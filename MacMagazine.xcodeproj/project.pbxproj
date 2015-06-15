@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A531B2E7F8D00E1CCCA /* main.m */; };
+		EDBB4A571B2E7F8D00E1CCCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A561B2E7F8D00E1CCCA /* AppDelegate.m */; };
+		EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A581B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld */; };
+		EDBB4A5D1B2E7F8D00E1CCCA /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A5C1B2E7F8D00E1CCCA /* MasterViewController.m */; };
+		EDBB4A601B2E7F8D00E1CCCA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A5F1B2E7F8D00E1CCCA /* DetailViewController.m */; };
+		EDBB4A631B2E7F8D00E1CCCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB4A611B2E7F8D00E1CCCA /* Main.storyboard */; };
+		EDBB4A651B2E7F8D00E1CCCA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */; };
+		EDBB4A681B2E7F8D00E1CCCA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBB4A661B2E7F8D00E1CCCA /* LaunchScreen.xib */; };
+		EDBB4A741B2E7F8D00E1CCCA /* MacMagazineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A731B2E7F8D00E1CCCA /* MacMagazineTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EDBB4A6E1B2E7F8D00E1CCCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDBB4A461B2E7F8D00E1CCCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EDBB4A4D1B2E7F8D00E1CCCA;
+			remoteInfo = MacMagazine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EDBB4A4E1B2E7F8D00E1CCCA /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDBB4A521B2E7F8D00E1CCCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDBB4A531B2E7F8D00E1CCCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EDBB4A551B2E7F8D00E1CCCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EDBB4A561B2E7F8D00E1CCCA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EDBB4A591B2E7F8D00E1CCCA /* MacMagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacMagazine.xcdatamodel; sourceTree = "<group>"; };
+		EDBB4A5B1B2E7F8D00E1CCCA /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		EDBB4A5C1B2E7F8D00E1CCCA /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		EDBB4A5E1B2E7F8D00E1CCCA /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		EDBB4A5F1B2E7F8D00E1CCCA /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		EDBB4A621B2E7F8D00E1CCCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EDBB4A671B2E7F8D00E1CCCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EDBB4A6D1B2E7F8D00E1CCCA /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDBB4A721B2E7F8D00E1CCCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDBB4A731B2E7F8D00E1CCCA /* MacMagazineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacMagazineTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EDBB4A4B1B2E7F8D00E1CCCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDBB4A6A1B2E7F8D00E1CCCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EDBB4A451B2E7F8D00E1CCCA = {
+			isa = PBXGroup;
+			children = (
+				EDBB4A501B2E7F8D00E1CCCA /* MacMagazine */,
+				EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */,
+				EDBB4A4F1B2E7F8D00E1CCCA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EDBB4A4F1B2E7F8D00E1CCCA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EDBB4A4E1B2E7F8D00E1CCCA /* MacMagazine.app */,
+				EDBB4A6D1B2E7F8D00E1CCCA /* MacMagazineTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EDBB4A501B2E7F8D00E1CCCA /* MacMagazine */ = {
+			isa = PBXGroup;
+			children = (
+				EDBB4A551B2E7F8D00E1CCCA /* AppDelegate.h */,
+				EDBB4A561B2E7F8D00E1CCCA /* AppDelegate.m */,
+				EDBB4A5B1B2E7F8D00E1CCCA /* MasterViewController.h */,
+				EDBB4A5C1B2E7F8D00E1CCCA /* MasterViewController.m */,
+				EDBB4A5E1B2E7F8D00E1CCCA /* DetailViewController.h */,
+				EDBB4A5F1B2E7F8D00E1CCCA /* DetailViewController.m */,
+				EDBB4A611B2E7F8D00E1CCCA /* Main.storyboard */,
+				EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */,
+				EDBB4A661B2E7F8D00E1CCCA /* LaunchScreen.xib */,
+				EDBB4A581B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld */,
+				EDBB4A511B2E7F8D00E1CCCA /* Supporting Files */,
+			);
+			path = MacMagazine;
+			sourceTree = "<group>";
+		};
+		EDBB4A511B2E7F8D00E1CCCA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDBB4A521B2E7F8D00E1CCCA /* Info.plist */,
+				EDBB4A531B2E7F8D00E1CCCA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */ = {
+			isa = PBXGroup;
+			children = (
+				EDBB4A731B2E7F8D00E1CCCA /* MacMagazineTests.m */,
+				EDBB4A711B2E7F8D00E1CCCA /* Supporting Files */,
+			);
+			path = MacMagazineTests;
+			sourceTree = "<group>";
+		};
+		EDBB4A711B2E7F8D00E1CCCA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDBB4A721B2E7F8D00E1CCCA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EDBB4A4D1B2E7F8D00E1CCCA /* MacMagazine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDBB4A771B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazine" */;
+			buildPhases = (
+				EDBB4A4A1B2E7F8D00E1CCCA /* Sources */,
+				EDBB4A4B1B2E7F8D00E1CCCA /* Frameworks */,
+				EDBB4A4C1B2E7F8D00E1CCCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacMagazine;
+			productName = MacMagazine;
+			productReference = EDBB4A4E1B2E7F8D00E1CCCA /* MacMagazine.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EDBB4A6C1B2E7F8D00E1CCCA /* MacMagazineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDBB4A7A1B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazineTests" */;
+			buildPhases = (
+				EDBB4A691B2E7F8D00E1CCCA /* Sources */,
+				EDBB4A6A1B2E7F8D00E1CCCA /* Frameworks */,
+				EDBB4A6B1B2E7F8D00E1CCCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EDBB4A6F1B2E7F8D00E1CCCA /* PBXTargetDependency */,
+			);
+			name = MacMagazineTests;
+			productName = MacMagazineTests;
+			productReference = EDBB4A6D1B2E7F8D00E1CCCA /* MacMagazineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EDBB4A461B2E7F8D00E1CCCA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "made@sampa";
+				TargetAttributes = {
+					EDBB4A4D1B2E7F8D00E1CCCA = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					EDBB4A6C1B2E7F8D00E1CCCA = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = EDBB4A4D1B2E7F8D00E1CCCA;
+					};
+				};
+			};
+			buildConfigurationList = EDBB4A491B2E7F8D00E1CCCA /* Build configuration list for PBXProject "MacMagazine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EDBB4A451B2E7F8D00E1CCCA;
+			productRefGroup = EDBB4A4F1B2E7F8D00E1CCCA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EDBB4A4D1B2E7F8D00E1CCCA /* MacMagazine */,
+				EDBB4A6C1B2E7F8D00E1CCCA /* MacMagazineTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EDBB4A4C1B2E7F8D00E1CCCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBB4A631B2E7F8D00E1CCCA /* Main.storyboard in Resources */,
+				EDBB4A681B2E7F8D00E1CCCA /* LaunchScreen.xib in Resources */,
+				EDBB4A651B2E7F8D00E1CCCA /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDBB4A6B1B2E7F8D00E1CCCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EDBB4A4A1B2E7F8D00E1CCCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBB4A601B2E7F8D00E1CCCA /* DetailViewController.m in Sources */,
+				EDBB4A5D1B2E7F8D00E1CCCA /* MasterViewController.m in Sources */,
+				EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */,
+				EDBB4A571B2E7F8D00E1CCCA /* AppDelegate.m in Sources */,
+				EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDBB4A691B2E7F8D00E1CCCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBB4A741B2E7F8D00E1CCCA /* MacMagazineTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EDBB4A6F1B2E7F8D00E1CCCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EDBB4A4D1B2E7F8D00E1CCCA /* MacMagazine */;
+			targetProxy = EDBB4A6E1B2E7F8D00E1CCCA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EDBB4A611B2E7F8D00E1CCCA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDBB4A621B2E7F8D00E1CCCA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EDBB4A661B2E7F8D00E1CCCA /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDBB4A671B2E7F8D00E1CCCA /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EDBB4A751B2E7F8D00E1CCCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EDBB4A761B2E7F8D00E1CCCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EDBB4A781B2E7F8D00E1CCCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MacMagazine/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EDBB4A791B2E7F8D00E1CCCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MacMagazine/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EDBB4A7B1B2E7F8D00E1CCCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MacMagazineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
+			};
+			name = Debug;
+		};
+		EDBB4A7C1B2E7F8D00E1CCCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MacMagazineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EDBB4A491B2E7F8D00E1CCCA /* Build configuration list for PBXProject "MacMagazine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBB4A751B2E7F8D00E1CCCA /* Debug */,
+				EDBB4A761B2E7F8D00E1CCCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDBB4A771B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBB4A781B2E7F8D00E1CCCA /* Debug */,
+				EDBB4A791B2E7F8D00E1CCCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EDBB4A7A1B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBB4A7B1B2E7F8D00E1CCCA /* Debug */,
+				EDBB4A7C1B2E7F8D00E1CCCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EDBB4A581B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EDBB4A591B2E7F8D00E1CCCA /* MacMagazine.xcdatamodel */,
+			);
+			currentVersion = EDBB4A591B2E7F8D00E1CCCA /* MacMagazine.xcdatamodel */;
+			path = MacMagazine.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = EDBB4A461B2E7F8D00E1CCCA /* Project object */;
+}
