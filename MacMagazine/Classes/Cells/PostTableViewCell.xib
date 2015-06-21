@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="99" id="KGk-i7-Jjw" customClass="PostTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="98"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-HR-0kH">
+                        <rect key="frame" x="8" y="8" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="7vt-4g-tpA"/>
+                            <constraint firstAttribute="width" secondItem="ssC-HR-0kH" secondAttribute="height" multiplier="1:1" id="tu9-4o-J1j"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-k4-WUe" customClass="SUNLabel">
+                        <rect key="frame" x="76" y="8" width="236" height="40.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnw-Nd-23O" customClass="SUNLabel">
+                        <rect key="frame" x="76" y="53" width="236" height="36"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Kde-k4-WUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0JP-LO-5Gx"/>
+                    <constraint firstItem="Kde-k4-WUe" firstAttribute="leading" secondItem="bnw-Nd-23O" secondAttribute="leading" id="1Yo-1z-819"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bnw-Nd-23O" secondAttribute="bottom" id="2QC-8M-No4"/>
+                    <constraint firstItem="ssC-HR-0kH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="BMd-2x-I9y"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ssC-HR-0kH" secondAttribute="bottom" constant="8" id="DVC-Uu-NnP"/>
+                    <constraint firstItem="Kde-k4-WUe" firstAttribute="trailing" secondItem="bnw-Nd-23O" secondAttribute="trailing" id="HH7-Ah-DGp"/>
+                    <constraint firstItem="Kde-k4-WUe" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="j6q-GJ-Rcv"/>
+                    <constraint firstItem="Kde-k4-WUe" firstAttribute="leading" secondItem="ssC-HR-0kH" secondAttribute="trailing" constant="8" id="kGa-rt-KMO"/>
+                    <constraint firstItem="bnw-Nd-23O" firstAttribute="top" secondItem="Kde-k4-WUe" secondAttribute="bottom" constant="5" id="mpm-4c-gUA"/>
+                    <constraint firstItem="Kde-k4-WUe" firstAttribute="top" secondItem="ssC-HR-0kH" secondAttribute="top" id="o9K-el-gbi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="2QC-8M-No4" id="iln-GF-6hV"/>
+                <outlet property="headlineBottomSpaceConstraint" destination="mpm-4c-gUA" id="zWO-Ad-aix"/>
+                <outlet property="headlineLabel" destination="Kde-k4-WUe" id="VLt-8p-IHG"/>
+                <outlet property="leadingSpaceConstraint" destination="BMd-2x-I9y" id="HAd-pw-cts"/>
+                <outlet property="subheadlineLabel" destination="bnw-Nd-23O" id="MjL-St-4dc"/>
+                <outlet property="thumbnailImageView" destination="ssC-HR-0kH" id="QNQ-Vd-7cR"/>
+                <outlet property="thumbnailTrailingSpaceConstraint" destination="kGa-rt-KMO" id="Orl-IB-wQS"/>
+                <outlet property="thumbnailWidthConstraint" destination="7vt-4g-tpA" id="4ad-JL-yAO"/>
+                <outlet property="topSpaceConstraint" destination="0JP-LO-5Gx" id="vIG-fv-L2y"/>
+                <outlet property="trailingSpaceConstraint" destination="j6q-GJ-Rcv" id="Tn3-Ap-xJj"/>
+            </connections>
+            <point key="canvasLocation" x="397" y="319.5"/>
+        </tableViewCell>
+    </objects>
+</document>
