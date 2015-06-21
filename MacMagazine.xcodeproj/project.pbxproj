@@ -315,7 +315,7 @@
 				EDFA9DDB1B37586500EE213C /* NSDate */,
 				EDFA9DD51B3651DD00EE213C /* NSString */,
 			);
-			name = Categories;
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		EDFA9DD51B3651DD00EE213C /* NSString */ = {
@@ -324,14 +324,14 @@
 				EDFA9DC91B3651C900EE213C /* NSString+HTMLSafe.h */,
 				EDFA9DCA1B3651C900EE213C /* NSString+HTMLSafe.m */,
 			);
-			name = NSString;
+			path = NSString;
 			sourceTree = "<group>";
 		};
 		EDFA9DD71B37541600EE213C /* Cache */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Cache;
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		EDFA9DDB1B37586500EE213C /* NSDate */ = {
@@ -342,7 +342,7 @@
 				EDFA9DDF1B37591900EE213C /* NSDateFormatter+Addons.h */,
 				EDFA9DE01B37591900EE213C /* NSDateFormatter+Addons.m */,
 			);
-			name = NSDate;
+			path = NSDate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
