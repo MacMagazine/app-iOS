@@ -8,6 +8,8 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <Ono/Ono.h>
+#import "NSDate+Formatters.h"
+#import "NSDateFormatter+Addons.h"
 #import "Post.h"
 #import "SUNCoreDataStore.h"
 
@@ -84,17 +86,20 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
                     [images addObject:path];
                 }];
                 
-                static NSDateFormatter *dateFormatter;
-                static dispatch_once_t onceToken;
-                dispatch_once(&onceToken, ^{
-                    dateFormatter = [NSDateFormatter new];
+                NSDateFormatter *dateFormatter = [NSDateFormatter formatterWithKey:@"Post pubDate" block:^(NSDateFormatter *dateFormatter) {
                     dateFormatter.dateFormat = @"EEE, dd MMMM yyyy HH:mm:ss Z";
                     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-                });
+                }];
+                
+                NSDateFormatter *timeFreeFormatter = [NSDateFormatter formatterWithKey:@"Post date" block:^(NSDateFormatter *dateFormatter) {
+                    dateFormatter.dateFormat = @"yyyy.MM.dd";
+                    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+                }];
                 
                 post.title = [element firstChildWithTag:@"title"].stringValue;
                 post.link = [element firstChildWithTag:@"link"].stringValue;
                 post.pubDate = [dateFormatter dateFromString:[element firstChildWithTag:@"pubDate"].stringValue];
+                post.date = [timeFreeFormatter stringFromDate:post.pubDate];
                 post.author = [element firstChildWithTag:@"creator"].stringValue;
                 post.descriptionText = [element firstChildWithTag:@"description"].stringValue;
                 post.content = [element firstChildWithTag:@"encoded"].stringValue;
@@ -127,8 +132,16 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
 
 #pragma mark - Instance Methods
 
+- (NSArray *)categoriesArray {
+    return self.categories;
+}
+
+- (NSArray *)imagesArray {
+    return self.images;
+}
+
 - (NSString *)thumbnail {
-    return self.images.firstObject;
+    return self.imagesArray.firstObject;
 }
 
 - (BOOL)isFeatured {

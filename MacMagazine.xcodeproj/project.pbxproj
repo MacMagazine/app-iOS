@@ -27,9 +27,8 @@
 		EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DBD1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m */; };
 		EDFA9DC71B36353E00EE213C /* PostPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DC61B36353E00EE213C /* PostPresenter.m */; };
 		EDFA9DCB1B3651C900EE213C /* NSString+HTMLSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DCA1B3651C900EE213C /* NSString+HTMLSafe.m */; };
-		EDFA9DD21B3651D900EE213C /* SDWebImageManager+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DCD1B3651D900EE213C /* SDWebImageManager+Resize.m */; };
-		EDFA9DD31B3651D900EE213C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DCF1B3651D900EE213C /* UIImage+Resize.m */; };
-		EDFA9DD41B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DD11B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m */; };
+		EDFA9DDE1B37587900EE213C /* NSDate+Formatters.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DDD1B37587900EE213C /* NSDate+Formatters.m */; };
+		EDFA9DE11B37591900EE213C /* NSDateFormatter+Addons.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DE01B37591900EE213C /* NSDateFormatter+Addons.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,12 +80,10 @@
 		EDFA9DC61B36353E00EE213C /* PostPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPresenter.m; sourceTree = "<group>"; };
 		EDFA9DC91B3651C900EE213C /* NSString+HTMLSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTMLSafe.h"; sourceTree = "<group>"; };
 		EDFA9DCA1B3651C900EE213C /* NSString+HTMLSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTMLSafe.m"; sourceTree = "<group>"; };
-		EDFA9DCC1B3651D900EE213C /* SDWebImageManager+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageManager+Resize.h"; sourceTree = "<group>"; };
-		EDFA9DCD1B3651D900EE213C /* SDWebImageManager+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+Resize.m"; sourceTree = "<group>"; };
-		EDFA9DCE1B3651D900EE213C /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		EDFA9DCF1B3651D900EE213C /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		EDFA9DD01B3651D900EE213C /* UIImageView+SDWebImageResizeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SDWebImageResizeManager.h"; sourceTree = "<group>"; };
-		EDFA9DD11B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SDWebImageResizeManager.m"; sourceTree = "<group>"; };
+		EDFA9DDC1B37587900EE213C /* NSDate+Formatters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Formatters.h"; sourceTree = "<group>"; };
+		EDFA9DDD1B37587900EE213C /* NSDate+Formatters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Formatters.m"; sourceTree = "<group>"; };
+		EDFA9DDF1B37591900EE213C /* NSDateFormatter+Addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Addons.h"; sourceTree = "<group>"; };
+		EDFA9DE01B37591900EE213C /* NSDateFormatter+Addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Addons.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				EDBB4A7E1B2E825B00E1CCCA /* App Delegate */,
+				EDFA9DD71B37541600EE213C /* Cache */,
 				EDFA9DAD1B36265F00EE213C /* Cells */,
 				EDFA9DA61B361CF200EE213C /* Core Data */,
 				EDBB4A801B2E829300E1CCCA /* Models */,
@@ -314,8 +312,8 @@
 		EDFA9DC81B3651BD00EE213C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				EDFA9DDB1B37586500EE213C /* NSDate */,
 				EDFA9DD51B3651DD00EE213C /* NSString */,
-				EDFA9DD61B3651E800EE213C /* SDWebImage */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -329,17 +327,22 @@
 			name = NSString;
 			sourceTree = "<group>";
 		};
-		EDFA9DD61B3651E800EE213C /* SDWebImage */ = {
+		EDFA9DD71B37541600EE213C /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				EDFA9DCC1B3651D900EE213C /* SDWebImageManager+Resize.h */,
-				EDFA9DCD1B3651D900EE213C /* SDWebImageManager+Resize.m */,
-				EDFA9DCE1B3651D900EE213C /* UIImage+Resize.h */,
-				EDFA9DCF1B3651D900EE213C /* UIImage+Resize.m */,
-				EDFA9DD01B3651D900EE213C /* UIImageView+SDWebImageResizeManager.h */,
-				EDFA9DD11B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m */,
 			);
-			name = SDWebImage;
+			name = Cache;
+			sourceTree = "<group>";
+		};
+		EDFA9DDB1B37586500EE213C /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				EDFA9DDC1B37587900EE213C /* NSDate+Formatters.h */,
+				EDFA9DDD1B37587900EE213C /* NSDate+Formatters.m */,
+				EDFA9DDF1B37591900EE213C /* NSDateFormatter+Addons.h */,
+				EDFA9DE01B37591900EE213C /* NSDateFormatter+Addons.m */,
+			);
+			name = NSDate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,7 +481,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDFA9DD41B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m in Sources */,
 				EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */,
 				EDFA9DA91B361D1000EE213C /* SUNCoreDataStore.m in Sources */,
 				EDFA9DBB1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m in Sources */,
@@ -488,12 +490,12 @@
 				EDFA9DAC1B3625AA00EE213C /* PostsTableViewController.m in Sources */,
 				EDBB4A571B2E7F8D00E1CCCA /* AppDelegate.m in Sources */,
 				EDFA9DB81B3629C300EE213C /* NSManagedObject+SUNCoreDataStoreAddons.m in Sources */,
-				EDFA9DD31B3651D900EE213C /* UIImage+Resize.m in Sources */,
 				EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */,
+				EDFA9DE11B37591900EE213C /* NSDateFormatter+Addons.m in Sources */,
 				EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */,
 				EDBB4A891B2E831900E1CCCA /* Post.m in Sources */,
+				EDFA9DDE1B37587900EE213C /* NSDate+Formatters.m in Sources */,
 				EDFA9DB11B36267600EE213C /* PostTableViewCell.m in Sources */,
-				EDFA9DD21B3651D900EE213C /* SDWebImageManager+Resize.m in Sources */,
 				EDFA9DC71B36353E00EE213C /* PostPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

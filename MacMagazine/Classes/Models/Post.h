@@ -11,8 +11,8 @@
 @interface Post : _Post
 
 + (void)getWithPage:(NSUInteger)page success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
-- (NSArray *)categories;
-- (NSArray *)images;
+- (NSArray *)categoriesArray;
+- (NSArray *)imagesArray;
 - (BOOL)isFeatured;
 - (BOOL)isVisible;
 - (NSString *)thumbnail;

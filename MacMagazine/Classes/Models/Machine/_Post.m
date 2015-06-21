@@ -7,6 +7,7 @@ const struct PostAttributes PostAttributes = {
 	.author = @"author",
 	.categories = @"categories",
 	.content = @"content",
+	.date = @"date",
 	.descriptionText = @"descriptionText",
 	.featured = @"featured",
 	.guid = @"guid",
@@ -62,6 +63,8 @@ const struct PostAttributes PostAttributes = {
 @dynamic categories;
 
 @dynamic content;
+
+@dynamic date;
 
 @dynamic descriptionText;
 

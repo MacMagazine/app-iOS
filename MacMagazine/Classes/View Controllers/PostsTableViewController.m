@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
+#import "NSDate+Formatters.h"
 #import "Post.h"
 #import "PostPresenter.h"
 #import "PostsTableViewController.h"
@@ -32,12 +33,13 @@
     }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[Post entityName]];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
+                                     [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
                                      [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"visible = %@", @YES];
     fetchRequest.returnsObjectsAsFaults = NO;
     
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[SUNCoreDataStore defaultStore].mainQueueContext sectionNameKeyPath:nil cacheName:nil];
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[SUNCoreDataStore defaultStore].mainQueueContext sectionNameKeyPath:@"date" cacheName:nil];
     _fetchedResultsController.delegate = self;
     
     NSError *error = nil;
@@ -94,7 +96,7 @@
 }
 
 - (void)reloadData {
-    if (!self.refreshControl.isRefreshing) {
+    if (!self.refreshControl.isRefreshing && self.fetchedResultsController.fetchedObjects.count == 0) {
         [self.refreshControl beginRefreshing];
     }
     
@@ -119,6 +121,22 @@
 #pragma mark - Protocols
 
 #pragma mark - UITableView delegate
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([self tableView:self.tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    }
+    
+    Post *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    if ([calendar isDateInToday:post.pubDate]) {
+        return NSLocalizedString(@"Today", @"");
+    } else if ([calendar isDateInYesterday:post.pubDate]) {
+        return NSLocalizedString(@"Yesterday", @"");
+    } else {
+        return [post.pubDate stringFromTemplate:@"EEEEddMMMM"];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];

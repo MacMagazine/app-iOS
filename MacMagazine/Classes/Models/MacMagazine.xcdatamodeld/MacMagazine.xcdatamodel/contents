@@ -4,6 +4,7 @@
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="categories" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="featured" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="guid" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,6 +18,6 @@
         <userInfo/>
     </entity>
     <elements>
-        <element name="Post" positionX="261" positionY="189" width="128" height="210"/>
+        <element name="Post" positionX="261" positionY="189" width="128" height="225"/>
     </elements>
 </model>

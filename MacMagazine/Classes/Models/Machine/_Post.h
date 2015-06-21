@@ -7,6 +7,7 @@ extern const struct PostAttributes {
 	__unsafe_unretained NSString *author;
 	__unsafe_unretained NSString *categories;
 	__unsafe_unretained NSString *content;
+	__unsafe_unretained NSString *date;
 	__unsafe_unretained NSString *descriptionText;
 	__unsafe_unretained NSString *featured;
 	__unsafe_unretained NSString *guid;
@@ -41,6 +42,10 @@ extern const struct PostAttributes {
 @property (nonatomic, strong) NSString* content;
 
 //- (BOOL)validateContent:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* date;
+
+//- (BOOL)validateDate:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* descriptionText;
 
@@ -94,6 +99,9 @@ extern const struct PostAttributes {
 
 - (NSString*)primitiveContent;
 - (void)setPrimitiveContent:(NSString*)value;
+
+- (NSString*)primitiveDate;
+- (void)setPrimitiveDate:(NSString*)value;
 
 - (NSString*)primitiveDescriptionText;
 - (void)setPrimitiveDescriptionText:(NSString*)value;

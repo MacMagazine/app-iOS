@@ -6,12 +6,11 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "NSString+HTMLSafe.h"
 #import "Post.h"
 #import "PostPresenter.h"
 #import "PostTableViewCell.h"
-#import "UIImageView+SDWebImageResizeManager.h"
 
 @interface PostPresenter ()
 
@@ -33,7 +32,18 @@
     cell.imageVisible = self.post.thumbnail.length > 0;
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
-    [cell.thumbnailImageView sd_setImageWithURL:[self thumbnailURLForImageView:cell.thumbnailImageView]];
+    cell.thumbnailImageView.image = nil;
+    
+    NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    [cell.thumbnailImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        cell.thumbnailImageView.alpha = 0;
+        cell.thumbnailImageView.image = image;
+        [UIView animateWithDuration:request ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            cell.thumbnailImageView.alpha = 1;
+        } completion:nil];
+    } failure:nil];
 }
 
 - (SEL)selectorForViewOfClass:(Class)viewClass {
@@ -63,7 +73,7 @@
         return [NSURL URLWithString:thumbnail];
     }
     
-    thumbnail = [thumbnail stringByAppendingFormat:@"?fit=%.f,%.f", size.width, size.height];
+    thumbnail = [thumbnail stringByAppendingFormat:@"?w=%.f", size.width * scale];
     return [NSURL URLWithString:thumbnail];
 }
 
