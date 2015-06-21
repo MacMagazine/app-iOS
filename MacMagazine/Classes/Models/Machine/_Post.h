@@ -10,11 +10,14 @@ extern const struct PostAttributes {
 	__unsafe_unretained NSString *descriptionText;
 	__unsafe_unretained NSString *featured;
 	__unsafe_unretained NSString *guid;
+	__unsafe_unretained NSString *images;
 	__unsafe_unretained NSString *link;
 	__unsafe_unretained NSString *pubDate;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *visible;
 } PostAttributes;
+
+@class NSObject;
 
 @class NSObject;
 
@@ -54,6 +57,10 @@ extern const struct PostAttributes {
 @property (nonatomic, strong) NSString* guid;
 
 //- (BOOL)validateGuid:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) id images;
+
+//- (BOOL)validateImages:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* link;
 
@@ -99,6 +106,9 @@ extern const struct PostAttributes {
 
 - (NSString*)primitiveGuid;
 - (void)setPrimitiveGuid:(NSString*)value;
+
+- (id)primitiveImages;
+- (void)setPrimitiveImages:(id)value;
 
 - (NSString*)primitiveLink;
 - (void)setPrimitiveLink:(NSString*)value;

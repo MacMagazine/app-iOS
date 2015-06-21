@@ -24,5 +24,6 @@
 @property (assign, nonatomic) CGFloat thumbnailWidthConstant;
 @property (assign, nonatomic) CGFloat headlineBottomSpaceConstant;
 @property (assign, nonatomic) CGFloat layoutWidth;
+@property (assign, nonatomic) BOOL imageVisible;
 
 @end

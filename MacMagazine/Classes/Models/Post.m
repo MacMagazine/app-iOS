@@ -74,6 +74,16 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
                     }
                 }];
                 
+                NSMutableArray *images = [NSMutableArray new];
+                ONOXMLDocument *contentDocument = [ONOXMLDocument HTMLDocumentWithString:[element firstChildWithTag:@"encoded"].stringValue encoding:NSUTF8StringEncoding error:nil];
+                [contentDocument.rootElement enumerateElementsWithXPath:@"//img" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+                    NSString *path = [element valueForAttribute:@"src"];
+                    if ([path containsString:@"?"]) {
+                        path = [path componentsSeparatedByString:@"?"].firstObject;
+                    }
+                    [images addObject:path];
+                }];
+                
                 static NSDateFormatter *dateFormatter;
                 static dispatch_once_t onceToken;
                 dispatch_once(&onceToken, ^{
@@ -91,6 +101,7 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
                 post.featuredValue = [categories containsObject:kMMFeaturedCategoryName];
                 post.categories = categories;
                 post.visible = @YES;
+                post.images = images;
                 [responseObjects addObject:post];
                 
                 if (cleanVisiblePosts) {
@@ -115,6 +126,10 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
 }
 
 #pragma mark - Instance Methods
+
+- (NSString *)thumbnail {
+    return self.images.firstObject;
+}
 
 - (BOOL)isFeatured {
     return self.featuredValue;

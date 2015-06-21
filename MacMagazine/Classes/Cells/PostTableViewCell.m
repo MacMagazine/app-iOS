@@ -22,6 +22,20 @@
 
 #pragma mark - Getters/Setters
 
+- (BOOL)imageVisible {
+    return self.thumbnailWidthConstant > 0;
+}
+
+- (void)setImageVisible:(BOOL)imageVisible {
+    if (imageVisible) {
+        self.thumbnailWidthConstraint.constant = self.thumbnailWidthConstant;
+        self.thumbnailTrailingSpaceConstraint.constant = self.thumbnailTrailingConstant;
+    } else {
+        self.thumbnailWidthConstraint.constant = 0;
+        self.thumbnailTrailingSpaceConstraint.constant = 0;
+    }
+}
+
 - (void)setThumbnailTrailingConstant:(CGFloat)thumbnailTrailingConstant {
     _thumbnailWidthConstant = thumbnailTrailingConstant;
     self.thumbnailTrailingSpaceConstraint.constant = thumbnailTrailingConstant;

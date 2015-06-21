@@ -26,6 +26,10 @@
 		EDFA9DBB1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DBA1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m */; };
 		EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DBD1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m */; };
 		EDFA9DC71B36353E00EE213C /* PostPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DC61B36353E00EE213C /* PostPresenter.m */; };
+		EDFA9DCB1B3651C900EE213C /* NSString+HTMLSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DCA1B3651C900EE213C /* NSString+HTMLSafe.m */; };
+		EDFA9DD21B3651D900EE213C /* SDWebImageManager+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DCD1B3651D900EE213C /* SDWebImageManager+Resize.m */; };
+		EDFA9DD31B3651D900EE213C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DCF1B3651D900EE213C /* UIImage+Resize.m */; };
+		EDFA9DD41B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DD11B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +79,14 @@
 		EDFA9DBD1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+SUNCoreDataStoreAddons.m"; sourceTree = "<group>"; };
 		EDFA9DC51B36353E00EE213C /* PostPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPresenter.h; sourceTree = "<group>"; };
 		EDFA9DC61B36353E00EE213C /* PostPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPresenter.m; sourceTree = "<group>"; };
+		EDFA9DC91B3651C900EE213C /* NSString+HTMLSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTMLSafe.h"; sourceTree = "<group>"; };
+		EDFA9DCA1B3651C900EE213C /* NSString+HTMLSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTMLSafe.m"; sourceTree = "<group>"; };
+		EDFA9DCC1B3651D900EE213C /* SDWebImageManager+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageManager+Resize.h"; sourceTree = "<group>"; };
+		EDFA9DCD1B3651D900EE213C /* SDWebImageManager+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+Resize.m"; sourceTree = "<group>"; };
+		EDFA9DCE1B3651D900EE213C /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		EDFA9DCF1B3651D900EE213C /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		EDFA9DD01B3651D900EE213C /* UIImageView+SDWebImageResizeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SDWebImageResizeManager.h"; sourceTree = "<group>"; };
+		EDFA9DD11B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SDWebImageResizeManager.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +148,7 @@
 		EDBB4A501B2E7F8D00E1CCCA /* MacMagazine */ = {
 			isa = PBXGroup;
 			children = (
+				EDFA9DC81B3651BD00EE213C /* Categories */,
 				EDBB4A7D1B2E825400E1CCCA /* Classes */,
 				EDBB4A611B2E7F8D00E1CCCA /* Main.storyboard */,
 				EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */,
@@ -298,6 +311,37 @@
 			path = Presenters;
 			sourceTree = "<group>";
 		};
+		EDFA9DC81B3651BD00EE213C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				EDFA9DD51B3651DD00EE213C /* NSString */,
+				EDFA9DD61B3651E800EE213C /* SDWebImage */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		EDFA9DD51B3651DD00EE213C /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				EDFA9DC91B3651C900EE213C /* NSString+HTMLSafe.h */,
+				EDFA9DCA1B3651C900EE213C /* NSString+HTMLSafe.m */,
+			);
+			name = NSString;
+			sourceTree = "<group>";
+		};
+		EDFA9DD61B3651E800EE213C /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				EDFA9DCC1B3651D900EE213C /* SDWebImageManager+Resize.h */,
+				EDFA9DCD1B3651D900EE213C /* SDWebImageManager+Resize.m */,
+				EDFA9DCE1B3651D900EE213C /* UIImage+Resize.h */,
+				EDFA9DCF1B3651D900EE213C /* UIImage+Resize.m */,
+				EDFA9DD01B3651D900EE213C /* UIImageView+SDWebImageResizeManager.h */,
+				EDFA9DD11B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m */,
+			);
+			name = SDWebImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -434,18 +478,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDFA9DD41B3651D900EE213C /* UIImageView+SDWebImageResizeManager.m in Sources */,
 				EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */,
 				EDFA9DA91B361D1000EE213C /* SUNCoreDataStore.m in Sources */,
 				EDFA9DBB1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m in Sources */,
 				EDBB4A851B2E830D00E1CCCA /* _Post.m in Sources */,
 				EDFA9DB51B36297800EE213C /* NSManagedObjectContext+SUNCoreDataStoreAddons.m in Sources */,
+				EDFA9DCB1B3651C900EE213C /* NSString+HTMLSafe.m in Sources */,
 				EDFA9DAC1B3625AA00EE213C /* PostsTableViewController.m in Sources */,
 				EDBB4A571B2E7F8D00E1CCCA /* AppDelegate.m in Sources */,
 				EDFA9DB81B3629C300EE213C /* NSManagedObject+SUNCoreDataStoreAddons.m in Sources */,
+				EDFA9DD31B3651D900EE213C /* UIImage+Resize.m in Sources */,
 				EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */,
 				EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */,
 				EDBB4A891B2E831900E1CCCA /* Post.m in Sources */,
 				EDFA9DB11B36267600EE213C /* PostTableViewCell.m in Sources */,
+				EDFA9DD21B3651D900EE213C /* SDWebImageManager+Resize.m in Sources */,
 				EDFA9DC71B36353E00EE213C /* PostPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
