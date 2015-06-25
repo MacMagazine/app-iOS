@@ -11,5 +11,6 @@
 @interface PostPresenter : SUNPresenter
 
 - (NSString *)descriptionText;
+- (NSURL *)thumbnailURLForImageView:(UIImageView *)imageView;
 
 @end

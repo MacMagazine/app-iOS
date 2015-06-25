@@ -7,6 +7,7 @@
 //
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "FeaturedPostTableViewCell.h"
 #import "NSString+HTMLSafe.h"
 #import "Post.h"
 #import "PostPresenter.h"
@@ -28,17 +29,37 @@
     return self.object;
 }
 
+- (void)setupFeaturedTableViewCell:(FeaturedPostTableViewCell *)cell {
+    if (![cell.headlineLabel.text isEqualToString:self.post.title]) {
+        cell.thumbnailImageView.alpha = 0;
+    }
+    cell.headlineLabel.text = self.post.title;
+    cell.subheadlineLabel.text = self.descriptionText;
+    
+    NSDate *requestTime = [NSDate date];
+    NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    [cell.thumbnailImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        BOOL shouldAnimate = [[NSDate date] timeIntervalSinceDate:requestTime] > 0.2;
+        cell.thumbnailImageView.image = image;
+        [UIView animateWithDuration:shouldAnimate ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            cell.thumbnailImageView.alpha = 1;
+        } completion:nil];
+    } failure:nil];
+}
+
 - (void)setupTableViewCell:(PostTableViewCell *)cell {
     cell.imageVisible = self.post.thumbnail.length > 0;
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
-    cell.thumbnailImageView.image = nil;
+    cell.thumbnailImageView.alpha = 0;
     
     NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
     [cell.thumbnailImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        cell.thumbnailImageView.alpha = 0;
         cell.thumbnailImageView.image = image;
         [UIView animateWithDuration:request ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             cell.thumbnailImageView.alpha = 1;
@@ -49,6 +70,8 @@
 - (SEL)selectorForViewOfClass:(Class)viewClass {
     if ([viewClass isSubclassOfClass:[PostTableViewCell class]]) {
         return @selector(setupTableViewCell:);
+    } else if ([viewClass isSubclassOfClass:[FeaturedPostTableViewCell class]]) {
+        return @selector(setupFeaturedTableViewCell:);
     }
     
     return [super selectorForViewOfClass:viewClass];
@@ -67,13 +90,13 @@
     }
     
     CGFloat scale = [UIScreen mainScreen].scale;
-    CGSize size = CGSizeMake(CGRectGetWidth(imageView.frame) * scale, CGRectGetHeight(imageView.frame) * scale);
+    CGFloat width = CGRectGetWidth(imageView.frame) * scale;
     
-    if (![thumbnail containsString:@"wp.com"] || CGSizeEqualToSize(size, CGSizeZero)) {
+    if (![thumbnail containsString:@"wp.com"] || width == 0) {
         return [NSURL URLWithString:thumbnail];
     }
     
-    thumbnail = [thumbnail stringByAppendingFormat:@"?w=%.f", size.width * scale];
+    thumbnail = [thumbnail stringByAppendingFormat:@"?w=%.f", width * scale];
     return [NSURL URLWithString:thumbnail];
 }
 

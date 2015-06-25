@@ -21,7 +21,8 @@
 #pragma mark - Application Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [SUNCoreDataStore setupDefaultStoreWithModelURL:[[NSBundle mainBundle] URLForResource:@"MacMagazine" withExtension:@"momd"] persistentStoreURL:nil];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"MacMagazine" withExtension:@"momd"];
+    [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     return YES;

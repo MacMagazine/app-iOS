@@ -7,6 +7,9 @@
 //
 
 #import "NSDate+Formatters.h"
+#import "FeaturedPostTableViewCell.h"
+#import "MMLabel.h"
+#import "MMTableViewHeaderView.h"
 #import "Post.h"
 #import "PostPresenter.h"
 #import "PostsTableViewController.h"
@@ -71,6 +74,10 @@
     Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.layoutMargins = self.tableView.layoutMargins;
     cell.layoutWidth = self.tableView.bounds.size.width;
+    
+    NSUInteger numberOfRows = [self.tableView numberOfRowsInSection:indexPath.section];
+    cell.separatorView.hidden = (indexPath.row + 1 == numberOfRows);
+    
     [[PostPresenter presenter] presentObject:post inView:cell];
 }
 
@@ -102,7 +109,7 @@
     
     [Post getWithPage:1 success:^(NSArray *response) {
         self.numberOfResponseObjectsPerRequest = response.count;
-        self.nextPage = (self.fetchedResultsController.fetchedObjects.count / self.numberOfResponseObjectsPerRequest) + 1;
+        self.nextPage = (self.fetchedResultsController.fetchedObjects.count / MAX(1, self.numberOfResponseObjectsPerRequest)) + 1;
         [self.refreshControl endRefreshing];
     } failure:^(NSError *error) {
         [self handleError:error];
@@ -120,23 +127,27 @@
 
 #pragma mark - Protocols
 
-#pragma mark - UITableView delegate
+#pragma mark - UITableView data source
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([self tableView:self.tableView numberOfRowsInSection:section] == 0) {
-        return nil;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSString *identifier = [PostTableViewCell identifier];
+    if (post.isFeatured) {
+        identifier = [FeaturedPostTableViewCell identifier];
     }
     
-    Post *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    if ([calendar isDateInToday:post.pubDate]) {
-        return NSLocalizedString(@"Today", @"");
-    } else if ([calendar isDateInYesterday:post.pubDate]) {
-        return NSLocalizedString(@"Yesterday", @"");
-    } else {
-        return [post.pubDate stringFromTemplate:@"EEEEddMMMM"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    [cell layoutIfNeeded];
+    if (cell.frame.size.width != tableView.frame.size.width) {
+        cell.frame = CGRectMake(0, 0, tableView.frame.size.width, cell.frame.size.height);
+        [cell layoutIfNeeded];
+        [cell layoutSubviews];
     }
+    return cell;
 }
+
+#pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
@@ -150,15 +161,59 @@
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    MMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMTableViewHeaderView identifier]];
+   
+    Post *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    if ([calendar isDateInToday:post.pubDate]) {
+        headerView.titleLabel.text = NSLocalizedString(@"Today", @"");
+    } else if ([calendar isDateInYesterday:post.pubDate]) {
+        headerView.titleLabel.text = NSLocalizedString(@"Yesterday", @"");
+    } else {
+        headerView.titleLabel.text = [post.pubDate stringFromTemplate:@"EEEEddMMMM"];
+    }
+    
+    headerView.topSeparatorView.backgroundColor = self.tableView.separatorColor;
+    headerView.bottomSeparatorView.backgroundColor = self.tableView.separatorColor;
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    Post *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    if ([calendar isDateInToday:post.pubDate]) {
+        return 0;
+    }
+    
+    return [MMTableViewHeaderView height];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    for (NSString *cellIdentifier in @[[PostTableViewCell identifier], [FeaturedPostTableViewCell identifier]]) {
+        UINib *nib = [UINib nibWithNibName:cellIdentifier bundle:[NSBundle mainBundle]];
+        [self.tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
+    }
+    [self.tableView registerClass:[MMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMTableViewHeaderView identifier]];
+    
     self.title = @"MacMagazine";
     self.tableView.estimatedRowHeight = 100;
     self.tableView.tableFooterView = self.footerView;
-    self.dequeueReusableCellIdentifier = [PostTableViewCell identifier];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.frame), CGRectGetWidth(navigationBar.frame), 0.5)];
+    separatorView.backgroundColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.80 alpha:1.00];
+    separatorView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [navigationBar addSubview:separatorView];
+    
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"SFUIDisplay-Medium" size:18]};
+
     [self.refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     [self reloadData];
 }
