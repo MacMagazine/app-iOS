@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 601BFC4C5CE12F4DD0B64BF3 /* libPods.a */; };
+		EDA6FA1E1B3BD2D4007EE794 /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA6FA1D1B3BD2D4007EE794 /* PostDetailViewController.m */; };
 		EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A531B2E7F8D00E1CCCA /* main.m */; };
 		EDBB4A571B2E7F8D00E1CCCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A561B2E7F8D00E1CCCA /* AppDelegate.m */; };
 		EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A581B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld */; };
@@ -71,6 +72,8 @@
 		21DB65787D3E922FF090D828 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		601BFC4C5CE12F4DD0B64BF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EDA6FA1C1B3BD2D4007EE794 /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
+		EDA6FA1D1B3BD2D4007EE794 /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		EDBB4A4E1B2E7F8D00E1CCCA /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBB4A521B2E7F8D00E1CCCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBB4A531B2E7F8D00E1CCCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -268,6 +271,8 @@
 		EDBB4A7F1B2E826900E1CCCA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EDA6FA1C1B3BD2D4007EE794 /* PostDetailViewController.h */,
+				EDA6FA1D1B3BD2D4007EE794 /* PostDetailViewController.m */,
 				EDFA9DAA1B3625AA00EE213C /* PostsTableViewController.h */,
 				EDFA9DAB1B3625AA00EE213C /* PostsTableViewController.m */,
 			);
@@ -614,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */,
+				EDA6FA1E1B3BD2D4007EE794 /* PostDetailViewController.m in Sources */,
 				EDFA9DA91B361D1000EE213C /* SUNCoreDataStore.m in Sources */,
 				EDFA9DBB1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m in Sources */,
 				EDBB4A851B2E830D00E1CCCA /* _Post.m in Sources */,

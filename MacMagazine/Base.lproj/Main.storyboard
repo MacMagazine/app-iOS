@@ -69,11 +69,30 @@
                         <outlet property="footerView" destination="70g-3B-fYI" id="Vev-7n-V94"/>
                         <outlet property="tableView" destination="g6p-zf-lg2" id="yNV-VW-DIy"/>
                         <outlet property="view" destination="ecJ-GM-cpx" id="r5m-ds-XAo"/>
+                        <segue destination="RUg-XO-4v9" kind="show" identifier="PostDetailViewController" id="ziL-Q8-cbt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-Oe-pGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="568" y="64"/>
+        </scene>
+        <!--Post Detail View Controller-->
+        <scene sceneID="Rli-EN-Zft">
+            <objects>
+                <viewController storyboardIdentifier="PostDetailViewController" id="RUg-XO-4v9" customClass="PostDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dY9-cH-k8p"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q03-2p-cpd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fNM-rL-RsD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MDh-gJ-xYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1268" y="64"/>
         </scene>
     </scenes>
 </document>

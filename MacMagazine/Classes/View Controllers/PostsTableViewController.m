@@ -11,6 +11,7 @@
 #import "MMLabel.h"
 #import "MMTableViewHeaderView.h"
 #import "Post.h"
+#import "PostDetailViewController.h"
 #import "PostPresenter.h"
 #import "PostsTableViewController.h"
 #import "PostTableViewCell.h"
@@ -152,6 +153,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:NSStringFromClass([PostDetailViewController class]) preparationBlock:^(UIStoryboardSegue *segue, PostDetailViewController *destinationViewController) {
+        destinationViewController.post = post;
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
