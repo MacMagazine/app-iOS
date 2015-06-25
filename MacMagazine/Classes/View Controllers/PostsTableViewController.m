@@ -161,6 +161,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger numberOfSections = [tableView numberOfSections];
+    if (indexPath.section + 1 != numberOfSections) {
+        return;
+    }
+    
     NSUInteger numberOfRemainingCells = labs(indexPath.row - [tableView numberOfRowsInSection:indexPath.section]);
     if (numberOfRemainingCells <= 10) {
         [self fetchMoreData];
