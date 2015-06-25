@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "FeaturedPostTableViewCell.h"
 #import "NSString+HTMLSafe.h"
 #import "Post.h"
@@ -30,24 +30,16 @@
 }
 
 - (void)setupFeaturedTableViewCell:(FeaturedPostTableViewCell *)cell {
-    if (![cell.headlineLabel.text isEqualToString:self.post.title]) {
-        cell.thumbnailImageView.alpha = 0;
-    }
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
+    cell.thumbnailImageView.alpha = 0;
     
-    NSDate *requestTime = [NSDate date];
     NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-    
-    [cell.thumbnailImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        BOOL shouldAnimate = [[NSDate date] timeIntervalSinceDate:requestTime] > 0.2;
-        cell.thumbnailImageView.image = image;
-        [UIView animateWithDuration:shouldAnimate ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [cell.thumbnailImageView sd_setImageWithURL:imageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [UIView animateWithDuration:cacheType != SDImageCacheTypeMemory ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             cell.thumbnailImageView.alpha = 1;
         } completion:nil];
-    } failure:nil];
+    }];
 }
 
 - (void)setupTableViewCell:(PostTableViewCell *)cell {
@@ -57,14 +49,11 @@
     cell.thumbnailImageView.alpha = 0;
     
     NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-    [cell.thumbnailImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        cell.thumbnailImageView.image = image;
-        [UIView animateWithDuration:request ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [cell.thumbnailImageView sd_setImageWithURL:imageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [UIView animateWithDuration:cacheType != SDImageCacheTypeMemory ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             cell.thumbnailImageView.alpha = 1;
         } completion:nil];
-    } failure:nil];
+    }];
 }
 
 - (SEL)selectorForViewOfClass:(Class)viewClass {

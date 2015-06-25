@@ -195,6 +195,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     for (NSString *cellIdentifier in @[[PostTableViewCell identifier], [FeaturedPostTableViewCell identifier]]) {
         UINib *nib = [UINib nibWithNibName:cellIdentifier bundle:[NSBundle mainBundle]];
         [self.tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
@@ -215,7 +218,10 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"SFUIDisplay-Medium" size:18]};
 
     [self.refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
-    [self reloadData];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

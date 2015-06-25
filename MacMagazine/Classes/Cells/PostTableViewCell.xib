@@ -18,7 +18,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FEM-L5-Nv4" userLabel="Placeholder Image View">
                         <rect key="frame" x="8" y="18" width="60" height="60"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-HR-0kH" userLabel="Thumbnail Image View">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-HR-0kH" userLabel="Thumbnail Image View">
                         <rect key="frame" x="8" y="18" width="60" height="60"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -78,7 +78,7 @@
                 <outlet property="topSpaceConstraint" destination="0JP-LO-5Gx" id="vIG-fv-L2y"/>
                 <outlet property="trailingSpaceConstraint" destination="j6q-GJ-Rcv" id="Tn3-Ap-xJj"/>
             </connections>
-            <point key="canvasLocation" x="185" y="293"/>
+            <point key="canvasLocation" x="-190" y="212"/>
         </tableViewCell>
     </objects>
 </document>
