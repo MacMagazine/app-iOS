@@ -24,7 +24,7 @@
 }
 
 + (instancetype)formatterWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {
-    NSString *key = [NSString stringWithFormat:@"DateStyle: %li TimeStyle: %li", dateStyle, timeStyle];
+    NSString *key = [NSString stringWithFormat:@"DateStyle: %li TimeStyle: %li", (unsigned long)dateStyle, (unsigned long)timeStyle];
     NSDateFormatter *formatter = [NSDateFormatter formatters][key];
     if (!formatter) {
         formatter = [NSDateFormatter new];
