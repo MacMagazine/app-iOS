@@ -472,6 +472,7 @@
 				EDBB4A4B1B2E7F8D00E1CCCA /* Frameworks */,
 				EDBB4A4C1B2E7F8D00E1CCCA /* Resources */,
 				D9225290DA7C91A36EA30779 /* Copy Pods Resources */,
+				ED95D8751B4219C700028B46 /* Updates Build Version */,
 			);
 			buildRules = (
 			);
@@ -610,6 +611,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		ED95D8751B4219C700028B46 /* Updates Build Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Updates Build Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Update build version with number of commits\nBUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
