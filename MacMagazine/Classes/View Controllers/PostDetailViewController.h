@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-@import WebKit;
 #import "SUNViewController.h"
 
 @class Post;
@@ -14,6 +13,6 @@
 @interface PostDetailViewController : SUNViewController
 
 @property (strong, nonatomic) Post *post;
-@property (strong, nonatomic) WKWebView *webView;
+@property (strong, nonatomic) UIWebView *webView;
 
 @end

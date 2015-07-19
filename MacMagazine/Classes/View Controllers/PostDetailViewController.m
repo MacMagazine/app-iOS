@@ -33,7 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.webView = [WKWebView new];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : @"com.madeatsampa.MacMagazine"}];
+    [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
+    [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
+    
+    self.webView = [UIWebView new];
     [self.view addSubview:self.webView];
     [self.webView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
     
