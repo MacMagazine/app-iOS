@@ -193,6 +193,12 @@
     return [MMTableViewHeaderView height];
 }
 
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
