@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 601BFC4C5CE12F4DD0B64BF3 /* libPods.a */; };
+		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		EDA6FA1E1B3BD2D4007EE794 /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA6FA1D1B3BD2D4007EE794 /* PostDetailViewController.m */; };
 		EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A531B2E7F8D00E1CCCA /* main.m */; };
 		EDBB4A571B2E7F8D00E1CCCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A561B2E7F8D00E1CCCA /* AppDelegate.m */; };
@@ -72,6 +73,9 @@
 		21DB65787D3E922FF090D828 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		601BFC4C5CE12F4DD0B64BF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		ED10FFEF1B5C72FF00AA902C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		EDA6FA1C1B3BD2D4007EE794 /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		EDA6FA1D1B3BD2D4007EE794 /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		EDBB4A4E1B2E7F8D00E1CCCA /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,16 @@
 				21DB65787D3E922FF090D828 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		ED10FFED1B5C72FF00AA902C /* GTMDefines */ = {
+			isa = PBXGroup;
+			children = (
+				ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */,
+				ED10FFEF1B5C72FF00AA902C /* GTMNSString+HTML.h */,
+				ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */,
+			);
+			path = GTMDefines;
 			sourceTree = "<group>";
 		};
 		EDBB4A451B2E7F8D00E1CCCA = {
@@ -381,6 +395,7 @@
 		EDFA9DC81B3651BD00EE213C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ED10FFED1B5C72FF00AA902C /* GTMDefines */,
 				EDFA9DDB1B37586500EE213C /* NSDate */,
 				EDFA9DD51B3651DD00EE213C /* NSString */,
 			);
@@ -653,6 +668,7 @@
 				EDFA9DB11B36267600EE213C /* PostTableViewCell.m in Sources */,
 				EDFA9DF11B378C7A00EE213C /* MMLabel.m in Sources */,
 				EDFA9DC71B36353E00EE213C /* PostPresenter.m in Sources */,
+				ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,9 +818,13 @@
 			baseConfigurationReference = 21DB65787D3E922FF090D828 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fernando Saragoca (8Y8458KNAN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fernando Saragoca (8Y8458KNAN)";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2718217d-f845-46eb-939e-22a01477debd";
 			};
 			name = Release;
 		};

@@ -8,6 +8,7 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "FeaturedPostTableViewCell.h"
+#import "GTMNSString+HTML.h"
 #import "NSString+HTMLSafe.h"
 #import "Post.h"
 #import "PostPresenter.h"
@@ -69,7 +70,7 @@
 #pragma mark - Attributes
 
 - (NSString *)descriptionText {
-    return self.post.descriptionText.htmlSafe;
+    return [self.post.descriptionText.htmlSafe gtm_stringByUnescapingFromHTML];
 }
 
 - (NSURL *)thumbnailURLForImageView:(UIImageView *)imageView {
