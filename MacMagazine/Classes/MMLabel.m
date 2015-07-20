@@ -29,6 +29,10 @@
 #pragma mark - Class Methods
 
 + (UIFont *)mm_fontForTextStyle:(NSString *)textStyle {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9,0,0}]) {
+        return [UIFont preferredFontForTextStyle:textStyle];
+    }
+    
     NSString *fontName = @"SFUIDisplay-Regular";
     
     if ([textStyle isEqualToString:UIFontTextStyleBody]) {
