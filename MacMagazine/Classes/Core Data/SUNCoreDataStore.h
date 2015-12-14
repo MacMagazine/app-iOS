@@ -17,7 +17,7 @@
 
 + (void)setupDefaultStoreWithModelURL:(NSURL * __nonnull)modelURL persistentStoreURL:(NSURL * __nullable)persistentStoreURL;
 + (nullable instancetype)defaultStore;
-- (nullable instancetype)initWithModelURL:(NSURL * __nonnull)modelURL persistentStoreURL:(NSURL * __nullable)persistentStoreURL NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithModelURL:(NSURL * __nonnull)modelURL persistentStoreURL:(NSURL * __nullable)persistentStoreURL;
 
 @property (strong, nonatomic, readonly) NSManagedObjectContext * __nonnull mainQueueContext;
 @property (strong, nonatomic, readonly) NSManagedObjectContext * __nonnull privateQueueContext;
