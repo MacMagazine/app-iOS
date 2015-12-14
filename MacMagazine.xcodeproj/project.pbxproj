@@ -548,6 +548,7 @@
 				TargetAttributes = {
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 8Y8458KNAN;
 					};
 					EDBB4A6C1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -845,9 +846,11 @@
 			baseConfigurationReference = AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Fernando Saragoca (KQE53QV928)";
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9de7b5f5-cb0c-4bc2-b921-aa2f667954ae";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -863,7 +866,7 @@
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1191b766-3839-4ce9-8572-722da6f7f8e7";
+				PROVISIONING_PROFILE = "1479ef1b-7d05-4f80-ba03-bac8b7cc12a5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

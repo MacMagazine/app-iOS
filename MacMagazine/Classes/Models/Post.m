@@ -30,7 +30,7 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
         sessionManager = [AFHTTPSessionManager manager];
         sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
         [sessionManager.requestSerializer setValue:kMMRequestUserAgent forHTTPHeaderField:@"User-Agent"];
-        [sessionManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObject:@"application/rss+xml"]];
+        [sessionManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/rss+xml", @"text/xml", nil]];
     });
     return sessionManager;
 }
