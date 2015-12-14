@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 601BFC4C5CE12F4DD0B64BF3 /* libPods.a */; };
+		DB194AD61C1E6E3500AA90D8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB194AD51C1E6E3500AA90D8 /* SpriteKit.framework */; };
+		DB194ADA1C1E6EE600AA90D8 /* MacintoshScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DB194AD91C1E6EE600AA90D8 /* MacintoshScene.m */; };
+		DB194ADE1C1E71E100AA90D8 /* hello.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB194ADD1C1E71E100AA90D8 /* hello.atlas */; };
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		EDA6FA1E1B3BD2D4007EE794 /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA6FA1D1B3BD2D4007EE794 /* PostDetailViewController.m */; };
 		EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A531B2E7F8D00E1CCCA /* main.m */; };
@@ -73,6 +76,10 @@
 		21DB65787D3E922FF090D828 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		601BFC4C5CE12F4DD0B64BF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		DB194AD51C1E6E3500AA90D8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		DB194AD81C1E6EE600AA90D8 /* MacintoshScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacintoshScene.h; sourceTree = "<group>"; };
+		DB194AD91C1E6EE600AA90D8 /* MacintoshScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacintoshScene.m; sourceTree = "<group>"; };
+		DB194ADD1C1E71E100AA90D8 /* hello.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = hello.atlas; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		ED10FFEF1B5C72FF00AA902C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
@@ -155,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB194AD61C1E6E3500AA90D8 /* SpriteKit.framework in Frameworks */,
 				31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +180,7 @@
 		89ACD3CA3A35E1F724A142BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB194AD51C1E6E3500AA90D8 /* SpriteKit.framework */,
 				601BFC4C5CE12F4DD0B64BF3 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -184,6 +193,16 @@
 				21DB65787D3E922FF090D828 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DB194AD71C1E6EC600AA90D8 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				DB194ADD1C1E71E100AA90D8 /* hello.atlas */,
+				DB194AD81C1E6EE600AA90D8 /* MacintoshScene.h */,
+				DB194AD91C1E6EE600AA90D8 /* MacintoshScene.m */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 		ED10FFED1B5C72FF00AA902C /* GTMDefines */ = {
@@ -260,6 +279,7 @@
 		EDBB4A7D1B2E825400E1CCCA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DB194AD71C1E6EC600AA90D8 /* Animations */,
 				EDBB4A7E1B2E825B00E1CCCA /* App Delegate */,
 				EDFA9DD71B37541600EE213C /* Cache */,
 				EDFA9DAD1B36265F00EE213C /* Cells */,
@@ -488,6 +508,7 @@
 				EDBB4A4C1B2E7F8D00E1CCCA /* Resources */,
 				D9225290DA7C91A36EA30779 /* Copy Pods Resources */,
 				ED95D8751B4219C700028B46 /* Updates Build Version */,
+				2EB8243CB6DBA9B48FC3FA00 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -567,6 +588,7 @@
 				EDFA9E131B37932000EE213C /* SF-UI-Text-Heavy.otf in Resources */,
 				EDFA9E0C1B37932000EE213C /* SF-UI-Display-Medium.otf in Resources */,
 				EDBB4A631B2E7F8D00E1CCCA /* Main.storyboard in Resources */,
+				DB194ADE1C1E71E100AA90D8 /* hello.atlas in Resources */,
 				EDFA9E161B37932000EE213C /* SF-UI-Text-Light.otf in Resources */,
 				EDFA9E0E1B37932000EE213C /* SF-UI-Display-Semibold.otf in Resources */,
 				EDFA9E1C1B37932000EE213C /* SF-UI-Text-SemiboldItalic.otf in Resources */,
@@ -597,6 +619,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2EB8243CB6DBA9B48FC3FA00 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3C596E23EB1EDF075D1CEC7C /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -649,6 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBB4A5A1B2E7F8D00E1CCCA /* MacMagazine.xcdatamodeld in Sources */,
+				DB194ADA1C1E6EE600AA90D8 /* MacintoshScene.m in Sources */,
 				EDA6FA1E1B3BD2D4007EE794 /* PostDetailViewController.m in Sources */,
 				EDFA9DA91B361D1000EE213C /* SUNCoreDataStore.m in Sources */,
 				EDFA9DBB1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m in Sources */,
@@ -810,6 +848,7 @@
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -825,6 +864,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2718217d-f845-46eb-939e-22a01477debd";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

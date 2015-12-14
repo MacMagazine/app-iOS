@@ -1,27 +1,23 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (3.0.1):
+    - AFNetworking/NSURLSession (= 3.0.1)
+    - AFNetworking/Reachability (= 3.0.1)
+    - AFNetworking/Security (= 3.0.1)
+    - AFNetworking/Serialization (= 3.0.1)
+    - AFNetworking/UIKit (= 3.0.1)
+  - AFNetworking/NSURLSession (3.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.0.1)
+  - AFNetworking/Security (3.0.1)
+  - AFNetworking/Serialization (3.0.1)
+  - AFNetworking/UIKit (3.0.1):
     - AFNetworking/NSURLSession
   - HexColors (2.2.1)
-  - HockeySDK (3.6.4)
+  - HockeySDK (3.8.5):
+    - HockeySDK/AllFeaturesLib (= 3.8.5)
+  - HockeySDK/AllFeaturesLib (3.8.5)
   - libwebp (0.4.3):
     - libwebp/core (= 0.4.3)
     - libwebp/dec (= 0.4.3)
@@ -48,29 +44,29 @@ PODS:
   - libwebp/webp (0.4.3)
   - Ono (1.2.2)
   - PSTAlertController (1.1.0)
-  - PureLayout (2.0.6)
+  - PureLayout (3.0.1)
   - SDWebImage/Core (3.7.2)
   - SDWebImage/WebP (3.7.2):
     - libwebp
     - SDWebImage/Core
   - SUNKit (0.0.1):
-    - PureLayout (~> 2.0)
+    - PureLayout (~> 3.0)
   - TSMessages (0.9.12):
-    - HexColors
+    - HexColors (~> 2.2.0)
   - TTTAttributedLabel (1.13.3)
   - Tweaks (2.0.0)
 
 DEPENDENCIES:
-  - AFNetworking (= 2.5.4)
-  - HockeySDK (= 3.6.4)
+  - AFNetworking
+  - HockeySDK
   - Ono (= 1.2.2)
   - PSTAlertController (= 1.1.0)
-  - PureLayout (= 2.0.6)
+  - PureLayout
   - SDWebImage/WebP (= 3.7.2)
   - SUNKit (from `git@git.madeatsampa.com:madeatsampa/SUNKit.git`)
   - TSMessages (= 0.9.12)
   - TTTAttributedLabel (= 1.13.3)
-  - Tweaks (= 2.0.0)
+  - Tweaks
 
 EXTERNAL SOURCES:
   SUNKit:
@@ -78,21 +74,21 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SUNKit:
-    :commit: 138475c5bccf2afb6ada2cd1be9f851a7bdf8678
+    :commit: 151cce7acf8c215ad544dc588a2816c31020e6a9
     :git: git@git.madeatsampa.com:madeatsampa/SUNKit.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: 20d8749e03e45f1e5c046ad0b647e0b07bcdd91f
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
-  HockeySDK: c07cdd580296737edcd0963e292c19885a53f563
+  HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   libwebp: 360ed8bc4ec8da413f07f84071e7f5a5c67a285d
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PSTAlertController: cb21afcfa76c3229feec7db044afd4f60dab5892
-  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  SUNKit: d38ee0dea9aa2bf741571601844767d899b210e5
-  TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3
+  SUNKit: dbbf67acf5504aaed7e1d7daab2c164dd1484ea3
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
   Tweaks: 524fa47636cce3bf3a4d9156e980f10ae9480e81
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0
