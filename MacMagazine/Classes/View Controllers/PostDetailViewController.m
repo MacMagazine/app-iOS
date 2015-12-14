@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : @"com.madeatsampa.MacMagazine"}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : @"MacMagazine"}];
     [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
     [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
     
