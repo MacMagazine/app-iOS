@@ -57,9 +57,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
-    self.animationView.hidden = YES;
-    self.backgroundAnimationView.hidden = YES;
-    [self.navigationController popViewControllerAnimated:YES];
+    [self webViewDidFinishLoad:webView];
 }
 
 #pragma mark - View lifecycle
