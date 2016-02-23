@@ -213,7 +213,6 @@
     }
     [self.tableView registerClass:[MMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMTableViewHeaderView identifier]];
     
-    self.title = @"MacMagazine";
     self.tableView.estimatedRowHeight = 100;
     self.tableView.tableFooterView = self.footerView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -222,11 +221,12 @@
     UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.frame), CGRectGetWidth(navigationBar.frame), 1)];
     separatorView.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1];
     separatorView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [navigationBar addSubview:separatorView];
-    
-    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9,0,0}]) {
-        self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"SFUIDisplay-Medium" size:18]};
-    }
+    [navigationBar addSubview:separatorView];    
+
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
+    logoImageView.frame = CGRectMake(0, 0, 34, 34);
+    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = logoImageView;
 
     [self.refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     [self reloadData];
