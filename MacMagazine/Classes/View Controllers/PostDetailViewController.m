@@ -79,7 +79,8 @@
     
     self.webView = [UIWebView new];
     [self.view insertSubview:self.webView belowSubview:self.animationView];
-    [self.webView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0)];
+    [self.webView autoPinEdgesToSuperviewEdges];
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0)];
     self.webView.alpha = 0.0f;
     self.webView.delegate = self;
     
