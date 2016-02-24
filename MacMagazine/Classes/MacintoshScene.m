@@ -49,7 +49,7 @@
 }
 
 -(void)animateMac {
-    [self.macintosh runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.macintoshFrames timePerFrame:0.05f resize:NO restore:YES]] withKey:@"hello"];
+    [self.macintosh runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.macintoshFrames timePerFrame:0.037f resize:NO restore:YES]] withKey:@"hello"];
     
     return;
 }
