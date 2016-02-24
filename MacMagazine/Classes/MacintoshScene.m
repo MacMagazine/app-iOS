@@ -19,7 +19,7 @@
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        self.backgroundColor = [SKColor clearColor];
+        self.backgroundColor = [SKColor whiteColor];
         
         //Setup the array to hold the hello frames
         NSMutableArray *macFrames = [NSMutableArray array];
