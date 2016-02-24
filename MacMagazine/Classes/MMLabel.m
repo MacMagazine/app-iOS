@@ -33,20 +33,20 @@
         return [UIFont preferredFontForTextStyle:textStyle];
     }
     
-    NSString *fontName = @"SFUIDisplay-Regular";
+    NSString *fontName = @"HelveticaNeueInterface-Regular";
     
     if ([textStyle isEqualToString:UIFontTextStyleBody]) {
-        fontName = @"SFUIDisplay-Regular";
+        fontName = @"HelveticaNeueInterface-Regular";
     } else if ([textStyle isEqualToString:UIFontTextStyleCaption1]) {
-        fontName = @"SFUIDisplay-Light";
+        fontName = @"HelveticaNeueInterface-Regular";
     } else if ([textStyle isEqualToString:UIFontTextStyleCaption2]) {
-        fontName = @"SFUIDisplay-Light";
+        fontName = @"HelveticaNeueInterface-Regular";
     } else if ([textStyle isEqualToString:UIFontTextStyleFootnote]) {
-        fontName = @"SFUIDisplay-Light";
+        fontName = @"HelveticaNeueInterface-Regular";
     } else if ([textStyle isEqualToString:UIFontTextStyleHeadline]) {
-        fontName = @"SFUIDisplay-Medium";
+        fontName = @"HelveticaNeueInterface-MediumP4";
     } else if ([textStyle isEqualToString:UIFontTextStyleSubheadline]) {
-        fontName = @"SFUIDisplay-Light";
+        fontName = @"HelveticaNeueInterface-Regular";
     }
     
     return [UIFont fontWithName:fontName size:[UIFont preferredFontForTextStyle:textStyle].pointSize];
