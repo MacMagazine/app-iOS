@@ -33,6 +33,10 @@
 #pragma mark - Instance Methods
 
 - (void)removeAnimation {
+    if (!self.animationView.superview) {
+        return;
+    }
+    
     [UIView animateWithDuration:0.2f delay:1.6f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
         self.animationView.alpha = 0.0f;
     } completion:nil];
@@ -75,7 +79,8 @@
     [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
     [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
     
-    self.navigationController.hidesBarsOnSwipe = YES;
+    // Must fix content inset before turning ON
+    self.navigationController.hidesBarsOnSwipe = NO;
     
     self.showLoadingBar = YES;
     self.showPageTitles = NO;
@@ -88,6 +93,7 @@
         [weakSelf removeAnimation];
     }];
     
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0)];
     self.webView.alpha = 0.0f;
     
     NSURL *URL = [NSURL URLWithString:self.post.link];
@@ -98,7 +104,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (BOOL)prefersStatusBarHidden {
