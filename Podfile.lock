@@ -51,6 +51,9 @@ PODS:
     - SDWebImage/Core
   - SUNKit (0.0.1):
     - PureLayout (~> 3.0)
+  - TOWebViewController (2.2.3):
+    - TOWebViewController/Core (= 2.2.3)
+  - TOWebViewController/Core (2.2.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
   - TTTAttributedLabel (1.13.3)
@@ -64,6 +67,7 @@ DEPENDENCIES:
   - PureLayout
   - SDWebImage/WebP (= 3.7.2)
   - SUNKit (from `git@git.madeatsampa.com:madeatsampa/SUNKit.git`)
+  - TOWebViewController (~> 2.2)
   - TSMessages (= 0.9.12)
   - TTTAttributedLabel (= 1.13.3)
   - Tweaks
@@ -87,6 +91,7 @@ SPEC CHECKSUMS:
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SUNKit: dbbf67acf5504aaed7e1d7daab2c164dd1484ea3
+  TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
   Tweaks: 524fa47636cce3bf3a4d9156e980f10ae9480e81
