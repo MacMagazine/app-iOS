@@ -25,6 +25,8 @@
     [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
+    [self.window setTintColor:[UIColor colorWithRed:0.25 green:0.66 blue:0.96 alpha:1]];
+    
     return YES;
 }
 
