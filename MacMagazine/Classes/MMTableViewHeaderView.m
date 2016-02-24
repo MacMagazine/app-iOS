@@ -33,26 +33,27 @@
         return nil;
     }
     
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    self.backgroundView = visualEffectView;
+    [visualEffectView autoPinEdgesToSuperviewEdges];
+    
     _titleLabel = [MMLabel new];
     _titleLabel.numberOfLines = 1;
     _titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textStyle = UIFontTextStyleCaption1;
+    _titleLabel.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_titleLabel];
     [_titleLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
     
-    self.contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     self.textLabel.hidden = YES;
     self.detailTextLabel.hidden = YES;
     
     return self;
-}
-
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    [super willMoveToSuperview:newSuperview];
-    
-    self.topSeparatorView.frame = CGRectMake(0, -0.5, self.contentView.frame.size.width, 0.5);
-    self.bottomSeparatorView.frame = CGRectMake(0, self.contentView.frame.size.height, self.contentView.frame.size.width, 0.5);
 }
 
 @end
