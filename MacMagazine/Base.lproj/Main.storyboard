@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GCO-rq-BET">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GCO-rq-BET">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -89,50 +89,8 @@
                     <view key="view" contentMode="scaleToFill" id="fNM-rL-RsD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSJ-pH-W3q" userLabel="BackgroundAnimationView">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FX7-gC-dUo" customClass="SKView">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="Swh-af-9wd"/>
-                                    <constraint firstAttribute="height" constant="240" id="vSW-oF-Lul"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Swh-af-9wd"/>
-                                        <exclude reference="vSW-oF-Lul"/>
-                                    </mask>
-                                </variation>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="sSJ-pH-W3q" firstAttribute="centerY" secondItem="FX7-gC-dUo" secondAttribute="centerY" id="APi-SS-KPx"/>
-                            <constraint firstItem="sSJ-pH-W3q" firstAttribute="height" secondItem="FX7-gC-dUo" secondAttribute="height" id="IqF-4v-F9Z"/>
-                            <constraint firstItem="Q03-2p-cpd" firstAttribute="top" secondItem="FX7-gC-dUo" secondAttribute="bottom" id="IxE-ac-0BW"/>
-                            <constraint firstItem="FX7-gC-dUo" firstAttribute="centerY" secondItem="fNM-rL-RsD" secondAttribute="centerY" constant="32" id="QgO-5E-nws"/>
-                            <constraint firstItem="FX7-gC-dUo" firstAttribute="centerX" secondItem="fNM-rL-RsD" secondAttribute="centerX" id="RCc-6w-QsB"/>
-                            <constraint firstItem="sSJ-pH-W3q" firstAttribute="centerX" secondItem="FX7-gC-dUo" secondAttribute="centerX" id="Rk1-R8-vJa"/>
-                            <constraint firstAttribute="trailing" secondItem="FX7-gC-dUo" secondAttribute="trailing" id="UvM-bh-tX9"/>
-                            <constraint firstItem="FX7-gC-dUo" firstAttribute="top" secondItem="dY9-cH-k8p" secondAttribute="bottom" id="Ypr-GT-MtM"/>
-                            <constraint firstItem="sSJ-pH-W3q" firstAttribute="width" secondItem="FX7-gC-dUo" secondAttribute="width" id="k1d-OD-PLe"/>
-                            <constraint firstItem="FX7-gC-dUo" firstAttribute="leading" secondItem="fNM-rL-RsD" secondAttribute="leading" id="ms5-PK-Rck"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="QgO-5E-nws"/>
-                                <exclude reference="RCc-6w-QsB"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <connections>
-                        <outlet property="animationView" destination="FX7-gC-dUo" id="Y6A-4t-a3I"/>
-                        <outlet property="backgroundAnimationView" destination="sSJ-pH-W3q" id="kGz-fl-PJo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MDh-gJ-xYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

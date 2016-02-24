@@ -6,18 +6,17 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <PureLayout/PureLayout.h>
-#import "Post.h"
 #import "PostDetailViewController.h"
 #import "MacintoshScene.h"
-#import <UIKit/UIWebView.h>
+#import "Post.h"
+
 #import <AVFoundation/AVFoundation.h>
+#import <PureLayout/PureLayout.h>
 #import <SpriteKit/SpriteKit.h>
 
 @interface PostDetailViewController () <UIWebViewDelegate>
 
-@property (nonatomic, weak) IBOutlet SKView *animationView;
-@property (nonatomic, weak) IBOutlet UIView *backgroundAnimationView;
+@property (nonatomic, weak) SKView *animationView;
 
 @end
 
@@ -33,14 +32,9 @@
 
 #pragma mark - Instance Methods
 
-#pragma mark - Protocols
-
-#pragma mark - UIWebView Delegate
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)removeAnimation {
     [UIView animateWithDuration:0.2f delay:1.6f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
         self.animationView.alpha = 0.0f;
-        self.backgroundAnimationView.alpha = 0.0f;
     } completion:nil];
     
     [UIView animateWithDuration:0.2f delay:1.6f options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -52,13 +46,25 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.animationView removeFromSuperview];
-        [strongSelf.backgroundAnimationView removeFromSuperview];
     });
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
-    [self webViewDidFinishLoad:webView];
+- (void)prepareMacintoshAnimation {
+    // Macintosh animation
+    // Create and configure the scene.
+    SKScene *scene = [MacintoshScene sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    // Present the scene.
+    SKView *animationView = [[SKView alloc] init];
+    [self.view insertSubview:animationView atIndex:0];
+    self.animationView = animationView;
+    [self.animationView autoPinEdgesToSuperviewEdges];
+    
+    [self.animationView presentScene:scene];
 }
+
+#pragma mark - Protocols
 
 #pragma mark - View lifecycle
 
@@ -69,29 +75,34 @@
     [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
     [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
     
-    // Macintosh animation
-    // Create and configure the scene.
-    SKScene *scene = [MacintoshScene sceneWithSize:self.animationView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.navigationController.hidesBarsOnSwipe = YES;
     
-    // Present the scene.
-    [self.animationView presentScene:scene];
+    self.showLoadingBar = YES;
+    self.showPageTitles = NO;
+    self.showUrlWhileLoading = NO;
     
-    self.webView = [UIWebView new];
-    [self.view insertSubview:self.webView belowSubview:self.animationView];
-    [self.webView autoPinEdgesToSuperviewEdges];
-    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0)];
+    [self prepareMacintoshAnimation];
+    
+    __weak typeof(self) weakSelf = self;
+    [self setDidFinishLoadHandler:^(UIWebView *webView) {
+        [weakSelf removeAnimation];
+    }];
+    
     self.webView.alpha = 0.0f;
-    self.webView.delegate = self;
     
     NSURL *URL = [NSURL URLWithString:self.post.link];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
-    [self.webView loadRequest:request];
-    
+    self.urlRequest = request;
+    self.url = URL;
 }
 
-- (void)dealloc {
-    _webView.delegate = nil;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.navigationController.navigationBarHidden;
 }
 
 @end

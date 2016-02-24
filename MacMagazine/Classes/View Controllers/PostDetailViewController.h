@@ -6,13 +6,12 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "SUNViewController.h"
+#import <TOWebViewController/TOWebViewController.h>
 
 @class Post;
 
-@interface PostDetailViewController : SUNViewController
+@interface PostDetailViewController : TOWebViewController
 
 @property (strong, nonatomic) Post *post;
-@property (strong, nonatomic) UIWebView *webView;
 
 @end
