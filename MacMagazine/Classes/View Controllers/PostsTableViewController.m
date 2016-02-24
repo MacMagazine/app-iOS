@@ -236,6 +236,7 @@
     [super viewDidAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
     self.navigationController.hidesBarsOnSwipe = NO;
 }
 
