@@ -90,4 +90,8 @@
     
 }
 
+- (void)dealloc {
+    _webView.delegate = nil;
+}
+
 @end
