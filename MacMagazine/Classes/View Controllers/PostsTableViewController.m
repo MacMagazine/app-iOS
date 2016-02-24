@@ -174,7 +174,7 @@
     } else if ([calendar isDateInYesterday:post.pubDate]) {
         headerView.titleLabel.text = NSLocalizedString(@"Yesterday", @"");
     } else {
-        headerView.titleLabel.text = [post.pubDate stringFromTemplate:@"EEEEddMMMM"];
+        headerView.titleLabel.text = [post.pubDate stringFromTemplate:@"EEEEddMMMM"].uppercaseString;
     }
     
     headerView.topSeparatorView.backgroundColor = self.tableView.separatorColor;

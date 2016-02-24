@@ -20,7 +20,7 @@
 }
 
 + (CGFloat)height {
-    CGFloat height = [@"TODAY" boundingRectWithSize:CGSizeMake(300, INT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont mm_fontForTextStyle:UIFontTextStyleSubheadline]} context:nil].size.height;
+    CGFloat height = [@"TODAY" boundingRectWithSize:CGSizeMake(300, INT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont mm_fontForTextStyle:UIFontTextStyleCaption1]} context:nil].size.height;
     return height + 10;
 }
 
@@ -35,21 +35,13 @@
     
     _titleLabel = [MMLabel new];
     _titleLabel.numberOfLines = 1;
-    _titleLabel.textColor = [UIColor blackColor];
+    _titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.textStyle = UIFontTextStyleSubheadline;
+    _titleLabel.textStyle = UIFontTextStyleCaption1;
     [self.contentView addSubview:_titleLabel];
     [_titleLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
     
-    self.topSeparatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 0.5)];
-    self.topSeparatorView.backgroundColor = [UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:1.00];
-    [self addSubview:self.topSeparatorView];
-    
-    self.bottomSeparatorView = [[UIView alloc] initWithFrame:CGRectMake(0, self.contentView.frame.size.height - 0.5, self.contentView.frame.size.width, 0.5)];
-    self.bottomSeparatorView.backgroundColor = self.topSeparatorView.backgroundColor;
-    [self addSubview:self.bottomSeparatorView];
-    
-    self.contentView.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.00];
+    self.contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     self.textLabel.hidden = YES;
     self.detailTextLabel.hidden = YES;
     
