@@ -17,36 +17,11 @@ PODS:
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
-  - libwebp (0.4.3):
-    - libwebp/core (= 0.4.3)
-    - libwebp/dec (= 0.4.3)
-    - libwebp/demux (= 0.4.3)
-    - libwebp/dsp (= 0.4.3)
-    - libwebp/enc (= 0.4.3)
-    - libwebp/mux (= 0.4.3)
-    - libwebp/utils (= 0.4.3)
-    - libwebp/webp (= 0.4.3)
-  - libwebp/core (0.4.3):
-    - libwebp/webp
-  - libwebp/dec (0.4.3):
-    - libwebp/core
-  - libwebp/demux (0.4.3):
-    - libwebp/core
-  - libwebp/dsp (0.4.3):
-    - libwebp/core
-  - libwebp/enc (0.4.3):
-    - libwebp/core
-  - libwebp/mux (0.4.3):
-    - libwebp/core
-  - libwebp/utils (0.4.3):
-    - libwebp/core
-  - libwebp/webp (0.4.3)
   - Ono (1.2.2)
   - PureLayout (3.0.1)
-  - SDWebImage/Core (3.7.2)
-  - SDWebImage/WebP (3.7.2):
-    - libwebp
-    - SDWebImage/Core
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
   - SUNKit (0.0.1):
     - PureLayout (~> 3.0)
   - TOWebViewController (2.2.3):
@@ -60,7 +35,7 @@ DEPENDENCIES:
   - HockeySDK
   - Ono (= 1.2.2)
   - PureLayout
-  - SDWebImage/WebP (= 3.7.2)
+  - SDWebImage
   - SUNKit (from `git@git.madeatsampa.com:madeatsampa/SUNKit.git`)
   - TOWebViewController (~> 2.2)
   - TTTAttributedLabel (= 1.13.3)
@@ -78,10 +53,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 20d8749e03e45f1e5c046ad0b647e0b07bcdd91f
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
-  libwebp: 360ed8bc4ec8da413f07f84071e7f5a5c67a285d
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SUNKit: dbbf67acf5504aaed7e1d7daab2c164dd1484ea3
   TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
