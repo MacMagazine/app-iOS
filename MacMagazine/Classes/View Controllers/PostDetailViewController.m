@@ -18,6 +18,7 @@
 @interface PostDetailViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) SKView *animationView;
+@property (nonatomic) BOOL isLoading;
 
 @end
 
@@ -89,9 +90,11 @@
     
     [self prepareMacintoshAnimation];
     
+    self.isLoading = YES;
     __weak typeof(self) weakSelf = self;
     [self setDidFinishLoadHandler:^(UIWebView *webView) {
         [weakSelf removeAnimation];
+        weakSelf.isLoading = NO;
     }];
     
     [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
@@ -119,8 +122,10 @@
             NSString* documentURL = [[request mainDocumentURL] absoluteString];
             //if they are the same this is a javascript href click
             if ([url isEqualToString:documentURL]) {
+                if (!strongSelf.isLoading) {
 //                [strongSelf pushFrontWithLink:url];
-                return NO;
+                    return NO;
+                }
             }
         }
         return YES;
