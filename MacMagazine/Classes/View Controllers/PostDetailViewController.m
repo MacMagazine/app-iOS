@@ -12,6 +12,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <PureLayout/PureLayout.h>
+#import <SafariServices/SafariServices.h>
 #import <SpriteKit/SpriteKit.h>
 
 @interface PostDetailViewController () <UIWebViewDelegate>
@@ -93,7 +94,39 @@
         [weakSelf removeAnimation];
     }];
     
-    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0)];
+    [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if ((navigationType == UIWebViewNavigationTypeLinkClicked) && !([request.URL.absoluteString containsString:@"macmagazine.com.br"])) {
+            SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:request.URL];
+            [strongSelf presentViewController:safariViewController animated:YES completion:nil];
+            return NO;
+        }
+        
+        // Semi-hack sollution to capture URL selection when there's a javascript redirect.
+        // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
+        NSString *url = request.URL.absoluteString;
+        
+        // first page load, don't move away
+        if ([url isEqualToString:strongSelf.post.link]) {
+            return YES;
+        }
+        
+        if (navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeFormSubmitted) {
+//            [strongSelf pushFrontWithURL:url];      //this will make a new webview and push it on our navigation controller            
+            return NO;
+        } else if (navigationType == UIWebViewNavigationTypeOther) {
+            //push our own javascript-triggered links as well
+            NSString* documentURL = [[request mainDocumentURL] absoluteString];
+            //if they are the same this is a javascript href click
+            if ([url isEqualToString:documentURL]) {
+//                [strongSelf pushFrontWithLink:url];
+                return NO;
+            }
+        }
+        return YES;
+    }];
+    
+    self.webView.scrollView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0);
     self.webView.alpha = 0.0f;
     
     NSURL *URL = [NSURL URLWithString:self.post.link];
