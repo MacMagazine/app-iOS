@@ -40,6 +40,38 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 #pragma mark - Actions
 
+- (BOOL)respondToLoadRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // Semi-hack sollution to capture URL selection when there's a javascript redirect.
+    // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
+    NSString *URLString = request.URL.absoluteString;
+    
+    // First page load, don't move away
+    if ([URLString isEqualToString:self.URL.absoluteString]) {
+        return YES;
+    }
+    
+    MMLinkClickType linkClickType = ([request.URL.absoluteString containsString:MMBaseURL]) ? MMLinkClickTypeInternal : MMLinkClickTypeExternal;
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        [self performActionForLinkClickWithType:linkClickType URL:request.URL];
+        
+        return NO;
+    } else if (navigationType == UIWebViewNavigationTypeOther) {
+        // For javascript-triggered links
+        NSString *documentURL = [[request mainDocumentURL] absoluteString];
+        
+        // If they are the same this is a javascript href click
+        if ([URLString isEqualToString:documentURL]) {
+            if (!self.isLoading) {
+                [self performActionForLinkClickWithType:linkClickType URL:request.URL];
+                
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
 - (void)pushToNewDetailViewControllerWithURL:(NSURL *)URL {
     PostDetailViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
     viewController.URL = URL;
@@ -53,34 +85,42 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 #pragma mark - Instance Methods
 
-- (void)removeAnimation {
-    if (!self.animationView.superview) {
+- (void)removeLoadingAnimation {
+    if (!self.webView.hidden) {
         return;
     }
     
-    [UIView animateWithDuration:0.2f delay:1.6f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
-        self.animationView.alpha = 0.0f;
-    } completion:nil];
+    self.webView.hidden = NO;
+    self.webView.alpha = 0.0f;
     
-    [UIView animateWithDuration:0.2f delay:1.6f options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.webView.alpha = 1.0f;
-    } completion:nil];
-    
-    // setting this inside the completion block was causing undesired behaviour
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.animationView removeFromSuperview];
-    });
+    if (FBTweakValue(@"Animations", @"Macintosh", @"Enabled", NO)) {
+        [UIView animateWithDuration:0.2f delay:1.2f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
+            self.animationView.alpha = 0.0f;
+        } completion:nil];
+        
+        [UIView animateWithDuration:0.2f delay:1.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.webView.alpha = 1.0f;
+        } completion:nil];
+        
+        // setting this inside the completion block was causing undesired behaviour
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.animationView removeFromSuperview];
+        });
+    } else {
+        [UIView animateWithDuration:0.2f delay:1.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.webView.alpha = 1.0f;
+        } completion:nil];
+    }
 }
 
 - (void)prepareMacintoshAnimation {
-    // Macintosh animation
-    // Create and configure the scene.
+    // Create and configure the scene
     SKScene *scene = [MacintoshScene sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    // Present the scene.
+    // Present the scene
     SKView *animationView = [[SKView alloc] init];
     [self.view insertSubview:animationView atIndex:0];
     self.animationView = animationView;
@@ -89,11 +129,54 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     [self.animationView presentScene:scene];
 }
 
-- (void)dealWithLinkClickWithType:(MMLinkClickType)linkClickType URL:(NSURL *)URL {
+- (void)performActionForLinkClickWithType:(MMLinkClickType)linkClickType URL:(NSURL *)URL {
     if (linkClickType == MMLinkClickTypeInternal) {
         [self pushToNewDetailViewControllerWithURL:URL];
     } else if (linkClickType == MMLinkClickTypeExternal) {
         [self pushToSFSafariViewControllerWithURL:URL];
+    }
+}
+
+- (void)setupWebView {
+    // Changes the UIWebView user agent in order to hide some CSS/HTML elements
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : @"MacMagazine"}];
+    [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
+    [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
+    
+    self.webView.hidden = YES;
+    self.showLoadingBar = YES;
+    self.isLoading = YES;
+    self.showPageTitles = NO;
+    self.showUrlWhileLoading = NO;
+    
+    __weak typeof(self) weakSelf = self;
+    // Finish load handler
+    [self setDidFinishLoadHandler:^(UIWebView *webView) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf removeLoadingAnimation];
+        strongSelf.isLoading = NO;
+    }];
+    
+    // URLRequest handler
+    [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        return [strongSelf respondToLoadRequest:request navigationType:navigationType];
+    }];
+    
+    // Loads request
+    NSURL *URL = self.URL;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    self.urlRequest = request;
+    self.url = URL;
+}
+
+- (void)setupLoadingAnimation {
+    if (FBTweakValue(@"Animations", @"Macintosh", @"Enabled", NO)) {
+        [self prepareMacintoshAnimation];
+        // UIWebView is hidden and isets end up being calculated wrong
+        UIEdgeInsets inset = UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0);
+        self.webView.scrollView.contentInset = inset;
+        self.webView.scrollView.scrollIndicatorInsets = inset;
     }
 }
 
@@ -104,78 +187,8 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : @"MacMagazine"}];
-    [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
-    [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
-    
-    // Must fix content inset before turning ON
-    self.navigationController.hidesBarsOnSwipe = NO;
-    
-    self.showLoadingBar = YES;
-    self.showPageTitles = NO;
-    self.showUrlWhileLoading = NO;
-    
-    if (FBTweakValue(@"Animations", @"Macintosh", @"Enabled", NO)) {
-        [self prepareMacintoshAnimation];
-    }
-    
-    self.isLoading = YES;
-    __weak typeof(self) weakSelf = self;
-    [self setDidFinishLoadHandler:^(UIWebView *webView) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf removeAnimation];
-        strongSelf.isLoading = NO;
-    }];
-    
-    [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        // Semi-hack sollution to capture URL selection when there's a javascript redirect.
-        // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
-        NSString *URLString = request.URL.absoluteString;
-        
-        // first page load, don't move away
-        if ([URLString isEqualToString:strongSelf.URL.absoluteString]) {
-            return YES;
-        }
-        
-        if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-            if ([request.URL.absoluteString containsString:MMBaseURL]) {
-                [strongSelf pushToNewDetailViewControllerWithURL:request.URL];
-            } else {
-                [strongSelf pushToSFSafariViewControllerWithURL:request.URL];
-            }
-            return NO;
-        } else if (navigationType == UIWebViewNavigationTypeOther) {
-            //push our own javascript-triggered links as well
-            NSString* documentURL = [[request mainDocumentURL] absoluteString];
-            //if they are the same this is a javascript href click
-            if ([URLString isEqualToString:documentURL]) {
-                if (!strongSelf.isLoading) {
-                    if ([request.URL.absoluteString containsString:MMBaseURL]) {
-                        [strongSelf pushToNewDetailViewControllerWithURL:request.URL];
-                    } else {
-                        [strongSelf pushToSFSafariViewControllerWithURL:request.URL];
-                    }
-                    return NO;
-                }
-            }
-        }
-        return YES;
-    }];
-    
-    UIEdgeInsets inset = UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0);
-    self.webView.scrollView.contentInset = inset;
-    self.webView.scrollView.scrollIndicatorInsets = inset;
-    self.webView.alpha = 0.0f;
-    
-    NSURL *URL = self.URL;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
-    self.urlRequest = request;
-    self.url = URL;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [self setupWebView];
+    [self setupLoadingAnimation];
 }
 
 - (BOOL)prefersStatusBarHidden {
