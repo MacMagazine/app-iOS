@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "AppDelegate.h"
 #import "SUNCoreDataStore.h"
+
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <Tweaks/FBTweakShakeWindow.h>
 
 @interface AppDelegate ()
 
@@ -30,4 +32,15 @@
     return YES;
 }
 
+#pragma mark FBTweaks UI Override
+
+#ifdef DEBUG
+- (UIWindow *)window {
+    if (!_window) {
+        _window = [[FBTweakShakeWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    }
+    
+    return _window;
+}
+#endif
 @end

@@ -14,6 +14,7 @@
 #import <PureLayout/PureLayout.h>
 #import <SafariServices/SafariServices.h>
 #import <SpriteKit/SpriteKit.h>
+#import <Tweaks/FBTweakInline.h>
 
 static NSString * const MMBaseURL = @"macmagazine.com.br";
 
@@ -114,13 +115,16 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     self.showPageTitles = NO;
     self.showUrlWhileLoading = NO;
     
-    [self prepareMacintoshAnimation];
+    if (FBTweakValue(@"Animations", @"Macintosh", @"Enabled", NO)) {
+        [self prepareMacintoshAnimation];
+    }
     
     self.isLoading = YES;
     __weak typeof(self) weakSelf = self;
     [self setDidFinishLoadHandler:^(UIWebView *webView) {
-        [weakSelf removeAnimation];
-        weakSelf.isLoading = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf removeAnimation];
+        strongSelf.isLoading = NO;
     }];
     
     [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
