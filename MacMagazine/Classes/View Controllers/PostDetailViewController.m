@@ -159,7 +159,9 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
         return YES;
     }];
     
-    self.webView.scrollView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0);
+    UIEdgeInsets inset = UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0);
+    self.webView.scrollView.contentInset = inset;
+    self.webView.scrollView.scrollIndicatorInsets = inset;
     self.webView.alpha = 0.0f;
     
     NSURL *URL = self.URL;
