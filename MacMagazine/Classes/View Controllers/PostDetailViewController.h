@@ -8,10 +8,8 @@
 
 #import <TOWebViewController/TOWebViewController.h>
 
-@class Post;
-
 @interface PostDetailViewController : TOWebViewController
 
-@property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) NSURL *URL;
 
 @end

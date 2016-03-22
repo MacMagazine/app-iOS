@@ -15,6 +15,13 @@
 #import <SafariServices/SafariServices.h>
 #import <SpriteKit/SpriteKit.h>
 
+static NSString * const MMBaseURL = @"macmagazine.com.br";
+
+typedef NS_ENUM(NSUInteger, MMLinkClickType) {
+    MMLinkClickTypeInternal,
+    MMLinkClickTypeExternal,
+};
+
 @interface PostDetailViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) SKView *animationView;
@@ -31,6 +38,17 @@
 #pragma mark - Getters/Setters
 
 #pragma mark - Actions
+
+- (void)pushToNewDetailViewControllerWithURL:(NSURL *)URL {
+    PostDetailViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
+    viewController.URL = URL;
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)pushToSFSafariViewControllerWithURL:(NSURL *)URL {
+    SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
+    [self presentViewController:safariViewController animated:YES completion:nil];
+}
 
 #pragma mark - Instance Methods
 
@@ -70,6 +88,14 @@
     [self.animationView presentScene:scene];
 }
 
+- (void)dealWithLinkClickWithType:(MMLinkClickType)linkClickType URL:(NSURL *)URL {
+    if (linkClickType == MMLinkClickTypeInternal) {
+        [self pushToNewDetailViewControllerWithURL:URL];
+    } else if (linkClickType == MMLinkClickTypeExternal) {
+        [self pushToSFSafariViewControllerWithURL:URL];
+    }
+}
+
 #pragma mark - Protocols
 
 #pragma mark - View lifecycle
@@ -99,31 +125,33 @@
     
     [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if ((navigationType == UIWebViewNavigationTypeLinkClicked) && !([request.URL.absoluteString containsString:@"macmagazine.com.br"])) {
-            SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:request.URL];
-            [strongSelf presentViewController:safariViewController animated:YES completion:nil];
-            return NO;
-        }
-        
         // Semi-hack sollution to capture URL selection when there's a javascript redirect.
         // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
-        NSString *url = request.URL.absoluteString;
+        NSString *URLString = request.URL.absoluteString;
         
         // first page load, don't move away
-        if ([url isEqualToString:strongSelf.post.link]) {
+        if ([URLString isEqualToString:strongSelf.URL.absoluteString]) {
             return YES;
         }
         
-        if (navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeFormSubmitted) {
-//            [strongSelf pushFrontWithURL:url];      //this will make a new webview and push it on our navigation controller            
+        if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+            if ([request.URL.absoluteString containsString:MMBaseURL]) {
+                [strongSelf pushToNewDetailViewControllerWithURL:request.URL];
+            } else {
+                [strongSelf pushToSFSafariViewControllerWithURL:request.URL];
+            }
             return NO;
         } else if (navigationType == UIWebViewNavigationTypeOther) {
             //push our own javascript-triggered links as well
             NSString* documentURL = [[request mainDocumentURL] absoluteString];
             //if they are the same this is a javascript href click
-            if ([url isEqualToString:documentURL]) {
+            if ([URLString isEqualToString:documentURL]) {
                 if (!strongSelf.isLoading) {
-//                [strongSelf pushFrontWithLink:url];
+                    if ([request.URL.absoluteString containsString:MMBaseURL]) {
+                        [strongSelf pushToNewDetailViewControllerWithURL:request.URL];
+                    } else {
+                        [strongSelf pushToSFSafariViewControllerWithURL:request.URL];
+                    }
                     return NO;
                 }
             }
@@ -134,7 +162,7 @@
     self.webView.scrollView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.navigationController.navigationBar.bounds) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame), 0, 0, 0);
     self.webView.alpha = 0.0f;
     
-    NSURL *URL = [NSURL URLWithString:self.post.link];
+    NSURL *URL = self.URL;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
     self.urlRequest = request;
     self.url = URL;
