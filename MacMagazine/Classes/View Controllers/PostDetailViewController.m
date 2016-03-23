@@ -49,31 +49,31 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     // Semi-hack sollution to capture URL selection when there's a javascript redirect.
     // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
     NSString *URLString = request.URL.absoluteString;
-    
+
     // First page load, don't move away
     if ([URLString isEqualToString:self.post.link]) {
         return YES;
     }
-    
+
     MMLinkClickType linkClickType = ([request.URL.absoluteString containsString:MMBaseURL]) ? MMLinkClickTypeInternal : MMLinkClickTypeExternal;
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         [self performActionForLinkClickWithType:linkClickType URL:request.URL];
-        
+
         return NO;
     } else if (navigationType == UIWebViewNavigationTypeOther) {
         // For javascript-triggered links
         NSString *documentURL = [[request mainDocumentURL] absoluteString];
-        
+
         // If they are the same this is a javascript href click
         if ([URLString isEqualToString:documentURL]) {
             if (!self.isLoading) {
                 [self performActionForLinkClickWithType:linkClickType URL:request.URL];
-                
+
                 return NO;
             }
         }
     }
-    
+
     return YES;
 }
 
@@ -97,11 +97,11 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     if (!self.url) {
         return;
     }
-    
+
     if (![sender isKindOfClass:[UIBarButtonItem class]]) {
         return;
     }
-    
+
     UIBarButtonItem *actionItem = (UIBarButtonItem *)sender;
     NSArray *browserActivities = @[[TOActivitySafari new], [TOActivityChrome new]];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.url] applicationActivities:browserActivities];
@@ -135,13 +135,13 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 - (void)reloadViewControllerWithPost:(Post *)post {
     [self.webView stopLoading];
-    
+
     self.post = post;
     self.nextPost = nil;
     self.previousPost = nil;
     self.postURL = nil;
     self.url = nil;
-    
+
     [self setupWebView];
     [self setupLoadingAnimation];
     [self setupToolbar];
@@ -151,19 +151,19 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     if (!self.webView.hidden) {
         return;
     }
-    
+
     self.webView.hidden = NO;
     self.webView.alpha = 0.0f;
-    
+
     if (FBTweakValue(@"Animations", @"Macintosh", @"Enabled", NO)) {
         [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
             self.animationView.alpha = 0.0f;
         } completion:nil];
-        
+
         [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.webView.alpha = 1.0f;
         } completion:nil];
-        
+
         // setting this inside the completion block was causing undesired behaviour
         __weak typeof(self) weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -181,13 +181,13 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     // Create and configure the scene
     SKScene *scene = [MacintoshScene sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
-    
+
     // Present the scene
     SKView *animationView = [[SKView alloc] init];
     [self.view insertSubview:animationView atIndex:0];
     self.animationView = animationView;
     [self.animationView autoPinEdgesToSuperviewEdges];
-    
+
     [self.animationView presentScene:scene];
 }
 
@@ -204,15 +204,15 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : @"MacMagazine"}];
     [[NSURLCache sharedURLCache] setMemoryCapacity:10 * 1024 * 1024];
     [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
-    
+
     self.webView.hidden = YES;
     self.isLoading = YES;
-    
+
     self.navigationButtonsHidden = YES;
     self.showLoadingBar = YES;
     self.showPageTitles = NO;
     self.showUrlWhileLoading = NO;
-    
+
     __weak typeof(self) weakSelf = self;
     // Finish load handler
     [self setDidFinishLoadHandler:^(UIWebView *webView) {
@@ -222,18 +222,18 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
             strongSelf.isLoading = NO;
         }
     }];
-    
+
     // URLRequest handler
     [self setShouldStartLoadRequestHandler:^BOOL(NSURLRequest *request, UIWebViewNavigationType navigationType) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         return [strongSelf respondToLoadRequest:request navigationType:navigationType];
     }];
-    
+
     // Loads request
     if (!self.postURL) {
         self.postURL = [NSURL URLWithString:self.post.link];
     }
-    
+
     NSURL *URL = self.postURL;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
     self.urlRequest = request;
@@ -252,12 +252,12 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 - (void)setupToolbar {
     [self.navigationController setToolbarHidden:NO animated:YES];
-    
+
     UIToolbar *toolbar = self.navigationController.toolbar;
     toolbar.items = nil;
-    
+
     NSMutableArray <UIBarButtonItem *> *items = [[NSMutableArray alloc] initWithCapacity:4];
-    
+
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     // Previous post item
     UIBarButtonItem *previousPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowup"] style:UIBarButtonItemStylePlain target:self action:@selector(previousPostButtonTapped:)];
@@ -266,7 +266,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     if (![self previousPost]) {
         previousPostItem.enabled = NO;
     }
-    
+
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     // Next post item
     UIBarButtonItem *nextPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowdown"] style:UIBarButtonItemStylePlain target:self action:@selector(nextPostButtonTapped:)];
@@ -275,19 +275,19 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     if (![self nextPost]) {
         nextPostItem.enabled = NO;
     }
-    
+
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     // Reload item
     UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonTapped:)];
     [items addObject:refreshItem];
-    
+
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     // Action item
     UIBarButtonItem *actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonTapped:)];
     [items addObject:actionItem];
-    
+
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    
+
     [toolbar setItems:[items copy]];
 }
 
@@ -296,7 +296,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
         _nextPost = nil;
         return _nextPost;
     }
-    
+
     if (!_nextPost) {
         NSUInteger currentPostIndex = [self.posts indexOfObject:self.post];
         NSInteger nextPostIndex = currentPostIndex + 1;
@@ -304,7 +304,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
             _nextPost = [self.posts objectAtIndex:currentPostIndex + 1];
         }
     }
-    
+
     return _nextPost;
 }
 
@@ -313,7 +313,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
         _previousPost = nil;
         return _previousPost;
     }
-    
+
     if (!_previousPost) {
         NSUInteger currentPostIndex = [self.posts indexOfObject:self.post];
         NSInteger previousPostIndex = currentPostIndex - 1;
@@ -321,7 +321,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
             _previousPost = [self.posts objectAtIndex:currentPostIndex - 1];
         }
     }
-    
+
     return _previousPost;
 }
 
@@ -331,14 +331,14 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self setupWebView];
     [self setupLoadingAnimation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     [self setupToolbar];
 }
 
