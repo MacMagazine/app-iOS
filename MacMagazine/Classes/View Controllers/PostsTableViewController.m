@@ -148,7 +148,8 @@
     
     Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [self performSegueWithIdentifier:NSStringFromClass([PostDetailViewController class]) preparationBlock:^(UIStoryboardSegue *segue, PostDetailViewController *destinationViewController) {
-        destinationViewController.URL = [NSURL URLWithString:post.link];
+        destinationViewController.post = post;
+        destinationViewController.posts = self.fetchedResultsController.fetchedObjects;
     }];
 }
 

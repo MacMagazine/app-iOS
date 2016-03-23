@@ -15,6 +15,8 @@
 #import <SafariServices/SafariServices.h>
 #import <SpriteKit/SpriteKit.h>
 #import <Tweaks/FBTweakInline.h>
+#import <TOWebViewController/TOActivityChrome.h>
+#import <TOWebViewController/TOActivitySafari.h>
 
 static NSString * const MMBaseURL = @"macmagazine.com.br";
 
@@ -24,6 +26,9 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 };
 
 @interface PostDetailViewController () <UIWebViewDelegate>
+
+@property (nonatomic, strong) Post *nextPost;
+@property (nonatomic, strong) Post *previousPost;
 
 @property (nonatomic, weak) SKView *animationView;
 @property (nonatomic) BOOL isLoading;
@@ -46,7 +51,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     NSString *URLString = request.URL.absoluteString;
     
     // First page load, don't move away
-    if ([URLString isEqualToString:self.URL.absoluteString]) {
+    if ([URLString isEqualToString:self.post.link]) {
         return YES;
     }
     
@@ -73,9 +78,10 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 }
 
 - (void)pushToNewDetailViewControllerWithURL:(NSURL *)URL {
-    PostDetailViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
-    viewController.URL = URL;
-    [self.navigationController pushViewController:viewController animated:YES];
+    PostDetailViewController *destinationViewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
+    destinationViewController.postURL = URL;
+    destinationViewController.post = nil;
+    destinationViewController.posts = nil;
 }
 
 - (void)pushToSFSafariViewControllerWithURL:(NSURL *)URL {
@@ -83,7 +89,58 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     [self presentViewController:safariViewController animated:YES completion:nil];
 }
 
+#pragma mark - Button Actions
+
+- (void)actionButtonTapped:(id)sender {
+    // Do nothing if there is no url for action
+    if (!self.url) {
+        return;
+    }
+    
+    if (![sender isKindOfClass:[UIBarButtonItem class]]) {
+        return;
+    }
+    
+    UIBarButtonItem *actionItem = (UIBarButtonItem *)sender;
+    NSArray *browserActivities = @[[TOActivitySafari new], [TOActivityChrome new]];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.url] applicationActivities:browserActivities];
+    activityViewController.modalPresentationStyle = UIModalPresentationPopover;
+    activityViewController.popoverPresentationController.barButtonItem = actionItem;
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+- (void)refreshButtonTapped:(id)sender {
+    //In certain cases, if the connection drops out preload or midload,
+    //it nullifies webView.request, which causes [webView reload] to stop working.
+    //This checks to see if the webView request URL is nullified, and if so, tries to load
+    //off our stored self.url property instead
+    if (self.webView.request.URL.absoluteString.length == 0 && self.url) {
+        [self.webView loadRequest:self.urlRequest];
+    } else {
+        [self.webView reload];
+    }
+}
+
+- (void)nextPostButtonTapped:(id)sender {
+    [self reloadViewControllerWithPost:self.nextPost];
+}
+
+- (void)previousPostButtonTapped:(id)sender {
+    [self reloadViewControllerWithPost:self.previousPost];
+}
+
 #pragma mark - Instance Methods
+
+- (void)reloadViewControllerWithPost:(Post *)post {
+    self.post = post;
+    self.nextPost = nil;
+    self.previousPost = nil;
+    self.postURL = nil;
+    
+    [self setupWebView];
+    [self setupLoadingAnimation];
+    [self setupToolbar];
+}
 
 - (void)removeLoadingAnimation {
     if (!self.webView.hidden) {
@@ -144,8 +201,10 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     [[NSURLCache sharedURLCache] setDiskCapacity:50 * 1024 * 1024];
     
     self.webView.hidden = YES;
-    self.showLoadingBar = YES;
     self.isLoading = YES;
+    
+    self.navigationButtonsHidden = YES;
+    self.showLoadingBar = YES;
     self.showPageTitles = NO;
     self.showUrlWhileLoading = NO;
     
@@ -164,7 +223,11 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     }];
     
     // Loads request
-    NSURL *URL = self.URL;
+    if (!self.postURL) {
+        self.postURL = [NSURL URLWithString:self.post.link];
+    }
+    
+    NSURL *URL = self.postURL;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
     self.urlRequest = request;
     self.url = URL;
@@ -180,6 +243,81 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     }
 }
 
+- (void)setupToolbar {
+    [self.navigationController setToolbarHidden:NO];
+    
+    UIToolbar *toolbar = self.navigationController.toolbar;
+    toolbar.items = nil;
+    
+    NSMutableArray <UIBarButtonItem *> *items = [[NSMutableArray alloc] initWithCapacity:4];
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    // Previous post item
+    UIBarButtonItem *previousPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowup"] style:UIBarButtonItemStylePlain target:self action:@selector(previousPostButtonTapped:)];
+    previousPostItem.imageInsets = UIEdgeInsetsMake(5, 0, 0, 0);
+    [items addObject:previousPostItem];
+    if (![self previousPost]) {
+        previousPostItem.enabled = NO;
+    }
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    // Next post item
+    UIBarButtonItem *nextPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowdown"] style:UIBarButtonItemStylePlain target:self action:@selector(nextPostButtonTapped:)];
+    nextPostItem.imageInsets = UIEdgeInsetsMake(5, 0, 0, 0);
+    [items addObject:nextPostItem];
+    if (![self nextPost]) {
+        nextPostItem.enabled = NO;
+    }
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    // Reload item
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonTapped:)];
+    [items addObject:refreshItem];
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    // Action item
+    UIBarButtonItem *actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonTapped:)];
+    [items addObject:actionItem];
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    
+    [toolbar setItems:[items copy]];
+}
+
+- (Post *)nextPost {
+    if (!(self.posts) || !(self.post)) {
+        _nextPost = nil;
+        return _nextPost;
+    }
+    
+    if (!_nextPost) {
+        NSUInteger currentPostIndex = [self.posts indexOfObject:self.post];
+        NSInteger nextPostIndex = currentPostIndex + 1;
+        if (nextPostIndex <= (self.posts.count - 1)) {
+            _nextPost = [self.posts objectAtIndex:currentPostIndex + 1];
+        }
+    }
+    
+    return _nextPost;
+}
+
+- (Post *)previousPost {
+    if (!(self.posts) || !(self.post)) {
+        _previousPost = nil;
+        return _previousPost;
+    }
+    
+    if (!_previousPost) {
+        NSUInteger currentPostIndex = [self.posts indexOfObject:self.post];
+        NSInteger previousPostIndex = currentPostIndex - 1;
+        if (previousPostIndex >= 0) {
+            _previousPost = [self.posts objectAtIndex:currentPostIndex - 1];
+        }
+    }
+    
+    return _previousPost;
+}
+
 #pragma mark - Protocols
 
 #pragma mark - View lifecycle
@@ -189,6 +327,12 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     
     [self setupWebView];
     [self setupLoadingAnimation];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self setupToolbar];
 }
 
 - (BOOL)prefersStatusBarHidden {
