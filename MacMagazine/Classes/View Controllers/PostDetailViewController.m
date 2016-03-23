@@ -82,6 +82,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     destinationViewController.postURL = URL;
     destinationViewController.post = nil;
     destinationViewController.posts = nil;
+    [self.navigationController pushViewController:destinationViewController animated:YES];
 }
 
 - (void)pushToSFSafariViewControllerWithURL:(NSURL *)URL {
@@ -110,6 +111,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 }
 
 - (void)refreshButtonTapped:(id)sender {
+    [self.webView stopLoading];
     //In certain cases, if the connection drops out preload or midload,
     //it nullifies webView.request, which causes [webView reload] to stop working.
     //This checks to see if the webView request URL is nullified, and if so, tries to load
@@ -132,10 +134,13 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 #pragma mark - Instance Methods
 
 - (void)reloadViewControllerWithPost:(Post *)post {
+    [self.webView stopLoading];
+    
     self.post = post;
     self.nextPost = nil;
     self.previousPost = nil;
     self.postURL = nil;
+    self.url = nil;
     
     [self setupWebView];
     [self setupLoadingAnimation];
@@ -151,11 +156,11 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     self.webView.alpha = 0.0f;
     
     if (FBTweakValue(@"Animations", @"Macintosh", @"Enabled", NO)) {
-        [UIView animateWithDuration:0.2f delay:1.2f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
             self.animationView.alpha = 0.0f;
         } completion:nil];
         
-        [UIView animateWithDuration:0.2f delay:1.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.webView.alpha = 1.0f;
         } completion:nil];
         
@@ -166,7 +171,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
             [strongSelf.animationView removeFromSuperview];
         });
     } else {
-        [UIView animateWithDuration:0.2f delay:1.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.webView.alpha = 1.0f;
         } completion:nil];
     }
@@ -211,9 +216,11 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     __weak typeof(self) weakSelf = self;
     // Finish load handler
     [self setDidFinishLoadHandler:^(UIWebView *webView) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf removeLoadingAnimation];
-        strongSelf.isLoading = NO;
+        if (!webView.isLoading) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf removeLoadingAnimation];
+            strongSelf.isLoading = NO;
+        }
     }];
     
     // URLRequest handler
@@ -244,7 +251,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 }
 
 - (void)setupToolbar {
-    [self.navigationController setToolbarHidden:NO];
+    [self.navigationController setToolbarHidden:NO animated:YES];
     
     UIToolbar *toolbar = self.navigationController.toolbar;
     toolbar.items = nil;
