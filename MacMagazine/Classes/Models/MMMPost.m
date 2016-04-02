@@ -145,12 +145,4 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
     return self.imagesArray.firstObject;
 }
 
-- (BOOL)isFeatured {
-    return self.featuredValue;
-}
-
-- (BOOL)isVisible {
-    return self.visibleValue;
-}
-
 @end
