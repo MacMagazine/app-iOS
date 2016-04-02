@@ -128,8 +128,6 @@
 		EDFA9DDD1B37587900EE213C /* NSDate+Formatters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Formatters.m"; sourceTree = "<group>"; };
 		EDFA9DDF1B37591900EE213C /* NSDateFormatter+Addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Addons.h"; sourceTree = "<group>"; };
 		EDFA9DE01B37591900EE213C /* NSDateFormatter+Addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Addons.m"; sourceTree = "<group>"; };
-		EDFA9DE21B3782A900EE213C /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EDFA9DE31B3782A900EE213C /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EDFA9DE71B3782E800EE213C /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDFA9DE91B37844F00EE213C /* MMMFeaturedPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMFeaturedPostTableViewCell.h; sourceTree = "<group>"; };
 		EDFA9DEA1B37844F00EE213C /* MMMFeaturedPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMFeaturedPostTableViewCell.m; sourceTree = "<group>"; };
@@ -755,7 +753,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EDBB4A621B2E7F8D00E1CCCA /* Base */,
-				EDFA9DE21B3782A900EE213C /* pt */,
 			);
 			name = Main.storyboard;
 			path = .;
@@ -765,7 +762,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EDBB4A671B2E7F8D00E1CCCA /* Base */,
-				EDFA9DE31B3782A900EE213C /* pt */,
 			);
 			name = LaunchScreen.xib;
 			path = .;
