@@ -10,7 +10,7 @@
 
 @interface MMMMacintoshScene ()
 
-@property (nonatomic, strong) NSArray *macintoshFrames;
+@property (nonatomic, strong) NSArray<SKTexture *> *macintoshFrames;
 @property (nonatomic, strong) SKSpriteNode *macintosh;
 
 @end
@@ -21,12 +21,13 @@
 
 #pragma mark - Instance Methods
 
-- (id)initWithSize:(CGSize)size {
-    if (self = [super initWithSize:size]) {
+- (instancetype)initWithSize:(CGSize)size {
+    self = [super initWithSize:size];
+    if (self) {
         self.backgroundColor = [SKColor whiteColor];
         
         //Setup the array to hold the hello frames
-        NSMutableArray *macFrames = [NSMutableArray array];
+        NSMutableArray<SKTexture *> *macFrames = [NSMutableArray array];
         
         //Load the TextureAtlas for the mac
         SKTextureAtlas *helloAtlas = [SKTextureAtlas atlasNamed:@"hello"];
@@ -53,9 +54,8 @@
 }
 
 - (void)animateMac {
-    [self.macintosh runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.macintoshFrames timePerFrame:0.037f resize:NO restore:YES]] withKey:@"hello"];
-    
-    return;
+    SKAction *action = [SKAction repeatActionForever:[SKAction animateWithTextures:self.macintoshFrames timePerFrame:0.037f resize:NO restore:YES]];
+    [self.macintosh runAction:action withKey:@"hello"];
 }
 
 @end
