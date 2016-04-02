@@ -200,9 +200,9 @@
 		DB194AD71C1E6EC600AA90D8 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				DB194ADD1C1E71E100AA90D8 /* hello.atlas */,
 				DB194AD81C1E6EE600AA90D8 /* MMMMacintoshScene.h */,
 				DB194AD91C1E6EE600AA90D8 /* MMMMacintoshScene.m */,
+				DB194ADD1C1E71E100AA90D8 /* hello.atlas */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -264,8 +264,8 @@
 				EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */,
 				EDBB4A521B2E7F8D00E1CCCA /* Info.plist */,
 				EDFA9DE81B3782E800EE213C /* Localizable.strings */,
-				EDBB4A531B2E7F8D00E1CCCA /* main.m */,
 				ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */,
+				EDBB4A531B2E7F8D00E1CCCA /* main.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -294,7 +294,6 @@
 				EDBB4A7E1B2E825B00E1CCCA /* App Delegate */,
 				EDFA9DAD1B36265F00EE213C /* Cells */,
 				EDFA9DA61B361CF200EE213C /* Core Data */,
-				EDFA9DEE1B378C6800EE213C /* Dynamic Type */,
 				EDBB4A801B2E829300E1CCCA /* Models */,
 				EDFA9DC41B36352600EE213C /* Presenters */,
 				EDBB4A7F1B2E826900E1CCCA /* View Controllers */,
@@ -452,15 +451,6 @@
 			path = NSDate;
 			sourceTree = "<group>";
 		};
-		EDFA9DEE1B378C6800EE213C /* Dynamic Type */ = {
-			isa = PBXGroup;
-			children = (
-				EDFA9DEF1B378C7A00EE213C /* MMMLabel.h */,
-				EDFA9DF01B378C7A00EE213C /* MMMLabel.m */,
-			);
-			path = "Dynamic Type";
-			sourceTree = "<group>";
-		};
 		EDFA9DF21B37931400EE213C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +482,8 @@
 		EDFA9E1D1B379AF600EE213C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EDFA9DEF1B378C7A00EE213C /* MMMLabel.h */,
+				EDFA9DF01B378C7A00EE213C /* MMMLabel.m */,
 				EDFA9E1E1B379B0800EE213C /* MMMTableViewHeaderView.h */,
 				EDFA9E1F1B379B0800EE213C /* MMMTableViewHeaderView.m */,
 			);
