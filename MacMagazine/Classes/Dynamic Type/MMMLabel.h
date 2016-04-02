@@ -8,12 +8,12 @@
 
 #import "SUNLabel.h"
 
-@interface MMMLabel : SUNLabel
+NS_ASSUME_NONNULL_BEGIN
+
+@interface MMMLabel : UILabel
+
+@property (copy, nonatomic, nullable) NSString *textStyle;
 
 @end
 
-@interface UIFont (MMLabel)
-
-+ (UIFont *)mm_fontForTextStyle:(NSString *)textStyle;
-
-@end
+NS_ASSUME_NONNULL_END

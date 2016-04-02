@@ -12,44 +12,56 @@
 
 @implementation MMMLabel
 
+#pragma mark - Getters/Setters
+
+- (void)setTextStyle:(NSString *)textStyle {
+    _textStyle = [textStyle copy];
+
+    [self reloadFont];
+}
+
 #pragma mark - Instance Methods
 
-- (void)updateFont {
+- (void)commonInitialization {
+    self.textStyle = self.font.fontDescriptor.fontAttributes[@"NSCTFontUIUsageAttribute"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadFont) name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
+
+- (void)reloadFont {
     if (self.textStyle) {
-        self.font = [UIFont fontWithName:[UIFont mm_fontForTextStyle:self.textStyle].fontName size:[UIFont preferredFontForTextStyle:self.textStyle].pointSize * self.multiplier.floatValue];
+        UIFont *font = [UIFont preferredFontForTextStyle:self.textStyle];
+        self.font = font;
     }
 }
 
-@end
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
 
-#pragma mark - UIFont (AvenirLabel)
+#pragma mark - Initialization
 
-@implementation UIFont (AvenirLabel)
-
-#pragma mark - Class Methods
-
-+ (UIFont *)mm_fontForTextStyle:(NSString *)textStyle {
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9,0,0}]) {
-        return [UIFont preferredFontForTextStyle:textStyle];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self commonInitialization];
     }
-    
-    NSString *fontName = @"HelveticaNeueInterface-Regular";
-    
-    if ([textStyle isEqualToString:UIFontTextStyleBody]) {
-        fontName = @"HelveticaNeueInterface-Regular";
-    } else if ([textStyle isEqualToString:UIFontTextStyleCaption1]) {
-        fontName = @"HelveticaNeueInterface-Regular";
-    } else if ([textStyle isEqualToString:UIFontTextStyleCaption2]) {
-        fontName = @"HelveticaNeueInterface-Regular";
-    } else if ([textStyle isEqualToString:UIFontTextStyleFootnote]) {
-        fontName = @"HelveticaNeueInterface-Regular";
-    } else if ([textStyle isEqualToString:UIFontTextStyleHeadline]) {
-        fontName = @"HelveticaNeueInterface-MediumP4";
-    } else if ([textStyle isEqualToString:UIFontTextStyleSubheadline]) {
-        fontName = @"HelveticaNeueInterface-Regular";
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInitialization];
     }
-    
-    return [UIFont fontWithName:fontName size:[UIFont preferredFontForTextStyle:textStyle].pointSize];
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInitialization];
+    }
+    return self;
 }
 
 @end

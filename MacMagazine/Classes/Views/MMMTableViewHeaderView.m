@@ -21,7 +21,7 @@
 }
 
 + (CGFloat)height {
-    NSDictionary *textAttributes = @{NSFontAttributeName : [UIFont mm_fontForTextStyle:UIFontTextStyleCaption1]};
+    NSDictionary *textAttributes = @{NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1]};
     CGRect boundingRect = [@"TODAY" boundingRectWithSize:CGSizeMake(300, INT_MAX)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:textAttributes
