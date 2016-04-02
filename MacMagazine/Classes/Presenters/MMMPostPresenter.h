@@ -8,9 +8,13 @@
 
 #import "SUNPresenter.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MMMPostPresenter : SUNPresenter
 
-- (NSString *)descriptionText;
-- (NSURL *)thumbnailURLForImageView:(UIImageView *)imageView;
+- (nullable NSString *)descriptionText;
+- (nullable NSURL *)thumbnailURLForImageView:(UIImageView *)imageView;
 
 @end
+
+NS_ASSUME_NONNULL_END

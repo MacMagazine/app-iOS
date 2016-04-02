@@ -10,12 +10,16 @@
 
 @class MMMPost;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MMMPostDetailViewController : TOWebViewController
 
-@property (nonatomic, strong) MMMPost *post;
-@property (nonatomic, copy) NSArray<MMMPost *> *posts;
+@property (nonatomic, strong, nullable) MMMPost *post;
+@property (nonatomic, copy, nullable) NSArray<MMMPost *> *posts;
 
 // In case the detail view controller is loaded from a link click
-@property (nonatomic, strong) NSURL *postURL;
+@property (nonatomic, strong, nullable) NSURL *postURL;
 
 @end
+
+NS_ASSUME_NONNULL_END

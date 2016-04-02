@@ -46,10 +46,6 @@
 }
 
 + (instancetype)mmm_formatterWithKey:(NSString *)key block:(void(^)(NSDateFormatter *dateFormatter))block {
-    if (!block || key.length == 0) {
-        return nil;
-    }
-    
     NSString *cacheKey = [NSString stringWithFormat:@"Custom Formatter: %@", key];
     NSDateFormatter *formatter = [NSDateFormatter formatters][cacheKey];
     if (!formatter) {

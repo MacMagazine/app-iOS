@@ -8,10 +8,12 @@
 
 #import <SUNKit/SUNTableViewController.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MMMPostsTableViewController : SUNTableViewController
 
-@property (nonatomic, weak) IBOutlet UIView *footerView;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, weak, nullable) IBOutlet UIView *footerView;
+@property (nonatomic, weak, nullable) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic) NSUInteger nextPage;
 @property (nonatomic) NSUInteger numberOfResponseObjectsPerRequest;
 
@@ -21,3 +23,5 @@
 - (void)reloadData;
 
 @end
+
+NS_ASSUME_NONNULL_END
