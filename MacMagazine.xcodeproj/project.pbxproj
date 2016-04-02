@@ -554,7 +554,6 @@
 				TargetAttributes = {
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = 8Y8458KNAN;
 					};
 					EDBB4A6C1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -872,12 +871,10 @@
 			baseConfigurationReference = AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.madeatsampa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31968fac-9f6b-4809-a802-f7da8859bb90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -887,14 +884,11 @@
 			baseConfigurationReference = 21DB65787D3E922FF090D828 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.madeatsampa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "64ad71de-fcde-4242-87f6-633fa27b7d4c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
