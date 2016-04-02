@@ -14,14 +14,9 @@ xcuserdata
 profile
 *.moved-aside
 
-# SVN
-.svn
-
 # OS X
 .DS_Store
 
-# RoR
-/.bundle
-/db/*.sqlite3
-/log/*.log
-/tmp
+# CocoaPods
+Pods
+
