@@ -121,7 +121,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSString *identifier = [MMMPostTableViewCell identifier];
-    if (post.isFeatured) {
+    if (post.featuredValue) {
         identifier = [MMMFeaturedPostTableViewCell identifier];
     }
     
