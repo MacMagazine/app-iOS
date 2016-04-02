@@ -1,22 +1,22 @@
 PODS:
-  - AFNetworking (3.0.1):
-    - AFNetworking/NSURLSession (= 3.0.1)
-    - AFNetworking/Reachability (= 3.0.1)
-    - AFNetworking/Security (= 3.0.1)
-    - AFNetworking/Serialization (= 3.0.1)
-    - AFNetworking/UIKit (= 3.0.1)
-  - AFNetworking/NSURLSession (3.0.1):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.0.1)
-  - AFNetworking/Security (3.0.1)
-  - AFNetworking/Serialization (3.0.1)
-  - AFNetworking/UIKit (3.0.1):
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - HockeySDK (3.8.5):
-    - HockeySDK/AllFeaturesLib (= 3.8.5)
-  - HockeySDK/AllFeaturesLib (3.8.5)
+  - HockeySDK (3.8.6):
+    - HockeySDK/AllFeaturesLib (= 3.8.6)
+  - HockeySDK/AllFeaturesLib (3.8.6)
   - Ono (1.2.2)
   - PureLayout (3.0.1)
   - SDWebImage (3.7.5):
@@ -27,38 +27,38 @@ PODS:
   - TOWebViewController (2.2.3):
     - TOWebViewController/Core (= 2.2.3)
   - TOWebViewController/Core (2.2.3)
-  - TTTAttributedLabel (1.13.3)
+  - TTTAttributedLabel (1.13.4)
   - Tweaks (2.0.0)
 
 DEPENDENCIES:
-  - AFNetworking
-  - HockeySDK
-  - Ono (= 1.2.2)
-  - PureLayout
-  - SDWebImage
-  - SUNKit (from `git@git.madeatsampa.com:madeatsampa/SUNKit.git`)
+  - AFNetworking (~> 3.1)
+  - HockeySDK (~> 3.8)
+  - Ono (~> 1.2)
+  - PureLayout (~> 3.0)
+  - SDWebImage (~> 3.7)
+  - SUNKit (from `https://git.madeatsampa.com/madeatsampa/SUNKit.git`)
   - TOWebViewController (~> 2.2)
-  - TTTAttributedLabel (= 1.13.3)
-  - Tweaks
+  - TTTAttributedLabel (~> 1.13)
+  - Tweaks (~> 2.0)
 
 EXTERNAL SOURCES:
   SUNKit:
-    :git: git@git.madeatsampa.com:madeatsampa/SUNKit.git
+    :git: https://git.madeatsampa.com/madeatsampa/SUNKit.git
 
 CHECKOUT OPTIONS:
   SUNKit:
-    :commit: 151cce7acf8c215ad544dc588a2816c31020e6a9
-    :git: git@git.madeatsampa.com:madeatsampa/SUNKit.git
+    :commit: ec256325ff34ff819a9f505809ecfc1f6aa8de2f
+    :git: https://git.madeatsampa.com/madeatsampa/SUNKit.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 20d8749e03e45f1e5c046ad0b647e0b07bcdd91f
-  HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SUNKit: dbbf67acf5504aaed7e1d7daab2c164dd1484ea3
   TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
-  TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   Tweaks: 524fa47636cce3bf3a4d9156e980f10ae9480e81
 
 COCOAPODS: 0.39.0

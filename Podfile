@@ -2,15 +2,17 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '8.0'
 
-pod 'AFNetworking'
-pod 'HockeySDK'
-pod 'Ono', '1.2.2'
-pod 'PureLayout'
-pod 'SDWebImage'
-pod 'SUNKit', :git => 'git@git.madeatsampa.com:madeatsampa/SUNKit.git' # :path => '~/Developer/made@sampa/SUNKit'
+pod 'AFNetworking', '~> 3.1'
+pod 'HockeySDK', '~> 3.8'
+pod 'Ono', '~> 1.2'
+pod 'PureLayout', '~> 3.0'
+pod 'SDWebImage', '~> 3.7'
+pod 'SUNKit', git: 'https://git.madeatsampa.com/madeatsampa/SUNKit.git'
 pod 'TOWebViewController', '~> 2.2'
-pod 'Tweaks'
-pod 'TTTAttributedLabel', '1.13.3'
+pod 'Tweaks', '~> 2.0'
+pod 'TTTAttributedLabel', '~> 1.13'
+
+plugin 'cocoapods-acknowledgements', settings_bundle: true
 
 post_install do |installer_representation|
     installer_representation.pods_project.targets.each do |target|
@@ -21,5 +23,3 @@ post_install do |installer_representation|
         end
     end
 end
-
-plugin 'cocoapods-acknowledgements', settings_bundle: true
