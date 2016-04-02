@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
+@import ObjectiveC.message;
+
+#import <objc/message.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "MMMPostPresenter.h"
@@ -15,23 +18,19 @@
 #import "MMMPostTableViewCell.h"
 #import "NSString+HTMLSafe.h"
 
-@interface MMMPostPresenter ()
-
-- (MMMPost *)post;
-
-@end
-
-#pragma mark PostPresenter
+#pragma mark MMMPostPresenter
 
 @implementation MMMPostPresenter
 
-#pragma mark - Instance Methods
+#pragma mark - Gettes/Setters
 
 - (MMMPost *)post {
     return self.object;
 }
 
-- (void)setupFeaturedTableViewCell:(MMMFeaturedPostTableViewCell *)cell {
+#pragma mark - Instance Methods
+
+- (void)setupMMMFeaturedPostTableViewCell:(MMMFeaturedPostTableViewCell *)cell {
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
     cell.thumbnailImageView.alpha = 0;
@@ -44,7 +43,7 @@
     }];
 }
 
-- (void)setupTableViewCell:(MMMPostTableViewCell *)cell {
+- (void)setupMMMPostTableViewCell:(MMMPostTableViewCell *)cell {
     cell.imageVisible = self.post.thumbnail.length > 0;
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
@@ -52,20 +51,12 @@
     
     NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
     [cell.thumbnailImageView sd_setImageWithURL:imageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [UIView animateWithDuration:cacheType != SDImageCacheTypeMemory ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        NSTimeInterval duration = (cacheType != SDImageCacheTypeMemory) ? 0.25 : 0;
+        UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
+        [UIView animateWithDuration:duration delay:0 options:options animations:^{
             cell.thumbnailImageView.alpha = 1;
         } completion:nil];
     }];
-}
-
-- (SEL)selectorForViewOfClass:(Class)viewClass {
-    if ([viewClass isSubclassOfClass:[MMMPostTableViewCell class]]) {
-        return @selector(setupTableViewCell:);
-    } else if ([viewClass isSubclassOfClass:[MMMFeaturedPostTableViewCell class]]) {
-        return @selector(setupFeaturedTableViewCell:);
-    }
-    
-    return [super selectorForViewOfClass:viewClass];
 }
 
 #pragma mark - Attributes

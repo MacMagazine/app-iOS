@@ -6,11 +6,15 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "SUNPresenter.h"
+#import "MMMPresenter.h"
+
+@class MMMPost;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MMMPostPresenter : SUNPresenter
+@interface MMMPostPresenter : MMMPresenter
+
+@property (nonatomic, strong, readonly) MMMPost *post;
 
 - (nullable NSString *)descriptionText;
 - (nullable NSURL *)thumbnailURLForImageView:(UIImageView *)imageView;

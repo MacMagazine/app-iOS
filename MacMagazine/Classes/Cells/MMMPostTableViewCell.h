@@ -6,13 +6,12 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <SUNKit/SUNTableViewCell.h>
-
 #import "MMMLabel.h"
+#import "MMMTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MMMPostTableViewCell : SUNTableViewCell
+@interface MMMPostTableViewCell : MMMTableViewCell
 
 @property (nonatomic, weak, nullable) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak, nullable) IBOutlet MMMLabel *headlineLabel;

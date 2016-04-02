@@ -74,8 +74,9 @@
     
     NSUInteger numberOfRows = [self.tableView numberOfRowsInSection:indexPath.section];
     cell.separatorView.hidden = (indexPath.row + 1 == numberOfRows);
-    
-    [[MMMPostPresenter presenter] presentObject:post inView:cell];
+
+    MMMPostPresenter *presenter = [[MMMPostPresenter alloc] initWithObject:post];
+    [presenter setupView:cell];
 }
 
 - (void)fetchMoreData {
@@ -165,8 +166,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MMMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMMTableViewHeaderView identifier]];
-   
-    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     if ([calendar isDateInToday:post.pubDate]) {
         headerView.titleLabel.text = NSLocalizedString(@"Today", @"");
@@ -180,7 +181,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     if ([calendar isDateInToday:post.pubDate]) {
         return 0;
