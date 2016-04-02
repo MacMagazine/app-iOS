@@ -11,20 +11,20 @@
 
 @interface MMMPostTableViewCell : SUNTableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
-@property (weak, nonatomic) IBOutlet MMMLabel *headlineLabel;
-@property (weak, nonatomic) IBOutlet MMMLabel *subheadlineLabel;
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, weak) IBOutlet MMMLabel *headlineLabel;
+@property (nonatomic, weak) IBOutlet MMMLabel *subheadlineLabel;
+@property (nonatomic, weak) IBOutlet UIView *separatorView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailingSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingSpaceConstraint;
 
-@property (assign, nonatomic) CGFloat thumbnailTrailingConstant;
-@property (assign, nonatomic) CGFloat thumbnailWidthConstant;
-@property (assign, nonatomic) CGFloat headlineBottomSpaceConstant;
-@property (assign, nonatomic) CGFloat layoutWidth;
-@property (assign, nonatomic) BOOL imageVisible;
+@property (nonatomic) CGFloat thumbnailTrailingConstant;
+@property (nonatomic) CGFloat thumbnailWidthConstant;
+@property (nonatomic) CGFloat headlineBottomSpaceConstant;
+@property (nonatomic) CGFloat layoutWidth;
+@property (nonatomic) BOOL imageVisible;
 
 @end

@@ -10,10 +10,10 @@
 
 @interface MMMPostsTableViewController : SUNTableViewController
 
-@property (weak, nonatomic) IBOutlet UIView *footerView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
-@property (assign, nonatomic) NSUInteger nextPage;
-@property (assign, nonatomic) NSUInteger numberOfResponseObjectsPerRequest;
+@property (nonatomic, weak) IBOutlet UIView *footerView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic) NSUInteger nextPage;
+@property (nonatomic) NSUInteger numberOfResponseObjectsPerRequest;
 
 - (BOOL)canFetchMoreData;
 - (void)fetchMoreData;

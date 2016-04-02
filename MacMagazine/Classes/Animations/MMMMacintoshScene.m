@@ -10,12 +10,16 @@
 
 @interface MMMMacintoshScene ()
 
-@property (nonatomic ,strong) NSArray *macintoshFrames;
-@property (nonatomic ,strong) SKSpriteNode *macintosh;
+@property (nonatomic, strong) NSArray *macintoshFrames;
+@property (nonatomic, strong) SKSpriteNode *macintosh;
 
 @end
 
+#pragma mark MMMMacintoshScene
+
 @implementation MMMMacintoshScene
+
+#pragma mark - Instance Methods
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -48,7 +52,7 @@
     return self;
 }
 
--(void)animateMac {
+- (void)animateMac {
     [self.macintosh runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.macintoshFrames timePerFrame:0.037f resize:NO restore:YES]] withKey:@"hello"];
     
     return;

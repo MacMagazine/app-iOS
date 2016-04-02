@@ -10,8 +10,8 @@
 
 @interface MMMFeaturedPostTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headlineTopSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headlineBottomSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *headlineTopSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *headlineBottomSpaceConstraint;
 
 @end
 

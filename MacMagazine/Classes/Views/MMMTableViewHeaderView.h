@@ -11,7 +11,7 @@
 
 @interface MMMTableViewHeaderView : UITableViewHeaderFooterView
 
-@property (strong, nonatomic) MMMLabel *titleLabel;
+@property (nonatomic, strong) MMMLabel *titleLabel;
 
 + (NSString *)identifier;
 + (CGFloat)height;

@@ -10,9 +10,9 @@
 
 @interface MMMPostTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thumbnailTrailingSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thumbnailWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headlineBottomSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *thumbnailTrailingSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *thumbnailWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *headlineBottomSpaceConstraint;
 
 @end
 

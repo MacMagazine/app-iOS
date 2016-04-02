@@ -19,11 +19,11 @@
 + (nullable instancetype)defaultStore;
 - (nullable instancetype)initWithModelURL:(NSURL * __nonnull)modelURL persistentStoreURL:(NSURL * __nullable)persistentStoreURL;
 
-@property (strong, nonatomic, readonly) NSManagedObjectContext * __nonnull mainQueueContext;
-@property (strong, nonatomic, readonly) NSManagedObjectContext * __nonnull privateQueueContext;
-@property (strong, nonatomic, readonly) NSPersistentStoreCoordinator * __nonnull persistentStoreCoordinator;
-@property (strong, nonatomic, readonly) NSManagedObjectModel * __nonnull managedObjectModel;
-@property (strong, nonatomic, readonly) NSURL * __nonnull modelURL;
-@property (strong, nonatomic, readonly) NSURL * __nonnull persistentStoreURL;
+@property (nonatomic, strong, readonly) NSManagedObjectContext * __nonnull mainQueueContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext * __nonnull privateQueueContext;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * __nonnull persistentStoreCoordinator;
+@property (nonatomic, strong, readonly) NSManagedObjectModel * __nonnull managedObjectModel;
+@property (nonatomic, strong, readonly) NSURL * __nonnull modelURL;
+@property (nonatomic, strong, readonly) NSURL * __nonnull persistentStoreURL;
 
 @end
