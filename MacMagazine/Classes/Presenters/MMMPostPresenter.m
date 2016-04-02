@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-@import ObjectiveC.message;
-
-#import <objc/message.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "MMMPostPresenter.h"
