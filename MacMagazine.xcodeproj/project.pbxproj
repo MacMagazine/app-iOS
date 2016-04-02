@@ -10,7 +10,6 @@
 		054C8B71124EF96646EE6D3E /* Pods-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */; };
 		31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 601BFC4C5CE12F4DD0B64BF3 /* libPods.a */; };
 		C1F0D05C75017A59F9543184 /* Pods-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EF452011E64EC59FD8F549 /* Pods-metadata.plist */; };
-		DB194AD61C1E6E3500AA90D8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB194AD51C1E6E3500AA90D8 /* SpriteKit.framework */; };
 		DB194ADA1C1E6EE600AA90D8 /* MMMMacintoshScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DB194AD91C1E6EE600AA90D8 /* MMMMacintoshScene.m */; };
 		DB194ADE1C1E71E100AA90D8 /* hello.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB194ADD1C1E71E100AA90D8 /* hello.atlas */; };
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
@@ -81,7 +80,6 @@
 		601BFC4C5CE12F4DD0B64BF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
 		AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		DB194AD51C1E6E3500AA90D8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		DB194AD81C1E6EE600AA90D8 /* MMMMacintoshScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMMacintoshScene.h; sourceTree = "<group>"; };
 		DB194AD91C1E6EE600AA90D8 /* MMMMacintoshScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMMacintoshScene.m; sourceTree = "<group>"; };
 		DB194ADD1C1E71E100AA90D8 /* hello.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = hello.atlas; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB194AD61C1E6E3500AA90D8 /* SpriteKit.framework in Frameworks */,
 				31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,7 +183,6 @@
 		89ACD3CA3A35E1F724A142BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DB194AD51C1E6E3500AA90D8 /* SpriteKit.framework */,
 				601BFC4C5CE12F4DD0B64BF3 /* libPods.a */,
 			);
 			name = Frameworks;

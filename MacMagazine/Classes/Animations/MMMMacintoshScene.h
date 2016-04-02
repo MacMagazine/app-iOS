@@ -6,7 +6,7 @@
 //  Copyright © 2015 made@sampa. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
+@import SpriteKit;
 
 @interface MMMMacintoshScene : SKScene
 
