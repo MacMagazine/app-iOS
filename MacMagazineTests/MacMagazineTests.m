@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import UIKit;
+@import XCTest;
 
 @interface MacMagazineTests : XCTestCase
 

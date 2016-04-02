@@ -17,7 +17,7 @@
 //  the License.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /// Utilities for NSStrings containing HTML
 @interface NSString (GTMNSStringHTMLAdditions)

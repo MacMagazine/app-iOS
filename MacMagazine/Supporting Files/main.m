@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "MMMAppDelegate.h"
 
