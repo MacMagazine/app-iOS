@@ -21,8 +21,12 @@
 }
 
 + (CGFloat)height {
-    CGFloat height = [@"TODAY" boundingRectWithSize:CGSizeMake(300, INT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont mm_fontForTextStyle:UIFontTextStyleCaption1]} context:nil].size.height;
-    return height + 10;
+    NSDictionary *textAttributes = @{NSFontAttributeName : [UIFont mm_fontForTextStyle:UIFontTextStyleCaption1]};
+    CGRect boundingRect = [@"TODAY" boundingRectWithSize:CGSizeMake(300, INT_MAX)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:textAttributes
+                                                 context:nil];
+    return CGRectGetHeight(boundingRect) + 10;
 }
 
 #pragma mark - Instance Methods
@@ -34,8 +38,7 @@
         return nil;
     }
     
-    UIVisualEffect *blurEffect;
-    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
     
     UIVisualEffectView *visualEffectView;
     visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];

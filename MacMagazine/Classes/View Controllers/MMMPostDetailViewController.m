@@ -103,7 +103,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     }
 
     UIBarButtonItem *actionItem = (UIBarButtonItem *)sender;
-    NSArray *browserActivities = @[[TOActivitySafari new], [TOActivityChrome new]];
+    NSArray<__kindof UIActivity *> *browserActivities = @[[TOActivitySafari new], [TOActivityChrome new]];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.url] applicationActivities:browserActivities];
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     activityViewController.popoverPresentationController.barButtonItem = actionItem;

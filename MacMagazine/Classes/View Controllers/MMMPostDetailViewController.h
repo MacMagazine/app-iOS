@@ -13,7 +13,7 @@
 @interface MMMPostDetailViewController : TOWebViewController
 
 @property (nonatomic, strong) MMMPost *post;
-@property (copy, nonatomic) NSArray <MMMPost *> *posts;
+@property (nonatomic, copy) NSArray<MMMPost *> *posts;
 
 // In case the detail view controller is loaded from a link click
 @property (nonatomic, strong) NSURL *postURL;
