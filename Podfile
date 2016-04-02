@@ -21,3 +21,5 @@ post_install do |installer_representation|
         end
     end
 end
+
+plugin 'cocoapods-acknowledgements', settings_bundle: true
