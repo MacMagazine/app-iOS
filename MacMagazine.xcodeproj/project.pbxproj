@@ -507,6 +507,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDBB4A771B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
+				ED9B38811CB04B41001D2BF9 /* ShellScript */,
 				3C596E23EB1EDF075D1CEC7C /* Check Pods Manifest.lock */,
 				EDBB4A4A1B2E7F8D00E1CCCA /* Sources */,
 				EDBB4A4B1B2E7F8D00E1CCCA /* Frameworks */,
@@ -686,6 +687,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Update build version with number of commits\nBUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"";
+		};
+		ED9B38811CB04B41001D2BF9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\n\nScripts/sort_all_files_imports.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
