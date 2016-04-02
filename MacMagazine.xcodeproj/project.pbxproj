@@ -206,9 +206,9 @@
 		DB194AD71C1E6EC600AA90D8 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				DB194ADD1C1E71E100AA90D8 /* hello.atlas */,
 				DB194AD81C1E6EE600AA90D8 /* MMMMacintoshScene.h */,
 				DB194AD91C1E6EE600AA90D8 /* MMMMacintoshScene.m */,
-				DB194ADD1C1E71E100AA90D8 /* hello.atlas */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
