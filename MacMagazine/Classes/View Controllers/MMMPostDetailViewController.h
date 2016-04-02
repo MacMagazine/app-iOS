@@ -1,5 +1,5 @@
 //
-//  PostDetailViewController.h
+//  MMMPostDetailViewController.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/24/15.
@@ -8,12 +8,12 @@
 
 #import <TOWebViewController/TOWebViewController.h>
 
-@class Post;
+@class MMMPost;
 
-@interface PostDetailViewController : TOWebViewController
+@interface MMMPostDetailViewController : TOWebViewController
 
-@property (strong, nonatomic) Post *post;
-@property (copy, nonatomic) NSArray <Post *> *posts;
+@property (strong, nonatomic) MMMPost *post;
+@property (copy, nonatomic) NSArray <MMMPost *> *posts;
 
 // In case the detail view controller is loaded from a link click
 @property (strong, nonatomic) NSURL *postURL;

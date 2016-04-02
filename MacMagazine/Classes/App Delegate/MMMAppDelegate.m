@@ -1,24 +1,24 @@
 //
-//  AppDelegate.m
+//  MMMAppDelegate.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/14/15.
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "MMMAppDelegate.h"
 #import "SUNCoreDataStore.h"
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <Tweaks/FBTweakShakeWindow.h>
 
-@interface AppDelegate ()
+@interface MMMAppDelegate ()
 
 @end
 
-#pragma mark AppDelegate
+#pragma mark MMMAppDelegate
 
-@implementation AppDelegate
+@implementation MMMAppDelegate
 
 #pragma mark - Application Lifecycle
 

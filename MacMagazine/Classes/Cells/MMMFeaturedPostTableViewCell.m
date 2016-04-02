@@ -1,23 +1,23 @@
 //
-//  FeaturedPostTableViewCell.m
+//  MMMFeaturedPostTableViewCell.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/21/15.
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "FeaturedPostTableViewCell.h"
+#import "MMMFeaturedPostTableViewCell.h"
 
-@interface FeaturedPostTableViewCell ()
+@interface MMMFeaturedPostTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headlineTopSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headlineBottomSpaceConstraint;
 
 @end
 
-#pragma mark FeaturedPostTableViewCell
+#pragma mark MMMFeaturedPostTableViewCell
 
-@implementation FeaturedPostTableViewCell
+@implementation MMMFeaturedPostTableViewCell
 
 #pragma mark - Instance Methods
 

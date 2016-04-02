@@ -1,5 +1,5 @@
 //
-//  PostPresenter.h
+//  MMMPostPresenter.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/20/15.
@@ -8,7 +8,7 @@
 
 #import "SUNPresenter.h"
 
-@interface PostPresenter : SUNPresenter
+@interface MMMPostPresenter : SUNPresenter
 
 - (NSString *)descriptionText;
 - (NSURL *)thumbnailURLForImageView:(UIImageView *)imageView;

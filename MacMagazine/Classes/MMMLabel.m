@@ -1,16 +1,16 @@
 //
-//  MMLabel.m
+//  MMMLabel.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/21/15.
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "MMLabel.h"
+#import "MMMLabel.h"
 
-#pragma mark MMLabel
+#pragma mark MMMLabel
 
-@implementation MMLabel
+@implementation MMMLabel
 
 #pragma mark - Instance Methods
 

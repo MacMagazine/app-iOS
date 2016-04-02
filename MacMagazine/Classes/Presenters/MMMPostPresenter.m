@@ -1,5 +1,5 @@
 //
-//  PostPresenter.m
+//  MMMPostPresenter.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/20/15.
@@ -7,30 +7,30 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "FeaturedPostTableViewCell.h"
+#import "MMMFeaturedPostTableViewCell.h"
 #import "GTMNSString+HTML.h"
 #import "NSString+HTMLSafe.h"
-#import "Post.h"
-#import "PostPresenter.h"
-#import "PostTableViewCell.h"
+#import "MMMPost.h"
+#import "MMMPostPresenter.h"
+#import "MMMPostTableViewCell.h"
 
-@interface PostPresenter ()
+@interface MMMPostPresenter ()
 
-- (Post *)post;
+- (MMMPost *)post;
 
 @end
 
 #pragma mark PostPresenter
 
-@implementation PostPresenter
+@implementation MMMPostPresenter
 
 #pragma mark - Instance Methods
 
-- (Post *)post {
+- (MMMPost *)post {
     return self.object;
 }
 
-- (void)setupFeaturedTableViewCell:(FeaturedPostTableViewCell *)cell {
+- (void)setupFeaturedTableViewCell:(MMMFeaturedPostTableViewCell *)cell {
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
     cell.thumbnailImageView.alpha = 0;
@@ -43,7 +43,7 @@
     }];
 }
 
-- (void)setupTableViewCell:(PostTableViewCell *)cell {
+- (void)setupTableViewCell:(MMMPostTableViewCell *)cell {
     cell.imageVisible = self.post.thumbnail.length > 0;
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
@@ -58,9 +58,9 @@
 }
 
 - (SEL)selectorForViewOfClass:(Class)viewClass {
-    if ([viewClass isSubclassOfClass:[PostTableViewCell class]]) {
+    if ([viewClass isSubclassOfClass:[MMMPostTableViewCell class]]) {
         return @selector(setupTableViewCell:);
-    } else if ([viewClass isSubclassOfClass:[FeaturedPostTableViewCell class]]) {
+    } else if ([viewClass isSubclassOfClass:[MMMFeaturedPostTableViewCell class]]) {
         return @selector(setupFeaturedTableViewCell:);
     }
     
@@ -70,7 +70,7 @@
 #pragma mark - Attributes
 
 - (NSString *)descriptionText {
-    return [self.post.descriptionText.htmlSafe gtm_stringByUnescapingFromHTML];
+    return [self.post.descriptionText.mmm_htmlSafe gtm_stringByUnescapingFromHTML];
 }
 
 - (NSURL *)thumbnailURLForImageView:(UIImageView *)imageView {

@@ -1,14 +1,14 @@
 //
-//  PostDetailViewController.m
+//  MMMPostDetailViewController.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/24/15.
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "PostDetailViewController.h"
-#import "MacintoshScene.h"
-#import "Post.h"
+#import "MMMPostDetailViewController.h"
+#import "MMMMacintoshScene.h"
+#import "MMMPost.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <PureLayout/PureLayout.h>
@@ -18,26 +18,26 @@
 #import <TOWebViewController/TOActivityChrome.h>
 #import <TOWebViewController/TOActivitySafari.h>
 
-static NSString * const MMBaseURL = @"macmagazine.com.br";
+static NSString * const MMMBaseURL = @"macmagazine.com.br";
 
-typedef NS_ENUM(NSUInteger, MMLinkClickType) {
-    MMLinkClickTypeInternal,
-    MMLinkClickTypeExternal,
+typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
+    MMMLinkClickTypeInternal,
+    MMMLinkClickTypeExternal,
 };
 
-@interface PostDetailViewController () <UIWebViewDelegate>
+@interface MMMPostDetailViewController () <UIWebViewDelegate>
 
-@property (nonatomic, strong) Post *nextPost;
-@property (nonatomic, strong) Post *previousPost;
+@property (nonatomic, strong) MMMPost *nextPost;
+@property (nonatomic, strong) MMMPost *previousPost;
 
 @property (nonatomic, weak) SKView *animationView;
 @property (nonatomic) BOOL isLoading;
 
 @end
 
-#pragma mark PostDetailViewController
+#pragma mark MMMPostDetailViewController
 
-@implementation PostDetailViewController
+@implementation MMMPostDetailViewController
 
 #pragma mark - Class Methods
 
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
         return YES;
     }
 
-    MMLinkClickType linkClickType = ([request.URL.absoluteString containsString:MMBaseURL]) ? MMLinkClickTypeInternal : MMLinkClickTypeExternal;
+    MMMLinkClickType linkClickType = ([request.URL.absoluteString containsString:MMMBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         [self performActionForLinkClickWithType:linkClickType URL:request.URL];
 
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 }
 
 - (void)pushToNewDetailViewControllerWithURL:(NSURL *)URL {
-    PostDetailViewController *destinationViewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
+    MMMPostDetailViewController *destinationViewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
     destinationViewController.postURL = URL;
     destinationViewController.post = nil;
     destinationViewController.posts = nil;
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 #pragma mark - Instance Methods
 
-- (void)reloadViewControllerWithPost:(Post *)post {
+- (void)reloadViewControllerWithPost:(MMMPost *)post {
     [self.webView stopLoading];
 
     self.post = post;
@@ -179,7 +179,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
 
 - (void)prepareMacintoshAnimation {
     // Create and configure the scene
-    SKScene *scene = [MacintoshScene sceneWithSize:self.view.bounds.size];
+    SKScene *scene = [MMMMacintoshScene sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
 
     // Present the scene
@@ -191,10 +191,10 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     [self.animationView presentScene:scene];
 }
 
-- (void)performActionForLinkClickWithType:(MMLinkClickType)linkClickType URL:(NSURL *)URL {
-    if (linkClickType == MMLinkClickTypeInternal) {
+- (void)performActionForLinkClickWithType:(MMMLinkClickType)linkClickType URL:(NSURL *)URL {
+    if (linkClickType == MMMLinkClickTypeInternal) {
         [self pushToNewDetailViewControllerWithURL:URL];
-    } else if (linkClickType == MMLinkClickTypeExternal) {
+    } else if (linkClickType == MMMLinkClickTypeExternal) {
         [self pushToSFSafariViewControllerWithURL:URL];
     }
 }
@@ -291,7 +291,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     [toolbar setItems:[items copy]];
 }
 
-- (Post *)nextPost {
+- (MMMPost *)nextPost {
     if (!(self.posts) || !(self.post)) {
         _nextPost = nil;
         return _nextPost;
@@ -308,7 +308,7 @@ typedef NS_ENUM(NSUInteger, MMLinkClickType) {
     return _nextPost;
 }
 
-- (Post *)previousPost {
+- (MMMPost *)previousPost {
     if (!(self.posts) || !(self.post)) {
         _previousPost = nil;
         return _previousPost;

@@ -23,7 +23,7 @@
     return formatters;
 }
 
-+ (instancetype)formatterWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {
++ (instancetype)mmm_formatterWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {
     NSString *key = [NSString stringWithFormat:@"DateStyle: %li TimeStyle: %li", (unsigned long)dateStyle, (unsigned long)timeStyle];
     NSDateFormatter *formatter = [NSDateFormatter formatters][key];
     if (!formatter) {
@@ -35,7 +35,7 @@
     return formatter;
 }
 
-+ (instancetype)formatterWithTemplate:(NSString *)templateString {
++ (instancetype)mmm_formatterWithTemplate:(NSString *)templateString {
     NSDateFormatter *formatter = [NSDateFormatter formatters][templateString];
     if (!formatter) {
         formatter = [NSDateFormatter new];
@@ -45,7 +45,7 @@
     return formatter;
 }
 
-+ (instancetype)formatterWithKey:(NSString *)key block:(void(^)(NSDateFormatter *dateFormatter))block {
++ (instancetype)mmm_formatterWithKey:(NSString *)key block:(void(^)(NSDateFormatter *dateFormatter))block {
     if (!block || key.length == 0) {
         return nil;
     }

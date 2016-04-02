@@ -1,5 +1,5 @@
 //
-//  MMTableViewHeaderView.h
+//  MMMTableViewHeaderView.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/21/15.
@@ -7,11 +7,11 @@
 //
 
 @import UIKit;
-#import "MMLabel.h"
+#import "MMMLabel.h"
 
-@interface MMTableViewHeaderView : UITableViewHeaderFooterView
+@interface MMMTableViewHeaderView : UITableViewHeaderFooterView
 
-@property (strong, nonatomic) MMLabel *titleLabel;
+@property (strong, nonatomic) MMMLabel *titleLabel;
 
 + (NSString *)identifier;
 + (CGFloat)height;

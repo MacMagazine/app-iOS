@@ -1,5 +1,5 @@
 //
-//  MMLabel.h
+//  MMMLabel.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/21/15.
@@ -8,7 +8,7 @@
 
 #import "SUNLabel.h"
 
-@interface MMLabel : SUNLabel
+@interface MMMLabel : SUNLabel
 
 @end
 

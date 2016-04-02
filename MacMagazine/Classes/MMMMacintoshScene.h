@@ -1,5 +1,5 @@
 //
-//  MacintoshScene.h
+//  MMMMacintoshScene.h
 //  MacMagazine
 //
 //  Created by Cesar Barscevicius on 12/13/15.
@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MacintoshScene : SKScene
+@interface MMMMacintoshScene : SKScene
 
 @end

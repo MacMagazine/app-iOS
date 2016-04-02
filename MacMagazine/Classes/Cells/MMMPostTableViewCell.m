@@ -1,14 +1,14 @@
 //
-//  PostTableViewCell.m
+//  MMMPostTableViewCell.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/20/15.
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "PostTableViewCell.h"
+#import "MMMPostTableViewCell.h"
 
-@interface PostTableViewCell ()
+@interface MMMPostTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *thumbnailTrailingSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *thumbnailWidthConstraint;
@@ -16,9 +16,9 @@
 
 @end
 
-#pragma mark PostTableViewCell
+#pragma mark MMMPostTableViewCell
 
-@implementation PostTableViewCell
+@implementation MMMPostTableViewCell
 
 #pragma mark - Getters/Setters
 

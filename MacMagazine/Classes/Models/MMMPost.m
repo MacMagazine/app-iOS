@@ -1,5 +1,5 @@
 //
-//  Post.m
+//  MMMPost.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/14/15.
@@ -10,7 +10,7 @@
 #import <Ono/Ono.h>
 #import "NSDate+Formatters.h"
 #import "NSDateFormatter+Addons.h"
-#import "Post.h"
+#import "MMMPost.h"
 #import "SUNCoreDataStore.h"
 
 static NSString * const kMMFeaturedCategoryName = @"Destaques";
@@ -19,7 +19,7 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
 
 #pragma mark Post
 
-@implementation Post
+@implementation MMMPost
 
 #pragma mark - Class Methods
 
@@ -62,7 +62,7 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
             [document enumerateElementsWithXPath:@"channel//item" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                 NSString *guid = [element firstChildWithTag:@"guid"].stringValue;
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"guid = %@", guid];
-                Post *post = [cache filteredArrayUsingPredicate:predicate].firstObject;
+                MMMPost *post = [cache filteredArrayUsingPredicate:predicate].firstObject;
                 if (!post) {
                     post = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
                     post.guid = guid;
@@ -86,12 +86,12 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
                     [images addObject:path];
                 }];
                 
-                NSDateFormatter *dateFormatter = [NSDateFormatter formatterWithKey:@"Post pubDate" block:^(NSDateFormatter *dateFormatter) {
+                NSDateFormatter *dateFormatter = [NSDateFormatter mmm_formatterWithKey:@"Post pubDate" block:^(NSDateFormatter *dateFormatter) {
                     dateFormatter.dateFormat = @"EEE, dd MMMM yyyy HH:mm:ss Z";
                     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
                 }];
                 
-                NSDateFormatter *timeFreeFormatter = [NSDateFormatter formatterWithKey:@"Post date" block:^(NSDateFormatter *dateFormatter) {
+                NSDateFormatter *timeFreeFormatter = [NSDateFormatter mmm_formatterWithKey:@"Post date" block:^(NSDateFormatter *dateFormatter) {
                     dateFormatter.dateFormat = @"yyyy.MM.dd";
                     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
                 }];

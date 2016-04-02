@@ -1,5 +1,5 @@
 //
-//  PostsTableViewController.m
+//  MMMPostsTableViewController.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/20/15.
@@ -7,23 +7,23 @@
 //
 
 #import "NSDate+Formatters.h"
-#import "FeaturedPostTableViewCell.h"
-#import "MMLabel.h"
-#import "MMTableViewHeaderView.h"
-#import "Post.h"
-#import "PostDetailViewController.h"
-#import "PostPresenter.h"
-#import "PostsTableViewController.h"
-#import "PostTableViewCell.h"
+#import "MMMFeaturedPostTableViewCell.h"
+#import "MMMLabel.h"
+#import "MMMTableViewHeaderView.h"
+#import "MMMPost.h"
+#import "MMMPostDetailViewController.h"
+#import "MMMPostPresenter.h"
+#import "MMMPostsTableViewController.h"
+#import "MMMPostTableViewCell.h"
 #import "SUNCoreDataStore.h"
 
-@interface PostsTableViewController ()
+@interface MMMPostsTableViewController ()
 
 @end
 
-#pragma mark PostsTableViewController
+#pragma mark MMMPostsTableViewController
 
-@implementation PostsTableViewController
+@implementation MMMPostsTableViewController
 
 #pragma mark - Class Methods
 
@@ -36,7 +36,7 @@
         return _fetchedResultsController;
     }
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[Post entityName]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[MMMPost entityName]];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
                                      [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
                                      [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
@@ -71,15 +71,15 @@
     return YES;
 }
 
-- (void)configureCell:(PostTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+- (void)configureCell:(MMMPostTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.layoutMargins = self.tableView.layoutMargins;
     cell.layoutWidth = self.tableView.bounds.size.width;
     
     NSUInteger numberOfRows = [self.tableView numberOfRowsInSection:indexPath.section];
     cell.separatorView.hidden = (indexPath.row + 1 == numberOfRows);
     
-    [[PostPresenter presenter] presentObject:post inView:cell];
+    [[MMMPostPresenter presenter] presentObject:post inView:cell];
 }
 
 - (void)fetchMoreData {
@@ -88,7 +88,7 @@
     }
     
     [self.activityIndicatorView startAnimating];
-    [Post getWithPage:self.nextPage success:^(id response) {
+    [MMMPost getWithPage:self.nextPage success:^(id response) {
         [self.activityIndicatorView stopAnimating];
         self.nextPage += 1;
     } failure:^(NSError *error) {
@@ -108,7 +108,7 @@
         [self.refreshControl beginRefreshing];
     }
     
-    [Post getWithPage:1 success:^(NSArray *response) {
+    [MMMPost getWithPage:1 success:^(NSArray *response) {
         self.numberOfResponseObjectsPerRequest = response.count;
         self.nextPage = (self.fetchedResultsController.fetchedObjects.count / MAX(1, self.numberOfResponseObjectsPerRequest)) + 1;
         [self.refreshControl endRefreshing];
@@ -123,10 +123,10 @@
 #pragma mark - UITableView data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSString *identifier = [PostTableViewCell identifier];
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSString *identifier = [MMMPostTableViewCell identifier];
     if (post.isFeatured) {
-        identifier = [FeaturedPostTableViewCell identifier];
+        identifier = [MMMFeaturedPostTableViewCell identifier];
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
@@ -146,8 +146,8 @@
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    Post *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:NSStringFromClass([PostDetailViewController class]) preparationBlock:^(UIStoryboardSegue *segue, PostDetailViewController *destinationViewController) {
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:NSStringFromClass([MMMPostDetailViewController class]) preparationBlock:^(UIStoryboardSegue *segue, MMMPostDetailViewController *destinationViewController) {
         destinationViewController.post = post;
         destinationViewController.posts = self.fetchedResultsController.fetchedObjects;
     }];
@@ -166,29 +166,29 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    MMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMTableViewHeaderView identifier]];
+    MMMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMMTableViewHeaderView identifier]];
    
-    Post *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     if ([calendar isDateInToday:post.pubDate]) {
         headerView.titleLabel.text = NSLocalizedString(@"Today", @"");
     } else if ([calendar isDateInYesterday:post.pubDate]) {
         headerView.titleLabel.text = NSLocalizedString(@"Yesterday", @"");
     } else {
-        headerView.titleLabel.text = [post.pubDate stringFromTemplate:@"EEEEddMMMM"].uppercaseString;
+        headerView.titleLabel.text = [post.pubDate mmm_stringFromTemplate:@"EEEEddMMMM"].uppercaseString;
     }
     
     return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    Post *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     if ([calendar isDateInToday:post.pubDate]) {
         return 0;
     }
     
-    return [MMTableViewHeaderView height];
+    return [MMMTableViewHeaderView height];
 }
 
 #pragma mark - UIScrollView delegate
@@ -205,11 +205,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
     
-    for (NSString *cellIdentifier in @[[PostTableViewCell identifier], [FeaturedPostTableViewCell identifier]]) {
+    for (NSString *cellIdentifier in @[[MMMPostTableViewCell identifier], [MMMFeaturedPostTableViewCell identifier]]) {
         UINib *nib = [UINib nibWithNibName:cellIdentifier bundle:[NSBundle mainBundle]];
         [self.tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
     }
-    [self.tableView registerClass:[MMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMTableViewHeaderView identifier]];
+    [self.tableView registerClass:[MMMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMMTableViewHeaderView identifier]];
     
     self.tableView.estimatedRowHeight = 100;
     self.tableView.tableFooterView = self.footerView;

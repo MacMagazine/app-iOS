@@ -1,21 +1,21 @@
 //
-//  MacintoshScene.m
+//  MMMMacintoshScene.m
 //  MacMagazine
 //
 //  Created by Cesar Barscevicius on 12/13/15.
 //  Copyright © 2015 made@sampa. All rights reserved.
 //
 
-#import "MacintoshScene.h"
+#import "MMMMacintoshScene.h"
 
-@interface MacintoshScene ()
+@interface MMMMacintoshScene ()
 
 @property (nonatomic ,strong) NSArray *macintoshFrames;
 @property (nonatomic ,strong) SKSpriteNode *macintosh;
 
 @end
 
-@implementation MacintoshScene
+@implementation MMMMacintoshScene
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {

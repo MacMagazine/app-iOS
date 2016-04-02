@@ -15,12 +15,12 @@
 
 #pragma mark - Instance Methods
 
-- (NSString *)stringWithDateStyle:(NSDateFormatterStyle)dateStyle {
-    return [[NSDateFormatter formatterWithDateStyle:dateStyle timeStyle:NSDateFormatterNoStyle] stringFromDate:self];
+- (NSString *)mmm_stringFromTemplate:(NSString *)templateString {
+    return [[NSDateFormatter mmm_formatterWithTemplate:templateString] stringFromDate:self];
 }
 
-- (NSString *)stringFromTemplate:(NSString *)templateString {
-    return [[NSDateFormatter formatterWithTemplate:templateString] stringFromDate:self];
+- (NSString *)mmm_stringWithDateStyle:(NSDateFormatterStyle)dateStyle {
+    return [[NSDateFormatter mmm_formatterWithDateStyle:dateStyle timeStyle:NSDateFormatterNoStyle] stringFromDate:self];
 }
 
 @end

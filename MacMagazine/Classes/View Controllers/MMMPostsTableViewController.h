@@ -1,5 +1,5 @@
 //
-//  PostsTableViewController.h
+//  MMMPostsTableViewController.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/20/15.
@@ -8,7 +8,7 @@
 
 #import <SUNKit/SUNTableViewController.h>
 
-@interface PostsTableViewController : SUNTableViewController
+@interface MMMPostsTableViewController : SUNTableViewController
 
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;

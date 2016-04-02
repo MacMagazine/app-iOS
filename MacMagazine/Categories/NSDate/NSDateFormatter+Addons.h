@@ -10,8 +10,8 @@
 
 @interface NSDateFormatter (Addons)
 
-+ (instancetype)formatterWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle;
-+ (instancetype)formatterWithTemplate:(NSString *)templateString;
-+ (instancetype)formatterWithKey:(NSString *)key block:(void(^)(NSDateFormatter *dateFormatter))block;
++ (instancetype)mmm_formatterWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle;
++ (instancetype)mmm_formatterWithTemplate:(NSString *)templateString;
++ (instancetype)mmm_formatterWithKey:(NSString *)key block:(void(^)(NSDateFormatter *dateFormatter))block;
 
 @end

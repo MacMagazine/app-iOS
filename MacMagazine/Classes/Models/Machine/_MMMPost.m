@@ -1,44 +1,29 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Post.m instead.
+// Make changes to MMMPost.m instead.
 
-#import "_Post.h"
+#import "_MMMPost.h"
 
-const struct PostAttributes PostAttributes = {
-	.author = @"author",
-	.categories = @"categories",
-	.content = @"content",
-	.date = @"date",
-	.descriptionText = @"descriptionText",
-	.featured = @"featured",
-	.guid = @"guid",
-	.images = @"images",
-	.link = @"link",
-	.pubDate = @"pubDate",
-	.title = @"title",
-	.visible = @"visible",
-};
-
-@implementation PostID
+@implementation MMMPostID
 @end
 
-@implementation _Post
+@implementation _MMMPost
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"MMMPost" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"Post";
+	return @"MMMPost";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"Post" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"MMMPost" inManagedObjectContext:moc_];
 }
 
-- (PostID*)objectID {
-	return (PostID*)[super objectID];
+- (MMMPostID*)objectID {
+	return (MMMPostID*)[super objectID];
 }
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
@@ -118,5 +103,44 @@ const struct PostAttributes PostAttributes = {
 	[self setPrimitiveVisible:@(value_)];
 }
 
+@end
+
+@implementation MMMPostAttributes 
++ (NSString *)author {
+	return @"author";
+}
++ (NSString *)categories {
+	return @"categories";
+}
++ (NSString *)content {
+	return @"content";
+}
++ (NSString *)date {
+	return @"date";
+}
++ (NSString *)descriptionText {
+	return @"descriptionText";
+}
++ (NSString *)featured {
+	return @"featured";
+}
++ (NSString *)guid {
+	return @"guid";
+}
++ (NSString *)images {
+	return @"images";
+}
++ (NSString *)link {
+	return @"link";
+}
++ (NSString *)pubDate {
+	return @"pubDate";
+}
++ (NSString *)title {
+	return @"title";
+}
++ (NSString *)visible {
+	return @"visible";
+}
 @end
 

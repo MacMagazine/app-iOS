@@ -10,6 +10,6 @@
 
 @interface NSString (HTMLSafe)
 
-- (NSString *)htmlSafe;
+- (NSString *)mmm_htmlSafe;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  MMTableViewHeaderView.m
+//  MMMTableViewHeaderView.m
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/21/15.
@@ -7,11 +7,11 @@
 //
 
 #import <PureLayout/PureLayout.h>
-#import "MMTableViewHeaderView.h"
+#import "MMMTableViewHeaderView.h"
 
-#pragma mark MMTableViewHeaderView
+#pragma mark MMMTableViewHeaderView
 
-@implementation MMTableViewHeaderView
+@implementation MMMTableViewHeaderView
 
 #pragma mark - Class Methods
 
@@ -41,7 +41,7 @@
     self.backgroundView = visualEffectView;
     [visualEffectView autoPinEdgesToSuperviewEdges];
     
-    _titleLabel = [MMLabel new];
+    _titleLabel = [MMMLabel new];
     _titleLabel.numberOfLines = 1;
     _titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
     _titleLabel.textAlignment = NSTextAlignmentCenter;

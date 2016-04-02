@@ -14,7 +14,7 @@
 
 #pragma mark - Instance Methods
 
-- (NSString *)htmlSafe {
+- (NSString *)mmm_htmlSafe {
     static NSRegularExpression *regexp;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

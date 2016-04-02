@@ -1,5 +1,5 @@
 //
-//  PostTableViewCell.h
+//  MMMPostTableViewCell.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/20/15.
@@ -7,13 +7,13 @@
 //
 
 #import <SUNKit/SUNTableViewCell.h>
-#import "MMLabel.h"
+#import "MMMLabel.h"
 
-@interface PostTableViewCell : SUNTableViewCell
+@interface MMMPostTableViewCell : SUNTableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
-@property (weak, nonatomic) IBOutlet MMLabel *headlineLabel;
-@property (weak, nonatomic) IBOutlet MMLabel *subheadlineLabel;
+@property (weak, nonatomic) IBOutlet MMMLabel *headlineLabel;
+@property (weak, nonatomic) IBOutlet MMMLabel *subheadlineLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpaceConstraint;

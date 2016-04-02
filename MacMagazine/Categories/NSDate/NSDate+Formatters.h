@@ -10,7 +10,7 @@
 
 @interface NSDate (Formatters)
 
-- (NSString *)stringFromTemplate:(NSString *)templateString;
-- (NSString *)stringWithDateStyle:(NSDateFormatterStyle)dateStyle;
+- (NSString *)mmm_stringFromTemplate:(NSString *)templateString;
+- (NSString *)mmm_stringWithDateStyle:(NSDateFormatterStyle)dateStyle;
 
 @end

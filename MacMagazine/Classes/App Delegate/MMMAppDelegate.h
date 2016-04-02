@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  MMMAppDelegate.h
 //  MacMagazine
 //
 //  Created by Fernando Saragoca on 6/14/15.
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface MMMAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
