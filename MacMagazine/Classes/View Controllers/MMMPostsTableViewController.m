@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "NSDate+Formatters.h"
+#import "MMMPostsTableViewController.h"
 #import "MMMFeaturedPostTableViewCell.h"
 #import "MMMLabel.h"
-#import "MMMTableViewHeaderView.h"
 #import "MMMPost.h"
 #import "MMMPostDetailViewController.h"
 #import "MMMPostPresenter.h"
-#import "MMMPostsTableViewController.h"
 #import "MMMPostTableViewCell.h"
+#import "MMMTableViewHeaderView.h"
+#import "NSDate+Formatters.h"
 #import "SUNCoreDataStore.h"
 
 @interface MMMPostsTableViewController ()

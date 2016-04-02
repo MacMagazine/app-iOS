@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "NSManagedObject+SUNCoreDataStoreAddons.h"
 #import "NSSet+SUNCoreDataStoreAddons.h"
+#import "NSManagedObject+SUNCoreDataStoreAddons.h"
 
 #pragma mark NSSet (SUNCoreDataStoreAddons)
 

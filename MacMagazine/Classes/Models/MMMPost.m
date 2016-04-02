@@ -8,9 +8,10 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <Ono/Ono.h>
+
+#import "MMMPost.h"
 #import "NSDate+Formatters.h"
 #import "NSDateFormatter+Addons.h"
-#import "MMMPost.h"
 #import "SUNCoreDataStore.h"
 
 static NSString * const kMMFeaturedCategoryName = @"Destaques";

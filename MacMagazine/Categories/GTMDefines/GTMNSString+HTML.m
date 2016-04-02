@@ -17,8 +17,8 @@
 //  the License.
 //
 
-#import "GTMDefines.h"
 #import "GTMNSString+HTML.h"
+#import "GTMDefines.h"
 
 typedef struct {
   __unsafe_unretained NSString *escapeSequence;

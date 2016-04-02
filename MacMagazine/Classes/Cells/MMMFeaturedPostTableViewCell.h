@@ -7,6 +7,7 @@
 //
 
 #import <SUNKit/SUNTableViewCell.h>
+
 #import "MMMLabel.h"
 
 @interface MMMFeaturedPostTableViewCell : SUNTableViewCell

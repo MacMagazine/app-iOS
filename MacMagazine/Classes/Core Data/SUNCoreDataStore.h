@@ -8,6 +8,7 @@
 
 @import CoreData;
 @import Foundation;
+
 #import "NSArray+SUNCoreDataStoreAddons.h"
 #import "NSManagedObject+SUNCoreDataStoreAddons.h"
 #import "NSManagedObjectContext+SUNCoreDataStoreAddons.h"

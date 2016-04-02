@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "MMMPostDetailViewController.h"
-#import "MMMMacintoshScene.h"
-#import "MMMPost.h"
-
 #import <AVFoundation/AVFoundation.h>
 #import <PureLayout/PureLayout.h>
 #import <SafariServices/SafariServices.h>
 #import <SpriteKit/SpriteKit.h>
-#import <Tweaks/FBTweakInline.h>
 #import <TOWebViewController/TOActivityChrome.h>
 #import <TOWebViewController/TOActivitySafari.h>
+#import <Tweaks/FBTweakInline.h>
+
+#import "MMMPostDetailViewController.h"
+#import "MMMMacintoshScene.h"
+#import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
 

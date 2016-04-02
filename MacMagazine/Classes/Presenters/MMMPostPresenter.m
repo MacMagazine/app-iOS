@@ -7,12 +7,13 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "MMMFeaturedPostTableViewCell.h"
-#import "GTMNSString+HTML.h"
-#import "NSString+HTMLSafe.h"
-#import "MMMPost.h"
+
 #import "MMMPostPresenter.h"
+#import "GTMNSString+HTML.h"
+#import "MMMFeaturedPostTableViewCell.h"
+#import "MMMPost.h"
 #import "MMMPostTableViewCell.h"
+#import "NSString+HTMLSafe.h"
 
 @interface MMMPostPresenter ()
 
