@@ -256,37 +256,57 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     UIToolbar *toolbar = self.navigationController.toolbar;
     toolbar.items = nil;
 
-    NSMutableArray <UIBarButtonItem *> *items = [[NSMutableArray alloc] initWithCapacity:4];
+    NSMutableArray<UIBarButtonItem *> *items = [[NSMutableArray alloc] initWithCapacity:4];
 
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                   target:nil
+                                                                   action:nil]];
     // Previous post item
-    UIBarButtonItem *previousPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowup"] style:UIBarButtonItemStylePlain target:self action:@selector(previousPostButtonTapped:)];
+    UIBarButtonItem *previousPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowup"]
+                                                                         style:UIBarButtonItemStylePlain
+                                                                        target:self
+                                                                        action:@selector(previousPostButtonTapped:)];
     previousPostItem.imageInsets = UIEdgeInsetsMake(5, 0, 0, 0);
     [items addObject:previousPostItem];
     if (![self previousPost]) {
         previousPostItem.enabled = NO;
     }
 
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                   target:nil
+                                                                   action:nil]];
     // Next post item
-    UIBarButtonItem *nextPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowdown"] style:UIBarButtonItemStylePlain target:self action:@selector(nextPostButtonTapped:)];
+    UIBarButtonItem *nextPostItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_arrowdown"]
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(nextPostButtonTapped:)];
     nextPostItem.imageInsets = UIEdgeInsetsMake(5, 0, 0, 0);
     [items addObject:nextPostItem];
     if (![self nextPost]) {
         nextPostItem.enabled = NO;
     }
 
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                   target:nil
+                                                                   action:nil]];
     // Reload item
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonTapped:)];
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                 target:self
+                                                                                 action:@selector(refreshButtonTapped:)];
     [items addObject:refreshItem];
 
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                   target:nil
+                                                                   action:nil]];
     // Action item
-    UIBarButtonItem *actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonTapped:)];
+    UIBarButtonItem *actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                target:self
+                                                                                action:@selector(actionButtonTapped:)];
     [items addObject:actionItem];
 
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                   target:nil
+                                                                   action:nil]];
 
     [toolbar setItems:[items copy]];
 }
