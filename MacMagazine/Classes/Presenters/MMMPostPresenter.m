@@ -30,33 +30,30 @@
 
 #pragma mark - Instance Methods
 
-- (void)setupMMMFeaturedPostTableViewCell:(MMMFeaturedPostTableViewCell *)cell {
-    cell.headlineLabel.text = self.post.title;
-    cell.subheadlineLabel.text = self.descriptionText;
-    cell.thumbnailImageView.alpha = 0;
-    
-    NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
-    [cell.thumbnailImageView sd_setImageWithURL:imageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [UIView animateWithDuration:cacheType != SDImageCacheTypeMemory ? 0.25 : 0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            cell.thumbnailImageView.alpha = 1;
+- (void)downloadImageForImageView:(UIImageView *)imageView {
+    NSURL *URL = [self thumbnailURLForImageView:imageView];
+    [imageView sd_setImageWithURL:URL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        NSTimeInterval duration = (cacheType != SDImageCacheTypeMemory) ? 0.25 : 0;
+        UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
+        [UIView animateWithDuration:duration delay:0 options:options animations:^{
+            imageView.alpha = 1;
         } completion:nil];
     }];
 }
 
-- (void)setupMMMPostTableViewCell:(MMMPostTableViewCell *)cell {
-    cell.imageVisible = self.post.thumbnail.length > 0;
+- (void)setupMMMFeaturedPostTableViewCell:(MMMFeaturedPostTableViewCell *)cell {
     cell.headlineLabel.text = self.post.title;
     cell.subheadlineLabel.text = self.descriptionText;
     cell.thumbnailImageView.alpha = 0;
-    
-    NSURL *imageURL = [self thumbnailURLForImageView:cell.thumbnailImageView];
-    [cell.thumbnailImageView sd_setImageWithURL:imageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        NSTimeInterval duration = (cacheType != SDImageCacheTypeMemory) ? 0.25 : 0;
-        UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
-        [UIView animateWithDuration:duration delay:0 options:options animations:^{
-            cell.thumbnailImageView.alpha = 1;
-        } completion:nil];
-    }];
+    [self downloadImageForImageView:cell.thumbnailImageView];
+}
+
+- (void)setupMMMPostTableViewCell:(MMMPostTableViewCell *)cell {
+    cell.imageVisible = (self.post.thumbnail.length > 0);
+    cell.headlineLabel.text = self.post.title;
+    cell.subheadlineLabel.text = self.descriptionText;
+    cell.thumbnailImageView.alpha = 0;
+    [self downloadImageForImageView:cell.thumbnailImageView];
 }
 
 #pragma mark - Attributes
