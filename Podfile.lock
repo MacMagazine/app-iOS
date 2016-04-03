@@ -22,8 +22,6 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
-  - SUNKit (0.0.1):
-    - PureLayout (~> 3.0)
   - TOWebViewController (2.2.3):
     - TOWebViewController/Core (= 2.2.3)
   - TOWebViewController/Core (2.2.3)
@@ -36,19 +34,9 @@ DEPENDENCIES:
   - Ono (~> 1.2)
   - PureLayout (~> 3.0)
   - SDWebImage (~> 3.7)
-  - SUNKit (from `https://git.madeatsampa.com/madeatsampa/SUNKit.git`)
   - TOWebViewController (~> 2.2)
   - TTTAttributedLabel (~> 1.13)
   - Tweaks (~> 2.0)
-
-EXTERNAL SOURCES:
-  SUNKit:
-    :git: https://git.madeatsampa.com/madeatsampa/SUNKit.git
-
-CHECKOUT OPTIONS:
-  SUNKit:
-    :commit: ec256325ff34ff819a9f505809ecfc1f6aa8de2f
-    :git: https://git.madeatsampa.com/madeatsampa/SUNKit.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -56,7 +44,6 @@ SPEC CHECKSUMS:
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
-  SUNKit: dbbf67acf5504aaed7e1d7daab2c164dd1484ea3
   TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   Tweaks: 524fa47636cce3bf3a4d9156e980f10ae9480e81

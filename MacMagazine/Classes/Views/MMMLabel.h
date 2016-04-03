@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import "SUNLabel.h"
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
