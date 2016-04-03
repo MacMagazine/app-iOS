@@ -50,21 +50,20 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
             NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
             fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"guid" ascending:YES]];
             NSArray *cache = [context executeFetchRequest:fetchRequest error:&error];
+            NSMutableArray *objectsToDelete = [cache mutableCopy];
             if (error) {
                 if (failure) failure(error);
                 return;
             }
-            
-            NSArray *visiblePosts = [cache filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"visible = %@", @YES]];
-            NSSet *visiblePostsGuids = [NSSet setWithArray:[visiblePosts valueForKey:@"guid"]];
-            
-            __block BOOL cleanVisiblePosts = YES;
+
             NSMutableArray *responseObjects = [NSMutableArray new];
             [document enumerateElementsWithXPath:@"channel//item" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                 NSString *guid = [element firstChildWithTag:@"guid"].stringValue;
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"guid = %@", guid];
                 MMMPost *post = [cache filteredArrayUsingPredicate:predicate].firstObject;
-                if (!post) {
+                if (post) {
+                    [objectsToDelete removeObject:post];
+                } else {
                     post = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
                     post.guid = guid;
                 }
@@ -109,14 +108,10 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
                 post.visible = @YES;
                 post.images = images;
                 [responseObjects addObject:post];
-                
-                if (cleanVisiblePosts) {
-                    cleanVisiblePosts = ![visiblePostsGuids containsObject:post.guid];
-                }
             }];
             
-            if (cleanVisiblePosts && page <= 1) {
-                [visiblePosts makeObjectsPerformSelector:@selector(setVisible:) withObject:@NO];
+            if (page <= 1) {
+                [context sun_deleteObjects:[NSSet setWithArray:objectsToDelete]];
             }
             
             [context sun_save];
