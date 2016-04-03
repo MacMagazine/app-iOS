@@ -362,8 +362,4 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self setupToolbar];
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return self.navigationController.navigationBarHidden;
-}
-
 @end

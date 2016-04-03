@@ -13,6 +13,7 @@
 #import "MMMFeaturedPostTableViewCell.h"
 #import "MMMPost.h"
 #import "MMMPostTableViewCell.h"
+#import "NSDate+Formatters.h"
 #import "NSString+HTMLSafe.h"
 
 #pragma mark MMMPostPresenter
@@ -74,6 +75,17 @@
     
     thumbnail = [thumbnail stringByAppendingFormat:@"?w=%.f", width * scale];
     return [NSURL URLWithString:thumbnail];
+}
+
+- (nullable NSString *)sectionTitle {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    if ([calendar isDateInToday:self.post.pubDate]) {
+        return NSLocalizedString(@"Today", @"");
+    } else if ([calendar isDateInYesterday:self.post.pubDate]) {
+        return NSLocalizedString(@"Yesterday", @"");
+    } else {
+        return [self.post.pubDate mmm_stringFromTemplate:@"EEEEddMMMM"].uppercaseString;
+    }
 }
 
 @end

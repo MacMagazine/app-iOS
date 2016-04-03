@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
+
 #import "MMMPostsTableViewController.h"
 #import "MMMFeaturedPostTableViewCell.h"
 #import "MMMLabel.h"
@@ -67,7 +69,7 @@
     return YES;
 }
 
-- (void)configureCell:(MMMPostTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(__kindof MMMTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.layoutMargins = self.tableView.layoutMargins;
     cell.layoutWidth = CGRectGetWidth(self.tableView.bounds);
@@ -109,7 +111,7 @@
     
     [MMMPost getWithPage:1 success:^(NSArray *response) {
         self.numberOfResponseObjectsPerRequest = response.count;
-        self.nextPage = (self.fetchedResultsController.fetchedObjects.count / MAX(1, self.numberOfResponseObjectsPerRequest)) + 1;
+        self.nextPage = 2;
         [self.refreshControl endRefreshing];
     } failure:^(NSError *error) {
         [self handleError:error];
@@ -117,9 +119,35 @@
     }];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    if (selectedIndexPath) {
+        MMMPostDetailViewController *detailViewController = segue.destinationViewController;
+        detailViewController.posts = self.fetchedResultsController.fetchedObjects;
+        detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+    }
+
+    [super prepareForSegue:segue sender:sender];
+}
+
+- (void)applyRefreshControlFix {
+    if (!self.refreshControl.isRefreshing) {
+        [self.tableView sendSubviewToBack:self.refreshControl];
+    }
+}
+
 #pragma mark - Protocols
 
 #pragma mark - UITableView data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.fetchedResultsController.sections.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
+    return [sectionInfo numberOfObjects];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -128,28 +156,25 @@
         identifier = [MMMFeaturedPostTableViewCell identifier];
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    __kindof MMMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
+
     [cell layoutIfNeeded];
-    if (cell.frame.size.width != tableView.frame.size.width) {
-        cell.frame = CGRectMake(0, 0, tableView.frame.size.width, cell.frame.size.height);
+    
+    if (CGRectGetWidth(cell.frame) != CGRectGetWidth(tableView.frame)) {
+        cell.frame = CGRectMake(0, 0, CGRectGetWidth(tableView.frame), CGRectGetHeight(cell.frame));
         [cell layoutIfNeeded];
         [cell layoutSubviews];
     }
+
     return cell;
 }
 
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:NSStringFromClass([MMMPostDetailViewController class]) preparationBlock:^(UIStoryboardSegue *segue, MMMPostDetailViewController *destinationViewController) {
-        destinationViewController.post = post;
-        destinationViewController.posts = self.fetchedResultsController.fetchedObjects;
-    }];
+    NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
+    [self performSegueWithIdentifier:segueIdentifier sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -167,15 +192,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MMMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMMTableViewHeaderView identifier]];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    if ([calendar isDateInToday:post.pubDate]) {
-        headerView.titleLabel.text = NSLocalizedString(@"Today", @"");
-    } else if ([calendar isDateInYesterday:post.pubDate]) {
-        headerView.titleLabel.text = NSLocalizedString(@"Yesterday", @"");
-    } else {
-        headerView.titleLabel.text = [post.pubDate mmm_stringFromTemplate:@"EEEEddMMMM"].uppercaseString;
-    }
+    MMMPostPresenter *presenter = [[MMMPostPresenter alloc] initWithObject:post];
+    headerView.titleLabel.text = presenter.sectionTitle;
     
     return headerView;
 }
@@ -191,30 +211,51 @@
     return [MMMTableViewHeaderView height];
 }
 
-#pragma mark - UIScrollView delegate
+#pragma mark - NSFetchedResultsController delegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView reloadData];
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
 
-    for (NSString *cellIdentifier in @[[MMMPostTableViewCell identifier], [MMMFeaturedPostTableViewCell identifier]]) {
-        UINib *nib = [UINib nibWithNibName:cellIdentifier bundle:[NSBundle mainBundle]];
-        [self.tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applyRefreshControlFix)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView
+                                             selector:@selector(reloadData)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+
+    [self.tableView registerNib:[MMMPostTableViewCell nib] forCellReuseIdentifier:[MMMPostTableViewCell identifier]];
+    [self.tableView registerNib:[MMMFeaturedPostTableViewCell nib] forCellReuseIdentifier:[MMMFeaturedPostTableViewCell identifier]];
     [self.tableView registerClass:[MMMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMMTableViewHeaderView identifier]];
     
     self.tableView.estimatedRowHeight = 100;
-    self.tableView.tableFooterView = self.footerView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [footerView addSubview:activityIndicatorView];
+    [activityIndicatorView autoCenterInSuperviewMargins];
+    self.activityIndicatorView = activityIndicatorView;
+    self.tableView.tableFooterView = footerView;
+
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+
+#warning Verificar necessidade com @cesarbars.
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.frame), CGRectGetWidth(navigationBar.frame), 1)];
     separatorView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
@@ -226,24 +267,23 @@
     logoImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.navigationItem.titleView = logoImageView;
 
-    [self.refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     [self reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self.navigationController setToolbarHidden:YES animated:YES];
+
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    if (selectedIndexPath) {
+        [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:animated];
+    }
+
+    [self.navigationController setToolbarHidden:YES animated:animated];
     self.navigationController.hidesBarsOnSwipe = NO;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return self.navigationController.navigationBarHidden;
 }
 
 @end

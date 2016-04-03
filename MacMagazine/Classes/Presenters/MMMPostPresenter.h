@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSString *)descriptionText;
 - (nullable NSURL *)thumbnailURLForImageView:(UIImageView *)imageView;
+- (nullable NSString *)sectionTitle;
 
 @end
 

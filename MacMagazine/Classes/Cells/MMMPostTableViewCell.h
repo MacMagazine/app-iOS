@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak, nullable) IBOutlet MMMLabel *headlineLabel;
 @property (nonatomic, weak, nullable) IBOutlet MMMLabel *subheadlineLabel;
-@property (nonatomic, weak, nullable) IBOutlet UIView *separatorView;
 
 @property (nonatomic, weak, nullable) IBOutlet NSLayoutConstraint *topSpaceConstraint;
 @property (nonatomic, weak, nullable) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
@@ -26,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat thumbnailTrailingConstant;
 @property (nonatomic) CGFloat thumbnailWidthConstant;
 @property (nonatomic) CGFloat headlineBottomSpaceConstant;
-@property (nonatomic) CGFloat layoutWidth;
 @property (nonatomic, getter=isVisible) BOOL imageVisible;
 
 @end

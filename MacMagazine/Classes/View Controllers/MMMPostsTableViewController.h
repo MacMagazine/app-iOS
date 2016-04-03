@@ -6,14 +6,16 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <SUNKit/SUNTableViewController.h>
+@import CoreData;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MMMPostsTableViewController : SUNTableViewController
+@interface MMMPostsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, weak, nullable) IBOutlet UIView *footerView;
-@property (nonatomic, weak, nullable) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, weak, nullable) UIView *footerView;
+@property (nonatomic, weak, nullable) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic) NSUInteger nextPage;
 @property (nonatomic) NSUInteger numberOfResponseObjectsPerRequest;
 
