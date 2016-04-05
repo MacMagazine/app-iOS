@@ -29,10 +29,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 @interface MMMPostDetailViewController () <WKNavigationDelegate>
 
 @property (nonatomic, weak) WKWebView *webView;
-
-@property (nonatomic, strong) MMMPost *nextPost;
-@property (nonatomic, strong) MMMPost *previousPost;
-
 @property (nonatomic) BOOL isLoading;
 
 @end
@@ -45,47 +41,12 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 #pragma mark - Getters/Setters
 
-- (MMMPost *)nextPost {
-    if (!(self.posts) || !(self.post)) {
-        _nextPost = nil;
-        return _nextPost;
-    }
-
-    if (!_nextPost) {
-        NSUInteger currentPostIndex = [self.posts indexOfObject:self.post];
-        NSInteger nextPostIndex = currentPostIndex + 1;
-        if (nextPostIndex <= (self.posts.count - 1)) {
-            _nextPost = [self.posts objectAtIndex:currentPostIndex + 1];
-        }
-    }
-
-    return _nextPost;
-}
-
-- (MMMPost *)previousPost {
-    if (!(self.posts) || !(self.post)) {
-        _previousPost = nil;
-        return _previousPost;
-    }
-
-    if (!_previousPost) {
-        NSUInteger currentPostIndex = [self.posts indexOfObject:self.post];
-        NSInteger previousPostIndex = currentPostIndex - 1;
-        if (previousPostIndex >= 0) {
-            _previousPost = [self.posts objectAtIndex:currentPostIndex - 1];
-        }
-    }
-
-    return _previousPost;
-}
-
 #pragma mark - Actions
 
 - (void)pushToNewDetailViewControllerWithURL:(NSURL *)URL {
     MMMPostDetailViewController *destinationViewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
     destinationViewController.postURL = URL;
     destinationViewController.post = nil;
-    destinationViewController.posts = nil;
     [self.navigationController pushViewController:destinationViewController animated:YES];
 }
 
@@ -107,14 +68,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     activityViewController.popoverPresentationController.barButtonItem = actionItem;
     [self presentViewController:activityViewController animated:YES completion:nil];
-}
-
-- (void)nextPostButtonTapped:(id)sender {
-    [self reloadViewControllerWithPost:self.nextPost];
-}
-
-- (void)previousPostButtonTapped:(id)sender {
-    [self reloadViewControllerWithPost:self.previousPost];
 }
 
 #pragma mark - Instance Methods
@@ -150,8 +103,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self.webView stopLoading];
 
     self.post = post;
-    self.nextPost = nil;
-    self.previousPost = nil;
     self.postURL = nil;
 
     [self setupWebView];
