@@ -6,13 +6,11 @@
 //  Copyright (c) 2015 made@sampa. All rights reserved.
 //
 
-#import <TOWebViewController/TOWebViewController.h>
-
 @class MMMPost;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MMMPostDetailViewController : TOWebViewController
+@interface MMMPostDetailViewController : UIViewController
 
 @property (nonatomic, strong, nullable) MMMPost *post;
 @property (nonatomic, copy, nullable) NSArray<MMMPost *> *posts;
