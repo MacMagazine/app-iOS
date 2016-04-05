@@ -15,7 +15,6 @@
 #import <WebKit/WebKit.h>
 
 #import "MMMPostDetailViewController.h"
-#import "MMMMacintoshScene.h"
 #import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
