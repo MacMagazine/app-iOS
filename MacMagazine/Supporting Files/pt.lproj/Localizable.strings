@@ -4,11 +4,11 @@
   Created by Fernando Saragoca on 6/21/15.
   Copyright (c) 2015 made@sampa. All rights reserved. */
 
-"OK" = "OK";
+"Error.Default.Dismiss" = "OK";
 
-"Today" = "HOJE";
+"Date.Today" = "Hoje";
 
-"Yesterday" = "ONTEM";
+"Date.Yesterday" = "Ontem";
 
 "Post.Sharing.OpenInChrome" = "Abrir no Chrome";
 
