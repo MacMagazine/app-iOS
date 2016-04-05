@@ -19,6 +19,7 @@
 #import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
+static NSString * const MMMUserAgent = @"MacMagazine";
 
 typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     MMMLinkClickTypeInternal,
@@ -124,8 +125,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     self.webView = webView;
     [self.webView autoPinEdgesToSuperviewEdges];
 
-    // Changes the UIWebView user agent in order to hide some CSS/HTML elements
-    self.webView.customUserAgent = @"MacMagazine";
+    // Changes the WKWebView user agent in order to hide some CSS/HTML elements
+    self.webView.customUserAgent = MMMUserAgent;
     self.webView.navigationDelegate = self;
 
     // Observer to check that loading has completelly finished for the WebView
