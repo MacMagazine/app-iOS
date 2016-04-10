@@ -12,6 +12,11 @@ pod 'TUSafariActivity', '~> 1.0'
 pod 'Tweaks', '~> 2.0'
 pod 'TTTAttributedLabel', '~> 1.13'
 
+target 'MacMagazineTests', :exclusive => true do
+    pod 'Expecta', '~> 1.0'
+    pod 'OCMock', '~> 3.2'
+end
+
 plugin 'cocoapods-acknowledgements', settings_bundle: true
 
 post_install do |installer_representation|

@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		054C8B71124EF96646EE6D3E /* Pods-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */; };
+		2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */; };
 		31D462A65421DC59A9047AF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 601BFC4C5CE12F4DD0B64BF3 /* libPods.a */; };
+		441ABECD9FD4D927774E25CE /* Pods-MacMagazineTests-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D0BB38807C802BBB37718FE /* Pods-MacMagazineTests-metadata.plist */; };
+		4EC6258FDDC50004CCD52EA6 /* libPods-MacMagazineTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB41123AA71834684163D3B7 /* libPods-MacMagazineTests.a */; };
 		C1F0D05C75017A59F9543184 /* Pods-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EF452011E64EC59FD8F549 /* Pods-metadata.plist */; };
 		DB194ADA1C1E6EE600AA90D8 /* MMMMacintoshScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DB194AD91C1E6EE600AA90D8 /* MMMMacintoshScene.m */; };
 		DB194ADE1C1E71E100AA90D8 /* hello.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB194ADD1C1E71E100AA90D8 /* hello.atlas */; };
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		ED11A8FB1CB03AE200B13BA4 /* _MMMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */; };
 		ED11A8FE1CB0402E00B13BA4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */; };
+		ED3AD2E81CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3AD2E71CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m */; };
 		ED6E96921CB07341009B3530 /* MMMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6E96911CB07341009B3530 /* MMMTableViewCell.m */; };
 		ED6E969F1CB07869009B3530 /* MMMPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6E969E1CB07869009B3530 /* MMMPresenter.m */; };
 		EDA6FA1E1B3BD2D4007EE794 /* MMMPostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA6FA1D1B3BD2D4007EE794 /* MMMPostDetailViewController.m */; };
@@ -25,7 +29,6 @@
 		EDBB4A631B2E7F8D00E1CCCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB4A611B2E7F8D00E1CCCA /* Main.storyboard */; };
 		EDBB4A651B2E7F8D00E1CCCA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */; };
 		EDBB4A681B2E7F8D00E1CCCA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBB4A661B2E7F8D00E1CCCA /* LaunchScreen.xib */; };
-		EDBB4A741B2E7F8D00E1CCCA /* MacMagazineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A731B2E7F8D00E1CCCA /* MacMagazineTests.m */; };
 		EDBB4A891B2E831900E1CCCA /* MMMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBB4A881B2E831900E1CCCA /* MMMPost.m */; };
 		EDFA9DA91B361D1000EE213C /* SUNCoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DA81B361D1000EE213C /* SUNCoreDataStore.m */; };
 		EDFA9DAC1B3625AA00EE213C /* MMMPostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFA9DAB1B3625AA00EE213C /* MMMPostsTableViewController.m */; };
@@ -80,18 +83,24 @@
 /* Begin PBXFileReference section */
 		01EF452011E64EC59FD8F549 /* Pods-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-metadata.plist"; path = "Pods/Pods-metadata.plist"; sourceTree = "<group>"; };
 		21DB65787D3E922FF090D828 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
+		5D0BB38807C802BBB37718FE /* Pods-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
 		601BFC4C5CE12F4DD0B64BF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CD54A1DEF31D98950263CC3 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
 		AC69FA4FFB2E13CEACB607CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C085005EA399F10A161EBFCB /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB194AD81C1E6EE600AA90D8 /* MMMMacintoshScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMMacintoshScene.h; sourceTree = "<group>"; };
 		DB194AD91C1E6EE600AA90D8 /* MMMMacintoshScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMMacintoshScene.m; sourceTree = "<group>"; };
 		DB194ADD1C1E71E100AA90D8 /* hello.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = hello.atlas; sourceTree = "<group>"; };
+		DB41123AA71834684163D3B7 /* libPods-MacMagazineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		ED10FFEF1B5C72FF00AA902C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		ED11A8F91CB03AE200B13BA4 /* _MMMPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MMMPost.h; sourceTree = "<group>"; };
 		ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MMMPost.m; sourceTree = "<group>"; };
 		ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		ED3AD2E71CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringHTMLSafeTests.m; sourceTree = "<group>"; };
 		ED6E96901CB07341009B3530 /* MMMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMTableViewCell.h; sourceTree = "<group>"; };
 		ED6E96911CB07341009B3530 /* MMMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMTableViewCell.m; sourceTree = "<group>"; };
 		ED6E969D1CB07869009B3530 /* MMMPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMPresenter.h; sourceTree = "<group>"; };
@@ -111,7 +120,6 @@
 		EDBB4A671B2E7F8D00E1CCCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EDBB4A6D1B2E7F8D00E1CCCA /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBB4A721B2E7F8D00E1CCCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EDBB4A731B2E7F8D00E1CCCA /* MacMagazineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacMagazineTests.m; sourceTree = "<group>"; };
 		EDBB4A871B2E831900E1CCCA /* MMMPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMPost.h; sourceTree = "<group>"; };
 		EDBB4A881B2E831900E1CCCA /* MMMPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMPost.m; sourceTree = "<group>"; };
 		EDFA9DA71B361D1000EE213C /* SUNCoreDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUNCoreDataStore.h; sourceTree = "<group>"; };
@@ -181,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EC6258FDDC50004CCD52EA6 /* libPods-MacMagazineTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				601BFC4C5CE12F4DD0B64BF3 /* libPods.a */,
+				DB41123AA71834684163D3B7 /* libPods-MacMagazineTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -202,6 +212,10 @@
 				21DB65787D3E922FF090D828 /* Pods.release.xcconfig */,
 				01EF452011E64EC59FD8F549 /* Pods-metadata.plist */,
 				9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */,
+				9CD54A1DEF31D98950263CC3 /* Pods-MacMagazineTests.debug.xcconfig */,
+				C085005EA399F10A161EBFCB /* Pods-MacMagazineTests.release.xcconfig */,
+				5D0BB38807C802BBB37718FE /* Pods-MacMagazineTests-metadata.plist */,
+				33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -282,8 +296,8 @@
 		EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */ = {
 			isa = PBXGroup;
 			children = (
+				ED3AD2E71CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m */,
 				EDBB4A711B2E7F8D00E1CCCA /* Supporting Files */,
-				EDBB4A731B2E7F8D00E1CCCA /* MacMagazineTests.m */,
 			);
 			path = MacMagazineTests;
 			sourceTree = "<group>";
@@ -534,9 +548,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDBB4A7A1B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazineTests" */;
 			buildPhases = (
+				895BD523B62864AA89D314E3 /* Check Pods Manifest.lock */,
 				EDBB4A691B2E7F8D00E1CCCA /* Sources */,
 				EDBB4A6A1B2E7F8D00E1CCCA /* Frameworks */,
 				EDBB4A6B1B2E7F8D00E1CCCA /* Resources */,
+				8E433413DE52AECA6D13019A /* Embed Pods Frameworks */,
+				12A2A3B4C4045EC7B708B69C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -627,12 +644,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441ABECD9FD4D927774E25CE /* Pods-MacMagazineTests-metadata.plist in Resources */,
+				2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		12A2A3B4C4045EC7B708B69C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2EB8243CB6DBA9B48FC3FA00 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -661,6 +695,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		895BD523B62864AA89D314E3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E433413DE52AECA6D13019A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D9225290DA7C91A36EA30779 /* Copy Pods Resources */ = {
@@ -744,7 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDBB4A741B2E7F8D00E1CCCA /* MacMagazineTests.m in Sources */,
+				ED3AD2E81CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,6 +965,7 @@
 		};
 		EDBB4A7B1B2E7F8D00E1CCCA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CD54A1DEF31D98950263CC3 /* Pods-MacMagazineTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -918,6 +983,7 @@
 		};
 		EDBB4A7C1B2E7F8D00E1CCCA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C085005EA399F10A161EBFCB /* Pods-MacMagazineTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
