@@ -100,7 +100,7 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.localizedDescription
                                                                              message:error.localizedFailureReason
                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleDefault handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Error.Default.Dismiss", @"") style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
