@@ -12,6 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  Notifications service, designed to register APNS token, reset device badge and update notification preferences.
+ */
 @interface MMMNotificationsAPI : NSObject
 
 /**
@@ -29,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAPIKey:(NSString *)apiKey NS_DESIGNATED_INITIALIZER;
 
 /**
- *  Register device in server to receive notifications.
+ *  Register device in server to receive notifications. Server-side device badge is set to `0` when registering.
  *
  *  @param tokenData Token provided by application:didRegisterForRemoteNotificationsWithDeviceToken:.
  *  @param notificationPeferences Notification preferences for device being registered.
