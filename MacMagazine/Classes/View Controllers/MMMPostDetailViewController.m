@@ -101,8 +101,24 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     }
 
     UIBarButtonItem *actionItem = (UIBarButtonItem *)sender;
-    NSArray<__kindof UIActivity *> *browserActivities = @[[[TUSafariActivity alloc] init], [[ARChromeActivity alloc] init]];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.webView.URL] applicationActivities:browserActivities];
+    NSMutableArray *activityItems = [[NSMutableArray alloc] init];
+    if (self.post) {
+        [activityItems addObject:self.post.title];
+    }
+    [activityItems addObject:self.webView.URL];
+
+    NSMutableArray<__kindof UIActivity *> *browserActivities = [[NSMutableArray alloc] init];
+    [browserActivities addObject:[[TUSafariActivity alloc] init]];
+
+    NSURL *chromeURLScheme = [NSURL URLWithString:@"googlechrome-x-callback://"];
+    if ([[UIApplication sharedApplication] canOpenURL:chromeURLScheme]) {
+        ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+        chromeActivity.activityTitle = NSLocalizedString(@"Post.Sharing.OpenInChrome", @"");
+        [browserActivities addObject:chromeActivity];
+    }
+
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems
+                                                                                         applicationActivities:browserActivities];
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     activityViewController.popoverPresentationController.barButtonItem = actionItem;
     [self presentViewController:activityViewController animated:YES completion:nil];
