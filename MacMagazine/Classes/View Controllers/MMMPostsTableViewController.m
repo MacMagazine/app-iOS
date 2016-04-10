@@ -123,7 +123,6 @@
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
         MMMPostDetailViewController *detailViewController = segue.destinationViewController;
-        detailViewController.posts = self.fetchedResultsController.fetchedObjects;
         detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
     }
 
