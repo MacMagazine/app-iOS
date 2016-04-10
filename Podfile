@@ -14,6 +14,13 @@ pod 'TTTAttributedLabel', '~> 1.13'
 
 plugin 'cocoapods-acknowledgements', settings_bundle: true
 
+plugin 'cocoapods-keys', {
+    :project => 'MacMagazine',
+    :keys => [
+        "MMMNotificationsAPIKey"
+    ]
+}
+
 post_install do |installer_representation|
     installer_representation.pods_project.targets.each do |target|
         if target.name == "Tweaks"
