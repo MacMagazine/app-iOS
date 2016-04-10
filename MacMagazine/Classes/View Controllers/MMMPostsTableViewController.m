@@ -255,13 +255,6 @@
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
 
-#warning Verificar necessidade com @cesarbars.
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.frame), CGRectGetWidth(navigationBar.frame), 1)];
-    separatorView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
-    separatorView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [navigationBar addSubview:separatorView];
-
     UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
     logoImageView.frame = CGRectMake(0, 0, 34, 34);
     logoImageView.contentMode = UIViewContentModeScaleAspectFit;
