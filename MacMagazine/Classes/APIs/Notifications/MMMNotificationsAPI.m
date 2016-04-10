@@ -22,6 +22,15 @@
 
 static NSString * const MMMNotificationsAPIBaseURLPath = @"https://macmagazine-ios-notifications.herokuapp.com/api/v1";
 
+NSString * MMMNotificationsNormalizedAPNSTokenWithData(NSData *data) {
+    const unsigned *tokenBytes = [data bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    return hexToken;
+}
+
 #pragma mark - Getters/Setters
 
 - (AFHTTPSessionManager *)sessionManager {
@@ -45,15 +54,12 @@ static NSString * const MMMNotificationsAPIBaseURLPath = @"https://macmagazine-i
 }
 
 - (void)registerToken:(NSData *)tokenData notificationPeferences:(MMMNotificationsPreferences)notificationPeferences {
-    NSString *token = tokenData.description;
-    token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
-    token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
-    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *token = MMMNotificationsNormalizedAPNSTokenWithData(tokenData);
     NSString *path = [@"devices" stringByAppendingPathComponent:token];
 
     NSDictionary *parameters = @{@"api_key" : self.apiKey,
-                                 @"notification_preferences" : NSStringFromMMMNotificationsPreferences(notificationPeferences),
-                                 @"badge" : @0};
+                                 @"badge" : @0,
+                                 @"notification_preferences" : NSStringFromMMMNotificationsPreferences(notificationPeferences)};
     
     [self.sessionManager PUT:path parameters:parameters success:nil failure:nil];
 }

@@ -13,6 +13,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  Convert APNS token from NSData to NSString.
+ *  Using `description` from NSData might not be safe.
+ *  Following instructions here: http://stackoverflow.com/questions/9372815/how-can-i-convert-my-device-token-nsdata-into-an-nsstring/9372848#9372848
+ *
+ *  @param data Token provided by application:didRegisterForRemoteNotificationsWithDeviceToken:.
+ *
+ *  @return NSString representation.
+ */
+FOUNDATION_EXPORT NSString * MMMNotificationsNormalizedAPNSTokenWithData(NSData *data);
+
+/**
  *  Notifications service, designed to register APNS token, reset device badge and update notification preferences.
  */
 @interface MMMNotificationsAPI : NSObject
