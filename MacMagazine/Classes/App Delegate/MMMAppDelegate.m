@@ -46,7 +46,7 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 
 #ifndef DEBUG
-    MacmagazineKeys *keys = [MacmagazineKeys new];
+    MacmagazineKeys *keys = [[MacmagazineKeys alloc] init];
     self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
 #endif
 
