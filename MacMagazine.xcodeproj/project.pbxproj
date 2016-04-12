@@ -13,6 +13,8 @@
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		ED11A8FB1CB03AE200B13BA4 /* _MMMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */; };
 		ED11A8FE1CB0402E00B13BA4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */; };
+		ED5A40B51CBA16F100B0A6A9 /* MMMNotificationsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A40B41CBA16F100B0A6A9 /* MMMNotificationsAPI.m */; };
+		ED5A40B81CBA1DD900B0A6A9 /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A40B71CBA1DD900B0A6A9 /* MMMNotificationsPreferences.m */; };
 		ED6E96921CB07341009B3530 /* MMMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6E96911CB07341009B3530 /* MMMTableViewCell.m */; };
 		ED6E969F1CB07869009B3530 /* MMMPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6E969E1CB07869009B3530 /* MMMPresenter.m */; };
 		EDA6FA1E1B3BD2D4007EE794 /* MMMPostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA6FA1D1B3BD2D4007EE794 /* MMMPostDetailViewController.m */; };
@@ -87,6 +89,10 @@
 		ED11A8F91CB03AE200B13BA4 /* _MMMPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MMMPost.h; sourceTree = "<group>"; };
 		ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MMMPost.m; sourceTree = "<group>"; };
 		ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		ED5A40B31CBA16F100B0A6A9 /* MMMNotificationsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMNotificationsAPI.h; sourceTree = "<group>"; };
+		ED5A40B41CBA16F100B0A6A9 /* MMMNotificationsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsAPI.m; sourceTree = "<group>"; };
+		ED5A40B61CBA1DD900B0A6A9 /* MMMNotificationsPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMNotificationsPreferences.h; sourceTree = "<group>"; };
+		ED5A40B71CBA1DD900B0A6A9 /* MMMNotificationsPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsPreferences.m; sourceTree = "<group>"; };
 		ED6E96901CB07341009B3530 /* MMMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMTableViewCell.h; sourceTree = "<group>"; };
 		ED6E96911CB07341009B3530 /* MMMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMTableViewCell.m; sourceTree = "<group>"; };
 		ED6E969D1CB07869009B3530 /* MMMPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMPresenter.h; sourceTree = "<group>"; };
@@ -218,6 +224,25 @@
 				EDBB4A611B2E7F8D00E1CCCA /* Main.storyboard */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		ED5A40B21CBA16D500B0A6A9 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				ED5A40B91CBA1F2D00B0A6A9 /* Notifications */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
+		ED5A40B91CBA1F2D00B0A6A9 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				ED5A40B31CBA16F100B0A6A9 /* MMMNotificationsAPI.h */,
+				ED5A40B41CBA16F100B0A6A9 /* MMMNotificationsAPI.m */,
+				ED5A40B61CBA1DD900B0A6A9 /* MMMNotificationsPreferences.h */,
+				ED5A40B71CBA1DD900B0A6A9 /* MMMNotificationsPreferences.m */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		EDBB4A451B2E7F8D00E1CCCA = {
@@ -702,6 +727,7 @@
 				EDFA9DB51B36297800EE213C /* NSManagedObjectContext+SUNCoreDataStoreAddons.m in Sources */,
 				EDFA9DCB1B3651C900EE213C /* NSString+HTMLSafe.m in Sources */,
 				EDFA9DAC1B3625AA00EE213C /* MMMPostsTableViewController.m in Sources */,
+				ED5A40B51CBA16F100B0A6A9 /* MMMNotificationsAPI.m in Sources */,
 				ED6E969F1CB07869009B3530 /* MMMPresenter.m in Sources */,
 				EDBB4A571B2E7F8D00E1CCCA /* MMMAppDelegate.m in Sources */,
 				ED11A8FB1CB03AE200B13BA4 /* _MMMPost.m in Sources */,
@@ -717,6 +743,7 @@
 				EDFA9DB11B36267600EE213C /* MMMPostTableViewCell.m in Sources */,
 				ED6E96921CB07341009B3530 /* MMMTableViewCell.m in Sources */,
 				EDFA9DF11B378C7A00EE213C /* MMMLabel.m in Sources */,
+				ED5A40B81CBA1DD900B0A6A9 /* MMMNotificationsPreferences.m in Sources */,
 				EDFA9DC71B36353E00EE213C /* MMMPostPresenter.m in Sources */,
 				ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */,
 			);
@@ -861,7 +888,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.madeatsampa.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fernandosaragoca.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -875,7 +902,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.madeatsampa.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fernandosaragoca.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -18,6 +18,7 @@ PODS:
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
+  - Keys (1.0.0)
   - Ono (1.2.2)
   - PureLayout (3.0.1)
   - SDWebImage (3.7.5):
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - AFNetworking (~> 3.1)
   - ARChromeActivity (~> 1.0)
   - HockeySDK (~> 3.8)
+  - Keys (from `Pods/CocoaPodsKeys`)
   - Ono (~> 1.2)
   - PureLayout (~> 3.0)
   - SDWebImage (~> 3.7)
@@ -38,10 +40,15 @@ DEPENDENCIES:
   - TUSafariActivity (~> 1.0)
   - Tweaks (~> 2.0)
 
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ARChromeActivity: 5dcf9b9f09323761f992aff3525cdd777f83609d
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
+  Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
