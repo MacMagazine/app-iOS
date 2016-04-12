@@ -15,9 +15,11 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - ARChromeActivity (1.0.6)
+  - Expecta (1.0.5)
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
+  - OCMock (3.2.2)
   - Keys (1.0.0)
   - Ono (1.2.2)
   - PureLayout (3.0.1)
@@ -31,7 +33,9 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.1)
   - ARChromeActivity (~> 1.0)
+  - Expecta (~> 1.0)
   - HockeySDK (~> 3.8)
+  - OCMock (~> 3.2)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Ono (~> 1.2)
   - PureLayout (~> 3.0)
@@ -47,6 +51,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ARChromeActivity: 5dcf9b9f09323761f992aff3525cdd777f83609d
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
