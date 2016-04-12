@@ -100,7 +100,7 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.localizedDescription
                                                                              message:error.localizedFailureReason
                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleDefault handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Error.Default.Dismiss", @"") style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -123,7 +123,6 @@
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
         MMMPostDetailViewController *detailViewController = segue.destinationViewController;
-        detailViewController.posts = self.fetchedResultsController.fetchedObjects;
         detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
     }
 
@@ -254,13 +253,6 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
-
-#warning Verificar necessidade com @cesarbars.
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.frame), CGRectGetWidth(navigationBar.frame), 1)];
-    separatorView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
-    separatorView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [navigationBar addSubview:separatorView];
 
     UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
     logoImageView.frame = CGRectMake(0, 0, 34, 34);

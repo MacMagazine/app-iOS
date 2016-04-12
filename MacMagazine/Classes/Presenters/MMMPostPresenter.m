@@ -80,9 +80,9 @@
 - (nullable NSString *)sectionTitle {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     if ([calendar isDateInToday:self.post.pubDate]) {
-        return NSLocalizedString(@"Today", @"");
+        return NSLocalizedString(@"Date.Today", @"").uppercaseString;
     } else if ([calendar isDateInYesterday:self.post.pubDate]) {
-        return NSLocalizedString(@"Yesterday", @"");
+        return NSLocalizedString(@"Date.Yesterday", @"").uppercaseString;
     } else {
         return [self.post.pubDate mmm_stringFromTemplate:@"EEEEddMMMM"].uppercaseString;
     }
