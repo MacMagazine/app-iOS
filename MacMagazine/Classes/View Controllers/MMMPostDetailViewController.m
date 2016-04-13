@@ -99,8 +99,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     // Observer to check that loading has completelly finished for the WebView
     [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:NULL];
 
-    // Hides WebView for animations
-    self.webView.hidden = YES;
 
     // Loads the request for the post URL
     if (!self.postURL) {
@@ -140,19 +138,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
-- (void)removeLoadingAnimation {
-    if (!self.webView.hidden) {
-        return;
-    }
-
-    self.webView.alpha = 0.0f;
-    self.webView.hidden = NO;
-
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.webView.alpha = 1.0f;
-    } completion:nil];
-}
-
 - (void)performActionForLinkClickWithType:(MMMLinkClickType)linkClickType URL:(NSURL *)URL {
     if (linkClickType == MMMLinkClickTypeInternal) {
         [self pushToNewDetailViewControllerWithURL:URL];
@@ -169,9 +154,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     if ([keyPath isEqualToString:@"loading"] && object == self.webView) {
         // Update the right item on the navbar acordingly
         [self setupNavigationBar];
-        if (!self.webView.isLoading) {
-            [self removeLoadingAnimation];
-        }
     }
 }
 
