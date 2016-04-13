@@ -28,7 +28,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 @interface MMMPostDetailViewController () <WKNavigationDelegate>
 
 @property (nonatomic, weak) WKWebView *webView;
-@property (nonatomic) BOOL isLoading;
 
 @end
 
@@ -102,7 +101,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
     // Hides WebView for animations
     self.webView.hidden = YES;
-    self.isLoading = YES;
 
     // Loads the request for the post URL
     if (!self.postURL) {
