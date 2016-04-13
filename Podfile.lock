@@ -19,8 +19,8 @@ PODS:
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
-  - OCMock (3.2.2)
   - Keys (1.0.0)
+  - OCMock (3.2.2)
   - Ono (1.2.2)
   - PureLayout (3.0.1)
   - SDWebImage (3.7.5):
@@ -35,8 +35,8 @@ DEPENDENCIES:
   - ARChromeActivity (~> 1.0)
   - Expecta (~> 1.0)
   - HockeySDK (~> 3.8)
-  - OCMock (~> 3.2)
   - Keys (from `Pods/CocoaPodsKeys`)
+  - OCMock (~> 3.2)
   - Ono (~> 1.2)
   - PureLayout (~> 3.0)
   - SDWebImage (~> 3.7)
@@ -54,6 +54,7 @@ SPEC CHECKSUMS:
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
+  OCMock: 18c9b7e67d4c2770e95bb77a9cc1ae0c91fe3835
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
