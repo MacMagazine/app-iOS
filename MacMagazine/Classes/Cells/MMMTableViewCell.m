@@ -1,11 +1,3 @@
-//
-//  MMMTableViewCell.m
-//  MacMagazine
-//
-//  Created by Fernando Saragoca on 4/2/16.
-//  Copyright © 2016 made@sampa. All rights reserved.
-//
-
 #import "MMMTableViewCell.h"
 
 #pragma mark MMMTableViewCell
