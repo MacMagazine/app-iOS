@@ -15,7 +15,7 @@ target 'MacMagazine' do
 
     target 'MacMagazineTests' do
         pod 'Expecta', '~> 1.0'
-        pod 'OCMock', '~> 3.2'
+        pod 'OCMock', '~> 3.3'
     end
 end
 
