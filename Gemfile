@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'cocoapods'
+gem 'cocoapods', '1.0.0.beta.8'
 gem 'cocoapods-keys'
 gem 'cocoapods-acknowledgements'
 
-gem 'synx'
+gem 'synx', git: 'https://github.com/marcelofabri/synx'
