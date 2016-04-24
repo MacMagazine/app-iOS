@@ -14,6 +14,8 @@ target 'MacMagazine' do
     pod 'TTTAttributedLabel', '~> 1.13'
 
     target 'MacMagazineTests' do
+        inherit! :search_paths
+        
         pod 'Expecta', '~> 1.0'
         pod 'OCMock', '~> 3.3'
     end

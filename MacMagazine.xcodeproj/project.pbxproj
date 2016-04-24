@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		054C8B71124EF96646EE6D3E /* Pods-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */; };
+		25CEA6E962AFE8CEB209AC6E /* Pods-MacMagazineTests-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */; };
 		2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */; };
-		3661F4A6E89C3BDCC4BE81E6 /* libPods-MacMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FFA47C3B4FE9B7B227A078 /* libPods-MacMagazine.a */; };
-		8F12B66314244F4AFDDB43C8 /* Pods-MacMagazine-MacMagazineTests-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1328854EE88D1CDA3420AEFC /* Pods-MacMagazine-MacMagazineTests-metadata.plist */; };
+		7DBD964C0D21B08D3CB7F021 /* libPods-MacMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */; };
 		A09F3C2CE21563254F1F7F32 /* Pods-MacMagazine-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */; };
+		A3D1C6B71959923D475C2BFC /* libPods-MacMagazineTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */; };
 		ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */; };
-		B346CA788015D7BFAC3F9AAF /* libPods-MacMagazine-MacMagazineTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 815DD2F281D115EF54FA7F6F /* libPods-MacMagazine-MacMagazineTests.a */; };
 		DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */; };
 		DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
@@ -83,22 +83,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07037A501EAA7FA2FD7F6D04 /* Pods-MacMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.release.xcconfig"; sourceTree = "<group>"; };
-		1328854EE88D1CDA3420AEFC /* Pods-MacMagazine-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazine-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
 		33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
-		45FFA47C3B4FE9B7B227A078 /* libPods-MacMagazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4700374D19DD3DE953B4EE97 /* Pods-MacMagazine-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine-MacMagazineTests/Pods-MacMagazine-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
-		815DD2F281D115EF54FA7F6F /* libPods-MacMagazine-MacMagazineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazine-MacMagazineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		869126EBCAFD650A86CE7B53 /* Pods-MacMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.debug.xcconfig"; sourceTree = "<group>"; };
+		34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-metadata.plist"; path = "Pods/Pods-MacMagazine-metadata.plist"; sourceTree = "<group>"; };
-		9116B5477D8B14182035E05F /* Pods-MacMagazine-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine-MacMagazineTests/Pods-MacMagazine-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
+		AB63865A46B1A50D2E796140 /* Pods-MacMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 		B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-settings-metadata.plist"; sourceTree = "<group>"; };
+		BE8C7D0C85BC9AA17052E28F /* Pods-MacMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.release.xcconfig"; sourceTree = "<group>"; };
 		C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
+		D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB09F73E1CBDCF4D00183E0F /* MMMNotificationsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMNotificationsAPI.h; path = APIs/Notifications/MMMNotificationsAPI.h; sourceTree = "<group>"; };
 		DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMNotificationsAPI.m; path = APIs/Notifications/MMMNotificationsAPI.m; sourceTree = "<group>"; };
 		DB09F7401CBDCF4D00183E0F /* MMMNotificationsPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMNotificationsPreferences.h; path = APIs/Notifications/MMMNotificationsPreferences.h; sourceTree = "<group>"; };
 		DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMNotificationsPreferences.m; path = APIs/Notifications/MMMNotificationsPreferences.m; sourceTree = "<group>"; };
+		DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		ED10FFEF1B5C72FF00AA902C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3661F4A6E89C3BDCC4BE81E6 /* libPods-MacMagazine.a in Frameworks */,
+				7DBD964C0D21B08D3CB7F021 /* libPods-MacMagazine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B346CA788015D7BFAC3F9AAF /* libPods-MacMagazine-MacMagazineTests.a in Frameworks */,
+				A3D1C6B71959923D475C2BFC /* libPods-MacMagazineTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,23 +208,14 @@
 				33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */,
 				B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */,
 				C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */,
-				869126EBCAFD650A86CE7B53 /* Pods-MacMagazine.debug.xcconfig */,
-				07037A501EAA7FA2FD7F6D04 /* Pods-MacMagazine.release.xcconfig */,
-				9116B5477D8B14182035E05F /* Pods-MacMagazine-MacMagazineTests.debug.xcconfig */,
-				4700374D19DD3DE953B4EE97 /* Pods-MacMagazine-MacMagazineTests.release.xcconfig */,
 				8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */,
-				1328854EE88D1CDA3420AEFC /* Pods-MacMagazine-MacMagazineTests-metadata.plist */,
+				9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */,
+				AB63865A46B1A50D2E796140 /* Pods-MacMagazine.debug.xcconfig */,
+				BE8C7D0C85BC9AA17052E28F /* Pods-MacMagazine.release.xcconfig */,
+				DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */,
+				E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		AF2F22C5A5F8365142E788B5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				45FFA47C3B4FE9B7B227A078 /* libPods-MacMagazine.a */,
-				815DD2F281D115EF54FA7F6F /* libPods-MacMagazine-MacMagazineTests.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DB09F73C1CBDCF3A00183E0F /* APIs */ = {
@@ -244,6 +235,15 @@
 				DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */,
 			);
 			name = Notifications;
+			sourceTree = "<group>";
+		};
+		E08F51B4FAC6AF00545000CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */,
+				34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		ED10FFED1B5C72FF00AA902C /* GTMDefines */ = {
@@ -272,7 +272,7 @@
 				EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */,
 				ABB28A460E53AF01B246FD8C /* Pods */,
 				EDBB4A4F1B2E7F8D00E1CCCA /* Products */,
-				AF2F22C5A5F8365142E788B5 /* Frameworks */,
+				E08F51B4FAC6AF00545000CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -662,7 +662,7 @@
 			files = (
 				2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */,
 				E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */,
-				8F12B66314244F4AFDDB43C8 /* Pods-MacMagazine-MacMagazineTests-metadata.plist in Resources */,
+				25CEA6E962AFE8CEB209AC6E /* Pods-MacMagazineTests-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,7 +711,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine-MacMagazineTests/Pods-MacMagazine-MacMagazineTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		511BC34ED2374035D740F24F /* 📦 Copy Pods Resources */ = {
@@ -726,7 +726,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine-MacMagazineTests/Pods-MacMagazine-MacMagazineTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F34EE0D2E969E2202A3E287 /* 📦 Check Pods Manifest.lock */ = {
@@ -956,7 +956,7 @@
 		};
 		EDBB4A781B2E7F8D00E1CCCA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 869126EBCAFD650A86CE7B53 /* Pods-MacMagazine.debug.xcconfig */;
+			baseConfigurationReference = AB63865A46B1A50D2E796140 /* Pods-MacMagazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
@@ -969,7 +969,7 @@
 		};
 		EDBB4A791B2E7F8D00E1CCCA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07037A501EAA7FA2FD7F6D04 /* Pods-MacMagazine.release.xcconfig */;
+			baseConfigurationReference = BE8C7D0C85BC9AA17052E28F /* Pods-MacMagazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -983,7 +983,7 @@
 		};
 		EDBB4A7B1B2E7F8D00E1CCCA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9116B5477D8B14182035E05F /* Pods-MacMagazine-MacMagazineTests.debug.xcconfig */;
+			baseConfigurationReference = DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1001,7 +1001,7 @@
 		};
 		EDBB4A7C1B2E7F8D00E1CCCA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4700374D19DD3DE953B4EE97 /* Pods-MacMagazine-MacMagazineTests.release.xcconfig */;
+			baseConfigurationReference = E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
