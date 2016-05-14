@@ -93,10 +93,10 @@
 		BE8C7D0C85BC9AA17052E28F /* Pods-MacMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.release.xcconfig"; sourceTree = "<group>"; };
 		C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
 		D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB09F73E1CBDCF4D00183E0F /* MMMNotificationsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMNotificationsAPI.h; path = APIs/Notifications/MMMNotificationsAPI.h; sourceTree = "<group>"; };
-		DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMNotificationsAPI.m; path = APIs/Notifications/MMMNotificationsAPI.m; sourceTree = "<group>"; };
-		DB09F7401CBDCF4D00183E0F /* MMMNotificationsPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMNotificationsPreferences.h; path = APIs/Notifications/MMMNotificationsPreferences.h; sourceTree = "<group>"; };
-		DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMNotificationsPreferences.m; path = APIs/Notifications/MMMNotificationsPreferences.m; sourceTree = "<group>"; };
+		DB09F73E1CBDCF4D00183E0F /* MMMNotificationsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMNotificationsAPI.h; sourceTree = "<group>"; };
+		DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsAPI.m; sourceTree = "<group>"; };
+		DB09F7401CBDCF4D00183E0F /* MMMNotificationsPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMNotificationsPreferences.h; sourceTree = "<group>"; };
+		DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsPreferences.m; sourceTree = "<group>"; };
 		DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 			children = (
 				DB09F73D1CBDCF4400183E0F /* Notifications */,
 			);
-			name = APIs;
+			path = APIs;
 			sourceTree = "<group>";
 		};
 		DB09F73D1CBDCF4400183E0F /* Notifications */ = {
@@ -234,7 +234,7 @@
 				DB09F7401CBDCF4D00183E0F /* MMMNotificationsPreferences.h */,
 				DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */,
 			);
-			name = Notifications;
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		E08F51B4FAC6AF00545000CE /* Frameworks */ = {
@@ -268,11 +268,11 @@
 		EDBB4A451B2E7F8D00E1CCCA = {
 			isa = PBXGroup;
 			children = (
+				E08F51B4FAC6AF00545000CE /* Frameworks */,
 				EDBB4A501B2E7F8D00E1CCCA /* MacMagazine */,
 				EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */,
 				ABB28A460E53AF01B246FD8C /* Pods */,
 				EDBB4A4F1B2E7F8D00E1CCCA /* Products */,
-				E08F51B4FAC6AF00545000CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -312,8 +312,8 @@
 		EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */ = {
 			isa = PBXGroup;
 			children = (
-				ED3AD2E71CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m */,
 				EDBB4A711B2E7F8D00E1CCCA /* Supporting Files */,
+				ED3AD2E71CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m */,
 			);
 			path = MacMagazineTests;
 			sourceTree = "<group>";

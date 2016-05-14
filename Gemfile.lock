@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/marcelofabri/synx
-  revision: 910c4b75bee21f5aac49d0dd58a00f254699497d
-  specs:
-    synx (0.2.0)
-      clamp (~> 0.6)
-      colorize (~> 0.7)
-      xcodeproj (>= 0.28.2, < 1.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -72,6 +63,10 @@ GEM
     osx_keychain (1.0.1)
       RubyInline (~> 3)
     redcarpet (3.3.4)
+    synx (0.2.1)
+      clamp (~> 0.6)
+      colorize (~> 0.7)
+      xcodeproj (~> 1.0)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -87,7 +82,7 @@ DEPENDENCIES
   cocoapods
   cocoapods-acknowledgements
   cocoapods-keys
-  synx!
+  synx
 
 BUNDLED WITH
    1.12.1
