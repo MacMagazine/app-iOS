@@ -12,11 +12,13 @@
 
 #import "MMMAppDelegate.h"
 #import "MMMNotificationsAPI.h"
+#import "MMMNotificationsHandler.h"
 #import "SUNCoreDataStore.h"
 
 @interface MMMAppDelegate ()
 
 @property (nonatomic, strong) MMMNotificationsAPI *notificationsAPI;
+@property (nonatomic, strong) MMMNotificationsHandler *notificationsHandler;
 
 @end
 
@@ -51,7 +53,8 @@
 #endif
 
     self.window.tintColor = [UIColor colorWithRed:0.25 green:0.66 blue:0.96 alpha:1];
-    
+    self.notificationsHandler = [[MMMNotificationsHandler alloc] initWithNavigationController:(UINavigationController *)self.window.rootViewController];
+
     return YES;
 }
 
@@ -71,6 +74,10 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [self.notificationsAPI registerToken:deviceToken notificationPeferences:MMMNotificationsPreferencesAllPosts];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [self.notificationsHandler applicationDidReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
 
 @end
