@@ -42,7 +42,9 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 - (void)setPost:(MMMPost *)post {
     _post = post;
 
-    self.postURL = [NSURL URLWithString:self.post.link];
+    if (post.link.length > 0) {
+        self.postURL = [NSURL URLWithString:self.post.link];
+    }
 }
 
 #pragma mark - Actions
