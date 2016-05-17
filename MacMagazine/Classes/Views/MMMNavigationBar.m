@@ -1,11 +1,3 @@
-//
-//  MMMNavigationBar.m
-//  MacMagazine
-//
-//  Created by Fernando Saragoca on 4/4/16.
-//  Copyright © 2016 made@sampa. All rights reserved.
-//
-
 #import <PureLayout/PureLayout.h>
 
 #import "MMMNavigationBar.h"
