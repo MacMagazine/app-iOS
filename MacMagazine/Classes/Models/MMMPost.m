@@ -114,7 +114,19 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
             });
         }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (failure) failure(error);
+        NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        dateFormatter.dateFormat =  @"dd/MM/yyyy HH:mm:ss";
+
+        //Create a date string in the local timezone
+        dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
+        NSString *localDateString = [dateFormatter stringFromDate:[NSDate date]];
+
+        userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Request falhou às :%@ – %@",localDateString,  error.localizedDescription];
+        NSError *errorWithDate = [NSError errorWithDomain:error.domain code:error.code userInfo:[userInfo copy]];
+
+        if (failure) failure(errorWithDate );
     }];
 }
 
