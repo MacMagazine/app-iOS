@@ -29,6 +29,7 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
 }
 
 + (void)getWithPage:(NSUInteger)page success:(void (^)(id response))success failure:(void (^)(NSError *error))failure {
+    NSDate *requestStartDate = [NSDate date];
     [[self sessionManager] GET:kMMRSSFeedPath parameters:@{@"paged" : @(page)} progress:nil success:^(NSURLSessionDataTask *task, NSData *responseData) {
         NSManagedObjectContext *context = [SUNCoreDataStore defaultStore].privateQueueContext;
         [context performBlock:^{
@@ -120,9 +121,10 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
         dateFormatter.dateFormat = @"dd/MM/yyyy HH:mm:ss";
 
         dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
-        NSString *localDateString = [dateFormatter stringFromDate:[NSDate date]];
+        NSString *localCurentDateString = [dateFormatter stringFromDate:[NSDate date]];
+        NSString *localStartDateString = [dateFormatter stringFromDate:requestStartDate];
 
-        userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Request falhou às :%@ – %@",localDateString, error.localizedDescription];
+        userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"%@\n Request iniciado às :%@ falhou.\n %@",localCurentDateString, localStartDateString, error.localizedDescription];
         NSError *errorWithDate = [NSError errorWithDomain:error.domain code:error.code userInfo:userInfo];
 
         if (failure) failure(errorWithDate);
