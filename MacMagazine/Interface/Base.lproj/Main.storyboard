@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GCO-rq-BET">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GCO-rq-BET">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -33,7 +33,13 @@
                             <outlet property="delegate" destination="6gf-ZB-8Tj" id="BWp-1C-lBe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="W2l-YZ-igi"/>
+                    <navigationItem key="navigationItem" id="W2l-YZ-igi">
+                        <barButtonItem key="leftBarButtonItem" image="settings_ic" id="IQa-p9-dlm">
+                            <connections>
+                                <action selector="settingsAction:" destination="6gf-ZB-8Tj" id="Bpt-PE-yqr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="RUg-XO-4v9" kind="show" identifier="MMMPostDetailViewController" id="vI1-2K-Hqj"/>
                     </connections>
@@ -61,4 +67,7 @@
             <point key="canvasLocation" x="1268" y="64"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settings_ic" width="24" height="24"/>
+    </resources>
 </document>
