@@ -203,7 +203,9 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)dealloc {
-    [self.webView removeObserver:self forKeyPath:@"loading"];
+    [_webView removeObserver:self forKeyPath:@"loading"];
+    _webView.UIDelegate = nil;
+    _webView.navigationDelegate = nil;
 }
 
 @end
