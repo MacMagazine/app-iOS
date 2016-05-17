@@ -90,11 +90,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     if (self.webView) {
         [self.webView stopLoading];
     } else {
-        WKPreferences *wkPreferences = [[WKPreferences alloc] init];
-        wkPreferences.javaScriptCanOpenWindowsAutomatically = YES;
+        WKPreferences *preferences = [[WKPreferences alloc] init];
+        preferences.javaScriptCanOpenWindowsAutomatically = YES;
 
         WKWebViewConfiguration *webViewConfiguration = [[WKWebViewConfiguration alloc] init];
-        webViewConfiguration.preferences = wkPreferences;
+        webViewConfiguration.preferences = preferences;
 
         WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:webViewConfiguration];
         [self.view addSubview:webView];
@@ -156,7 +156,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - WKNavigationDelegate Delegate
 
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
-
     if (!navigationAction.targetFrame.isMainFrame) {
         [webView loadRequest:navigationAction.request];
     }
