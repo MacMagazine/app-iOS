@@ -31,6 +31,14 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 #pragma mark - Getters/Setters
 
+- (void)setPost:(MMMPost *)post {
+    _post = post;
+
+    if (post.link.length > 0) {
+        self.postURL = [NSURL URLWithString:self.post.link];
+    }
+}
+
 #pragma mark - Actions
 
 - (void)pushToNewDetailViewControllerWithURL:(NSURL *)URL {
@@ -79,36 +87,25 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - Instance Methods
 
 - (void)setupWebView {
-    WKWebView *webView = [[WKWebView alloc] init];
-    [self.view addSubview:webView];
-    self.webView = webView;
-    [self.webView autoPinEdgesToSuperviewEdges];
+    if (self.webView) {
+        [self.webView stopLoading];
+    } else {
+        WKWebView *webView = [[WKWebView alloc] init];
+        [self.view addSubview:webView];
+        self.webView = webView;
+        [self.webView autoPinEdgesToSuperviewEdges];
 
-    // Changes the WKWebView user agent in order to hide some CSS/HTML elements
-    self.webView.customUserAgent = MMMUserAgent;
-    self.webView.navigationDelegate = self;
+        // Changes the WKWebView user agent in order to hide some CSS/HTML elements
+        self.webView.customUserAgent = MMMUserAgent;
+        self.webView.navigationDelegate = self;
 
-    // Observer to check that loading has completelly finished for the WebView
-    [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:NULL];
-
-
-    // Loads the request for the post URL
-    if (!self.postURL) {
-        self.postURL = [NSURL URLWithString:self.post.link];
+        // Observer to check that loading has completelly finished for the WebView
+        [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:NULL];
     }
 
-    NSURL *URL = self.postURL;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.postURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
     [self.webView loadRequest:request];
-}
 
-- (void)reloadViewControllerWithPost:(MMMPost *)post {
-    [self.webView stopLoading];
-
-    self.post = post;
-    self.postURL = nil;
-
-    [self setupWebView];
     [self setupNavigationBar];
 }
 
@@ -186,7 +183,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self reloadViewControllerWithPost:self.post];
+    [self setupWebView];
 }
 
 - (void)dealloc {
