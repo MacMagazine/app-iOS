@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     MMMLinkClickTypeExternal,
 };
 
-@interface MMMPostDetailViewController () <WKNavigationDelegate>
+@interface MMMPostDetailViewController () <WKNavigationDelegate, WKUIDelegate>
 
 @property (nonatomic, weak) WKWebView *webView;
 
@@ -90,7 +90,13 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     if (self.webView) {
         [self.webView stopLoading];
     } else {
-        WKWebView *webView = [[WKWebView alloc] init];
+        WKPreferences *wkPreferences = [[WKPreferences alloc] init];
+        wkPreferences.javaScriptCanOpenWindowsAutomatically = YES;
+
+        WKWebViewConfiguration *webViewConfiguration = [[WKWebViewConfiguration alloc] init];
+        webViewConfiguration.preferences = wkPreferences;
+
+        WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:webViewConfiguration];
         [self.view addSubview:webView];
         self.webView = webView;
         [self.webView autoPinEdgesToSuperviewEdges];
@@ -98,6 +104,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         // Changes the WKWebView user agent in order to hide some CSS/HTML elements
         self.webView.customUserAgent = MMMUserAgent;
         self.webView.navigationDelegate = self;
+        self.webView.UIDelegate = self;
 
         // Observer to check that loading has completelly finished for the WebView
         [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:NULL];
@@ -147,6 +154,15 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 #pragma mark - WKNavigationDelegate Delegate
+
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+
+    if (!navigationAction.targetFrame.isMainFrame) {
+        [webView loadRequest:navigationAction.request];
+    }
+    
+    return nil;
+}
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     WKNavigationActionPolicy actionPolicy = WKNavigationActionPolicyAllow;
