@@ -18,11 +18,19 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Apagar cache</string>
+			<string>Pushes para todos os posts</string>
 			<key>Key</key>
-			<string>clear_cache</string>
+			<string>all_posts_pushes</string>
 			<key>DefaultValue</key>
 			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string></string>
+			<key>FooterText</key>
+			<string>As mudanças nas preferências de notificações só terão efeitos da próxima vez que o app for inicializado.</string>
 		</dict>
 	</array>
 </dict>

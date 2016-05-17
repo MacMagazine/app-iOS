@@ -48,6 +48,10 @@
 
 #pragma mark - Actions
 
+- (IBAction)settingsAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
+
 #pragma mark - Instance Methods
 
 - (BOOL)canFetchMoreData {
