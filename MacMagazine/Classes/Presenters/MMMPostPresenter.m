@@ -23,6 +23,13 @@
 - (void)downloadImageForImageView:(UIImageView *)imageView {
     NSURL *URL = [self thumbnailURLForImageView:imageView];
     [imageView sd_setImageWithURL:URL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        // hack to disable SDWebImage's GIF support (SD GIF implementation is basically broken):
+        // https://github.com/rs/SDWebImage/issues/501
+        // this avoids a fork ¯\_(ツ)_/¯
+        if (image.images) {
+            image = [UIImage imageWithCGImage:[image.images.firstObject CGImage]];
+            imageView.image = image;
+        }
         NSTimeInterval duration = (cacheType != SDImageCacheTypeMemory) ? 0.25 : 0;
         UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
         [UIView animateWithDuration:duration delay:0 options:options animations:^{
