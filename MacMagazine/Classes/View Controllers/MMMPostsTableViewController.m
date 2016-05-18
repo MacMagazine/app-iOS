@@ -1,4 +1,5 @@
 #import <PureLayout/PureLayout.h>
+#import <TSMessages/TSMessage.h>
 
 #import "MMMPostsTableViewController.h"
 #import "MMMFeaturedPostTableViewCell.h"
@@ -89,11 +90,9 @@
 }
 
 - (void)handleError:(NSError *)error {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.localizedDescription
-                                                                             message:error.localizedFailureReason
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Error.Default.Dismiss", @"") style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alertController animated:YES completion:nil];
+    [TSMessage showNotificationWithTitle:error.localizedDescription
+                                subtitle:error.localizedFailureReason
+                                    type:TSMessageNotificationTypeError];
 }
 
 - (void)reloadData {
