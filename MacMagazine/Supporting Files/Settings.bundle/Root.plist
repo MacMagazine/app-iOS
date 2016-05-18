@@ -14,6 +14,16 @@
 			<key>File</key>
 			<string>Pods-settings-metadata</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Apagar cache de imagens</string>
+			<key>Key</key>
+			<string>clear_image_cache</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
 	</array>
 </dict>
 </plist>
