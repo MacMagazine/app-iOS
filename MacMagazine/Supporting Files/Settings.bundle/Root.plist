@@ -18,7 +18,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Pushes para todos os posts</string>
+			<string>Notificações para todos os posts</string>
 			<key>Key</key>
 			<string>all_posts_pushes</string>
 			<key>DefaultValue</key>
@@ -30,7 +30,7 @@
 			<key>Title</key>
 			<string></string>
 			<key>FooterText</key>
-			<string>As mudanças nas preferências de notificações só terão efeitos da próxima vez que o app for inicializado.</string>
+			<string>As mudanças nas preferências de notificações só terão efeitos na próxima vez que o app for inicializado.</string>
 		</dict>
 	</array>
 </dict>
