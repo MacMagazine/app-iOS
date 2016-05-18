@@ -15,7 +15,7 @@ static NSString * const MMMClearCachePreferenceKey = @"clear_cache";
 
         NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
         NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-        //// Execute
+
         [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:MMMClearCachePreferenceKey];
         }];
