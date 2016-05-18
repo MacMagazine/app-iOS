@@ -209,7 +209,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
-    // hack to reload the post if loggin in to disqus
+    // hack to reload the post if logging in to disqus
     if ([self.webView.URL.absoluteString containsString:MMMDisqusBaseURL]) {
         UIViewController *backViewController = self.navigationController.viewControllers.lastObject;
         if ([backViewController isKindOfClass:[MMMPostDetailViewController class]]) {
