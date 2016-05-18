@@ -18,6 +18,7 @@
 		DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */; };
 		DB5F80EB1CECE04B002A20C1 /* MMMCacheManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80EA1CECE04B002A20C1 /* MMMCacheManagerTests.m */; };
 		DB5F80F21CED27D2002A20C1 /* MMMCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80F11CED27D2002A20C1 /* MMMCacheManager.m */; };
+		DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		ED11A8FB1CB03AE200B13BA4 /* _MMMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */; };
@@ -80,9 +81,7 @@
 		DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsAPI.m; sourceTree = "<group>"; };
 		DB09F7401CBDCF4D00183E0F /* MMMNotificationsPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMNotificationsPreferences.h; sourceTree = "<group>"; };
 		DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsPreferences.m; sourceTree = "<group>"; };
-		DB5F80EA1CECE04B002A20C1 /* MMMCacheManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMCacheManagerTests.m; sourceTree = "<group>"; };
-		DB5F80F01CED27D2002A20C1 /* MMMCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMCacheManager.h; path = Cache/MMMCacheManager.h; sourceTree = "<group>"; };
-		DB5F80F11CED27D2002A20C1 /* MMMCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMCacheManager.m; path = Cache/MMMCacheManager.m; sourceTree = "<group>"; };
+		DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsPreferencesTests.m; sourceTree = "<group>"; };
 		DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -291,6 +290,7 @@
 			children = (
 				DB5F80EA1CECE04B002A20C1 /* MMMCacheManagerTests.m */,
 				ED1813971CE99523005DE994 /* MMMNotificationsHandlerTests.m */,
+				DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */,
 				ED3AD2E71CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m */,
 			);
 			path = MacMagazineTests;
@@ -758,6 +758,7 @@
 				ED3AD2E81CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m in Sources */,
 				DB5F80EB1CECE04B002A20C1 /* MMMCacheManagerTests.m in Sources */,
 				ED1813981CE99523005DE994 /* MMMNotificationsHandlerTests.m in Sources */,
+				DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
