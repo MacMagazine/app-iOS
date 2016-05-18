@@ -3,7 +3,7 @@
 #import <Tweaks/FBTweakShakeWindow.h>
 
 #import "MMMAppDelegate.h"
-#import "MMMImageCacheManager.h"
+#import "MMMCacheManager.h"
 #import "MMMNotificationsAPI.h"
 #import "MMMNotificationsHandler.h"
 #import "SUNCoreDataStore.h"
@@ -58,7 +58,7 @@
     UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     
-    [MMMImageCacheManager clearImageCacheIfNeeded];
+    [MMMCacheManager clearCacheIfNeeded];
 }
 
 #pragma mark - Notifications

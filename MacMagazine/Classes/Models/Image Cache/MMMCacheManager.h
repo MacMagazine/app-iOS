@@ -6,10 +6,10 @@
 //  Copyright © 2016 made@sampa. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-@interface MMMImageCacheManager : NSObject
+@interface MMMCacheManager : NSObject
 
-+ (void)clearImageCacheIfNeeded;
++ (void)clearCacheIfNeeded;
 
 @end

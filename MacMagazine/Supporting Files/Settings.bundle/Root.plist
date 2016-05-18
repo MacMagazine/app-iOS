@@ -18,9 +18,9 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Apagar cache de imagens</string>
+			<string>Apagar cache</string>
 			<key>Key</key>
-			<string>clear_image_cache</string>
+			<string>clear_cache</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>

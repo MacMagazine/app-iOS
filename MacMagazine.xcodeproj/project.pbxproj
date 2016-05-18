@@ -16,7 +16,7 @@
 		ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */; };
 		DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */; };
 		DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */; };
-		DB36D78D1CEC9D74006CB3D1 /* MMMImageCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB36D78C1CEC9D74006CB3D1 /* MMMImageCacheManager.m */; };
+		DB36D78D1CEC9D74006CB3D1 /* MMMCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB36D78C1CEC9D74006CB3D1 /* MMMCacheManager.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		ED11A8FB1CB03AE200B13BA4 /* _MMMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */; };
@@ -79,8 +79,8 @@
 		DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsAPI.m; sourceTree = "<group>"; };
 		DB09F7401CBDCF4D00183E0F /* MMMNotificationsPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMNotificationsPreferences.h; sourceTree = "<group>"; };
 		DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsPreferences.m; sourceTree = "<group>"; };
-		DB36D78B1CEC9D74006CB3D1 /* MMMImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMImageCacheManager.h; path = "Image Cache/MMMImageCacheManager.h"; sourceTree = "<group>"; };
-		DB36D78C1CEC9D74006CB3D1 /* MMMImageCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMImageCacheManager.m; path = "Image Cache/MMMImageCacheManager.m"; sourceTree = "<group>"; };
+		DB36D78B1CEC9D74006CB3D1 /* MMMCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMCacheManager.h; path = "Image Cache/MMMCacheManager.h"; sourceTree = "<group>"; };
+		DB36D78C1CEC9D74006CB3D1 /* MMMCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMCacheManager.m; path = "Image Cache/MMMCacheManager.m"; sourceTree = "<group>"; };
 		DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		DB36D78E1CEC9D7A006CB3D1 /* Image Cache */ = {
 			isa = PBXGroup;
 			children = (
-				DB36D78B1CEC9D74006CB3D1 /* MMMImageCacheManager.h */,
-				DB36D78C1CEC9D74006CB3D1 /* MMMImageCacheManager.m */,
+				DB36D78B1CEC9D74006CB3D1 /* MMMCacheManager.h */,
+				DB36D78C1CEC9D74006CB3D1 /* MMMCacheManager.m */,
 			);
 			name = "Image Cache";
 			sourceTree = "<group>";
@@ -721,7 +721,7 @@
 				EDA6FA1E1B3BD2D4007EE794 /* MMMPostDetailViewController.m in Sources */,
 				EDFA9DA91B361D1000EE213C /* SUNCoreDataStore.m in Sources */,
 				DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */,
-				DB36D78D1CEC9D74006CB3D1 /* MMMImageCacheManager.m in Sources */,
+				DB36D78D1CEC9D74006CB3D1 /* MMMCacheManager.m in Sources */,
 				EDFA9DBB1B362A0C00EE213C /* NSArray+SUNCoreDataStoreAddons.m in Sources */,
 				EDFA9DB51B36297800EE213C /* NSManagedObjectContext+SUNCoreDataStoreAddons.m in Sources */,
 				ED6B98A91CEABD900091335E /* MMMNotificationsHandler.m in Sources */,
