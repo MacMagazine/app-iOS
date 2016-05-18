@@ -17,8 +17,6 @@
 
 #pragma mark MMMAppDelegate
 
-NSString static *notificationPreferenceKey = @"all_posts_pushes";
-
 @implementation MMMAppDelegate
 
 #pragma mark - Getter/Setters
@@ -38,11 +36,6 @@ NSString static *notificationPreferenceKey = @"all_posts_pushes";
 #pragma mark - Application Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (![standardUserDefaults objectForKey:notificationPreferenceKey]) {
-        [standardUserDefaults setValue:@NO forKey:notificationPreferenceKey];
-    }
-
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"MacMagazine" withExtension:@"momd"];
     [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
@@ -75,9 +68,7 @@ NSString static *notificationPreferenceKey = @"all_posts_pushes";
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    BOOL userOptionNotificationAllPosts = [[NSUserDefaults standardUserDefaults] boolForKey:notificationPreferenceKey];
-
-    [self.notificationsAPI registerToken:deviceToken notificationPeferences:(userOptionNotificationAllPosts) ? MMMNotificationsPreferencesAllPosts : MMMNotificationsPreferencesFeaturedPosts];
+    [self.notificationsAPI registerToken:deviceToken notificationPeferences:MMMNotificationsPreferencesUser];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
