@@ -68,7 +68,7 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [self.notificationsAPI registerToken:deviceToken notificationPeferences:MMMNotificationsPreferencesAllPosts];
+    [self.notificationsAPI registerToken:deviceToken notificationPeferences:MMMNotificationsPreferencesUser];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
