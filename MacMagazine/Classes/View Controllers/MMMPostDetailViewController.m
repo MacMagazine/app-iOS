@@ -158,7 +158,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - NSNotifications
 
 - (void)reloadWebViewsNotificationReceived:(NSNotification *)notification {
-    [self.webView reload] ;
+    [self.webView reload];
 }
 
 #pragma mark - WKNavigationDelegate Delegate
