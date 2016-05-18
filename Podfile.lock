@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - ARChromeActivity (1.0.6)
   - Expecta (1.0.5)
+  - HexColors (2.2.1)
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
@@ -26,6 +27,8 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - TSMessages (0.9.12):
+    - HexColors (~> 2.2.0)
   - TTTAttributedLabel (1.13.4)
   - TUSafariActivity (1.0.4)
   - Tweaks (2.0.0)
@@ -40,6 +43,7 @@ DEPENDENCIES:
   - Ono (~> 1.2)
   - PureLayout (~> 3.0)
   - SDWebImage (~> 3.7)
+  - TSMessages (~> 0.9)
   - TTTAttributedLabel (~> 1.13)
   - TUSafariActivity (~> 1.0)
   - Tweaks (~> 2.0)
@@ -52,16 +56,18 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ARChromeActivity: 5dcf9b9f09323761f992aff3525cdd777f83609d
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  HexColors: abfd172e329dab59888614ccba6f216cec59289d
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   OCMock: d68685bde31f69cb61d518dcb39269080c78b5ed
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   Tweaks: 524fa47636cce3bf3a4d9156e980f10ae9480e81
 
-PODFILE CHECKSUM: 07b6b9a60354b8b9522d88417609d908181bc639
+PODFILE CHECKSUM: 851656029c9cc8c35ba96bc384d8582a3d8332ab
 
 COCOAPODS: 1.0.0

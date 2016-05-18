@@ -12,6 +12,7 @@ target 'MacMagazine' do
     pod 'TUSafariActivity', '~> 1.0'
     pod 'Tweaks', '~> 2.0'
     pod 'TTTAttributedLabel', '~> 1.13'
+    pod 'TSMessages', '~> 0.9'
 
     target 'MacMagazineTests' do
         inherit! :search_paths

@@ -561,7 +561,6 @@
 				EDBB4A651B2E7F8D00E1CCCA /* Images.xcassets in Resources */,
 				EDFA9DB21B36267600EE213C /* MMMPostTableViewCell.xib in Resources */,
 				EDFA9DED1B37844F00EE213C /* MMMFeaturedPostTableViewCell.xib in Resources */,
-				C1F0D05C75017A59F9543184 /* Pods-metadata.plist in Resources */,
 				054C8B71124EF96646EE6D3E /* Pods-settings-metadata.plist in Resources */,
 				ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */,
 				A09F3C2CE21563254F1F7F32 /* Pods-MacMagazine-metadata.plist in Resources */,
