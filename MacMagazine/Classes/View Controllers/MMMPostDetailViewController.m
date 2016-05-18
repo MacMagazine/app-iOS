@@ -10,7 +10,9 @@
 #import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
+static NSString * const MMMDisqusBaseURL = @"disqus.com";
 static NSString * const MMMUserAgent = @"MacMagazine";
+static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notification.webview.reload";
 
 typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     MMMLinkClickTypeInternal,
@@ -144,7 +146,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 #pragma mark - Protocols
 
-#pragma makr - WKWebView KVO
+#pragma mark - WKWebView KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"loading"] && object == self.webView) {
@@ -153,11 +155,21 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     }
 }
 
+#pragma mark - NSNotifications
+
+- (void)reloadWebViewsNotificationReceived:(NSNotification *)notification {
+    [self.webView reload];
+}
+
 #pragma mark - WKNavigationDelegate Delegate
 
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    NSURL *targetURL = navigationAction.request.URL;
+
+    //http://stackoverflow.com/questions/25713069/why-is-wkwebview-not-opening-links-with-target-blank
     if (!navigationAction.targetFrame.isMainFrame) {
-        [webView loadRequest:navigationAction.request];
+        MMMLinkClickType linkClickType = ([targetURL.absoluteString containsString:MMMBaseURL] || [targetURL.absoluteString containsString:MMMDisqusBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
+        [self performActionForLinkClickWithType:linkClickType URL:targetURL];
     }
     
     return nil;
@@ -178,7 +190,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
 
         // For javascript-triggered links
-        NSString *documentURL = [[navigationAction.request mainDocumentURL] absoluteString];
+        NSString *documentURL = navigationAction.request.mainDocumentURL.absoluteString;
 
         // If they are the same this is a javascript href click
         if ([targetURL.absoluteString isEqualToString:documentURL]) {
@@ -199,12 +211,24 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [super viewDidLoad];
 
     [self setupWebView];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWebViewsNotificationReceived:) name:MMMReloadWebViewsNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    // hack to reload the post if logging in to disqus
+    if ([self.webView.URL.absoluteString containsString:MMMDisqusBaseURL]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:MMMReloadWebViewsNotification object:nil];
+    }
 }
 
 - (void)dealloc {
     [_webView removeObserver:self forKeyPath:@"loading"];
     _webView.UIDelegate = nil;
     _webView.navigationDelegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
