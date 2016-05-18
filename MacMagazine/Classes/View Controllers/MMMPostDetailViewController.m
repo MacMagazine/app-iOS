@@ -12,6 +12,7 @@
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
 static NSString * const MMMDisqusBaseURL = @"disqus.com";
 static NSString * const MMMUserAgent = @"MacMagazine";
+static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notification.webview.reload";
 
 typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     MMMLinkClickTypeInternal,
@@ -145,13 +146,19 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 #pragma mark - Protocols
 
-#pragma makr - WKWebView KVO
+#pragma mark - WKWebView KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"loading"] && object == self.webView) {
         // Update the right item on the navbar acordingly
         [self setupNavigationBar];
     }
+}
+
+#pragma mark - NSNotifications
+
+- (void)reloadWebViewsNotificationReceived:(NSNotification *)notification {
+    [self.webView reload] ;
 }
 
 #pragma mark - WKNavigationDelegate Delegate
@@ -204,6 +211,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [super viewDidLoad];
 
     [self setupWebView];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWebViewsNotificationReceived:) name:MMMReloadWebViewsNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -211,11 +220,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
     // hack to reload the post if logging in to disqus
     if ([self.webView.URL.absoluteString containsString:MMMDisqusBaseURL]) {
-        UIViewController *backViewController = self.navigationController.viewControllers.lastObject;
-        if ([backViewController isKindOfClass:[MMMPostDetailViewController class]]) {
-            MMMPostDetailViewController *presentingViewController = (MMMPostDetailViewController *)backViewController;
-            [presentingViewController.webView reload];
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:MMMReloadWebViewsNotification object:nil];
     }
 }
 
@@ -223,6 +228,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [_webView removeObserver:self forKeyPath:@"loading"];
     _webView.UIDelegate = nil;
     _webView.navigationDelegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
