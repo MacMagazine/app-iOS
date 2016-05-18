@@ -178,7 +178,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
 
         // For javascript-triggered links
-        NSString *documentURL = [[navigationAction.request mainDocumentURL] absoluteString];
+        NSString *documentURL = navigationAction.request.mainDocumentURL.absoluteString;
 
         // If they are the same this is a javascript href click
         if ([targetURL.absoluteString isEqualToString:documentURL]) {
