@@ -10,6 +10,7 @@
 #import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
+static NSString * const MMMDisqusBaseURL = @"disqus.com";
 static NSString * const MMMUserAgent = @"MacMagazine";
 
 typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
@@ -156,8 +157,12 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - WKNavigationDelegate Delegate
 
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    NSURL *targetURL = navigationAction.request.URL;
+
+    //http://stackoverflow.com/questions/25713069/why-is-wkwebview-not-opening-links-with-target-blank
     if (!navigationAction.targetFrame.isMainFrame) {
-        [webView loadRequest:navigationAction.request];
+        MMMLinkClickType linkClickType = ([targetURL.absoluteString containsString:MMMBaseURL] || [targetURL.absoluteString containsString:MMMDisqusBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
+        [self performActionForLinkClickWithType:linkClickType URL:targetURL];
     }
     
     return nil;
@@ -199,6 +204,19 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [super viewDidLoad];
 
     [self setupWebView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    // hack to reload the post if loggin in to disqus
+    if ([self.webView.URL.absoluteString containsString:MMMDisqusBaseURL]) {
+        UIViewController *backViewController = self.navigationController.viewControllers.lastObject;
+        if ([backViewController isKindOfClass:[MMMPostDetailViewController class]]) {
+            MMMPostDetailViewController *presentingViewController = (MMMPostDetailViewController *)backViewController;
+            [presentingViewController.webView reload];
+        }
+    }
 }
 
 - (void)dealloc {
