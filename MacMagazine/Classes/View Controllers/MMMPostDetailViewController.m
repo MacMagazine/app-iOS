@@ -213,6 +213,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self setupWebView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWebViewsNotificationReceived:) name:MMMReloadWebViewsNotification object:nil];
+
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
+    logoImageView.frame = CGRectMake(0, 0, 34, 34);
+    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = logoImageView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
