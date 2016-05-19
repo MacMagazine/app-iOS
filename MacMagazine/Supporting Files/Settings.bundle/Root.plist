@@ -18,9 +18,19 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Notificações para todos os posts</string>
+			<string>Notificar todos os posts</string>
 			<key>Key</key>
 			<string>all_posts_pushes</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Apagar cache</string>
+			<key>Key</key>
+			<string>clear_cache</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
