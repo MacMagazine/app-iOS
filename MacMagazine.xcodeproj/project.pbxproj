@@ -20,6 +20,7 @@
 		DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */; };
 		DB5F80F21CED27D2002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		DB5F80F81CED334B002A20C1 /* MMMCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80F71CED334B002A20C1 /* MMMCacheManager.m */; };
+		DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
 		ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */; };
 		ED11A8FB1CB03AE200B13BA4 /* _MMMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = ED11A8FA1CB03AE200B13BA4 /* _MMMPost.m */; };
@@ -85,6 +86,8 @@
 		DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMNotificationsPreferencesTests.m; sourceTree = "<group>"; };
 		DB5F80F61CED334B002A20C1 /* MMMCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMCacheManager.h; path = Cache/MMMCacheManager.h; sourceTree = "<group>"; };
 		DB5F80F71CED334B002A20C1 /* MMMCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMCacheManager.m; path = Cache/MMMCacheManager.m; sourceTree = "<group>"; };
+		DB72998B1CFCE46400924E8A /* MMMLogoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMLogoImageView.h; sourceTree = "<group>"; };
+		DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMLogoImageView.m; sourceTree = "<group>"; };
 		DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 				EDB2EB831CB3792200ED0D61 /* MMMNavigationBar.m */,
 				EDFA9E1E1B379B0800EE213C /* MMMTableViewHeaderView.h */,
 				EDFA9E1F1B379B0800EE213C /* MMMTableViewHeaderView.m */,
+				DB72998B1CFCE46400924E8A /* MMMLogoImageView.h */,
+				DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -739,6 +744,7 @@
 				EDFA9DB81B3629C300EE213C /* NSManagedObject+SUNCoreDataStoreAddons.m in Sources */,
 				EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */,
 				EDB2EB841CB3792200ED0D61 /* MMMNavigationBar.m in Sources */,
+				DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */,
 				EDFA9DE11B37591900EE213C /* NSDateFormatter+Addons.m in Sources */,
 				EDBB4A541B2E7F8D00E1CCCA /* main.m in Sources */,
 				EDFA9E201B379B0800EE213C /* MMMTableViewHeaderView.m in Sources */,

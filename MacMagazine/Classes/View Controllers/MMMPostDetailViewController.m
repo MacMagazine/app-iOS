@@ -7,6 +7,7 @@
 #import <WebKit/WebKit.h>
 
 #import "MMMPostDetailViewController.h"
+#import "MMMLogoImageView.h"
 #import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
@@ -119,21 +120,23 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *rightItem;
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                  target:self
+                                                                  action:@selector(actionButtonTapped:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 
+    UIView *titleView = nil;
     if (self.webView.isLoading) {
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
         [activityView startAnimating];
-        rightItem = [[UIBarButtonItem alloc] initWithCustomView:activityView];
+
+        titleView = activityView;
     } else {
-        // Action item
-        rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                  target:self
-                                                                  action:@selector(actionButtonTapped:)];
+        titleView = [[MMMLogoImageView alloc] init];
     }
 
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.titleView = titleView;
 }
 
 - (void)performActionForLinkClickWithType:(MMMLinkClickType)linkClickType URL:(NSURL *)URL {

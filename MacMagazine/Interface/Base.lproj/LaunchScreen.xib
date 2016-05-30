@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -18,6 +18,7 @@
                     <items>
                         <navigationItem id="XDp-5w-YFe">
                             <nil key="title"/>
+                            <barButtonItem key="leftBarButtonItem" image="settings_ic" id="QIA-B3-HnQ"/>
                             <view key="titleView" contentMode="scaleToFill" id="Qfx-8k-5XK" userLabel="Title View">
                                 <rect key="frame" x="223" y="25" width="34" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -51,5 +52,6 @@
     </objects>
     <resources>
         <image name="mm_logo" width="80" height="80"/>
+        <image name="settings_ic" width="24" height="24"/>
     </resources>
 </document>
