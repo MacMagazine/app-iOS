@@ -1,11 +1,3 @@
-//
-//  MMMLogoImageView.m
-//  MacMagazine
-//
-//  Created by Cesar Barscevicius on 5/30/16.
-//  Copyright © 2016 made@sampa. All rights reserved.
-//
-
 #import "MMMLogoImageView.h"
 
 @implementation MMMLogoImageView
