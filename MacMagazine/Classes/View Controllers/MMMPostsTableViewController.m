@@ -4,6 +4,7 @@
 #import "MMMPostsTableViewController.h"
 #import "MMMFeaturedPostTableViewCell.h"
 #import "MMMLabel.h"
+#import "MMMLogoImageView.h"
 #import "MMMPost.h"
 #import "MMMPostDetailViewController.h"
 #import "MMMPostPresenter.h"
@@ -249,10 +250,7 @@
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
 
-    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
-    logoImageView.frame = CGRectMake(0, 0, 34, 34);
-    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = logoImageView;
+    self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
 
     [self reloadData];
 }

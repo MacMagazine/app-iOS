@@ -7,6 +7,7 @@
 #import <WebKit/WebKit.h>
 
 #import "MMMPostDetailViewController.h"
+#import "MMMLogoImageView.h"
 #import "MMMPost.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
@@ -132,11 +133,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
         titleView = activityView;
     } else {
-        UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
-        logoImageView.frame = CGRectMake(0, 0, 34, 34);
-        logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-
-        titleView = logoImageView;
+        titleView = [[MMMLogoImageView alloc] init];
     }
 
     self.navigationItem.titleView = titleView;
