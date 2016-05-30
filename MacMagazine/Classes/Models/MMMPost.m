@@ -29,7 +29,6 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
 }
 
 + (void)getWithPage:(NSUInteger)page success:(void (^)(id response))success failure:(void (^)(NSError *error))failure {
-    NSDate *requestStartDate = [NSDate date];
     [[self sessionManager] GET:kMMRSSFeedPath parameters:@{@"paged" : @(page)} progress:nil success:^(NSURLSessionDataTask *task, NSData *responseData) {
         NSManagedObjectContext *context = [SUNCoreDataStore defaultStore].privateQueueContext;
         [context performBlock:^{
