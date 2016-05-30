@@ -119,21 +119,27 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *rightItem;
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                  target:self
+                                                                  action:@selector(actionButtonTapped:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 
+    UIView *titleView = nil;
     if (self.webView.isLoading) {
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
         [activityView startAnimating];
-        rightItem = [[UIBarButtonItem alloc] initWithCustomView:activityView];
+
+        titleView = activityView;
     } else {
-        // Action item
-        rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                  target:self
-                                                                  action:@selector(actionButtonTapped:)];
+        UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
+        logoImageView.frame = CGRectMake(0, 0, 34, 34);
+        logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+
+        titleView = logoImageView;
     }
 
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.titleView = titleView;
 }
 
 - (void)performActionForLinkClickWithType:(MMMLinkClickType)linkClickType URL:(NSURL *)URL {
@@ -213,11 +219,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self setupWebView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWebViewsNotificationReceived:) name:MMMReloadWebViewsNotification object:nil];
-
-    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mm_logo"]];
-    logoImageView.frame = CGRectMake(0, 0, 34, 34);
-    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = logoImageView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
