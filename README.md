@@ -16,10 +16,11 @@ Use as [Issues](https://github.com/madeatsampa/MacMagazine-iOS/issues) para cada
 ### Instruções de instalação
 Este projeto usa [CocoaPods](http://bundler.io). Colocar tudo pra funcionar é super simples.
 Depois de clonar o projeto, é só instalar os `pods`, usando o [Bundler](http://bundler.io), com os seguintes comandos no `path` do projeto:
-<br>
-`bundle install` <br>
-`bundle exec pod install`<br>
+
+`bundle install`
+
+`bundle exec pod install`
 
 Ah, nós usamos um token para registrar novos devices no servidor de notificações. Quando o `cocoapods-keys` pedir por uma chave de pushes é só digitar `enter` (manter o valor em branco) que a instalação dos pods prossegue sem problemas.
-<br>
+
 :)
