@@ -14,7 +14,7 @@ Para aqueles quiserem colaborar com o projeto, é só usar os [Pull Requests](ht
 Use as [Issues](https://github.com/madeatsampa/MacMagazine-iOS/issues) para cadastrar problemas encontrados ou features desejadas.
 
 ### Instruções de instalação
-Este projeto usa [CocoaPods](http://bundler.io). Colocar tudo pra funcionar é super simples.
+Este projeto usa [CocoaPods](https://cocoapods.org). Colocar tudo pra funcionar é super simples.
 Depois de clonar o projeto, é só instalar os `pods`, usando o [Bundler](http://bundler.io), com os seguintes comandos no `path` do projeto:
 
 `bundle install`
