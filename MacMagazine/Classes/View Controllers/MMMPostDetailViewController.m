@@ -170,7 +170,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     NSURL *targetURL = navigationAction.request.URL;
 
     //http://stackoverflow.com/questions/25713069/why-is-wkwebview-not-opening-links-with-target-blank
-    if (!navigationAction.targetFrame.isMainFrame) {
+    if (navigationAction.targetFrame && !navigationAction.targetFrame.isMainFrame) {
         MMMLinkClickType linkClickType = ([targetURL.absoluteString containsString:MMMBaseURL] || [targetURL.absoluteString containsString:MMMDisqusBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
         [self performActionForLinkClickWithType:linkClickType URL:targetURL];
     }
