@@ -52,8 +52,10 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)pushToSFSafariViewControllerWithURL:(NSURL *)URL {
-    SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
-    [self presentViewController:safariViewController animated:YES completion:nil];
+    if (URL.absoluteString.length > 0 && URL.scheme.length > 0) {
+        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:safariViewController animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Button Actions
@@ -170,7 +172,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     NSURL *targetURL = navigationAction.request.URL;
 
     //http://stackoverflow.com/questions/25713069/why-is-wkwebview-not-opening-links-with-target-blank
-    if (navigationAction.targetFrame && !navigationAction.targetFrame.isMainFrame) {
+    if (!navigationAction.targetFrame.isMainFrame) {
         MMMLinkClickType linkClickType = ([targetURL.absoluteString containsString:MMMBaseURL] || [targetURL.absoluteString containsString:MMMDisqusBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
         [self performActionForLinkClickWithType:linkClickType URL:targetURL];
     }
