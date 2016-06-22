@@ -12,6 +12,7 @@
 #import "MMMTableViewHeaderView.h"
 #import "NSDate+Formatters.h"
 #import "SUNCoreDataStore.h"
+#import "UIViewController+ShareActivity.h"
 
 #pragma mark MMMPostsTableViewController
 
@@ -206,6 +207,42 @@
     return [MMMTableViewHeaderView height];
 }
 
+#pragma mark - Long press gesture
+- (void)enableLongPressGesture
+{
+    SEL selector = @selector(handleLongPress:);
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
+    [self.tableView addGestureRecognizer:longPressGesture];
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint gesturePoint = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:gesturePoint];
+        if (indexPath == nil) return;
+
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSURL *postURL = [NSURL URLWithString:post.link];
+        if (!postURL) {
+            return;
+        }
+
+        NSMutableArray *activityItems = [[NSMutableArray alloc] init];
+        if (post) {
+            [activityItems addObject:post.title];
+        }
+        [activityItems addObject:postURL];
+
+        [self shareActivityItems:activityItems completion:^(NSString * _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }];
+    }
+}
+
+
 #pragma mark - NSFetchedResultsController delegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
@@ -251,6 +288,8 @@
     self.refreshControl = refreshControl;
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
+
+    [self enableLongPressGesture];
 
     [self reloadData];
 }
