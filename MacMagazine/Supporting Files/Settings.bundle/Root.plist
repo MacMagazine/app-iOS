@@ -12,7 +12,7 @@
 			<key>Title</key>
 			<string></string>
 			<key>FooterText</key>
-			<string>Se a opção &quot;Pushes para todos os posts&quot; estiver desativada, você só receberá notificações de posts-destaque. As alterações que fizer acima só surtirão efeito na próxima vez em que o app for aberto.</string>
+			<string>Se a opção &quot;Push para todos os posts&quot; estiver desativada, você só receberá notificações de posts-destaque. As alterações que fizer acima só surtirão efeito na próxima vez em que o app for aberto.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
