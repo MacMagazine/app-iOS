@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)pushToSFSafariViewControllerWithURL:(NSURL *)URL {
-    if (URL.absoluteString.length > 0 && URL.scheme.length > 0) {
+    if ([@[@"http", @"https"] containsObject:URL.scheme.lowercaseString]) {
         SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
         [self presentViewController:safariViewController animated:YES completion:nil];
     }
