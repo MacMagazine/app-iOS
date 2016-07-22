@@ -21,6 +21,6 @@ Depois de clonar o projeto, é só instalar os `pods`, usando o [Bundler](http:/
 
 `bundle exec pod install`
 
-Ah, nós usamos um token para registrar novos devices no servidor de notificações. Quando o `cocoapods-keys` pedir por uma chave de pushes é só digitar `enter` (manter o valor em branco) que a instalação dos pods prossegue sem problemas.
+Ah, nós usamos um token para registrar novos devices no servidor de notificações. Quando o `cocoapods-keys` pedir por uma chave de pushes é só digitar qualquer caractere (como `a`) e então `enter` que a instalação dos pods prossegue sem problemas.
 
 :)
