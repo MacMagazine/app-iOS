@@ -493,7 +493,7 @@
 			buildConfigurationList = EDBB4A771B2E7F8D00E1CCCA /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
 				7F34EE0D2E969E2202A3E287 /* 📦 Check Pods Manifest.lock */,
-				ED9B38811CB04B41001D2BF9 /* ShellScript */,
+				ED9B38811CB04B41001D2BF9 /* Sort imports */,
 				EDBB4A4A1B2E7F8D00E1CCCA /* Sources */,
 				EDBB4A4B1B2E7F8D00E1CCCA /* Frameworks */,
 				EDBB4A4C1B2E7F8D00E1CCCA /* Resources */,
@@ -707,13 +707,14 @@
 			shellPath = /bin/sh;
 			shellScript = "# Update build version with number of commits\nBUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"";
 		};
-		ED9B38811CB04B41001D2BF9 /* ShellScript */ = {
+		ED9B38811CB04B41001D2BF9 /* Sort imports */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Sort imports";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
