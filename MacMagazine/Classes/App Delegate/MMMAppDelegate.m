@@ -1,4 +1,5 @@
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <Crashlytics/Crashlytics.h>
 #import <Keys/MacmagazineKeys.h>
 #import <Tweaks/FBTweakShakeWindow.h>
 
@@ -36,12 +37,14 @@
 #pragma mark - Application Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    MacmagazineKeys *keys = [[MacmagazineKeys alloc] init];
+    [Crashlytics startWithAPIKey:keys.mMMCrashlyticsAPIKey];
+
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"MacMagazine" withExtension:@"momd"];
     [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 
 #ifndef DEBUG
-    MacmagazineKeys *keys = [[MacmagazineKeys alloc] init];
     self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
 #endif
 

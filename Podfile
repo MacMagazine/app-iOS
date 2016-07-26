@@ -4,15 +4,16 @@ platform :ios, '9.0'
 
 target 'MacMagazine' do
     pod 'AFNetworking', '~> 3.1'
+    pod 'ARChromeActivity', '~> 1.0'
+    pod 'Crashlytics', '~> 3.7'
     pod 'HockeySDK', '~> 3.8'
     pod 'Ono', '~> 1.2'
     pod 'PureLayout', '~> 3.0'
     pod 'SDWebImage', '~> 3.7'
-    pod 'ARChromeActivity', '~> 1.0'
+    pod 'TSMessages', '~> 0.9'
+    pod 'TTTAttributedLabel', '~> 1.13'
     pod 'TUSafariActivity', '~> 1.0'
     pod 'Tweaks', '~> 2.0'
-    pod 'TTTAttributedLabel', '~> 1.13'
-    pod 'TSMessages', '~> 0.9'
 
     target 'MacMagazineTests' do
         inherit! :search_paths
@@ -27,7 +28,8 @@ plugin 'cocoapods-acknowledgements', settings_bundle: true
 plugin 'cocoapods-keys', {
     :project => 'MacMagazine',
     :keys => [
-        "MMMNotificationsAPIKey"
+        'MMMCrashlyticsAPIKey',
+        'MMMNotificationsAPIKey'
     ]
 }
 

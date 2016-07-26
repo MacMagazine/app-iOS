@@ -15,7 +15,10 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - ARChromeActivity (1.0.6)
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
   - Expecta (1.0.5)
+  - Fabric (1.6.7)
   - HexColors (2.2.1)
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
@@ -36,6 +39,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.1)
   - ARChromeActivity (~> 1.0)
+  - Crashlytics (~> 3.7)
   - Expecta (~> 1.0)
   - HockeySDK (~> 3.8)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -55,7 +59,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ARChromeActivity: 5dcf9b9f09323761f992aff3525cdd777f83609d
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
@@ -68,6 +74,6 @@ SPEC CHECKSUMS:
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   Tweaks: 524fa47636cce3bf3a4d9156e980f10ae9480e81
 
-PODFILE CHECKSUM: 851656029c9cc8c35ba96bc384d8582a3d8332ab
+PODFILE CHECKSUM: 2ec4273a306d28ed50f7cbb9f3eda45b70ddf035
 
 COCOAPODS: 1.0.0
