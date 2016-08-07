@@ -121,7 +121,6 @@
         UINavigationController *navigationController = segue.destinationViewController;
         MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
         detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
-        detailViewController.isPostClicked = YES;
     }
 
     [super prepareForSegue:segue sender:sender];

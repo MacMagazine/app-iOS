@@ -7,7 +7,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MMMPostDetailViewController : UIViewController
 
 @property (nonatomic, strong, nullable) MMMPost *post;
-@property (nonatomic) BOOL isPostClicked;
 // In case the detail view controller is loaded from a link click
 @property (nonatomic, strong, nullable) NSURL *postURL;
 
