@@ -213,10 +213,57 @@
     return YES;
 }
 
+- (UIViewController *)previewingContext:(id )previewingContext viewControllerForLocation:(CGPoint)location{
+    // check if viewController is not already displayed in the preview controller
+    if ([self.presentedViewController isKindOfClass:[MMMPostDetailViewController class]]) {
+        return nil;
+    }
+    
+    CGPoint cellPostion = [self.tableView convertPoint:location fromView:self.view];
+    NSIndexPath *path = [self.tableView indexPathForRowAtPoint:cellPostion];
+    
+    if (path) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MMMPostDetailViewController *previewViewController = [storyboard instantiateViewControllerWithIdentifier:@"MMMPostDetailViewController"];
+        
+        // send data to previewViewController
+        previewViewController.post = [self.fetchedResultsController objectAtIndexPath:path];
+        return previewViewController;
+    }
+    return nil;
+}
+
+- (void)previewingContext:(id )previewingContext commitViewController: (UIViewController *)viewControllerToCommit {
+    [self.navigationController showViewController:viewControllerToCommit sender:nil];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if ([self isForceTouchAvailable]) {
+        if (!self.previewingContext) {
+            self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
+        }
+    } else {
+        if (self.previewingContext) {
+            [self unregisterForPreviewingWithContext:self.previewingContext];
+        }
+    }
+}
+
 #pragma mark - NSFetchedResultsController delegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadData];
+}
+
+#pragma mark - UIViewControllerPreviewingDelegate delegate
+
+- (BOOL)isForceTouchAvailable {
+    BOOL isForceTouchAvailable = NO;
+    if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
+        isForceTouchAvailable = self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
+    }
+    return isForceTouchAvailable;
 }
 
 #pragma mark - View lifecycle
@@ -224,6 +271,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([self isForceTouchAvailable]) {
+        self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    }
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
