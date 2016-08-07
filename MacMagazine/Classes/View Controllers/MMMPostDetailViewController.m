@@ -122,10 +122,12 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                  target:self
-                                                                  action:@selector(actionButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    if (self.isPostClicked == YES) {
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                   target:self
+                                                                                   action:@selector(actionButtonTapped:)];
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
 
     UIView *titleView = nil;
     if (self.webView.isLoading) {
@@ -135,7 +137,10 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
         titleView = activityView;
     } else {
-        titleView = [[MMMLogoImageView alloc] init];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            // check if the device is an iPhone
+            titleView = [[MMMLogoImageView alloc] init];
+        }
     }
 
     self.navigationItem.titleView = titleView;

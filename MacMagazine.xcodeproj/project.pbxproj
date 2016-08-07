@@ -542,7 +542,6 @@
 				TargetAttributes = {
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = K992HP865M;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -906,7 +905,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -923,7 +922,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
