@@ -21,8 +21,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnw-Nd-23O" userLabel="Subheadline Label" customClass="MMMLabel">
-                        <rect key="frame" x="104" y="86" width="200" height="48"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <rect key="frame" x="104" y="81.5" width="200" height="52.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" white="0.62" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -44,7 +44,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="bnw-Nd-23O" secondAttribute="bottom" id="06B-t6-1vv"/>
-                    <constraint firstItem="bnw-Nd-23O" firstAttribute="top" secondItem="Kde-k4-WUe" secondAttribute="bottom" constant="8" id="9OG-c7-DzW"/>
+                    <constraint firstItem="bnw-Nd-23O" firstAttribute="top" secondItem="Kde-k4-WUe" secondAttribute="bottom" constant="4" id="9OG-c7-DzW"/>
                     <constraint firstItem="bnw-Nd-23O" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="D7w-vR-hB2"/>
                     <constraint firstItem="bnw-Nd-23O" firstAttribute="leading" secondItem="Kde-k4-WUe" secondAttribute="leading" id="GdF-jA-QRn"/>
                     <constraint firstAttribute="trailing" secondItem="pwL-UV-uL7" secondAttribute="trailing" id="ILg-id-zMU"/>
