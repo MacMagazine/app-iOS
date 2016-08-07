@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MMMPostsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface MMMPostsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, weak, nullable) UIView *footerView;
