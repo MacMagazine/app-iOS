@@ -132,6 +132,15 @@
     }
 }
 
+- (void)selectFirstTableViewCellInAppLaunch {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        // check if the device is an iPad
+        NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:false scrollPosition:UITableViewScrollPositionMiddle];
+        [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+    }
+}
+
 #pragma mark - Protocols
 
 #pragma mark - UITableView data source
@@ -312,6 +321,7 @@
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
 
+    [self selectFirstTableViewCellInAppLaunch];
     [self reloadData];
 }
 
