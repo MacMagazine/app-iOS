@@ -34,7 +34,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="W2l-YZ-igi">
-                        <barButtonItem key="leftBarButtonItem" image="settings_ic" id="IQa-p9-dlm">
+                        <barButtonItem key="leftBarButtonItem" image="icSettings" id="IQa-p9-dlm">
                             <connections>
                                 <action selector="settingsAction:" destination="6gf-ZB-8Tj" id="Bpt-PE-yqr"/>
                             </connections>
@@ -68,6 +68,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="settings_ic" width="24" height="24"/>
+        <image name="icSettings" width="24" height="24"/>
     </resources>
 </document>
