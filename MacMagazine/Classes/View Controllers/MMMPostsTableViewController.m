@@ -132,11 +132,11 @@
     }
 }
 
-- (void)selectFirstTableViewCellInAppLaunch {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+- (void)selectFirstTableViewCell {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad & [self fetchedResultsController] != nil) {
         // check if the device is an iPad
         NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:false scrollPosition:UITableViewScrollPositionMiddle];
+        [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
     }
 }
@@ -222,21 +222,21 @@
     return YES;
 }
 
-- (UIViewController *)previewingContext:(id )previewingContext viewControllerForLocation:(CGPoint)location{
+- (UIViewController *)previewingContext:(id )previewingContext viewControllerForLocation:(CGPoint)location {
     // check if viewController is not already displayed in the preview controller
     if ([self.presentedViewController isKindOfClass:[MMMPostDetailViewController class]]) {
         return nil;
     }
     
-    CGPoint cellPostion = [self.tableView convertPoint:location fromView:self.view];
-    NSIndexPath *path = [self.tableView indexPathForRowAtPoint:cellPostion];
+    CGPoint cellPosition = [self.tableView convertPoint:location fromView:self.view];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:cellPosition];
     
-    if (path) {
+    if (indexPath) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        MMMPostDetailViewController *previewViewController = [storyboard instantiateViewControllerWithIdentifier:@"MMMPostDetailViewController"];
+        MMMPostDetailViewController *previewViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([MMMPostDetailViewController class])];
         
         // send data to previewViewController
-        previewViewController.post = [self.fetchedResultsController objectAtIndexPath:path];
+        previewViewController.post = [self.fetchedResultsController objectAtIndexPath:indexPath];
         return previewViewController;
     }
     return nil;
@@ -321,7 +321,7 @@
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
 
-    [self selectFirstTableViewCellInAppLaunch];
+    [self selectFirstTableViewCell];
     [self reloadData];
 }
 
