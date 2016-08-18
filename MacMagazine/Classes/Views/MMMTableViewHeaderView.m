@@ -18,7 +18,7 @@
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:textAttributes
                                                  context:nil];
-    return CGRectGetHeight(boundingRect) + 10;
+    return CGRectGetHeight(boundingRect) + 18;
 }
 
 #pragma mark - Instance Methods

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -11,19 +11,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="151"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="150.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-k4-WUe" userLabel="Headline Label" customClass="MMMLabel">
-                        <rect key="frame" x="104" y="16" width="200" height="62"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnw-Nd-23O" userLabel="Subheadline Label" customClass="MMMLabel">
-                        <rect key="frame" x="104" y="86" width="200" height="48"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <color key="textColor" white="0.62" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="104" y="82" width="200" height="52"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.63296884698737166" green="0.64543556202312902" blue="0.65946061643835618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwL-UV-uL7" userLabel="Separator View">
@@ -40,11 +34,22 @@
                             <constraint firstAttribute="height" constant="100" id="STs-5B-EFl"/>
                             <constraint firstAttribute="width" constant="72" id="Ucg-zf-XSo"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-k4-WUe" userLabel="Headline Label" customClass="MMMLabel">
+                        <rect key="frame" x="104" y="16" width="200" height="62"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" red="0.20080961044520548" green="0.22297595814867044" blue="0.2479130993150685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="bnw-Nd-23O" secondAttribute="bottom" id="06B-t6-1vv"/>
-                    <constraint firstItem="bnw-Nd-23O" firstAttribute="top" secondItem="Kde-k4-WUe" secondAttribute="bottom" constant="8" id="9OG-c7-DzW"/>
+                    <constraint firstItem="bnw-Nd-23O" firstAttribute="top" secondItem="Kde-k4-WUe" secondAttribute="bottom" constant="4" id="9OG-c7-DzW"/>
                     <constraint firstItem="bnw-Nd-23O" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="D7w-vR-hB2"/>
                     <constraint firstItem="bnw-Nd-23O" firstAttribute="leading" secondItem="Kde-k4-WUe" secondAttribute="leading" id="GdF-jA-QRn"/>
                     <constraint firstAttribute="trailing" secondItem="pwL-UV-uL7" secondAttribute="trailing" id="ILg-id-zMU"/>

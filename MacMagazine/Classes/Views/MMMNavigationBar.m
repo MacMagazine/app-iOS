@@ -9,8 +9,15 @@
 #pragma mark - Instance Methods
 
 - (void)commonInitialization {
+    NSArray *navigationBarSubviews = self.subviews;
+    UIView *firstSubview = navigationBarSubviews.firstObject;
+    UIImageView *separatorImageView = firstSubview.subviews.firstObject;
+    if (separatorImageView && [separatorImageView isKindOfClass:[UIImageView class]]) {
+        separatorImageView.hidden = YES;
+    }
+    
     UIView *separatorView = [[UIView alloc] init];
-    separatorView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
+    separatorView.backgroundColor = [UIColor colorWithRed:0.78 green:0.80 blue:0.84 alpha:0.80];
     [self addSubview:separatorView];
 
     [separatorView autoSetDimension:ALDimensionHeight toSize:1.f / [UIScreen mainScreen].scale];
