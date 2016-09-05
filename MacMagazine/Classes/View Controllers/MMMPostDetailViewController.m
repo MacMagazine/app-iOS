@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         [activityItems addObject:self.post.title];
     }
     [activityItems addObject:self.webView.URL];
-    [self shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
+    [self mmm_shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
 }
 
 #pragma mark - Instance Methods

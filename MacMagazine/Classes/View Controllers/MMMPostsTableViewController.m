@@ -208,6 +208,7 @@
 }
 
 #pragma mark - Long press gesture
+
 - (void)enableLongPressGesture
 {
     SEL selector = @selector(handleLongPress:);
@@ -236,7 +237,7 @@
         }
         [activityItems addObject:postURL];
 
-        [self shareActivityItems:activityItems completion:^(NSString * _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        [self mmm_shareActivityItems:activityItems completion:^(NSString * _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }];
     }

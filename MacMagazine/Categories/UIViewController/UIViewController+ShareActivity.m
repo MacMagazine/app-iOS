@@ -5,15 +5,15 @@
 
 @implementation UIViewController (ShareActivity)
 
-- (void)shareActivityItems:(NSArray *)activityItems
-                completion:(UIActivityViewControllerCompletionWithItemsHandler)completion
+- (void)mmm_shareActivityItems:(nullable NSArray *)activityItems
+                    completion:(nullable UIActivityViewControllerCompletionWithItemsHandler)completion
 {
-    [self shareActivityItems:activityItems fromBarButtonItem:nil completion:completion];
+    [self mmm_shareActivityItems:activityItems fromBarButtonItem:nil completion:completion];
 }
 
-- (void)shareActivityItems:(NSArray *)activityItems
-         fromBarButtonItem:(UIBarButtonItem *)actionItem
-                completion:(UIActivityViewControllerCompletionWithItemsHandler)completion
+- (void)mmm_shareActivityItems:(nullable NSArray *)activityItems
+             fromBarButtonItem:(nullable UIBarButtonItem *)actionItem
+                    completion:(nullable UIActivityViewControllerCompletionWithItemsHandler)completion
 {
     if (!activityItems || activityItems.count == 0) return;
 

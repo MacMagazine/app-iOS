@@ -1,12 +1,12 @@
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UIViewController (ShareActivity)
 
-- (void)shareActivityItems:(NSArray *)activityItems
-                completion:(UIActivityViewControllerCompletionWithItemsHandler)completion;
+- (void)mmm_shareActivityItems:(nullable NSArray *)activityItems
+                completion:(nullable UIActivityViewControllerCompletionWithItemsHandler)completion;
 
-- (void)shareActivityItems:(NSArray *)activityItems
-         fromBarButtonItem:(UIBarButtonItem *)actionItem
-                completion:(UIActivityViewControllerCompletionWithItemsHandler)completion;
+- (void)mmm_shareActivityItems:(nullable NSArray *)activityItems
+             fromBarButtonItem:(nullable UIBarButtonItem *)actionItem
+                    completion:(nullable UIActivityViewControllerCompletionWithItemsHandler)completion;
 
 @end
