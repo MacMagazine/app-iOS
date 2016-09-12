@@ -93,7 +93,7 @@
 		DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMLogoImageView.m; sourceTree = "<group>"; };
 		DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
-		ED0B03291D864ADA009E80B5 /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazine.entitlements; sourceTree = "<group>"; };
+		ED0B03291D864ADA009E80B5 /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MacMagazine.entitlements; path = ../MacMagazine.entitlements; sourceTree = "<group>"; };
 		ED10FFEE1B5C72FF00AA902C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		ED10FFEF1B5C72FF00AA902C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		ED10FFF01B5C72FF00AA902C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
@@ -284,7 +284,6 @@
 		EDBB4A501B2E7F8D00E1CCCA /* MacMagazine */ = {
 			isa = PBXGroup;
 			children = (
-				ED0B03291D864ADA009E80B5 /* MacMagazine.entitlements */,
 				EDFA9DC81B3651BD00EE213C /* Categories */,
 				EDBB4A7D1B2E825400E1CCCA /* Classes */,
 				ED11A8FC1CB03C1A00B13BA4 /* Interface */,
@@ -299,8 +298,9 @@
 				EDBB4A641B2E7F8D00E1CCCA /* Images.xcassets */,
 				EDBB4A521B2E7F8D00E1CCCA /* Info.plist */,
 				EDFA9DE81B3782E800EE213C /* Localizable.strings */,
-				ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */,
+				ED0B03291D864ADA009E80B5 /* MacMagazine.entitlements */,
 				EDBB4A531B2E7F8D00E1CCCA /* main.m */,
+				ED11A8FD1CB0402E00B13BA4 /* Settings.bundle */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
