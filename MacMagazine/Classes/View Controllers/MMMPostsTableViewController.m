@@ -132,6 +132,15 @@
     }
 }
 
+- (void)selectFirstTableViewCell {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad & [self fetchedResultsController] != nil) {
+        // check if the device is an iPad
+        NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+    }
+}
+
 #pragma mark - Protocols
 
 #pragma mark - UITableView data source
@@ -217,10 +226,57 @@
     return YES;
 }
 
+- (UIViewController *)previewingContext:(id )previewingContext viewControllerForLocation:(CGPoint)location {
+    // check if viewController is not already displayed in the preview controller
+    if ([self.presentedViewController isKindOfClass:[MMMPostDetailViewController class]]) {
+        return nil;
+    }
+    
+    CGPoint cellPosition = [self.tableView convertPoint:location fromView:self.view];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:cellPosition];
+    
+    if (indexPath) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MMMPostDetailViewController *previewViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([MMMPostDetailViewController class])];
+        
+        // send data to previewViewController
+        previewViewController.post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        return previewViewController;
+    }
+    return nil;
+}
+
+- (void)previewingContext:(id )previewingContext commitViewController: (UIViewController *)viewControllerToCommit {
+    [self.navigationController showViewController:viewControllerToCommit sender:nil];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if ([self isForceTouchAvailable]) {
+        if (!self.previewingContext) {
+            self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
+        }
+    } else {
+        if (self.previewingContext) {
+            [self unregisterForPreviewingWithContext:self.previewingContext];
+        }
+    }
+}
+
 #pragma mark - NSFetchedResultsController delegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadData];
+}
+
+#pragma mark - UIViewControllerPreviewingDelegate delegate
+
+- (BOOL)isForceTouchAvailable {
+    BOOL isForceTouchAvailable = NO;
+    if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
+        isForceTouchAvailable = self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
+    }
+    return isForceTouchAvailable;
 }
 
 #pragma mark - View lifecycle
@@ -228,6 +284,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([self isForceTouchAvailable]) {
+        self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    }
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
@@ -266,6 +325,7 @@
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
 
+    [self selectFirstTableViewCell];
     [self reloadData];
 }
 
