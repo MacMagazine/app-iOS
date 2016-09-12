@@ -1,14 +1,13 @@
-#import <ARChromeActivity/ARChromeActivity.h>
 #import <AVFoundation/AVFoundation.h>
 #import <PureLayout/PureLayout.h>
 #import <SafariServices/SafariServices.h>
-#import <TUSafariActivity/TUSafariActivity.h>
 #import <Tweaks/FBTweakInline.h>
 #import <WebKit/WebKit.h>
 
 #import "MMMPostDetailViewController.h"
 #import "MMMLogoImageView.h"
 #import "MMMPost.h"
+#import "UIViewController+ShareActivity.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
 static NSString * const MMMDisqusBaseURL = @"disqus.com";
@@ -71,22 +70,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         [activityItems addObject:self.post.title];
     }
     [activityItems addObject:self.webView.URL];
-
-    NSMutableArray<__kindof UIActivity *> *browserActivities = [[NSMutableArray alloc] init];
-    [browserActivities addObject:[[TUSafariActivity alloc] init]];
-
-    NSURL *chromeURLScheme = [NSURL URLWithString:@"googlechrome-x-callback://"];
-    if ([[UIApplication sharedApplication] canOpenURL:chromeURLScheme]) {
-        ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-        chromeActivity.activityTitle = NSLocalizedString(@"Post.Sharing.OpenInChrome", @"");
-        [browserActivities addObject:chromeActivity];
-    }
-
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                                                                         applicationActivities:browserActivities];
-    activityViewController.modalPresentationStyle = UIModalPresentationPopover;
-    activityViewController.popoverPresentationController.barButtonItem = actionItem;
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    [self mmm_shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
 }
 
 #pragma mark - Instance Methods

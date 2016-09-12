@@ -10,6 +10,7 @@
 		054C8B71124EF96646EE6D3E /* Pods-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */; };
 		25CEA6E962AFE8CEB209AC6E /* Pods-MacMagazineTests-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */; };
 		2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */; };
+		47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */; };
 		7DBD964C0D21B08D3CB7F021 /* libPods-MacMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */; };
 		A09F3C2CE21563254F1F7F32 /* Pods-MacMagazine-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */; };
 		A3D1C6B71959923D475C2BFC /* libPods-MacMagazineTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */; };
@@ -71,6 +72,8 @@
 /* Begin PBXFileReference section */
 		33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
 		34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47EC44A51D1B0B5D004AE94C /* UIViewController+ShareActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShareActivity.h"; sourceTree = "<group>"; };
+		47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShareActivity.m"; sourceTree = "<group>"; };
 		8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-metadata.plist"; path = "Pods/Pods-MacMagazine-metadata.plist"; sourceTree = "<group>"; };
 		9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
@@ -173,6 +176,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47EC44A41D1B0B40004AE94C /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				47EC44A51D1B0B5D004AE94C /* UIViewController+ShareActivity.h */,
+				47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
 		ABB28A460E53AF01B246FD8C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +458,7 @@
 				ED10FFED1B5C72FF00AA902C /* GTMDefines */,
 				EDFA9DDB1B37586500EE213C /* NSDate */,
 				EDFA9DD51B3651DD00EE213C /* NSString */,
+				47EC44A41D1B0B40004AE94C /* UIViewController */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -756,6 +769,7 @@
 				EDFA9DF11B378C7A00EE213C /* MMMLabel.m in Sources */,
 				EDFA9DC71B36353E00EE213C /* MMMPostPresenter.m in Sources */,
 				ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */,
+				47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */,
 				DB5F80F21CED27D2002A20C1 /* (null) in Sources */,
 				DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */,
 			);
