@@ -266,17 +266,14 @@
 
 #pragma mark - Long press gesture
 
-- (void)enableLongPressGesture
-{
+- (void)enableLongPressGesture {
     SEL selector = @selector(handleLongPress:);
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
     [self.tableView addGestureRecognizer:longPressGesture];
 }
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
-{
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
-    {
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint gesturePoint = [gestureRecognizer locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:gesturePoint];
         if (indexPath == nil) return;
