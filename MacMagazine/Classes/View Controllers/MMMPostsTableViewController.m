@@ -133,7 +133,7 @@
 }
 
 - (void)selectFirstTableViewCell {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad & [self fetchedResultsController] != nil) {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && self.fetchedResultsController.fetchedObjects.count > 0) {
         // check if the device is an iPad
         NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
