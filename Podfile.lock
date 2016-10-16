@@ -15,14 +15,14 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - ARChromeActivity (1.0.6)
-  - Crashlytics (3.8.1):
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Expecta (1.0.5)
-  - Fabric (1.6.8)
+  - Fabric (1.6.10)
   - HexColors (2.2.1)
-  - HockeySDK (4.1.0):
-    - HockeySDK/AllFeaturesLib (= 4.1.0)
-  - HockeySDK/AllFeaturesLib (4.1.0)
+  - HockeySDK (4.1.2):
+    - HockeySDK/DefaultLib (= 4.1.2)
+  - HockeySDK/DefaultLib (4.1.2)
   - Keys (1.0.0)
   - OCMock (3.3.1)
   - Ono (1.2.2)
@@ -57,11 +57,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ARChromeActivity: 5dcf9b9f09323761f992aff3525cdd777f83609d
-  Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
-  HockeySDK: 1249d4f1b3a9ce537a1517805bcf6fe121099d16
+  HockeySDK: c7523379550a4305cefc1cdfa7b5f9a5a3538180
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
@@ -73,4 +73,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b929458cb88633af57c7933f58ca5e529b10b5ac
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1
