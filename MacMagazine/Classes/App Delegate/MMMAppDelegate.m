@@ -37,7 +37,7 @@
 #pragma mark - Application Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    MacmagazineKeys *keys = [[MacmagazineKeys alloc] init];
+    MacMagazineKeys *keys = [[MacMagazineKeys alloc] init];
     [Crashlytics startWithAPIKey:keys.mMMCrashlyticsAPIKey];
 
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"MacMagazine" withExtension:@"momd"];

@@ -117,11 +117,17 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-    if (selectedIndexPath) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
-        detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+	UINavigationController *navigationController = segue.destinationViewController;
+	MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
+
+	if (self.postID) {
+		detailViewController.postURL = [NSURL URLWithString:self.postID];
+
+	} else {
+		NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+		if (selectedIndexPath) {
+			detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+		}
     }
 
     [super prepareForSegue:segue sender:sender];
@@ -183,7 +189,7 @@
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
+	NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
     [self performSegueWithIdentifier:segueIdentifier sender:nil];
 }
 
@@ -339,6 +345,11 @@
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
 
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(pushReceived:)
+												 name:@"pushReceived"
+											   object:nil];
+
     [self.tableView registerNib:[MMMPostTableViewCell nib] forCellReuseIdentifier:[MMMPostTableViewCell identifier]];
     [self.tableView registerNib:[MMMFeaturedPostTableViewCell nib] forCellReuseIdentifier:[MMMFeaturedPostTableViewCell identifier]];
     [self.tableView registerClass:[MMMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMMTableViewHeaderView identifier]];
@@ -379,6 +390,13 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)pushReceived:(NSNotification *)notification {
+	self.postID = [notification object];
+
+	NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
+	[self performSegueWithIdentifier:segueIdentifier sender:nil];
 }
 
 @end

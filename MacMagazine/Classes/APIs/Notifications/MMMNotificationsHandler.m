@@ -22,9 +22,7 @@
 
     // Inactive state = "The app is transitioning to or from the background"
     if (applicationState == UIApplicationStateInactive && postGuid.length > 0) {
-        MMMPostDetailViewController *postDetailViewController = [[MMMPostDetailViewController alloc] init];
-        postDetailViewController.postURL = [NSURL URLWithString:postGuid];
-        [self.navigationController pushViewController:postDetailViewController animated:YES];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"pushReceived" object:postGuid];
     }
 
     [MMMPost getWithPage:1 success:^(NSArray *response) {

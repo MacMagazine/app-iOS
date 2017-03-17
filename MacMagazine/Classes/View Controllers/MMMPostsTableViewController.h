@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSUInteger numberOfResponseObjectsPerRequest;
 @property (nonatomic, strong) id previewingContext;
 
+@property (nonatomic, strong, nullable) NSString *postID;
+
 - (BOOL)canFetchMoreData;
 - (void)fetchMoreData;
 - (void)handleError:(NSError *)error;

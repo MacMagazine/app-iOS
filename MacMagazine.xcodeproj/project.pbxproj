@@ -558,7 +558,7 @@
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 7PXVC8PJ97;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -694,7 +694,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C0F356E1DEA76884AECD25E0 /* [CP] Check Pods Manifest.lock */ = {
@@ -709,7 +709,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		ED95D8751B4219C700028B46 /* Updates Build Version */ = {
@@ -724,7 +724,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Update build version with number of commits\nBUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"";
+			shellScript = "# Update build version with number of commits\n#BUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\n#defaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\n#defaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"";
 		};
 		ED9B38811CB04B41001D2BF9 /* Sort imports */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -927,13 +927,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7a8acbf3-afe1-4cf7-8176-806c71140c4b";
+				PROVISIONING_PROFILE_SPECIFIER = "MacMagazine AppStore";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -945,14 +946,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7a8acbf3-afe1-4cf7-8176-806c71140c4b";
+				PROVISIONING_PROFILE_SPECIFIER = "MacMagazine AppStore";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
