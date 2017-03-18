@@ -140,9 +140,25 @@
 }
 
 - (void)selectFirstTableViewCell {
+	// check if the device is an iPad
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && self.fetchedResultsController.fetchedObjects.count > 0) {
-        // check if the device is an iPad
-        NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+		
+		NSUInteger row = 0;
+		NSUInteger section = 0;
+
+		NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSelection"];
+		if (dict) {
+			NSDate *date = dict[@"date"];
+			// Verify if the last selected post is greater than 12 hours
+			NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:date];
+			int numberOfHours = secondsBetween / 3600;
+			if (numberOfHours < 12) {
+				row = [dict[@"selectedCellIndexPathRow"] integerValue];
+				section = [dict[@"selectedCellIndexPathSection"] integerValue];
+			}
+		}
+		NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+
         [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
     }
@@ -189,6 +205,9 @@
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+
 	NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
     [self performSegueWithIdentifier:segueIdentifier sender:nil];
 }

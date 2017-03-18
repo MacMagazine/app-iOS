@@ -724,7 +724,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Update build version with number of commits\n#BUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\n#defaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\n#defaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"";
+			shellScript = "# Update build version with number of commits\n#BUILD_NUMBER=$(git rev-list HEAD | wc -l | tr -d ' ')\n#defaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\n#defaults write \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app.dSYM/Contents/info.plist\" \"CFBundleVersion\" \"${BUILD_NUMBER}\"\n\n#!/bin/bash\nVERSIONNUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nNEWSUBVERSION=`echo $VERSIONNUM | awk -F \".\" '{print $1}'`\nNEWSUBVERSION=$(($NEWSUBVERSION + 1))\nNEWVERSIONSTRING=`echo $VERSIONNUM | awk -F \".\" '{print '$NEWSUBVERSION' }'`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $NEWVERSIONSTRING\" \"$INFOPLIST_FILE\"";
 		};
 		ED9B38811CB04B41001D2BF9 /* Sort imports */ = {
 			isa = PBXShellScriptBuildPhase;
