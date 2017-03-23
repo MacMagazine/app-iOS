@@ -157,10 +157,13 @@
 				section = [dict[@"selectedCellIndexPathSection"] integerValue];
 			}
 		}
-		NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
 
-        [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+			NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+			[self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+			[self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+		});
+
     }
 }
 
@@ -292,9 +295,12 @@
 #pragma mark - Long press gesture
 
 - (void)enableLongPressGesture {
-    SEL selector = @selector(handleLongPress:);
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
-    [self.tableView addGestureRecognizer:longPressGesture];
+	// check if the device is an iPhone
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone && self.fetchedResultsController.fetchedObjects.count > 0) {
+		SEL selector = @selector(handleLongPress:);
+		UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
+		[self.tableView addGestureRecognizer:longPressGesture];
+	}
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
@@ -326,6 +332,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadData];
+	[self selectFirstTableViewCell];
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate delegate
@@ -346,6 +353,7 @@
     if ([self isForceTouchAvailable]) {
         self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
     }
+
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
@@ -389,7 +397,6 @@
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
 
-    [self selectFirstTableViewCell];
     [self enableLongPressGesture];
 
     [self reloadData];
@@ -397,6 +404,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+	self.splitViewController.preferredPrimaryColumnWidthFraction = 0.33f;
 
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
