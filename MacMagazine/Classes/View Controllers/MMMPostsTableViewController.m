@@ -14,6 +14,12 @@
 #import "SUNCoreDataStore.h"
 #import "UIViewController+ShareActivity.h"
 
+@interface MMMPostsTableViewController ()
+
+@property (nonatomic, weak) NSIndexPath *selectedIndexPath;
+
+@end
+
 #pragma mark MMMPostsTableViewController
 
 @implementation MMMPostsTableViewController
@@ -189,7 +195,7 @@
     
     __kindof MMMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
-
+    
     [cell layoutIfNeeded];
     
     if (CGRectGetWidth(cell.frame) != CGRectGetWidth(tableView.frame)) {
@@ -199,7 +205,7 @@
     }
 
     UIView *selectedBackgroundView = [[UIView alloc] init];
-    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.00];
+    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.13 green:0.79 blue:0.83 alpha:0.18];
     cell.selectedBackgroundView = selectedBackgroundView;
 
     return cell;
@@ -208,11 +214,15 @@
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-
-	NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
-    [self performSegueWithIdentifier:segueIdentifier sender:nil];
+    // check if the cell is already selected
+    if (self.selectedIndexPath != indexPath) {
+        [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
+        [self performSegueWithIdentifier:segueIdentifier sender:nil];
+    }
+    self.selectedIndexPath = indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
