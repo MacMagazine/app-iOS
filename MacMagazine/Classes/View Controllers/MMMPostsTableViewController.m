@@ -17,6 +17,7 @@
 @interface MMMPostsTableViewController ()
 
 @property (nonatomic, weak) NSIndexPath *selectedIndexPath;
+@property (nonatomic) int variableControlForFetchedResults;
 
 @end
 
@@ -169,7 +170,7 @@
 			[self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
 			[self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
 		});
-
+        self.variableControlForFetchedResults++;
     }
 }
 
@@ -342,7 +343,9 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadData];
-	[self selectFirstTableViewCell];
+    if(self.variableControlForFetchedResults == 0) {
+        [self selectFirstTableViewCell];
+    }
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate delegate
@@ -406,6 +409,7 @@
     self.refreshControl = refreshControl;
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
+    self.variableControlForFetchedResults = 0;
 
     [self enableLongPressGesture];
 
