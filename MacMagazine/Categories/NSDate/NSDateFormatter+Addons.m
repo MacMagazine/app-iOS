@@ -32,7 +32,10 @@
     if (!formatter) {
         formatter = [NSDateFormatter new];
         formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:templateString options:0 locale:[NSLocale currentLocale]];
-        [NSDateFormatter formatters][templateString] = formatter;
+		formatter.locale = [NSLocale localeWithLocaleIdentifier:@"pt_BR"];
+		formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:templateString options:0 locale:formatter.locale];
+
+		[NSDateFormatter formatters][templateString] = formatter;
     }
     return formatter;
 }
