@@ -18,6 +18,7 @@
 
 @property (nonatomic, weak) NSIndexPath *selectedIndexPath;
 @property (nonatomic) int variableControlForFetchedResults;
+@property (nonatomic) BOOL isRunningInFullScreen;
 
 @end
 
@@ -149,28 +150,29 @@
 - (void)selectFirstTableViewCell {
 	// check if the device is an iPad
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && self.fetchedResultsController.fetchedObjects.count > 0) {
-		
-		NSUInteger row = 0;
-		NSUInteger section = 0;
-
-		NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSelection"];
-		if (dict) {
-			NSDate *date = dict[@"date"];
-			// Verify if the last selected post is greater than 12 hours
-			NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:date];
-			int numberOfHours = secondsBetween / 3600;
-			if (numberOfHours < 12) {
-				row = [dict[@"selectedCellIndexPathRow"] integerValue];
-				section = [dict[@"selectedCellIndexPathSection"] integerValue];
-			}
-		}
-
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-			NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-			[self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
-			[self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
-		});
-        self.variableControlForFetchedResults++;
+        if(self.isRunningInFullScreen == YES) {
+            NSUInteger row = 0;
+            NSUInteger section = 0;
+            
+            NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSelection"];
+            if (dict) {
+                NSDate *date = dict[@"date"];
+                // Verify if the last selected post is greater than 12 hours
+                NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:date];
+                int numberOfHours = secondsBetween / 3600;
+                if (numberOfHours < 12) {
+                    row = [dict[@"selectedCellIndexPathRow"] integerValue];
+                    section = [dict[@"selectedCellIndexPathSection"] integerValue];
+                }
+            }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+                NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+                [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+            });
+            self.variableControlForFetchedResults++;
+        }
     }
 }
 
@@ -292,6 +294,9 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
+    
+    self.isRunningInFullScreen = CGRectEqualToRect([UIApplication sharedApplication].delegate.window.frame, [UIApplication sharedApplication].delegate.window.screen.bounds);
+    
     if ([self isForceTouchAvailable]) {
         if (!self.previewingContext) {
             self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
