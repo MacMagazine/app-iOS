@@ -31,8 +31,7 @@
     NSDateFormatter *formatter = [NSDateFormatter formatters][templateString];
     if (!formatter) {
         formatter = [NSDateFormatter new];
-        formatter.locale = [NSLocale localeWithLocaleIdentifier:@"pt_BR"];
-        formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:templateString options:0 locale:formatter.locale];
+        formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:templateString options:0 locale:[NSLocale currentLocale]];
         [NSDateFormatter formatters][templateString] = formatter;
     }
     return formatter;
