@@ -36,7 +36,7 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self commonInitialization];
