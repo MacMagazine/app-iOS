@@ -17,9 +17,9 @@
 		ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */; };
 		DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */; };
 		DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */; };
-		DB5F80EB1CECE04B002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		DB5F80EB1CECE04B002A20C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */; };
-		DB5F80F21CED27D2002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		DB5F80F21CED27D2002A20C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		DB5F80F81CED334B002A20C1 /* MMMCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80F71CED334B002A20C1 /* MMMCacheManager.m */; };
 		DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
@@ -776,7 +776,7 @@
 				EDFA9DC71B36353E00EE213C /* MMMPostPresenter.m in Sources */,
 				ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */,
 				47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */,
-				DB5F80F21CED27D2002A20C1 /* (null) in Sources */,
+				DB5F80F21CED27D2002A20C1 /* BuildFile in Sources */,
 				DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,7 +786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED3AD2E81CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m in Sources */,
-				DB5F80EB1CECE04B002A20C1 /* (null) in Sources */,
+				DB5F80EB1CECE04B002A20C1 /* BuildFile in Sources */,
 				ED1813981CE99523005DE994 /* MMMNotificationsHandlerTests.m in Sources */,
 				DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */,
 			);
