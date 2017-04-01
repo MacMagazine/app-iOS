@@ -14,6 +14,14 @@
 #import "SUNCoreDataStore.h"
 #import "UIViewController+ShareActivity.h"
 
+@interface MMMPostsTableViewController ()
+
+@property (nonatomic, weak) NSIndexPath *selectedIndexPath;
+@property (nonatomic) int variableControlForFetchedResults;
+@property (nonatomic) BOOL isRunningInFullScreen;
+
+@end
+
 #pragma mark MMMPostsTableViewController
 
 @implementation MMMPostsTableViewController
@@ -142,28 +150,29 @@
 - (void)selectFirstTableViewCell {
 	// check if the device is an iPad
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && self.fetchedResultsController.fetchedObjects.count > 0) {
-		
-		NSUInteger row = 0;
-		NSUInteger section = 0;
-
-		NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSelection"];
-		if (dict) {
-			NSDate *date = dict[@"date"];
-			// Verify if the last selected post is greater than 12 hours
-			NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:date];
-			int numberOfHours = secondsBetween / 3600;
-			if (numberOfHours < 12) {
-				row = [dict[@"selectedCellIndexPathRow"] integerValue];
-				section = [dict[@"selectedCellIndexPathSection"] integerValue];
-			}
-		}
-
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-			NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-			[self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
-			[self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
-		});
-
+        if(self.isRunningInFullScreen == YES) {
+            NSUInteger row = 0;
+            NSUInteger section = 0;
+            
+            NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSelection"];
+            if (dict) {
+                NSDate *date = dict[@"date"];
+                // Verify if the last selected post is greater than 12 hours
+                NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:date];
+                int numberOfHours = secondsBetween / 3600;
+                if (numberOfHours < 12) {
+                    row = [dict[@"selectedCellIndexPathRow"] integerValue];
+                    section = [dict[@"selectedCellIndexPathSection"] integerValue];
+                }
+            }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+                NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+                [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+            });
+            self.variableControlForFetchedResults++;
+        }
     }
 }
 
@@ -189,7 +198,7 @@
     
     __kindof MMMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
-
+    
     [cell layoutIfNeeded];
     
     if (CGRectGetWidth(cell.frame) != CGRectGetWidth(tableView.frame)) {
@@ -199,7 +208,7 @@
     }
 
     UIView *selectedBackgroundView = [[UIView alloc] init];
-    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.00];
+    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.13 green:0.79 blue:0.83 alpha:0.18];
     cell.selectedBackgroundView = selectedBackgroundView;
 
     return cell;
@@ -208,11 +217,15 @@
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-
-	NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
-    [self performSegueWithIdentifier:segueIdentifier sender:nil];
+    // check if the cell is already selected
+    if (self.selectedIndexPath != indexPath) {
+        [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
+        [self performSegueWithIdentifier:segueIdentifier sender:nil];
+    }
+    self.selectedIndexPath = indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -281,6 +294,9 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
+    
+    self.isRunningInFullScreen = CGRectEqualToRect([UIApplication sharedApplication].delegate.window.frame, [UIApplication sharedApplication].delegate.window.screen.bounds);
+    
     if ([self isForceTouchAvailable]) {
         if (!self.previewingContext) {
             self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
@@ -332,7 +348,9 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadData];
-	[self selectFirstTableViewCell];
+    if(self.variableControlForFetchedResults == 0) {
+        [self selectFirstTableViewCell];
+    }
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate delegate
@@ -396,6 +414,7 @@
     self.refreshControl = refreshControl;
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
+    self.variableControlForFetchedResults = 0;
 
     [self enableLongPressGesture];
 
