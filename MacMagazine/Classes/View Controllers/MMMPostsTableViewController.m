@@ -218,7 +218,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // check if the cell is already selected
-    if (self.selectedIndexPath != indexPath) {
+	self.postID = nil;		// Used only when received a push notification
+
+	if (self.selectedIndexPath != indexPath) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
