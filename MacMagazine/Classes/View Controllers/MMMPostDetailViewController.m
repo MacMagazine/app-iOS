@@ -110,6 +110,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                    target:self
                                                                                    action:@selector(actionButtonTapped:)];
+        [rightItem setTintColor:[UIColor colorWithRed:0.00 green:0.55 blue:0.80 alpha:1.0]];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
 
