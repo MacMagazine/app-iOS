@@ -208,18 +208,18 @@
     }
 
     UIView *selectedBackgroundView = [[UIView alloc] init];
-    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.13 green:0.79 blue:0.83 alpha:0.18];
+    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:((float)0/(float)255) green:((float)138/(float)255) blue:((float)202/(float)255) alpha:0.3];
     cell.selectedBackgroundView = selectedBackgroundView;
 
-    return cell;
+	return cell;
 }
 
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // check if the cell is already selected
 	self.postID = nil;		// Used only when received a push notification
 
+	// check if the cell is already selected
 	if (self.selectedIndexPath != indexPath) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -227,7 +227,8 @@
         NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
         [self performSegueWithIdentifier:segueIdentifier sender:nil];
     }
-    self.selectedIndexPath = indexPath;
+
+	self.selectedIndexPath = indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
