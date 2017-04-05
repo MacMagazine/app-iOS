@@ -333,12 +333,17 @@
         if (!postURL) {
             return;
         }
+        
+        NSURL *url = [NSURL URLWithString:[post thumbnail]];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
 
         NSMutableArray *activityItems = [[NSMutableArray alloc] init];
         if (post) {
             [activityItems addObject:post.title];
         }
         [activityItems addObject:postURL];
+        [activityItems addObject:postThumbnail];
 
         [self mmm_shareActivityItems:activityItems completion:^(NSString * _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

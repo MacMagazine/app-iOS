@@ -17,9 +17,9 @@
 		ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */; };
 		DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */; };
 		DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */; };
-		DB5F80EB1CECE04B002A20C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		DB5F80EB1CECE04B002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */; };
-		DB5F80F21CED27D2002A20C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		DB5F80F21CED27D2002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		DB5F80F81CED334B002A20C1 /* MMMCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80F71CED334B002A20C1 /* MMMCacheManager.m */; };
 		DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
@@ -557,8 +557,7 @@
 				TargetAttributes = {
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = 7PXVC8PJ97;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -776,7 +775,7 @@
 				EDFA9DC71B36353E00EE213C /* MMMPostPresenter.m in Sources */,
 				ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */,
 				47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */,
-				DB5F80F21CED27D2002A20C1 /* BuildFile in Sources */,
+				DB5F80F21CED27D2002A20C1 /* (null) in Sources */,
 				DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,7 +785,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED3AD2E81CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m in Sources */,
-				DB5F80EB1CECE04B002A20C1 /* BuildFile in Sources */,
+				DB5F80EB1CECE04B002A20C1 /* (null) in Sources */,
 				ED1813981CE99523005DE994 /* MMMNotificationsHandlerTests.m in Sources */,
 				DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */,
 			);
@@ -927,14 +926,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 6Y8FN886HF;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "243d6539-ee54-4172-84a1-969ed56f7e18";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -946,15 +945,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a8acbf3-afe1-4cf7-8176-806c71140c4b";
-				PROVISIONING_PROFILE_SPECIFIER = "MacMagazine AppStore";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
