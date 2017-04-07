@@ -63,6 +63,10 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     if (!self.webView.URL) {
         return;
     }
+    
+    NSURL *url = [NSURL URLWithString:[self.post thumbnail]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
 
     UIBarButtonItem *actionItem = (UIBarButtonItem *)sender;
     NSMutableArray *activityItems = [[NSMutableArray alloc] init];
@@ -70,6 +74,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         [activityItems addObject:self.post.title];
     }
     [activityItems addObject:self.webView.URL];
+    [activityItems addObject:postThumbnail];
     [self mmm_shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
 }
 
