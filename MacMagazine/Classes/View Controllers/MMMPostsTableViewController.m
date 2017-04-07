@@ -220,7 +220,7 @@
 	self.postID = nil;		// Used only when received a push notification
 
 	// check if the cell is already selected
-	if (self.selectedIndexPath != indexPath) {
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone || self.selectedIndexPath != indexPath) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
