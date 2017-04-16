@@ -111,6 +111,13 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
+    UIView *titleView = nil;
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
+    [activityView startAnimating];
+    titleView = activityView;
+    self.navigationItem.titleView = titleView;
+    
     if (self.post || self.postURL) {
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                    target:self
@@ -118,22 +125,19 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         [rightItem setTintColor:[UIColor colorWithRed:0.00 green:0.55 blue:0.80 alpha:1.0]];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
-
-    UIView *titleView = nil;
+    
     if (self.webView.isLoading) {
-        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
         [activityView startAnimating];
-
         titleView = activityView;
+        self.navigationItem.titleView = titleView;
     } else {
+        [activityView stopAnimating];
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             // check if the device is an iPhone
             titleView = [[MMMLogoImageView alloc] init];
+            self.navigationItem.titleView = titleView;
         }
     }
-
-    self.navigationItem.titleView = titleView;
 }
 
 - (void)performActionForLinkClickWithType:(MMMLinkClickType)linkClickType URL:(NSURL *)URL {
