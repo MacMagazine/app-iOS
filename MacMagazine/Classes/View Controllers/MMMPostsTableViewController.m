@@ -17,6 +17,7 @@
 @interface MMMPostsTableViewController ()
 
 @property (nonatomic, weak) NSIndexPath *selectedIndexPath;
+@property (nonatomic, weak) NSIndexPath *selectedPostIndexPath;
 @property (nonatomic) int variableControlForFetchedResults;
 @property (nonatomic) BOOL isRunningInFullScreen;
 
@@ -63,6 +64,24 @@
 }
 
 #pragma mark - Instance Methods
+
+- (void)sharePost {
+    MMMPost *post = [self.fetchedResultsController objectAtIndexPath:self.selectedPostIndexPath];
+    NSURL *postURL = [NSURL URLWithString:post.link];
+    if (!postURL) {
+        return;
+    }
+    
+    NSURL *url = [NSURL URLWithString:[post thumbnail]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
+    
+    NSMutableArray *activityItems = [[NSMutableArray alloc] init];
+    [activityItems addObject:post.title];
+    [activityItems addObject:postURL];
+    [activityItems addObject:postThumbnail];
+    [self mmm_shareActivityItems:activityItems completion:nil];
+}
 
 - (BOOL)canFetchMoreData {
     if (self.activityIndicatorView.isAnimating) {
@@ -130,7 +149,6 @@
 
 	if (self.postID) {
 		detailViewController.postURL = [NSURL URLWithString:self.postID];
-
 	} else {
 		NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
 		if (selectedIndexPath) {
@@ -217,7 +235,8 @@
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	self.postID = nil;		// Used only when received a push notification
+    // Used only when received a push notification
+    self.postID = nil;
 
 	// check if the cell is already selected
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone || self.selectedIndexPath != indexPath) {
@@ -283,6 +302,9 @@
     if (indexPath) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         MMMPostDetailViewController *previewViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([MMMPostDetailViewController class])];
+        
+        // Used only to share post through preview action
+        self.selectedPostIndexPath = indexPath;
         
         // send data to previewViewController
         previewViewController.post = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -383,6 +405,12 @@
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sharePost)
+                                                 name:@"sharePost"
+                                               object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applyRefreshControlFix)
                                                  name:UIApplicationDidBecomeActiveNotification
