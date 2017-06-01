@@ -126,6 +126,11 @@
     [TSMessage showNotificationWithTitle:error.localizedDescription
                                 subtitle:error.localizedFailureReason
                                     type:TSMessageNotificationTypeError];
+
+	// Hide error message after 0.6s
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+		[TSMessage dismissActiveNotification];
+	});
 }
 
 - (void)reloadData {
@@ -185,10 +190,13 @@
             }
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-                NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-                [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
-                [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
-            });
+				NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+				if (section > [self.tableView numberOfSections] || row > [self.tableView numberOfRowsInSection:section]) {
+					selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+				}
+				[self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+				[self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+			});
             self.variableControlForFetchedResults++;
         }
     }
