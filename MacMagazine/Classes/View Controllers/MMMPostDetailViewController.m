@@ -251,4 +251,9 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)prefersStatusBarHidden {
+	[self setNeedsStatusBarAppearanceUpdate];
+	return NO;
+}
+
 @end

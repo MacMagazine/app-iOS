@@ -82,15 +82,17 @@
 #pragma mark - Handle Orientation
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    id presentedViewController = [window.rootViewController presentedViewController];
+
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+
+	id presentedViewController = [window.rootViewController presentedViewController];
     NSString *className = presentedViewController ? NSStringFromClass([presentedViewController class]) : nil;
-    
+	
     // change orientation when app is playing videos
-    if (window && [className isEqualToString:@"AVFullScreenViewController"]) {
-        return UIInterfaceOrientationMaskAll;
-    } else {
-        return UIInterfaceOrientationMaskPortrait;
-    }
+	if ((window && [className isEqualToString:@"AVFullScreenViewController"]) || ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
+		return UIInterfaceOrientationMaskAll;
+	}
+	return UIInterfaceOrientationMaskPortrait;
 }
 
 @end
