@@ -79,4 +79,18 @@
     [self.notificationsHandler applicationDidReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
 
+#pragma mark - Handle Orientation
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    id presentedViewController = [window.rootViewController presentedViewController];
+    NSString *className = presentedViewController ? NSStringFromClass([presentedViewController class]) : nil;
+    
+    // change orientation when app is playing videos
+    if (window && [className isEqualToString:@"AVFullScreenViewController"]) {
+        return UIInterfaceOrientationMaskAll;
+    } else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
 @end

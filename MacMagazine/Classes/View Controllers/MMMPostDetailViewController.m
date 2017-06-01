@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 @interface MMMPostDetailViewController () <WKNavigationDelegate, WKUIDelegate>
 
 @property (nonatomic, weak) WKWebView *webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIView *titleView;
 
 @end
 
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     if (!self.webView.URL) {
         return;
     }
-    
+
     NSURL *url = [NSURL URLWithString:[self.post thumbnail]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
@@ -76,6 +78,20 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [activityItems addObject:self.webView.URL];
     [activityItems addObject:postThumbnail];
     [self mmm_shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
+}
+
+#pragma mark - Preview Actions
+
+- (NSArray<id> *)previewActionItems {
+    UIPreviewAction *sharePreviewAction = [UIPreviewAction actionWithTitle:@"Compartilhar" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"sharePost" object:nil];
+    }];
+
+    UIPreviewAction *cancelPreviewAction = [UIPreviewAction actionWithTitle:@"Cancelar" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+    }];
+
+    NSArray *previewActions = @[sharePreviewAction, cancelPreviewAction];
+    return previewActions;
 }
 
 #pragma mark - Instance Methods
@@ -111,6 +127,13 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
+    self.titleView = nil;
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
+    [self.activityView startAnimating];
+    self.titleView = self.activityView;
+    self.navigationItem.titleView = self.titleView;
+
     if (self.post || self.postURL) {
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                    target:self
@@ -119,21 +142,18 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         self.navigationItem.rightBarButtonItem = rightItem;
     }
 
-    UIView *titleView = nil;
     if (self.webView.isLoading) {
-        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
-        [activityView startAnimating];
-
-        titleView = activityView;
+        [self.activityView startAnimating];
+        self.titleView = self.activityView;
+        self.navigationItem.titleView = self.titleView;
     } else {
+        [self.activityView stopAnimating];
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             // check if the device is an iPhone
-            titleView = [[MMMLogoImageView alloc] init];
+            self.titleView = [[MMMLogoImageView alloc] init];
+            self.navigationItem.titleView = self.titleView;
         }
     }
-
-    self.navigationItem.titleView = titleView;
 }
 
 - (void)performActionForLinkClickWithType:(MMMLinkClickType)linkClickType URL:(NSURL *)URL {
@@ -171,7 +191,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         MMMLinkClickType linkClickType = ([targetURL.absoluteString containsString:MMMBaseURL] || [targetURL.absoluteString containsString:MMMDisqusBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
         [self performActionForLinkClickWithType:linkClickType URL:targetURL];
     }
-    
+
     return nil;
 }
 
