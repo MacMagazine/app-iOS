@@ -66,24 +66,35 @@
 
 #pragma mark - Instance Methods
 
+- (void)selectNextPost {
+    NSInteger currentIndexPath = self.selectedIndexPath.row;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
+    [self selectTableViewCellAtIndexPath:currentIndexPath+=1];
+}
+
+- (void)selectPreviousPost {
+    NSInteger currentIndexPath = self.selectedIndexPath.row;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
+    [self selectTableViewCellAtIndexPath:currentIndexPath-=1];
+}
+
 - (void)shortCutAction {
     if(self.isTableViewCellSelected == YES) {
         if(self.selectedIndexPath.row != 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
-            [self selectFirstTableViewCellFromShortCut];
+            [self selectTableViewCellAtIndexPath:0];
         }
     } else {
-        [self selectFirstTableViewCellFromShortCut];
+        [self selectTableViewCellAtIndexPath:0];
     }
 }
 
-- (void)selectFirstTableViewCellFromShortCut {
+- (void)selectTableViewCellAtIndexPath:(NSInteger)indexPathRow {
     double delayInSeconds = 0.5;
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-            NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:indexPathRow inSection:0];
             [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
             [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
         });
@@ -176,11 +187,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	UINavigationController *navigationController = segue.destinationViewController;
 	MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
-
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    detailViewController.currentTableViewIndexPathRow = selectedIndexPath.row;
+    
 	if (self.postID) {
 		detailViewController.postURL = [NSURL URLWithString:self.postID];
 	} else {
-		NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
 		if (selectedIndexPath) {
 			detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
 		}
@@ -439,6 +451,16 @@
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(selectNextPost)
+                                                 name:@"selectNextPost"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(selectPreviousPost)
+                                                 name:@"selectPreviousPost"
+                                               object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(shortCutAction)
                                                  name:@"shortCutAction"

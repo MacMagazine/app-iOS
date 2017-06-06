@@ -80,6 +80,14 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self mmm_shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
 }
 
+- (void)actionNextPost:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectNextPost" object:nil];
+}
+
+- (void)actionPreviousPost:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectPreviousPost" object:nil];
+}
+
 #pragma mark - Preview Actions
 
 - (NSArray<id> *)previewActionItems {
@@ -146,7 +154,32 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
                                                                                    target:self
                                                                                    action:@selector(actionButtonTapped:)];
         [rightItem setTintColor:[UIColor colorWithRed:0.00 green:0.55 blue:0.80 alpha:1.0]];
-        self.navigationItem.rightBarButtonItem = rightItem;
+        
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/13, self.view.frame.size.width/13)];
+            [nextButton setImage:[UIImage imageNamed:@"nextPostIcon.png"] forState:UIControlStateNormal];
+            [nextButton addTarget:self action:@selector(actionNextPost:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *nextPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+            
+            UIButton *previousButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/13, self.view.frame.size.width/13)];
+            [previousButton setImage:[UIImage imageNamed:@"previousPostIcon.png"] forState:UIControlStateNormal];
+            [previousButton addTarget:self action:@selector(actionPreviousPost:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *previousPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:previousButton];
+            
+            if(self.currentTableViewIndexPathRow == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [previousButton setEnabled:NO];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [previousButton setEnabled:YES];
+                });
+            }
+            
+            self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:rightItem, nextPostRightItem, previousPostRightItem, nil];
+        } else {
+            self.navigationItem.rightBarButtonItem = rightItem;
+        }
     }
 
     if (self.webView.isLoading) {
