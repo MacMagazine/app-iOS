@@ -20,6 +20,7 @@
 @property (nonatomic, weak) NSIndexPath *selectedPostIndexPath;
 @property (nonatomic) int variableControlForFetchedResults;
 @property (nonatomic) BOOL isRunningInFullScreen;
+@property (nonatomic) BOOL isTableViewCellSelected;
 
 @end
 
@@ -66,7 +67,18 @@
 #pragma mark - Instance Methods
 
 - (void)shortCutAction {
-    double delayInSeconds = 0.2;
+    if(self.isTableViewCellSelected == YES) {
+        if(self.selectedIndexPath.row != 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
+            [self selectFirstTableViewCellFromShortCut];
+        }
+    } else {
+        [self selectFirstTableViewCellFromShortCut];
+    }
+}
+
+- (void)selectFirstTableViewCellFromShortCut {
+    double delayInSeconds = 0.5;
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
@@ -258,7 +270,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Used only when received a push notification
     self.postID = nil;
-
+    self.isTableViewCellSelected = YES;
+    
 	// check if the cell is already selected
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone || self.selectedIndexPath != indexPath) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
@@ -476,6 +489,7 @@
 
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
     self.variableControlForFetchedResults = 0;
+    self.isTableViewCellSelected = NO;
 
     [self enableLongPressGesture];
 
@@ -491,6 +505,8 @@
     if (selectedIndexPath) {
         [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:animated];
     }
+    
+    self.isTableViewCellSelected = NO;
 
     [self.navigationController setToolbarHidden:YES animated:animated];
     self.navigationController.hidesBarsOnSwipe = NO;

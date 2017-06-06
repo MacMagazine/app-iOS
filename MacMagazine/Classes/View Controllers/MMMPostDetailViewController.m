@@ -96,6 +96,13 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 #pragma mark - Instance Methods
 
+- (void)dismissDetailView {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+        [(UINavigationController *)self.splitViewController.viewControllers[0]
+         popToRootViewControllerAnimated:YES];
+    });
+}
+
 - (void)setupWebView {
     if (self.webView) {
         [self.webView stopLoading];
@@ -229,6 +236,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dismissDetailView)
+                                                 name:@"dismissDetailView"
+                                               object:nil];
 
     [self setupWebView];
 
