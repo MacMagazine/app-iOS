@@ -65,6 +65,19 @@
 
 #pragma mark - Instance Methods
 
+- (void)shortCutAction {
+    double delayInSeconds = 0.2;
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+            NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+            [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+        });
+    });
+}
+
 - (void)sharePost {
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:self.selectedPostIndexPath];
     NSURL *postURL = [NSURL URLWithString:post.link];
@@ -413,6 +426,10 @@
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(shortCutAction)
+                                                 name:@"shortCutAction"
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(sharePost)
@@ -467,7 +484,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
 	self.splitViewController.preferredPrimaryColumnWidthFraction = 0.33f;
 
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;

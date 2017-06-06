@@ -7,6 +7,7 @@
 #import "MMMCacheManager.h"
 #import "MMMNotificationsAPI.h"
 #import "MMMNotificationsHandler.h"
+#import "MMMPostsTableViewController.h"
 #import "SUNCoreDataStore.h"
 
 @interface MMMAppDelegate ()
@@ -77,6 +78,14 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [self.notificationsHandler applicationDidReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+#pragma mark - ShortCut
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    if([shortcutItem.type isEqualToString:@"open.last.post"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shortCutAction" object:self];
+    }
 }
 
 #pragma mark - Handle Orientation

@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>127</string>
+	<string>158</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -58,6 +58,17 @@
 		<string>SF-UI-Text-Regular.otf</string>
 		<string>SF-UI-Text-Semibold.otf</string>
 		<string>SF-UI-Text-SemiboldItalic.otf</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>UIApplicationShortcutIconTypeRecent</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Abrir Último Post</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>open.last.post</string>
+		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
