@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>287</string>
+	<string>333</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -65,7 +65,7 @@
 			<key>UIApplicationShortcutItemIconFile</key>
 			<string>UIApplicationShortcutIconTypeRecent</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Abrir Último Post</string>
+			<string>Abrir o último post</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>open.last.post</string>
 		</dict>

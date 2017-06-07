@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "nextPostIcon1x.png",
+      "filename" : "shareIconSelected1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "nextPostIcon2x.png",
+      "filename" : "shareIconSelected2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "nextPostIcon3x.png",
+      "filename" : "shareIconSelected3x.png",
       "scale" : "3x"
     }
   ],
