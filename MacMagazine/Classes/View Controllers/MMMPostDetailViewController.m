@@ -148,6 +148,19 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self.activityView startAnimating];
     self.titleView = self.activityView;
     self.navigationItem.titleView = self.titleView;
+    
+    if (self.webView.isLoading) {
+        [self.activityView startAnimating];
+        self.titleView = self.activityView;
+        self.navigationItem.titleView = self.titleView;
+    } else {
+        [self.activityView stopAnimating];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            // check if the device is an iPhone
+            self.titleView = [[MMMLogoImageView alloc] init];
+            self.navigationItem.titleView = self.titleView;
+        }
+    }
 
     if (self.post || self.postURL) {
         UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
@@ -200,19 +213,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
             self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:self.rightItem, nextPostRightItem, previousPostRightItem, nil];
         } else {
             self.navigationItem.rightBarButtonItem = self.rightItem;
-        }
-    }
-
-    if (self.webView.isLoading) {
-        [self.activityView startAnimating];
-        self.titleView = self.activityView;
-        self.navigationItem.titleView = self.titleView;
-    } else {
-        [self.activityView stopAnimating];
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            // check if the device is an iPhone
-            self.titleView = [[MMMLogoImageView alloc] init];
-            self.navigationItem.titleView = self.titleView;
         }
     }
 }
