@@ -50,6 +50,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     MMMPostDetailViewController *destinationViewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
     destinationViewController.postURL = URL;
     destinationViewController.post = nil;
+    destinationViewController.isURLOpendedInternally = YES;
     [self.navigationController pushViewController:destinationViewController animated:YES];
 }
 
@@ -66,8 +67,14 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     if (!self.webView.URL) {
         return;
     }
-
-    NSURL *url = [NSURL URLWithString:[self.post thumbnail]];
+    
+    NSURL *url = [[NSURL alloc] init];
+    if([self.post thumbnail] == nil) {
+        url = [NSURL URLWithString:self.webView.URL.absoluteString];
+    } else {
+        url = [NSURL URLWithString:[self.post thumbnail]];
+    }
+    
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
 
@@ -200,7 +207,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
             
             UIBarButtonItem *previousPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:previousButtonView];
             
-            if(self.currentTableViewIndexPathRow == 0) {
+            if((self.currentTableViewIndexPath.row == 0 && self.currentTableViewIndexPath.section == 0) && self.isURLOpendedInternally == NO) {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     [previousButton setEnabled:NO];
                 });

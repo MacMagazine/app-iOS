@@ -67,34 +67,48 @@
 #pragma mark - Instance Methods
 
 - (void)selectNextPost {
-    NSInteger currentIndexPath = self.selectedIndexPath.row;
+    NSInteger currentIndexPathRow = self.selectedIndexPath.row;
+    NSInteger currentIndexPathSection = self.selectedIndexPath.section;
+    NSInteger totalofRowsRowInSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section] - 1;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
-    [self selectTableViewCellAtIndexPath:currentIndexPath+=1];
+    
+    if(self.selectedIndexPath.row == (totalofRowsRowInSection)) {
+        [self selectTableViewCellAtIndexPath:0 andTheCurrentIndexPathSection:currentIndexPathSection+=1];
+    } else {
+        [self selectTableViewCellAtIndexPath:currentIndexPathRow+=1 andTheCurrentIndexPathSection:currentIndexPathSection];
+    }
 }
 
 - (void)selectPreviousPost {
-    NSInteger currentIndexPath = self.selectedIndexPath.row;
+    NSInteger currentIndexPathRow = self.selectedIndexPath.row;
+    NSInteger currentIndexPathSection = self.selectedIndexPath.section;
+    NSInteger totalOfRowsInLastSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section - 1] - 1;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
-    [self selectTableViewCellAtIndexPath:currentIndexPath-=1];
+    
+    if(self.selectedIndexPath.row == 0) {
+        [self selectTableViewCellAtIndexPath:totalOfRowsInLastSection andTheCurrentIndexPathSection:currentIndexPathSection - 1];
+    } else {
+        [self selectTableViewCellAtIndexPath:currentIndexPathRow-=1 andTheCurrentIndexPathSection:currentIndexPathSection];
+    }
 }
 
 - (void)shortCutAction {
     if(self.isTableViewCellSelected == YES) {
         if(self.selectedIndexPath.row != 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
-            [self selectTableViewCellAtIndexPath:0];
+            [self selectTableViewCellAtIndexPath:0 andTheCurrentIndexPathSection:0];
         }
     } else {
-        [self selectTableViewCellAtIndexPath:0];
+        [self selectTableViewCellAtIndexPath:0 andTheCurrentIndexPathSection:0];
     }
 }
 
-- (void)selectTableViewCellAtIndexPath:(NSInteger)indexPathRow {
+- (void)selectTableViewCellAtIndexPath:(NSInteger)indexPathRow andTheCurrentIndexPathSection:(NSInteger)indexPathSection {
     double delayInSeconds = 0.5;
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-            NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:indexPathRow inSection:0];
+            NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:indexPathRow inSection:indexPathSection];
             [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
             [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
         });
@@ -177,6 +191,8 @@
     [MMMPost getWithPage:1 success:^(NSArray *response) {
         self.numberOfResponseObjectsPerRequest = response.count;
         self.nextPage = 2;
+        NSIndexPath *top = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
+        [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.refreshControl endRefreshing];
     } failure:^(NSError *error) {
         [self handleError:error];
@@ -188,7 +204,8 @@
 	UINavigationController *navigationController = segue.destinationViewController;
 	MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-    detailViewController.currentTableViewIndexPathRow = selectedIndexPath.row;
+    detailViewController.currentTableViewIndexPath = selectedIndexPath;
+    detailViewController.isURLOpendedInternally = NO;
     
 	if (self.postID) {
 		detailViewController.postURL = [NSURL URLWithString:self.postID];
