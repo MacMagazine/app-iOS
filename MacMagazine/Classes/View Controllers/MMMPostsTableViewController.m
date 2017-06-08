@@ -191,9 +191,9 @@
     [MMMPost getWithPage:1 success:^(NSArray *response) {
         self.numberOfResponseObjectsPerRequest = response.count;
         self.nextPage = 2;
-        NSIndexPath *top = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
-        [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.refreshControl endRefreshing];
+        NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
     } failure:^(NSError *error) {
         [self handleError:error];
         [self.refreshControl endRefreshing];
