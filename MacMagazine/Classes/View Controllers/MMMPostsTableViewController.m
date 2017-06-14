@@ -61,6 +61,9 @@
 #pragma mark - Actions
 
 - (IBAction)settingsAction:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 

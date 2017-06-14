@@ -64,6 +64,9 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - Button Actions
 
 - (void)actionButtonTapped:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
     if (!self.webView.URL) {
         return;
     }
@@ -88,10 +91,16 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)actionNextPost:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"selectNextPost" object:nil];
 }
 
 - (void)actionPreviousPost:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"selectPreviousPost" object:nil];
 }
 
@@ -99,10 +108,16 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 - (NSArray<id> *)previewActionItems {
     UIPreviewAction *sharePreviewAction = [UIPreviewAction actionWithTitle:@"Compartilhar" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        UINotificationFeedbackGenerator *generator = [[UINotificationFeedbackGenerator alloc] init];
+        [generator prepare];
+        [generator notificationOccurred:(UINotificationFeedbackTypeSuccess)];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"sharePost" object:nil];
     }];
 
     UIPreviewAction *cancelPreviewAction = [UIPreviewAction actionWithTitle:@"Cancelar" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+        [generator prepare];
+        [generator impactOccurred];
     }];
 
     NSArray *previewActions = @[sharePreviewAction, cancelPreviewAction];
