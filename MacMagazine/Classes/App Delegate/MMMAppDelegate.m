@@ -49,6 +49,9 @@
     self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
 #endif
 
+    NSInteger appNumberOfCalls = [[NSUserDefaults standardUserDefaults] integerForKey:@"appNumberOfCalls"];
+    [[NSUserDefaults standardUserDefaults] setInteger:appNumberOfCalls+1 forKey:@"appNumberOfCalls"];
+    
     self.window.tintColor = [UIColor colorWithRed:0.25 green:0.66 blue:0.96 alpha:1];
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.00 green:0.55 blue:0.80 alpha:1.0]];
     self.notificationsHandler = [[MMMNotificationsHandler alloc] initWithNavigationController:(UINavigationController *)self.window.rootViewController];
