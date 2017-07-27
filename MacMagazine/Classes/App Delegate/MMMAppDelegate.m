@@ -7,6 +7,7 @@
 #import "MMMCacheManager.h"
 #import "MMMNotificationsAPI.h"
 #import "MMMNotificationsHandler.h"
+#import "MMMPostsTableViewController.h"
 #import "SUNCoreDataStore.h"
 
 @interface MMMAppDelegate ()
@@ -48,6 +49,9 @@
     self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
 #endif
 
+    NSInteger appNumberOfCalls = [[NSUserDefaults standardUserDefaults] integerForKey:@"appNumberOfCalls"];
+    [[NSUserDefaults standardUserDefaults] setInteger:appNumberOfCalls+1 forKey:@"appNumberOfCalls"];
+    
     self.window.tintColor = [UIColor colorWithRed:0.25 green:0.66 blue:0.96 alpha:1];
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.00 green:0.55 blue:0.80 alpha:1.0]];
     self.notificationsHandler = [[MMMNotificationsHandler alloc] initWithNavigationController:(UINavigationController *)self.window.rootViewController];
@@ -77,6 +81,14 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [self.notificationsHandler applicationDidReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+#pragma mark - ShortCut
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    if([shortcutItem.type isEqualToString:@"open.last.post"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shortCutAction" object:self];
+    }
 }
 
 #pragma mark - Handle Orientation

@@ -24,6 +24,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIView *titleView;
+@property (nonatomic) UIBarButtonItem *rightItem;
 
 @end
 
@@ -49,6 +50,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     MMMPostDetailViewController *destinationViewController = [[self storyboard] instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
     destinationViewController.postURL = URL;
     destinationViewController.post = nil;
+    destinationViewController.isURLOpendedInternally = YES;
     [self.navigationController pushViewController:destinationViewController animated:YES];
 }
 
@@ -62,32 +64,60 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - Button Actions
 
 - (void)actionButtonTapped:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
     if (!self.webView.URL) {
         return;
     }
-
-    NSURL *url = [NSURL URLWithString:[self.post thumbnail]];
+    
+    NSURL *url = [[NSURL alloc] init];
+    if([self.post thumbnail] == nil) {
+        url = [NSURL URLWithString:self.webView.URL.absoluteString];
+    } else {
+        url = [NSURL URLWithString:[self.post thumbnail]];
+    }
+    
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
 
-    UIBarButtonItem *actionItem = (UIBarButtonItem *)sender;
     NSMutableArray *activityItems = [[NSMutableArray alloc] init];
     if (self.post) {
         [activityItems addObject:self.post.title];
     }
     [activityItems addObject:self.webView.URL];
     [activityItems addObject:postThumbnail];
-    [self mmm_shareActivityItems:activityItems fromBarButtonItem:actionItem completion:nil];
+    [self mmm_shareActivityItems:activityItems fromBarButtonItem:self.rightItem completion:nil];
+}
+
+- (void)actionNextPost:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectNextPost" object:nil];
+}
+
+- (void)actionPreviousPost:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectPreviousPost" object:nil];
 }
 
 #pragma mark - Preview Actions
 
 - (NSArray<id> *)previewActionItems {
     UIPreviewAction *sharePreviewAction = [UIPreviewAction actionWithTitle:@"Compartilhar" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        UINotificationFeedbackGenerator *generator = [[UINotificationFeedbackGenerator alloc] init];
+        [generator prepare];
+        [generator notificationOccurred:(UINotificationFeedbackTypeSuccess)];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"sharePost" object:nil];
     }];
 
     UIPreviewAction *cancelPreviewAction = [UIPreviewAction actionWithTitle:@"Cancelar" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+        [generator prepare];
+        [generator impactOccurred];
     }];
 
     NSArray *previewActions = @[sharePreviewAction, cancelPreviewAction];
@@ -95,6 +125,13 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 #pragma mark - Instance Methods
+
+- (void)dismissDetailView {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+        [(UINavigationController *)self.splitViewController.viewControllers[0]
+         popToRootViewControllerAnimated:YES];
+    });
+}
 
 - (void)setupWebView {
     if (self.webView) {
@@ -133,15 +170,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self.activityView startAnimating];
     self.titleView = self.activityView;
     self.navigationItem.titleView = self.titleView;
-
-    if (self.post || self.postURL) {
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                   target:self
-                                                                                   action:@selector(actionButtonTapped:)];
-        [rightItem setTintColor:[UIColor colorWithRed:0.00 green:0.55 blue:0.80 alpha:1.0]];
-        self.navigationItem.rightBarButtonItem = rightItem;
-    }
-
+    
     if (self.webView.isLoading) {
         [self.activityView startAnimating];
         self.titleView = self.activityView;
@@ -152,6 +181,69 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
             // check if the device is an iPhone
             self.titleView = [[MMMLogoImageView alloc] init];
             self.navigationItem.titleView = self.titleView;
+        }
+    }
+
+    if (self.post || self.postURL) {
+        UIButton *rightButton = [[UIButton alloc] init];
+        [rightButton setImage:[UIImage imageNamed:@"shareIcon.png"] forState:UIControlStateNormal];
+        [rightButton setImage:[UIImage imageNamed:@"shareIconSelected.png"] forState:UIControlStateHighlighted];
+        [rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // UIView just to handle the UIBarButtonItem position
+        UIView *rightButtonView = [[UIView alloc] init];
+        
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            [rightButton setFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
+            [rightButtonView setFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
+            
+            rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -10, 0);
+            [rightButtonView addSubview:rightButton];
+            self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+            
+            UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
+            [nextButton setImage:[UIImage imageNamed:@"nextPostIcon.png"] forState:UIControlStateNormal];
+            [nextButton setImage:[UIImage imageNamed:@"nextPostIconSelected.png"] forState:UIControlStateHighlighted];
+            [nextButton addTarget:self action:@selector(actionNextPost:) forControlEvents:UIControlEventTouchUpInside];
+            
+            // UIView just to handle the UIBarButtonItem position
+            UIView *nextButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
+            nextButtonView.bounds = CGRectOffset(nextButtonView.bounds, -10, 0);
+            [nextButtonView addSubview:nextButton];
+            
+            UIBarButtonItem *nextPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:nextButtonView];
+            
+            UIButton *previousButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
+            [previousButton setImage:[UIImage imageNamed:@"previousPostIcon.png"] forState:UIControlStateNormal];
+            [previousButton setImage:[UIImage imageNamed:@"previousPostIconSelected.png"] forState:UIControlStateHighlighted];
+            [previousButton addTarget:self action:@selector(actionPreviousPost:) forControlEvents:UIControlEventTouchUpInside];
+            
+            // UIView just to handle the UIBarButtonItem position
+            UIView *previousButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
+            previousButtonView.bounds = CGRectOffset(previousButtonView.bounds, -10, 0);
+            [previousButtonView addSubview:previousButton];
+            
+            UIBarButtonItem *previousPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:previousButtonView];
+            
+            if((self.currentTableViewIndexPath.row == 0 && self.currentTableViewIndexPath.section == 0) && self.isURLOpendedInternally == NO) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [previousButton setEnabled:NO];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [previousButton setEnabled:YES];
+                });
+            }
+            
+            self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:self.rightItem, nextPostRightItem, previousPostRightItem, nil];
+        } else {
+            [rightButton setFrame:CGRectMake(0, 0, 65, 65)];
+            [rightButtonView setFrame:CGRectMake(0, 0, 65, 65)];
+
+            rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -25, 0);
+            [rightButtonView addSubview:rightButton];
+            self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+            self.navigationItem.rightBarButtonItem = self.rightItem;
         }
     }
 }
@@ -229,6 +321,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dismissDetailView)
+                                                 name:@"dismissDetailView"
+                                               object:nil];
 
     [self setupWebView];
 
