@@ -40,10 +40,10 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BCAD6881F47A08100B54526 /* Info.plist */,
+				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
 				9BCAD6801F47A08100B54526 /* Main.storyboard */,
-				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
-				9BCAD6881F47A08100B54526 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
