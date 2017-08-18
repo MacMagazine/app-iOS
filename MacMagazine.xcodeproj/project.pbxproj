@@ -37,6 +37,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
+				9BCAD6801F47A08100B54526 /* Main.storyboard */,
+				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
+				9BCAD6881F47A08100B54526 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		9BCAD66E1F47A08100B54526 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +67,10 @@
 		9BCAD6791F47A08100B54526 /* MacMagazine */ = {
 			isa = PBXGroup;
 			children = (
+				9B578C2E1F47A2A40086C6A7 /* Resources */,
 				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 				9BCAD67C1F47A08100B54526 /* MasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* DetailViewController.swift */,
-				9BCAD6801F47A08100B54526 /* Main.storyboard */,
-				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
-				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
-				9BCAD6881F47A08100B54526 /* Info.plist */,
 			);
 			path = MacMagazine;
 			sourceTree = "<group>";
@@ -74,6 +82,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BCAD68B1F47A08100B54526 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
+				9B578C2D1F47A1D00086C6A7 /* ShellScript */,
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
@@ -134,6 +143,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9B578C2D1F47A1D00086C6A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9BCAD6731F47A08100B54526 /* Sources */ = {
@@ -270,7 +295,7 @@
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -283,7 +308,7 @@
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -308,6 +333,7 @@
 				9BCAD68D1F47A08100B54526 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
