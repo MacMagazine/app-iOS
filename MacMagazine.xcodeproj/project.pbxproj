@@ -13,7 +13,18 @@
 		9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6801F47A08100B54526 /* Main.storyboard */; };
 		9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */; };
+		9BE697DE1F487EEF0048D68D /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9BE697D21F4874C20048D68D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BCAD66F1F47A08100B54526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BCAD6761F47A08100B54526;
+			remoteInfo = MacMagazine;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,10 +35,20 @@
 		9BCAD6831F47A08100B54526 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BCAD6861F47A08100B54526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BCAD6881F47A08100B54526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9BCAD6741F47A08100B54526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BE697CA1F4874C20048D68D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -52,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
+				9BE697CE1F4874C20048D68D /* MacMagazineTests */,
 				9BCAD6781F47A08100B54526 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				9BCAD6771F47A08100B54526 /* MacMagazine.app */,
+				9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,12 +90,69 @@
 		9BCAD6791F47A08100B54526 /* MacMagazine */ = {
 			isa = PBXGroup;
 			children = (
+				9BE697DC1F487DF70048D68D /* 3rd Party */,
 				9B578C2E1F47A2A40086C6A7 /* Resources */,
-				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
+				9BE697DA1F487DAB0048D68D /* Comum */,
+				9BE697D71F487D5A0048D68D /* Posts */,
+				9BE697D81F487D610048D68D /* NoAr */,
+				9BE697D91F487D660048D68D /* Ajustes */,
 				9BCAD67C1F47A08100B54526 /* MasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* DetailViewController.swift */,
 			);
 			path = MacMagazine;
+			sourceTree = "<group>";
+		};
+		9BE697CE1F4874C20048D68D /* MacMagazineTests */ = {
+			isa = PBXGroup;
+			children = (
+				9BE697D11F4874C20048D68D /* Info.plist */,
+				9BE697DD1F487EEF0048D68D /* PostsTests.swift */,
+			);
+			path = MacMagazineTests;
+			sourceTree = "<group>";
+		};
+		9BE697D71F487D5A0048D68D /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Posts;
+			sourceTree = "<group>";
+		};
+		9BE697D81F487D610048D68D /* NoAr */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NoAr;
+			sourceTree = "<group>";
+		};
+		9BE697D91F487D660048D68D /* Ajustes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Ajustes;
+			sourceTree = "<group>";
+		};
+		9BE697DA1F487DAB0048D68D /* Comum */ = {
+			isa = PBXGroup;
+			children = (
+				9BE697DB1F487DBA0048D68D /* Models */,
+				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
+			);
+			name = Comum;
+			sourceTree = "<group>";
+		};
+		9BE697DB1F487DBA0048D68D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		9BE697DC1F487DF70048D68D /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "3rd Party";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +176,24 @@
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9BE697CC1F4874C20048D68D /* MacMagazineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BE697D61F4874C20048D68D /* Build configuration list for PBXNativeTarget "MacMagazineTests" */;
+			buildPhases = (
+				9BE697C91F4874C20048D68D /* Sources */,
+				9BE697CA1F4874C20048D68D /* Frameworks */,
+				9BE697CB1F4874C20048D68D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BE697D31F4874C20048D68D /* PBXTargetDependency */,
+			);
+			name = MacMagazineTests;
+			productName = MacMagazineTests;
+			productReference = 9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -110,6 +208,12 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 7PXVC8PJ97;
 						ProvisioningStyle = Automatic;
+					};
+					9BE697CC1F4874C20048D68D = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 7PXVC8PJ97;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9BCAD6761F47A08100B54526;
 					};
 				};
 			};
@@ -127,6 +231,7 @@
 			projectRoot = "";
 			targets = (
 				9BCAD6761F47A08100B54526 /* MacMagazine */,
+				9BE697CC1F4874C20048D68D /* MacMagazineTests */,
 			);
 		};
 /* End PBXProject section */
@@ -139,6 +244,13 @@
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
 				9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BE697CB1F4874C20048D68D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +283,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BE697C91F4874C20048D68D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BE697DE1F487EEF0048D68D /* PostsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9BE697D31F4874C20048D68D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BCAD6761F47A08100B54526 /* MacMagazine */;
+			targetProxy = 9BE697D21F4874C20048D68D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9BCAD6801F47A08100B54526 /* Main.storyboard */ = {
@@ -314,6 +442,34 @@
 			};
 			name = Release;
 		};
+		9BE697D41F4874C20048D68D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				INFOPLIST_FILE = MacMagazineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
+			};
+			name = Debug;
+		};
+		9BE697D51F4874C20048D68D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				INFOPLIST_FILE = MacMagazineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -334,6 +490,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9BE697D61F4874C20048D68D /* Build configuration list for PBXNativeTarget "MacMagazineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BE697D41F4874C20048D68D /* Debug */,
+				9BE697D51F4874C20048D68D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
