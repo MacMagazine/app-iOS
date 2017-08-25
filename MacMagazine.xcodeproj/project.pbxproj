@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B28583B1F49CEDF00E59699 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28583A1F49CEDF00E59699 /* Posts.swift */; };
+		9B28583D1F49D19200E59699 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28583A1F49CEDF00E59699 /* Posts.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* MasterViewController.swift */; };
 		9BCAD67F1F47A08100B54526 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67E1F47A08100B54526 /* DetailViewController.swift */; };
@@ -27,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B28583A1F49CEDF00E59699 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BCAD67C1F47A08100B54526 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +147,7 @@
 		9BE697DB1F487DBA0048D68D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9B28583A1F49CEDF00E59699 /* Posts.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -280,6 +284,7 @@
 				9BCAD67F1F47A08100B54526 /* DetailViewController.swift in Sources */,
 				9BCAD67D1F47A08100B54526 /* MasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
+				9B28583B1F49CEDF00E59699 /* Posts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BE697DE1F487EEF0048D68D /* PostsTests.swift in Sources */,
+				9B28583D1F49D19200E59699 /* Posts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +504,7 @@
 				9BE697D51F4874C20048D68D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

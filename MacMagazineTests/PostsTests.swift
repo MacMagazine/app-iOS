@@ -10,6 +10,8 @@ import XCTest
 
 class PostsTests: XCTestCase {
 	
+	var posts: Posts = []
+
 	override func setUp() {
 		super.setUp()
 		// Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,8 +22,16 @@ class PostsTests: XCTestCase {
 		super.tearDown()
 	}
 	
-	func testPost() {
-		// This is an example of a functional test case.
-		// Use XCTAssert and related functions to verify your tests produce the correct results.
+	func testPostIsEmpty() {
 	}
+
+	func testSavePost() {
+	}
+
+	func testGetPostTotal() {
+	}
+
+	func testGetPost() {
+	}
+
 }
