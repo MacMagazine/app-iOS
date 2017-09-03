@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  PostsMasterViewController.swift
 //  MacMagazine
 //
 //  Created by Cassio Rossi on 18/08/17.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class PostsMasterViewController: UITableViewController {
 
-	var detailViewController: DetailViewController? = nil
+	var detailViewController: PostsDetailViewController? = nil
 	var posts = Posts()
 
 	override func viewDidLoad() {
@@ -47,7 +47,7 @@ class MasterViewController: UITableViewController {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = tableView.indexPathForSelectedRow {
 		        let object = self.posts.getPostAtIndex(index: indexPath.row)
-		        let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+		        let controller = (segue.destination as! UINavigationController).topViewController as! PostsDetailViewController
 		        controller.detailItem = object
 		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		        controller.navigationItem.leftItemsSupplementBackButton = true
