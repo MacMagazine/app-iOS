@@ -10,26 +10,66 @@ import Foundation
 
 class Post: NSObject {
 	
-	// MARK: - Properties
+	// MARK: - Properties -
 	
 	public var id: Int
-	public var post_date: Date
 	public var title: String
 	public var content: String
 	
-	// MARK: - Insert Object
+	private var postDisplayDate: String?
+	public var postDate = String() {
+		didSet {
+			if let posted_date = wordPressDateFormatter.date(from: postDate) {
+				self.postDisplayDate = displayDateFormatter.string(from: posted_date)
+			}
+		}
+	}
+
+	// MARK: -  Local Methods -
 	
-	init(id: Int, post_date: Date, title: String, content: String) {
+	private let wordPressDateFormatter: DateFormatter = {
+		// Expected date format: "2016-01-29T01:45:33"
+		let formatter = DateFormatter()
+		formatter.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"
+		return formatter
+	}()
+
+	private let displayDateFormatter: DateFormatter = {
+		// Expected date format: "2016-01-29T01:45:33"
+		let formatter = DateFormatter()
+		formatter.dateFormat = "DD/MM/YYYY"
+		return formatter
+	}()
+
+	// MARK: - Insert Object -
+	
+	init(id: Int, postDate: String, title: String, content: String) {
 		self.id = id
-		self.post_date = post_date
 		self.title = title
 		self.content = content
+
+		super.init()
+
+		({ self.postDate = postDate })()
 	}
+
+	// MARK: - Get Display Date -
+	
+	public func getDisplayDate() -> String? {
+		return self.postDisplayDate
+	}
+
 }
 
+// MARK: -
+// MARK: - Compare Method -
+
 func ==(lhs: Post, rhs: Post) -> Bool {
-	return lhs.id == rhs.id && lhs.post_date == rhs.post_date && lhs.title == rhs.title && lhs.content == rhs.content
+	return lhs.id == rhs.id && lhs.postDate == rhs.postDate && lhs.title == rhs.title && lhs.content == rhs.content
 }
+
+// MARK: -
+// MARK: - Class -
 
 class Posts {
 	
@@ -65,7 +105,7 @@ class Posts {
 	}
 	
 	func sortPost() {
-		let dateDescriptor = NSSortDescriptor(key: "post_date", ascending: true)
+		let dateDescriptor = NSSortDescriptor(key: "postDate", ascending: true)
 		
 		self.posts = (self.posts as NSArray).sortedArray(using: [dateDescriptor]) as! [Post]
 	}
