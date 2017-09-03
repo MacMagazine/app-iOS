@@ -23,7 +23,7 @@ class PostsMasterViewController: UITableViewController {
 		super.viewWillAppear(animated)
 		
 		let query = "\(Site.perPage.withParameter(10))&\(Site.page.withParameter(1))"
-		Network.getContentFromServer(host: Site.posts.withParameter(nil), query: query) {
+		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
 			(result: Posts?) in
 			
 			if result != nil {
@@ -66,16 +66,38 @@ class PostsMasterViewController: UITableViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath) as? postCell else {
+            fatalError("Unexpected Index Path")
+        }
 
 		let object = self.posts.getPostAtIndex(index: indexPath.row)
-		cell.textLabel!.text = object?.title
-		return cell
-	}
+		cell.headlineLabel!.text = object?.title
+        cell.subheadlineLabel!.text = object?.excerpt
+		
+		if let url = object?.artworkURL {
+			LazyImage.show(imageView: cell.thumbnailImageView, url: url, defaultImage:"logo") {
+				() in
+				//Image loaded. Do something..
+				//            cell.spin.stopAnimating()
+			}
+		} else {
+			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\((object?.artwork)!)") {
+				(result: String?) in
+				
+				if result != nil {
+					object?.artworkURL = result!
+					DispatchQueue.main.async {
+						LazyImage.show(imageView: cell.thumbnailImageView, url: object?.artworkURL, defaultImage:"logo") {
+							() in
+							//Image loaded. Do something..
+							//            cell.spin.stopAnimating()
+						}
+					}
+				}
+			}
+		}
 
-	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-		// Return false if you do not want the specified item to be editable.
-		return false
+        return cell
 	}
 
 }

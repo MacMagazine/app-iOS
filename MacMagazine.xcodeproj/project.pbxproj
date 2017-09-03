@@ -13,6 +13,7 @@
 		9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */; };
 		9B28583B1F49CEDF00E59699 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28583A1F49CEDF00E59699 /* Posts.swift */; };
 		9B28583D1F49D19200E59699 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28583A1F49CEDF00E59699 /* Posts.swift */; };
+		9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* postCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
 		9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */; };
@@ -37,6 +38,7 @@
 		9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
 		9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9B28583A1F49CEDF00E59699 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		9BC9B12D1F5C960700C4DF17 /* postCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsMasterViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		9BC9B12F1F5C96A500C4DF17 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9BC9B12D1F5C960700C4DF17 /* postCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		9BCAD66E1F47A08100B54526 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +141,7 @@
 		9BE697D71F487D5A0048D68D /* Posts */ = {
 			isa = PBXGroup;
 			children = (
+				9BC9B12F1F5C96A500C4DF17 /* Cells */,
 				9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */,
 			);
@@ -306,6 +317,7 @@
 				9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */,
 				9B28583B1F49CEDF00E59699 /* Posts.swift in Sources */,
 				9B02AE4C1F5C515400EA1A6F /* LazyImage.swift in Sources */,
+				9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

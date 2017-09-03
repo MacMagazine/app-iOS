@@ -17,7 +17,7 @@ class PostTests: XCTestCase {
 		super.setUp()
 		// Put setup codvarere. This method is called before the invocation of each test method in the class.
 		self.postDate = "2001-01-01T01:01:01"
-		self.item = Post(id: 0, postDate: self.postDate!, title: "title", content: "content", excerpt: "excerpt")
+		self.item = Post(id: 0, postDate: self.postDate!, title: "title", content: "content", excerpt: "excerpt", artwork: 1234)
 	}
 	
 	override func tearDown() {
@@ -44,6 +44,10 @@ class PostTests: XCTestCase {
 	func testThatItemHasExcerpt() {
 		XCTAssertEqual(self.item!.excerpt, "excerpt", "Excerpt should always be present")
 	}
+
+    func testThatItemHasArtwork() {
+        XCTAssertEqual(self.item!.artwork, 1234, "Artwork should always be present")
+    }
 
 	func testItemCanBeAssignedId() {
 		self.item!.id = 1
@@ -84,6 +88,11 @@ class PostTests: XCTestCase {
 		XCTAssertEqual(self.item!.excerpt, "New excerpt", "Excerpt should always be present")
 	}
 
+    func testItemCanBeAssignedArwork() {
+        self.item!.artwork = 4321
+        XCTAssertEqual(self.item!.artwork, 4321, "Artwork should always be present")
+    }
+
 }
 
 class PostsTests: XCTestCase {
@@ -95,7 +104,7 @@ class PostsTests: XCTestCase {
 		super.setUp()
 		// Put setup code here. This method is called before the invocation of each test method in the class.
 		self.posts = Posts()
-		self.p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content", excerpt: "excerpt1")
+		self.p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content", excerpt: "excerpt1", artwork: 1234)
 	}
 	
 	override func tearDown() {
@@ -134,7 +143,7 @@ class PostsTests: XCTestCase {
 		// Test for wrong data
 		self.posts?.insertOrUpdatePost(post: self.p!)
 		
-		let p1 = Post(id: 1, postDate: "2007-01-01T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1")
+        let p1 = Post(id: 1, postDate: "2007-01-01T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321)
 		self.posts?.deletePost(post: p1)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
@@ -189,7 +198,7 @@ class PostsTests: XCTestCase {
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
 
-		let p1 = Post(id: 0, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1")
+		let p1 = Post(id: 0, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321)
 		self.posts?.insertOrUpdatePost(post: p1)
 
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)

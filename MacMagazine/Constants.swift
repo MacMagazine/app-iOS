@@ -13,7 +13,8 @@ enum Site: String {
 	case posts
 	case perPage, page
 	case search
-	
+	case artworkURL
+
 	func withParameter(_ number: Int?) -> String {
 		switch self {
 
@@ -28,6 +29,9 @@ enum Site: String {
 
 		case .posts:
 			return "\(Site.protocolo.withParameter(nil))\(Site.url.withParameter(nil))\(Site.api.withParameter(nil))posts?"
+
+		case .artworkURL:
+			return "\(Site.protocolo.withParameter(nil))\(Site.url.withParameter(nil))\(Site.api.withParameter(nil))media/"
 
 		case .perPage:
 			return "per_page=\(number!)"

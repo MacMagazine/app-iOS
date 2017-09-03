@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,7 +30,7 @@
         <!--Detail-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
-                <viewController title="Detail" id="JEX-9P-axG" customClass="PostsDetailViewController" sceneMemberID="viewController">
+                <viewController title="Detail" id="JEX-9P-axG" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SYR-Wa-9uf"/>
                         <viewControllerLayoutGuide type="bottom" id="GAO-Cl-Wes"/>
@@ -146,30 +147,126 @@
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="151" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Arm-wq-HPj" style="IBUITableViewCellStyleDefault" id="WCw-Qf-5nD">
-                                <rect key="frame" x="0.0" y="22" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="151" id="IPr-CY-YTU" customClass="postCell" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="22" width="375" height="151"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IPr-CY-YTU" id="VwH-Lo-1lM">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DaF-eS-7AO" userLabel="Thumbnail Image View">
+                                            <rect key="frame" x="16" y="25" width="72" height="100"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="cdz-qE-yb5"/>
+                                                <constraint firstAttribute="width" constant="72" id="dzr-Ja-U6I"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label">
+                                            <rect key="frame" x="104" y="16" width="255" height="42.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-nH-YW4" userLabel="Subheadline Label">
+                                            <rect key="frame" x="104" y="62.5" width="255" height="71.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N4-Vj-vdj" userLabel="Separator View">
+                                            <rect key="frame" x="16" y="149" width="359" height="1"/>
+                                            <color key="backgroundColor" red="0.97000002860000001" green="0.97000002860000001" blue="0.97000002860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="geD-AJ-bJM"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="8N4-Vj-vdj" secondAttribute="trailing" id="4Ir-KW-oKV"/>
+                                        <constraint firstItem="195-hI-MvL" firstAttribute="trailing" secondItem="VwH-Lo-1lM" secondAttribute="trailingMargin" id="Gsp-pZ-2Ai"/>
+                                        <constraint firstItem="195-hI-MvL" firstAttribute="leading" secondItem="DaF-eS-7AO" secondAttribute="trailing" constant="16" id="Jjb-qY-dmT"/>
+                                        <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="topMargin" id="L9a-WV-6FG"/>
+                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" secondItem="195-hI-MvL" secondAttribute="leading" id="X0K-BM-pB8"/>
+                                        <constraint firstItem="DaF-eS-7AO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VwH-Lo-1lM" secondAttribute="topMargin" id="XDe-gf-BQm"/>
+                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="trailing" secondItem="VwH-Lo-1lM" secondAttribute="trailingMargin" id="ZXV-N3-gQb"/>
+                                        <constraint firstItem="DaF-eS-7AO" firstAttribute="centerY" secondItem="VwH-Lo-1lM" secondAttribute="centerY" id="aYP-EE-Ez2"/>
+                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="etO-4c-GA6"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="h5p-nH-YW4" secondAttribute="bottom" id="fTc-bC-MbL"/>
+                                        <constraint firstItem="DaF-eS-7AO" firstAttribute="leading" secondItem="VwH-Lo-1lM" secondAttribute="leadingMargin" id="hNi-GT-eM8"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="DaF-eS-7AO" secondAttribute="bottom" id="t0T-bB-U0E"/>
+                                        <constraint firstItem="8N4-Vj-vdj" firstAttribute="leading" secondItem="VwH-Lo-1lM" secondAttribute="leading" constant="16" id="yXY-3i-N6a"/>
+                                        <constraint firstAttribute="bottom" secondItem="8N4-Vj-vdj" secondAttribute="bottom" id="z58-GH-7Jb"/>
+                                    </constraints>
+                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
                                 <connections>
-                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="6S0-TO-JiA"/>
+                                    <outlet property="headlineLabel" destination="195-hI-MvL" id="uaM-Rl-g6x"/>
+                                    <outlet property="subheadlineLabel" destination="h5p-nH-YW4" id="JGW-dj-dbM"/>
+                                    <outlet property="thumbnailImageView" destination="DaF-eS-7AO" id="N8G-E6-OCh"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="262" id="gFs-qz-q1f" customClass="postCell" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="173" width="375" height="262"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gFs-qz-q1f" id="Ui7-Bp-i1r">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHz-9N-Wi2" userLabel="Separator View">
+                                            <rect key="frame" x="16" y="260" width="359" height="1"/>
+                                            <color key="backgroundColor" red="0.97000002860000001" green="0.97000002860000001" blue="0.97000002860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="nnU-Hb-l7x"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label" customClass="MMMLabel">
+                                            <rect key="frame" x="16" y="193" width="343" height="52"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
+                                            <rect key="frame" x="16" y="16" width="343" height="169"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="169" id="yUF-y4-bPq"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="leading" secondItem="kaO-wS-N74" secondAttribute="leading" id="7Su-o7-cme"/>
+                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leadingMargin" id="Jev-0f-7BL"/>
+                                        <constraint firstAttribute="trailing" secondItem="gHz-9N-Wi2" secondAttribute="trailing" id="Sfm-2g-st5"/>
+                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="trailing" secondItem="kaO-wS-N74" secondAttribute="trailing" id="VDN-r6-Ft8"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="kaO-wS-N74" secondAttribute="bottom" id="YyJ-d4-BZG"/>
+                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="top" secondItem="Ui7-Bp-i1r" secondAttribute="topMargin" id="nfR-Ti-jN2"/>
+                                        <constraint firstItem="gHz-9N-Wi2" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leading" constant="16" id="qzK-MN-KCa"/>
+                                        <constraint firstAttribute="bottom" secondItem="gHz-9N-Wi2" secondAttribute="bottom" id="saX-2K-2Q8"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="aso-Qa-tMZ" secondAttribute="trailing" id="tUG-7D-L0a"/>
+                                        <constraint firstItem="kaO-wS-N74" firstAttribute="top" secondItem="aso-Qa-tMZ" secondAttribute="bottom" constant="8" id="xu3-dl-nxf"/>
+                                    </constraints>
+                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="headlineLabel" destination="kaO-wS-N74" id="wey-Eb-rXC"/>
+                                    <outlet property="thumbnailImageView" destination="aso-Qa-tMZ" id="Jhh-1u-Aiq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -179,7 +276,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Posts" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
@@ -227,7 +324,4 @@
         <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="36" height="28"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
-    </inferredMetricsTieBreakers>
 </document>
