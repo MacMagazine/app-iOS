@@ -154,7 +154,6 @@ extension Network {
 			}
 			
 			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerpt)
-			print(post)
 			posts.insertOrUpdatePost(post: post)
 		}
 		

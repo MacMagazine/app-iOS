@@ -28,7 +28,9 @@ class MasterViewController: UITableViewController {
 			
 			if result != nil {
 				self.posts = result!
-				self.tableView.reloadData()
+				DispatchQueue.main.async {
+					self.tableView.reloadData()
+				}
 			}
 		}
 
