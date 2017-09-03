@@ -15,7 +15,8 @@ class Post: NSObject {
 	public var id: Int
 	public var title: String
 	public var content: String
-	
+	public var excerpt: String
+
 	private var postDisplayDate: String?
 	public var postDate = String() {
 		didSet {
@@ -43,10 +44,11 @@ class Post: NSObject {
 
 	// MARK: - Insert Object -
 	
-	init(id: Int, postDate: String, title: String, content: String) {
+	init(id: Int, postDate: String, title: String, content: String, excerpt: String) {
 		self.id = id
 		self.title = title
 		self.content = content
+		self.excerpt = excerpt
 
 		super.init()
 
@@ -65,8 +67,9 @@ class Post: NSObject {
 // MARK: - Compare Method -
 
 func ==(lhs: Post, rhs: Post) -> Bool {
-	return lhs.id == rhs.id && lhs.postDate == rhs.postDate && lhs.title == rhs.title && lhs.content == rhs.content
+	return lhs.id == rhs.id && lhs.postDate == rhs.postDate && lhs.title == rhs.title && lhs.content == rhs.content && lhs.excerpt == rhs.excerpt
 }
+
 
 // MARK: -
 // MARK: - Class -
@@ -123,3 +126,39 @@ class Posts {
 	}
 	
 }
+
+// MARK: -
+// MARK: - Class Extension -
+
+extension Network {
+	public class func processJSON(rsp: [Dictionary<String, Any>]) -> Posts? {
+		let posts = Posts()		// Stores all medias to display
+		
+		for data in rsp as [AnyObject] {
+			// Get only the data we want
+			
+			guard
+				let identifier = data["id"] as? Int,
+				let dateString = data["date"] as? String,
+				
+				let titleDictionary = data["title"] as? Dictionary<String, Any>,
+				let title = titleDictionary["rendered"] as? String,
+
+				let contentDictionary = data["content"] as? Dictionary<String, Any>,
+				let content = contentDictionary["rendered"] as? String,
+				
+				let excerptDictionary = data["excerpt"] as? Dictionary<String, Any>,
+				let excerpt = excerptDictionary["rendered"] as? String
+				else {
+					return nil
+			}
+			
+			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerpt)
+			print(post)
+			posts.insertOrUpdatePost(post: post)
+		}
+		
+		return posts
+	}
+}
+

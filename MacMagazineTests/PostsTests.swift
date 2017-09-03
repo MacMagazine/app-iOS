@@ -17,7 +17,7 @@ class PostTests: XCTestCase {
 		super.setUp()
 		// Put setup codvarere. This method is called before the invocation of each test method in the class.
 		self.postDate = "2001-01-01T01:01:01"
-		self.item = Post(id: 0, postDate: self.postDate!, title: "title", content: "content")
+		self.item = Post(id: 0, postDate: self.postDate!, title: "title", content: "content", excerpt: "excerpt")
 	}
 	
 	override func tearDown() {
@@ -39,6 +39,10 @@ class PostTests: XCTestCase {
 	
 	func testThatItemHasContent() {
 		XCTAssertEqual(self.item!.content, "content", "Content should always be present")
+	}
+
+	func testThatItemHasExcerpt() {
+		XCTAssertEqual(self.item!.excerpt, "excerpt", "Excerpt should always be present")
 	}
 
 	func testItemCanBeAssignedId() {
@@ -75,16 +79,23 @@ class PostTests: XCTestCase {
 		XCTAssertEqual(self.item!.content, "New content", "Content should always be present")
 	}
 
+	func testItemCanBeAssignedExcerpt() {
+		self.item!.excerpt = "New excerpt"
+		XCTAssertEqual(self.item!.excerpt, "New excerpt", "Excerpt should always be present")
+	}
+
 }
 
 class PostsTests: XCTestCase {
 	
 	var posts: Posts?
-	
+	var p: Post?
+
 	override func setUp() {
 		super.setUp()
 		// Put setup code here. This method is called before the invocation of each test method in the class.
 		self.posts = Posts()
+		self.p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content", excerpt: "excerpt1")
 	}
 	
 	override func tearDown() {
@@ -102,8 +113,7 @@ class PostsTests: XCTestCase {
 	}
 	
 	func testInsertPost() {
-		let p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content")
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
@@ -111,21 +121,20 @@ class PostsTests: XCTestCase {
 	
 	func testDeletePost() {
 		// Test for valid data
-		let p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content")
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
 		
-		self.posts?.deletePost(post: p)
+		self.posts?.deletePost(post: self.p!)
 		
 		XCTAssertTrue(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 0)
 		
 		// Test for wrong data
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 		
-		let p1 = Post(id: 1, postDate: "2007-01-01T01:01:01", title: "title1", content: "content1")
+		let p1 = Post(id: 1, postDate: "2007-01-01T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1")
 		self.posts?.deletePost(post: p1)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
@@ -134,14 +143,13 @@ class PostsTests: XCTestCase {
 	
 	func testGetPostAtIndex() {
 		// Test for valid data
-		let p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content")
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
 
 		if let postToCompare = self.posts?.getPostAtIndex(index: 0) {
-			XCTAssertTrue(postToCompare == p)
+			XCTAssertTrue(postToCompare == self.p!)
 		} else {
 			XCTFail("Object is Nil")
 		}
@@ -151,8 +159,7 @@ class PostsTests: XCTestCase {
 	}
 
 	func testFindPostById() {
-		let p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content")
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
@@ -168,23 +175,21 @@ class PostsTests: XCTestCase {
 	}
 
 	func testGetIndexPost() {
-		let p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content")
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
 
-		XCTAssertEqual(self.posts?.getIndexPost(of: p), 0)
+		XCTAssertEqual(self.posts?.getIndexPost(of: self.p!), 0)
 	}
 
 	func testUniqueId() {
-		let p = Post(id: 0, postDate: "2007-01-01T01:01:01", title: "title", content: "content")
-		self.posts?.insertOrUpdatePost(post: p)
+		self.posts?.insertOrUpdatePost(post: self.p!)
 		
 		XCTAssertFalse(self.posts!.isEmpty())
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
 
-		let p1 = Post(id: 0, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1")
+		let p1 = Post(id: 0, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1")
 		self.posts?.insertOrUpdatePost(post: p1)
 
 		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
@@ -196,4 +201,5 @@ class PostsTests: XCTestCase {
 		}
 
 	}
+
 }
