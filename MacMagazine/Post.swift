@@ -6,8 +6,8 @@
 //  This file was automatically generated and should not be edited.
 //
 
-import Foundation
 import CoreData
+import UIKit
 
 // MARK: -
 // MARK: - Post Object -
@@ -52,6 +52,17 @@ class Post: NSObject {
 	
 	// MARK: - Insert Object -
 	
+	private func decodeHTMLString(string: String) -> String? {
+		
+		let encodedData = string.data(using: String.Encoding.utf8)!
+		do {
+			return try NSAttributedString(data: encodedData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil).string
+		} catch let error as NSError {
+			print(error.localizedDescription)
+			return nil
+		}
+	}
+
 	init(id: Int, postDate: String, title: String, content: String, excerpt: String, artwork: Int, categorias: [Int]) {
 		self.id = id
 		self.title = title
@@ -63,6 +74,8 @@ class Post: NSObject {
 		super.init()
 		
 		({ self.postDate = postDate })()
+		self.excerpt = self.decodeHTMLString(string: excerpt)!
+		self.title = self.decodeHTMLString(string: title)!
 	}
 	
 	// MARK: - Post Methods -
@@ -263,15 +276,13 @@ extension Network {
 					return
 			}
 			
-			let excerpt = excerptHTML.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-			
-			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerpt, artwork: artwork, categorias: categorias)
+			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerptHTML, artwork: artwork, categorias: categorias)
 			
 			Posts.insertOrUpdatePost(post: post)
 		}
 		DataController.sharedInstance.saveContext()
 	}
-	
+
 	public class func processImageJSON(json: Dictionary<String, Any>) -> String? {
 		var imageURL: String?
 		

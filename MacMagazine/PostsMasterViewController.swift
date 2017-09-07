@@ -21,6 +21,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		tableView.rowHeight = UITableViewAutomaticDimension
+		tableView.estimatedRowHeight = 44
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -149,11 +151,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		return 0
 	}
 
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		let object = fetchedResultsController.object(at: indexPath)
-		return (object.categorias.contains(String(Categoria.destaque.rawValue)) ? 212 : 151)
-	}
-
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let object = fetchedResultsController.object(at: indexPath)
 
@@ -172,7 +169,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let object = fetchedResultsController.object(at: atIndexPath)
 
 		cell.headlineLabel!.text = object.title
-
 		if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
 			cell.subheadlineLabel!.text = object.excerpt
 		}
