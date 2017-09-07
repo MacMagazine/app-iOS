@@ -152,6 +152,10 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
             fatalError("Unexpected Index Path")
         }
 
+		let bgColorView = UIView()
+		bgColorView.backgroundColor = UIColor(hex: "008aca", alpha: 0.3)
+		cell.selectedBackgroundView = bgColorView
+
 		configure(cell: cell, atIndexPath: indexPath)
 
         return cell
