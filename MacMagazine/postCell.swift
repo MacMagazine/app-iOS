@@ -15,7 +15,8 @@ class postCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var headlineLabel: UILabel!
     @IBOutlet weak var subheadlineLabel: UILabel!
-    
+	@IBOutlet weak var spin: UIActivityIndicatorView!
+	
     // MARK: - Methods -
 
     override func awakeFromNib() {

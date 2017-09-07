@@ -17,6 +17,7 @@ class Post: NSObject {
 	public var content: String
 	public var excerpt: String
 	public var artwork: Int
+	public var categorias: [Int]
 
 	public var artworkURL: String?
 	
@@ -47,12 +48,13 @@ class Post: NSObject {
 	
 	// MARK: - Insert Object -
 	
-	init(id: Int, postDate: String, title: String, content: String, excerpt: String, artwork: Int) {
+	init(id: Int, postDate: String, title: String, content: String, excerpt: String, artwork: Int, categorias: [Int]) {
 		self.id = id
 		self.title = title
 		self.content = content
 		self.excerpt = excerpt
 		self.artwork = artwork
+		self.categorias = categorias
 		
 		super.init()
 		
@@ -63,6 +65,10 @@ class Post: NSObject {
 	
 	public func getDisplayDate() -> String? {
 		return self.postDisplayDate
+	}
+	
+	public func hasCategory(id: Int) -> Bool {
+		return self.categorias.contains(id)
 	}
 
 }
@@ -128,7 +134,12 @@ class Posts {
 	func getIndexPost(of: Post) -> Int? {
 		return self.posts.index(of: of)
 	}
-	
+
+	func filterByCategory(categoryId: Int) -> [Post]? {
+		let posts = self.posts.filter() { $0.categorias.contains(categoryId) }
+		return posts
+	}
+
 }
 
 // MARK: -
@@ -153,7 +164,9 @@ extension Network {
 				let content = contentDictionary["rendered"] as? String,
 				
 				let excerptDictionary = data["excerpt"] as? Dictionary<String, Any>,
-				let excerptHTML = excerptDictionary["rendered"] as? String
+				let excerptHTML = excerptDictionary["rendered"] as? String,
+			
+				let categorias = data["categories"] as? [Int]
 				
 				else {
 					return nil
@@ -161,7 +174,7 @@ extension Network {
 			
 			let excerpt = excerptHTML.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 			
-			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerpt, artwork: artwork)
+			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerpt, artwork: artwork, categorias: categorias)
 			
 			posts.insertOrUpdatePost(post: post)
 		}

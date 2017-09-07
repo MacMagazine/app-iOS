@@ -172,6 +172,9 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-uf-NdD">
+                                            <rect key="frame" x="42" y="65" width="20" height="20"/>
+                                        </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label">
                                             <rect key="frame" x="104" y="16" width="255" height="42.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -193,6 +196,7 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="centerY" secondItem="DaF-eS-7AO" secondAttribute="centerY" id="1Dk-fx-Jdu"/>
                                         <constraint firstAttribute="trailing" secondItem="8N4-Vj-vdj" secondAttribute="trailing" id="4Ir-KW-oKV"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="trailing" secondItem="VwH-Lo-1lM" secondAttribute="trailingMargin" id="Gsp-pZ-2Ai"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="leading" secondItem="DaF-eS-7AO" secondAttribute="trailing" constant="16" id="Jjb-qY-dmT"/>
@@ -201,6 +205,7 @@
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VwH-Lo-1lM" secondAttribute="topMargin" id="XDe-gf-BQm"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="trailing" secondItem="VwH-Lo-1lM" secondAttribute="trailingMargin" id="ZXV-N3-gQb"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="centerY" secondItem="VwH-Lo-1lM" secondAttribute="centerY" id="aYP-EE-Ez2"/>
+                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="centerX" secondItem="DaF-eS-7AO" secondAttribute="centerX" id="d75-B0-hKB"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="etO-4c-GA6"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="h5p-nH-YW4" secondAttribute="bottom" id="fTc-bC-MbL"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="leading" secondItem="VwH-Lo-1lM" secondAttribute="leadingMargin" id="hNi-GT-eM8"/>
@@ -213,6 +218,7 @@
                                 <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
                                 <connections>
                                     <outlet property="headlineLabel" destination="195-hI-MvL" id="uaM-Rl-g6x"/>
+                                    <outlet property="spin" destination="Yds-uf-NdD" id="4JI-P3-MJO"/>
                                     <outlet property="subheadlineLabel" destination="h5p-nH-YW4" id="JGW-dj-dbM"/>
                                     <outlet property="thumbnailImageView" destination="DaF-eS-7AO" id="N8G-E6-OCh"/>
                                 </connections>

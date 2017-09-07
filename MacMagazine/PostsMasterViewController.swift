@@ -21,7 +21,7 @@ class PostsMasterViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
 		super.viewWillAppear(animated)
-		
+
 		let query = "\(Site.perPage.withParameter(10))&\(Site.page.withParameter(1))"
 		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
 			(result: Posts?) in
@@ -33,7 +33,6 @@ class PostsMasterViewController: UITableViewController {
 				}
 			}
 		}
-
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -71,28 +70,20 @@ class PostsMasterViewController: UITableViewController {
         }
 
 		let object = self.posts.getPostAtIndex(index: indexPath.row)
+		
 		cell.headlineLabel!.text = object?.title
         cell.subheadlineLabel!.text = object?.excerpt
 		
+		cell.thumbnailImageView.image = nil
 		if let url = object?.artworkURL {
-			LazyImage.show(imageView: cell.thumbnailImageView, url: url, defaultImage:"logo") {
-				() in
-				//Image loaded. Do something..
-				//            cell.spin.stopAnimating()
-			}
+			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
 		} else {
 			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\((object?.artwork)!)") {
 				(result: String?) in
 				
 				if result != nil {
 					object?.artworkURL = result!
-					DispatchQueue.main.async {
-						LazyImage.show(imageView: cell.thumbnailImageView, url: object?.artworkURL, defaultImage:"logo") {
-							() in
-							//Image loaded. Do something..
-							//            cell.spin.stopAnimating()
-						}
-					}
+					self.loadImage(imageView: cell.thumbnailImageView, url: (object?.artworkURL)!, spin: cell.spin)
 				}
 			}
 		}
@@ -100,5 +91,17 @@ class PostsMasterViewController: UITableViewController {
         return cell
 	}
 
+	// MARK: - View Methods
+
+	func loadImage(imageView: UIImageView, url: String, spin: UIActivityIndicatorView) {
+		DispatchQueue.main.async {
+			spin.startAnimating()
+			LazyImage.show(imageView: imageView, url: url, defaultImage:"image_logo") {
+				() in
+				//Image loaded. Do something..
+				spin.stopAnimating()
+			}
+		}
+	}
 }
 
