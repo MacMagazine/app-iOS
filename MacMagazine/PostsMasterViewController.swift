@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
-class PostsMasterViewController: UITableViewController {
+class PostsMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+	// MARK: - Properties -
+	
+	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController? = nil
-	var posts = Posts()
+
+	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -24,17 +29,19 @@ class PostsMasterViewController: UITableViewController {
 
 		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height)!), animated: true)
 		self.refreshControl?.beginRefreshing()
+
 		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
 		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
-			(result: Posts?) in
+			() in
 			
-			if result != nil {
-				self.posts = result!
-				self.posts.excludePost(fromCategoryId: Categoria.podcast.rawValue)
-			}
 			DispatchQueue.main.async {
-				self.tableView.reloadData()
 				self.refreshControl?.endRefreshing()
+				// Execute the fetch to display the data
+				do {
+					try self.fetchedResultsController.performFetch()
+				} catch {
+					print("An error occurred")
+				}
 			}
 		}
 	}
@@ -44,12 +51,12 @@ class PostsMasterViewController: UITableViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
-	// MARK: - Segues
+	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = tableView.indexPathForSelectedRow {
-		        let object = self.posts.getPostAtIndex(index: indexPath.row)
+		        let object = Posts.getPost(atIndex: indexPath.row)
 		        let controller = (segue.destination as! UINavigationController).topViewController as! PostsDetailViewController
 		        controller.detailItem = object
 		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -58,54 +65,137 @@ class PostsMasterViewController: UITableViewController {
 		}
 	}
 
-	// MARK: - Table View
+	// MARK: - Fetched Results Controller Methods -
+	
+	lazy var fetchedResultsController: NSFetchedResultsController<Posts> = {
+		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+		
+		let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
+		fetchRequest.sortDescriptors = [sortDescriptor]
+		
+		fetchRequest.predicate = NSPredicate(format: "NOT categorias IN %@", [Categoria.podcast.rawValue])
+
+		// Initialize Fetched Results Controller
+		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+		
+		controller.delegate = self
+		
+		do {
+			try controller.performFetch()
+		} catch {
+			let fetchError = error as NSError
+			print("\(fetchError), \(fetchError.userInfo)")
+		}
+		
+		return controller
+	}()
+	
+	// MARK: - Fetched Results Controller Delegate Methods -
+
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.beginUpdates()
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		
+		switch (type) {
+		case .insert:
+			if let indexPath = newIndexPath {
+				tableView.insertRows(at: [indexPath], with: .fade)
+			}
+			break;
+		case .delete:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+			break;
+		case .update:
+			if let indexPath = indexPath {
+				if let cell = tableView.cellForRow(at: indexPath) as? postCell {
+					configure(cell: cell, atIndexPath: indexPath)
+				}
+			}
+			break;
+		case .move:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+			
+			if let newIndexPath = newIndexPath {
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
+			break;
+		}
+	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
+	}
+
+	// MARK: - Table View -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		if let sections = self.fetchedResultsController.sections {
+			return sections.count
+		}
+		
+		return 0
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.posts.getNumberOfPosts()
+		if let sections = self.fetchedResultsController.sections {
+			let sectionInfo = sections[section]
+			return sectionInfo.numberOfObjects
+		}
+		
+		return 0
 	}
 
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		let object = self.posts.getPostAtIndex(index: indexPath.row)
-		return ((object?.hasCategory(id: 674))! ? 212 : 151)
+		let object = fetchedResultsController.object(at: indexPath)
+		return ((object.categorias.contains(NSNumber(value: Categoria.destaque.rawValue))) ? 212 : 151)
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let object = self.posts.getPostAtIndex(index: indexPath.row)
+		let object = fetchedResultsController.object(at: indexPath)
 
-		let identifier = ((object?.hasCategory(id: Categoria.destaque.rawValue))! ? "featuredCell" : "normalCell")
+		let identifier = ((object.categorias.contains(NSNumber(value: Categoria.destaque.rawValue))) ? "featuredCell" : "normalCell")
 		
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? postCell else {
             fatalError("Unexpected Index Path")
         }
 
-		cell.headlineLabel!.text = object?.title
-		
-		if identifier == "normalCell" {
-			cell.subheadlineLabel!.text = object?.excerpt
-		}
-
-		cell.thumbnailImageView.image = nil
-		if let url = object?.artworkURL {
-			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
-		} else {
-			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\((object?.artwork)!)") {
-				(result: String?) in
-				
-				if result != nil {
-					object?.artworkURL = result!
-					self.loadImage(imageView: cell.thumbnailImageView, url: (object?.artworkURL)!, spin: cell.spin)
-				}
-			}
-		}
+		configure(cell: cell, atIndexPath: indexPath)
 
         return cell
 	}
 
-	// MARK: - View Methods
+	func configure(cell: postCell, atIndexPath: IndexPath) {
+		let object = fetchedResultsController.object(at: atIndexPath)
+
+		cell.headlineLabel!.text = object.title
+		
+		if (object.categorias.contains(NSNumber(value: Categoria.destaque.rawValue))) == false {
+			//cell.subheadlineLabel!.text = object.excerpt
+		}
+		
+		cell.thumbnailImageView.image = nil
+		if let url = object.artworkURL {
+			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
+		} else {
+
+			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\((object.artwork)!)") {
+				(result: String?) in
+				
+				if result != nil {
+					object.artworkURL = result!
+					self.loadImage(imageView: cell.thumbnailImageView, url: (object.artworkURL)!, spin: cell.spin)
+				}
+			}
+		}
+	}
+	
+	// MARK: - View Methods -
 
 	func loadImage(imageView: UIImageView, url: String, spin: UIActivityIndicatorView) {
 		DispatchQueue.main.async {

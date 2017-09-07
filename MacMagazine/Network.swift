@@ -10,7 +10,7 @@ import Foundation
 
 class Network {
 	
-	class func getPosts(host: String, query: String, completion: @escaping (Posts?) -> Void) {
+	class func getPosts(host: String, query: String, completion: @escaping () -> Void) {
 		let url = URL(string: "\(host)\(query)")
 
 		let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
@@ -18,7 +18,7 @@ class Network {
 			data, response, error in
 			
 			if let _ = error {
-				completion(nil)
+				completion()
 				
 			} else if let httpResponse = response as? HTTPURLResponse {
 				if httpResponse.statusCode == 200 {
@@ -26,10 +26,11 @@ class Network {
 					do {
 						if let data = data, let response = try JSONSerialization.jsonObject(with: data as Data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [Dictionary<String, Any>] {
 
-							completion(self.processJSON(json: response))
+							self.processJSON(json: response)
+							completion()
 						}
 					} catch {
-						completion(nil)
+						completion()
 					}
 					
 				}
@@ -63,4 +64,5 @@ class Network {
 			}
 			}.resume()
 	}
+
 }

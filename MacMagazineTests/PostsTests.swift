@@ -108,7 +108,7 @@ class PostTests: XCTestCase {
 	}
 
 }
-
+/*
 class PostsTests: XCTestCase {
 	
 	var posts: Posts?
@@ -352,3 +352,4 @@ class PostsTests: XCTestCase {
 	}
 	
 }
+*/

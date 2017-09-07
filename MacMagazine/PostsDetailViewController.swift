@@ -32,7 +32,7 @@ class PostsDetailViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
-	var detailItem: Post? {
+	var detailItem: Posts? {
 		didSet {
 		    // Update the view.
 		    configureView()
