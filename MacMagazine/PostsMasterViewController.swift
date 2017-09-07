@@ -70,10 +70,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	lazy var fetchedResultsController: NSFetchedResultsController<Posts> = {
 		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 		
-		let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
-		fetchRequest.sortDescriptors = [sortDescriptor]
-		
-		fetchRequest.predicate = NSPredicate(format: "NOT categorias IN %@", [Categoria.podcast.rawValue])
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+		fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", String(Categoria.podcast.rawValue))
 
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -153,13 +151,13 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		let object = fetchedResultsController.object(at: indexPath)
-		return ((object.categorias.contains(NSNumber(value: Categoria.destaque.rawValue))) ? 212 : 151)
+		return (object.categorias.contains(String(Categoria.destaque.rawValue)) ? 212 : 151)
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let object = fetchedResultsController.object(at: indexPath)
 
-		let identifier = ((object.categorias.contains(NSNumber(value: Categoria.destaque.rawValue))) ? "featuredCell" : "normalCell")
+		let identifier = (object.categorias.contains(String(Categoria.destaque.rawValue)) ? "featuredCell" : "normalCell")
 		
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? postCell else {
             fatalError("Unexpected Index Path")
@@ -174,17 +172,17 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let object = fetchedResultsController.object(at: atIndexPath)
 
 		cell.headlineLabel!.text = object.title
-		
-		if (object.categorias.contains(NSNumber(value: Categoria.destaque.rawValue))) == false {
-			//cell.subheadlineLabel!.text = object.excerpt
+
+		if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
+			cell.subheadlineLabel!.text = object.excerpt
 		}
 		
-		cell.thumbnailImageView.image = nil
+		cell.thumbnailImageView.image = UIImage(named: "image_logo")
 		if let url = object.artworkURL {
 			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
 		} else {
 
-			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\((object.artwork)!)") {
+			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\(object.artwork)") {
 				(result: String?) in
 				
 				if result != nil {

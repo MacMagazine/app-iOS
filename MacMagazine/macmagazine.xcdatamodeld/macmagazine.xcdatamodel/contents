@@ -3,7 +3,7 @@
     <entity name="Post" representedClassName="Posts" syncable="YES">
         <attribute name="artwork" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="artworkURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="categorias" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="categorias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="excerpt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>

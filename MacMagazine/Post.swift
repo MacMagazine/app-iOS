@@ -75,12 +75,8 @@ class Post: NSObject {
 		return self.categorias.contains(id)
 	}
 	
-	public func getCategorias() -> [NSNumber] {
-		var newCategorias = [NSNumber]()
-		for cat in self.categorias {
-			newCategorias.append(NSNumber(value: cat))
-		}
-		return newCategorias
+	public func getCategorias() -> String {
+		return (self.categorias.map{String($0)}).joined(separator: ",")
 	}
 	
 }
@@ -132,10 +128,10 @@ public class Posts: NSManagedObject {
 			request.predicate = NSPredicate(format: "id == %@", NSNumber(value: byId!))
 		}
 		if inCategory != nil {
-			request.predicate = NSPredicate(format: "categorias IN %@", [NSNumber(value: inCategory!)])
+			request.predicate = NSPredicate(format: "categorias CONTAINS[cd] %@", String(inCategory!))
 		}
 		if notInCategory != nil {
-			request.predicate = NSPredicate(format: "NOT categorias IN %@", [NSNumber(value: notInCategory!)])
+			request.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", String(notInCategory!))
 		}
 
 		do {
@@ -229,8 +225,8 @@ extension Posts {
 	@NSManaged public var title: String
 	@NSManaged public var content: String
 	@NSManaged public var excerpt: String
-	@NSManaged public var artwork: NSNumber?
-	@NSManaged public var categorias: [NSNumber]
+	@NSManaged public var artwork: NSNumber
+	@NSManaged public var categorias: String
 	
 	@NSManaged public var artworkURL: String?
 	
