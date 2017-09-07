@@ -23,28 +23,16 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		// Do any additional setup after loading the view, typically from a nib.
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 44
+
+		self.getPosts()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
 		super.viewWillAppear(animated)
 
-		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height)!), animated: true)
-		self.refreshControl?.beginRefreshing()
-
-		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
-		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
-			() in
-			
-			DispatchQueue.main.async {
-				self.refreshControl?.endRefreshing()
-				// Execute the fetch to display the data
-				do {
-					try self.fetchedResultsController.performFetch()
-				} catch {
-					print("An error occurred")
-				}
-			}
+		if (self.refreshControl?.isRefreshing)! {
+			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height)!), animated: true)
 		}
 	}
 
@@ -73,7 +61,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 		
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
-		fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", String(Categoria.podcast.rawValue))
+
+		if self.tabBarController!.selectedIndex == 0 {
+			fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", String(Categoria.podcast.rawValue))
+		} else if self.tabBarController!.selectedIndex == 1 {
+			fetchRequest.predicate = NSPredicate(format: "categorias CONTAINS[cd] %@", String(Categoria.podcast.rawValue))
+		}
 
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -155,8 +148,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let object = fetchedResultsController.object(at: indexPath)
 
 		let identifier = (object.categorias.contains(String(Categoria.destaque.rawValue)) ? "featuredCell" : "normalCell")
-		
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? postCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? postCell else {
             fatalError("Unexpected Index Path")
         }
 
@@ -169,11 +161,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let object = fetchedResultsController.object(at: atIndexPath)
 
 		cell.headlineLabel!.text = object.title
+		
 		if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
 			cell.subheadlineLabel!.text = object.excerpt
 		}
 		
-		cell.thumbnailImageView.image = UIImage(named: "image_logo")
 		if let url = object.artworkURL {
 			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
 		} else {
@@ -191,13 +183,35 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	
 	// MARK: - View Methods -
 
+	@IBAction func getPosts() {
+		self.refreshControl?.beginRefreshing()
+		
+		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
+		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
+			() in
+			
+			DispatchQueue.main.async {
+				self.refreshControl?.endRefreshing()
+				// Execute the fetch to display the data
+				do {
+					try self.fetchedResultsController.performFetch()
+				} catch {
+					print("An error occurred")
+				}
+			}
+		}
+	}
+
 	func loadImage(imageView: UIImageView, url: String, spin: UIActivityIndicatorView) {
 		DispatchQueue.main.async {
+			imageView.alpha = 0
+
 			spin.startAnimating()
 			LazyImage.show(imageView: imageView, url: url, defaultImage:"image_logo") {
 				() in
 				//Image loaded. Do something..
 				spin.stopAnimating()
+				imageView.alpha = 1
 			}
 		}
 	}
