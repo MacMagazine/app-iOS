@@ -22,15 +22,19 @@ class PostsMasterViewController: UITableViewController {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
 		super.viewWillAppear(animated)
 
-		let query = "\(Site.perPage.withParameter(10))&\(Site.page.withParameter(1))"
+		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height)!), animated: true)
+		self.refreshControl?.beginRefreshing()
+		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
 		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
 			(result: Posts?) in
 			
 			if result != nil {
 				self.posts = result!
-				DispatchQueue.main.async {
-					self.tableView.reloadData()
-				}
+				self.posts.excludePost(fromCategoryId: Categoria.podcast.rawValue)
+			}
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+				self.refreshControl?.endRefreshing()
 			}
 		}
 	}
@@ -64,16 +68,26 @@ class PostsMasterViewController: UITableViewController {
 		return self.posts.getNumberOfPosts()
 	}
 
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		let object = self.posts.getPostAtIndex(index: indexPath.row)
+		return ((object?.hasCategory(id: 674))! ? 212 : 151)
+	}
+
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath) as? postCell else {
+		let object = self.posts.getPostAtIndex(index: indexPath.row)
+
+		let identifier = ((object?.hasCategory(id: Categoria.destaque.rawValue))! ? "featuredCell" : "normalCell")
+		
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? postCell else {
             fatalError("Unexpected Index Path")
         }
 
-		let object = self.posts.getPostAtIndex(index: indexPath.row)
-		
 		cell.headlineLabel!.text = object?.title
-        cell.subheadlineLabel!.text = object?.excerpt
 		
+		if identifier == "normalCell" {
+			cell.subheadlineLabel!.text = object?.excerpt
+		}
+
 		cell.thumbnailImageView.image = nil
 		if let url = object?.artworkURL {
 			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)

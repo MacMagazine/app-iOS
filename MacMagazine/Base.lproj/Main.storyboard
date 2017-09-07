@@ -159,7 +159,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="150.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DaF-eS-7AO" userLabel="Thumbnail Image View">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="DaF-eS-7AO" userLabel="Thumbnail Image View">
                                             <rect key="frame" x="16" y="25" width="72" height="100"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -173,7 +173,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-uf-NdD">
-                                            <rect key="frame" x="42" y="65" width="20" height="20"/>
+                                            <rect key="frame" x="42" y="105" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label">
                                             <rect key="frame" x="104" y="16" width="255" height="42.5"/>
@@ -196,8 +196,8 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="centerY" secondItem="DaF-eS-7AO" secondAttribute="centerY" id="1Dk-fx-Jdu"/>
                                         <constraint firstAttribute="trailing" secondItem="8N4-Vj-vdj" secondAttribute="trailing" id="4Ir-KW-oKV"/>
+                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="bottom" secondItem="DaF-eS-7AO" secondAttribute="bottom" id="Dux-lz-AsT"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="trailing" secondItem="VwH-Lo-1lM" secondAttribute="trailingMargin" id="Gsp-pZ-2Ai"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="leading" secondItem="DaF-eS-7AO" secondAttribute="trailing" constant="16" id="Jjb-qY-dmT"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="topMargin" id="L9a-WV-6FG"/>
@@ -230,20 +230,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="261.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHz-9N-Wi2" userLabel="Separator View">
-                                            <rect key="frame" x="16" y="260" width="359" height="1"/>
-                                            <color key="backgroundColor" red="0.97000002860000001" green="0.97000002860000001" blue="0.97000002860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="nnU-Hb-l7x"/>
-                                            </constraints>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label" customClass="MMMLabel">
-                                            <rect key="frame" x="16" y="193" width="343" height="52"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
                                             <rect key="frame" x="16" y="16" width="343" height="169"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -255,13 +242,33 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FtC-sD-OAp">
+                                            <rect key="frame" x="177" y="90" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label">
+                                            <rect key="frame" x="16" y="193" width="343" height="52"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHz-9N-Wi2" userLabel="Separator View">
+                                            <rect key="frame" x="16" y="260" width="359" height="1"/>
+                                            <color key="backgroundColor" red="0.97000002860000001" green="0.97000002860000001" blue="0.97000002860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="nnU-Hb-l7x"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="leading" secondItem="kaO-wS-N74" secondAttribute="leading" id="7Su-o7-cme"/>
+                                        <constraint firstItem="FtC-sD-OAp" firstAttribute="centerY" secondItem="aso-Qa-tMZ" secondAttribute="centerY" id="Hov-E9-pj6"/>
+                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="top" secondItem="FtC-sD-OAp" secondAttribute="bottom" constant="-94" id="JcQ-sA-o4B"/>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leadingMargin" id="Jev-0f-7BL"/>
+                                        <constraint firstItem="FtC-sD-OAp" firstAttribute="centerX" secondItem="aso-Qa-tMZ" secondAttribute="centerX" id="Ksb-fC-f9t"/>
                                         <constraint firstAttribute="trailing" secondItem="gHz-9N-Wi2" secondAttribute="trailing" id="Sfm-2g-st5"/>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="trailing" secondItem="kaO-wS-N74" secondAttribute="trailing" id="VDN-r6-Ft8"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="kaO-wS-N74" secondAttribute="bottom" id="YyJ-d4-BZG"/>
+                                        <constraint firstItem="FtC-sD-OAp" firstAttribute="centerY" secondItem="aso-Qa-tMZ" secondAttribute="centerY" id="e4H-Mu-rEX"/>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="top" secondItem="Ui7-Bp-i1r" secondAttribute="topMargin" id="nfR-Ti-jN2"/>
                                         <constraint firstItem="gHz-9N-Wi2" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leading" constant="16" id="qzK-MN-KCa"/>
                                         <constraint firstAttribute="bottom" secondItem="gHz-9N-Wi2" secondAttribute="bottom" id="saX-2K-2Q8"/>
@@ -272,6 +279,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="headlineLabel" destination="kaO-wS-N74" id="wey-Eb-rXC"/>
+                                    <outlet property="spin" destination="FtC-sD-OAp" id="87S-IQ-pXF"/>
                                     <outlet property="thumbnailImageView" destination="aso-Qa-tMZ" id="Jhh-1u-Aiq"/>
                                 </connections>
                             </tableViewCell>
@@ -282,7 +290,23 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Posts" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" id="Zdf-7t-Un8">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="vSY-Fe-RrA">
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="jRh-cz-TRt">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="psl-62-Dqt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
@@ -326,6 +350,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="image_logo" width="72" height="100"/>
+        <image name="logo" width="80" height="80"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="36" height="28"/>

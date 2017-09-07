@@ -232,6 +232,26 @@ class PostsTests: XCTestCase {
 
 	}
 
+	func testGetNumberOfFilteredPosts() {
+		self.posts?.insertOrUpdatePost(post: self.p!)
+
+		XCTAssertFalse(self.posts!.isEmpty())
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
+		
+		let p1 = Post(id: 1, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321, categorias: [20, 30])
+		self.posts?.insertOrUpdatePost(post: p1)
+		
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 2)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(inCategory: 10), 1)
+
+		let p2 = Post(id: 2, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321, categorias: [10, 20, 30])
+		self.posts?.insertOrUpdatePost(post: p2)
+		
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 3)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(inCategory: 10), 2)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(inCategory: 20), 2)
+	}
+
 	func testFilterByCategory() {
 		self.posts?.insertOrUpdatePost(post: self.p!)
 		
@@ -264,4 +284,71 @@ class PostsTests: XCTestCase {
 		}
 	}
 
+	func testGetNumberOfFilteredExcludedPosts() {
+		self.posts?.insertOrUpdatePost(post: self.p!)
+		
+		XCTAssertFalse(self.posts!.isEmpty())
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
+		
+		let p1 = Post(id: 1, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321, categorias: [20, 30])
+		self.posts?.insertOrUpdatePost(post: p1)
+		
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 2)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(notInCategory: 10), 1)
+		
+		let p2 = Post(id: 2, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321, categorias: [10, 20, 30])
+		self.posts?.insertOrUpdatePost(post: p2)
+		
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 3)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(notInCategory: 10), 1)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(notInCategory: 20), 1)
+	}
+	
+	func testFilterExcludedCategory() {
+		self.posts?.insertOrUpdatePost(post: self.p!)
+		
+		XCTAssertFalse(self.posts!.isEmpty())
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
+		
+		let p1 = Post(id: 1, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321, categorias: [20, 30])
+		self.posts?.insertOrUpdatePost(post: p1)
+		
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 2)
+		
+		if let postsToCompare = self.posts?.filterExcludingCategory(categoryId: 10) {
+			let filteredPost = Posts()
+			for post in postsToCompare {
+				filteredPost.insertOrUpdatePost(post: post)
+			}
+			XCTAssertEqual(filteredPost.getNumberOfPosts(), 1)
+		} else {
+			XCTFail("Object is Nil")
+		}
+		
+		if let postsToCompare = self.posts?.filterExcludingCategory(categoryId: 20) {
+			let filteredPost = Posts()
+			for post in postsToCompare {
+				filteredPost.insertOrUpdatePost(post: post)
+			}
+			XCTAssertEqual(filteredPost.getNumberOfPosts(), 1)
+		} else {
+			XCTFail("Object is Nil")
+		}
+	}
+
+	func testExcludePost() {
+		self.posts?.insertOrUpdatePost(post: self.p!)
+		
+		XCTAssertFalse(self.posts!.isEmpty())
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
+		
+		let p1 = Post(id: 1, postDate: "2001-01-02T01:01:01", title: "title1", content: "content1", excerpt: "excerpt1", artwork: 4321, categorias: [20, 30])
+		self.posts?.insertOrUpdatePost(post: p1)
+		
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 2)
+		
+		self.posts?.excludePost(fromCategoryId: 10)
+		XCTAssertEqual(self.posts?.getNumberOfPosts(), 1)
+	}
+	
 }

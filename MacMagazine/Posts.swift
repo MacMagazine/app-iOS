@@ -93,10 +93,10 @@ class Posts {
 		return (self.posts.count == 0)
 	}
 	
-	func getNumberOfPosts() -> NSInteger {
+	func getNumberOfPosts() -> Int {
 		return self.posts.count
 	}
-	
+
 	func insertOrUpdatePost(post: Post) -> Void {
 		// Cannot duplicate Ids
 		if let p = self.findPostById(id: post.id) {
@@ -135,9 +135,32 @@ class Posts {
 		return self.posts.index(of: of)
 	}
 
+	func getNumberOfPosts(inCategory: Int) -> Int {
+		if let posts = self.filterByCategory(categoryId: inCategory) {
+			return posts.count
+		}
+		return 0
+	}
+	
 	func filterByCategory(categoryId: Int) -> [Post]? {
 		let posts = self.posts.filter() { $0.categorias.contains(categoryId) }
 		return posts
+	}
+
+	func getNumberOfPosts(notInCategory: Int) -> Int {
+		if let posts = self.filterExcludingCategory(categoryId: notInCategory) {
+			return posts.count
+		}
+		return 0
+	}
+	
+	func filterExcludingCategory(categoryId: Int) -> [Post]? {
+		let posts = self.posts.filter() { $0.categorias.contains(categoryId) == false }
+		return posts
+	}
+
+	func excludePost(fromCategoryId: Int) -> Void {
+		self.posts = self.posts.filter() { $0.categorias.contains(fromCategoryId) == false }
 	}
 
 }

@@ -9,23 +9,16 @@
 import Foundation
 
 enum Site: String {
-	case protocolo, url, api
+	case protocolo = "https://"
+	case url = "macmagazine.com.br"
+	case api = "/wp-json/wp/v2/"
+	case search = "per_page=1&page=1"
 	case posts
-	case perPage, page
-	case search
 	case artworkURL
+	case perPage, page
 
 	func withParameter(_ number: Int?) -> String {
 		switch self {
-
-		case .protocolo:
-			return "https://"
-
-		case .url:
-			return "macmagazine.com.br"
-
-		case .api:
-			return "/wp-json/wp/v2/"
 
 		case .posts:
 			return "\(Site.protocolo.withParameter(nil))\(Site.url.withParameter(nil))\(Site.api.withParameter(nil))posts?"
@@ -39,8 +32,13 @@ enum Site: String {
 		case .page:
 			return "page=\(number!)"
 
-		case .search:
-			return "per_page=1&page=1"
+		default:
+			return self.rawValue
 		}
 	}
+}
+
+enum Categoria: Int {
+	case destaque = 674
+	case podcast = 101
 }
