@@ -95,7 +95,7 @@
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
 
-	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+//	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 
 	id presentedViewController = [window.rootViewController presentedViewController];
     NSString *className = presentedViewController ? NSStringFromClass([presentedViewController class]) : nil;

@@ -1,6 +1,6 @@
 #import <PureLayout/PureLayout.h>
-#import <TSMessages/TSMessage.h>
 #import <StoreKit/StoreKit.h>
+#import <TSMessages/TSMessage.h>
 
 #import "MMMPostsTableViewController.h"
 #import "MMMFeaturedPostTableViewCell.h"
@@ -34,6 +34,7 @@
 #pragma mark - Getters/Setters
 
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize callbackBlock;
 
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController) {
@@ -77,30 +78,48 @@
     }
 }
 
-- (void)selectNextPost {
-    NSInteger currentIndexPathRow = self.selectedIndexPath.row;
-    NSInteger currentIndexPathSection = self.selectedIndexPath.section;
-    NSInteger totalofRowsRowInSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section] - 1;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
-    
-    if(self.selectedIndexPath.row == (totalofRowsRowInSection)) {
-        [self selectTableViewCellAtIndexPath:0 andTheCurrentIndexPathSection:currentIndexPathSection+=1];
-    } else {
-        [self selectTableViewCellAtIndexPath:currentIndexPathRow+=1 andTheCurrentIndexPathSection:currentIndexPathSection];
-    }
+- (void)previousPost:(MMCallbackBlock)block {
+	self.callbackBlock = block;
+	
+	NSInteger currentIndexPathRow = self.selectedIndexPath.row;
+	NSInteger currentIndexPathSection = self.selectedIndexPath.section;
+	
+	NSInteger totalofRowsRowInPrevSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section] - 1;
+	if (self.selectedIndexPath.section > 0) {
+		totalofRowsRowInPrevSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section - 1] - 1;
+	}
+	
+	NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+	if (self.selectedIndexPath.row == 0) {
+		if (self.selectedIndexPath.section > 0) {
+			index = [NSIndexPath indexPathForRow:totalofRowsRowInPrevSection inSection:--currentIndexPathSection];
+		}
+	} else {
+		index = [NSIndexPath indexPathForRow:--currentIndexPathRow inSection:currentIndexPathSection];
+	}
+	
+	self.selectedIndexPath = index;
+	MMMPost *post = [self.fetchedResultsController objectAtIndexPath:index];
+	self.callbackBlock(@{@"post": post, @"index": index});
 }
 
-- (void)selectPreviousPost {
-    NSInteger currentIndexPathRow = self.selectedIndexPath.row;
-    NSInteger currentIndexPathSection = self.selectedIndexPath.section;
-    NSInteger totalOfRowsInLastSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section - 1] - 1;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
-    
-    if(self.selectedIndexPath.row == 0) {
-        [self selectTableViewCellAtIndexPath:totalOfRowsInLastSection andTheCurrentIndexPathSection:currentIndexPathSection - 1];
-    } else {
-        [self selectTableViewCellAtIndexPath:currentIndexPathRow-=1 andTheCurrentIndexPathSection:currentIndexPathSection];
-    }
+- (void)nextPost:(MMCallbackBlock)block {
+	self.callbackBlock = block;
+
+	NSInteger currentIndexPathRow = self.selectedIndexPath.row;
+	NSInteger currentIndexPathSection = self.selectedIndexPath.section;
+	NSInteger totalofRowsRowInSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section] - 1;
+
+	NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+	if (self.selectedIndexPath.row == totalofRowsRowInSection) {
+		index = [NSIndexPath indexPathForRow:0 inSection:++currentIndexPathSection];
+	} else {
+		index = [NSIndexPath indexPathForRow:++currentIndexPathRow inSection:currentIndexPathSection];
+	}
+
+	self.selectedIndexPath = index;
+	MMMPost *post = [self.fetchedResultsController objectAtIndexPath:index];
+	self.callbackBlock(@{@"post": post, @"index": index});
 }
 
 - (void)shortCutAction {
@@ -524,6 +543,7 @@
     [self.tableView registerClass:[MMMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMMTableViewHeaderView identifier]];
     
     self.tableView.estimatedRowHeight = 100;
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];

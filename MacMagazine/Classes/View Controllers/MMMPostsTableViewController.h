@@ -3,6 +3,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MMMPost;
+
 @interface MMMPostsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISplitViewControllerDelegate, UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -18,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchMoreData;
 - (void)handleError:(NSError *)error;
 - (void)reloadData;
+
+typedef void (^MMCallbackBlock)(NSDictionary *);
+@property (nonatomic, copy) MMCallbackBlock callbackBlock;
+- (void)previousPost:(MMCallbackBlock)block;
+- (void)nextPost:(MMCallbackBlock)block;
 
 @end
 

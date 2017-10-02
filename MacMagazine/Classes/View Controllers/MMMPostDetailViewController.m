@@ -7,6 +7,7 @@
 #import "MMMPostDetailViewController.h"
 #import "MMMLogoImageView.h"
 #import "MMMPost.h"
+#import "MMMPostsTableViewController.h"
 #import "UIViewController+ShareActivity.h"
 
 static NSString * const MMMBaseURL = @"macmagazine.com.br";
@@ -94,14 +95,27 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
     [generator prepare];
     [generator impactOccurred];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectNextPost" object:nil];
+	
+	MMMPostsTableViewController *parent = (MMMPostsTableViewController *)self.navigationController.parentViewController.childViewControllers[0];
+	[parent nextPost:^(NSDictionary *response) {
+		[self setPost:response[@"post"]];
+		self.currentTableViewIndexPath = response[@"index"];
+		[self setupWebView];
+	}];
+
 }
 
 - (void)actionPreviousPost:(id)sender {
     UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
     [generator prepare];
     [generator impactOccurred];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectPreviousPost" object:nil];
+
+	MMMPostsTableViewController *parent = (MMMPostsTableViewController *)self.navigationController.parentViewController.childViewControllers[0];
+	[parent previousPost:^(NSDictionary *response) {
+		[self setPost:response[@"post"]];
+		self.currentTableViewIndexPath = response[@"index"];
+		[self setupWebView];
+	}];
 }
 
 #pragma mark - Preview Actions
@@ -128,8 +142,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 - (void)dismissDetailView {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-        [(UINavigationController *)self.splitViewController.viewControllers[0]
-         popToRootViewControllerAnimated:YES];
+        [(UINavigationController *)self.splitViewController.viewControllers[0] popToRootViewControllerAnimated:YES];
     });
 }
 
