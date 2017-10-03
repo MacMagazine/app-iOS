@@ -1,4 +1,5 @@
 #import <PureLayout/PureLayout.h>
+#import <StoreKit/StoreKit.h>
 #import <TSMessages/TSMessage.h>
 
 #import "MMMPostsTableViewController.h"
@@ -20,6 +21,7 @@
 @property (nonatomic, weak) NSIndexPath *selectedPostIndexPath;
 @property (nonatomic) int variableControlForFetchedResults;
 @property (nonatomic) BOOL isRunningInFullScreen;
+@property (nonatomic) BOOL isTableViewCellSelected;
 
 @end
 
@@ -32,6 +34,7 @@
 #pragma mark - Getters/Setters
 
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize callbackBlock;
 
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController) {
@@ -53,17 +56,94 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-
+    
     return _fetchedResultsController;
 }
 
 #pragma mark - Actions
 
 - (IBAction)settingsAction:(id)sender {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
+    [generator prepare];
+    [generator impactOccurred];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
 #pragma mark - Instance Methods
+
+- (void)popUpRatingAppView {
+    NSInteger appNumberOfCalls = [[NSUserDefaults standardUserDefaults] integerForKey:@"appNumberOfCalls"];
+    if(appNumberOfCalls % 50 == 0) {
+        [SKStoreReviewController requestReview];
+    }
+}
+
+- (void)previousPost:(MMCallbackBlock)block {
+	self.callbackBlock = block;
+	
+	NSInteger currentIndexPathRow = self.selectedIndexPath.row;
+	NSInteger currentIndexPathSection = self.selectedIndexPath.section;
+	
+	NSInteger totalofRowsRowInPrevSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section] - 1;
+	if (self.selectedIndexPath.section > 0) {
+		totalofRowsRowInPrevSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section - 1] - 1;
+	}
+	
+	NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+	if (self.selectedIndexPath.row == 0) {
+		if (self.selectedIndexPath.section > 0) {
+			index = [NSIndexPath indexPathForRow:totalofRowsRowInPrevSection inSection:--currentIndexPathSection];
+		}
+	} else {
+		index = [NSIndexPath indexPathForRow:--currentIndexPathRow inSection:currentIndexPathSection];
+	}
+	
+	self.selectedIndexPath = index;
+	MMMPost *post = [self.fetchedResultsController objectAtIndexPath:index];
+	self.callbackBlock(@{@"post": post, @"index": index});
+}
+
+- (void)nextPost:(MMCallbackBlock)block {
+	self.callbackBlock = block;
+
+	NSInteger currentIndexPathRow = self.selectedIndexPath.row;
+	NSInteger currentIndexPathSection = self.selectedIndexPath.section;
+	NSInteger totalofRowsRowInSection = [self.tableView numberOfRowsInSection:self.selectedIndexPath.section] - 1;
+
+	NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+	if (self.selectedIndexPath.row == totalofRowsRowInSection) {
+		index = [NSIndexPath indexPathForRow:0 inSection:++currentIndexPathSection];
+	} else {
+		index = [NSIndexPath indexPathForRow:++currentIndexPathRow inSection:currentIndexPathSection];
+	}
+
+	self.selectedIndexPath = index;
+	MMMPost *post = [self.fetchedResultsController objectAtIndexPath:index];
+	self.callbackBlock(@{@"post": post, @"index": index});
+}
+
+- (void)shortCutAction {
+    if(self.isTableViewCellSelected == YES) {
+        if(self.selectedIndexPath.row != 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetailView" object:self];
+            [self selectTableViewCellAtIndexPath:0 andTheCurrentIndexPathSection:0];
+        }
+    } else {
+        [self selectTableViewCellAtIndexPath:0 andTheCurrentIndexPathSection:0];
+    }
+}
+
+- (void)selectTableViewCellAtIndexPath:(NSInteger)indexPathRow andTheCurrentIndexPathSection:(NSInteger)indexPathSection {
+    double delayInSeconds = 0.5;
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+            NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:indexPathRow inSection:indexPathSection];
+            [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+            [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+        });
+    });
+}
 
 - (void)sharePost {
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:self.selectedPostIndexPath];
@@ -102,7 +182,7 @@
     
     NSUInteger numberOfRows = [self.tableView numberOfRowsInSection:indexPath.section];
     cell.separatorView.hidden = (indexPath.row + 1 == numberOfRows);
-
+    
     MMMPostPresenter *presenter = [[MMMPostPresenter alloc] initWithObject:post];
     [presenter setupView:cell];
 }
@@ -126,11 +206,11 @@
     [TSMessage showNotificationWithTitle:error.localizedDescription
                                 subtitle:error.localizedFailureReason
                                     type:TSMessageNotificationTypeError];
-
-	// Hide error message after 0.6s
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-		[TSMessage dismissActiveNotification];
-	});
+    
+    // Hide error message after 0.6s
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+        [TSMessage dismissActiveNotification];
+    });
 }
 
 - (void)reloadData {
@@ -142,6 +222,8 @@
         self.numberOfResponseObjectsPerRequest = response.count;
         self.nextPage = 2;
         [self.refreshControl endRefreshing];
+        NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
     } failure:^(NSError *error) {
         [self handleError:error];
         [self.refreshControl endRefreshing];
@@ -149,18 +231,20 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	UINavigationController *navigationController = segue.destinationViewController;
-	MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
-
-	if (self.postID) {
-		detailViewController.postURL = [NSURL URLWithString:self.postID];
-	} else {
-		NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-		if (selectedIndexPath) {
-			detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
-		}
+    UINavigationController *navigationController = segue.destinationViewController;
+    MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    detailViewController.currentTableViewIndexPath = selectedIndexPath;
+    detailViewController.isURLOpendedInternally = NO;
+    
+    if (self.postID) {
+        detailViewController.postURL = [NSURL URLWithString:self.postID];
+    } else {
+        if (selectedIndexPath) {
+            detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+        }
     }
-
+    
     [super prepareForSegue:segue sender:sender];
 }
 
@@ -171,7 +255,7 @@
 }
 
 - (void)selectFirstTableViewCell {
-	// check if the device is an iPad
+    // check if the device is an iPad
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && self.fetchedResultsController.fetchedObjects.count > 0) {
         if(self.isRunningInFullScreen == YES) {
             NSUInteger row = 0;
@@ -190,13 +274,13 @@
             }
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-				NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-				if (section > [self.tableView numberOfSections] || row > [self.tableView numberOfRowsInSection:section]) {
-					selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-				}
-				[self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
-				[self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
-			});
+                NSIndexPath *selectedCellIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                if (section > [self.tableView numberOfSections] || row > [self.tableView numberOfRowsInSection:section]) {
+                    selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                }
+                [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+                [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
+            });
             self.variableControlForFetchedResults++;
         }
     }
@@ -232,12 +316,12 @@
         [cell layoutIfNeeded];
         [cell layoutSubviews];
     }
-
+    
     UIView *selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = [UIColor colorWithRed:((float)0/(float)255) green:((float)138/(float)255) blue:((float)202/(float)255) alpha:0.3];
     cell.selectedBackgroundView = selectedBackgroundView;
-
-	return cell;
+    
+    return cell;
 }
 
 #pragma mark - UITableView delegate
@@ -245,17 +329,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Used only when received a push notification
     self.postID = nil;
-
-	// check if the cell is already selected
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone || self.selectedIndexPath != indexPath) {
+    self.isTableViewCellSelected = YES;
+    
+    // check if the cell is already selected
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone || self.selectedIndexPath != indexPath) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"selectedCellIndexPathRow": @(indexPath.row), @"selectedCellIndexPathSection": @(indexPath.section), @"date": [NSDate date]} forKey:@"lastSelection"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
         [self performSegueWithIdentifier:segueIdentifier sender:nil];
     }
-
-	self.selectedIndexPath = indexPath;
+    
+    self.selectedIndexPath = indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -273,7 +358,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MMMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMMTableViewHeaderView identifier]];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-
+    
     MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     MMMPostPresenter *presenter = [[MMMPostPresenter alloc] initWithObject:post];
     headerView.titleLabel.text = presenter.sectionTitle;
@@ -344,12 +429,12 @@
 #pragma mark - Long press gesture
 
 - (void)enableLongPressGesture {
-	// check if the device is an iPhone
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone && self.fetchedResultsController.fetchedObjects.count > 0) {
-		SEL selector = @selector(handleLongPress:);
-		UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
-		[self.tableView addGestureRecognizer:longPressGesture];
-	}
+    // check if the device is an iPhone
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone && self.fetchedResultsController.fetchedObjects.count > 0) {
+        SEL selector = @selector(handleLongPress:);
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
+        [self.tableView addGestureRecognizer:longPressGesture];
+    }
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
@@ -357,7 +442,7 @@
         CGPoint gesturePoint = [gestureRecognizer locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:gesturePoint];
         if (indexPath == nil) return;
-
+        
         [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         MMMPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
         NSURL *postURL = [NSURL URLWithString:post.link];
@@ -368,14 +453,14 @@
         NSURL *url = [NSURL URLWithString:[post thumbnail]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *postThumbnail = [[UIImage alloc] initWithData:data];
-
+        
         NSMutableArray *activityItems = [[NSMutableArray alloc] init];
         if (post) {
             [activityItems addObject:post.title];
         }
         [activityItems addObject:postURL];
         [activityItems addObject:postThumbnail];
-
+        
         [self mmm_shareActivityItems:activityItems completion:^(NSString * _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }];
@@ -409,10 +494,24 @@
     if ([self isForceTouchAvailable]) {
         self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
     }
-
+    
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(selectNextPost)
+                                                 name:@"selectNextPost"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(selectPreviousPost)
+                                                 name:@"selectPreviousPost"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(shortCutAction)
+                                                 name:@"shortCutAction"
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(sharePost)
@@ -423,58 +522,62 @@
                                              selector:@selector(applyRefreshControlFix)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadData)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView
                                              selector:@selector(reloadData)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(pushReceived:)
-												 name:@"pushReceived"
-											   object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pushReceived:)
+                                                 name:@"pushReceived"
+                                               object:nil];
+    
     [self.tableView registerNib:[MMMPostTableViewCell nib] forCellReuseIdentifier:[MMMPostTableViewCell identifier]];
     [self.tableView registerNib:[MMMFeaturedPostTableViewCell nib] forCellReuseIdentifier:[MMMFeaturedPostTableViewCell identifier]];
     [self.tableView registerClass:[MMMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMMTableViewHeaderView identifier]];
     
     self.tableView.estimatedRowHeight = 100;
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [footerView addSubview:activityIndicatorView];
     [activityIndicatorView autoCenterInSuperviewMargins];
     self.activityIndicatorView = activityIndicatorView;
     self.tableView.tableFooterView = footerView;
-
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
-
+    
     self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
     self.variableControlForFetchedResults = 0;
-
+    self.isTableViewCellSelected = NO;
+    
     [self enableLongPressGesture];
-
+    [self popUpRatingAppView];
     [self reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-	self.splitViewController.preferredPrimaryColumnWidthFraction = 0.33f;
-
+    
+    self.splitViewController.preferredPrimaryColumnWidthFraction = 0.33f;
+    
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
         [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:animated];
     }
-
+    
+    self.isTableViewCellSelected = NO;
+    
     [self.navigationController setToolbarHidden:YES animated:animated];
     self.navigationController.hidesBarsOnSwipe = NO;
 }
@@ -484,10 +587,10 @@
 }
 
 - (void)pushReceived:(NSNotification *)notification {
-	self.postID = [notification object];
-
-	NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
-	[self performSegueWithIdentifier:segueIdentifier sender:nil];
+    self.postID = [notification object];
+    
+    NSString *segueIdentifier = NSStringFromClass([MMMPostDetailViewController class]);
+    [self performSegueWithIdentifier:segueIdentifier sender:nil];
 }
 
 @end
