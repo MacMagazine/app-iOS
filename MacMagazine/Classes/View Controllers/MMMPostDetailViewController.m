@@ -147,6 +147,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupWebView {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.4];
+	self.webView.alpha = 0.0;
+	[UIView commitAnimations];
+	
     if (self.webView) {
         [self.webView stopLoading];
     } else {
@@ -189,6 +194,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         self.titleView = self.activityView;
         self.navigationItem.titleView = self.titleView;
     } else {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4];
+		self.webView.alpha = 1.0;
+		[UIView commitAnimations];
+
         [self.activityView stopAnimating];
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             // check if the device is an iPhone
