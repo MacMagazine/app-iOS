@@ -262,8 +262,13 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         } else {
             [rightButton setFrame:CGRectMake(0, 0, 65, 65)];
             [rightButtonView setFrame:CGRectMake(0, 0, 65, 65)];
+			
+			CGFloat y = 0.0;
+			if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) {
+				y = 10.0;
+			}
 
-            rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -25, 0);
+			rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -25, y);
             [rightButtonView addSubview:rightButton];
             self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
             self.navigationItem.rightBarButtonItem = self.rightItem;
