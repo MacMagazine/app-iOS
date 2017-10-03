@@ -497,17 +497,7 @@
     
     self.splitViewController.delegate = self;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(selectNextPost)
-                                                 name:@"selectNextPost"
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(selectPreviousPost)
-                                                 name:@"selectPreviousPost"
-                                               object:nil];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(shortCutAction)
                                                  name:@"shortCutAction"
