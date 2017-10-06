@@ -122,7 +122,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos posts ..." translucent="NO" id="0qd-er-Gku">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos posts..." translucent="NO" id="0qd-er-Gku">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -162,19 +162,19 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-uf-NdD">
-                                            <rect key="frame" x="42" y="96" width="20" height="20"/>
+                                            <rect key="frame" x="42" y="56.5" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="195-hI-MvL" secondAttribute="trailing" id="25n-4E-m8J"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="leading" secondItem="DaF-eS-7AO" secondAttribute="trailing" constant="16" id="4A6-62-iRa"/>
+                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="centerY" secondItem="VwH-Lo-1lM" secondAttribute="centerY" id="6TE-Wa-f9a"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="leading" secondItem="VwH-Lo-1lM" secondAttribute="leading" constant="16" id="6Xm-es-U9G"/>
                                         <constraint firstAttribute="bottom" secondItem="DaF-eS-7AO" secondAttribute="bottom" constant="16.5" id="A1g-EY-VlX"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="width" secondItem="195-hI-MvL" secondAttribute="width" id="CgZ-VO-kwV"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="GDp-vA-Lob"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="DaF-eS-7AO" secondAttribute="top" id="J5t-nl-vvh"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="top" constant="16" id="Jjd-vx-9mF"/>
-                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="bottom" secondItem="DaF-eS-7AO" secondAttribute="bottom" id="coY-eT-QRr"/>
                                         <constraint firstItem="Yds-uf-NdD" firstAttribute="centerX" secondItem="DaF-eS-7AO" secondAttribute="centerX" id="crk-bM-Pcb"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" secondItem="195-hI-MvL" secondAttribute="leading" id="qPM-Hn-Ggi"/>
                                     </constraints>
@@ -313,7 +313,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos Podcasts ..." translucent="NO" id="3X8-ZW-9l4">
+                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Procurar nos Podcasts..." translucent="NO" id="3X8-ZW-9l4">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -353,7 +353,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xy3-FG-bSx">
-                                            <rect key="frame" x="42" y="96" width="20" height="20"/>
+                                            <rect key="frame" x="42" y="56.5" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
@@ -361,10 +361,10 @@
                                         <constraint firstItem="WHZ-kW-s7u" firstAttribute="top" secondItem="CUW-vd-D0f" secondAttribute="bottom" constant="4" id="6XR-oC-3fa"/>
                                         <constraint firstItem="xy3-FG-bSx" firstAttribute="centerX" secondItem="7YU-GS-Xls" secondAttribute="centerX" id="73X-X3-hWr"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="CUW-vd-D0f" secondAttribute="trailing" id="FCa-Nz-Xjg"/>
+                                        <constraint firstItem="xy3-FG-bSx" firstAttribute="centerY" secondItem="Olc-Ki-V5h" secondAttribute="centerY" id="H4T-Oj-Au2"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="top" secondItem="7YU-GS-Xls" secondAttribute="top" id="KSc-eD-J1O"/>
                                         <constraint firstItem="WHZ-kW-s7u" firstAttribute="leading" secondItem="CUW-vd-D0f" secondAttribute="leading" id="OUK-4s-S8s"/>
                                         <constraint firstItem="7YU-GS-Xls" firstAttribute="top" secondItem="Olc-Ki-V5h" secondAttribute="top" constant="16" id="YSr-Ek-xJI"/>
-                                        <constraint firstItem="xy3-FG-bSx" firstAttribute="bottom" secondItem="7YU-GS-Xls" secondAttribute="bottom" id="oq1-EQ-GbQ"/>
                                         <constraint firstAttribute="bottom" secondItem="7YU-GS-Xls" secondAttribute="bottom" constant="16.5" id="pmW-yy-zAt"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="leading" secondItem="7YU-GS-Xls" secondAttribute="trailing" constant="16" id="woL-Dy-COk"/>
                                         <constraint firstItem="WHZ-kW-s7u" firstAttribute="width" secondItem="CUW-vd-D0f" secondAttribute="width" id="zjh-Ys-csx"/>

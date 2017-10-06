@@ -108,6 +108,7 @@
 		56FF63521F87C920001C9DF9 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
 				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 			);
 			name = Interface;
@@ -139,7 +140,6 @@
 			children = (
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
-				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -661,7 +661,7 @@
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -677,7 +677,7 @@
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;

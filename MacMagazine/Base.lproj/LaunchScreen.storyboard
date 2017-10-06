@@ -90,7 +90,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Posts" selectedImage="tab_logo" id="Eoh-5R-hpO"/>
-                    <navigationItem key="navigationItem" id="KLa-mX-ucd"/>
+                    <navigationItem key="navigationItem" id="KLa-mX-ucd">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="3qZ-ps-rys">
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="O3y-iJ-Gnu">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPD-MJ-uuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -153,6 +166,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="logo" width="80" height="80"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="36" height="28"/>

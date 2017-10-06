@@ -72,9 +72,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         let object = self.fetchedResultsController.object(at: atIndexPath)
         
         cell.headlineLabel!.text = object.title
-        
+        print(object.excerpt)
         if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
-            cell.subheadlineLabel!.text = object.excerpt
+            cell.subheadlineLabel?.text = object.excerpt
         }
         
         if let url = object.artworkURL {
