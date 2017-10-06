@@ -1,10 +1,3 @@
-//
-//  DataController.swift
-//
-//  Created by Cassio Rossi on 8/25/16.
-//  Copyright © 2016 Cassio Rossi. All rights reserved.
-//
-
 import UIKit
 import CoreData
 

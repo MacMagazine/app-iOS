@@ -1,15 +1,6 @@
-//
-//  Post.swift
-//
-//  Created by Cassio Rossi on 22/09/16.
-//  Copyright © 2016 Cassio Rossi. All rights reserved.
-//  This file was automatically generated and should not be edited.
-//
-
 import CoreData
 import UIKit
 
-// MARK: -
 // MARK: - Post Object -
 
 class Post: NSObject {
@@ -53,10 +44,9 @@ class Post: NSObject {
 	// MARK: - Insert Object -
 	
 	private func decodeHTMLString(string: String) -> String? {
-		
 		let encodedData = string.data(using: String.Encoding.utf8)!
 		do {
-			return try NSAttributedString(data: encodedData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil).string
+			return try NSAttributedString(data: encodedData, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil).string
 		} catch let error as NSError {
 			print(error.localizedDescription)
 			return nil
@@ -91,22 +81,19 @@ class Post: NSObject {
 	public func getCategorias() -> String {
 		return (self.categorias.map{String($0)}).joined(separator: ",")
 	}
-	
+    
 }
 
-// MARK: -
 // MARK: - Post Compare Method -
 
 func ==(lhs: Post, rhs: Post) -> Bool {
 	return lhs.id == rhs.id && lhs.postDate == rhs.postDate && lhs.title == rhs.title && lhs.content == rhs.content && lhs.excerpt == rhs.excerpt && lhs.artwork == rhs.artwork
 }
 
-// MARK: -
 // MARK: - Core Data Methods -
 
 @objc(Posts)
 public class Posts: NSManagedObject {
-
 	class func getPosts() -> [Posts] {
 		return self.getPosts(byId: nil, inCategory: nil, notInCategory: nil)
 	}
@@ -210,14 +197,12 @@ public class Posts: NSManagedObject {
 		self.managedObjectContext().delete(post)
 		DataController.sharedInstance.saveContext()
 	}
-
+    
 }
 
-// MARK: -
 // MARK: - Core Data Definitions -
 
 extension Posts {
-	
 	public class func entityName() -> String {
 		return "Post"
 	}
@@ -245,17 +230,14 @@ extension Posts {
 	
 	@NSManaged public var postDisplayDate: String?
 	@NSManaged public var postDate: String?
-	
 }
 
-// MARK: -
 // MARK: - Network Class Extension -
 
 extension Network {
 	public class func processJSON(json: [Dictionary<String, Any>]) {
 		for data in json {
 			// Get only the data we want
-			
 			guard
 				let identifier = data["id"] as? Int,
 				let dateString = data["date"] as? String,
@@ -295,7 +277,7 @@ extension Network {
 		}
 		
 		imageURL = source_url
-		
 		return imageURL
 	}
+    
 }

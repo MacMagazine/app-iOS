@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6357C98C0DC116EDC94E8029 /* Pods_MacMagazineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 326DA0B647E180BD0FF17241 /* Pods_MacMagazineTests.framework */; };
+		63E2830DA034AF4D7C808BBF /* Pods_MacMagazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1AA80D26D3283DC9E69A7C /* Pods_MacMagazine.framework */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B02AE4C1F5C515400EA1A6F /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */; };
 		9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
@@ -38,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E1AA80D26D3283DC9E69A7C /* Pods_MacMagazine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MacMagazine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F3B4FCD919482497B7C7DB3 /* Pods-MacMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.release.xcconfig"; sourceTree = "<group>"; };
+		326DA0B647E180BD0FF17241 /* Pods_MacMagazineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MacMagazineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FCED1DD253B7038027F3431 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
 		9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -57,6 +63,8 @@
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
 		9BF356271F6208F70081BE90 /* UIColor+HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexColor.swift"; sourceTree = "<group>"; };
+		AF61668635BA996990AE067C /* Pods-MacMagazineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.release.xcconfig"; sourceTree = "<group>"; };
+		EE128DEFC1006C30D4786728 /* Pods-MacMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E2830DA034AF4D7C808BBF /* Pods_MacMagazine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,20 +80,58 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6357C98C0DC116EDC94E8029 /* Pods_MacMagazineTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9B02AE4D1F5C515A00EA1A6F /* Tools */ = {
+		56E253AE1F881A5F001CC6B3 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		56FF63511F87C88C001C9DF9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9BE697D71F487D5A0048D68D /* Posts */,
+				9BE697D81F487D610048D68D /* NoAr */,
+				9BE697D91F487D660048D68D /* Ajustes */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		56FF63521F87C920001C9DF9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				9BCAD6801F47A08100B54526 /* Main.storyboard */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		59BC6C986E1CEC441EFC381E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EE128DEFC1006C30D4786728 /* Pods-MacMagazine.debug.xcconfig */,
+				1F3B4FCD919482497B7C7DB3 /* Pods-MacMagazine.release.xcconfig */,
+				5FCED1DD253B7038027F3431 /* Pods-MacMagazineTests.debug.xcconfig */,
+				AF61668635BA996990AE067C /* Pods-MacMagazineTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9B02AE4D1F5C515A00EA1A6F /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */,
 				9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */,
 				9BF356271F6208F70081BE90 /* UIColor+HexColor.swift */,
 			);
-			name = Tools;
+			name = Util;
 			sourceTree = "<group>";
 		};
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
@@ -93,7 +140,6 @@
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
-				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -122,6 +168,8 @@
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
 				9BE697CE1F4874C20048D68D /* MacMagazineTests */,
 				9BCAD6781F47A08100B54526 /* Products */,
+				59BC6C986E1CEC441EFC381E /* Pods */,
+				BD3BCFF20E986ADDB88A862F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,9 +189,6 @@
 				9BABAC271F618F2F0052063A /* Database */,
 				9B578C2E1F47A2A40086C6A7 /* Resources */,
 				9BE697DA1F487DAB0048D68D /* Comum */,
-				9BE697D71F487D5A0048D68D /* Posts */,
-				9BE697D81F487D610048D68D /* NoAr */,
-				9BE697D91F487D660048D68D /* Ajustes */,
 			);
 			path = MacMagazine;
 			sourceTree = "<group>";
@@ -184,9 +229,11 @@
 		9BE697DA1F487DAB0048D68D /* Comum */ = {
 			isa = PBXGroup;
 			children = (
-				9B02AE4D1F5C515A00EA1A6F /* Tools */,
+				56E253AE1F881A5F001CC6B3 /* AppDelegate */,
+				56FF63521F87C920001C9DF9 /* Interface */,
+				56FF63511F87C88C001C9DF9 /* ViewController */,
+				9B02AE4D1F5C515A00EA1A6F /* Util */,
 				9BE697DB1F487DBA0048D68D /* Models */,
-				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 			);
 			name = Comum;
 			sourceTree = "<group>";
@@ -206,6 +253,15 @@
 			name = "3rd Party";
 			sourceTree = "<group>";
 		};
+		BD3BCFF20E986ADDB88A862F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E1AA80D26D3283DC9E69A7C /* Pods_MacMagazine.framework */,
+				326DA0B647E180BD0FF17241 /* Pods_MacMagazineTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,10 +269,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BCAD68B1F47A08100B54526 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
+				8C16565EE980BB9269605783 /* [CP] Check Pods Manifest.lock */,
 				9B578C2D1F47A1D00086C6A7 /* ShellScript */,
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
+				1E5D31FC2DF06D2720E8BED2 /* [CP] Embed Pods Frameworks */,
+				8F2C9C9504EE45A24CBDDB48 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,9 +290,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BE697D61F4874C20048D68D /* Build configuration list for PBXNativeTarget "MacMagazineTests" */;
 			buildPhases = (
+				87FA549B7605B138C4F9DDAB /* [CP] Check Pods Manifest.lock */,
 				9BE697C91F4874C20048D68D /* Sources */,
 				9BE697CA1F4874C20048D68D /* Frameworks */,
 				9BE697CB1F4874C20048D68D /* Resources */,
+				9BE768F17249AD324E39DE91 /* [CP] Embed Pods Frameworks */,
+				5257FCB1319F214D9AC8B804 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,17 +314,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
 					9BCAD6761F47A08100B54526 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 7PXVC8PJ97;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					9BE697CC1F4874C20048D68D = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 7PXVC8PJ97;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9BCAD6761F47A08100B54526;
 					};
@@ -308,6 +371,90 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1E5D31FC2DF06D2720E8BED2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5257FCB1319F214D9AC8B804 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87FA549B7605B138C4F9DDAB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MacMagazineTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C16565EE980BB9269605783 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MacMagazine-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F2C9C9504EE45A24CBDDB48 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9B578C2D1F47A1D00086C6A7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -320,6 +467,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"";
+		};
+		9BE768F17249AD324E39DE91 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -393,7 +555,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -401,7 +565,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -424,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -444,7 +612,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -452,7 +622,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -469,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -480,32 +654,39 @@
 		};
 		9BCAD68C1F47A08100B54526 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE128DEFC1006C30D4786728 /* Pods-MacMagazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MacMagazine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		9BCAD68D1F47A08100B54526 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F3B4FCD919482497B7C7DB3 /* Pods-MacMagazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MacMagazine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
 		9BE697D41F4874C20048D68D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FCED1DD253B7038027F3431 /* Pods-MacMagazineTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
@@ -513,13 +694,15 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
 			};
 			name = Debug;
 		};
 		9BE697D51F4874C20048D68D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF61668635BA996990AE067C /* Pods-MacMagazineTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
@@ -527,7 +710,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
 			};
 			name = Release;

@@ -1,11 +1,3 @@
-//
-//  UIColor+HexColor.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 07/09/17.
-//  Copyright © 2017 MacMagazine. All rights reserved.
-//
-
 import UIKit
 
 extension UIColor {

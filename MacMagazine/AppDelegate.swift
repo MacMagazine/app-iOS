@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 18/08/17.
-//  Copyright © 2017 MacMagazine. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
@@ -59,4 +51,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 	}
 
 }
-

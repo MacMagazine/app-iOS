@@ -15,27 +15,27 @@ import UIKit
 
 class LazyImage: NSObject {
 	
-	static var backgroundView:UIView?
-	static var oldFrame:CGRect = CGRect()
-	static var imageAlreadyZoomed:Bool = false   // Variable to track whether there is currently a zoomed image
+	static var backgroundView: UIView?
+	static var oldFrame: CGRect = CGRect()
+	static var imageAlreadyZoomed: Bool = false   // Variable to track whether there is currently a zoomed image
 	
 	
 	//MARK: - Image lazy loading
 	
 	//MARK: Image lazy loading without completion
 	
-	class func show(imageView:UIImageView, url:String?) -> Void {
+	class func show(imageView: UIImageView, url: String?) -> Void {
 		self.show(imageView: imageView, url: url, defaultImage: nil) {}
 	}
 	
-	class func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+	class func show(imageView: UIImageView, url: String?, defaultImage: String?) -> Void {
 		self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
 	}
 	
 	
 	//MARK: Image lazy loading with completion
 	
-	class func show(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
+	class func show(imageView: UIImageView, url: String?, completion: @escaping () -> Void) -> Void {
 		self.show(imageView: imageView, url: url, defaultImage: nil) {
 			
 			//Call completion block
@@ -44,7 +44,7 @@ class LazyImage: NSObject {
 	}
 	
 	
-	class func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
+	class func show(imageView: UIImageView, url: String?, defaultImage: String?, completion: @escaping () -> Void) -> Void {
 		
 		if url == nil || url!.isEmpty {
 			return //URL is null, don't proceed
@@ -53,7 +53,7 @@ class LazyImage: NSObject {
 		//Clip subviews for image view
 		imageView.clipsToBounds = true;
 		
-		var isUserInteractionEnabled:Bool = false
+		var isUserInteractionEnabled: Bool = false
 		
 		//De-activate interactions while loading.
 		//This prevents image gestures not to fire while image is loading.
@@ -64,24 +64,24 @@ class LazyImage: NSObject {
 		}
 		
 		//Remove all "/" from the url because it will be used as the entire file name in order to be unique
-		let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
+		let imgName: String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
 		
 		//Image path
-		let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
+		let imagePath: String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
 		
 		//Check if image exists
-		let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
+		let imageExists: Bool = FileManager.default.fileExists(atPath: imagePath)
 		
 		if imageExists {
 			
 			//check if imageview size is 0
-			let width:CGFloat = imageView.bounds.size.width;
-			let height:CGFloat = imageView.bounds.size.height;
+			let width: CGFloat = imageView.bounds.size.width;
+			let height: CGFloat = imageView.bounds.size.height;
 			
 			//In case of default cell images (Dimensions are 0 when not present)
 			if height == 0 && width == 0 {
 				
-				var frame:CGRect = imageView.frame
+				var frame: CGRect = imageView.frame
 				frame.size.width = 40
 				frame.size.height = 40
 				imageView.frame = frame
@@ -89,9 +89,9 @@ class LazyImage: NSObject {
 			
 			if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
 				//Image exists
-				let dat:Data = imageData
+				let dat: Data = imageData
 				
-				let image:UIImage = UIImage(data:dat)!
+				let image: UIImage = UIImage(data:dat)!
 				
 				imageView.image = image;
 				
@@ -140,7 +140,7 @@ class LazyImage: NSObject {
 	}
 	
 	
-	class fileprivate func lazyLoad(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
+	class fileprivate func lazyLoad(imageView: UIImageView, url: String?, isUserInteractionEnabled: Bool, completion: @escaping () -> Void) -> Void {
 		
 		if url == nil || url!.isEmpty {
 			return //URL is null, don't proceed
@@ -152,8 +152,8 @@ class LazyImage: NSObject {
 		//Image path
 		let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
 		
-		let width:CGFloat = imageView.bounds.size.width;
-		let height:CGFloat = imageView.bounds.size.height;
+		let width: CGFloat = imageView.bounds.size.width;
+		let height: CGFloat = imageView.bounds.size.height;
 		
 		//In case of default cell images (Dimensions are 0 when not present)
 		if height == 0 && width == 0 {
@@ -165,8 +165,8 @@ class LazyImage: NSObject {
 		}
 		
 		//Lazy load image (Asychronous call)
-		let urlObject:URL = URL(string:url!)!
-		let urlRequest:URLRequest = URLRequest(url: urlObject)
+		let urlObject: URL = URL(string:url!)!
+		let urlRequest: URLRequest = URLRequest(url: urlObject)
 		
 		let backgroundQueue = DispatchQueue(label:"imageBackgroundQue",
 		                                    qos: .background,
@@ -178,7 +178,7 @@ class LazyImage: NSObject {
 			let task = session.dataTask(with: urlRequest, completionHandler: {(data, response, error) in
 				
 				if response != nil {
-					let httpResponse:HTTPURLResponse = response as! HTTPURLResponse
+					let httpResponse: HTTPURLResponse = response as! HTTPURLResponse
 					
 					if httpResponse.statusCode != 200 {
 						Swift.debugPrint("LazyImage status code : \(httpResponse.statusCode)")
@@ -193,7 +193,7 @@ class LazyImage: NSObject {
 					return
 				}
 				
-				let image:UIImage? = UIImage(data:data!)
+				let image: UIImage? = UIImage(data:data!)
 				
 				//Go to main thread and update the UI
 				DispatchQueue.main.async(execute: { () -> Void in
@@ -235,7 +235,7 @@ class LazyImage: NSObject {
 	/****************************************************/
 	//MARK: - Zoom functionality
 	
-	class func zoom(imageView:UIImageView) -> Void {
+	class func zoom(imageView: UIImageView) -> Void {
 		
 		if imageView.image == nil {
 			return  //No image loaded return
@@ -265,8 +265,8 @@ class LazyImage: NSObject {
 		}
 		
 		
-		let image:UIImage = imageView.image!
-		var window:UIWindow = UIApplication.shared.keyWindow!
+		let image: UIImage = imageView.image!
+		var window: UIWindow = UIApplication.shared.keyWindow!
 		
 		window = UIApplication.shared.windows[0]
 		
@@ -303,7 +303,7 @@ class LazyImage: NSObject {
 	
 	
 	
-	class func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
+	@objc class func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
 		
 		UIApplication.shared.isStatusBarHidden = false
 		
@@ -322,7 +322,7 @@ class LazyImage: NSObject {
 	
 	
 	
-	class func rotated()
+	@objc class func rotated()
 	{
 		self.removeZoomedImageView()
 		
@@ -360,7 +360,7 @@ class LazyImage: NSObject {
 	/****************************************************/
 	//MARK: - Blur
 	
-	class func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
+	class func blur(imageView: UIImageView, style: UIBlurEffectStyle) -> UIVisualEffectView? {
 		
 		if imageView.image == nil {
 			return nil  //No image loaded return
