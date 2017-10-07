@@ -101,8 +101,13 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
             imageView.alpha = 0
             spin.startAnimating()
         }
-        
-        imageView.sd_setImage(with: URL(string: url), completed: { (image, error, cacheType, url) in
+
+        imageView.sd_setImage(with: URL(string: url), completed: { (image, error, cacheType, imageUrl) in
+            let options: UIViewAnimationOptions = .curveEaseInOut
+            UIView.animate(withDuration: 1, delay: 0, options: options, animations: {() -> Void in
+                imageView.alpha = 1
+            }) { _ in }
+            
             DispatchQueue.main.async {
                 imageView.image = image
                 spin.stopAnimating()
