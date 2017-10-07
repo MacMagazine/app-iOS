@@ -8,6 +8,7 @@ target 'MacMagazine' do
   # Pods for MacMagazine
   
   pod 'SDWebImage', '~> 4.0'
+  pod 'SwiftGifOrigin', '~> 1.6.1'
 
   target 'MacMagazineTests' do
     inherit! :search_paths

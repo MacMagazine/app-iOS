@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import SDWebImage
+import SwiftGifOrigin
 
 // MARK: - PostsMasterViewController -
 
@@ -109,7 +110,13 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
             }) { _ in }
             
             DispatchQueue.main.async {
-                imageView.image = image
+                if image?.isGIF() == true {
+                    let gif = UIImage.gif(url: url)
+                    imageView.image = gif
+                } else {
+                    imageView.image = image
+                }
+
                 spin.stopAnimating()
                 imageView.alpha = 1
             }
