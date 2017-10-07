@@ -10,7 +10,6 @@
 		6357C98C0DC116EDC94E8029 /* Pods_MacMagazineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 326DA0B647E180BD0FF17241 /* Pods_MacMagazineTests.framework */; };
 		63E2830DA034AF4D7C808BBF /* Pods_MacMagazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1AA80D26D3283DC9E69A7C /* Pods_MacMagazine.framework */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
-		9B02AE4C1F5C515400EA1A6F /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */; };
 		9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */; };
 		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
@@ -45,7 +44,6 @@
 		326DA0B647E180BD0FF17241 /* Pods_MacMagazineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MacMagazineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FCED1DD253B7038027F3431 /* Pods-MacMagazineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
 		9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9BABAC2B1F618F810052063A /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 		9B02AE4D1F5C515A00EA1A6F /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */,
 				9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */,
 				9BF356271F6208F70081BE90 /* UIColor+HexColor.swift */,
 			);
@@ -188,7 +185,7 @@
 				9BE697DC1F487DF70048D68D /* 3rd Party */,
 				9BABAC271F618F2F0052063A /* Database */,
 				9B578C2E1F47A2A40086C6A7 /* Resources */,
-				9BE697DA1F487DAB0048D68D /* Comum */,
+				9BE697DA1F487DAB0048D68D /* Classes */,
 			);
 			path = MacMagazine;
 			sourceTree = "<group>";
@@ -226,7 +223,7 @@
 			name = Ajustes;
 			sourceTree = "<group>";
 		};
-		9BE697DA1F487DAB0048D68D /* Comum */ = {
+		9BE697DA1F487DAB0048D68D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				56E253AE1F881A5F001CC6B3 /* AppDelegate */,
@@ -235,7 +232,7 @@
 				9B02AE4D1F5C515A00EA1A6F /* Util */,
 				9BE697DB1F487DBA0048D68D /* Models */,
 			);
-			name = Comum;
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		9BE697DB1F487DBA0048D68D /* Models */ = {
@@ -319,6 +316,7 @@
 				TargetAttributes = {
 					9BCAD6761F47A08100B54526 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = K992HP865M;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -498,7 +496,6 @@
 				9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */,
 				9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */,
 				9BABAC2E1F6190620052063A /* Post.swift in Sources */,
-				9B02AE4C1F5C515400EA1A6F /* LazyImage.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColor+HexColor.swift in Sources */,
 			);
@@ -657,11 +654,11 @@
 			baseConfigurationReference = EE128DEFC1006C30D4786728 /* Pods-MacMagazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = K992HP865M;
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -673,11 +670,11 @@
 			baseConfigurationReference = 1F3B4FCD919482497B7C7DB3 /* Pods-MacMagazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = K992HP865M;
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;

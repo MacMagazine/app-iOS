@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import SDWebImage
 
 // MARK: - PostsMasterViewController -
 
@@ -17,11 +18,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 44
 
-		self.getPosts()
+        self.getPosts()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        
 		super.viewWillAppear(animated)
 
 		if (self.refreshControl?.isRefreshing)! {
@@ -50,7 +52,10 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
     // MARK: - Action Methods -
     
     @IBAction func getPosts() {
-        self.refreshControl?.beginRefreshing()
+        if !(self.refreshControl?.isRefreshing)! && self.fetchedResultsController.fetchedObjects?.count == 0 {
+            self.refreshControl?.beginRefreshing()
+        }
+        
         let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
         Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
             () in
@@ -72,7 +77,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         let object = self.fetchedResultsController.object(at: atIndexPath)
         
         cell.headlineLabel!.text = object.title
-        print(object.excerpt)
+
         if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
             cell.subheadlineLabel?.text = object.excerpt
         }
@@ -95,14 +100,15 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         DispatchQueue.main.async {
             imageView.alpha = 0
             spin.startAnimating()
-            
-            LazyImage.show(imageView: imageView, url: url, defaultImage: "image_logo") {
-                () in
-                //Image loaded. Do something..
+        }
+        
+        imageView.sd_setImage(with: URL(string: url), completed: { (image, error, cacheType, url) in
+            DispatchQueue.main.async {
+                imageView.image = image
                 spin.stopAnimating()
                 imageView.alpha = 1
             }
-        }
+        })
     }
 
 	// MARK: - Fetched Results Controller Methods -
@@ -140,7 +146,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	}
 	
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-		
 		switch (type) {
 		case .insert:
 			if let indexPath = newIndexPath {

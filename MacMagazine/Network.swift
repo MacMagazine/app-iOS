@@ -11,7 +11,6 @@ class Network {
 		let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
 		defaultSession.dataTask(with: url! as URL) {
 			data, response, error in
-			
 			if let _ = error {
 				completion()
 			} else if let httpResponse = response as? HTTPURLResponse {
@@ -35,7 +34,6 @@ class Network {
         let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
         defaultSession.dataTask(with: url! as URL) {
             data, response, error in
-            
             if let _ = error {
                 completion(nil)
             } else if let httpResponse = response as? HTTPURLResponse {
