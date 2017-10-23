@@ -18,6 +18,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		super.viewDidLoad()
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 44
+        tableView.tableFooterView = UIView()
+        splitViewController?.preferredDisplayMode = .allVisible
+        splitViewController?.preferredPrimaryColumnWidthFraction = 0.323
 
         self.getPosts()
 	}
