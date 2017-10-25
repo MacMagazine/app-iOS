@@ -1,11 +1,3 @@
-//
-//  PostsTests.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 19/08/17.
-//  Copyright © 2017 MacMagazine. All rights reserved.
-//
-
 import XCTest
 
 class PostTests: XCTestCase {

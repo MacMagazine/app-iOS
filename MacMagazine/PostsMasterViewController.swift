@@ -1,13 +1,9 @@
-//
-//  PostsMasterViewController.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 18/08/17.
-//  Copyright © 2017 MacMagazine. All rights reserved.
-//
-
 import UIKit
 import CoreData
+import SDWebImage
+import SwiftGifOrigin
+
+// MARK: - PostsMasterViewController -
 
 class PostsMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
@@ -15,20 +11,24 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController? = nil
+    var selectedIndexPath = IndexPath()
 
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 44
-
-		self.getPosts()
+        tableView.tableFooterView = UIView()
+        splitViewController?.preferredDisplayMode = .allVisible
+        splitViewController?.preferredPrimaryColumnWidthFraction = 0.323
+        
+        self.getPosts()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        
 		super.viewWillAppear(animated)
 
 		if (self.refreshControl?.isRefreshing)! {
@@ -38,7 +38,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 
 	// MARK: - Segues -
@@ -49,11 +48,85 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		        let object = Posts.getPost(atIndex: indexPath.row)
 		        let controller = (segue.destination as! UINavigationController).topViewController as! PostsDetailViewController
 		        controller.detailItem = object
+                controller.postUrl = (object?.link)!
 		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		        controller.navigationItem.leftItemsSupplementBackButton = true
 		    }
 		}
 	}
+    
+    // MARK: - Action Methods -
+    
+    @IBAction func getPosts() {
+        if !(self.refreshControl?.isRefreshing)! && self.fetchedResultsController.fetchedObjects?.count == 0 {
+            self.refreshControl?.beginRefreshing()
+        }
+        
+        let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
+        Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
+            () in
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+                // Execute the fetch to display the data
+                do {
+                    try self.fetchedResultsController.performFetch()
+                } catch {
+                    print("An error occurred")
+                }
+            }
+        }
+    }
+    
+    // MARK: - Class Methods -
+    
+    func configure(cell: PostCell, atIndexPath: IndexPath) {
+        let object = self.fetchedResultsController.object(at: atIndexPath)
+        
+        cell.headlineLabel!.text = object.title
+
+        if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
+            cell.subheadlineLabel?.text = object.excerpt
+        }
+        
+        if let url = object.artworkURL {
+            self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
+        } else {
+            Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\(object.artwork)") {
+                (result: String?) in
+                
+                if result != nil {
+                    object.artworkURL = result!
+                    self.loadImage(imageView: cell.thumbnailImageView, url: (object.artworkURL)!, spin: cell.spin)
+                }
+            }
+        }
+    }
+    
+    func loadImage(imageView: UIImageView, url: String, spin: UIActivityIndicatorView) {
+        DispatchQueue.main.async {
+            imageView.alpha = 0
+            spin.startAnimating()
+        }
+
+        imageView.sd_setImage(with: URL(string: url), completed: { (image, error, cacheType, imageUrl) in
+            let options: UIViewAnimationOptions = .curveEaseInOut
+            UIView.animate(withDuration: 1, delay: 0, options: options, animations: {() -> Void in
+                imageView.alpha = 1
+            }) { _ in }
+            
+            DispatchQueue.main.async {
+                if image?.isGIF() == true {
+                    let gif = UIImage.gif(url: url)
+                    imageView.image = gif
+                } else {
+                    imageView.image = image
+                }
+
+                spin.stopAnimating()
+                imageView.alpha = 1
+            }
+        })
+    }
 
 	// MARK: - Fetched Results Controller Methods -
 	
@@ -72,7 +145,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
 		
 		controller.delegate = self
-		
+        
 		do {
 			try controller.performFetch()
 		} catch {
@@ -90,7 +163,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	}
 	
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-		
 		switch (type) {
 		case .insert:
 			if let indexPath = newIndexPath {
@@ -104,8 +176,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 			break;
 		case .update:
 			if let indexPath = indexPath {
-				if let cell = tableView.cellForRow(at: indexPath) as? postCell {
-					configure(cell: cell, atIndexPath: indexPath)
+				if let cell = tableView.cellForRow(at: indexPath) as? PostCell {
+					self.configure(cell: cell, atIndexPath: indexPath)
 				}
 			}
 			break;
@@ -125,13 +197,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		tableView.endUpdates()
 	}
 
-	// MARK: - Table View -
+	// MARK: - Table View Data Source -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		if let sections = self.fetchedResultsController.sections {
 			return sections.count
 		}
-		
 		return 0
 	}
 
@@ -140,15 +211,14 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 			let sectionInfo = sections[section]
 			return sectionInfo.numberOfObjects
 		}
-		
 		return 0
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let object = fetchedResultsController.object(at: indexPath)
+		let object = self.fetchedResultsController.object(at: indexPath)
 
 		let identifier = (object.categorias.contains(String(Categoria.destaque.rawValue)) ? "featuredCell" : "normalCell")
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? postCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {
             fatalError("Unexpected Index Path")
         }
 
@@ -156,68 +226,17 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		bgColorView.backgroundColor = UIColor(hex: "008aca", alpha: 0.3)
 		cell.selectedBackgroundView = bgColorView
 
-		configure(cell: cell, atIndexPath: indexPath)
-
+		self.configure(cell: cell, atIndexPath: indexPath)
         return cell
 	}
-
-	func configure(cell: postCell, atIndexPath: IndexPath) {
-		let object = fetchedResultsController.object(at: atIndexPath)
-
-		cell.headlineLabel!.text = object.title
-		
-		if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
-			cell.subheadlineLabel!.text = object.excerpt
-		}
-		
-		if let url = object.artworkURL {
-			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
-		} else {
-
-			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\(object.artwork)") {
-				(result: String?) in
-				
-				if result != nil {
-					object.artworkURL = result!
-					self.loadImage(imageView: cell.thumbnailImageView, url: (object.artworkURL)!, spin: cell.spin)
-				}
-			}
-		}
-	}
-	
-	// MARK: - View Methods -
-
-	@IBAction func getPosts() {
-		self.refreshControl?.beginRefreshing()
-		
-		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
-		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
-			() in
-			
-			DispatchQueue.main.async {
-				self.refreshControl?.endRefreshing()
-				// Execute the fetch to display the data
-				do {
-					try self.fetchedResultsController.performFetch()
-				} catch {
-					print("An error occurred")
-				}
-			}
-		}
-	}
-
-	func loadImage(imageView: UIImageView, url: String, spin: UIActivityIndicatorView) {
-		DispatchQueue.main.async {
-			imageView.alpha = 0
-
-			spin.startAnimating()
-			LazyImage.show(imageView: imageView, url: url, defaultImage:"image_logo") {
-				() in
-				//Image loaded. Do something..
-				spin.stopAnimating()
-				imageView.alpha = 1
-			}
-		}
-	}
+    
+    // MARK: - Table View Delegate -
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if UIDevice.current.userInterfaceIdiom == .phone || self.selectedIndexPath != indexPath {
+            performSegue(withIdentifier: "showDetail", sender: nil)
+        }
+        
+        self.selectedIndexPath = indexPath
+    }
+    
 }
-

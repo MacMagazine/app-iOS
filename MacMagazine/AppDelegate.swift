@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 18/08/17.
-//  Copyright © 2017 MacMagazine. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
@@ -15,12 +7,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
 		let splitViewController = window!.rootViewController as! UISplitViewController
 		let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+        
 		navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
 		splitViewController.delegate = self
 		
+        UINavigationBar.appearance().tintColor = UIColor(hex: "008aca", alpha: 1)
+        
 		return true
 	}
 
@@ -59,4 +53,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 	}
 
 }
-
