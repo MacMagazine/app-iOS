@@ -232,6 +232,10 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
     
     // MARK: - Table View Delegate -
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if UIDevice.current.userInterfaceIdiom == .phone || self.selectedIndexPath != indexPath {
+            performSegue(withIdentifier: "showDetail", sender: nil)
+        }
+        
         self.selectedIndexPath = indexPath
     }
     
