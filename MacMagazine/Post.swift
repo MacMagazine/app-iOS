@@ -9,6 +9,7 @@ class Post: NSObject {
 	
 	public var id: Int
 	public var title: String
+    public var link: String
 	public var content: String
 	public var excerpt: String
 	public var artwork: Int
@@ -53,9 +54,10 @@ class Post: NSObject {
 		}
 	}
 
-	init(id: Int, postDate: String, title: String, content: String, excerpt: String, artwork: Int, categorias: [Int]) {
+    init(id: Int, postDate: String, title: String, link: String, content: String, excerpt: String, artwork: Int, categorias: [Int]) {
 		self.id = id
 		self.title = title
+        self.link = link
 		self.content = content
 		self.excerpt = excerpt
 		self.artwork = artwork
@@ -87,7 +89,7 @@ class Post: NSObject {
 // MARK: - Post Compare Method -
 
 func ==(lhs: Post, rhs: Post) -> Bool {
-	return lhs.id == rhs.id && lhs.postDate == rhs.postDate && lhs.title == rhs.title && lhs.content == rhs.content && lhs.excerpt == rhs.excerpt && lhs.artwork == rhs.artwork
+	return lhs.id == rhs.id && lhs.postDate == rhs.postDate && lhs.title == rhs.title && lhs.link == rhs.link && lhs.content == rhs.content && lhs.excerpt == rhs.excerpt && lhs.artwork == rhs.artwork
 }
 
 // MARK: - Core Data Methods -
@@ -99,13 +101,11 @@ public class Posts: NSManagedObject {
 	}
 	
 	class func getPost(byId: Int) -> Posts? {
-		
 		let posts = self.getPosts(byId: byId, inCategory: nil, notInCategory: nil)
 		return (posts.count == 1 ? posts[0] : nil)
 	}
 
 	class func getPost(atIndex: Int) -> Posts? {
-		
 		let posts = self.getPosts(byId: nil, inCategory: nil, notInCategory: nil)
 		return (posts.count > 0 ? posts[atIndex] : nil)
 	}
@@ -119,7 +119,6 @@ public class Posts: NSManagedObject {
 	}
 
 	class func getPosts(byId: Int?, inCategory: Int?, notInCategory: Int?) -> [Posts] {
-		
 		var item: Array<Posts> = []
 		
 		// Execute the fetch request
@@ -169,6 +168,7 @@ public class Posts: NSManagedObject {
 		// Cannot duplicate Ids
 		if let item = self.getPost(byId: post.id) {
 			item.title = post.title
+            item.link = post.link
 			item.content = post.content
 			item.excerpt = post.excerpt
 			item.artwork = NSNumber(value: post.artwork)
@@ -176,13 +176,11 @@ public class Posts: NSManagedObject {
 			item.categorias = post.getCategorias()
 			item.postDisplayDate = post.getDisplayDate()
 			item.postDate = post.postDate
-
 		} else {
-
 			let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entityName(), into: self.privateManagedObjectContext()) as! Posts
-			
 			newItem.id = NSNumber(value: post.id)
 			newItem.title = post.title
+            newItem.link = post.link
 			newItem.content = post.content
 			newItem.excerpt = post.excerpt
 			newItem.artwork = NSNumber(value: post.artwork)
@@ -222,6 +220,7 @@ extension Posts {
 	@NSManaged public var id: NSNumber?
 	@NSManaged public var title: String
 	@NSManaged public var content: String
+    @NSManaged public var link: String
 	@NSManaged public var excerpt: String
 	@NSManaged public var artwork: NSNumber
 	@NSManaged public var categorias: String
@@ -242,6 +241,7 @@ extension Network {
 				let identifier = data["id"] as? Int,
 				let dateString = data["date"] as? String,
 				let artwork = data["featured_media"] as? Int,
+                let link = data["link"] as? String,
 				
 				let titleDictionary = data["title"] as? Dictionary<String, Any>,
 				let title = titleDictionary["rendered"] as? String,
@@ -258,7 +258,7 @@ extension Network {
 					return
 			}
 			
-			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerptHTML, artwork: artwork, categorias: categorias)
+            let post = Post(id: identifier, postDate: dateString, title: title, link: link, content: content, excerpt: excerptHTML, artwork: artwork, categorias: categorias)
 			
 			Posts.insertOrUpdatePost(post: post)
 		}

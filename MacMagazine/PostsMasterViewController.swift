@@ -11,6 +11,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController? = nil
+    var selectedIndexPath = IndexPath()
 
 	// MARK: - View Lifecycle -
 
@@ -21,7 +22,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         tableView.tableFooterView = UIView()
         splitViewController?.preferredDisplayMode = .allVisible
         splitViewController?.preferredPrimaryColumnWidthFraction = 0.323
-
+        
         self.getPosts()
 	}
 
@@ -47,6 +48,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		        let object = Posts.getPost(atIndex: indexPath.row)
 		        let controller = (segue.destination as! UINavigationController).topViewController as! PostsDetailViewController
 		        controller.detailItem = object
+                controller.postUrl = (object?.link)!
 		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		        controller.navigationItem.leftItemsSupplementBackButton = true
 		    }
@@ -195,7 +197,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		tableView.endUpdates()
 	}
 
-	// MARK: - Table View -
+	// MARK: - Table View Data Source -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		if let sections = self.fetchedResultsController.sections {
@@ -227,5 +229,10 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		self.configure(cell: cell, atIndexPath: indexPath)
         return cell
 	}
+    
+    // MARK: - Table View Delegate -
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedIndexPath = indexPath
+    }
     
 }
