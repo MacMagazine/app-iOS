@@ -467,6 +467,13 @@
     }
 }
 
+#pragma mark - Tap gesture
+
+- (void)logoTapped:(UITapGestureRecognizer *)gestureRecognizer {
+    NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 #pragma mark - NSFetchedResultsController delegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
@@ -547,7 +554,12 @@
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
     
-    self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
+    UITapGestureRecognizer *logoTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoTapped:)];
+
+    MMMLogoImageView *logoImageView = [[MMMLogoImageView alloc] init];
+    [logoImageView addGestureRecognizer:logoTapRecognizer];
+
+    self.navigationItem.titleView = logoImageView;
     self.variableControlForFetchedResults = 0;
     self.isTableViewCellSelected = NO;
     
