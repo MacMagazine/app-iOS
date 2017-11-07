@@ -167,7 +167,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		cell.headlineLabel!.text = object.title
 		
 		if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
-			cell.subheadlineLabel!.text = object.excerpt
+			if (cell.subheadlineLabel) != nil {
+				cell.subheadlineLabel!.text = object.excerpt
+			}
 		}
 		
 		if let url = object.artworkURL {
