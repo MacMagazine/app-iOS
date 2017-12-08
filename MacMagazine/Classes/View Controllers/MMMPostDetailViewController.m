@@ -208,11 +208,14 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     }
 
     if (self.post || self.postURL) {
-        UIButton *rightButton = [[UIButton alloc] init];
-        [rightButton setImage:[UIImage imageNamed:@"shareIcon.png"] forState:UIControlStateNormal];
-        [rightButton setImage:[UIImage imageNamed:@"shareIconSelected.png"] forState:UIControlStateHighlighted];
-        [rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
+		UIButton *rightButton = [[UIButton alloc] init];
+
+		if (self.post) {
+			[rightButton setImage:[UIImage imageNamed:@"shareIcon.png"] forState:UIControlStateNormal];
+			[rightButton setImage:[UIImage imageNamed:@"shareIconSelected.png"] forState:UIControlStateHighlighted];
+			[rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+		}
+		
         // UIView just to handle the UIBarButtonItem position
         UIView *rightButtonView = [[UIView alloc] init];
         
