@@ -188,7 +188,9 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self.activityView startAnimating];
     self.titleView = self.activityView;
     self.navigationItem.titleView = self.titleView;
-    
+	
+	bool isPhone = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone);
+
     if (self.webView.isLoading) {
         [self.activityView startAnimating];
         self.titleView = self.activityView;
@@ -200,55 +202,34 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 		[UIView commitAnimations];
 
         [self.activityView stopAnimating];
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        if (isPhone) {
             // check if the device is an iPhone
             self.titleView = [[MMMLogoImageView alloc] init];
             self.navigationItem.titleView = self.titleView;
         }
     }
 
-    if (self.post || self.postURL) {
-        UIButton *rightButton = [[UIButton alloc] init];
-        [rightButton setImage:[UIImage imageNamed:@"shareIcon.png"] forState:UIControlStateNormal];
-        [rightButton setImage:[UIImage imageNamed:@"shareIconSelected.png"] forState:UIControlStateHighlighted];
-        [rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // UIView just to handle the UIBarButtonItem position
-        UIView *rightButtonView = [[UIView alloc] init];
-        
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            [rightButton setFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
-            [rightButtonView setFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
-            
-            rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -10, 0);
-            [rightButtonView addSubview:rightButton];
-            self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
-            
-            UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
-            [nextButton setImage:[UIImage imageNamed:@"nextPostIcon.png"] forState:UIControlStateNormal];
-            [nextButton setImage:[UIImage imageNamed:@"nextPostIconSelected.png"] forState:UIControlStateHighlighted];
+    if (self.post && self.postURL) {
+		UIButton *rightButton = [[UIButton alloc] init];
+		[rightButton setImage:[UIImage imageNamed:@"shareIcon"] forState:UIControlStateNormal];
+		[rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+		self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+
+		NSMutableArray *icons = [@[] mutableCopy];
+		[icons addObject:self.rightItem];
+
+		if (isPhone) {
+			CGFloat iconSize = 32.0;
+
+			UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+            [nextButton setImage:[UIImage imageNamed:@"nextPostIcon"] forState:UIControlStateNormal];
             [nextButton addTarget:self action:@selector(actionNextPost:) forControlEvents:UIControlEventTouchUpInside];
-            
-            // UIView just to handle the UIBarButtonItem position
-            UIView *nextButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
-            nextButtonView.bounds = CGRectOffset(nextButtonView.bounds, -10, 0);
-            [nextButtonView addSubview:nextButton];
-            
-            UIBarButtonItem *nextPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:nextButtonView];
-            
-            UIButton *previousButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
-            [previousButton setImage:[UIImage imageNamed:@"previousPostIcon.png"] forState:UIControlStateNormal];
-            [previousButton setImage:[UIImage imageNamed:@"previousPostIconSelected.png"] forState:UIControlStateHighlighted];
+
+            UIButton *previousButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+            [previousButton setImage:[UIImage imageNamed:@"previousPostIcon"] forState:UIControlStateNormal];
             [previousButton addTarget:self action:@selector(actionPreviousPost:) forControlEvents:UIControlEventTouchUpInside];
             
-            // UIView just to handle the UIBarButtonItem position
-            UIView *previousButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/12, self.view.frame.size.width/12)];
-            previousButtonView.bounds = CGRectOffset(previousButtonView.bounds, -10, 0);
-            [previousButtonView addSubview:previousButton];
-            
-            UIBarButtonItem *previousPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:previousButtonView];
-            
-            if((self.currentTableViewIndexPath.row == 0 && self.currentTableViewIndexPath.section == 0) && self.isURLOpendedInternally == NO) {
+            if ((self.currentTableViewIndexPath.row == 0 && self.currentTableViewIndexPath.section == 0) && self.isURLOpendedInternally == NO) {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     [previousButton setEnabled:NO];
                 });
@@ -257,22 +238,12 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
                     [previousButton setEnabled:YES];
                 });
             }
-            
-            self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:self.rightItem, nextPostRightItem, previousPostRightItem, nil];
-        } else {
-            [rightButton setFrame:CGRectMake(0, 0, 65, 65)];
-            [rightButtonView setFrame:CGRectMake(0, 0, 65, 65)];
-			
-			CGFloat y = 0.0;
-			if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) {
-				y = 10.0;
-			}
 
-			rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -25, y);
-            [rightButtonView addSubview:rightButton];
-            self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
-            self.navigationItem.rightBarButtonItem = self.rightItem;
+			[icons addObject:[[UIBarButtonItem alloc] initWithCustomView:nextButton]];
+			[icons addObject:[[UIBarButtonItem alloc] initWithCustomView:previousButton]];
         }
+
+		self.navigationItem.rightBarButtonItems = icons;
     }
 }
 
