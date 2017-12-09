@@ -210,25 +210,49 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     }
 
     if (self.post && self.postURL) {
-		UIButton *rightButton = [[UIButton alloc] init];
-		[rightButton setImage:[UIImage imageNamed:@"shareIcon"] forState:UIControlStateNormal];
-		[rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-		self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 
 		NSMutableArray *icons = [@[] mutableCopy];
-		[icons addObject:self.rightItem];
 
 		if (isPhone) {
-			CGFloat iconSize = 32.0;
+			CGFloat iconSize = self.view.frame.size.width/12;
+
+			UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+			[rightButton setImage:[UIImage imageNamed:@"shareIcon"] forState:UIControlStateNormal];
+			[rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+			
+			// UIView just to handle the UIBarButtonItem position
+			UIView *rightButtonView = [[UIView alloc] init];
+			[rightButton setFrame:CGRectMake(0, 0, iconSize, iconSize)];
+			[rightButtonView setFrame:CGRectMake(0, 0, iconSize, iconSize)];
+			
+			rightButtonView.bounds = CGRectOffset(rightButtonView.bounds, -10, 0);
+			[rightButtonView addSubview:rightButton];
+			self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+
+			[icons addObject:self.rightItem];
 
 			UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
-            [nextButton setImage:[UIImage imageNamed:@"nextPostIcon"] forState:UIControlStateNormal];
-            [nextButton addTarget:self action:@selector(actionNextPost:) forControlEvents:UIControlEventTouchUpInside];
+			[nextButton setImage:[UIImage imageNamed:@"nextPostIcon"] forState:UIControlStateNormal];
+			[nextButton addTarget:self action:@selector(actionNextPost:) forControlEvents:UIControlEventTouchUpInside];
+			
+			// UIView just to handle the UIBarButtonItem position
+			UIView *nextButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+			nextButtonView.bounds = CGRectOffset(nextButtonView.bounds, -16, -4);
+			[nextButtonView addSubview:nextButton];
+			
+			UIBarButtonItem *nextPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:nextButtonView];
+			
+			UIButton *previousButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+			[previousButton setImage:[UIImage imageNamed:@"previousPostIcon"] forState:UIControlStateNormal];
+			[previousButton addTarget:self action:@selector(actionPreviousPost:) forControlEvents:UIControlEventTouchUpInside];
+			
+			// UIView just to handle the UIBarButtonItem position
+			UIView *previousButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+			previousButtonView.bounds = CGRectOffset(previousButtonView.bounds, -26, -4);
+			[previousButtonView addSubview:previousButton];
+			
+			UIBarButtonItem *previousPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:previousButtonView];
 
-            UIButton *previousButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
-            [previousButton setImage:[UIImage imageNamed:@"previousPostIcon"] forState:UIControlStateNormal];
-            [previousButton addTarget:self action:@selector(actionPreviousPost:) forControlEvents:UIControlEventTouchUpInside];
-            
             if ((self.currentTableViewIndexPath.row == 0 && self.currentTableViewIndexPath.section == 0) && self.isURLOpendedInternally == NO) {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     [previousButton setEnabled:NO];
@@ -239,9 +263,14 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
                 });
             }
 
-			[icons addObject:[[UIBarButtonItem alloc] initWithCustomView:nextButton]];
-			[icons addObject:[[UIBarButtonItem alloc] initWithCustomView:previousButton]];
-        }
+			[icons addObject:nextPostRightItem];
+			[icons addObject:previousPostRightItem];
+		} else {
+			UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareIcon"] style:UIBarButtonItemStylePlain target:self action:@selector(actionButtonTapped:)];
+			
+			self.rightItem = share;
+			[icons addObject:self.rightItem];
+		}
 
 		self.navigationItem.rightBarButtonItems = icons;
     }
@@ -277,7 +306,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
     NSURL *targetURL = navigationAction.request.URL;
 
-    //http://stackoverflow.com/questions/25713069/why-is-wkwebview-not-opening-links-with-target-blank
+	//http://stackoverflow.com/questions/25713069/why-is-wkwebview-not-opening-links-with-target-blank
     if (!navigationAction.targetFrame.isMainFrame) {
         MMMLinkClickType linkClickType = ([targetURL.absoluteString containsString:MMMBaseURL] || [targetURL.absoluteString containsString:MMMDisqusBaseURL]) ? MMMLinkClickTypeInternal : MMMLinkClickTypeExternal;
         [self performActionForLinkClickWithType:linkClickType URL:targetURL];
@@ -296,6 +325,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         [self performActionForLinkClickWithType:linkClickType URL:targetURL];
 
         actionPolicy = WKNavigationActionPolicyCancel;
+
     } else if (navigationAction.navigationType == WKNavigationTypeOther) {
         // Semi-hack sollution to capture URL selection when there's a javascript redirect.
         // http://tech.vg.no/2013/09/13/dissecting-javascript-clicks-in-uiwebview/
@@ -303,13 +333,17 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         // For javascript-triggered links
         NSString *documentURL = navigationAction.request.mainDocumentURL.absoluteString;
 
-        // If they are the same this is a javascript href click
+		// If they are the same this is a javascript href click
         if ([targetURL.absoluteString isEqualToString:documentURL]) {
             if (!self.webView.isLoading) {
                 [self performActionForLinkClickWithType:linkClickType URL:targetURL];
-
                 actionPolicy = WKNavigationActionPolicyCancel;
-            }
+			} else {
+				if ([webView.URL.absoluteString isEqualToString:@"https://disqus.com/next/login-success/"]) {
+					actionPolicy = WKNavigationActionPolicyCancel;
+					[self.navigationController popViewControllerAnimated:YES];
+				}
+			}
         }
     }
 
