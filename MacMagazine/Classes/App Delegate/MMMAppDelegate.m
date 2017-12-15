@@ -15,6 +15,8 @@
 @property (nonatomic, strong) MMMNotificationsAPI *notificationsAPI;
 @property (nonatomic, strong) MMMNotificationsHandler *notificationsHandler;
 
+@property BOOL returnedFromBackground;
+
 @end
 
 #pragma mark MMMAppDelegate
@@ -67,6 +69,18 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     
     [MMMCacheManager clearCacheIfNeeded];
+
+	if (self.returnedFromBackground) {
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
+			[self.window.rootViewController.childViewControllers[0].childViewControllers[0] selectFirstTableViewCell];
+		});
+
+	}
+	self.returnedFromBackground = false;
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+	self.returnedFromBackground = true;
 }
 
 #pragma mark - Notifications
@@ -94,8 +108,6 @@
 #pragma mark - Handle Orientation
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-
-//	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 
 	id presentedViewController = [window.rootViewController presentedViewController];
     NSString *className = presentedViewController ? NSStringFromClass([presentedViewController class]) : nil;

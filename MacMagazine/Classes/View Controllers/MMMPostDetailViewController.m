@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 @interface MMMPostDetailViewController () <WKNavigationDelegate, WKUIDelegate>
 
+@property BOOL shouldHideHomeIndicator;
+
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIView *titleView;
@@ -214,7 +216,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 		NSMutableArray *icons = [@[] mutableCopy];
 
 		if (isPhone) {
-			CGFloat iconSize = self.view.frame.size.width/12;
+			CGFloat iconSize = 32.0;
 
 			UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
 			[rightButton setImage:[UIImage imageNamed:@"shareIcon"] forState:UIControlStateNormal];
@@ -237,7 +239,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 			
 			// UIView just to handle the UIBarButtonItem position
 			UIView *nextButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
-			nextButtonView.bounds = CGRectOffset(nextButtonView.bounds, -16, -4);
+			nextButtonView.bounds = CGRectOffset(nextButtonView.bounds, -10, -4);
 			[nextButtonView addSubview:nextButton];
 			
 			UIBarButtonItem *nextPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:nextButtonView];
@@ -248,7 +250,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 			
 			// UIView just to handle the UIBarButtonItem position
 			UIView *previousButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
-			previousButtonView.bounds = CGRectOffset(previousButtonView.bounds, -26, -4);
+			previousButtonView.bounds = CGRectOffset(previousButtonView.bounds, -10, -4);
 			[previousButtonView addSubview:previousButton];
 			
 			UIBarButtonItem *previousPostRightItem = [[UIBarButtonItem alloc] initWithCustomView:previousButtonView];
@@ -354,6 +356,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.shouldHideHomeIndicator = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dismissDetailView)
@@ -387,3 +391,4 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 @end
+

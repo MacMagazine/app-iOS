@@ -41,7 +41,7 @@
         <!--Posts Table View Controller-->
         <scene sceneID="F1D-fs-4Zn">
             <objects>
-                <tableViewController id="6gf-ZB-8Tj" customClass="MMMPostsTableViewController" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="6gf-ZB-8Tj" customClass="MMMPostsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hrb-UT-iGQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,8 +89,8 @@
             <objects>
                 <viewController storyboardIdentifier="MMMPostDetailViewController" id="RUg-XO-4v9" customClass="MMMPostDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dY9-cH-k8p"/>
-                        <viewControllerLayoutGuide type="bottom" id="Q03-2p-cpd"/>
+                        <viewControllerLayoutGuide type="top" id="cIx-w7-n7D"/>
+                        <viewControllerLayoutGuide type="bottom" id="i7p-pE-1Qj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fNM-rL-RsD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
