@@ -26,6 +26,8 @@ typedef void (^MMCallbackBlock)(NSDictionary *);
 - (void)previousPost:(MMCallbackBlock)block;
 - (void)nextPost:(MMCallbackBlock)block;
 
+- (void)selectFirstTableViewCell;
+
 @end
 
 NS_ASSUME_NONNULL_END

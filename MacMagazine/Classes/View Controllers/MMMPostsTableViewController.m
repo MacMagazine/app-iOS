@@ -278,6 +278,7 @@
                 if (section > [self.tableView numberOfSections] || row > [self.tableView numberOfRowsInSection:section]) {
                     selectedCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
                 }
+				[self.tableView scrollToRowAtIndexPath:selectedCellIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                 [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
                 [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
             });
@@ -471,7 +472,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadData];
-    if(self.variableControlForFetchedResults == 0) {
+    if (self.variableControlForFetchedResults == 0) {
         [self selectFirstTableViewCell];
     }
 }
