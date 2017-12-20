@@ -7,151 +7,191 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 3.0.0
+//  Version 6.4.2
 
 
 import Foundation
 import UIKit
 
+/// LazyImage error object
+///
+/// - CallFailed: The download request did not succeed.
+/// - noDataAvailable: The download request returned nil response.
+/// - CorruptedData: The downloaded data are corrupted and can not be read.
+public enum LazyImageError: Error {
+	case CallFailed
+	case noDataAvailable
+	case CorruptedData
+}
+
+extension LazyImageError: LocalizedError {
+	
+	public var errorDescription: String? {
+		switch self {
+		case .CallFailed:
+			return NSLocalizedString("The download request did not succeed.", comment: "Error")
+			
+		case .noDataAvailable:
+			return NSLocalizedString("The download request returned nil response.", comment: "Error")
+			
+		case .CorruptedData:
+			return NSLocalizedString("The downloaded data are corrupted and can not be read.", comment: "Error")
+		}
+	}
+}
+
+
+
+
 class LazyImage: NSObject {
 	
-	static var backgroundView:UIView?
-	static var oldFrame:CGRect = CGRect()
-	static var imageAlreadyZoomed:Bool = false   // Variable to track whether there is currently a zoomed image
+	var backgroundView:UIView?
+	var oldFrame:CGRect = CGRect()
+	var imageAlreadyZoomed:Bool = false     // Flag to track whether there is currently a zoomed image
+	var showSpinner:Bool = false            // Flag to track wether to show spinner
+	var forceDownload:Bool = false          // Flag to force download an image even if it is cached on the disk
+	var spinner:UIActivityIndicatorView?    // Actual spinner
+	var desiredImageSize:CGSize?
 	
 	
-	//MARK: - Image lazy loading
+	//MARK: - URL string stripping
 	
-	//MARK: Image lazy loading without completion
-	
-	class func show(imageView:UIImageView, url:String?) -> Void {
-		self.show(imageView: imageView, url: url, defaultImage: nil) {}
+	//TODO: Change this to hash the url
+	private func stripURL(url:String) -> String {
+		return url.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
 	}
 	
-	class func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
-		self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
+	/*
+	private func SHA256(url:String) -> String {
+	
+	let data = url(using: String.Encoding.utf8)
+	let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+	CC_SHA256(((data! as NSData)).bytes, CC_LONG(data!.count), res?.mutableBytes.assumingMemoryBound(to: UInt8.self))
+	let hashedString = "\(res!)".replacingOccurrences(of: "", with: "").replacingOccurrences(of: " ", with: "")
+	let badchar: CharacterSet = CharacterSet(charactersIn: "\"<\",\">\"")
+	let cleanedstring: String = (hashedString.components(separatedBy: badchar) as NSArray).componentsJoined(by: "")
+	return cleanedstring
+	
+	}
+	*/
+	
+	//MARK: - Image storage
+	
+	private func storagePathforImageName(name:String) -> String {
+		return String(format:"%@/%@", NSTemporaryDirectory(), name)
 	}
 	
 	
-	//MARK: Image lazy loading with completion
+	private func saveImage(image:UIImage, imagePath:String) {
+		
+		//Store image to the temporary folder for later use
+		var error: NSError?
+		
+		do {
+			try UIImagePNGRepresentation(image)!.write(to: URL(fileURLWithPath: imagePath), options: [])
+		} catch let error1 as NSError {
+			error = error1
+			if let actualError = error {
+				Swift.debugPrint("Image not saved. \(actualError)")
+			}
+		} catch {
+			fatalError()
+		}
+	}
 	
-	class func show(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
-		self.show(imageView: imageView, url: url, defaultImage: nil) {
+	
+	private func readImage(imagePath:String) -> UIImage? {
+		
+		//Read the image
+		var image:UIImage?
+		if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
+			//Image exists
+			let dat:Data = imageData
 			
-			//Call completion block
-			completion()
+			image = UIImage(data:dat)
+		}
+		return image
+	}
+	
+	
+	//MARK: - Clear cache for specific URLs
+	
+	
+	/// Clear the storage for specific URLs if they are already downloaded
+	///
+	/// - Parameter urls: The urls array for which the storage will be cleared
+	func clearCacheForURLs(urls:Array<String>) -> Void {
+		
+		for i in stride(from: 0, to: urls.count, by: 1) {
+			
+			let imgName:String = self.stripURL(url: urls[i])
+			
+			//Image path
+			let imagePath:String = self.storagePathforImageName(name: imgName)
+			
+			//Check if image exists
+			let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
+			
+			if imageExists {
+				var error: NSError?
+				
+				do {
+					try FileManager.default.removeItem(atPath: imagePath)
+				} catch let error1 as NSError {
+					error = error1
+					if let actualError = error {
+						Swift.debugPrint("Image not saved. \(actualError)")
+					}
+				} catch {
+					fatalError()
+				}
+			}
 		}
 	}
 	
 	
-	class func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
+	//MARK - Check image existence
+	
+	
+	/// Checks if image exists in storage
+	///
+	/// - Parameter url: The image URL
+	/// - Returns: returns the image path or nil if image does not exists
+	private func checkIfImageExists(url:String) -> String? {
 		
-		if url == nil || url!.isEmpty {
-			return //URL is null, don't proceed
-		}
-		
-		//Clip subviews for image view
-		imageView.clipsToBounds = true;
-		
-		var isUserInteractionEnabled:Bool = false
-		
-		//De-activate interactions while loading.
-		//This prevents image gestures not to fire while image is loading.
-		if imageView.isUserInteractionEnabled {
-			
-			isUserInteractionEnabled = imageView.isUserInteractionEnabled
-			imageView.isUserInteractionEnabled = false
-		}
-		
-		//Remove all "/" from the url because it will be used as the entire file name in order to be unique
-		let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
+		let imgName:String = self.stripURL(url: url)
 		
 		//Image path
-		let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
+		var imagePath:String? = self.storagePathforImageName(name: imgName)
 		
 		//Check if image exists
-		let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
+		let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath!)
 		
-		if imageExists {
-			
-			//check if imageview size is 0
-			let width:CGFloat = imageView.bounds.size.width;
-			let height:CGFloat = imageView.bounds.size.height;
-			
-			//In case of default cell images (Dimensions are 0 when not present)
-			if height == 0 && width == 0 {
-				
-				var frame:CGRect = imageView.frame
-				frame.size.width = 40
-				frame.size.height = 40
-				imageView.frame = frame
-			}
-			
-			if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
-				//Image exists
-				let dat:Data = imageData
-				
-				let image:UIImage = UIImage(data:dat)!
-				
-				imageView.image = image;
-				
-				if isUserInteractionEnabled {
-					imageView.isUserInteractionEnabled = true;
-				}
-				
-				//Completion
-				completion()
-			}
-			else {
-				//Image exists but corrupted. Load it again
-				if let defaultImg = defaultImage {
-					imageView.image = UIImage(named:defaultImg)
-				}
-				else {
-					imageView.image = UIImage(named:"")
-				}
-				
-				//Lazy load image (Asychronous call)
-				self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
-					
-					//Call completion block
-					completion()
-				}
-			}
+		if !imageExists {
+			imagePath = nil
 		}
-		else
-		{
-			//Image does not exist. Load it
-			if let defaultImg = defaultImage {
-				imageView.image = UIImage(named:defaultImg)
-			}
-			else {
-				imageView.image = UIImage(named:"")
-			}
-			
-			//Lazy load image (Asychronous call)
-			self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
-				
-				//Completion block reference
-				completion()
-			}
-			
+		
+		return imagePath
+	}
+	
+	
+	//MARK: - Preload setup image
+	
+	
+	/// Sets up the image before loading with a default image
+	private func setupImageBeforeLoading(imageView:UIImageView, defaultImage:String?) -> Void {
+		
+		if let defaultImg = defaultImage {
+			imageView.image = UIImage(named:defaultImg)
 		}
 	}
 	
 	
-	class fileprivate func lazyLoad(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
+	//MARK: - Setup 0 framed image
+	
+	private func setUpZeroFramedImageIfNeeded(imageView:UIImageView) -> Void {
 		
-		if url == nil || url!.isEmpty {
-			return //URL is null, don't proceed
-		}
-		
-		//Remove all "/" from the url because it will be used as the entire file name in order to be unique
-		let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
-		
-		//Image path
-		let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
-		
+		//Check if imageview size is 0
 		let width:CGFloat = imageView.bounds.size.width;
 		let height:CGFloat = imageView.bounds.size.height;
 		
@@ -163,25 +203,374 @@ class LazyImage: NSObject {
 			frame.size.height = 40
 			imageView.frame = frame
 		}
+	}
+	
+	
+	//MARK: - Image lazy loading
+	
+	//MARK: Image lazy loading without completion
+	
+	
+	/// Downloads and shows an image URL to the specified image view
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	func show(imageView:UIImageView, url:String?) -> Void {
+		self.showSpinner = false
+		self.forceDownload = false
+		self.desiredImageSize = nil
+		self.load(imageView: imageView, url: url, defaultImage: nil) {_ in}
+	}
+	
+	
+	/// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	func showWithSpinner(imageView:UIImageView, url:String?) -> Void {
+		self.showSpinner = true
+		self.forceDownload = false
+		self.desiredImageSize = nil
+		self.load(imageView: imageView, url: url, defaultImage: nil) {_ in}
+	}
+	
+	
+	/// Downloads and shows an image URL to the specified image view presenting a default image until the data are fully downloaded
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - defaultImage: The default image to be shown until the image data are fully downloaded
+	func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+		self.showSpinner = false
+		self.forceDownload = false
+		self.desiredImageSize = nil
+		self.load(imageView: imageView, url: url, defaultImage: defaultImage) {_ in}
+	}
+	
+	
+	/// Downloads and shows an image URL to the specified image view presenting both a default image and a spinner until the data are fully downloaded
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - defaultImage: The default image to be shown until the image data are fully downloaded
+	func showWithSpinner(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+		self.showSpinner = true
+		self.forceDownload = false
+		self.desiredImageSize = nil
+		self.load(imageView: imageView, url: url, defaultImage: defaultImage) {_ in}
+	}
+	
+	
+	//MARK: Image lazy loading with completion
+	
+	
+	/// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+	func showWithSpinner(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		self.showSpinner = true
+		self.forceDownload = false
+		self.desiredImageSize = nil
+		self.load(imageView: imageView, url: url, defaultImage: nil) {
+			(error:LazyImageError?) in
+			
+			//Call completion block
+			completion(error)
+		}
+	}
+	
+	
+	/// Downloads and shows an image URL to the specified image view
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+	func show(imageView:UIImageView, url:String?, completion: @escaping ( _ error:LazyImageError?) -> Void) -> Void {
+		self.showSpinner = true
+		self.forceDownload = false
+		self.desiredImageSize = nil
+		self.load(imageView: imageView, url: url, defaultImage: nil) {
+			(error:LazyImageError?) in
+			
+			//Call completion block
+			completion(error)
+		}
+	}
+	
+	
+	//MARK: Image lazy loading with completion and image resizing
+	
+	
+	/// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded.
+	/// The image is rescaled according to the size provided for better rendering
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - size: The new scaling size of the image
+	///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+	func showWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		self.showSpinner = true
+		self.forceDownload = false
+		self.desiredImageSize = size
+		self.load(imageView: imageView, url: url, defaultImage: nil) {
+			(error:LazyImageError?) in
+			
+			//Call completion block
+			completion(error)
+		}
+	}
+	
+	
+	/// Downloads and shows an image URL to the specified image view.
+	/// The image is rescaled according to the size provided for better rendering
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - size: The new scaling size of the image
+	///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+	func show(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		self.showSpinner = false
+		self.forceDownload = false
+		self.desiredImageSize = size
+		self.load(imageView: imageView, url: url, defaultImage: nil) {
+			(error:LazyImageError?) in
+			
+			//Call completion block
+			completion(error)
+		}
+	}
+	
+	
+	//MARK: Image lazy loading with force download, with completion and image resizing
+	
+	/// Force downloads, even if cached, and shows an image URL to the specified image view presenting a spinner.
+	/// The image is rescaled according to the size provided for better rendering
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - size: The new scaling size of the image
+	///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+	func showOverrideWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		self.showSpinner = true
+		self.forceDownload = true
+		self.desiredImageSize = size
+		self.load(imageView: imageView, url: url, defaultImage: nil) {
+			(error:LazyImageError?) in
+			
+			//Call completion block
+			completion(error)
+		}
+	}
+	
+	
+	/// Force downloads, even if cached, and shows an image URL to the specified image view.
+	/// The image is rescaled according to the size provided for better rendering
+	///
+	/// - Parameters:
+	///   - imageView: The image view reference to show the image
+	///   - url: The URL of the image to be downloaded
+	///   - size: The new scaling size of the image
+	///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+	func showOverride(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		self.showSpinner = false
+		self.forceDownload = true
+		self.desiredImageSize = size
+		self.load(imageView: imageView, url: url, defaultImage: nil) {
+			(error:LazyImageError?) in
+			
+			//Call completion block
+			completion(error)
+		}
+	}
+	
+	
+	
+	//MARK: - Show Image
+	
+	
+	fileprivate func load(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		
+		self.setupImageBeforeLoading(imageView: imageView, defaultImage: defaultImage)
+		
+		if url == nil || url!.isEmpty {
+			let error: LazyImageError = LazyImageError.CallFailed
+			completion(error)
+			return //URL is null, don't proceed
+		}
+		
+		//Clip subviews for image view
+		imageView.clipsToBounds = true;
+		
+		//Force download image if required
+		if self.forceDownload == true {
+			
+			//Lazy load image (Asychronous call)
+			self.lazyLoad(imageView: imageView, url: url) {
+				(error:LazyImageError?) in
+				
+				//Completion block reference
+				completion(error)
+			}
+			return
+		}
+		
+		//Check if image exists
+		let imagePath:String? = self.checkIfImageExists(url: url!)
+		
+		if let imagePath = imagePath {
+			
+			self.setUpZeroFramedImageIfNeeded(imageView: imageView)
+			
+			//Try to read the image
+			let image = self.readImage(imagePath: imagePath)
+			
+			if let image = image {
+				//Image read successfully
+				
+				self.updateImageView(imageView:imageView, fetchedImage:image) {
+					
+					//Completion block
+					//Data available with no errors
+					completion(nil)
+					return
+				}
+			}
+			else {
+				//Image exists but corrupted. Load it again
+				
+				//Lazy load image (Asychronous call)
+				self.lazyLoad(imageView: imageView, url: url) {
+					(error:LazyImageError?) in
+					
+					//Call completion block
+					completion(error)
+				}
+			}
+		}
+		else
+		{
+			//Image does not exist. Load it
+			
+			//Lazy load image (Asychronous call)
+			self.lazyLoad(imageView: imageView, url: url) {
+				(error:LazyImageError?) in
+				
+				//Completion block reference
+				completion(error)
+			}
+			
+		}
+	}
+	
+	
+	private func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+		
+		if url == nil || url!.isEmpty {
+			let error: LazyImageError = LazyImageError.CallFailed
+			completion(error)
+			return //URL is null, don't proceed
+		}
+		
+		//Show spinner
+		if self.showSpinner {
+			self.showActivityIndicatory(view:imageView)
+		}
+		
+		//Make the call
+		self.fetchImage(url: url) {
+			
+			[weak self] (image:UIImage?, error:LazyImageError?) in
+			
+			var finalError = error
+			if finalError == nil {
+				
+				if let img = image {
+					
+					let imgName:String? = self?.stripURL(url: url!)
+					
+					//Image path
+					let imagePath:String? = self?.storagePathforImageName(name: imgName!)
+					
+					//Save the image
+					self?.saveImage(image: img, imagePath: imagePath!)
+				}
+				else {
+					//Completion block
+					//Data available but corrupted
+					finalError = LazyImageError.CorruptedData
+				}
+			}
+			
+			//Update the UI
+			self?.updateImageView(imageView:imageView, fetchedImage:image) {
+				
+				//Completion block
+				//Data available with no errors
+				completion(finalError)
+			}
+		}
+	}
+	
+	
+	//MARK: - Call
+	
+	func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+		
+		if challenge.previousFailureCount > 0 {
+			completionHandler(Foundation.URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+		} else if let serverTrust = challenge.protectionSpace.serverTrust {
+			completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))
+		} else {
+			print("unknown state. error: \(String(describing: challenge.error))")
+			// do something w/ completionHandler here
+		}
+	}
+
+	func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
+		
+		guard let url = url else {
+			
+			//Call did not succeed
+			let error: LazyImageError = LazyImageError.CallFailed
+			completion(nil, error)
+			return
+		}
 		
 		//Lazy load image (Asychronous call)
-		let urlObject:URL = URL(string:url!)!
+		let urlObject:URL = URL(string:url)!
 		let urlRequest:URLRequest = URLRequest(url: urlObject)
 		
 		let backgroundQueue = DispatchQueue(label:"imageBackgroundQue",
-		                                    qos: .background,
-		                                    target: nil)
+											qos: .background,
+											target: nil)
 		
 		backgroundQueue.async(execute: {
 			
 			let session:URLSession = URLSession(configuration: URLSessionConfiguration.default)
-			let task = session.dataTask(with: urlRequest, completionHandler: {(data, response, error) in
+			let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
 				
 				if response != nil {
 					let httpResponse:HTTPURLResponse = response as! HTTPURLResponse
 					
 					if httpResponse.statusCode != 200 {
 						Swift.debugPrint("LazyImage status code : \(httpResponse.statusCode)")
+						
+						//Completion block
+						//Call did not succeed
+						let error: LazyImageError = LazyImageError.CallFailed
+						completion(nil, error)
+						return
 					}
 				}
 				
@@ -190,52 +579,81 @@ class LazyImage: NSObject {
 						Swift.debugPrint("Error : \(error!.localizedDescription)")
 					}
 					Swift.debugPrint("LazyImage: No image data available")
+					
+					//No data available
+					let error: LazyImageError = LazyImageError.noDataAvailable
+					completion(nil, error)
 					return
 				}
 				
-				let image:UIImage? = UIImage(data:data!)
-				
-				//Go to main thread and update the UI
-				DispatchQueue.main.async(execute: { () -> Void in
-					
-					if let img = image {
-						
-						imageView.image = img;
-						
-						//Store image to the temporary folder for later use
-						var error: NSError?
-						
-						do {
-							try UIImagePNGRepresentation(img)!.write(to: URL(fileURLWithPath: imagePath), options: [])
-						} catch let error1 as NSError {
-							error = error1
-							if let actualError = error {
-								NSLog("Image not saved. \(actualError)")
-							}
-						} catch {
-							fatalError()
-						}
-						
-						//Turn gestures back on
-						if isUserInteractionEnabled {
-							imageView.isUserInteractionEnabled = true;
-						}
-						
-						//Completion block
-						completion()
-					}
-				})
+				completion(UIImage(data:data!), nil)
+				return
 			})
 			task.resume()
 		})
 	}
 	
 	
+	//MARK: Update the image
+	
+	private func updateImageView(imageView:UIImageView, fetchedImage:UIImage?,
+								 completion: @escaping () -> Void) -> Void {
+		
+		//Check if we have a new size
+		var image:UIImage? = fetchedImage
+		
+		if let _ = image, let newSize = self.desiredImageSize {
+			image = self.resizeImage(image: image!, targetSize: newSize)
+		}
+		
+		//Go to main thread and update the UI
+		DispatchQueue.main.async(execute: { [weak self] () -> Void in
+			
+			//Hide spinner
+			if let _ = self?.showSpinner {
+				self?.removeActivityIndicator()
+				self?.showSpinner = false
+			}
+			
+			//Set the image
+			imageView.image = image;
+			
+			//Completion block
+			completion()
+		})
+	}
+	
+	
+	/****************************************************/
+	//MARK: - Show activity indicator
+	
+	func showActivityIndicatory(view: UIView) {
+		
+		self.removeActivityIndicator()
+		self.spinner = UIActivityIndicatorView()
+		self.spinner!.frame = view.bounds
+		self.spinner!.hidesWhenStopped = true
+		self.spinner!.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+		view.addSubview(self.spinner!)
+		self.spinner!.startAnimating()
+	}
+	
+	func removeActivityIndicator() {
+		
+		if let spinner = self.spinner {
+			
+			spinner.stopAnimating()
+			spinner.removeFromSuperview()
+		}
+		//Reset
+		self.spinner = nil
+	}
+	
 	
 	/****************************************************/
 	//MARK: - Zoom functionality
 	
-	class func zoom(imageView:UIImageView) -> Void {
+	func zoom(imageView:UIImageView) -> Void {
 		
 		if imageView.image == nil {
 			return  //No image loaded return
@@ -293,17 +711,17 @@ class LazyImage: NSObject {
 			imgV.frame=CGRect(x: 0,y: (screenBounds.size.height-image.size.height*screenBounds.size.width/image.size.width)/2, width: screenBounds.size.width, height: image.size.height*screenBounds.size.width/image.size.width)
 			self.backgroundView!.alpha=1;
 		},
-		               completion: {(value: Bool) in
+					   completion: {(value: Bool) in
 						UIApplication.shared.isStatusBarHidden = true
 						
 						//Track when device is rotated so we can remove the zoomed view
-						NotificationCenter.default.addObserver(self, selector:#selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+						NotificationCenter.default.addObserver(self, selector:#selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 		})
 	}
 	
 	
 	
-	class func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
+	@objc func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
 		
 		UIApplication.shared.isStatusBarHidden = false
 		
@@ -313,16 +731,16 @@ class LazyImage: NSObject {
 			imgV.frame = self.oldFrame
 			self.backgroundView!.alpha=0
 		},
-		               completion: {(value: Bool) in
+					   completion: {(value: Bool) in
 						self.backgroundView!.removeFromSuperview()
 						self.backgroundView = nil
-						imageAlreadyZoomed = false  //No more zoomed view
+						self.imageAlreadyZoomed = false  //No more zoomed view
 		})
 	}
 	
 	
 	
-	class func rotated()
+	@objc func rotated()
 	{
 		self.removeZoomedImageView()
 		
@@ -339,7 +757,7 @@ class LazyImage: NSObject {
 	}
 	
 	
-	class func removeZoomedImageView() -> Void {
+	func removeZoomedImageView() -> Void {
 		
 		UIApplication.shared.isStatusBarHidden = false
 		
@@ -348,19 +766,38 @@ class LazyImage: NSObject {
 			UIView.animate(withDuration: 0.3, animations: {
 				bgView.alpha=0
 			},
-			               completion: {(value: Bool) in
+						   completion: {(value: Bool) in
 							bgView.removeFromSuperview()
 							self.backgroundView = nil
-							imageAlreadyZoomed = false
+							self.imageAlreadyZoomed = false
 			})
 		}
 	}
 	
 	
 	/****************************************************/
+	//MARK: - Resize image
+	
+	
+	func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+		
+		let horizontalRatio:CGFloat = targetSize.width / image.size.width
+		let verticalRatio:CGFloat = targetSize.height / image.size.height
+		
+		let ratio = max(horizontalRatio, verticalRatio)
+		let newSize = CGSize(width: image.size.width * ratio, height: image.size.height * ratio)
+		UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
+		image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+		let newImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return newImage!
+	}
+	
+	
+	/****************************************************/
 	//MARK: - Blur
 	
-	class func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
+	func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
 		
 		if imageView.image == nil {
 			return nil  //No image loaded return
@@ -378,3 +815,4 @@ class LazyImage: NSObject {
 	}
 	
 }
+

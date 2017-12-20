@@ -16,6 +16,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController? = nil
 
+	lazy var lazyImage: LazyImage = LazyImage()
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
@@ -213,8 +215,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 			imageView.alpha = 0
 
 			spin.startAnimating()
-			LazyImage.show(imageView: imageView, url: url, defaultImage:"image_logo") {
-				() in
+			self.lazyImage.showWithSpinner(imageView: imageView, url: url) {
+				(error:LazyImageError?) in
+
 				//Image loaded. Do something..
 				spin.stopAnimating()
 				imageView.alpha = 1
