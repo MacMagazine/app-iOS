@@ -231,20 +231,22 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = segue.destinationViewController;
-    MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
-    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-    detailViewController.currentTableViewIndexPath = selectedIndexPath;
-    detailViewController.isURLOpendedInternally = NO;
-    
-    if (self.postID) {
-        detailViewController.postURL = [NSURL URLWithString:self.postID];
-    } else {
-        if (selectedIndexPath) {
-            detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
-        }
-    }
-    
+	if (![[segue identifier] isEqualToString:@"settingsSegue"]) {
+		UINavigationController *navigationController = segue.destinationViewController;
+		MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
+		NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+		detailViewController.currentTableViewIndexPath = selectedIndexPath;
+		detailViewController.isURLOpendedInternally = NO;
+		
+		if (self.postID) {
+			detailViewController.postURL = [NSURL URLWithString:self.postID];
+		} else {
+			if (selectedIndexPath) {
+				detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+			}
+		}
+	}
+	
     [super prepareForSegue:segue sender:sender];
 }
 

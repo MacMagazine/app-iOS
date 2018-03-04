@@ -12,6 +12,7 @@
 		2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */; };
 		47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */; };
 		7DBD964C0D21B08D3CB7F021 /* libPods-MacMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */; };
+		9B5140DA204C2BB9004E0D47 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */; };
 		9B81CBE11F83206500787175 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B81CBDF1F83206500787175 /* Launch Screen.storyboard */; };
 		A09F3C2CE21563254F1F7F32 /* Pods-MacMagazine-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */; };
 		A3D1C6B71959923D475C2BFC /* libPods-MacMagazineTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */; };
@@ -76,6 +77,8 @@
 		47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShareActivity.m"; sourceTree = "<group>"; };
 		8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-metadata.plist"; path = "Pods/Pods-MacMagazine-metadata.plist"; sourceTree = "<group>"; };
 		9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
+		9B5140D8204C2BB9004E0D47 /* SettingsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		9B81CBE01F83206500787175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
 		AB63865A46B1A50D2E796140 /* Pods-MacMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				EDA6FA1D1B3BD2D4007EE794 /* MMMPostDetailViewController.m */,
 				EDFA9DAA1B3625AA00EE213C /* MMMPostsTableViewController.h */,
 				EDFA9DAB1B3625AA00EE213C /* MMMPostsTableViewController.m */,
+				9B5140D8204C2BB9004E0D47 /* SettingsTableViewController.h */,
+				9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -763,6 +768,7 @@
 				EDFA9DEC1B37844F00EE213C /* MMMFeaturedPostTableViewCell.m in Sources */,
 				EDFA9DB81B3629C300EE213C /* NSManagedObject+SUNCoreDataStoreAddons.m in Sources */,
 				EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */,
+				9B5140DA204C2BB9004E0D47 /* SettingsTableViewController.m in Sources */,
 				EDB2EB841CB3792200ED0D61 /* MMMNavigationBar.m in Sources */,
 				DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */,
 				EDFA9DE11B37591900EE213C /* NSDateFormatter+Addons.m in Sources */,
