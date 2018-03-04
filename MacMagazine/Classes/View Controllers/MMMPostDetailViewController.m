@@ -352,11 +352,25 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     decisionHandler(actionPolicy);
 }
 
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
+
+	if (![fontSize isEqualToString:@""]) {
+		NSString *cssURL = [@"https://macmagazine.com.br/wp-content/files/app/" stringByAppendingFormat:@"%@.css", fontSize];
+		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
+		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
+		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+	}
+	
+	fontSize = nil;
+}
+
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+
 	self.shouldHideHomeIndicator = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
