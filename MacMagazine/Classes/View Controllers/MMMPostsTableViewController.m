@@ -15,6 +15,8 @@
 #import "SUNCoreDataStore.h"
 #import "UIViewController+ShareActivity.h"
 
+static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.notification.tableview.reload";
+
 @interface MMMPostsTableViewController ()
 
 @property (nonatomic, weak) NSIndexPath *selectedIndexPath;
@@ -231,20 +233,22 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = segue.destinationViewController;
-    MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
-    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-    detailViewController.currentTableViewIndexPath = selectedIndexPath;
-    detailViewController.isURLOpendedInternally = NO;
-    
-    if (self.postID) {
-        detailViewController.postURL = [NSURL URLWithString:self.postID];
-    } else {
-        if (selectedIndexPath) {
-            detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
-        }
-    }
-    
+	if (![[segue identifier] isEqualToString:@"settingsSegue"]) {
+		UINavigationController *navigationController = segue.destinationViewController;
+		MMMPostDetailViewController *detailViewController = (MMMPostDetailViewController *) navigationController.topViewController;
+		NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+		detailViewController.currentTableViewIndexPath = selectedIndexPath;
+		detailViewController.isURLOpendedInternally = NO;
+		
+		if (self.postID) {
+			detailViewController.postURL = [NSURL URLWithString:self.postID];
+		} else {
+			if (selectedIndexPath) {
+				detailViewController.post = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+			}
+		}
+	}
+	
     [super prepareForSegue:segue sender:sender];
 }
 
@@ -285,6 +289,12 @@
             self.variableControlForFetchedResults++;
         }
     }
+}
+
+- (void)reloadTableViewsNotificationReceived:(NSNotification *)notification {
+	[self setMode];
+	_fetchedResultsController = nil;
+	[self.tableView reloadData];
 }
 
 #pragma mark - Protocols
@@ -487,11 +497,36 @@
     return isForceTouchAvailable;
 }
 
+- (void)setMode {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+		self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+		self.tableView.backgroundColor = [UIColor darkGrayColor];
+		
+	} else {
+		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+		self.navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
+		self.navigationItem.rightBarButtonItem.tintColor = [UIColor darkGrayColor];
+		self.navigationItem.leftBarButtonItem.tintColor = self.view.tintColor;
+		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+		
+	}
+
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+	
+	[self setMode];
+
     if ([self isForceTouchAvailable]) {
         self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.view];
     }
@@ -528,7 +563,11 @@
                                              selector:@selector(pushReceived:)
                                                  name:@"pushReceived"
                                                object:nil];
-    
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(reloadTableViewsNotificationReceived:) name:MMMReloadTableViewsNotification
+											   object:nil];
+
     [self.tableView registerNib:[MMMPostTableViewCell nib] forCellReuseIdentifier:[MMMPostTableViewCell identifier]];
     [self.tableView registerNib:[MMMFeaturedPostTableViewCell nib] forCellReuseIdentifier:[MMMFeaturedPostTableViewCell identifier]];
     [self.tableView registerClass:[MMMTableViewHeaderView class] forHeaderFooterViewReuseIdentifier:[MMMTableViewHeaderView identifier]];

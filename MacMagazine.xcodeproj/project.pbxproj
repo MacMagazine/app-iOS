@@ -12,7 +12,9 @@
 		2CB731CE5889DCBB6E6B28B5 /* Pods-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */; };
 		47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */; };
 		7DBD964C0D21B08D3CB7F021 /* libPods-MacMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */; };
+		9B5140DA204C2BB9004E0D47 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */; };
 		9B81CBE11F83206500787175 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B81CBDF1F83206500787175 /* Launch Screen.storyboard */; };
+		9B9A017A20548B0C00BAE7E0 /* Customslider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9A017920548B0C00BAE7E0 /* Customslider.m */; };
 		A09F3C2CE21563254F1F7F32 /* Pods-MacMagazine-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */; };
 		A3D1C6B71959923D475C2BFC /* libPods-MacMagazineTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */; };
 		ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */; };
@@ -76,7 +78,11 @@
 		47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShareActivity.m"; sourceTree = "<group>"; };
 		8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-metadata.plist"; path = "Pods/Pods-MacMagazine-metadata.plist"; sourceTree = "<group>"; };
 		9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
+		9B5140D8204C2BB9004E0D47 /* SettingsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		9B81CBE01F83206500787175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		9B9A017820548B0C00BAE7E0 /* Customslider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customslider.h; sourceTree = "<group>"; };
+		9B9A017920548B0C00BAE7E0 /* Customslider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customslider.m; sourceTree = "<group>"; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
 		AB63865A46B1A50D2E796140 /* Pods-MacMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 		B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-settings-metadata.plist"; sourceTree = "<group>"; };
@@ -184,6 +190,15 @@
 				47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */,
 			);
 			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		9B9A017720548B0000BAE7E0 /* UISlider */ = {
+			isa = PBXGroup;
+			children = (
+				9B9A017820548B0C00BAE7E0 /* Customslider.h */,
+				9B9A017920548B0C00BAE7E0 /* Customslider.m */,
+			);
+			path = UISlider;
 			sourceTree = "<group>";
 		};
 		ABB28A460E53AF01B246FD8C /* Pods */ = {
@@ -346,6 +361,8 @@
 				EDA6FA1D1B3BD2D4007EE794 /* MMMPostDetailViewController.m */,
 				EDFA9DAA1B3625AA00EE213C /* MMMPostsTableViewController.h */,
 				EDFA9DAB1B3625AA00EE213C /* MMMPostsTableViewController.m */,
+				9B5140D8204C2BB9004E0D47 /* SettingsTableViewController.h */,
+				9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -457,6 +474,7 @@
 		EDFA9DC81B3651BD00EE213C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9B9A017720548B0000BAE7E0 /* UISlider */,
 				ED10FFED1B5C72FF00AA902C /* GTMDefines */,
 				EDFA9DDB1B37586500EE213C /* NSDate */,
 				EDFA9DD51B3651DD00EE213C /* NSString */,
@@ -763,6 +781,7 @@
 				EDFA9DEC1B37844F00EE213C /* MMMFeaturedPostTableViewCell.m in Sources */,
 				EDFA9DB81B3629C300EE213C /* NSManagedObject+SUNCoreDataStoreAddons.m in Sources */,
 				EDFA9DBE1B362A1900EE213C /* NSSet+SUNCoreDataStoreAddons.m in Sources */,
+				9B5140DA204C2BB9004E0D47 /* SettingsTableViewController.m in Sources */,
 				EDB2EB841CB3792200ED0D61 /* MMMNavigationBar.m in Sources */,
 				DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */,
 				EDFA9DE11B37591900EE213C /* NSDateFormatter+Addons.m in Sources */,
@@ -771,6 +790,7 @@
 				EDBB4A891B2E831900E1CCCA /* MMMPost.m in Sources */,
 				EDFA9DDE1B37587900EE213C /* NSDate+Formatters.m in Sources */,
 				EDFA9DB11B36267600EE213C /* MMMPostTableViewCell.m in Sources */,
+				9B9A017A20548B0C00BAE7E0 /* Customslider.m in Sources */,
 				ED6E96921CB07341009B3530 /* MMMTableViewCell.m in Sources */,
 				EDFA9DF11B378C7A00EE213C /* MMMLabel.m in Sources */,
 				EDFA9DC71B36353E00EE213C /* MMMPostPresenter.m in Sources */,
