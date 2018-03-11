@@ -3,6 +3,7 @@
 #import <TSMessages/TSMessage.h>
 
 #import "MMMPostsTableViewController.h"
+#import "HexColor.h"
 #import "MMMFeaturedPostTableViewCell.h"
 #import "MMMLabel.h"
 #import "MMMLogoImageView.h"
@@ -503,15 +504,15 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-		self.tableView.backgroundColor = [UIColor darkGrayColor];
+		self.tableView.backgroundColor = [UIColor blackColor];
 		
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-		self.navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
-		self.navigationItem.rightBarButtonItem.tintColor = [UIColor darkGrayColor];
-		self.navigationItem.leftBarButtonItem.tintColor = self.view.tintColor;
+		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+		self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+		self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];

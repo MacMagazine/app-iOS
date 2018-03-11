@@ -1,4 +1,5 @@
 #import "MMMPostTableViewCell.h"
+#import "HexColor.h"
 
 @interface MMMPostTableViewCell ()
 
@@ -63,9 +64,9 @@
 	self.headlineLabel.textColor = [UIColor blackColor];
 	self.subheadlineLabel.textColor = [UIColor grayColor];
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		self.contentView.backgroundColor = [UIColor darkGrayColor];
+		self.contentView.backgroundColor = [UIColor blackColor];
 		self.headlineLabel.textColor = [UIColor whiteColor];
-		self.subheadlineLabel.textColor = [UIColor whiteColor];
+		self.subheadlineLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
 	}
 
 	UIFont *headlineFont = self.headlineLabel.font;
@@ -89,7 +90,7 @@
 		size = ([fontSize isEqualToString:@"fontemaior"] ? 16. : 12. );
 		newFontSize = [UIFont fontWithName:subheadlineFont.fontName size:size];
 		self.subheadlineLabel.font = newFontSize;
-		
+		NSLog(@"%@", self.subheadlineLabel);
 		newFontSize = nil; headlineFont = nil; subheadlineFont = nil;
 	}
 	fontSize = nil;

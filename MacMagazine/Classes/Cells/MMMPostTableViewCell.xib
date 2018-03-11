@@ -20,20 +20,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnw-Nd-23O" userLabel="Subheadline Label" customClass="MMMLabel">
-                        <rect key="frame" x="104" y="85.5" width="200" height="58"/>
+                        <rect key="frame" x="104" y="84.5" width="200" height="58"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.56580191850662231" green="0.57890999317169189" blue="0.5946270227432251" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwL-UV-uL7" userLabel="Separator View">
-                        <rect key="frame" x="16" y="158.5" width="304" height="1"/>
+                        <rect key="frame" x="16" y="157.5" width="304" height="1"/>
                         <color key="backgroundColor" red="0.97000002861022949" green="0.97000002861022949" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="OfH-04-FQf"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-HR-0kH" userLabel="Thumbnail Image View">
-                        <rect key="frame" x="16" y="17" width="72" height="100"/>
+                        <rect key="frame" x="16" y="16" width="72" height="100"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="STs-5B-EFl"/>
@@ -46,7 +46,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-k4-WUe" userLabel="Headline Label" customClass="MMMLabel">
-                        <rect key="frame" x="104" y="17" width="200" height="64.5"/>
+                        <rect key="frame" x="104" y="16" width="200" height="64.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.15161636471748352" green="0.16851629316806793" blue="0.18932646512985229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
