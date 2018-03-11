@@ -5,6 +5,7 @@
 #import <WebKit/WebKit.h>
 
 #import "MMMPostDetailViewController.h"
+#import "HexColor.h"
 #import "MMMLogoImageView.h"
 #import "MMMPost.h"
 #import "MMMPostsTableViewController.h"
@@ -184,25 +185,29 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
-
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-		self.view.backgroundColor = [UIColor darkGrayColor];
+		self.view.backgroundColor = [UIColor blackColor];
 		
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-		self.navigationController.navigationBar.tintColor = self.view.tintColor;
+		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 		self.view.backgroundColor = [UIColor whiteColor];
 	}
 
 	self.titleView = nil;
-    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityView = [[UIActivityIndicatorView alloc] init];
     [self.activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		self.activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+	} else {
+		self.activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+	}
     [self.activityView startAnimating];
     self.titleView = self.activityView;
     self.navigationItem.titleView = self.titleView;
@@ -238,6 +243,12 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 			[rightButton setImage:[UIImage imageNamed:@"shareIcon"] forState:UIControlStateNormal];
 			[rightButton addTarget:self action:@selector(actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 			
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+				rightButton.tintColor = [UIColor whiteColor];
+			} else {
+				rightButton.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+			}
+
 			// UIView just to handle the UIBarButtonItem position
 			UIView *rightButtonView = [[UIView alloc] init];
 			[rightButton setFrame:CGRectMake(0, 0, iconSize, iconSize)];
@@ -282,11 +293,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
             }
 
 			if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-				nextPostRightItem.tintColor = [UIColor whiteColor];
-				previousPostRightItem.tintColor = [UIColor whiteColor];
+				nextButton.tintColor = [UIColor whiteColor];
+				previousButton.tintColor = [UIColor whiteColor];
 			} else {
-				nextPostRightItem.tintColor = self.view.tintColor;
-				previousPostRightItem.tintColor = self.view.tintColor;
+				nextButton.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+				previousButton.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 			}
 
 			[icons addObject:nextPostRightItem];
@@ -297,7 +308,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 			if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 				share.tintColor = [UIColor whiteColor];
 			} else {
-				share.tintColor = self.view.tintColor;
+				share.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 			}
 
 			self.rightItem = share;

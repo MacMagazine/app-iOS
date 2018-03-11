@@ -1,4 +1,5 @@
 #import "MMMFeaturedPostTableViewCell.h"
+#import "HexColor.h"
 
 @interface MMMFeaturedPostTableViewCell ()
 
@@ -31,7 +32,7 @@
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		self.contentView.backgroundColor = [UIColor darkGrayColor];
 		self.headlineLabel.textColor = [UIColor whiteColor];
-		self.subheadlineLabel.textColor = [UIColor whiteColor];
+		self.subheadlineLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
 	}
 
 	UIFont *headlineFont = self.headlineLabel.font;

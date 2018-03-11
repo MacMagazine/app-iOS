@@ -12,6 +12,7 @@
 
 #import "SettingsTableViewController.h"
 #import "Customslider.h"
+#import "HexColor.h"
 
 @interface SettingsTableViewController ()
 
@@ -120,14 +121,14 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-		self.tableView.backgroundColor = [UIColor darkGrayColor];
+		self.tableView.backgroundColor = [UIColor blackColor];
 
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-		self.navigationController.navigationBar.tintColor = self.view.tintColor;
-		self.navigationItem.rightBarButtonItem.tintColor = self.view.tintColor;
+		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+		self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
