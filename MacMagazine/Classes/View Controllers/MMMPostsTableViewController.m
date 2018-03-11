@@ -510,8 +510,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-		self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-		self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+		self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;

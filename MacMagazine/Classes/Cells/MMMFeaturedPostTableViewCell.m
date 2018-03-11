@@ -30,7 +30,7 @@
 	self.headlineLabel.textColor = [UIColor blackColor];
 	self.subheadlineLabel.textColor = [UIColor grayColor];
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		self.contentView.backgroundColor = [UIColor darkGrayColor];
+		self.contentView.backgroundColor = [UIColor blackColor];
 		self.headlineLabel.textColor = [UIColor whiteColor];
 		self.subheadlineLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
 	}

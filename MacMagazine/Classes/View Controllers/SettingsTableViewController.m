@@ -77,6 +77,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
 			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"clear_cache"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
+			
+			[self close:nil];
 		}];
 	}
 
