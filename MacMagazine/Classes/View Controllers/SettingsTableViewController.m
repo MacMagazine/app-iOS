@@ -66,25 +66,23 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-	if (indexPath.section == 0 && indexPath.row == 0) {
-		// Clean Cache
-		[[SDImageCache sharedImageCache] clearDisk];
-		
-		NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-		NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-		
-		[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"clear_cache"];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-			
-			[self close:nil];
-		}];
-	}
-
 }
 
 #pragma mark - View Methods
+
+- (IBAction)clean:(id)sender {
+	[[SDImageCache sharedImageCache] clearDisk];
+	
+	NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+	NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+	
+	[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"clear_cache"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		[self close:nil];
+	}];
+}
 
 - (IBAction)close:(id)sender{
 	NSString *fonteSize = @"";
@@ -123,7 +121,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.tableView.backgroundColor = [UIColor blackColor];
 

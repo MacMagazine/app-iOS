@@ -69,29 +69,23 @@
 		self.subheadlineLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
 	}
 
-	UIFont *headlineFont = self.headlineLabel.font;
-	UIFont *newFontSize = [UIFont fontWithName:headlineFont.fontName size:17.];
-	self.headlineLabel.font = newFontSize;
+	UIFontDescriptor *headlineFont = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
+	CGFloat pointSize = headlineFont.pointSize;
+	self.headlineLabel.font = [UIFont fontWithDescriptor:headlineFont size:pointSize];
 	
-	UIFont *subheadlineFont = self.headlineLabel.font;
-	newFontSize = [UIFont fontWithName:subheadlineFont.fontName size:14.];
-	self.subheadlineLabel.font = newFontSize;
+	UIFontDescriptor *subheadlineFont = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+	CGFloat subpointSize = subheadlineFont.pointSize;
+	self.subheadlineLabel.font = [UIFont fontWithDescriptor:subheadlineFont size:subpointSize];
 	
-	newFontSize = nil; headlineFont = nil; subheadlineFont = nil;
-
 	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
 	if (![fontSize isEqualToString:@""]) {
-		UIFont *headlineFont = self.headlineLabel.font;
-		CGFloat size = ([fontSize isEqualToString:@"fontemaior"] ? 19. : 15. );
-		UIFont *newFontSize = [UIFont fontWithName:headlineFont.fontName size:size];
-		self.headlineLabel.font = newFontSize;
+		UIFontDescriptor *headlineFont = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
+		CGFloat pointSize = headlineFont.pointSize;
+		self.headlineLabel.font = [UIFont fontWithDescriptor:headlineFont size:pointSize * ([fontSize isEqualToString:@"fontemaior"] ? 1.1 : 0.9 )];
 		
-		UIFont *subheadlineFont = self.headlineLabel.font;
-		size = ([fontSize isEqualToString:@"fontemaior"] ? 16. : 12. );
-		newFontSize = [UIFont fontWithName:subheadlineFont.fontName size:size];
-		self.subheadlineLabel.font = newFontSize;
-		NSLog(@"%@", self.subheadlineLabel);
-		newFontSize = nil; headlineFont = nil; subheadlineFont = nil;
+		UIFontDescriptor *subheadlineFont = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+		CGFloat subpointSize = subheadlineFont.pointSize;
+		self.subheadlineLabel.font = [UIFont fontWithDescriptor:subheadlineFont size:subpointSize * ([fontSize isEqualToString:@"fontemaior"] ? 1.1 : 0.9 )];
 	}
 	fontSize = nil;
 

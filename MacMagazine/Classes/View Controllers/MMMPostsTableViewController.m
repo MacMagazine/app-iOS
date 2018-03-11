@@ -367,6 +367,19 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull MMMTableViewHeaderView *)view forSection:(NSInteger)section {
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		view.titleLabel.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+		view.contentView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+	} else {
+		view.titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
+		view.contentView.backgroundColor = [UIColor clearColor];
+	}
+	
+	return YES;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MMMTableViewHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MMMTableViewHeaderView identifier]];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
@@ -504,7 +517,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.tableView.backgroundColor = [UIColor blackColor];
 		
