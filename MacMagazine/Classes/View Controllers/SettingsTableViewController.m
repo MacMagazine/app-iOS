@@ -11,15 +11,19 @@
 #import <SDWebImage/SDImageCache.h>
 
 #import "SettingsTableViewController.h"
+#import "Customslider.h"
 
 @interface SettingsTableViewController ()
 
 @property (nonatomic, weak) IBOutlet UISwitch *pushForAll;
-@property (nonatomic, weak) IBOutlet UISlider *fontSize;
-	
+@property (nonatomic, weak) IBOutlet Customslider *fontSize;
+@property (nonatomic, weak) IBOutlet UITableViewCell *sliderCell;
+@property (nonatomic, weak) IBOutlet UISwitch *darkMode;
+
 @end
 
 static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notification.webview.reload";
+static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.notification.tableview.reload";
 
 @implementation SettingsTableViewController
 
@@ -29,6 +33,10 @@ static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notifi
     [super viewDidLoad];
 
 	[_fontSize setContinuous:NO];
+
+	[_fontSize setNoOfTicks: 2];
+	[_fontSize setIsTickType: YES];
+	[_sliderCell.contentView insertSubview:[_fontSize addTickMarksView] belowSubview:_fontSize];
 
 	// Read old settings
 	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
@@ -43,7 +51,9 @@ static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notifi
 	}
 	fontSize = nil;
 	
-	[_pushForAll setOn:	[[NSUserDefaults standardUserDefaults] boolForKey:@"all_posts_pushes"]];
+	[_pushForAll setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"all_posts_pushes"]];
+	[_darkMode setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]];
+	[self setMode:[_darkMode isOn]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +84,22 @@ static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notifi
 #pragma mark - View Methods
 
 - (IBAction)close:(id)sender{
+	NSString *fonteSize = @"";
+	if ([_fontSize value] == 0.) {
+		fonteSize = @"fontemenor";
+	}
+	if ([_fontSize value] == 2.) {
+		fonteSize = @"fontemaior";
+	}
+	
+	[[NSUserDefaults standardUserDefaults] setObject:fonteSize forKey:@"font-size-settings"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:MMMReloadTableViewsNotification object:nil];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:MMMReloadWebViewsNotification object:nil];
+	}
+
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -82,32 +108,32 @@ static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notifi
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (IBAction)changeFont:(id)sender {
-	UISlider *slider = (UISlider *)sender;
-	NSInteger value = 1;
-	if ([slider value] > 1.5f) {
-		value = 2;
-	} else if ([slider value] < 0.5f) {
-		value = 0;
-	}
-	[_fontSize setValue:value animated:YES];
-	
-	NSString *fonteSize = @"";
-	if ([_fontSize value] == 0) {
-		fonteSize = @"fontemenor";
-	}
-	if ([_fontSize value] == 2) {
-		fonteSize = @"fontemaior";
-	}
-
-	[[NSUserDefaults standardUserDefaults] setObject:fonteSize forKey:@"font-size-settings"];
+- (IBAction)darkMode:(id)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:[(UISwitch *)sender isOn] forKey:@"dark_mode"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	[self setMode:[(UISwitch *)sender isOn]];
+}
 
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MMMReloadWebViewsNotification object:nil];
+- (void)setMode:(BOOL)darkMode {
+	if (darkMode) {
+		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+		self.tableView.backgroundColor = [UIColor darkGrayColor];
+
+	} else {
+		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+		self.navigationController.navigationBar.tintColor = self.view.tintColor;
+		self.navigationItem.rightBarButtonItem.tintColor = self.view.tintColor;
+		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
 	}
 
-	fonteSize = nil;
 }
-	
+
 @end

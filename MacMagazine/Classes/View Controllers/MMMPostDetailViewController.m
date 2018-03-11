@@ -184,7 +184,23 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupNavigationBar {
-    self.titleView = nil;
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+		self.view.backgroundColor = [UIColor darkGrayColor];
+		
+	} else {
+		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+		self.navigationController.navigationBar.tintColor = self.view.tintColor;
+		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+		self.view.backgroundColor = [UIColor whiteColor];
+	}
+
+	self.titleView = nil;
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityView setFrame:CGRectMake(0, 0, 20.0f, 20.0f)];
     [self.activityView startAnimating];
@@ -265,11 +281,25 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
                 });
             }
 
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+				nextPostRightItem.tintColor = [UIColor whiteColor];
+				previousPostRightItem.tintColor = [UIColor whiteColor];
+			} else {
+				nextPostRightItem.tintColor = self.view.tintColor;
+				previousPostRightItem.tintColor = self.view.tintColor;
+			}
+
 			[icons addObject:nextPostRightItem];
 			[icons addObject:previousPostRightItem];
 		} else {
 			UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareIcon"] style:UIBarButtonItemStylePlain target:self action:@selector(actionButtonTapped:)];
 			
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+				share.tintColor = [UIColor whiteColor];
+			} else {
+				share.tintColor = self.view.tintColor;
+			}
+
 			self.rightItem = share;
 			[icons addObject:self.rightItem];
 		}
@@ -354,15 +384,20 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
-
 	if (![fontSize isEqualToString:@""]) {
 		NSString *cssURL = [@"https://macmagazine.com.br/wp-content/files/app/" stringByAppendingFormat:@"%@.css", fontSize];
 		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
 		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
 		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
 	}
-	
 	fontSize = nil;
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		NSString *cssURL = @"https://macmagazine.com.br/wp-content/files/app/darmode.css";
+		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
+		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
+		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+	}
 }
 
 
