@@ -1,5 +1,5 @@
 @import UIKit;
 
-@interface MMMLogoImageView : UIImageView
+@interface MMMLogoImageView : UIView
 
 @end

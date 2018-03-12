@@ -355,7 +355,13 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     self.selectedIndexPath = indexPath;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(MMMTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#4d4d4d"];
+	}
+
     NSUInteger numberOfSections = [tableView numberOfSections];
     if (indexPath.section + 1 != numberOfSections) {
         return;
@@ -600,11 +606,10 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
-    
-    self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
+	
+	self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
     self.variableControlForFetchedResults = 0;
     self.isTableViewCellSelected = NO;
-    
     [self enableLongPressGesture];
     [self popUpRatingAppView];
     [self reloadData];
