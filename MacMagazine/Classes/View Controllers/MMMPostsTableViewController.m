@@ -43,24 +43,24 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     if (_fetchedResultsController) {
         return _fetchedResultsController;
     }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[MMMPost entityName]];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
-                                     [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
-                                     [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"visible = %@", @YES];
-    fetchRequest.returnsObjectsAsFaults = NO;
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[SUNCoreDataStore defaultStore].mainQueueContext sectionNameKeyPath:@"date" cacheName:nil];
-    _fetchedResultsController.delegate = self;
-    
-    NSError *error = nil;
-    if (![_fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _fetchedResultsController;
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[MMMPost entityName]];
+	fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
+									 [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
+									 [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"visible = %@", @YES];
+	fetchRequest.returnsObjectsAsFaults = NO;
+	
+	_fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[SUNCoreDataStore defaultStore].mainQueueContext sectionNameKeyPath:@"date" cacheName:@"MMMCache"];
+	_fetchedResultsController.delegate = self;
+	
+	NSError *error = nil;
+	if (![_fetchedResultsController performFetch:&error]) {
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+
+	return _fetchedResultsController;
 }
 
 #pragma mark - Actions
@@ -225,8 +225,11 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
         self.numberOfResponseObjectsPerRequest = response.count;
         self.nextPage = 2;
         [self.refreshControl endRefreshing];
-        NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
+		
+		if ([self.tableView numberOfSections] > 0 && [self.tableView numberOfRowsInSection:0] > 0) {
+			NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
+			[self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
+		}
     } failure:^(NSError *error) {
         [self handleError:error];
         [self.refreshControl endRefreshing];
@@ -294,8 +297,29 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 
 - (void)reloadTableViewsNotificationReceived:(NSNotification *)notification {
 	[self setMode];
+	
+	[NSFetchedResultsController deleteCacheWithName:@"MMMCache"];
 	_fetchedResultsController = nil;
-	[self.tableView reloadData];
+
+	[UIView animateWithDuration:0.4f
+						  delay:0.0f
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^(){
+						 self.tableView.alpha = 0;
+						 [self.tableView reloadData];
+					 }
+					 completion:^(BOOL finished){
+						 [UIView animateWithDuration:0.4f
+											   delay:0.2f
+											 options:UIViewAnimationOptionCurveEaseInOut
+										  animations:^(){
+											  self.tableView.alpha = 1;
+										  }
+										  completion:nil];
+
+					 }];
+
+
 }
 
 #pragma mark - Protocols
@@ -526,7 +550,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.tableView.backgroundColor = [UIColor blackColor];
-		
+
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];

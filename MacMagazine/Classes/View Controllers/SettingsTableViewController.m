@@ -8,11 +8,14 @@
 
 @import WebKit;
 
+#import <CoreData/CoreData.h>
 #import <SDWebImage/SDImageCache.h>
 
 #import "SettingsTableViewController.h"
 #import "Customslider.h"
 #import "HexColor.h"
+#import "MMMPost.h"
+#import "SUNCoreDataStore.h"
 
 @interface SettingsTableViewController ()
 

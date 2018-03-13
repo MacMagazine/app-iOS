@@ -150,6 +150,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupWebView {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		self.view.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+		self.webView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+	}
+
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4];
 	self.webView.alpha = 0.0;
@@ -394,20 +399,23 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
-	if (![fontSize isEqualToString:@""]) {
-		NSString *cssURL = [@"https://macmagazine.com.br/wp-content/files/app/" stringByAppendingFormat:@"%@.css", fontSize];
-		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
-		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
-		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
-	}
-	fontSize = nil;
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		NSString *cssURL = @"https://macmagazine.com.br/wp-content/files/app/darmode.css";
-		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
-		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
-		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+	if ([[[webView URL] absoluteString] containsString:MMMBaseURL]) {
+		NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
+		if (![fontSize isEqualToString:@""]) {
+			NSString *cssURL = [@"https://macmagazine.com.br/wp-content/files/app/" stringByAppendingFormat:@"%@.css", fontSize];
+			NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
+			NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
+			[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+		}
+		fontSize = nil;
+		
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+			NSString *cssURL = @"https://macmagazine.com.br/wp-content/files/app/modoescuro.css";
+			NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
+			NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
+			[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+		}
 	}
 }
 
