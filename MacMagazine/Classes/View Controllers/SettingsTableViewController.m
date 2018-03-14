@@ -66,7 +66,43 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 }
 
 #pragma mark - TableView Delegate
-	
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+	UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		// View color
+		[header.contentView setBackgroundColor:[UIColor blackColor]];
+
+		// Text Color
+		[header.textLabel setTextColor:[UIColor whiteColor]];
+	} else {
+		// View color
+		[header.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+
+		// Text Color
+		[header.textLabel setTextColor:[UIColor darkGrayColor]];
+	}
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+	UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		// View color
+		[footer.contentView setBackgroundColor:[UIColor blackColor]];
+
+		// Text Color
+		[footer.textLabel setTextColor:[UIColor whiteColor]];
+	} else {
+		// View color
+		[footer.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+
+		// Text Color
+		[footer.textLabel setTextColor:[UIColor darkGrayColor]];
+	}
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -148,7 +184,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		NSInteger rows = [self.tableView numberOfRowsInSection:section];
 		for (NSInteger row = 0; row < rows; row++ ) {
 			UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
-			cell.contentView.backgroundColor = (darkmode ? [UIColor blackColor] : [UIColor whiteColor]);
+			
+			cell.contentView.backgroundColor = (darkmode ? [UIColor colorWithHexString:@"#181818"] : [UIColor whiteColor]);
 
 			for (id object in cell.contentView.subviews) {
 				if ([object isKindOfClass:[UILabel class]]) {
@@ -164,7 +201,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 			}
 		}
 	}
-
+	
+	[self.tableView reloadData];
 }
 
 @end
