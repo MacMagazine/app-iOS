@@ -137,6 +137,33 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
 	}
+	
+	[self tableViewMode:darkMode];
+
+}
+
+- (void)tableViewMode:(BOOL)darkmode {
+	NSInteger sections = [self.tableView numberOfSections];
+	for (NSInteger section = 0; section < sections; section++ ) {
+		NSInteger rows = [self.tableView numberOfRowsInSection:section];
+		for (NSInteger row = 0; row < rows; row++ ) {
+			UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+			cell.contentView.backgroundColor = (darkmode ? [UIColor blackColor] : [UIColor whiteColor]);
+
+			for (id object in cell.contentView.subviews) {
+				if ([object isKindOfClass:[UILabel class]]) {
+					UILabel *obj = (UILabel *)object;
+					obj.textColor = (darkmode ? [UIColor whiteColor] : [UIColor blackColor]);
+					obj = nil;
+				}
+				if ([object isKindOfClass:[UIButton class]]) {
+					UIButton *obj = (UIButton *)object;
+					[obj setTitleColor:(darkmode ? [UIColor whiteColor] : [UIColor blackColor]) forState:UIControlStateNormal];
+					obj = nil;
+				}
+			}
+		}
+	}
 
 }
 
