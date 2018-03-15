@@ -37,10 +37,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     [super viewDidLoad];
 
 	[_fontSize setContinuous:NO];
-
 	[_fontSize setNoOfTicks: 2];
 	[_fontSize setIsTickType: YES];
-	[_sliderCell.contentView insertSubview:[_fontSize addTickMarksView] belowSubview:_fontSize];
 
 	// Read old settings
 	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
@@ -63,6 +61,12 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[_sliderCell.contentView insertSubview:[_fontSize addTickMarksView] belowSubview:_fontSize];
 }
 
 #pragma mark - TableView Delegate
@@ -110,12 +114,22 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 #pragma mark - View Methods
 
 - (IBAction)clean:(id)sender {
+	// Delete all from CoreData
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MMMPost"];
+	NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+	
+	NSError *deleteError = nil;
+	NSPersistentStoreCoordinator *psc = [[SUNCoreDataStore defaultStore] persistentStoreCoordinator];
+	[psc executeRequest:delete withContext:[[SUNCoreDataStore defaultStore] mainQueueContext] error:&deleteError];
+	psc = nil; delete = nil; request = nil;
+
 	[[SDImageCache sharedImageCache] clearDisk];
 	
 	NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
 	NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
 	
 	[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+		[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"lastSelection"];
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"clear_cache"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		

@@ -300,13 +300,14 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	
 	[NSFetchedResultsController deleteCacheWithName:@"MMMCache"];
 	_fetchedResultsController = nil;
+	self.variableControlForFetchedResults = 0;
+	[self.tableView reloadData];
 
 	[UIView animateWithDuration:0.4f
 						  delay:0.0f
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^(){
 						 self.tableView.alpha = 0;
-						 [self.tableView reloadData];
 					 }
 					 completion:^(BOOL finished){
 						 [UIView animateWithDuration:0.4f
@@ -315,7 +316,9 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 										  animations:^(){
 											  self.tableView.alpha = 1;
 										  }
-										  completion:nil];
+										  completion:^(BOOL finished){
+											  [self reloadData];
+										  }];
 
 					 }];
 
