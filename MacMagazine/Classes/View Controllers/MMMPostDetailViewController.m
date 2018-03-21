@@ -176,7 +176,15 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
         // Changes the WKWebView user agent in order to hide some CSS/HTML elements
         self.webView.customUserAgent = MMMUserAgent;
-        self.webView.navigationDelegate = self;
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+			self.webView.customUserAgent = [self.webView.customUserAgent stringByAppendingString:@"-darkmode"];
+		}
+		NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
+		if (![fontSize isEqualToString:@""]) {
+			self.webView.customUserAgent = [self.webView.customUserAgent stringByAppendingFormat:@"-%@", fontSize];
+		}
+
+		self.webView.navigationDelegate = self;
         self.webView.UIDelegate = self;
 
         // Observer to check that loading has completelly finished for the WebView

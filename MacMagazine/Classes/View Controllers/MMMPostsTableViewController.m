@@ -355,11 +355,15 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
         [cell layoutIfNeeded];
         [cell layoutSubviews];
     }
-    
-    UIView *selectedBackgroundView = [[UIView alloc] init];
-    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:((float)0/(float)255) green:((float)138/(float)255) blue:((float)202/(float)255) alpha:0.3];
-    cell.selectedBackgroundView = selectedBackgroundView;
-    
+	
+	UIView *selectedBackgroundView = [[UIView alloc] init];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		selectedBackgroundView.backgroundColor = [UIColor grayColor];
+	} else {
+		selectedBackgroundView.backgroundColor = [UIColor colorWithRed:((float)0/(float)255) green:((float)138/(float)255) blue:((float)202/(float)255) alpha:0.3];
+	}
+	cell.selectedBackgroundView = selectedBackgroundView;
+
     return cell;
 }
 
@@ -404,7 +408,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		view.titleLabel.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
-		view.contentView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+		view.contentView.backgroundColor = [UIColor blackColor];
 	} else {
 		view.titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
 		view.contentView.backgroundColor = [UIColor clearColor];
@@ -550,9 +554,9 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
+		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-		self.tableView.backgroundColor = [UIColor blackColor];
+		self.tableView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
 
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;

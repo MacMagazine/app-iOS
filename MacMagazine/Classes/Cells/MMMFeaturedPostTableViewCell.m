@@ -28,9 +28,12 @@
 - (void)layoutIfNeeded {
 	self.contentView.backgroundColor = [UIColor whiteColor];
 	self.headlineLabel.textColor = [UIColor blackColor];
+	self.headlineLabel.highlightedTextColor = [UIColor blackColor];
 	self.subheadlineLabel.textColor = [UIColor grayColor];
+	self.subheadlineLabel.highlightedTextColor = [UIColor blackColor];
+
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		self.contentView.backgroundColor = [UIColor blackColor];
+		self.contentView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
 		self.headlineLabel.textColor = [UIColor whiteColor];
 		self.subheadlineLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
 	}
