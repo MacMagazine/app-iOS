@@ -1,6 +1,7 @@
 #import <PureLayout/PureLayout.h>
 
 #import "MMMTableViewHeaderView.h"
+#import "HexColor.h"
 
 #pragma mark MMMTableViewHeaderView
 
@@ -39,7 +40,7 @@
     
     _titleLabel = [MMMLabel new];
     _titleLabel.numberOfLines = 1;
-    _titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
+	_titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textStyle = UIFontTextStyleCaption1;
     _titleLabel.backgroundColor = [UIColor clearColor];

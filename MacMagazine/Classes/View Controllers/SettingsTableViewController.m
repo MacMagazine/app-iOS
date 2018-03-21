@@ -8,11 +8,14 @@
 
 @import WebKit;
 
+#import <CoreData/CoreData.h>
 #import <SDWebImage/SDImageCache.h>
 
 #import "SettingsTableViewController.h"
 #import "Customslider.h"
 #import "HexColor.h"
+#import "MMMPost.h"
+#import "SUNCoreDataStore.h"
 
 @interface SettingsTableViewController ()
 
@@ -34,10 +37,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     [super viewDidLoad];
 
 	[_fontSize setContinuous:NO];
-
 	[_fontSize setNoOfTicks: 2];
 	[_fontSize setIsTickType: YES];
-	[_sliderCell.contentView insertSubview:[_fontSize addTickMarksView] belowSubview:_fontSize];
 
 	// Read old settings
 	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
@@ -62,29 +63,79 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - TableView Delegate
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
+	[_sliderCell.contentView insertSubview:[_fontSize addTickMarksView] belowSubview:_fontSize];
+}
+
+#pragma mark - TableView Delegate
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+	UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		// View color
+		[header.contentView setBackgroundColor:[UIColor blackColor]];
+
+		// Text Color
+		[header.textLabel setTextColor:[UIColor whiteColor]];
+	} else {
+		// View color
+		[header.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+
+		// Text Color
+		[header.textLabel setTextColor:[UIColor darkGrayColor]];
+	}
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+	UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		// View color
+		[footer.contentView setBackgroundColor:[UIColor blackColor]];
+
+		// Text Color
+		[footer.textLabel setTextColor:[UIColor whiteColor]];
+	} else {
+		// View color
+		[footer.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+
+		// Text Color
+		[footer.textLabel setTextColor:[UIColor darkGrayColor]];
+	}
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-	if (indexPath.section == 0 && indexPath.row == 0) {
-		// Clean Cache
-		[[SDImageCache sharedImageCache] clearDisk];
-		
-		NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-		NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-		
-		[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"clear_cache"];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-			
-			[self close:nil];
-		}];
-	}
-
 }
 
 #pragma mark - View Methods
+
+- (IBAction)clean:(id)sender {
+	// Delete all from CoreData
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MMMPost"];
+	NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+	
+	NSError *deleteError = nil;
+	NSPersistentStoreCoordinator *psc = [[SUNCoreDataStore defaultStore] persistentStoreCoordinator];
+	[psc executeRequest:delete withContext:[[SUNCoreDataStore defaultStore] mainQueueContext] error:&deleteError];
+	psc = nil; delete = nil; request = nil;
+
+	[[SDImageCache sharedImageCache] clearDisk];
+	
+	NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+	NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+	
+	[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+		[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"lastSelection"];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"clear_cache"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		[self close:nil];
+	}];
+}
 
 - (IBAction)close:(id)sender{
 	NSString *fonteSize = @"";
@@ -123,7 +174,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.tableView.backgroundColor = [UIColor blackColor];
 
@@ -136,7 +187,36 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
 	}
+	
+	[self tableViewMode:darkMode];
 
+}
+
+- (void)tableViewMode:(BOOL)darkmode {
+	NSInteger sections = [self.tableView numberOfSections];
+	for (NSInteger section = 0; section < sections; section++ ) {
+		NSInteger rows = [self.tableView numberOfRowsInSection:section];
+		for (NSInteger row = 0; row < rows; row++ ) {
+			UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+			
+			cell.contentView.backgroundColor = (darkmode ? [UIColor colorWithHexString:@"#181818"] : [UIColor whiteColor]);
+
+			for (id object in cell.contentView.subviews) {
+				if ([object isKindOfClass:[UILabel class]]) {
+					UILabel *obj = (UILabel *)object;
+					obj.textColor = (darkmode ? [UIColor whiteColor] : [UIColor blackColor]);
+					obj = nil;
+				}
+				if ([object isKindOfClass:[UIButton class]]) {
+					UIButton *obj = (UIButton *)object;
+					[obj setTitleColor:(darkmode ? [UIColor whiteColor] : [UIColor blackColor]) forState:UIControlStateNormal];
+					obj = nil;
+				}
+			}
+		}
+	}
+	
+	[self.tableView reloadData];
 }
 
 @end

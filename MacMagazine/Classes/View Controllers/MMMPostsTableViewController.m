@@ -43,24 +43,24 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     if (_fetchedResultsController) {
         return _fetchedResultsController;
     }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[MMMPost entityName]];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
-                                     [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
-                                     [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"visible = %@", @YES];
-    fetchRequest.returnsObjectsAsFaults = NO;
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[SUNCoreDataStore defaultStore].mainQueueContext sectionNameKeyPath:@"date" cacheName:nil];
-    _fetchedResultsController.delegate = self;
-    
-    NSError *error = nil;
-    if (![_fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _fetchedResultsController;
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[MMMPost entityName]];
+	fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
+									 [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
+									 [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"visible = %@", @YES];
+	fetchRequest.returnsObjectsAsFaults = NO;
+	
+	_fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[SUNCoreDataStore defaultStore].mainQueueContext sectionNameKeyPath:@"date" cacheName:@"MMMCache"];
+	_fetchedResultsController.delegate = self;
+	
+	NSError *error = nil;
+	if (![_fetchedResultsController performFetch:&error]) {
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+
+	return _fetchedResultsController;
 }
 
 #pragma mark - Actions
@@ -225,8 +225,11 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
         self.numberOfResponseObjectsPerRequest = response.count;
         self.nextPage = 2;
         [self.refreshControl endRefreshing];
-        NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
+		
+		if ([self.tableView numberOfSections] > 0 && [self.tableView numberOfRowsInSection:0] > 0) {
+			NSIndexPath *top = [NSIndexPath indexPathForRow:0 inSection:0];
+			[self.tableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
+		}
     } failure:^(NSError *error) {
         [self handleError:error];
         [self.refreshControl endRefreshing];
@@ -294,8 +297,32 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 
 - (void)reloadTableViewsNotificationReceived:(NSNotification *)notification {
 	[self setMode];
+	
+	[NSFetchedResultsController deleteCacheWithName:@"MMMCache"];
 	_fetchedResultsController = nil;
+	self.variableControlForFetchedResults = 0;
 	[self.tableView reloadData];
+
+	[UIView animateWithDuration:0.4f
+						  delay:0.0f
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^(){
+						 self.tableView.alpha = 0;
+					 }
+					 completion:^(BOOL finished){
+						 [UIView animateWithDuration:0.4f
+											   delay:0.2f
+											 options:UIViewAnimationOptionCurveEaseInOut
+										  animations:^(){
+											  self.tableView.alpha = 1;
+										  }
+										  completion:^(BOOL finished){
+											  [self reloadData];
+										  }];
+
+					 }];
+
+
 }
 
 #pragma mark - Protocols
@@ -328,11 +355,15 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
         [cell layoutIfNeeded];
         [cell layoutSubviews];
     }
-    
-    UIView *selectedBackgroundView = [[UIView alloc] init];
-    selectedBackgroundView.backgroundColor = [UIColor colorWithRed:((float)0/(float)255) green:((float)138/(float)255) blue:((float)202/(float)255) alpha:0.3];
-    cell.selectedBackgroundView = selectedBackgroundView;
-    
+	
+	UIView *selectedBackgroundView = [[UIView alloc] init];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		selectedBackgroundView.backgroundColor = [UIColor grayColor];
+	} else {
+		selectedBackgroundView.backgroundColor = [UIColor colorWithRed:((float)0/(float)255) green:((float)138/(float)255) blue:((float)202/(float)255) alpha:0.3];
+	}
+	cell.selectedBackgroundView = selectedBackgroundView;
+
     return cell;
 }
 
@@ -355,7 +386,13 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     self.selectedIndexPath = indexPath;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(MMMTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#4d4d4d"];
+	}
+
     NSUInteger numberOfSections = [tableView numberOfSections];
     if (indexPath.section + 1 != numberOfSections) {
         return;
@@ -365,6 +402,19 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     if (numberOfRemainingCells <= 10) {
         [self fetchMoreData];
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull MMMTableViewHeaderView *)view forSection:(NSInteger)section {
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		view.titleLabel.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+		view.contentView.backgroundColor = [UIColor blackColor];
+	} else {
+		view.titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
+		view.contentView.backgroundColor = [UIColor clearColor];
+	}
+	
+	return YES;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -506,8 +556,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
 		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-		self.tableView.backgroundColor = [UIColor blackColor];
-		
+		self.tableView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];
@@ -587,11 +637,10 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
-    
-    self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
+	
+	self.navigationItem.titleView = [[MMMLogoImageView alloc] init];
     self.variableControlForFetchedResults = 0;
     self.isTableViewCellSelected = NO;
-    
     [self enableLongPressGesture];
     [self popUpRatingAppView];
     [self reloadData];

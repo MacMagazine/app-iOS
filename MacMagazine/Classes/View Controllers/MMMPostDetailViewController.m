@@ -150,6 +150,11 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupWebView {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		self.view.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+		self.webView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+	}
+
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4];
 	self.webView.alpha = 0.0;
@@ -171,7 +176,15 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 
         // Changes the WKWebView user agent in order to hide some CSS/HTML elements
         self.webView.customUserAgent = MMMUserAgent;
-        self.webView.navigationDelegate = self;
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+			self.webView.customUserAgent = [self.webView.customUserAgent stringByAppendingString:@"-darkmode"];
+		}
+		NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
+		if (![fontSize isEqualToString:@""]) {
+			self.webView.customUserAgent = [self.webView.customUserAgent stringByAppendingFormat:@"-%@", fontSize];
+		}
+
+		self.webView.navigationDelegate = self;
         self.webView.UIDelegate = self;
 
         // Observer to check that loading has completelly finished for the WebView
@@ -188,7 +201,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.view.backgroundColor = [UIColor blackColor];
 		
@@ -394,20 +407,23 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-	NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
-	if (![fontSize isEqualToString:@""]) {
-		NSString *cssURL = [@"https://macmagazine.com.br/wp-content/files/app/" stringByAppendingFormat:@"%@.css", fontSize];
-		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
-		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
-		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
-	}
-	fontSize = nil;
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		NSString *cssURL = @"https://macmagazine.com.br/wp-content/files/app/darmode.css";
-		NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
-		NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
-		[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+	if ([[[webView URL] absoluteString] containsString:MMMBaseURL]) {
+		NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
+		if (![fontSize isEqualToString:@""]) {
+			NSString *cssURL = [@"https://macmagazine.com.br/wp-content/files/app/" stringByAppendingFormat:@"%@.css", fontSize];
+			NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
+			NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
+			[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+		}
+		fontSize = nil;
+		
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+			NSString *cssURL = @"https://macmagazine.com.br/wp-content/files/app/modoescuro.css";
+			NSString *javascriptString = @"var fileref = document.createElement('link'); fileref.setAttribute('rel', 'stylesheet'); fileref.setAttribute('type', 'text/css'); fileref.setAttribute('href', '%@'); document.getElementsByTagName('head')[0].appendChild(fileref)";
+			NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssURL];
+			[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
+		}
 	}
 }
 
