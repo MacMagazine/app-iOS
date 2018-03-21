@@ -150,11 +150,6 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)setupWebView {
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		self.view.backgroundColor = [UIColor colorWithHexString:@"#181818"];
-		self.webView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
-	}
-
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4];
 	self.webView.alpha = 0.0;
@@ -170,14 +165,23 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         webViewConfiguration.preferences = preferences;
 
         WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:webViewConfiguration];
-        [self.view addSubview:webView];
+		webView.opaque = false;
+		self.webView.opaque = false;
+
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+			self.view.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+			self.webView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+			webView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+		}
+
+		[self.view addSubview:webView];
         self.webView = webView;
         [self.webView autoPinEdgesToSuperviewEdges];
 
         // Changes the WKWebView user agent in order to hide some CSS/HTML elements
         self.webView.customUserAgent = MMMUserAgent;
 		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-			self.webView.customUserAgent = [self.webView.customUserAgent stringByAppendingString:@"-darkmode"];
+			self.webView.customUserAgent = [self.webView.customUserAgent stringByAppendingString:@"-modoescuro"];
 		}
 		NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
 		if (![fontSize isEqualToString:@""]) {
@@ -407,7 +411,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-
+/*
+ 	// REMOVIDO POR ESTAR NO USER-AGENT E O SITE GERENCIA - CODIGO MANTIDO PARA REFERENCIA
 	if ([[[webView URL] absoluteString] containsString:MMMBaseURL]) {
 		NSString *fontSize = [[NSUserDefaults standardUserDefaults] stringForKey:@"font-size-settings"];
 		if (![fontSize isEqualToString:@""]) {
@@ -425,6 +430,8 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 			[webView evaluateJavaScript:javascriptWithCSSString completionHandler:nil];
 		}
 	}
+*/
+
 }
 
 
@@ -443,6 +450,15 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
     [self setupWebView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWebViewsNotificationReceived:) name:MMMReloadWebViewsNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		self.view.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+		self.webView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -557,6 +557,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.tableView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
+		
+		[[[UIApplication sharedApplication] keyWindow] setBackgroundColor:[UIColor blackColor]];
 
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
@@ -567,6 +569,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 		
+		[[[UIApplication sharedApplication] keyWindow] setBackgroundColor:[UIColor whiteColor]];
 	}
 
 }
