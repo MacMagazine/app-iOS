@@ -1,6 +1,7 @@
 #import <PureLayout/PureLayout.h>
 
 #import "MMMNavigationBar.h"
+#import "HexColor.h"
 
 #pragma mark MMMNavigationBar
 
@@ -17,7 +18,11 @@
     }
     
     UIView *separatorView = [[UIView alloc] init];
-    separatorView.backgroundColor = [UIColor colorWithRed:0.78 green:0.80 blue:0.84 alpha:0.80];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
+		separatorView.backgroundColor = [UIColor colorWithHexString:@"#4c4c4c"];
+	} else {
+		separatorView.backgroundColor = [UIColor colorWithRed:0.78 green:0.80 blue:0.84 alpha:0.80];
+	}
     [self addSubview:separatorView];
 
     [separatorView autoSetDimension:ALDimensionHeight toSize:1.f / [UIScreen mainScreen].scale];

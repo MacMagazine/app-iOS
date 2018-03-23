@@ -205,7 +205,7 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#181818"];
+		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.view.backgroundColor = [UIColor blackColor];
 		

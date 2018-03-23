@@ -7,6 +7,7 @@
 #import "MMMFeaturedPostTableViewCell.h"
 #import "MMMLabel.h"
 #import "MMMLogoImageView.h"
+#import "MMMNavigationBar.h"
 #import "MMMPost.h"
 #import "MMMPostDetailViewController.h"
 #import "MMMPostPresenter.h"
@@ -390,7 +391,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	
 	cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
-		cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#4d4d4d"];
+		cell.separatorView.backgroundColor = [UIColor colorWithHexString:@"#2d2d2d"];
 	}
 
     NSUInteger numberOfSections = [tableView numberOfSections];
@@ -552,24 +553,30 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 		self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-		self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 		self.tableView.backgroundColor = [UIColor colorWithHexString:@"#181818"];
 		
 		[[[UIApplication sharedApplication] keyWindow] setBackgroundColor:[UIColor blackColor]];
 
+		MMMNavigationBar *navBar = (MMMNavigationBar *)self.navigationController.navigationBar;
+		navBar.separatorView.backgroundColor = [UIColor colorWithHexString:@"#4c4c4c"];
+
 	} else {
 		self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 		self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:@"#0097d4"];
+		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 		self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
 		self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithHexString:@"#0097d4"];
-		self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 		UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 		self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 		
 		[[[UIApplication sharedApplication] keyWindow] setBackgroundColor:[UIColor whiteColor]];
+
+		MMMNavigationBar *navBar = (MMMNavigationBar *)self.navigationController.navigationBar;
+		navBar.separatorView.backgroundColor = [UIColor colorWithRed:0.78 green:0.80 blue:0.84 alpha:0.80];
 	}
 
 }

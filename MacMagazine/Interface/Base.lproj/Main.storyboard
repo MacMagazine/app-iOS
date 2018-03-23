@@ -251,7 +251,7 @@
         <scene sceneID="i9C-7B-tGc">
             <objects>
                 <navigationController id="sqJ-YF-9UK" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="BVP-oJ-Q3V">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="BVP-oJ-Q3V" customClass="MMMNavigationBar">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
