@@ -23,11 +23,14 @@
 @property (nonatomic, weak) IBOutlet Customslider *fontSize;
 @property (nonatomic, weak) IBOutlet UITableViewCell *sliderCell;
 @property (nonatomic, weak) IBOutlet UISwitch *darkMode;
+@property (nonatomic, weak) IBOutlet UIButton *reportButton;
 
 @end
 
 static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notification.webview.reload";
 static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.notification.tableview.reload";
+
+#define URLEMail @"mailto:app@macmagazine.com.br?subject=Relato de problema no app."
 
 @implementation SettingsTableViewController
 
@@ -167,6 +170,11 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[self setMode:[(UISwitch *)sender isOn]];
+}
+
+- (IBAction)reportProblem:(id)sender {
+    NSString *url = [URLEMail stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.alphanumericCharacterSet];
+    [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: url] options:@{} completionHandler:nil];
 }
 
 - (void)setMode:(BOOL)darkMode {

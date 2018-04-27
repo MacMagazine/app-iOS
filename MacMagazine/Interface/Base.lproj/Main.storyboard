@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbL-dz-gbu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbL-dz-gbu">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -193,6 +193,34 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Bzp-Xl-iN5">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="0pO-w4-SMn">
+                                        <rect key="frame" x="0.0" y="463" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0pO-w4-SMn" id="uMx-uR-RgQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQ6-3P-a6I">
+                                                    <rect key="frame" x="0.0" y="3" width="375" height="44"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Relatar algum problema no app"/>
+                                                    <connections>
+                                                        <action selector="reportProblem:" destination="tag-Iw-CA7" eventType="touchUpInside" id="U3i-tD-seu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="WQ6-3P-a6I" secondAttribute="trailing" id="H1G-FR-HMQ"/>
+                                                <constraint firstItem="WQ6-3P-a6I" firstAttribute="leading" secondItem="uMx-uR-RgQ" secondAttribute="leading" id="SGu-52-gbz"/>
+                                                <constraint firstAttribute="bottom" secondItem="WQ6-3P-a6I" secondAttribute="bottom" constant="3" id="isn-TV-PRg"/>
+                                                <constraint firstItem="WQ6-3P-a6I" firstAttribute="top" secondItem="uMx-uR-RgQ" secondAttribute="top" constant="3" id="rxj-9X-tWr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="tag-Iw-CA7" id="pZ5-Om-MIh"/>
@@ -211,6 +239,7 @@
                         <outlet property="darkMode" destination="DY8-5N-ULI" id="4hS-Yr-Um9"/>
                         <outlet property="fontSize" destination="afg-Bl-yxC" id="2a3-kG-Z06"/>
                         <outlet property="pushForAll" destination="ucd-8O-8Em" id="hzH-MZ-MuP"/>
+                        <outlet property="reportButton" destination="WQ6-3P-a6I" id="bJS-Ug-oXt"/>
                         <outlet property="sliderCell" destination="ZFG-Gt-Lnc" id="eIo-6d-XIK"/>
                     </connections>
                 </tableViewController>
