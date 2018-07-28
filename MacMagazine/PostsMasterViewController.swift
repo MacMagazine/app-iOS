@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Kingfisher
 
 class PostsMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
@@ -16,15 +17,13 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController? = nil
 
-	lazy var lazyImage: LazyImage = LazyImage()
-
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		tableView.rowHeight = UITableViewAutomaticDimension
-		tableView.estimatedRowHeight = 44
+		tableView.estimatedRowHeight = 133
 
 		self.getPosts()
 	}
@@ -174,16 +173,23 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 			}
 		}
 		
+		// Lazy load of image from Marvel server
+		let defaultImage = UIImage(named: "image_Logo")
+
 		if let url = object.artworkURL {
-			self.loadImage(imageView: cell.thumbnailImageView, url: url, spin: cell.spin)
+			cell.thumbnailImageView.kf.indicatorType = .activity
+			cell.thumbnailImageView.kf.setImage(with: URL(string: url), placeholder: defaultImage)
 		} else {
 
 			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\(object.artwork)") {
 				(result: String?) in
 				
 				if result != nil {
-					object.artworkURL = result!
-					self.loadImage(imageView: cell.thumbnailImageView, url: (object.artworkURL)!, spin: cell.spin)
+					DispatchQueue.main.async {
+						object.artworkURL = result!
+						cell.thumbnailImageView.kf.indicatorType = .activity
+						cell.thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL!), placeholder: defaultImage)
+					}
 				}
 			}
 		}
@@ -192,9 +198,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	// MARK: - View Methods -
 
 	@IBAction func getPosts() {
+
 		self.refreshControl?.beginRefreshing()
-		
-		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(1))"
+
+		let pages = (Posts.getNumberOfPosts() / 20) + 1
+
+		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(pages))"
 		Network.getPosts(host: Site.posts.withParameter(nil), query: query) {
 			() in
 			
@@ -206,21 +215,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 				} catch {
 					print("An error occurred")
 				}
-			}
-		}
-	}
-
-	func loadImage(imageView: UIImageView, url: String, spin: UIActivityIndicatorView) {
-		DispatchQueue.main.async {
-			imageView.alpha = 0
-
-			spin.startAnimating()
-			self.lazyImage.showWithSpinner(imageView: imageView, url: url) {
-				(error:LazyImageError?) in
-
-				//Image loaded. Do something..
-				spin.stopAnimating()
-				imageView.alpha = 1
 			}
 		}
 	}

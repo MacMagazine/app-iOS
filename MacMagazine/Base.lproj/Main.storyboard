@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translucent="NO" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="7bK-jq-Zjz" kind="relationship" relationship="rootViewController" id="tsl-Nk-0bq"/>
@@ -119,11 +119,11 @@
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos posts ..." translucent="NO" id="0qd-er-Gku">
+                        <searchBar key="tableHeaderView" contentMode="redraw" misplaced="YES" placeholder="Procurar nos posts ..." translucent="NO" id="0qd-er-Gku">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -151,20 +151,17 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label">
-                                            <rect key="frame" x="104" y="16" width="255" height="20.5"/>
+                                            <rect key="frame" x="104" y="16" width="255" height="64.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-nH-YW4" userLabel="Subheadline Label">
-                                            <rect key="frame" x="104" y="40.5" width="255" height="38"/>
+                                            <rect key="frame" x="104" y="84.5" width="255" height="38"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-uf-NdD">
-                                            <rect key="frame" x="42" y="96" width="20" height="20"/>
-                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="195-hI-MvL" secondAttribute="trailing" id="25n-4E-m8J"/>
@@ -175,8 +172,6 @@
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="GDp-vA-Lob"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="DaF-eS-7AO" secondAttribute="top" id="J5t-nl-vvh"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="top" constant="16" id="Jjd-vx-9mF"/>
-                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="bottom" secondItem="DaF-eS-7AO" secondAttribute="bottom" id="coY-eT-QRr"/>
-                                        <constraint firstItem="Yds-uf-NdD" firstAttribute="centerX" secondItem="DaF-eS-7AO" secondAttribute="centerX" id="crk-bM-Pcb"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" secondItem="195-hI-MvL" secondAttribute="leading" id="qPM-Hn-Ggi"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
@@ -184,7 +179,6 @@
                                 <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
                                 <connections>
                                     <outlet property="headlineLabel" destination="195-hI-MvL" id="uaM-Rl-g6x"/>
-                                    <outlet property="spin" destination="Yds-uf-NdD" id="4JI-P3-MJO"/>
                                     <outlet property="subheadlineLabel" destination="h5p-nH-YW4" id="JGW-dj-dbM"/>
                                     <outlet property="thumbnailImageView" destination="DaF-eS-7AO" id="N8G-E6-OCh"/>
                                 </connections>
@@ -196,7 +190,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
                                             <rect key="frame" x="16" y="16" width="343" height="160"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -208,9 +202,6 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FtC-sD-OAp">
-                                            <rect key="frame" x="177.5" y="85.5" width="20" height="20"/>
-                                        </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label">
                                             <rect key="frame" x="16" y="184" width="343" height="23.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -220,8 +211,6 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="leadingMargin" secondItem="kaO-wS-N74" secondAttribute="leading" id="5L7-bD-Vd8"/>
-                                        <constraint firstItem="FtC-sD-OAp" firstAttribute="centerY" secondItem="aso-Qa-tMZ" secondAttribute="centerY" id="5hK-vs-p31"/>
-                                        <constraint firstItem="FtC-sD-OAp" firstAttribute="centerX" secondItem="aso-Qa-tMZ" secondAttribute="centerX" id="CJ2-if-eTs"/>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="top" secondItem="Ui7-Bp-i1r" secondAttribute="top" constant="16" id="Xgm-0B-3dB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="kaO-wS-N74" secondAttribute="trailing" id="dR4-IG-CyV"/>
                                         <constraint firstItem="kaO-wS-N74" firstAttribute="top" secondItem="aso-Qa-tMZ" secondAttribute="bottom" constant="8" id="f0G-Sq-ZyJ"/>
@@ -233,7 +222,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="headlineLabel" destination="kaO-wS-N74" id="wey-Eb-rXC"/>
-                                    <outlet property="spin" destination="FtC-sD-OAp" id="87S-IQ-pXF"/>
                                     <outlet property="thumbnailImageView" destination="aso-Qa-tMZ" id="Jhh-1u-Aiq"/>
                                 </connections>
                             </tableViewCell>
@@ -310,11 +298,11 @@
         <scene sceneID="1rj-YR-AM7">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="yxj-hX-XGv" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5e5-vw-TjT">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="5e5-vw-TjT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos Podcasts ..." translucent="NO" id="3X8-ZW-9l4">
+                        <searchBar key="tableHeaderView" contentMode="redraw" misplaced="YES" placeholder="Procurar nos Podcasts ..." translucent="NO" id="3X8-ZW-9l4">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -342,30 +330,25 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUW-vd-D0f" userLabel="Headline Label">
-                                            <rect key="frame" x="104" y="16" width="255" height="20.5"/>
+                                            <rect key="frame" x="104" y="16" width="255" height="64.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHZ-kW-s7u" userLabel="Subheadline Label">
-                                            <rect key="frame" x="104" y="40.5" width="255" height="38"/>
+                                            <rect key="frame" x="104" y="84.5" width="255" height="38"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xy3-FG-bSx">
-                                            <rect key="frame" x="42" y="96" width="20" height="20"/>
-                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="7YU-GS-Xls" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leading" constant="16" id="1Gh-VS-KuC"/>
                                         <constraint firstItem="WHZ-kW-s7u" firstAttribute="top" secondItem="CUW-vd-D0f" secondAttribute="bottom" constant="4" id="6XR-oC-3fa"/>
-                                        <constraint firstItem="xy3-FG-bSx" firstAttribute="centerX" secondItem="7YU-GS-Xls" secondAttribute="centerX" id="73X-X3-hWr"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="CUW-vd-D0f" secondAttribute="trailing" id="FCa-Nz-Xjg"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="top" secondItem="7YU-GS-Xls" secondAttribute="top" id="KSc-eD-J1O"/>
                                         <constraint firstItem="WHZ-kW-s7u" firstAttribute="leading" secondItem="CUW-vd-D0f" secondAttribute="leading" id="OUK-4s-S8s"/>
                                         <constraint firstItem="7YU-GS-Xls" firstAttribute="top" secondItem="Olc-Ki-V5h" secondAttribute="top" constant="16" id="YSr-Ek-xJI"/>
-                                        <constraint firstItem="xy3-FG-bSx" firstAttribute="bottom" secondItem="7YU-GS-Xls" secondAttribute="bottom" id="oq1-EQ-GbQ"/>
                                         <constraint firstAttribute="bottom" secondItem="7YU-GS-Xls" secondAttribute="bottom" constant="16.5" id="pmW-yy-zAt"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="leading" secondItem="7YU-GS-Xls" secondAttribute="trailing" constant="16" id="woL-Dy-COk"/>
                                         <constraint firstItem="WHZ-kW-s7u" firstAttribute="width" secondItem="CUW-vd-D0f" secondAttribute="width" id="zjh-Ys-csx"/>
@@ -375,7 +358,6 @@
                                 <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
                                 <connections>
                                     <outlet property="headlineLabel" destination="CUW-vd-D0f" id="jRl-yH-5M2"/>
-                                    <outlet property="spin" destination="xy3-FG-bSx" id="ABK-dZ-CRo"/>
                                     <outlet property="subheadlineLabel" destination="WHZ-kW-s7u" id="flH-ff-uoC"/>
                                     <outlet property="thumbnailImageView" destination="7YU-GS-Xls" id="KvJ-Ku-pcn"/>
                                 </connections>
@@ -399,9 +381,6 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ynk-HS-sap">
-                                            <rect key="frame" x="177.5" y="85.5" width="20" height="20"/>
-                                        </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkt-CV-3LK" userLabel="Headline Label">
                                             <rect key="frame" x="16" y="184" width="343" height="23.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -412,10 +391,8 @@
                                     <constraints>
                                         <constraint firstItem="rkt-CV-3LK" firstAttribute="top" secondItem="sNY-4G-WZZ" secondAttribute="bottom" constant="8" id="4nB-da-ovG"/>
                                         <constraint firstItem="sNY-4G-WZZ" firstAttribute="top" secondItem="h4g-p6-8M7" secondAttribute="top" constant="16" id="CJV-OO-K3f"/>
-                                        <constraint firstItem="ynk-HS-sap" firstAttribute="centerY" secondItem="sNY-4G-WZZ" secondAttribute="centerY" id="Llt-dd-UzY"/>
                                         <constraint firstAttribute="bottom" secondItem="rkt-CV-3LK" secondAttribute="bottom" constant="16" id="OXm-PA-b3a"/>
                                         <constraint firstItem="sNY-4G-WZZ" firstAttribute="leading" secondItem="h4g-p6-8M7" secondAttribute="leading" constant="16" id="QEX-3c-POG"/>
-                                        <constraint firstItem="ynk-HS-sap" firstAttribute="centerX" secondItem="sNY-4G-WZZ" secondAttribute="centerX" id="eJe-T1-G2C"/>
                                         <constraint firstAttribute="trailing" secondItem="sNY-4G-WZZ" secondAttribute="trailing" constant="16" id="esC-UZ-Jme"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="rkt-CV-3LK" secondAttribute="leading" id="hQQ-6R-8Jd"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="rkt-CV-3LK" secondAttribute="trailing" id="hbf-SN-h66"/>
@@ -424,7 +401,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="headlineLabel" destination="rkt-CV-3LK" id="pjn-xP-Ino"/>
-                                    <outlet property="spin" destination="ynk-HS-sap" id="K0e-5I-JwW"/>
                                     <outlet property="thumbnailImageView" destination="sNY-4G-WZZ" id="jFx-Kd-5XT"/>
                                 </connections>
                             </tableViewCell>
@@ -463,7 +439,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image_logo" width="72" height="100"/>
+        <image name="image_logo" width="144" height="200"/>
+        <image name="image_logo_feature" width="686" height="320"/>
         <image name="logo" width="80" height="80"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>

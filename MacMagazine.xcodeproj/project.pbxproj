@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
-		9B02AE4C1F5C515400EA1A6F /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */; };
 		9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */; };
+		9B3683A020C5D84400925E76 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; };
 		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2A1F618F810052063A /* macmagazine.xcdatamodeld */; };
 		9BABAC2E1F6190620052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
-		9BABAC301F619FAE0052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
 		9BABAC311F61A4270052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* postCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
@@ -37,10 +37,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9B3683A120C5D84400925E76 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9B3683A020C5D84400925E76 /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
 		9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9B36839D20C5D66000925E76 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9BABAC2B1F618F810052063A /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9BABAC2D1F6190620052063A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -71,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +95,6 @@
 		9B02AE4D1F5C515A00EA1A6F /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9B02AE4B1F5C515400EA1A6F /* LazyImage.swift */,
 				9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */,
 				9BF356271F6208F70081BE90 /* UIColor+HexColor.swift */,
 			);
@@ -202,6 +216,7 @@
 		9BE697DC1F487DF70048D68D /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				9B36839D20C5D66000925E76 /* Kingfisher.framework */,
 			);
 			name = "3rd Party";
 			sourceTree = "<group>";
@@ -217,6 +232,7 @@
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
+				9B3683A120C5D84400925E76 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,19 +268,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
 					9BCAD6761F47A08100B54526 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 7PXVC8PJ97;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 					9BE697CC1F4874C20048D68D = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 7PXVC8PJ97;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9BCAD6761F47A08100B54526;
 					};
@@ -338,7 +354,6 @@
 				9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */,
 				9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */,
 				9BABAC2E1F6190620052063A /* Post.swift in Sources */,
-				9B02AE4C1F5C515400EA1A6F /* LazyImage.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColor+HexColor.swift in Sources */,
 			);
@@ -351,7 +366,6 @@
 				9BABAC311F61A4270052063A /* DataController.swift in Sources */,
 				9BE697DE1F487EEF0048D68D /* PostsTests.swift in Sources */,
 				9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */,
-				9BABAC301F619FAE0052063A /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +413,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -406,6 +421,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -456,6 +472,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -463,6 +480,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -497,11 +515,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacMagazine",
+				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -510,11 +532,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacMagazine",
+				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -523,11 +549,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacMagazine",
+				);
 				INFOPLIST_FILE = MacMagazineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
 			};
 			name = Debug;
@@ -537,11 +567,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacMagazine",
+				);
 				INFOPLIST_FILE = MacMagazineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacMagazine.app/MacMagazine";
 			};
 			name = Release;

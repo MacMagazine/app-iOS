@@ -17,7 +17,7 @@ class PostTests: XCTestCase {
 		super.setUp()
 		// Put setup codvarere. This method is called before the invocation of each test method in the class.
 		self.postDate = "2001-01-01T01:01:01"
-		self.item = Post(id: 0, postDate: self.postDate!, title: "title", content: "content", excerpt: "excerpt", artwork: 1234, categorias: [10])
+		self.item = Post(id: 0, postDate: self.postDate!, title: "title", content: "content", excerpt: "excerpt", artwork: 1234, categorias: [10], artworkURL: nil)
 	}
 	
 	override func tearDown() {

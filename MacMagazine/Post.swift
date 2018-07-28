@@ -56,19 +56,24 @@ class Post: NSObject {
 		
 		let encodedData = string.data(using: String.Encoding.utf8)!
 		do {
-			return try NSAttributedString(data: encodedData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil).string
-		} catch let error as NSError {
-			print(error.localizedDescription)
+			return try NSAttributedString(data: encodedData,
+										  options: [.documentType: NSAttributedString.DocumentType.html,
+													.characterEncoding: String.Encoding.utf8.rawValue],
+										  documentAttributes: nil).string
+		} catch {
+			print("error: ", error)
 			return nil
 		}
+
 	}
 
-	init(id: Int, postDate: String, title: String, content: String, excerpt: String, artwork: Int, categorias: [Int]) {
+	init(id: Int, postDate: String, title: String, content: String, excerpt: String, artwork: Int, categorias: [Int], artworkURL: String?) {
 		self.id = id
 		self.title = title
 		self.content = content
 		self.excerpt = excerpt
 		self.artwork = artwork
+		self.artworkURL = artworkURL
 		self.categorias = categorias
 		
 		super.init()
@@ -253,6 +258,7 @@ extension Posts {
 
 extension Network {
 	public class func processJSON(json: [Dictionary<String, Any>]) {
+
 		for data in json {
 			// Get only the data we want
 			
@@ -275,12 +281,23 @@ extension Network {
 				else {
 					return
 			}
-			
-			let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerptHTML, artwork: artwork, categorias: categorias)
-			
-			Posts.insertOrUpdatePost(post: post)
+
+			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\(artwork)") {
+				(result: String?) in
+
+				DispatchQueue.main.async {
+					if result != nil {
+						UIImageView().kf.setImage(with: URL(string: result!), placeholder: UIImage(named: "image_Logo"))
+					}
+
+					let post = Post(id: identifier, postDate: dateString, title: title, content: content, excerpt: excerptHTML, artwork: artwork, categorias: categorias, artworkURL: result)
+					
+					Posts.insertOrUpdatePost(post: post)
+					DataController.sharedInstance.saveContext()
+				}
+			}
+
 		}
-		DataController.sharedInstance.saveContext()
 	}
 
 	public class func processImageJSON(json: Dictionary<String, Any>) -> String? {
