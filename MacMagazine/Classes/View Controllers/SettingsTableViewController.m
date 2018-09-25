@@ -9,6 +9,7 @@
 @import WebKit;
 
 #import <CoreData/CoreData.h>
+#import <MessageUI/MessageUI.h>
 #import <SDWebImage/SDImageCache.h>
 
 #import "SettingsTableViewController.h"
@@ -17,7 +18,7 @@
 #import "MMMPost.h"
 #import "SUNCoreDataStore.h"
 
-@interface SettingsTableViewController ()
+@interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UISwitch *pushForAll;
 @property (nonatomic, weak) IBOutlet Customslider *fontSize;
@@ -28,8 +29,6 @@
 
 static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notification.webview.reload";
 static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.notification.tableview.reload";
-
-#define URLEMail @"mailto:app@macmagazine.com.br?subject=Relato de problema no app."
 
 @implementation SettingsTableViewController
 
@@ -171,11 +170,6 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	[self setMode:[(UISwitch *)sender isOn]];
 }
 
-- (IBAction)reportProblem:(id)sender {
-    NSString *url = [URLEMail stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.alphanumericCharacterSet];
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: url] options:@{} completionHandler:nil];
-}
-
 - (void)setMode:(BOOL)darkMode {
 	if (darkMode) {
 		self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -224,6 +218,28 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 	}
 	
 	[self.tableView reloadData];
+}
+
+- (IBAction)reportProblem:(id)sender {
+	if ([MFMailComposeViewController canSendMail]) {
+
+		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+		mailVC.mailComposeDelegate = self;
+
+		[mailVC setSubject:@"Relato de problema na App MacMagazine"];
+		[mailVC setToRecipients:@[@"contato@macmagazine.com.br"]];
+		
+		[self presentViewController:mailVC animated:YES completion:nil];
+		
+	} else {
+		NSLog(@"This device cannot send email");
+	}
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+
+	[self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 @end

@@ -206,7 +206,7 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Relatar algum problema no app"/>
                                                     <connections>
-                                                        <action selector="reportProblem:" destination="tag-Iw-CA7" eventType="touchUpInside" id="U3i-tD-seu"/>
+                                                        <action selector="reportProblem:" destination="tag-Iw-CA7" eventType="touchUpInside" id="9IY-cD-zax"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
