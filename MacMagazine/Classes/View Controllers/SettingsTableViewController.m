@@ -23,7 +23,6 @@
 @property (nonatomic, weak) IBOutlet Customslider *fontSize;
 @property (nonatomic, weak) IBOutlet UITableViewCell *sliderCell;
 @property (nonatomic, weak) IBOutlet UISwitch *darkMode;
-@property (nonatomic, weak) IBOutlet UIButton *reportButton;
 
 @end
 
@@ -174,7 +173,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 
 - (IBAction)reportProblem:(id)sender {
     NSString *url = [URLEMail stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.alphanumericCharacterSet];
-    [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: url] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: url] options:@{} completionHandler:nil];
 }
 
 - (void)setMode:(BOOL)darkMode {

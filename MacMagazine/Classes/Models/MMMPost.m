@@ -8,7 +8,7 @@
 
 static NSString * const kMMFeaturedCategoryName = @"Destaques";
 static NSString * const kMMRequestUserAgent = @"Feedburner";
-static NSString * const kMMRSSFeedPath = @"https://macmagazine.com.br/feed/";
+static NSString * const kMMRSSFeedPath = @"http://feeds.feedburner.com/blogmacmagazine";
 
 #pragma mark Post
 

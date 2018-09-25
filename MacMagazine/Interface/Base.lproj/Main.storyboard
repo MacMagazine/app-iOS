@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbL-dz-gbu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbL-dz-gbu">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -87,7 +86,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucd-8O-8Em">
-                                                    <rect key="frame" x="312" y="9.3333333333333357" width="49" height="31"/>
+                                                    <rect key="frame" x="312" y="9.6666666666666643" width="49" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="47" id="Ct1-Rq-oeo"/>
                                                         <constraint firstAttribute="height" constant="31" id="Ytr-zB-AIe"/>
@@ -125,7 +124,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cc-yU-NWu">
-                                                    <rect key="frame" x="16" y="11.000000000000002" width="12" height="21.666666666666671"/>
+                                                    <rect key="frame" x="16" y="11.333333333333334" width="12" height="21.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -165,7 +164,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DY8-5N-ULI">
-                                                    <rect key="frame" x="312" y="9.3333333333333357" width="49" height="31"/>
+                                                    <rect key="frame" x="312" y="9.6666666666666643" width="49" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="TIl-Ab-7ww"/>
                                                         <constraint firstAttribute="width" constant="47" id="cWd-9h-uSh"/>
@@ -239,7 +238,6 @@
                         <outlet property="darkMode" destination="DY8-5N-ULI" id="4hS-Yr-Um9"/>
                         <outlet property="fontSize" destination="afg-Bl-yxC" id="2a3-kG-Z06"/>
                         <outlet property="pushForAll" destination="ucd-8O-8Em" id="hzH-MZ-MuP"/>
-                        <outlet property="reportButton" destination="WQ6-3P-a6I" id="bJS-Ug-oXt"/>
                         <outlet property="sliderCell" destination="ZFG-Gt-Lnc" id="eIo-6d-XIK"/>
                     </connections>
                 </tableViewController>

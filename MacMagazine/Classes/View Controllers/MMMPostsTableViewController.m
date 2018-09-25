@@ -70,7 +70,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
     [generator prepare];
     [generator impactOccurred];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
 }
 
 #pragma mark - Instance Methods
@@ -405,8 +405,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull MMMTableViewHeaderView *)view forSection:(NSInteger)section {
-
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull MMMTableViewHeaderView *)view forSection:(NSInteger)section {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dark_mode"]) {
 		view.titleLabel.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
 		view.contentView.backgroundColor = [UIColor blackColor];
@@ -414,8 +413,6 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		view.titleLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.0];
 		view.contentView.backgroundColor = [UIColor clearColor];
 	}
-	
-	return YES;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
