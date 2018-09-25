@@ -459,6 +459,9 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
         // Used only to share post through preview action
         self.selectedPostIndexPath = indexPath;
         
+        // setting previewing context source rect
+        [previewingContext setSourceRect: [self.tableView rectForRowAtIndexPath: indexPath]];
+        
         // send data to previewViewController
         previewViewController.post = [self.fetchedResultsController objectAtIndexPath:indexPath];
         return previewViewController;
