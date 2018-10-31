@@ -23,7 +23,7 @@ PODS:
   - HockeySDK (4.1.2):
     - HockeySDK/DefaultLib (= 4.1.2)
   - HockeySDK/DefaultLib (4.1.2)
-  - Keys (1.0.0)
+  - Keys (1.0.1)
   - OCMock (3.3.1)
   - Ono (1.2.2)
   - PureLayout (3.0.2)
@@ -50,6 +50,23 @@ DEPENDENCIES:
   - TUSafariActivity (~> 1.0)
   - Tweaks (~> 2.0)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - ARChromeActivity
+    - Crashlytics
+    - Expecta
+    - Fabric
+    - HexColors
+    - HockeySDK
+    - OCMock
+    - Ono
+    - PureLayout
+    - SDWebImage
+    - TSMessages
+    - TUSafariActivity
+    - Tweaks
+
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
@@ -62,7 +79,7 @@ SPEC CHECKSUMS:
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   HockeySDK: c7523379550a4305cefc1cdfa7b5f9a5a3538180
-  Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
@@ -73,4 +90,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b929458cb88633af57c7933f58ca5e529b10b5ac
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3

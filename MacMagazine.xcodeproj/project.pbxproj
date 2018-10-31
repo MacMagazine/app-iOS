@@ -20,9 +20,9 @@
 		ADC1C6E7C4096CA38982A924 /* Pods-MacMagazine-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */; };
 		DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F73F1CBDCF4D00183E0F /* MMMNotificationsAPI.m */; };
 		DB09F7431CBDCF4D00183E0F /* MMMNotificationsPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09F7411CBDCF4D00183E0F /* MMMNotificationsPreferences.m */; };
-		DB5F80EB1CECE04B002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		DB5F80EB1CECE04B002A20C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80EE1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m */; };
-		DB5F80F21CED27D2002A20C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		DB5F80F21CED27D2002A20C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		DB5F80F81CED334B002A20C1 /* MMMCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5F80F71CED334B002A20C1 /* MMMCacheManager.m */; };
 		DB72998D1CFCE46400924E8A /* MMMLogoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB72998C1CFCE46400924E8A /* MMMLogoImageView.m */; };
 		E667D6DF52AA19A6062EE05C /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */; };
@@ -531,7 +531,6 @@
 				EDBB4A4B1B2E7F8D00E1CCCA /* Frameworks */,
 				EDBB4A4C1B2E7F8D00E1CCCA /* Resources */,
 				ED95D8751B4219C700028B46 /* Updates Build Version */,
-				0A9696279A8785461D4A7381 /* [CP] Embed Pods Frameworks */,
 				07984D1C7A4E8C06A336B175 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -551,8 +550,6 @@
 				EDBB4A691B2E7F8D00E1CCCA /* Sources */,
 				EDBB4A6A1B2E7F8D00E1CCCA /* Frameworks */,
 				EDBB4A6B1B2E7F8D00E1CCCA /* Resources */,
-				4977DC27F324CF9DD99653A9 /* [CP] Embed Pods Frameworks */,
-				511BC34ED2374035D740F24F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -646,58 +643,64 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine-resources.sh",
+				"${PODS_ROOT}/ARChromeActivity/ARChromeActivity/ARChromeActivity.png",
+				"${PODS_ROOT}/ARChromeActivity/ARChromeActivity/ARChromeActivity@2x.png",
+				"${PODS_ROOT}/ARChromeActivity/ARChromeActivity/ARChromeActivity@2x~ipad.png",
+				"${PODS_ROOT}/ARChromeActivity/ARChromeActivity/ARChromeActivity@3x.png",
+				"${PODS_ROOT}/ARChromeActivity/ARChromeActivity/ARChromeActivity@3x~ipad.png",
+				"${PODS_ROOT}/ARChromeActivity/ARChromeActivity/ARChromeActivity~ipad.png",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundError.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundError@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundErrorIcon@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundMessage.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundMessage@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundSuccess.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundSuccess@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundWarning.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundWarning@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundWarningIcon.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationBackgroundWarningIcon@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationButtonBackground.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/NotificationButtonBackground@2x.png",
+				"${PODS_ROOT}/TSMessages/Pod/Assets/TSMessagesDefaultDesign.json",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TUSafariActivity/TUSafariActivity.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ARChromeActivity.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ARChromeActivity@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ARChromeActivity@2x~ipad.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ARChromeActivity@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ARChromeActivity@3x~ipad.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ARChromeActivity~ipad.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundError.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundError@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundMessage.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundMessage@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccess.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccess@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarning.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarning@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TSMessagesDefaultDesign.json",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TUSafariActivity.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0A9696279A8785461D4A7381 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4977DC27F324CF9DD99653A9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		511BC34ED2374035D740F24F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacMagazineTests/Pods-MacMagazineTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F34EE0D2E969E2202A3E287 /* [CP] Check Pods Manifest.lock */ = {
@@ -706,13 +709,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MacMagazine-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C0F356E1DEA76884AECD25E0 /* [CP] Check Pods Manifest.lock */ = {
@@ -721,13 +727,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MacMagazineTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ED95D8751B4219C700028B46 /* Updates Build Version */ = {
@@ -796,7 +805,7 @@
 				EDFA9DC71B36353E00EE213C /* MMMPostPresenter.m in Sources */,
 				ED10FFF11B5C72FF00AA902C /* GTMNSString+HTML.m in Sources */,
 				47EC44A71D1B0B5D004AE94C /* UIViewController+ShareActivity.m in Sources */,
-				DB5F80F21CED27D2002A20C1 /* (null) in Sources */,
+				DB5F80F21CED27D2002A20C1 /* BuildFile in Sources */,
 				DB09F7421CBDCF4D00183E0F /* MMMNotificationsAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -806,7 +815,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED3AD2E81CBAB4FB007BEC71 /* NSStringHTMLSafeTests.m in Sources */,
-				DB5F80EB1CECE04B002A20C1 /* (null) in Sources */,
+				DB5F80EB1CECE04B002A20C1 /* BuildFile in Sources */,
 				ED1813981CE99523005DE994 /* MMMNotificationsHandlerTests.m in Sources */,
 				DB5F80EF1CECF316002A20C1 /* MMMNotificationsPreferencesTests.m in Sources */,
 			);

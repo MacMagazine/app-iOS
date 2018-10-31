@@ -132,4 +132,8 @@ static NSString * const kMMRSSFeedPath = @"http://feeds.feedburner.com/blogmacma
     return self.imagesArray.firstObject;
 }
 
+- (BOOL)wasUpdated {
+    return [self.title containsString: @"atualizado"];
+}
+
 @end
