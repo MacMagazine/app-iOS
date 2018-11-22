@@ -11,7 +11,7 @@
 #import "MMMPostsTableViewController.h"
 #import "UIViewController+ShareActivity.h"
 
-static NSString * const MMMBaseURL = @"macmagazine.com.br";
+static NSString * const MMMBaseURL = @"macmagazine.uol.com.br";
 static NSString * const MMMDisqusBaseURL = @"disqus.com";
 static NSString * const MMMUserAgent = @"MacMagazine";
 static NSString * const MMMReloadWebViewsNotification = @"com.macmagazine.notification.webview.reload";

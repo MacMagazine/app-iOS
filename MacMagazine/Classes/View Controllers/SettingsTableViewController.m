@@ -226,7 +226,7 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
 		mailVC.mailComposeDelegate = self;
 
-		[mailVC setSubject:@"Relato de problema na App MacMagazine"];
+		[mailVC setSubject:@"Relato de problema no app MacMagazine"];
 		[mailVC setToRecipients:@[@"contato@macmagazine.com.br"]];
 		
 		[self presentViewController:mailVC animated:YES completion:nil];

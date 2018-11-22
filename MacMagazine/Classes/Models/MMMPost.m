@@ -8,11 +8,20 @@
 
 static NSString * const kMMFeaturedCategoryName = @"Destaques";
 static NSString * const kMMRequestUserAgent = @"Feedburner";
-static NSString * const kMMRSSFeedPath = @"http://feeds.feedburner.com/blogmacmagazine";
+static NSString * const kMMRSSFeedPath = @"https://macmagazine.uol.com.br/feed/";
+//static NSString * const kMMRSSFeedPath = @"http://feeds.feedburner.com/blogmacmagazine";
+
+@interface MMMPost()
+
+@property (nonatomic, strong) NSString *feedURL;
+
+@end
 
 #pragma mark Post
 
 @implementation MMMPost
+
+@synthesize feedURL;
 
 #pragma mark - Class Methods
 
@@ -29,7 +38,9 @@ static NSString * const kMMRSSFeedPath = @"http://feeds.feedburner.com/blogmacma
 }
 
 + (void)getWithPage:(NSUInteger)page success:(void (^)(id response))success failure:(void (^)(NSError *error))failure {
-    [[self sessionManager] GET:kMMRSSFeedPath parameters:@{@"paged" : @(page)} progress:nil success:^(NSURLSessionDataTask *task, NSData *responseData) {
+
+	[[self sessionManager] GET:kMMRSSFeedPath parameters:@{@"paged" : @(page)} progress:nil success:^(NSURLSessionDataTask *task, NSData *responseData) {
+		
         NSManagedObjectContext *context = [SUNCoreDataStore defaultStore].privateQueueContext;
         [context performBlock:^{
             NSError *error;

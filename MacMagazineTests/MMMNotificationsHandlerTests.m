@@ -61,11 +61,11 @@
 }
 
 - (NSDictionary *)notificationPayload {
-    return @{@"guid" : @"https://www.macmagazine.com.br"};
+    return @{@"guid" : @"https://macmagazine.uol.com.br"};
 }
 
 - (NSDictionary *)invalidNotificationPayload {
-    return @{@"url" : @"https://www.macmagazine.com.br"};
+    return @{@"url" : @"https://macmagazine.uol.com.br"};
 }
 
 @end
