@@ -195,7 +195,10 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
         [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:NULL];
     }
 
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.postURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    NSURLRequestCachePolicy cachePolicy = [self.post wasUpdated] == true ? NSURLRequestReloadIgnoringLocalCacheData : NSURLRequestReturnCacheDataElseLoad;
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.postURL cachePolicy:cachePolicy timeoutInterval:60];
+
     [self.webView loadRequest:request];
 
     [self setupNavigationBar];

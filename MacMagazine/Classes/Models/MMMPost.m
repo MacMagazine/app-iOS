@@ -143,4 +143,9 @@ static NSString * const kMMRSSFeedPath = @"https://macmagazine.uol.com.br/feed/"
     return self.imagesArray.firstObject;
 }
 
+- (BOOL)wasUpdated {
+    return [self.title containsString: @"atualizado"];
+}
+
+
 @end
