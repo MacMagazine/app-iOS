@@ -6,6 +6,6 @@
 - (NSArray<NSString *> *)categoriesArray;
 - (NSArray<NSString *> *)imagesArray;
 - (NSString *)thumbnail;
-- (BOOL)wasUpdated
+- (BOOL)wasUpdated;
 
 @end

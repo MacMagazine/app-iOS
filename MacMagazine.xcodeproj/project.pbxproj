@@ -71,21 +71,46 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9B54CFA921A76544006C9F44 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		177FA3E8216B3B701D0910A2 /* Pods-MacMagazineNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineNotificationServiceExtension/Pods-MacMagazineNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		33C944037626C06B21EB6D6A /* Pods-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
 		34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BE9108B7315E0C624127173 /* Pods-MacMagazine-MacMagazineNotificationServiceExtension-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-MacMagazineNotificationServiceExtension-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-MacMagazineNotificationServiceExtension-settings-metadata.plist"; sourceTree = "<group>"; };
+		3FDA224C4EFE864296097E13 /* libPods-MacMagazineNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazineNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47EC44A51D1B0B5D004AE94C /* UIViewController+ShareActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShareActivity.h"; sourceTree = "<group>"; };
 		47EC44A61D1B0B5D004AE94C /* UIViewController+ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShareActivity.m"; sourceTree = "<group>"; };
 		8D505ADF096FDA45E5AEAC9C /* Pods-MacMagazine-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-metadata.plist"; path = "Pods/Pods-MacMagazine-metadata.plist"; sourceTree = "<group>"; };
 		9AA074C50ED7CFE2F1D2012C /* Pods-MacMagazineTests-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineTests-metadata.plist"; path = "Pods/Pods-MacMagazineTests-metadata.plist"; sourceTree = "<group>"; };
 		9B5140D8204C2BB9004E0D47 /* SettingsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		9B5140D9204C2BB9004E0D47 /* SettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		9B54CF9F21A76544006C9F44 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		9B54CFA021A76544006C9F44 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		9B54CFA221A76544006C9F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B54CFAA21A768F4006C9F44 /* MacMagazineNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		9B81CBE01F83206500787175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		9B9A017820548B0C00BAE7E0 /* Customslider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customslider.h; sourceTree = "<group>"; };
 		9B9A017920548B0C00BAE7E0 /* Customslider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customslider.m; sourceTree = "<group>"; };
+		9F00EED978AE354FC271DEA2 /* libPods-MacMagazine-MacMagazineNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazine-MacMagazineNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FFB00CCA7D89F9C6F0BD3B4 /* Pods-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-settings-metadata.plist"; sourceTree = "<group>"; };
 		AB63865A46B1A50D2E796140 /* Pods-MacMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.debug.xcconfig"; sourceTree = "<group>"; };
+		ACA76CA7D07D8F3AFF15C500 /* Pods-MacMagazineNotificationServiceExtension-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineNotificationServiceExtension-metadata.plist"; path = "Pods/Pods-MacMagazineNotificationServiceExtension-metadata.plist"; sourceTree = "<group>"; };
+		AD990AD4660901A98CD9C9C1 /* Pods-MacMagazine-MacMagazineNotificationServiceExtension-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-MacMagazineNotificationServiceExtension-metadata.plist"; path = "Pods/Pods-MacMagazine-MacMagazineNotificationServiceExtension-metadata.plist"; sourceTree = "<group>"; };
 		B277A5A28C97B1E3708BC704 /* Pods-MacMagazine-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-settings-metadata.plist"; sourceTree = "<group>"; };
+		B4A18F512F52C2147E78BF10 /* Pods-MacMagazineNotificationServiceExtension-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazineNotificationServiceExtension-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazineNotificationServiceExtension-settings-metadata.plist"; sourceTree = "<group>"; };
+		B9007F0A92A92B51AD280D01 /* Pods-MacMagazineNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazineNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazineNotificationServiceExtension/Pods-MacMagazineNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		BE8C7D0C85BC9AA17052E28F /* Pods-MacMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacMagazine/Pods-MacMagazine.release.xcconfig"; sourceTree = "<group>"; };
 		C433AED99AC82BE266A14301 /* Pods-MacMagazine-MacMagazineTests-settings-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-MacMagazine-MacMagazineTests-settings-metadata.plist"; path = "MacMagazine/Supporting Files/Settings.bundle/Pods-MacMagazine-MacMagazineTests-settings-metadata.plist"; sourceTree = "<group>"; };
 		D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacMagazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +217,17 @@
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
+		9B54CF9E21A76544006C9F44 /* MacMagazineNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				9B54CFAA21A768F4006C9F44 /* MacMagazineNotificationServiceExtension.entitlements */,
+				9B54CF9F21A76544006C9F44 /* NotificationService.h */,
+				9B54CFA021A76544006C9F44 /* NotificationService.m */,
+				9B54CFA221A76544006C9F44 /* Info.plist */,
+			);
+			path = MacMagazineNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		9B9A017720548B0000BAE7E0 /* UISlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +250,12 @@
 				BE8C7D0C85BC9AA17052E28F /* Pods-MacMagazine.release.xcconfig */,
 				DD364E93085EE59C3A60E952 /* Pods-MacMagazineTests.debug.xcconfig */,
 				E2FB681F18D1181B9F21C9D3 /* Pods-MacMagazineTests.release.xcconfig */,
+				AD990AD4660901A98CD9C9C1 /* Pods-MacMagazine-MacMagazineNotificationServiceExtension-metadata.plist */,
+				3BE9108B7315E0C624127173 /* Pods-MacMagazine-MacMagazineNotificationServiceExtension-settings-metadata.plist */,
+				B9007F0A92A92B51AD280D01 /* Pods-MacMagazineNotificationServiceExtension.debug.xcconfig */,
+				177FA3E8216B3B701D0910A2 /* Pods-MacMagazineNotificationServiceExtension.release.xcconfig */,
+				ACA76CA7D07D8F3AFF15C500 /* Pods-MacMagazineNotificationServiceExtension-metadata.plist */,
+				B4A18F512F52C2147E78BF10 /* Pods-MacMagazineNotificationServiceExtension-settings-metadata.plist */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -253,6 +295,8 @@
 			children = (
 				D4A07793D999EE4CB7CD2BCE /* libPods-MacMagazine.a */,
 				34940ED2582E7A14B8A6EAE1 /* libPods-MacMagazineTests.a */,
+				9F00EED978AE354FC271DEA2 /* libPods-MacMagazine-MacMagazineNotificationServiceExtension.a */,
+				3FDA224C4EFE864296097E13 /* libPods-MacMagazineNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -279,6 +323,7 @@
 		EDBB4A451B2E7F8D00E1CCCA = {
 			isa = PBXGroup;
 			children = (
+				9B54CF9E21A76544006C9F44 /* MacMagazineNotificationServiceExtension */,
 				E08F51B4FAC6AF00545000CE /* Frameworks */,
 				EDBB4A501B2E7F8D00E1CCCA /* MacMagazine */,
 				EDBB4A701B2E7F8D00E1CCCA /* MacMagazineTests */,
@@ -533,6 +578,7 @@
 				ED95D8751B4219C700028B46 /* Updates Build Version */,
 				0A9696279A8785461D4A7381 /* [CP] Embed Pods Frameworks */,
 				07984D1C7A4E8C06A336B175 /* [CP] Copy Pods Resources */,
+				9B54CFA921A76544006C9F44 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -575,9 +621,11 @@
 				TargetAttributes = {
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = 6Y8FN886HF;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -963,13 +1011,14 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6Y8FN886HF;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -980,7 +1029,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;

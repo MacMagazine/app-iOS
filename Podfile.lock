@@ -25,6 +25,7 @@ PODS:
   - HockeySDK/DefaultLib (4.1.6)
   - Keys (1.0.0)
   - OCMock (3.4.2)
+  - OneSignal (2.9.3)
   - Ono (1.2.2)
   - PureLayout (3.1.2)
   - SDWebImage (3.8.2):
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - HockeySDK (~> 4.1)
   - Keys (from `Pods/CocoaPodsKeys`)
   - OCMock (~> 3.3)
+  - OneSignal (< 3.0, >= 2.6.2)
   - Ono (~> 1.2)
   - PureLayout (~> 3.0)
   - SDWebImage (~> 3.7)
@@ -64,6 +66,7 @@ SPEC CHECKSUMS:
   HockeySDK: 95db557d54489a570dcdefae0d02f98eecc279a3
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   OCMock: ebe9ee1dca7fbed0ff9193ac0b3e2d8862ea56f6
+  OneSignal: a506e3bc61d2030f0757faf9bd783a9b211c6e3c
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   PureLayout: 4634d0b61e3b5021166e8ec7c18e9e0ca0720c8b
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -71,6 +74,6 @@ SPEC CHECKSUMS:
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   Tweaks: 0c41be06d41b82a11f515c27711b65d343aa4af6
 
-PODFILE CHECKSUM: b929458cb88633af57c7933f58ca5e529b10b5ac
+PODFILE CHECKSUM: e314b0f2a802c7b3e43faa70ca607057a26d04f8
 
 COCOAPODS: 1.2.0

@@ -9,7 +9,6 @@
 static NSString * const kMMFeaturedCategoryName = @"Destaques";
 static NSString * const kMMRequestUserAgent = @"Feedburner";
 static NSString * const kMMRSSFeedPath = @"https://macmagazine.uol.com.br/feed/";
-//static NSString * const kMMRSSFeedPath = @"http://feeds.feedburner.com/blogmacmagazine";
 
 @interface MMMPost()
 

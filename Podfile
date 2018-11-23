@@ -2,6 +2,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.0'
 
+target 'MacMagazineNotificationServiceExtension' do
+	pod 'OneSignal', '>= 2.6.2', '< 3.0'
+end
+
 target 'MacMagazine' do
     pod 'AFNetworking', '~> 3.1'
     pod 'ARChromeActivity', '~> 1.0'
@@ -13,8 +17,9 @@ target 'MacMagazine' do
     pod 'TSMessages', '~> 0.9'
     pod 'TUSafariActivity', '~> 1.0'
     pod 'Tweaks', '~> 2.0'
+	pod 'OneSignal', '>= 2.6.2', '< 3.0'
 
-    target 'MacMagazineTests' do
+	target 'MacMagazineTests' do
         inherit! :search_paths
         
         pod 'Expecta', '~> 1.0'

@@ -1,6 +1,7 @@
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Keys/MacmagazineKeys.h>
+#import <OneSignal/OneSignal.h>
 #import <Tweaks/FBTweakShakeWindow.h>
 
 #import "MMMAppDelegate.h"
@@ -47,8 +48,20 @@
     [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 
+	[OneSignal initWithLaunchOptions:launchOptions
+							   appId:@"322eb3b6-acd2-415e-bdb0-b2f0f05d7f34"
+			handleNotificationAction:nil
+							settings:@{kOSSettingsKeyAutoPrompt: @false}];
+	OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
+	
+	// Recommend moving the below line to prompt for push after informing the user about
+	//   how your app will use them.
+	[OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
+		NSLog(@"User accepted notifications: %d", accepted);
+	}];
+
 #ifndef DEBUG
-    self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
+//    self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
 #endif
 
     NSInteger appNumberOfCalls = [[NSUserDefaults standardUserDefaults] integerForKey:@"appNumberOfCalls"];
@@ -68,7 +81,7 @@
     UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
     UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
-    
+	
     [MMMCacheManager clearCacheIfNeeded];
 
 	if (self.returnedFromBackground) {
@@ -86,6 +99,7 @@
 
 #pragma mark - Notifications
 
+/*
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
@@ -93,7 +107,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [self.notificationsAPI registerToken:deviceToken notificationPeferences:MMMNotificationsPreferencesUser];
 }
-
+*/
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [self.notificationsHandler applicationDidReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }

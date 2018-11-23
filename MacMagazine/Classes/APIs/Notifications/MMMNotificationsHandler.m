@@ -17,7 +17,7 @@
 }
 
 - (void)applicationDidReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSString *postGuid = userInfo[@"guid"];
+    NSString *postGuid = userInfo[@"custom"][@"a"][@"guid"];
     UIApplicationState applicationState = [UIApplication sharedApplication].applicationState;
 
     // Inactive state = "The app is transitioning to or from the background"
