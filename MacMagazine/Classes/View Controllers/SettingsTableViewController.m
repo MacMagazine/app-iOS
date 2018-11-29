@@ -10,11 +10,13 @@
 
 #import <CoreData/CoreData.h>
 #import <MessageUI/MessageUI.h>
+#import <OneSignal/OneSignal.h>
 #import <SDWebImage/SDImageCache.h>
 
 #import "SettingsTableViewController.h"
 #import "Customslider.h"
 #import "HexColor.h"
+#import "MMMNotificationsPreferences.h"
 #import "MMMPost.h"
 #import "SUNCoreDataStore.h"
 
@@ -161,6 +163,8 @@ static NSString * const MMMReloadTableViewsNotification = @"com.macmagazine.noti
 - (IBAction)setPushPreferences:(id)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:[(UISwitch *)sender isOn] forKey:@"all_posts_pushes"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+
+	[OneSignal sendTag:@"notification_preferences" value:NSStringFromMMMNotificationsPreferences(MMMNotificationsPreferencesUser)];
 }
 
 - (IBAction)darkMode:(id)sender {

@@ -48,21 +48,22 @@
     [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 
+	OSPermissionSubscriptionState *status = [OneSignal getPermissionSubscriptionState];
+	if (status.permissionStatus.status != OSNotificationPermissionAuthorized) {
+		[[UIApplication sharedApplication] unregisterForRemoteNotifications];
+	}
+
 	[OneSignal initWithLaunchOptions:launchOptions
 							   appId:@"322eb3b6-acd2-415e-bdb0-b2f0f05d7f34"
 			handleNotificationAction:nil
 							settings:@{kOSSettingsKeyAutoPrompt: @false}];
 	OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
-	
-	// Recommend moving the below line to prompt for push after informing the user about
-	//   how your app will use them.
-	[OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
-		NSLog(@"User accepted notifications: %d", accepted);
-	}];
 
-#ifndef DEBUG
-//    self.notificationsAPI = [[MMMNotificationsAPI alloc] initWithAPIKey:keys.mMMNotificationsAPIKey];
-#endif
+	[OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
+		if (accepted) {
+			[OneSignal sendTag:@"notification_preferences" value:NSStringFromMMMNotificationsPreferences(MMMNotificationsPreferencesUser)];
+		}
+	}];
 
     NSInteger appNumberOfCalls = [[NSUserDefaults standardUserDefaults] integerForKey:@"appNumberOfCalls"];
     [[NSUserDefaults standardUserDefaults] setInteger:appNumberOfCalls+1 forKey:@"appNumberOfCalls"];
@@ -78,9 +79,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
-    UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+//    UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+//    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
 	
     [MMMCacheManager clearCacheIfNeeded];
 

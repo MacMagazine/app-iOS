@@ -621,6 +621,7 @@
 				TargetAttributes = {
 					EDBB4A4D1B2E7F8D00E1CCCA = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 7PXVC8PJ97;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -1012,13 +1013,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				INFOPLIST_FILE = "MacMagazine/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "MacMagazine Dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
