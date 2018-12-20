@@ -48,13 +48,8 @@
     [SUNCoreDataStore setupDefaultStoreWithModelURL:modelURL persistentStoreURL:nil];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 
-	OSPermissionSubscriptionState *status = [OneSignal getPermissionSubscriptionState];
-	if (status.permissionStatus.status != OSNotificationPermissionAuthorized) {
-		[[UIApplication sharedApplication] unregisterForRemoteNotifications];
-	}
-
 	[OneSignal initWithLaunchOptions:launchOptions
-							   appId:@"322eb3b6-acd2-415e-bdb0-b2f0f05d7f34"
+							   appId:keys.mMMNotificationsAPIKey
 			handleNotificationAction:nil
 							settings:@{kOSSettingsKeyAutoPrompt: @false}];
 	OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
