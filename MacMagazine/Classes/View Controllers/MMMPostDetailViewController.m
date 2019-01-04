@@ -124,14 +124,14 @@ typedef NS_ENUM(NSUInteger, MMMLinkClickType) {
 #pragma mark - Preview Actions
 
 - (NSArray<id> *)previewActionItems {
-    UIPreviewAction *sharePreviewAction = [UIPreviewAction actionWithTitle:@"Compartilhar" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+    UIPreviewAction *sharePreviewAction = [UIPreviewAction actionWithTitle: NSLocalizedString(@"Post.Sharing.Share", @"") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         UINotificationFeedbackGenerator *generator = [[UINotificationFeedbackGenerator alloc] init];
         [generator prepare];
         [generator notificationOccurred:(UINotificationFeedbackTypeSuccess)];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"sharePost" object:nil];
     }];
 
-    UIPreviewAction *cancelPreviewAction = [UIPreviewAction actionWithTitle:@"Cancelar" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+    UIPreviewAction *cancelPreviewAction = [UIPreviewAction actionWithTitle: NSLocalizedString(@"Post.Sharing.Cancel", @"") style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleLight)];
         [generator prepare];
         [generator impactOccurred];
