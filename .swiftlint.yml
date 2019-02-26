@@ -1,0 +1,142 @@
+whitelist_rules: # rules enabled
+  - closing_brace
+  #Closing brace with closing parenthesis should not have any whitespaces in the middle.
+
+  - closure_spacing
+  #Closure expressions should have a single space inside each brace.
+  
+  - colon
+  #Colons should be next to the identifier when specifying a type and next to the key in dictionary literals.
+  
+  - comma
+  #There should be no space before and one after any comma.
+  
+  - empty_parentheses_with_trailing_closure
+  #When using trailing closures, empty parentheses should be avoided after the method call.
+
+  - opening_brace
+  #Opening braces should be preceded by a single space and on the same line as the declaration.
+
+  - operator_usage_whitespace
+  #Operators should be surrounded by a single whitespace when they are being used.
+
+  - redundant_discardable_let
+  #Prefer _ = foo() over let _ = foo() when discarding a result from a function.
+
+  - redundant_nil_coalescing
+  #nil coalescing operator is only evaluated if the lhs is nil, coalescing operator with nil as rhs is redundant
+
+  - redundant_optional_initialization
+  #Initializing an optional variable with nil is redundant.
+
+  - redundant_void_return
+  #Returning Void in a function declaration is redundant.
+
+  - return_arrow_whitespace
+  #Return arrow and return type should be separated by a single space or on a separate line.
+
+  - sorted_imports
+  #Imports should be sorted.
+
+  - statement_position
+  #Else and catch should be on the same line, one space after the previous declaration.
+
+  - trailing_comma
+  #Trailing commas in arrays and dictionaries should be avoided/enforced.
+  
+  - trailing_newline
+  #Files should have a single trailing newline.
+
+  - trailing_semicolon
+  #Lines should not have trailing semicolons.
+
+  - trailing_whitespace
+  #Lines should not have trailing whitespace.
+
+  - unneeded_parentheses_in_closure_argument
+  #Parentheses are not needed when declaring closure arguments.
+
+  - unused_closure_parameter
+  #Unused parameter in a closure should be replaced with _.
+
+  - vertical_whitespace
+  #Limit vertical whitespace to a single empty line
+  
+  - void_return
+  #Prefer -> Void over -> ().
+
+  - force_cast
+  #Force casts should be avoided.
+  
+  - force_try
+  #Force tries should be avoided.
+  
+  - force_unwrapping
+  #Force unwrapping should be avoided.
+
+  - implicitly_unwrapped_optional
+  #Implicitly unwrapped optionals should be avoided when possible.
+
+  - empty_string
+  #Prefer checking isEmpty over comparing string to an empty string literal.
+
+  - fallthrough
+  #Fallthrough should be avoided.
+  
+  - unneeded_break_in_switch
+  #Avoid using unneeded break statements.
+  
+  - syntactic_sugar
+  #Shorthand syntactic sugar should be used, i.e. [Int] instead of Array.
+  
+  - control_statement 
+  #if,for,while,do,catch statements shouldn't wrap their conditionals or arguments in parentheses.
+  
+  - todo
+  # TODOs and FIXMEs should be resolved.
+
+  - empty_count
+  # Prefer checking isEmpty over comparing count to zero.
+
+  - mark
+  # MARK comment should be in valid format. e.g. '// MARK: ...' or '// MARK: - ...'
+
+  - vertical_parameter_alignment
+  # Function parameters should be aligned vertically if they're in multiple lines in a declaration.
+
+  - vertical_parameter_alignment_on_call
+  # Function parameters should be aligned vertically if they're in multiple lines in a method call.
+
+  - empty_parameters
+  # Prefer () -> over Void ->.
+
+  - first_where
+  # Prefer using .first(where:) over .filter { }.first in collections.
+
+  - for_where
+  # where clauses are preferred over a single if inside a for.
+  
+  - conditional_returns_on_newline
+  # Conditional statements should always return on the next line
+    
+  - shorthand_operator
+  # Prefer shorthand operators (+=, -=, *=, /=) over doing the operation and assigning.
+    
+  - private_action
+  # IBActions should be private.
+  
+  - private_outlet
+  # IBOutlets should be private to avoid leaking UIKit to higher layers.
+  
+included:
+  - MacMagazine
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+
+# Configuration: for each rules we can customise its behaviour
+force_cast: warning
+force_try: warning
+force_unwrapping: warning
+implicitly_unwrapped_optional: warning
+empty_count: warning
+shorthand_operator: warning

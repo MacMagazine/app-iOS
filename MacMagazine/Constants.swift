@@ -27,10 +27,10 @@ enum Site: String {
 			return "\(Site.protocolo.withParameter(nil))\(Site.url.withParameter(nil))\(Site.api.withParameter(nil))media/"
 
 		case .perPage:
-			return "per_page=\(number!)"
+			return "per_page=\(number ?? 0)"
 
 		case .page:
-			return "page=\(number!)"
+			return "page=\(number ?? 0)"
 
 		default:
 			return self.rawValue

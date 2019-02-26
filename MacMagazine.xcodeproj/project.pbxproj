@@ -12,11 +12,13 @@
 		9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */; };
 		9B3683A020C5D84400925E76 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; };
+		9BA5527E2225DA5B00B3FA23 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
+		9BA5527F2225DAB300B3FA23 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE4F1F5C7BD800EA1A6F /* Constants.swift */; };
 		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2A1F618F810052063A /* macmagazine.xcdatamodeld */; };
 		9BABAC2E1F6190620052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
 		9BABAC311F61A4270052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
-		9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* postCell.swift */; };
+		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
 		9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */; };
@@ -58,7 +60,7 @@
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9BABAC2B1F618F810052063A /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9BABAC2D1F6190620052063A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		9BC9B12D1F5C960700C4DF17 /* postCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postCell.swift; sourceTree = "<group>"; };
+		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsMasterViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 		9BC9B12F1F5C96A500C4DF17 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9BC9B12D1F5C960700C4DF17 /* postCell.swift */,
+				9BC9B12D1F5C960700C4DF17 /* PostCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -228,6 +230,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BCAD68B1F47A08100B54526 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
+				9BA5527D2225CE1D00B3FA23 /* Run swiftlint Script */,
 				9B578C2D1F47A1D00086C6A7 /* ShellScript */,
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
@@ -337,7 +340,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"";
+			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n";
+		};
+		9BA5527D2225CE1D00B3FA23 /* Run swiftlint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run swiftlint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -354,7 +375,7 @@
 				9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */,
 				9B02AE501F5C7BD800EA1A6F /* Constants.swift in Sources */,
 				9BABAC2E1F6190620052063A /* Post.swift in Sources */,
-				9BC9B12E1F5C960700C4DF17 /* postCell.swift in Sources */,
+				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColor+HexColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,9 +384,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA5527F2225DAB300B3FA23 /* Constants.swift in Sources */,
 				9BABAC311F61A4270052063A /* DataController.swift in Sources */,
 				9BE697DE1F487EEF0048D68D /* PostsTests.swift in Sources */,
 				9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */,
+				9BA5527E2225DA5B00B3FA23 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +477,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -505,6 +529,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -523,7 +548,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -540,7 +564,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

@@ -1,5 +1,5 @@
 //
-//  postCell.swift
+//  PostCell.swift
 //  MacMagazine
 //
 //  Created by Cassio Rossi on 03/09/17.
@@ -8,24 +8,24 @@
 
 import UIKit
 
-class postCell: UITableViewCell {
-    
-    // MARK: - Properties -
+class PostCell: UITableViewCell {
+
+	// MARK: - Properties -
 
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var headlineLabel: UILabel!
     @IBOutlet weak var subheadlineLabel: UILabel!
-	
-    // MARK: - Methods -
+
+	// MARK: - Methods -
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
+
+	override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
+
 }

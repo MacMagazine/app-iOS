@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,7 +62,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="129"/>
+            <point key="canvasLocation" x="809" y="128"/>
         </scene>
         <!--No Ar-->
         <scene sceneID="sqc-JR-sY6">
@@ -130,7 +129,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="IPr-CY-YTU" customClass="postCell" customModule="MacMagazine" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="IPr-CY-YTU" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IPr-CY-YTU" id="VwH-Lo-1lM">
@@ -183,7 +182,7 @@
                                     <outlet property="thumbnailImageView" destination="DaF-eS-7AO" id="N8G-E6-OCh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="224" id="gFs-qz-q1f" customClass="postCell" customModule="MacMagazine" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="224" id="gFs-qz-q1f" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="199" width="375" height="224"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gFs-qz-q1f" id="Ui7-Bp-i1r">
@@ -309,7 +308,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="Mgp-RX-pZe" customClass="postCell" customModule="MacMagazine" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="Mgp-RX-pZe" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mgp-RX-pZe" id="Olc-Ki-V5h">
@@ -360,48 +359,6 @@
                                     <outlet property="headlineLabel" destination="CUW-vd-D0f" id="jRl-yH-5M2"/>
                                     <outlet property="subheadlineLabel" destination="WHZ-kW-s7u" id="flH-ff-uoC"/>
                                     <outlet property="thumbnailImageView" destination="7YU-GS-Xls" id="KvJ-Ku-pcn"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="224" id="joY-1G-d3j" customClass="postCell" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="199" width="375" height="224"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="joY-1G-d3j" id="h4g-p6-8M7">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="sNY-4G-WZZ" userLabel="Thumbnail Image View">
-                                            <rect key="frame" x="16" y="16" width="343" height="160"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="160" id="9Jw-73-blx"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkt-CV-3LK" userLabel="Headline Label">
-                                            <rect key="frame" x="16" y="184" width="343" height="23.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="rkt-CV-3LK" firstAttribute="top" secondItem="sNY-4G-WZZ" secondAttribute="bottom" constant="8" id="4nB-da-ovG"/>
-                                        <constraint firstItem="sNY-4G-WZZ" firstAttribute="top" secondItem="h4g-p6-8M7" secondAttribute="top" constant="16" id="CJV-OO-K3f"/>
-                                        <constraint firstAttribute="bottom" secondItem="rkt-CV-3LK" secondAttribute="bottom" constant="16" id="OXm-PA-b3a"/>
-                                        <constraint firstItem="sNY-4G-WZZ" firstAttribute="leading" secondItem="h4g-p6-8M7" secondAttribute="leading" constant="16" id="QEX-3c-POG"/>
-                                        <constraint firstAttribute="trailing" secondItem="sNY-4G-WZZ" secondAttribute="trailing" constant="16" id="esC-UZ-Jme"/>
-                                        <constraint firstAttribute="leadingMargin" secondItem="rkt-CV-3LK" secondAttribute="leading" id="hQQ-6R-8Jd"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="rkt-CV-3LK" secondAttribute="trailing" id="hbf-SN-h66"/>
-                                    </constraints>
-                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="headlineLabel" destination="rkt-CV-3LK" id="pjn-xP-Ino"/>
-                                    <outlet property="thumbnailImageView" destination="sNY-4G-WZZ" id="jFx-Kd-5XT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

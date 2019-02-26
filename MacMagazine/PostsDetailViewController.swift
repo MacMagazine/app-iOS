@@ -10,7 +10,7 @@ import UIKit
 
 class PostsDetailViewController: UIViewController {
 
-	@IBOutlet weak var detailDescriptionLabel: UILabel!
+	@IBOutlet private weak var detailDescriptionLabel: UILabel!
 
 	func configureView() {
 		// Update the user interface for the detail item.
@@ -39,6 +39,4 @@ class PostsDetailViewController: UIViewController {
 		}
 	}
 
-
 }
-
