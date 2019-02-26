@@ -10,7 +10,7 @@ import Foundation
 
 enum Site: String {
 	case protocolo = "https://"
-	case url = "macmagazine.com.br"
+	case url = "macmagazine.uol.com.br"
 	case api = "/wp-json/wp/v2/"
 	case search = "per_page=1&page=1"
 	case posts

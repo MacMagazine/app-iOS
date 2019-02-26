@@ -261,7 +261,7 @@ extension Network {
 
 		for data in json {
 			// Get only the data we want
-			
+			print(json)
 			guard
 				let identifier = data["id"] as? Int,
 				let dateString = data["date"] as? String,
