@@ -12,9 +12,9 @@ class PostCell: UITableViewCell {
 
 	// MARK: - Properties -
 
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var headlineLabel: UILabel!
-    @IBOutlet weak var subheadlineLabel: UILabel!
+    @IBOutlet private weak var thumbnailImageView: UIImageView!
+    @IBOutlet private weak var headlineLabel: UILabel!
+    @IBOutlet private weak var subheadlineLabel: UILabel!
 
 	// MARK: - Methods -
 
@@ -26,6 +26,27 @@ class PostCell: UITableViewCell {
 	override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+
+    func configurePost(_ object: Posts) {
+        headlineLabel?.text = object.title
+
+        if object.categorias.contains("Destaques") == false {
+            if subheadlineLabel != nil {
+                subheadlineLabel?.text = object.excerpt
+            }
+        }
+
+        // Lazy load of image from Marvel server
+        let defaultImage = UIImage(named: "image_Logo")
+
+        thumbnailImageView.kf.indicatorType = .activity
+        thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: defaultImage)
+    }
+
+    func configurePodcast(_ object: Posts) {
+        headlineLabel?.text = object.title
+        subheadlineLabel?.text = "Duração: \(object.duration)"
     }
 
 }

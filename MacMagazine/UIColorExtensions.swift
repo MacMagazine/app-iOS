@@ -1,5 +1,5 @@
 //
-//  UIColor+HexColor.swift
+//  UIColorExtensions.swift
 //  MacMagazine
 //
 //  Created by Cassio Rossi on 07/09/17.
@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIColor {
+
 	convenience init(hex: String, alpha: CGFloat = 1.0) {
 		let scanner = Scanner(string: hex)
 		scanner.scanLocation = 0
@@ -23,4 +24,5 @@ extension UIColor {
 
 		self.init(red: CGFloat(red) / 0xff, green: CGFloat(green) / 0xff, blue: CGFloat(blue) / 0xff, alpha: alpha)
 	}
+
 }

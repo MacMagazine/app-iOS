@@ -122,7 +122,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" misplaced="YES" placeholder="Procurar nos posts ..." translucent="NO" id="0qd-er-Gku">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos posts ..." translucent="NO" id="0qd-er-Gku">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -171,7 +171,8 @@
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="GDp-vA-Lob"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="DaF-eS-7AO" secondAttribute="top" id="J5t-nl-vvh"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="top" constant="16" id="Jjd-vx-9mF"/>
-                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" secondItem="195-hI-MvL" secondAttribute="leading" id="qPM-Hn-Ggi"/>
+                                        <constraint firstAttribute="trailing" secondItem="h5p-nH-YW4" secondAttribute="trailing" constant="16" id="gTG-H6-0NK"/>
+                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="195-hI-MvL" secondAttribute="leading" id="qPM-Hn-Ggi"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
@@ -301,7 +302,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" misplaced="YES" placeholder="Procurar nos Podcasts ..." translucent="NO" id="3X8-ZW-9l4">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos Podcasts ..." translucent="NO" id="3X8-ZW-9l4">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -315,42 +316,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="7YU-GS-Xls" userLabel="Thumbnail Image View">
-                                            <rect key="frame" x="16" y="16" width="72" height="100"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="100" id="G35-H6-MXx"/>
-                                                <constraint firstAttribute="width" constant="72" id="Xls-b5-rRx"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUW-vd-D0f" userLabel="Headline Label">
-                                            <rect key="frame" x="104" y="16" width="255" height="64.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUW-vd-D0f" userLabel="Headline Label">
+                                            <rect key="frame" x="16" y="16" width="343" height="67.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHZ-kW-s7u" userLabel="Subheadline Label">
-                                            <rect key="frame" x="104" y="84.5" width="255" height="38"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHZ-kW-s7u" userLabel="Subheadline Label">
+                                            <rect key="frame" x="16" y="89.5" width="343" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="rHA-gj-PZm"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="7YU-GS-Xls" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leading" constant="16" id="1Gh-VS-KuC"/>
-                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="top" secondItem="CUW-vd-D0f" secondAttribute="bottom" constant="4" id="6XR-oC-3fa"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="CUW-vd-D0f" secondAttribute="trailing" id="FCa-Nz-Xjg"/>
-                                        <constraint firstItem="CUW-vd-D0f" firstAttribute="top" secondItem="7YU-GS-Xls" secondAttribute="top" id="KSc-eD-J1O"/>
-                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="leading" secondItem="CUW-vd-D0f" secondAttribute="leading" id="OUK-4s-S8s"/>
-                                        <constraint firstItem="7YU-GS-Xls" firstAttribute="top" secondItem="Olc-Ki-V5h" secondAttribute="top" constant="16" id="YSr-Ek-xJI"/>
-                                        <constraint firstAttribute="bottom" secondItem="7YU-GS-Xls" secondAttribute="bottom" constant="16.5" id="pmW-yy-zAt"/>
-                                        <constraint firstItem="CUW-vd-D0f" firstAttribute="leading" secondItem="7YU-GS-Xls" secondAttribute="trailing" constant="16" id="woL-Dy-COk"/>
-                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="width" secondItem="CUW-vd-D0f" secondAttribute="width" id="zjh-Ys-csx"/>
+                                        <constraint firstItem="CUW-vd-D0f" firstAttribute="top" secondItem="Olc-Ki-V5h" secondAttribute="topMargin" id="OPP-dn-R5a"/>
+                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="trailing" secondItem="Olc-Ki-V5h" secondAttribute="trailingMargin" id="Sti-Cx-hp4"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="WHZ-kW-s7u" secondAttribute="bottom" constant="6" id="WRK-5O-JHq"/>
+                                        <constraint firstItem="CUW-vd-D0f" firstAttribute="trailing" secondItem="Olc-Ki-V5h" secondAttribute="trailingMargin" id="Zts-mw-ANq"/>
+                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leadingMargin" id="hzv-hx-0OC"/>
+                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="top" secondItem="CUW-vd-D0f" secondAttribute="bottom" constant="6" id="n4f-Nq-4Qc"/>
+                                        <constraint firstItem="CUW-vd-D0f" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leadingMargin" id="oQZ-mh-IG0"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
@@ -358,7 +347,6 @@
                                 <connections>
                                     <outlet property="headlineLabel" destination="CUW-vd-D0f" id="jRl-yH-5M2"/>
                                     <outlet property="subheadlineLabel" destination="WHZ-kW-s7u" id="flH-ff-uoC"/>
-                                    <outlet property="thumbnailImageView" destination="7YU-GS-Xls" id="KvJ-Ku-pcn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -392,7 +380,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AsJ-vc-R6Q" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1647" y="-2099"/>
+            <point key="canvasLocation" x="1645.5999999999999" y="-2099.1004497751128"/>
         </scene>
     </scenes>
     <resources>

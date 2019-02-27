@@ -29,11 +29,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 		super.viewWillAppear(animated)
 
-		if (self.refreshControl?.isRefreshing)! {
-			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height)!), animated: true)
+		if self.refreshControl?.isRefreshing ?? true {
+			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
 		}
 	}
 
@@ -47,9 +47,13 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = tableView.indexPathForSelectedRow {
-		        let object = Posts.getPost(atIndex: indexPath.row)
-		        let controller = (segue.destination as! UINavigationController).topViewController as! PostsDetailViewController
-		        controller.detailItem = object
+                guard let navController = segue.destination as? UINavigationController else {
+                    return
+                }
+                guard let controller = navController.topViewController as? PostsDetailViewController else {
+                    return
+                }
+		        controller.detailItem = fetchedResultsController.object(at: indexPath)
 		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		        controller.navigationItem.leftItemsSupplementBackButton = true
 		    }
@@ -61,12 +65,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	lazy var fetchedResultsController: NSFetchedResultsController<Posts> = {
 		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 
-		if self.tabBarController!.selectedIndex == 0 {
-			fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", String(Categoria.podcast.rawValue))
-		} else if self.tabBarController!.selectedIndex == 1 {
-			fetchRequest.predicate = NSPredicate(format: "categorias CONTAINS[cd] %@", String(Categoria.podcast.rawValue))
+		if self.tabBarController?.selectedIndex == 0 {
+			fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
+		} else if self.tabBarController?.selectedIndex == 1 {
+			fetchRequest.predicate = NSPredicate(format: "categorias CONTAINS[cd] %@", "Podcast")
 		}
 
 		// Initialize Fetched Results Controller
@@ -141,7 +145,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let object = fetchedResultsController.object(at: indexPath)
 
-		let identifier = (object.categorias.contains(String(Categoria.destaque.rawValue)) ? "featuredCell" : "normalCell")
+        var identifier = "normalCell"
+        if self.tabBarController?.selectedIndex == 0 && object.categorias.contains("Destaques") {
+            identifier = "featuredCell"
+        }
+
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {
             fatalError("Unexpected Index Path")
         }
@@ -158,34 +166,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	func configure(cell: PostCell, atIndexPath: IndexPath) {
 		let object = fetchedResultsController.object(at: atIndexPath)
 
-		cell.headlineLabel!.text = object.title
-
-		if object.categorias.contains(String(Categoria.destaque.rawValue)) == false {
-			if cell.subheadlineLabel != nil {
-				cell.subheadlineLabel!.text = object.excerpt
-			}
-		}
-
-		// Lazy load of image from Marvel server
-		let defaultImage = UIImage(named: "image_Logo")
-
-		if let url = object.artworkURL {
-			cell.thumbnailImageView.kf.indicatorType = .activity
-			cell.thumbnailImageView.kf.setImage(with: URL(string: url), placeholder: defaultImage)
-		} else {
-
-			Network.getImageURL(host: Site.artworkURL.withParameter(nil), query: "\(object.artwork)") {
-				(result: String?) in
-
-				if result != nil {
-					DispatchQueue.main.async {
-						object.artworkURL = result!
-						cell.thumbnailImageView.kf.indicatorType = .activity
-						cell.thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL!), placeholder: defaultImage)
-					}
-				}
-			}
-		}
+        if self.tabBarController?.selectedIndex == 0 {
+            cell.configurePost(object)
+        }
+        if self.tabBarController?.selectedIndex == 1 {
+            cell.configurePodcast(object)
+        }
 	}
 
 	// MARK: - View Methods -
@@ -194,20 +180,34 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 		self.refreshControl?.beginRefreshing()
 
-		let pages = (Posts.getNumberOfPosts() / 20) + 1
+        //let pages = (Posts.getNumberOfPosts() / 15) + 1
+        let processResponse: (XMLPost?) -> Void = { post in
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+            }
 
-		let query = "\(Site.perPage.withParameter(20))&\(Site.page.withParameter(pages))"
-		Network.getPosts(host: Site.posts.withParameter(nil), query: query) { () in
+            guard let post = post else {
+                return
+            }
+            Posts.insertOrUpdatePost(post: post)
+            DataController.sharedInstance.saveContext()
 
-			DispatchQueue.main.async {
-				self.refreshControl?.endRefreshing()
-				// Execute the fetch to display the data
-				do {
-					try self.fetchedResultsController.performFetch()
-				} catch {
-					print("An error occurred")
-				}
-			}
-		}
+            DispatchQueue.main.async {
+                // Execute the fetch to display the data
+                do {
+                    try self.fetchedResultsController.performFetch()
+                } catch {
+                    print("An error occurred")
+                }
+            }
+        }
+
+        if self.tabBarController?.selectedIndex == 0 {
+            API().getPosts(page: 0, processResponse)
+        }
+        if self.tabBarController?.selectedIndex == 1 {
+            API().getPodcasts(page: 0, processResponse)
+        }
 	}
+
 }

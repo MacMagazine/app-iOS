@@ -17,9 +17,14 @@
 	<key>CFBundleShortVersionString</key>
 	<string>4.0</string>
 	<key>CFBundleVersion</key>
-	<string>81</string>
+	<string>278</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
