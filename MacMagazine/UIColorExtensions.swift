@@ -10,6 +10,24 @@ import UIKit
 
 extension UIColor {
 
+    // MARK: - Light mode -
+
+    static let lightCellSelectedColor = UIColor(named: "lightBlueColor")
+    static let lightNavigationBarColor = UIColor(named: "backgroundLightColor")
+    static let lightTabBarColor = UIColor(named: "backgroundLightColor")
+    static let lightTableColor = UIColor(named: "backgroundLighterColor")
+    static let lightTabBarTintColor = UIColor(named: "blueColor")
+    static let lightTabBarUnselectedItemTintColor = UIColor.lightGray
+
+    // MARK: - Dark mode -
+
+    static let darkCellSelectedColor = UIColor(named: "darkBlueColor")
+    static let darkNavigationBarColor = UIColor(named: "backgroundDarkColor")
+    static let darkTabBarColor = UIColor(named: "backgroundDarkColor")
+    static let darkTableColor = UIColor(named: "backgroundDarkerColor")
+    static let darkTabBarTintColor = UIColor.white
+    static let darkTabBarUnselectedItemTintColor = UIColor.darkGray
+
 	convenience init(hex: String, alpha: CGFloat = 1.0) {
 		let scanner = Scanner(string: hex)
 		scanner.scanLocation = 0
