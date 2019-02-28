@@ -103,7 +103,6 @@
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos posts ..." translucent="NO" id="0qd-er-Gku">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
@@ -283,7 +282,6 @@
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos Podcasts ..." translucent="NO" id="3X8-ZW-9l4">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>

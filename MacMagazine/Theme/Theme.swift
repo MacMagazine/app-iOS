@@ -25,6 +25,8 @@ protocol Theme {
     var labelColor: UIColor { get }
     var secondaryLabelColor: UIColor { get }
     var subtleLabelColor: UIColor { get }
+    var textColor: UIColor { get }
+    var placeholderTextColor: UIColor { get }
 
     var barStyle: UIBarStyle { get }
     var barTintColor: UIColor { get }
@@ -63,6 +65,16 @@ extension Theme {
                     .foregroundColor: labelColor
                 ]
             }
+        }
+
+        // SEARCHBAR
+
+        UISearchBar.appearance().with {
+            $0.barTintColor = barTintColor
+        }
+        UITextField.appearance().with {
+            $0.textColor = textColor
+            $0.placeholderColor = placeholderTextColor
         }
 
         // TABLEVIEW

@@ -25,4 +25,6 @@ struct LightTheme: Theme {
     let labelColor: UIColor = .black
     let secondaryLabelColor: UIColor = .darkGray
     let subtleLabelColor: UIColor = .lightGray
+    let textColor: UIColor = .black
+    let placeholderTextColor: UIColor = .gray
 }
