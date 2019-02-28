@@ -8,9 +8,6 @@
 
 import UIKit
 
-class AppHeadline: UILabel {}
-class AppSubhead: UILabel {}
-
 protocol Theme {
     var tint: UIColor { get }
     var secondaryTint: UIColor { get }
@@ -91,13 +88,45 @@ extension Theme {
         }
 
         UIView.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).backgroundColor = backgroundColor
-        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = headerFooterColor
 
         // LABEL
 
-        UILabel.appearance().textColor = labelColor
-        AppHeadline.appearance().textColor = labelColor
-        AppSubhead.appearance().textColor = secondaryLabelColor
+        var fontSize = 1.0
+        if let sliderFontSize = UserDefaults.standard.object(forKey: "font-size-settings") as? String {
+            switch sliderFontSize {
+            case "fontemenor":
+                fontSize = 0.9
+            case "fontemaior":
+                fontSize = 1.1
+            default:
+                fontSize = 1.0
+            }
+        }
+
+        UILabel.appearance().with {
+            $0.textColor = labelColor
+            $0.fontSize = CGFloat(fontSize)
+        }
+        AppHeadline.appearance().with {
+            $0.textColor = labelColor
+            $0.fontSize = CGFloat(fontSize)
+        }
+        AppSubhead.appearance().with {
+            $0.textColor = secondaryLabelColor
+            $0.fontSize = CGFloat(fontSize)
+        }
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
+            $0.textColor = headerFooterColor
+            $0.fontSize = CGFloat(0.8)
+        }
+        AppSmallFont.appearance().with {
+            $0.textColor = labelColor
+            $0.fontSize = CGFloat(1.0)
+        }
+        AppBigFont.appearance().with {
+            $0.textColor = labelColor
+            $0.fontSize = CGFloat(1.0)
+        }
 
         // BUTTON
 
