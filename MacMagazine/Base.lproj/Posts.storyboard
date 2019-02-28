@@ -59,14 +59,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="104" y="16" width="255" height="64.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
+                                            <rect key="frame" x="104" y="16" width="255" height="42.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64.5" id="9gs-1O-xJn"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-nH-YW4" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="104" y="84.5" width="255" height="38"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-nH-YW4" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                            <rect key="frame" x="104" y="62.5" width="255" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="38" id="I3d-tN-2l4"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -81,6 +87,7 @@
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="GDp-vA-Lob"/>
                                         <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="DaF-eS-7AO" secondAttribute="top" id="J5t-nl-vvh"/>
                                         <constraint firstItem="DaF-eS-7AO" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="top" constant="16" id="Jjd-vx-9mF"/>
+                                        <constraint firstAttribute="bottom" secondItem="h5p-nH-YW4" secondAttribute="bottom" constant="10" id="er1-5u-KZ0"/>
                                         <constraint firstAttribute="trailing" secondItem="h5p-nH-YW4" secondAttribute="trailing" constant="16" id="gTG-H6-0NK"/>
                                         <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="195-hI-MvL" secondAttribute="leading" id="qPM-Hn-Ggi"/>
                                     </constraints>
@@ -93,11 +100,11 @@
                                     <outlet property="thumbnailImageView" destination="DaF-eS-7AO" id="N8G-E6-OCh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="224" id="gFs-qz-q1f" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="199" width="375" height="224"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="262" id="gFs-qz-q1f" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="199" width="375" height="262"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gFs-qz-q1f" id="Ui7-Bp-i1r">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
@@ -113,9 +120,12 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="184" width="343" height="23.5"/>
+                                            <rect key="frame" x="16" y="180" width="343" height="73.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="73.5" id="iTr-N7-fxN"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -123,10 +133,10 @@
                                         <constraint firstAttribute="leadingMargin" secondItem="kaO-wS-N74" secondAttribute="leading" id="5L7-bD-Vd8"/>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="top" secondItem="Ui7-Bp-i1r" secondAttribute="top" constant="16" id="Xgm-0B-3dB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="kaO-wS-N74" secondAttribute="trailing" id="dR4-IG-CyV"/>
-                                        <constraint firstItem="kaO-wS-N74" firstAttribute="top" secondItem="aso-Qa-tMZ" secondAttribute="bottom" constant="8" id="f0G-Sq-ZyJ"/>
+                                        <constraint firstItem="kaO-wS-N74" firstAttribute="top" secondItem="aso-Qa-tMZ" secondAttribute="bottom" constant="4" id="f0G-Sq-ZyJ"/>
                                         <constraint firstItem="aso-Qa-tMZ" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leading" constant="16" id="hdj-Fc-Zdo"/>
                                         <constraint firstAttribute="trailing" secondItem="aso-Qa-tMZ" secondAttribute="trailing" constant="16" id="imz-3F-KHJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="kaO-wS-N74" secondAttribute="bottom" constant="16" id="wrv-iX-JaA"/>
+                                        <constraint firstAttribute="bottom" secondItem="kaO-wS-N74" secondAttribute="bottom" constant="8" id="wrv-iX-JaA"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
