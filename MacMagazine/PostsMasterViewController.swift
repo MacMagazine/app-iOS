@@ -155,7 +155,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         }
 
 		let bgColorView = UIView()
-		bgColorView.backgroundColor = .lightCellSelectedColor
+//        bgColorView.backgroundColor = .lightCellSelectedColor
 		cell.selectedBackgroundView = bgColorView
 
 		configure(cell: cell, atIndexPath: indexPath)

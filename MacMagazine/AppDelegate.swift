@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 		// Override point for customization after application launch.
+        applyTheme()
+
 		guard let splitViewController = window?.rootViewController as? UISplitViewController else {
 			return true
 		}
@@ -47,5 +49,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 		return false
 	}
+
+    fileprivate func applyTheme() {
+        guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
+            let theme: Theme = LightTheme()
+            theme.apply(for: UIApplication.shared)
+
+            return
+        }
+
+        let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
+        theme.apply(for: UIApplication.shared)
+    }
 
 }

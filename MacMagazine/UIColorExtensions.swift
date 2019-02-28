@@ -12,7 +12,7 @@ extension UIColor {
 
     // MARK: - Light mode -
 
-    static let lightCellSelectedColor = UIColor(named: "lightBlueColor")
+    static let lightCellSelectedColor = UIColor(hex: "008ACA", alpha: 0.3)
     static let lightNavigationBarColor = UIColor(named: "backgroundLightColor")
     static let lightTabBarColor = UIColor(named: "backgroundLightColor")
     static let lightTableColor = UIColor(named: "backgroundLighterColor")

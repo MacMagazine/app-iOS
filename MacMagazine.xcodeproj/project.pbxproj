@@ -27,6 +27,14 @@
 		9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */; };
 		9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */; };
+		9BD135E02228042C00A0B627 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135DF2228042C00A0B627 /* Theme.swift */; };
+		9BD135E2222804A600A0B627 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E1222804A600A0B627 /* With.swift */; };
+		9BD135E7222804E500A0B627 /* UIViewTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E4222804E500A0B627 /* UIViewTheme.swift */; };
+		9BD135E8222804E500A0B627 /* UITableViewCellTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E5222804E500A0B627 /* UITableViewCellTheme.swift */; };
+		9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E6222804E500A0B627 /* UIWindowTheme.swift */; };
+		9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135F92228064800A0B627 /* DarkTheme.swift */; };
+		9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FA2228064800A0B627 /* LightTheme.swift */; };
+		9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +81,14 @@
 		9BCAD6861F47A08100B54526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BCAD6881F47A08100B54526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		9BD135DF2228042C00A0B627 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		9BD135E1222804A600A0B627 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
+		9BD135E4222804E500A0B627 /* UIViewTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewTheme.swift; sourceTree = "<group>"; };
+		9BD135E5222804E500A0B627 /* UITableViewCellTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCellTheme.swift; sourceTree = "<group>"; };
+		9BD135E6222804E500A0B627 /* UIWindowTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowTheme.swift; sourceTree = "<group>"; };
+		9BD135F92228064800A0B627 /* DarkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
+		9BD135FA2228064800A0B627 /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
+		9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerExtension.swift; sourceTree = "<group>"; };
 		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
@@ -179,6 +195,29 @@
 			path = MacMagazine;
 			sourceTree = "<group>";
 		};
+		9BD135DE222802ED00A0B627 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				9BD135E3222804BF00A0B627 /* Extensions */,
+				9BD135F92228064800A0B627 /* DarkTheme.swift */,
+				9BD135FA2228064800A0B627 /* LightTheme.swift */,
+				9BD135DF2228042C00A0B627 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		9BD135E3222804BF00A0B627 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */,
+				9BD135E5222804E500A0B627 /* UITableViewCellTheme.swift */,
+				9BD135E4222804E500A0B627 /* UIViewTheme.swift */,
+				9BD135E6222804E500A0B627 /* UIWindowTheme.swift */,
+				9BD135E1222804A600A0B627 /* With.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9BE697CE1F4874C20048D68D /* MacMagazineTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +255,7 @@
 		9BE697DA1F487DAB0048D68D /* Comum */ = {
 			isa = PBXGroup;
 			children = (
+				9BD135DE222802ED00A0B627 /* Theme */,
 				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
 				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 			);
@@ -374,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BD135E7222804E500A0B627 /* UIViewTheme.swift in Sources */,
 				9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */,
 				9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
@@ -382,11 +423,18 @@
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
 				9BABAC291F618F4A0052063A /* DataController.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
+				9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */,
 				9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */,
 				9B0DD44A2226BAF60016C567 /* API.swift in Sources */,
+				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BABAC2E1F6190620052063A /* Post.swift in Sources */,
+				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
+				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
+				9BD135E02228042C00A0B627 /* Theme.swift in Sources */,
+				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
+				9BD135E8222804E500A0B627 /* UITableViewCellTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
