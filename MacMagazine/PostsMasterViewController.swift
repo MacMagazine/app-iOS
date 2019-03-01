@@ -17,6 +17,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController?
 
+	var nextPage = 0
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
@@ -25,12 +27,16 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		self.getPosts()
+		self.getPosts(paged: 0)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 		super.viewWillAppear(animated)
+
+		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
+			$0.textAlignment = .center
+		}
 
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
@@ -65,16 +71,12 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	lazy var fetchedResultsController: NSFetchedResultsController<Posts> = {
 		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
-
-		if self.tabBarController?.selectedIndex == 0 {
-			fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
-		} else if self.tabBarController?.selectedIndex == 1 {
-			fetchRequest.predicate = NSPredicate(format: "categorias CONTAINS[cd] %@", "Podcast")
-		}
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
+										NSSortDescriptor(key: "pubDate", ascending: false)]
+		fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
 
 		// Initialize Fetched Results Controller
-		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "headerDate", cacheName: nil)
 		controller.delegate = self
 
 		do {
@@ -87,44 +89,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		return controller
 	}()
 
-	// MARK: - Fetched Results Controller Delegate Methods -
-
-	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.beginUpdates()
-	}
-
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
-		switch type {
-		case .insert:
-			if let indexPath = newIndexPath {
-				tableView.insertRows(at: [indexPath], with: .fade)
-			}
-		case .delete:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-		case .update:
-			if let indexPath = indexPath {
-				if let cell = tableView.cellForRow(at: indexPath) as? PostCell {
-					configure(cell: cell, atIndexPath: indexPath)
-				}
-			}
-		case .move:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-
-			if let newIndexPath = newIndexPath {
-				tableView.insertRows(at: [newIndexPath], with: .fade)
-			}
-		}
-	}
-
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
-
 	// MARK: - Table View -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -132,6 +96,14 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 			return sections.count
 		}
 		return 0
+	}
+
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		if let sections = fetchedResultsController.sections {
+			let currentSection = sections[section]
+			return currentSection.name.toHeaderDate()
+		}
+		return nil
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -146,41 +118,28 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let object = fetchedResultsController.object(at: indexPath)
 
         var identifier = "normalCell"
-        if self.tabBarController?.selectedIndex == 0 && object.categorias.contains("Destaques") {
+        if object.categorias.contains("Destaques") {
             identifier = "featuredCell"
         }
 
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {
-            fatalError("Unexpected Index Path")
-        }
-
-		let bgColorView = UIView()
-//        bgColorView.backgroundColor = .lightCellSelectedColor
-		cell.selectedBackgroundView = bgColorView
-
+			fatalError("Unexpected Index Path")
+		}
 		configure(cell: cell, atIndexPath: indexPath)
-
-        return cell
+		return cell
 	}
 
 	func configure(cell: PostCell, atIndexPath: IndexPath) {
 		let object = fetchedResultsController.object(at: atIndexPath)
-
-        if self.tabBarController?.selectedIndex == 0 {
-            cell.configurePost(object)
-        }
-        if self.tabBarController?.selectedIndex == 1 {
-            cell.configurePodcast(object)
-        }
+        cell.configurePost(object)
 	}
 
 	// MARK: - View Methods -
 
-	@IBAction private func getPosts() {
+	@IBAction private func getPosts(paged: Int) {
 
 		self.refreshControl?.beginRefreshing()
 
-        //let pages = (Posts.getNumberOfPosts() / 15) + 1
         let processResponse: (XMLPost?) -> Void = { post in
             DispatchQueue.main.async {
                 self.refreshControl?.endRefreshing()
@@ -192,7 +151,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
             Posts.insertOrUpdatePost(post: post)
             DataController.sharedInstance.saveContext()
 
-            DispatchQueue.main.async {
+			self.nextPage = paged + 1
+
+			DispatchQueue.main.async {
                 // Execute the fetch to display the data
                 do {
                     try self.fetchedResultsController.performFetch()
@@ -202,12 +163,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
             }
         }
 
-        if self.tabBarController?.selectedIndex == 0 {
-            API().getPosts(page: 0, processResponse)
-        }
-        if self.tabBarController?.selectedIndex == 1 {
-            API().getPodcasts(page: 0, processResponse)
-        }
+		API().getPosts(page: paged, processResponse)
 	}
 
 }

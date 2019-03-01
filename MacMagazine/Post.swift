@@ -44,6 +44,7 @@ public class Posts: NSManagedObject {
             item[0].podcast = post.podcast
             item[0].podcastURL = post.podcastURL
             item[0].duration = post.duration
+			item[0].headerDate = post.pubDate.toDate(nil).sortedDate()
 
 		} else {
 
@@ -60,6 +61,7 @@ public class Posts: NSManagedObject {
             newItem.podcast = post.podcast
             newItem.podcastURL = post.podcastURL
             newItem.duration = post.duration
+			newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
 		}
 	}
 
@@ -86,14 +88,15 @@ extension Posts {
 		return NSFetchRequest<Posts>(entityName: self.entityName())
 	}
 
-	@NSManaged public var title: String
-    @NSManaged public var link: String
-	@NSManaged public var excerpt: String
-	@NSManaged public var categorias: String
 	@NSManaged public var artworkURL: String
+	@NSManaged public var categorias: String
+	@NSManaged public var excerpt: String
+	@NSManaged public var headerDate: String
 	@NSManaged public var pubDate: Date
-    @NSManaged public var podcast: String
-    @NSManaged public var podcastURL: String
-    @NSManaged public var duration: String
+	@NSManaged public var title: String
+	@NSManaged public var duration: String
+	@NSManaged public var link: String
+	@NSManaged public var podcast: String
+	@NSManaged public var podcastURL: String
 
 }

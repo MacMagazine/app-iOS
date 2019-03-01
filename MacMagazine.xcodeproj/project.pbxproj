@@ -14,9 +14,11 @@
 		9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 		9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B3683A020C5D84400925E76 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; };
+		9B834B912229A9BE002C61F9 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B902229A9BE002C61F9 /* PodcastCell.swift */; };
+		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
-		9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2A1F618F810052063A /* macmagazine.xcdatamodeld */; };
 		9BABAC2E1F6190620052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
 		9BABAC311F61A4270052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
@@ -73,8 +75,10 @@
 		9B0DD44B2226E9320016C567 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		9B0DD44E2226FD150016C567 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9B36839D20C5D66000925E76 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
+		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
+		9B834B902229A9BE002C61F9 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
+		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		9BABAC2B1F618F810052063A /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9BABAC2D1F6190620052063A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,10 +159,18 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		9B834B922229A9C3002C61F9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9B834B902229A9BE002C61F9 /* PodcastCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		9BABAC271F618F2F0052063A /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				9BABAC2A1F618F810052063A /* macmagazine.xcdatamodeld */,
+				9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */,
 				9BABAC281F618F4A0052063A /* DataController.swift */,
 				9BABAC2D1F6190620052063A /* Post.swift */,
 			);
@@ -251,7 +263,9 @@
 		9BE697D81F487D610048D68D /* NoAr */ = {
 			isa = PBXGroup;
 			children = (
+				9B834B922229A9C3002C61F9 /* Cells */,
 				9BD1360622282BEB00A0B627 /* Podcasts.storyboard */,
+				9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */,
 			);
 			name = NoAr;
 			sourceTree = "<group>";
@@ -442,7 +456,8 @@
 				9BABAC291F618F4A0052063A /* DataController.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */,
-				9BABAC2C1F618F810052063A /* macmagazine.xcdatamodeld in Sources */,
+				9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */,
+				9B834B912229A9BE002C61F9 /* PodcastCell.swift in Sources */,
 				9B0DD44A2226BAF60016C567 /* API.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BABAC2E1F6190620052063A /* Post.swift in Sources */,
@@ -451,6 +466,7 @@
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
+				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
 				9BD135E02228042C00A0B627 /* Theme.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
 				9BD135E8222804E500A0B627 /* UITableViewCellTheme.swift in Sources */,
@@ -738,12 +754,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9BABAC2A1F618F810052063A /* macmagazine.xcdatamodeld */ = {
+		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				9BABAC2B1F618F810052063A /* macmagazine.xcdatamodel */,
+				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 9BABAC2B1F618F810052063A /* macmagazine.xcdatamodel */;
+			currentVersion = 9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

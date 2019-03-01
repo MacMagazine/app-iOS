@@ -28,7 +28,7 @@
         <!--Master-->
         <scene sceneID="1rj-YR-AM7">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="yxj-hX-XGv" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="yxj-hX-XGv" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="5e5-vw-TjT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,7 +39,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="Mgp-RX-pZe" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="Mgp-RX-pZe" customClass="PodcastCell" customModule="MacMagazine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mgp-RX-pZe" id="Olc-Ki-V5h">
@@ -47,36 +47,48 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUW-vd-D0f" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="16" width="343" height="67.5"/>
+                                            <rect key="frame" x="16" y="16" width="343" height="71.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHZ-kW-s7u" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="89.5" width="343" height="21"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiR-VW-oEp">
+                                            <rect key="frame" x="16" y="91.5" width="343" height="21"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekd-zi-GA1" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="278.5" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHZ-kW-s7u" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="278.5" y="0.0" width="64.5" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="rHA-gj-PZm"/>
+                                                <constraint firstAttribute="height" constant="21" id="6qf-08-qM0"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="yiR-VW-oEp" firstAttribute="top" secondItem="CUW-vd-D0f" secondAttribute="bottom" constant="4" id="4xe-Me-xcv"/>
+                                        <constraint firstItem="yiR-VW-oEp" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leadingMargin" id="Hj9-0Z-M0x"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="top" secondItem="Olc-Ki-V5h" secondAttribute="topMargin" id="OPP-dn-R5a"/>
-                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="trailing" secondItem="Olc-Ki-V5h" secondAttribute="trailingMargin" id="Sti-Cx-hp4"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="WHZ-kW-s7u" secondAttribute="bottom" constant="6" id="WRK-5O-JHq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="yiR-VW-oEp" secondAttribute="bottom" constant="4" id="UhL-o1-NHf"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="trailing" secondItem="Olc-Ki-V5h" secondAttribute="trailingMargin" id="Zts-mw-ANq"/>
-                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leadingMargin" id="hzv-hx-0OC"/>
-                                        <constraint firstItem="WHZ-kW-s7u" firstAttribute="top" secondItem="CUW-vd-D0f" secondAttribute="bottom" constant="6" id="n4f-Nq-4Qc"/>
                                         <constraint firstItem="CUW-vd-D0f" firstAttribute="leading" secondItem="Olc-Ki-V5h" secondAttribute="leadingMargin" id="oQZ-mh-IG0"/>
+                                        <constraint firstItem="yiR-VW-oEp" firstAttribute="trailing" secondItem="Olc-Ki-V5h" secondAttribute="trailingMargin" id="zt5-1g-Gtr"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
                                 <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
                                 <connections>
                                     <outlet property="headlineLabel" destination="CUW-vd-D0f" id="jRl-yH-5M2"/>
-                                    <outlet property="subheadlineLabel" destination="WHZ-kW-s7u" id="flH-ff-uoC"/>
+                                    <outlet property="lengthlineLabel" destination="WHZ-kW-s7u" id="sKp-Hq-PrN"/>
+                                    <outlet property="subheadlineLabel" destination="ekd-zi-GA1" id="v5j-pc-oeY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -5,6 +5,7 @@
         <attribute name="categorias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="excerpt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headerDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="podcast" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="podcastURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,6 +13,6 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Post" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Post" positionX="-63" positionY="-18" width="128" height="195"/>
     </elements>
 </model>

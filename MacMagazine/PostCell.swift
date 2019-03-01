@@ -44,9 +44,4 @@ class PostCell: UITableViewCell {
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: defaultImage)
     }
 
-    func configurePodcast(_ object: Posts) {
-        headlineLabel?.text = object.title
-        subheadlineLabel?.text = "Duração: \(object.duration)"
-    }
-
 }

@@ -17,4 +17,21 @@ extension String {
         return dateFormatter.date(from: self) ?? Date()
     }
 
+	func toHeaderDate() -> String {
+		// Expected date format: "20190227"
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyyMMdd"
+		let date = dateFormatter.date(from: self) ?? Date()
+
+		let calendar = Calendar.current
+		if calendar.isDateInToday(date) {
+			return "HOJE"
+		}
+		if calendar.isDateInYesterday(date) {
+			return "ONTEM"
+		}
+		dateFormatter.dateFormat = "EEEEddMMMM"
+		return dateFormatter.string(from: date).uppercased()
+	}
+
 }

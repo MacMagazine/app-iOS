@@ -7,18 +7,25 @@
 //
 
 import Foundation
-/*
- private let wordPressDateFormatter: DateFormatter = {
- // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
- let formatter = DateFormatter()
- formatter.dateFormat = "DD MMM YYYY HH:mm:ss +"
- return formatter
- }()
 
- private let displayDateFormatter: DateFormatter = {
- // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
- let formatter = DateFormatter()
- formatter.dateFormat = "DD/MM/YYYY"
- return formatter
- }()
-*/
+extension Date {
+
+	func headerDate() -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss +0000"
+		return dateFormatter.string(from: self)
+	}
+
+	func cellDate() -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "dd/MM/yyyy"
+		return dateFormatter.string(from: self)
+	}
+
+	func sortedDate() -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyyMMdd"
+		return dateFormatter.string(from: self)
+	}
+
+}

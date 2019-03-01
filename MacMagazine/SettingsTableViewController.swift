@@ -31,18 +31,27 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
 
-        applyTheme()
-
         guard MFMailComposeViewController.canSendMail() else {
             reportProblem.isHidden = true
             return
         }
     }
 
-    // MARK: - TableView Methods -
+	override func viewWillAppear(_ animated: Bool) {
+		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
+		super.viewWillAppear(animated)
+
+		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
+			$0.textAlignment = .left
+		}
+
+		applyTheme()
+	}
+
+	// MARK: - TableView Methods -
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "MACMAGAZINE \(version)" : nil
+		return section == 0 ? "MACMAGAZINE \(version)" : nil
     }
 
     // MARK: - View Methods -
