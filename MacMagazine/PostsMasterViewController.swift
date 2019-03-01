@@ -10,6 +10,28 @@ import CoreData
 import Kingfisher
 import UIKit
 
+extension UITableView {
+	func rowNumber(indexPath: IndexPath) -> Int {
+		if indexPath.section == 0 {
+			return indexPath.row
+		}
+		var rows = 0
+		for i in 0...indexPath.section {
+			if i == indexPath.section {
+				rows += indexPath.row
+				break
+			}
+			rows += self.numberOfRows(inSection: i)
+		}
+		return rows
+	}
+}
+
+enum Direction {
+	case down
+	case up
+}
+
 class PostsMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
 	// MARK: - Properties -
@@ -17,7 +39,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController?
 
-	var nextPage = 0
+	var lastContentOffset = CGPoint()
+	var direction: Direction = .down
+	var lastPage = -1
 
 	// MARK: - View Lifecycle -
 
@@ -27,7 +51,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		self.getPosts(paged: 0)
+		getPosts(paged: 0)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +113,64 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		return controller
 	}()
 
+	// MARK: - Fetched Results Controller Delegate Methods -
+
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.beginUpdates()
+	}
+
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+
+		switch type {
+		case .insert:
+			tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+		case .delete:
+			tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+		default:
+			return
+		}
+	}
+
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+
+		switch type {
+		case .update:
+			if let indexPath = indexPath {
+				if let cell = tableView.cellForRow(at: indexPath) as? PostCell {
+					configure(cell: cell, atIndexPath: indexPath)
+				}
+			}
+		case .insert:
+			if let indexPath = newIndexPath {
+				tableView.insertRows(at: [indexPath], with: .fade)
+			}
+		case .delete:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+		case .move:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+
+			if let newIndexPath = newIndexPath {
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
+		}
+	}
+
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
+	}
+
+	// MARK: - Scroll detection -
+
+	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		direction = offset.y > lastContentOffset.y ? .down : .up
+		lastContentOffset = offset
+	}
+
 	// MARK: - Table View -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -114,6 +196,16 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		return 0
 	}
 
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if direction == .down {
+			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
+			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
+				lastPage = page
+				self.getPosts(paged: page)
+			}
+		}
+	}
+
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let object = fetchedResultsController.object(at: indexPath)
 
@@ -136,31 +228,29 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 	// MARK: - View Methods -
 
-	@IBAction private func getPosts(paged: Int) {
+	@IBAction private func getPosts() {
+		getPosts(paged: 0)
+	}
 
+	fileprivate func getPosts(paged: Int) {
 		self.refreshControl?.beginRefreshing()
 
-        let processResponse: (XMLPost?) -> Void = { post in
-            DispatchQueue.main.async {
-                self.refreshControl?.endRefreshing()
-            }
-
+		let processResponse: (XMLPost?) -> Void = { post in
             guard let post = post else {
-                return
+				DispatchQueue.main.async {
+					self.refreshControl?.endRefreshing()
+					// Execute the fetch to display the data
+					do {
+						try self.fetchedResultsController.performFetch()
+					} catch {
+						print("An error occurred")
+					}
+				}
+				return
             }
-            Posts.insertOrUpdatePost(post: post)
+
+			Posts.insertOrUpdatePost(post: post)
             DataController.sharedInstance.saveContext()
-
-			self.nextPage = paged + 1
-
-			DispatchQueue.main.async {
-                // Execute the fetch to display the data
-                do {
-                    try self.fetchedResultsController.performFetch()
-                } catch {
-                    print("An error occurred")
-                }
-            }
         }
 
 		API().getPosts(page: paged, processResponse)

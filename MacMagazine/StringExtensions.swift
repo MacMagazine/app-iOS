@@ -30,7 +30,8 @@ extension String {
 		if calendar.isDateInYesterday(date) {
 			return "ONTEM"
 		}
-		dateFormatter.dateFormat = "EEEEddMMMM"
+		dateFormatter.locale = Locale(identifier: "pt-BR")
+		dateFormatter.dateFormat = "EEEE, dd 'DE' MMMM"
 		return dateFormatter.string(from: date).uppercased()
 	}
 

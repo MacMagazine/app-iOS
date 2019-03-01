@@ -6,6 +6,7 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import Kingfisher
 import UIKit
 
 class PostCell: UITableViewCell {
@@ -38,10 +39,8 @@ class PostCell: UITableViewCell {
         }
 
         // Lazy load of image from Marvel server
-        let defaultImage = UIImage(named: "image_Logo")
-
         thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: defaultImage)
+        thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
     }
 
 }

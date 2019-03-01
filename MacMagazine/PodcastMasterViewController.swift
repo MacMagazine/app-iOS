@@ -16,7 +16,9 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 	let managedObjectContext = DataController.sharedInstance.managedObjectContext
 	var detailViewController: PostsDetailViewController?
 
-	var nextPage = 0
+	var lastContentOffset = CGPoint()
+	var direction: Direction = .down
+	var lastPage = -1
 
 	// MARK: - View Lifecycle -
 
@@ -26,7 +28,7 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		self.getPosts(paged: 0)
+		getPodcasts(paged: 0)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +122,14 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 		tableView.endUpdates()
 	}
 
+	// MARK: - Scroll detection -
+
+	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		direction = offset.y > lastContentOffset.y ? .down : .up
+		lastContentOffset = offset
+	}
+
 	// MARK: - Table View -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -137,6 +147,16 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 		return 0
 	}
 
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if direction == .down {
+			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
+			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
+				lastPage = page
+				self.getPodcasts(paged: page)
+			}
+		}
+	}
+
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath) as? PodcastCell else {
 			fatalError("Unexpected Index Path")
@@ -152,31 +172,30 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 
 	// MARK: - View Methods -
 
-	@IBAction private func getPosts(paged: Int) {
+	@IBAction private func getPodcasts() {
+		getPodcasts(paged: 0)
+	}
+
+	fileprivate func getPodcasts(paged: Int) {
 
 		self.refreshControl?.beginRefreshing()
 
 		let processResponse: (XMLPost?) -> Void = { post in
-			DispatchQueue.main.async {
-				self.refreshControl?.endRefreshing()
-			}
-
 			guard let post = post else {
+				DispatchQueue.main.async {
+					self.refreshControl?.endRefreshing()
+					// Execute the fetch to display the data
+					do {
+						try self.fetchedResultsController.performFetch()
+					} catch {
+						print("An error occurred")
+					}
+				}
 				return
 			}
+
 			Posts.insertOrUpdatePost(post: post)
 			DataController.sharedInstance.saveContext()
-
-			self.nextPage = paged + 1
-
-			DispatchQueue.main.async {
-				// Execute the fetch to display the data
-				do {
-					try self.fetchedResultsController.performFetch()
-				} catch {
-					print("An error occurred")
-				}
-			}
 		}
 		API().getPodcasts(page: paged, processResponse)
 	}

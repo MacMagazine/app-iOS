@@ -116,7 +116,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
-                            <action selector="getPosts" destination="yxj-hX-XGv" eventType="valueChanged" id="Kev-cX-QDd"/>
+                            <action selector="getPodcasts" destination="yxj-hX-XGv" eventType="valueChanged" id="pQ3-ta-mgR"/>
                         </connections>
                     </refreshControl>
                 </tableViewController>

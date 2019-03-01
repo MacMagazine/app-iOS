@@ -117,12 +117,14 @@ extension API {
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if processItem {
-            value += string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            value += string
         }
     }
 
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if processItem {
+			value = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+
             switch elementName {
             case "title":
                 currentPost.title = value
