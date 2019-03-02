@@ -101,7 +101,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
     fileprivate func applyTheme() {
         guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-            let theme: Theme = LightTheme()
+			darkMode.isOn = false
+
+			let theme: Theme = LightTheme()
             theme.apply(for: UIApplication.shared)
 
             return
