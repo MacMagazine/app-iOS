@@ -92,6 +92,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
     @IBAction private func reportProblem(_ sender: Any) {
         let composeVC = MFMailComposeViewController()
+		composeVC.mailComposeDelegate = self
         composeVC.setSubject("Relato de problema no app MacMagazine \(version)")
         composeVC.setToRecipients(["contato@macmagazine.com.br"])
         self.present(composeVC, animated: true, completion: nil)
@@ -124,8 +125,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
     // MARK: - Mail Methods -
 
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        self.dismiss(animated: true, completion: nil)
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 
 }
