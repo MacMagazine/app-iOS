@@ -53,15 +53,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		splitViewController?.delegate = self
-
 		getPosts(paged: 0)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-
-		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
 			$0.textAlignment = .center
@@ -91,14 +87,15 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "showDetail" {
-		    if let indexPath = tableView.indexPathForSelectedRow {
-                guard let navController = segue.destination as? UINavigationController,
+		if let indexPath = tableView.indexPathForSelectedRow {
+			if selectedIndexPath != indexPath {
+				guard let navController = segue.destination as? UINavigationController,
 					let controller = navController.topViewController as? PostsDetailViewController else {
-                    return
-                }
-		        controller.post = fetchedResultsController.object(at: indexPath)
-		    }
+						return
+				}
+				controller.post = fetchedResultsController.object(at: indexPath)
+			}
+			selectedIndexPath = indexPath
 		}
 	}
 
@@ -238,15 +235,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         cell.configurePost(object)
 	}
 
-	// MARK: - TableView Delegate Methods -
-
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if selectedIndexPath != indexPath {
-			self.performSegue(withIdentifier: "showDetail", sender: self)
-		}
-		selectedIndexPath = indexPath
-	}
-
 	// MARK: - View Methods -
 
 	@IBAction private func getPosts() {
@@ -277,11 +265,4 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		API().getPosts(page: paged, processResponse)
 	}
 
-}
-
-extension PostsMasterViewController: UISplitViewControllerDelegate {
-
-	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-		return true
-	}
 }

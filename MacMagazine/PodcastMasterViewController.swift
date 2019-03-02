@@ -69,8 +69,6 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 					return
 				}
 				controller.post = fetchedResultsController.object(at: indexPath)
-				controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-				controller.navigationItem.leftItemsSupplementBackButton = true
 			}
 		}
 	}

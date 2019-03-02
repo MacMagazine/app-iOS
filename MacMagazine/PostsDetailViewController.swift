@@ -14,8 +14,13 @@ class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 	// MARK: - Properties -
 
 	@IBOutlet private weak var webView: WKWebView!
+	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
-	var post: Posts?
+	var post: Posts? {
+		didSet {
+			configureView()
+		}
+	}
 
 	// MARK: - View lifecycle -
 
@@ -26,11 +31,6 @@ class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 
 		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
 		webView.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
-	}
-
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-
 		configureView()
 	}
 
@@ -42,7 +42,7 @@ class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 	// MARK: - WebView Delegate -
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		print("finished")
+		self.navigationItem.rightBarButtonItem = nil
 	}
 
 	// MARK: - View methods -
@@ -55,6 +55,7 @@ class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spin)
 		let request = URLRequest(url: url)
 		webView?.load(request)
 		webView?.allowsBackForwardNavigationGestures = false

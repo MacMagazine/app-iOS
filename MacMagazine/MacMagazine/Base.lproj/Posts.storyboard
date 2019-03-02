@@ -97,6 +97,10 @@
                                     <outlet property="headlineLabel" destination="eWd-UO-GCe" id="gKf-8Y-RHZ"/>
                                     <outlet property="subheadlineLabel" destination="aaR-9M-I36" id="eIo-fo-3En"/>
                                     <outlet property="thumbnailImageView" destination="xZw-QH-v0o" id="QkC-Ds-IuT"/>
+                                    <segue destination="y5n-ns-H7J" kind="showDetail" id="NN7-K3-Lkn">
+                                        <segue key="commit" inheritsFrom="parent" id="Kg1-gv-TBn"/>
+                                        <segue key="preview" inheritsFrom="commit" id="BTA-x5-Sja"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="262" id="y5c-nL-wk3" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
@@ -150,8 +154,7 @@
                             <outlet property="delegate" destination="E1M-7D-5bB" id="wKp-gb-xxI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="w2J-jB-JAu">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="Master" id="w2J-jB-JAu">
                         <view key="titleView" contentMode="scaleToFill" id="AhA-t6-bVN">
                             <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -171,21 +174,18 @@
                             <action selector="getPosts" destination="E1M-7D-5bB" eventType="valueChanged" id="XLk-Pp-rui"/>
                         </connections>
                     </refreshControl>
-                    <connections>
-                        <segue destination="y5n-ns-H7J" kind="showDetail" identifier="showDetail" id="18A-pd-gJu"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qp0-GD-Zf0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1826" y="-1867"/>
         </scene>
-        <!--UINavigationController-vC3-pB-5Vb-->
+        <!--detailController-->
         <scene sceneID="V1D-MA-LM7">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="UINavigationController-vC3-pB-5Vb" id="y5n-ns-H7J" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="detailController" id="y5n-ns-H7J" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARb-Li-vxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2614" y="-1867"/>
+            <point key="canvasLocation" x="2548" y="-1867"/>
         </scene>
     </scenes>
     <resources>
@@ -194,4 +194,7 @@
         <image name="logo" width="80" height="80"/>
         <image name="tab_logo" width="37" height="28"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="NN7-K3-Lkn"/>
+    </inferredMetricsTieBreakers>
 </document>
