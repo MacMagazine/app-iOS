@@ -27,16 +27,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPW-Sy-sMy">
-                                                    <rect key="frame" x="107" y="5.5" width="161" height="33"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Limpar cache do app"/>
+                                                    <connections>
+                                                        <action selector="clearCache:" destination="BdR-6J-zUk" eventType="touchUpInside" id="77b-C9-NPC"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="tPW-Sy-sMy" firstAttribute="centerY" secondItem="rax-Mf-JQH" secondAttribute="centerY" id="KeC-i0-Vsz"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tPW-Sy-sMy" secondAttribute="trailing" id="VEK-SK-Rz9"/>
-                                                <constraint firstItem="tPW-Sy-sMy" firstAttribute="centerX" secondItem="rax-Mf-JQH" secondAttribute="centerX" id="nzN-CX-Nfu"/>
-                                                <constraint firstItem="tPW-Sy-sMy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rax-Mf-JQH" secondAttribute="leading" id="qJ1-gh-5gW"/>
+                                                <constraint firstItem="tPW-Sy-sMy" firstAttribute="leading" secondItem="rax-Mf-JQH" secondAttribute="leading" id="5fD-1V-7Sj"/>
+                                                <constraint firstAttribute="trailing" secondItem="tPW-Sy-sMy" secondAttribute="trailing" id="hXc-nF-O01"/>
+                                                <constraint firstAttribute="bottom" secondItem="tPW-Sy-sMy" secondAttribute="bottom" id="m4Z-lQ-KoA"/>
+                                                <constraint firstItem="tPW-Sy-sMy" firstAttribute="top" secondItem="rax-Mf-JQH" secondAttribute="top" id="wA7-XC-35O"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -200,7 +203,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQy-CM-f0q">
-                                                    <rect key="frame" x="0.0" y="3" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Relatar problema no app"/>
                                                     <connections>
@@ -209,10 +212,10 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fQy-CM-f0q" firstAttribute="top" secondItem="ZuQ-Vd-KLW" secondAttribute="top" constant="3" id="158-eR-OrU"/>
-                                                <constraint firstAttribute="bottom" secondItem="fQy-CM-f0q" secondAttribute="bottom" constant="3" id="fru-7I-5fr"/>
-                                                <constraint firstAttribute="trailing" secondItem="fQy-CM-f0q" secondAttribute="trailing" id="oZX-nt-Ce8"/>
-                                                <constraint firstItem="fQy-CM-f0q" firstAttribute="leading" secondItem="ZuQ-Vd-KLW" secondAttribute="leading" id="xNy-d7-AIi"/>
+                                                <constraint firstAttribute="trailing" secondItem="fQy-CM-f0q" secondAttribute="trailing" id="PSY-AQ-uHi"/>
+                                                <constraint firstItem="fQy-CM-f0q" firstAttribute="top" secondItem="ZuQ-Vd-KLW" secondAttribute="top" id="VuU-M6-z8n"/>
+                                                <constraint firstAttribute="bottom" secondItem="fQy-CM-f0q" secondAttribute="bottom" id="qbz-6m-3zX"/>
+                                                <constraint firstItem="fQy-CM-f0q" firstAttribute="leading" secondItem="ZuQ-Vd-KLW" secondAttribute="leading" id="tyB-OQ-aVf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

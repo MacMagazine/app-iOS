@@ -55,11 +55,23 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 		super.viewWillAppear(animated)
+
+		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
 			$0.textAlignment = .center
+		}
+
+		// Execute the fetch to display the data
+		do {
+			try self.fetchedResultsController.performFetch()
+		} catch {
+			print("An error occurred")
+		}
+
+		if (fetchedResultsController.fetchedObjects?.isEmpty ?? true) && !(self.refreshControl?.isRefreshing ?? true) {
+			getPosts(paged: 0)
 		}
 
 		if self.refreshControl?.isRefreshing ?? true {

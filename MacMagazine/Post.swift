@@ -65,6 +65,22 @@ public class Posts: NSManagedObject {
 		}
 	}
 
+	class func deleteAll() {
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName())
+		fetchRequest.returnsObjectsAsFaults = false
+		do {
+			let results = try self.privateManagedObjectContext().fetch(fetchRequest)
+			for object in results {
+				guard let objectData = object as? NSManagedObject else {
+					continue
+				}
+				self.privateManagedObjectContext().delete(objectData)
+			}
+		} catch {
+			print("Detele all data error:", error)
+		}
+	}
+
 }
 
 // MARK: -

@@ -32,8 +32,20 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 		super.viewWillAppear(animated)
+
+		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
+
+		// Execute the fetch to display the data
+		do {
+			try self.fetchedResultsController.performFetch()
+		} catch {
+			print("An error occurred")
+		}
+
+		if (fetchedResultsController.fetchedObjects?.isEmpty ?? true) && !(self.refreshControl?.isRefreshing ?? true) {
+			getPodcasts(paged: 0)
+		}
 
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)

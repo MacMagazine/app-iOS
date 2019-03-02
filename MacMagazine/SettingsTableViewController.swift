@@ -6,6 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import Kingfisher
 import MessageUI
 import UIKit
 
@@ -55,6 +56,15 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
 
     // MARK: - View Methods -
+
+	@IBAction private func clearCache(_ sender: Any) {
+		// Delete all posts and podcasts
+		Posts.deleteAll()
+		DataController.sharedInstance.saveContext()
+
+		// Delete all downloaded images
+		ImageCache.default.clearDiskCache()
+	}
 
     @IBAction private func changeFontSize(_ sender: Any) {
         guard let slider = sender as? UISlider else {
