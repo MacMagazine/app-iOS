@@ -46,50 +46,49 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="DaF-eS-7AO" userLabel="Thumbnail Image View">
-                                            <rect key="frame" x="16" y="16" width="72" height="100"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Dsg-Us-S1E">
+                                            <rect key="frame" x="16" y="16" width="343" height="100.5"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="DaF-eS-7AO" userLabel="Thumbnail Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="72" height="100.5"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="72" id="jtf-dV-FhZ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Hhn-Iu-I7d">
+                                                    <rect key="frame" x="88" y="0.0" width="255" height="100.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="255" height="42.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-nH-YW4" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="48.5" width="255" height="52"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="72" id="0wb-B1-AO0"/>
-                                                <constraint firstAttribute="height" constant="100" id="FPA-qH-d0s"/>
+                                                <constraint firstAttribute="height" priority="750" constant="100.5" id="aqK-Fw-NLv"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-hI-MvL" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="104" y="16" width="255" height="42.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64.5" id="9gs-1O-xJn"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-nH-YW4" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="104" y="62.5" width="255" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="38" id="I3d-tN-2l4"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="195-hI-MvL" secondAttribute="trailing" id="25n-4E-m8J"/>
-                                        <constraint firstItem="195-hI-MvL" firstAttribute="leading" secondItem="DaF-eS-7AO" secondAttribute="trailing" constant="16" id="4A6-62-iRa"/>
-                                        <constraint firstItem="DaF-eS-7AO" firstAttribute="leading" secondItem="VwH-Lo-1lM" secondAttribute="leading" constant="16" id="6Xm-es-U9G"/>
-                                        <constraint firstAttribute="bottom" secondItem="DaF-eS-7AO" secondAttribute="bottom" constant="16.5" id="A1g-EY-VlX"/>
-                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="width" secondItem="195-hI-MvL" secondAttribute="width" id="CgZ-VO-kwV"/>
-                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="top" secondItem="195-hI-MvL" secondAttribute="bottom" constant="4" id="GDp-vA-Lob"/>
-                                        <constraint firstItem="195-hI-MvL" firstAttribute="top" secondItem="DaF-eS-7AO" secondAttribute="top" id="J5t-nl-vvh"/>
-                                        <constraint firstItem="DaF-eS-7AO" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="top" constant="16" id="Jjd-vx-9mF"/>
-                                        <constraint firstAttribute="bottom" secondItem="h5p-nH-YW4" secondAttribute="bottom" constant="10" id="er1-5u-KZ0"/>
-                                        <constraint firstAttribute="trailing" secondItem="h5p-nH-YW4" secondAttribute="trailing" constant="16" id="gTG-H6-0NK"/>
-                                        <constraint firstItem="h5p-nH-YW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="195-hI-MvL" secondAttribute="leading" id="qPM-Hn-Ggi"/>
+                                        <constraint firstItem="Dsg-Us-S1E" firstAttribute="top" secondItem="VwH-Lo-1lM" secondAttribute="top" constant="16" id="Qq1-95-OfM"/>
+                                        <constraint firstAttribute="trailing" secondItem="Dsg-Us-S1E" secondAttribute="trailing" constant="16" id="YYA-eW-gGM"/>
+                                        <constraint firstItem="Dsg-Us-S1E" firstAttribute="leading" secondItem="VwH-Lo-1lM" secondAttribute="leading" constant="16" id="bXp-We-19y"/>
+                                        <constraint firstAttribute="bottom" secondItem="Dsg-Us-S1E" secondAttribute="bottom" constant="16" id="xFt-MJ-a78"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
@@ -107,36 +106,35 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="261.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
-                                            <rect key="frame" x="16" y="16" width="343" height="160"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="160" id="plj-Mf-kbx"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="180" width="343" height="73.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="73.5" id="iTr-N7-fxN"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="teU-I7-8ip">
+                                            <rect key="frame" x="16" y="16" width="343" height="229.5"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="aso-Qa-tMZ" userLabel="Thumbnail Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="160"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="TDs-8D-xh4"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-wS-N74" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="176" width="343" height="53.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="leadingMargin" secondItem="kaO-wS-N74" secondAttribute="leading" id="5L7-bD-Vd8"/>
-                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="top" secondItem="Ui7-Bp-i1r" secondAttribute="top" constant="16" id="Xgm-0B-3dB"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="kaO-wS-N74" secondAttribute="trailing" id="dR4-IG-CyV"/>
-                                        <constraint firstItem="kaO-wS-N74" firstAttribute="top" secondItem="aso-Qa-tMZ" secondAttribute="bottom" constant="4" id="f0G-Sq-ZyJ"/>
-                                        <constraint firstItem="aso-Qa-tMZ" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leading" constant="16" id="hdj-Fc-Zdo"/>
-                                        <constraint firstAttribute="trailing" secondItem="aso-Qa-tMZ" secondAttribute="trailing" constant="16" id="imz-3F-KHJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="kaO-wS-N74" secondAttribute="bottom" constant="8" id="wrv-iX-JaA"/>
+                                        <constraint firstItem="teU-I7-8ip" firstAttribute="top" secondItem="Ui7-Bp-i1r" secondAttribute="top" constant="16" id="AwV-2s-cE5"/>
+                                        <constraint firstItem="teU-I7-8ip" firstAttribute="leading" secondItem="Ui7-Bp-i1r" secondAttribute="leading" constant="16" id="bRR-L4-6FV"/>
+                                        <constraint firstAttribute="bottom" secondItem="teU-I7-8ip" secondAttribute="bottom" constant="16" id="d4t-3F-0Ky"/>
+                                        <constraint firstAttribute="trailing" secondItem="teU-I7-8ip" secondAttribute="trailing" constant="16" id="d8L-iu-tGt"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                 </tableViewCellContentView>
