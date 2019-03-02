@@ -43,6 +43,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	var direction: Direction = .down
 	var lastPage = -1
 
+	var selectedIndexPath: IndexPath?
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
@@ -50,6 +52,8 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		// Do any additional setup after loading the view, typically from a nib.
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
+
+		splitViewController?.delegate = self
 
 		getPosts(paged: 0)
 	}
@@ -89,15 +93,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = tableView.indexPathForSelectedRow {
-                guard let navController = segue.destination as? UINavigationController else {
+                guard let navController = segue.destination as? UINavigationController,
+					let controller = navController.topViewController as? PostsDetailViewController else {
                     return
                 }
-                guard let controller = navController.topViewController as? PostsDetailViewController else {
-                    return
-                }
-		        controller.detailItem = fetchedResultsController.object(at: indexPath)
-		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-		        controller.navigationItem.leftItemsSupplementBackButton = true
+		        controller.post = fetchedResultsController.object(at: indexPath)
 		    }
 		}
 	}
@@ -238,6 +238,15 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
         cell.configurePost(object)
 	}
 
+	// MARK: - TableView Delegate Methods -
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if selectedIndexPath != indexPath {
+			self.performSegue(withIdentifier: "showDetail", sender: self)
+		}
+		selectedIndexPath = indexPath
+	}
+
 	// MARK: - View Methods -
 
 	@IBAction private func getPosts() {
@@ -268,4 +277,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		API().getPosts(page: paged, processResponse)
 	}
 
+}
+
+extension PostsMasterViewController: UISplitViewControllerDelegate {
+
+	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+		return true
+	}
 }

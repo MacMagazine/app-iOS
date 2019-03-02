@@ -7,23 +7,30 @@
 //
 
 import UIKit
+import WebKit
 
-class PostsDetailViewController: UIViewController {
+class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 
-	@IBOutlet private weak var detailDescriptionLabel: UILabel!
+	// MARK: - Properties -
 
-	func configureView() {
-		// Update the user interface for the detail item.
-		if let detail = detailItem {
-		    if let label = detailDescriptionLabel {
-		        label.text = detail.description
-		    }
-		}
-	}
+	@IBOutlet private weak var webView: WKWebView!
+
+	var post: Posts?
+
+	// MARK: - View lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		webView?.navigationDelegate = self
+
+		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
+		webView.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
 		configureView()
 	}
 
@@ -32,11 +39,25 @@ class PostsDetailViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
-	var detailItem: Posts? {
-		didSet {
-		    // Update the view.
-		    configureView()
+	// MARK: - WebView Delegate -
+
+	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
+		print("finished")
+	}
+
+	// MARK: - View methods -
+
+	func configureView() {
+		// Update the user interface for the detail item.
+		guard let post = post,
+			let url = URL(string: post.link)
+			else {
+				return
 		}
+
+		let request = URLRequest(url: url)
+		webView?.load(request)
+		webView?.allowsBackForwardNavigationGestures = false
 	}
 
 }

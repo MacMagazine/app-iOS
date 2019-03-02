@@ -68,7 +68,7 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 				guard let controller = navController.topViewController as? PostsDetailViewController else {
 					return
 				}
-				controller.detailItem = fetchedResultsController.object(at: indexPath)
+				controller.post = fetchedResultsController.object(at: indexPath)
 				controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 				controller.navigationItem.leftItemsSupplementBackButton = true
 			}

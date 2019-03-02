@@ -27,9 +27,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
         version = getAppVersion()
 
-        guard let sliderFontSize = UserDefaults.standard.object(forKey: "font-size-settings") as? String else {
-            return
-        }
+        let sliderFontSize = Settings().getFontSize()
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
 
         guard MFMailComposeViewController.canSendMail() else {
@@ -111,14 +109,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     // MARK: - Private Methods -
 
     fileprivate func applyTheme() {
-        guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-			darkMode.isOn = false
-
-			let theme: Theme = LightTheme()
-            theme.apply(for: UIApplication.shared)
-
-            return
-        }
+        let isDarkMode = Settings().isDarkMode()
 
         let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
         theme.apply(for: UIApplication.shared)
