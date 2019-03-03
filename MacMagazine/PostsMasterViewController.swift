@@ -83,27 +83,16 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
 		}
+
+		if UIDevice.current.userInterfaceIdiom == .phone {
+			selectedIndexPath = nil
+		}
+
 	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
-	}
-
-	// MARK: - Segues -
-
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let indexPath = tableView.indexPathForSelectedRow {
-			if selectedIndexPath != indexPath {
-				guard let navController = segue.destination as? UINavigationController,
-					let controller = navController.topViewController as? PostsDetailViewController else {
-						return
-				}
-				controller.navigationItem.leftItemsSupplementBackButton = true
-				controller.post = fetchedResultsController.object(at: indexPath)
-			}
-			selectedIndexPath = indexPath
-		}
 	}
 
 	// MARK: - Fetched Results Controller Methods -
@@ -128,8 +117,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 		return controller
 	}()
-
-	// MARK: - Fetched Results Controller Delegate Methods -
 
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView.beginUpdates()
@@ -240,6 +227,26 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 	func configure(cell: PostCell, atIndexPath: IndexPath) {
 		let object = fetchedResultsController.object(at: atIndexPath)
         cell.configurePost(object)
+	}
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if selectedIndexPath != indexPath {
+			self.performSegue(withIdentifier: "showDetail", sender: self)
+		}
+		selectedIndexPath = indexPath
+	}
+
+	// MARK: - Segues -
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let indexPath = tableView.indexPathForSelectedRow {
+			guard let navController = segue.destination as? UINavigationController,
+				let controller = navController.topViewController as? PostsDetailViewController else {
+					return
+			}
+			controller.navigationItem.leftItemsSupplementBackButton = true
+			controller.post = fetchedResultsController.object(at: indexPath)
+		}
 	}
 
 	// MARK: - View Methods -

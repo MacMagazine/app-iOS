@@ -8,6 +8,8 @@
 
 import UIKit
 
+class AppView: UIView {}
+
 public extension UIView {
 
     /// Border color of view; also inspectable from Storyboard.

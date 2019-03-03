@@ -37,7 +37,16 @@ extension Theme {
 
     func apply(for application: UIApplication) {
 
+		// WINDOW
+
         application.keyWindow?.tintColor = tint
+
+		// VIEW
+
+		AppView.appearance().with {
+			$0.tintColor = backgroundColor
+			$0.backgroundColor = backgroundColor
+		}
 
         // TABBAR
 
@@ -67,9 +76,7 @@ extension Theme {
 
         // SEARCHBAR
 
-        UISearchBar.appearance().with {
-            $0.barTintColor = barTintColor
-        }
+        UISearchBar.appearance().barTintColor = barTintColor
         UITextField.appearance().with {
             $0.textColor = textColor
             $0.placeholderColor = placeholderTextColor
@@ -138,19 +145,21 @@ extension Theme {
 
         // SWITCH
 
-        UISwitch.appearance().with {
-            $0.onTintColor = onTint
-        }
+        UISwitch.appearance().onTintColor = onTint
 
         // SLIDER
 
         UISlider.appearance().tintColor = tint
 
-		// WebView
+		// WEBVIEW
 
 		WKWebView.appearance().with {
 			$0.backgroundColor = backgroundColor
 		}
+
+		// ACTIVITYINDICATOR
+
+		UIActivityIndicatorView.appearance().color = tint
 
         extend()
 

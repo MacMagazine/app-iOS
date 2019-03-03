@@ -538,7 +538,6 @@
                                     <outlet property="headlineLabel" destination="ZVj-9u-z2o" id="ZiY-aK-y9A"/>
                                     <outlet property="subheadlineLabel" destination="bCb-zz-Ohi" id="gJN-Qn-8tg"/>
                                     <outlet property="thumbnailImageView" destination="t1j-Xh-Ifu" id="nPg-WA-IMW"/>
-                                    <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="Ab2-gT-8Os"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="262" id="hkA-ME-Noc" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
@@ -612,6 +611,9 @@
                             <action selector="getPosts" destination="Jej-5Q-aqJ" eventType="valueChanged" id="FI1-P5-bwj"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmD-xa-eeh" sceneMemberID="firstResponder"/>
             </objects>
@@ -625,11 +627,11 @@
                         <viewControllerLayoutGuide type="top" id="eKl-mZ-FRj"/>
                         <viewControllerLayoutGuide type="bottom" id="frX-7l-mly"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="V9J-eg-qh6">
+                    <view key="view" contentMode="scaleToFill" id="V9J-eg-qh6" customClass="AppView" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d8c-LD-mbE">
+                            <wkWebView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d8c-LD-mbE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -656,7 +658,6 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="x4L-t4-vbR">
                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="color" red="0.0" green="0.7843137255" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="526" y="-2116"/>
@@ -691,6 +692,6 @@
         <image name="tab_noar" width="36" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YQQ-bx-LIJ"/>
+        <segue reference="lNV-kD-aRc"/>
     </inferredMetricsTieBreakers>
 </document>
