@@ -10,6 +10,8 @@ import CoreData
 import Kingfisher
 import UIKit
 
+// MARK: - Extensions -
+
 extension UITableView {
 	func rowNumber(indexPath: IndexPath) -> Int {
 		if indexPath.section == 0 {
@@ -27,10 +29,14 @@ extension UITableView {
 	}
 }
 
+// MARK: - Enums -
+
 enum Direction {
 	case down
 	case up
 }
+
+// MARK: -
 
 class PostsMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
