@@ -93,6 +93,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 					let controller = navController.topViewController as? PostsDetailViewController else {
 						return
 				}
+				controller.navigationItem.leftItemsSupplementBackButton = true
 				controller.post = fetchedResultsController.object(at: indexPath)
 			}
 			selectedIndexPath = indexPath

@@ -18,7 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		// Override point for customization after application launch.
         applyTheme()
 
-		guard let splitViewController = window?.rootViewController as? UISplitViewController else {
+		guard let tabBarViewController = window?.rootViewController as? UITabBarController else {
+			return true
+		}
+
+		guard let splitViewController = tabBarViewController.viewControllers?.first as? UISplitViewController else {
 			return true
 		}
 		splitViewController.delegate = self

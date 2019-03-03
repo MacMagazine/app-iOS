@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 protocol Theme {
     var tint: UIColor { get }
@@ -144,6 +145,12 @@ extension Theme {
         // SLIDER
 
         UISlider.appearance().tintColor = tint
+
+		// WebView
+
+		WKWebView.appearance().with {
+			$0.backgroundColor = backgroundColor
+		}
 
         extend()
 

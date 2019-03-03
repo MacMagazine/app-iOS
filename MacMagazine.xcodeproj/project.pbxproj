@@ -22,7 +22,6 @@
 		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BABAC2E1F6190620052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
 		9BABAC311F61A4270052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
-		9BC08787222B098C005A1010 /* Posts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC08785222B098C005A1010 /* Posts.storyboard */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
@@ -40,8 +39,6 @@
 		9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FA2228064800A0B627 /* LightTheme.swift */; };
 		9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */; };
 		9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */; };
-		9BD1360522282BA300A0B627 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD1360322282BA300A0B627 /* Settings.storyboard */; };
-		9BD1360822282BEB00A0B627 /* Podcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD1360622282BEB00A0B627 /* Podcasts.storyboard */; };
 		9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1360E22283DF300A0B627 /* UILabelTheme.swift */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +79,6 @@
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9BABAC2D1F6190620052063A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		9BC08786222B098C005A1010 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/Posts.storyboard; sourceTree = "<group>"; };
 		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,8 +98,6 @@
 		9BD135FA2228064800A0B627 /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerExtension.swift; sourceTree = "<group>"; };
 		9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldTheme.swift; sourceTree = "<group>"; };
-		9BD1360422282BA300A0B627 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
-		9BD1360722282BEB00A0B627 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/Podcasts.storyboard; sourceTree = "<group>"; };
 		9BD1360E22283DF300A0B627 /* UILabelTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelTheme.swift; sourceTree = "<group>"; };
 		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -255,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				9BC9B12F1F5C96A500C4DF17 /* Cells */,
-				9BC08785222B098C005A1010 /* Posts.storyboard */,
 				9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */,
 			);
@@ -266,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				9B834B922229A9C3002C61F9 /* Cells */,
-				9BD1360622282BEB00A0B627 /* Podcasts.storyboard */,
 				9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */,
 			);
 			name = NoAr;
@@ -275,7 +267,6 @@
 		9BE697D91F487D660048D68D /* Ajustes */ = {
 			isa = PBXGroup;
 			children = (
-				9BD1360322282BA300A0B627 /* Settings.storyboard */,
 				9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */,
 			);
 			name = Ajustes;
@@ -392,12 +383,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD1360822282BEB00A0B627 /* Podcasts.storyboard in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
 				9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
-				9BD1360522282BA300A0B627 /* Settings.storyboard in Resources */,
-				9BC08787222B098C005A1010 /* Posts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,14 +487,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9BC08785222B098C005A1010 /* Posts.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BC08786222B098C005A1010 /* Base */,
-			);
-			name = Posts.storyboard;
-			sourceTree = "<group>";
-		};
 		9BCAD6801F47A08100B54526 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -521,22 +501,6 @@
 				9BCAD6861F47A08100B54526 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		9BD1360322282BA300A0B627 /* Settings.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BD1360422282BA300A0B627 /* Base */,
-			);
-			name = Settings.storyboard;
-			sourceTree = "<group>";
-		};
-		9BD1360622282BEB00A0B627 /* Podcasts.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BD1360722282BEB00A0B627 /* Base */,
-			);
-			name = Podcasts.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
