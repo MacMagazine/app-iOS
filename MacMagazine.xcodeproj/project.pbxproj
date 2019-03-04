@@ -17,7 +17,6 @@
 		9B3683A020C5D84400925E76 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; };
-		9B834B912229A9BE002C61F9 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B902229A9BE002C61F9 /* PodcastCell.swift */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BABAC2E1F6190620052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
@@ -41,6 +40,7 @@
 		9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */; };
 		9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1360E22283DF300A0B627 /* UILabelTheme.swift */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
+		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,6 @@
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9B36839D20C5D66000925E76 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
-		9B834B902229A9BE002C61F9 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9BABAC2D1F6190620052063A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
 		9BF356271F6208F70081BE90 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,14 +153,6 @@
 				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		9B834B922229A9C3002C61F9 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				9B834B902229A9BE002C61F9 /* PodcastCell.swift */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		9BABAC271F618F2F0052063A /* Database */ = {
@@ -258,7 +250,6 @@
 		9BE697D81F487D610048D68D /* NoAr */ = {
 			isa = PBXGroup;
 			children = (
-				9B834B922229A9C3002C61F9 /* Cells */,
 				9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */,
 			);
 			name = NoAr;
@@ -281,6 +272,7 @@
 				9BABAC271F618F2F0052063A /* Database */,
 				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 				9B1BA5E3222B22980059F692 /* Settings.swift */,
+				9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */,
 			);
 			name = Comum;
 			sourceTree = "<group>";
@@ -449,7 +441,7 @@
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */,
 				9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */,
-				9B834B912229A9BE002C61F9 /* PodcastCell.swift in Sources */,
+				9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */,
 				9B0DD44A2226BAF60016C567 /* API.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BABAC2E1F6190620052063A /* Post.swift in Sources */,

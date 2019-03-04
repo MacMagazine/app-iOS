@@ -6,6 +6,7 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import AVFoundation
 import Kingfisher
 import UIKit
 
@@ -13,9 +14,13 @@ class PostCell: UITableViewCell {
 
 	// MARK: - Properties -
 
-    @IBOutlet private weak var thumbnailImageView: UIImageView!
-    @IBOutlet private weak var headlineLabel: UILabel!
-    @IBOutlet private weak var subheadlineLabel: UILabel!
+	@IBOutlet private weak var playButton: UIButton!
+	@IBOutlet private weak var headlineLabel: UILabel!
+	@IBOutlet private weak var subheadlineLabel: UILabel!
+	@IBOutlet private weak var lengthlineLabel: UILabel!
+	@IBOutlet private weak var thumbnailImageView: UIImageView!
+
+	fileprivate var player: AVPlayer?
 
 	// MARK: - Methods -
 
@@ -38,9 +43,35 @@ class PostCell: UITableViewCell {
             }
         }
 
-        // Lazy load of image from Marvel server
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
     }
+
+	func configurePodcast(_ object: Posts) {
+		headlineLabel?.text = object.title
+		subheadlineLabel?.text = object.pubDate.cellDate()
+		lengthlineLabel?.text = "duração: \(object.duration)"
+
+		if !object.podcastURL.isEmpty {
+			let podcastURL = object.podcastURL
+			guard let url = URL(string: podcastURL) else {
+				return
+			}
+			player = AVPlayer(playerItem: AVPlayerItem(url: url))
+			let playerLayer = AVPlayerLayer(player: player)
+			playerLayer.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+			self.contentView.layoutSublayers(of: playerLayer)
+		}
+	}
+
+	@IBAction private func play(_ sender: Any) {
+		if player?.rate == 0 {
+			player?.play()
+			playButton.isSelected = true
+		} else {
+			player?.pause()
+			playButton.isSelected = false
+		}
+	}
 
 }

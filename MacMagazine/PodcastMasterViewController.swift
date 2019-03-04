@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class PodcastMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class PodcastMasterViewController: UITableViewController, FetchedResultsControllerDelegate {
 
 	// MARK: - Properties -
 
@@ -34,16 +34,10 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
-
 		// Execute the fetch to display the data
-		do {
-			try self.fetchedResultsController.performFetch()
-		} catch {
-			print("An error occurred")
-		}
+		fetchedResultsController.reloadData()
 
-		if (fetchedResultsController.fetchedObjects?.isEmpty ?? true) && !(self.refreshControl?.isRefreshing ?? true) {
+		if fetchedResultsController.hasData() && !(self.refreshControl?.isRefreshing ?? true) {
 			getPodcasts(paged: 0)
 		}
 
@@ -75,7 +69,7 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 
 	// MARK: - Fetched Results Controller Methods -
 
-	lazy var fetchedResultsController: NSFetchedResultsController<Posts> = {
+	lazy var fetchedResultsController: FetchedResultsControllerDataSource = {
 		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
@@ -83,7 +77,6 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-		controller.delegate = self
 
 		do {
 			try controller.performFetch()
@@ -92,45 +85,11 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 			print("\(fetchError), \(fetchError.userInfo)")
 		}
 
-		return controller
+		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
+		fetchController.delegate = self
+
+		return fetchController
 	}()
-
-	// MARK: - Fetched Results Controller Delegate Methods -
-
-	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.beginUpdates()
-	}
-
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
-		switch type {
-		case .insert:
-			if let indexPath = newIndexPath {
-				tableView.insertRows(at: [indexPath], with: .fade)
-			}
-		case .delete:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-		case .update:
-			if let indexPath = indexPath {
-				if let cell = tableView.cellForRow(at: indexPath) as? PodcastCell {
-					configure(cell: cell, atIndexPath: indexPath)
-				}
-			}
-		case .move:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-			if let newIndexPath = newIndexPath {
-				tableView.insertRows(at: [newIndexPath], with: .fade)
-			}
-		}
-	}
-
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
 
 	// MARK: - Scroll detection -
 
@@ -140,24 +99,16 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 		lastContentOffset = offset
 	}
 
-	// MARK: - Table View -
+	// MARK: - View Methods -
 
-	override func numberOfSections(in tableView: UITableView) -> Int {
-		if let sections = self.fetchedResultsController.sections {
-			return sections.count
+	func configure(cell: PostCell, atIndexPath: IndexPath) {
+		guard let object = fetchedResultsController.object(at: atIndexPath) else {
+			return
 		}
-		return 0
+		cell.configurePodcast(object)
 	}
 
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if let sections = self.fetchedResultsController.sections {
-			let sectionInfo = sections[section]
-			return sectionInfo.numberOfObjects
-		}
-		return 0
-	}
-
-	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
 			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
@@ -166,21 +117,6 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 			}
 		}
 	}
-
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath) as? PodcastCell else {
-			fatalError("Unexpected Index Path")
-		}
-		configure(cell: cell, atIndexPath: indexPath)
-		return cell
-	}
-
-	func configure(cell: PodcastCell, atIndexPath: IndexPath) {
-		let object = fetchedResultsController.object(at: atIndexPath)
-		cell.configurePodcast(object)
-	}
-
-	// MARK: - View Methods -
 
 	@IBAction private func getPodcasts() {
 		getPodcasts(paged: 0)
@@ -194,12 +130,7 @@ class PodcastMasterViewController: UITableViewController, NSFetchedResultsContro
 			guard let post = post else {
 				DispatchQueue.main.async {
 					self.refreshControl?.endRefreshing()
-					// Execute the fetch to display the data
-					do {
-						try self.fetchedResultsController.performFetch()
-					} catch {
-						print("An error occurred")
-					}
+					self.fetchedResultsController.reloadData()
 				}
 				return
 			}

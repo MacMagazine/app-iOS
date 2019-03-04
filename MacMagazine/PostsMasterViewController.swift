@@ -38,7 +38,7 @@ enum Direction {
 
 // MARK: -
 
-class PostsMasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class PostsMasterViewController: UITableViewController, FetchedResultsControllerDelegate {
 
 	// MARK: - Properties -
 
@@ -70,13 +70,9 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		}
 
 		// Execute the fetch to display the data
-		do {
-			try self.fetchedResultsController.performFetch()
-		} catch {
-			print("An error occurred")
-		}
+		fetchedResultsController.reloadData()
 
-		if (fetchedResultsController.fetchedObjects?.isEmpty ?? true) && !(self.refreshControl?.isRefreshing ?? true) {
+		if fetchedResultsController.hasData() && !(self.refreshControl?.isRefreshing ?? true) {
 			getPosts(paged: 0)
 		}
 
@@ -97,7 +93,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 	// MARK: - Fetched Results Controller Methods -
 
-	lazy var fetchedResultsController: NSFetchedResultsController<Posts> = {
+	lazy var fetchedResultsController: FetchedResultsControllerDataSource = {
 		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
@@ -106,7 +102,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "headerDate", cacheName: nil)
-		controller.delegate = self
 
 		do {
 			try controller.performFetch()
@@ -115,56 +110,11 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 			print("\(fetchError), \(fetchError.userInfo)")
 		}
 
-		return controller
+		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
+		fetchController.delegate = self
+
+		return fetchController
 	}()
-
-	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.beginUpdates()
-	}
-
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-
-		switch type {
-		case .insert:
-			tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-		case .delete:
-			tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-		default:
-			return
-		}
-	}
-
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
-		switch type {
-		case .update:
-			if let indexPath = indexPath {
-				if let cell = tableView.cellForRow(at: indexPath) as? PostCell {
-					configure(cell: cell, atIndexPath: indexPath)
-				}
-			}
-		case .insert:
-			if let indexPath = newIndexPath {
-				tableView.insertRows(at: [indexPath], with: .fade)
-			}
-		case .delete:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-		case .move:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-
-			if let newIndexPath = newIndexPath {
-				tableView.insertRows(at: [newIndexPath], with: .fade)
-			}
-		}
-	}
-
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
 
 	// MARK: - Scroll detection -
 
@@ -172,68 +122,6 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 		let offset = scrollView.contentOffset
 		direction = offset.y > lastContentOffset.y ? .down : .up
 		lastContentOffset = offset
-	}
-
-	// MARK: - Table View -
-
-	override func numberOfSections(in tableView: UITableView) -> Int {
-		if let sections = self.fetchedResultsController.sections {
-			return sections.count
-		}
-		return 0
-	}
-
-	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if let sections = fetchedResultsController.sections {
-			let currentSection = sections[section]
-			return currentSection.name.toHeaderDate()
-		}
-		return nil
-	}
-
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if let sections = self.fetchedResultsController.sections {
-			let sectionInfo = sections[section]
-			return sectionInfo.numberOfObjects
-		}
-		return 0
-	}
-
-	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		if direction == .down {
-			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
-			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
-				lastPage = page
-				self.getPosts(paged: page)
-			}
-		}
-	}
-
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let object = fetchedResultsController.object(at: indexPath)
-
-        var identifier = "normalCell"
-        if object.categorias.contains("Destaques") {
-            identifier = "featuredCell"
-        }
-
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {
-			fatalError("Unexpected Index Path")
-		}
-		configure(cell: cell, atIndexPath: indexPath)
-		return cell
-	}
-
-	func configure(cell: PostCell, atIndexPath: IndexPath) {
-		let object = fetchedResultsController.object(at: atIndexPath)
-        cell.configurePost(object)
-	}
-
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if selectedIndexPath != indexPath {
-			self.performSegue(withIdentifier: "showDetail", sender: self)
-		}
-		selectedIndexPath = indexPath
 	}
 
 	// MARK: - Segues -
@@ -251,6 +139,30 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
 
 	// MARK: - View Methods -
 
+	func configure(cell: PostCell, atIndexPath: IndexPath) {
+		guard let object = fetchedResultsController.object(at: atIndexPath) else {
+			return
+		}
+		cell.configurePost(object)
+	}
+
+	func willDisplayCell(indexPath: IndexPath) {
+		if direction == .down {
+			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
+			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
+				lastPage = page
+				self.getPosts(paged: page)
+			}
+		}
+	}
+
+	func didSelectRowAt(indexPath: IndexPath) {
+		if selectedIndexPath != indexPath {
+			self.performSegue(withIdentifier: "showDetail", sender: self)
+		}
+		selectedIndexPath = indexPath
+	}
+
 	@IBAction private func getPosts() {
 		getPosts(paged: 0)
 	}
@@ -262,12 +174,7 @@ class PostsMasterViewController: UITableViewController, NSFetchedResultsControll
             guard let post = post else {
 				DispatchQueue.main.async {
 					self.refreshControl?.endRefreshing()
-					// Execute the fetch to display the data
-					do {
-						try self.fetchedResultsController.performFetch()
-					} catch {
-						print("An error occurred")
-					}
+					self.fetchedResultsController.reloadData()
 				}
 				return
             }

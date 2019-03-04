@@ -71,7 +71,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="l52-Et-5EV" customClass="PodcastCell" customModule="MacMagazine" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="133" id="l52-Et-5EV" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l52-Et-5EV" id="bll-ft-MLh">
