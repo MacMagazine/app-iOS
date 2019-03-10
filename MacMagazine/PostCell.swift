@@ -47,6 +47,19 @@ class PostCell: UITableViewCell {
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
     }
 
+	func configureSearchPost(_ object: XMLPost) {
+		headlineLabel?.text = object.title
+
+		if object.categories.contains("Destaques") == false {
+			if subheadlineLabel != nil {
+				subheadlineLabel?.text = object.excerpt
+			}
+		}
+
+		thumbnailImageView.kf.indicatorType = .activity
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
+	}
+
 	func configurePodcast(_ object: Posts) {
 		headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate.cellDate()

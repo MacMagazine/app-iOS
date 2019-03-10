@@ -40,6 +40,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Procurar nos Podcasts ..."
 		tableView.tableHeaderView = searchController?.searchBar
+		self.definesPresentationContext = true
 
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -183,6 +184,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 			}
 			self.posts.append(post)
 		}
+		posts = []
 		API().searchPodcasts(text, processResponse)
 	}
 
@@ -191,7 +193,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 // MARK: - UISearchBarDelegate -
 
 extension PodcastMasterViewController: UISearchBarDelegate {
-
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		guard let text = searchBar.text else {
 			return
@@ -199,5 +200,4 @@ extension PodcastMasterViewController: UISearchBarDelegate {
 		searchPodcasts(text)
 		searchBar.resignFirstResponder()
 	}
-
 }

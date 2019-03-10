@@ -38,7 +38,7 @@ enum Direction {
 
 // MARK: -
 
-class PostsMasterViewController: UITableViewController, FetchedResultsControllerDelegate {
+class PostsMasterViewController: UITableViewController, FetchedResultsControllerDelegate, ResultsViewControllerDelegate {
 
 	// MARK: - Properties -
 
@@ -51,11 +51,28 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	var selectedIndexPath: IndexPath?
 
+	private var searchController: UISearchController?
+	private var resultsTableController: ResultsViewController?
+	var posts = [XMLPost]()
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
 		// Do any additional setup after loading the view, typically from a nib.
+		resultsTableController = ResultsViewController()
+		resultsTableController?.delegate = self
+		resultsTableController?.tableView.delegate = self
+		resultsTableController?.isPodcast = false
+
+		searchController = UISearchController(searchResultsController: resultsTableController)
+		searchController?.searchBar.autocapitalizationType = .none
+		searchController?.searchBar.delegate = self
+		searchController?.searchBar.placeholder = "Procurar nos Posts ..."
+		tableView.tableHeaderView = searchController?.searchBar
+		self.definesPresentationContext = true
+
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
@@ -139,13 +156,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	// MARK: - View Methods -
 
-	func configure(cell: PostCell, atIndexPath: IndexPath) {
-		guard let object = fetchedResultsController.object(at: atIndexPath) else {
-			return
-		}
-		cell.configurePost(object)
-	}
-
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
@@ -161,6 +171,20 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			self.performSegue(withIdentifier: "showDetail", sender: self)
 		}
 		selectedIndexPath = indexPath
+	}
+
+	func configure(cell: PostCell, atIndexPath: IndexPath) {
+		guard let object = fetchedResultsController.object(at: atIndexPath) else {
+			return
+		}
+		cell.configurePost(object)
+	}
+
+	func configureResult(cell: PostCell, atIndexPath: IndexPath) {
+		if !posts.isEmpty {
+			let object = posts[atIndexPath.row]
+			cell.configureSearchPost(object)
+		}
 	}
 
 	@IBAction private func getPosts() {
@@ -186,4 +210,38 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		API().getPosts(page: paged, processResponse)
 	}
 
+	fileprivate func isFiltering() -> Bool {
+		return searchController?.isActive ?? false
+	}
+
+	fileprivate func searchPosts(_ text: String) {
+		let processResponse: (XMLPost?) -> Void = { post in
+			guard let post = post else {
+				DispatchQueue.main.async {
+					self.posts.sort(by: {
+						$0.pubDate.toDate(nil).sortedDate().compare($1.pubDate.toDate(nil).sortedDate()) == .orderedDescending
+					})
+					self.resultsTableController?.posts = self.posts
+					self.resultsTableController?.tableView.reloadData()
+				}
+				return
+			}
+			self.posts.append(post)
+		}
+		posts = []
+		API().searchPosts(text, processResponse)
+	}
+
+}
+
+// MARK: - UISearchBarDelegate -
+
+extension PostsMasterViewController: UISearchBarDelegate {
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		guard let text = searchBar.text else {
+			return
+		}
+		searchPosts(text)
+		searchBar.resignFirstResponder()
+	}
 }
