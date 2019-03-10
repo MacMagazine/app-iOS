@@ -172,6 +172,10 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		let processResponse: (XMLPost?) -> Void = { post in
 			guard let post = post else {
 				DispatchQueue.main.async {
+					self.posts.sort(by: {
+						$0.pubDate.toDate(nil).sortedDate().compare($1.pubDate.toDate(nil).sortedDate()) == .orderedDescending
+					})
+
 					self.resultsTableController?.posts = self.posts
 					self.resultsTableController?.tableView.reloadData()
 				}

@@ -66,9 +66,10 @@ class PostCell: UITableViewCell {
 
 	func configureSearchPodcast(_ object: XMLPost) {
 		headlineLabel?.text = object.title
-		subheadlineLabel?.text = object.pubDate//.cellDate()
-		lengthlineLabel?.text = "duração: \(object.duration)"
+		subheadlineLabel?.text = object.pubDate.toDate(nil).cellDate()
+		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
 
+		playButton.isEnabled = !object.podcastURL.isEmpty
 		if !object.podcastURL.isEmpty {
 			let podcastURL = object.podcastURL
 			guard let url = URL(string: podcastURL) else {
