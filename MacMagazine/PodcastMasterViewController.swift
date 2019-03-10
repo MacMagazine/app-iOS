@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class PodcastMasterViewController: UITableViewController, FetchedResultsControllerDelegate {
+class PodcastMasterViewController: UITableViewController, FetchedResultsControllerDelegate, ResultsViewControllerDelegate {
 
 	// MARK: - Properties -
 
@@ -20,11 +20,27 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	var direction: Direction = .down
 	var lastPage = -1
 
+	private var searchController: UISearchController?
+	private var resultsTableController: ResultsViewController?
+	var posts = [XMLPost]()
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
 		// Do any additional setup after loading the view, typically from a nib.
+		resultsTableController = ResultsViewController()
+		resultsTableController?.delegate = self
+		resultsTableController?.tableView.delegate = self
+		resultsTableController?.isPodcast = true
+
+		searchController = UISearchController(searchResultsController: resultsTableController)
+		searchController?.searchBar.autocapitalizationType = .none
+		searchController?.searchBar.delegate = self
+		searchController?.searchBar.placeholder = "Procurar nos Podcasts ..."
+		tableView.tableHeaderView = searchController?.searchBar
+
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
@@ -85,7 +101,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 			print("\(fetchError), \(fetchError.userInfo)")
 		}
 
-		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
+		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller, isPodcast: true)
 		fetchController.delegate = self
 
 		return fetchController
@@ -101,13 +117,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	// MARK: - View Methods -
 
-	func configure(cell: PostCell, atIndexPath: IndexPath) {
-		guard let object = fetchedResultsController.object(at: atIndexPath) else {
-			return
-		}
-		cell.configurePodcast(object)
-	}
-
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
@@ -115,6 +124,20 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 				lastPage = page
 				self.getPodcasts(paged: page)
 			}
+		}
+	}
+
+	func configure(cell: PostCell, atIndexPath: IndexPath) {
+		guard let object = fetchedResultsController.object(at: atIndexPath) else {
+			return
+		}
+		cell.configurePodcast(object)
+	}
+
+	func configureResult(cell: PostCell, atIndexPath: IndexPath) {
+		if !posts.isEmpty {
+			let object = posts[atIndexPath.row]
+			cell.configureSearchPodcast(object)
 		}
 	}
 
@@ -140,4 +163,37 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		}
 		API().getPodcasts(page: paged, processResponse)
 	}
+
+	fileprivate func isFiltering() -> Bool {
+		return searchController?.isActive ?? false
+	}
+
+	fileprivate func searchPodcasts(_ text: String) {
+		let processResponse: (XMLPost?) -> Void = { post in
+			guard let post = post else {
+				DispatchQueue.main.async {
+					self.resultsTableController?.posts = self.posts
+					self.resultsTableController?.tableView.reloadData()
+				}
+				return
+			}
+			self.posts.append(post)
+		}
+		API().searchPodcasts(text, processResponse)
+	}
+
+}
+
+// MARK: - UISearchBarDelegate -
+
+extension PodcastMasterViewController: UISearchBarDelegate {
+
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		guard let text = searchBar.text else {
+			return
+		}
+		searchPodcasts(text)
+		searchBar.resignFirstResponder()
+	}
+
 }

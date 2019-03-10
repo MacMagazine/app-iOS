@@ -10,10 +10,10 @@ import Foundation
 
 struct APIParams {
     static let feed = "https://macmagazine.uol.com.br/feed/"
-    static let paged = "&paged="
-    static let posts = "?cat=-101"
-    static let podcast = "?cat=101"
-    static let search = "?s="
+    static let paged = "paged="
+    static let posts = "cat=-101"
+    static let podcast = "cat=101"
+    static let search = "s="
 }
 
 class API: NSObject, XMLParserDelegate {
@@ -30,21 +30,27 @@ class API: NSObject, XMLParserDelegate {
 
     func getPosts(page: Int = 0, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
-        let host = "\(APIParams.feed)\(APIParams.posts)\(APIParams.paged)\(page)"
+        let host = "\(APIParams.feed)?\(APIParams.posts)&\(APIParams.paged)\(page)"
         executeGetContent(host)
     }
 
     func getPodcasts(page: Int = 0, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
-        let host = "\(APIParams.feed)\(APIParams.podcast)\(APIParams.paged)\(page)"
+        let host = "\(APIParams.feed)?\(APIParams.podcast)&\(APIParams.paged)\(page)"
         executeGetContent(host)
     }
 
-    func search(_ text: String, _ completion: ((XMLPost?) -> Void)?) {
+    func searchPosts(_ text: String, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
-        let host = "\(APIParams.feed)\(APIParams.search)\(text)"
+        let host = "\(APIParams.feed)?\(APIParams.posts)&\(APIParams.search)'\(text)'"
         executeGetContent(host)
     }
+
+	func searchPodcasts(_ text: String, _ completion: ((XMLPost?) -> Void)?) {
+		onCompletion = completion
+		let host = "\(APIParams.feed)?\(APIParams.podcast)&\(APIParams.search)'\(text)'"
+		executeGetContent(host)
+	}
 
     // MARK: - Internal methods -
 

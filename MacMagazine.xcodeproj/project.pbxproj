@@ -15,6 +15,10 @@
 		9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
 		9B3683A020C5D84400925E76 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
+		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
+		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
+		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
@@ -74,6 +78,10 @@
 		9B0DD44E2226FD150016C567 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9B36839D20C5D66000925E76 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
+		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
+		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
+		9B4A8FA622357A0D00A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PodcastCell.xib; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -168,6 +176,9 @@
 		9BC9B12F1F5C96A500C4DF17 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9B4A8FA122357A0300A49239 /* NormalCell.xib */,
+				9B4A8FA422357A0800A49239 /* FeaturedCell.xib */,
+				9B4A8FA722357A0D00A49239 /* PodcastCell.xib */,
 				9BC9B12D1F5C960700C4DF17 /* PostCell.swift */,
 			);
 			name = Cells;
@@ -240,7 +251,6 @@
 		9BE697D71F487D5A0048D68D /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				9BC9B12F1F5C96A500C4DF17 /* Cells */,
 				9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */,
 			);
@@ -270,9 +280,11 @@
 				9BD135DE222802ED00A0B627 /* Theme */,
 				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
 				9BABAC271F618F2F0052063A /* Database */,
+				9BC9B12F1F5C96A500C4DF17 /* Cells */,
 				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 				9B1BA5E3222B22980059F692 /* Settings.swift */,
 				9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */,
+				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
 			);
 			name = Comum;
 			sourceTree = "<group>";
@@ -376,8 +388,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
+				9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */,
 				9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */,
+				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
+				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +467,7 @@
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
 				9BD135E02228042C00A0B627 /* Theme.swift in Sources */,
+				9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
 				9BD135E8222804E500A0B627 /* UITableViewCellTheme.swift in Sources */,
 				9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */,
@@ -479,6 +495,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9B4A8FA122357A0300A49239 /* NormalCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B4A8FA022357A0300A49239 /* Base */,
+			);
+			name = NormalCell.xib;
+			sourceTree = "<group>";
+		};
+		9B4A8FA422357A0800A49239 /* FeaturedCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B4A8FA322357A0800A49239 /* Base */,
+			);
+			name = FeaturedCell.xib;
+			sourceTree = "<group>";
+		};
+		9B4A8FA722357A0D00A49239 /* PodcastCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B4A8FA622357A0D00A49239 /* Base */,
+			);
+			name = PodcastCell.xib;
+			sourceTree = "<group>";
+		};
 		9BCAD6801F47A08100B54526 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

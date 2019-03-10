@@ -57,134 +57,6 @@
             </objects>
             <point key="canvasLocation" x="-1460" y="-2552"/>
         </scene>
-        <!--NoAr-->
-        <scene sceneID="rdk-JC-Z0u">
-            <objects>
-                <tableViewController title="NoAr" clearsSelectionOnViewWillAppear="NO" id="Z0W-bf-CTA" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="oub-WZ-aBF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos Podcasts ..." translucent="NO" id="nA5-g1-lRo">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="133" id="l52-Et-5EV" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="66" width="375" height="133"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l52-Et-5EV" id="bll-ft-MLh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="AZG-Aa-13Z">
-                                            <rect key="frame" x="16" y="16" width="343" height="100.5"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h4O-m0-0ny">
-                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="100.5"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heU-t2-5HJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="40" id="Own-Di-1Pp"/>
-                                                                <constraint firstAttribute="width" constant="40" id="eJq-2Z-lBS"/>
-                                                            </constraints>
-                                                            <state key="normal" backgroundImage="play"/>
-                                                            <state key="selected" image="pause"/>
-                                                            <connections>
-                                                                <action selector="play:" destination="l52-Et-5EV" eventType="touchUpInside" id="aQh-ml-asP"/>
-                                                            </connections>
-                                                        </button>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TT9-3f-ytO">
-                                                            <rect key="frame" x="0.0" y="40" width="40" height="60.5"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </view>
-                                                    </subviews>
-                                                </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wWI-j2-ejs">
-                                                    <rect key="frame" x="56" y="0.0" width="287" height="100.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvN-1Q-oZA" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="287" height="71.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                            <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="PF8-6w-8aM">
-                                                            <rect key="frame" x="0.0" y="79.5" width="287" height="21"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjw-vH-v0L" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="206.5" height="21"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                    <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXP-az-Fl0" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="222.5" y="0.0" width="64.5" height="21"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                    <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="21" id="h88-zZ-Mk3"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="AZG-Aa-13Z" firstAttribute="leading" secondItem="bll-ft-MLh" secondAttribute="leading" constant="16" id="75W-er-6wY"/>
-                                        <constraint firstItem="AZG-Aa-13Z" firstAttribute="top" secondItem="bll-ft-MLh" secondAttribute="top" constant="16" id="AgH-55-2py"/>
-                                        <constraint firstAttribute="bottom" secondItem="AZG-Aa-13Z" secondAttribute="bottom" constant="16" id="E0c-MQ-hgb"/>
-                                        <constraint firstAttribute="trailing" secondItem="AZG-Aa-13Z" secondAttribute="trailing" constant="16" id="jv0-Jm-il6"/>
-                                    </constraints>
-                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
-                                </tableViewCellContentView>
-                                <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
-                                <connections>
-                                    <outlet property="headlineLabel" destination="uvN-1Q-oZA" id="tXR-M2-bTf"/>
-                                    <outlet property="lengthlineLabel" destination="pXP-az-Fl0" id="Jlg-Kg-j1M"/>
-                                    <outlet property="playButton" destination="heU-t2-5HJ" id="Vxc-pC-Kog"/>
-                                    <outlet property="subheadlineLabel" destination="Fjw-vH-v0L" id="gDC-qG-XKU"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="Z0W-bf-CTA" id="UFy-0p-yc1"/>
-                            <outlet property="delegate" destination="Z0W-bf-CTA" id="YFY-ng-xU4"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="nMX-vp-qZr">
-                        <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="bE9-cs-s4h">
-                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xQa-r1-6jD">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                    </navigationItem>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="LJb-BT-nEa">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="getPodcasts" destination="Z0W-bf-CTA" eventType="valueChanged" id="zHc-kL-sfg"/>
-                        </connections>
-                    </refreshControl>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HeG-Yl-FBI" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-242" y="-1380"/>
-        </scene>
         <!--NoArNavigation-->
         <scene sceneID="vsx-Zo-BK5">
             <objects>
@@ -197,7 +69,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Z0W-bf-CTA" kind="relationship" relationship="rootViewController" id="tJh-cc-O6T"/>
+                        <segue destination="dI9-bf-84Z" kind="relationship" relationship="rootViewController" id="aDJ-uj-kzw"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0b-0M-tH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -474,117 +346,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Procurar nos posts ..." translucent="NO" id="Zty-ac-gRj">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" rowHeight="133" id="Yd6-B7-mf4" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="77" width="375" height="133"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yd6-B7-mf4" id="Yzf-F3-lJv">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="nrO-8x-Pm4">
-                                            <rect key="frame" x="16" y="16" width="343" height="100.5"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="t1j-Xh-Ifu" userLabel="Thumbnail Image View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="72" height="100.5"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="72" id="BPq-Lo-39O"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="6"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="wae-jv-MWg">
-                                                    <rect key="frame" x="88" y="0.0" width="255" height="100.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVj-9u-z2o" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="255" height="42.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-zz-Ohi" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="48.5" width="255" height="52"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="height" priority="750" constant="100.5" id="Pid-3y-0lx"/>
-                                            </constraints>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="nrO-8x-Pm4" firstAttribute="leading" secondItem="Yzf-F3-lJv" secondAttribute="leading" constant="16" id="1L1-sX-qAW"/>
-                                        <constraint firstAttribute="trailing" secondItem="nrO-8x-Pm4" secondAttribute="trailing" constant="16" id="3j7-qM-2rc"/>
-                                        <constraint firstItem="nrO-8x-Pm4" firstAttribute="top" secondItem="Yzf-F3-lJv" secondAttribute="top" constant="16" id="Zjn-sC-Ek9"/>
-                                        <constraint firstAttribute="bottom" secondItem="nrO-8x-Pm4" secondAttribute="bottom" constant="16" id="ijh-n6-AfD"/>
-                                    </constraints>
-                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
-                                </tableViewCellContentView>
-                                <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
-                                <connections>
-                                    <outlet property="headlineLabel" destination="ZVj-9u-z2o" id="ZiY-aK-y9A"/>
-                                    <outlet property="subheadlineLabel" destination="bCb-zz-Ohi" id="gJN-Qn-8tg"/>
-                                    <outlet property="thumbnailImageView" destination="t1j-Xh-Ifu" id="nPg-WA-IMW"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="262" id="hkA-ME-Noc" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="210" width="375" height="262"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hkA-ME-Noc" id="I8y-YF-3tJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lCN-6K-auB">
-                                            <rect key="frame" x="16" y="16" width="343" height="229.5"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-OR-pne" userLabel="Thumbnail Image View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="160"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="160" id="4ee-5N-iPb"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="6"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2h-O2-C57" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="176" width="343" height="53.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="lCN-6K-auB" secondAttribute="trailing" constant="16" id="EZw-a2-WPX"/>
-                                        <constraint firstItem="lCN-6K-auB" firstAttribute="leading" secondItem="I8y-YF-3tJ" secondAttribute="leading" constant="16" id="YcA-k1-ZHC"/>
-                                        <constraint firstAttribute="bottom" secondItem="lCN-6K-auB" secondAttribute="bottom" constant="16" id="guy-S5-0OT"/>
-                                        <constraint firstItem="lCN-6K-auB" firstAttribute="top" secondItem="I8y-YF-3tJ" secondAttribute="top" constant="16" id="wQi-xs-CjX"/>
-                                    </constraints>
-                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="headlineLabel" destination="r2h-O2-C57" id="aBn-Ah-eSS"/>
-                                    <outlet property="thumbnailImageView" destination="3dd-OR-pne" id="5AV-jC-g4k"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="Jej-5Q-aqJ" id="pLE-kF-Jzm"/>
@@ -680,13 +441,49 @@
             </objects>
             <point key="canvasLocation" x="-508" y="-2116"/>
         </scene>
+        <!--NoAr-->
+        <scene sceneID="D62-wU-79y">
+            <objects>
+                <tableViewController title="NoAr" clearsSelectionOnViewWillAppear="NO" id="dI9-bf-84Z" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="M41-4U-Ums">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="dI9-bf-84Z" id="vKx-lk-Tcp"/>
+                            <outlet property="delegate" destination="dI9-bf-84Z" id="Rwn-da-3s1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="RDY-Ty-82q">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="7gQ-ba-oxb">
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-dzf">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="1RB-I0-yLe">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="getPodcasts" destination="dI9-bf-84Z" eventType="valueChanged" id="qzu-fX-jGB"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rfs-yV-yEe" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-242" y="-1380"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="image_logo" width="144" height="200"/>
-        <image name="image_logo_feature" width="686" height="320"/>
         <image name="logo" width="80" height="80"/>
-        <image name="pause" width="500" height="500"/>
-        <image name="play" width="500" height="500"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="36" height="28"/>

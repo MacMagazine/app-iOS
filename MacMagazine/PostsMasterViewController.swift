@@ -110,7 +110,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			print("\(fetchError), \(fetchError.userInfo)")
 		}
 
-		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
+		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller, isPodcast: false)
 		fetchController.delegate = self
 
 		return fetchController

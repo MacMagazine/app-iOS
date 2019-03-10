@@ -31,12 +31,15 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	// MARK: - Initialization methods -
 
-	init(withTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
+	init(withTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>, isPodcast: Bool) {
 		super.init()
 
 		self.tableView = tableView
 		self.tableView?.dataSource = self
 		self.tableView?.delegate = self
+
+		self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
+		self.tableView?.register(UINib(nibName: isPodcast ? "PodcastCell" : "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
 
 		self.fetchedResultsController = fetchedResultsController
 		self.fetchedResultsController?.delegate = self
@@ -72,9 +75,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	}
 
 	internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let object = fetchedResultsController?.object(at: indexPath)
-
 		var identifier = "normalCell"
+		let object = fetchedResultsController?.object(at: indexPath)
 		if object?.categorias.contains("Destaques") ?? false {
 			identifier = "featuredCell"
 		}
