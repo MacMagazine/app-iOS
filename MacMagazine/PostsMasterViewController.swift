@@ -80,10 +80,14 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
+		clearsSelectionOnViewWillAppear = true
 		super.viewWillAppear(animated)
 
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
 			$0.textAlignment = .center
+		}
+		if UIDevice.current.userInterfaceIdiom == .phone {
+			selectedIndexPath = nil
 		}
 
 		// Execute the fetch to display the data
@@ -96,11 +100,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
 		}
+	}
 
-		if UIDevice.current.userInterfaceIdiom == .phone {
-			selectedIndexPath = nil
-		}
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 
+		processSelection()
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -127,7 +132,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			print("\(fetchError), \(fetchError.userInfo)")
 		}
 
-		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller, isPodcast: false)
+		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
 		fetchController.delegate = self
 
 		return fetchController
@@ -169,8 +174,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	func didSelectRowAt(indexPath: IndexPath) {
 		if selectedIndexPath != indexPath {
 			self.performSegue(withIdentifier: "showDetail", sender: self)
+			selectedIndexPath = indexPath
+			UserDefaults.standard.set(["row": indexPath.row, "section": indexPath.section], forKey: "selectedIndexPath")
+			UserDefaults.standard.synchronize()
 		}
-		selectedIndexPath = indexPath
 	}
 
 	func configure(cell: PostCell, atIndexPath: IndexPath) {
@@ -199,6 +206,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 				DispatchQueue.main.async {
 					self.refreshControl?.endRefreshing()
 					self.fetchedResultsController.reloadData()
+					self.processSelection()
 				}
 				return
             }
@@ -208,6 +216,19 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         }
 
 		API().getPosts(page: paged, processResponse)
+	}
+
+	fileprivate func processSelection() {
+		if UIDevice.current.userInterfaceIdiom == .pad {
+			guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {
+				self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+				self.fetchedResultsController.tableView(self.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+				return
+			}
+			let indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
+			self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+			fetchedResultsController.tableView(tableView, didSelectRowAt: indexPath)
+		}
 	}
 
 	fileprivate func isFiltering() -> Bool {

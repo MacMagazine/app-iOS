@@ -37,7 +37,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
 		super.viewWillAppear(animated)
 
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {

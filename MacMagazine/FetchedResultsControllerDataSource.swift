@@ -31,15 +31,23 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	// MARK: - Initialization methods -
 
-	init(withTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>, isPodcast: Bool) {
+	init(withTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
 		super.init()
+		setup(tableView: tableView, fetchedResultsController: fetchedResultsController)
+		self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
+	}
 
+	init(withPodcastTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
+		super.init()
+		setup(tableView: tableView, fetchedResultsController: fetchedResultsController)
+		self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
+	}
+
+	func setup(tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
 		self.tableView = tableView
 		self.tableView?.dataSource = self
 		self.tableView?.delegate = self
-
 		self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
-		self.tableView?.register(UINib(nibName: isPodcast ? "PodcastCell" : "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
 
 		self.fetchedResultsController = fetchedResultsController
 		self.fetchedResultsController?.delegate = self
