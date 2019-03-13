@@ -40,22 +40,33 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Fhb-a9-jls">
+                        <rect key="frame" x="359" y="0.0" width="10" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="n9d-wA-pPk"/>
+                            <constraint firstAttribute="height" constant="21" id="x96-LZ-u9F"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Fhb-a9-jls" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" id="LCM-vc-Qs8"/>
                     <constraint firstItem="Q13-km-nzu" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" constant="16" id="d41-1i-Mm0"/>
                     <constraint firstAttribute="bottom" secondItem="Q13-km-nzu" secondAttribute="bottom" constant="16" id="eIx-yn-sPA"/>
                     <constraint firstItem="Q13-km-nzu" firstAttribute="leading" secondItem="AFJ-uX-4fX" secondAttribute="leading" constant="16" id="rzb-fg-fWC"/>
                     <constraint firstAttribute="trailing" secondItem="Q13-km-nzu" secondAttribute="trailing" constant="16" id="wZi-zE-7OB"/>
+                    <constraint firstAttribute="trailing" secondItem="Fhb-a9-jls" secondAttribute="trailing" constant="6" id="zMQ-M7-ux6"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="favoriteImageView" destination="Fhb-a9-jls" id="Lxm-JC-EMt"/>
                 <outlet property="headlineLabel" destination="vgH-Hn-dDc" id="3iF-aC-E6v"/>
                 <outlet property="thumbnailImageView" destination="9a5-EP-HCe" id="WfO-bR-Mhf"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="fav_on" width="60" height="130"/>
         <image name="image_logo_feature" width="686" height="320"/>
     </resources>
 </document>

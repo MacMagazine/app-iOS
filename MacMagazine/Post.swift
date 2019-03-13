@@ -62,6 +62,7 @@ public class Posts: NSManagedObject {
             newItem.podcastURL = post.podcastURL
             newItem.duration = post.duration
 			newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
+			newItem.favorite = false
 		}
 	}
 
@@ -114,5 +115,6 @@ extension Posts {
 	@NSManaged public var link: String
 	@NSManaged public var podcast: String
 	@NSManaged public var podcastURL: String
+	@NSManaged public var favorite: Bool
 
 }

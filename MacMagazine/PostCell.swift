@@ -19,6 +19,7 @@ class PostCell: UITableViewCell {
 	@IBOutlet private weak var subheadlineLabel: UILabel!
 	@IBOutlet private weak var lengthlineLabel: UILabel!
 	@IBOutlet private weak var thumbnailImageView: UIImageView!
+	@IBOutlet private weak var favoriteImageView: UIImageView!
 
 	fileprivate var player: AVPlayer?
 
@@ -45,6 +46,8 @@ class PostCell: UITableViewCell {
 
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
+
+		favoriteImageView.isHidden = !object.favorite
     }
 
 	func configureSearchPost(_ object: XMLPost) {
@@ -58,12 +61,16 @@ class PostCell: UITableViewCell {
 
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
+
+		favoriteImageView.isHidden = false
 	}
 
 	func configurePodcast(_ object: Posts) {
 		headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate.cellDate()
 		lengthlineLabel?.text = "duração: \(object.duration)"
+
+		favoriteImageView.isHidden = !object.favorite
 
 		if !object.podcastURL.isEmpty {
 			let podcastURL = object.podcastURL
@@ -81,6 +88,8 @@ class PostCell: UITableViewCell {
 		headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate.toDate(nil).cellDate()
 		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
+
+		favoriteImageView.isHidden = false
 
 		playButton.isEnabled = !object.podcastURL.isEmpty
 		if !object.podcastURL.isEmpty {

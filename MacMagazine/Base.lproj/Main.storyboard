@@ -364,12 +364,17 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" image="fav_on" id="mos-l0-Ml2">
+                            <connections>
+                                <action selector="showFavorites:" destination="Jej-5Q-aqJ" id="Xng-DI-R8j"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="6Bw-5M-aUL">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
-                            <action selector="getPosts" destination="Jej-5Q-aqJ" eventType="valueChanged" id="FI1-P5-bwj"/>
+                            <action selector="getPosts:" destination="Jej-5Q-aqJ" eventType="valueChanged" id="Ldp-GK-zoa"/>
                         </connections>
                     </refreshControl>
                     <connections>
@@ -483,6 +488,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fav_on" width="14" height="30"/>
         <image name="logo" width="80" height="80"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>

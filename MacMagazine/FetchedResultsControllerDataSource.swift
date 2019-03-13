@@ -78,6 +78,30 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return 0
 	}
 
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+		let favoritar = UIContextualAction(style: .normal, title: "Favoritar") {
+			_, _, boolValue in
+
+			guard let object = self.fetchedResultsController?.object(at: indexPath) else {
+				return
+			}
+			object.favorite = !object.favorite
+			DataController.sharedInstance.saveContext()
+			self.tableView?.reloadRows(at: [indexPath], with: .fade)
+
+			boolValue(true)
+		}
+
+		let compatilhar = UIContextualAction(style: .normal, title: "Compartilhar") {
+			_, _, boolValue in
+
+			boolValue(true)
+		}
+
+		return UISwipeActionsConfiguration(actions: [compatilhar, favoritar])
+	}
+
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		delegate?.willDisplayCell(indexPath: indexPath)
 	}

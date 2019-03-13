@@ -55,6 +55,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	private var resultsTableController: ResultsViewController?
 	var posts = [XMLPost]()
 
+	var showFavorites = false
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
@@ -105,7 +107,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		processSelection()
+		if fetchedResultsController.hasData() && !(self.refreshControl?.isRefreshing ?? true) {
+			processSelection()
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -120,20 +124,21 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
 										NSSortDescriptor(key: "pubDate", ascending: false)]
-		fetchRequest.predicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
+
+		let categoryPredicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
+		var favoritePredicate = NSPredicate(value: true)
+		if showFavorites {
+			favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
+		}
+		let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
+		fetchRequest.predicate = predicate
 
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "headerDate", cacheName: nil)
 
-		do {
-			try controller.performFetch()
-		} catch {
-			let fetchError = error as NSError
-			print("\(fetchError), \(fetchError.userInfo)")
-		}
-
 		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
 		fetchController.delegate = self
+		fetchController.reloadData()
 
 		return fetchController
 	}()
@@ -194,9 +199,18 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		}
 	}
 
-	@IBAction private func getPosts() {
+	// MARK: - Actions methods -
+
+	@IBAction private func getPosts(_ sender: Any) {
 		getPosts(paged: 0)
 	}
+
+	@IBAction private func showFavorites(_ sender: Any) {
+		showFavorites = !showFavorites
+		fetchedResultsController.reloadData()
+	}
+
+	// MARK: - Local methods -
 
 	fileprivate func getPosts(paged: Int) {
 		self.refreshControl?.beginRefreshing()

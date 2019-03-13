@@ -143,7 +143,7 @@ extension Theme {
             $0.borderColor = tint
         }
 
-        // SWITCH
+		// SWITCH
 
         UISwitch.appearance().onTintColor = onTint
 

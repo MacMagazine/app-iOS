@@ -54,17 +54,27 @@
                             <constraint firstAttribute="height" priority="750" constant="100.5" id="AyR-ML-Vst"/>
                         </constraints>
                     </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="2mt-5S-7M3">
+                        <rect key="frame" x="359" y="0.0" width="10" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="RkQ-Yc-m7v"/>
+                            <constraint firstAttribute="height" constant="21" id="Yhd-02-Yzn"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="a9B-FG-HPj" firstAttribute="top" secondItem="car-jf-2r8" secondAttribute="top" constant="16" id="16A-33-pUJ"/>
                     <constraint firstAttribute="bottom" secondItem="a9B-FG-HPj" secondAttribute="bottom" constant="16" id="Glm-I2-3oM"/>
+                    <constraint firstItem="2mt-5S-7M3" firstAttribute="top" secondItem="car-jf-2r8" secondAttribute="top" id="MI5-cd-NnY"/>
                     <constraint firstItem="a9B-FG-HPj" firstAttribute="leading" secondItem="car-jf-2r8" secondAttribute="leading" constant="16" id="MLQ-f8-GJb"/>
                     <constraint firstAttribute="trailing" secondItem="a9B-FG-HPj" secondAttribute="trailing" constant="16" id="Pws-gj-MEi"/>
+                    <constraint firstAttribute="trailing" secondItem="2mt-5S-7M3" secondAttribute="trailing" constant="6" id="RMM-dT-uBm"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </tableViewCellContentView>
             <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
             <connections>
+                <outlet property="favoriteImageView" destination="2mt-5S-7M3" id="mbL-wJ-ecl"/>
                 <outlet property="headlineLabel" destination="6Pt-cm-c6G" id="YYb-xK-JjE"/>
                 <outlet property="subheadlineLabel" destination="EMg-Si-BGK" id="jLM-UC-JgW"/>
                 <outlet property="thumbnailImageView" destination="RK1-pN-dtX" id="ldf-lc-8P0"/>
@@ -72,6 +82,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="fav_on" width="20" height="44"/>
         <image name="image_logo" width="144" height="200"/>
     </resources>
 </document>

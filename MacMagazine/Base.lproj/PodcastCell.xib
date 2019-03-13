@@ -74,17 +74,27 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k">
+                        <rect key="frame" x="359" y="0.0" width="10" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="QYw-WD-7Rk"/>
+                            <constraint firstAttribute="height" constant="21" id="bik-fu-VEU"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="wpR-by-Wrq" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" constant="16" id="Sc3-Mp-NUe"/>
                     <constraint firstAttribute="trailing" secondItem="wpR-by-Wrq" secondAttribute="trailing" constant="16" id="UZ1-El-pnm"/>
+                    <constraint firstItem="Lw1-da-P8k" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" id="WM3-mU-tQe"/>
                     <constraint firstAttribute="bottom" secondItem="wpR-by-Wrq" secondAttribute="bottom" constant="16" id="hBt-na-hCM"/>
+                    <constraint firstAttribute="trailing" secondItem="Lw1-da-P8k" secondAttribute="trailing" constant="6" id="wcw-rV-22N"/>
                     <constraint firstItem="wpR-by-Wrq" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="wp5-e9-0EY"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </tableViewCellContentView>
             <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
             <connections>
+                <outlet property="favoriteImageView" destination="Lw1-da-P8k" id="5fb-Q5-8qc"/>
                 <outlet property="headlineLabel" destination="hAk-1v-1ps" id="kmk-dB-AUq"/>
                 <outlet property="lengthlineLabel" destination="B5u-aS-IBP" id="XQW-76-ERM"/>
                 <outlet property="playButton" destination="bZM-HU-BxN" id="Rav-ig-lWB"/>
@@ -93,6 +103,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="fav_on" width="60" height="130"/>
         <image name="pause" width="500" height="500"/>
         <image name="play" width="500" height="500"/>
     </resources>
