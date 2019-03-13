@@ -42,7 +42,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	// MARK: - Properties -
 
-	let managedObjectContext = DataController.sharedInstance.managedObjectContext
+    var fetchController: FetchedResultsControllerDataSource?
 	var detailViewController: PostsDetailViewController?
 
 	var lastContentOffset = CGPoint()
@@ -56,13 +56,21 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var posts = [XMLPost]()
 
 	var showFavorites = false
+    let categoryPredicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
+    let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
-	// MARK: - View Lifecycle -
+    // MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
+        fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: "headerDate", featuredCellNib: "FeaturedCell")
+        fetchController?.delegate = self
+        fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
+                                                         NSSortDescriptor(key: "pubDate", ascending: false)]
+        fetchController?.fetchRequest.predicate = categoryPredicate
+
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
 		resultsTableController?.tableView.delegate = self
@@ -82,8 +90,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = true
-		super.viewWillAppear(animated)
+		clearsSelectionOnViewWillAppear = UIDevice.current.userInterfaceIdiom == .pad
+
+        super.viewWillAppear(animated)
 
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
 			$0.textAlignment = .center
@@ -92,12 +101,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			selectedIndexPath = nil
 		}
 
-		// Execute the fetch to display the data
-		fetchedResultsController.reloadData()
+        if !hasData() {
+            getPosts(paged: 0)
+        }
 
-		if fetchedResultsController.hasData() && !(self.refreshControl?.isRefreshing ?? true) {
-			getPosts(paged: 0)
-		}
+		// Execute the fetch to display the data
+		fetchController?.reloadData()
 
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
@@ -107,41 +116,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		if fetchedResultsController.hasData() && !(self.refreshControl?.isRefreshing ?? true) {
-			processSelection()
-		}
+		processSelection()
 	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
-
-	// MARK: - Fetched Results Controller Methods -
-
-	lazy var fetchedResultsController: FetchedResultsControllerDataSource = {
-		let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
-
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
-										NSSortDescriptor(key: "pubDate", ascending: false)]
-
-		let categoryPredicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
-		var favoritePredicate = NSPredicate(value: true)
-		if showFavorites {
-			favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
-		}
-		let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
-		fetchRequest.predicate = predicate
-
-		// Initialize Fetched Results Controller
-		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "headerDate", cacheName: nil)
-
-		let fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, fetchedResultsController: controller)
-		fetchController.delegate = self
-		fetchController.reloadData()
-
-		return fetchController
-	}()
 
 	// MARK: - Scroll detection -
 
@@ -160,7 +141,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 					return
 			}
 			controller.navigationItem.leftItemsSupplementBackButton = true
-			controller.post = fetchedResultsController.object(at: indexPath)
+			controller.post = fetchController?.object(at: indexPath)
 		}
 	}
 
@@ -186,7 +167,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	func configure(cell: PostCell, atIndexPath: IndexPath) {
-		guard let object = fetchedResultsController.object(at: atIndexPath) else {
+		guard let object = fetchController?.object(at: atIndexPath) else {
 			return
 		}
 		cell.configurePost(object)
@@ -207,10 +188,21 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	@IBAction private func showFavorites(_ sender: Any) {
 		showFavorites = !showFavorites
-		fetchedResultsController.reloadData()
+        if showFavorites {
+            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
+            fetchController?.fetchRequest.predicate = predicate
+        } else {
+            fetchController?.fetchRequest.predicate = categoryPredicate
+        }
+		fetchController?.reloadData()
+        tableView.reloadData()
 	}
 
 	// MARK: - Local methods -
+
+    fileprivate func hasData() -> Bool {
+        return (fetchController?.hasData() ?? false) && !(self.refreshControl?.isRefreshing ?? true)
+    }
 
 	fileprivate func getPosts(paged: Int) {
 		self.refreshControl?.beginRefreshing()
@@ -219,7 +211,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
             guard let post = post else {
 				DispatchQueue.main.async {
 					self.refreshControl?.endRefreshing()
-					self.fetchedResultsController.reloadData()
+					self.fetchController?.reloadData()
 					self.processSelection()
 				}
 				return
@@ -233,16 +225,18 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func processSelection() {
-		if UIDevice.current.userInterfaceIdiom == .pad {
-			guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {
-				self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-				self.fetchedResultsController.tableView(self.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
-				return
-			}
-			let indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
-			self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
-			fetchedResultsController.tableView(tableView, didSelectRowAt: indexPath)
-		}
+        if UIDevice.current.userInterfaceIdiom == .pad &&
+            tableView.numberOfSections > 0 {
+
+            guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {
+                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+                fetchController?.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+                return
+            }
+            let indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+            fetchController?.tableView(tableView, didSelectRowAt: indexPath)
+        }
 	}
 
 	fileprivate func isFiltering() -> Bool {

@@ -28,30 +28,26 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	fileprivate var tableView: UITableView?
 	fileprivate var fetchedResultsController: NSFetchedResultsController<Posts>?
+    fileprivate let managedObjectContext = DataController.sharedInstance.managedObjectContext
+    fileprivate var groupedBy: String?
+
+    public let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
 
 	// MARK: - Initialization methods -
 
-	init(withTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
-		super.init()
-		setup(tableView: tableView, fetchedResultsController: fetchedResultsController)
-		self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
-	}
+    init(withTable tableView: UITableView, group: String?, featuredCellNib: String) {
+        super.init()
+        self.groupedBy = group
+        setup(tableView: tableView)
+        self.tableView?.register(UINib(nibName: featuredCellNib, bundle: nil), forCellReuseIdentifier: "featuredCell")
+    }
 
-	init(withPodcastTable tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
-		super.init()
-		setup(tableView: tableView, fetchedResultsController: fetchedResultsController)
-		self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
-	}
-
-	func setup(tableView: UITableView, fetchedResultsController: NSFetchedResultsController<Posts>) {
-		self.tableView = tableView
-		self.tableView?.dataSource = self
-		self.tableView?.delegate = self
-		self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
-
-		self.fetchedResultsController = fetchedResultsController
-		self.fetchedResultsController?.delegate = self
-	}
+    func setup(tableView: UITableView) {
+        self.tableView = tableView
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = self
+        self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
+    }
 
 	// MARK: - TableView methods -
 
@@ -88,7 +84,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 			}
 			object.favorite = !object.favorite
 			DataController.sharedInstance.saveContext()
-			self.tableView?.reloadRows(at: [indexPath], with: .fade)
 
 			boolValue(true)
 		}
@@ -129,14 +124,17 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	func reloadData() {
 		// Execute the fetch to display the data
 		do {
-			try self.fetchedResultsController?.performFetch()
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: groupedBy, cacheName: nil)
+            fetchedResultsController?.delegate = self
+
+            try fetchedResultsController?.performFetch()
 		} catch {
 			print("An error occurred")
 		}
 	}
 
 	func hasData() -> Bool {
-		return fetchedResultsController?.fetchedObjects?.isEmpty ?? true
+		return !(fetchedResultsController?.fetchedObjects?.isEmpty ?? true)
 	}
 
 	func object(at indexPath: IndexPath) -> Posts? {

@@ -21,10 +21,10 @@
                         <rect key="frame" x="16" y="16" width="343" height="229.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="9a5-EP-HCe" userLabel="Thumbnail Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="343" height="160"/>
+                                <rect key="frame" x="0.0" y="0.0" width="343" height="171"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="tdK-tK-CSF"/>
+                                    <constraint firstAttribute="height" priority="750" constant="160" id="tdK-tK-CSF"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -33,7 +33,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgH-Hn-dDc" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="176" width="343" height="53.5"/>
+                                <rect key="frame" x="0.0" y="187" width="343" height="42.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -43,18 +43,18 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Fhb-a9-jls">
                         <rect key="frame" x="359" y="0.0" width="10" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="n9d-wA-pPk"/>
-                            <constraint firstAttribute="height" constant="21" id="x96-LZ-u9F"/>
+                            <constraint firstAttribute="height" constant="21" id="AZQ-kv-dyA"/>
+                            <constraint firstAttribute="width" constant="10" id="rh9-ly-ydf"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Fhb-a9-jls" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" id="LCM-vc-Qs8"/>
+                    <constraint firstAttribute="trailing" secondItem="Fhb-a9-jls" secondAttribute="trailing" constant="6" id="LJr-XO-6tR"/>
                     <constraint firstItem="Q13-km-nzu" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" constant="16" id="d41-1i-Mm0"/>
+                    <constraint firstItem="Fhb-a9-jls" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" id="djS-Zl-PgY"/>
                     <constraint firstAttribute="bottom" secondItem="Q13-km-nzu" secondAttribute="bottom" constant="16" id="eIx-yn-sPA"/>
                     <constraint firstItem="Q13-km-nzu" firstAttribute="leading" secondItem="AFJ-uX-4fX" secondAttribute="leading" constant="16" id="rzb-fg-fWC"/>
                     <constraint firstAttribute="trailing" secondItem="Q13-km-nzu" secondAttribute="trailing" constant="16" id="wZi-zE-7OB"/>
-                    <constraint firstAttribute="trailing" secondItem="Fhb-a9-jls" secondAttribute="trailing" constant="6" id="zMQ-M7-ux6"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </tableViewCellContentView>
@@ -66,7 +66,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="60" height="130"/>
+        <image name="fav_on" width="14" height="30"/>
         <image name="image_logo_feature" width="686" height="320"/>
     </resources>
 </document>

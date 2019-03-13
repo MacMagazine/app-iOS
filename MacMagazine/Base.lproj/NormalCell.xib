@@ -57,8 +57,8 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="2mt-5S-7M3">
                         <rect key="frame" x="359" y="0.0" width="10" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="RkQ-Yc-m7v"/>
-                            <constraint firstAttribute="height" constant="21" id="Yhd-02-Yzn"/>
+                            <constraint firstAttribute="height" constant="21" id="10V-bz-leO"/>
+                            <constraint firstAttribute="width" constant="10" id="P99-6P-QA4"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -82,7 +82,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="20" height="44"/>
+        <image name="fav_on" width="14" height="30"/>
         <image name="image_logo" width="144" height="200"/>
     </resources>
 </document>

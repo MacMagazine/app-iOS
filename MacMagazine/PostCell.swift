@@ -47,7 +47,7 @@ class PostCell: UITableViewCell {
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
 
-		favoriteImageView.isHidden = !object.favorite
+        favoriteImageView.alpha = (object.favorite ? 1 : 0)
     }
 
 	func configureSearchPost(_ object: XMLPost) {

@@ -473,6 +473,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" image="fav_on" id="DiB-v8-Kg9">
+                            <connections>
+                                <action selector="showFavorites:" destination="dI9-bf-84Z" id="yVB-Cm-1Ye"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="1RB-I0-yLe">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

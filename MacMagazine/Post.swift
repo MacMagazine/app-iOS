@@ -34,7 +34,24 @@ public class Posts: NSManagedObject {
 	class func insertOrUpdatePost(post: XMLPost) {
 		// Cannot duplicate links
         let item = self.getPost(byLink: post.link)
-		if !item.isEmpty {
+		if item.isEmpty {
+            guard let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entityName(), into: self.privateManagedObjectContext()) as? Posts else {
+                return
+            }
+
+            newItem.title = post.title
+            newItem.link = post.link
+            newItem.excerpt = post.excerpt
+            newItem.artworkURL = post.artworkURL
+            newItem.categorias = post.getCategorias()
+            newItem.pubDate = post.pubDate.toDate(nil)
+            newItem.podcast = post.podcast
+            newItem.podcastURL = post.podcastURL
+            newItem.duration = post.duration
+            newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
+            newItem.favorite = false
+
+        } else {
 			item[0].title = post.title
 			item[0].link = post.link
 			item[0].excerpt = post.excerpt
@@ -45,24 +62,6 @@ public class Posts: NSManagedObject {
             item[0].podcastURL = post.podcastURL
             item[0].duration = post.duration
 			item[0].headerDate = post.pubDate.toDate(nil).sortedDate()
-
-		} else {
-
-            guard let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entityName(), into: self.privateManagedObjectContext()) as? Posts else {
-                return
-            }
-
-			newItem.title = post.title
-			newItem.link = post.link
-			newItem.excerpt = post.excerpt
-			newItem.artworkURL = post.artworkURL
-			newItem.categorias = post.getCategorias()
-			newItem.pubDate = post.pubDate.toDate(nil)
-            newItem.podcast = post.podcast
-            newItem.podcastURL = post.podcastURL
-            newItem.duration = post.duration
-			newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
-			newItem.favorite = false
 		}
 	}
 
