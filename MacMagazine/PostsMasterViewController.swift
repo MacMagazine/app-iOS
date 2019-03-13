@@ -90,14 +90,14 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = UIDevice.current.userInterfaceIdiom == .pad
+		clearsSelectionOnViewWillAppear = Settings().isPad()
 
         super.viewWillAppear(animated)
 
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
 			$0.textAlignment = .center
 		}
-		if UIDevice.current.userInterfaceIdiom == .phone {
+		if Settings().isPhone() {
 			selectedIndexPath = nil
 		}
 
@@ -225,7 +225,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func processSelection() {
-        if UIDevice.current.userInterfaceIdiom == .pad &&
+        if Settings().isPad() &&
             tableView.numberOfSections > 0 {
 
             guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {

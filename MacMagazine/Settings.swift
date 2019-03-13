@@ -6,11 +6,19 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Settings {
 
-	func isDarkMode() -> Bool {
+    func isPhone() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .phone
+    }
+
+    func isPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+
+    func isDarkMode() -> Bool {
 		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
 			return false
 		}

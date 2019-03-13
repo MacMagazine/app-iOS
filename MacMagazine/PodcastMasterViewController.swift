@@ -81,12 +81,10 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 			if let indexPath = tableView.indexPathForSelectedRow {
-				guard let navController = segue.destination as? UINavigationController else {
-					return
-				}
-				guard let controller = navController.topViewController as? PostsDetailViewController else {
-					return
-				}
+                guard let navController = segue.destination as? UINavigationController,
+                    let controller = navController.topViewController as? PostsDetailViewController else {
+                        return
+                }
 				controller.post = fetchController?.object(at: indexPath)
 			}
 		}
