@@ -234,8 +234,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                 return
             }
             let indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
-            fetchController?.tableView(tableView, didSelectRowAt: indexPath)
+			if tableView.numberOfSections >= indexPath.section && tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
+				if hasData() && !(self.refreshControl?.isRefreshing ?? false) {
+					tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+					fetchController?.tableView(tableView, didSelectRowAt: indexPath)
+				}
+			}
         }
 	}
 

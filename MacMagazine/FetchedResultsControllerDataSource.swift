@@ -27,11 +27,18 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	weak var delegate: FetchedResultsControllerDelegate?
 
 	fileprivate var tableView: UITableView?
-	fileprivate var fetchedResultsController: NSFetchedResultsController<Posts>?
     fileprivate let managedObjectContext = DataController.sharedInstance.managedObjectContext
     fileprivate var groupedBy: String?
 
     public let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+
+	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Posts> in
+		// Initialize Fetched Results Controller
+		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+		controller.delegate = self
+
+		return controller
+	}()
 
 	// MARK: - Initialization methods -
 
@@ -52,14 +59,14 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	// MARK: - TableView methods -
 
 	func numberOfSections(in tableView: UITableView) -> Int {
-		if let sections = self.fetchedResultsController?.sections {
+		if let sections = self.fetchedResultsController.sections {
 			return sections.count
 		}
 		return 0
 	}
 
 	private func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if let sections = fetchedResultsController?.sections {
+		if let sections = fetchedResultsController.sections {
 			let currentSection = sections[section]
 			return currentSection.name.toHeaderDate()
 		}
@@ -67,7 +74,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if let sections = self.fetchedResultsController?.sections {
+		if let sections = self.fetchedResultsController.sections {
 			let sectionInfo = sections[section]
 			return sectionInfo.numberOfObjects
 		}
@@ -79,9 +86,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		let favoritar = UIContextualAction(style: .normal, title: "Favoritar") {
 			_, _, boolValue in
 
-			guard let object = self.fetchedResultsController?.object(at: indexPath) else {
-				return
-			}
+			let object = self.fetchedResultsController.object(at: indexPath)
 			object.favorite = !object.favorite
 			DataController.sharedInstance.saveContext()
 
@@ -103,8 +108,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		var identifier = "normalCell"
-		let object = fetchedResultsController?.object(at: indexPath)
-		if object?.categorias.contains("Destaques") ?? false {
+		let object = fetchedResultsController.object(at: indexPath)
+		if object.categorias.contains("Destaques") {
 			identifier = "featuredCell"
 		}
 
@@ -125,20 +130,20 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		// Execute the fetch to display the data
 		do {
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: groupedBy, cacheName: nil)
-            fetchedResultsController?.delegate = self
+            fetchedResultsController.delegate = self
 
-            try fetchedResultsController?.performFetch()
+            try fetchedResultsController.performFetch()
 		} catch {
 			print("An error occurred")
 		}
 	}
 
 	func hasData() -> Bool {
-		return !(fetchedResultsController?.fetchedObjects?.isEmpty ?? true)
+		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
 	}
 
 	func object(at indexPath: IndexPath) -> Posts? {
-		return fetchedResultsController?.object(at: indexPath)
+		return fetchedResultsController.object(at: indexPath)
 	}
 
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
