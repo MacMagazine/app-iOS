@@ -29,8 +29,18 @@ class CoreDataStack {
 			}
 			fatalError("Unresolved error: \(error), \(error.userInfo)")
 		}
+
+		container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+		container.viewContext.undoManager = nil
+		container.viewContext.shouldDeleteInaccessibleFaults = true
+		container.viewContext.automaticallyMergesChangesFromParent = true
+
 		return container
 	}()
+
+	var viewContext: NSManagedObjectContext {
+		return persistentContainer.viewContext
+	}
 
 	// MARK: - Context Methods -
 
@@ -39,7 +49,7 @@ class CoreDataStack {
 	}
 
 	func save(_ context: NSManagedObjectContext?) {
-		let desiredContext = context ?? persistentContainer.viewContext
+		let desiredContext = context ?? viewContext
 		if desiredContext.hasChanges {
 			do {
 				try desiredContext.save()
@@ -62,7 +72,7 @@ class CoreDataStack {
 				}
 
 				// Updates the main context
-				NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.persistentContainer.viewContext])
+				NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
 
 			} catch {
 				fatalError("Failed to execute request: \(error)")
@@ -99,7 +109,6 @@ class CoreDataStack {
 			} else {
 				self.update(post: items[0], with: post)
 				self.save(context)
-				self.save()
 			}
 		}
 	}
@@ -120,7 +129,6 @@ class CoreDataStack {
 			newItem.favorite = false
 
 			self.save(privateManagedObjectContext)
-			self.save()
 		}
 	}
 

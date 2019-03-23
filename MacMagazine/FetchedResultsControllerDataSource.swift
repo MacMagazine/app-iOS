@@ -27,7 +27,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	weak var delegate: FetchedResultsControllerDelegate?
 
 	fileprivate var tableView: UITableView?
-    fileprivate let managedObjectContext = CoreDataStack.shared.persistentContainer.viewContext
+    fileprivate let managedObjectContext = CoreDataStack.shared.viewContext
     fileprivate var groupedBy: String?
 
     public let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
