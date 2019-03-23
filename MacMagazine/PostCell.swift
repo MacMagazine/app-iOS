@@ -62,7 +62,7 @@ class PostCell: UITableViewCell {
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
 
-		favoriteImageView.isHidden = false
+		favoriteImageView.isHidden = true
 	}
 
 	func configurePodcast(_ object: Posts) {
@@ -89,7 +89,7 @@ class PostCell: UITableViewCell {
 		subheadlineLabel?.text = object.pubDate.toDate(nil).cellDate()
 		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
 
-		favoriteImageView.isHidden = false
+		favoriteImageView.isHidden = true
 
 		playButton.isEnabled = !object.podcastURL.isEmpty
 		if !object.podcastURL.isEmpty {

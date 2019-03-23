@@ -65,16 +65,9 @@ class DataController: NSObject {
 
 	func saveContext () {
 		do {
-			try self.privateManagedObjectContext.save()
-			self.managedObjectContext.perform {
-				do {
-					try self.managedObjectContext.save()
-				} catch let err as NSError {
-					print("Could not save main context: \(err.localizedDescription)")
-				}
-			}
+			try self.managedObjectContext.save()
 		} catch let err as NSError {
-			print("Could not save private context: \(err.localizedDescription)")
+			print("Could not save main context: \(err.localizedDescription)")
 		}
 	}
 

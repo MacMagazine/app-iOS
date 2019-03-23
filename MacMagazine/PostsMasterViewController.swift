@@ -217,8 +217,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 				return
             }
 
-			Posts.insertOrUpdatePost(post: post)
-            DataController.sharedInstance.saveContext()
+			DispatchQueue.main.async {
+				Posts.insertOrUpdatePost(post: post)
+				DataController.sharedInstance.saveContext()
+			}
         }
 
 		API().getPosts(page: paged, processResponse)

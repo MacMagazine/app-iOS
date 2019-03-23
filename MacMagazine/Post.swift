@@ -14,14 +14,14 @@ import UIKit
 public class Posts: NSManagedObject {
 
 	class func getPost(byLink: String) -> [Posts] {
-        var item = [Posts]()
+		var item = [Posts]()
 
 		do {
-            // Execute the fetch request
-            let request: NSFetchRequest<Posts> = Posts.fetchRequest()
-            request.predicate = NSPredicate(format: "link == %@", byLink)
+			// Execute the fetch request
+			let request: NSFetchRequest<Posts> = Posts.fetchRequest()
+			request.predicate = NSPredicate(format: "link == %@", byLink)
 
-            let results = try self.privateManagedObjectContext().fetch(request)
+			let results = try self.managedObjectContext().fetch(request)
 			item = results
 
 		} catch let error as NSError {
@@ -33,51 +33,52 @@ public class Posts: NSManagedObject {
 
 	class func insertOrUpdatePost(post: XMLPost) {
 		// Cannot duplicate links
-        let item = self.getPost(byLink: post.link)
+		let item = self.getPost(byLink: post.link)
 		if item.isEmpty {
-            guard let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entityName(), into: self.privateManagedObjectContext()) as? Posts else {
-                return
-            }
+			guard let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entityName(), into: self.managedObjectContext()) as? Posts else {
+				return
+			}
+			newItem.title = post.title
+			newItem.link = post.link
+			newItem.excerpt = post.excerpt
+			newItem.artworkURL = post.artworkURL
+			newItem.categorias = post.getCategorias()
+			newItem.pubDate = post.pubDate.toDate(nil)
+			newItem.podcast = post.podcast
+			newItem.podcastURL = post.podcastURL
+			newItem.duration = post.duration
+			newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
+			newItem.favorite = false
 
-            newItem.title = post.title
-            newItem.link = post.link
-            newItem.excerpt = post.excerpt
-            newItem.artworkURL = post.artworkURL
-            newItem.categorias = post.getCategorias()
-            newItem.pubDate = post.pubDate.toDate(nil)
-            newItem.podcast = post.podcast
-            newItem.podcastURL = post.podcastURL
-            newItem.duration = post.duration
-            newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
-            newItem.favorite = false
-
-        } else {
+		} else {
 			item[0].title = post.title
 			item[0].link = post.link
 			item[0].excerpt = post.excerpt
 			item[0].artworkURL = post.artworkURL
 			item[0].categorias = post.getCategorias()
 			item[0].pubDate = post.pubDate.toDate(nil)
-            item[0].podcast = post.podcast
-            item[0].podcastURL = post.podcastURL
-            item[0].duration = post.duration
+			item[0].podcast = post.podcast
+			item[0].podcastURL = post.podcastURL
+			item[0].duration = post.duration
 			item[0].headerDate = post.pubDate.toDate(nil).sortedDate()
 		}
 	}
 
 	class func deleteAll() {
-		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName())
-		fetchRequest.returnsObjectsAsFaults = false
-		do {
-			let results = try self.privateManagedObjectContext().fetch(fetchRequest)
-			for object in results {
-				guard let objectData = object as? NSManagedObject else {
-					continue
+		DispatchQueue.main.async {
+			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName())
+			fetchRequest.returnsObjectsAsFaults = false
+			do {
+				let results = try self.managedObjectContext().fetch(fetchRequest)
+				for object in results {
+					guard let objectData = object as? NSManagedObject else {
+						continue
+					}
+					self.managedObjectContext().delete(objectData)
 				}
-				self.privateManagedObjectContext().delete(objectData)
+			} catch {
+				print("Detele all data error:", error)
 			}
-		} catch {
-			print("Detele all data error:", error)
 		}
 	}
 
