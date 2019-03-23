@@ -59,26 +59,26 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	// MARK: - TableView methods -
 
 	func numberOfSections(in tableView: UITableView) -> Int {
-		if let sections = self.fetchedResultsController.sections {
-			return sections.count
+		guard let sections = self.fetchedResultsController.sections else {
+			return 0
 		}
-		return 0
+		return sections.count
 	}
 
-	private func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if let sections = fetchedResultsController.sections {
-			let currentSection = sections[section]
-			return currentSection.name.toHeaderDate()
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		guard let sections = fetchedResultsController.sections else {
+			return nil
 		}
-		return nil
+		let currentSection = sections[section]
+		return currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate()
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if let sections = self.fetchedResultsController.sections {
-			let sectionInfo = sections[section]
-			return sectionInfo.numberOfObjects
+		guard let sections = self.fetchedResultsController.sections else {
+			return 0
 		}
-		return 0
+		let sectionInfo = sections[section]
+		return sectionInfo.numberOfObjects
 	}
 
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
