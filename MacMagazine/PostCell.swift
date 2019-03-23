@@ -35,19 +35,22 @@ class PostCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configurePost(_ object: Posts) {
+    func configurePost(_ object: Post) {
         headlineLabel?.text = object.title
 
-        if object.categorias.contains("Destaques") == false {
+		if object.categorias?.contains("Destaques") == false {
             if subheadlineLabel != nil {
                 subheadlineLabel?.text = object.excerpt
             }
         }
 
-        thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
+		favoriteImageView.alpha = (object.favorite ? 1 : 0)
 
-        favoriteImageView.alpha = (object.favorite ? 1 : 0)
+		guard let artworkURL = object.artworkURL else {
+			return
+		}
+        thumbnailImageView.kf.indicatorType = .activity
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_Logo"))
     }
 
 	func configureSearchPost(_ object: XMLPost) {
@@ -65,15 +68,17 @@ class PostCell: UITableViewCell {
 		favoriteImageView.isHidden = true
 	}
 
-	func configurePodcast(_ object: Posts) {
+	func configurePodcast(_ object: Post) {
 		headlineLabel?.text = object.title
-		subheadlineLabel?.text = object.pubDate.cellDate()
-		lengthlineLabel?.text = "duração: \(object.duration)"
+		subheadlineLabel?.text = object.pubDate?.cellDate()
+		lengthlineLabel?.text = "duração: \(object.duration ?? "-")"
 
 		favoriteImageView.isHidden = !object.favorite
 
-		if !object.podcastURL.isEmpty {
-			let podcastURL = object.podcastURL
+		guard let podcastURL = object.podcastURL else {
+			return
+		}
+		if !podcastURL.isEmpty {
 			guard let url = URL(string: podcastURL) else {
 				return
 			}

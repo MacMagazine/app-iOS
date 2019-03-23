@@ -207,23 +207,18 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	fileprivate func getPosts(paged: Int) {
 		self.refreshControl?.beginRefreshing()
 
-		let processResponse: (XMLPost?) -> Void = { post in
-            guard let post = post else {
+		API().getPosts(page: paged) { post in
+			guard let post = post else {
 				DispatchQueue.main.async {
 					self.refreshControl?.endRefreshing()
 					self.fetchController?.reloadData()
 					self.processSelection()
 				}
 				return
-            }
-
-			DispatchQueue.main.async {
-				Posts.insertOrUpdatePost(post: post)
-				DataController.sharedInstance.saveContext()
 			}
-        }
 
-		API().getPosts(page: paged, processResponse)
+			CoreDataStack.shared.save(post: post)
+		}
 	}
 
 	fileprivate func processSelection() {

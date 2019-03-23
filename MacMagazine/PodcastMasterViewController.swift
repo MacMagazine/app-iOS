@@ -161,10 +161,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 				return
 			}
 
-			DispatchQueue.main.async {
-				Posts.insertOrUpdatePost(post: post)
-				DataController.sharedInstance.saveContext()
-			}
+			CoreDataStack.shared.save(post: post)
 		}
 		API().getPodcasts(page: paged, processResponse)
 	}

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
+		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
 		9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
@@ -22,9 +23,6 @@
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B77E4F220E4389A00B015B6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B36839D20C5D66000925E76 /* Kingfisher.framework */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
-		9BABAC291F618F4A0052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
-		9BABAC2E1F6190620052063A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC2D1F6190620052063A /* Post.swift */; };
-		9BABAC311F61A4270052063A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BABAC281F618F4A0052063A /* DataController.swift */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
@@ -73,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9B0DD4492226BAF60016C567 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9B0DD44B2226E9320016C567 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		9B0DD44E2226FD150016C567 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -84,8 +83,6 @@
 		9B4A8FA622357A0D00A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PodcastCell.xib; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
-		9BABAC281F618F4A0052063A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		9BABAC2D1F6190620052063A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -167,8 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */,
-				9BABAC281F618F4A0052063A /* DataController.swift */,
-				9BABAC2D1F6190620052063A /* Post.swift */,
+				9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -452,14 +448,12 @@
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
-				9BABAC291F618F4A0052063A /* DataController.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */,
 				9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */,
 				9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */,
 				9B0DD44A2226BAF60016C567 /* API.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
-				9BABAC2E1F6190620052063A /* Post.swift in Sources */,
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
@@ -470,6 +464,7 @@
 				9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
 				9BD135E8222804E500A0B627 /* UITableViewCellTheme.swift in Sources */,
+				9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */,
 				9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +473,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BABAC311F61A4270052063A /* DataController.swift in Sources */,
 				9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */,
 				9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */,
 			);

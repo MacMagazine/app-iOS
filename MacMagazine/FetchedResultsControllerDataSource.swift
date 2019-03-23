@@ -27,12 +27,12 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	weak var delegate: FetchedResultsControllerDelegate?
 
 	fileprivate var tableView: UITableView?
-    fileprivate let managedObjectContext = DataController.sharedInstance.managedObjectContext
+    fileprivate let managedObjectContext = CoreDataStack.shared.persistentContainer.viewContext
     fileprivate var groupedBy: String?
 
-    public let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+    public let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 
-	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Posts> in
+	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Post> in
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
 		controller.delegate = self
@@ -88,7 +88,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 			let object = self.fetchedResultsController.object(at: indexPath)
 			object.favorite = !object.favorite
-			DataController.sharedInstance.saveContext()
+			CoreDataStack.shared.save()
 
 			boolValue(true)
 		}
@@ -109,7 +109,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		var identifier = "normalCell"
 		let object = fetchedResultsController.object(at: indexPath)
-		if object.categorias.contains("Destaques") {
+		if object.categorias?.contains("Destaques") ?? false {
 			identifier = "featuredCell"
 		}
 
@@ -142,7 +142,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
 	}
 
-	func object(at indexPath: IndexPath) -> Posts? {
+	func object(at indexPath: IndexPath) -> Post? {
 		return fetchedResultsController.object(at: indexPath)
 	}
 

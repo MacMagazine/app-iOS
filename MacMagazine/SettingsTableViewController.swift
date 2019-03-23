@@ -56,8 +56,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
 	@IBAction private func clearCache(_ sender: Any) {
 		// Delete all posts and podcasts
-		Posts.deleteAll()
-		DataController.sharedInstance.saveContext()
+		CoreDataStack.shared.flush()
 
 		// Delete all downloaded images
 		ImageCache.default.clearDiskCache()

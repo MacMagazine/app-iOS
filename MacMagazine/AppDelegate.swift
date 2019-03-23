@@ -11,7 +11,10 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
+	// MARK: - Properties -
 	var window: UIWindow?
+
+	// MARK: - Window lifecycle -
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -32,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		return true
 	}
 
-	// MARK: - Split view
+	// MARK: - Splitview Delegate -
 
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
 		guard let secondaryAsNavController = secondaryViewController as? UINavigationController,
@@ -46,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		}
 		return false
 	}
+
+	// MARK: - Theme -
 
     fileprivate func applyTheme() {
         guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
