@@ -102,6 +102,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		}
 
         if !hasData() {
+			lastPage = -1
             getPosts(paged: 0)
         }
 
@@ -208,16 +209,16 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		self.refreshControl?.beginRefreshing()
 
 		API().getPosts(page: paged) { post in
-			guard let post = post else {
-				DispatchQueue.main.async {
+			DispatchQueue.main.async {
+				guard let post = post else {
 					self.refreshControl?.endRefreshing()
 					self.fetchController?.reloadData()
 					self.processSelection()
+					return
 				}
-				return
-			}
 
-			CoreDataStack.shared.save(post: post)
+				CoreDataStack.shared.save(post: post)
+			}
 		}
 	}
 

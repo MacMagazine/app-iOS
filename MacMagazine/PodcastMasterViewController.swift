@@ -61,6 +61,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		super.viewWillAppear(animated)
 
         if !hasData() {
+			lastPage = -1
 			getPodcasts(paged: 0)
 		}
         // Execute the fetch to display the data
@@ -149,21 +150,18 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     }
 
 	fileprivate func getPodcasts(paged: Int) {
-
 		self.refreshControl?.beginRefreshing()
 
-		let processResponse: (XMLPost?) -> Void = { post in
-			guard let post = post else {
-				DispatchQueue.main.async {
+		API().getPodcasts(page: paged) { post in
+			DispatchQueue.main.async {
+				guard let post = post else {
 					self.refreshControl?.endRefreshing()
 					self.fetchController?.reloadData()
+					return
 				}
-				return
+				CoreDataStack.shared.save(post: post)
 			}
-
-			CoreDataStack.shared.save(post: post)
 		}
-		API().getPodcasts(page: paged, processResponse)
 	}
 
 	fileprivate func isFiltering() -> Bool {
