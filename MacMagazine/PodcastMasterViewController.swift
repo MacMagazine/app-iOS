@@ -17,7 +17,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	var detailViewController: PostsDetailViewController?
 
 	var lastContentOffset = CGPoint()
-	var direction: Direction = .down
+	var direction: Direction = .up
 	var lastPage = -1
 
 	private var searchController: UISearchController?
@@ -54,7 +54,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		getPodcasts(paged: 0)
+		// Execute the fetch to display the data
+		fetchController?.reloadData()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -64,8 +65,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 			lastPage = -1
 			getPodcasts(paged: 0)
 		}
-        // Execute the fetch to display the data
-        fetchController?.reloadData()
 
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)

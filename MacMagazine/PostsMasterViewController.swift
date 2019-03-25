@@ -46,7 +46,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var detailViewController: PostsDetailViewController?
 
 	var lastContentOffset = CGPoint()
-	var direction: Direction = .down
+	var direction: Direction = .up
 	var lastPage = -1
 
 	var selectedIndexPath: IndexPath?
@@ -86,7 +86,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		getPosts(paged: 0)
+		// Execute the fetch to display the data
+		fetchController?.reloadData()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -105,9 +106,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			lastPage = -1
             getPosts(paged: 0)
         }
-
-		// Execute the fetch to display the data
-		fetchController?.reloadData()
 
 		if self.refreshControl?.isRefreshing ?? true {
 			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)

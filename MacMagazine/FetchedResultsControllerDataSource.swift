@@ -13,6 +13,7 @@ protocol FetchedResultsControllerDelegate: AnyObject {
 	func willDisplayCell(indexPath: IndexPath)
 	func didSelectRowAt(indexPath: IndexPath)
 	func configure(cell: PostCell, atIndexPath: IndexPath)
+	func scrollViewDidScroll(_ scrollView: UIScrollView)
 }
 
 extension FetchedResultsControllerDelegate {
@@ -55,6 +56,12 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.delegate = self
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
     }
+
+	// MARK: - Scroll detection -
+
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		delegate?.scrollViewDidScroll(scrollView)
+	}
 
 	// MARK: - TableView methods -
 
