@@ -193,6 +193,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 			if let newIndexPath = newIndexPath {
 				tableView?.insertRows(at: [newIndexPath], with: .fade)
 			}
+		@unknown default:
+			break
 		}
 	}
 
