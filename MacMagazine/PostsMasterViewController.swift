@@ -50,6 +50,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var lastPage = -1
 
 	var selectedIndexPath: IndexPath?
+	var link: String?
 
 	private var searchController: UISearchController?
 	private var resultsTableController: ResultsViewController?
@@ -73,7 +74,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
-		resultsTableController?.tableView.delegate = self
 		resultsTableController?.isPodcast = false
 
 		searchController = UISearchController(searchResultsController: resultsTableController)
@@ -134,13 +134,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let indexPath = tableView.indexPathForSelectedRow {
+		if tableView.indexPathForSelectedRow != nil {
 			guard let navController = segue.destination as? UINavigationController,
 				let controller = navController.topViewController as? PostsDetailViewController else {
 					return
 			}
 			controller.navigationItem.leftItemsSupplementBackButton = true
-			controller.post = fetchController?.object(at: indexPath)
+			controller.link = link
 		}
 	}
 
@@ -156,15 +156,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		}
 	}
 
-	func didSelectRowAt(indexPath: IndexPath) {
-		if selectedIndexPath != indexPath {
-			self.performSegue(withIdentifier: "showDetail", sender: self)
-			selectedIndexPath = indexPath
-			UserDefaults.standard.set(["row": indexPath.row, "section": indexPath.section], forKey: "selectedIndexPath")
-			UserDefaults.standard.synchronize()
-		}
-	}
-
 	func configure(cell: PostCell, atIndexPath: IndexPath) {
 		guard let object = fetchController?.object(at: atIndexPath) else {
 			return
@@ -172,11 +163,34 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		cell.configurePost(object)
 	}
 
+	func didSelectRowAt(indexPath: IndexPath) {
+		if selectedIndexPath != indexPath {
+			guard let post = fetchController?.object(at: indexPath),
+				let link = post.link
+				else {
+					return
+			}
+
+			self.link = link
+			selectedIndexPath = indexPath
+			self.performSegue(withIdentifier: "showDetail", sender: self)
+
+			UserDefaults.standard.set(["row": indexPath.row, "section": indexPath.section], forKey: "selectedIndexPath")
+			UserDefaults.standard.synchronize()
+		}
+	}
+
 	func configureResult(cell: PostCell, atIndexPath: IndexPath) {
 		if !posts.isEmpty {
 			let object = posts[atIndexPath.row]
 			cell.configureSearchPost(object)
 		}
+	}
+
+	func didSelectResultRowAt(indexPath: IndexPath) {
+		let post = posts[indexPath.row]
+		self.link = post.link
+		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
 
 	// MARK: - Actions methods -

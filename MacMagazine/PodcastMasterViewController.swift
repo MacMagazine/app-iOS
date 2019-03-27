@@ -80,12 +80,12 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
-			if let indexPath = tableView.indexPathForSelectedRow {
+			if tableView.indexPathForSelectedRow != nil {
                 guard let navController = segue.destination as? UINavigationController,
                     let controller = navController.topViewController as? PostsDetailViewController else {
                         return
                 }
-				controller.post = fetchController?.object(at: indexPath)
+				controller.link = ""
 			}
 		}
 	}
@@ -124,7 +124,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		}
 	}
 
-    // MARK: - Actions methods -
+	// MARK: - Actions methods -
 
 	@IBAction private func getPodcasts() {
 		getPodcasts(paged: 0)

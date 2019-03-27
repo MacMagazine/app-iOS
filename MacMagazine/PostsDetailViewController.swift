@@ -16,7 +16,7 @@ class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 	@IBOutlet private weak var webView: WKWebView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
-	var post: Post? {
+	var link: String? {
 		didSet {
 			configureView()
 		}
@@ -49,8 +49,7 @@ class PostsDetailViewController: UIViewController, WKNavigationDelegate {
 
 	func configureView() {
 		// Update the user interface for the detail item.
-		guard let post = post,
-			let link = post.link,
+		guard let link = link,
 			let url = URL(string: link)
 			else {
 				return
