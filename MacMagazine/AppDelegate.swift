@@ -43,11 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 			else {
 				return false
 		}
-		if topAsDetailController.links == [] {
-			// Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-			return true
-		}
-		return false
+		return topAsDetailController.links.isEmpty
 	}
 
 	// MARK: - Theme -

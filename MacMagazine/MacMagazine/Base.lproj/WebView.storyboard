@@ -38,6 +38,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="mof-85-jGR"/>
                     <connections>
+                        <outlet property="share" destination="dA3-eY-eOM" id="eFL-mL-ZYw"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
                         <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>
                     </connections>
@@ -47,6 +48,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
+                <barButtonItem systemItem="action" id="dA3-eY-eOM">
+                    <connections>
+                        <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1294" y="-2116"/>
         </scene>

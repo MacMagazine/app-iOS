@@ -14,6 +14,7 @@ protocol FetchedResultsControllerDelegate: AnyObject {
 	func didSelectRowAt(indexPath: IndexPath)
 	func configure(cell: PostCell, atIndexPath: IndexPath)
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
+	func showActionSheet(items: [Any])
 }
 
 extension FetchedResultsControllerDelegate {
@@ -97,6 +98,17 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 		let compatilhar = UIContextualAction(style: .normal, title: nil) {
 			_, _, boolValue in
+
+			let post = self.fetchedResultsController.object(at: indexPath)
+			guard let link = post.link,
+				let url = URL(string: link)
+				else {
+					boolValue(true)
+					return
+			}
+
+			let items: [Any] = [post.title ?? "", url]
+			self.delegate?.showActionSheet(items: items)
 
 			boolValue(true)
 		}
@@ -216,13 +228,13 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return fetchedResultsController.object(at: indexPath)
 	}
 
-	func links() -> [String?] {
+	func links() -> [PostData] {
 		guard let posts = fetchedResultsController.fetchedObjects else {
 			return []
 		}
-		var response = [String?]()
+		var response = [PostData]()
 		for post in posts {
-			response.append(post.link)
+			response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL))
 		}
 		return response
 	}

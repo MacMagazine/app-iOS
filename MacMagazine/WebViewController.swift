@@ -15,8 +15,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 
 	@IBOutlet private weak var webView: WKWebView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
+	@IBOutlet private weak var share: UIBarButtonItem!
 
-	var link: String? {
+	var post: PostData? {
 		didSet {
 			configureView()
 		}
@@ -38,12 +39,13 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	// MARK: - WebView Delegate -
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		self.parent?.navigationItem.rightBarButtonItem = nil
+		self.parent?.navigationItem.rightBarButtonItem = share
 	}
 
 	func configureView() {
 		// Update the user interface for the detail item.
-		guard let link = link,
+		guard let post = post,
+			let link = post.link,
 			let url = URL(string: link)
 			else {
 				return
@@ -53,6 +55,21 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		let request = URLRequest(url: url)
 		webView?.load(request)
 		webView?.allowsBackForwardNavigationGestures = false
+	}
+
+	// MARK: - Actions -
+
+	@IBAction private func share(_ sender: Any) {
+		guard let post = post,
+			let link = post.link,
+			let url = URL(string: link)
+			else {
+				return
+		}
+
+		let items: [Any] = [post.title ?? "", url]
+		let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+		present(ac, animated: true)
 	}
 
 }

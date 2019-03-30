@@ -389,7 +389,20 @@
         <scene sceneID="fYa-LD-1Wl">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="qRi-qc-cAu"/>
+                    <navigationItem key="navigationItem" id="qRi-qc-cAu">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="2RS-0E-jz0">
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Ii-zjF">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </navigationItem>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGQ-1P-xj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

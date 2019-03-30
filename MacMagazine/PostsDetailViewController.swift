@@ -13,11 +13,11 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 	// MARK: - Properties -
 
 	var selectedIndex = 0
-	var links = [String?]()
+	var links: [PostData] = []
 
 	private(set) lazy var orderedViewControllers: [UIViewController] = {
-		return links.map { link in
-			createWebViewController(link: link ?? "") ?? UIViewController()
+		return links.map { post in
+			createWebViewController(post: post) ?? UIViewController()
 		}
 	}()
 
@@ -83,14 +83,17 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	// MARK: - View methods -
 
-	func createWebViewController(link: String) -> UIViewController? {
+	func createWebViewController(post: PostData) -> UIViewController? {
 		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
 		guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
 			return nil
 		}
-		controller.link = link
+		controller.post = post
 
 		return controller
 	}
 
+	public func share(_ index: Int) {
+		print(index)
+	}
 }

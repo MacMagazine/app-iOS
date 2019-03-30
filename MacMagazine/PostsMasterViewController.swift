@@ -29,11 +29,23 @@ extension UITableView {
 	}
 }
 
-// MARK: - Enums -
+// MARK: -
 
 enum Direction {
 	case down
 	case up
+}
+
+struct PostData {
+	var title: String?
+	var link: String?
+	var thumbnail: String?
+
+	init(title: String?, link: String?, thumbnail: String?) {
+		self.title = title
+		self.link = link
+		self.thumbnail = thumbnail
+	}
 }
 
 // MARK: -
@@ -50,7 +62,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var lastPage = -1
 
 	var selectedIndexPath: IndexPath?
-	var links = [String?]()
+	var links: [PostData] = []
 
 	private var searchController: UISearchController?
 	private var resultsTableController: ResultsViewController?
@@ -138,19 +150,23 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			guard let navController = segue.destination as? UINavigationController,
 				let controller = navController.topViewController as? PostsDetailViewController,
 				let indexPath = selectedIndexPath,
-				let post = fetchController?.object(at: indexPath),
-				let link = post.link
+				let post = fetchController?.object(at: indexPath)
 				else {
 					return
 			}
 
 			controller.navigationItem.leftItemsSupplementBackButton = true
-			controller.selectedIndex = links.firstIndex(of: link) ?? 0
+			controller.selectedIndex = links.firstIndex(where: { $0.link == post.link }) ?? 0
 			controller.links = links
 		}
 	}
 
 	// MARK: - View Methods -
+
+	func showActionSheet(items: [Any]) {
+		let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+		present(ac, animated: true)
+	}
 
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
@@ -189,7 +205,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectResultRowAt(indexPath: IndexPath) {
 		selectedIndexPath = indexPath
-		self.links = posts.map { $0.link }
+		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL) }
 		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
 

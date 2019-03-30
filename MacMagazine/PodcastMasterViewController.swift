@@ -100,6 +100,11 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	// MARK: - View Methods -
 
+	func showActionSheet(items: [Any]) {
+		let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+		present(ac, animated: true)
+	}
+	
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
