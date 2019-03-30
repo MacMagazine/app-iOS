@@ -17,7 +17,15 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	private(set) lazy var orderedViewControllers: [UIViewController] = {
 		return links.map { post in
-			createWebViewController(post: post) ?? UIViewController()
+			if let vc = self.parent as? PostsMasterViewController {
+				// Comes from table.didSelect
+				return vc.createWebViewController(post: post) ?? UIViewController()
+			} else if let vc = self.parent?.parent?.children[0] as? PostsMasterViewController {
+				// Comes from Peek&Pop
+				return vc.createWebViewController(post: post) ?? UIViewController()
+			} else {
+				return UIViewController()
+			}
 		}
 	}()
 
@@ -82,16 +90,6 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 	}
 
 	// MARK: - View methods -
-
-	func createWebViewController(post: PostData) -> UIViewController? {
-		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
-		guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
-			return nil
-		}
-		controller.post = post
-
-		return controller
-	}
 
 	public func share(_ index: Int) {
 		print(index)

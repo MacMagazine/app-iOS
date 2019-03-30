@@ -29,6 +29,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
     	// Do any additional setup after loading the view.
 		webView?.navigationDelegate = self
+		self.parent?.navigationItem.rightBarButtonItem = share
 
 		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
 		webView.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"

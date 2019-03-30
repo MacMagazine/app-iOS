@@ -98,6 +98,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
+		if traitCollection.forceTouchCapability == .available {
+			registerForPreviewing(with: self, sourceView: self.tableView)
+		}
+
 		// Execute the fetch to display the data
 		fetchController?.reloadData()
 	}
@@ -313,4 +317,44 @@ extension PostsMasterViewController: UISearchBarDelegate {
 		searchPosts(text)
 		searchBar.resignFirstResponder()
 	}
+}
+
+// MARK: - UIViewControllerPreviewingDelegate -
+
+extension PostsMasterViewController: UIViewControllerPreviewingDelegate {
+
+	func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+
+		guard let indexPath = tableView.indexPathForRow(at: location),
+			let post = self.fetchController?.object(at: indexPath)
+			else {
+				return nil
+		}
+		tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+		selectedIndexPath = indexPath
+		previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+		return createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL))
+	}
+
+	func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+		self.links = fetchController?.links() ?? []
+		self.performSegue(withIdentifier: "showDetail", sender: self)
+	}
+
+}
+
+// MARK: - Peek&Pop -
+
+extension PostsMasterViewController {
+
+	func createWebViewController(post: PostData) -> UIViewController? {
+		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+		guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+			return nil
+		}
+		controller.post = post
+
+		return controller
+	}
+
 }
