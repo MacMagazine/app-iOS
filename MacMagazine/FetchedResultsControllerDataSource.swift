@@ -83,7 +83,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-		let favoritar = UIContextualAction(style: .normal, title: "Favoritar") {
+		let favoritar = UIContextualAction(style: .normal, title: nil) {
 			_, _, boolValue in
 
 			let object = self.fetchedResultsController.object(at: indexPath)
@@ -92,12 +92,16 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 			boolValue(true)
 		}
+		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		favoritar.image = UIImage(named: "fav_cell")
 
-		let compatilhar = UIContextualAction(style: .normal, title: "Compartilhar") {
+		let compatilhar = UIContextualAction(style: .normal, title: nil) {
 			_, _, boolValue in
 
 			boolValue(true)
 		}
+		compatilhar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		compatilhar.image = UIImage(named: "share")
 
 		return UISwipeActionsConfiguration(actions: [compatilhar, favoritar])
 	}
