@@ -228,6 +228,14 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return fetchedResultsController.object(at: indexPath)
 	}
 
+	func object(with link: String) -> Post? {
+		guard let posts = fetchedResultsController.fetchedObjects else {
+			return nil
+		}
+		let filteredPosts = posts.filter { $0.link == link }
+		return filteredPosts.isEmpty ? nil : filteredPosts[0]
+	}
+
 	func links() -> [PostData] {
 		guard let posts = fetchedResultsController.fetchedObjects else {
 			return []

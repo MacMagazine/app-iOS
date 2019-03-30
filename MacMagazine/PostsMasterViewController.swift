@@ -164,7 +164,17 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - View Methods -
 
 	func showActionSheet(items: [Any]) {
-		let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
+			for item in items {
+				guard let post = self.fetchController?.object(with: "\(item)") else {
+					continue
+				}
+				post.favorite = !post.favorite
+				CoreDataStack.shared.save()
+			}
+		}
+
+		let ac = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
 		present(ac, animated: true)
 	}
 

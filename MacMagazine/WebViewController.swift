@@ -67,8 +67,21 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
+		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
+			guard let vc = self.parent?.parent?.parent?.children[0] as? PostsMasterViewController else {
+				return
+			}
+			for item in items {
+				guard let post = vc.fetchController?.object(with: "\(item)") else {
+					continue
+				}
+				post.favorite = !post.favorite
+				CoreDataStack.shared.save()
+			}
+		}
+
 		let items: [Any] = [post.title ?? "", url]
-		let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+		let ac = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
 		present(ac, animated: true)
 	}
 
