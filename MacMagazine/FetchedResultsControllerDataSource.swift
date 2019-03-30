@@ -66,10 +66,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	// MARK: - TableView methods -
 
 	func numberOfSections(in tableView: UITableView) -> Int {
-		guard let sections = self.fetchedResultsController.sections else {
-			return 0
-		}
-		return sections.count
+		return sections()
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -81,11 +78,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let sections = self.fetchedResultsController.sections else {
-			return 0
-		}
-		let sectionInfo = sections[section]
-		return sectionInfo.numberOfObjects
+		return rows(in: section)
 	}
 
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -145,14 +138,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 	}
 
-	func hasData() -> Bool {
-		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
-	}
-
-	func object(at indexPath: IndexPath) -> Post? {
-		return fetchedResultsController.object(at: indexPath)
-	}
-
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView?.beginUpdates()
 	}
@@ -200,6 +185,42 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView?.endUpdates()
+	}
+
+	// MARK: -
+
+	func hasData() -> Bool {
+		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
+	}
+
+	func sections() -> Int {
+		guard let sections = self.fetchedResultsController.sections else {
+			return 0
+		}
+		return sections.count
+	}
+
+	func rows(in section: Int) -> Int {
+		guard let sections = self.fetchedResultsController.sections else {
+			return 0
+		}
+		let sectionInfo = sections[section]
+		return sectionInfo.numberOfObjects
+	}
+
+	func object(at indexPath: IndexPath) -> Post? {
+		return fetchedResultsController.object(at: indexPath)
+	}
+
+	func links() -> [String?] {
+		guard let posts = fetchedResultsController.fetchedObjects else {
+			return []
+		}
+		var response = [String?]()
+		for post in posts {
+			response.append(post.link)
+		}
+		return response
 	}
 
 }

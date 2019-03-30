@@ -85,7 +85,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
                     let controller = navController.topViewController as? PostsDetailViewController else {
                         return
                 }
-				controller.link = ""
+				controller.links = []
 			}
 		}
 	}

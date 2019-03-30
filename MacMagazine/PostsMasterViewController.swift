@@ -50,7 +50,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var lastPage = -1
 
 	var selectedIndexPath: IndexPath?
-	var link: String?
+	var links = [String?]()
 
 	private var searchController: UISearchController?
 	private var resultsTableController: ResultsViewController?
@@ -136,11 +136,17 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if tableView.indexPathForSelectedRow != nil {
 			guard let navController = segue.destination as? UINavigationController,
-				let controller = navController.topViewController as? PostsDetailViewController else {
+				let controller = navController.topViewController as? PostsDetailViewController,
+				let indexPath = selectedIndexPath,
+				let post = fetchController?.object(at: indexPath),
+				let link = post.link
+				else {
 					return
 			}
+
 			controller.navigationItem.leftItemsSupplementBackButton = true
-			controller.link = link
+			controller.selectedIndex = links.firstIndex(of: link) ?? 0
+			controller.links = links
 		}
 	}
 
@@ -165,13 +171,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectRowAt(indexPath: IndexPath) {
 		if selectedIndexPath != indexPath {
-			guard let post = fetchController?.object(at: indexPath),
-				let link = post.link
-				else {
-					return
-			}
-
-			self.link = link
+			self.links = fetchController?.links() ?? []
 			selectedIndexPath = indexPath
 			self.performSegue(withIdentifier: "showDetail", sender: self)
 
@@ -188,8 +188,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	func didSelectResultRowAt(indexPath: IndexPath) {
-		let post = posts[indexPath.row]
-		self.link = post.link
+		selectedIndexPath = indexPath
+		self.links = posts.map { $0.link }
 		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
 

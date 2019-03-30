@@ -385,6 +385,48 @@
             </objects>
             <point key="canvasLocation" x="527" y="-2885"/>
         </scene>
+        <!--PostDetail-->
+        <scene sceneID="4ZF-zM-Lbj">
+            <objects>
+                <viewController storyboardIdentifier="PostDetail" title="PostDetail" id="uJA-Vl-hWR" customClass="WebViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eKl-mZ-FRj"/>
+                        <viewControllerLayoutGuide type="bottom" id="frX-7l-mly"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V9J-eg-qh6" customClass="AppView" customModule="MacMagazine" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-3F-pZB">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="cpQ-3F-pZB" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="8WW-eq-IfG"/>
+                            <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="cpQ-3F-pZB" secondAttribute="bottom" id="K5H-r3-AdM"/>
+                            <constraint firstItem="cpQ-3F-pZB" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="WuL-UJ-Anh"/>
+                            <constraint firstAttribute="trailing" secondItem="cpQ-3F-pZB" secondAttribute="trailing" id="wE0-uR-qf0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mof-85-jGR"/>
+                    <connections>
+                        <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
+                        <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJ7-qP-eRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="x4L-t4-vbR">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
+            </objects>
+            <point key="canvasLocation" x="1294" y="-2116"/>
+        </scene>
         <!--Posts Detail View Controller-->
         <scene sceneID="fYa-LD-1Wl">
             <objects>
