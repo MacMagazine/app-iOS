@@ -31,13 +31,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 
 		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
 		webView.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
+
 		configureView()
     }
 
 	// MARK: - WebView Delegate -
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		self.navigationItem.rightBarButtonItem = nil
+		self.parent?.navigationItem.rightBarButtonItem = nil
 	}
 
 	func configureView() {
@@ -48,7 +49,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spin)
+		self.parent?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spin)
 		let request = URLRequest(url: url)
 		webView?.load(request)
 		webView?.allowsBackForwardNavigationGestures = false
