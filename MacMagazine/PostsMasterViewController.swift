@@ -122,10 +122,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			lastPage = -1
             getPosts(paged: 0)
         }
-
-		if self.refreshControl?.isRefreshing ?? true {
-			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
-		}
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -256,22 +252,27 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	fileprivate func getPosts(paged: Int) {
 		self.refreshControl?.beginRefreshing()
+		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
 
 		API().getPosts(page: paged) { post in
 			DispatchQueue.main.async {
+				self.refreshControl?.endRefreshing()
+				self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+				self.fetchController?.reloadData()
+
 				guard let post = post else {
-					self.refreshControl?.endRefreshing()
-					self.fetchController?.reloadData()
-					self.processSelection()
 					return
 				}
-
 				CoreDataStack.shared.save(post: post)
 			}
 		}
 	}
 
 	fileprivate func processSelection() {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+			self.getPosts(0)
+		}
+
         if Settings().isPad() &&
             tableView.numberOfSections > 0 {
 
