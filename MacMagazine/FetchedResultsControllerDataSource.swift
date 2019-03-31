@@ -14,7 +14,7 @@ protocol FetchedResultsControllerDelegate: AnyObject {
 	func didSelectRowAt(indexPath: IndexPath)
 	func configure(cell: PostCell, atIndexPath: IndexPath)
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
-	func showActionSheet(items: [Any])
+	func showActionSheet(_ view: UIView?, for items: [Any])
 }
 
 extension FetchedResultsControllerDelegate {
@@ -107,8 +107,9 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 					return
 			}
 
+			let cell = self.tableView?.cellForRow(at: indexPath)
 			let items: [Any] = [post.title ?? "", url]
-			self.delegate?.showActionSheet(items: items)
+			self.delegate?.showActionSheet(cell, for: items)
 
 			boolValue(true)
 		}

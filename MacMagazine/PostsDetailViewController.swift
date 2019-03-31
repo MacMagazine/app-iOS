@@ -14,18 +14,11 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	var selectedIndex = 0
 	var links: [PostData] = []
+	var createWebViewController: ((PostData) -> UIViewController?)?
 
 	private(set) lazy var orderedViewControllers: [UIViewController] = {
 		return links.map { post in
-			if let vc = self.parent as? PostsMasterViewController {
-				// Comes from table.didSelect
-				return vc.createWebViewController(post: post) ?? UIViewController()
-			} else if let vc = self.parent?.parent?.children[0] as? PostsMasterViewController {
-				// Comes from Peek&Pop
-				return vc.createWebViewController(post: post) ?? UIViewController()
-			} else {
-				return UIViewController()
-			}
+			return self.createWebViewController?(post) ?? UIViewController()
 		}
 	}()
 
@@ -38,7 +31,11 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		dataSource = self
 		delegate = self
 
-		setViewControllers([orderedViewControllers[selectedIndex]], direction: .forward, animated: true, completion: nil)
+		var controller = UIViewController()
+		if !orderedViewControllers.isEmpty {
+			controller = orderedViewControllers[selectedIndex]
+		}
+		setViewControllers([controller], direction: .forward, animated: true, completion: nil)
 	}
 
 	override func didReceiveMemoryWarning() {

@@ -100,9 +100,25 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	// MARK: - View Methods -
 
-	func showActionSheet(items: [Any]) {
-		let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-		present(ac, animated: true)
+	func showActionSheet(_ view: UIView?, for items: [Any]) {
+		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
+			for item in items {
+				guard let post = self.fetchController?.object(with: "\(item)") else {
+					continue
+				}
+				post.favorite = !post.favorite
+				CoreDataStack.shared.save()
+			}
+		}
+
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
+		if let ppc = activityVC.popoverPresentationController {
+			guard let view = view else {
+				return
+			}
+			ppc.sourceView = view
+		}
+		present(activityVC, animated: true)
 	}
 
 	func willDisplayCell(indexPath: IndexPath) {

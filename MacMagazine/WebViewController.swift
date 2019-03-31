@@ -77,21 +77,23 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		}
 
 		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
-			guard let vc = self.parent?.parent?.parent?.children[0] as? PostsMasterViewController else {
-				return
-			}
 			for item in items {
-				guard let post = vc.fetchController?.object(with: "\(item)") else {
-					continue
+				CoreDataStack.shared.get(post: "\(item)") { items in
+					if !items.isEmpty {
+						items[0].favorite = !items[0].favorite
+						CoreDataStack.shared.save()
+					}
 				}
-				post.favorite = !post.favorite
-				CoreDataStack.shared.save()
 			}
 		}
 
 		let items: [Any] = [post.title ?? "", url]
-		let ac = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
-		present(ac, animated: true)
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
+
+		if let ppc = activityVC.popoverPresentationController {
+			ppc.barButtonItem = share
+		}
+		present(activityVC, animated: true)
 	}
 
 	// MARK: - UIPreviewAction -

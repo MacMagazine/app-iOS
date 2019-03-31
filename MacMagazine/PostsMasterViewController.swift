@@ -162,12 +162,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			controller.navigationItem.leftItemsSupplementBackButton = true
 			controller.selectedIndex = links.firstIndex(where: { $0.link == post.link }) ?? 0
 			controller.links = links
+			controller.createWebViewController = createWebViewController
 		}
 	}
 
 	// MARK: - View Methods -
 
-	func showActionSheet(items: [Any]) {
+	func showActionSheet(_ view: UIView?, for items: [Any]) {
 		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
 			for item in items {
 				guard let post = self.fetchController?.object(with: "\(item)") else {
@@ -178,8 +179,14 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			}
 		}
 
-		let ac = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
-		present(ac, animated: true)
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
+		if let ppc = activityVC.popoverPresentationController {
+			guard let view = view else {
+				return
+			}
+			ppc.sourceView = view
+		}
+		present(activityVC, animated: true)
 	}
 
 	func willDisplayCell(indexPath: IndexPath) {
@@ -350,11 +357,12 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 	func previewActionFavorite(_ post: PostData?) {
 		previewActionCancel()
 
-		guard let post = self.fetchController?.object(with: post?.link ?? "") else {
-			return
+		CoreDataStack.shared.get(post: post?.link ?? "") { items in
+			if !items.isEmpty {
+				items[0].favorite = !items[0].favorite
+				CoreDataStack.shared.save()
+			}
 		}
-		post.favorite = !post.favorite
-		CoreDataStack.shared.save()
 	}
 
 	func previewActionShare(_ post: PostData?) {
@@ -367,7 +375,7 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 		}
 
 		let items: [Any] = [post?.title ?? "", url]
-		showActionSheet(items: items)
+		showActionSheet(nil, for: items)
 	}
 
 	func previewActionCancel() {
