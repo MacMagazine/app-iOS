@@ -56,18 +56,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 		// Execute the fetch to display the data
 		fetchController?.reloadData()
-	}
 
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-
-        if !hasData() {
-			lastPage = -1
-			getPodcasts(paged: 0)
-		}
-
-		if self.refreshControl?.isRefreshing ?? true {
-			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+			self.getPodcasts(paged: 0)
 		}
 	}
 
@@ -148,7 +139,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	// MARK: - Actions methods -
 
 	@IBAction private func getPodcasts() {
-		getPodcasts(paged: 0)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+			self.getPodcasts(paged: 0)
+		}
 	}
 
     @IBAction private func showFavorites(_ sender: Any) {
@@ -171,12 +164,17 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	fileprivate func getPodcasts(paged: Int) {
 		self.refreshControl?.beginRefreshing()
+		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
 
 		API().getPodcasts(page: paged) { post in
 			DispatchQueue.main.async {
 				guard let post = post else {
+					// When post == nil, indicates the last post retrieved
 					self.refreshControl?.endRefreshing()
 					self.fetchController?.reloadData()
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+						self.tableView.setContentOffset(CGPoint(x: 0, y: -(Settings().isPhone() ? 88: 70)), animated: true)
+					}
 					return
 				}
 				CoreDataStack.shared.save(post: post)

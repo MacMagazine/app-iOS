@@ -127,7 +127,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		processSelection()
+		if hasData() &&
+			Settings().isPad() {
+			processSelection()
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -229,7 +232,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Actions methods -
 
 	@IBAction private func getPosts(_ sender: Any) {
-		getPosts(paged: 0)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+			self.getPosts(paged: 0)
+		}
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
@@ -256,11 +261,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 		API().getPosts(page: paged) { post in
 			DispatchQueue.main.async {
-				self.refreshControl?.endRefreshing()
-				self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-				self.fetchController?.reloadData()
-
 				guard let post = post else {
+					// When post == nil, indicates the last post retrieved
+					self.refreshControl?.endRefreshing()
+					self.fetchController?.reloadData()
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+						self.processSelection()
+					}
 					return
 				}
 				CoreDataStack.shared.save(post: post)
@@ -270,7 +277,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	fileprivate func processSelection() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-			self.getPosts(0)
+			if self.lastPage == -1 {
+				self.lastPage = 0
+				self.getPosts(0)
+			}
 		}
 
         if Settings().isPad() &&
