@@ -321,7 +321,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 
 // MARK: - UIViewControllerPreviewingDelegate -
 
-extension PostsMasterViewController: UIViewControllerPreviewingDelegate {
+extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebViewControllerDelegate {
 
 	func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
 
@@ -333,12 +333,37 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate {
 		tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
 		selectedIndexPath = indexPath
 		previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-		return createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL))
+
+		guard let webController = createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL)) as? WebViewController else {
+			return nil
+		}
+		webController.delegate = self
+
+		return webController
 	}
 
 	func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
 		self.links = fetchController?.links() ?? []
 		self.performSegue(withIdentifier: "showDetail", sender: self)
+	}
+
+	func previewActionFavorite(_ post: PostData?) {
+		guard let post = self.fetchController?.object(with: post?.link ?? "") else {
+			return
+		}
+		post.favorite = !post.favorite
+		CoreDataStack.shared.save()
+	}
+
+	func previewActionShare(_ post: PostData?) {
+		guard let link = post?.link,
+			let url = URL(string: link)
+			else {
+				return
+		}
+
+		let items: [Any] = [post?.title ?? "", url]
+		showActionSheet(items: items)
 	}
 
 }

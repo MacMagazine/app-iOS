@@ -9,6 +9,11 @@
 import UIKit
 import WebKit
 
+protocol WebViewControllerDelegate {
+	func previewActionFavorite(_ post: PostData?)
+	func previewActionShare(_ post: PostData?)
+}
+
 class WebViewController: UIViewController, WKNavigationDelegate {
 
 	// MARK: - Properties -
@@ -16,6 +21,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	@IBOutlet private weak var webView: WKWebView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 	@IBOutlet private weak var share: UIBarButtonItem!
+
+	var delegate: WebViewControllerDelegate?
 
 	var post: PostData? {
 		didSet {
@@ -84,6 +91,19 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		let items: [Any] = [post.title ?? "", url]
 		let ac = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
 		present(ac, animated: true)
+	}
+
+	// MARK: - UIPreviewAction -
+
+	override var previewActionItems: [UIPreviewActionItem] {
+		let favoritar = UIPreviewAction(title: "Favoritar", style: .default) { [weak self] _, _ in
+			self?.delegate?.previewActionFavorite(self?.post)
+		}
+		let compartilhar = UIPreviewAction(title: "Compartilhar", style: .default) { [weak self] _, _ in
+			self?.delegate?.previewActionShare(self?.post)
+		}
+		let cancelar = UIPreviewAction(title: "Cancelar", style: .destructive) { _, _  in }
+		return [favoritar, compartilhar, cancelar]
 	}
 
 }

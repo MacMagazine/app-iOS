@@ -89,9 +89,4 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	}
 
-	// MARK: - View methods -
-
-	public func share(_ index: Int) {
-		print(index)
-	}
 }
