@@ -12,6 +12,7 @@ import WebKit
 protocol WebViewControllerDelegate {
 	func previewActionFavorite(_ post: PostData?)
 	func previewActionShare(_ post: PostData?)
+	func previewActionCancel()
 }
 
 class WebViewController: UIViewController, WKNavigationDelegate {
@@ -102,7 +103,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		let compartilhar = UIPreviewAction(title: "Compartilhar", style: .default) { [weak self] _, _ in
 			self?.delegate?.previewActionShare(self?.post)
 		}
-		let cancelar = UIPreviewAction(title: "Cancelar", style: .destructive) { _, _  in }
+		let cancelar = UIPreviewAction(title: "Cancelar", style: .destructive) { [weak self] _, _  in
+			self?.delegate?.previewActionCancel()
+		}
 		return [favoritar, compartilhar, cancelar]
 	}
 

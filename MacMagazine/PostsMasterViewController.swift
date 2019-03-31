@@ -348,6 +348,8 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 	}
 
 	func previewActionFavorite(_ post: PostData?) {
+		previewActionCancel()
+
 		guard let post = self.fetchController?.object(with: post?.link ?? "") else {
 			return
 		}
@@ -356,6 +358,8 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 	}
 
 	func previewActionShare(_ post: PostData?) {
+		previewActionCancel()
+
 		guard let link = post?.link,
 			let url = URL(string: link)
 			else {
@@ -364,6 +368,13 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 
 		let items: [Any] = [post?.title ?? "", url]
 		showActionSheet(items: items)
+	}
+
+	func previewActionCancel() {
+		guard let index = self.tableView.indexPathForSelectedRow else {
+			return
+		}
+		self.tableView.deselectRow(at: index, animated: true)
 	}
 
 }
