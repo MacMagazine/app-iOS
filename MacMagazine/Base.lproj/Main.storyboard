@@ -114,37 +114,26 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="tzb-GF-QmQ">
-                                <string key="footerTitle">Se a opção "Push para todos os posts" estiver desativada, você só receberá notificações de posts-destaque. As alterações que fizer acima só surtirão efeito na próxima vez em que o app for aberto. </string>
+                            <tableViewSection headerTitle="Push para" id="tzb-GF-QmQ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="r1N-CG-9fg">
-                                        <rect key="frame" x="0.0" y="115" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="135" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r1N-CG-9fg" id="nqX-io-A7H">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLj-NW-vhJ">
-                                                    <rect key="frame" x="312" y="9.5" width="49" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="31" id="4QT-KX-3YO"/>
-                                                        <constraint firstAttribute="width" constant="47" id="D6H-hd-JDn"/>
-                                                    </constraints>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push para todos os posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cn6-J0-aH1">
-                                                    <rect key="frame" x="16" y="11" width="288" height="27"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-pV-sjC">
+                                                    <rect key="frame" x="51" y="11" width="273" height="29"/>
+                                                    <segments>
+                                                        <segment title="Todos os Posts"/>
+                                                        <segment title="Somente Destaques"/>
+                                                    </segments>
+                                                </segmentedControl>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cn6-J0-aH1" firstAttribute="top" secondItem="nqX-io-A7H" secondAttribute="topMargin" id="ELa-oU-Se6"/>
-                                                <constraint firstItem="cn6-J0-aH1" firstAttribute="leading" secondItem="nqX-io-A7H" secondAttribute="leadingMargin" id="FW0-5g-Wws"/>
-                                                <constraint firstItem="WLj-NW-vhJ" firstAttribute="leading" secondItem="cn6-J0-aH1" secondAttribute="trailing" constant="8" id="kfT-yu-uy0"/>
-                                                <constraint firstAttribute="trailing" secondItem="WLj-NW-vhJ" secondAttribute="trailing" constant="16" id="pTM-7B-vJt"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="cn6-J0-aH1" secondAttribute="bottom" constant="1" id="rxW-fu-Gov"/>
-                                                <constraint firstItem="WLj-NW-vhJ" firstAttribute="centerY" secondItem="nqX-io-A7H" secondAttribute="centerY" id="xRL-s0-VUL"/>
+                                                <constraint firstItem="Sj3-pV-sjC" firstAttribute="centerY" secondItem="nqX-io-A7H" secondAttribute="centerY" id="Cuj-rw-3Ny"/>
+                                                <constraint firstItem="Sj3-pV-sjC" firstAttribute="centerX" secondItem="nqX-io-A7H" secondAttribute="centerX" id="K4G-KN-nYg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -153,7 +142,7 @@
                             <tableViewSection headerTitle="Tamanho da fonte" id="lz6-nM-2mu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="44" id="VYt-Vq-PHi">
-                                        <rect key="frame" x="0.0" y="297" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="241" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VYt-Vq-PHi" id="rmi-XG-BsJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -227,7 +216,7 @@
                             <tableViewSection id="weY-1J-5YR">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="04o-14-AOV">
-                                        <rect key="frame" x="0.0" y="377" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="321" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="04o-14-AOV" id="V2f-5C-7e3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -265,7 +254,7 @@
                             <tableViewSection id="xNE-VJ-p0K">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="rt5-Cn-lyN">
-                                        <rect key="frame" x="0.0" y="463" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="407" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rt5-Cn-lyN" id="e0z-VH-ecP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -318,7 +307,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242" y="-615"/>
+            <point key="canvasLocation" x="-242.40000000000001" y="-615.74212893553226"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="Odw-wy-fvT">

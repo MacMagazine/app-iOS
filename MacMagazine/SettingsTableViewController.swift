@@ -49,7 +49,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 	// MARK: - TableView Methods -
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return section == 0 ? "MACMAGAZINE \(version)" : nil
+		let header = ["MACMAGAZINE \(version)", "PUSH PARA", "TAMANHO DA FONTE", "", ""]
+		return header[section] == "" ? nil : header[section]
     }
 
     // MARK: - View Methods -
