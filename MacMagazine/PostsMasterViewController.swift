@@ -127,8 +127,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		if hasData() &&
-			Settings().isPad() {
+		if hasData() {
 			processSelection()
 		}
 	}
