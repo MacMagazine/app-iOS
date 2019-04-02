@@ -91,8 +91,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
-		searchController?.searchBar.placeholder = "Procurar nos Posts ..."
+		searchController?.searchBar.placeholder = "Buscar nos Posts ..."
 		tableView.tableHeaderView = searchController?.searchBar
+
 		self.definesPresentationContext = true
 
 		tableView.rowHeight = UITableView.automaticDimension
@@ -255,17 +256,23 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
-		self.refreshControl?.beginRefreshing()
-		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
+		if paged < 1 {
+			self.refreshControl?.beginRefreshing()
+			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
+		}
 
 		API().getPosts(page: paged) { post in
 			DispatchQueue.main.async {
 				guard let post = post else {
 					// When post == nil, indicates the last post retrieved
-					self.refreshControl?.endRefreshing()
 					self.fetchController?.reloadData()
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-						self.processSelection()
+
+					if paged < 1 {
+						self.refreshControl?.endRefreshing()
+						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+							self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
+							self.processSelection()
+						}
 					}
 					return
 				}

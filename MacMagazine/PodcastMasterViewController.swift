@@ -41,14 +41,14 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
-		resultsTableController?.tableView.delegate = self
 		resultsTableController?.isPodcast = true
 
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
-		searchController?.searchBar.placeholder = "Procurar nos Podcasts ..."
+		searchController?.searchBar.placeholder = "Buscar nos Podcasts ..."
 		tableView.tableHeaderView = searchController?.searchBar
+
 		self.definesPresentationContext = true
 
 		tableView.rowHeight = UITableView.automaticDimension
@@ -65,20 +65,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
-	}
-
-	// MARK: - Segues -
-
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "showDetail" {
-			if tableView.indexPathForSelectedRow != nil {
-                guard let navController = segue.destination as? UINavigationController,
-                    let controller = navController.topViewController as? PostsDetailViewController else {
-                        return
-                }
-				controller.links = []
-			}
-		}
 	}
 
 	// MARK: - Scroll detection -
@@ -163,17 +149,21 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     }
 
 	fileprivate func getPodcasts(paged: Int) {
-		self.refreshControl?.beginRefreshing()
-		self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
+		if paged < 1 {
+			self.refreshControl?.beginRefreshing()
+			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
+		}
 
 		API().getPodcasts(page: paged) { post in
 			DispatchQueue.main.async {
 				guard let post = post else {
 					// When post == nil, indicates the last post retrieved
-					self.refreshControl?.endRefreshing()
 					self.fetchController?.reloadData()
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-						self.tableView.setContentOffset(CGPoint(x: 0, y: -(Settings().isPhone() ? 88: 70)), animated: true)
+					if paged < 1 {
+						self.refreshControl?.endRefreshing()
+						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+							self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
+						}
 					}
 					return
 				}

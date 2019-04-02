@@ -33,6 +33,15 @@ protocol Theme {
     func extend()
 }
 
+extension UIColor {
+	func image(_ size: CGSize = CGSize(width: 1, height: 38)) -> UIImage {
+		return UIGraphicsImageRenderer(size: size).image { rendererContext in
+			self.setFill()
+			rendererContext.fill(CGRect(origin: .zero, size: size))
+		}
+	}
+}
+
 extension Theme {
 
     func apply(for application: UIApplication) {
@@ -76,11 +85,15 @@ extension Theme {
 
         // SEARCHBAR
 
-        UISearchBar.appearance().barTintColor = barTintColor
-        UITextField.appearance().with {
-            $0.textColor = textColor
-            $0.placeholderColor = placeholderTextColor
-        }
+		UISearchBar.appearance().with {
+			$0.barTintColor = barTintColor
+			$0.setSearchFieldBackgroundImage(UIColor.lightGray.withAlphaComponent(0.3).image(), for: .normal)
+			$0.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
+		}
+		UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).with {
+			$0.textColor = textColor
+			$0.placeholderColor = placeholderTextColor
+		}
 
         // TABLEVIEW
 

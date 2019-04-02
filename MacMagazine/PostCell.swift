@@ -21,7 +21,7 @@ class PostCell: UITableViewCell {
 	@IBOutlet private weak var thumbnailImageView: UIImageView!
 	@IBOutlet private weak var favoriteImageView: UIImageView!
 
-	fileprivate var player: AVPlayer?
+	fileprivate var player: AVPlayer = AVPlayer()
 
 	// MARK: - Methods -
 
@@ -82,10 +82,11 @@ class PostCell: UITableViewCell {
 			guard let url = URL(string: podcastURL) else {
 				return
 			}
+			print(url)
 			player = AVPlayer(playerItem: AVPlayerItem(url: url))
 			let playerLayer = AVPlayerLayer(player: player)
 			playerLayer.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
-			self.contentView.layoutSublayers(of: playerLayer)
+			self.contentView.layer.addSublayer(playerLayer)
 		}
 	}
 
@@ -102,6 +103,7 @@ class PostCell: UITableViewCell {
 			guard let url = URL(string: podcastURL) else {
 				return
 			}
+
 			player = AVPlayer(playerItem: AVPlayerItem(url: url))
 			let playerLayer = AVPlayerLayer(player: player)
 			playerLayer.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
@@ -110,11 +112,11 @@ class PostCell: UITableViewCell {
 	}
 
 	@IBAction private func play(_ sender: Any) {
-		if player?.rate == 0 {
-			player?.play()
+		if player.rate == 0 {
+			player.play()
 			playButton.isSelected = true
 		} else {
-			player?.pause()
+			player.pause()
 			playButton.isSelected = false
 		}
 	}
