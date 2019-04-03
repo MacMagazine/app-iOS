@@ -268,10 +268,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 					self.fetchController?.reloadData()
 
 					if paged < 1 {
-						self.refreshControl?.endRefreshing()
 						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-							self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
-							self.processSelection()
+							self.refreshControl?.endRefreshing()
+							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+								self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
+								self.processSelection()
+							}
 						}
 					}
 					return

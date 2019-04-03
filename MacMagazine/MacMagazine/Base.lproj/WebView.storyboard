@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,6 +39,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="mof-85-jGR"/>
                     <connections>
+                        <outlet property="favorite" destination="cRF-ml-ok5" id="eB5-nD-52J"/>
                         <outlet property="share" destination="dA3-eY-eOM" id="eFL-mL-ZYw"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
                         <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>
@@ -48,6 +50,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
+                <barButtonItem image="fav_on" id="cRF-ml-ok5">
+                    <connections>
+                        <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
+                    </connections>
+                </barButtonItem>
                 <barButtonItem systemItem="action" id="dA3-eY-eOM">
                     <connections>
                         <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
@@ -57,4 +64,7 @@
             <point key="canvasLocation" x="1294" y="-2116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fav_on" width="22" height="20"/>
+    </resources>
 </document>

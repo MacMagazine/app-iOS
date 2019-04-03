@@ -22,6 +22,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	@IBOutlet private weak var webView: WKWebView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 	@IBOutlet private weak var share: UIBarButtonItem!
+	@IBOutlet private weak var favorite: UIBarButtonItem!
 
 	var delegate: WebViewControllerDelegate?
 
@@ -37,7 +38,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
     	// Do any additional setup after loading the view.
 		webView?.navigationDelegate = self
-		self.parent?.navigationItem.rightBarButtonItem = share
+
+		self.parent?.navigationItem.rightBarButtonItem = nil
+		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 
 		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
 		webView.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
@@ -48,7 +51,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	// MARK: - WebView Delegate -
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		self.parent?.navigationItem.rightBarButtonItem = share
+		self.parent?.navigationItem.rightBarButtonItem = nil
+		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 	}
 
 	func configureView() {
@@ -60,13 +64,30 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
+		self.parent?.navigationItem.rightBarButtonItems = nil
 		self.parent?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spin)
+
 		let request = URLRequest(url: url)
 		webView?.load(request)
 		webView?.allowsBackForwardNavigationGestures = false
 	}
 
 	// MARK: - Actions -
+
+	@IBAction private func favorite(_ sender: Any) {
+		guard let post = post,
+			let link = post.link
+			else {
+				return
+		}
+
+		CoreDataStack.shared.get(post: link) { items in
+			if !items.isEmpty {
+				items[0].favorite = !items[0].favorite
+				CoreDataStack.shared.save()
+			}
+		}
+	}
 
 	@IBAction private func share(_ sender: Any) {
 		guard let post = post,

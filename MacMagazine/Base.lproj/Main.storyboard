@@ -390,7 +390,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </navigationItem>
                 </pageViewController>
@@ -463,11 +463,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_on" width="14" height="30"/>
+        <image name="fav_on" width="33" height="30"/>
         <image name="logo" width="80" height="80"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>
-        <image name="tab_noar" width="36" height="28"/>
+        <image name="tab_noar" width="24" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lNV-kD-aRc"/>
