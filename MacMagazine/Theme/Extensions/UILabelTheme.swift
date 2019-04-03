@@ -12,6 +12,7 @@ class AppHeadline: UILabel {}
 class AppSubhead: UILabel {}
 class AppSmallFont: UILabel {}
 class AppBigFont: UILabel {}
+class AppLabel: UILabel {}
 
 public extension UILabel {
     @objc dynamic var fontSize: CGFloat {

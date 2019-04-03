@@ -25,16 +25,23 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var podcastDuration: UILabel!
     @IBOutlet private weak var slider: UISlider!
 
-    var player: AVPlayer = AVPlayer()
+	var player: AVAudioPlayer = AVAudioPlayer()
+	var timer: Timer?
 
     var podcast: Podcast? {
         didSet {
-            podcastTitle.text = podcast?.title
-            podcastDuration.text = podcast?.duration
+			if podcast == nil {
+				timer?.invalidate()
+				player.pause()
+				playButton.isSelected = false
+			} else {
+				podcastTitle.text = podcast?.title
+				podcastDuration.text = podcast?.duration
 
-            spin.startAnimating()
-            playButton.isHidden = spin.isAnimating
-            loadPlayer()
+				spin.startAnimating()
+				playButton.isHidden = spin.isAnimating
+				loadPlayer()
+			}
         }
     }
 
@@ -43,31 +50,45 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+		do {
+			try AVAudioSession.sharedInstance().setCategory(.playback)
+		} catch {
+			print(error.localizedDescription)
+		}
     }
 
     // MARK: - Actions -
 
     @IBAction private func play(_ sender: Any) {
-        if player.rate == 0 {
-            player.play()
-            playButton.isSelected = true
+        if player.isPlaying {
+			player.pause()
+			playButton.isSelected = false
         } else {
-            player.pause()
-            playButton.isSelected = false
-        }
+			player.play()
+			playButton.isSelected = true
+			startTimer()
+		}
     }
 
     @IBAction private func sliderValueChanged(_ slider: UISlider) {
-        let targetTime: CMTime = CMTimeMake(value: Int64(slider.value), timescale: 1)
-
-        player.seek(to: targetTime)
-
-        if player.rate == 0 {
-            player.play()
-        }
+		player.stop()
+		player.currentTime = TimeInterval(slider.value)
+		player.prepareToPlay()
+		player.play()
     }
 
     // MARK: - Methods -
+
+	func startTimer() {
+		timer?.invalidate()
+		timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+	}
+
+	@objc func updateTime() {
+		let remaining = player.duration - player.currentTime
+		podcastDuration.text = self.secondsToHoursMinutesSeconds(Int(remaining))
+		slider.value = Float(player.currentTime)
+	}
 
     func secondsToHoursMinutesSeconds(_ seconds: Int) -> String {
         let formatter = DateComponentsFormatter()
@@ -80,38 +101,35 @@ class PlayerViewController: UIViewController {
         return formattedString
     }
 
-    fileprivate func loadPlayer() {
-        guard let url = URL(string: podcast?.url ?? "") else {
-            return
-        }
-        let playerItem = AVPlayerItem(url: url)
-        player = AVPlayer(playerItem: playerItem)
-        player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) {
-            _ in
+	fileprivate func loadPlayer() {
+		guard let url = URL(string: podcast?.url ?? "") else {
+			return
+		}
+		Network.get(url: url) { (data: Data?, _: String?) in
+			guard let data = data else {
+				return
+			}
 
-            if self.player.currentItem?.status == .readyToPlay {
-                let time = CMTimeGetSeconds(self.player.currentTime())
-                self.slider.value = Float(time)
+			DispatchQueue.main.async {
+				self.spin.stopAnimating()
+				self.playButton.isHidden = self.spin.isAnimating
 
-                let remaining = self.slider.maximumValue - self.slider.value
-                self.podcastDuration.text = self.secondsToHoursMinutesSeconds(Int(remaining))
-            }
-        }
+				do {
+					self.player = try AVAudioPlayer(data: data)
 
-        DispatchQueue.global().async { [weak self] in
-            let seconds = CMTimeGetSeconds(playerItem.asset.duration)
+					self.player.prepareToPlay()
+					self.player.play()
+					self.startTimer()
 
-            DispatchQueue.main.async { [weak self] in
-                self?.slider.maximumValue = Float(seconds)
-                self?.podcastDuration.text = self?.secondsToHoursMinutesSeconds(Int(seconds))
+					self.slider.maximumValue = Float(self.player.duration)
+					self.podcastDuration.text = self.secondsToHoursMinutesSeconds(Int(self.player.duration))
+					self.playButton.isSelected = true
+				} catch {
+					self.playButton.isEnabled = false
+				}
+			}
+		}
 
-                self?.player.play()
-
-                self?.spin.stopAnimating()
-                self?.playButton.isHidden = self?.spin.isAnimating ?? true
-                self?.playButton.isSelected = true
-            }
-        }
-    }
+	}
 
 }

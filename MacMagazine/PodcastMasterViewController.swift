@@ -205,7 +205,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 					}
 					return
 				}
-				CoreDataStack.shared.save(post: post)
+				if !post.duration.isEmpty {
+					CoreDataStack.shared.save(post: post)
+				}
 			}
 		}
 	}

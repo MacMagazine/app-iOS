@@ -128,6 +128,9 @@ extension Theme {
             $0.textColor = labelColor
             $0.fontSize = CGFloat(fontSize)
         }
+		AppLabel.appearance().with {
+			$0.textColor = .black
+		}
         AppHeadline.appearance().with {
             $0.textColor = labelColor
             $0.fontSize = CGFloat(fontSize)
