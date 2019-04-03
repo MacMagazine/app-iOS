@@ -30,7 +30,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
     var showWebView: ((Bool) -> Void)?
-    var play: ((String) -> Void)?
+    var play: ((Podcast?) -> Void)?
 
 	// MARK: - View Lifecycle -
 
@@ -124,11 +124,10 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
         if selectedPodcast != indexPath.row {
             selectedPodcast = indexPath.row
 
-            guard let object = fetchController?.object(at: indexPath),
-                let podcast = object.podcastFrame
-                else {
-                    return
+            guard let object = fetchController?.object(at: indexPath) else {
+                return
             }
+            let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
             showWebView?(true)
             play?(podcast)
         } else {
@@ -150,7 +149,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
             selectedPodcast = indexPath.row
 
             let object = posts[selectedPodcast]
-            let podcast = object.podcastFrame
+            let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
             showWebView?(true)
             play?(podcast)
         } else {

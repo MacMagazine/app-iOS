@@ -41,12 +41,12 @@ class PodcastViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         if !show {
-            play("")
+            play(nil)
         }
     }
 
-    fileprivate func play(_ podcast: String) {
-        guard let vc = self.children[1] as? PlayerWebView else {
+    fileprivate func play(_ podcast: Podcast?) {
+        guard let vc = self.children[1] as? PlayerViewController else {
             return
         }
         vc.podcast = podcast
