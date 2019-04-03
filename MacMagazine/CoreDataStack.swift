@@ -118,6 +118,7 @@ class CoreDataStack {
 		newItem.duration = post.duration
 		newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
 		newItem.favorite = false
+        newItem.podcastFrame = post.podcastFrame
 	}
 
 	func update(post: Post, with item: XMLPost) {
@@ -131,6 +132,7 @@ class CoreDataStack {
 		post.podcastURL = item.podcastURL
 		post.duration = item.duration
 		post.headerDate = item.pubDate.toDate(nil).sortedDate()
+        post.podcastFrame = item.podcastFrame
 	}
 
 }

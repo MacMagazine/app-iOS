@@ -18,60 +18,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="wpR-by-Wrq">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dPr-Vt-BPt">
                         <rect key="frame" x="16" y="16" width="343" height="100.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="z4j-ho-mZ8">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="100.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAk-1v-1ps" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="343" height="71.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kvq-mm-4qb">
+                                <rect key="frame" x="0.0" y="79.5" width="343" height="21"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-HU-BxN">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Oi1-rj-h7o"/>
-                                            <constraint firstAttribute="width" constant="40" id="ze6-I6-7Mk"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="play"/>
-                                        <state key="selected" image="pause"/>
-                                        <connections>
-                                            <action selector="play:" destination="tks-Xo-Anw" eventType="touchUpInside" id="8Lq-BL-f1D"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yPk-Uo-w8G">
-                                        <rect key="frame" x="0.0" y="40" width="40" height="60.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dPr-Vt-BPt">
-                                <rect key="frame" x="56" y="0.0" width="287" height="100.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAk-1v-1ps" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="287" height="71.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="270.5" height="21"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kvq-mm-4qb">
-                                        <rect key="frame" x="0.0" y="79.5" width="287" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="206.5" height="21"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="222.5" y="0.0" width="64.5" height="21"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="T1a-2X-f0D"/>
-                                        </constraints>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="278.5" y="0.0" width="64.5" height="21"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="T1a-2X-f0D"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                     </stackView>
@@ -84,12 +58,12 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="wpR-by-Wrq" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" constant="16" id="Sc3-Mp-NUe"/>
-                    <constraint firstAttribute="trailing" secondItem="wpR-by-Wrq" secondAttribute="trailing" constant="16" id="UZ1-El-pnm"/>
+                    <constraint firstItem="dPr-Vt-BPt" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="Ax8-Oe-tkp"/>
+                    <constraint firstItem="dPr-Vt-BPt" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="topMargin" id="LSY-nE-nbx"/>
                     <constraint firstItem="Lw1-da-P8k" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" id="WM3-mU-tQe"/>
-                    <constraint firstAttribute="bottom" secondItem="wpR-by-Wrq" secondAttribute="bottom" constant="16" id="hBt-na-hCM"/>
+                    <constraint firstAttribute="trailing" secondItem="dPr-Vt-BPt" secondAttribute="trailing" constant="16" id="fbA-eW-IfW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="dPr-Vt-BPt" secondAttribute="bottom" id="uZ2-g0-Olm"/>
                     <constraint firstAttribute="trailing" secondItem="Lw1-da-P8k" secondAttribute="trailing" constant="6" id="wcw-rV-22N"/>
-                    <constraint firstItem="wpR-by-Wrq" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="wp5-e9-0EY"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </tableViewCellContentView>
@@ -98,14 +72,11 @@
                 <outlet property="favoriteImageView" destination="Lw1-da-P8k" id="5fb-Q5-8qc"/>
                 <outlet property="headlineLabel" destination="hAk-1v-1ps" id="kmk-dB-AUq"/>
                 <outlet property="lengthlineLabel" destination="B5u-aS-IBP" id="XQW-76-ERM"/>
-                <outlet property="playButton" destination="bZM-HU-BxN" id="Rav-ig-lWB"/>
                 <outlet property="subheadlineLabel" destination="4Gu-AC-b1g" id="hbB-gb-nfQ"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="33" height="30"/>
-        <image name="pause" width="500" height="500"/>
-        <image name="play" width="500" height="500"/>
+        <image name="fav_on" width="22" height="20"/>
     </resources>
 </document>

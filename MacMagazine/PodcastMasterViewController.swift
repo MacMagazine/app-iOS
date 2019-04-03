@@ -19,6 +19,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
 	var lastPage = -1
+    var selectedPodcast = -1
 
 	private var searchController: UISearchController?
 	private var resultsTableController: ResultsViewController?
@@ -27,6 +28,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     var showFavorites = false
     let categoryPredicate = NSPredicate(format: "categorias CONTAINS[cd] %@", "Podcast")
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
+
+    var showWebView: ((Bool) -> Void)?
+    var play: ((String) -> Void)?
 
 	// MARK: - View Lifecycle -
 
@@ -115,12 +119,45 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		cell.configurePodcast(object)
 	}
 
-	func configureResult(cell: PostCell, atIndexPath: IndexPath) {
-		if !posts.isEmpty {
-			let object = posts[atIndexPath.row]
-			cell.configureSearchPodcast(object)
-		}
-	}
+    func didSelectRowAt(indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        if selectedPodcast != indexPath.row {
+            selectedPodcast = indexPath.row
+
+            guard let object = fetchController?.object(at: indexPath),
+                let podcast = object.podcastFrame
+                else {
+                    return
+            }
+            showWebView?(true)
+            play?(podcast)
+        } else {
+            selectedPodcast = -1
+            showWebView?(false)
+        }
+    }
+
+    func configureResult(cell: PostCell, atIndexPath: IndexPath) {
+        if !posts.isEmpty {
+            let object = posts[atIndexPath.row]
+            cell.configureSearchPodcast(object)
+        }
+    }
+
+    func didSelectResultRowAt(indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        if selectedPodcast != indexPath.row {
+            selectedPodcast = indexPath.row
+
+            let object = posts[selectedPodcast]
+            let podcast = object.podcastFrame
+            showWebView?(true)
+            play?(podcast)
+        } else {
+            selectedPodcast = -1
+            showWebView?(false)
+        }
+    }
 
 	// MARK: - Actions methods -
 
@@ -130,7 +167,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		}
 	}
 
-    @IBAction private func showFavorites(_ sender: Any) {
+    // MARK: - Public methods -
+
+    func showFavoritesAction() {
         showFavorites = !showFavorites
         if showFavorites {
             let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])

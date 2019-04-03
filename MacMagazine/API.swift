@@ -85,6 +85,7 @@ struct XMLPost {
     var podcastURL: String = ""
     var podcast: String = ""
     var duration: String = ""
+    var podcastFrame: String = ""
 
     fileprivate func decodeHTMLString(string: String) -> String {
 
@@ -159,6 +160,8 @@ extension API {
                 currentPost.podcast = value
             case "itunes:duration":
                 currentPost.duration = value
+            case "rawvoice:embed":
+                currentPost.podcastFrame = value
             case "item":
                 onCompletion?(currentPost)
                 processItem = false
