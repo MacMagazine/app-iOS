@@ -39,6 +39,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     	// Do any additional setup after loading the view.
 		webView?.navigationDelegate = self
 
+		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+
 		self.parent?.navigationItem.rightBarButtonItem = nil
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 
@@ -85,6 +87,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 			if !items.isEmpty {
 				items[0].favorite = !items[0].favorite
 				CoreDataStack.shared.save()
+				self.favorite.image = UIImage(named: items[0].favorite ? "fav_on" : "fav_off")
 			}
 		}
 	}
@@ -97,31 +100,34 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
-		let favorito = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
-			for item in items {
-				CoreDataStack.shared.get(post: "\(item)") { items in
-					if !items.isEmpty {
-						items[0].favorite = !items[0].favorite
-						CoreDataStack.shared.save()
-					}
-				}
-			}
-		}
-
 		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
 			for item in items {
 				guard let url = URL(string: "\(item)") else {
 					continue
 				}
 				if UIApplication.shared.canOpenURL(url) {
-					UIApplication.shared.open(url)
+					UIApplication.shared.open(url, options: [:], completionHandler: nil)
 				}
 			}
 		}
 
-		let items: [Any] = [post.title ?? "", url]
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [favorito, safari])
+		let chrome = UIActivityExtensions(title: "Abrir no Chrome", image: UIImage(named: "chrome")) { items in
+			for item in items {
+				guard let url = URL(string: "\(item)".replacingOccurrences(of: "http", with: "googlechrome")) else {
+					continue
+				}
+				if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url, options: [:], completionHandler: nil)
+				}
+			}
+		}
+		var activities = [safari]
+		if UIApplication.shared.canOpenURL(URL(string: "googlechrome://")!) {
+			activities.append(chrome)
+		}
 
+		let items: [Any] =  [post.title ?? "", url]
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: activities)
 		if let ppc = activityVC.popoverPresentationController {
 			ppc.barButtonItem = share
 		}

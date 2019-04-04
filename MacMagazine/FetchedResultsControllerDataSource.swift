@@ -93,8 +93,9 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 			boolValue(true)
 		}
+		let object = self.fetchedResultsController.object(at: indexPath)
+		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
 		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
-		favoritar.image = UIImage(named: "fav_cell")
 
 		let compatilhar = UIContextualAction(style: .normal, title: nil) {
 			_, _, boolValue in
@@ -243,7 +244,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 		var response = [PostData]()
 		for post in posts {
-			response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL))
+			response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite))
 		}
 		return response
 	}

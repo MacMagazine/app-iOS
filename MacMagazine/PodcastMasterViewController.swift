@@ -38,7 +38,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
-        fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
+		NotificationCenter.default.addObserver(self, selector: #selector(onScrollToTop(_:)), name: NSNotification.Name(rawValue: "scrollToTop"), object: nil)
+
+		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
         fetchController?.fetchRequest.predicate = categoryPredicate
@@ -69,6 +71,10 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	// MARK: - Scroll detection -
 
+	@objc func onScrollToTop(_ notification: Notification) {
+		tableView.setContentOffset(.zero, animated: true)
+	}
+
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let offset = scrollView.contentOffset
 		direction = offset.y > lastContentOffset.y ? .down : .up
@@ -78,28 +84,33 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	// MARK: - View Methods -
 
 	func showActionSheet(_ view: UIView?, for items: [Any]) {
-		let favorito = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
-			for item in items {
-				guard let post = self.fetchController?.object(with: "\(item)") else {
-					continue
-				}
-				post.favorite = !post.favorite
-				CoreDataStack.shared.save()
-			}
-		}
-
 		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
 			for item in items {
 				guard let url = URL(string: "\(item)") else {
 					continue
 				}
 				if UIApplication.shared.canOpenURL(url) {
-					UIApplication.shared.open(url)
+					UIApplication.shared.open(url, options: [:], completionHandler: nil)
 				}
 			}
 		}
 
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [favorito, safari])
+		let chrome = UIActivityExtensions(title: "Abrir no Chrome", image: UIImage(named: "chrome")) { items in
+			for item in items {
+				guard let url = URL(string: "\(item)".replacingOccurrences(of: "http", with: "googlechrome")) else {
+					continue
+				}
+				if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url, options: [:], completionHandler: nil)
+				}
+			}
+		}
+		var activities = [safari]
+		if UIApplication.shared.canOpenURL(URL(string: "googlechrome://")!) {
+			activities.append(chrome)
+		}
+
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: activities)
 		if let ppc = activityVC.popoverPresentationController {
 			guard let view = view else {
 				return

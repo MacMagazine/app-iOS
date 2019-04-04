@@ -9,10 +9,12 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	// MARK: - Properties -
+
 	var window: UIWindow?
+	var previousController: UIViewController?
 
 	// MARK: - Window lifecycle -
 
@@ -24,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		guard let tabBarViewController = window?.rootViewController as? UITabBarController else {
 			return true
 		}
+		tabBarViewController.delegate = self
 
 		guard let splitViewController = tabBarViewController.viewControllers?.first as? UISplitViewController else {
 			return true
@@ -35,8 +38,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		return true
 	}
 
-	// MARK: - Splitview Delegate -
+}
 
+// MARK: - Theme -
+
+extension AppDelegate {
+	fileprivate func applyTheme() {
+		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
+			let theme: Theme = LightTheme()
+			theme.apply(for: UIApplication.shared)
+
+			return
+		}
+		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
+		theme.apply(for: UIApplication.shared)
+	}
+}
+
+// MARK: - Splitview Delegate -
+
+extension AppDelegate: UISplitViewControllerDelegate {
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
 		guard let secondaryAsNavController = secondaryViewController as? UINavigationController,
 			let topAsDetailController = secondaryAsNavController.topViewController as? PostsDetailViewController
@@ -45,19 +66,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		}
 		return topAsDetailController.links.isEmpty
 	}
+}
 
-	// MARK: - Theme -
+// MARK: - TabController Delegate -
 
-    fileprivate func applyTheme() {
-        guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-            let theme: Theme = LightTheme()
-            theme.apply(for: UIApplication.shared)
-
-            return
-        }
-
-        let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
-        theme.apply(for: UIApplication.shared)
-    }
-
+extension AppDelegate: UITabBarControllerDelegate {
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		if let navVC = viewController as? UINavigationController,
+			let vc = navVC.children[0] as? UITableViewController {
+			if previousController == vc {
+				vc.tableView.setContentOffset(.zero, animated: true)
+			}
+			previousController = vc
+		} else if let navVC = viewController as? UINavigationController,
+			let vc = navVC.children[0] as? PodcastViewController {
+			if previousController == vc {
+				NotificationCenter.default.post(name: NSNotification.Name(rawValue: "scrollToTop"), object: nil)
+			}
+			previousController = vc
+		} else if let splitVC = viewController as? UISplitViewController,
+			let navVC = splitVC.children[0] as? UINavigationController,
+			let vc = navVC.children[0] as? PostsMasterViewController {
+			if previousController == vc || previousController == nil {
+				vc.tableView.setContentOffset(.zero, animated: true)
+			}
+			previousController = vc
+		}
+	}
 }
