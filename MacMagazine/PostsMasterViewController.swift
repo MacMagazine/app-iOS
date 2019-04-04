@@ -87,7 +87,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
                                                          NSSortDescriptor(key: "pubDate", ascending: false)]
-        fetchController?.fetchRequest.predicate = categoryPredicate
+//        fetchController?.fetchRequest.predicate = categoryPredicate
 
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
@@ -173,7 +173,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - View Methods -
 
 	func showActionSheet(_ view: UIView?, for items: [Any]) {
-		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
+		let favoritar = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
 			for item in items {
 				guard let post = self.fetchController?.object(with: "\(item)") else {
 					continue
@@ -183,7 +183,18 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			}
 		}
 
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
+		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
+			for item in items {
+				guard let url = URL(string: "\(item)") else {
+					continue
+				}
+				if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url)
+				}
+			}
+		}
+
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [favoritar, safari])
 		if let ppc = activityVC.popoverPresentationController {
 			guard let view = view else {
 				return
@@ -245,13 +256,15 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	@IBAction private func showFavorites(_ sender: Any) {
 		showFavorites = !showFavorites
         if showFavorites {
-            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
-            fetchController?.fetchRequest.predicate = predicate
+//            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
+//            fetchController?.fetchRequest.predicate = predicate
+			fetchController?.fetchRequest.predicate = favoritePredicate
 
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
         } else {
-            fetchController?.fetchRequest.predicate = categoryPredicate
+//            fetchController?.fetchRequest.predicate = categoryPredicate
+			fetchController?.fetchRequest.predicate = nil
 
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil

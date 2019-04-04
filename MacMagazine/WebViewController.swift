@@ -97,7 +97,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
-		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
+		let favorito = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
 			for item in items {
 				CoreDataStack.shared.get(post: "\(item)") { items in
 					if !items.isEmpty {
@@ -108,8 +108,19 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 			}
 		}
 
+		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
+			for item in items {
+				guard let url = URL(string: "\(item)") else {
+					continue
+				}
+				if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url)
+				}
+			}
+		}
+
 		let items: [Any] = [post.title ?? "", url]
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [favorito, safari])
 
 		if let ppc = activityVC.popoverPresentationController {
 			ppc.barButtonItem = share

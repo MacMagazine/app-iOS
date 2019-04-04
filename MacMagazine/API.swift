@@ -30,7 +30,7 @@ class API: NSObject, XMLParserDelegate {
 
     func getPosts(page: Int = 0, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
-        let host = "\(APIParams.feed)?\(APIParams.posts)&\(APIParams.paged)\(page)"
+        let host = "\(APIParams.feed)?\(APIParams.paged)\(page)"
         executeGetContent(host)
     }
 
@@ -42,7 +42,7 @@ class API: NSObject, XMLParserDelegate {
 
     func searchPosts(_ text: String, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
-        let host = "\(APIParams.feed)?\(APIParams.posts)&\(APIParams.search)'\(text)'"
+        let host = "\(APIParams.feed)?\(APIParams.search)'\(text)'"
         executeGetContent(host)
     }
 

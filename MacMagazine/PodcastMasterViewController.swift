@@ -60,10 +60,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 		// Execute the fetch to display the data
 		fetchController?.reloadData()
-
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-			self.getPodcasts(paged: 0)
-		}
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -82,7 +78,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	// MARK: - View Methods -
 
 	func showActionSheet(_ view: UIView?, for items: [Any]) {
-		let customItem = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
+		let favorito = UIActivityExtensions(title: "Favoritar", image: UIImage(named: "fav_cell")) { items in
 			for item in items {
 				guard let post = self.fetchController?.object(with: "\(item)") else {
 					continue
@@ -92,7 +88,18 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 			}
 		}
 
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [customItem])
+		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
+			for item in items {
+				guard let url = URL(string: "\(item)") else {
+					continue
+				}
+				if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url)
+				}
+			}
+		}
+
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: [favorito, safari])
 		if let ppc = activityVC.popoverPresentationController {
 			guard let view = view else {
 				return
