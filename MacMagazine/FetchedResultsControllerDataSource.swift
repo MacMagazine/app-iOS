@@ -48,6 +48,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         super.init()
         self.groupedBy = group
         setup(tableView: tableView)
+
+		self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: featuredCellNib, bundle: nil), forCellReuseIdentifier: "featuredCell")
     }
 
@@ -70,12 +72,15 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return sections()
 	}
 
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		guard let sections = fetchedResultsController.sections else {
-			return nil
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		guard let sections = fetchedResultsController.sections,
+			let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as? HeaderCell
+			else {
+				return nil
 		}
 		let currentSection = sections[section]
-		return currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate()
+		header.setHeader(currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate())
+		return header
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

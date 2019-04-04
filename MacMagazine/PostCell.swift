@@ -9,6 +9,19 @@
 import Kingfisher
 import UIKit
 
+class HeaderCell: UITableViewHeaderFooterView {
+
+	// MARK: - Properties -
+
+	@IBOutlet private weak var headerLabel: UILabel!
+
+	// MARK: - Methods -
+
+	func setHeader(_ text: String?) {
+		headerLabel?.text = text
+	}
+}
+
 class PostCell: UITableViewCell {
 
 	// MARK: - Properties -
