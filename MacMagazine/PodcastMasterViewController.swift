@@ -50,7 +50,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
-		searchController?.searchBar.placeholder = "Buscar nos Podcasts ..."
+		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
 		tableView.tableHeaderView = searchController?.searchBar
 
 		self.definesPresentationContext = true

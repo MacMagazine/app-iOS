@@ -10,6 +10,9 @@ import UIKit
 
 class PodcastViewController: UIViewController {
 
+	// MARK: - Properties -
+
+	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var playerHeight: NSLayoutConstraint!
 
     // MARK: - View lifecycle -
@@ -17,7 +20,10 @@ class PodcastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        guard let vc = self.children[0] as? PodcastMasterViewController else {
+		self.navigationItem.titleView = logoView
+		self.navigationItem.title = nil
+
+		guard let vc = self.children[0] as? PodcastMasterViewController else {
             return
         }
         vc.showWebView = showWebView
@@ -31,6 +37,14 @@ class PodcastViewController: UIViewController {
             return
         }
         vc.showFavoritesAction()
+
+		if vc.showFavorites {
+			self.navigationItem.titleView = nil
+			self.navigationItem.title = "Favoritos"
+		} else {
+			self.navigationItem.titleView = logoView
+			self.navigationItem.title = nil
+		}
     }
 
     // MARK: - Methods -

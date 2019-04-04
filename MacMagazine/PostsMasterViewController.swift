@@ -57,6 +57,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     var fetchController: FetchedResultsControllerDataSource?
 	var detailViewController: PostsDetailViewController?
 
+	@IBOutlet private weak var logoView: UIView!
+
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
 	var lastPage = -1
@@ -78,7 +80,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
-        fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: "headerDate", featuredCellNib: "FeaturedCell")
+		self.navigationItem.titleView = logoView
+		self.navigationItem.title = nil
+
+		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: "headerDate", featuredCellNib: "FeaturedCell")
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
                                                          NSSortDescriptor(key: "pubDate", ascending: false)]
@@ -91,7 +96,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
-		searchController?.searchBar.placeholder = "Buscar nos Posts ..."
+		searchController?.searchBar.placeholder = "Buscar nos posts..."
 		tableView.tableHeaderView = searchController?.searchBar
 
 		self.definesPresentationContext = true
@@ -242,9 +247,15 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         if showFavorites {
             let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
             fetchController?.fetchRequest.predicate = predicate
+
+			self.navigationItem.titleView = nil
+			self.navigationItem.title = "Favoritos"
         } else {
             fetchController?.fetchRequest.predicate = categoryPredicate
-        }
+
+			self.navigationItem.titleView = logoView
+			self.navigationItem.title = nil
+		}
 		fetchController?.reloadData()
         tableView.reloadData()
 	}

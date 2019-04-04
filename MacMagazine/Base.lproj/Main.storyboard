@@ -32,8 +32,9 @@
         <scene sceneID="ZIo-pw-Xnt">
             <objects>
                 <navigationController title="PostsNavigation" id="kKX-hy-fjk" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -62,7 +63,7 @@
         <scene sceneID="vsx-Zo-BK5">
             <objects>
                 <navigationController title="NoArNavigation" automaticallyAdjustsScrollViewInsets="NO" id="GbX-Zp-bIv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="No Ar" image="tab_noar" id="59e-2Y-DJH"/>
+                    <tabBarItem key="tabBarItem" title="Podcast" image="tab_noar" id="59e-2Y-DJH"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ">
@@ -334,7 +335,7 @@
             <objects>
                 <tableViewController title="Posts" clearsSelectionOnViewWillAppear="NO" id="Jej-5Q-aqJ" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="33" sectionFooterHeight="22" id="BzE-Hd-ooV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections/>
@@ -344,17 +345,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <view key="titleView" contentMode="scaleToFill" id="JbQ-Qw-e5R">
-                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-ag-GL7">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <barButtonItem key="rightBarButtonItem" image="fav_on" id="mos-l0-Ml2">
                             <connections>
                                 <action selector="showFavorites:" destination="Jej-5Q-aqJ" id="Xng-DI-R8j"/>
@@ -369,10 +359,22 @@
                         </connections>
                     </refreshControl>
                     <connections>
+                        <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmD-xa-eeh" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="JbQ-Qw-e5R">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-ag-GL7">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="527" y="-2885"/>
         </scene>
@@ -484,17 +486,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="7gQ-ba-oxb">
-                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-dzf">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <barButtonItem key="rightBarButtonItem" image="fav_on" id="DiB-v8-Kg9">
                             <connections>
                                 <action selector="showFavorites:" destination="3UV-U7-cDa" id="H56-ko-JjQ"/>
@@ -502,10 +493,22 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoView" destination="7gQ-ba-oxb" id="Aj3-1W-bkS"/>
                         <outlet property="playerHeight" destination="3US-UY-uQE" id="EX8-pJ-oXv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TX-9w-Qd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="7gQ-ba-oxb">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-dzf">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-204" y="-1380.3598200899551"/>
         </scene>
