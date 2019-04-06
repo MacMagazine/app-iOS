@@ -44,6 +44,18 @@ class ResultsViewController: UITableViewController {
 	// MARK: - TableView methods -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
+		if posts.isEmpty {
+			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+			notFound.text = "Nenhum resultado encontrado"
+			notFound.textColor = Settings().isDarkMode() ? .white : .black
+			notFound.textAlignment = .center
+			tableView.backgroundView = notFound
+			tableView.separatorStyle = .none
+		} else {
+			tableView.backgroundView = nil
+			tableView.separatorStyle = .singleLine
+		}
+
 		return 1
 	}
 
