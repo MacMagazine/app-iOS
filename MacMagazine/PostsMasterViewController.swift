@@ -277,30 +277,37 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
-		if paged < 1 {
-			self.refreshControl?.beginRefreshing()
-			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
-		}
+		let getPost = {
+			API().getPosts(page: paged) { post in
+				DispatchQueue.main.async {
+					guard let post = post else {
+						// When post == nil, indicates the last post retrieved
+						self.fetchController?.reloadData()
 
-		API().getPosts(page: paged) { post in
-			DispatchQueue.main.async {
-				guard let post = post else {
-					// When post == nil, indicates the last post retrieved
-					self.fetchController?.reloadData()
-
-					if paged < 1 {
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-							self.refreshControl?.endRefreshing()
+						if paged < 1 {
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-								self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
-								self.processSelection()
+								self.refreshControl?.endRefreshing()
+								DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+									self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
+									self.processSelection()
+								}
 							}
 						}
+						return
 					}
-					return
+					CoreDataStack.shared.save(post: post)
 				}
-				CoreDataStack.shared.save(post: post)
 			}
+		}
+
+		if paged < 1 {
+			self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+			UIView.animate(withDuration: 0.4, animations: {
+				self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: false)
+			}, completion: { _ in
+				self.refreshControl?.beginRefreshing()
+				getPost()
+			})
 		}
 	}
 
