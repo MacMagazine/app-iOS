@@ -87,7 +87,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return rows(in: section)
 	}
 
-	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
 		let favoritar = UIContextualAction(style: .normal, title: nil) {
 			_, _, boolValue in
@@ -101,6 +101,13 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		let object = self.fetchedResultsController.object(at: indexPath)
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
 		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+
+		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
+		swipeActions.performsFirstActionWithFullSwipe = true
+		return swipeActions
+	}
+
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
 		let compatilhar = UIContextualAction(style: .normal, title: nil) {
 			_, _, boolValue in
@@ -122,7 +129,9 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		compatilhar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
 		compatilhar.image = UIImage(named: "share")
 
-		return UISwipeActionsConfiguration(actions: [compatilhar, favoritar])
+		let swipeActions = UISwipeActionsConfiguration(actions: [compatilhar])
+		swipeActions.performsFirstActionWithFullSwipe = true
+		return swipeActions
 	}
 
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -206,28 +206,35 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     }
 
 	fileprivate func getPodcasts(paged: Int) {
-		if paged < 1 {
-			self.refreshControl?.beginRefreshing()
-			self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: true)
-		}
-
-		API().getPodcasts(page: paged) { post in
-			DispatchQueue.main.async {
-				guard let post = post else {
-					// When post == nil, indicates the last post retrieved
-					self.fetchController?.reloadData()
-					if paged < 1 {
-						self.refreshControl?.endRefreshing()
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-							self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
+		let getPodcast = {
+			API().getPodcasts(page: paged) { post in
+				DispatchQueue.main.async {
+					guard let post = post else {
+						// When post == nil, indicates the last post retrieved
+						self.fetchController?.reloadData()
+						if paged < 1 {
+							self.refreshControl?.endRefreshing()
+							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+								self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
+							}
 						}
+						return
 					}
-					return
-				}
-				if !post.duration.isEmpty {
-					CoreDataStack.shared.save(post: post)
+					if !post.duration.isEmpty {
+						CoreDataStack.shared.save(post: post)
+					}
 				}
 			}
+		}
+
+		if paged < 1 {
+			self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+			UIView.animate(withDuration: 0.4, animations: {
+				self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: false)
+			}, completion: { _ in
+				self.refreshControl?.beginRefreshing()
+				getPodcast()
+			})
 		}
 	}
 
