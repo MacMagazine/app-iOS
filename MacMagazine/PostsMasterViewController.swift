@@ -99,8 +99,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos posts..."
-		tableView.tableHeaderView = searchController?.searchBar
-
+		searchController?.hidesNavigationBarDuringPresentation = true
 		self.definesPresentationContext = true
 
 		tableView.rowHeight = UITableView.automaticDimension
@@ -248,6 +247,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	// MARK: - Actions methods -
 
+	@IBAction private func search(_ sender: Any) {
+		navigationItem.searchController = searchController
+		searchController?.searchBar.becomeFirstResponder()
+	}
+
 	@IBAction private func getPosts(_ sender: Any) {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
 			self.getPosts(paged: 0)
@@ -289,7 +293,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 								self.refreshControl?.endRefreshing()
 								DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-									self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
 									self.processSelection()
 								}
 							}
@@ -369,10 +372,14 @@ extension PostsMasterViewController: UISearchBarDelegate {
 		guard let text = searchBar.text else {
 			return
 		}
-		searchBar.resignFirstResponder()
 		resultsTableController?.posts = []
 		resultsTableController?.isSearching = true
 		searchPosts(text)
+	}
+
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		searchBar.resignFirstResponder()
+		navigationItem.searchController = nil
 	}
 }
 

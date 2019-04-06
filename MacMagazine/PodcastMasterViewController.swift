@@ -54,8 +54,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
-		tableView.tableHeaderView = searchController?.searchBar
-
+		self.parent?.navigationItem.searchController = searchController
 		self.definesPresentationContext = true
 
 		tableView.rowHeight = UITableView.automaticDimension

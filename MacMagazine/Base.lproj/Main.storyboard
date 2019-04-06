@@ -345,9 +345,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <barButtonItem key="rightBarButtonItem" image="fav_on" id="mos-l0-Ml2">
+                        <barButtonItem key="leftBarButtonItem" image="fav_on" id="mos-l0-Ml2">
                             <connections>
                                 <action selector="showFavorites:" destination="Jej-5Q-aqJ" id="Xng-DI-R8j"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Ml7-gR-vKk">
+                            <connections>
+                                <action selector="search:" destination="Jej-5Q-aqJ" id="dZ9-cr-Rlt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -376,7 +381,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="527" y="-2885"/>
+            <point key="canvasLocation" x="425" y="-2919"/>
         </scene>
         <!--Posts Detail View Controller-->
         <scene sceneID="fYa-LD-1Wl">
@@ -486,11 +491,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" image="fav_on" id="DiB-v8-Kg9">
+                        <barButtonItem key="leftBarButtonItem" image="fav_on" id="DiB-v8-Kg9">
                             <connections>
                                 <action selector="showFavorites:" destination="3UV-U7-cDa" id="H56-ko-JjQ"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="jMe-aj-dZs"/>
                     </navigationItem>
                     <connections>
                         <outlet property="logoView" destination="7gQ-ba-oxb" id="Aj3-1W-bkS"/>
