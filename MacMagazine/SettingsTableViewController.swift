@@ -39,10 +39,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
-			$0.textAlignment = .left
-		}
-
 		applyTheme()
 	}
 
@@ -114,6 +110,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         theme.apply(for: UIApplication.shared)
 
         darkMode.isOn = isDarkMode
+		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadWeb"), object: nil)
     }
 
     fileprivate func getAppVersion() -> String {

@@ -106,7 +106,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 			}
 		}
 		var activities = [safari]
-		if UIApplication.shared.canOpenURL(URL(string: "googlechrome://")!) {
+		if let url = URL(string: "googlechrome://"),
+			UIApplication.shared.canOpenURL(url) {
 			activities.append(chrome)
 		}
 

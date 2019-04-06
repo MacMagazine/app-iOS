@@ -37,6 +37,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	override func viewDidLoad() {
         super.viewDidLoad()
     	// Do any additional setup after loading the view.
+		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name(rawValue: "reloadWeb"), object: nil)
+
 		webView?.navigationDelegate = self
 
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
@@ -44,11 +46,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		self.parent?.navigationItem.rightBarButtonItem = nil
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 
-		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
-		webView.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
-
 		configureView()
     }
+
+	// MARK: - Notifications -
+
+	@objc func reload(_ notification: Notification) {
+		configureView()
+	}
 
 	// MARK: - WebView Delegate -
 
@@ -58,6 +63,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	}
 
 	func configureView() {
+		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
+		webView?.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
+
 		// Update the user interface for the detail item.
 		guard let post = post,
 			let link = post.link,
@@ -122,7 +130,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 			}
 		}
 		var activities = [safari]
-		if UIApplication.shared.canOpenURL(URL(string: "googlechrome://")!) {
+		if let url = URL(string: "googlechrome://"),
+			UIApplication.shared.canOpenURL(url) {
 			activities.append(chrome)
 		}
 

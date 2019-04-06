@@ -110,6 +110,11 @@ extension Theme {
 
         UIView.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).backgroundColor = backgroundColor
 
+		UIRefreshControl.appearance().with {
+			$0.tintColor = tint
+			$0.backgroundColor = backgroundColor
+		}
+
         // LABEL
 
         var fontSize = 1.0
