@@ -424,7 +424,7 @@
             <objects>
                 <tableViewController title="NoAr" clearsSelectionOnViewWillAppear="NO" id="dI9-bf-84Z" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="M41-4U-Ums">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections/>
@@ -458,15 +458,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <connections>
                                     <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-MC-Tvc">
-                                <rect key="frame" x="0.0" y="354" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="554" width="375" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="3US-UY-uQE"/>
+                                    <constraint firstAttribute="height" id="3US-UY-uQE"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="dJn-2U-uf9" kind="embed" id="GHc-83-1mb"/>
@@ -521,7 +521,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mjB-qY-c9f"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GF4-A6-6Pd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-ku-KsB">

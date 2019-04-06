@@ -48,6 +48,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
 		resultsTableController?.isPodcast = true
+		resultsTableController?.isSearching = false
 
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
@@ -251,7 +252,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 					})
 
 					self.resultsTableController?.posts = self.posts
-					self.resultsTableController?.tableView.reloadData()
+					self.resultsTableController?.isSearching = false
 				}
 				return
 			}
@@ -270,7 +271,9 @@ extension PodcastMasterViewController: UISearchBarDelegate {
 		guard let text = searchBar.text else {
 			return
 		}
-		searchPodcasts(text)
 		searchBar.resignFirstResponder()
+		resultsTableController?.posts = []
+		resultsTableController?.isSearching = true
+		searchPodcasts(text)
 	}
 }

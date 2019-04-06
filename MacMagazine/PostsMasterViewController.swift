@@ -93,6 +93,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
 		resultsTableController?.isPodcast = false
+		resultsTableController?.isSearching = false
 
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
@@ -349,7 +350,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 						$0.pubDate.toDate(nil).sortedDate().compare($1.pubDate.toDate(nil).sortedDate()) == .orderedDescending
 					})
 					self.resultsTableController?.posts = self.posts
-					self.resultsTableController?.tableView.reloadData()
+					self.resultsTableController?.isSearching = false
 				}
 				return
 			}
@@ -368,8 +369,10 @@ extension PostsMasterViewController: UISearchBarDelegate {
 		guard let text = searchBar.text else {
 			return
 		}
-		searchPosts(text)
 		searchBar.resignFirstResponder()
+		resultsTableController?.posts = []
+		resultsTableController?.isSearching = true
+		searchPosts(text)
 	}
 }
 

@@ -22,12 +22,18 @@ class ResultsViewController: UITableViewController {
 	// MARK: - Properties -
 
 	weak var delegate: ResultsViewControllerDelegate?
+
 	var isPodcast: Bool = false {
 		didSet {
 			tableView.register(UINib(nibName: isPodcast ? "PodcastCell" : "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
 		}
 	}
 	var posts: [XMLPost] = []
+	var isSearching = false {
+		didSet {
+			tableView.reloadData()
+		}
+	}
 
 	// MARK: - View lifecycle -
 
@@ -45,12 +51,19 @@ class ResultsViewController: UITableViewController {
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		if posts.isEmpty {
-			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-			notFound.text = "Nenhum resultado encontrado"
-			notFound.textColor = Settings().isDarkMode() ? .white : .black
-			notFound.textAlignment = .center
-			tableView.backgroundView = notFound
 			tableView.separatorStyle = .none
+			if isSearching {
+				let spin = UIActivityIndicatorView(style: .whiteLarge)
+				spin.startAnimating()
+				tableView.backgroundView = spin
+			} else {
+				let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+				notFound.text = "Nenhum resultado encontrado"
+				notFound.textColor = Settings().isDarkMode() ? .white : .black
+				notFound.textAlignment = .center
+				tableView.backgroundView = notFound
+				tableView.separatorStyle = .none
+			}
 		} else {
 			tableView.backgroundView = nil
 			tableView.separatorStyle = .singleLine
