@@ -69,7 +69,24 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	// MARK: - TableView methods -
 
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return sections()
+		let numSections = sections()
+
+		if numSections == 0 {
+
+			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+			notFound.text = "Nada encontrado"
+			notFound.textColor = Settings().isDarkMode() ? .white : .black
+			notFound.textAlignment = .center
+			tableView.backgroundView = notFound
+			tableView.separatorStyle = .none
+
+		} else {
+			tableView.backgroundView = nil
+			tableView.separatorStyle = .singleLine
+
+		}
+
+		return numSections
 	}
 
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

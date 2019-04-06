@@ -62,7 +62,6 @@ class ResultsViewController: UITableViewController {
 				notFound.textColor = Settings().isDarkMode() ? .white : .black
 				notFound.textAlignment = .center
 				tableView.backgroundView = notFound
-				tableView.separatorStyle = .none
 			}
 		} else {
 			tableView.backgroundView = nil
