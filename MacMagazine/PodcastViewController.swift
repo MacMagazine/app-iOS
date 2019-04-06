@@ -15,6 +15,8 @@ class PodcastViewController: UIViewController {
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var playerHeight: NSLayoutConstraint!
 
+	var searchController: UISearchController?
+
     // MARK: - View lifecycle -
 
     override func viewDidLoad() {
@@ -24,15 +26,31 @@ class PodcastViewController: UIViewController {
 		self.navigationItem.title = nil
 
 		guard let vc = self.children[0] as? PodcastMasterViewController else {
-            return
-        }
-        vc.showWebView = showWebView
-        vc.play = play
+			return
+		}
+		vc.showWebView = showWebView
+		vc.play = play
+
+		vc.resultsTableController = ResultsViewController()
+		vc.resultsTableController?.delegate = vc
+		vc.resultsTableController?.isPodcast = true
+		vc.resultsTableController?.isSearching = false
+
+		searchController = UISearchController(searchResultsController: vc.resultsTableController)
+		searchController?.searchBar.autocapitalizationType = .none
+		searchController?.searchBar.delegate = self
+		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
+		self.definesPresentationContext = true
     }
 
     // MARK: - Actions -
 
-    @IBAction private func showFavorites(_ sender: Any) {
+	@IBAction private func search(_ sender: Any) {
+		navigationItem.searchController = searchController
+		searchController?.searchBar.becomeFirstResponder()
+	}
+
+	@IBAction private func showFavorites(_ sender: Any) {
         guard let vc = self.children[0] as? PodcastMasterViewController else {
             return
         }
@@ -66,4 +84,25 @@ class PodcastViewController: UIViewController {
         vc.podcast = podcast
     }
 
+}
+
+// MARK: - UISearchBarDelegate -
+
+extension PodcastViewController: UISearchBarDelegate {
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		guard let text = searchBar.text,
+			let vc = self.children[0] as? PodcastMasterViewController
+			else {
+				return
+		}
+		searchBar.resignFirstResponder()
+		vc.resultsTableController?.posts = []
+		vc.resultsTableController?.isSearching = true
+		vc.searchPodcasts(text)
+	}
+
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		searchBar.resignFirstResponder()
+		navigationItem.searchController = nil
+	}
 }

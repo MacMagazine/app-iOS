@@ -21,8 +21,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	var lastPage = -1
     var selectedPodcast = -1
 
-	private var searchController: UISearchController?
-	private var resultsTableController: ResultsViewController?
+	var searchController: UISearchController?
+	var resultsTableController: ResultsViewController?
 	var posts = [XMLPost]()
 
     var showFavorites = false
@@ -44,18 +44,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
         fetchController?.fetchRequest.predicate = categoryPredicate
-
-		resultsTableController = ResultsViewController()
-		resultsTableController?.delegate = self
-		resultsTableController?.isPodcast = true
-		resultsTableController?.isSearching = false
-
-		searchController = UISearchController(searchResultsController: resultsTableController)
-		searchController?.searchBar.autocapitalizationType = .none
-		searchController?.searchBar.delegate = self
-		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
-		self.parent?.navigationItem.searchController = searchController
-		self.definesPresentationContext = true
 
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -238,11 +226,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		}
 	}
 
-	fileprivate func isFiltering() -> Bool {
-		return searchController?.isActive ?? false
-	}
-
-	fileprivate func searchPodcasts(_ text: String) {
+	func searchPodcasts(_ text: String) {
 		let processResponse: (XMLPost?) -> Void = { post in
 			guard let post = post else {
 				DispatchQueue.main.async {
@@ -261,18 +245,4 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		API().searchPodcasts(text, processResponse)
 	}
 
-}
-
-// MARK: - UISearchBarDelegate -
-
-extension PodcastMasterViewController: UISearchBarDelegate {
-	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		guard let text = searchBar.text else {
-			return
-		}
-		searchBar.resignFirstResponder()
-		resultsTableController?.posts = []
-		resultsTableController?.isSearching = true
-		searchPodcasts(text)
-	}
 }
