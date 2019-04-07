@@ -65,6 +65,7 @@ class API: NSObject, XMLParserDelegate {
         }
         Network.get(url: url) { (data: Data?, _: String?) in
             guard let data = data else {
+				self.onCompletion?(nil)
                 return
             }
             let parser = XMLParser(data: data)
