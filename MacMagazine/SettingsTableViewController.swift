@@ -110,7 +110,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         theme.apply(for: UIApplication.shared)
 
         darkMode.isOn = isDarkMode
-		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadWeb"), object: nil)
+		NotificationCenter.default.post(name: .reloadWeb, object: nil)
     }
 
     fileprivate func getAppVersion() -> String {

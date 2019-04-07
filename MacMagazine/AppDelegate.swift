@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension Notification.Name {
+	static let shortcutAction = Notification.Name("shortcutAction")
+	static let reloadWeb = Notification.Name("reloadWeb")
+	static let scrollToTop = Notification.Name("scrollToTop")
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -81,7 +87,7 @@ extension AppDelegate: UITabBarControllerDelegate {
 		} else if let navVC = viewController as? UINavigationController,
 			let vc = navVC.children[0] as? PodcastViewController {
 			if previousController == vc {
-				NotificationCenter.default.post(name: NSNotification.Name(rawValue: "scrollToTop"), object: nil)
+				NotificationCenter.default.post(name: .scrollToTop, object: nil)
 			}
 			previousController = vc
 		} else if let splitVC = viewController as? UISplitViewController,
@@ -91,6 +97,16 @@ extension AppDelegate: UITabBarControllerDelegate {
 				vc.tableView.setContentOffset(.zero, animated: true)
 			}
 			previousController = vc
+		}
+	}
+}
+
+// MARK: - Shortcut -
+
+extension AppDelegate {
+	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+		if shortcutItem.type == "open.last.post" {
+			NotificationCenter.default.post(name: .shortcutAction, object: nil)
 		}
 	}
 }

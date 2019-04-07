@@ -37,7 +37,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
-		NotificationCenter.default.addObserver(self, selector: #selector(onScrollToTop(_:)), name: NSNotification.Name(rawValue: "scrollToTop"), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onScrollToTop(_:)), name: .scrollToTop, object: nil)
 
 		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
         fetchController?.delegate = self

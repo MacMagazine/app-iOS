@@ -37,7 +37,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	override func viewDidLoad() {
         super.viewDidLoad()
     	// Do any additional setup after loading the view.
-		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name(rawValue: "reloadWeb"), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
 
 		webView?.navigationDelegate = self
 

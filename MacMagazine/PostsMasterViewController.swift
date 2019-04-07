@@ -82,6 +82,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
+		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutAction(_:)), name: .shortcutAction, object: nil)
+
 		self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
 
@@ -322,16 +324,23 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 				self.getPosts(0)
 			}
 		}
+		processTabletSelection()
+	}
 
+	fileprivate func getLastSelection() -> IndexPath {
+		var indexPath = IndexPath(row: 0, section: 0)
+		guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {
+			return indexPath
+		}
+		indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
+		return indexPath
+	}
+
+	fileprivate func processTabletSelection() {
         if Settings().isPad() &&
             tableView.numberOfSections > 0 {
 
-            guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {
-                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-                fetchController?.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
-                return
-            }
-            let indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
+			let indexPath = getLastSelection()
 			if tableView.numberOfSections >= indexPath.section && tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
 				if hasData() && !(self.refreshControl?.isRefreshing ?? false) {
 					tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
@@ -341,8 +350,16 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         }
 	}
 
-	fileprivate func isFiltering() -> Bool {
-		return searchController?.isActive ?? false
+	fileprivate func processPhoneSelection() {
+		if Settings().isPhone() &&
+			tableView.numberOfSections > 0 {
+
+			let indexPath = getLastSelection()
+			if tableView.numberOfSections >= indexPath.section && tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row && hasData() {
+				tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+				didSelectRowAt(indexPath: indexPath)
+			}
+		}
 	}
 
 	fileprivate func searchPosts(_ text: String) {
@@ -447,6 +464,14 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 // MARK: - Peek&Pop -
 
 extension PostsMasterViewController {
+
+	@objc func onShortcutAction(_ notification: Notification) {
+		if Settings().isPad() {
+			processTabletSelection()
+		} else {
+			processPhoneSelection()
+		}
+	}
 
 	func createWebViewController(post: PostData) -> UIViewController? {
 		let storyboard = UIStoryboard(name: "WebView", bundle: nil)

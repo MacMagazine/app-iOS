@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>4.0</string>
 	<key>CFBundleVersion</key>
-	<string>1313</string>
+	<string>1314</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -27,6 +27,17 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>UIApplicationShortcutIconTypeRecent</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Abrir o último post</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>open.last.post</string>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
