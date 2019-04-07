@@ -42,7 +42,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMg-Si-BGK" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Configura as novidades: open source, dynamic typing e mais! Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMg-Si-BGK" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="48.5" width="255" height="52"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <nil key="textColor"/>
@@ -83,7 +83,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="33" height="30"/>
+        <image name="fav_on" width="22" height="20"/>
         <image name="image_logo" width="144" height="200"/>
     </resources>
 </document>

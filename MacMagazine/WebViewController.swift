@@ -6,6 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import SafariServices
 import UIKit
 import WebKit
 
@@ -15,7 +16,7 @@ protocol WebViewControllerDelegate {
 	func previewActionCancel()
 }
 
-class WebViewController: UIViewController, WKNavigationDelegate {
+class WebViewController: UIViewController {
 
 	// MARK: - Properties -
 
@@ -32,6 +33,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		}
 	}
 
+	var postURL: URL? {
+		didSet {
+			guard let url = postURL else {
+				return
+			}
+			loadWebView(url: url)
+		}
+	}
+
 	// MARK: - View lifecycle -
 
 	override func viewDidLoad() {
@@ -40,32 +50,37 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
 
 		webView?.navigationDelegate = self
+		webView?.uiDelegate = self
 
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
 
-		self.parent?.navigationItem.rightBarButtonItem = nil
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 
-		configureView()
+		reload()
     }
 
 	// MARK: - Notifications -
 
+	func reload() {
+		if post != nil {
+			configureView()
+		} else {
+			guard let url = postURL else {
+				return
+			}
+			loadWebView(url: url)
+
+			self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+		}
+	}
+
 	@objc func reload(_ notification: Notification) {
-		configureView()
+		reload()
 	}
 
-	// MARK: - WebView Delegate -
-
-	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		self.parent?.navigationItem.rightBarButtonItem = nil
-		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
-	}
+	// MARK: - Local methods -
 
 	func configureView() {
-		// Changes the WKWebView user agent in order to hide some CSS/HTML elements
-		webView?.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
-
 		// Update the user interface for the detail item.
 		guard let post = post,
 			let link = post.link,
@@ -74,12 +89,18 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 				return
 		}
 
-		self.parent?.navigationItem.rightBarButtonItems = nil
-		self.parent?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spin)
+		loadWebView(url: url)
+	}
 
-		let request = URLRequest(url: url)
-		webView?.load(request)
+	func loadWebView(url: URL) {
+		UserDefaults.standard.removeObject(forKey: "offset")
+
+		// Changes the WKWebView user agent in order to hide some CSS/HT elements
+		webView?.customUserAgent = "MacMagazine\(Settings().getDarkModeUserAgent())\(Settings().getFontSizeUserAgent())"
 		webView?.allowsBackForwardNavigationGestures = false
+		webView?.load(URLRequest(url: url))
+
+		self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
 	}
 
 	// MARK: - Actions -
@@ -156,6 +177,126 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 			self?.delegate?.previewActionCancel()
 		}
 		return [favoritar, compartilhar, cancelar]
+	}
+
+}
+
+// MARK: - WebView Delegate -
+
+extension WebViewController: WKNavigationDelegate, WKUIDelegate {
+
+	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
+		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+		self.navigationItem.rightBarButtonItems = nil
+	}
+
+	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+
+		if !(navigationAction.targetFrame?.isMainFrame ?? false) {
+			guard let url = navigationAction.request.url else {
+				return nil
+			}
+
+			if url.isKnownAddress() {
+				pushNavigation(url)
+			} else {
+				openInSafari(url)
+			}
+		}
+		return nil
+	}
+
+	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+
+		var actionPolicy: WKNavigationActionPolicy = .allow
+
+		guard let url = navigationAction.request.url else {
+			decisionHandler(actionPolicy)
+			return
+		}
+		let isMMAddress = url.isMMAddress()
+
+		switch navigationAction.navigationType {
+		case .linkActivated:
+			if isMMAddress {
+				pushNavigation(url)
+			} else {
+				openInSafari(url)
+			}
+			actionPolicy = .cancel
+
+		case .other:
+			if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
+				if webView.isLoading {
+					if webView.url?.absoluteString == "https://disqus.com/next/login-success/" {
+						actionPolicy = .cancel
+						self.navigationController?.popViewController(animated: true)
+						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+							NotificationCenter.default.post(name: .reloadWeb, object: nil)
+						}
+					}
+				} else {
+					if isMMAddress {
+						pushNavigation(url)
+					} else {
+						openInSafari(url)
+					}
+					actionPolicy = .cancel
+				}
+			}
+
+		default:
+			break
+		}
+
+		decisionHandler(actionPolicy)
+	}
+
+}
+
+extension WebViewController {
+
+	func pushNavigation(_ url: URL) {
+		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+		guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+			return
+		}
+		controller.postURL = url
+
+		controller.modalPresentationStyle = .overFullScreen
+		self.navigationController?.pushViewController(controller, animated: true)
+	}
+
+	func openInSafari(_ url: URL) {
+		if url.scheme?.lowercased().contains("http") ?? false {
+			let safari = SFSafariViewController(url: url)
+			safari.modalPresentationStyle = .overFullScreen
+			self.present(safari, animated: true, completion: nil)
+		}
+	}
+
+}
+
+// MARK: - Extensions -
+
+extension URL {
+
+	struct Address {
+		static let disqus = "disqus.com"
+		static let macmagazine = "macmagazine.uol.com.br"
+	}
+
+	func isKnownAddress() -> Bool {
+		return self.absoluteString.contains(Address.disqus) ||
+			self.absoluteString.contains(Address.macmagazine)
+	}
+
+	func isMMAddress() -> Bool {
+		return self.absoluteString.contains(Address.macmagazine)
+	}
+
+	func isDisqusAddress() -> Bool {
+		return self.absoluteString.contains(Address.disqus)
 	}
 
 }
