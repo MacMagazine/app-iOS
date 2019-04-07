@@ -25,16 +25,38 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var podcastDuration: UILabel!
     @IBOutlet private weak var slider: UISlider!
 
+	var show: ((Bool) -> Void)?
 	var player: AVAudioPlayer = AVAudioPlayer()
+
 	var timer: Timer?
+	var isHidden = true
+	var url: String?
 
     var podcast: Podcast? {
         didSet {
-			if podcast == nil {
-				timer?.invalidate()
-				player.pause()
-				playButton.isSelected = false
+			if podcast?.url == url {
+				if isHidden {
+					show?(true)
+					if playButton.isHidden {
+						loadPlayer()
+					} else {
+						play()
+					}
+				} else {
+					timer?.invalidate()
+					show?(false)
+					if !playButton.isHidden {
+						player.pause()
+					}
+					playButton.isSelected = false
+				}
+				isHidden = !isHidden
 			} else {
+				if isHidden {
+					show?(true)
+					isHidden = false
+				}
+				url = podcast?.url
 				podcastTitle.text = podcast?.title
 				podcastDuration.text = podcast?.duration
 
@@ -64,11 +86,15 @@ class PlayerViewController: UIViewController {
 			player.pause()
 			playButton.isSelected = false
         } else {
-			player.play()
-			playButton.isSelected = true
-			startTimer()
+			play()
 		}
     }
+
+	fileprivate func play() {
+		player.play()
+		playButton.isSelected = true
+		startTimer()
+	}
 
     @IBAction private func sliderValueChanged(_ slider: UISlider) {
 		player.stop()
@@ -105,27 +131,36 @@ class PlayerViewController: UIViewController {
 		guard let url = URL(string: podcast?.url ?? "") else {
 			return
 		}
+
+		if self.slider.value > 0 {
+			timer?.invalidate()
+			self.player.stop()
+		}
+
 		Network.get(url: url) { (data: Data?, _: String?) in
 			guard let data = data else {
 				return
 			}
 
-			DispatchQueue.main.async {
-				self.spin.stopAnimating()
-				self.playButton.isHidden = self.spin.isAnimating
+			if !self.isHidden {
+				DispatchQueue.main.async {
+					self.spin.stopAnimating()
+					self.playButton.isHidden = self.spin.isAnimating
 
-				do {
-					self.player = try AVAudioPlayer(data: data)
+					do {
+						self.player = try AVAudioPlayer(data: data)
 
-					self.player.prepareToPlay()
-					self.player.play()
-					self.startTimer()
+						self.player.prepareToPlay()
+						self.player.play()
+						self.startTimer()
 
-					self.slider.maximumValue = Float(self.player.duration)
-					self.podcastDuration.text = self.secondsToHoursMinutesSeconds(Int(self.player.duration))
-					self.playButton.isSelected = true
-				} catch {
-					self.playButton.isEnabled = false
+						self.slider.value = 0
+						self.slider.maximumValue = Float(self.player.duration)
+						self.podcastDuration.text = self.secondsToHoursMinutesSeconds(Int(self.player.duration))
+						self.playButton.isSelected = true
+					} catch {
+						self.playButton.isEnabled = false
+					}
 				}
 			}
 		}

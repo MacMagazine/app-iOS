@@ -71,7 +71,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	func numberOfSections(in tableView: UITableView) -> Int {
 		let numSections = sections()
 
-		if numSections == 0 {
+		if numSections == 0 || rows(in: 0) == 0 {
 
 			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
 			notFound.text = "Nada encontrado"

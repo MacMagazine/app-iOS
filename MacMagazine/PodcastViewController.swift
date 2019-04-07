@@ -25,10 +25,11 @@ class PodcastViewController: UIViewController {
 		self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
 
+		playerHeight.constant = 0.0
+
 		guard let vc = self.children[0] as? PodcastMasterViewController else {
 			return
 		}
-		vc.showWebView = showWebView
 		vc.play = play
 
 		vc.resultsTableController = ResultsViewController()
@@ -72,15 +73,13 @@ class PodcastViewController: UIViewController {
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
         }
-        if !show {
-            play(nil)
-        }
     }
 
     fileprivate func play(_ podcast: Podcast?) {
         guard let vc = self.children[1] as? PlayerViewController else {
             return
         }
+		vc.show = showWebView
         vc.podcast = podcast
     }
 

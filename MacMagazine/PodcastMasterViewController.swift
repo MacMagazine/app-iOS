@@ -19,7 +19,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
 	var lastPage = -1
-    var selectedPodcast = -1
 
 	var searchController: UISearchController?
 	var resultsTableController: ResultsViewController?
@@ -27,9 +26,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
     var showFavorites = false
     let categoryPredicate = NSPredicate(format: "categorias CONTAINS[cd] %@", "Podcast")
+	let isPodcastPredicate = NSPredicate(format: "podcastURL CONTAINS[cd] %@", "http")
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
-    var showWebView: ((Bool) -> Void)?
     var play: ((Podcast?) -> Void)?
 
 	// MARK: - View Lifecycle -
@@ -43,7 +42,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
-        fetchController?.fetchRequest.predicate = categoryPredicate
+		let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, isPodcastPredicate])
+		fetchController?.fetchRequest.predicate = predicate
 
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -128,19 +128,12 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
     func didSelectRowAt(indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        if selectedPodcast != indexPath.row {
-            selectedPodcast = indexPath.row
 
-            guard let object = fetchController?.object(at: indexPath) else {
+		guard let object = fetchController?.object(at: indexPath) else {
                 return
-            }
-            let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
-            showWebView?(true)
-            play?(podcast)
-        } else {
-            selectedPodcast = -1
-            showWebView?(false)
-        }
+		}
+		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
+		play?(podcast)
     }
 
     func configureResult(cell: PostCell, atIndexPath: IndexPath) {
@@ -152,17 +145,10 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
     func didSelectResultRowAt(indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        if selectedPodcast != indexPath.row {
-            selectedPodcast = indexPath.row
 
-            let object = posts[selectedPodcast]
-            let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
-            showWebView?(true)
-            play?(podcast)
-        } else {
-            selectedPodcast = -1
-            showWebView?(false)
-        }
+		let object = posts[indexPath.row]
+		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
+		play?(podcast)
     }
 
 	// MARK: - Actions methods -
@@ -177,13 +163,14 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
     func showFavoritesAction() {
         showFavorites = !showFavorites
+		var predicateArray = [categoryPredicate, isPodcastPredicate]
         if showFavorites {
-            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
-            fetchController?.fetchRequest.predicate = predicate
-        } else {
-            fetchController?.fetchRequest.predicate = categoryPredicate
+			predicateArray.append(favoritePredicate)
         }
-        fetchController?.reloadData()
+		let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicateArray)
+		fetchController?.fetchRequest.predicate = predicate
+
+		fetchController?.reloadData()
         tableView.reloadData()
     }
 
