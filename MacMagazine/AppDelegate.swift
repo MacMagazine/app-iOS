@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		splitViewController.preferredDisplayMode = .allVisible
 		splitViewController.preferredPrimaryColumnWidthFraction = 0.33
 
+		WatchSessionManager.shared.startSession()
+
 		return true
 	}
 

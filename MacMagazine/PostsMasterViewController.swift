@@ -36,20 +36,6 @@ enum Direction {
 	case up
 }
 
-struct PostData {
-	var title: String?
-	var link: String?
-	var thumbnail: String?
-	var favorito: Bool = false
-
-	init(title: String?, link: String?, thumbnail: String?, favorito: Bool) {
-		self.title = title
-		self.link = link
-		self.thumbnail = thumbnail
-		self.favorito = favorito
-	}
-}
-
 // MARK: -
 
 class PostsMasterViewController: UITableViewController, FetchedResultsControllerDelegate, ResultsViewControllerDelegate {
@@ -288,6 +274,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			API().getPosts(page: paged) { post in
 				DispatchQueue.main.async {
 					guard let post = post else {
+						// Save data to Apple Watch
+						CoreDataStack.shared.saveForWatch()
+
 						// When post == nil, indicates the last post retrieved
 						self.fetchController?.reloadData()
 

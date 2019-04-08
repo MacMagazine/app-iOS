@@ -10,7 +10,7 @@ import ClockKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
 
-    // MARK: - Timeline Configuration
+    // MARK: - Timeline Configuration -
 
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         handler([.forward, .backward])
@@ -28,7 +28,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(.showOnLockScreen)
     }
 
-    // MARK: - Timeline Population
+    // MARK: - Timeline Population -
 
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
@@ -45,7 +45,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(nil)
     }
 
-    // MARK: - Placeholder Templates
+    // MARK: - Placeholder Templates -
 
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached

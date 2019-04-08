@@ -73,6 +73,35 @@ class CoreDataStack {
 		}
 	}
 
+	func saveForWatch() {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
+		request.fetchLimit = 10
+
+		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
+		let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asynchronousFetchResult in
+			guard let result = asynchronousFetchResult.finalResult as? [Post] else {
+				return
+			}
+			let watchPosts = result.map {
+				PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: false, pubDate: $0.pubDate?.watchDate(), excerpt: $0.excerpt)
+			}
+			do {
+				let jsonData = try JSONEncoder().encode(watchPosts)
+				UserDefaults.standard.set(jsonData, forKey: "watch")
+				UserDefaults.standard.synchronize()
+			} catch {
+				print(error.localizedDescription)
+			}
+		}
+
+		do {
+			try viewContext.execute(asynchronousFetchRequest)
+		} catch let error {
+			print("NSAsynchronousFetchRequest error: \(error)")
+		}
+	}
+
 	func get(post link: String, completion: @escaping ([Post]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		request.predicate = NSPredicate(format: "link == %@", link)

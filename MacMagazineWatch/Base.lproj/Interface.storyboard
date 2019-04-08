@@ -8,36 +8,38 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--MacMagazine-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                <controller title="MacMagazine" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
                     <items>
+                        <button width="1" alignment="left" title="Carregar" id="8QR-7Q-nix">
+                            <connections>
+                                <action selector="load" destination="AgC-eL-Hgc" id="Ya6-AZ-TBb"/>
+                            </connections>
+                        </button>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" image="08-iphones" id="Dbu-Ek-N2m"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="Dbu-Ek-N2m"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="mB8-gp-5A1">
                                     <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Site japonês traz possíveis detalhes sobre os iPhones de 2019" numberOfLines="0" id="boY-tx-SmG">
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="boY-tx-SmG">
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="08/Abr - 16:40" id="Ryp-d6-Saf">
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="Ryp-d6-Saf">
                                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                         </label>
                                     </items>
                                 </group>
                             </items>
                         </group>
-                        <label width="1" alignment="left" numberOfLines="0" id="bgJ-Ov-P9Z">
-                            <mutableString key="text">O site japonês Macotakara é um dos que costuma mandar bem em rumores sobre novos iPhones. O histórico não é 100% impecável, mas é muito bom.
-
-Hoje, eles trouxeram possíveis informações — obtidas, supostamente, com fontes dentro de fornecedoras da Apple na China — sobre os iPhones de 2019 que confirmam e ao mesmo tempo contradizem rumores passados.
-
-Para começar, já é praticamente um consenso de que teremos modelos de iPhones com três câmeras este ano. Segundo o Macotakara, esse sistema triplo estará em dois novos modelos com telas OLED: um de 6,1, o outro de 6,5 polegadas. A informação é curiosa, pois a linha XS atual é composta de modelos de 5,8 e 6,5 polegadas, enquanto o XR (mais barato) tem 6,1 polegadas.</mutableString>
-                        </label>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
                     </items>
                     <connections>
-                        <outlet property="label" destination="boY-tx-SmG" id="cmh-fB-ihl"/>
+                        <outlet property="content" destination="bgJ-Ov-P9Z" id="MIj-bv-dit"/>
+                        <outlet property="dateLabel" destination="Ryp-d6-Saf" id="oKh-gC-dyj"/>
+                        <outlet property="image" destination="Dbu-Ek-N2m" id="mk6-RA-Rmg"/>
+                        <outlet property="titleLabel" destination="boY-tx-SmG" id="9ou-5b-fVa"/>
                     </connections>
                 </controller>
             </objects>

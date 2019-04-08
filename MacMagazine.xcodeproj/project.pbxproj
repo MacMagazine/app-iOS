@@ -27,10 +27,13 @@
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
 		9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */; };
+		9B91117D225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
+		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
+		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
 		9BB4BC53225B99F600559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC52225B99F600559170 /* Assets.xcassets */; };
 		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9BB4BC5F225B99F600559170 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* InterfaceController.swift */; };
+		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
 		9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */; };
 		9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC62225B99F600559170 /* ComplicationController.swift */; };
 		9BB4BC65225B99F700559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC64225B99F700559170 /* Assets.xcassets */; };
@@ -127,12 +130,14 @@
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
 		9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
 		9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		9B91117C225BC100000A6AC3 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC52225B99F600559170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MacMagazineWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BB4BC5E225B99F600559170 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		9BB4BC62225B99F600559170 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		9BB4BC64225B99F700559170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -224,6 +229,22 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		9B91117F225BC10D000A6AC3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9B91117C225BC100000A6AC3 /* PostData.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		9B911182225BC519000A6AC3 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				9B911180225BC513000A6AC3 /* WatchSessionManager.swift */,
+			);
+			name = Watch;
+			sourceTree = "<group>";
+		};
 		9BABAC271F618F2F0052063A /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +267,7 @@
 		9BB4BC5D225B99F600559170 /* MacMagazineWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				9BB4BC5E225B99F600559170 /* InterfaceController.swift */,
+				9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */,
 				9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */,
 				9BB4BC62225B99F600559170 /* ComplicationController.swift */,
 				9BB4BC64225B99F700559170 /* Assets.xcassets */,
@@ -297,6 +318,7 @@
 				9BE697D71F487D5A0048D68D /* Posts */,
 				9BE697D81F487D610048D68D /* NoAr */,
 				9BE697D91F487D660048D68D /* Ajustes */,
+				9B911182225BC519000A6AC3 /* Watch */,
 			);
 			path = MacMagazine;
 			sourceTree = "<group>";
@@ -367,14 +389,15 @@
 			isa = PBXGroup;
 			children = (
 				9B0DD4482226B9600016C567 /* API */,
-				9BD135DE222802ED00A0B627 /* Theme */,
-				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
-				9BABAC271F618F2F0052063A /* Database */,
-				9BC9B12F1F5C96A500C4DF17 /* Cells */,
 				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
-				9B1BA5E3222B22980059F692 /* Settings.swift */,
+				9BC9B12F1F5C96A500C4DF17 /* Cells */,
+				9BABAC271F618F2F0052063A /* Database */,
+				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
 				9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */,
 				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
+				9B1BA5E3222B22980059F692 /* Settings.swift */,
+				9B91117F225BC10D000A6AC3 /* Shared */,
+				9BD135DE222802ED00A0B627 /* Theme */,
 			);
 			name = Comum;
 			sourceTree = "<group>";
@@ -685,7 +708,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */,
-				9BB4BC5F225B99F600559170 /* InterfaceController.swift in Sources */,
+				9B91117E225BC100000A6AC3 /* PostData.swift in Sources */,
+				9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */,
 				9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,6 +728,7 @@
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
+				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */,
 				9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */,
@@ -717,6 +742,7 @@
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
+				9B91117D225BC100000A6AC3 /* PostData.swift in Sources */,
 				9BD135E02228042C00A0B627 /* Theme.swift in Sources */,
 				9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */,
 				9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */,
