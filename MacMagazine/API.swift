@@ -8,17 +8,19 @@
 
 import Foundation
 
-struct APIParams {
-    static let feed = "https://macmagazine.uol.com.br/feed/"
-    static let paged = "paged="
-    static let posts = "cat=-101"
-    static let podcast = "cat=101"
-    static let search = "s="
-}
-
 class API: NSObject, XMLParserDelegate {
 
-    // MARK: - Properties -
+	// MARK: - Definitions -
+
+	enum APIParams {
+		static let feed = "https://macmagazine.uol.com.br/feed/"
+		static let paged = "paged="
+		static let posts = "cat=-101"
+		static let podcast = "cat=101"
+		static let search = "s="
+	}
+
+	// MARK: - Properties -
 
     var onCompletion: ((XMLPost?) -> Void)?
     var currentPost = XMLPost()

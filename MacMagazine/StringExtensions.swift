@@ -14,6 +14,7 @@ extension String {
         // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format ?? "EEE, dd MMM yyyy HH:mm:ss +0000"
+		dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.date(from: self) ?? Date()
     }
 

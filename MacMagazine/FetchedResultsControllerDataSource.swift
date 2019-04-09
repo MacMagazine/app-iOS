@@ -34,6 +34,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
     public let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 
+	var filteringFavorite = false
+
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Post> in
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -71,10 +73,10 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	func numberOfSections(in tableView: UITableView) -> Int {
 		let numSections = sections()
 
-		if numSections == 0 || rows(in: 0) == 0 {
+		if (numSections == 0 || rows(in: 0) == 0) && filteringFavorite {
 
 			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-			notFound.text = "Nada encontrado"
+			notFound.text = "Você ainda não favoritou nenhum post."
 			notFound.textColor = Settings().isDarkMode() ? .white : .black
 			notFound.textAlignment = .center
 			tableView.backgroundView = notFound

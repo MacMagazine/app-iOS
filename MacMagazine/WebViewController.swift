@@ -281,7 +281,7 @@ extension WebViewController {
 
 extension URL {
 
-	struct Address {
+	enum Address {
 		static let disqus = "disqus.com"
 		static let macmagazine = "macmagazine.uol.com.br"
 	}

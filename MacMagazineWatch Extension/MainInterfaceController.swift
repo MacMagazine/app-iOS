@@ -23,7 +23,6 @@ class MainInterfaceController: WKInterfaceController {
 			guard let posts = posts else {
 				return
 			}
-			print(posts.count)
 			titleLabel.setText(posts[0].title)
 			dateLabel.setText(posts[0].pubDate)
 			content.setText(posts[0].excerpt)
@@ -47,7 +46,13 @@ class MainInterfaceController: WKInterfaceController {
         super.willActivate()
 	}
 
-	@IBAction private func load() {
+	override func didAppear() {
+		super.didAppear()
+
+		load()
+	}
+
+	func load() {
 		if WCSession.default.isReachable {
 			WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
 				guard let jsonData = response["posts"] as? Data else {

@@ -75,6 +75,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: "headerDate", featuredCellNib: "FeaturedCell")
         fetchController?.delegate = self
+		fetchController?.filteringFavorite = false
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
                                                          NSSortDescriptor(key: "pubDate", ascending: false)]
 
@@ -250,11 +251,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		showFavorites = !showFavorites
         if showFavorites {
 			fetchController?.fetchRequest.predicate = favoritePredicate
+			fetchController?.filteringFavorite = true
 
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
         } else {
 			fetchController?.fetchRequest.predicate = nil
+			fetchController?.filteringFavorite = false
 
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil
@@ -303,6 +306,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 				self.refreshControl?.beginRefreshing()
 				getPost()
 			})
+		} else {
+			getPost()
 		}
 	}
 

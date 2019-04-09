@@ -57,6 +57,14 @@
 		9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */; };
 		9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */; };
 		9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1360E22283DF300A0B627 /* UILabelTheme.swift */; };
+		9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E972225CFDEC00683B88 /* phone_2@3x.png */; };
+		9BD4E97B225CFDEC00683B88 /* tablet_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */; };
+		9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E974225CFDEC00683B88 /* tablet_2.png */; };
+		9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E975225CFDEC00683B88 /* tablet_1.png */; };
+		9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E976225CFDEC00683B88 /* phone_2@2x.png */; };
+		9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
+		9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */; };
+		9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E979225CFDEC00683B88 /* phone_1@3x.png */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 /* End PBXBuildFile section */
@@ -163,6 +171,14 @@
 		9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerExtension.swift; sourceTree = "<group>"; };
 		9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldTheme.swift; sourceTree = "<group>"; };
 		9BD1360E22283DF300A0B627 /* UILabelTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelTheme.swift; sourceTree = "<group>"; };
+		9BD4E972225CFDEC00683B88 /* phone_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_2@3x.png"; sourceTree = "<group>"; };
+		9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_1@2x.png"; sourceTree = "<group>"; };
+		9BD4E974225CFDEC00683B88 /* tablet_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_2.png; sourceTree = "<group>"; };
+		9BD4E975225CFDEC00683B88 /* tablet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_1.png; sourceTree = "<group>"; };
+		9BD4E976225CFDEC00683B88 /* phone_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_2@2x.png"; sourceTree = "<group>"; };
+		9BD4E977225CFDEC00683B88 /* phone_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@2x.png"; sourceTree = "<group>"; };
+		9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2@2x.png"; sourceTree = "<group>"; };
+		9BD4E979225CFDEC00683B88 /* phone_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@3x.png"; sourceTree = "<group>"; };
 		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
@@ -219,6 +235,7 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BD4E971225CFDEC00683B88 /* icons */,
 				9BE697DC1F487DF70048D68D /* 3rd Party Frameworks */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
@@ -346,6 +363,21 @@
 				9BD135E1222804A600A0B627 /* With.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9BD4E971225CFDEC00683B88 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				9BD4E972225CFDEC00683B88 /* phone_2@3x.png */,
+				9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */,
+				9BD4E974225CFDEC00683B88 /* tablet_2.png */,
+				9BD4E975225CFDEC00683B88 /* tablet_1.png */,
+				9BD4E976225CFDEC00683B88 /* phone_2@2x.png */,
+				9BD4E977225CFDEC00683B88 /* phone_1@2x.png */,
+				9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */,
+				9BD4E979225CFDEC00683B88 /* phone_1@3x.png */,
+			);
+			path = icons;
 			sourceTree = "<group>";
 		};
 		9BE697CE1F4874C20048D68D /* MacMagazineTests */ = {
@@ -573,6 +605,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BD4E97B225CFDEC00683B88 /* tablet_1@2x.png in Resources */,
+				9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */,
+				9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */,
+				9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */,
+				9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */,
+				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
+				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
 				9BC1BB892256A9AE00E81C42 /* HeaderCell.xib in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
 				9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */,
@@ -581,6 +620,7 @@
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
+				9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

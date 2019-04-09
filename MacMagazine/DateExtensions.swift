@@ -13,6 +13,7 @@ extension Date {
 	func headerDate() -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss +0000"
+		dateFormatter.locale = Locale(identifier: "en_US")
 		return dateFormatter.string(from: self)
 	}
 

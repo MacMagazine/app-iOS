@@ -253,29 +253,74 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="xNE-VJ-p0K">
+                            <tableViewSection headerTitle="ÍCONE DA APLICAÇÃO" id="xNE-VJ-p0K">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="rt5-Cn-lyN">
-                                        <rect key="frame" x="0.0" y="407" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="427" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rt5-Cn-lyN" id="e0z-VH-ecP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6o-eN-v9e">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4ww-CQ-udS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lt5-xJ-Evt">
+                                                            <rect key="frame" x="0.0" y="0.0" width="94" height="50"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
+                                                            <rect key="frame" x="94" y="0.0" width="93.5" height="50"/>
+                                                            <state key="normal" image="phone_1"/>
+                                                            <connections>
+                                                                <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ze0-Qe-rbI"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
+                                                            <rect key="frame" x="187.5" y="0.0" width="94" height="50"/>
+                                                            <state key="normal" image="phone_2"/>
+                                                            <connections>
+                                                                <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="U2M-0i-uXB"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxa-8H-BH1">
+                                                            <rect key="frame" x="281.5" y="0.0" width="93.5" height="50"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4ww-CQ-udS" firstAttribute="top" secondItem="e0z-VH-ecP" secondAttribute="top" id="No0-sV-9BB"/>
+                                                <constraint firstAttribute="trailing" secondItem="4ww-CQ-udS" secondAttribute="trailing" id="RvM-a0-b02"/>
+                                                <constraint firstAttribute="bottom" secondItem="4ww-CQ-udS" secondAttribute="bottom" id="XMb-68-QD7"/>
+                                                <constraint firstItem="4ww-CQ-udS" firstAttribute="leading" secondItem="e0z-VH-ecP" secondAttribute="leading" id="oOH-O7-bTA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="UtS-7J-auh">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h">
+                                        <rect key="frame" x="0.0" y="513" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Goh-iK-82H">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Relatar problema no app"/>
                                                     <connections>
-                                                        <action selector="reportProblem:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="fdc-mW-h5U"/>
+                                                        <action selector="reportProblem:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="AYG-c0-re3"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="v6o-eN-v9e" firstAttribute="top" secondItem="e0z-VH-ecP" secondAttribute="top" id="9w8-Wa-kMD"/>
-                                                <constraint firstAttribute="bottom" secondItem="v6o-eN-v9e" secondAttribute="bottom" id="Do9-5B-PuD"/>
-                                                <constraint firstAttribute="trailing" secondItem="v6o-eN-v9e" secondAttribute="trailing" id="XTN-bZ-yQZ"/>
-                                                <constraint firstItem="v6o-eN-v9e" firstAttribute="leading" secondItem="e0z-VH-ecP" secondAttribute="leading" id="jec-Mb-1bl"/>
+                                                <constraint firstItem="Goh-iK-82H" firstAttribute="top" secondItem="k1Z-8E-Rhb" secondAttribute="top" id="A0e-qF-dc0"/>
+                                                <constraint firstItem="Goh-iK-82H" firstAttribute="leading" secondItem="k1Z-8E-Rhb" secondAttribute="leading" id="iJy-cx-em2"/>
+                                                <constraint firstAttribute="bottom" secondItem="Goh-iK-82H" secondAttribute="bottom" id="jrW-HJ-sHH"/>
+                                                <constraint firstAttribute="trailing" secondItem="Goh-iK-82H" secondAttribute="trailing" id="sSA-yZ-P54"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -304,7 +349,7 @@
                     <connections>
                         <outlet property="darkMode" destination="LQq-v5-cBk" id="Fel-NY-UYa"/>
                         <outlet property="fontSize" destination="8Xj-Ri-tHM" id="yeG-fi-gji"/>
-                        <outlet property="reportProblem" destination="rt5-Cn-lyN" id="w06-PG-2Qp"/>
+                        <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -603,6 +648,8 @@
         <image name="fav_on" width="22" height="20"/>
         <image name="logo" width="80" height="80"/>
         <image name="pause" width="500" height="500"/>
+        <image name="phone_1" width="30" height="30"/>
+        <image name="phone_2" width="30" height="30"/>
         <image name="play" width="500" height="500"/>
         <image name="settings" width="24" height="24"/>
         <image name="tab_logo" width="37" height="28"/>

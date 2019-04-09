@@ -41,6 +41,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
         fetchController?.delegate = self
+		fetchController?.filteringFavorite = false
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 		let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, isPodcastPredicate])
 		fetchController?.fetchRequest.predicate = predicate
@@ -50,6 +51,14 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 		// Execute the fetch to display the data
 		fetchController?.reloadData()
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
+		if !hasData() {
+			getPodcasts(paged: 0)
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -164,6 +173,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     func showFavoritesAction() {
         showFavorites = !showFavorites
 		var predicateArray = [categoryPredicate, isPodcastPredicate]
+		fetchController?.filteringFavorite = showFavorites
+
         if showFavorites {
 			predicateArray.append(favoritePredicate)
         }
@@ -189,9 +200,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 						self.fetchController?.reloadData()
 						if paged < 1 {
 							self.refreshControl?.endRefreshing()
-							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-								self.tableView.setContentOffset(CGPoint(x: 0, y: 56), animated: true)
-							}
 						}
 						return
 					}
@@ -210,6 +218,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 				self.refreshControl?.beginRefreshing()
 				getPodcast()
 			})
+		} else {
+			getPodcast()
 		}
 	}
 

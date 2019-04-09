@@ -8,16 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--MacMagazine-->
+        <!--content-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller title="MacMagazine" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="content" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
                     <items>
-                        <button width="1" alignment="left" title="Carregar" id="8QR-7Q-nix">
-                            <connections>
-                                <action selector="load" destination="AgC-eL-Hgc" id="Ya6-AZ-TBb"/>
-                            </connections>
-                        </button>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="Dbu-Ek-N2m"/>
@@ -43,6 +38,7 @@
                     </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="-262" y="-305"/>
         </scene>
     </scenes>
 </document>

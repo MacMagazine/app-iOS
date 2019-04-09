@@ -10,7 +10,7 @@ import Kingfisher
 import MessageUI
 import UIKit
 
-class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+class SettingsTableViewController: UITableViewController {
 
     // MARK: - Properties -
 
@@ -45,7 +45,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 	// MARK: - TableView Methods -
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let header = ["MACMAGAZINE \(version)", "RECEBER PUSHES PARA", "TAMANHO DA FONTE", "", ""]
+		let header = ["MACMAGAZINE \(version)", "RECEBER PUSHES PARA", "TAMANHO DA FONTE", "", "ÍCONE DA APLICAÇÃO", ""]
 		return header[section] == "" ? nil : header[section]
     }
 
@@ -93,15 +93,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         applyTheme()
     }
 
-    @IBAction private func reportProblem(_ sender: Any) {
-        let composeVC = MFMailComposeViewController()
-		composeVC.mailComposeDelegate = self
-        composeVC.setSubject("Relato de problema no app MacMagazine \(version)")
-        composeVC.setToRecipients(["contato@macmagazine.com.br"])
-        self.present(composeVC, animated: true, completion: nil)
-    }
-
-    // MARK: - Private Methods -
+	// MARK: - Private Methods -
 
     fileprivate func applyTheme() {
         let isDarkMode = Settings().isDarkMode()
@@ -113,17 +105,82 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 		NotificationCenter.default.post(name: .reloadWeb, object: nil)
     }
 
-    fileprivate func getAppVersion() -> String {
-        let bundle = Bundle(for: type(of: self))
-        let appVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String
-        let buildVersion = bundle.infoDictionary?["CFBundleVersion"] as? String
-        return "v: \(appVersion ?? "0") (\(buildVersion ?? "0"))"
-    }
+}
 
-    // MARK: - Mail Methods -
+// MARK: - App Icon Methods -
 
-    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
+extension SettingsTableViewController {
+
+	struct IconOptions {
+		static let option1 = "option_1"
+		static let option2 = "option_2"
+		static let phone1 = "phone_1"
+		static let phone2 = "phone_2"
+		static let tablet1 = "tablet_1"
+		static let tablet2 = "tablet_2"
+
+		func getIcon(for option: String) -> String? {
+			var icon: String?
+
+			switch option {
+			case IconOptions.option1:
+				icon = IconOptions.phone1
+			case IconOptions.option2:
+				icon = IconOptions.phone2
+			default:
+				break
+			}
+
+			return icon
+		}
+	}
+
+	@IBAction private func changeAppIcon(_ sender: Any) {
+		guard let button = sender as? UIButton,
+			let option = button.restorationIdentifier else {
+				return
+		}
+		changeIcon(to: option)
+	}
+
+	fileprivate func changeIcon(to iconName: String) {
+		guard UIApplication.shared.supportsAlternateIcons,
+			let icon = IconOptions().getIcon(for: iconName) else {
+				return
+		}
+
+		UIApplication.shared.setAlternateIconName(icon, completionHandler: { error in
+			if let error = error {
+				print("App icon failed to change due to \(error.localizedDescription)")
+			} else {
+				print("App icon changed successfully")
+			}
+		})
+	}
+
+}
+
+// MARK: - Mail Methods -
+
+extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
+
+	@IBAction private func reportProblem(_ sender: Any) {
+		let composeVC = MFMailComposeViewController()
+		composeVC.mailComposeDelegate = self
+		composeVC.setSubject("Relato de problema no app MacMagazine \(version)")
+		composeVC.setToRecipients(["contato@macmagazine.com.br"])
+		self.present(composeVC, animated: true, completion: nil)
+	}
+
+	public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+		controller.dismiss(animated: true, completion: nil)
+	}
+
+	fileprivate func getAppVersion() -> String {
+		let bundle = Bundle(for: type(of: self))
+		let appVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String
+		let buildVersion = bundle.infoDictionary?["CFBundleVersion"] as? String
+		return "v: \(appVersion ?? "0") (\(buildVersion ?? "0"))"
+	}
 
 }
