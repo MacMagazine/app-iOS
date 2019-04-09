@@ -6,7 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class API: NSObject, XMLParserDelegate {
 
@@ -65,7 +65,13 @@ class API: NSObject, XMLParserDelegate {
         guard let url = URL(string: "\(host)") else {
             return
         }
+
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
         Network.get(url: url) { (data: Data?, _: String?) in
+			DispatchQueue.main.async {
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
+			}
+
             guard let data = data else {
 				self.onCompletion?(nil)
                 return

@@ -1,2 +1,2 @@
 github "onevcat/Kingfisher" ~> 5.0
-github "krzyzanowskim/CryptoSwift"
+github "jorgenhenrichsen/SwiftAudio" ~> 0.7.1

@@ -137,7 +137,12 @@ class PlayerViewController: UIViewController {
 			self.player.stop()
 		}
 
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		Network.get(url: url) { (data: Data?, _: String?) in
+			DispatchQueue.main.async {
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
+			}
+
 			guard let data = data else {
 				return
 			}

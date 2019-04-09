@@ -65,6 +65,7 @@
 		9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
 		9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */; };
 		9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E979225CFDEC00683B88 /* phone_1@3x.png */; };
+		9BD4E983225D1CC100683B88 /* SwiftAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD4E982225D1CC000683B88 /* SwiftAudio.framework */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 /* End PBXBuildFile section */
@@ -179,6 +180,7 @@
 		9BD4E977225CFDEC00683B88 /* phone_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@2x.png"; sourceTree = "<group>"; };
 		9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2@2x.png"; sourceTree = "<group>"; };
 		9BD4E979225CFDEC00683B88 /* phone_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@3x.png"; sourceTree = "<group>"; };
+		9BD4E982225D1CC000683B88 /* SwiftAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftAudio.framework; sourceTree = SOURCE_ROOT; };
 		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B703714225015AA00F68654 /* Kingfisher.framework in Frameworks */,
+				9BD4E983225D1CC100683B88 /* SwiftAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +440,7 @@
 		9BE697DC1F487DF70048D68D /* 3rd Party Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BD4E982225D1CC000683B88 /* SwiftAudio.framework */,
 				9B703713225015A900F68654 /* Kingfisher.framework */,
 			);
 			name = "3rd Party Frameworks";
