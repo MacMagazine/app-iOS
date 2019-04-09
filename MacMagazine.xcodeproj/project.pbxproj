@@ -378,14 +378,14 @@
 		9BD4E971225CFDEC00683B88 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				9BD4E977225CFDEC00683B88 /* phone_1@2x.png */,
+				9BD4E979225CFDEC00683B88 /* phone_1@3x.png */,
+				9BD4E976225CFDEC00683B88 /* phone_2@2x.png */,
 				9BD4E972225CFDEC00683B88 /* phone_2@3x.png */,
+				9BD4E975225CFDEC00683B88 /* tablet_1.png */,
 				9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */,
 				9BD4E974225CFDEC00683B88 /* tablet_2.png */,
-				9BD4E975225CFDEC00683B88 /* tablet_1.png */,
-				9BD4E976225CFDEC00683B88 /* phone_2@2x.png */,
-				9BD4E977225CFDEC00683B88 /* phone_1@2x.png */,
 				9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */,
-				9BD4E979225CFDEC00683B88 /* phone_1@3x.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";

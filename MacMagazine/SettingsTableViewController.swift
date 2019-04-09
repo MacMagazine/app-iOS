@@ -124,9 +124,9 @@ extension SettingsTableViewController {
 
 			switch option {
 			case IconOptions.option1:
-				icon = IconOptions.phone1
+				icon = Settings().isPhone() ? IconOptions.phone1 : IconOptions.tablet1
 			case IconOptions.option2:
-				icon = IconOptions.phone2
+				icon = Settings().isPhone() ? IconOptions.phone2 : IconOptions.tablet2
 			default:
 				break
 			}
@@ -148,14 +148,7 @@ extension SettingsTableViewController {
 			let icon = IconOptions().getIcon(for: iconName) else {
 				return
 		}
-
-		UIApplication.shared.setAlternateIconName(icon, completionHandler: { error in
-			if let error = error {
-				print("App icon failed to change due to \(error.localizedDescription)")
-			} else {
-				print("App icon changed successfully")
-			}
-		})
+		UIApplication.shared.setAlternateIconName(icon)
 	}
 
 }
