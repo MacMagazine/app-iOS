@@ -30,6 +30,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
     var play: ((Podcast?) -> Void)?
+	var selectedIndex: IndexPath?
 
 	// MARK: - View Lifecycle -
 
@@ -136,7 +137,11 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	}
 
     func didSelectRowAt(indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+		if selectedIndex == indexPath {
+        	tableView.deselectRow(at: indexPath, animated: true)
+			selectedIndex = nil
+		}
+		selectedIndex = indexPath
 
 		guard let object = fetchController?.object(at: indexPath) else {
                 return
@@ -153,7 +158,11 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     }
 
     func didSelectResultRowAt(indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+		if selectedIndex == indexPath {
+			tableView.deselectRow(at: indexPath, animated: true)
+			selectedIndex = nil
+		}
+		selectedIndex = indexPath
 
 		let object = posts[indexPath.row]
 		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
