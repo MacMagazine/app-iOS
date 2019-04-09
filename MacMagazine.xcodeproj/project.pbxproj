@@ -31,7 +31,6 @@
 		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
-		9BB4BC53225B99F600559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC52225B99F600559170 /* Assets.xcassets */; };
 		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
 		9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */; };
@@ -66,6 +65,8 @@
 		9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */; };
 		9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E979225CFDEC00683B88 /* phone_1@3x.png */; };
 		9BD4E989225D30A300683B88 /* VideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD4E988225D30A300683B88 /* VideoTableViewController.swift */; };
+		9BD4E98A225D431100683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
+		9BD4E98B225D4C0900683B88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 /* End PBXBuildFile section */
@@ -153,7 +154,6 @@
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		9BB4BC52225B99F600559170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MacMagazineWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
@@ -287,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				9BB4BC4F225B99F500559170 /* Interface.storyboard */,
-				9BB4BC52225B99F600559170 /* Assets.xcassets */,
 				9BB4BC54225B99F600559170 /* Info.plist */,
 			);
 			path = MacMagazineWatch;
@@ -610,8 +609,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BB4BC53225B99F600559170 /* Assets.xcassets in Resources */,
 				9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */,
+				9BD4E98B225D4C0900683B88 /* Assets.xcassets in Resources */,
+				9BD4E98A225D431100683B88 /* phone_1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
