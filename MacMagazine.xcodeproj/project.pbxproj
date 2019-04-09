@@ -470,9 +470,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BB4BC70225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch" */;
 			buildPhases = (
+				9BB4BC73225B9ADF00559170 /* Run update version Script */,
 				9BB4BC4B225B99F500559170 /* Resources */,
 				9BB4BC6F225B99F700559170 /* Embed App Extensions */,
-				9BB4BC73225B9ADF00559170 /* Run update version Script */,
 			);
 			buildRules = (
 			);
@@ -489,10 +489,10 @@
 			buildConfigurationList = 9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch Extension" */;
 			buildPhases = (
 				9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */,
+				9BB4BC75225B9B8000559170 /* Run update version Script */,
 				9BB4BC55225B99F600559170 /* Sources */,
 				9BB4BC56225B99F600559170 /* Frameworks */,
 				9BB4BC57225B99F600559170 /* Resources */,
-				9BB4BC75225B9B8000559170 /* Run update version Script */,
 			);
 			buildRules = (
 			);
@@ -561,7 +561,7 @@
 					};
 					9BB4BC58225B99F600559170 = {
 						CreatedOnToolsVersion = 10.2;
-						DevelopmentTeam = 6Y8FN886HF;
+						DevelopmentTeam = 7PXVC8PJ97;
 						ProvisioningStyle = Automatic;
 					};
 					9BCAD6761F47A08100B54526 = {
@@ -962,7 +962,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6Y8FN886HF;
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -986,7 +986,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6Y8FN886HF;
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

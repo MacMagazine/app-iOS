@@ -46,6 +46,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var detailViewController: PostsDetailViewController?
 
 	@IBOutlet private weak var logoView: UIView!
+	@IBOutlet private weak var favorite: UIBarButtonItem!
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -255,12 +256,14 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
+			favorite.image = UIImage(named: "fav_on")
         } else {
 			fetchController?.fetchRequest.predicate = nil
 			fetchController?.filteringFavorite = false
 
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil
+			favorite.image = UIImage(named: "fav_off")
 		}
 		fetchController?.reloadData()
         tableView.reloadData()

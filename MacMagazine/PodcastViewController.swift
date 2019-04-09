@@ -14,6 +14,7 @@ class PodcastViewController: UIViewController {
 
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var playerHeight: NSLayoutConstraint!
+	@IBOutlet private weak var favorite: UIBarButtonItem!
 
 	var searchController: UISearchController?
 
@@ -60,9 +61,11 @@ class PodcastViewController: UIViewController {
 		if vc.showFavorites {
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
+			favorite.image = UIImage(named: "fav_on")
 		} else {
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil
+			favorite.image = UIImage(named: "fav_off")
 		}
     }
 

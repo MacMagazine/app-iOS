@@ -420,7 +420,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <barButtonItem key="leftBarButtonItem" image="fav_on" id="mos-l0-Ml2">
+                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="mos-l0-Ml2">
                             <connections>
                                 <action selector="showFavorites:" destination="Jej-5Q-aqJ" id="Xng-DI-R8j"/>
                             </connections>
@@ -439,6 +439,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
+                        <outlet property="favorite" destination="mos-l0-Ml2" id="oNt-bX-D7R"/>
                         <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
                     </connections>
@@ -566,7 +567,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="fav_on" id="DiB-v8-Kg9">
+                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="DiB-v8-Kg9">
                             <connections>
                                 <action selector="showFavorites:" destination="3UV-U7-cDa" id="H56-ko-JjQ"/>
                             </connections>
@@ -578,6 +579,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favorite" destination="DiB-v8-Kg9" id="Js6-Mj-QV4"/>
                         <outlet property="logoView" destination="7gQ-ba-oxb" id="Aj3-1W-bkS"/>
                         <outlet property="playerHeight" destination="3US-UY-uQE" id="EX8-pJ-oXv"/>
                     </connections>
@@ -694,7 +696,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_on" width="22" height="20"/>
+        <image name="fav_off" width="22" height="21"/>
         <image name="logo" width="80" height="80"/>
         <image name="pause" width="500" height="500"/>
         <image name="phone_1" width="30" height="30"/>
