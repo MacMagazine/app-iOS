@@ -21,12 +21,13 @@
                     <connections>
                         <segue destination="Yhy-9h-hZ1" kind="relationship" relationship="viewControllers" id="HkX-0o-vzg"/>
                         <segue destination="GbX-Zp-bIv" kind="relationship" relationship="viewControllers" id="Pat-DE-2eX"/>
+                        <segue destination="2jD-dP-dNC" kind="relationship" relationship="viewControllers" id="V9h-Db-yoA"/>
                         <segue destination="aBB-qV-jdy" kind="relationship" relationship="viewControllers" id="ULx-8J-32D"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kei-9h-rVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2449" y="-2149"/>
+            <point key="canvasLocation" x="-3188" y="-1830"/>
         </scene>
         <!--PostsNavigation-->
         <scene sceneID="ZIo-pw-Xnt">
@@ -354,7 +355,36 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242.40000000000001" y="-615.74212893553226"/>
+            <point key="canvasLocation" x="-2284" y="-710"/>
+        </scene>
+        <!--Video Table View Controller-->
+        <scene sceneID="KVA-hv-P1C">
+            <objects>
+                <tableViewController id="axI-pv-z5A" customClass="VideoTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="e1G-mx-aUu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="videos" id="LBf-rN-Wox">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LBf-rN-Wox" id="g1n-If-Gws">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="axI-pv-z5A" id="oTM-ZX-ZbP"/>
+                            <outlet property="delegate" destination="axI-pv-z5A" id="59b-Zj-d5d"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="FHE-os-pfV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eA7-hW-b7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-207.19999999999999" y="-510.49475262368821"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="Odw-wy-fvT">
@@ -373,7 +403,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWp-bD-vQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1146" y="-615"/>
+            <point key="canvasLocation" x="-3188" y="-710"/>
         </scene>
         <!--Posts-->
         <scene sceneID="R3C-Oo-scN">
@@ -641,7 +671,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1A-ga-PBM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="-871.66416791604206"/>
+            <point key="canvasLocation" x="1807.2" y="-871.66416791604206"/>
+        </scene>
+        <!--Videos-->
+        <scene sceneID="0BS-5v-H15">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jD-dP-dNC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Videos" image="video" id="4hU-Rq-N3T"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="axI-pv-z5A" kind="relationship" relationship="rootViewController" id="05V-T3-MZr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kmC-ae-OHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1146.4000000000001" y="-510.49475262368821"/>
         </scene>
     </scenes>
     <resources>
@@ -651,9 +700,10 @@
         <image name="phone_1" width="30" height="30"/>
         <image name="phone_2" width="30" height="30"/>
         <image name="play" width="500" height="500"/>
-        <image name="settings" width="24" height="24"/>
+        <image name="settings" width="28" height="28"/>
         <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="24" height="28"/>
+        <image name="video" width="36" height="28"/>
         <image name="warning" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
