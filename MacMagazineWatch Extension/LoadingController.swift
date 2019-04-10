@@ -13,12 +13,23 @@ class LoadingController: WKInterfaceController {
 
     // MARK: - Properties -
 
+    var retries = 3
+
     var posts: [PostData]? {
         didSet {
-            DispatchQueue.main.async {
-                let pages = Array(1...10).map {
-                    "Page\($0)"
+            guard let _posts = posts else {
+print("is empty")
+                if retries > 0 {
+                    retries -= 1
+                    getPosts()
                 }
+                return
+            }
+            let pages: [String] = Array(1..._posts.count).compactMap {
+                "Page\($0)"
+                }
+print(pages)
+            DispatchQueue.main.async {
                 WKInterfaceController.reloadRootControllers(withNames: pages, contexts: self.posts)
             }
         }
@@ -44,8 +55,10 @@ class LoadingController: WKInterfaceController {
     override func didAppear() {
         super.didAppear()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            self.getPosts()
+        if posts?.isEmpty ?? true {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.getPosts()
+            }
         }
     }
 
@@ -55,10 +68,14 @@ class LoadingController: WKInterfaceController {
 
     func getPosts() {
         if WCSession.default.isReachable {
+            print("loading")
             WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
                 guard let jsonData = response["posts"] as? Data else {
+                    print("empty")
+                    self.posts = nil
                     return
                 }
+                print("loaded")
                 do {
                     self.posts = try JSONDecoder().decode([PostData].self, from: jsonData)
                 } catch {
