@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum Definitions {
+	static let darkMode = "darkMode"
+	static let fontSize = "font-size-settings"
+	static let icon = "icon"
+}
+
 struct Settings {
 
     func isPhone() -> Bool {
@@ -19,7 +25,7 @@ struct Settings {
     }
 
     func isDarkMode() -> Bool {
-		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
+		guard let isDarkMode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Bool else {
 			return false
 		}
 		return isDarkMode
@@ -30,7 +36,7 @@ struct Settings {
 	}
 
 	func getFontSize() -> String {
-		guard let sliderFontSize = UserDefaults.standard.object(forKey: "font-size-settings") as? String else {
+		guard let sliderFontSize = UserDefaults.standard.object(forKey: Definitions.fontSize) as? String else {
 			return ""
 		}
 		return sliderFontSize

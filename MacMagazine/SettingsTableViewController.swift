@@ -18,6 +18,9 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var darkMode: UISwitch!
     @IBOutlet private weak var reportProblem: UITableViewCell!
 
+	@IBOutlet private weak var iconOption1: UIImageView!
+	@IBOutlet private weak var iconOption2: UIImageView!
+
     var version: String = ""
 
     // MARK: - View lifecycle -
@@ -30,11 +33,15 @@ class SettingsTableViewController: UITableViewController {
         let sliderFontSize = Settings().getFontSize()
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
 
-        guard MFMailComposeViewController.canSendMail() else {
-            reportProblem.isHidden = true
-            return
-        }
-    }
+		let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
+		self.iconOption1.alpha = iconName ?? IconOptions.option1 == IconOptions.option1 ? 1 : 0.6
+		self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
+
+		guard MFMailComposeViewController.canSendMail() else {
+			reportProblem.isHidden = true
+			return
+		}
+	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -45,7 +52,7 @@ class SettingsTableViewController: UITableViewController {
 	// MARK: - TableView Methods -
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let header = ["MACMAGAZINE \(version)", "RECEBER PUSHES PARA", "TAMANHO DA FONTE", "", "ÍCONE DA APLICAÇÃO", ""]
+		let header = ["MACMAGAZINE \(version)", "RECEBER PUSHES PARA", "TAMANHO DA FONTE", "", "ÍCONE DO APLICATIVO", ""]
 		return header[section] == "" ? nil : header[section]
     }
 
@@ -76,7 +83,7 @@ class SettingsTableViewController: UITableViewController {
         }
         slider.value = Float(roundedValue)
 
-        UserDefaults.standard.set(fontSize, forKey: "font-size-settings")
+        UserDefaults.standard.set(fontSize, forKey: Definitions.fontSize)
         UserDefaults.standard.synchronize()
 
         applyTheme()
@@ -87,7 +94,7 @@ class SettingsTableViewController: UITableViewController {
             return
         }
 
-        UserDefaults.standard.set(darkModeSwitch.isOn, forKey: "darkMode")
+        UserDefaults.standard.set(darkModeSwitch.isOn, forKey: Definitions.darkMode)
         UserDefaults.standard.synchronize()
 
         applyTheme()
@@ -148,7 +155,15 @@ extension SettingsTableViewController {
 			let icon = IconOptions().getIcon(for: iconName) else {
 				return
 		}
-		UIApplication.shared.setAlternateIconName(icon)
+		UIApplication.shared.setAlternateIconName(icon) { error in
+			if error == nil {
+				UserDefaults.standard.set(iconName, forKey: Definitions.icon)
+				UserDefaults.standard.synchronize()
+
+				self.iconOption1.alpha = iconName == IconOptions.option1 ? 1 : 0.6
+				self.iconOption2.alpha = iconName == IconOptions.option2 ? 1 : 0.6
+			}
+		}
 	}
 
 }

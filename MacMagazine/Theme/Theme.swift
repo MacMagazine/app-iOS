@@ -9,6 +9,8 @@
 import UIKit
 import WebKit
 
+class AppImageView: UIImageView {}
+
 protocol Theme {
     var tint: UIColor { get }
     var secondaryTint: UIColor { get }
@@ -163,6 +165,12 @@ extension Theme {
             $0.setTitleColor(tint, for: .normal)
             $0.borderColor = tint
         }
+
+		// IMAGE
+
+		AppImageView.appearance().with {
+			$0.borderColor = UIColor(hex: "dddddd", alpha: 1)
+		}
 
 		// SWITCH
 

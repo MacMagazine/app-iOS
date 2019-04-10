@@ -254,38 +254,95 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="ÍCONE DA APLICAÇÃO" id="xNE-VJ-p0K">
+                            <tableViewSection headerTitle="ÍCONE DO APLICATIVO" id="xNE-VJ-p0K">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="rt5-Cn-lyN">
-                                        <rect key="frame" x="0.0" y="427" width="375" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="74" id="rt5-Cn-lyN">
+                                        <rect key="frame" x="0.0" y="427" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rt5-Cn-lyN" id="e0z-VH-ecP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4ww-CQ-udS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lt5-xJ-Evt">
-                                                            <rect key="frame" x="0.0" y="0.0" width="94" height="50"/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
-                                                            <rect key="frame" x="94" y="0.0" width="93.5" height="50"/>
-                                                            <state key="normal" image="phone_1"/>
-                                                            <connections>
-                                                                <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ze0-Qe-rbI"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
-                                                            <rect key="frame" x="187.5" y="0.0" width="94" height="50"/>
-                                                            <state key="normal" image="phone_2"/>
-                                                            <connections>
-                                                                <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="U2M-0i-uXB"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxa-8H-BH1">
-                                                            <rect key="frame" x="281.5" y="0.0" width="93.5" height="50"/>
-                                                        </button>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="74"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
+                                                            <rect key="frame" x="75" y="0.0" width="75" height="74"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                    <rect key="frame" x="9" y="8.5" width="57" height="57"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
+                                                                        <constraint firstAttribute="width" constant="57" id="XYi-HN-HK1"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="12"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="74"/>
+                                                                    <connections>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ze0-Qe-rbI"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="WFw-2p-qsH" firstAttribute="centerY" secondItem="Mba-6b-LGK" secondAttribute="centerY" id="72H-6B-rJu"/>
+                                                                <constraint firstItem="xMf-nN-nab" firstAttribute="top" secondItem="Mba-6b-LGK" secondAttribute="top" id="RO0-AF-CSo"/>
+                                                                <constraint firstAttribute="bottom" secondItem="xMf-nN-nab" secondAttribute="bottom" id="W3N-gi-O5E"/>
+                                                                <constraint firstItem="xMf-nN-nab" firstAttribute="leading" secondItem="Mba-6b-LGK" secondAttribute="leading" id="Xwq-TU-UI7"/>
+                                                                <constraint firstItem="WFw-2p-qsH" firstAttribute="centerX" secondItem="Mba-6b-LGK" secondAttribute="centerX" id="cNh-mG-p8T"/>
+                                                                <constraint firstAttribute="trailing" secondItem="xMf-nN-nab" secondAttribute="trailing" id="mZW-Qz-dlC"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
+                                                            <rect key="frame" x="150" y="0.0" width="75" height="74"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
+                                                            <rect key="frame" x="225" y="0.0" width="75" height="74"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                    <rect key="frame" x="9" y="8.5" width="57" height="57"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
+                                                                        <constraint firstAttribute="width" constant="57" id="TwA-5I-6vQ"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="12"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="74"/>
+                                                                    <connections>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="U2M-0i-uXB"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="Wcj-XM-fT5" firstAttribute="leading" secondItem="Kr4-nf-He3" secondAttribute="leading" id="4UD-FT-F6O"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Wcj-XM-fT5" secondAttribute="trailing" id="Diy-Uc-0eT"/>
+                                                                <constraint firstItem="B7r-eJ-ky4" firstAttribute="centerX" secondItem="Kr4-nf-He3" secondAttribute="centerX" id="GBH-8p-0Kb"/>
+                                                                <constraint firstItem="B7r-eJ-ky4" firstAttribute="centerY" secondItem="Kr4-nf-He3" secondAttribute="centerY" id="Z8P-9w-3qs"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Wcj-XM-fT5" secondAttribute="bottom" id="j9y-71-PPf"/>
+                                                                <constraint firstItem="Wcj-XM-fT5" firstAttribute="top" secondItem="Kr4-nf-He3" secondAttribute="top" id="wv9-4P-Amr"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
+                                                            <rect key="frame" x="300" y="0.0" width="75" height="74"/>
+                                                        </view>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -302,7 +359,7 @@
                             <tableViewSection id="UtS-7J-auh">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h">
-                                        <rect key="frame" x="0.0" y="513" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="537" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -350,6 +407,8 @@
                     <connections>
                         <outlet property="darkMode" destination="LQq-v5-cBk" id="Fel-NY-UYa"/>
                         <outlet property="fontSize" destination="8Xj-Ri-tHM" id="yeG-fi-gji"/>
+                        <outlet property="iconOption1" destination="WFw-2p-qsH" id="igU-sl-ORk"/>
+                        <outlet property="iconOption2" destination="B7r-eJ-ky4" id="5j5-wP-hOT"/>
                         <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
                 </tableViewController>
@@ -697,7 +756,7 @@
     </scenes>
     <resources>
         <image name="fav_off" width="22" height="21"/>
-        <image name="logo" width="80" height="80"/>
+        <image name="logo" width="80" height="70.5"/>
         <image name="pause" width="500" height="500"/>
         <image name="phone_1" width="30" height="30"/>
         <image name="phone_2" width="30" height="30"/>
@@ -705,7 +764,7 @@
         <image name="settings" width="28" height="28"/>
         <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="24" height="28"/>
-        <image name="video" width="36" height="28"/>
+        <image name="video" width="40" height="28"/>
         <image name="warning" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
