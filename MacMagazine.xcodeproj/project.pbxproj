@@ -37,6 +37,7 @@
 		9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC62225B99F600559170 /* ComplicationController.swift */; };
 		9BB4BC65225B99F700559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC64225B99F700559170 /* Assets.xcassets */; };
 		9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */; };
+		9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB94D13225DF023000FA38E /* LoadingController.swift */; };
 		9BC1BB892256A9AE00E81C42 /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC1BB882256A9AE00E81C42 /* HeaderCell.xib */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
@@ -161,6 +162,7 @@
 		9BB4BC62225B99F600559170 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		9BB4BC64225B99F700559170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BB4BC66225B99F700559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BB94D13225DF023000FA38E /* LoadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingController.swift; sourceTree = "<group>"; };
 		9BC1BB882256A9AE00E81C42 /* HeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCell.xib; sourceTree = "<group>"; };
 		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,6 +297,7 @@
 		9BB4BC5D225B99F600559170 /* MacMagazineWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9BB94D13225DF023000FA38E /* LoadingController.swift */,
 				9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */,
 				9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */,
 				9BB4BC62225B99F600559170 /* ComplicationController.swift */,
@@ -773,6 +776,7 @@
 				9B91117E225BC100000A6AC3 /* PostData.swift in Sources */,
 				9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */,
 				9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */,
+				9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,10 +8,28 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--content-->
+        <!--MacMagazine-->
+        <scene sceneID="eEc-mC-IFO">
+            <objects>
+                <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <button width="1" alignment="left" title="Load" id="UaG-re-OLP">
+                            <connections>
+                                <action selector="load" destination="4mM-Hh-YOV" id="9sv-pV-ihE"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="2Cc-ik-Jaf"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-547" y="-315"/>
+        </scene>
+        <!--1 de 10-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="content" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page1" title="1 de 10" hidesWhenLoading="NO" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
@@ -28,6 +46,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="21" alignment="left" id="676-kQ-0px"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
                     </items>
                     <connections>
@@ -35,10 +54,307 @@
                         <outlet property="dateLabel" destination="Ryp-d6-Saf" id="oKh-gC-dyj"/>
                         <outlet property="image" destination="Dbu-Ek-N2m" id="mk6-RA-Rmg"/>
                         <outlet property="titleLabel" destination="boY-tx-SmG" id="9ou-5b-fVa"/>
+                        <segue destination="9We-pD-T8n" kind="relationship" relationship="nextPage" id="UTK-lq-WTX"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-262" y="-305"/>
+        </scene>
+        <!--2 de 10-->
+        <scene sceneID="5YE-Jt-LWo">
+            <objects>
+                <controller identifier="Page2" title="2 de 10" hidesWhenLoading="NO" id="9We-pD-T8n" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="PF8-EH-l85">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="F66-00-n7T"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="bYW-lC-Nnx">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="eMp-q0-iQ4">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="Z75-yg-0c4">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="2A8-vi-7nl"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="2A8-vi-7nl" id="Sgq-nh-20t"/>
+                        <outlet property="dateLabel" destination="Z75-yg-0c4" id="h5D-jO-iXQ"/>
+                        <outlet property="image" destination="F66-00-n7T" id="WxP-J6-Mha"/>
+                        <outlet property="titleLabel" destination="eMp-q0-iQ4" id="I62-cH-b3Y"/>
+                        <segue destination="GbV-Bo-7aO" kind="relationship" relationship="nextPage" id="eiB-4L-m8Q"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="68" y="-305"/>
+        </scene>
+        <!--3 de 10-->
+        <scene sceneID="cRP-jI-SSh">
+            <objects>
+                <controller identifier="Page3" title="3 de 10" hidesWhenLoading="NO" id="GbV-Bo-7aO" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="qi8-CO-POR">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="ckT-8q-Ha3"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="qvA-xX-zxl">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Hqn-Uz-rQO">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="ebw-c3-mmX">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vsn-j6-O9N"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="Vsn-j6-O9N" id="wG4-jz-F7y"/>
+                        <outlet property="dateLabel" destination="ebw-c3-mmX" id="Hvk-cl-r95"/>
+                        <outlet property="image" destination="ckT-8q-Ha3" id="FPv-wg-jLO"/>
+                        <outlet property="titleLabel" destination="Hqn-Uz-rQO" id="njO-82-dzf"/>
+                        <segue destination="JNI-BE-hT8" kind="relationship" relationship="nextPage" id="7lE-0x-X9L"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="375" y="-305"/>
+        </scene>
+        <!--6 de 10-->
+        <scene sceneID="NBO-cN-DZb">
+            <objects>
+                <controller identifier="Page6" title="6 de 10" hidesWhenLoading="NO" id="sKh-tL-3ST" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="HeP-py-EgD">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="W55-sg-Egf"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="vEO-FZ-d7w">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="J9g-kA-FMl">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="FRi-94-sWc">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="WP7-Vs-5DP"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="WP7-Vs-5DP" id="ENc-ra-xfy"/>
+                        <outlet property="dateLabel" destination="FRi-94-sWc" id="10c-ZE-Dfg"/>
+                        <outlet property="image" destination="W55-sg-Egf" id="Smx-yJ-yxc"/>
+                        <outlet property="titleLabel" destination="J9g-kA-FMl" id="vhu-aa-wJb"/>
+                        <segue destination="GO2-rZ-lJG" kind="relationship" relationship="nextPage" id="KpX-dk-gut"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1309" y="-305"/>
+        </scene>
+        <!--7 de 10-->
+        <scene sceneID="V2k-8w-4hC">
+            <objects>
+                <controller identifier="Page7" title="7 de 10" hidesWhenLoading="NO" id="GO2-rZ-lJG" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="rCD-PS-VEk">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="xK5-Tf-4mz"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="hUe-me-W7e">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Lxc-sQ-SEF">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="4O8-RD-XmB">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="t49-VR-idn"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="t49-VR-idn" id="9Fc-H9-fcL"/>
+                        <outlet property="dateLabel" destination="4O8-RD-XmB" id="6RP-kI-FAI"/>
+                        <outlet property="image" destination="xK5-Tf-4mz" id="CK0-EF-C4e"/>
+                        <outlet property="titleLabel" destination="Lxc-sQ-SEF" id="qSQ-U7-i5c"/>
+                        <segue destination="gKl-Sb-e9Z" kind="relationship" relationship="nextPage" id="Xyy-In-FDN"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1589" y="-305"/>
+        </scene>
+        <!--5 de 10-->
+        <scene sceneID="Jk4-uV-Bzw">
+            <objects>
+                <controller identifier="Page5" title="5 de 10" hidesWhenLoading="NO" id="lrc-62-V8F" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="Ttv-Dv-do3">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="M8L-g2-hkv"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="vIv-lu-8n5">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Lyo-hh-zdF">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="h45-jp-Ydi">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="rxI-S7-EpD"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="rxI-S7-EpD" id="N6c-wf-M6Z"/>
+                        <outlet property="dateLabel" destination="h45-jp-Ydi" id="NPH-aX-5WR"/>
+                        <outlet property="image" destination="M8L-g2-hkv" id="cae-XM-ZTy"/>
+                        <outlet property="titleLabel" destination="Lyo-hh-zdF" id="51L-bN-uxp"/>
+                        <segue destination="sKh-tL-3ST" kind="relationship" relationship="nextPage" id="3WQ-iI-7Tv"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1012" y="-305"/>
+        </scene>
+        <!--4 de 10-->
+        <scene sceneID="KOp-Ib-6rl">
+            <objects>
+                <controller identifier="Page4" title="4 de 10" hidesWhenLoading="NO" id="JNI-BE-hT8" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="9Ai-Le-jxh">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="QM9-Dh-VVE"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="Cek-X8-Rld">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="qbn-UN-52b">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="hVU-bt-IVC">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="P3J-ZP-I2I"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="P3J-ZP-I2I" id="2Rz-ny-KbB"/>
+                        <outlet property="dateLabel" destination="hVU-bt-IVC" id="REy-hb-C1Q"/>
+                        <outlet property="image" destination="QM9-Dh-VVE" id="bmb-Tc-Qld"/>
+                        <outlet property="titleLabel" destination="qbn-UN-52b" id="dRj-yF-u3W"/>
+                        <segue destination="lrc-62-V8F" kind="relationship" relationship="nextPage" id="qZ2-g8-db9"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="695" y="-305"/>
+        </scene>
+        <!--8 de 10-->
+        <scene sceneID="Otb-0v-sfU">
+            <objects>
+                <controller identifier="Page8" title="8 de 10" hidesWhenLoading="NO" id="gKl-Sb-e9Z" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="jbg-WZ-puI">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="e9P-px-wL4"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="Dlb-F2-5jg">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="7MD-jR-p3Y">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="sJ9-jb-oRs">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Aha-sR-p1o"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="Aha-sR-p1o" id="2EB-wH-vlk"/>
+                        <outlet property="dateLabel" destination="sJ9-jb-oRs" id="P30-7r-0NN"/>
+                        <outlet property="image" destination="e9P-px-wL4" id="jWe-mt-da8"/>
+                        <outlet property="titleLabel" destination="7MD-jR-p3Y" id="xy7-RV-okr"/>
+                        <segue destination="CyE-cE-D4X" kind="relationship" relationship="nextPage" id="2oZ-2I-7pC"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1882" y="-305"/>
+        </scene>
+        <!--9 de 10-->
+        <scene sceneID="6hO-7I-KCa">
+            <objects>
+                <controller identifier="Page9" title="9 de 10" hidesWhenLoading="NO" id="CyE-cE-D4X" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="t5U-I5-NLv">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="BT8-Jl-AO2"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="jkN-jh-Rdz">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="MV7-Gd-ZA2">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="3xn-xg-Pg9">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="iPd-uq-hMZ"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="iPd-uq-hMZ" id="ghu-8u-tRz"/>
+                        <outlet property="dateLabel" destination="3xn-xg-Pg9" id="Pi9-w5-C1U"/>
+                        <outlet property="image" destination="BT8-Jl-AO2" id="67c-ky-9eM"/>
+                        <outlet property="titleLabel" destination="MV7-Gd-ZA2" id="bWp-0x-375"/>
+                        <segue destination="Nzf-94-lke" kind="relationship" relationship="nextPage" id="VSh-zn-68a"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="2184" y="-305"/>
+        </scene>
+        <!--10 de 10-->
+        <scene sceneID="jxK-1h-8iI">
+            <objects>
+                <controller identifier="Page10" title="10 de 10" hidesWhenLoading="NO" id="Nzf-94-lke" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="WV2-xU-OqA">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="AQa-xZ-Sy5"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="eaj-Ix-Ygj">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="CjC-NB-Ccb">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="nPd-ON-YxZ">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="edl-ur-37t"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="edl-ur-37t" id="ef5-zl-FuN"/>
+                        <outlet property="dateLabel" destination="nPd-ON-YxZ" id="7iP-Bx-4iK"/>
+                        <outlet property="image" destination="AQa-xZ-Sy5" id="N73-Ia-lqV"/>
+                        <outlet property="titleLabel" destination="CjC-NB-Ccb" id="ToY-h2-DtJ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="2486" y="-305"/>
         </scene>
     </scenes>
 </document>
