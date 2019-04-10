@@ -6,6 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import EMTLoadingIndicator
 import WatchConnectivity
 import WatchKit
 
@@ -13,7 +14,11 @@ class LoadingController: WKInterfaceController {
 
     // MARK: - Properties -
 
-    var retries = 3
+	@IBOutlet private weak var reloadGroup: WKInterfaceGroup!
+	@IBOutlet weak var spin: WKInterfaceImage!
+
+	private var indicator: EMTLoadingIndicator?
+	var retries = 3
 
     var posts: [PostData]? {
         didSet {
@@ -31,6 +36,9 @@ class LoadingController: WKInterfaceController {
 				if retries > 0 {
 					retries -= 1
 					getPosts()
+				} else {
+					indicator?.hide()
+					reloadGroup.setHidden(false)
 				}
 			}
         }
@@ -42,7 +50,11 @@ class LoadingController: WKInterfaceController {
         super.awake(withContext: context)
 
         // Configure interface objects here.
-        if WCSession.isSupported() {
+		indicator = EMTLoadingIndicator(interfaceController: self, interfaceImage: spin, width: 40, height: 40, style: .line)
+
+		reloadGroup.setHidden(true)
+
+		if WCSession.isSupported() {
             WCSession.default.delegate = self
             WCSession.default.activate()
         }
@@ -69,6 +81,8 @@ class LoadingController: WKInterfaceController {
 
     func getPosts() {
         if WCSession.default.isReachable {
+
+			indicator?.showWait()
 
 			WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
                 guard let jsonData = response["posts"] as? Data else {

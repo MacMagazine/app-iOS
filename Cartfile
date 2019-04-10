@@ -1,1 +1,2 @@
 github "onevcat/Kingfisher" ~> 5.0
+github "hirokimu/EMTLoadingIndicator" ~> 4.0

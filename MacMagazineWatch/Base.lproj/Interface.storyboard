@@ -13,13 +13,21 @@
             <objects>
                 <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch_Extension">
                     <items>
-                        <button width="1" alignment="left" title="Load" id="UaG-re-OLP">
-                            <connections>
-                                <action selector="load" destination="4mM-Hh-YOV" id="9sv-pV-ihE"/>
-                            </connections>
-                        </button>
+                        <imageView width="1" height="1" alignment="left" id="Mjh-1W-EUm"/>
+                        <group width="1" height="1" alignment="left" layout="vertical" id="GrF-65-IpN">
+                            <items>
+                                <label width="1" height="0.59999999999999998" alignment="left" text="Não foi possível obter os posts neste momento." textAlignment="center" numberOfLines="0" id="4G5-2k-WtO"/>
+                                <button width="1" alignment="left" title="Tentar Novamente" id="UaG-re-OLP">
+                                    <connections>
+                                        <action selector="load" destination="4mM-Hh-YOV" id="9sv-pV-ihE"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                     </items>
                     <connections>
+                        <outlet property="reloadGroup" destination="GrF-65-IpN" id="ClH-KU-t8Q"/>
+                        <outlet property="spin" destination="Mjh-1W-EUm" id="dPZ-Ja-Bb0"/>
                         <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="2Cc-ik-Jaf"/>
                     </connections>
                 </controller>
