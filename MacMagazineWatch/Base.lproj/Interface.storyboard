@@ -11,7 +11,7 @@
         <!--MacMagazine-->
         <scene sceneID="eEc-mC-IFO">
             <objects>
-                <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <imageView alignment="center" verticalAlignment="center" id="Mjh-1W-EUm"/>
                         <group width="1" height="1" alignment="left" layout="vertical" id="GrF-65-IpN">
@@ -37,7 +37,7 @@
         <!--1 de 10-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="Page1" title="1 de 10" hidesWhenLoading="NO" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page1" title="1 de 10" hidesWhenLoading="NO" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
@@ -57,6 +57,15 @@
                         <label width="1" height="16" alignment="left" id="676-kQ-0px"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
                     </items>
+                    <menu key="menu" id="6TI-ce-UKl">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="5kG-Di-pfw">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="Jgv-ps-PVC"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="bgJ-Ov-P9Z" id="MIj-bv-dit"/>
                         <outlet property="dateLabel" destination="Ryp-d6-Saf" id="oKh-gC-dyj"/>
@@ -71,7 +80,7 @@
         <!--2 de 10-->
         <scene sceneID="5YE-Jt-LWo">
             <objects>
-                <controller identifier="Page2" title="2 de 10" hidesWhenLoading="NO" id="9We-pD-T8n" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page2" title="2 de 10" hidesWhenLoading="NO" id="9We-pD-T8n" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="PF8-EH-l85">
                             <items>
@@ -105,7 +114,7 @@
         <!--3 de 10-->
         <scene sceneID="cRP-jI-SSh">
             <objects>
-                <controller identifier="Page3" title="3 de 10" hidesWhenLoading="NO" id="GbV-Bo-7aO" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page3" title="3 de 10" hidesWhenLoading="NO" id="GbV-Bo-7aO" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="qi8-CO-POR">
                             <items>
@@ -139,7 +148,7 @@
         <!--6 de 10-->
         <scene sceneID="NBO-cN-DZb">
             <objects>
-                <controller identifier="Page6" title="6 de 10" hidesWhenLoading="NO" id="sKh-tL-3ST" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page6" title="6 de 10" hidesWhenLoading="NO" id="sKh-tL-3ST" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="HeP-py-EgD">
                             <items>
@@ -173,7 +182,7 @@
         <!--7 de 10-->
         <scene sceneID="V2k-8w-4hC">
             <objects>
-                <controller identifier="Page7" title="7 de 10" hidesWhenLoading="NO" id="GO2-rZ-lJG" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page7" title="7 de 10" hidesWhenLoading="NO" id="GO2-rZ-lJG" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="rCD-PS-VEk">
                             <items>
@@ -207,7 +216,7 @@
         <!--5 de 10-->
         <scene sceneID="Jk4-uV-Bzw">
             <objects>
-                <controller identifier="Page5" title="5 de 10" hidesWhenLoading="NO" id="lrc-62-V8F" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page5" title="5 de 10" hidesWhenLoading="NO" id="lrc-62-V8F" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="Ttv-Dv-do3">
                             <items>
@@ -241,7 +250,7 @@
         <!--4 de 10-->
         <scene sceneID="KOp-Ib-6rl">
             <objects>
-                <controller identifier="Page4" title="4 de 10" hidesWhenLoading="NO" id="JNI-BE-hT8" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page4" title="4 de 10" hidesWhenLoading="NO" id="JNI-BE-hT8" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="9Ai-Le-jxh">
                             <items>
@@ -275,7 +284,7 @@
         <!--8 de 10-->
         <scene sceneID="Otb-0v-sfU">
             <objects>
-                <controller identifier="Page8" title="8 de 10" hidesWhenLoading="NO" id="gKl-Sb-e9Z" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page8" title="8 de 10" hidesWhenLoading="NO" id="gKl-Sb-e9Z" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="jbg-WZ-puI">
                             <items>
@@ -309,7 +318,7 @@
         <!--9 de 10-->
         <scene sceneID="6hO-7I-KCa">
             <objects>
-                <controller identifier="Page9" title="9 de 10" hidesWhenLoading="NO" id="CyE-cE-D4X" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page9" title="9 de 10" hidesWhenLoading="NO" id="CyE-cE-D4X" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="t5U-I5-NLv">
                             <items>
@@ -343,7 +352,7 @@
         <!--10 de 10-->
         <scene sceneID="jxK-1h-8iI">
             <objects>
-                <controller identifier="Page10" title="10 de 10" hidesWhenLoading="NO" id="Nzf-94-lke" customClass="MainInterfaceController" customModule="MacMagazineWatch_Extension">
+                <controller identifier="Page10" title="10 de 10" hidesWhenLoading="NO" id="Nzf-94-lke" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="WV2-xU-OqA">
                             <items>

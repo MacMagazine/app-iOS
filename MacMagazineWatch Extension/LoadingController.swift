@@ -70,8 +70,8 @@ class LoadingController: WKInterfaceController {
         super.didAppear()
 
         if posts?.isEmpty ?? true {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.getPosts()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                self?.getPosts()
             }
         }
     }

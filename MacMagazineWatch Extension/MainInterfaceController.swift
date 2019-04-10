@@ -40,8 +40,11 @@ class MainInterfaceController: WKInterfaceController {
                 let url = URL(string: thumbnail) else {
                 return
             }
-            image.kf.setImage(with: url)
+			image.kf.setImage(with: url)
         }
     }
 
+	@IBAction private func reload() {
+		WKInterfaceController.reloadRootPageControllers(withNames: ["loading"], contexts: nil, orientation: .horizontal, pageIndex: 0)
+	}
 }
