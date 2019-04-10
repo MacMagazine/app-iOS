@@ -100,6 +100,15 @@
                         <label width="1" height="16" alignment="left" id="53f-BR-2So"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="2A8-vi-7nl"/>
                     </items>
+                    <menu key="menu" id="YHi-NC-or3">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="iLq-pH-O5F">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="EO8-yW-V0N"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="2A8-vi-7nl" id="Sgq-nh-20t"/>
                         <outlet property="dateLabel" destination="Z75-yg-0c4" id="h5D-jO-iXQ"/>
@@ -134,6 +143,15 @@
                         <label width="1" height="16" alignment="left" id="Myw-jq-Apl"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vsn-j6-O9N"/>
                     </items>
+                    <menu key="menu" id="nNX-pD-pTF">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="Vu0-br-rN7">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="sgo-Xv-n2B"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="Vsn-j6-O9N" id="wG4-jz-F7y"/>
                         <outlet property="dateLabel" destination="ebw-c3-mmX" id="Hvk-cl-r95"/>
@@ -168,6 +186,15 @@
                         <label width="1" height="16" alignment="left" id="LkX-N0-IPN"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="WP7-Vs-5DP"/>
                     </items>
+                    <menu key="menu" id="F7d-k1-Lrv">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="DcW-tm-BgX">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="BAA-TS-psa"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="WP7-Vs-5DP" id="ENc-ra-xfy"/>
                         <outlet property="dateLabel" destination="FRi-94-sWc" id="10c-ZE-Dfg"/>
@@ -202,6 +229,15 @@
                         <label width="1" height="16" alignment="left" id="474-Na-rpk"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="t49-VR-idn"/>
                     </items>
+                    <menu key="menu" id="E6y-89-cEO">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="bNz-Hq-Wto">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="WCu-eJ-NEe"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="t49-VR-idn" id="9Fc-H9-fcL"/>
                         <outlet property="dateLabel" destination="4O8-RD-XmB" id="6RP-kI-FAI"/>
@@ -236,6 +272,15 @@
                         <label width="1" height="16" alignment="left" id="xJv-Le-UJv"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="rxI-S7-EpD"/>
                     </items>
+                    <menu key="menu" id="Kgo-H7-yjL">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="qyI-mK-isG">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="QQh-kQ-zM2"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="rxI-S7-EpD" id="N6c-wf-M6Z"/>
                         <outlet property="dateLabel" destination="h45-jp-Ydi" id="NPH-aX-5WR"/>
@@ -270,6 +315,15 @@
                         <label width="1" height="16" alignment="left" id="EuW-2s-5NA"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="P3J-ZP-I2I"/>
                     </items>
+                    <menu key="menu" id="mFv-5w-vO0">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="m6d-0q-PbI">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="qft-og-kvU"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="P3J-ZP-I2I" id="2Rz-ny-KbB"/>
                         <outlet property="dateLabel" destination="hVU-bt-IVC" id="REy-hb-C1Q"/>
@@ -304,6 +358,15 @@
                         <label width="1" height="16" alignment="left" id="rjX-hk-auQ"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Aha-sR-p1o"/>
                     </items>
+                    <menu key="menu" id="VNL-iQ-bpm">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="DDI-Yw-l4Y">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="tMZ-af-rKe"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="Aha-sR-p1o" id="2EB-wH-vlk"/>
                         <outlet property="dateLabel" destination="sJ9-jb-oRs" id="P30-7r-0NN"/>
@@ -338,6 +401,15 @@
                         <label width="1" height="16" alignment="left" id="3Ep-gr-qAG"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="iPd-uq-hMZ"/>
                     </items>
+                    <menu key="menu" id="6ny-8V-Qhx">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="jz5-wX-PwQ">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="pNl-n5-H5M"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="iPd-uq-hMZ" id="ghu-8u-tRz"/>
                         <outlet property="dateLabel" destination="3xn-xg-Pg9" id="Pi9-w5-C1U"/>
@@ -372,6 +444,15 @@
                         <label width="1" height="16" alignment="left" id="9b4-mp-3WS"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="edl-ur-37t"/>
                     </items>
+                    <menu key="menu" id="iEs-N1-wLn">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="ljE-xE-fGb">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="hqB-E3-NQz"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="content" destination="edl-ur-37t" id="ef5-zl-FuN"/>
                         <outlet property="dateLabel" destination="nPd-ON-YxZ" id="7iP-Bx-4iK"/>
