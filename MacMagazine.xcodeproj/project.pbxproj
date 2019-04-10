@@ -19,10 +19,11 @@
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
 		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
+		9B5D4041225EA36200315963 /* EMTLoadingIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */; };
+		9B5D4042225EA36200315963 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B6F965A225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
-		9B6F965E225E6A230075ED89 /* EMTLoadingIndicator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FA224FD59900F68654 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B7036F8224FD59900F68654 /* WebView.storyboard */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
@@ -73,7 +74,6 @@
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 		9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF96571225E3ACD00BAF22D /* Kingfisher.framework */; };
-		9BF96576225E3CD200BAF22D /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,18 +139,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BF96577225E3CD200BAF22D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9B6F965E225E6A230075ED89 /* EMTLoadingIndicator.framework in Embed Frameworks */,
-				9BF96576225E3CD200BAF22D /* Kingfisher.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,6 +223,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5D4041225EA36200315963 /* EMTLoadingIndicator.framework in Frameworks */,
+				9B5D4042225EA36200315963 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,8 +550,8 @@
 				9BB4BC75225B9B8000559170 /* Run update version Script */,
 				9BB4BC55225B99F600559170 /* Sources */,
 				9BB4BC56225B99F600559170 /* Frameworks */,
+				9B5D4043225EA38F00315963 /* Run Sign Framework Script */,
 				9BB4BC57225B99F600559170 /* Resources */,
-				9BF96577225E3CD200BAF22D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -739,6 +729,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n";
+		};
+		9B5D4043225EA38F00315963 /* Run Sign Framework Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Frameworks/watchOS/Kingfisher.framework",
+				"$(SRCROOT)/Frameworks/watchOS/EMTLoadingIndicator.framework",
+			);
+			name = "Run Sign Framework Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/EMTLoadingIndicator.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		9B70370B22500FD500F68654 /* Run Sign Framework Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1055,7 +1067,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
-					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
 					"$(PROJECT_DIR)/Frameworks/watchOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1085,7 +1096,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
 					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
 					"$(PROJECT_DIR)/Frameworks/watchOS",
 				);
