@@ -15,6 +15,7 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format ?? "EEE, dd MMM yyyy HH:mm:ss +0000"
 		dateFormatter.locale = Locale(identifier: "en_US")
+		dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.date(from: self) ?? Date()
     }
 
@@ -22,6 +23,7 @@ extension String {
 		// Expected date format: "20190227"
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyyMMdd"
+		dateFormatter.timeZone = TimeZone(abbreviation: "BRT")
 		let date = dateFormatter.date(from: self) ?? Date()
 
 		let calendar = Calendar.current
