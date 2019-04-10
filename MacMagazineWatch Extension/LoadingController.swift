@@ -17,21 +17,22 @@ class LoadingController: WKInterfaceController {
 
     var posts: [PostData]? {
         didSet {
-            guard let _posts = posts else {
-print("is empty")
-                if retries > 0 {
-                    retries -= 1
-                    getPosts()
-                }
-                return
-            }
-            let pages: [String] = Array(1..._posts.count).compactMap {
-                "Page\($0)"
-                }
-print(pages)
-            DispatchQueue.main.async {
-                WKInterfaceController.reloadRootControllers(withNames: pages, contexts: self.posts)
-            }
+            if let _posts = posts, !_posts.isEmpty {
+				let pages: [String] = Array(1..._posts.count).compactMap {
+					"Page\($0)"
+				}
+				let contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
+					["title": "\(index + 1) de \(_posts.count)", "post": element]
+				}
+				DispatchQueue.main.async {
+					WKInterfaceController.reloadRootPageControllers(withNames: pages, contexts: contexts, orientation: .horizontal, pageIndex: 0)
+				}
+			} else {
+				if retries > 0 {
+					retries -= 1
+					getPosts()
+				}
+			}
         }
     }
 
@@ -68,25 +69,24 @@ print(pages)
 
     func getPosts() {
         if WCSession.default.isReachable {
-            print("loading")
-            WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
+
+			WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
                 guard let jsonData = response["posts"] as? Data else {
-                    print("empty")
                     self.posts = nil
                     return
                 }
-                print("loaded")
-                do {
+
+				do {
                     self.posts = try JSONDecoder().decode([PostData].self, from: jsonData)
                 } catch {
-                    print(error.localizedDescription)
+					logE(error.localizedDescription)
                 }
 
             }, errorHandler: { error in
-                print("Error sending message: %@", error)
+				logE(error.localizedDescription)
             })
         } else {
-            print("not reachable")
+			logE("Companion Not Reachable")
         }
     }
 

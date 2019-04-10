@@ -24,8 +24,15 @@ class MainInterfaceController: WKInterfaceController {
         super.awake(withContext: context)
 
         // Configure interface objects here.
-        if let item = context as? PostData {
-            titleLabel.setText(item.title)
+		self.setTitle("MacMagazine")
+
+		if let object = context as? [String: Any],
+			let title = object["title"] as? String,
+			let item = object["post"] as? PostData {
+
+			self.setTitle(title)
+
+			titleLabel.setText(item.title)
             dateLabel.setText(item.pubDate)
             content.setText(item.excerpt)
 

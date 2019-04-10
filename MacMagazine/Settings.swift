@@ -12,6 +12,7 @@ enum Definitions {
 	static let darkMode = "darkMode"
 	static let fontSize = "font-size-settings"
 	static let icon = "icon"
+	static let watch = "watch"
 }
 
 struct Settings {

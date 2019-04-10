@@ -38,11 +38,15 @@ extension WatchSessionManager: WCSessionDelegate {
 
 	func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
 		if message["request"] as? String == "posts" {
-			guard let posts = UserDefaults.standard.object(forKey: "watch") else {
-				replyHandler(["posts": []])
-				return
+			CoreDataStack.shared.getPostsForWatch { watchPosts in
+				do {
+					let jsonData = try JSONEncoder().encode(watchPosts)
+					replyHandler(["posts": jsonData])
+				} catch {
+					logE(error.localizedDescription)
+					replyHandler(["posts": []])
+				}
 			}
-			replyHandler(["posts": posts])
 		}
 	}
 

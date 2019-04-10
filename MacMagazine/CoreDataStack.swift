@@ -49,7 +49,7 @@ class CoreDataStack {
 			do {
 				try desiredContext.save()
 			} catch {
-				print(error)
+				logE(error.localizedDescription)
 			}
 		}
 	}
@@ -73,7 +73,7 @@ class CoreDataStack {
 		}
 	}
 
-	func saveForWatch() {
+	func getPostsForWatch(completion: @escaping ([PostData]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 		request.fetchLimit = 10
@@ -86,19 +86,13 @@ class CoreDataStack {
 			let watchPosts = result.map {
 				PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: false, pubDate: $0.pubDate?.watchDate(), excerpt: $0.excerpt)
 			}
-			do {
-				let jsonData = try JSONEncoder().encode(watchPosts)
-				UserDefaults.standard.set(jsonData, forKey: "watch")
-				UserDefaults.standard.synchronize()
-			} catch {
-				print(error.localizedDescription)
-			}
+			completion(watchPosts)
 		}
 
 		do {
 			try viewContext.execute(asynchronousFetchRequest)
 		} catch let error {
-			print("NSAsynchronousFetchRequest error: \(error)")
+			logE(error.localizedDescription)
 		}
 	}
 
@@ -118,7 +112,7 @@ class CoreDataStack {
 		do {
 			try viewContext.execute(asynchronousFetchRequest)
 		} catch let error {
-			print("NSAsynchronousFetchRequest error: \(error)")
+			logE(error.localizedDescription)
 		}
 	}
 

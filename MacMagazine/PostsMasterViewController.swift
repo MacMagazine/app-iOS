@@ -276,6 +276,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
+		logI("Getting posts")
 		let getPost = {
             var images: [String] = []
 			API().getPosts(page: paged) { post in
@@ -285,9 +286,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                         let urls = images.compactMap { URL(string: $0) }
                         let prefetcher = ImagePrefetcher(urls: urls)
                         prefetcher.start()
-
-                        // Save data to Apple Watch
-						CoreDataStack.shared.saveForWatch()
 
 						// When post == nil, indicates the last post retrieved
 						self.fetchController?.reloadData()
