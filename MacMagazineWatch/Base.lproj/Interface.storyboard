@@ -33,7 +33,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="Dbu-Ek-N2m"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Dbu-Ek-N2m"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="mB8-gp-5A1">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="boY-tx-SmG">
@@ -46,7 +46,7 @@
                                 </group>
                             </items>
                         </group>
-                        <label width="1" height="21" alignment="left" id="676-kQ-0px"/>
+                        <label width="1" height="16" alignment="left" id="676-kQ-0px"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
                     </items>
                     <connections>
@@ -67,7 +67,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="PF8-EH-l85">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="F66-00-n7T"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="F66-00-n7T"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="bYW-lC-Nnx">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="eMp-q0-iQ4">
@@ -80,6 +80,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="53f-BR-2So"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="2A8-vi-7nl"/>
                     </items>
                     <connections>
@@ -100,7 +101,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="qi8-CO-POR">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="ckT-8q-Ha3"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="ckT-8q-Ha3"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="qvA-xX-zxl">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Hqn-Uz-rQO">
@@ -113,6 +114,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="Myw-jq-Apl"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vsn-j6-O9N"/>
                     </items>
                     <connections>
@@ -133,7 +135,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="HeP-py-EgD">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="W55-sg-Egf"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="W55-sg-Egf"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="vEO-FZ-d7w">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="J9g-kA-FMl">
@@ -146,6 +148,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="LkX-N0-IPN"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="WP7-Vs-5DP"/>
                     </items>
                     <connections>
@@ -166,7 +169,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="rCD-PS-VEk">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="xK5-Tf-4mz"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="xK5-Tf-4mz"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="hUe-me-W7e">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Lxc-sQ-SEF">
@@ -179,6 +182,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="474-Na-rpk"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="t49-VR-idn"/>
                     </items>
                     <connections>
@@ -199,7 +203,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="Ttv-Dv-do3">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="M8L-g2-hkv"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="M8L-g2-hkv"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="vIv-lu-8n5">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Lyo-hh-zdF">
@@ -212,6 +216,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="xJv-Le-UJv"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="rxI-S7-EpD"/>
                     </items>
                     <connections>
@@ -232,7 +237,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="9Ai-Le-jxh">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="QM9-Dh-VVE"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="QM9-Dh-VVE"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="Cek-X8-Rld">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="qbn-UN-52b">
@@ -245,6 +250,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="EuW-2s-5NA"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="P3J-ZP-I2I"/>
                     </items>
                     <connections>
@@ -265,7 +271,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="jbg-WZ-puI">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="e9P-px-wL4"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="e9P-px-wL4"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="Dlb-F2-5jg">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="7MD-jR-p3Y">
@@ -278,6 +284,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="rjX-hk-auQ"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Aha-sR-p1o"/>
                     </items>
                     <connections>
@@ -298,7 +305,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="t5U-I5-NLv">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="BT8-Jl-AO2"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="BT8-Jl-AO2"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="jkN-jh-Rdz">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="MV7-Gd-ZA2">
@@ -311,6 +318,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="3Ep-gr-qAG"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="iPd-uq-hMZ"/>
                     </items>
                     <connections>
@@ -331,7 +339,7 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="WV2-xU-OqA">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" id="AQa-xZ-Sy5"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="AQa-xZ-Sy5"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="eaj-Ix-Ygj">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="CjC-NB-Ccb">
@@ -344,6 +352,7 @@
                                 </group>
                             </items>
                         </group>
+                        <label width="1" height="16" alignment="left" id="9b4-mp-3WS"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="edl-ur-37t"/>
                     </items>
                     <connections>

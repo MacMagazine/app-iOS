@@ -23,7 +23,6 @@
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FA224FD59900F68654 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B7036F8224FD59900F68654 /* WebView.storyboard */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
-		9B703714225015AA00F68654 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B703713225015A900F68654 /* Kingfisher.framework */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
 		9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */; };
@@ -70,6 +69,8 @@
 		9BD4E98B225D4C0900683B88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
+		9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF96571225E3ACD00BAF22D /* Kingfisher.framework */; };
+		9BF96576225E3CD200BAF22D /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,27 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BF9654F225E1DB800BAF22D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BF96577225E3CD200BAF22D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9BF96576225E3CD200BAF22D /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -146,7 +168,6 @@
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9B7036F9224FD59900F68654 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
 		9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityExtensions.swift; sourceTree = "<group>"; };
-		9B703713225015A900F68654 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = SOURCE_ROOT; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
 		9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +219,8 @@
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
 		9BF356271F6208F70081BE90 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDataSource.swift; sourceTree = "<group>"; };
+		9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
+		9BF96571225E3ACD00BAF22D /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,11 +235,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B703714225015AA00F68654 /* Kingfisher.framework in Frameworks */,
+				9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BE697CA1F4874C20048D68D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BF9654E225E1DB800BAF22D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,8 +279,8 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BF9656D225E3ACD00BAF22D /* Frameworks */,
 				9BD4E971225CFDEC00683B88 /* icons */,
-				9BE697DC1F487DF70048D68D /* 3rd Party Frameworks */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
@@ -327,6 +357,7 @@
 				9BB4BC4E225B99F500559170 /* MacMagazineWatch */,
 				9BB4BC5D225B99F600559170 /* MacMagazineWatch Extension */,
 				9BCAD6781F47A08100B54526 /* Products */,
+				9BF96565225E371900BAF22D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -457,12 +488,36 @@
 			name = Comum;
 			sourceTree = "<group>";
 		};
-		9BE697DC1F487DF70048D68D /* 3rd Party Frameworks */ = {
+		9BF96565225E371900BAF22D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9B703713225015A900F68654 /* Kingfisher.framework */,
 			);
-			name = "3rd Party Frameworks";
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BF9656D225E3ACD00BAF22D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9BF9656E225E3ACD00BAF22D /* watchOS */,
+				9BF96570225E3ACD00BAF22D /* iOS */,
+			);
+			path = Frameworks;
+			sourceTree = SOURCE_ROOT;
+		};
+		9BF9656E225E3ACD00BAF22D /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */,
+			);
+			path = watchOS;
+			sourceTree = "<group>";
+		};
+		9BF96570225E3ACD00BAF22D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9BF96571225E3ACD00BAF22D /* Kingfisher.framework */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,6 +530,8 @@
 				9BB4BC73225B9ADF00559170 /* Run update version Script */,
 				9BB4BC4B225B99F500559170 /* Resources */,
 				9BB4BC6F225B99F700559170 /* Embed App Extensions */,
+				9BF9654E225E1DB800BAF22D /* Frameworks */,
+				9BF9654F225E1DB800BAF22D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -495,6 +552,7 @@
 				9BB4BC55225B99F600559170 /* Sources */,
 				9BB4BC56225B99F600559170 /* Frameworks */,
 				9BB4BC57225B99F600559170 /* Resources */,
+				9BF96577225E3CD200BAF22D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -681,7 +739,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Kingfisher.framework",
+				"$(SRCROOT)/Frameworks/iOS/Kingfisher.framework",
 			);
 			name = "Run Sign Framework Script";
 			outputFileListPaths = (
@@ -919,9 +977,16 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks/watchOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = MacMagazineWatch_Extension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brit.macmagazine-dev.watchkitapp";
@@ -944,9 +1009,16 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks/watchOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = MacMagazineWatch_Extension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brit.macmagazine-dev.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -967,6 +1039,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)/Frameworks/watchOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -991,6 +1070,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)/Frameworks/watchOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1129,6 +1215,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks/iOS",
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1147,6 +1234,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks/iOS",
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

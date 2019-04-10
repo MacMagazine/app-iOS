@@ -277,10 +277,16 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	fileprivate func getPosts(paged: Int) {
 		let getPost = {
+            var images: [String] = []
 			API().getPosts(page: paged) { post in
 				DispatchQueue.main.async {
 					guard let post = post else {
-						// Save data to Apple Watch
+                        // Prefetch images to be able to sent to Apple Watch
+                        let urls = images.compactMap { URL(string: $0) }
+                        let prefetcher = ImagePrefetcher(urls: urls)
+                        prefetcher.start()
+
+                        // Save data to Apple Watch
 						CoreDataStack.shared.saveForWatch()
 
 						// When post == nil, indicates the last post retrieved
@@ -296,6 +302,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 						}
 						return
 					}
+                    images.append(post.artworkURL)
 					CoreDataStack.shared.save(post: post)
 				}
 			}
