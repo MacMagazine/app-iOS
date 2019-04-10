@@ -15,7 +15,7 @@ class LoadingController: WKInterfaceController {
     // MARK: - Properties -
 
 	@IBOutlet private weak var reloadGroup: WKInterfaceGroup!
-	@IBOutlet weak var spin: WKInterfaceImage!
+	@IBOutlet private weak var spin: WKInterfaceImage!
 
 	private var indicator: EMTLoadingIndicator?
 	var retries = 3
@@ -53,6 +53,7 @@ class LoadingController: WKInterfaceController {
 		indicator = EMTLoadingIndicator(interfaceController: self, interfaceImage: spin, width: 40, height: 40, style: .line)
 
 		reloadGroup.setHidden(true)
+		indicator?.showWait()
 
 		if WCSession.isSupported() {
             WCSession.default.delegate = self
@@ -76,14 +77,13 @@ class LoadingController: WKInterfaceController {
     }
 
     @IBAction private func load() {
+		reloadGroup.setHidden(true)
+		indicator?.showWait()
         getPosts()
     }
 
     func getPosts() {
         if WCSession.default.isReachable {
-
-			indicator?.showWait()
-
 			WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
                 guard let jsonData = response["posts"] as? Data else {
                     self.posts = nil

@@ -13,7 +13,7 @@
             <objects>
                 <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch_Extension">
                     <items>
-                        <imageView width="1" height="1" alignment="left" id="Mjh-1W-EUm"/>
+                        <imageView alignment="center" verticalAlignment="center" id="Mjh-1W-EUm"/>
                         <group width="1" height="1" alignment="left" layout="vertical" id="GrF-65-IpN">
                             <items>
                                 <label width="1" height="0.59999999999999998" alignment="left" text="Não foi possível obter os posts neste momento." textAlignment="center" numberOfLines="0" id="4G5-2k-WtO"/>
