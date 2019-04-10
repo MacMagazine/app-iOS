@@ -50,7 +50,7 @@
         <scene sceneID="hct-bz-jAy">
             <objects>
                 <splitViewController title="Posts" id="Yhy-9h-hZ1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Posts" image="tab_logo" id="iZz-lw-mOc"/>
+                    <tabBarItem key="tabBarItem" title="Posts" image="tab_posts" id="iZz-lw-mOc"/>
                     <connections>
                         <segue destination="kKX-hy-fjk" kind="relationship" relationship="masterViewController" id="xsv-wY-uN5"/>
                         <segue destination="fD0-My-KZk" kind="relationship" relationship="detailViewController" id="YQQ-bx-LIJ"/>
@@ -449,7 +449,7 @@
         <scene sceneID="Odw-wy-fvT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aBB-qV-jdy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ajustes" image="settings" id="Z3D-d2-gj4"/>
+                    <tabBarItem key="tabBarItem" title="Ajustes" image="tab_settings" id="Z3D-d2-gj4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="9fV-k2-BIj">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -738,7 +738,7 @@
         <scene sceneID="0BS-5v-H15">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jD-dP-dNC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Videos" image="video" id="4hU-Rq-N3T"/>
+                    <tabBarItem key="tabBarItem" title="Videos" image="tab_video" id="4hU-Rq-N3T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -761,13 +761,13 @@
         <image name="phone_1" width="30" height="30"/>
         <image name="phone_2" width="30" height="30"/>
         <image name="play" width="500" height="500"/>
-        <image name="settings" width="28" height="28"/>
-        <image name="tab_logo" width="37" height="28"/>
         <image name="tab_noar" width="24" height="28"/>
-        <image name="video" width="40" height="28"/>
+        <image name="tab_posts" width="32" height="28"/>
+        <image name="tab_settings" width="24" height="25"/>
+        <image name="tab_video" width="35" height="24"/>
         <image name="warning" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lNV-kD-aRc"/>
+        <segue reference="YQQ-bx-LIJ"/>
     </inferredMetricsTieBreakers>
 </document>
