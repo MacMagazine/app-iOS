@@ -107,7 +107,7 @@ extension AppDelegate: UITabBarControllerDelegate {
 
 extension AppDelegate {
 	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-		if shortcutItem.type == "open.last.post" {
+		if shortcutItem.type == "openLastPost" {
 			NotificationCenter.default.post(name: .shortcutAction, object: nil)
 		}
 	}

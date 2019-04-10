@@ -748,12 +748,14 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Frameworks/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Frameworks/watchOS/EMTLoadingIndicator.framework",
 			);
 			name = "Run Sign Framework Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/EMTLoadingIndicator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
