@@ -22,6 +22,8 @@
 		9B5D4042225EA36200315963 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */; };
 		9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
+		9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
+		9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B6F965A225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
@@ -853,8 +855,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */,
+				9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */,
 				9B6F965B225E5A060075ED89 /* Logger.swift in Sources */,
 				9B91117E225BC100000A6AC3 /* PostData.swift in Sources */,
+				9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */,
 				9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */,
 				9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */,
 				9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */,

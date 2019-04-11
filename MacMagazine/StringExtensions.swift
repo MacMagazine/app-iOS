@@ -10,7 +10,11 @@ import Foundation
 
 extension String {
 
-    func toDate(_ format: String?) -> Date {
+	func toDate() -> Date {
+		return toDate(nil)
+	}
+
+	func toDate(_ format: String?) -> Date {
         // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format ?? "EEE, dd MMM yyyy HH:mm:ss +0000"

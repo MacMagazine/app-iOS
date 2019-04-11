@@ -93,7 +93,7 @@ class PostCell: UITableViewCell {
         favoriteImageView.isHidden = true
 
         headlineLabel?.text = object.title
-		subheadlineLabel?.text = object.pubDate.toDate(nil).cellDate()
+		subheadlineLabel?.text = object.pubDate.toDate().cellDate()
 		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
 	}
 

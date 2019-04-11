@@ -135,11 +135,11 @@ class CoreDataStack {
 		newItem.excerpt = post.excerpt
 		newItem.artworkURL = post.artworkURL
 		newItem.categorias = post.getCategorias()
-		newItem.pubDate = post.pubDate.toDate(nil)
+		newItem.pubDate = post.pubDate.toDate()
 		newItem.podcast = post.podcast
 		newItem.podcastURL = post.podcastURL
 		newItem.duration = post.duration
-		newItem.headerDate = post.pubDate.toDate(nil).sortedDate()
+		newItem.headerDate = post.pubDate.toDate().sortedDate()
 		newItem.favorite = false
         newItem.podcastFrame = post.podcastFrame
 	}
@@ -150,11 +150,11 @@ class CoreDataStack {
 		post.excerpt = item.excerpt
 		post.artworkURL = item.artworkURL
 		post.categorias = item.getCategorias()
-		post.pubDate = item.pubDate.toDate(nil)
+		post.pubDate = item.pubDate.toDate()
 		post.podcast = item.podcast
 		post.podcastURL = item.podcastURL
 		post.duration = item.duration
-		post.headerDate = item.pubDate.toDate(nil).sortedDate()
+		post.headerDate = item.pubDate.toDate().sortedDate()
         post.podcastFrame = item.podcastFrame
 	}
 

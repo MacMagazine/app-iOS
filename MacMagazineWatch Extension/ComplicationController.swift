@@ -7,6 +7,7 @@
 //
 
 import ClockKit
+import WatchKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
 
@@ -29,16 +30,16 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Configuration -
 
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.backward, .forward])
+        handler([.forward])
     }
 
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
-        handler(Date())
+		handler(Date())
     }
 
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
 		let currentDate = Date()
-		let endDate = currentDate.addingTimeInterval(TimeInterval(15 * 30))
+		let endDate = currentDate.addingTimeInterval(TimeInterval(24 * 60 * 60))
 		handler(endDate)
 	}
 
@@ -50,29 +51,16 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
-		if complication.family == .modularLarge ||
-            complication.family == .utilitarianLarge ||
-			complication.family == .graphicRectangular {
-
-			posts = []
-			API().getPosts(page: 0) { post in
-				guard let post = post else {
-					return
-				}
-				if self.posts?.isEmpty ?? true {
-					let dateFormatter = DateFormatter()
-					dateFormatter.dateFormat = "hh:mm:ss"
-
-					let timeString = dateFormatter.string(from: Date())
-					let message = Complication(header: timeString, line1: post.title, line2: post.pubDate)
-					let entry = self.createTimeLineEntry(for: complication, message: message, date: Date())
-					handler(entry)
-				}
-				self.posts?.append(post)
+		posts = []
+		API().getPosts(page: 0) { post in
+			guard let post = post else {
+				return
 			}
-
-		} else {
-			handler(nil)
+			if self.posts?.isEmpty ?? true {
+				let entry = self.prepareEntry(with: post, for: complication)
+				handler(entry)
+			}
+			self.posts?.append(post)
 		}
     }
 
@@ -82,28 +70,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 	}
 
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
-
         // Call the handler with the timeline entries after to the given date
 		var timeLineEntryArray = [CLKComplicationTimelineEntry]()
-		var nextDate = Date(timeIntervalSinceNow: 10)
 
 		guard let posts = posts else {
 			return
 		}
-		for post in posts {
-			print("==== \(post.title)")
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "hh:mm:ss"
-
-			let timeString = dateFormatter.string(from: nextDate)
-			let message = Complication(header: timeString, line1: post.title, line2: post.pubDate)
-            guard let entry = createTimeLineEntry(for: complication, message: message, date: nextDate) else {
-				handler(nil)
-                return
-            }
-			timeLineEntryArray.append(entry)
-			nextDate = nextDate.addingTimeInterval(10)
+		guard let entry = self.prepareEntry(with: posts[0], for: complication) else {
+			handler(nil)
+			return
 		}
+		timeLineEntryArray.append(entry)
+
 		handler(timeLineEntryArray)
     }
 
@@ -111,20 +89,36 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
-		let message = Complication(header: "MacMagazine", line1: "Sem conteúdo", line2: "")
+		let message = Complication(header: "MacMagazine", line1: "Veja nossas últimas", line2: "publicações")
 		let entry = createComplicationTemplate(for: complication, message: message)
 		handler(entry)
 	}
 
 	// MARK: - Methods -
 
+	func prepareEntry(with post: XMLPost, for complication: CLKComplication) -> CLKComplicationTimelineEntry? {
+		let timeString = post.pubDate.toDate().complicationDate()
+
+		var message = Complication(header: "@\(timeString)", line1: post.title, line2: "")
+		var texts = post.title.pairs
+		if !texts.isEmpty {
+			let line1 = texts.first
+			texts.removeFirst()
+			let line2 = texts.joined()
+			message = Complication(header: "@\(timeString)", line1: line1, line2: line2)
+		}
+		let entry = self.createTimeLineEntry(for: complication, message: message, date: post.pubDate.toDate())
+
+		return entry
+	}
+
 	func createComplicationTemplate(for complication: CLKComplication, message: Complication) -> CLKComplicationTemplate? {
 
 		if complication.family == .modularLarge {
 			let template = CLKComplicationTemplateModularLargeStandardBody()
-			template.headerTextProvider = CLKSimpleTextProvider(text: message.header ?? "")
-			template.body1TextProvider = CLKSimpleTextProvider(text: message.line1 ?? "")
-			template.body2TextProvider = CLKSimpleTextProvider(text: message.line2 ?? "")
+			template.headerTextProvider = CLKSimpleTextProvider(text: message.line1 ?? "")
+			template.body1TextProvider = CLKSimpleTextProvider(text: message.line2 ?? "")
+			template.body2TextProvider = CLKSimpleTextProvider(text: message.header ?? "")
 			return(template)
 
 		} else if complication.family == .utilitarianLarge {
@@ -134,9 +128,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 		} else if complication.family == .graphicRectangular {
 			let template = CLKComplicationTemplateGraphicRectangularStandardBody()
-			template.headerTextProvider = CLKSimpleTextProvider(text: message.header ?? "")
-			template.body1TextProvider = CLKSimpleTextProvider(text: message.line1 ?? "")
-			template.body2TextProvider = CLKSimpleTextProvider(text: message.line2 ?? "")
+			template.headerTextProvider = CLKSimpleTextProvider(text: message.line1 ?? "")
+			template.body1TextProvider = CLKSimpleTextProvider(text: message.line2 ?? "")
+			template.body2TextProvider = CLKSimpleTextProvider(text: message.header ?? "")
 			return(template)
 
 		} else {
@@ -165,4 +159,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		}
 	}
 
+}
+
+extension Collection {
+	var pairs: [String] {
+		let size = 18
+		var startIndex = self.startIndex
+		let count = self.count
+		let n = count / size + (count % size == 0 ? 0 : 1)
+		return (0..<n).map { _ in
+			let endIndex = index(startIndex, offsetBy: size, limitedBy: self.endIndex) ?? self.endIndex
+			defer { startIndex = endIndex }
+			return "\(self[startIndex..<endIndex])"
+		}
+	}
 }

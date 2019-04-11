@@ -237,7 +237,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 			guard let post = post else {
 				DispatchQueue.main.async {
 					self.posts.sort(by: {
-						$0.pubDate.toDate(nil).sortedDate().compare($1.pubDate.toDate(nil).sortedDate()) == .orderedDescending
+						$0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
 					})
 
 					self.resultsTableController?.posts = self.posts
