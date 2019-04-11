@@ -17,7 +17,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Configuration -
 
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.forward])
+        handler([.backward, .forward])
     }
 
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
@@ -26,7 +26,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
 		let currentDate = Date()
-		let endDate = currentDate.addingTimeInterval(TimeInterval(4 * 60 * 60))
+		let endDate = currentDate.addingTimeInterval(TimeInterval(4 * 60))
 		handler(endDate)
 	}
 
@@ -38,12 +38,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
-		if complication.family == .modularLarge {
+		if complication.family == .modularLarge ||
+            complication.family == .utilitarianLarge {
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateFormat = "hh:mm"
 
 			let timeString = dateFormatter.string(from: Date())
-			let entry = createTimeLineEntry(headerText: timeString, bodyText: timeLineText[0], date: Date())
+            let entry = createTimeLineEntry(for: complication, headerText: timeString, bodyText: timeLineText[0], date: Date())
 
 			handler(entry)
 		} else {
@@ -59,16 +60,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after to the given date
 		var timeLineEntryArray = [CLKComplicationTimelineEntry]()
-		var nextDate = Date(timeIntervalSinceNow: 1 * 60 * 60)
+		var nextDate = Date(timeIntervalSinceNow: 1 * 60)
 
 		for index in 1...3 {
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateFormat = "hh:mm"
 
 			let timeString = dateFormatter.string(from: nextDate)
-			let entry = createTimeLineEntry(headerText: timeString, bodyText: timeLineText[index], date: nextDate)
+            guard let entry = createTimeLineEntry(for: complication, headerText: timeString, bodyText: timeLineText[index], date: nextDate) else {
+                return
+            }
 			timeLineEntryArray.append(entry)
-			nextDate = nextDate.addingTimeInterval(1 * 60 * 60)
+			nextDate = nextDate.addingTimeInterval(1 * 60)
 		}
 		handler(timeLineEntryArray)
     }
@@ -77,26 +80,41 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
-		let template = CLKComplicationTemplateModularLargeStandardBody()
+        if complication.family == .modularLarge {
+            let template = CLKComplicationTemplateModularLargeStandardBody()
+            template.headerTextProvider = CLKSimpleTextProvider(text: "Título inicial")
+            template.body1TextProvider = CLKSimpleTextProvider(text: "Textinho inicial")
+            handler(template)
 
-		template.headerTextProvider = CLKSimpleTextProvider(text: "Título inicial")
-		template.body1TextProvider = CLKSimpleTextProvider(text: "Textinho inicial")
+        } else if complication.family == .utilitarianLarge {
+            let template = CLKComplicationTemplateUtilitarianLargeFlat()
+            template.textProvider = CLKSimpleTextProvider(text: "Título inicial")
+            handler(template)
 
-		handler(template)
+        } else {
+            handler(nil)
+        }
 	}
 
 	// MARK: - Methods -
 
-	func createTimeLineEntry(headerText: String, bodyText: String, date: Date) -> CLKComplicationTimelineEntry {
+	func createTimeLineEntry(for complication: CLKComplication, headerText: String, bodyText: String, date: Date) -> CLKComplicationTimelineEntry? {
 
-		let template = CLKComplicationTemplateModularLargeStandardBody()
+        if complication.family == .modularLarge {
+            let template = CLKComplicationTemplateModularLargeStandardBody()
+            template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
+            template.body1TextProvider = CLKSimpleTextProvider(text: bodyText)
+            let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+            return(entry)
 
-		template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
-		template.body1TextProvider = CLKSimpleTextProvider(text: bodyText)
-
-		let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
-
-		return(entry)
+        } else if complication.family == .utilitarianLarge {
+            let template = CLKComplicationTemplateUtilitarianLargeFlat()
+            template.textProvider = CLKSimpleTextProvider(text: bodyText)
+            let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+            return(entry)
+        } else {
+            return nil
+        }
 	}
 
 }
