@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
-		9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
@@ -21,6 +20,8 @@
 		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
 		9B5D4041225EA36200315963 /* EMTLoadingIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */; };
 		9B5D4042225EA36200315963 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */; };
+		9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
+		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B6F965A225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
@@ -327,8 +328,8 @@
 			children = (
 				9BB94D13225DF023000FA38E /* LoadingController.swift */,
 				9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */,
-				9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */,
 				9BB4BC62225B99F600559170 /* ComplicationController.swift */,
+				9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */,
 				9BB4BC64225B99F700559170 /* Assets.xcassets */,
 				9BB4BC66225B99F700559170 /* Info.plist */,
 			);
@@ -856,6 +857,8 @@
 				9B91117E225BC100000A6AC3 /* PostData.swift in Sources */,
 				9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */,
 				9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */,
+				9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */,
+				9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */,
 				9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -905,7 +908,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B02AE4E1F5C53C700EA1A6F /* Network.swift in Sources */,
 				9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,31 +18,41 @@ class MainInterfaceController: WKInterfaceController {
 	@IBOutlet private weak var dateLabel: WKInterfaceLabel!
 	@IBOutlet private weak var content: WKInterfaceLabel!
 
+	var object: [String: Any]?
+
 	// MARK: - App lifecycle -
 
 	override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
-        // Configure interface objects here.
+		// Configure interface objects here.
+		guard let object = context as? [String: Any] else {
+			return
+		}
+		self.object = object
 		self.setTitle("MacMagazine")
+    }
 
-		if let object = context as? [String: Any],
+	override func willActivate() {
+		super.willActivate()
+
+		if let object = self.object,
 			let title = object["title"] as? String,
 			let item = object["post"] as? PostData {
 
 			self.setTitle(title)
 
 			titleLabel.setText(item.title)
-            dateLabel.setText(item.pubDate)
-            content.setText(item.excerpt)
+			dateLabel.setText(item.pubDate)
+			content.setText(item.excerpt)
 
-            guard let thumbnail = item.thumbnail,
-                let url = URL(string: thumbnail) else {
-                return
-            }
+			guard let thumbnail = item.thumbnail,
+				let url = URL(string: thumbnail) else {
+					return
+			}
 			image.kf.setImage(with: url)
-        }
-    }
+		}
+	}
 
 	@IBAction private func reload() {
 		WKInterfaceController.reloadRootPageControllers(withNames: ["loading"], contexts: nil, orientation: .horizontal, pageIndex: 0)

@@ -17,7 +17,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // Be sure to complete the background task once you’re done.
-                backgroundTask.setTaskCompletedWithSnapshot(false)
+				reloadComplicationData(backgroundTask: backgroundTask)
             case let snapshotTask as WKSnapshotRefreshBackgroundTask:
                 // Snapshot tasks have a unique completion call, make sure to set your expiration date
                 snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
@@ -40,4 +40,15 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
 
+	func reloadComplicationData(backgroundTask: WKApplicationRefreshBackgroundTask) {
+		let later = Date(timeIntervalSinceNow: 10)	// every hour
+		reloadData()
+		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: later, userInfo: nil) { _ in }
+		backgroundTask.setTaskCompletedWithSnapshot(false)
+	}
+
+	func reloadData() {
+		let complicationsController = ComplicationController()
+		complicationsController.reloadData()
+	}
 }

@@ -23,13 +23,13 @@ class LoadingController: WKInterfaceController {
     var posts: [PostData]? {
         didSet {
             if let _posts = posts, !_posts.isEmpty {
-				let pages: [String] = Array(1..._posts.count).compactMap {
-					"Page\($0)"
-				}
-				let contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
-					["title": "\(index + 1) de \(_posts.count)", "post": element]
-				}
 				DispatchQueue.main.async {
+					let pages: [String] = Array(1..._posts.count).compactMap {
+						"Page\($0)"
+					}
+					let contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
+						["title": "\(index + 1) de \(_posts.count)", "post": element]
+					}
 					WKInterfaceController.reloadRootPageControllers(withNames: pages, contexts: contexts, orientation: .horizontal, pageIndex: 0)
 				}
 			} else {
@@ -50,6 +50,9 @@ class LoadingController: WKInterfaceController {
         super.awake(withContext: context)
 
         // Configure interface objects here.
+		// Schedule a background task to reload data for the Complication
+		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { _ in }
+
 		indicator = EMTLoadingIndicator(interfaceController: self, interfaceImage: spin, width: 40, height: 40, style: .line)
 
 		reloadGroup.setHidden(true)
@@ -59,11 +62,6 @@ class LoadingController: WKInterfaceController {
             WCSession.default.delegate = self
             WCSession.default.activate()
         }
-    }
-
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
     }
 
     override func didAppear() {

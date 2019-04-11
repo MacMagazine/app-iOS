@@ -66,11 +66,15 @@ class API: NSObject, XMLParserDelegate {
             return
         }
 
+		#if os(iOS)
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		#endif
         Network.get(url: url) { (data: Data?, _: String?) in
+			#if os(iOS)
 			DispatchQueue.main.async {
 				UIApplication.shared.isNetworkActivityIndicatorVisible = false
 			}
+			#endif
 
             guard let data = data else {
 				self.onCompletion?(nil)
