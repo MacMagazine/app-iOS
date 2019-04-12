@@ -18,6 +18,7 @@ class API: NSObject, XMLParserDelegate {
 		static let posts = "cat=-101"
 		static let podcast = "cat=101"
 		static let search = "s="
+
 		static let playlistItems = "https://www.googleapis.com/youtube/v3/playlistItems"
 		static let playlistPart = "part=snippet"
 		static let playlistIdParam = "playlistId="
@@ -25,6 +26,8 @@ class API: NSObject, XMLParserDelegate {
 		static let keyParam = "key="
 		static let key: [UInt8] = [0, 57, 10, 37, 54, 21, 39, 43, 50, 70, 46, 33, 50, 24, 1, 39, 85, 7, 43, 19, 61, 27, 117, 2, 52, 82, 5, 37, 69, 48, 27, 21, 29, 26, 38, 92, 10, 68, 50]
 		static let salt = "AppDelegateNSObject"
+		static let maxResults = "maxResults=15"
+		static let pageToken = "pageToken="
 	}
 
 	// MARK: - Properties -
@@ -269,7 +272,12 @@ extension API {
 		let playlistId = obfuscator.reveal(key: APIParams.playlistId)
 		let key = obfuscator.reveal(key: APIParams.key)
 
-		let host = "\(APIParams.playlistItems)?\(APIParams.playlistPart)&\(APIParams.playlistIdParam)\(playlistId)&\(APIParams.keyParam)\(key)"
+		var pageToken = ""
+		if let nextToken = Settings().getVideoNextToken() {
+			pageToken = "&\(APIParams.pageToken)\(nextToken)"
+		}
+
+		let host = "\(APIParams.playlistItems)?\(APIParams.playlistPart)&\(APIParams.playlistIdParam)\(playlistId)&\(APIParams.keyParam)\(key)&\(APIParams.maxResults)\(pageToken)"
 		executeGetVideoContent(host)
 	}
 

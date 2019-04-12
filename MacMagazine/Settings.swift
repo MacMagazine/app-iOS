@@ -13,6 +13,7 @@ enum Definitions {
 	static let fontSize = "font-size-settings"
 	static let icon = "icon"
 	static let watch = "watch"
+	static let videoNextToken = "videoNextToken"
 }
 
 struct Settings {
@@ -50,6 +51,18 @@ struct Settings {
 			fontSize = "-\(sliderFontSize)"
 		}
 		return fontSize
+	}
+
+	func setVideoNextToken(_ token: String?) {
+		UserDefaults.standard.set(token, forKey: Definitions.videoNextToken)
+		UserDefaults.standard.synchronize()
+	}
+
+	func getVideoNextToken() -> String? {
+		guard let videoNextToken = UserDefaults.standard.object(forKey: Definitions.videoNextToken) as? String else {
+			return nil
+		}
+		return videoNextToken
 	}
 
 }
