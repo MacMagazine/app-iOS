@@ -116,9 +116,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 		if complication.family == .modularLarge {
 			let template = CLKComplicationTemplateModularLargeStandardBody()
-			template.headerTextProvider = CLKSimpleTextProvider(text: message.line1 ?? "")
-			template.body1TextProvider = CLKSimpleTextProvider(text: message.line2 ?? "")
-			template.body2TextProvider = CLKSimpleTextProvider(text: message.header ?? "")
+			template.headerTextProvider = CLKSimpleTextProvider(text: message.header ?? "")
+			template.body1TextProvider = CLKSimpleTextProvider(text: message.line1 ?? "")
+			template.body2TextProvider = CLKSimpleTextProvider(text: message.line2 ?? "")
 			return(template)
 
 		} else if complication.family == .utilitarianLarge {

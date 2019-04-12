@@ -110,10 +110,14 @@ extension VideoCollectionViewController {
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "video", for: indexPath)
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "video", for: indexPath) as? VideosCollectionViewCell else {
+			fatalError("Unexpected Index Path")
+		}
 
 		// Configure the cell
-		print(indexPath.item)
+		let object = fetchedResultsController.object(at: indexPath)
+		cell.configureVideo(with: object)
+
 		return cell
 	}
 
@@ -174,4 +178,20 @@ extension VideoCollectionViewController: NSFetchedResultsControllerDelegate {
 		}
 	}
 
+}
+
+extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+		let screen = UIScreen.main.bounds.size
+		let ratio: CGFloat = 1.778	// YouTube thumbnail images size
+
+		if Settings().isPhone() {
+			let width = screen.width - 20.0		// margin of 10px
+			let height = (width / ratio) + 40	// image has a bottom margin of 40px
+			return CGSize(width: width, height: height)
+		} else {
+			return CGSize(width: 300.0, height: 200.0)
+		}
+	}
 }

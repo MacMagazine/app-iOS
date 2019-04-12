@@ -17,6 +17,7 @@
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
 		9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */; };
+		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
@@ -31,7 +32,6 @@
 		9B6F965A225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
-		9B7036FA224FD59900F68654 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B7036F8224FD59900F68654 /* WebView.storyboard */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
@@ -39,6 +39,10 @@
 		9B91117D225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
+		9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393C2260DDB8004005AA /* Settings.storyboard */; };
+		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
+		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
+		9BA939472260DE37004005AA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939452260DE37004005AA /* HeaderCell.xib */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
 		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
@@ -47,7 +51,6 @@
 		9BB4BC65225B99F700559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC64225B99F700559170 /* Assets.xcassets */; };
 		9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */; };
 		9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB94D13225DF023000FA38E /* LoadingController.swift */; };
-		9BC1BB892256A9AE00E81C42 /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC1BB882256A9AE00E81C42 /* HeaderCell.xib */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
@@ -161,6 +164,7 @@
 		9B25F5082260967A0057FBF9 /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
 		9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewController.swift; sourceTree = "<group>"; };
+		9B3224302260DD78005CF974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/Videos.storyboard; sourceTree = SOURCE_ROOT; };
 		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
 		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
@@ -170,7 +174,6 @@
 		9B6F9659225E5A060075ED89 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EMTLoadingIndicator.framework; sourceTree = "<group>"; };
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		9B7036F9224FD59900F68654 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
 		9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityExtensions.swift; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -178,6 +181,10 @@
 		9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		9B91117C225BC100000A6AC3 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		9BA9393D2260DDB8004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		9BA939402260DDDA004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Podcast.storyboard; sourceTree = "<group>"; };
+		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
+		9BA939462260DE37004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HeaderCell.xib; sourceTree = "<group>"; };
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,7 +195,6 @@
 		9BB4BC64225B99F700559170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BB4BC66225B99F700559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BB94D13225DF023000FA38E /* LoadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingController.swift; sourceTree = "<group>"; };
-		9BC1BB882256A9AE00E81C42 /* HeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCell.xib; sourceTree = "<group>"; };
 		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -291,7 +297,6 @@
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
 				9BCAD6801F47A08100B54526 /* Main.storyboard */,
-				9B7036F8224FD59900F68654 /* WebView.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -347,7 +352,7 @@
 		9BC9B12F1F5C96A500C4DF17 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9BC1BB882256A9AE00E81C42 /* HeaderCell.xib */,
+				9BA939452260DE37004005AA /* HeaderCell.xib */,
 				9B4A8FA122357A0300A49239 /* NormalCell.xib */,
 				9B4A8FA422357A0800A49239 /* FeaturedCell.xib */,
 				9B4A8FA722357A0D00A49239 /* PodcastCell.xib */,
@@ -385,7 +390,7 @@
 				9B578C2E1F47A2A40086C6A7 /* Resources */,
 				9BE697DA1F487DAB0048D68D /* Comum */,
 				9BE697D71F487D5A0048D68D /* Posts */,
-				9BE697D81F487D610048D68D /* NoAr */,
+				9BE697D81F487D610048D68D /* Podcast */,
 				9BD4E987225D269000683B88 /* Videos */,
 				9BE697D91F487D660048D68D /* Ajustes */,
 				9B911182225BC519000A6AC3 /* Watch */,
@@ -436,6 +441,7 @@
 		9BD4E987225D269000683B88 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				9B32242F2260DD78005CF974 /* Videos.storyboard */,
 				9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */,
 				9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */,
 			);
@@ -456,24 +462,27 @@
 			children = (
 				9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */,
+				9BA939422260DE0A004005AA /* WebView.storyboard */,
 				9B7036F6224FCB0400F68654 /* WebViewController.swift */,
 			);
 			name = Posts;
 			sourceTree = "<group>";
 		};
-		9BE697D81F487D610048D68D /* NoAr */ = {
+		9BE697D81F487D610048D68D /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				9BA9393F2260DDDA004005AA /* Podcast.storyboard */,
 				9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */,
 				9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */,
 				9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */,
 			);
-			name = NoAr;
+			name = Podcast;
 			sourceTree = "<group>";
 		};
 		9BE697D91F487D660048D68D /* Ajustes */ = {
 			isa = PBXGroup;
 			children = (
+				9BA9393C2260DDB8004005AA /* Settings.storyboard */,
 				9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */,
 			);
 			name = Ajustes;
@@ -697,18 +706,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA939472260DE37004005AA /* HeaderCell.xib in Resources */,
 				9BD4E97B225CFDEC00683B88 /* tablet_1@2x.png in Resources */,
+				9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */,
 				9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */,
 				9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */,
 				9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */,
+				9BA939442260DE0A004005AA /* WebView.storyboard in Resources */,
+				9B3224312260DD78005CF974 /* Videos.storyboard in Resources */,
+				9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */,
 				9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */,
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
-				9BC1BB892256A9AE00E81C42 /* HeaderCell.xib in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
 				9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */,
 				9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */,
-				9B7036FA224FD59900F68654 /* WebView.storyboard in Resources */,
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
@@ -946,6 +958,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9B32242F2260DD78005CF974 /* Videos.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B3224302260DD78005CF974 /* Base */,
+			);
+			name = Videos.storyboard;
+			sourceTree = "<group>";
+		};
 		9B4A8FA122357A0300A49239 /* NormalCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -970,12 +990,36 @@
 			name = PodcastCell.xib;
 			sourceTree = "<group>";
 		};
-		9B7036F8224FD59900F68654 /* WebView.storyboard */ = {
+		9BA9393C2260DDB8004005AA /* Settings.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9B7036F9224FD59900F68654 /* Base */,
+				9BA9393D2260DDB8004005AA /* Base */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
+		9BA9393F2260DDDA004005AA /* Podcast.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BA939402260DDDA004005AA /* Base */,
+			);
+			name = Podcast.storyboard;
+			sourceTree = "<group>";
+		};
+		9BA939422260DE0A004005AA /* WebView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BA939432260DE0A004005AA /* Base */,
 			);
 			name = WebView.storyboard;
+			sourceTree = "<group>";
+		};
+		9BA939452260DE37004005AA /* HeaderCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BA939462260DE37004005AA /* Base */,
+			);
+			name = HeaderCell.xib;
 			sourceTree = "<group>";
 		};
 		9BB4BC4F225B99F500559170 /* Interface.storyboard */ = {

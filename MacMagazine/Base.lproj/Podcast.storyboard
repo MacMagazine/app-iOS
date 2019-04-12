@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GbX-Zp-bIv">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--NoArNavigation-->
+        <scene sceneID="vsx-Zo-BK5">
+            <objects>
+                <navigationController title="NoArNavigation" automaticallyAdjustsScrollViewInsets="NO" id="GbX-Zp-bIv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Podcast" image="tab_noar" id="59e-2Y-DJH"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3UV-U7-cDa" kind="relationship" relationship="rootViewController" id="gwk-L6-yXV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z0b-0M-tH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1370" y="-1178"/>
+        </scene>
+        <!--NoAr-->
+        <scene sceneID="D62-wU-79y">
+            <objects>
+                <tableViewController title="NoAr" clearsSelectionOnViewWillAppear="NO" id="dI9-bf-84Z" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="1" sectionFooterHeight="1" id="M41-4U-Ums">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="dI9-bf-84Z" id="vKx-lk-Tcp"/>
+                            <outlet property="delegate" destination="dI9-bf-84Z" id="Rwn-da-3s1"/>
+                        </connections>
+                    </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="1RB-I0-yLe">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="getPodcasts" destination="dI9-bf-84Z" eventType="valueChanged" id="qzu-fX-jGB"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rfs-yV-yEe" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="644" y="-1285"/>
+        </scene>
+        <!--Podcast View Controller-->
+        <scene sceneID="yun-cy-K9P">
+            <objects>
+                <viewController id="3UV-U7-cDa" customClass="PodcastViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xvo-5h-vIB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sxe-hu-yMD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SlD-dw-tjD" customClass="AppView" customModule="MacMagazine" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
+                                <connections>
+                                    <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-MC-Tvc">
+                                <rect key="frame" x="0.0" y="354" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="3US-UY-uQE"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="dJn-2U-uf9" kind="embed" id="GHc-83-1mb"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="leading" secondItem="SlD-dw-tjD" secondAttribute="leading" id="049-Sf-hrY"/>
+                            <constraint firstAttribute="trailing" secondItem="slx-MC-Tvc" secondAttribute="trailing" id="7Xh-Ft-8ae"/>
+                            <constraint firstItem="Sxe-hu-yMD" firstAttribute="top" secondItem="slx-MC-Tvc" secondAttribute="bottom" id="AVO-YF-8mZ"/>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="top" secondItem="7Pr-nE-zS6" secondAttribute="bottom" id="Mgj-QU-tea"/>
+                            <constraint firstItem="7Pr-nE-zS6" firstAttribute="leading" secondItem="SlD-dw-tjD" secondAttribute="leading" id="hP9-vx-mMm"/>
+                            <constraint firstItem="7Pr-nE-zS6" firstAttribute="top" secondItem="Xvo-5h-vIB" secondAttribute="bottom" id="icc-Db-zKq"/>
+                            <constraint firstAttribute="trailing" secondItem="7Pr-nE-zS6" secondAttribute="trailing" id="kUk-Nd-AxK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RDY-Ty-82q">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="DiB-v8-Kg9">
+                            <connections>
+                                <action selector="showFavorites:" destination="3UV-U7-cDa" id="H56-ko-JjQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="jMe-aj-dZs">
+                            <connections>
+                                <action selector="search:" destination="3UV-U7-cDa" id="Ctm-LE-bYj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="favorite" destination="DiB-v8-Kg9" id="Js6-Mj-QV4"/>
+                        <outlet property="logoView" destination="7gQ-ba-oxb" id="Aj3-1W-bkS"/>
+                        <outlet property="playerHeight" destination="3US-UY-uQE" id="EX8-pJ-oXv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5TX-9w-Qd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="7gQ-ba-oxb">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-dzf">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="-428" y="-1178"/>
+        </scene>
+        <!--Player View Controller-->
+        <scene sceneID="yFF-Uh-ljt">
+            <objects>
+                <viewController id="dJn-2U-uf9" customClass="PlayerViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MBk-Uq-fbb"/>
+                        <viewControllerLayoutGuide type="bottom" id="mjB-qY-c9f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GF4-A6-6Pd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-ku-KsB">
+                                <rect key="frame" x="36" y="40" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7f-9U-gBL">
+                                <rect key="frame" x="16" y="20" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="G0P-9J-IcQ"/>
+                                    <constraint firstAttribute="width" secondItem="y7f-9U-gBL" secondAttribute="height" multiplier="1:1" id="lbQ-3j-mu5"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="play"/>
+                                <state key="disabled" image="warning"/>
+                                <state key="selected" image="pause"/>
+                                <connections>
+                                    <action selector="play:" destination="dJn-2U-uf9" eventType="touchUpInside" id="Ne5-Fm-fcQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQu-qt-VEj" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="86" y="20" width="43.5" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="slV-ZK-qmg">
+                                <rect key="frame" x="14" y="124" width="347" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="dJn-2U-uf9" eventType="valueChanged" id="9xt-eA-FPV"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udk-Gp-T2N" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="16" y="162" width="343" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="slV-ZK-qmg" firstAttribute="top" secondItem="y7f-9U-gBL" secondAttribute="bottom" constant="44" id="5WX-QK-YaW"/>
+                            <constraint firstItem="Udk-Gp-T2N" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" id="8bg-vy-HSZ"/>
+                            <constraint firstItem="slV-ZK-qmg" firstAttribute="trailing" secondItem="GF4-A6-6Pd" secondAttribute="trailingMargin" id="Agk-mr-DoC"/>
+                            <constraint firstItem="PFY-ku-KsB" firstAttribute="top" secondItem="MBk-Uq-fbb" secondAttribute="bottom" constant="40" id="HXm-ie-f7d"/>
+                            <constraint firstItem="Udk-Gp-T2N" firstAttribute="top" secondItem="slV-ZK-qmg" secondAttribute="bottom" constant="8" id="UDn-dk-Mpu"/>
+                            <constraint firstItem="Udk-Gp-T2N" firstAttribute="trailing" secondItem="GF4-A6-6Pd" secondAttribute="trailingMargin" id="acl-C1-oob"/>
+                            <constraint firstItem="oQu-qt-VEj" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="GF4-A6-6Pd" secondAttribute="trailingMargin" id="gta-KH-A7f"/>
+                            <constraint firstItem="oQu-qt-VEj" firstAttribute="top" secondItem="GF4-A6-6Pd" secondAttribute="topMargin" constant="20" id="jUI-P5-Wwo"/>
+                            <constraint firstItem="y7f-9U-gBL" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" id="o6P-yf-llb"/>
+                            <constraint firstItem="oQu-qt-VEj" firstAttribute="leading" secondItem="y7f-9U-gBL" secondAttribute="trailing" constant="10" id="ovP-eJ-7C5"/>
+                            <constraint firstItem="PFY-ku-KsB" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" constant="20" id="r5Q-N2-2LC"/>
+                            <constraint firstItem="slV-ZK-qmg" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" id="vBd-pf-kgK"/>
+                            <constraint firstItem="y7f-9U-gBL" firstAttribute="top" secondItem="GF4-A6-6Pd" secondAttribute="topMargin" constant="20" id="x7g-dM-zMP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playButton" destination="y7f-9U-gBL" id="G8W-h6-W2y"/>
+                        <outlet property="podcastDuration" destination="Udk-Gp-T2N" id="CVv-mi-Y9T"/>
+                        <outlet property="podcastTitle" destination="oQu-qt-VEj" id="vJW-4E-bKW"/>
+                        <outlet property="slider" destination="slV-ZK-qmg" id="3aa-6e-X16"/>
+                        <outlet property="spin" destination="PFY-ku-KsB" id="qu2-4c-i59"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D1A-ga-PBM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="644" y="-908"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fav_off" width="22" height="21"/>
+        <image name="logo" width="80" height="70.5"/>
+        <image name="pause" width="500" height="500"/>
+        <image name="play" width="500" height="500"/>
+        <image name="tab_noar" width="24" height="28"/>
+        <image name="warning" width="500" height="500"/>
+    </resources>
+</document>

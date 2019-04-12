@@ -223,6 +223,7 @@ struct Item: Codable {
 	var etag: String?
 	var id: String?
 	var snippet: Snippet?
+	var statistics: Statistics?
 }
 
 struct Snippet: Codable {
@@ -258,6 +259,14 @@ struct MediaInfo: Codable {
 	var url: String?
 	var width: Int
 	var height: Int
+}
+
+struct Statistics: Codable {
+	var viewCount: String?
+	var likeCount: String?
+	var dislikeCount: String?
+	var favoriteCount: String?
+	var commentCount: String?
 }
 
 #if os(iOS)

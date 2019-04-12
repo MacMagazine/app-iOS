@@ -14,10 +14,10 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var favoriteImageView: UIImageView!
 	@IBOutlet weak private var headlineLabel: UILabel!
 
-	func configureCell(with object: Video) {
+	func configureVideo(with object: Video) {
 		headlineLabel?.text = object.title
 
-		favoriteImageView.alpha = (object.favorite ? 1 : 0)
+//		favoriteImageView.alpha = (object.favorite ? 1 : 0)
 
 		guard let artworkURL = object.artworkURL else {
 			return
