@@ -19,7 +19,8 @@ class CoreDataStack {
 
 	private init() {}
 
-	let entityName = "Post"
+	let postEntityName = "Post"
+	let videoEntityName = "Video"
 
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "macmagazine")
@@ -55,7 +56,12 @@ class CoreDataStack {
 	}
 
 	func flush() {
-		let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
+		flush(entityName: postEntityName)
+		flush(entityName: videoEntityName)
+	}
+
+	func flush(entityName: String) {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
 		deleteRequest.resultType = .resultTypeObjectIDs
 
@@ -74,7 +80,7 @@ class CoreDataStack {
 	}
 
 	func getPostsForWatch(completion: @escaping ([PostData]) -> Void) {
-		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
 		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 		request.fetchLimit = 10
 
@@ -97,7 +103,7 @@ class CoreDataStack {
 	}
 
 	func get(post link: String, completion: @escaping ([Post]) -> Void) {
-		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
 		request.predicate = NSPredicate(format: "link == %@", link)
 
 		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure

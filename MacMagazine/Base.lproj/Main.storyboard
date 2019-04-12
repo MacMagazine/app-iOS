@@ -416,35 +416,6 @@
             </objects>
             <point key="canvasLocation" x="-2284" y="-710"/>
         </scene>
-        <!--Video Table View Controller-->
-        <scene sceneID="KVA-hv-P1C">
-            <objects>
-                <tableViewController id="axI-pv-z5A" customClass="VideoTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="e1G-mx-aUu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="videos" id="LBf-rN-Wox">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LBf-rN-Wox" id="g1n-If-Gws">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="axI-pv-z5A" id="oTM-ZX-ZbP"/>
-                            <outlet property="delegate" destination="axI-pv-z5A" id="59b-Zj-d5d"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="FHE-os-pfV"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eA7-hW-b7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-207.19999999999999" y="-510.49475262368821"/>
-        </scene>
         <!--Ajustes-->
         <scene sceneID="Odw-wy-fvT">
             <objects>
@@ -746,12 +717,47 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="axI-pv-z5A" kind="relationship" relationship="rootViewController" id="05V-T3-MZr"/>
+                        <segue destination="PeN-ph-XhJ" kind="relationship" relationship="rootViewController" id="HKW-sX-kPE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmC-ae-OHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1146.4000000000001" y="-510.49475262368821"/>
+        </scene>
+        <!--Video Collection View Controller-->
+        <scene sceneID="QE0-Oi-FuT">
+            <objects>
+                <collectionViewController id="PeN-ph-XhJ" customClass="VideoCollectionViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MOJ-H3-Jtu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7iI-GI-Urh">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="video" id="lNX-c7-cbD">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="PeN-ph-XhJ" id="SA7-6M-9gM"/>
+                            <outlet property="delegate" destination="PeN-ph-XhJ" id="W73-WJ-QzV"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="fVw-Ev-d1Z"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPe-Yv-RqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-204" y="-510"/>
         </scene>
     </scenes>
     <resources>
@@ -762,7 +768,7 @@
         <image name="phone_2" width="30" height="30"/>
         <image name="play" width="500" height="500"/>
         <image name="tab_noar" width="24" height="28"/>
-        <image name="tab_posts" width="32" height="28"/>
+        <image name="tab_posts" width="22" height="24"/>
         <image name="tab_settings" width="24" height="25"/>
         <image name="tab_video" width="35" height="24"/>
         <image name="warning" width="500" height="500"/>

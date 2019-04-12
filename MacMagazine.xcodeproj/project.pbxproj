@@ -14,6 +14,7 @@
 		9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 		9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
+		9B25F506226088F40057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F505226088F40057FBF9 /* VideoCollectionViewController.swift */; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
@@ -71,7 +72,6 @@
 		9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
 		9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */; };
 		9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E979225CFDEC00683B88 /* phone_1@3x.png */; };
-		9BD4E989225D30A300683B88 /* VideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD4E988225D30A300683B88 /* VideoTableViewController.swift */; };
 		9BD4E98A225D431100683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
 		9BD4E98B225D4C0900683B88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
@@ -155,6 +155,8 @@
 		9B0DD44B2226E9320016C567 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		9B0DD44E2226FD150016C567 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		9B25F505226088F40057FBF9 /* VideoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewController.swift; sourceTree = "<group>"; };
+		9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 4.xcdatamodel"; sourceTree = "<group>"; };
 		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
 		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
@@ -211,7 +213,6 @@
 		9BD4E977225CFDEC00683B88 /* phone_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@2x.png"; sourceTree = "<group>"; };
 		9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2@2x.png"; sourceTree = "<group>"; };
 		9BD4E979225CFDEC00683B88 /* phone_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@3x.png"; sourceTree = "<group>"; };
-		9BD4E988225D30A300683B88 /* VideoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewController.swift; sourceTree = "<group>"; };
 		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
@@ -430,7 +431,7 @@
 		9BD4E987225D269000683B88 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				9BD4E988225D30A300683B88 /* VideoTableViewController.swift */,
+				9B25F505226088F40057FBF9 /* VideoCollectionViewController.swift */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -873,6 +874,7 @@
 			files = (
 				9BD135E7222804E500A0B627 /* UIViewTheme.swift in Sources */,
 				9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */,
+				9B25F506226088F40057FBF9 /* VideoCollectionViewController.swift in Sources */,
 				9B1BA5E4222B22980059F692 /* Settings.swift in Sources */,
 				9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */,
 				9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */,
@@ -893,7 +895,6 @@
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
-				9BD4E989225D30A300683B88 /* VideoTableViewController.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
 				9B6F965A225E5A060075ED89 /* Logger.swift in Sources */,
@@ -1363,11 +1364,12 @@
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */,
 				9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */,
 				9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */,
 				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */;
+			currentVersion = 9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
