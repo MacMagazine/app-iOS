@@ -14,6 +14,7 @@ enum Definitions {
 	static let icon = "icon"
 	static let watch = "watch"
 	static let videoNextToken = "videoNextToken"
+	static let allVideosFetched = "allVideosFetched"
 }
 
 struct Settings {
@@ -54,8 +55,15 @@ struct Settings {
 	}
 
 	func setVideoNextToken(_ token: String?) {
-		UserDefaults.standard.set(token, forKey: Definitions.videoNextToken)
-		UserDefaults.standard.synchronize()
+		guard let _ = UserDefaults.standard.object(forKey: Definitions.allVideosFetched) as? Bool else {
+			UserDefaults.standard.set(token, forKey: Definitions.videoNextToken)
+			if let _ = token {
+				UserDefaults.standard.set(true, forKey: Definitions.allVideosFetched)
+			}
+			UserDefaults.standard.synchronize()
+
+			return
+		}
 	}
 
 	func getVideoNextToken() -> String? {
