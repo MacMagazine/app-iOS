@@ -114,6 +114,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 			let object = self.fetchedResultsController.object(at: indexPath)
 			object.favorite = !object.favorite
 			CoreDataStack.shared.save()
+			NotificationCenter.default.post(name: .favoriteUpdated, object: object)
 
 			boolValue(true)
 		}

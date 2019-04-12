@@ -48,6 +48,7 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
     	// Do any additional setup after loading the view.
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
 
 		webView?.navigationDelegate = self
 		webView?.uiDelegate = self
@@ -58,25 +59,6 @@ class WebViewController: UIViewController {
 
 		reload()
     }
-
-	// MARK: - Notifications -
-
-	func reload() {
-		if post != nil {
-			configureView()
-		} else {
-			guard let url = postURL else {
-				return
-			}
-			loadWebView(url: url)
-
-			self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
-		}
-	}
-
-	@objc func reload(_ notification: Notification) {
-		reload()
-	}
 
 	// MARK: - Local methods -
 
@@ -89,7 +71,9 @@ class WebViewController: UIViewController {
 				return
 		}
 
-		loadWebView(url: url)
+		if webView?.url != url {
+			loadWebView(url: url)
+		}
 	}
 
 	func loadWebView(url: URL) {
@@ -181,6 +165,42 @@ class WebViewController: UIViewController {
 
 }
 
+// MARK: - Notifications -
+
+extension WebViewController {
+
+	func reload() {
+		if post != nil {
+			configureView()
+		} else {
+			guard let url = postURL else {
+				return
+			}
+			loadWebView(url: url)
+
+			self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+		}
+	}
+
+	@objc func reload(_ notification: Notification) {
+		reload()
+	}
+
+	@objc func onFavoriteUpdated(_ notification: Notification) {
+		if Settings().isPad() {
+			guard let object = notification.object as? Post else {
+				return
+			}
+			if post?.link == object.link {
+				post?.favorito = object.favorite
+				favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+				self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+			}
+		}
+	}
+
+}
+
 // MARK: - WebView Delegate -
 
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
@@ -230,9 +250,11 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 				if webView.isLoading {
 					if webView.url?.absoluteString == "https://disqus.com/next/login-success/" {
 						actionPolicy = .cancel
-						self.navigationController?.popViewController(animated: true)
 						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-							NotificationCenter.default.post(name: .reloadWeb, object: nil)
+							self.navigationController?.popViewController(animated: true)
+							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+								NotificationCenter.default.post(name: .reloadWeb, object: nil)
+							}
 						}
 					}
 				} else {
