@@ -290,7 +290,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 						// When post == nil, indicates the last post retrieved
 						self.fetchController?.reloadData()
 
-                        logI("=== CHEGUEI AQUI ===")
 						if paged < 1 {
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 								self.refreshControl?.endRefreshing()

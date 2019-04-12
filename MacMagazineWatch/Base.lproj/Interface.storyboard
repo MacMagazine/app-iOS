@@ -40,7 +40,8 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Dbu-Ek-N2m"/>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Dbu-Ek-N2m"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="byL-Am-gQ5"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="mB8-gp-5A1">
                                     <items>
                                         <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="boY-tx-SmG">
@@ -63,404 +64,473 @@
                                     <action selector="reload" destination="AgC-eL-Hgc" id="Jgv-ps-PVC"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="oQg-6Z-coR">
+                                <connections>
+                                    <action selector="clearCache" destination="AgC-eL-Hgc" id="NI9-nV-4xe"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
                         <outlet property="content" destination="bgJ-Ov-P9Z" id="MIj-bv-dit"/>
                         <outlet property="dateLabel" destination="Ryp-d6-Saf" id="oKh-gC-dyj"/>
-                        <outlet property="image" destination="Dbu-Ek-N2m" id="mk6-RA-Rmg"/>
+                        <outlet property="image" destination="byL-Am-gQ5" id="9nf-Bp-JPt"/>
+                        <outlet property="spin" destination="Dbu-Ek-N2m" id="IPx-TX-p5R"/>
                         <outlet property="titleLabel" destination="boY-tx-SmG" id="9ou-5b-fVa"/>
-                        <segue destination="9We-pD-T8n" kind="relationship" relationship="nextPage" id="UTK-lq-WTX"/>
+                        <segue destination="aCm-Ql-Tag" kind="relationship" relationship="nextPage" id="a9N-WP-Pzs"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-262" y="-305"/>
         </scene>
-        <!--2 de 10-->
-        <scene sceneID="5YE-Jt-LWo">
+        <!--10 de 10-->
+        <scene sceneID="46K-iY-8Jz">
             <objects>
-                <controller identifier="Page2" title="2 de 10" hidesWhenLoading="NO" id="9We-pD-T8n" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                <controller identifier="Page10" title="10 de 10" hidesWhenLoading="NO" id="0h6-bj-cf1" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="PF8-EH-l85">
+                        <group width="1" height="1" alignment="left" layout="overlap" id="psJ-Tc-FcT">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="F66-00-n7T"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="bYW-lC-Nnx">
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="SGw-fl-GfY"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="UrY-FG-u5w"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="NZo-52-dmy">
                                     <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="eMp-q0-iQ4">
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="yha-Ir-4py">
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="Z75-yg-0c4">
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="HNS-av-d2h">
                                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                         </label>
                                     </items>
                                 </group>
                             </items>
                         </group>
-                        <label width="1" height="16" alignment="left" id="53f-BR-2So"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="2A8-vi-7nl"/>
+                        <label width="1" height="16" alignment="left" id="U6t-5b-0eQ"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="jiI-TN-5aF"/>
                     </items>
-                    <menu key="menu" id="YHi-NC-or3">
+                    <menu key="menu" id="qXE-aR-iBc">
                         <items>
-                            <menuItem title="Recarregar" icon="repeat" id="iLq-pH-O5F">
+                            <menuItem title="Recarregar" icon="repeat" id="Igd-nF-f7H">
                                 <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="EO8-yW-V0N"/>
+                                    <action selector="reload" destination="0h6-bj-cf1" id="GVe-kP-orf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="lpf-H0-k3c">
+                                <connections>
+                                    <action selector="clearCache" destination="0h6-bj-cf1" id="dKy-xC-9az"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="content" destination="2A8-vi-7nl" id="Sgq-nh-20t"/>
-                        <outlet property="dateLabel" destination="Z75-yg-0c4" id="h5D-jO-iXQ"/>
-                        <outlet property="image" destination="F66-00-n7T" id="WxP-J6-Mha"/>
-                        <outlet property="titleLabel" destination="eMp-q0-iQ4" id="I62-cH-b3Y"/>
-                        <segue destination="GbV-Bo-7aO" kind="relationship" relationship="nextPage" id="eiB-4L-m8Q"/>
+                        <outlet property="content" destination="jiI-TN-5aF" id="lva-ws-PJc"/>
+                        <outlet property="dateLabel" destination="HNS-av-d2h" id="brR-2x-j8h"/>
+                        <outlet property="image" destination="UrY-FG-u5w" id="FwL-b6-Aa3"/>
+                        <outlet property="spin" destination="SGw-fl-GfY" id="CO0-S3-GpB"/>
+                        <outlet property="titleLabel" destination="yha-Ir-4py" id="FB5-cm-Q4Q"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="68" y="-305"/>
-        </scene>
-        <!--3 de 10-->
-        <scene sceneID="cRP-jI-SSh">
-            <objects>
-                <controller identifier="Page3" title="3 de 10" hidesWhenLoading="NO" id="GbV-Bo-7aO" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="qi8-CO-POR">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="ckT-8q-Ha3"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="qvA-xX-zxl">
-                                    <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Hqn-Uz-rQO">
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="ebw-c3-mmX">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <label width="1" height="16" alignment="left" id="Myw-jq-Apl"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vsn-j6-O9N"/>
-                    </items>
-                    <menu key="menu" id="nNX-pD-pTF">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="Vu0-br-rN7">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="sgo-Xv-n2B"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                    <connections>
-                        <outlet property="content" destination="Vsn-j6-O9N" id="wG4-jz-F7y"/>
-                        <outlet property="dateLabel" destination="ebw-c3-mmX" id="Hvk-cl-r95"/>
-                        <outlet property="image" destination="ckT-8q-Ha3" id="FPv-wg-jLO"/>
-                        <outlet property="titleLabel" destination="Hqn-Uz-rQO" id="njO-82-dzf"/>
-                        <segue destination="JNI-BE-hT8" kind="relationship" relationship="nextPage" id="7lE-0x-X9L"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="375" y="-305"/>
-        </scene>
-        <!--6 de 10-->
-        <scene sceneID="NBO-cN-DZb">
-            <objects>
-                <controller identifier="Page6" title="6 de 10" hidesWhenLoading="NO" id="sKh-tL-3ST" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="HeP-py-EgD">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="W55-sg-Egf"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="vEO-FZ-d7w">
-                                    <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="J9g-kA-FMl">
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="FRi-94-sWc">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <label width="1" height="16" alignment="left" id="LkX-N0-IPN"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="WP7-Vs-5DP"/>
-                    </items>
-                    <menu key="menu" id="F7d-k1-Lrv">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="DcW-tm-BgX">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="BAA-TS-psa"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                    <connections>
-                        <outlet property="content" destination="WP7-Vs-5DP" id="ENc-ra-xfy"/>
-                        <outlet property="dateLabel" destination="FRi-94-sWc" id="10c-ZE-Dfg"/>
-                        <outlet property="image" destination="W55-sg-Egf" id="Smx-yJ-yxc"/>
-                        <outlet property="titleLabel" destination="J9g-kA-FMl" id="vhu-aa-wJb"/>
-                        <segue destination="GO2-rZ-lJG" kind="relationship" relationship="nextPage" id="KpX-dk-gut"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="1309" y="-305"/>
-        </scene>
-        <!--7 de 10-->
-        <scene sceneID="V2k-8w-4hC">
-            <objects>
-                <controller identifier="Page7" title="7 de 10" hidesWhenLoading="NO" id="GO2-rZ-lJG" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="rCD-PS-VEk">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="xK5-Tf-4mz"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="hUe-me-W7e">
-                                    <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Lxc-sQ-SEF">
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="4O8-RD-XmB">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <label width="1" height="16" alignment="left" id="474-Na-rpk"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="t49-VR-idn"/>
-                    </items>
-                    <menu key="menu" id="E6y-89-cEO">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="bNz-Hq-Wto">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="WCu-eJ-NEe"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                    <connections>
-                        <outlet property="content" destination="t49-VR-idn" id="9Fc-H9-fcL"/>
-                        <outlet property="dateLabel" destination="4O8-RD-XmB" id="6RP-kI-FAI"/>
-                        <outlet property="image" destination="xK5-Tf-4mz" id="CK0-EF-C4e"/>
-                        <outlet property="titleLabel" destination="Lxc-sQ-SEF" id="qSQ-U7-i5c"/>
-                        <segue destination="gKl-Sb-e9Z" kind="relationship" relationship="nextPage" id="Xyy-In-FDN"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="1589" y="-305"/>
-        </scene>
-        <!--5 de 10-->
-        <scene sceneID="Jk4-uV-Bzw">
-            <objects>
-                <controller identifier="Page5" title="5 de 10" hidesWhenLoading="NO" id="lrc-62-V8F" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="Ttv-Dv-do3">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="M8L-g2-hkv"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="vIv-lu-8n5">
-                                    <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Lyo-hh-zdF">
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="h45-jp-Ydi">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <label width="1" height="16" alignment="left" id="xJv-Le-UJv"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="rxI-S7-EpD"/>
-                    </items>
-                    <menu key="menu" id="Kgo-H7-yjL">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="qyI-mK-isG">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="QQh-kQ-zM2"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                    <connections>
-                        <outlet property="content" destination="rxI-S7-EpD" id="N6c-wf-M6Z"/>
-                        <outlet property="dateLabel" destination="h45-jp-Ydi" id="NPH-aX-5WR"/>
-                        <outlet property="image" destination="M8L-g2-hkv" id="cae-XM-ZTy"/>
-                        <outlet property="titleLabel" destination="Lyo-hh-zdF" id="51L-bN-uxp"/>
-                        <segue destination="sKh-tL-3ST" kind="relationship" relationship="nextPage" id="3WQ-iI-7Tv"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="1012" y="-305"/>
-        </scene>
-        <!--4 de 10-->
-        <scene sceneID="KOp-Ib-6rl">
-            <objects>
-                <controller identifier="Page4" title="4 de 10" hidesWhenLoading="NO" id="JNI-BE-hT8" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="9Ai-Le-jxh">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="QM9-Dh-VVE"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="Cek-X8-Rld">
-                                    <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="qbn-UN-52b">
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="hVU-bt-IVC">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <label width="1" height="16" alignment="left" id="EuW-2s-5NA"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="P3J-ZP-I2I"/>
-                    </items>
-                    <menu key="menu" id="mFv-5w-vO0">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="m6d-0q-PbI">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="qft-og-kvU"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                    <connections>
-                        <outlet property="content" destination="P3J-ZP-I2I" id="2Rz-ny-KbB"/>
-                        <outlet property="dateLabel" destination="hVU-bt-IVC" id="REy-hb-C1Q"/>
-                        <outlet property="image" destination="QM9-Dh-VVE" id="bmb-Tc-Qld"/>
-                        <outlet property="titleLabel" destination="qbn-UN-52b" id="dRj-yF-u3W"/>
-                        <segue destination="lrc-62-V8F" kind="relationship" relationship="nextPage" id="qZ2-g8-db9"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="695" y="-305"/>
-        </scene>
-        <!--8 de 10-->
-        <scene sceneID="Otb-0v-sfU">
-            <objects>
-                <controller identifier="Page8" title="8 de 10" hidesWhenLoading="NO" id="gKl-Sb-e9Z" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="jbg-WZ-puI">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="e9P-px-wL4"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="Dlb-F2-5jg">
-                                    <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="7MD-jR-p3Y">
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="sJ9-jb-oRs">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <label width="1" height="16" alignment="left" id="rjX-hk-auQ"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Aha-sR-p1o"/>
-                    </items>
-                    <menu key="menu" id="VNL-iQ-bpm">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="DDI-Yw-l4Y">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="tMZ-af-rKe"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                    <connections>
-                        <outlet property="content" destination="Aha-sR-p1o" id="2EB-wH-vlk"/>
-                        <outlet property="dateLabel" destination="sJ9-jb-oRs" id="P30-7r-0NN"/>
-                        <outlet property="image" destination="e9P-px-wL4" id="jWe-mt-da8"/>
-                        <outlet property="titleLabel" destination="7MD-jR-p3Y" id="xy7-RV-okr"/>
-                        <segue destination="CyE-cE-D4X" kind="relationship" relationship="nextPage" id="2oZ-2I-7pC"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="1882" y="-305"/>
+            <point key="canvasLocation" x="863" y="159"/>
         </scene>
         <!--9 de 10-->
-        <scene sceneID="6hO-7I-KCa">
+        <scene sceneID="J9J-z1-0sy">
             <objects>
-                <controller identifier="Page9" title="9 de 10" hidesWhenLoading="NO" id="CyE-cE-D4X" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                <controller identifier="Page9" title="9 de 10" hidesWhenLoading="NO" id="gyA-pH-xNr" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="t5U-I5-NLv">
+                        <group width="1" height="1" alignment="left" layout="overlap" id="KtJ-MY-OFh">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="BT8-Jl-AO2"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="jkN-jh-Rdz">
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="eLX-As-hdd"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Bai-wh-tN2"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="fAB-0I-URc">
                                     <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="MV7-Gd-ZA2">
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="iLm-2e-Y4Q">
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="3xn-xg-Pg9">
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="xGp-G8-3aa">
                                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                         </label>
                                     </items>
                                 </group>
                             </items>
                         </group>
-                        <label width="1" height="16" alignment="left" id="3Ep-gr-qAG"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="iPd-uq-hMZ"/>
+                        <label width="1" height="16" alignment="left" id="fBx-sT-MEy"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vag-Th-Nqa"/>
                     </items>
-                    <menu key="menu" id="6ny-8V-Qhx">
+                    <menu key="menu" id="IbB-mY-B3j">
                         <items>
-                            <menuItem title="Recarregar" icon="repeat" id="jz5-wX-PwQ">
+                            <menuItem title="Recarregar" icon="repeat" id="cm3-ga-Lvf">
                                 <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="pNl-n5-H5M"/>
+                                    <action selector="reload" destination="gyA-pH-xNr" id="Znh-Tm-MBp"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="TJm-lh-dWJ">
+                                <connections>
+                                    <action selector="clearCache" destination="gyA-pH-xNr" id="ME4-ch-nME"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="content" destination="iPd-uq-hMZ" id="ghu-8u-tRz"/>
-                        <outlet property="dateLabel" destination="3xn-xg-Pg9" id="Pi9-w5-C1U"/>
-                        <outlet property="image" destination="BT8-Jl-AO2" id="67c-ky-9eM"/>
-                        <outlet property="titleLabel" destination="MV7-Gd-ZA2" id="bWp-0x-375"/>
-                        <segue destination="Nzf-94-lke" kind="relationship" relationship="nextPage" id="VSh-zn-68a"/>
+                        <outlet property="content" destination="Vag-Th-Nqa" id="S2N-B5-2ru"/>
+                        <outlet property="dateLabel" destination="xGp-G8-3aa" id="2GI-OZ-ei2"/>
+                        <outlet property="image" destination="Bai-wh-tN2" id="6xX-9X-rEe"/>
+                        <outlet property="spin" destination="eLX-As-hdd" id="jDz-uF-bZK"/>
+                        <outlet property="titleLabel" destination="iLm-2e-Y4Q" id="B9J-li-q90"/>
+                        <segue destination="0h6-bj-cf1" kind="relationship" relationship="nextPage" id="pjd-o9-v7l"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="2184" y="-305"/>
+            <point key="canvasLocation" x="599" y="159"/>
         </scene>
-        <!--10 de 10-->
-        <scene sceneID="jxK-1h-8iI">
+        <!--8 de 10-->
+        <scene sceneID="Dqh-do-X6a">
             <objects>
-                <controller identifier="Page10" title="10 de 10" hidesWhenLoading="NO" id="Nzf-94-lke" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                <controller identifier="Page8" title="8 de 10" hidesWhenLoading="NO" id="J5I-Gx-AZV" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" id="WV2-xU-OqA">
+                        <group width="1" height="1" alignment="left" layout="overlap" id="fcr-Dw-5Su">
                             <items>
-                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="AQa-xZ-Sy5"/>
-                                <group width="1" height="1" alignment="left" layout="vertical" id="eaj-Ix-Ygj">
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="sPX-nC-x76"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="1sO-4h-nQY"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="e2T-vc-CEp">
                                     <items>
-                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="CjC-NB-Ccb">
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="nJB-G2-Au5">
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="right" verticalAlignment="bottom" text="date" id="nPd-ON-YxZ">
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="c0i-Wv-Tze">
                                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                         </label>
                                     </items>
                                 </group>
                             </items>
                         </group>
-                        <label width="1" height="16" alignment="left" id="9b4-mp-3WS"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="edl-ur-37t"/>
+                        <label width="1" height="16" alignment="left" id="9gy-B1-x4v"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Qa8-We-Hku"/>
                     </items>
-                    <menu key="menu" id="iEs-N1-wLn">
+                    <menu key="menu" id="ciQ-5N-tb5">
                         <items>
-                            <menuItem title="Recarregar" icon="repeat" id="ljE-xE-fGb">
+                            <menuItem title="Recarregar" icon="repeat" id="MkR-ZE-cvf">
                                 <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="hqB-E3-NQz"/>
+                                    <action selector="reload" destination="J5I-Gx-AZV" id="1CI-kI-dfU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="7KU-8X-e7g">
+                                <connections>
+                                    <action selector="clearCache" destination="J5I-Gx-AZV" id="nIa-cz-6py"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="content" destination="edl-ur-37t" id="ef5-zl-FuN"/>
-                        <outlet property="dateLabel" destination="nPd-ON-YxZ" id="7iP-Bx-4iK"/>
-                        <outlet property="image" destination="AQa-xZ-Sy5" id="N73-Ia-lqV"/>
-                        <outlet property="titleLabel" destination="CjC-NB-Ccb" id="ToY-h2-DtJ"/>
+                        <outlet property="content" destination="Qa8-We-Hku" id="wXO-uZ-nri"/>
+                        <outlet property="dateLabel" destination="c0i-Wv-Tze" id="1Jq-3K-WaT"/>
+                        <outlet property="image" destination="1sO-4h-nQY" id="k1L-Nn-xJH"/>
+                        <outlet property="spin" destination="sPX-nC-x76" id="JYF-wk-oHe"/>
+                        <outlet property="titleLabel" destination="nJB-G2-Au5" id="hbh-BY-1Ri"/>
+                        <segue destination="gyA-pH-xNr" kind="relationship" relationship="nextPage" id="LbO-lM-k2n"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="2486" y="-305"/>
+            <point key="canvasLocation" x="317" y="159"/>
+        </scene>
+        <!--7 de 10-->
+        <scene sceneID="VkH-TQ-Tdb">
+            <objects>
+                <controller identifier="Page7" title="7 de 10" hidesWhenLoading="NO" id="6at-Ic-eAe" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="Shc-GA-yEz">
+                            <items>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="zed-Dn-hAN"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="ehq-b7-JzK"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="VYW-w0-fPd">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="9lQ-3S-7WQ">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="AHk-L8-R1W">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" height="16" alignment="left" id="wI6-eC-pbP"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Yb7-i7-VFu"/>
+                    </items>
+                    <menu key="menu" id="ylj-Zh-Wct">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="lHx-DT-0il">
+                                <connections>
+                                    <action selector="reload" destination="6at-Ic-eAe" id="oIH-qs-Icv"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="oYh-Sk-q3X">
+                                <connections>
+                                    <action selector="clearCache" destination="6at-Ic-eAe" id="kNH-Tp-yLA"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="content" destination="Yb7-i7-VFu" id="z0e-6O-dSf"/>
+                        <outlet property="dateLabel" destination="AHk-L8-R1W" id="4Kl-hA-SdS"/>
+                        <outlet property="image" destination="ehq-b7-JzK" id="eaZ-fq-Y9W"/>
+                        <outlet property="spin" destination="zed-Dn-hAN" id="cLK-wn-zfL"/>
+                        <outlet property="titleLabel" destination="9lQ-3S-7WQ" id="gLN-D5-lP3"/>
+                        <segue destination="J5I-Gx-AZV" kind="relationship" relationship="nextPage" id="xV8-yg-14r"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="24" y="159"/>
+        </scene>
+        <!--6 de 10-->
+        <scene sceneID="owl-m6-yTu">
+            <objects>
+                <controller identifier="Page6" title="6 de 10" hidesWhenLoading="NO" id="Cnc-TD-fHb" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="mD4-wE-GEP">
+                            <items>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="833-wC-dgD"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="t2v-5j-a8M"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="E6G-UV-frB">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="dFQ-1c-t2K">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="AMa-yz-r3N">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" height="16" alignment="left" id="75u-Mp-x7j"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="Ndf-Cq-MtC"/>
+                    </items>
+                    <menu key="menu" id="Joo-vV-bEX">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="fgR-GC-gXB">
+                                <connections>
+                                    <action selector="reload" destination="Cnc-TD-fHb" id="2xL-2R-V2s"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="CGr-lW-iwg">
+                                <connections>
+                                    <action selector="clearCache" destination="Cnc-TD-fHb" id="s2X-Ba-TmO"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="content" destination="Ndf-Cq-MtC" id="1bN-3z-aFm"/>
+                        <outlet property="dateLabel" destination="AMa-yz-r3N" id="oTc-aw-7vJ"/>
+                        <outlet property="image" destination="t2v-5j-a8M" id="fSl-nf-g2f"/>
+                        <outlet property="spin" destination="833-wC-dgD" id="ZL0-Un-YbO"/>
+                        <outlet property="titleLabel" destination="dFQ-1c-t2K" id="VEP-BU-3B8"/>
+                        <segue destination="6at-Ic-eAe" kind="relationship" relationship="nextPage" id="mx4-2R-XHb"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-262" y="159"/>
+        </scene>
+        <!--5 de 10-->
+        <scene sceneID="jzG-2F-ZyO">
+            <objects>
+                <controller identifier="Page5" title="5 de 10" hidesWhenLoading="NO" id="3er-GV-j8p" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="ddE-7d-xqJ">
+                            <items>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="LqM-7W-QdI"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Np1-eh-JgW"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="h3z-Hy-LtC">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="Ngf-Gl-hle">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="8yf-vX-fcD">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" height="16" alignment="left" id="zI4-ht-41z"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="FGc-YY-FVl"/>
+                    </items>
+                    <menu key="menu" id="UVr-Ks-3qp">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="Bbb-sR-6Fk">
+                                <connections>
+                                    <action selector="reload" destination="3er-GV-j8p" id="9jd-S7-5hj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="vpA-zd-9bK">
+                                <connections>
+                                    <action selector="clearCache" destination="3er-GV-j8p" id="S8b-O5-Z2p"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="content" destination="FGc-YY-FVl" id="jbN-is-DBE"/>
+                        <outlet property="dateLabel" destination="8yf-vX-fcD" id="8xE-nq-FgP"/>
+                        <outlet property="image" destination="Np1-eh-JgW" id="BIR-HT-59N"/>
+                        <outlet property="spin" destination="LqM-7W-QdI" id="xWP-T8-Abe"/>
+                        <outlet property="titleLabel" destination="Ngf-Gl-hle" id="ha9-bg-oXb"/>
+                        <segue destination="Cnc-TD-fHb" kind="relationship" relationship="nextPage" id="VTb-ON-UsK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="863" y="-305"/>
+        </scene>
+        <!--4 de 10-->
+        <scene sceneID="o6i-k9-K3L">
+            <objects>
+                <controller identifier="Page4" title="4 de 10" hidesWhenLoading="NO" id="KeD-e3-aOl" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="FxZ-D3-ZfX">
+                            <items>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="5Qa-Wv-LYY"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="OAu-aw-CQ2"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="b2M-SO-HSu">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="HMV-pW-7yC">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="GIz-6D-A9L">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" height="16" alignment="left" id="wtc-pG-qwp"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="GIK-xN-cUL"/>
+                    </items>
+                    <menu key="menu" id="oXq-gV-pTw">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="Wck-Es-dsB">
+                                <connections>
+                                    <action selector="reload" destination="KeD-e3-aOl" id="Wj5-7f-Q7c"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="6uV-ZD-jaj">
+                                <connections>
+                                    <action selector="clearCache" destination="KeD-e3-aOl" id="h2J-sD-9L8"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="content" destination="GIK-xN-cUL" id="1uN-hX-aIP"/>
+                        <outlet property="dateLabel" destination="GIz-6D-A9L" id="AcY-NX-oKU"/>
+                        <outlet property="image" destination="OAu-aw-CQ2" id="siA-D5-kBt"/>
+                        <outlet property="spin" destination="5Qa-Wv-LYY" id="2Dy-M2-9Su"/>
+                        <outlet property="titleLabel" destination="HMV-pW-7yC" id="pmg-d3-hdN"/>
+                        <segue destination="3er-GV-j8p" kind="relationship" relationship="nextPage" id="WSN-Rd-Q7Z"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="599" y="-305"/>
+        </scene>
+        <!--3 de 10-->
+        <scene sceneID="Xo0-0K-kEy">
+            <objects>
+                <controller identifier="Page3" title="3 de 10" hidesWhenLoading="NO" id="m1l-3B-QBI" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="6Fg-Av-NRI">
+                            <items>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="SzG-7l-QFN"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="DS5-hf-xNa"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="hrO-5Z-lJc">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="v8V-DV-7tb">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="qZQ-aL-x5a">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" height="16" alignment="left" id="KWG-Pb-ala"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="GRl-H9-F4Z"/>
+                    </items>
+                    <menu key="menu" id="C5f-ag-5cF">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="HQQ-Qo-QBr">
+                                <connections>
+                                    <action selector="reload" destination="m1l-3B-QBI" id="Eyh-lv-jrB"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="7yw-uU-Xwt">
+                                <connections>
+                                    <action selector="clearCache" destination="m1l-3B-QBI" id="Q7b-oW-riJ"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="content" destination="GRl-H9-F4Z" id="bH8-77-jcc"/>
+                        <outlet property="dateLabel" destination="qZQ-aL-x5a" id="239-v1-wF4"/>
+                        <outlet property="image" destination="DS5-hf-xNa" id="t0E-bS-8Ez"/>
+                        <outlet property="spin" destination="SzG-7l-QFN" id="uW5-e8-Qbw"/>
+                        <outlet property="titleLabel" destination="v8V-DV-7tb" id="680-T6-MAb"/>
+                        <segue destination="KeD-e3-aOl" kind="relationship" relationship="nextPage" id="i4V-gh-asK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="317" y="-305"/>
+        </scene>
+        <!--2 de 10-->
+        <scene sceneID="wtm-te-BRT">
+            <objects>
+                <controller identifier="Page2" title="2 de 10" hidesWhenLoading="NO" id="aCm-Ql-Tag" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="nqv-T1-tBI">
+                            <items>
+                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="M89-HP-eLq"/>
+                                <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="4Lz-pY-qse"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="usz-WK-w0I">
+                                    <items>
+                                        <label width="136" alignment="left" verticalAlignment="bottom" text="Title" numberOfLines="5" id="J15-yU-mvA">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="bottom" text="date" id="7qM-A0-4TA">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <label width="1" height="16" alignment="left" id="cv7-u4-yjk"/>
+                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="yks-VZ-pLg"/>
+                    </items>
+                    <menu key="menu" id="nGf-g5-yCQ">
+                        <items>
+                            <menuItem title="Recarregar" icon="repeat" id="pAU-YC-27H">
+                                <connections>
+                                    <action selector="reload" destination="aCm-Ql-Tag" id="k8E-uk-fc6"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Limpar Cache" icon="trash" id="gbl-uf-3LP">
+                                <connections>
+                                    <action selector="clearCache" destination="aCm-Ql-Tag" id="HHF-Cc-kQh"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="content" destination="yks-VZ-pLg" id="kHr-uY-CbG"/>
+                        <outlet property="dateLabel" destination="7qM-A0-4TA" id="SnM-bX-nVQ"/>
+                        <outlet property="image" destination="4Lz-pY-qse" id="8mg-na-UuH"/>
+                        <outlet property="spin" destination="M89-HP-eLq" id="MNZ-a0-bPQ"/>
+                        <outlet property="titleLabel" destination="J15-yU-mvA" id="ZmB-Wg-oJY"/>
+                        <segue destination="m1l-3B-QBI" kind="relationship" relationship="nextPage" id="AfC-qK-QQt"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="24" y="-305"/>
         </scene>
     </scenes>
 </document>

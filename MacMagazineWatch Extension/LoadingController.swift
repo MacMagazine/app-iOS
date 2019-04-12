@@ -7,6 +7,7 @@
 //
 
 import EMTLoadingIndicator
+import Kingfisher
 import WatchConnectivity
 import WatchKit
 
@@ -24,6 +25,16 @@ class LoadingController: WKInterfaceController {
         didSet {
             if let _posts = posts, !_posts.isEmpty {
 				DispatchQueue.main.async {
+					// Prefetch images to be able to sent to Apple Watch
+					let urls: [URL] = _posts.compactMap {
+						guard let thumbnail = $0.thumbnail else {
+							return nil
+						}
+						return URL(string: thumbnail)
+					}
+					let prefetcher = ImagePrefetcher(urls: urls)
+					prefetcher.start()
+
 					let pages: [String] = Array(1..._posts.count).compactMap {
 						"Page\($0)"
 					}
