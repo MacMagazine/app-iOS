@@ -79,6 +79,8 @@ class CoreDataStack {
 		}
 	}
 
+	// MARK: - Post Video -
+
 	func getPostsForWatch(completion: @escaping ([PostData]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
 		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
@@ -162,6 +164,76 @@ class CoreDataStack {
 		post.duration = item.duration
 		post.headerDate = item.pubDate.toDate().sortedDate()
         post.podcastFrame = item.podcastFrame
+	}
+
+	// MARK: - Entity Video -
+
+	func get(video videoId: String, completion: @escaping ([Video]) -> Void) {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: videoEntityName)
+		request.predicate = NSPredicate(format: "videoId == %@", videoId)
+
+		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
+		let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asynchronousFetchResult in
+			guard let result = asynchronousFetchResult.finalResult as? [Video] else {
+				completion([])
+				return
+			}
+			completion(result)
+		}
+
+		do {
+			try viewContext.execute(asynchronousFetchRequest)
+		} catch let error {
+			logE(error.localizedDescription)
+		}
+	}
+
+	struct JSONVideo {
+		var title: String = ""
+		var videoId: String = ""
+		var pubDate: String = ""
+		var artworkURL: String = ""
+	}
+
+	func save(playlist: YouTube) {
+		// Cannot duplicate videos
+		guard let videos = playlist.items else {
+			return
+		}
+		let mappedVideos: [JSONVideo] = videos.compactMap {
+			guard let title = $0.snippet?.title,
+				let videoId = $0.snippet?.resourceId?.videoId else {
+					return nil
+			}
+			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: $0.snippet?.thumbnails?.maxres?.url ?? "")
+		}
+
+		mappedVideos.forEach { video in
+			get(video: video.videoId) { items in
+				if items.isEmpty {
+					self.insert(video: video)
+				} else {
+					self.update(video: items[0], with: video)
+				}
+				self.save()
+			}
+		}
+	}
+
+	func insert(video: JSONVideo) {
+		let newItem = Video(context: viewContext)
+		newItem.title = video.title
+		newItem.artworkURL = video.artworkURL
+		newItem.pubDate = video.pubDate.toDate()
+		newItem.videoId = video.videoId
+		newItem.favorite = false
+	}
+
+	func update(video: Video, with item: JSONVideo) {
+		video.title = item.title
+		video.artworkURL = item.artworkURL
+		video.pubDate = item.pubDate.toDate()
+		video.videoId = item.videoId
 	}
 
 }

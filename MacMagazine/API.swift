@@ -18,6 +18,13 @@ class API: NSObject, XMLParserDelegate {
 		static let posts = "cat=-101"
 		static let podcast = "cat=101"
 		static let search = "s="
+		static let playlistItems = "https://www.googleapis.com/youtube/v3/playlistItems"
+		static let playlistPart = "part=snippet"
+		static let playlistIdParam = "playlistId="
+		static let playlistId: [UInt8] = [20, 37, 70, 30, 44, 1, 41, 16, 8, 61, 4, 24, 1, 22, 43, 45, 28, 0, 5, 41, 69, 25, 8, 36]
+		static let keyParam = "key="
+		static let key: [UInt8] = [0, 57, 10, 37, 54, 21, 39, 43, 50, 70, 46, 33, 50, 24, 1, 39, 85, 7, 43, 19, 61, 27, 117, 2, 52, 82, 5, 37, 69, 48, 27, 21, 29, 26, 38, 92, 10, 68, 50]
+		static let salt = "AppDelegateNSObject"
 	}
 
 	// MARK: - Properties -
@@ -27,6 +34,8 @@ class API: NSObject, XMLParserDelegate {
     var processItem = false
     var value = ""
     var attributes: [String: String]?
+
+	var onVideoCompletion: ((YouTube?) -> Void)?
 
     // MARK: - Public methods -
 
@@ -101,7 +110,6 @@ struct XMLPost {
     var podcastFrame: String = ""
 
     fileprivate func decodeHTMLString(string: String) -> String {
-
         guard let encodedData = string.data(using: String.Encoding.utf8) else {
             return ""
         }
@@ -110,10 +118,9 @@ struct XMLPost {
         } catch {
              return error.localizedDescription
         }
-
     }
 
-    func getCategorias() -> String {
+	func getCategorias() -> String {
         return self.categories.joined(separator: ",")
     }
 }
@@ -194,3 +201,113 @@ extension API {
     }
 
 }
+
+struct YouTube: Codable {
+	var kind: String?
+	var etag: String?
+	var nextPageToken: String?
+	var pageInfo: PageInfo?
+	var items: [Item]?
+}
+
+struct PageInfo: Codable {
+	var totalResults: Int?
+	var resultsPerPage: Int?
+}
+
+struct Item: Codable {
+	var kind: String?
+	var etag: String?
+	var id: String?
+	var snippet: Snippet?
+}
+
+struct Snippet: Codable {
+	var publishedAt: String?
+	var channelId: String?
+	var title: String?
+	var description: String?
+	var thumbnails: Thumbnails?
+	var channelTitle: String?
+	var playlistId: String?
+	var position: Int
+	var resourceId: ResourceId?
+}
+
+struct ResourceId: Codable {
+	var kind: String?
+	var videoId: String?
+}
+
+struct Thumbnails: Codable {
+	var original: MediaInfo?
+	var medium: MediaInfo?
+	var high: MediaInfo?
+	var standard: MediaInfo?
+	var maxres: MediaInfo?
+
+	private enum CodingKeys: String, CodingKey {
+		case original = "default", medium, high, standard, maxres
+	}
+}
+
+struct MediaInfo: Codable {
+	var url: String?
+	var width: Int
+	var height: Int
+}
+
+#if os(iOS)
+// MARK: - Videos Methods -
+
+extension API {
+
+	func getVideos( _ completion: ((YouTube?) -> Void)?) {
+		onVideoCompletion = completion
+
+		let obfuscator = Obfuscator(with: APIParams.salt)
+		let playlistId = obfuscator.reveal(key: APIParams.playlistId)
+		let key = obfuscator.reveal(key: APIParams.key)
+
+		let host = "\(APIParams.playlistItems)?\(APIParams.playlistPart)&\(APIParams.playlistIdParam)\(playlistId)&\(APIParams.keyParam)\(key)"
+		executeGetVideoContent(host)
+	}
+
+	fileprivate func executeGetVideoContent(_ host: String) {
+		let cookieStore = HTTPCookieStorage.shared
+		for cookie in cookieStore.cookies ?? [] {
+			cookieStore.deleteCookie(cookie)
+		}
+
+		guard let url = URL(string: "\(host)") else {
+			return
+		}
+
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		Network.getVdeos(url: url) { (data: Data?, _: String?) in
+			DispatchQueue.main.async {
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
+			}
+
+			guard let data = data else {
+				self.onVideoCompletion?(nil)
+				return
+			}
+
+			do {
+				let decoder = JSONDecoder()
+				decoder.keyDecodingStrategy = .convertFromSnakeCase
+				decoder.dateDecodingStrategy = .iso8601
+
+				let response = try decoder.decode(YouTube.self, from: data)
+				self.onVideoCompletion?(response)
+
+			} catch {
+				self.onVideoCompletion?(nil)
+			}
+
+		}
+	}
+
+}
+#endif

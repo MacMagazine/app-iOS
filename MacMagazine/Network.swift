@@ -31,6 +31,23 @@ class Network {
         }.resume()
     }
 
+	class func getVdeos<T>(url: URL, completion: @escaping (T?, String?) -> Void) {
+
+		var request = URLRequest(url: url)
+		request.httpMethod = "GET"
+
+		let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
+		defaultSession.dataTask(with: request) { data, _, error in
+
+			guard data != nil && error == nil else {
+				completion(nil, error?.localizedDescription)
+				return
+			}
+			completion(data as? T, nil)
+
+		}.resume()
+	}
+
 }
 
 extension Network {
