@@ -728,7 +728,7 @@
         <scene sceneID="QE0-Oi-FuT">
             <objects>
                 <collectionViewController id="PeN-ph-XhJ" customClass="VideoCollectionViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MOJ-H3-Jtu" customClass="Video">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MOJ-H3-Jtu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -753,8 +753,30 @@
                             <outlet property="delegate" destination="PeN-ph-XhJ" id="W73-WJ-QzV"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="fVw-Ev-d1Z"/>
+                    <navigationItem key="navigationItem" id="fVw-Ev-d1Z">
+                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="EeU-sK-M4J"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="favorite" destination="EeU-sK-M4J" id="Umu-Ob-foM"/>
+                        <outlet property="logoView" destination="IzC-fW-mQ9" id="gHr-79-9Xo"/>
+                        <outlet property="spin" destination="z7S-we-Rjf" id="Mea-fe-vcl"/>
+                    </connections>
                 </collectionViewController>
+                <view contentMode="scaleToFill" id="IzC-fW-mQ9">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="z7S-we-Rjf">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPe-Yv-RqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-204" y="-510"/>

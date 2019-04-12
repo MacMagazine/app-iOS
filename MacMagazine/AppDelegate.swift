@@ -80,6 +80,7 @@ extension AppDelegate: UISplitViewControllerDelegate {
 // MARK: - TabController Delegate -
 
 extension AppDelegate: UITabBarControllerDelegate {
+	// Tap 2x to Top
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 		if let navVC = viewController as? UINavigationController,
 			let vc = navVC.children[0] as? UITableViewController {
