@@ -42,4 +42,10 @@ extension String {
 		return dateFormatter.string(from: date).uppercased()
 	}
 
+	func escape() -> String {
+		guard let escapedString = self.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else {
+			return ""
+		}
+		return escapedString
+	}
 }

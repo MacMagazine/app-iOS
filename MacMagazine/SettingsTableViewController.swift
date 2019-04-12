@@ -64,6 +64,9 @@ class SettingsTableViewController: UITableViewController {
 
 		// Delete all downloaded images
 		ImageCache.default.clearDiskCache()
+
+		// Clean preivous selections
+		Settings().flush()
 	}
 
     @IBAction private func changeFontSize(_ sender: Any) {

@@ -19,6 +19,12 @@ enum Definitions {
 
 struct Settings {
 
+	func flush() {
+		UserDefaults.standard.set(true, forKey: Definitions.videoNextToken)
+		UserDefaults.standard.set(true, forKey: Definitions.allVideosFetched)
+		UserDefaults.standard.synchronize()
+	}
+
     func isPhone() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }

@@ -117,7 +117,13 @@ extension Theme {
 			$0.backgroundColor = backgroundColor
 		}
 
-        // LABEL
+		// COLLECTIONVIEW
+
+		UICollectionView.appearance().with {
+			$0.backgroundColor = backgroundColor
+		}
+
+		// LABEL
 
         var fontSize = 1.0
         if let sliderFontSize = UserDefaults.standard.object(forKey: "font-size-settings") as? String {

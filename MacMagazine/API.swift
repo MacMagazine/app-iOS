@@ -24,7 +24,7 @@ class API: NSObject, XMLParserDelegate {
 		static let playlistIdParam = "playlistId="
 		static let playlistId: [UInt8] = [20, 37, 70, 30, 44, 1, 41, 16, 8, 61, 4, 24, 1, 22, 43, 45, 28, 0, 5, 41, 69, 25, 8, 36]
 		static let keyParam = "key="
-		static let key: [UInt8] = [0, 57, 10, 37, 54, 21, 39, 43, 50, 70, 46, 33, 50, 24, 1, 39, 85, 7, 43, 19, 61, 27, 117, 2, 52, 82, 5, 37, 69, 48, 27, 21, 29, 26, 38, 92, 10, 68, 50]
+		static let key: [UInt8] = [0, 57, 10, 37, 54, 21, 36, 2, 13, 46, 93, 125, 43, 45, 86, 5, 55, 5, 57, 59, 9, 58, 118, 32, 5, 12, 4, 51, 36, 52, 36, 60, 62, 9, 91, 36, 54, 30, 50]
 		static let salt = "AppDelegateNSObject"
 		static let maxResults = "maxResults=15"
 		static let pageToken = "pageToken="

@@ -141,7 +141,7 @@ class CoreDataStack {
 		newItem.title = post.title
 		newItem.link = post.link
 		newItem.excerpt = post.excerpt
-		newItem.artworkURL = post.artworkURL
+		newItem.artworkURL = post.artworkURL.escape()
 		newItem.categorias = post.getCategorias()
 		newItem.pubDate = post.pubDate.toDate()
 		newItem.podcast = post.podcast
@@ -156,7 +156,7 @@ class CoreDataStack {
 		post.title = item.title
 		post.link = item.link
 		post.excerpt = item.excerpt
-		post.artworkURL = item.artworkURL
+		post.artworkURL = item.artworkURL.escape()
 		post.categorias = item.getCategorias()
 		post.pubDate = item.pubDate.toDate()
 		post.podcast = item.podcast
@@ -226,16 +226,16 @@ class CoreDataStack {
 	func insert(video: JSONVideo) {
 		let newItem = Video(context: viewContext)
 		newItem.title = video.title
-		newItem.artworkURL = video.artworkURL
-		newItem.pubDate = video.pubDate.toDate()
+		newItem.artworkURL = video.artworkURL.escape()
+		newItem.pubDate = video.pubDate.toDate("yyyy-MM-dd'T'HH:mm:ss.000'Z'")
 		newItem.videoId = video.videoId
 		newItem.favorite = false
 	}
 
 	func update(video: Video, with item: JSONVideo) {
 		video.title = item.title
-		video.artworkURL = item.artworkURL
-		video.pubDate = item.pubDate.toDate()
+		video.artworkURL = item.artworkURL.escape()
+		video.pubDate = item.pubDate.toDate("yyyy-MM-dd'T'HH:mm:ss.000'Z'")
 		video.videoId = item.videoId
 	}
 

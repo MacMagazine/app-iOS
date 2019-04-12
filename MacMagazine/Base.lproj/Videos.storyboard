@@ -61,7 +61,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dK-RX-Lqi">
                                                     <rect key="frame" x="0.0" y="112" width="300" height="0.0"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -118,7 +118,7 @@
     </scenes>
     <resources>
         <image name="fav_off" width="22" height="21"/>
-        <image name="logo" width="80" height="70.5"/>
+        <image name="logo" width="80" height="68.5"/>
         <image name="tab_video" width="35" height="24"/>
     </resources>
 </document>
