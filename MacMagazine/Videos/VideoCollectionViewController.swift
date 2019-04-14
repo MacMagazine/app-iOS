@@ -45,9 +45,9 @@ class VideoCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		self.navigationItem.titleView = logoView
-		self.navigationItem.title = nil
-    }
+		navigationItem.titleView = logoView
+		navigationItem.title = nil
+	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -57,7 +57,16 @@ class VideoCollectionViewController: UICollectionViewController {
 		}
 	}
 
-    /*
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+
+		guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+			return
+		}
+		flowLayout.invalidateLayout()
+	}
+
+	/*
     // MARK: - Navigation -
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -75,19 +84,27 @@ class VideoCollectionViewController: UICollectionViewController {
 	}
 
 	fileprivate func getVideos() {
-		self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+		navigationItem.titleView = self.spin
 
 		API().getVideos { videos in
 			guard let videos = videos else {
 				return
 			}
 			DispatchQueue.main.async {
-				self.navigationItem.rightBarButtonItems = nil
 				CoreDataStack.shared.save(playlist: videos)
+
+				self.navigationItem.titleView = self.logoView
 			}
 		}
 	}
 
+	// MARK: - Actions methods -
+
+	@IBAction private func search(_ sender: Any) {
+	}
+
+	@IBAction private func showFavorites(_ sender: Any) {
+	}
 }
 
 // MARK: - UICollectionViewDataSource -
@@ -184,14 +201,12 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
 		let screen = UIScreen.main.bounds.size
-		let ratio: CGFloat = 1.778	// YouTube thumbnail images size
+		let ratio: CGFloat = 1.778		// YouTube thumbnail images size (16:9)
 
-		if Settings().isPhone() {
-			let width = screen.width - 20.0		// margin of 10px
-			let height = (width / ratio) + 40	// image has a bottom margin of 40px
-			return CGSize(width: width, height: height)
-		} else {
-			return CGSize(width: 300.0, height: 200.0)
-		}
+		let divider = screen.width < 600 ? 1 : screen.width > 768 ? 3 : 2
+		let width = (screen.width - CGFloat((divider + 1) * 20)) / CGFloat(divider)		// margin of 20px
+		let height = (width / ratio) + 80		// image has a bottom margin of 80px
+
+		return CGSize(width: width, height: height)
 	}
 }

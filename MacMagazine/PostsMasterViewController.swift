@@ -220,6 +220,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			UserDefaults.standard.set(["row": indexPath.row, "section": indexPath.section], forKey: "selectedIndexPath")
 			UserDefaults.standard.synchronize()
 		}
+		if Settings().isPhone() {
+			self.tableView.deselectRow(at: indexPath, animated: true)
+		}
 	}
 
 	func configureResult(cell: PostCell, atIndexPath: IndexPath) {
@@ -265,8 +268,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			self.navigationItem.title = nil
 			favorite.image = UIImage(named: "fav_off")
 		}
+
 		fetchController?.reloadData()
-        tableView.reloadData()
+		tableView.reloadData()
 	}
 
 	// MARK: - Local methods -

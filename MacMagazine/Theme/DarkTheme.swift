@@ -9,7 +9,9 @@
 import UIKit
 
 struct DarkTheme: Theme {
-    let barStyle: UIBarStyle = .black
+	let videoLabelColor: UIColor = .white
+
+	let barStyle: UIBarStyle = .black
     let barTintColor: UIColor = UIColor(hex: "181818", alpha: 1)
 
     let tint: UIColor = .white
@@ -20,8 +22,9 @@ struct DarkTheme: Theme {
     let cellBackgroundColor: UIColor = UIColor(hex: "181818", alpha: 1)
     let separatorColor: UIColor = .lightGray
     let selectionColor: UIColor = .gray
-    let headerFooterColor: UIColor = .white
+	let videoCellBackgroundColor: UIColor = .gray
 
+	let headerFooterColor: UIColor = .white
     let labelColor: UIColor = .white
     let secondaryLabelColor: UIColor = .lightGray
     let subtleLabelColor: UIColor = .darkGray

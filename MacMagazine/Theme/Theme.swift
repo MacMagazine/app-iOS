@@ -12,7 +12,12 @@ import WebKit
 class AppImageView: UIImageView {}
 
 protocol Theme {
-    var tint: UIColor { get }
+	var videoLabelColor: UIColor { get }
+
+	var barStyle: UIBarStyle { get }
+	var barTintColor: UIColor { get }
+
+	var tint: UIColor { get }
     var secondaryTint: UIColor { get }
     var onTint: UIColor { get }
 
@@ -20,6 +25,7 @@ protocol Theme {
     var cellBackgroundColor: UIColor { get }
     var separatorColor: UIColor { get }
     var selectionColor: UIColor { get }
+	var videoCellBackgroundColor: UIColor { get }
 
     var headerFooterColor: UIColor { get }
     var labelColor: UIColor { get }
@@ -27,9 +33,6 @@ protocol Theme {
     var subtleLabelColor: UIColor { get }
     var textColor: UIColor { get }
     var placeholderTextColor: UIColor { get }
-
-    var barStyle: UIBarStyle { get }
-    var barTintColor: UIColor { get }
 
     func apply(for application: UIApplication)
     func extend()
@@ -122,6 +125,9 @@ extension Theme {
 		UICollectionView.appearance().with {
 			$0.backgroundColor = backgroundColor
 		}
+		UICollectionViewCell.appearance().with {
+			$0.backgroundColor = cellBackgroundColor
+		}
 
 		// LABEL
 
@@ -164,6 +170,14 @@ extension Theme {
             $0.textColor = labelColor
             $0.fontSize = CGFloat(1.0)
         }
+		VideoViewLikeLabel.appearance().with {
+			$0.textColor = videoLabelColor
+			$0.fontSize = CGFloat(0.8)
+		}
+		VideoViewLikeDataLabel.appearance().with {
+			$0.textColor = secondaryLabelColor
+			$0.fontSize = CGFloat(0.9)
+		}
 
         // BUTTON
 
