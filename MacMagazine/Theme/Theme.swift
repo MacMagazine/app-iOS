@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 class AppImageView: UIImageView {}
+class AppButton: UIButton {}
 
 protocol Theme {
 	var videoLabelColor: UIColor { get }
@@ -172,7 +173,7 @@ extension Theme {
         }
 		VideoViewLikeLabel.appearance().with {
 			$0.textColor = videoLabelColor
-			$0.fontSize = CGFloat(0.8)
+			$0.fontSize = CGFloat(0.65)
 		}
 		VideoViewLikeDataLabel.appearance().with {
 			$0.textColor = secondaryLabelColor
@@ -185,6 +186,8 @@ extension Theme {
             $0.setTitleColor(tint, for: .normal)
             $0.borderColor = tint
         }
+
+		AppButton.appearance().tintColor = tint
 
 		// IMAGE
 

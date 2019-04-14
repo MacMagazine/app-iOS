@@ -11,15 +11,16 @@ import UIKit
 
 class VideosCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var thumbnailImageView: UIImageView!
-	@IBOutlet weak private var favoriteImageView: UIImageView!
 	@IBOutlet weak private var headlineLabel: UILabel!
 	@IBOutlet weak private var subheadlineLabel: UILabel!
+
+	@IBOutlet weak private var favorite: UIButton!
 
 	func configureVideo(with object: Video) {
 		headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate?.watchDate()
 
-//		favoriteImageView.alpha = (object.favorite ? 1 : 0)
+		favorite.isSelected = object.favorite
 
 		guard let artworkURL = object.artworkURL else {
 			return

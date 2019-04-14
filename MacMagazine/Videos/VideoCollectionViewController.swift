@@ -201,11 +201,21 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
 		let screen = UIScreen.main.bounds.size
-		let ratio: CGFloat = 1.778		// YouTube thumbnail images size (16:9)
+		// YouTube thumbnail images size (16:9)
+		let ratio: CGFloat = 1.778
 
+		// Number of items per column based on device screen size
 		let divider = screen.width < 600 ? 1 : screen.width > 768 ? 3 : 2
-		let width = (screen.width - CGFloat((divider + 1) * 20)) / CGFloat(divider)		// margin of 20px
-		let height = (width / ratio) + 80		// image has a bottom margin of 80px
+
+		// margin of 20px
+		let width = (screen.width - CGFloat((divider + 1) * 20)) / CGFloat(divider)
+
+		// image has a bottom margin of 120px to accomodate labels and buttons
+		// 10px distance betwwen thumb and labels
+		// 80px for labels
+		// 25px for fav and share buttons
+		// 5px bottom margin
+		let height = (width / ratio) + 120
 
 		return CGSize(width: width, height: height)
 	}
