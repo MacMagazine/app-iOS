@@ -288,6 +288,24 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		9B3C7A5422637FF9001146A4 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
+				9B1BA5E3222B22980059F692 /* Settings.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		9B3C7A5522638012001146A4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */,
+				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,13 +510,11 @@
 			isa = PBXGroup;
 			children = (
 				9B0DD4482226B9600016C567 /* API */,
-				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 				9BC9B12F1F5C96A500C4DF17 /* Cells */,
+				9B3C7A5522638012001146A4 /* Controllers */,
 				9BABAC271F618F2F0052063A /* Database */,
 				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
-				9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */,
-				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
-				9B1BA5E3222B22980059F692 /* Settings.swift */,
+				9B3C7A5422637FF9001146A4 /* Others */,
 				9B91117F225BC10D000A6AC3 /* Shared */,
 				9BD135DE222802ED00A0B627 /* Theme */,
 			);

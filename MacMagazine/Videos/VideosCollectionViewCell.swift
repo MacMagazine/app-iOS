@@ -28,4 +28,13 @@ class VideosCollectionViewCell: UICollectionViewCell {
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_Logo"))
 	}
+
+	// MARK: - Actions methods -
+
+	@IBAction private func share(_ sender: Any) {
+	}
+
+	@IBAction private func favorite(_ sender: Any) {
+	}
+
 }
