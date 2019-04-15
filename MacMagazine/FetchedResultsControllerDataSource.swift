@@ -112,11 +112,11 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 			_, _, boolValue in
 
 			let object = self.fetchedResultsController.object(at: indexPath)
-			object.favorite = !object.favorite
-			CoreDataStack.shared.save()
-			NotificationCenter.default.post(name: .favoriteUpdated, object: object)
-
-			boolValue(true)
+			Favorite().updatePostStatus(using: object.link ?? "") { isFavoriteOn in
+				object.favorite = isFavoriteOn
+				NotificationCenter.default.post(name: .favoriteUpdated, object: object)
+				boolValue(true)
+			}
 		}
 		let object = self.fetchedResultsController.object(at: indexPath)
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")

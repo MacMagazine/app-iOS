@@ -41,7 +41,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
 	func reloadComplicationData(backgroundTask: WKApplicationRefreshBackgroundTask) {
-		let later = Date(timeIntervalSinceNow: 1 * 60 * 60)	// every hour
+		let later = Date(timeIntervalSinceNow: 10)	// every hour
 		reloadData()
 		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: later, userInfo: nil) { _ in }
 		backgroundTask.setTaskCompletedWithSnapshot(false)

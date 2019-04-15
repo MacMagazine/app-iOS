@@ -50,7 +50,7 @@
                         </subviews>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k">
-                        <rect key="frame" x="349" y="0.0" width="20" height="20"/>
+                        <rect key="frame" x="349" y="6" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="QYw-WD-7Rk"/>
                             <constraint firstAttribute="height" constant="20" id="bik-fu-VEU"/>
@@ -60,7 +60,7 @@
                 <constraints>
                     <constraint firstItem="dPr-Vt-BPt" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="Ax8-Oe-tkp"/>
                     <constraint firstItem="dPr-Vt-BPt" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="topMargin" id="LSY-nE-nbx"/>
-                    <constraint firstItem="Lw1-da-P8k" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" id="WM3-mU-tQe"/>
+                    <constraint firstItem="Lw1-da-P8k" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" constant="6" id="WM3-mU-tQe"/>
                     <constraint firstAttribute="trailing" secondItem="dPr-Vt-BPt" secondAttribute="trailing" constant="16" id="fbA-eW-IfW"/>
                     <constraint firstAttribute="bottomMargin" secondItem="dPr-Vt-BPt" secondAttribute="bottom" id="uZ2-g0-Olm"/>
                     <constraint firstAttribute="trailing" secondItem="Lw1-da-P8k" secondAttribute="trailing" constant="6" id="wcw-rV-22N"/>

@@ -82,9 +82,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 	// MARK: - Methods -
 
 	func prepareEntry(with post: XMLPost, for complication: CLKComplication) -> CLKComplicationTimelineEntry? {
-		let timeString = post.pubDate.toDate().complicationDate()
-
-		var message = Complication(header: "@\(timeString)", line1: post.title, line2: "")
+		let timeString = post.pubDate.toComplicationDate()
+		var message = Complication(header: "\(timeString)", line1: post.title, line2: "")
 		var texts = post.title.pairs
 		if !texts.isEmpty {
 			let line1 = texts.first

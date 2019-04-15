@@ -31,11 +31,4 @@ extension Date {
 		return dateFormatter.string(from: self)
 	}
 
-	func complicationDate() -> String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "HH:mm"
-		dateFormatter.timeZone = TimeZone(abbreviation: "BRT")
-		return dateFormatter.string(from: self)
-	}
-
 }

@@ -436,13 +436,7 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 
 	func previewActionFavorite(_ post: PostData?) {
 		previewActionCancel()
-
-		CoreDataStack.shared.get(post: post?.link ?? "") { items in
-			if !items.isEmpty {
-				items[0].favorite = !items[0].favorite
-				CoreDataStack.shared.save()
-			}
-		}
+		Favorite().updatePostStatus(using: post?.link ?? "")
 	}
 
 	func previewActionShare(_ post: PostData?) {

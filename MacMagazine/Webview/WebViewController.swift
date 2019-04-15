@@ -96,13 +96,8 @@ class WebViewController: UIViewController {
 			else {
 				return
 		}
-
-		CoreDataStack.shared.get(post: link) { items in
-			if !items.isEmpty {
-				items[0].favorite = !items[0].favorite
-				CoreDataStack.shared.save()
-				self.favorite.image = UIImage(named: items[0].favorite ? "fav_on" : "fav_off")
-			}
+		Favorite().updatePostStatus(using: link) { isFavoriteOn in
+			self.favorite.image = UIImage(named: isFavoriteOn ? "fav_on" : "fav_off")
 		}
 	}
 

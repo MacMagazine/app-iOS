@@ -17,9 +17,13 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var subheadlineLabel: UILabel!
 	@IBOutlet weak private var favorite: UIButton!
 
+	var videoId: String?
+
 	// MARK: - Setup methods -
 
 	func configureVideo(with object: Video) {
+		videoId = object.videoId
+
 		headlineLabel.text = object.title
 		subheadlineLabel.text = object.pubDate?.watchDate()
 		youtubeWebView?.videoId = object.videoId
@@ -32,6 +36,9 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	}
 
 	@IBAction private func favorite(_ sender: Any) {
+		Favorite().updateVideoStatus(using: videoId) { isFavoriteOn in
+			self.favorite.isSelected = isFavoriteOn
+		}
 	}
 
 }

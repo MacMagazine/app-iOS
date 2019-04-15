@@ -47,6 +47,7 @@
 		9BB2CA692264883A0012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
 		9BB2CA6A226488C80012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
 		9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
+		9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
 		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
@@ -192,6 +193,7 @@
 		9BA939462260DE37004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HeaderCell.xib; sourceTree = "<group>"; };
 		9BB2CA682264883A0012ACD6 /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAPI.swift; sourceTree = "<group>"; };
+		9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -364,6 +366,21 @@
 			name = Database;
 			sourceTree = "<group>";
 		};
+		9BB2CA6D2264B0380012ACD6 /* ShareSheet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ShareSheet;
+			sourceTree = "<group>";
+		};
+		9BB2CA6E2264B0400012ACD6 /* FavoriteAction */ = {
+			isa = PBXGroup;
+			children = (
+				9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */,
+			);
+			path = FavoriteAction;
+			sourceTree = "<group>";
+		};
 		9BB4BC4E225B99F500559170 /* MacMagazineWatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,15 +543,17 @@
 		9BE697DA1F487DAB0048D68D /* Comum */ = {
 			isa = PBXGroup;
 			children = (
-				9B3C7A6E2263B9D7001146A4 /* Webview */,
 				9B0DD4482226B9600016C567 /* API */,
 				9BC9B12F1F5C96A500C4DF17 /* Cells */,
 				9B3C7A5522638012001146A4 /* Controllers */,
 				9BABAC271F618F2F0052063A /* Database */,
 				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
+				9BB2CA6E2264B0400012ACD6 /* FavoriteAction */,
 				9B3C7A5422637FF9001146A4 /* Others */,
+				9BB2CA6D2264B0380012ACD6 /* ShareSheet */,
 				9B91117F225BC10D000A6AC3 /* Shared */,
 				9BD135DE222802ED00A0B627 /* Theme */,
+				9B3C7A6E2263B9D7001146A4 /* Webview */,
 			);
 			name = Comum;
 			sourceTree = "<group>";
@@ -950,6 +969,7 @@
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */,
+				9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */,
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
 				9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */,

@@ -42,6 +42,25 @@ extension String {
 		return dateFormatter.string(from: date).uppercased()
 	}
 
+	func toComplicationDate() -> String {
+		// Expected date format: "20190227"
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyyMMdd"
+		dateFormatter.timeZone = TimeZone(abbreviation: "BRT")
+		let date = dateFormatter.date(from: self) ?? Date()
+
+		let calendar = Calendar.current
+		if calendar.isDateInToday(date) {
+			dateFormatter.dateFormat = "'@ 'HH:mm"
+		} else if calendar.isDateInYesterday(date) {
+			dateFormatter.dateFormat = "'ONTEM @ 'HH:mm"
+		} else {
+			dateFormatter.dateFormat = "dd/MM' @'HH:mm"
+		}
+		dateFormatter.locale = Locale(identifier: "pt-BR")
+		return dateFormatter.string(from: date).uppercased()
+	}
+
 	func escape() -> String {
 		guard let escapedString = self.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else {
 			return ""
