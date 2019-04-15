@@ -16,6 +16,8 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var headlineLabel: UILabel!
 	@IBOutlet weak private var subheadlineLabel: UILabel!
 	@IBOutlet weak private var favorite: UIButton!
+	@IBOutlet weak private var viewsLabel: UILabel!
+	@IBOutlet weak private var likesLabel: UILabel!
 
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
@@ -25,10 +27,13 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	func configureVideo(with object: Video) {
 		videoId = object.videoId
 
+		favorite.isSelected = object.favorite
 		headlineLabel.text = object.title
 		subheadlineLabel.text = object.pubDate?.watchDate()
+		viewsLabel.text = object.views
+		likesLabel.text = object.likes
 		youtubeWebView?.videoId = object.videoId
-		favorite.isSelected = object.favorite
+		youtubeWebView?.scrollView.isScrollEnabled = false
 	}
 
 	// MARK: - Actions methods -

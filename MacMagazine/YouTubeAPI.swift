@@ -94,6 +94,16 @@ extension API {
 		executeGetVideoContent(host)
 	}
 
+	func getVideosStatistics(_ videos: [String], _ completion: ((YouTube?) -> Void)?) {
+		onVideoCompletion = completion
+
+		let obfuscator = Obfuscator(with: APIParams.salt)
+		let key = obfuscator.reveal(key: APIParams.key)
+		let host = "\(APIParams.statistics)?\(APIParams.statisticsPart)&\(APIParams.videoId)\(videos.joined(separator: ","))&\(APIParams.keyParam)\(key)"
+
+		executeGetVideoContent(host)
+	}
+
 	fileprivate func executeGetVideoContent(_ host: String) {
 		let cookieStore = HTTPCookieStorage.shared
 		for cookie in cookieStore.cookies ?? [] {
@@ -104,7 +114,9 @@ extension API {
 			return
 		}
 
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		DispatchQueue.main.async {
+			UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		}
 		Network.getVdeos(url: url) { (data: Data?, _: String?) in
 			DispatchQueue.main.async {
 				UIApplication.shared.isNetworkActivityIndicatorVisible = false

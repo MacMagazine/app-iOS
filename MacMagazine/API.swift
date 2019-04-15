@@ -28,6 +28,10 @@ class API: NSObject, XMLParserDelegate {
 		static let salt = "AppDelegateNSObject"
 		static let maxResults = "maxResults=15"
 		static let pageToken = "pageToken="
+
+		static let statistics = "https://www.googleapis.com/youtube/v3/videos"
+		static let statisticsPart = "part=statistics"
+		static let videoId = "id="
 	}
 
 	// MARK: - Properties -

@@ -70,20 +70,28 @@ class VideoCollectionViewController: UICollectionViewController {
 
 	fileprivate func hasData() -> Bool {
 		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
-			//&& !(self.refreshControl?.isRefreshing ?? true)
 	}
 
 	fileprivate func getVideos() {
 		navigationItem.titleView = self.spin
 
 		API().getVideos { videos in
-			guard let videos = videos else {
-				return
+			guard let videos = videos,
+				let items = videos.items
+				else {
+					return
 			}
-			DispatchQueue.main.async {
-				CoreDataStack.shared.save(playlist: videos)
-
-				self.navigationItem.titleView = self.logoView
+			let videoIds: [String] = items.compactMap {
+				return $0.snippet?.resourceId?.videoId
+			}
+			API().getVideosStatistics(videoIds) { statistics in
+				guard let stats = statistics?.items else {
+					return
+				}
+				DispatchQueue.main.async {
+					CoreDataStack.shared.save(playlist: videos, statistics: stats)
+					self.navigationItem.titleView = self.logoView
+				}
 			}
 		}
 	}

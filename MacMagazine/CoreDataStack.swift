@@ -193,9 +193,11 @@ class CoreDataStack {
 		var videoId: String = ""
 		var pubDate: String = ""
 		var artworkURL: String = ""
+		var views: String = ""
+		var likes: String = ""
 	}
 
-	func save(playlist: YouTube) {
+	func save(playlist: YouTube, statistics: [Item]) {
 		// Cannot duplicate videos
 		guard let videos = playlist.items else {
 			return
@@ -208,7 +210,18 @@ class CoreDataStack {
 				else {
 					return nil
 			}
-			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: $0.snippet?.thumbnails?.maxres?.url ?? "")
+
+			var likes = ""
+			var views = ""
+			let stat = statistics.filter {
+				$0.id == videoId
+			}
+			if !stat.isEmpty {
+				views = stat[0].statistics?.viewCount ?? ""
+				likes = stat[0].statistics?.likeCount ?? ""
+			}
+
+			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: $0.snippet?.thumbnails?.maxres?.url ?? "", views: views, likes: likes)
 		}
 
 		mappedVideos.forEach { video in
@@ -225,11 +238,13 @@ class CoreDataStack {
 
 	func insert(video: JSONVideo) {
 		let newItem = Video(context: viewContext)
+		newItem.favorite = false
 		newItem.title = video.title
 		newItem.artworkURL = video.artworkURL.escape()
 		newItem.pubDate = video.pubDate.toDate("yyyy-MM-dd'T'HH:mm:ss.000'Z'")
 		newItem.videoId = video.videoId
-		newItem.favorite = false
+		newItem.likes = video.likes
+		newItem.views = video.views
 	}
 
 	func update(video: Video, with item: JSONVideo) {
@@ -237,6 +252,8 @@ class CoreDataStack {
 		video.artworkURL = item.artworkURL.escape()
 		video.pubDate = item.pubDate.toDate("yyyy-MM-dd'T'HH:mm:ss.000'Z'")
 		video.videoId = item.videoId
+		video.likes = item.likes
+		video.views = item.views
 	}
 
 }
