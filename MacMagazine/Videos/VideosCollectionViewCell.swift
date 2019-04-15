@@ -18,6 +18,7 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var favorite: UIButton!
 
 	var videoId: String?
+	let youTubeURL = "https://www.youtube.com/watch?v="
 
 	// MARK: - Setup methods -
 
@@ -33,6 +34,13 @@ class VideosCollectionViewCell: UICollectionViewCell {
 	// MARK: - Actions methods -
 
 	@IBAction private func share(_ sender: Any) {
+		guard let videoId = videoId,
+			let title = headlineLabel.text
+			else {
+				return
+		}
+		let items: [Any] = [title, "\(youTubeURL)\(videoId)"]
+		Share().present(at: self, using: items)
 	}
 
 	@IBAction private func favorite(_ sender: Any) {

@@ -158,40 +158,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - View Methods -
 
 	func showActionSheet(_ view: UIView?, for items: [Any]) {
-		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
-			for item in items {
-				guard let url = URL(string: "\(item)") else {
-					continue
-				}
-				if UIApplication.shared.canOpenURL(url) {
-					UIApplication.shared.open(url, options: [:], completionHandler: nil)
-				}
-			}
-		}
-
-		let chrome = UIActivityExtensions(title: "Abrir no Chrome", image: UIImage(named: "chrome")) { items in
-			for item in items {
-				guard let url = URL(string: "\(item)".replacingOccurrences(of: "http", with: "googlechrome")) else {
-					continue
-				}
-				if UIApplication.shared.canOpenURL(url) {
-					UIApplication.shared.open(url, options: [:], completionHandler: nil)
-				}
-			}
-		}
-		var activities = [safari]
-		if let url = URL(string: "googlechrome://"),
-			UIApplication.shared.canOpenURL(url) {
-			activities.append(chrome)
-		}
-
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: activities)
-		if let ppc = activityVC.popoverPresentationController {
-			if view != nil {
-				ppc.sourceView = view
-			}
-		}
-		present(activityVC, animated: true)
+		Share().present(at: view, using: items)
 	}
 
 	func willDisplayCell(indexPath: IndexPath) {

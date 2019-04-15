@@ -89,7 +89,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			let line1 = texts.first
 			texts.removeFirst()
 			let line2 = texts.joined()
-			message = Complication(header: "@\(timeString)", line1: line1, line2: line2)
+			message = Complication(header: "\(timeString)", line1: line1, line2: line2)
 		}
 		let entry = self.createTimeLineEntry(for: complication, message: message, date: post.pubDate.toDate())
 

@@ -48,6 +48,7 @@
 		9BB2CA6A226488C80012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
 		9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
 		9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */; };
+		9BB2CA722264B8890012ACD6 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA712264B8890012ACD6 /* Share.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
 		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
@@ -194,6 +195,7 @@
 		9BB2CA682264883A0012ACD6 /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAPI.swift; sourceTree = "<group>"; };
 		9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		9BB2CA712264B8890012ACD6 /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -366,11 +368,12 @@
 			name = Database;
 			sourceTree = "<group>";
 		};
-		9BB2CA6D2264B0380012ACD6 /* ShareSheet */ = {
+		9BB2CA6D2264B0380012ACD6 /* ShareAction */ = {
 			isa = PBXGroup;
 			children = (
+				9BB2CA712264B8890012ACD6 /* Share.swift */,
 			);
-			path = ShareSheet;
+			path = ShareAction;
 			sourceTree = "<group>";
 		};
 		9BB2CA6E2264B0400012ACD6 /* FavoriteAction */ = {
@@ -550,7 +553,7 @@
 				9B02AE4D1F5C515A00EA1A6F /* Extensions */,
 				9BB2CA6E2264B0400012ACD6 /* FavoriteAction */,
 				9B3C7A5422637FF9001146A4 /* Others */,
-				9BB2CA6D2264B0380012ACD6 /* ShareSheet */,
+				9BB2CA6D2264B0380012ACD6 /* ShareAction */,
 				9B91117F225BC10D000A6AC3 /* Shared */,
 				9BD135DE222802ED00A0B627 /* Theme */,
 				9B3C7A6E2263B9D7001146A4 /* Webview */,
@@ -954,6 +957,7 @@
 				9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */,
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
+				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
 				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,

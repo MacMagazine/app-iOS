@@ -108,40 +108,8 @@ class WebViewController: UIViewController {
 			else {
 				return
 		}
-
-		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
-			for item in items {
-				guard let url = URL(string: "\(item)") else {
-					continue
-				}
-				if UIApplication.shared.canOpenURL(url) {
-					UIApplication.shared.open(url, options: [:], completionHandler: nil)
-				}
-			}
-		}
-
-		let chrome = UIActivityExtensions(title: "Abrir no Chrome", image: UIImage(named: "chrome")) { items in
-			for item in items {
-				guard let url = URL(string: "\(item)".replacingOccurrences(of: "http", with: "googlechrome")) else {
-					continue
-				}
-				if UIApplication.shared.canOpenURL(url) {
-					UIApplication.shared.open(url, options: [:], completionHandler: nil)
-				}
-			}
-		}
-		var activities = [safari]
-		if let url = URL(string: "googlechrome://"),
-			UIApplication.shared.canOpenURL(url) {
-			activities.append(chrome)
-		}
-
 		let items: [Any] =  [post.title ?? "", url]
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: activities)
-		if let ppc = activityVC.popoverPresentationController {
-			ppc.barButtonItem = share
-		}
-		present(activityVC, animated: true)
+		Share().present(at: share, using: items)
 	}
 
 	// MARK: - UIPreviewAction -
