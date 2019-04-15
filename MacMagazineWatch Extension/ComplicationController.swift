@@ -49,13 +49,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
-		logI("")
 		API().getComplications { post in
 			guard let post = post else {
 				return
 			}
 			let entry = self.prepareEntry(with: post, for: complication)
-			logD(post)
 			handler(entry)
 		}
     }
@@ -132,7 +130,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 	}
 
 	func reloadData() {
-		logI("")
 		let server = CLKComplicationServer.sharedInstance()
 		guard let complications = server.activeComplications,
 			!complications.isEmpty else {

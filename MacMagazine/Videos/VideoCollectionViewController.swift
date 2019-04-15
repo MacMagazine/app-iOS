@@ -17,6 +17,9 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var favorite: UIBarButtonItem!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
+	var showFavorites = false
+	let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
+
 	fileprivate let managedObjectContext = CoreDataStack.shared.viewContext
 
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<Video> = {
@@ -52,9 +55,7 @@ class VideoCollectionViewController: UICollectionViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		if !hasData() {
-			getVideos()
-		}
+		getVideos()
 	}
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -67,10 +68,6 @@ class VideoCollectionViewController: UICollectionViewController {
 	}
 
 	// MARK: - Local methods -
-
-	fileprivate func hasData() -> Bool {
-		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
-	}
 
 	fileprivate func getVideos() {
 		navigationItem.titleView = self.spin
@@ -102,6 +99,29 @@ class VideoCollectionViewController: UICollectionViewController {
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
+		showFavorites = !showFavorites
+		if showFavorites {
+			fetchedResultsController.fetchRequest.predicate = favoritePredicate
+
+			self.navigationItem.titleView = nil
+			self.navigationItem.title = "Favoritos"
+			favorite.image = UIImage(named: "fav_on")
+		} else {
+			fetchedResultsController.fetchRequest.predicate = nil
+
+			self.navigationItem.titleView = logoView
+			self.navigationItem.title = nil
+			favorite.image = UIImage(named: "fav_off")
+		}
+
+		do {
+			try fetchedResultsController.performFetch()
+			UIView.transition(with: collectionView, duration: 0.4, options: showFavorites ? .transitionFlipFromRight : .transitionFlipFromLeft, animations: {
+				self.collectionView.reloadData()
+			})
+		} catch {
+			logE(error.localizedDescription)
+		}
 	}
 
 }

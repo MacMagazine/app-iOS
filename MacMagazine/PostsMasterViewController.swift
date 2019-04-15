@@ -249,7 +249,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
-		logI("")
 		let getPost = {
             var images: [String] = []
 			API().getPosts(page: paged) { post in

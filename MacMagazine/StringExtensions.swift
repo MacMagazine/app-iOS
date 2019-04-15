@@ -47,17 +47,19 @@ extension String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyyMMdd"
 		dateFormatter.timeZone = TimeZone(abbreviation: "BRT")
-		let date = dateFormatter.date(from: self) ?? Date()
+		let day = dateFormatter.date(from: self) ?? Date()
 
 		let calendar = Calendar.current
-		if calendar.isDateInToday(date) {
-			dateFormatter.dateFormat = "'@ 'HH:mm"
-		} else if calendar.isDateInYesterday(date) {
-			dateFormatter.dateFormat = "'ONTEM @ 'HH:mm"
+		if calendar.isDateInToday(day) {
+			dateFormatter.dateFormat = "'@'HH:mm"
+		} else if calendar.isDateInYesterday(day) {
+			dateFormatter.dateFormat = "'ONTEM @'HH:mm"
 		} else {
 			dateFormatter.dateFormat = "dd/MM' @'HH:mm"
 		}
 		dateFormatter.locale = Locale(identifier: "pt-BR")
+
+		let date = dateFormatter.date(from: self) ?? Date()
 		return dateFormatter.string(from: date).uppercased()
 	}
 
