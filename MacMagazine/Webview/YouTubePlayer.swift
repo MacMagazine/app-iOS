@@ -1,0 +1,55 @@
+//
+//  YouTubePlayer.swift
+//  MacMagazine
+//
+//  Created by Cassio Rossi on 14/04/2019.
+//  Copyright © 2019 MacMagazine. All rights reserved.
+//
+
+import UIKit
+import WebKit
+
+class YouTubePlayer: WKWebView {
+
+	// MARK: - Properties -
+
+	var embedVideoHtml: String {
+		return """
+		<!DOCTYPE html><html><body><div id="player"></div>
+		<script>
+		var meta = document.createElement('meta');
+		meta.setAttribute('name', 'viewport');
+		meta.setAttribute('content', 'width=device-width');
+		document.getElementsByTagName('head')[0].appendChild(meta);
+		var tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		var player;
+		function onYouTubeIframeAPIReady() {
+		player = new YT.Player('player', {
+		playerVars: { 'playsinline': 1, 'controls': 1 },
+		height: '\(self.frame.height)',
+		width: '\(self.frame.width)',
+		videoId: '\(videoId ?? "")',
+		events: { 'onReady': onPlayerReady }
+		});
+		}
+		function onPlayerReady(event) { event.target.playVideo(); }
+		</script>
+		</body></html>
+		"""
+	}
+
+	var videoId: String? {
+		didSet {
+			guard let _ = videoId else {
+				return
+			}
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+				self.loadHTMLString(self.embedVideoHtml, baseURL: nil)
+			}
+		}
+	}
+
+}

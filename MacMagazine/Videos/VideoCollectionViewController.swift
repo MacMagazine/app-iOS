@@ -66,16 +66,6 @@ class VideoCollectionViewController: UICollectionViewController {
 		flowLayout.invalidateLayout()
 	}
 
-	/*
-    // MARK: - Navigation -
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 	// MARK: - Local methods -
 
 	fileprivate func hasData() -> Bool {
@@ -105,6 +95,7 @@ class VideoCollectionViewController: UICollectionViewController {
 
 	@IBAction private func showFavorites(_ sender: Any) {
 	}
+
 }
 
 // MARK: - UICollectionViewDataSource -
@@ -141,7 +132,23 @@ extension VideoCollectionViewController {
 	// MARK: - UICollectionViewDelegate -
 
 	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-		return true
+		return false
+	}
+
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+//
+//		let object = fetchedResultsController.object(at: indexPath)
+//		guard let videoId = object.videoId,
+//			let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController
+//			else {
+//				return
+//		}
+//
+//		controller.videoId = videoId
+//
+//		controller.modalPresentationStyle = .overFullScreen
+//		self.present(controller, animated: true)
 	}
 }
 

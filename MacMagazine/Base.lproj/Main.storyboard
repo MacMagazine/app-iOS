@@ -135,7 +135,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGQ-1P-xj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="526" y="-2116"/>
+            <point key="canvasLocation" x="425" y="-2116"/>
         </scene>
         <!--PostsDetailNavigation-->
         <scene sceneID="xa0-Qk-bfW">
@@ -188,7 +188,7 @@
     </scenes>
     <resources>
         <image name="fav_off" width="22" height="21"/>
-        <image name="logo" width="80" height="70.5"/>
+        <image name="logo" width="80" height="68.5"/>
         <image name="tab_posts" width="22" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

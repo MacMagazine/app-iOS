@@ -46,7 +46,8 @@ class WebViewController: UIViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-    	// Do any additional setup after loading the view.
+
+		// Do any additional setup after loading the view.
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
 
@@ -172,12 +173,11 @@ extension WebViewController {
 	func reload() {
 		if post != nil {
 			configureView()
-		} else {
+		} else if postURL != nil {
 			guard let url = postURL else {
 				return
 			}
 			loadWebView(url: url)
-
 			self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
 		}
 	}
@@ -306,6 +306,7 @@ extension URL {
 	enum Address {
 		static let disqus = "disqus.com"
 		static let macmagazine = "macmagazine.uol.com.br"
+		static let blank = "about:blank"
 	}
 
 	func isKnownAddress() -> Bool {
@@ -319,6 +320,10 @@ extension URL {
 
 	func isDisqusAddress() -> Bool {
 		return self.absoluteString.contains(Address.disqus)
+	}
+
+	func isBlankAddress() -> Bool {
+		return self.absoluteString.contains(Address.blank)
 	}
 
 }
