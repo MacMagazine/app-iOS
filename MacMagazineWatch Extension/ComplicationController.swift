@@ -13,8 +13,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 	// MARK: - Properties -
 
-	var posts: [XMLPost]?
-
 	struct Complication {
 		var header: String?
 		var line1: String?
@@ -39,7 +37,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
 		let currentDate = Date()
-		let endDate = currentDate.addingTimeInterval(TimeInterval(24 * 60 * 60))
+		let endDate = currentDate.addingTimeInterval(TimeInterval(1 * 60 * 60))
 		handler(endDate)
 	}
 
@@ -51,16 +49,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
-		posts = []
-		API().getPosts(page: 0) { post in
+		logI("")
+		API().getComplications { post in
 			guard let post = post else {
 				return
 			}
-			if self.posts?.isEmpty ?? true {
-				let entry = self.prepareEntry(with: post, for: complication)
-				handler(entry)
-			}
-			self.posts?.append(post)
+			let entry = self.prepareEntry(with: post, for: complication)
+			logD(post)
+			handler(entry)
 		}
     }
 
@@ -71,18 +67,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after to the given date
-		var timeLineEntryArray = [CLKComplicationTimelineEntry]()
-
-		guard let posts = posts else {
-			return
-		}
-		guard let entry = self.prepareEntry(with: posts[0], for: complication) else {
-			handler(nil)
-			return
-		}
-		timeLineEntryArray.append(entry)
-
-		handler(timeLineEntryArray)
+		handler(nil)
     }
 
     // MARK: - Placeholder Templates -
@@ -148,6 +133,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 	}
 
 	func reloadData() {
+		logI("")
 		let server = CLKComplicationServer.sharedInstance()
 		guard let complications = server.activeComplications,
 			!complications.isEmpty else {

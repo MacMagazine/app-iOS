@@ -44,6 +44,9 @@
 		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
 		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
 		9BA939472260DE37004005AA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939452260DE37004005AA /* HeaderCell.xib */; };
+		9BB2CA692264883A0012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
+		9BB2CA6A226488C80012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
+		9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
 		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
@@ -187,6 +190,8 @@
 		9BA939402260DDDA004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Podcast.storyboard; sourceTree = "<group>"; };
 		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
 		9BA939462260DE37004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HeaderCell.xib; sourceTree = "<group>"; };
+		9BB2CA682264883A0012ACD6 /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
+		9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAPI.swift; sourceTree = "<group>"; };
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -283,9 +288,11 @@
 		9B0DD4482226B9600016C567 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				9B25F5082260967A0057FBF9 /* Obfuscator.swift */,
 				9B02AE491F5C507000EA1A6F /* Network.swift */,
 				9B0DD4492226BAF60016C567 /* API.swift */,
-				9B25F5082260967A0057FBF9 /* Obfuscator.swift */,
+				9BB2CA682264883A0012ACD6 /* XMLParser.swift */,
+				9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -901,6 +908,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */,
+				9BB2CA6A226488C80012ACD6 /* XMLParser.swift in Sources */,
 				9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */,
 				9B6F965B225E5A060075ED89 /* Logger.swift in Sources */,
 				9B91117E225BC100000A6AC3 /* PostData.swift in Sources */,
@@ -924,6 +932,7 @@
 				9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
 				9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */,
+				9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */,
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
@@ -935,6 +944,7 @@
 				9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */,
 				9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */,
 				9B0DD44A2226BAF60016C567 /* API.swift in Sources */,
+				9BB2CA692264883A0012ACD6 /* XMLParser.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
@@ -1103,7 +1113,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOG_ENABLED";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
@@ -1135,6 +1145,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
@@ -1195,6 +1206,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
@@ -1352,6 +1364,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brit.macmagazine-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 			};
 			name = Release;
 		};
