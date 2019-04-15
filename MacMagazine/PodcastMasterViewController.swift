@@ -157,7 +157,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		fetchController?.fetchRequest.predicate = predicate
 
 		fetchController?.reloadData()
-        tableView.reloadData()
+		UIView.transition(with: tableView, duration: 0.4, options: showFavorites ? .transitionFlipFromRight : .transitionFlipFromLeft, animations: {
+			self.tableView.reloadData()
+		})
     }
 
     // MARK: - Local methods -
