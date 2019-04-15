@@ -88,6 +88,7 @@ class VideoCollectionViewController: UICollectionViewController {
 				DispatchQueue.main.async {
 					CoreDataStack.shared.save(playlist: videos, statistics: stats)
 					self.navigationItem.titleView = self.logoView
+					self.collectionView.reloadData()
 				}
 			}
 		}
@@ -130,19 +131,34 @@ class VideoCollectionViewController: UICollectionViewController {
 
 extension VideoCollectionViewController {
 
+	func showNotFound() {
+		let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+		notFound.text = "Nenhum video encontrado"
+		notFound.textColor = Settings().isDarkMode() ? .white : .black
+		notFound.textAlignment = .center
+		collectionView.backgroundView = notFound
+	}
+
 	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		guard let sections = fetchedResultsController.sections else {
+			showNotFound()
 			return 0
 		}
+		collectionView.backgroundView = nil
 		return sections.count
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		guard let sections = fetchedResultsController.sections else {
+			showNotFound()
 			return 0
 		}
 		let sectionInfo = sections[section]
-		return sectionInfo.numberOfObjects
+		let items = sectionInfo.numberOfObjects
+		if items == 0 {
+			showNotFound()
+		}
+		return items
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
