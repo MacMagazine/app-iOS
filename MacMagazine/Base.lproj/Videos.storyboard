@@ -50,14 +50,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-bP-KyS" customClass="YouTubePlayer" customModule="MacMagazine" customModuleProvider="target">
+                                        <wkWebView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-bP-KyS" customClass="YouTubePlayer" customModule="MacMagazine" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="ZgJ-bP-KyS" secondAttribute="height" multiplier="16:9" id="dDh-S8-ec8"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="168" id="eqq-sa-ITh"/>
                                             </constraints>
-                                            <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
+                                            <wkWebViewConfiguration key="configuration">
                                                 <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
                                                 <wkPreferences key="preferences"/>
                                             </wkWebViewConfiguration>

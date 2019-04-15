@@ -15,7 +15,9 @@ class YouTubePlayer: WKWebView {
 
 	var embedVideoHtml: String {
 		return """
-		<!DOCTYPE html><html><body><div id="player"></div>
+		<!DOCTYPE html><html>
+		<style>body,html,iframe{margin:0;padding:0;}</style>
+		<body><div id="player"></div>
 		<script>
 		var meta = document.createElement('meta');
 		meta.setAttribute('name', 'viewport');
@@ -28,7 +30,7 @@ class YouTubePlayer: WKWebView {
 		var player;
 		function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
-		playerVars: { 'playsinline': 1, 'controls': 1 },
+		playerVars: { 'playsinline': 0, 'controls': 1, 'fs': 1 },
 		height: '\(self.frame.height)',
 		width: '\(self.frame.width)',
 		videoId: '\(videoId ?? "")',

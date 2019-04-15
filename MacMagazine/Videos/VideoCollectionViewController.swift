@@ -135,21 +135,6 @@ extension VideoCollectionViewController {
 		return false
 	}
 
-	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
-//
-//		let object = fetchedResultsController.object(at: indexPath)
-//		guard let videoId = object.videoId,
-//			let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController
-//			else {
-//				return
-//		}
-//
-//		controller.videoId = videoId
-//
-//		controller.modalPresentationStyle = .overFullScreen
-//		self.present(controller, animated: true)
-	}
 }
 
 // MARK: - FetchedResultsController Delegate -
