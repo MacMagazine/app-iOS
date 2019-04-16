@@ -241,7 +241,7 @@ class CoreDataStack {
 		newItem.favorite = false
 		newItem.title = video.title
 		newItem.artworkURL = video.artworkURL.escape()
-		newItem.pubDate = video.pubDate.toDate("yyyy-MM-dd'T'HH:mm:ss.000'Z'")
+		newItem.pubDate = video.pubDate.toDate(Format.youtube)
 		newItem.videoId = video.videoId
 		newItem.likes = video.likes
 		newItem.views = video.views
@@ -250,7 +250,7 @@ class CoreDataStack {
 	func update(video: Video, with item: JSONVideo) {
 		video.title = item.title
 		video.artworkURL = item.artworkURL.escape()
-		video.pubDate = item.pubDate.toDate("yyyy-MM-dd'T'HH:mm:ss.000'Z'")
+		video.pubDate = item.pubDate.toDate(Format.youtube)
 		video.videoId = item.videoId
 		video.likes = item.likes
 		video.views = item.views

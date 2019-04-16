@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum Format {
+	static let wordpress = "EEE, dd MMM yyyy HH:mm:ss +0000"
+	static let youtube = "yyyy-MM-dd'T'HH:mm:ss.000'Z'"
+}
+
 extension String {
 
 	func toDate() -> Date {
@@ -17,7 +22,7 @@ extension String {
 	func toDate(_ format: String?) -> Date {
         // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format ?? "EEE, dd MMM yyyy HH:mm:ss +0000"
+        dateFormatter.dateFormat = format ?? Format.wordpress
 		dateFormatter.locale = Locale(identifier: "en_US")
 		dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.date(from: self) ?? Date()
@@ -43,24 +48,23 @@ extension String {
 	}
 
 	func toComplicationDate() -> String {
-		// Expected date format: "20190227"
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyyMMdd"
-		dateFormatter.timeZone = TimeZone(abbreviation: "BRT")
-		let day = dateFormatter.date(from: self) ?? Date()
+		let dateToUse = self.toDate()
 
-		let calendar = Calendar.current
-		if calendar.isDateInToday(day) {
-			dateFormatter.dateFormat = "'@'HH:mm"
-		} else if calendar.isDateInYesterday(day) {
-			dateFormatter.dateFormat = "'ONTEM @'HH:mm"
-		} else {
-			dateFormatter.dateFormat = "dd/MM' @'HH:mm"
+		var calendar = Calendar.current
+		if let timeZone = TimeZone(identifier: "America/Sao_Paulo") {
+			calendar.timeZone = timeZone
 		}
-		dateFormatter.locale = Locale(identifier: "pt-BR")
+		let day = String(format: "%02d", calendar.component(.day, from: dateToUse))
+		let month = String(format: "%02d", calendar.component(.month, from: dateToUse))
+		let hour = String(format: "%02d", calendar.component(.hour, from: dateToUse))
+		let minutes = String(format: "%02d", calendar.component(.minute, from: dateToUse))
 
-		let date = dateFormatter.date(from: self) ?? Date()
-		return dateFormatter.string(from: date).uppercased()
+		if calendar.isDateInToday(dateToUse) {
+			return "@\(hour):\(minutes)"
+		} else if calendar.isDateInYesterday(dateToUse) {
+			return "ONTEM @\(hour):\(minutes)"
+		}
+		return "\(day)/\(month) @\(hour):\(minutes)"
 	}
 
 	func escape() -> String {
