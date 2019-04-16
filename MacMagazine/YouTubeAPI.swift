@@ -85,7 +85,7 @@ extension API {
 		let playlistId = obfuscator.reveal(key: APIParams.playlistId)
 		let key = obfuscator.reveal(key: APIParams.key)
 
-		var pageToken = ""
+		let pageToken = ""
 //		if let nextToken = Settings().getVideoNextToken() {
 //			pageToken = "&\(APIParams.pageToken)\(nextToken)"
 //		}

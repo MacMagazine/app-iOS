@@ -54,4 +54,8 @@ class YouTubePlayer: WKWebView {
 		}
 	}
 
+	func play() {
+		self.evaluateJavaScript("player.playVideo()")
+	}
+
 }

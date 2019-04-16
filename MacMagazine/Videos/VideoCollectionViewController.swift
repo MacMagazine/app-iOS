@@ -133,7 +133,7 @@ extension VideoCollectionViewController {
 
 	func showNotFound() {
 		let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-		notFound.text = "Nenhum video encontrado"
+		notFound.text = "Você ainda não favoritou nenhum video."
 		notFound.textColor = Settings().isDarkMode() ? .white : .black
 		notFound.textAlignment = .center
 		collectionView.backgroundView = notFound

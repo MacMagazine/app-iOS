@@ -6,12 +6,14 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import Kingfisher
 import UIKit
 
 class VideosCollectionViewCell: UICollectionViewCell {
 
 	// MARK: - Properties -
 
+	@IBOutlet weak private var thumbnailImageView: UIImageView!
 	@IBOutlet weak private var youtubeWebView: YouTubePlayer!
 	@IBOutlet weak private var headlineLabel: UILabel!
 	@IBOutlet weak private var subheadlineLabel: UILabel!
@@ -32,11 +34,22 @@ class VideosCollectionViewCell: UICollectionViewCell {
 		subheadlineLabel.text = object.pubDate?.watchDate()
 		viewsLabel.text = object.views
 		likesLabel.text = object.likes
+
+		guard let artworkURL = object.artworkURL else {
+			return
+		}
+		thumbnailImageView.kf.indicatorType = .activity
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_Logo"))
+
 		youtubeWebView?.videoId = object.videoId
 		youtubeWebView?.scrollView.isScrollEnabled = false
 	}
 
 	// MARK: - Actions methods -
+
+	@IBAction private func play(_ sender: Any) {
+		youtubeWebView?.play()
+	}
 
 	@IBAction private func share(_ sender: Any) {
 		guard let videoId = videoId,
