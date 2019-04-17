@@ -18,7 +18,7 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
 	var isSearching = false
-	var videos = [JSONVideo]()
+	var videos: [JSONVideo]?
 
 	var pageToken: String = ""
 	var lastContentOffset = CGPoint()
@@ -111,7 +111,7 @@ class VideoCollectionViewController: UICollectionViewController {
 	}
 
 	fileprivate func search(_ text: String) {
-		videos = [JSONVideo]()
+		videos = nil
 
 		API().searchVideos(text) { videos in
 			guard let videos = videos,
@@ -151,8 +151,10 @@ class VideoCollectionViewController: UICollectionViewController {
 				}
 
 				DispatchQueue.main.async {
-print(self.videos)
 					self.collectionView.reloadData()
+					self.searchController?.searchBar.resignFirstResponder()
+					self.navigationItem.searchController = nil
+					self.searchController?.isActive = false
 				}
 			}
 		}
@@ -214,8 +216,20 @@ extension VideoCollectionViewController {
 extension VideoCollectionViewController {
 
 	func showNotFound() {
+		var message = "Você ainda não favoritou nenhum video."
+		if isSearching {
+			message = "Nenhum resultado encontrado"
+			guard let _ = videos else {
+				let spin = UIActivityIndicatorView(style: .whiteLarge)
+				spin.startAnimating()
+				collectionView.backgroundView = spin
+
+				return
+			}
+		}
+
 		let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-		notFound.text = isSearching ? "Nenhum resultado encontrado" : "Você ainda não favoritou nenhum video."
+		notFound.text = message
 		notFound.textColor = Settings().isDarkMode() ? .white : .black
 		notFound.textAlignment = .center
 		collectionView.backgroundView = notFound
@@ -236,10 +250,10 @@ extension VideoCollectionViewController {
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if isSearching {
-			if videos.isEmpty {
+			if videos?.isEmpty ?? true {
 				showNotFound()
 			}
-			return videos.count
+			return videos?.count ?? 0
 		} else {
 			guard let sections = fetchedResultsController.sections else {
 				showNotFound()
@@ -270,6 +284,9 @@ extension VideoCollectionViewController {
 
 		// Configure the cell
 		if isSearching {
+			guard let videos = videos else {
+				return cell
+			}
 			let object = videos[indexPath.item]
 			cell.configureVideo(with: object)
 		} else {

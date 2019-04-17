@@ -33,6 +33,8 @@ class VideosCollectionViewCell: UICollectionViewCell {
 		videoId = object.videoId
 
 		favorite.isSelected = object.favorite
+		favorite.isEnabled = true
+
 		headlineLabel.text = object.title
 		subheadlineLabel.text = object.pubDate?.watchDate()
 		viewsLabel.text = object.views
