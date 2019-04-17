@@ -78,17 +78,17 @@ struct Statistics: Codable {
 
 extension API {
 
-	func getVideos( _ completion: ((YouTube?) -> Void)?) {
+	func getVideos(using token: String, _ completion: ((YouTube?) -> Void)?) {
 		onVideoCompletion = completion
 
 		let obfuscator = Obfuscator(with: APIParams.salt)
 		let playlistId = obfuscator.reveal(key: APIParams.playlistId)
 		let key = obfuscator.reveal(key: APIParams.key)
 
-		let pageToken = ""
-//		if let nextToken = Settings().getVideoNextToken() {
-//			pageToken = "&\(APIParams.pageToken)\(nextToken)"
-//		}
+		var pageToken = ""
+		if !token.isEmpty {
+			pageToken = "&\(APIParams.pageToken)\(token)"
+		}
 
 		let host = "\(APIParams.playlistItems)?\(APIParams.playlistPart)&\(APIParams.playlistIdParam)\(playlistId)&\(APIParams.keyParam)\(key)&\(APIParams.maxResults)\(pageToken)"
 		executeGetVideoContent(host)

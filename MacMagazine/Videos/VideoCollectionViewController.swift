@@ -17,6 +17,10 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var favorite: UIBarButtonItem!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
+	var pageToken: String = ""
+	var lastContentOffset = CGPoint()
+	var direction: Direction = .up
+
 	var showFavorites = false
 	let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
@@ -50,11 +54,8 @@ class VideoCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
-	}
 
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-
+		pageToken = ""
 		getVideos()
 	}
 
@@ -71,13 +72,16 @@ class VideoCollectionViewController: UICollectionViewController {
 
 	fileprivate func getVideos() {
 		navigationItem.titleView = self.spin
+		direction = .up
 
-		API().getVideos { videos in
+		API().getVideos(using: pageToken) { videos in
 			guard let videos = videos,
 				let items = videos.items
 				else {
 					return
 			}
+			self.pageToken = videos.nextPageToken ?? ""
+
 			let videoIds: [String] = items.compactMap {
 				return $0.snippet?.resourceId?.videoId
 			}
@@ -87,8 +91,8 @@ class VideoCollectionViewController: UICollectionViewController {
 				}
 				DispatchQueue.main.async {
 					CoreDataStack.shared.save(playlist: videos, statistics: stats)
-					self.navigationItem.titleView = self.logoView
 					self.collectionView.reloadData()
+					self.navigationItem.titleView = self.logoView
 				}
 			}
 		}
@@ -127,6 +131,22 @@ class VideoCollectionViewController: UICollectionViewController {
 
 }
 
+// MARK: - Scroll detection -
+
+extension VideoCollectionViewController {
+	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		direction = offset.y > lastContentOffset.y && offset.y > 100 ? .down : .up
+		lastContentOffset = offset
+
+		// Pull to Refresh
+		if offset.y < -100 && navigationItem.titleView == logoView {
+			pageToken = ""
+			getVideos()
+		}
+	}
+}
+
 // MARK: - UICollectionViewDataSource -
 
 extension VideoCollectionViewController {
@@ -159,6 +179,14 @@ extension VideoCollectionViewController {
 			showNotFound()
 		}
 		return items
+	}
+
+	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		if direction == .down &&
+			indexPath.item % 14 == 0 &&
+			navigationItem.titleView == logoView {
+			self.getVideos()
+		}
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -13,17 +13,9 @@ enum Definitions {
 	static let fontSize = "font-size-settings"
 	static let icon = "icon"
 	static let watch = "watch"
-	static let videoNextToken = "videoNextToken"
-	static let allVideosFetched = "allVideosFetched"
 }
 
 struct Settings {
-
-	func flush() {
-		UserDefaults.standard.set(true, forKey: Definitions.videoNextToken)
-		UserDefaults.standard.set(true, forKey: Definitions.allVideosFetched)
-		UserDefaults.standard.synchronize()
-	}
 
     func isPhone() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
@@ -58,25 +50,6 @@ struct Settings {
 			fontSize = "-\(sliderFontSize)"
 		}
 		return fontSize
-	}
-
-	func setVideoNextToken(_ token: String?) {
-		guard let _ = UserDefaults.standard.object(forKey: Definitions.allVideosFetched) as? Bool else {
-			UserDefaults.standard.set(token, forKey: Definitions.videoNextToken)
-			if let _ = token {
-				UserDefaults.standard.set(true, forKey: Definitions.allVideosFetched)
-			}
-			UserDefaults.standard.synchronize()
-
-			return
-		}
-	}
-
-	func getVideoNextToken() -> String? {
-		guard let videoNextToken = UserDefaults.standard.object(forKey: Definitions.videoNextToken) as? String else {
-			return nil
-		}
-		return videoNextToken
 	}
 
 }

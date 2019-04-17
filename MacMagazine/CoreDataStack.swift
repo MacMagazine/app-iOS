@@ -202,7 +202,6 @@ class CoreDataStack {
 		guard let videos = playlist.items else {
 			return
 		}
-		Settings().setVideoNextToken(playlist.nextPageToken)
 
 		let mappedVideos: [JSONVideo] = videos.compactMap {
 			guard let title = $0.snippet?.title,
