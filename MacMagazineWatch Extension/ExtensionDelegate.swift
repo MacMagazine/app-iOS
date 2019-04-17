@@ -41,13 +41,15 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
 	func reloadComplicationData(backgroundTask: WKApplicationRefreshBackgroundTask) {
-		let later = Date(timeIntervalSinceNow: 60 * 60)	// every hour
-		reloadData()
-		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: later, userInfo: nil) { _ in }
 		backgroundTask.setTaskCompletedWithSnapshot(false)
+		reloadData()
+
+		let later = Date(timeIntervalSinceNow: 60 * 60)	// every hour
+		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: later, userInfo: nil) { _ in }
 	}
 
 	func reloadData() {
+		logI("")
 		let complicationsController = ComplicationController()
 		complicationsController.reloadData()
 	}

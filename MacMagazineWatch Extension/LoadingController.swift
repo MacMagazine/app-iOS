@@ -86,6 +86,8 @@ class LoadingController: WKInterfaceController {
     }
 
     @IBAction private func load() {
+		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { _ in }
+
 		reloadGroup.setHidden(true)
 		indicator?.showWait()
         getPosts()

@@ -51,6 +51,27 @@ class VideosCollectionViewCell: UICollectionViewCell {
 		youtubeWebView?.videoId = object.videoId
 	}
 
+	func configureVideo(with object: JSONVideo) {
+		videoId = object.videoId
+
+		favorite.isSelected = false
+		favorite.isEnabled = false
+
+		headlineLabel.text = object.title
+		subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
+		viewsLabel.text = object.views
+		likesLabel.text = object.likes
+
+		thumbnailImageView.kf.indicatorType = .activity
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo"))
+
+		youtubeWebView?.scrollView.isScrollEnabled = false
+		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
+		youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
+
+		youtubeWebView?.videoId = object.videoId
+	}
+
 	// MARK: - Actions methods -
 
 	@IBAction private func play(_ sender: Any) {

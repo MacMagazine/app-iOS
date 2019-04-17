@@ -17,6 +17,9 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var favorite: UIBarButtonItem!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
+	var isSearching = false
+	var videos = [JSONVideo]()
+
 	var pageToken: String = ""
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -46,6 +49,8 @@ class VideoCollectionViewController: UICollectionViewController {
 		return controller
 	}()
 
+	private var searchController: UISearchController?
+
 	// MARK: - View lifecycle -
 
 	override func viewDidLoad() {
@@ -54,6 +59,13 @@ class VideoCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
+
+		searchController = UISearchController(searchResultsController: nil)
+		searchController?.searchBar.autocapitalizationType = .none
+		searchController?.searchBar.delegate = self
+		searchController?.searchBar.placeholder = "Buscar nos videos..."
+		searchController?.hidesNavigationBarDuringPresentation = true
+		self.definesPresentationContext = true
 
 		pageToken = ""
 		getVideos()
@@ -98,9 +110,59 @@ class VideoCollectionViewController: UICollectionViewController {
 		}
 	}
 
+	fileprivate func search(_ text: String) {
+		videos = [JSONVideo]()
+
+		API().searchVideos(text) { videos in
+			guard let videos = videos,
+				let items = videos.items
+				else {
+					return
+			}
+
+			let videoIds: [String] = items.compactMap {
+				return $0.id?.videoId
+			}
+			API().getVideosStatistics(videoIds) { statistics in
+				guard let stats = statistics?.items else {
+					return
+				}
+
+				self.videos = items.compactMap {
+					guard let title = $0.snippet?.title,
+						let videoId = $0.id?.videoId
+						else {
+							return nil
+					}
+
+					var likes = ""
+					var views = ""
+					let stat = stats.filter {
+						$0.id == videoId
+					}
+					if !stat.isEmpty {
+						views = stat[0].statistics?.viewCount ?? ""
+						likes = stat[0].statistics?.likeCount ?? ""
+					}
+
+					let artworkURL = $0.snippet?.thumbnails?.maxres?.url ?? $0.snippet?.thumbnails?.high?.url ?? ""
+
+					return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes)
+				}
+
+				DispatchQueue.main.async {
+print(self.videos)
+					self.collectionView.reloadData()
+				}
+			}
+		}
+	}
+
 	// MARK: - Actions methods -
 
 	@IBAction private func search(_ sender: Any) {
+		navigationItem.searchController = searchController
+		searchController?.searchBar.becomeFirstResponder()
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
@@ -153,38 +215,50 @@ extension VideoCollectionViewController {
 
 	func showNotFound() {
 		let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-		notFound.text = "Você ainda não favoritou nenhum video."
+		notFound.text = isSearching ? "Nenhum resultado encontrado" : "Você ainda não favoritou nenhum video."
 		notFound.textColor = Settings().isDarkMode() ? .white : .black
 		notFound.textAlignment = .center
 		collectionView.backgroundView = notFound
 	}
 
 	override func numberOfSections(in collectionView: UICollectionView) -> Int {
-		guard let sections = fetchedResultsController.sections else {
-			showNotFound()
-			return 0
+		if isSearching {
+			return 1
+		} else {
+			guard let sections = fetchedResultsController.sections else {
+				showNotFound()
+				return 0
+			}
+			collectionView.backgroundView = nil
+			return sections.count
 		}
-		collectionView.backgroundView = nil
-		return sections.count
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		guard let sections = fetchedResultsController.sections else {
-			showNotFound()
-			return 0
+		if isSearching {
+			if videos.isEmpty {
+				showNotFound()
+			}
+			return videos.count
+		} else {
+			guard let sections = fetchedResultsController.sections else {
+				showNotFound()
+				return 0
+			}
+			let sectionInfo = sections[section]
+			let items = sectionInfo.numberOfObjects
+			if items == 0 {
+				showNotFound()
+			}
+			return items
 		}
-		let sectionInfo = sections[section]
-		let items = sectionInfo.numberOfObjects
-		if items == 0 {
-			showNotFound()
-		}
-		return items
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		if direction == .down &&
 			indexPath.item % 14 == 0 &&
-			navigationItem.titleView == logoView {
+			navigationItem.titleView == logoView &&
+			!isSearching {
 			self.getVideos()
 		}
 	}
@@ -195,8 +269,13 @@ extension VideoCollectionViewController {
 		}
 
 		// Configure the cell
-		let object = fetchedResultsController.object(at: indexPath)
-		cell.configureVideo(with: object)
+		if isSearching {
+			let object = videos[indexPath.item]
+			cell.configureVideo(with: object)
+		} else {
+			let object = fetchedResultsController.object(at: indexPath)
+			cell.configureVideo(with: object)
+		}
 
 		return cell
 	}
@@ -282,5 +361,25 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 		let height = (width / ratio) + 120
 
 		return CGSize(width: width, height: height)
+	}
+}
+
+// MARK: - UISearchBarDelegate -
+
+extension VideoCollectionViewController: UISearchBarDelegate {
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		guard let text = searchBar.text else {
+			return
+		}
+		isSearching = true
+		self.collectionView.reloadData()
+		search(text)
+	}
+
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		isSearching = false
+		searchBar.resignFirstResponder()
+		navigationItem.searchController = nil
+		self.collectionView.reloadData()
 	}
 }

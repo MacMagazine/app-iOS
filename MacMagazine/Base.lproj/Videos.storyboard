@@ -212,7 +212,11 @@
                                 <action selector="showFavorites:" destination="PeN-ph-XhJ" id="K6A-Qw-gm8"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Or0-5W-R35"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Or0-5W-R35">
+                            <connections>
+                                <action selector="search:" destination="PeN-ph-XhJ" id="sL3-63-GLO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="favorite" destination="EeU-sK-M4J" id="Umu-Ob-foM"/>

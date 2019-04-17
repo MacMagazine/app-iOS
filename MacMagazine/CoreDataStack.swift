@@ -188,16 +188,7 @@ class CoreDataStack {
 		}
 	}
 
-	struct JSONVideo {
-		var title: String = ""
-		var videoId: String = ""
-		var pubDate: String = ""
-		var artworkURL: String = ""
-		var views: String = ""
-		var likes: String = ""
-	}
-
-	func save(playlist: YouTube, statistics: [Item]) {
+	func save(playlist: YouTube<String>, statistics: [Item<String>]) {
 		// Cannot duplicate videos
 		guard let videos = playlist.items else {
 			return
