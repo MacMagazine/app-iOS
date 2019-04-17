@@ -6,13 +6,16 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import AVFoundation
 import Kingfisher
 import UIKit
+import WebKit
 
 class VideosCollectionViewCell: UICollectionViewCell {
 
 	// MARK: - Properties -
 
+	@IBOutlet weak private var playButton: UIButton!
 	@IBOutlet weak private var thumbnailImageView: UIImageView!
 	@IBOutlet weak private var youtubeWebView: YouTubePlayer!
 	@IBOutlet weak private var headlineLabel: UILabel!
@@ -39,15 +42,20 @@ class VideosCollectionViewCell: UICollectionViewCell {
 			return
 		}
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_Logo"))
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo"))
+
+		youtubeWebView?.scrollView.isScrollEnabled = false
+		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
+		youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
 
 		youtubeWebView?.videoId = object.videoId
-		youtubeWebView?.scrollView.isScrollEnabled = false
 	}
 
 	// MARK: - Actions methods -
 
 	@IBAction private func play(_ sender: Any) {
+		thumbnailImageView.isHidden = true
+		playButton.isHidden = true
 		youtubeWebView?.play()
 	}
 
@@ -67,4 +75,13 @@ class VideosCollectionViewCell: UICollectionViewCell {
 		}
 	}
 
+}
+
+extension VideosCollectionViewCell: WKScriptMessageHandler {
+	func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+		if message.name == "videoPaused" {
+			self.thumbnailImageView.isHidden = false
+			self.playButton.isHidden = false
+		}
+	}
 }

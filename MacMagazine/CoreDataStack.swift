@@ -221,7 +221,9 @@ class CoreDataStack {
 				likes = stat[0].statistics?.likeCount ?? ""
 			}
 
-			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: $0.snippet?.thumbnails?.maxres?.url ?? "", views: views, likes: likes)
+			let artworkURL = $0.snippet?.thumbnails?.maxres?.url ?? $0.snippet?.thumbnails?.high?.url ?? ""
+
+			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes)
 		}
 
 		mappedVideos.forEach { video in

@@ -49,7 +49,7 @@ class PostCell: UITableViewCell {
 			return
 		}
         thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_Logo"))
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo"))
     }
 
 	func configureSearchPost(_ object: XMLPost) {
@@ -62,7 +62,7 @@ class PostCell: UITableViewCell {
 		}
 
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_Logo"))
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo"))
 
 		favoriteImageView.isHidden = true
 	}

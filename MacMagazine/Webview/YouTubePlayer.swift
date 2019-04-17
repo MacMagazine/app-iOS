@@ -34,10 +34,15 @@ class YouTubePlayer: WKWebView {
 		height: '\(self.frame.height)',
 		width: '\(self.frame.width)',
 		videoId: '\(videoId ?? "")',
-		events: { 'onReady': onPlayerReady }
+		events: { 'onReady': onPlayerReady, 'onStateChange': videoPaused }
 		});
 		}
 		function onPlayerReady(event) { event.target.playVideo(); }
+		function videoPaused(event) {
+		if (event.data == YT.PlayerState.PAUSED) {
+		window.webkit.messageHandlers.videoPaused.postMessage(event.data);
+		}
+		}
 		</script>
 		</body></html>
 		"""
