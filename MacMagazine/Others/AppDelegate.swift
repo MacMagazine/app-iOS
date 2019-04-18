@@ -6,6 +6,7 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import StoreKit
 import UIKit
 
 extension Notification.Name {
@@ -43,6 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		splitViewController.preferredPrimaryColumnWidthFraction = 0.33
 
 		WatchSessionManager.shared.startSession()
+
+		if Settings().shouldAskForReview() {
+			SKStoreReviewController.requestReview()
+		}
 
 		return true
 	}

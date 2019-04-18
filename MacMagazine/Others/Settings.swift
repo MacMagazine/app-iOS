@@ -13,6 +13,7 @@ enum Definitions {
 	static let fontSize = "font-size-settings"
 	static let icon = "icon"
 	static let watch = "watch"
+	static let askForReview = "askForReview"
 }
 
 struct Settings {
@@ -50,6 +51,19 @@ struct Settings {
 			fontSize = "-\(sliderFontSize)"
 		}
 		return fontSize
+	}
+
+	func shouldAskForReview() -> Bool {
+		guard let askForReview = UserDefaults.standard.object(forKey: Definitions.askForReview) as? Int else {
+			UserDefaults.standard.set(1, forKey: Definitions.askForReview)
+			UserDefaults.standard.synchronize()
+
+			return false
+		}
+		UserDefaults.standard.set(askForReview + 1, forKey: Definitions.askForReview)
+		UserDefaults.standard.synchronize()
+
+		return askForReview % 50 == 0
 	}
 
 }
