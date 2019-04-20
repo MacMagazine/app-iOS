@@ -40,6 +40,9 @@
 		9B91117D225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
+		9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7F8F226B6111000534CA /* WebKit.framework */; };
+		9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */; };
+		9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C7F93226B6AF4000534CA /* soundcloud.js */; };
 		9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393C2260DDB8004005AA /* Settings.storyboard */; };
 		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
 		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
@@ -189,6 +192,9 @@
 		9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		9B91117C225BC100000A6AC3 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		9B9C7F8F226B6111000534CA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudPlayer.swift; sourceTree = "<group>"; };
+		9B9C7F93226B6AF4000534CA /* soundcloud.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = soundcloud.js; sourceTree = "<group>"; };
 		9BA9393D2260DDB8004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		9BA939402260DDDA004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Podcast.storyboard; sourceTree = "<group>"; };
 		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
@@ -258,6 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
 				9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +333,8 @@
 				9BA939422260DE0A004005AA /* WebView.storyboard */,
 				9B7036F6224FCB0400F68654 /* WebViewController.swift */,
 				9B3C7A712263D643001146A4 /* YouTubePlayer.swift */,
+				9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */,
+				9B9C7F93226B6AF4000534CA /* soundcloud.js */,
 			);
 			path = Webview;
 			sourceTree = "<group>";
@@ -565,6 +574,7 @@
 		9BF96565225E371900BAF22D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B9C7F8F226B6111000534CA /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -779,6 +789,7 @@
 				9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */,
 				9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */,
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
+				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
 				9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */,
@@ -978,6 +989,7 @@
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
 				9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */,
+				9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
 				9B6F965A225E5A060075ED89 /* Logger.swift in Sources */,
 				9B91117D225BC100000A6AC3 /* PostData.swift in Sources */,

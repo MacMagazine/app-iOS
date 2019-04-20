@@ -112,7 +112,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		guard let object = fetchController?.object(at: indexPath) else {
                 return
 		}
-		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
+		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL, frame: object.podcastFrame)
 		play?(podcast)
     }
 
@@ -131,7 +131,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		selectedIndex = indexPath
 
 		let object = posts[indexPath.row]
-		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL)
+		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL, frame: object.podcastFrame)
 		play?(podcast)
     }
 

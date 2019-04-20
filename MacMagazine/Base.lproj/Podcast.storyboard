@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GbX-Zp-bIv">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +17,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -30,7 +34,7 @@
             <objects>
                 <tableViewController title="NoAr" clearsSelectionOnViewWillAppear="NO" id="dI9-bf-84Z" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="1" sectionFooterHeight="1" id="M41-4U-Ums">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections/>
@@ -60,19 +64,19 @@
                         <viewControllerLayoutGuide type="bottom" id="Sxe-hu-yMD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SlD-dw-tjD" customClass="AppView" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="559"/>
                                 <connections>
                                     <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-MC-Tvc">
-                                <rect key="frame" x="0.0" y="354" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="559" width="414" height="166"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="3US-UY-uQE"/>
+                                    <constraint firstAttribute="height" constant="166" id="3US-UY-uQE"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="dJn-2U-uf9" kind="embed" id="GHc-83-1mb"/>
@@ -133,80 +137,40 @@
                         <viewControllerLayoutGuide type="bottom" id="mjB-qY-c9f"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GF4-A6-6Pd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="166"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-ku-KsB">
-                                <rect key="frame" x="36" y="40" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7f-9U-gBL">
-                                <rect key="frame" x="16" y="20" width="60" height="60"/>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-1z-bwH" customClass="SoundcloudPlayer" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="166"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="G0P-9J-IcQ"/>
-                                    <constraint firstAttribute="width" secondItem="y7f-9U-gBL" secondAttribute="height" multiplier="1:1" id="lbQ-3j-mu5"/>
+                                    <constraint firstAttribute="height" constant="166" id="grX-we-IL1"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="play"/>
-                                <state key="disabled" image="warning"/>
-                                <state key="selected" image="pause"/>
-                                <connections>
-                                    <action selector="play:" destination="dJn-2U-uf9" eventType="touchUpInside" id="Ne5-Fm-fcQ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQu-qt-VEj" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="86" y="20" width="43.5" height="20.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="slV-ZK-qmg">
-                                <rect key="frame" x="14" y="124" width="347" height="31"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="dJn-2U-uf9" eventType="valueChanged" id="9xt-eA-FPV"/>
-                                </connections>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udk-Gp-T2N" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
-                                <rect key="frame" x="16" y="162" width="343" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="slV-ZK-qmg" firstAttribute="top" secondItem="y7f-9U-gBL" secondAttribute="bottom" constant="44" id="5WX-QK-YaW"/>
-                            <constraint firstItem="Udk-Gp-T2N" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" id="8bg-vy-HSZ"/>
-                            <constraint firstItem="slV-ZK-qmg" firstAttribute="trailing" secondItem="GF4-A6-6Pd" secondAttribute="trailingMargin" id="Agk-mr-DoC"/>
-                            <constraint firstItem="PFY-ku-KsB" firstAttribute="top" secondItem="MBk-Uq-fbb" secondAttribute="bottom" constant="40" id="HXm-ie-f7d"/>
-                            <constraint firstItem="Udk-Gp-T2N" firstAttribute="top" secondItem="slV-ZK-qmg" secondAttribute="bottom" constant="8" id="UDn-dk-Mpu"/>
-                            <constraint firstItem="Udk-Gp-T2N" firstAttribute="trailing" secondItem="GF4-A6-6Pd" secondAttribute="trailingMargin" id="acl-C1-oob"/>
-                            <constraint firstItem="oQu-qt-VEj" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="GF4-A6-6Pd" secondAttribute="trailingMargin" id="gta-KH-A7f"/>
-                            <constraint firstItem="oQu-qt-VEj" firstAttribute="top" secondItem="GF4-A6-6Pd" secondAttribute="topMargin" constant="20" id="jUI-P5-Wwo"/>
-                            <constraint firstItem="y7f-9U-gBL" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" id="o6P-yf-llb"/>
-                            <constraint firstItem="oQu-qt-VEj" firstAttribute="leading" secondItem="y7f-9U-gBL" secondAttribute="trailing" constant="10" id="ovP-eJ-7C5"/>
-                            <constraint firstItem="PFY-ku-KsB" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" constant="20" id="r5Q-N2-2LC"/>
-                            <constraint firstItem="slV-ZK-qmg" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leadingMargin" id="vBd-pf-kgK"/>
-                            <constraint firstItem="y7f-9U-gBL" firstAttribute="top" secondItem="GF4-A6-6Pd" secondAttribute="topMargin" constant="20" id="x7g-dM-zMP"/>
+                            <constraint firstAttribute="trailing" secondItem="lF6-1z-bwH" secondAttribute="trailing" id="3y4-Ye-Pz9"/>
+                            <constraint firstItem="lF6-1z-bwH" firstAttribute="top" secondItem="GF4-A6-6Pd" secondAttribute="top" id="XjY-nR-1kg"/>
+                            <constraint firstItem="lF6-1z-bwH" firstAttribute="leading" secondItem="GF4-A6-6Pd" secondAttribute="leading" id="ag0-xE-a4f"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="playButton" destination="y7f-9U-gBL" id="G8W-h6-W2y"/>
-                        <outlet property="podcastDuration" destination="Udk-Gp-T2N" id="CVv-mi-Y9T"/>
-                        <outlet property="podcastTitle" destination="oQu-qt-VEj" id="vJW-4E-bKW"/>
-                        <outlet property="slider" destination="slV-ZK-qmg" id="3aa-6e-X16"/>
-                        <outlet property="spin" destination="PFY-ku-KsB" id="qu2-4c-i59"/>
+                        <outlet property="scPlayer" destination="lF6-1z-bwH" id="VCA-rX-Lz8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1A-ga-PBM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="644" y="-908"/>
+            <point key="canvasLocation" x="643.47826086956525" y="-908.03571428571422"/>
         </scene>
     </scenes>
     <resources>
         <image name="fav_off" width="22" height="21"/>
-        <image name="logo" width="80" height="70.5"/>
-        <image name="pause" width="500" height="500"/>
-        <image name="play" width="500" height="500"/>
+        <image name="logo" width="80" height="68.5"/>
         <image name="tab_noar" width="24" height="28"/>
-        <image name="warning" width="500" height="500"/>
     </resources>
 </document>

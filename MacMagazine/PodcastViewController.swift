@@ -72,7 +72,7 @@ class PodcastViewController: UIViewController {
     // MARK: - Methods -
 
     fileprivate func showWebView(_ show: Bool) {
-        playerHeight.constant = show ? 200.0 : 0.0
+        playerHeight.constant = show ? 166.0 : 0.0
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
         }
