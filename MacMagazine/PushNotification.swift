@@ -66,7 +66,16 @@ extension PushNotification {
 		}
 		CoreDataStack.shared.links { links in
 			prepareDetailController(controller, using: links, compare: link)
-			UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true)
+
+			guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
+				return
+			}
+			if let navVC = tabController.selectedViewController as? UINavigationController {
+				navVC.pushViewController(controller, animated: true)
+			} else if let splitVC = tabController.selectedViewController as? UISplitViewController,
+				let navVC = splitVC.children[0] as? UINavigationController {
+				navVC.pushViewController(controller, animated: true)
+			}
 		}
 	}
 }
