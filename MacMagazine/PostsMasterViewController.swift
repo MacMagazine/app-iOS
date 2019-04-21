@@ -147,11 +147,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 				else {
 					return
 			}
-
-			controller.navigationItem.leftItemsSupplementBackButton = true
-			controller.selectedIndex = links.firstIndex(where: { $0.link == post.link }) ?? 0
-			controller.links = links
-			controller.createWebViewController = createWebViewController
+			prepareDetailController(controller, using: links, compare: post.link)
 		}
 	}
 
@@ -432,7 +428,6 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 // MARK: - Peek&Pop -
 
 extension PostsMasterViewController {
-
 	@objc func onShortcutAction(_ notification: Notification) {
 		if Settings().isPad() {
 			processTabletSelection()
@@ -440,15 +435,22 @@ extension PostsMasterViewController {
 			processPhoneSelection()
 		}
 	}
+}
 
-	func createWebViewController(post: PostData) -> UIViewController? {
-		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
-		guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
-			return nil
-		}
-		controller.post = post
+// MARK: - Common Methods -
 
-		return controller
+func prepareDetailController(_ controller: PostsDetailViewController, using links: [PostData], compare link: String?) {
+	controller.navigationItem.leftItemsSupplementBackButton = true
+	controller.selectedIndex = links.firstIndex(where: { $0.link == link }) ?? 0
+	controller.links = links
+	controller.createWebViewController = createWebViewController
+}
+
+func createWebViewController(post: PostData) -> UIViewController? {
+	let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+	guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+		return nil
 	}
-
+	controller.post = post
+	return controller
 }

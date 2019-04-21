@@ -117,7 +117,7 @@
         <!--Posts Detail View Controller-->
         <scene sceneID="fYa-LD-1Wl">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="detailController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qRi-qc-cAu">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="2RS-0E-jz0">

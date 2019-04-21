@@ -55,6 +55,16 @@ class CoreDataStack {
 		}
 	}
 
+	func links(_ completion: @escaping ([PostData]) -> Void) {
+		getAll { posts in
+			var response = [PostData]()
+			for post in posts {
+				response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite))
+			}
+			completion(response)
+		}
+	}
+
 	func flush() {
 		flush(entityName: postEntityName)
 		flush(entityName: videoEntityName)
@@ -104,9 +114,19 @@ class CoreDataStack {
 		}
 	}
 
+	func getAll(_ completion: @escaping ([Post]) -> Void) {
+		get(nil, completion: completion)
+	}
+
 	func get(post link: String, completion: @escaping ([Post]) -> Void) {
+		get(link, completion: completion)
+	}
+
+	func get(_ link: String?, completion: @escaping ([Post]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
-		request.predicate = NSPredicate(format: "link == %@", link)
+		if let link = link {
+			request.predicate = NSPredicate(format: "link == %@", link)
+		}
 
 		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
 		let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asynchronousFetchResult in
