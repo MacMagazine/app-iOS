@@ -20,9 +20,6 @@ class NotificationService: UNNotificationServiceExtension {
 		self.contentHandler = contentHandler
 		bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-		logD(request)
-		logD(contentHandler)
-
 		if let bestAttemptContent = bestAttemptContent {
 			OneSignal.didReceiveNotificationExtensionRequest(self.receivedRequest, with: self.bestAttemptContent)
 			contentHandler(bestAttemptContent)

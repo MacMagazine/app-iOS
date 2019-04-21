@@ -44,6 +44,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		splitViewController.preferredDisplayMode = .allVisible
 		splitViewController.preferredPrimaryColumnWidthFraction = 0.33
 
+		let notificationReceived: OSHandleNotificationActionBlock = { result in
+			// This block gets called when the user reacts to a notification received
+			guard let payload = result?.notification.payload,
+			let additionalData = payload.additionalData
+				else {
+				return
+			}
+			logD("additionalData = \(additionalData)")
+		}
+
 		WatchSessionManager.shared.startSession()
 
 		if Settings().shouldAskForReview() {
@@ -55,17 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Dev
 		let key: [UInt8] = [119, 69, 68, 114, 4, 15, 81, 94, 76, 17, 84, 121, 98, 98, 86, 83, 6, 84, 89, 32, 18, 69, 118, 72, 8, 85, 85, 82, 77, 6, 124, 54, 41, 83, 83, 86]
 
-		OneSignal.initWithLaunchOptions(launchOptions, appId: Obfuscator().reveal(key: key), handleNotificationAction: nil, settings: [kOSSettingsKeyAutoPrompt: false])
+		OneSignal.initWithLaunchOptions(launchOptions, appId: Obfuscator().reveal(key: key), handleNotificationAction: notificationReceived, settings: [kOSSettingsKeyAutoPrompt: false])
 		OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
 		OneSignal.promptForPushNotifications(userResponse: { accepted in
 			logI("User accepted notifications: \(accepted)")
 		})
-
-		let _: OSHandleNotificationReceivedBlock = { notification in
-			logD("Received Notification: \(notification!.payload.notificationID)")
-			logD("launchURL = \(notification?.payload.launchURL ?? "None")")
-			logD("content_available = \(notification?.payload.contentAvailable ?? false)")
-		}
 
 		return true
 	}

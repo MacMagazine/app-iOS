@@ -46,8 +46,8 @@
 		9B9C7F9C226BF836000534CA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F9B226BF836000534CA /* NotificationService.swift */; };
 		9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B9C7FA9226BFBBC000534CA /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
-		9B9C7FAB226BFC1F000534CA /* OneSignal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B9C7FAE226C0F5A000534CA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
+		9B9C7FAF226C1622000534CA /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
 		9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393C2260DDB8004005AA /* Settings.storyboard */; };
 		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
 		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
@@ -161,17 +161,6 @@
 				9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BD4E986225D1DCC00683B88 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9B9C7FAB226BFC1F000534CA /* OneSignal.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BF9654F225E1DB800BAF22D /* Embed Frameworks */ = {
@@ -304,6 +293,7 @@
 			files = (
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
 				9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */,
+				9B9C7FAF226C1622000534CA /* OneSignal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,7 +720,6 @@
 				9BCAD6751F47A08100B54526 /* Resources */,
 				9B70370B22500FD500F68654 /* Run Sign Framework Script */,
 				9BB4BC71225B99F700559170 /* Embed Watch Content */,
-				9BD4E986225D1DCC00683B88 /* Embed Frameworks */,
 				9B9C7FA4226BF836000534CA /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -955,7 +944,7 @@
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OneSignalframework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OneSignal.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
