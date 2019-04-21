@@ -105,7 +105,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>4.0</string>
 	<key>CFBundleVersion</key>
-	<string>2106</string>
+	<string>2107</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -115,6 +115,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>MacMagazine deseja ter acesso à sua localização para prestar um serviço melhor para você.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>MacMagazine deseja ter acesso à sua localização para prestar um serviço melhor para você.</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

@@ -658,7 +658,6 @@
 			buildConfigurationList = 9B9C7FA1226BF836000534CA /* Build configuration list for PBXNativeTarget "MacMagazineNotificationServiceExtension" */;
 			buildPhases = (
 				9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */,
-				9B9C7FA5226BF896000534CA /* Run update version Script */,
 				9B9C7F95226BF835000534CA /* Sources */,
 				9B9C7F96226BF835000534CA /* Frameworks */,
 				9B9C7F97226BF835000534CA /* Resources */,
@@ -952,24 +951,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		9B9C7FA5226BF896000534CA /* Run update version Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run update version Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n";
 		};
 		9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
