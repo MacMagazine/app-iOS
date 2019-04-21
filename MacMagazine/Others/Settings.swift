@@ -6,6 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import OneSignal
 import UIKit
 
 enum Definitions {
@@ -14,6 +15,8 @@ enum Definitions {
 	static let icon = "icon"
 	static let watch = "watch"
 	static let askForReview = "askForReview"
+	static let all_posts_pushes = "all_posts_pushes"
+	static let pushPreferences = "pushPreferences"
 }
 
 struct Settings {
@@ -66,4 +69,37 @@ struct Settings {
 		return askForReview % 50 == 0
 	}
 
+}
+
+enum PushPreferences {
+	static let featured = "featured_posts"
+	static let all = "all_posts"
+}
+
+extension Settings {
+	func getPushPreference() -> Int {
+		// 0 -> All posts
+		// 1 -> Featured only
+
+		guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.pushPreferences) as? Int else {
+			// There is no Push Notification Preference or is old style
+			guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.all_posts_pushes) as? Bool else {
+				// There is no Push Notification Preference
+				return 0
+			}
+			// Remove old preference
+			UserDefaults.standard.removeObject(forKey: Definitions.all_posts_pushes)
+			UserDefaults.standard.synchronize()
+
+			return pushPreferences ? 0 : 1
+		}
+		return pushPreferences
+	}
+
+	func updatePushPreferences(_ segment: Int) {
+		UserDefaults.standard.set(segment, forKey: Definitions.pushPreferences)
+		UserDefaults.standard.synchronize()
+
+		OneSignal.sendTag("notification_preferences", value: segment == 0 ? PushPreferences.all : PushPreferences.featured)
+	}
 }

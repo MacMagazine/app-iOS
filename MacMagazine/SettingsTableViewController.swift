@@ -98,6 +98,13 @@ class SettingsTableViewController: UITableViewController {
         UserDefaults.standard.synchronize()
 
         applyTheme()
+	}
+
+	@IBAction private func setPushMode(_ sender: Any) {
+		guard let segment = sender as? UISegmentedControl else {
+			return
+		}
+		Settings().updatePushPreferences(segment.selectedSegmentIndex)
     }
 
 	// MARK: - Private Methods -
