@@ -37,7 +37,9 @@ class PostCell: UITableViewCell {
     func configurePost(_ object: Post) {
         headlineLabel?.text = object.title
 
+		var defaultImage = "image_logo_feature"
 		if object.categorias?.contains("Destaques") == false {
+			defaultImage = "image_logo"
             if subheadlineLabel != nil {
                 subheadlineLabel?.text = object.excerpt
             }
@@ -49,20 +51,22 @@ class PostCell: UITableViewCell {
 			return
 		}
         thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo"))
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: defaultImage))
     }
 
 	func configureSearchPost(_ object: XMLPost) {
 		headlineLabel?.text = object.title
 
+		var defaultImage = "image_logo_feature"
 		if object.categories.contains("Destaques") == false {
+			defaultImage = "image_logo"
 			if subheadlineLabel != nil {
 				subheadlineLabel?.text = object.excerpt
 			}
 		}
 
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo"))
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: defaultImage))
 
 		favoriteImageView.isHidden = true
 	}

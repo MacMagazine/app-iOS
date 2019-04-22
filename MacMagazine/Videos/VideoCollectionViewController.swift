@@ -63,7 +63,7 @@ class VideoCollectionViewController: UICollectionViewController {
 		searchController = UISearchController(searchResultsController: nil)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
-		searchController?.searchBar.placeholder = "Buscar nos videos..."
+		searchController?.searchBar.placeholder = "Buscar nos vídeos..."
 		searchController?.hidesNavigationBarDuringPresentation = true
 		self.definesPresentationContext = true
 
@@ -216,7 +216,7 @@ extension VideoCollectionViewController {
 extension VideoCollectionViewController {
 
 	func showNotFound() {
-		var message = "Você ainda não favoritou nenhum video."
+		var message = "Você ainda não favoritou nenhum vídeo."
 		if isSearching {
 			message = "Nenhum resultado encontrado"
 			guard let _ = videos else {
