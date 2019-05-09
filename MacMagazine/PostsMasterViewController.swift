@@ -494,11 +494,18 @@ func showDetailController(with link: String) {
 		guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
 			return
 		}
-		if let navVC = tabController.selectedViewController as? UINavigationController {
-			navVC.pushViewController(controller, animated: true)
-		} else if let splitVC = tabController.selectedViewController as? UISplitViewController,
+		// Force first tab to present losing of reference
+		tabController.selectedIndex = 0
+		if let splitVC = tabController.selectedViewController as? UISplitViewController,
 			let navVC = splitVC.children[Settings().isPhone() ? 0 : 1] as? UINavigationController {
-			navVC.pushViewController(controller, animated: true)
+
+			if Settings().isPhone() {
+				splitVC.showDetailViewController(controller, sender: nil)
+			} else {
+				// Need to add the controller to navigation to see the nav bar
+				navVC.viewControllers = [controller]
+				splitVC.showDetailViewController(navVC, sender: nil)
+			}
 		}
 	}
 }
