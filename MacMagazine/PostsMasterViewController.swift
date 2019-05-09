@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import CoreSpotlight
 import Kingfisher
 import UIKit
 
@@ -180,7 +181,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			selectedIndexPath = indexPath
 			self.performSegue(withIdentifier: "showDetail", sender: self)
 
-			UserDefaults.standard.set(["row": indexPath.row, "section": indexPath.section], forKey: "selectedIndexPath")
+			guard let object = fetchController?.object(at: indexPath) else {
+				return
+			}
+			UserDefaults.standard.set(object.link, forKey: "selectedPostLink")
 			UserDefaults.standard.synchronize()
 		}
 		if Settings().isPhone() {
@@ -247,6 +251,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	fileprivate func getPosts(paged: Int) {
 		let getPost = {
             var images: [String] = []
+			var items: [CSSearchableItem] = []
+
 			API().getPosts(page: paged) { post in
 				DispatchQueue.main.async {
 					guard let post = post else {
@@ -254,6 +260,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                         let urls = images.compactMap { URL(string: $0) }
                         let prefetcher = ImagePrefetcher(urls: urls)
                         prefetcher.start()
+
+						// Index all items to Spotlight
+						CSSearchableIndex.default().indexSearchableItems(items) {
+							if let error = $0 {
+								logE(error.localizedDescription)
+							}
+						}
 
 						// When post == nil, indicates the last post retrieved
 						self.fetchController?.reloadData()
@@ -270,6 +283,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 					}
                     images.append(post.artworkURL)
 					CoreDataStack.shared.save(post: post)
+
+					items.append(self.createSearchableItem(post))
 				}
 			}
 		}
@@ -287,6 +302,16 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		}
 	}
 
+	fileprivate func createSearchableItem(_ post: XMLPost) -> CSSearchableItem {
+		let attributeSet = CSSearchableItemAttributeSet(itemContentType: "kUTTypeData")
+		attributeSet.title = post.title
+		attributeSet.contentDescription = post.excerpt
+		if let url = URL(string: post.artworkURL) {
+			attributeSet.thumbnailURL = url
+		}
+		return CSSearchableItem(uniqueIdentifier: post.link, domainIdentifier: "MMPosts", attributeSet: attributeSet)
+	}
+
 	fileprivate func processSelection() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 			if self.lastPage == -1 {
@@ -297,24 +322,26 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		processTabletSelection()
 	}
 
-	fileprivate func getLastSelection() -> IndexPath {
-		var indexPath = IndexPath(row: 0, section: 0)
-		guard let dict = UserDefaults.standard.object(forKey: "selectedIndexPath") as? [String: Int] else {
-			return indexPath
+	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
+		guard let link = UserDefaults.standard.object(forKey: "selectedPostLink") as? String else {
+			completion(IndexPath(row: 0, section: 0))
+			return
 		}
-		indexPath = IndexPath(row: dict["row"] ?? 0, section: dict["section"] ?? 0)
-		return indexPath
+		CoreDataStack.shared.get(post: link) { posts in
+			completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+		}
 	}
 
 	fileprivate func processTabletSelection() {
         if Settings().isPad() &&
             tableView.numberOfSections > 0 {
 
-			let indexPath = getLastSelection()
-			if tableView.numberOfSections >= indexPath.section && tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
-				if hasData() && !(self.refreshControl?.isRefreshing ?? false) {
-					tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
-					fetchController?.tableView(tableView, didSelectRowAt: indexPath)
+			getLastSelection { indexPath in
+				if self.tableView.numberOfSections >= indexPath.section && self.tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
+					if self.hasData() && !(self.refreshControl?.isRefreshing ?? false) {
+						self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+						self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
+					}
 				}
 			}
         }
@@ -324,10 +351,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		if Settings().isPhone() &&
 			tableView.numberOfSections > 0 {
 
-			let indexPath = getLastSelection()
-			if tableView.numberOfSections >= indexPath.section && tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row && hasData() {
-				tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
-				didSelectRowAt(indexPath: indexPath)
+			getLastSelection { indexPath in
+				if self.tableView.numberOfSections >= indexPath.section && self.tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row && self.hasData() {
+					self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+					self.didSelectRowAt(indexPath: indexPath)
+				}
 			}
 		}
 	}
@@ -453,4 +481,24 @@ func createWebViewController(post: PostData) -> UIViewController? {
 	}
 	controller.post = post
 	return controller
+}
+
+func showDetailController(with link: String) {
+	let storyboard = UIStoryboard(name: "Main", bundle: nil)
+	guard let controller = storyboard.instantiateViewController(withIdentifier: "detailController") as? PostsDetailViewController else {
+		return
+	}
+	CoreDataStack.shared.links { links in
+		prepareDetailController(controller, using: links, compare: link)
+
+		guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
+			return
+		}
+		if let navVC = tabController.selectedViewController as? UINavigationController {
+			navVC.pushViewController(controller, animated: true)
+		} else if let splitVC = tabController.selectedViewController as? UISplitViewController,
+			let navVC = splitVC.children[0] as? UINavigationController {
+			navVC.pushViewController(controller, animated: true)
+		}
+	}
 }

@@ -46,31 +46,11 @@ extension PushNotification {
 				}
 
 				if let url = url, post.link == url {
-					self.showDetailController(with: url)
+					showDetailController(with: url)
 				}
 
 				images.append(post.artworkURL)
 				CoreDataStack.shared.save(post: post)
-			}
-		}
-	}
-
-	func showDetailController(with link: String) {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		guard let controller = storyboard.instantiateViewController(withIdentifier: "detailController") as? PostsDetailViewController else {
-			return
-		}
-		CoreDataStack.shared.links { links in
-			prepareDetailController(controller, using: links, compare: link)
-
-			guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
-				return
-			}
-			if let navVC = tabController.selectedViewController as? UINavigationController {
-				navVC.pushViewController(controller, animated: true)
-			} else if let splitVC = tabController.selectedViewController as? UISplitViewController,
-				let navVC = splitVC.children[0] as? UINavigationController {
-				navVC.pushViewController(controller, animated: true)
 			}
 		}
 	}

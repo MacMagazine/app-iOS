@@ -283,4 +283,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return response
 	}
 
+	func indexPath(for object: Post) -> IndexPath {
+		return fetchedResultsController.indexPath(forObject: object) ?? IndexPath(row: 0, section: 0)
+	}
+
 }

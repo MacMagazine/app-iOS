@@ -6,6 +6,7 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import CoreSpotlight
 import StoreKit
 import UIKit
 
@@ -122,5 +123,19 @@ extension AppDelegate {
 		if shortcutItem.type == "openLastPost" {
 			NotificationCenter.default.post(name: .shortcutAction, object: nil)
 		}
+	}
+}
+
+// MARK: - Shortcut -
+
+extension AppDelegate {
+	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+		if userActivity.activityType == CSSearchableItemActionType {
+			if let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
+				showDetailController(with: identifier)
+				return true
+			}
+		}
+		return false
 	}
 }

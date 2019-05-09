@@ -81,6 +81,20 @@ class PostCell: UITableViewCell {
             return
         }
         lengthlineLabel?.text = "duração: \(duration)"
+
+		var defaultImage = "image_logo_feature"
+		if object.categorias?.contains("Destaques") == false {
+			defaultImage = "image_logo"
+			if subheadlineLabel != nil {
+				subheadlineLabel?.text = object.excerpt
+			}
+		}
+
+		guard let artworkURL = object.artworkURL else {
+			return
+		}
+		thumbnailImageView.kf.indicatorType = .activity
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: defaultImage))
 	}
 
 	func configureSearchPodcast(_ object: XMLPost) {
@@ -89,6 +103,17 @@ class PostCell: UITableViewCell {
         headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate.toDate().cellDate()
 		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
+
+		var defaultImage = "image_logo_feature"
+		if object.categories.contains("Destaques") == false {
+			defaultImage = "image_logo"
+			if subheadlineLabel != nil {
+				subheadlineLabel?.text = object.excerpt
+			}
+		}
+
+		thumbnailImageView.kf.indicatorType = .activity
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: defaultImage))
 	}
 
 }

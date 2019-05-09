@@ -45,7 +45,6 @@
 		9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C7F93226B6AF4000534CA /* soundcloud.js */; };
 		9B9C7F9C226BF836000534CA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F9B226BF836000534CA /* NotificationService.swift */; };
 		9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9B9C7FA9226BFBBC000534CA /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
 		9B9C7FAE226C0F5A000534CA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B9C7FAF226C1622000534CA /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
 		9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7FB0226CA192000534CA /* PushNotification.swift */; };
@@ -66,6 +65,8 @@
 		9BB4BC65225B99F700559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC64225B99F700559170 /* Assets.xcassets */; };
 		9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */; };
 		9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB94D13225DF023000FA38E /* LoadingController.swift */; };
+		9BBFD57C2283518C005E6897 /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
+		9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
@@ -234,6 +235,7 @@
 		9BB4BC64225B99F700559170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BB4BC66225B99F700559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BB94D13225DF023000FA38E /* LoadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingController.swift; sourceTree = "<group>"; };
+		9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9BC9B12D1F5C960700C4DF17 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9BCAD6771F47A08100B54526 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAD67A1F47A08100B54526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -276,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B9C7FA9226BFBBC000534CA /* OneSignal.framework in Frameworks */,
+				9BBFD57C2283518C005E6897 /* OneSignal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
 				9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */,
 				9B9C7FAF226C1622000534CA /* OneSignal.framework in Frameworks */,
@@ -618,6 +621,7 @@
 		9BF96565225E371900BAF22D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */,
 				9B9C7F8F226B6111000534CA /* WebKit.framework */,
 			);
 			name = Frameworks;
@@ -1250,6 +1254,7 @@
 		9B9C7FA2226BF836000534CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1278,6 +1283,7 @@
 		9B9C7FA3226BF836000534CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
