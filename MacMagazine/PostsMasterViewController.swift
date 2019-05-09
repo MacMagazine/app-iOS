@@ -497,7 +497,7 @@ func showDetailController(with link: String) {
 		if let navVC = tabController.selectedViewController as? UINavigationController {
 			navVC.pushViewController(controller, animated: true)
 		} else if let splitVC = tabController.selectedViewController as? UISplitViewController,
-			let navVC = splitVC.children[0] as? UINavigationController {
+			let navVC = splitVC.children[Settings().isPhone() ? 0 : 1] as? UINavigationController {
 			navVC.pushViewController(controller, animated: true)
 		}
 	}
