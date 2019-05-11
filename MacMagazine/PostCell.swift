@@ -30,7 +30,7 @@ class PostCell: UITableViewCell {
 	@IBOutlet private weak var subheadlineLabel: UILabel!
 	@IBOutlet private weak var lengthlineLabel: UILabel!
 	@IBOutlet private weak var thumbnailImageView: UIImageView!
-	@IBOutlet private weak var favoriteImageView: UIImageView!
+	@IBOutlet private weak var favoriteImageView: FavoriteImageView!
 
 	// MARK: - Methods -
 
@@ -72,8 +72,6 @@ class PostCell: UITableViewCell {
 	}
 
 	func configurePodcast(_ object: Post) {
-        favoriteImageView.isHidden = !object.favorite
-
         headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate?.cellDate()
         guard let duration = object.duration else {
@@ -82,38 +80,24 @@ class PostCell: UITableViewCell {
         }
         lengthlineLabel?.text = "duração: \(duration)"
 
-		var defaultImage = "image_logo_feature"
-		if object.categorias?.contains("Destaques") == false {
-			defaultImage = "image_logo"
-			if subheadlineLabel != nil {
-				subheadlineLabel?.text = object.excerpt
-			}
-		}
+		favoriteImageView.alpha = (object.favorite ? 1 : 0)
 
 		guard let artworkURL = object.artworkURL else {
 			return
 		}
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: defaultImage))
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
 	}
 
 	func configureSearchPodcast(_ object: XMLPost) {
-        favoriteImageView.isHidden = true
-
         headlineLabel?.text = object.title
 		subheadlineLabel?.text = object.pubDate.toDate().cellDate()
 		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
 
-		var defaultImage = "image_logo_feature"
-		if object.categories.contains("Destaques") == false {
-			defaultImage = "image_logo"
-			if subheadlineLabel != nil {
-				subheadlineLabel?.text = object.excerpt
-			}
-		}
-
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: defaultImage))
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature"))
+
+		favoriteImageView.isHidden = true
 	}
 
 }

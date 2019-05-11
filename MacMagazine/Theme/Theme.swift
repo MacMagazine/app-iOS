@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 class AppImageView: UIImageView {}
+class FavoriteImageView: UIImageView {}
 class AppButton: UIButton {}
 
 protocol Theme {
@@ -194,6 +195,7 @@ extension Theme {
 		AppImageView.appearance().with {
 			$0.borderColor = UIColor(hex: "dddddd", alpha: 1)
 		}
+		FavoriteImageView.appearance().tintColor = tint
 
 		// SWITCH
 

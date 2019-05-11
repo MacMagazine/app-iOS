@@ -74,7 +74,7 @@
                         <variation key="heightClass=compact-widthClass=compact" axis="horizontal"/>
                         <variation key="heightClass=regular-widthClass=regular" axis="horizontal"/>
                     </stackView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="349" y="5.9999999999999964" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="QYw-WD-7Rk"/>

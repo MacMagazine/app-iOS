@@ -55,7 +55,7 @@
                             <constraint firstAttribute="height" priority="750" constant="100.5" id="AyR-ML-Vst"/>
                         </constraints>
                     </stackView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="2mt-5S-7M3">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="2mt-5S-7M3" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="349" y="6" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="10V-bz-leO"/>

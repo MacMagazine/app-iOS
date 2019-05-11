@@ -41,7 +41,7 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Fhb-a9-jls">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Fhb-a9-jls" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="349" y="0.0" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="AZQ-kv-dyA"/>
@@ -67,7 +67,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="33" height="30"/>
+        <image name="fav_on" width="22" height="20"/>
         <image name="image_logo_feature" width="686" height="320"/>
     </resources>
 </document>
