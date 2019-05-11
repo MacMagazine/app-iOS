@@ -45,7 +45,19 @@ class PodcastViewController: UIViewController {
 		self.definesPresentationContext = true
     }
 
-    // MARK: - Actions -
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		coordinator.animate(alongsideTransition: { _ in
+		}, completion: { _ in
+			guard let vc = self.children[0] as? PodcastMasterViewController else {
+				return
+			}
+			vc.tableView.reloadData()
+		})
+
+		super.viewWillTransition(to: size, with: coordinator)
+	}
+
+	// MARK: - Actions -
 
 	@IBAction private func search(_ sender: Any) {
 		navigationItem.searchController = searchController
