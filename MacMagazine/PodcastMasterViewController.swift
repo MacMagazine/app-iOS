@@ -48,7 +48,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		fetchController?.fetchRequest.predicate = predicate
 
 		tableView.rowHeight = UITableView.automaticDimension
-		tableView.estimatedRowHeight = 133
+		tableView.estimatedRowHeight = 200
 
 		// Execute the fetch to display the data
 		fetchController?.reloadData()

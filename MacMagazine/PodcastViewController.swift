@@ -46,15 +46,21 @@ class PodcastViewController: UIViewController {
     }
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+
 		coordinator.animate(alongsideTransition: { _ in
+			guard let vc = self.children[0] as? PodcastMasterViewController else {
+				return
+			}
+			vc.tableView.reloadData()
+			vc.resultsTableController?.tableView.reloadData()
 		}, completion: { _ in
 			guard let vc = self.children[0] as? PodcastMasterViewController else {
 				return
 			}
 			vc.tableView.reloadData()
+			vc.resultsTableController?.tableView.reloadData()
 		})
-
-		super.viewWillTransition(to: size, with: coordinator)
 	}
 
 	// MARK: - Actions -
