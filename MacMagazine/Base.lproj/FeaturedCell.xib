@@ -42,17 +42,17 @@
                         </subviews>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Fhb-a9-jls" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="349" y="0.0" width="20" height="20"/>
+                        <rect key="frame" x="348" y="6" width="21" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="AZQ-kv-dyA"/>
-                            <constraint firstAttribute="width" constant="20" id="rh9-ly-ydf"/>
+                            <constraint firstAttribute="height" constant="21" id="AZQ-kv-dyA"/>
+                            <constraint firstAttribute="width" constant="21" id="rh9-ly-ydf"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Fhb-a9-jls" secondAttribute="trailing" constant="6" id="LJr-XO-6tR"/>
                     <constraint firstItem="Q13-km-nzu" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" constant="16" id="d41-1i-Mm0"/>
-                    <constraint firstItem="Fhb-a9-jls" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" id="djS-Zl-PgY"/>
+                    <constraint firstItem="Fhb-a9-jls" firstAttribute="top" secondItem="AFJ-uX-4fX" secondAttribute="top" constant="6" id="djS-Zl-PgY"/>
                     <constraint firstAttribute="bottom" secondItem="Q13-km-nzu" secondAttribute="bottom" constant="16" id="eIx-yn-sPA"/>
                     <constraint firstItem="Q13-km-nzu" firstAttribute="leading" secondItem="AFJ-uX-4fX" secondAttribute="leading" constant="16" id="rzb-fg-fWC"/>
                     <constraint firstAttribute="trailing" secondItem="Q13-km-nzu" secondAttribute="trailing" constant="16" id="wZi-zE-7OB"/>
@@ -67,7 +67,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="22" height="20"/>
+        <image name="fav_on" width="21" height="21"/>
         <image name="image_logo_feature" width="686" height="320"/>
     </resources>
 </document>

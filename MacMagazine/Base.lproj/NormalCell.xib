@@ -56,10 +56,10 @@
                         </constraints>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="2mt-5S-7M3" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="349" y="6" width="20" height="20"/>
+                        <rect key="frame" x="348" y="6" width="21" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="10V-bz-leO"/>
-                            <constraint firstAttribute="width" constant="20" id="P99-6P-QA4"/>
+                            <constraint firstAttribute="height" constant="21" id="10V-bz-leO"/>
+                            <constraint firstAttribute="width" constant="21" id="P99-6P-QA4"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -83,7 +83,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="22" height="20"/>
+        <image name="fav_on" width="21" height="21"/>
         <image name="image_logo" width="144" height="200"/>
     </resources>
 </document>

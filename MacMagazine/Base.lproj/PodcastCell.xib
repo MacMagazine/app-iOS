@@ -75,10 +75,10 @@
                         <variation key="heightClass=regular-widthClass=regular" axis="horizontal"/>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="349" y="5.9999999999999964" width="20" height="20"/>
+                        <rect key="frame" x="348" y="5.9999999999999964" width="21" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="QYw-WD-7Rk"/>
-                            <constraint firstAttribute="height" constant="20" id="bik-fu-VEU"/>
+                            <constraint firstAttribute="width" constant="21" id="QYw-WD-7Rk"/>
+                            <constraint firstAttribute="height" constant="21" id="bik-fu-VEU"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -103,7 +103,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav_on" width="22" height="20"/>
+        <image name="fav_on" width="21" height="21"/>
         <image name="image_logo_feature" width="686" height="320"/>
     </resources>
 </document>
