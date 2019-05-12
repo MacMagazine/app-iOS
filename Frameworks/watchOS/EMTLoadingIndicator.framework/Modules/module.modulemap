@@ -1,0 +1,11 @@
+framework module EMTLoadingIndicator {
+  umbrella header "EMTLoadingIndicator.h"
+
+  export *
+  module * { export * }
+}
+
+module EMTLoadingIndicator.Swift {
+    header "EMTLoadingIndicator-Swift.h"
+    requires objc
+}

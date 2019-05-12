@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Videos-->
+        <scene sceneID="0BS-5v-H15">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jD-dP-dNC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Videos" image="tab_video" id="4hU-Rq-N3T"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PeN-ph-XhJ" kind="relationship" relationship="rootViewController" id="HKW-sX-kPE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kmC-ae-OHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1146.4000000000001" y="-510.49475262368821"/>
+        </scene>
+        <!--Video Collection View Controller-->
+        <scene sceneID="QE0-Oi-FuT">
+            <objects>
+                <collectionViewController id="PeN-ph-XhJ" customClass="VideoCollectionViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MOJ-H3-Jtu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="7iI-GI-Urh">
+                            <size key="itemSize" width="300" height="300"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="video" id="lNX-c7-cbD" customClass="VideosCollectionViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                <rect key="frame" x="57" y="20" width="300" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <wkWebView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-bP-KyS" customClass="YouTubePlayer" customModule="MacMagazine" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ZgJ-bP-KyS" secondAttribute="height" multiplier="16:9" id="dDh-S8-ec8"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="168" id="eqq-sa-ITh"/>
+                                            </constraints>
+                                            <wkWebViewConfiguration key="configuration">
+                                                <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
+                                                <wkPreferences key="preferences"/>
+                                            </wkWebViewConfiguration>
+                                        </wkWebView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6QJ-Gr-4fx">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
+                                        </imageView>
+                                        <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcQ-Dv-MPg">
+                                            <rect key="frame" x="120" y="54.5" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="4sD-BP-v2M"/>
+                                                <constraint firstAttribute="width" constant="60" id="vmb-tm-Rwj"/>
+                                            </constraints>
+                                            <state key="normal" image="play"/>
+                                            <connections>
+                                                <action selector="play:" destination="lNX-c7-cbD" eventType="touchUpInside" id="OQD-A0-Ltu"/>
+                                            </connections>
+                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJr-W4-YSb">
+                                            <rect key="frame" x="8" y="175" width="284" height="80"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRM-UO-WvK" customClass="VideoViewLikeDataLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dK-RX-Lqi">
+                                                    <rect key="frame" x="0.0" y="18" width="43.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4V-EJ-PXU" customClass="VideoViewLikeDataLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="277" y="2" width="7" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIEWS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQP-0Z-f9n" customClass="VideoViewLikeLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="238" y="20" width="46" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3UV-Kj-DKw">
+                                                    <rect key="frame" x="264" y="36" width="20" height="8"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="8" id="UCP-ZE-acI"/>
+                                                        <constraint firstAttribute="width" constant="20" id="UaL-O2-N5p"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTp-wz-Hfk" customClass="VideoViewLikeDataLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="277" y="42" width="7" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKES" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E20-PT-GFs" customClass="VideoViewLikeLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="244" y="60" width="40" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pTp-wz-Hfk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" priority="750" constant="8" symbolic="YES" id="1jI-Hl-rD5"/>
+                                                <constraint firstItem="pTp-wz-Hfk" firstAttribute="top" secondItem="3UV-Kj-DKw" secondAttribute="bottom" constant="-2" id="8bw-F4-33z"/>
+                                                <constraint firstItem="5dK-RX-Lqi" firstAttribute="top" secondItem="xRM-UO-WvK" secondAttribute="bottom" id="8lf-7S-UdV"/>
+                                                <constraint firstAttribute="trailing" secondItem="pTp-wz-Hfk" secondAttribute="trailing" id="Bb1-6Q-TN0"/>
+                                                <constraint firstItem="3UV-Kj-DKw" firstAttribute="centerY" secondItem="aJr-W4-YSb" secondAttribute="centerY" id="DKe-2E-4bM"/>
+                                                <constraint firstItem="xRM-UO-WvK" firstAttribute="top" secondItem="aJr-W4-YSb" secondAttribute="top" id="DVY-5A-o6M"/>
+                                                <constraint firstAttribute="trailing" secondItem="3UV-Kj-DKw" secondAttribute="trailing" id="E5s-HK-VyK"/>
+                                                <constraint firstAttribute="trailing" secondItem="U4V-EJ-PXU" secondAttribute="trailing" id="HgR-no-FZT"/>
+                                                <constraint firstItem="IQP-0Z-f9n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xRM-UO-WvK" secondAttribute="trailing" priority="250" constant="8" symbolic="YES" id="MQa-nW-X1f"/>
+                                                <constraint firstItem="E20-PT-GFs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" priority="250" constant="8" symbolic="YES" id="Qdh-2C-JT4"/>
+                                                <constraint firstAttribute="height" constant="80" id="TOm-MJ-N61"/>
+                                                <constraint firstItem="IQP-0Z-f9n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" priority="250" constant="8" symbolic="YES" id="Un3-2t-Fgo"/>
+                                                <constraint firstItem="U4V-EJ-PXU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" constant="10" id="aaT-U6-zH1"/>
+                                                <constraint firstAttribute="trailing" secondItem="E20-PT-GFs" secondAttribute="trailing" id="flB-HE-a1g"/>
+                                                <constraint firstItem="xRM-UO-WvK" firstAttribute="leading" secondItem="aJr-W4-YSb" secondAttribute="leading" id="hEe-Dl-b7C"/>
+                                                <constraint firstItem="3UV-Kj-DKw" firstAttribute="top" secondItem="IQP-0Z-f9n" secondAttribute="bottom" constant="-2" id="hLg-hB-ObD"/>
+                                                <constraint firstItem="5dK-RX-Lqi" firstAttribute="leading" secondItem="aJr-W4-YSb" secondAttribute="leading" id="qwv-z7-poe"/>
+                                                <constraint firstItem="E20-PT-GFs" firstAttribute="top" secondItem="pTp-wz-Hfk" secondAttribute="bottom" id="riF-Yn-e7a"/>
+                                                <constraint firstAttribute="trailing" secondItem="IQP-0Z-f9n" secondAttribute="trailing" id="sJA-EQ-PFj"/>
+                                                <constraint firstItem="IQP-0Z-f9n" firstAttribute="top" secondItem="U4V-EJ-PXU" secondAttribute="bottom" id="x4z-wC-qLC"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kza-MX-Z9k">
+                                            <rect key="frame" x="0.0" y="255" width="300" height="25"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="25"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" image="fav_off"/>
+                                                    <state key="selected" image="fav_on"/>
+                                                    <connections>
+                                                        <action selector="favorite:" destination="lNX-c7-cbD" eventType="touchUpInside" id="9Gr-fq-6m4"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="150" y="0.0" width="150" height="25"/>
+                                                    <state key="normal" image="share_on"/>
+                                                    <connections>
+                                                        <action selector="share:" destination="lNX-c7-cbD" eventType="touchUpInside" id="a6C-7P-3sa"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="TPl-n0-s7F"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZgJ-bP-KyS" secondAttribute="trailing" id="3No-kk-I3O"/>
+                                    <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerX" secondItem="6QJ-Gr-4fx" secondAttribute="centerX" id="4m4-fb-dnt"/>
+                                    <constraint firstItem="aJr-W4-YSb" firstAttribute="top" secondItem="ZgJ-bP-KyS" secondAttribute="bottom" constant="6" id="6Qc-Cd-akI"/>
+                                    <constraint firstItem="ZgJ-bP-KyS" firstAttribute="top" secondItem="lNX-c7-cbD" secondAttribute="top" id="DUm-Ta-owq"/>
+                                    <constraint firstAttribute="trailing" secondItem="kza-MX-Z9k" secondAttribute="trailing" id="LYc-Tp-2qB"/>
+                                    <constraint firstItem="6QJ-Gr-4fx" firstAttribute="centerY" secondItem="ZgJ-bP-KyS" secondAttribute="centerY" id="LaP-hL-iGA"/>
+                                    <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerY" secondItem="6QJ-Gr-4fx" secondAttribute="centerY" id="Yz8-p8-g7Z"/>
+                                    <constraint firstItem="ZgJ-bP-KyS" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leading" id="ZoU-Tv-mUl"/>
+                                    <constraint firstItem="6QJ-Gr-4fx" firstAttribute="centerX" secondItem="ZgJ-bP-KyS" secondAttribute="centerX" id="bUW-hv-JK6"/>
+                                    <constraint firstItem="aJr-W4-YSb" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leadingMargin" id="d4M-pX-7cC"/>
+                                    <constraint firstItem="kza-MX-Z9k" firstAttribute="top" secondItem="aJr-W4-YSb" secondAttribute="bottom" id="drj-rt-8nR"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="aJr-W4-YSb" secondAttribute="trailing" id="hva-ov-ANi"/>
+                                    <constraint firstItem="kza-MX-Z9k" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leading" id="qLx-fC-vvL"/>
+                                    <constraint firstItem="6QJ-Gr-4fx" firstAttribute="height" secondItem="ZgJ-bP-KyS" secondAttribute="height" id="x4w-eH-pKa"/>
+                                    <constraint firstItem="6QJ-Gr-4fx" firstAttribute="width" secondItem="ZgJ-bP-KyS" secondAttribute="width" id="ya2-zk-KBu"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="favorite" destination="yAF-vV-0Rf" id="4Ns-B2-8nq"/>
+                                    <outlet property="headlineLabel" destination="5dK-RX-Lqi" id="bhn-oq-bjk"/>
+                                    <outlet property="likesLabel" destination="pTp-wz-Hfk" id="55K-jG-FFR"/>
+                                    <outlet property="playButton" destination="LcQ-Dv-MPg" id="wYv-1s-BIZ"/>
+                                    <outlet property="subheadlineLabel" destination="xRM-UO-WvK" id="HnG-rO-F5X"/>
+                                    <outlet property="thumbnailImageView" destination="6QJ-Gr-4fx" id="OIA-hk-a9V"/>
+                                    <outlet property="viewsLabel" destination="U4V-EJ-PXU" id="gf1-vS-qDL"/>
+                                    <outlet property="youtubeWebView" destination="ZgJ-bP-KyS" id="h2D-9T-ZnX"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="PeN-ph-XhJ" id="SA7-6M-9gM"/>
+                            <outlet property="delegate" destination="PeN-ph-XhJ" id="W73-WJ-QzV"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="fVw-Ev-d1Z">
+                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="EeU-sK-M4J">
+                            <connections>
+                                <action selector="showFavorites:" destination="PeN-ph-XhJ" id="K6A-Qw-gm8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Or0-5W-R35">
+                            <connections>
+                                <action selector="search:" destination="PeN-ph-XhJ" id="sL3-63-GLO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="favorite" destination="EeU-sK-M4J" id="Umu-Ob-foM"/>
+                        <outlet property="logoView" destination="IzC-fW-mQ9" id="gHr-79-9Xo"/>
+                        <outlet property="spin" destination="z7S-we-Rjf" id="Mea-fe-vcl"/>
+                    </connections>
+                </collectionViewController>
+                <view contentMode="scaleToFill" id="IzC-fW-mQ9">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="z7S-we-Rjf">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPe-Yv-RqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-204.34782608695653" y="-510.9375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fav_off" width="22" height="21"/>
+        <image name="fav_on" width="22" height="20"/>
+        <image name="logo" width="80" height="68.5"/>
+        <image name="play" width="500" height="500"/>
+        <image name="share_on" width="16" height="20"/>
+        <image name="tab_video" width="35" height="24"/>
+    </resources>
+</document>

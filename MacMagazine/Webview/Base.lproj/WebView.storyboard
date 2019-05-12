@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uJA-Vl-hWR">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--PostDetail-->
+        <scene sceneID="4ZF-zM-Lbj">
+            <objects>
+                <viewController storyboardIdentifier="PostDetail" title="PostDetail" id="uJA-Vl-hWR" customClass="WebViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eKl-mZ-FRj"/>
+                        <viewControllerLayoutGuide type="bottom" id="frX-7l-mly"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V9J-eg-qh6" customClass="AppView" customModule="MacMagazine" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-3F-pZB">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="cpQ-3F-pZB" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="8WW-eq-IfG"/>
+                            <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="cpQ-3F-pZB" secondAttribute="bottom" id="K5H-r3-AdM"/>
+                            <constraint firstItem="cpQ-3F-pZB" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="WuL-UJ-Anh"/>
+                            <constraint firstAttribute="trailing" secondItem="cpQ-3F-pZB" secondAttribute="trailing" id="wE0-uR-qf0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mof-85-jGR"/>
+                    <connections>
+                        <outlet property="favorite" destination="cRF-ml-ok5" id="eB5-nD-52J"/>
+                        <outlet property="share" destination="dA3-eY-eOM" id="eFL-mL-ZYw"/>
+                        <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
+                        <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJ7-qP-eRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="x4L-t4-vbR">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
+                <barButtonItem image="fav_on" id="cRF-ml-ok5">
+                    <connections>
+                        <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="action" id="dA3-eY-eOM">
+                    <connections>
+                        <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
+                    </connections>
+                </barButtonItem>
+            </objects>
+            <point key="canvasLocation" x="1294" y="-2116"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fav_on" width="22" height="20"/>
+    </resources>
+</document>

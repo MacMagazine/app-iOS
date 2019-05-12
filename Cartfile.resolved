@@ -1,0 +1,3 @@
+github "OneSignal/OneSignal-iOS-SDK" "2.9.5"
+github "hirokimu/EMTLoadingIndicator" "4.0.1"
+github "onevcat/Kingfisher" "5.3.1"
