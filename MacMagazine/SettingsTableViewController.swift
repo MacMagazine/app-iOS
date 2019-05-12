@@ -194,8 +194,7 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 	fileprivate func getAppVersion() -> String {
 		let bundle = Bundle(for: type(of: self))
 		let appVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String
-		let buildVersion = bundle.infoDictionary?["CFBundleVersion"] as? String
-		return "v: \(appVersion ?? "0") (\(buildVersion ?? "0"))"
+		return "\(appVersion ?? "0")"
 	}
 
 }
