@@ -1,28 +1,33 @@
 # App do MacMagazine para iOS
 O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_), para que a enorme comunidade de desenvolvedores/leitores do site possa colaborar e construir um app cada vez melhor e mais completo.
 
-O código-fonte está disponível aqui mesmo neste repositório.
-
-Para aqueles quiserem colaborar com o projeto, é só usar os [Pull Requests](https://github.com/MacMagazine/app-iOS/pulls) para enviar correções de bugs ou novas funcionalidades ao app.
-
 ## Funcionalidades existentes
-- Lista de posts com imagens dos artigos
+- Posts com imagens dos artigos
 - Compartilhamento de posts
+- Favoritar posts
+- Podcasts, com compartilhamento e favoritar
+- Videos, com compartilhamento e favoritar
+- Buscas em Posts, Podcasts e Videos
 - Notificações _push_ de todos os posts ou apenas de destaques
 - `WKWebView` para leitura dos artigos e visualização dos comentários
+- Modo Escuro
+- Opcão de tamanho de fontes para melhor visualização
+- App para `WatchOS`
 
 ## Bug Reporting e Feature request
 Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para cadastrar problemas encontrados ou features desejadas.
 
-### Instruções de instalação
-Este projeto usa [CocoaPods](https://cocoapods.org). Colocar tudo pra funcionar é super simples.
+### Instruções para colaboração
+Optamos pela não utilização de Gerenciadores de Dependências, como Cocoapods ou Carthage, para permitir um melhor entendimento do projeto, além de servir como estudo de Swift. Porém se tiver uma biblioteca que realmente faça a diferença no projeto, use Carthage.
 
-Depois de clonar o projeto, é só instalar os `pods`, usando o [Bundler](http://bundler.io), com os seguintes comandos no `path` do projeto:
+Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS suportada é 11+.
 
-`bundle install`
+Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/4.0`.
 
-`bundle exec pod install`
+Instale o utitlitário [swiftlint](https://github.com/realm/SwiftLint) e observe o [Code Style](https://github.com/raywenderlich/swift-style-guide) para manter o padrão no desenvolvimento.
 
-Ah, nós usamos um _token_ para registrar novos devices no servidor de notificações. Quando o `cocoapods-keys` pedir por uma chave de _pushes_ é só digitar qualquer caractere (como `a`) e então `enter` que a instalação dos `pods` prossegue sem problemas.
+Para cada bug/nova funcionalidade que for desenvolver, crie uma nova branch, no formato `hotfix/[descricao]` (no título, mencione o número do issue, usando hashtag (ex: branch: `hotfix/Fix_91_TableView_bug` e título: `Correção #91 TableView bug`)) ou `feature/[descricao]` e utilize [Pull Requests](https://github.com/MacMagazine/app-iOS/pulls) para enviar o código para aprovação do nosso time de revisores.
+
+Bom desenvolvimento.
 
 :-)
