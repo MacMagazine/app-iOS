@@ -49,18 +49,20 @@ class PodcastViewController: UIViewController {
 		super.viewWillTransition(to: size, with: coordinator)
 
 		coordinator.animate(alongsideTransition: { _ in
-			guard let vc = self.children[0] as? PodcastMasterViewController else {
-				return
-			}
-			vc.tableView.reloadData()
-			vc.resultsTableController?.tableView.reloadData()
+			self.rotate()
 		}, completion: { _ in
+			self.rotate()
+		})
+	}
+
+	fileprivate func rotate() {
+		if self.tabBarController?.selectedIndex == 1 {
 			guard let vc = self.children[0] as? PodcastMasterViewController else {
 				return
 			}
 			vc.tableView.reloadData()
 			vc.resultsTableController?.tableView.reloadData()
-		})
+		}
 	}
 
 	// MARK: - Actions -
