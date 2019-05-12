@@ -55,7 +55,7 @@
                         <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem systemItem="action" id="dA3-eY-eOM">
+                <barButtonItem image="share_nav" id="dA3-eY-eOM">
                     <connections>
                         <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
                     </connections>
@@ -65,6 +65,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_on" width="22" height="20"/>
+        <image name="fav_on" width="21" height="21"/>
+        <image name="share_nav" width="17" height="21"/>
     </resources>
 </document>
