@@ -12,7 +12,7 @@ O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_
 - `WKWebView` para leitura dos artigos e visualização dos comentários
 - Modo Escuro
 - Opcão de tamanho de fontes para melhor visualização
-- App para `WatchOS`
+- App para `watchOS`
 
 ## Bug Reporting e Feature request
 Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para cadastrar problemas encontrados ou features desejadas.
