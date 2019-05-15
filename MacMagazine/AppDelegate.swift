@@ -109,7 +109,14 @@ extension AppDelegate: UITabBarControllerDelegate {
 			let navVC = splitVC.children[0] as? UINavigationController,
 			let vc = navVC.children[0] as? PostsMasterViewController {
 			if previousController == vc || previousController == nil {
-				vc.tableView.setContentOffset(.zero, animated: true)
+				if navVC.children.count > 1,
+					let navDetail = navVC.children[1] as? UINavigationController,
+					let detail = navDetail.children[0] as? PostsDetailViewController,
+					navVC.visibleViewController == detail {
+					navVC.popViewController(animated: true)
+				} else {
+					vc.tableView.setContentOffset(.zero, animated: true)
+				}
 			}
 			previousController = vc
 		}
