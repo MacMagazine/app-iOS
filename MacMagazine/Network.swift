@@ -22,7 +22,7 @@ class Network {
         let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
         defaultSession.dataTask(with: request) { data, _, error in
 
-            guard data != nil && error == nil else {
+			guard data != nil && error == nil else {
                 completion(nil, error?.localizedDescription)
                 return
             }

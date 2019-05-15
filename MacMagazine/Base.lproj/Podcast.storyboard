@@ -118,7 +118,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-dzf">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-dzf" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -169,8 +169,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_off" width="22" height="21"/>
+        <image name="fav_off" width="21" height="21"/>
         <image name="logo" width="80" height="68.5"/>
+        <image name="logo_dark" width="80" height="68.5"/>
         <image name="tab_noar" width="24" height="28"/>
     </resources>
 </document>

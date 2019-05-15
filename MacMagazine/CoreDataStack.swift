@@ -160,7 +160,7 @@ class CoreDataStack {
 		let newItem = Post(context: viewContext)
 		newItem.title = post.title
 		newItem.link = post.link
-		newItem.excerpt = post.excerpt
+		newItem.excerpt = post.excerpt.toHtmlDecoded()
 		newItem.artworkURL = post.artworkURL.escape()
 		newItem.categorias = post.getCategorias()
 		newItem.pubDate = post.pubDate.toDate()
@@ -175,7 +175,7 @@ class CoreDataStack {
 	func update(post: Post, with item: XMLPost) {
 		post.title = item.title
 		post.link = item.link
-		post.excerpt = item.excerpt
+		post.excerpt = item.excerpt.toHtmlDecoded()
 		post.artworkURL = item.artworkURL.escape()
 		post.categorias = item.getCategorias()
 		post.pubDate = item.pubDate.toDate()

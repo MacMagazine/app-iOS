@@ -64,6 +64,12 @@ class SettingsTableViewController: UITableViewController {
 
 		// Delete all downloaded images
 		ImageCache.default.clearDiskCache()
+
+		let alertController = UIAlertController(title: "O cache foi esvaziado", message: "O conteúdo será recarregado novamente", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
+			self.dismiss(animated: true)
+		})
+		self.present(alertController, animated: true)
 	}
 
     @IBAction private func changeFontSize(_ sender: Any) {

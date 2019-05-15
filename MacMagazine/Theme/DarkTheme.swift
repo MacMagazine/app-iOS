@@ -9,6 +9,8 @@
 import UIKit
 
 struct DarkTheme: Theme {
+	let hightlightLogo: Bool = true
+
 	let videoLabelColor: UIColor = .white
 
 	let barStyle: UIBarStyle = .black

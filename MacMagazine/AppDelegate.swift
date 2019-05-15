@@ -121,6 +121,11 @@ extension AppDelegate: UITabBarControllerDelegate {
 extension AppDelegate {
 	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
 		if shortcutItem.type == "openLastPost" {
+			guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
+				return
+			}
+			tabController.selectedIndex = 0
+
 			NotificationCenter.default.post(name: .shortcutAction, object: nil)
 		}
 	}

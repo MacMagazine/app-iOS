@@ -9,11 +9,11 @@
 import UIKit
 import WebKit
 
-class AppImageView: UIImageView {}
-class FavoriteImageView: UIImageView {}
 class AppButton: UIButton {}
 
 protocol Theme {
+	var hightlightLogo: Bool { get }
+
 	var videoLabelColor: UIColor { get }
 
 	var barStyle: UIBarStyle { get }
@@ -196,6 +196,7 @@ extension Theme {
 			$0.borderColor = UIColor(hex: "dddddd", alpha: 1)
 		}
 		FavoriteImageView.appearance().tintColor = tint
+		NavLogoImageView.appearance().hightlightLogo = hightlightLogo
 
 		// SWITCH
 

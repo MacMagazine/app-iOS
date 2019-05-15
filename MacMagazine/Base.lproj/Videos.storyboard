@@ -228,7 +228,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -245,9 +245,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_off" width="22" height="21"/>
-        <image name="fav_on" width="22" height="20"/>
+        <image name="fav_off" width="21" height="21"/>
+        <image name="fav_on" width="21" height="21"/>
         <image name="logo" width="80" height="68.5"/>
+        <image name="logo_dark" width="80" height="68.5"/>
         <image name="play" width="500" height="500"/>
         <image name="share_on" width="16" height="20"/>
         <image name="tab_video" width="35" height="24"/>

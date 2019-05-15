@@ -102,7 +102,7 @@ class API: NSObject, XMLParserDelegate {
             cookieStore.deleteCookie(cookie)
         }
 
-        guard let url = URL(string: "\(host)") else {
+        guard let url = URL(string: "\(host.escape())") else {
             return
         }
 
