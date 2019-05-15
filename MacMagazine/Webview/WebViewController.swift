@@ -42,6 +42,8 @@ class WebViewController: UIViewController {
 		}
 	}
 
+	var forceReload: Bool = false
+
 	// MARK: - View lifecycle -
 
 	override func viewDidLoad() {
@@ -72,7 +74,8 @@ class WebViewController: UIViewController {
 				return
 		}
 
-		if webView?.url != url {
+		if webView?.url != url ||
+			forceReload {
 			loadWebView(url: url)
 		}
 	}
@@ -86,6 +89,8 @@ class WebViewController: UIViewController {
 		webView?.load(URLRequest(url: url))
 
 		self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+
+		forceReload = false
 	}
 
 	// MARK: - Actions -
@@ -146,6 +151,7 @@ extension WebViewController {
 	}
 
 	@objc func reload(_ notification: Notification) {
+		forceReload = true
 		reload()
 	}
 
@@ -255,6 +261,10 @@ extension WebViewController {
 	func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {
 			let safari = SFSafariViewController(url: url)
+
+			let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool ?? false
+			safari.preferredBarTintColor = isDarkMode ? UIColor.black : UIColor.white
+
 			safari.modalPresentationStyle = .overFullScreen
 			self.present(safari, animated: true, completion: nil)
 		}
