@@ -65,7 +65,7 @@ class SettingsTableViewController: UITableViewController {
 		// Delete all downloaded images
 		ImageCache.default.clearDiskCache()
 
-		let alertController = UIAlertController(title: "O cache foi esvaziado", message: "O conteúdo será recarregado novamente", preferredStyle: .alert)
+		let alertController = UIAlertController(title: "Cache limpo!", message: "Todo o conteúdo do app será agora recarregado.", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
 			self.dismiss(animated: true)
 		})

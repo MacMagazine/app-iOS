@@ -140,15 +140,26 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if tableView.indexPathForSelectedRow != nil {
-			guard let navController = segue.destination as? UINavigationController,
-				let controller = navController.topViewController as? PostsDetailViewController,
-				let indexPath = selectedIndexPath,
-				let post = fetchController?.object(at: indexPath)
-				else {
+		guard let navController = segue.destination as? UINavigationController,
+			let controller = navController.topViewController as? PostsDetailViewController,
+			let indexPath = selectedIndexPath
+			else {
+				return
+		}
+
+		guard let _ = navigationItem.searchController else {
+			// Normal Posts table
+			if tableView.indexPathForSelectedRow != nil {
+				guard let post = fetchController?.object(at: indexPath) else {
 					return
+				}
+				prepareDetailController(controller, using: links, compare: post.link)
 			}
-			prepareDetailController(controller, using: links, compare: post.link)
+			return
+		}
+		// Search Posts table
+		if resultsTableController?.tableView.indexPathForSelectedRow != nil {
+			prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
 		}
 	}
 
@@ -393,6 +404,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 	}
 
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		posts = []
 		searchBar.resignFirstResponder()
 		navigationItem.searchController = nil
 	}
