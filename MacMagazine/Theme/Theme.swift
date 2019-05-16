@@ -202,6 +202,10 @@ extension Theme {
 
         UISwitch.appearance().onTintColor = onTint
 
+		// SEGMENTCONTROL
+
+		UISegmentedControl.appearance().tintColor = tint
+
         // SLIDER
 
         UISlider.appearance().tintColor = tint

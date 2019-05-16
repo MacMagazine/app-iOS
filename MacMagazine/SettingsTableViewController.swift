@@ -66,9 +66,12 @@ class SettingsTableViewController: UITableViewController {
 		ImageCache.default.clearDiskCache()
 
 		let alertController = UIAlertController(title: "Cache limpo!", message: "Todo o conteúdo do app será agora recarregado.", preferredStyle: .alert)
-		alertController.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
+		alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 			self.dismiss(animated: true)
 		})
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool {
+			alertController.view.tintColor = isDarkMode ? .black : UIColor(hex: "0097d4", alpha: 1)
+		}
 		self.present(alertController, animated: true)
 	}
 
@@ -168,8 +171,19 @@ extension SettingsTableViewController {
 			let icon = IconOptions().getIcon(for: iconName) else {
 				return
 		}
+
+		// Temporary change the colors
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool {
+			UIApplication.shared.keyWindow?.tintColor = isDarkMode ? .black : UIColor(hex: "0097d4", alpha: 1)
+		}
+
 		UIApplication.shared.setAlternateIconName(icon) { error in
 			if error == nil {
+				// Return to theme settings
+				DispatchQueue.main.async {
+					self.applyTheme()
+				}
+
 				UserDefaults.standard.set(iconName, forKey: Definitions.icon)
 				UserDefaults.standard.synchronize()
 
