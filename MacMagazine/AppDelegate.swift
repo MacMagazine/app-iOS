@@ -140,7 +140,7 @@ extension AppDelegate {
 	}
 }
 
-// MARK: - Shortcut -
+// MARK: - Spotlight search -
 
 extension AppDelegate {
 	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
