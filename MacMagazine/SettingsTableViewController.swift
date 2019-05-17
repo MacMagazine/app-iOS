@@ -21,6 +21,8 @@ class SettingsTableViewController: UITableViewController {
 	@IBOutlet private weak var iconOption1: UIImageView!
 	@IBOutlet private weak var iconOption2: UIImageView!
 
+	@IBOutlet private weak var pushOptions: AppSegmentedControl!
+
     var version: String = ""
 
     // MARK: - View lifecycle -
@@ -36,6 +38,8 @@ class SettingsTableViewController: UITableViewController {
 		let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
 		self.iconOption1.alpha = iconName ?? IconOptions.option1 == IconOptions.option1 ? 1 : 0.6
 		self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
+
+		pushOptions.selectedSegmentIndex = Settings().getPushPreference()
 
 		guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
@@ -82,7 +86,8 @@ class SettingsTableViewController: UITableViewController {
 
         var fontSize = ""
         var roundedValue = 1
-        if slider.value < 0.65 {
+
+		if slider.value < 0.65 {
             roundedValue = 0
             fontSize = "fontemenor"
         }
@@ -95,7 +100,7 @@ class SettingsTableViewController: UITableViewController {
         UserDefaults.standard.set(fontSize, forKey: Definitions.fontSize)
         UserDefaults.standard.synchronize()
 
-        applyTheme()
+		applyTheme()
     }
 
     @IBAction private func changeDarkMode(_ sender: Any) {
@@ -110,7 +115,7 @@ class SettingsTableViewController: UITableViewController {
 	}
 
 	@IBAction private func setPushMode(_ sender: Any) {
-		guard let segment = sender as? UISegmentedControl else {
+		guard let segment = sender as? AppSegmentedControl else {
 			return
 		}
 		Settings().updatePushPreferences(segment.selectedSegmentIndex)

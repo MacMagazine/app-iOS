@@ -55,7 +55,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-pV-sjC">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-pV-sjC" customClass="AppSegmentedControl" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="70.5" y="11" width="273" height="29"/>
                                                     <segments>
                                                         <segment title="Todos os Posts"/>
@@ -341,6 +341,7 @@
                         <outlet property="fontSize" destination="8Xj-Ri-tHM" id="yeG-fi-gji"/>
                         <outlet property="iconOption1" destination="WFw-2p-qsH" id="igU-sl-ORk"/>
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="5j5-wP-hOT"/>
+                        <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
                 </tableViewController>

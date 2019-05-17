@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 class AppButton: UIButton {}
+class AppSegmentedControl: UISegmentedControl {}
 
 protocol Theme {
 	var hightlightLogo: Bool { get }
@@ -202,13 +203,17 @@ extension Theme {
 
         UISwitch.appearance().onTintColor = onTint
 
-		// SEGMENTCONTROL
-
-		UISegmentedControl.appearance().tintColor = tint
-
         // SLIDER
 
         UISlider.appearance().tintColor = tint
+
+		// SEGMENTCONTROL
+
+		AppSegmentedControl.appearance().tintColor = tint
+		UILabel.appearance(whenContainedInInstancesOf: [AppSegmentedControl.self]).with {
+			$0.textColor = tint
+			$0.fontSize = CGFloat(0.8)
+		}
 
 		// WEBVIEW
 

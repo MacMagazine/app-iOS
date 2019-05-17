@@ -665,7 +665,6 @@
 			buildConfigurationList = 9B9C7FA1226BF836000534CA /* Build configuration list for PBXNativeTarget "MacMagazineNotificationServiceExtension" */;
 			buildPhases = (
 				9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */,
-				9BA38773228DCDBB00C9778F /* Run update version Script */,
 				9B9C7F95226BF835000534CA /* Sources */,
 				9B9C7F96226BF835000534CA /* Frameworks */,
 				9B9C7F97226BF835000534CA /* Resources */,
@@ -914,7 +913,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\nfi\n";
+			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"${SRCROOT}/MacMagazineNotificationServiceExtension/Info.plist\"\n\nfi\n";
 		};
 		9B5D4043225EA38F00315963 /* Run Sign Framework Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -977,24 +976,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		9BA38773228DCDBB00C9778F /* Run update version Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run update version Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\nfi\n";
 		};
 		9BA5527D2225CE1D00B3FA23 /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;

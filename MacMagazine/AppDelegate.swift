@@ -11,7 +11,8 @@ import StoreKit
 import UIKit
 
 extension Notification.Name {
-	static let shortcutAction = Notification.Name("shortcutAction")
+	static let shortcutActionLastPost = Notification.Name("shortcutActionLastPost")
+	static let shortcutActionRecentPost = Notification.Name("shortcutActionRecentPost")
 	static let reloadWeb = Notification.Name("reloadWeb")
 	static let scrollToTop = Notification.Name("scrollToTop")
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
@@ -127,13 +128,14 @@ extension AppDelegate: UITabBarControllerDelegate {
 
 extension AppDelegate {
 	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-		if shortcutItem.type == "openLastPost" {
+		if shortcutItem.type == "openLastSeenPost" ||
+			shortcutItem.type == "openMostRecentPost" {
 			guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
 				return
 			}
 			tabController.selectedIndex = 0
 
-			NotificationCenter.default.post(name: .shortcutAction, object: nil)
+			NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
 		}
 	}
 }
