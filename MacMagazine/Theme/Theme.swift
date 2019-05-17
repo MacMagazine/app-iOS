@@ -212,7 +212,7 @@ extension Theme {
 		AppSegmentedControl.appearance().tintColor = tint
 		UILabel.appearance(whenContainedInInstancesOf: [AppSegmentedControl.self]).with {
 			$0.textColor = tint
-			$0.fontSize = CGFloat(0.8)
+			$0.fontSize = CGFloat(0.785)
 		}
 
 		// WEBVIEW

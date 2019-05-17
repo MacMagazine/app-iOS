@@ -56,7 +56,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-pV-sjC" customClass="AppSegmentedControl" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="70.5" y="11" width="273" height="29"/>
+                                                    <rect key="frame" x="57" y="11" width="300" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="lrT-ld-A6F"/>
+                                                    </constraints>
                                                     <segments>
                                                         <segment title="Todos os Posts"/>
                                                         <segment title="Somente Destaques"/>

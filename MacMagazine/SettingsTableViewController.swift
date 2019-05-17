@@ -126,10 +126,10 @@ class SettingsTableViewController: UITableViewController {
     fileprivate func applyTheme() {
         let isDarkMode = Settings().isDarkMode()
 
-        let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
+		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
         theme.apply(for: UIApplication.shared)
 
-        darkMode.isOn = isDarkMode
+		darkMode.isOn = isDarkMode
 		NotificationCenter.default.post(name: .reloadWeb, object: nil)
     }
 
