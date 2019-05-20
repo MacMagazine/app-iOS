@@ -105,7 +105,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>4.0</string>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>10</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -123,9 +123,9 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>tab_posts</string>
+			<string>postBack</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Abrir o último post visualizado</string>
+			<string>Voltar ao último post visualizado</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>openLastSeenPost</string>
 		</dict>
