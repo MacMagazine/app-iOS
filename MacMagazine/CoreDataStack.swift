@@ -124,6 +124,8 @@ class CoreDataStack {
 
 	func get(_ link: String?, completion: @escaping ([Post]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
+		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
+
 		if let link = link {
 			request.predicate = NSPredicate(format: "link == %@", link)
 		}

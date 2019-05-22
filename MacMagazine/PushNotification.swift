@@ -35,6 +35,7 @@ extension PushNotification {
 	func updateDatabase(openURL url: String?) {
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
+
 			DispatchQueue.main.async {
 				guard let post = post else {
 					// Prefetch images to be able to sent to Apple Watch
@@ -44,6 +45,8 @@ extension PushNotification {
 
 					return
 				}
+
+				logD("\(url ?? "") -> \(post.link)")
 
 				if let url = url, post.link == url {
 					showDetailController(with: url)
