@@ -20,9 +20,25 @@ extension Notification.Name {
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
 }
 
-// MARK: - Theme -
+// MARK: - Setup -
 
 extension AppDelegate {
+	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+		// Apply custom thmee (Dark/Light)
+		applyTheme()
+
+		// Apple Watch Session
+		WatchSessionManager.shared.startSession()
+
+		// AppStore Review
+		if Settings().shouldAskForReview() {
+			SKStoreReviewController.requestReview()
+		}
+
+		// Push Notification
+		PushNotification().setup(options: launchOptions)
+	}
+
 	fileprivate func applyTheme() {
 		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
 			let theme: Theme = LightTheme()

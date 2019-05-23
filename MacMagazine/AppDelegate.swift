@@ -33,19 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		splitViewController.preferredDisplayMode = .allVisible
 		splitViewController.preferredPrimaryColumnWidthFraction = 0.33
 
-		// Apply custom thmee (Dark/Light)
-//		applyTheme()
-
-		// Apple Watch Session
-//		WatchSessionManager.shared.startSession()
-
-		// AppStore Review
-//		if Settings().shouldAskForReview() {
-//			SKStoreReviewController.requestReview()
-//		}
-
-		// Push Notification
-//		PushNotification().setup(options: launchOptions)
+		setup(launchOptions)
 
 		return true
 	}

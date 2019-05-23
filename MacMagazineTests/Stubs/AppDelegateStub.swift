@@ -8,6 +8,13 @@
 
 import UIKit
 
+// MARK: - AppDelegate setup -
+
+extension AppDelegate {
+	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+	}
+}
+
 // MARK: - Splitview Delegate -
 
 extension AppDelegate: UISplitViewControllerDelegate {
