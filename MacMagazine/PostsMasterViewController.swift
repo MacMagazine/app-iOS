@@ -53,9 +53,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var direction: Direction = .up
 	var lastPage = -1
 	var openRecentPost = false
+	var viewDidAppear = false
 
 	var selectedIndexPath: IndexPath?
 	var links: [PostData] = []
+	var push: String?
 
 	private var searchController: UISearchController?
 	private var resultsTableController: ResultsViewController?
@@ -73,6 +75,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		// Do any additional setup after loading the view, typically from a nib.
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onPushReceived(_:)), name: .pushReceived, object: nil)
 
 		self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
@@ -124,6 +127,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.viewDidAppear(animated)
 
 		processSelection()
+		viewDidAppear = true
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -305,6 +309,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 								}
 							}
 							self.openRecentPost = false
+							self.push = nil
 						}
 						return
 					}
@@ -350,6 +355,17 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
+		// If came from Push notification, get the link
+		if let push = push {
+			CoreDataStack.shared.get(post: push) { posts in
+				completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+			}
+		}
+
+		if openRecentPost {
+			completion(IndexPath(row: 0, section: 0))
+		}
+
 		guard let link = UserDefaults.standard.object(forKey: "selectedPostLink") as? String else {
 			completion(IndexPath(row: 0, section: 0))
 			return
@@ -481,22 +497,39 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 
 }
 
-// MARK: - Peek&Pop -
+// MARK: - Notifications for Peek&Pop and Push -
 
 extension PostsMasterViewController {
-	@objc func onShortcutActionLastPost(_ notification: Notification) {
-		openRecentPost = false
 
-		if Settings().isPad() {
-			processTabletSelection()
-		} else {
-			processPhoneSelection()
+	fileprivate func processOption(openRecentPost: Bool, push: String?) {
+		self.openRecentPost = openRecentPost
+		self.push = push
+
+		if !openRecentPost ||
+			viewDidAppear {
+			if Settings().isPad() {
+				processTabletSelection()
+			} else {
+				processPhoneSelection()
+			}
 		}
 	}
 
-	@objc func onShortcutActionRecentPost(_ notification: Notification) {
-		openRecentPost = true
+	@objc func onShortcutActionLastPost(_ notification: Notification) {
+		processOption(openRecentPost: false, push: nil)
 	}
+
+	@objc func onShortcutActionRecentPost(_ notification: Notification) {
+		processOption(openRecentPost: true, push: nil)
+	}
+
+	@objc func onPushReceived(_ notification: Notification) {
+		guard let object = notification.object as? String else {
+			return
+		}
+		processOption(openRecentPost: false, push: object)
+	}
+
 }
 
 // MARK: - Common Methods -

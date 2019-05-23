@@ -6,6 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import CoreSpotlight
 import Kingfisher
 import MessageUI
 import UIKit
@@ -69,6 +70,10 @@ class SettingsTableViewController: UITableViewController {
 		// Delete all downloaded images
 		ImageCache.default.clearDiskCache()
 
+		// Clean Spotlight search indexes
+		CSSearchableIndex.default().deleteAllSearchableItems(completionHandler: nil)
+
+		// Feedback message
 		let alertController = UIAlertController(title: "Cache limpo!", message: "Todo o conteúdo do app será agora recarregado.", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 			self.dismiss(animated: true)
