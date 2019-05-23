@@ -57,7 +57,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	var selectedIndexPath: IndexPath?
 	var links: [PostData] = []
-	var push: String?
 
 	private var searchController: UISearchController?
 	private var resultsTableController: ResultsViewController?
@@ -75,7 +74,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		// Do any additional setup after loading the view, typically from a nib.
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(onPushReceived(_:)), name: .pushReceived, object: nil)
 
 		self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
@@ -309,7 +307,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 								}
 							}
 							self.openRecentPost = false
-							self.push = nil
 						}
 						return
 					}
@@ -355,13 +352,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
-		// If came from Push notification, get the link
-		if let push = push {
-			CoreDataStack.shared.get(post: push) { posts in
-				completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
-			}
-		}
-
 		if openRecentPost {
 			completion(IndexPath(row: 0, section: 0))
 		}
@@ -503,7 +493,6 @@ extension PostsMasterViewController {
 
 	fileprivate func processOption(openRecentPost: Bool, push: String?) {
 		self.openRecentPost = openRecentPost
-		self.push = push
 
 		if !openRecentPost ||
 			viewDidAppear {
@@ -521,13 +510,6 @@ extension PostsMasterViewController {
 
 	@objc func onShortcutActionRecentPost(_ notification: Notification) {
 		processOption(openRecentPost: true, push: nil)
-	}
-
-	@objc func onPushReceived(_ notification: Notification) {
-		guard let object = notification.object as? String else {
-			return
-		}
-		processOption(openRecentPost: false, push: object)
 	}
 
 }

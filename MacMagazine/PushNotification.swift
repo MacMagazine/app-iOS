@@ -13,9 +13,7 @@ import UIKit
 class PushNotification {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
 		let notificationReceived: OSHandleNotificationReceivedBlock = { result in
-			logD(result)
-
-			self.updateDatabase()
+			self.updateDatabase(for: nil)
 		}
 
 		let notificationAction: OSHandleNotificationActionBlock = { result in
@@ -26,7 +24,7 @@ class PushNotification {
 				else {
 					return
 			}
-			self.showPost(for: url["url"])
+			self.updateDatabase(for: url["url"])
 		}
 
 		let key: [UInt8] = [114, 66, 66, 33, 7, 95, 7, 81, 76, 21, 6, 42, 97, 98, 86, 91, 80, 6, 89, 35, 20, 18, 116, 72, 14, 87, 1, 81, 18, 85, 123, 55, 120, 4, 89, 81]
@@ -38,25 +36,10 @@ class PushNotification {
 }
 
 extension PushNotification {
-
-	// Open post
-	func showPost(for url: String?) {
+	func updateDatabase(for url: String?) {
 
 		logD(url)
 
-		DispatchQueue.main.async {
-			guard let url = url,
-				let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController
-				else {
-					return
-			}
-			tabController.selectedIndex = 0
-			NotificationCenter.default.post(name: .pushReceived, object: url)
-		}
-	}
-
-	// Load new posts in background
-	func updateDatabase() {
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
 
@@ -69,11 +52,15 @@ extension PushNotification {
 
 					return
 				}
-
 				images.append(post.artworkURL)
 				CoreDataStack.shared.save(post: post)
+
+				if let url = url, post.link == url {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+						showDetailController(with: url)
+					}
+				}
 			}
 		}
 	}
-
 }
