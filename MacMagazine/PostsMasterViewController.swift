@@ -72,9 +72,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
-		// Apply custom thmee (Dark/Light)
-		applyTheme()
-
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 
@@ -447,7 +444,6 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 				return nil
 		}
 		tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-		selectedIndexPath = indexPath
 		previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
 		guard let webController = createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite)) as? WebViewController else {
@@ -459,6 +455,10 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 	}
 
 	func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+		guard let index = self.tableView.indexPathForSelectedRow else {
+			return
+		}
+		selectedIndexPath = index
 		self.links = fetchController?.links() ?? []
 		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
@@ -563,17 +563,5 @@ func showDetailController(with link: String) {
 				splitVC.showDetailViewController(navVC, sender: nil)
 			}
 		}
-	}
-}
-
-extension PostsMasterViewController {
-	fileprivate func applyTheme() {
-		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-			let theme: Theme = LightTheme()
-			theme.apply(for: UIApplication.shared)
-			return
-		}
-		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
-		theme.apply(for: UIApplication.shared)
 	}
 }
