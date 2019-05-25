@@ -65,7 +65,7 @@ class ResultsViewController: UITableViewController {
 			}
 		} else {
 			tableView.backgroundView = nil
-			tableView.separatorStyle = .singleLine
+			tableView.separatorStyle = posts.count > 1 ? .singleLine : .none
 		}
 
 		return 1

@@ -84,8 +84,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 		} else {
 			tableView.backgroundView = nil
-			tableView.separatorStyle = .singleLine
-
+			tableView.separatorStyle = hasMoreThanOneLine() ? .singleLine : .none
 		}
 
 		return numSections
@@ -243,6 +242,10 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	func hasData() -> Bool {
 		return !(fetchedResultsController.fetchedObjects?.isEmpty ?? true)
+	}
+
+	func hasMoreThanOneLine() -> Bool {
+		return (fetchedResultsController.fetchedObjects?.count ?? 0 > 1)
 	}
 
 	func sections() -> Int {
