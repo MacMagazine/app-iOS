@@ -50,9 +50,6 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
 
 		// Do any additional setup after loading the view.
-		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
-
 		webView?.navigationDelegate = self
 		webView?.uiDelegate = self
 
@@ -62,6 +59,20 @@ class WebViewController: UIViewController {
 
 		reload()
     }
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+
+		NotificationCenter.default.removeObserver(self, name: .favoriteUpdated, object: nil)
+		NotificationCenter.default.removeObserver(self, name: .reloadWeb, object: nil)
+	}
 
 	// MARK: - Local methods -
 

@@ -114,7 +114,7 @@ extension Theme {
             $0.separatorColor = separatorColor
         }
 
-        UITableViewCell.appearance().with {
+        AppTableViewCell.appearance().with {
             $0.backgroundColor = .clear
             $0.contentColor = cellBackgroundColor
             $0.selectionColor = selectionColor
@@ -230,7 +230,7 @@ extension Theme {
 
 		UIActivityIndicatorView.appearance().color = tint
 
-        extend()
+		extend()
 
         // Ensure existing views render with new theme
         // https://developer.apple.com/documentation/uikit/uiappearance

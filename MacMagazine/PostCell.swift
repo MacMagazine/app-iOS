@@ -22,7 +22,7 @@ class HeaderCell: UITableViewHeaderFooterView {
 	}
 }
 
-class PostCell: UITableViewCell {
+class PostCell: AppTableViewCell {
 
 	// MARK: - Properties -
 

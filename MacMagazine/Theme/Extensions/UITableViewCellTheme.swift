@@ -8,7 +8,9 @@
 
 import UIKit
 
-public extension UITableViewCell {
+class AppTableViewCell: UITableViewCell {}
+
+extension AppTableViewCell {
 
     // The color of the cell when it is selected.
     @objc dynamic var selectionColor: UIColor? {
