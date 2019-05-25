@@ -373,10 +373,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="80" height="68.5"/>
-        <image name="logo_dark" width="80" height="68.5"/>
-        <image name="phone_1" width="30" height="30"/>
-        <image name="phone_2" width="30" height="30"/>
+        <image name="logo" width="415" height="350"/>
+        <image name="logo_dark" width="509" height="419"/>
+        <image name="phone_1" width="1024" height="1024"/>
+        <image name="phone_2" width="1024" height="1024"/>
         <image name="tab_settings" width="24" height="25"/>
     </resources>
 </document>

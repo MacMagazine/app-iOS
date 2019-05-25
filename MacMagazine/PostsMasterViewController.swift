@@ -479,6 +479,10 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 	}
 
 	func previewActionCancel() {
+		// Just in case, return the default theme colors
+		let theme: Theme = Settings().isDarkMode() ? DarkTheme() : LightTheme()
+		theme.apply(for: UIApplication.shared)
+
 		guard let index = self.tableView.indexPathForSelectedRow else {
 			return
 		}
@@ -487,7 +491,7 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 
 }
 
-// MARK: - Notifications for Peek&Pop and Push -
+// MARK: - Peek&Pop -
 
 extension PostsMasterViewController {
 

@@ -129,6 +129,12 @@ class WebViewController: UIViewController {
 		let cancelar = UIPreviewAction(title: "Cancelar", style: .destructive) { [weak self] _, _  in
 			self?.delegate?.previewActionCancel()
 		}
+
+		// Temporary change the colors
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool {
+			UIApplication.shared.keyWindow?.tintColor = isDarkMode ? .black : UIColor(hex: "0097d4", alpha: 1)
+		}
+
 		return [favoritar, compartilhar, cancelar]
 	}
 
@@ -260,12 +266,13 @@ extension WebViewController {
 
 	func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {
-			let safari = SFSafariViewController(url: url)
-
 			let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool ?? false
-			safari.preferredBarTintColor = isDarkMode ? UIColor.black : UIColor.white
 
+			let safari = SFSafariViewController(url: url)
+			safari.preferredBarTintColor = isDarkMode ? UIColor.black : UIColor.white
+			safari.dismissButtonStyle = .close
 			safari.modalPresentationStyle = .overFullScreen
+
 			self.present(safari, animated: true, completion: nil)
 		}
 	}

@@ -188,8 +188,8 @@
     </scenes>
     <resources>
         <image name="fav_off" width="21" height="21"/>
-        <image name="logo" width="80" height="68.5"/>
-        <image name="logo_dark" width="80" height="68.5"/>
+        <image name="logo" width="415" height="350"/>
+        <image name="logo_dark" width="509" height="419"/>
         <image name="tab_posts" width="22" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
