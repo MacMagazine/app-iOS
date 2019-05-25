@@ -11,7 +11,7 @@ import Kingfisher
 import UIKit
 import WebKit
 
-class VideosCollectionViewCell: UICollectionViewCell {
+class VideosCollectionViewCell: AppCollectionViewCell {
 
 	// MARK: - Properties -
 

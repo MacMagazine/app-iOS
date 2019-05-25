@@ -11,6 +11,7 @@ import WebKit
 
 class AppButton: UIButton {}
 class AppSegmentedControl: UISegmentedControl {}
+class AppCollectionViewCell: UICollectionViewCell {}
 
 protocol Theme {
 	var hightlightLogo: Bool { get }
@@ -131,7 +132,7 @@ extension Theme {
 		UICollectionView.appearance().with {
 			$0.backgroundColor = backgroundColor
 		}
-		UICollectionViewCell.appearance().with {
+		AppCollectionViewCell.appearance().with {
 			$0.backgroundColor = cellBackgroundColor
 		}
 
@@ -190,6 +191,7 @@ extension Theme {
         UIButton.appearance().with {
             $0.setTitleColor(tint, for: .normal)
             $0.borderColor = tint
+			$0.backgroundColor = .clear
         }
 
 		AppButton.appearance().tintColor = tint
