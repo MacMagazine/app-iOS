@@ -24,9 +24,6 @@ extension Notification.Name {
 
 extension AppDelegate {
 	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-		// Apply custom thmee (Dark/Light)
-		applyTheme()
-
 		// Apple Watch Session
 		WatchSessionManager.shared.startSession()
 
@@ -37,17 +34,6 @@ extension AppDelegate {
 
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
-	}
-
-	fileprivate func applyTheme() {
-		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-			let theme: Theme = LightTheme()
-			theme.apply(for: UIApplication.shared)
-
-			return
-		}
-		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
-		theme.apply(for: UIApplication.shared)
 	}
 }
 
@@ -93,6 +79,12 @@ extension AppDelegate: UITabBarControllerDelegate {
 				} else {
 					vc.tableView.setContentOffset(.zero, animated: true)
 				}
+			}
+			previousController = vc
+		} else if let navVC = viewController as? UINavigationController,
+			let vc = navVC.children[0] as? VideoCollectionViewController {
+			if previousController == vc {
+				vc.collectionView.setContentOffset(.zero, animated: true)
 			}
 			previousController = vc
 		}

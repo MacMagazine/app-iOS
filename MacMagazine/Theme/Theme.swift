@@ -37,6 +37,8 @@ protocol Theme {
     var textColor: UIColor { get }
     var placeholderTextColor: UIColor { get }
 
+	var keyboardStyle: UIKeyboardAppearance { get }
+
     func apply(for application: UIApplication)
     func extend()
 }
@@ -101,6 +103,7 @@ extension Theme {
 		UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).with {
 			$0.textColor = textColor
 			$0.placeholderColor = placeholderTextColor
+			$0.keyboardAppearance = keyboardStyle
 		}
 
         // TABLEVIEW

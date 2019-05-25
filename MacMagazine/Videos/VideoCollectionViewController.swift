@@ -20,6 +20,7 @@ class VideoCollectionViewController: UICollectionViewController {
 	var isSearching = false
 	var videos: [JSONVideo]?
 
+	var isLoading = true
 	var pageToken: String = ""
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -80,6 +81,17 @@ class VideoCollectionViewController: UICollectionViewController {
 		flowLayout.invalidateLayout()
 	}
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		if fetchedResultsController.fetchedObjects?.isEmpty ?? true &&
+			!isLoading {
+			pageToken = ""
+			isLoading = true
+			getVideos()
+		}
+	}
+
 	// MARK: - Local methods -
 
 	fileprivate func getVideos() {
@@ -102,6 +114,7 @@ class VideoCollectionViewController: UICollectionViewController {
 					return
 				}
 				DispatchQueue.main.async {
+					self.isLoading = false
 					CoreDataStack.shared.save(playlist: videos, statistics: stats)
 					self.collectionView.reloadData()
 					self.navigationItem.titleView = self.logoView
@@ -216,7 +229,7 @@ extension VideoCollectionViewController {
 extension VideoCollectionViewController {
 
 	func showNotFound() {
-		var message = "Você ainda não favoritou nenhum vídeo."
+		var message = isLoading ? "Carregando..." : "Você ainda não favoritou nenhum vídeo."
 		if isSearching {
 			message = "Nenhum resultado encontrado"
 			guard let _ = videos else {

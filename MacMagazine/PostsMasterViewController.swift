@@ -72,6 +72,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
+		// Apply custom thmee (Dark/Light)
+		applyTheme()
+
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 
@@ -560,5 +563,17 @@ func showDetailController(with link: String) {
 				splitVC.showDetailViewController(navVC, sender: nil)
 			}
 		}
+	}
+}
+
+extension PostsMasterViewController {
+	fileprivate func applyTheme() {
+		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
+			let theme: Theme = LightTheme()
+			theme.apply(for: UIApplication.shared)
+			return
+		}
+		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
+		theme.apply(for: UIApplication.shared)
 	}
 }

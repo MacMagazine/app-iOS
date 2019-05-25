@@ -32,4 +32,6 @@ struct LightTheme: Theme {
     let subtleLabelColor: UIColor = .lightGray
     let textColor: UIColor = .black
     let placeholderTextColor: UIColor = .gray
+
+	let keyboardStyle: UIKeyboardAppearance = .light
 }
