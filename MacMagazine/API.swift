@@ -8,7 +8,7 @@
 
 import UIKit
 
-class API: NSObject, XMLParserDelegate {
+class API {
 
 	// MARK: - Definitions -
 
@@ -52,10 +52,6 @@ class API: NSObject, XMLParserDelegate {
 	// MARK: - Properties -
 
     var onCompletion: ((XMLPost?) -> Void)?
-    var currentPost = XMLPost()
-    var processItem = false
-    var value = ""
-    var attributes: [String: String]?
 	var isComplication = false
 
 	#if os(iOS)
@@ -121,7 +117,8 @@ class API: NSObject, XMLParserDelegate {
                 return
             }
             let parser = XMLParser(data: data)
-            parser.delegate = self
+			let apiParser = APIXMLParser(onCompletion: self.onCompletion, isComplication: self.isComplication)
+			parser.delegate = apiParser
             parser.parse()
         }
     }

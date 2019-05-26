@@ -13,6 +13,8 @@
 		9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
 		9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 		9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
+		9B1386D3229A98310033783E /* ParsedObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D2229A98310033783E /* ParsedObjectTests.swift */; };
+		9B1386D8229A9B4A0033783E /* examplePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D7229A9B4A0033783E /* examplePost.swift */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
@@ -52,8 +54,8 @@
 		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
 		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
 		9BA939472260DE37004005AA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939452260DE37004005AA /* HeaderCell.xib */; };
-		9BB2CA692264883A0012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
-		9BB2CA6A226488C80012ACD6 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
+		9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
+		9BB2CA6A226488C80012ACD6 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
 		9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
 		9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */; };
 		9BB2CA722264B8890012ACD6 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA712264B8890012ACD6 /* Share.swift */; };
@@ -100,7 +102,7 @@
 		9BDCDC882296DD4F00649C0F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9BDCDC892296DD5900649C0F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9BDCDC8A2296DD5D00649C0F /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
-		9BDCDC8B2296DD6100649C0F /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* XMLParser.swift */; };
+		9BDCDC8B2296DD6100649C0F /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
 		9BDCDC8C2296DD6D00649C0F /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
 		9BDCDC8D2296F75900649C0F /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9BDCDC8E2296F82800649C0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
@@ -194,6 +196,8 @@
 		9B0DD4492226BAF60016C567 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9B0DD44B2226E9320016C567 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		9B0DD44E2226FD150016C567 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		9B1386D2229A98310033783E /* ParsedObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedObjectTests.swift; sourceTree = "<group>"; };
+		9B1386D7229A9B4A0033783E /* examplePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = examplePost.swift; sourceTree = "<group>"; };
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 4.xcdatamodel"; sourceTree = "<group>"; };
 		9B25F5082260967A0057FBF9 /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
@@ -232,7 +236,7 @@
 		9BA939402260DDDA004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Podcast.storyboard; sourceTree = "<group>"; };
 		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
 		9BA939462260DE37004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HeaderCell.xib; sourceTree = "<group>"; };
-		9BB2CA682264883A0012ACD6 /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
+		9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIXMLParser.swift; sourceTree = "<group>"; };
 		9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAPI.swift; sourceTree = "<group>"; };
 		9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		9BB2CA712264B8890012ACD6 /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
@@ -351,10 +355,18 @@
 				9B25F5082260967A0057FBF9 /* Obfuscator.swift */,
 				9B02AE491F5C507000EA1A6F /* Network.swift */,
 				9B0DD4492226BAF60016C567 /* API.swift */,
-				9BB2CA682264883A0012ACD6 /* XMLParser.swift */,
+				9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */,
 				9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		9B1386D4229A987F0033783E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9B1386D7229A9B4A0033783E /* examplePost.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		9B3C7A5522638012001146A4 /* Controllers */ = {
@@ -585,7 +597,9 @@
 			children = (
 				9BE697D11F4874C20048D68D /* Info.plist */,
 				9BDCDC932296FB0100649C0F /* Stubs */,
+				9B1386D4229A987F0033783E /* Mocks */,
 				9BDCDC862296DCB000649C0F /* NetworkTests.swift */,
+				9B1386D2229A98310033783E /* ParsedObjectTests.swift */,
 				9BE697DD1F487EEF0048D68D /* PostsTests.swift */,
 			);
 			path = MacMagazineTests;
@@ -1082,7 +1096,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */,
-				9BB2CA6A226488C80012ACD6 /* XMLParser.swift in Sources */,
+				9BB2CA6A226488C80012ACD6 /* APIXMLParser.swift in Sources */,
 				9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */,
 				9B6F965B225E5A060075ED89 /* Logger.swift in Sources */,
 				9B91117E225BC100000A6AC3 /* PostData.swift in Sources */,
@@ -1121,7 +1135,7 @@
 				9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */,
 				9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */,
 				9B0DD44A2226BAF60016C567 /* API.swift in Sources */,
-				9BB2CA692264883A0012ACD6 /* XMLParser.swift in Sources */,
+				9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
@@ -1156,7 +1170,9 @@
 				9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */,
 				9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */,
 				9BDCDC8E2296F82800649C0F /* AppDelegate.swift in Sources */,
-				9BDCDC8B2296DD6100649C0F /* XMLParser.swift in Sources */,
+				9BDCDC8B2296DD6100649C0F /* APIXMLParser.swift in Sources */,
+				9B1386D8229A9B4A0033783E /* examplePost.swift in Sources */,
+				9B1386D3229A98310033783E /* ParsedObjectTests.swift in Sources */,
 				9BDCDC892296DD5900649C0F /* API.swift in Sources */,
 				9BDCDC882296DD4F00649C0F /* Network.swift in Sources */,
 				9BDCDC8A2296DD5D00649C0F /* Obfuscator.swift in Sources */,

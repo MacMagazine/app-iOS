@@ -11,8 +11,6 @@ import XCTest
 // Tests to be performed:
 // 1) Get Posts from Wordpress
 // 2) Test that the proper XML was retrieved
-// 3) Create a mock test
-// 4) Test for the content of the mock data, adding to the XMLPost class
 
 class NetworkTests: XCTestCase {
 
@@ -88,8 +86,8 @@ class NetworkTests: XCTestCase {
 				return
 			}
 			XCTAssertNotEqual(post.title, "", "API response title should not be nil")
-			XCTAssertNotEqual(post.link, "", "API response title should not be nil")
-			XCTAssertNotEqual(post.pubDate, "", "API response title should not be nil")
+			XCTAssertNotEqual(post.link, "", "API response link should not be nil")
+			XCTAssertNotEqual(post.pubDate, "", "API response date should not be nil")
 		}
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
