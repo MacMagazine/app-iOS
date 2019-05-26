@@ -201,38 +201,14 @@ class VideoTests: XCTestCase {
 		let expectation = self.expectation(description: "Testing API for a valid Data...")
 		expectation.expectedFulfillmentCount = 1
 
-		guard let video = videoExample,
-			let stats = videoStatsExample
-			else {
-				XCTFail("Example video should exist")
-				return
-		}
-
-		var parsedVideo: YouTube<String>?
-		let onVideoCompletion = { (videos: YouTube<String>?) in
-			parsedVideo = videos
-		}
-		let onVideoStatsCompletion = { (videos: YouTube<String>?) in
-			guard let parsedVideo = parsedVideo,
-				let parsedVideoStats = videos,
-				let stats = parsedVideoStats.items
-				else {
-					XCTFail("parsedVideoStats should exist")
-					return
+		saveVideo { video in
+			XCTAssertEqual(video.count, 1, "Response should be 1")
+			if !video.isEmpty {
+				XCTAssertEqual(video[0].videoId, self.exampleVideo.getExampleVideoId(), "videoId must match")
 			}
-
-			CoreDataStack.shared.save(playlist: parsedVideo, statistics: stats)
-			CoreDataStack.shared.get(video: self.exampleVideo.getExampleVideoId()) { video in
-				XCTAssertEqual(video.count, 1, "Response should be 1")
-				if !video.isEmpty {
-					XCTAssertEqual(video[0].videoId, self.exampleVideo.getExampleVideoId(), "videoId must match")
-				}
-				
-				expectation.fulfill()
-			}
+			
+			expectation.fulfill()
 		}
-		API().parse(video, isSearch: nil, onVideoCompletion: onVideoCompletion, onVideoSearchCompletion: nil)
-		API().parse(stats, isSearch: nil, onVideoCompletion: onVideoStatsCompletion, onVideoSearchCompletion: nil)
 
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
@@ -243,7 +219,7 @@ class VideoTests: XCTestCase {
 		let expectation = self.expectation(description: "Testing API for a valid data on database...")
 		expectation.expectedFulfillmentCount = 1
 
-		CoreDataStack.shared.get(video: self.exampleVideo.getExampleVideoId()) { video in
+		saveVideo { video in
 			if video.isEmpty {
 				XCTFail("Database is empty")
 			} else {
@@ -267,4 +243,38 @@ class VideoTests: XCTestCase {
 		}
 	}
 
+}
+
+extension VideoTests {
+	func saveVideo(_ onCompletion: @escaping (([Video]) -> Void)) {
+		guard let video = videoExample,
+			let stats = videoStatsExample
+			else {
+				XCTFail("Example video should exist")
+				return
+		}
+		
+		var parsedVideo: YouTube<String>?
+		let onVideoCompletion = { (videos: YouTube<String>?) in
+			parsedVideo = videos
+		}
+		let onVideoStatsCompletion = { (videos: YouTube<String>?) in
+			guard let parsedVideo = parsedVideo,
+				let parsedVideoStats = videos,
+				let stats = parsedVideoStats.items
+				else {
+					XCTFail("parsedVideoStats should exist")
+					return
+			}
+			
+			CoreDataStack.shared.save(playlist: parsedVideo, statistics: stats)
+			CoreDataStack.shared.delay(0.4) {
+				CoreDataStack.shared.get(video: self.exampleVideo.getExampleVideoId()) { video in
+					onCompletion(video)
+				}
+			}
+		}
+		API().parse(video, isSearch: nil, onVideoCompletion: onVideoCompletion, onVideoSearchCompletion: nil)
+		API().parse(stats, isSearch: nil, onVideoCompletion: onVideoStatsCompletion, onVideoSearchCompletion: nil)
+	}
 }
