@@ -18,10 +18,11 @@ import XCTest
 class PostTests: XCTestCase {
 
 	var postExample: Data?
+	let examplePost = ExamplePost()
 
 	override func setUp() {
 		// Put setup code here. This method is called before the invocation of each test method in the class.
-		guard let post = getExamplePost() else {
+		guard let post = self.examplePost.getExamplePost() else {
 			return
 		}
 		postExample = post
@@ -47,31 +48,23 @@ class PostTests: XCTestCase {
 		
 		let onCompletion = { (post: XMLPost?) in
 			guard let post = post else {
-				let link = "https://macmagazine.uol.com.br/2019/05/23/novo-app-garante-que-todos-os-seus-contatos-do-iphone-tenham-fotos-atualizadas/"
-				CoreDataStack.shared.get(post: link) { posts in
+				CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { posts in
 
 					if posts.isEmpty {
 						XCTFail("Database is empty")
 					} else {
 						XCTAssertEqual(posts.count, 1, "Should retrieve only 1 post")
 
-						XCTAssertEqual(posts[0].title, "Novo app garante que todos os seus contatos do iPhone tenham fotos atualizadas", "API response title must match")
-						XCTAssertEqual(posts[0].link, "https://macmagazine.uol.com.br/2019/05/23/novo-app-garante-que-todos-os-seus-contatos-do-iphone-tenham-fotos-atualizadas/", "API response link must match")
-						
-						let pubDate = "Thu, 23 May 2019 13:37:02 +0000".toDate()
-						XCTAssertEqual(posts[0].pubDate, pubDate, "API response date should must match")
-						
-						XCTAssertEqual(posts[0].artworkURL, "https://macmagazine.uol.com.br/wp-content/uploads/2019/05/23-vignette-300x600.png", "API response artworkURL must match")
+						XCTAssertEqual(posts[0].title, self.examplePost.getValidTitle(), "API response title must match")
+						XCTAssertEqual(posts[0].link, self.examplePost.getValidLink(), "API response link must match")
+						XCTAssertEqual(posts[0].pubDate, self.examplePost.getValidDBPubdate(), "API response date should must match")
+						XCTAssertEqual(posts[0].artworkURL, self.examplePost.getValidArtworkURL(), "API response artworkURL must match")
 						XCTAssertEqual(posts[0].podcastURL, "", "API response podcastURL must match")
 						XCTAssertEqual(posts[0].podcast, "", "API response podcast must match")
 						XCTAssertEqual(posts[0].duration, "", "API response duration must match")
 						XCTAssertEqual(posts[0].podcastFrame, "", "API response podcastFrame must match")
-						
-						let excerpt = "Por padrão, se você não adicionar fotos aos seus contatos manualmente, o iPhone preenche o espaço do avatar com um círculo cinza com as iniciais da pessoa. Mas e se houvesse uma forma de colocar fotos em todos eles com poucos toques? Foi nesse projeto que o desenvolvedor Casey Liss trabalhou nos últimos três meses, [&#8230;]".toHtmlDecoded()
-						XCTAssertEqual(posts[0].excerpt, excerpt, "API response excerpt must match")
-						
-						let categorias = ["Dicas", "Gadgets", "Internet", "Software", "agenda", "app", "App Store", "avatares", "Casey Liss", "contatos", "fotos", "Gravatar", "iPhone", "Limitliss", "pessoas", "privacidade", "redes sociais", "social", "usuários", "Vignette"].joined(separator: ",")
-						XCTAssertEqual(posts[0].categorias, categorias, "API response categories must match")
+						XCTAssertEqual(posts[0].excerpt, self.examplePost.getValidDBExcerpt(), "API response excerpt must match")
+						XCTAssertEqual(posts[0].categorias, self.examplePost.getValidDBCategories(), "API response categories must match")
 					}
 
 					expectation.fulfill()

@@ -16,6 +16,7 @@
 		9B1386D8229A9B4A0033783E /* examplePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D7229A9B4A0033783E /* examplePost.swift */; };
 		9B1386DA229AA6680033783E /* VideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D9229AA6680033783E /* VideoTests.swift */; };
 		9B1386E9229ADE850033783E /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
+		9B1386EA229AEC6C0033783E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
@@ -1169,6 +1170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B1386EA229AEC6C0033783E /* StringExtensions.swift in Sources */,
 				9B1386DA229AA6680033783E /* VideoTests.swift in Sources */,
 				9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */,
 				9B1386E9229ADE850033783E /* PostsTests.swift in Sources */,

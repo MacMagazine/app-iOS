@@ -16,10 +16,11 @@ import XCTest
 class ParsedObjectTests: XCTestCase {
 
 	var postExample: Data?
+	let examplePost = ExamplePost()
 
 	override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-		guard let post = getExamplePost() else {
+		guard let post = self.examplePost.getExamplePost() else {
 			return
 		}
 		postExample = post
@@ -48,16 +49,16 @@ class ParsedObjectTests: XCTestCase {
 				return
 			}
 
-			XCTAssertEqual(post.title, "Novo app garante que todos os seus contatos do iPhone tenham fotos atualizadas", "API response title must match")
-			XCTAssertEqual(post.link, "https://macmagazine.uol.com.br/2019/05/23/novo-app-garante-que-todos-os-seus-contatos-do-iphone-tenham-fotos-atualizadas/", "API response link must match")
-			XCTAssertEqual(post.pubDate, "Thu, 23 May 2019 13:37:02 +0000", "API response date should must match")
-			XCTAssertEqual(post.artworkURL, "https://macmagazine.uol.com.br/wp-content/uploads/2019/05/23-vignette-300x600.png", "API response artworkURL must match")
+			XCTAssertEqual(post.title, self.examplePost.getValidTitle(), "API response title must match")
+			XCTAssertEqual(post.link, self.examplePost.getValidLink(), "API response link must match")
+			XCTAssertEqual(post.pubDate, self.examplePost.getValidPubdate(), "API response date should must match")
+			XCTAssertEqual(post.artworkURL, self.examplePost.getValidArtworkURL(), "API response artworkURL must match")
 			XCTAssertEqual(post.podcastURL, "", "API response podcastURL must match")
 			XCTAssertEqual(post.podcast, "", "API response podcast must match")
 			XCTAssertEqual(post.duration, "", "API response duration must match")
 			XCTAssertEqual(post.podcastFrame, "", "API response podcastFrame must match")
-			XCTAssertEqual(post.excerpt, "Por padrão, se você não adicionar fotos aos seus contatos manualmente, o iPhone preenche o espaço do avatar com um círculo cinza com as iniciais da pessoa. Mas e se houvesse uma forma de colocar fotos em todos eles com poucos toques? Foi nesse projeto que o desenvolvedor Casey Liss trabalhou nos últimos três meses, [&#8230;]", "API response excerpt must match")
-			XCTAssertEqual(post.categories, ["Dicas", "Gadgets", "Internet", "Software", "agenda", "app", "App Store", "avatares", "Casey Liss", "contatos", "fotos", "Gravatar", "iPhone", "Limitliss", "pessoas", "privacidade", "redes sociais", "social", "usuários", "Vignette"], "API response categories must match")
+			XCTAssertEqual(post.excerpt, self.examplePost.getValidExcerpt(), "API response excerpt must match")
+			XCTAssertEqual(post.categories, self.examplePost.getValidCategories(), "API response categories must match")
 
 			expectation.fulfill()
 		}

@@ -15,6 +15,8 @@ import XCTest
 
 class NetworkTests: XCTestCase {
 
+	let examplePost = ExamplePost()
+
 	override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -47,8 +49,8 @@ class NetworkTests: XCTestCase {
 				return
 			}
 			XCTAssertNotNil(xmlResponse, "Data should not be nil")
-			XCTAssertTrue(xmlResponse.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"), "Response should be a valid XML")
-			XCTAssertTrue(xmlResponse.contains("<atom:link href=\"https://macmagazine.uol.com.br/feed/?paged=0\" rel=\"self\" type=\"application/rss+xml\" />"), "Response should come from a valid source")
+			XCTAssertTrue(xmlResponse.contains(self.examplePost.getValidXML()), "Response should be a valid XML")
+			XCTAssertTrue(xmlResponse.contains(self.examplePost.getValidProvider()), "Response should come from a valid source")
 
 			expectation.fulfill()
 		}

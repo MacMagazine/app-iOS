@@ -6,9 +6,11 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-let examplePost = """
+struct ExamplePost {
+
+	let examplePost = """
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
 xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -84,7 +86,45 @@ Requer o <strong>iOS 12.1</strong> ou superior</div></div>
 
 </rss>
 """
+	
+	func getExamplePost() -> Data? {
+		return Data(examplePost.utf8)
+	}
+	
+	func getValidXML() -> String {
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+	}
+	func getValidProvider() -> String {
+		return "<atom:link href=\"https://macmagazine.uol.com.br/feed/?paged=0\" rel=\"self\" type=\"application/rss+xml\" />"
+	}
+	
+	func getValidTitle() -> String {
+		return "Novo app garante que todos os seus contatos do iPhone tenham fotos atualizadas"
+	}
+	func getValidLink() -> String {
+		return "https://macmagazine.uol.com.br/2019/05/23/novo-app-garante-que-todos-os-seus-contatos-do-iphone-tenham-fotos-atualizadas/"
+	}
+	func getValidPubdate() -> String {
+		return "Thu, 23 May 2019 13:37:02 +0000"
+	}
+	func getValidArtworkURL() -> String {
+		return "https://macmagazine.uol.com.br/wp-content/uploads/2019/05/23-vignette-300x600.png"
+	}
+	func getValidExcerpt() -> String {
+		return "Por padrão, se você não adicionar fotos aos seus contatos manualmente, o iPhone preenche o espaço do avatar com um círculo cinza com as iniciais da pessoa. Mas e se houvesse uma forma de colocar fotos em todos eles com poucos toques? Foi nesse projeto que o desenvolvedor Casey Liss trabalhou nos últimos três meses, [&#8230;]"
+	}
+	func getValidCategories() -> [String] {
+		return ["Dicas", "Gadgets", "Internet", "Software", "agenda", "app", "App Store", "avatares", "Casey Liss", "contatos", "fotos", "Gravatar", "iPhone", "Limitliss", "pessoas", "privacidade", "redes sociais", "social", "usuários", "Vignette"]
+	}
 
-func getExamplePost() -> Data? {
-	return Data(examplePost.utf8)
+	func getValidDBPubdate() -> Date {
+		return getValidPubdate().toDate()
+	}
+	func getValidDBExcerpt() -> String {
+		return getValidExcerpt().toHtmlDecoded()
+	}
+	func getValidDBCategories() -> String {
+		return getValidCategories().joined(separator: ",")
+	}
 }
+
