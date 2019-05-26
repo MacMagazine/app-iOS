@@ -1,0 +1,5 @@
+language: swift
+osx_image: xcode10.2
+xcode_project: MacMagazine.xcodeproj
+xcode_scheme: MacMagazine
+xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xs
