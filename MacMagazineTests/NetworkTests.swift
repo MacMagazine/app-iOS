@@ -85,9 +85,9 @@ class NetworkTests: XCTestCase {
 				expectation.fulfill()
 				return
 			}
-			XCTAssertNotEqual(post.title, "", "API response title should not be nil")
-			XCTAssertNotEqual(post.link, "", "API response link should not be nil")
-			XCTAssertNotEqual(post.pubDate, "", "API response date should not be nil")
+			XCTAssertNotEqual(post.title, "", "API response title should not be empty")
+			XCTAssertNotEqual(post.link, "", "API response link should not be empty")
+			XCTAssertNotEqual(post.pubDate, "", "API response date should not be empty")
 		}
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")

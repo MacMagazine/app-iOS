@@ -54,9 +54,9 @@ class VideoTests: XCTestCase {
 			XCTAssertEqual(items.count, 15, "Items should be equal to 15")
 
 			let video = items[0]
-			XCTAssertNotEqual(video.id, "", "API response id should not be nil")
-			XCTAssertNotEqual(video.snippet?.channelId, "", "API response channelId should not be nil")
-			XCTAssertNotEqual(video.snippet?.title, "", "API response title should not be nil")
+			XCTAssertNotEqual(video.id, "", "API response id must match")
+			XCTAssertNotEqual(video.snippet?.channelId, "", "API response channelId must match")
+			XCTAssertNotEqual(video.snippet?.title, "", "API response title must match")
 
 			expectation.fulfill()
 		}
@@ -94,11 +94,11 @@ class VideoTests: XCTestCase {
 				return
 			}
 
-			XCTAssertEqual(stats[0].kind, "youtube#video", "API response kind should not be nil")
-			XCTAssertEqual(stats[0].id, "Sx399pq69SA", "API response id should not be nil")
+			XCTAssertEqual(stats[0].kind, "youtube#video", "API response kind must match")
+			XCTAssertEqual(stats[0].id, "Sx399pq69SA", "API response id must match")
 
-			XCTAssertEqual(stats[1].kind, "youtube#video", "API response kind should not be nil")
-			XCTAssertEqual(stats[1].id, "PJYAOYHC1Xw", "API response id should not be nil")
+			XCTAssertEqual(stats[1].kind, "youtube#video", "API response kind must match")
+			XCTAssertEqual(stats[1].id, "PJYAOYHC1Xw", "API response id must match")
 
 			expectation.fulfill()
 		}
