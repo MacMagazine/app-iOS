@@ -84,3 +84,7 @@ Requer o <strong>iOS 12.1</strong> ou superior</div></div>
 
 </rss>
 """
+
+func getExamplePost() -> Data? {
+	return Data(examplePost.utf8)
+}

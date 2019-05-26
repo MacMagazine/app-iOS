@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import MacMagazine
 
 // Tests to be performed:
 // 1) Create a mock test
@@ -69,11 +70,5 @@ class ParsedObjectTests: XCTestCase {
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
 		}
-	}
-}
-
-extension ParsedObjectTests {
-	func getExamplePost() -> Data? {
-		return Data(examplePost.utf8)
 	}
 }

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import MacMagazine
 
 // Tests to be performed:
 // 1) Get Posts from Wordpress

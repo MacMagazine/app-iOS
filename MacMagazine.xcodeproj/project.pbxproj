@@ -11,11 +11,11 @@
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
-		9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 		9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B1386D3229A98310033783E /* ParsedObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D2229A98310033783E /* ParsedObjectTests.swift */; };
 		9B1386D8229A9B4A0033783E /* examplePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D7229A9B4A0033783E /* examplePost.swift */; };
 		9B1386DA229AA6680033783E /* VideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D9229AA6680033783E /* VideoTests.swift */; };
+		9B1386E9229ADE850033783E /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
@@ -100,15 +100,7 @@
 		9BD4E98A225D431100683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
 		9BD4E98B225D4C0900683B88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC862296DCB000649C0F /* NetworkTests.swift */; };
-		9BDCDC882296DD4F00649C0F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
-		9BDCDC892296DD5900649C0F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
-		9BDCDC8A2296DD5D00649C0F /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
-		9BDCDC8B2296DD6100649C0F /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
-		9BDCDC8C2296DD6D00649C0F /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
-		9BDCDC8D2296F75900649C0F /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
-		9BDCDC8E2296F82800649C0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC8F2296F88800649C0F /* AppDelegateExtensions.swift */; };
-		9BDCDC922296FAFC00649C0F /* AppDelegateStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC912296FAFC00649C0F /* AppDelegateStub.swift */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 		9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF96571225E3ACD00BAF22D /* Kingfisher.framework */; };
@@ -284,7 +276,6 @@
 		9BD4E979225CFDEC00683B88 /* phone_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@3x.png"; sourceTree = "<group>"; };
 		9BDCDC862296DCB000649C0F /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		9BDCDC8F2296F88800649C0F /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
-		9BDCDC912296FAFC00649C0F /* AppDelegateStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateStub.swift; sourceTree = "<group>"; };
 		9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE697D11F4874C20048D68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
@@ -586,19 +577,10 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
-		9BDCDC932296FB0100649C0F /* Stubs */ = {
-			isa = PBXGroup;
-			children = (
-				9BDCDC912296FAFC00649C0F /* AppDelegateStub.swift */,
-			);
-			path = Stubs;
-			sourceTree = "<group>";
-		};
 		9BE697CE1F4874C20048D68D /* MacMagazineTests */ = {
 			isa = PBXGroup;
 			children = (
 				9BE697D11F4874C20048D68D /* Info.plist */,
-				9BDCDC932296FB0100649C0F /* Stubs */,
 				9B1386D4229A987F0033783E /* Mocks */,
 				9BDCDC862296DCB000649C0F /* NetworkTests.swift */,
 				9B1386D2229A98310033783E /* ParsedObjectTests.swift */,
@@ -1188,18 +1170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B1386DA229AA6680033783E /* VideoTests.swift in Sources */,
-				9BDCDC922296FAFC00649C0F /* AppDelegateStub.swift in Sources */,
-				9BDCDC8D2296F75900649C0F /* StringExtensions.swift in Sources */,
 				9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */,
-				9B0DD44D2226F0EA0016C567 /* PostsTests.swift in Sources */,
-				9BDCDC8E2296F82800649C0F /* AppDelegate.swift in Sources */,
-				9BDCDC8B2296DD6100649C0F /* APIXMLParser.swift in Sources */,
+				9B1386E9229ADE850033783E /* PostsTests.swift in Sources */,
 				9B1386D8229A9B4A0033783E /* examplePost.swift in Sources */,
 				9B1386D3229A98310033783E /* ParsedObjectTests.swift in Sources */,
-				9BDCDC892296DD5900649C0F /* API.swift in Sources */,
-				9BDCDC882296DD4F00649C0F /* Network.swift in Sources */,
-				9BDCDC8A2296DD5D00649C0F /* Obfuscator.swift in Sources */,
-				9BDCDC8C2296DD6D00649C0F /* YouTubeAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1555,7 +1529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1610,7 +1584,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import MacMagazine
 
 class VideoTests: XCTestCase {
 
