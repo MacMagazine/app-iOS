@@ -1,4 +1,5 @@
 Carthage/
 Docs/
 .DS_store
-*.xcuserdata
+MacMagazine.xcodeproj/xcuserdata/*
+MacMagazine.xcodeproj/xcuserstate/*
