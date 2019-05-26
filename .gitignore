@@ -1,2 +1,4 @@
 Carthage/
 Docs/
+.DS_store
+*.xcuserdata
