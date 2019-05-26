@@ -76,10 +76,7 @@ class PostTests: XCTestCase {
 			expectation.fulfill()
 		}
 
-		let parser = XMLParser(data: post)
-		let apiParser = APIXMLParser(onCompletion: onCompletion, isComplication: false)
-		parser.delegate = apiParser
-		parser.parse()
+		API().parse(post, onCompletion: onCompletion, isComplication: false)
 
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")

@@ -154,31 +154,35 @@ extension API {
 				}
 				return
 			}
-
-			do {
-				let decoder = JSONDecoder()
-				decoder.keyDecodingStrategy = .convertFromSnakeCase
-				decoder.dateDecodingStrategy = .iso8601
-
-				if isSearch ?? false {
-					let response = try decoder.decode(YouTube<ResourceId>.self, from: data)
-					self.onVideoSearchCompletion?(response)
-				} else {
-					let response = try decoder.decode(YouTube<String>.self, from: data)
-					self.onVideoCompletion?(response)
-				}
-
-			} catch {
-				if isSearch ?? false {
-					self.onVideoSearchCompletion?(nil)
-				} else {
-					self.onVideoCompletion?(nil)
-				}
-			}
-
+			self.parse(data, isSearch: isSearch, onVideoCompletion: self.onVideoCompletion, onVideoSearchCompletion: self.onVideoSearchCompletion)
 		}
 	}
 
+}
+
+extension API {
+	func parse(_ data: Data, isSearch: Bool?, onVideoCompletion: ((YouTube<String>?) -> Void)?, onVideoSearchCompletion: ((YouTube<ResourceId>?) -> Void)?) {
+		do {
+			let decoder = JSONDecoder()
+			decoder.keyDecodingStrategy = .convertFromSnakeCase
+			decoder.dateDecodingStrategy = .iso8601
+
+			if isSearch ?? false {
+				let response = try decoder.decode(YouTube<ResourceId>.self, from: data)
+				onVideoSearchCompletion?(response)
+			} else {
+				let response = try decoder.decode(YouTube<String>.self, from: data)
+				onVideoCompletion?(response)
+			}
+
+		} catch {
+			if isSearch ?? false {
+				onVideoSearchCompletion?(nil)
+			} else {
+				onVideoCompletion?(nil)
+			}
+		}
+	}
 }
 
 #endif

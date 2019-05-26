@@ -116,11 +116,17 @@ class API {
 				self.onCompletion?(nil)
                 return
             }
-            let parser = XMLParser(data: data)
-			let apiParser = APIXMLParser(onCompletion: self.onCompletion, isComplication: self.isComplication)
-			parser.delegate = apiParser
-            parser.parse()
+            self.parse(data, onCompletion: self.onCompletion, isComplication: self.isComplication)
         }
     }
 
+}
+
+extension API {
+	func parse(_ data: Data, onCompletion: ((XMLPost?) -> Void)?, isComplication: Bool) {
+		let parser = XMLParser(data: data)
+		let apiParser = APIXMLParser(onCompletion: onCompletion, isComplication: isComplication)
+		parser.delegate = apiParser
+		parser.parse()
+	}
 }

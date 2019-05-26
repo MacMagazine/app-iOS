@@ -155,45 +155,46 @@ class VideoTests: XCTestCase {
 				return
 		}
 
-		do {
-			let decoder = JSONDecoder()
-			decoder.keyDecodingStrategy = .convertFromSnakeCase
-			decoder.dateDecodingStrategy = .iso8601
-			
-			let parsedVideo = try decoder.decode(YouTube<String>.self, from: video)
-
+		let onVideoCompletion = { (videos: YouTube<String>?) in
+			guard let parsedVideo = videos else {
+				XCTFail("parsedVideo should exist")
+				return
+			}
 			XCTAssertEqual(parsedVideo.kind, self.exampleVideo.getExampleKind(), "API response kind must match")
 			XCTAssertEqual(parsedVideo.nextPageToken, self.exampleVideo.getExampleNextPageToken(), "API response nextPageToken must match")
-
+			
 			XCTAssertNotNil(parsedVideo.pageInfo, "pageInfo should not be nil")
 			XCTAssertEqual(parsedVideo.pageInfo?.totalResults, self.exampleVideo.getExamplePageInfoTotalResults(), "API response pageInfo.totalResults must match")
-
+			
 			XCTAssertNotNil(parsedVideo.items, "items should not be nil")
 			XCTAssertEqual(parsedVideo.items?.count, 1, "There should be only 1 item")
 			if !(parsedVideo.items?.isEmpty ?? true) {
 				XCTAssertEqual(parsedVideo.items?[0].id, self.exampleVideo.getExampleItemsId(), "API response items.id must match")
 			}
+		}
+		API().parse(video, isSearch: nil, onVideoCompletion: onVideoCompletion, onVideoSearchCompletion: nil)
 
-			let parsedVideoStats = try decoder.decode(YouTube<String>.self, from: stats)
-
+		let onVideoStatsCompletion = { (videos: YouTube<String>?) in
+			guard let parsedVideoStats = videos else {
+				XCTFail("parsedVideoStats should exist")
+				return
+			}
 			XCTAssertEqual(parsedVideoStats.kind, self.exampleVideo.getExampleStatKind(), "API response kind must match")
-
+			
 			XCTAssertNotNil(parsedVideoStats.pageInfo, "pageInfo should not be nil")
 			XCTAssertEqual(parsedVideoStats.pageInfo?.totalResults, self.exampleVideo.getExampleStatsPageInfoTotalResults(), "API response pageInfo.totalResults must match")
-
+			
 			XCTAssertNotNil(parsedVideoStats.items, "items should not be nil")
 			XCTAssertEqual(parsedVideoStats.items?.count, 1, "There should be only 1 item")
 			if !(parsedVideoStats.items?.isEmpty ?? true) {
 				XCTAssertEqual(parsedVideoStats.items?[0].id, self.exampleVideo.getExampleStatsItemsId(), "API response items.id must match")
-
+				
 				XCTAssertNotNil(parsedVideoStats.items?[0].statistics, "items should not be nil")
 				XCTAssertEqual(parsedVideoStats.items?[0].statistics?.viewCount, self.exampleVideo.getExampleStatsStatisticsViewCount(), "API response items.statistics.viewCount must match")
 				XCTAssertEqual(parsedVideoStats.items?[0].statistics?.likeCount, self.exampleVideo.getExampleStatsStatisticsLikeCount(), "API response items.statistics.likeCount must match")
 			}
-
-		} catch {
-			XCTFail("JSON video should parse correctly")
 		}
+		API().parse(stats, isSearch: nil, onVideoCompletion: onVideoStatsCompletion, onVideoSearchCompletion: nil)
 	}
 
 	func testSaveParsedExampleVideo() {
@@ -206,38 +207,35 @@ class VideoTests: XCTestCase {
 				XCTFail("Example video should exist")
 				return
 		}
-		
-		do {
-			let decoder = JSONDecoder()
-			decoder.keyDecodingStrategy = .convertFromSnakeCase
-			decoder.dateDecodingStrategy = .iso8601
-			
-			let parsedVideo = try decoder.decode(YouTube<String>.self, from: video)
-			let parsedVideoStats = try decoder.decode(YouTube<String>.self, from: stats)
 
-			XCTAssertNotNil(parsedVideo, "video should not be nil")
-			XCTAssertNotNil(parsedVideoStats.items, "stats should not be nil")
-
-			guard let stats = parsedVideoStats.items else {
-				XCTFail("stats items must not be nil")
-				return
+		var parsedVideo: YouTube<String>?
+		let onVideoCompletion = { (videos: YouTube<String>?) in
+			parsedVideo = videos
+		}
+		let onVideoStatsCompletion = { (videos: YouTube<String>?) in
+			guard let parsedVideo = parsedVideo,
+				let parsedVideoStats = videos,
+				let stats = parsedVideoStats.items
+				else {
+					XCTFail("parsedVideoStats should exist")
+					return
 			}
+
 			CoreDataStack.shared.save(playlist: parsedVideo, statistics: stats)
 			CoreDataStack.shared.get(video: self.exampleVideo.getExampleVideoId()) { video in
 				XCTAssertEqual(video.count, 1, "Response should be 1")
 				if !video.isEmpty {
 					XCTAssertEqual(video[0].videoId, self.exampleVideo.getExampleVideoId(), "videoId must match")
 				}
-
+				
 				expectation.fulfill()
 			}
-			
-			waitForExpectations(timeout: 30) { error in
-				XCTAssertNil(error, "Error occurred: \(String(describing: error))")
-			}
+		}
+		API().parse(video, isSearch: nil, onVideoCompletion: onVideoCompletion, onVideoSearchCompletion: nil)
+		API().parse(stats, isSearch: nil, onVideoCompletion: onVideoStatsCompletion, onVideoSearchCompletion: nil)
 
-		} catch {
-			XCTFail("JSON video should parse correctly")
+		waitForExpectations(timeout: 30) { error in
+			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
 		}
 	}
 
