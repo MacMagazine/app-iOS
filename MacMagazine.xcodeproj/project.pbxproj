@@ -15,6 +15,7 @@
 		9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B1386D3229A98310033783E /* ParsedObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D2229A98310033783E /* ParsedObjectTests.swift */; };
 		9B1386D8229A9B4A0033783E /* examplePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D7229A9B4A0033783E /* examplePost.swift */; };
+		9B1386DA229AA6680033783E /* VideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386D9229AA6680033783E /* VideoTests.swift */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
@@ -198,6 +199,7 @@
 		9B0DD44E2226FD150016C567 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9B1386D2229A98310033783E /* ParsedObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedObjectTests.swift; sourceTree = "<group>"; };
 		9B1386D7229A9B4A0033783E /* examplePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = examplePost.swift; sourceTree = "<group>"; };
+		9B1386D9229AA6680033783E /* VideoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTests.swift; sourceTree = "<group>"; };
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 4.xcdatamodel"; sourceTree = "<group>"; };
 		9B25F5082260967A0057FBF9 /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				9BDCDC862296DCB000649C0F /* NetworkTests.swift */,
 				9B1386D2229A98310033783E /* ParsedObjectTests.swift */,
 				9BE697DD1F487EEF0048D68D /* PostsTests.swift */,
+				9B1386D9229AA6680033783E /* VideoTests.swift */,
 			);
 			path = MacMagazineTests;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BE697D61F4874C20048D68D /* Build configuration list for PBXNativeTarget "MacMagazineTests" */;
 			buildPhases = (
+				9B1386DB229AACD90033783E /* Run Swiftlint Script */,
 				9BE697C91F4874C20048D68D /* Sources */,
 				9BE697CA1F4874C20048D68D /* Frameworks */,
 				9BE697CB1F4874C20048D68D /* Resources */,
@@ -931,6 +935,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9B1386DB229AACD90033783E /* Run Swiftlint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftlint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		9B578C2D1F47A1D00086C6A7 /* Run update version Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1165,6 +1187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B1386DA229AA6680033783E /* VideoTests.swift in Sources */,
 				9BDCDC922296FAFC00649C0F /* AppDelegateStub.swift in Sources */,
 				9BDCDC8D2296F75900649C0F /* StringExtensions.swift in Sources */,
 				9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */,
