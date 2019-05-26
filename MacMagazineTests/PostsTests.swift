@@ -86,4 +86,32 @@ class PostTests: XCTestCase {
 		}
 	}
 
+	func testFavoritePost() {
+		let expectation = self.expectation(description: "Testing API for a valid data on database...")
+		expectation.expectedFulfillmentCount = 1
+
+		CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { posts in
+			if posts.isEmpty {
+				XCTFail("Database is empty")
+			} else {
+				XCTAssertEqual(posts.count, 1, "Should retrieve only 1 post")
+				
+				XCTAssertEqual(posts[0].favorite, false, "API response favorite must be false")
+
+				Favorite().updatePostStatus(using: self.examplePost.getValidLink()) { isFavoriteOn in
+					XCTAssertEqual(isFavoriteOn, true, "API response favorite must be true")
+
+					Favorite().updatePostStatus(using: self.examplePost.getValidLink()) { isFavoriteOn in
+						XCTAssertEqual(isFavoriteOn, false, "API response favorite must be false")
+						expectation.fulfill()
+					}
+				}
+			}
+		}
+
+		waitForExpectations(timeout: 30) { error in
+			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
+		}
+	}
+
 }
