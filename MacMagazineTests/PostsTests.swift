@@ -95,6 +95,20 @@ class PostTests: XCTestCase {
 		}
 	}
 
+	func testPostDestaque() {
+		let expectation = self.expectation(description: "Testing API for a valid data on database...")
+		expectation.expectedFulfillmentCount = 1
+		
+		CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { posts in
+			XCTAssertEqual(posts[0].categorias?.contains("Destaques"), false, "Post shouldn't be 'Destaque'")
+			expectation.fulfill()
+		}
+
+		waitForExpectations(timeout: 30) { error in
+			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
+		}
+	}
+
 }
 
 extension PostTests {
