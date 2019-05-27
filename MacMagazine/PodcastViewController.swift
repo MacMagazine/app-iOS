@@ -36,7 +36,6 @@ class PodcastViewController: UIViewController {
 		vc.resultsTableController = ResultsViewController()
 		vc.resultsTableController?.delegate = vc
 		vc.resultsTableController?.isPodcast = true
-		vc.resultsTableController?.isSearching = false
 
 		searchController = UISearchController(searchResultsController: vc.resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
@@ -70,6 +69,8 @@ class PodcastViewController: UIViewController {
 	@IBAction private func search(_ sender: Any) {
 		navigationItem.searchController = searchController
 		searchController?.searchBar.becomeFirstResponder()
+
+		Settings().applyTheme()
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
@@ -111,6 +112,13 @@ class PodcastViewController: UIViewController {
 // MARK: - UISearchBarDelegate -
 
 extension PodcastViewController: UISearchBarDelegate {
+	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+		guard let vc = self.children[0] as? PodcastMasterViewController else {
+			return
+		}
+		vc.resultsTableController?.showTyping()
+	}
+
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		guard let text = searchBar.text,
 			let vc = self.children[0] as? PodcastMasterViewController
@@ -119,7 +127,7 @@ extension PodcastViewController: UISearchBarDelegate {
 		}
 		searchBar.resignFirstResponder()
 		vc.resultsTableController?.posts = []
-		vc.resultsTableController?.isSearching = true
+		vc.resultsTableController?.showSpin()
 		vc.searchPodcasts(text)
 	}
 

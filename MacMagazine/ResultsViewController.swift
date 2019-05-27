@@ -28,10 +28,13 @@ class ResultsViewController: UITableViewController {
 			tableView.register(UINib(nibName: isPodcast ? "PodcastCell" : "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
 		}
 	}
-	var posts: [XMLPost] = []
-	var isSearching = false {
+	var posts: [XMLPost] = [] {
 		didSet {
-			tableView.reloadData()
+			if posts.isEmpty {
+				showNotFound()
+			} else {
+				showResults()
+			}
 		}
 	}
 
@@ -50,24 +53,6 @@ class ResultsViewController: UITableViewController {
 	// MARK: - TableView methods -
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		if posts.isEmpty {
-			tableView.separatorStyle = .none
-			if isSearching {
-				let spin = UIActivityIndicatorView(style: .whiteLarge)
-				spin.startAnimating()
-				tableView.backgroundView = spin
-			} else {
-				let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-				notFound.text = "Nenhum resultado encontrado"
-				notFound.textColor = Settings().isDarkMode() ? .white : .black
-				notFound.textAlignment = .center
-				tableView.backgroundView = notFound
-			}
-		} else {
-			tableView.backgroundView = nil
-			tableView.separatorStyle = posts.count > 1 ? .singleLine : .none
-		}
-
 		return 1
 	}
 
@@ -90,6 +75,44 @@ class ResultsViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		delegate?.didSelectResultRowAt(indexPath: indexPath)
+	}
+
+	// MARK: - View methods -
+
+	func showSpin() {
+		let spin = UIActivityIndicatorView(style: .whiteLarge)
+		spin.startAnimating()
+		tableView.backgroundView = spin
+		tableView.separatorStyle = .none
+
+		tableView.reloadData()
+	}
+
+	func showResults() {
+		tableView.backgroundView = nil
+		tableView.separatorStyle = posts.count > 1 ? .singleLine : .none
+		tableView.reloadData()
+	}
+
+	func showTyping() {
+		showMessage("Digite o termo que deseja procurar e\ndepois toque em 'Procurar'")
+	}
+
+	func showNotFound() {
+		showMessage("Nenhum resultado encontrado")
+	}
+
+	func showMessage(_ message: String) {
+		let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+		messageLabel.text = message
+		messageLabel.textColor = Settings().isDarkMode() ? .white : .black
+		messageLabel.textAlignment = .center
+		messageLabel.numberOfLines = 0
+
+		tableView.backgroundView = messageLabel
+		tableView.separatorStyle = .none
+
+		tableView.reloadData()
 	}
 
 }

@@ -25,7 +25,7 @@ extension Notification.Name {
 extension AppDelegate {
 	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
 		// Apply custom thmee (Dark/Light)
-		applyTheme()
+		Settings().applyTheme()
 
 		// Apple Watch Session
 		WatchSessionManager.shared.startSession()
@@ -37,16 +37,6 @@ extension AppDelegate {
 
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
-	}
-
-	fileprivate func applyTheme() {
-		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-			let theme: Theme = LightTheme()
-			theme.apply(for: UIApplication.shared)
-			return
-		}
-		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
-		theme.apply(for: UIApplication.shared)
 	}
 }
 
