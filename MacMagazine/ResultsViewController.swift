@@ -95,7 +95,7 @@ class ResultsViewController: UITableViewController {
 	}
 
 	func showTyping() {
-		showMessage("Digite o termo que deseja procurar e\ndepois toque em 'Procurar'")
+		showMessage("Digite as palavras-chave e\ndepois toque em \"Buscar\"")
 	}
 
 	func showNotFound() {
