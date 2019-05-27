@@ -1,5 +1,11 @@
 Carthage/
 Docs/
 .DS_store
-MacMagazine.xcodeproj/xcuserdata/*
-MacMagazine.xcodeproj/xcuserstate/*
+
+## Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+!*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+!*.xcodeproj/project.xcworkspace/xcshareddata
