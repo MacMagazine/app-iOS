@@ -51,11 +51,19 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
                 <barButtonItem image="fav_on" id="cRF-ml-ok5">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Favoritar post"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem image="share_nav" id="dA3-eY-eOM">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Compartilhar post"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
                     </connections>
