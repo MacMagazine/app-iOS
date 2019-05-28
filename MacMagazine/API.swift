@@ -13,6 +13,9 @@ class API {
 	// MARK: - Definitions -
 
 	enum APIParams {
+		// Disqus
+		static let disqus = "disqus.com"
+
 		// Wordpress
 		static let feed = "https://macmagazine.uol.com.br/feed/"
 		static let paged = "paged="
@@ -61,6 +64,27 @@ class API {
 
     // MARK: - Public methods -
 
+	func getCookies() -> [HTTPCookie]? {
+		let cookieStore = HTTPCookieStorage.shared
+		return cookieStore.cookies
+	}
+
+	func getDisqusCookies() -> [HTTPCookie] {
+		let disqus = getCookies()?.filter {
+			return $0.domain.contains(APIParams.disqus)
+		}
+		return disqus ?? []
+	}
+
+	func cleanCookies() {
+		let cookieStore = HTTPCookieStorage.shared
+		for cookie in getCookies() ?? [] {
+			if !cookie.domain.contains(APIParams.disqus) {
+				cookieStore.deleteCookie(cookie)
+			}
+		}
+	}
+
 	func getComplications(_ completion: ((XMLPost?) -> Void)?) {
 		isComplication = true
 		getPosts(page: 0, completion)
@@ -93,10 +117,7 @@ class API {
     // MARK: - Internal methods -
 
     fileprivate func executeGetContent(_ host: String) {
-        let cookieStore = HTTPCookieStorage.shared
-        for cookie in cookieStore.cookies ?? [] {
-            cookieStore.deleteCookie(cookie)
-        }
+		cleanCookies()
 
         guard let url = URL(string: "\(host.escape())") else {
             return

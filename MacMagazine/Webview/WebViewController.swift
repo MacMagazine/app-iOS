@@ -50,14 +50,30 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
 
 		// Do any additional setup after loading the view.
+		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+
 		webView?.navigationDelegate = self
 		webView?.uiDelegate = self
 
-		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
-
-		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
-
-		reload()
+		// Make sure that all cookies are loaded before
+		// That's prevent Disqus from being loogoff
+		let cookies = API().getDisqusCookies()
+		var cookiesLeft = cookies.count
+		if cookies.isEmpty {
+			reload()
+		} else {
+			cookies.forEach { cookie in
+				webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
+					cookiesLeft -= 1
+					if cookiesLeft <= 0 {
+						DispatchQueue.main.async {
+							self.reload()
+						}
+					}
+				}
+			}
+		}
     }
 
 	override func viewWillAppear(_ animated: Bool) {
