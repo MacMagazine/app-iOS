@@ -89,6 +89,9 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwT-Tn-dDI" customClass="AppSmallFont" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="11" width="12" height="22"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -96,6 +99,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvg-IN-K0M">
                                                     <rect key="frame" x="34" y="17" width="1" height="10"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="iW6-pn-9qS"/>
                                                         <constraint firstAttribute="height" constant="10" id="lVW-HZ-mVz"/>
@@ -104,6 +110,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHp-J6-tBh">
                                                     <rect key="frame" x="203.5" y="17" width="1" height="10"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="1Z0-H4-9Ci"/>
                                                         <constraint firstAttribute="height" constant="10" id="FpO-jb-UEr"/>
@@ -112,6 +121,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyP-zY-hVG">
                                                     <rect key="frame" x="373" y="17" width="1" height="10"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="6p5-eS-c4G"/>
                                                         <constraint firstAttribute="height" constant="10" id="OBx-NV-vsf"/>
@@ -128,6 +140,9 @@
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67r-rv-sEa" customClass="AppBigFont" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="379" y="5.5" width="19" height="33"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte grande">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -164,7 +179,7 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQq-v5-cBk">
                                                     <rect key="frame" x="351" y="9.5" width="49" height="31"/>
-                                                    <accessibility key="accessibilityConfiguration" hint="Botão para ativar ou desativar o modo escuro" label="Botão para para modo escuro">
+                                                    <accessibility key="accessibilityConfiguration" hint="Botão para ativar ou desativar o modo escuro" label="Botão para modo escuro">
                                                         <accessibilityTraits key="traits" button="YES"/>
                                                     </accessibility>
                                                     <constraints>

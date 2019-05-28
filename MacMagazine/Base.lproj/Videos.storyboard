@@ -69,6 +69,9 @@
                                         </wkWebView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6QJ-Gr-4fx">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
+                                            <accessibility key="accessibilityConfiguration" label="Thumbnail do episódio">
+                                                <bool key="isElement" value="YES"/>
+                                            </accessibility>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <integer key="value" value="6"/>
