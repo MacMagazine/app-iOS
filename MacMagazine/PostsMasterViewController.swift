@@ -75,8 +75,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 
-		self.navigationItem.titleView = logoView
-		self.navigationItem.title = nil
+		navigationItem.titleView = logoView
+		navigationItem.title = nil
 
 		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: "headerDate", featuredCellNib: "FeaturedCell")
         fetchController?.delegate = self
@@ -87,7 +87,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		resultsTableController = ResultsViewController()
 		resultsTableController?.delegate = self
 		resultsTableController?.isPodcast = false
-		resultsTableController?.isSearching = false
 
 		searchController = UISearchController(searchResultsController: resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
@@ -224,7 +223,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	@IBAction private func search(_ sender: Any) {
 		navigationItem.searchController = searchController
+		resultsTableController?.showTyping()
 		searchController?.searchBar.becomeFirstResponder()
+
+		Settings().applyTheme()
 	}
 
 	@IBAction private func getPosts(_ sender: Any) {
@@ -401,7 +403,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 						$0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
 					})
 					self.resultsTableController?.posts = self.posts
-					self.resultsTableController?.isSearching = false
 				}
 				return
 			}
@@ -416,17 +417,22 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 // MARK: - UISearchBarDelegate -
 
 extension PostsMasterViewController: UISearchBarDelegate {
+	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+		resultsTableController?.showTyping()
+	}
+
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		guard let text = searchBar.text else {
 			return
 		}
 		resultsTableController?.posts = []
-		resultsTableController?.isSearching = true
+		resultsTableController?.showSpin()
 		searchPosts(text)
 	}
 
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
 		posts = []
+		resultsTableController?.posts = posts
 		searchBar.resignFirstResponder()
 		navigationItem.searchController = nil
 	}

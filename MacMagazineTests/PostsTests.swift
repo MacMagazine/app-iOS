@@ -109,15 +109,54 @@ class PostTests: XCTestCase {
 		}
 	}
 
+	func testPreventDuplicates() {
+		let expectation = self.expectation(description: "Testing database to prevent duplicates...")
+		expectation.expectedFulfillmentCount = 1
+
+		guard let data = self.examplePost.getExamplePosts() else {
+			XCTFail("Example posts should exist")
+			return
+		}
+
+		var posts: [XMLPost] = []
+		let completion = { (post: XMLPost?) in
+			guard let post = post else {
+				XCTAssertEqual(posts.count, 2, "Should have 2 posts")
+
+				CoreDataStack.shared.delay(0.4) {
+					CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { db in
+						XCTAssertEqual(db.count, 1, "Should retrieve only 1 post")
+
+						expectation.fulfill()
+					}
+				}
+				return
+			}
+			posts.append(post)
+			CoreDataStack.shared.save(post: post)
+		}
+		API().parse(data, onCompletion: completion, isComplication: false)
+
+		waitForExpectations(timeout: 30) { error in
+			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
+		}
+	}
+
 }
 
 extension PostTests {
-	func savePost(_ onCompletion: @escaping (([Post]) -> Void)) {
+	func parseExample(_ onCompletion: @escaping ((XMLPost?) -> Void)) {
 		guard let example = postExample else {
 			XCTFail("Example post should exist")
 			return
 		}
 		API().parse(example, onCompletion: { (post: XMLPost?) in
+			onCompletion(post)
+		}, isComplication: false)
+	}
+
+	func savePost(_ onCompletion: @escaping (([Post]) -> Void)) {
+		parseExample { post in
 			guard let post = post else {
 				CoreDataStack.shared.delay(0.4) {
 					CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { posts in
@@ -126,8 +165,7 @@ extension PostTests {
 				}
 				return
 			}
-			
 			CoreDataStack.shared.save(post: post)
-		}, isComplication: false)
+		}
 	}
 }

@@ -30,7 +30,8 @@ class CoreDataStack {
 			}
 			fatalError("Unresolved error: \(error), \(error.userInfo)")
 		}
-
+		// To prevent duplicates, ignore any object that came later
+		container.viewContext.mergePolicy = NSRollbackMergePolicy
 		return container
 	}()
 

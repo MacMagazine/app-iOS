@@ -178,6 +178,8 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBAction private func search(_ sender: Any) {
 		navigationItem.searchController = searchController
 		searchController?.searchBar.becomeFirstResponder()
+
+		Settings().applyTheme()
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {

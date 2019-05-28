@@ -209,7 +209,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 					})
 
 					self.resultsTableController?.posts = self.posts
-					self.resultsTableController?.isSearching = false
 				}
 				return
 			}
