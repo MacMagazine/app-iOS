@@ -97,11 +97,19 @@
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="fav_off" id="DiB-v8-Kg9">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar podcasts favoritos"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="showFavorites:" destination="3UV-U7-cDa" id="H56-ko-JjQ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="jMe-aj-dZs">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Pesquisar podcasts"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="search:" destination="3UV-U7-cDa" id="Ctm-LE-bYj"/>
                             </connections>
@@ -170,8 +178,8 @@
     </scenes>
     <resources>
         <image name="fav_off" width="21" height="21"/>
-        <image name="logo" width="80" height="68.5"/>
-        <image name="logo_dark" width="80" height="68.5"/>
+        <image name="logo" width="415" height="350"/>
+        <image name="logo_dark" width="509" height="419"/>
         <image name="tab_noar" width="24" height="28"/>
     </resources>
 </document>

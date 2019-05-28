@@ -77,6 +77,7 @@
                                         </imageView>
                                         <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcQ-Dv-MPg">
                                             <rect key="frame" x="120" y="54.5" width="60" height="60"/>
+                                            <accessibility key="accessibilityConfiguration" label="Reproduzir video"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="4sD-BP-v2M"/>
                                                 <constraint firstAttribute="width" constant="60" id="vmb-tm-Rwj"/>
@@ -109,6 +110,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIEWS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQP-0Z-f9n" customClass="VideoViewLikeLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="238" y="20" width="46" height="18"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Visualizações"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -128,6 +130,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKES" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E20-PT-GFs" customClass="VideoViewLikeLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="244" y="60" width="40" height="18"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Curtidas"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -161,6 +164,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="25"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Favoritar"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" image="fav_off"/>
                                                     <state key="selected" image="fav_on"/>
@@ -170,6 +174,7 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="150" y="0.0" width="150" height="25"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Compartilhar"/>
                                                     <state key="normal" image="share_on"/>
                                                     <connections>
                                                         <action selector="share:" destination="lNX-c7-cbD" eventType="touchUpInside" id="a6C-7P-3sa"/>
@@ -218,11 +223,19 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="fVw-Ev-d1Z">
                         <barButtonItem key="leftBarButtonItem" image="fav_off" id="EeU-sK-M4J">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar videos favoritos"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="showFavorites:" destination="PeN-ph-XhJ" id="K6A-Qw-gm8"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Or0-5W-R35">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Pesquisar videos"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="search:" destination="PeN-ph-XhJ" id="sL3-63-GLO"/>
                             </connections>

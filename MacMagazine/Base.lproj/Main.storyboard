@@ -76,11 +76,19 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
                         <barButtonItem key="leftBarButtonItem" image="fav_off" id="mos-l0-Ml2">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar posts favoritos"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="showFavorites:" destination="Jej-5Q-aqJ" id="Xng-DI-R8j"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Ml7-gR-vKk">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="search:" destination="Jej-5Q-aqJ" id="dZ9-cr-Rlt"/>
                             </connections>
@@ -112,7 +120,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="425" y="-2919"/>
+            <point key="canvasLocation" x="425" y="-2885"/>
         </scene>
         <!--Posts Detail View Controller-->
         <scene sceneID="fYa-LD-1Wl">
@@ -173,7 +181,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6w-Ql-N2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2549" y="-2017"/>
+            <point key="canvasLocation" x="-2563" y="-2018"/>
         </scene>
         <!--Podcast-->
         <scene sceneID="vrS-A0-pzw">
@@ -193,6 +201,6 @@
         <image name="tab_posts" width="22" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lNV-kD-aRc"/>
+        <segue reference="YQQ-bx-LIJ"/>
     </inferredMetricsTieBreakers>
 </document>

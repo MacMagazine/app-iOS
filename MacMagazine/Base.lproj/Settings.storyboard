@@ -29,6 +29,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XF-p8-Zfg">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Limpar cache do app"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Limpar cache do app"/>
                                                     <connections>
@@ -118,6 +119,7 @@
                                                 </view>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xj-Ri-tHM">
                                                     <rect key="frame" x="32" y="7" width="344" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o tamanho da fonte" label="Alterar o tamanho da fonte"/>
                                                     <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
@@ -162,6 +164,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQq-v5-cBk">
                                                     <rect key="frame" x="351" y="9.5" width="49" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Botão para ativar ou desativar o modo escuro" label="Botão para para modo escuro">
+                                                        <accessibilityTraits key="traits" button="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="47" id="KBE-wK-4CQ"/>
                                                         <constraint firstAttribute="height" constant="31" id="lki-5p-1zm"/>
@@ -172,6 +177,7 @@
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modo Escuro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZG-3I-D6U">
                                                     <rect key="frame" x="20" y="11" width="323" height="27"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Modo escuro"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -224,6 +230,9 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
                                                                     <rect key="frame" x="0.0" y="0.0" width="82.5" height="74"/>
+                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo branco">
+                                                                        <accessibilityTraits key="traits" button="YES"/>
+                                                                    </accessibility>
                                                                     <connections>
                                                                         <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ze0-Qe-rbI"/>
                                                                     </connections>
@@ -261,6 +270,9 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
                                                                     <rect key="frame" x="0.0" y="0.0" width="82.5" height="74"/>
+                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo azul">
+                                                                        <accessibilityTraits key="traits" button="YES"/>
+                                                                    </accessibility>
                                                                     <connections>
                                                                         <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="U2M-0i-uXB"/>
                                                                     </connections>
