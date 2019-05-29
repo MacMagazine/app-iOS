@@ -70,7 +70,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	// MARK: - Scroll detection -
 
 	@objc func onScrollToTop(_ notification: Notification) {
-		tableView.setContentOffset(.zero, animated: true)
+		tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+		tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
 	}
 
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
