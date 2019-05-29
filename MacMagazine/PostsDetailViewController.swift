@@ -45,6 +45,21 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	// MARK: - PageViewController -
 
+	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+		if !completed {
+			return
+		}
+		guard let vc = pageViewController.viewControllers?.first as? WebViewController,
+			let index = orderedViewControllers.firstIndex(of: vc),
+			let link = links[index].link
+			else {
+				return
+		}
+		if Settings().isPad() {
+			NotificationCenter.default.post(name: .updateSelectedPost, object: link)
+		}
+	}
+
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
 		guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {

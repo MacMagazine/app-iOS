@@ -18,6 +18,7 @@ extension Notification.Name {
 	static let reloadWeb = Notification.Name("reloadWeb")
 	static let scrollToTop = Notification.Name("scrollToTop")
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
+	static let updateSelectedPost = Notification.Name("updateSelectedPost")
 }
 
 // MARK: - Setup -

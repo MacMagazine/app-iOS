@@ -75,6 +75,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 
+		if Settings().isPad() {
+			NotificationCenter.default.addObserver(self, selector: #selector(onUpdateSelectedPost(_:)), name: .updateSelectedPost, object: nil)
+		}
+
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
 
@@ -498,6 +502,22 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 		self.tableView.deselectRow(at: index, animated: true)
 	}
 
+}
+
+// MARK: - Notifications -
+
+extension PostsMasterViewController {
+	@objc func onUpdateSelectedPost(_ notification: Notification) {
+		guard let link = notification.object as? String else {
+			return
+		}
+		CoreDataStack.shared.get(post: link) { posts in
+			let indexPath = self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0)
+			self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
+			UserDefaults.standard.set(link, forKey: "selectedPostLink")
+			UserDefaults.standard.synchronize()
+		}
+	}
 }
 
 // MARK: - Peek&Pop -
