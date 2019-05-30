@@ -78,8 +78,8 @@ class SettingsTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 			self.dismiss(animated: true)
 		})
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool {
-			alertController.view.tintColor = isDarkMode ? .black : UIColor(hex: "0097d4", alpha: 1)
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			alertController.view.tintColor = LightTheme().tint
 		}
 		self.present(alertController, animated: true)
 	}
@@ -183,8 +183,8 @@ extension SettingsTableViewController {
 		}
 
 		// Temporary change the colors
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool {
-			UIApplication.shared.keyWindow?.tintColor = isDarkMode ? .black : UIColor(hex: "0097d4", alpha: 1)
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
 		}
 
 		UIApplication.shared.setAlternateIconName(icon) { error in
@@ -214,11 +214,21 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 		composeVC.mailComposeDelegate = self
 		composeVC.setSubject("Relato de problema no app MacMagazine \(version)")
 		composeVC.setToRecipients(["contato@macmagazine.com.br"])
+
+		// Temporary change the colors
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
+		}
+
 		self.present(composeVC, animated: true, completion: nil)
 	}
 
 	public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-		controller.dismiss(animated: true, completion: nil)
+		controller.dismiss(animated: true) {
+			if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+				UIApplication.shared.keyWindow?.tintColor = DarkTheme().tint
+			}
+		}
 	}
 
 	fileprivate func getAppVersion() -> String {

@@ -50,6 +50,8 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
 
 		// Do any additional setup after loading the view.
+		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
+
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 
@@ -79,7 +81,6 @@ class WebViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
 	}
 
@@ -87,7 +88,6 @@ class WebViewController: UIViewController {
 		super.viewWillDisappear(animated)
 
 		NotificationCenter.default.removeObserver(self, name: .favoriteUpdated, object: nil)
-		NotificationCenter.default.removeObserver(self, name: .reloadWeb, object: nil)
 	}
 
 	// MARK: - Local methods -
@@ -158,8 +158,8 @@ class WebViewController: UIViewController {
 		}
 
 		// Temporary change the colors
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool {
-			UIApplication.shared.keyWindow?.tintColor = isDarkMode ? .black : UIColor(hex: "0097d4", alpha: 1)
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
 		}
 
 		return [favoritar, compartilhar, cancelar]
@@ -293,10 +293,10 @@ extension WebViewController {
 
 	func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {
-			let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool ?? false
-
 			let safari = SFSafariViewController(url: url)
-			safari.preferredBarTintColor = isDarkMode ? UIColor.black : UIColor.white
+			if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+				safari.preferredBarTintColor = UIColor.black
+			}
 			safari.dismissButtonStyle = .close
 			safari.modalPresentationStyle = .overFullScreen
 
