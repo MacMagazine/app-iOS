@@ -81,6 +81,18 @@ extension Settings {
 		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
 		theme.apply(for: UIApplication.shared)
 	}
+
+	func applyLightTheme() {
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
+		}
+	}
+
+	func applyDarkTheme() {
+		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			UIApplication.shared.keyWindow?.tintColor = DarkTheme().tint
+		}
+	}
 }
 
 enum PushPreferences {

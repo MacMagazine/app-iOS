@@ -9,6 +9,8 @@
 import UIKit
 import WebKit
 
+class AppTabBar: UITabBar {}
+class AppNavigationBar: UINavigationBar {}
 class AppButton: UIButton {}
 class AppSegmentedControl: UISegmentedControl {}
 class AppCollectionViewCell: UICollectionViewCell {}
@@ -70,7 +72,7 @@ extension Theme {
 
         // TABBAR
 
-        UITabBar.appearance().with {
+        AppTabBar.appearance().with {
             $0.barStyle = barStyle
             $0.barTintColor = barTintColor
             $0.tintColor = tint
@@ -79,7 +81,7 @@ extension Theme {
 
         // NAVBAR
 
-        UINavigationBar.appearance().with {
+        AppNavigationBar.appearance().with {
             $0.barStyle = barStyle
             $0.barTintColor = barTintColor
             $0.tintColor = tint
@@ -150,9 +152,8 @@ extension Theme {
             }
         }
 
-        UILabel.appearance().with {
+        AppLabel.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
             $0.textColor = labelColor
-            $0.fontSize = CGFloat(fontSize)
         }
 		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
 			$0.textColor = headerFooterColor
@@ -188,7 +189,7 @@ extension Theme {
 
 		// BUTTON
 
-        UIButton.appearance().with {
+        UIButton.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
             $0.setTitleColor(tint, for: .normal)
             $0.borderColor = tint
 			$0.backgroundColor = .clear

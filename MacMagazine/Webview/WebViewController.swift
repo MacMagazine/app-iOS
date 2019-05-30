@@ -158,9 +158,7 @@ class WebViewController: UIViewController {
 		}
 
 		// Temporary change the colors
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
-			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
-		}
+		Settings().applyLightTheme()
 
 		return [favoritar, compartilhar, cancelar]
 	}

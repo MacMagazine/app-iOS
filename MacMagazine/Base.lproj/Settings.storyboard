@@ -190,7 +190,7 @@
                                                         <action selector="changeDarkMode:" destination="75e-Ta-Gqd" eventType="valueChanged" id="1qz-ln-wsH"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modo Escuro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZG-3I-D6U">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modo Escuro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZG-3I-D6U" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="11" width="323" height="27"/>
                                                     <accessibility key="accessibilityConfiguration" label="Modo escuro"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -385,7 +385,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aBB-qV-jdy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Ajustes" image="tab_settings" id="Z3D-d2-gj4"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="9fV-k2-BIj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="9fV-k2-BIj" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

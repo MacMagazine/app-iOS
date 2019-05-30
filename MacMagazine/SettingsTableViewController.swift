@@ -216,18 +216,14 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 		composeVC.setToRecipients(["contato@macmagazine.com.br"])
 
 		// Temporary change the colors
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
-			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
-		}
+		Settings().applyLightTheme()
 
 		self.present(composeVC, animated: true, completion: nil)
 	}
 
 	public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
 		controller.dismiss(animated: true) {
-			if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
-				UIApplication.shared.keyWindow?.tintColor = DarkTheme().tint
-			}
+			Settings().applyDarkTheme()
 		}
 	}
 

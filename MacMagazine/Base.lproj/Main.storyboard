@@ -13,7 +13,7 @@
         <scene sceneID="KNm-9d-eYv">
             <objects>
                 <tabBarController id="Rqn-ok-aGY" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bfV-7o-pYQ">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bfV-7o-pYQ" customClass="AppTabBar" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,7 +34,7 @@
             <objects>
                 <navigationController title="PostsNavigation" id="kKX-hy-fjk" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -150,7 +150,7 @@
             <objects>
                 <navigationController title="PostsDetailNavigation" automaticallyAdjustsScrollViewInsets="NO" id="fD0-My-KZk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -201,6 +201,6 @@
         <image name="tab_posts" width="22" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YQQ-bx-LIJ"/>
+        <segue reference="lNV-kD-aRc"/>
     </inferredMetricsTieBreakers>
 </document>
