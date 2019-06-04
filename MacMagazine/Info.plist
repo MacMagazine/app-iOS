@@ -83,7 +83,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>4.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>10</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -97,6 +97,10 @@
 	<string>MacMagazine deseja ter acesso à sua localização para prestar um serviço melhor para você.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>MacMagazine deseja ter acesso à sua localização para prestar um serviço melhor para você.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>MacMagazine deseja ter acesso à sua biblioteca de fotos para prestar um serviço melhor para você.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>MacMagazine deseja ter acesso à sua biblioteca de fotos para prestar um serviço melhor para você.</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
