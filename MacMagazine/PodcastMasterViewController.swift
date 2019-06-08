@@ -213,7 +213,10 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 				}
 				return
 			}
-			self.posts.append(post)
+			if !post.duration.isEmpty {
+				self.posts.append(post)
+				CoreDataStack.shared.save(post: post)
+			}
 		}
 		posts = []
 		API().searchPodcasts(text, processResponse)
