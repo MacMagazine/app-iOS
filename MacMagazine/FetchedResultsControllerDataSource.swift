@@ -120,6 +120,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		let object = self.fetchedResultsController.object(at: indexPath)
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
 		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		favoritar.accessibilityLabel = "Favoritar"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
 		swipeActions.performsFirstActionWithFullSwipe = true
@@ -147,6 +148,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 		compatilhar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
 		compatilhar.image = UIImage(named: "share")
+		compatilhar.accessibilityLabel = "Compartilhar"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [compatilhar])
 		swipeActions.performsFirstActionWithFullSwipe = true
