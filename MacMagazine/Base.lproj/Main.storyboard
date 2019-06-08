@@ -12,7 +12,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="KNm-9d-eYv">
             <objects>
-                <tabBarController id="Rqn-ok-aGY" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="main" id="Rqn-ok-aGY" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bfV-7o-pYQ" customClass="AppTabBar" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
