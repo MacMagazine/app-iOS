@@ -411,17 +411,23 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func searchPosts(_ text: String) {
+		var items: [CSSearchableItem] = []
+
 		let processResponse: (XMLPost?) -> Void = { post in
 			guard let post = post else {
 				DispatchQueue.main.async {
 					self.posts.sort(by: {
 						$0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
 					})
+					CSSearchableIndex.default().indexSearchableItems(items)
+
 					self.resultsTableController?.posts = self.posts
 				}
 				return
 			}
 			self.posts.append(post)
+			CoreDataStack.shared.save(post: post)
+			items.append(self.createSearchableItem(post))
 		}
 		posts = []
 		API().searchPosts(text, processResponse)
