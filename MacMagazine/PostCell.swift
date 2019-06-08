@@ -37,9 +37,9 @@ class PostCell: AppTableViewCell {
     func configurePost(_ object: Post) {
         headlineLabel?.text = object.title
 
-		var defaultImage = "image_logo_feature"
+		var defaultImage = "image_logo_feature\(Settings().isDarkMode() ? "_dark" : "")"
 		if object.categorias?.contains("Destaques") == false {
-			defaultImage = "image_logo"
+			defaultImage = "image_logo\(Settings().isDarkMode() ? "_dark" : "")"
             if subheadlineLabel != nil {
                 subheadlineLabel?.text = object.excerpt
             }
@@ -57,9 +57,9 @@ class PostCell: AppTableViewCell {
 	func configureSearchPost(_ object: XMLPost) {
 		headlineLabel?.text = object.title
 
-		var defaultImage = "image_logo_feature"
+		var defaultImage = "image_logo_feature\(Settings().isDarkMode() ? "_dark" : "")"
 		if object.categories.contains("Destaques") == false {
-			defaultImage = "image_logo"
+			defaultImage = "image_logo\(Settings().isDarkMode() ? "_dark" : "")"
 			if subheadlineLabel != nil {
 				subheadlineLabel?.text = object.excerpt
 			}
@@ -86,7 +86,7 @@ class PostCell: AppTableViewCell {
 			return
 		}
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().isDarkMode() ? "_dark" : "")"))
 	}
 
 	func configureSearchPodcast(_ object: XMLPost) {
@@ -95,7 +95,7 @@ class PostCell: AppTableViewCell {
 		lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
 
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature"))
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().isDarkMode() ? "_dark" : "")"))
 
 		favoriteImageView.isHidden = true
 	}

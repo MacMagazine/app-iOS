@@ -44,7 +44,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 			return
 		}
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
+		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().isDarkMode() ? "_dark" : "")"))
 
 		youtubeWebView?.scrollView.isScrollEnabled = false
 		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
@@ -65,7 +65,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		likesLabel.text = object.likes
 
 		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature"))
+		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().isDarkMode() ? "_dark" : "")"))
 
 		youtubeWebView?.scrollView.isScrollEnabled = false
 		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
