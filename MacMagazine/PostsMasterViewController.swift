@@ -52,6 +52,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
 	var lastPage = -1
+	var comeFrom3DTouch = false
 	var openRecentPost = false
 	var viewDidAppear = false
 
@@ -195,15 +196,15 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectRowAt(indexPath: IndexPath) {
 		if selectedIndexPath != indexPath {
-			self.links = fetchController?.links() ?? []
+			links = fetchController?.links() ?? []
 			selectedIndexPath = indexPath
 			self.performSegue(withIdentifier: "showDetail", sender: self)
 
-			guard let object = fetchController?.object(at: indexPath) else {
-				return
+			guard let object = fetchController?.object(at: indexPath),
+				let link = object.link else {
+					return
 			}
-			UserDefaults.standard.set(object.link, forKey: "selectedPostLink")
-			UserDefaults.standard.synchronize()
+			updateLastSelectedPost(link: link)
 		}
 		if Settings().isPhone() {
 			self.tableView.deselectRow(at: indexPath, animated: true)
@@ -362,12 +363,22 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			completion(IndexPath(row: 0, section: 0))
 		}
 
-		guard let link = UserDefaults.standard.object(forKey: "selectedPostLink") as? String else {
-			completion(IndexPath(row: 0, section: 0))
-			return
+		guard let selectedPostLink = UserDefaults.standard.object(forKey: "selectedPostLink") as? [String: AnyObject],
+			let link = selectedPostLink["link"] as? String,
+			let date = selectedPostLink["date"] as? Date
+			else {
+				completion(IndexPath(row: 0, section: 0))
+				return
 		}
-		CoreDataStack.shared.get(post: link) { posts in
-			completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+		// Check for 12h selection
+		if date.addingTimeInterval(12 * 60 * 60) > Date() ||
+			comeFrom3DTouch {
+			comeFrom3DTouch = false
+			CoreDataStack.shared.get(post: link) { posts in
+				completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+			}
+		} else {
+			completion(IndexPath(row: 0, section: 0))
 		}
 	}
 
@@ -514,7 +525,27 @@ extension PostsMasterViewController {
 		CoreDataStack.shared.get(post: link) { posts in
 			let indexPath = self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0)
 			self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
-			UserDefaults.standard.set(link, forKey: "selectedPostLink")
+
+			// Validate selection
+			self.updateLastSelectedPost(link: link)
+		}
+	}
+
+	fileprivate func updateLastSelectedPost(link: String) {
+		// Validate selection
+		guard let selectedPostLink = UserDefaults.standard.object(forKey: "selectedPostLink") as? [String: AnyObject],
+			let previouslink = selectedPostLink["link"] as? String
+			else {
+				let selectedPostLink: [String: AnyObject] = ["link": link as AnyObject, "date": Date() as AnyObject]
+				UserDefaults.standard.set(selectedPostLink, forKey: "selectedPostLink")
+				UserDefaults.standard.synchronize()
+
+				return
+		}
+
+		if previouslink != link {
+			let selectedPostLink: [String: AnyObject] = ["link": link as AnyObject, "date": Date() as AnyObject]
+			UserDefaults.standard.set(selectedPostLink, forKey: "selectedPostLink")
 			UserDefaults.standard.synchronize()
 		}
 	}
@@ -524,7 +555,8 @@ extension PostsMasterViewController {
 
 extension PostsMasterViewController {
 
-	fileprivate func processOption(openRecentPost: Bool, push: String?) {
+	fileprivate func processOption(openRecentPost: Bool) {
+		comeFrom3DTouch = true
 		self.openRecentPost = openRecentPost
 
 		if !openRecentPost ||
@@ -538,11 +570,11 @@ extension PostsMasterViewController {
 	}
 
 	@objc func onShortcutActionLastPost(_ notification: Notification) {
-		processOption(openRecentPost: false, push: nil)
+		processOption(openRecentPost: false)
 	}
 
 	@objc func onShortcutActionRecentPost(_ notification: Notification) {
-		processOption(openRecentPost: true, push: nil)
+		processOption(openRecentPost: true)
 	}
 
 }
