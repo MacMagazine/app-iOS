@@ -60,6 +60,34 @@ class ResultsViewController: UITableViewController {
 		return posts.count
 	}
 
+	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		
+		let compatilhar = UIContextualAction(style: .normal, title: nil) {
+			_, _, boolValue in
+			
+			let post = self.fetchedResultsController.object(at: indexPath)
+			guard let link = post.link,
+				let url = URL(string: link)
+				else {
+					boolValue(true)
+					return
+			}
+			
+			let cell = self.tableView?.cellForRow(at: indexPath)
+			let items: [Any] = [post.title ?? "", url]
+			self.delegate?.showActionSheet(cell, for: items)
+			
+			boolValue(true)
+		}
+		compatilhar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		compatilhar.image = UIImage(named: "share")
+		compatilhar.accessibilityLabel = "Compartilhar"
+		
+		let swipeActions = UISwipeActionsConfiguration(actions: [compatilhar])
+		swipeActions.performsFirstActionWithFullSwipe = true
+		return swipeActions
+	}
+
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		var identifier = "normalCell"
 		if posts[indexPath.row].categories.contains("Destaques") {
