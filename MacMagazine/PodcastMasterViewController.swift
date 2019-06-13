@@ -136,6 +136,18 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		play?(podcast)
     }
 
+	func setFavorite(_ favorited: Bool, atIndexPath: IndexPath) {
+		var object = posts[atIndexPath.row]
+		object.favorite = favorited
+
+		posts[atIndexPath.row] = object
+		self.resultsTableController?.posts = self.posts
+
+		if let cell = self.resultsTableController?.tableView.cellForRow(at: atIndexPath) as? PostCell {
+			cell.configureSearchPost(object)
+		}
+	}
+
 	// MARK: - Actions methods -
 
 	@IBAction private func getPodcasts() {

@@ -173,10 +173,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	// MARK: - View Methods -
 
-	func showActionSheet(_ view: UIView?, for items: [Any]) {
-		Share().present(at: view, using: items)
-	}
-
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
@@ -220,8 +216,20 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectResultRowAt(indexPath: IndexPath) {
 		selectedIndexPath = indexPath
-		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: false) }
+		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: $0.favorite) }
 		self.performSegue(withIdentifier: "showDetail", sender: self)
+	}
+
+	func setFavorite(_ favorited: Bool, atIndexPath: IndexPath) {
+		var object = posts[atIndexPath.row]
+		object.favorite = favorited
+
+		posts[atIndexPath.row] = object
+		self.resultsTableController?.posts = self.posts
+
+		if let cell = self.resultsTableController?.tableView.cellForRow(at: atIndexPath) as? PostCell {
+			cell.configureSearchPost(object)
+		}
 	}
 
 	// MARK: - Actions methods -
@@ -505,7 +513,8 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 		}
 
 		let items: [Any] = [post?.title ?? "", url]
-		showActionSheet(nil, for: items)
+		let view: UIView? = nil
+		Share().present(at: view, using: items)
 	}
 
 	func previewActionCancel() {

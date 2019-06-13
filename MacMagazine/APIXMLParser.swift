@@ -19,6 +19,7 @@ struct XMLPost {
 	var podcast: String = ""
 	var duration: String = ""
 	var podcastFrame: String = ""
+	var favorite: Bool = false
 
 	fileprivate func decodeHTMLString(string: String) -> String {
 		guard let encodedData = string.data(using: String.Encoding.utf8) else {

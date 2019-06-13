@@ -68,7 +68,7 @@ class PostCell: AppTableViewCell {
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: defaultImage))
 
-		favoriteImageView.isHidden = true
+		favoriteImageView.isHidden = !object.favorite
 	}
 
 	func configurePodcast(_ object: Post) {

@@ -11,6 +11,7 @@ import UIKit
 protocol ResultsViewControllerDelegate: AnyObject {
 	func didSelectResultRowAt(indexPath: IndexPath)
 	func configureResult(cell: PostCell, atIndexPath: IndexPath)
+	func setFavorite(_ favorited: Bool, atIndexPath: IndexPath)
 }
 
 extension ResultsViewControllerDelegate {
@@ -60,29 +61,49 @@ class ResultsViewController: UITableViewController {
 		return posts.count
 	}
 
-	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		
-		let compatilhar = UIContextualAction(style: .normal, title: nil) {
-			_, _, boolValue in
-			
-			let post = self.fetchedResultsController.object(at: indexPath)
-			guard let link = post.link,
-				let url = URL(string: link)
-				else {
-					boolValue(true)
-					return
+	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+		let favoritar = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
+			var object = self.posts[indexPath.row]
+			Favorite().updatePostStatus(using: object.link) { isFavoriteOn in
+				object.favorite = isFavoriteOn
+				NotificationCenter.default.post(name: .favoriteUpdated, object: object)
+				self.delegate?.setFavorite(isFavoriteOn, atIndexPath: indexPath)
+				boolValue(true)
 			}
-			
-			let cell = self.tableView?.cellForRow(at: indexPath)
-			let items: [Any] = [post.title ?? "", url]
-			self.delegate?.showActionSheet(cell, for: items)
-			
+		}
+
+		let object = self.posts[indexPath.row]
+		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
+		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		favoritar.accessibilityLabel = "Favoritar"
+
+		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
+		swipeActions.performsFirstActionWithFullSwipe = true
+		return swipeActions
+	}
+
+	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+		let compatilhar = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
+
+			let post = self.posts[indexPath.row]
+			let link = post.link
+			guard let url = URL(string: link) else {
+				boolValue(true)
+				return
+			}
+
+			let cell = self.tableView.cellForRow(at: indexPath)
+			let items: [Any] = [post.title, url]
+			Share().present(at: cell, using: items)
+
 			boolValue(true)
 		}
 		compatilhar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
 		compatilhar.image = UIImage(named: "share")
 		compatilhar.accessibilityLabel = "Compartilhar"
-		
+
 		let swipeActions = UISwipeActionsConfiguration(actions: [compatilhar])
 		swipeActions.performsFirstActionWithFullSwipe = true
 		return swipeActions
