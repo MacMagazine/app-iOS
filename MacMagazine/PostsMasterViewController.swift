@@ -103,18 +103,14 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		// Execute the fetch to display the data
-		fetchController?.reloadData()
-	}
+        // Execute the fetch to display the data
+        fetchController?.reloadData()
+    }
 
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = Settings().isPad()
 
         super.viewWillAppear(animated)
-
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: self.tableView)
-        }
 
         if Settings().isPhone() {
 			selectedIndexPath = nil
@@ -136,6 +132,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+
+    func setup() {
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: self.tableView)
+        }
+    }
 
 	// MARK: - Scroll detection -
 

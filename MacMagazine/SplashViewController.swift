@@ -22,12 +22,13 @@ class SplashViewController: UIViewController {
 
 		delay(0.6) {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-			guard let controller = storyboard.instantiateViewController(withIdentifier: "main") as? UITabBarController,
-				let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-				let splitViewController = controller.viewControllers?.first as? UISplitViewController
-				else {
-					return
-			}
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "main") as? UITabBarController,
+                let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                let splitViewController = controller.viewControllers?.first as? UISplitViewController,
+                let window = UIApplication.shared.keyWindow
+                else {
+                    return
+            }
 
 			controller.delegate = appDelegate
 
@@ -35,7 +36,19 @@ class SplashViewController: UIViewController {
 			splitViewController.preferredDisplayMode = .allVisible
 			splitViewController.preferredPrimaryColumnWidthFraction = 0.33
 
-			UIApplication.shared.keyWindow?.rootViewController = controller
+            UIView.transition(with: window,
+                              duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                window.rootViewController = controller
+            }, completion: { _ in
+                guard let navVC = splitViewController.viewControllers.first as? UINavigationController,
+                    let vc = navVC.viewControllers.first as? PostsMasterViewController
+                    else {
+                        return
+                }
+                vc.setup()
+            })
 		}
 	}
 
