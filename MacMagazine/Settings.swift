@@ -22,11 +22,11 @@ enum Definitions {
 struct Settings {
 
     func isPhone() -> Bool {
-        return UIDevice.current.userInterfaceIdiom == .phone
+        return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .compact
     }
 
     func isPad() -> Bool {
-        return UIDevice.current.userInterfaceIdiom == .pad
+        return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .regular
     }
 
     func isDarkMode() -> Bool {
