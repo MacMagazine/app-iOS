@@ -103,10 +103,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
-		if traitCollection.forceTouchCapability == .available {
-			registerForPreviewing(with: self, sourceView: self.tableView)
-		}
-
 		// Execute the fetch to display the data
 		fetchController?.reloadData()
 	}
@@ -116,7 +112,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         super.viewWillAppear(animated)
 
-		if Settings().isPhone() {
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: self.tableView)
+        }
+
+        if Settings().isPhone() {
 			selectedIndexPath = nil
 		}
 
