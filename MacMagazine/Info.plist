@@ -28,6 +28,15 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+			<key>phone_3</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>phone_3</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
@@ -57,6 +66,15 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>tablet_2</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>tablet_3</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>tablet_3</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>

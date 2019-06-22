@@ -21,6 +21,7 @@ class SettingsTableViewController: UITableViewController {
 
 	@IBOutlet private weak var iconOption1: UIImageView!
 	@IBOutlet private weak var iconOption2: UIImageView!
+    @IBOutlet private weak var iconOption3: UIImageView!
 
 	@IBOutlet private weak var pushOptions: AppSegmentedControl!
 
@@ -39,6 +40,7 @@ class SettingsTableViewController: UITableViewController {
 		let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
 		self.iconOption1.alpha = iconName ?? IconOptions.option1 == IconOptions.option1 ? 1 : 0.6
 		self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
+        self.iconOption3.alpha = iconName ?? IconOptions.option1 == IconOptions.option3 ? 1 : 0.6
 
 		pushOptions.selectedSegmentIndex = Settings().getPushPreference()
 
@@ -152,19 +154,22 @@ extension SettingsTableViewController {
 	struct IconOptions {
 		static let option1 = "option_1"
 		static let option2 = "option_2"
-		static let phone1 = "phone_1"
-		static let phone2 = "phone_2"
-		static let tablet1 = "tablet_1"
-		static let tablet2 = "tablet_2"
+        static let option3 = "option_3"
+        static let type = Settings().isPhone() ? "phone" : "tablet"
+        static let icon1 = "\(type)_1"
+        static let icon2 = "\(type)_2"
+        static let icon3 = "\(type)_3"
 
 		func getIcon(for option: String) -> String? {
 			var icon: String?
 
 			switch option {
 			case IconOptions.option1:
-				icon = Settings().isPhone() ? IconOptions.phone1 : IconOptions.tablet1
+				icon = IconOptions.icon1
 			case IconOptions.option2:
-				icon = Settings().isPhone() ? IconOptions.phone2 : IconOptions.tablet2
+				icon = IconOptions.icon2
+            case IconOptions.option3:
+                icon = IconOptions.icon3
 			default:
 				break
 			}
@@ -204,6 +209,7 @@ extension SettingsTableViewController {
 
 				self.iconOption1.alpha = iconName == IconOptions.option1 ? 1 : 0.6
 				self.iconOption2.alpha = iconName == IconOptions.option2 ? 1 : 0.6
+                self.iconOption3.alpha = iconName == IconOptions.option3 ? 1 : 0.6
 			}
 		}
 	}

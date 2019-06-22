@@ -223,13 +223,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="83" height="74"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="59" height="74"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
-                                                            <rect key="frame" x="83" y="0.0" width="82.5" height="74"/>
+                                                            <rect key="frame" x="59" y="0.0" width="59.5" height="74"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="12.5" y="8.5" width="57" height="57"/>
+                                                                    <rect key="frame" x="1" y="8.5" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
                                                                         <constraint firstAttribute="width" constant="57" id="XYi-HN-HK1"/>
@@ -244,7 +244,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="82.5" height="74"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="74"/>
                                                                     <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo branco">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -263,13 +263,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
-                                                            <rect key="frame" x="165.5" y="0.0" width="83" height="74"/>
+                                                            <rect key="frame" x="118.5" y="0.0" width="59" height="74"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
-                                                            <rect key="frame" x="248.5" y="0.0" width="82.5" height="74"/>
+                                                            <rect key="frame" x="177.5" y="0.0" width="59" height="74"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="13" y="8.5" width="57" height="57"/>
+                                                                    <rect key="frame" x="1" y="8.5" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
                                                                         <constraint firstAttribute="width" constant="57" id="TwA-5I-6vQ"/>
@@ -284,7 +284,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="82.5" height="74"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="59" height="74"/>
                                                                     <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo azul">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -302,8 +302,48 @@
                                                                 <constraint firstItem="Wcj-XM-fT5" firstAttribute="top" secondItem="Kr4-nf-He3" secondAttribute="top" id="wv9-4P-Amr"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-2y-DWs">
+                                                            <rect key="frame" x="236.5" y="0.0" width="59" height="74"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAV-0s-5g5">
+                                                            <rect key="frame" x="295.5" y="0.0" width="59.5" height="74"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_3" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                    <rect key="frame" x="1.5" y="8.5" width="57" height="57"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="57" id="Yp0-Ks-C6t"/>
+                                                                        <constraint firstAttribute="width" constant="57" id="e8q-N3-fur"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="12"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="74"/>
+                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo azul">
+                                                                        <accessibilityTraits key="traits" button="YES"/>
+                                                                    </accessibility>
+                                                                    <connections>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="xlo-Cn-NC7"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="Yeb-ut-fnF" secondAttribute="trailing" id="5nr-Al-8uy"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Yeb-ut-fnF" secondAttribute="bottom" id="Gm3-jA-exR"/>
+                                                                <constraint firstItem="eO4-rq-SKc" firstAttribute="centerX" secondItem="SAV-0s-5g5" secondAttribute="centerX" id="LFP-5i-GYN"/>
+                                                                <constraint firstItem="Yeb-ut-fnF" firstAttribute="top" secondItem="SAV-0s-5g5" secondAttribute="top" id="Mtj-wO-DjI"/>
+                                                                <constraint firstItem="Yeb-ut-fnF" firstAttribute="leading" secondItem="SAV-0s-5g5" secondAttribute="leading" id="njK-3V-Mjp"/>
+                                                                <constraint firstItem="eO4-rq-SKc" firstAttribute="centerY" secondItem="SAV-0s-5g5" secondAttribute="centerY" id="rc4-Y7-PCp"/>
+                                                            </constraints>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
-                                                            <rect key="frame" x="331" y="0.0" width="83" height="74"/>
+                                                            <rect key="frame" x="355" y="0.0" width="59" height="74"/>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -371,6 +411,7 @@
                         <outlet property="fontSize" destination="8Xj-Ri-tHM" id="yeG-fi-gji"/>
                         <outlet property="iconOption1" destination="WFw-2p-qsH" id="igU-sl-ORk"/>
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="5j5-wP-hOT"/>
+                        <outlet property="iconOption3" destination="eO4-rq-SKc" id="cjV-25-NwB"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
@@ -404,6 +445,7 @@
         <image name="logo_dark" width="509" height="419"/>
         <image name="phone_1" width="1024" height="1024"/>
         <image name="phone_2" width="1024" height="1024"/>
+        <image name="phone_3" width="1024" height="1024"/>
         <image name="tab_settings" width="24" height="25"/>
     </resources>
 </document>
