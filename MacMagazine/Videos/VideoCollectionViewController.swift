@@ -84,7 +84,12 @@ class VideoCollectionViewController: UICollectionViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		if fetchedResultsController.fetchedObjects?.isEmpty ?? true &&
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        delegate.supportedInterfaceOrientation = .all
+
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true &&
 			!isLoading {
 			pageToken = ""
 			isLoading = true

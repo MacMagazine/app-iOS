@@ -23,7 +23,7 @@ class PodcastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-		self.navigationItem.titleView = logoView
+        self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
 
 		playerHeight.constant = 0.0
@@ -54,7 +54,16 @@ class PodcastViewController: UIViewController {
 		})
 	}
 
-	fileprivate func rotate() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        delegate.supportedInterfaceOrientation = Settings().isPhone() ? .portrait : .all
+    }
+
+    fileprivate func rotate() {
 		if self.tabBarController?.selectedIndex == 1 {
 			guard let vc = self.children[0] as? PodcastMasterViewController else {
 				return

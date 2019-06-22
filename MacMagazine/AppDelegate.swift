@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var previousController: UIViewController?
+    var supportedInterfaceOrientation: UIInterfaceOrientationMask = .all
 
 	// MARK: - Window lifecycle -
 
@@ -25,5 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		return true
 	}
+
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return supportedInterfaceOrientation
+    }
 
 }

@@ -51,7 +51,12 @@ class SettingsTableViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		applyTheme()
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        delegate.supportedInterfaceOrientation = Settings().isPhone() ? .portrait : .all
+
+        applyTheme()
 	}
 
 	// MARK: - TableView Methods -
