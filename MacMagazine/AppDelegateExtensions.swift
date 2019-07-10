@@ -19,6 +19,15 @@ extension Notification.Name {
 	static let scrollToTop = Notification.Name("scrollToTop")
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
 	static let updateSelectedPost = Notification.Name("updateSelectedPost")
+    static let refreshAfterBackground = Notification.Name("refreshAfterBackground")
+}
+
+// MARK: - Update content -
+
+extension AppDelegate {
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
+    }
 }
 
 // MARK: - Setup -

@@ -73,7 +73,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
-		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRefreshAfterBackground(_:)), name: .refreshAfterBackground, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 
 		if Settings().isPad() {
@@ -540,6 +542,12 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 // MARK: - Notifications -
 
 extension PostsMasterViewController {
+    @objc func onRefreshAfterBackground(_ notification: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getPosts(paged: 0)
+        }
+    }
+
 	@objc func onUpdateSelectedPost(_ notification: Notification) {
 		guard let link = notification.object as? String else {
 			return
