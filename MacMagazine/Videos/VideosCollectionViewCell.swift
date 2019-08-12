@@ -80,7 +80,14 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		thumbnailImageView.isHidden = true
 		playButton.isHidden = true
 		youtubeWebView?.play()
-	}
+
+        // Handoff
+        let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
+        handoff.title = headlineLabel.text
+        handoff.webpageURL = URL(string: "https://www.youtube.com/watch?v=\(youtubeWebView?.videoId ?? "")")
+        userActivity = handoff
+        userActivity?.becomeCurrent()
+    }
 
 	@IBAction private func share(_ sender: Any) {
 		guard let videoId = videoId,

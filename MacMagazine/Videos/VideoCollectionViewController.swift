@@ -97,6 +97,11 @@ class VideoCollectionViewController: UICollectionViewController {
 		}
 	}
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        userActivity?.invalidate()
+    }
+
 	// MARK: - Local methods -
 
 	fileprivate func getVideos() {

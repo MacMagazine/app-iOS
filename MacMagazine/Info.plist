@@ -121,6 +121,10 @@
 	<string>MacMagazine deseja ter acesso à sua biblioteca de fotos para prestar um serviço melhor para você.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>MacMagazine deseja ter acesso à sua biblioteca de fotos para prestar um serviço melhor para você.</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.brit.macmagazine.details</string>
+	</array>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

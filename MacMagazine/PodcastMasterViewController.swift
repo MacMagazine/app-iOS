@@ -70,7 +70,12 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		// Dispose of any resources that can be recreated.
 	}
 
-	// MARK: - Scroll detection -
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        userActivity?.invalidate()
+    }
+
+    // MARK: - Scroll detection -
 
 	@objc func onScrollToTop(_ notification: Notification) {
 		tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
@@ -123,6 +128,16 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		}
 		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL, frame: object.podcastFrame)
 		play?(podcast)
+
+        // Handoff
+        guard let url = object.link else {
+            return
+        }
+        let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
+        handoff.title = object.title
+        handoff.webpageURL = URL(string: url)
+        userActivity = handoff
+        userActivity?.becomeCurrent()
     }
 
     func configureResult(cell: PostCell, atIndexPath: IndexPath) {
