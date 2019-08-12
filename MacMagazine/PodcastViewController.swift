@@ -15,6 +15,7 @@ class PodcastViewController: UIViewController {
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var playerHeight: NSLayoutConstraint!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var spin: UIActivityIndicatorView!
 
 	var searchController: UISearchController?
 
@@ -32,6 +33,8 @@ class PodcastViewController: UIViewController {
 			return
 		}
 		vc.play = play
+        vc.showSpin = showSpin
+        vc.hideSpin = hideSpin
 
 		vc.resultsTableController = ResultsViewController()
 		vc.resultsTableController?.delegate = vc
@@ -144,4 +147,16 @@ extension PodcastViewController: UISearchBarDelegate {
 		searchBar.resignFirstResponder()
 		navigationItem.searchController = nil
 	}
+}
+
+// MARK: - Spin -
+
+extension PodcastViewController {
+    func showSpin() {
+        navigationItem.titleView = spin
+    }
+
+    func hideSpin() {
+        navigationItem.titleView = logoView
+    }
 }

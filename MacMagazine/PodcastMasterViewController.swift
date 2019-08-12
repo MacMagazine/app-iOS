@@ -32,6 +32,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     var play: ((Podcast?) -> Void)?
 	var selectedIndex: IndexPath?
 
+    var showSpin: (() -> Void)?
+    var hideSpin: (() -> Void)?
+
 	// MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
@@ -78,6 +81,11 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		let offset = scrollView.contentOffset
 		direction = offset.y > lastContentOffset.y ? .down : .up
 		lastContentOffset = offset
+
+        // Pull to Refresh
+        if offset.y < -100 {
+            self.getPodcasts(paged: 0)
+        }
 	}
 
 	// MARK: - View Methods -
@@ -148,14 +156,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		}
 	}
 
-	// MARK: - Actions methods -
-
-	@IBAction private func getPodcasts() {
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-			self.getPodcasts(paged: 0)
-		}
-	}
-
     // MARK: - Public methods -
 
     func showFavoritesAction() {
@@ -178,39 +178,26 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     // MARK: - Local methods -
 
     fileprivate func hasData() -> Bool {
-        return (fetchController?.hasData() ?? false) && !(self.refreshControl?.isRefreshing ?? true)
+        return fetchController?.hasData() ?? false
     }
 
 	fileprivate func getPodcasts(paged: Int) {
-		let getPodcast = {
-			API().getPodcasts(page: paged) { post in
-				DispatchQueue.main.async {
-					guard let post = post else {
-						// When post == nil, indicates the last post retrieved
-						self.fetchController?.reloadData()
-						if paged < 1 {
-							self.refreshControl?.endRefreshing()
-						}
-						return
-					}
-					if !post.duration.isEmpty {
-						CoreDataStack.shared.save(post: post)
-					}
-				}
-			}
-		}
+        showSpin?()
+        API().getPodcasts(page: paged) { post in
+            DispatchQueue.main.async {
+                self.hideSpin?()
 
-		if paged < 1 {
-			self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-			UIView.animate(withDuration: 0.4, animations: {
-				self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: false)
-			}, completion: { _ in
-				self.refreshControl?.beginRefreshing()
-				getPodcast()
-			})
-		} else {
-			getPodcast()
-		}
+                guard let post = post else {
+                    // When post == nil, indicates the last post retrieved
+                    self.fetchController?.reloadData()
+                    return
+                }
+                if !post.duration.isEmpty {
+                    CoreDataStack.shared.save(post: post)
+                }
+            }
+        }
+
 	}
 
 	func searchPodcasts(_ text: String) {
