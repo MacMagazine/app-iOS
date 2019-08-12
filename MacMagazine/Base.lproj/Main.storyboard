@@ -94,16 +94,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="6Bw-5M-aUL">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="getPosts:" destination="Jej-5Q-aqJ" eventType="valueChanged" id="Ldp-GK-zoa"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <outlet property="favorite" destination="mos-l0-Ml2" id="oNt-bX-D7R"/>
                         <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
+                        <outlet property="spin" destination="uE4-5b-xTc" id="Vwt-Qm-yfC"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
                     </connections>
                 </tableViewController>
@@ -119,6 +113,10 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="uE4-5b-xTc">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="425" y="-2885"/>
         </scene>

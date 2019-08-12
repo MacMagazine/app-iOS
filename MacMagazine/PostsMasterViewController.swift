@@ -48,6 +48,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	@IBOutlet private weak var logoView: UIView!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var spin: UIActivityIndicatorView!
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -146,14 +147,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         }
     }
 
-	// MARK: - Scroll detection -
-
-	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let offset = scrollView.contentOffset
-		direction = offset.y > lastContentOffset.y ? .down : .up
-		lastContentOffset = offset
-	}
-
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -251,12 +244,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		Settings().applyTheme()
 	}
 
-	@IBAction private func getPosts(_ sender: Any) {
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-			self.getPosts(paged: 0)
-		}
-	}
-
 	@IBAction private func showFavorites(_ sender: Any) {
 		showFavorites = !showFavorites
         if showFavorites {
@@ -284,75 +271,61 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Local methods -
 
     fileprivate func hasData() -> Bool {
-        return (fetchController?.hasData() ?? false) && !(self.refreshControl?.isRefreshing ?? true)
+        return (fetchController?.hasData() ?? false) && !spin.isAnimating
     }
 
 	fileprivate func getPosts(paged: Int) {
-		let getPost = {
-            var images: [String] = []
-			var items: [CSSearchableItem] = []
+        var images: [String] = []
+        var items: [CSSearchableItem] = []
 
-			API().getPosts(page: paged) { post in
-				DispatchQueue.main.async {
-					guard let post = post else {
-                        // Prefetch images to be able to sent to Apple Watch
-                        let urls = images.compactMap { URL(string: $0) }
-                        let prefetcher = ImagePrefetcher(urls: urls)
-                        prefetcher.start()
+        showSpin()
 
-						// Index all items to Spotlight
-						CSSearchableIndex.default().indexSearchableItems(items) {
-							if let error = $0 {
-								logE(error.localizedDescription)
-							}
-						}
+        API().getPosts(page: paged) { post in
+            DispatchQueue.main.async {
+                guard let post = post else {
+                    // Prefetch images to be able to sent to Apple Watch
+                    let urls = images.compactMap { URL(string: $0) }
+                    let prefetcher = ImagePrefetcher(urls: urls)
+                    prefetcher.start()
 
-						// When post == nil, indicates the last post retrieved
-						self.fetchController?.reloadData()
+                    // Index all items to Spotlight
+                    CSSearchableIndex.default().indexSearchableItems(items) {
+                        if let error = $0 {
+                            logE(error.localizedDescription)
+                        }
+                    }
 
-						if paged < 1 {
-							if self.openRecentPost {
-								// Came from 3D touch, openRecentPost
-								let indexPath = IndexPath(row: 0, section: 0)
-								self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+                    // When post == nil, indicates the last post retrieved
+                    self.fetchController?.reloadData()
+                    self.hideSpin()
 
-								if Settings().isPad() {
-									self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
-								} else {
-									self.didSelectRowAt(indexPath: indexPath)
-								}
+                    if paged < 1 {
+                        if self.openRecentPost {
+                            // Came from 3D touch, openRecentPost
+                            let indexPath = IndexPath(row: 0, section: 0)
+                            self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
 
-							} else {
-								DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-									self.refreshControl?.endRefreshing()
-									DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-										self.processSelection()
-									}
-								}
-							}
-							self.openRecentPost = false
-						}
-						return
-					}
-                    images.append(post.artworkURL)
-					CoreDataStack.shared.save(post: post)
+                            if Settings().isPad() {
+                                self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
+                            } else {
+                                self.didSelectRowAt(indexPath: indexPath)
+                            }
 
-					items.append(self.createSearchableItem(post))
-				}
-			}
-		}
+                        } else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                self.processSelection()
+                            }
+                        }
+                        self.openRecentPost = false
+                    }
+                    return
+                }
+                images.append(post.artworkURL)
+                CoreDataStack.shared.save(post: post)
 
-		if paged < 1 {
-			self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-			UIView.animate(withDuration: 0.4, animations: {
-				self.tableView.setContentOffset(CGPoint(x: 0, y: -(self.refreshControl?.frame.size.height ?? 88)), animated: false)
-			}, completion: { _ in
-				self.refreshControl?.beginRefreshing()
-				getPost()
-			})
-		} else {
-			getPost()
-		}
+                items.append(self.createSearchableItem(post))
+            }
+        }
 	}
 
 	fileprivate func createSearchableItem(_ post: XMLPost) -> CSSearchableItem {
@@ -369,7 +342,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 			if self.lastPage == -1 {
 				self.lastPage = 0
-				self.getPosts(0)
+                self.getPosts(paged: 0)
 			}
 		}
 		processTabletSelection()
@@ -405,7 +378,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 			getLastSelection { indexPath in
 				if self.tableView.numberOfSections >= indexPath.section && self.tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
-					if self.hasData() && !(self.refreshControl?.isRefreshing ?? false) {
+					if self.hasData() {
 						self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
 						self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
 					}
@@ -450,6 +423,36 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		API().searchPosts(text, processResponse)
 	}
 
+}
+
+// MARK: - Scroll detection -
+
+extension PostsMasterViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        direction = offset.y > lastContentOffset.y && offset.y > 100 ? .down : .up
+        lastContentOffset = offset
+
+        // Pull to Refresh
+        if offset.y < -100 && navigationItem.titleView == logoView {
+            self.getPosts(paged: 0)
+        }
+    }
+//        direction = offset.y > lastContentOffset.y ? .down : .up
+}
+
+// MARK: - Spin -
+
+extension PostsMasterViewController {
+    func showSpin() {
+        navigationItem.titleView = spin
+        spin.startAnimating()
+    }
+
+    func hideSpin() {
+        spin.stopAnimating()
+        navigationItem.titleView = logoView
+    }
 }
 
 // MARK: - UISearchBarDelegate -
