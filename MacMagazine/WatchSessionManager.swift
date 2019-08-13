@@ -38,15 +38,25 @@ extension WatchSessionManager: WCSessionDelegate {
 
 	func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
 		if message["request"] as? String == "posts" {
-			CoreDataStack.shared.getPostsForWatch { watchPosts in
-				do {
-					let jsonData = try JSONEncoder().encode(watchPosts)
-					replyHandler(["posts": jsonData])
-				} catch {
-					logE(error.localizedDescription)
-					replyHandler(["posts": []])
-				}
-			}
+
+            API().getPosts(page: 0) { post in
+                DispatchQueue.main.async {
+                    guard let post = post else {
+                        CoreDataStack.shared.getPostsForWatch { watchPosts in
+                            do {
+                                let jsonData = try JSONEncoder().encode(watchPosts)
+                                replyHandler(["posts": jsonData])
+                            } catch {
+                                logE(error.localizedDescription)
+                                replyHandler(["posts": []])
+                            }
+                        }
+                        return
+                    }
+                    CoreDataStack.shared.save(post: post)
+                }
+            }
+
 		}
 	}
 

@@ -90,6 +90,7 @@ class LoadingController: WKInterfaceController {
 
 		reloadGroup.setHidden(true)
 		indicator?.showWait()
+        retries = 3
         getPosts()
     }
 
@@ -105,13 +106,16 @@ class LoadingController: WKInterfaceController {
                     self.posts = try JSONDecoder().decode([PostData].self, from: jsonData)
                 } catch {
 					logE(error.localizedDescription)
+                    self.posts = []
                 }
 
             }, errorHandler: { error in
 				logE(error.localizedDescription)
+                self.posts = []
             })
         } else {
-			logE("Companion Not Reachable")
+            logE("Companion not reachable")
+            self.posts = []
         }
     }
 
