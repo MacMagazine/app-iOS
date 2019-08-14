@@ -38,7 +38,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Post> in
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-		controller.delegate = self
+//		controller.delegate = self
 
 		return controller
 	}()
