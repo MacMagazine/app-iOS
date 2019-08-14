@@ -14,6 +14,7 @@ protocol FetchedResultsControllerDelegate: AnyObject {
 	func didSelectRowAt(indexPath: IndexPath)
 	func configure(cell: PostCell, atIndexPath: IndexPath)
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 }
 
 extension FetchedResultsControllerDelegate {
@@ -65,6 +66,10 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		delegate?.scrollViewDidScroll(scrollView)
+	}
+
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		delegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
 	}
 
 	// MARK: - TableView methods -
