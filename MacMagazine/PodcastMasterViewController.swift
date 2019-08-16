@@ -34,6 +34,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
     var showSpin: (() -> Void)?
     var hideSpin: (() -> Void)?
+	var isLoading = false
 
 	// MARK: - View Lifecycle -
 
@@ -82,6 +83,14 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
 	}
 
+	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		if isLoading {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+				self.getPodcasts(paged: 0)
+			}
+		}
+	}
+
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let offset = scrollView.contentOffset
 		direction = offset.y > lastContentOffset.y ? .down : .up
@@ -89,8 +98,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
         // Pull to Refresh
         if offset.y < -100 {
-            self.getPodcasts(paged: 0)
-        }
+			showSpin?()
+			isLoading = true
+		}
 	}
 
 	// MARK: - View Methods -
@@ -200,6 +210,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
         showSpin?()
         API().getPodcasts(page: paged) { post in
             DispatchQueue.main.async {
+				self.isLoading = false
                 self.hideSpin?()
 
                 guard let post = post else {

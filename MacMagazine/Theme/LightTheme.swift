@@ -20,7 +20,7 @@ struct LightTheme: Theme {
     let secondaryTint: UIColor = .lightGray
     let onTint: UIColor = UIColor(hex: "0097d4", alpha: 1)
 
-    let backgroundColor: UIColor = .groupTableViewBackground
+    let backgroundColor: UIColor = UIColor(hex: "efeef3", alpha: 1)
     let cellBackgroundColor: UIColor = .white
     let separatorColor: UIColor = .lightGray
     let selectionColor: UIColor = UIColor(hex: "008ACA", alpha: 0.3)

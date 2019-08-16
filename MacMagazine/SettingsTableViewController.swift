@@ -32,6 +32,9 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let theme: Theme = Settings().isDarkMode() ? DarkTheme() : LightTheme()
+        tableView.backgroundColor = theme.backgroundColor
+
         version = getAppVersion()
 
         let sliderFontSize = Settings().getFontSize()
@@ -143,6 +146,7 @@ class SettingsTableViewController: UITableViewController {
 
 		darkMode.isOn = isDarkMode
 		NotificationCenter.default.post(name: .reloadWeb, object: nil)
+        tableView.backgroundColor = theme.backgroundColor
     }
 
 }

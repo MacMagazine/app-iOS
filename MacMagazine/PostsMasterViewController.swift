@@ -428,30 +428,41 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 // MARK: - Scroll detection -
 
 extension PostsMasterViewController {
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		if navigationItem.titleView == spin {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+				self.getPosts(paged: 0)
+			}
+		}
+	}
+
+	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
         direction = offset.y > lastContentOffset.y && offset.y > 100 ? .down : .up
         lastContentOffset = offset
 
         // Pull to Refresh
         if offset.y < -100 && navigationItem.titleView == logoView {
-            self.getPosts(paged: 0)
+			showSpin()
         }
     }
-//        direction = offset.y > lastContentOffset.y ? .down : .up
 }
 
 // MARK: - Spin -
 
 extension PostsMasterViewController {
     func showSpin() {
-        navigationItem.titleView = spin
-        spin.startAnimating()
+		DispatchQueue.main.async {
+        	self.navigationItem.titleView = self.spin
+        	self.spin.startAnimating()
+		}
     }
 
     func hideSpin() {
-        spin.stopAnimating()
-        navigationItem.titleView = logoView
+		DispatchQueue.main.async {
+        	self.spin.stopAnimating()
+        	self.navigationItem.titleView = self.logoView
+		}
     }
 }
 
