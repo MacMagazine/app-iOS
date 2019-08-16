@@ -130,10 +130,9 @@ enum PushPreferences {
 }
 
 extension Settings {
-	func getPushPreference() -> Int {
-		// 0 -> All posts
-		// 1 -> Featured only
-
+	// 0 -> All posts
+	// 1 -> Featured only
+	var pushPreference: Int {
 		guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.pushPreferences) as? Int else {
 			// There is no Push Notification Preference or is old style
 			guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.all_posts_pushes) as? Bool else {
@@ -149,7 +148,7 @@ extension Settings {
 		return pushPreferences
 	}
 
-	func updatePushPreferences(_ segment: Int) {
+	func updatePushPreference(_ segment: Int) {
 		UserDefaults.standard.set(segment, forKey: Definitions.pushPreferences)
 		UserDefaults.standard.synchronize()
 

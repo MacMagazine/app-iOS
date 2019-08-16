@@ -44,7 +44,7 @@ class SettingsTableViewController: UITableViewController {
 		self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
         self.iconOption3.alpha = iconName ?? IconOptions.option1 == IconOptions.option3 ? 1 : 0.6
 
-		pushOptions.selectedSegmentIndex = Settings().getPushPreference()
+		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
 		guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
@@ -132,7 +132,7 @@ class SettingsTableViewController: UITableViewController {
 		guard let segment = sender as? AppSegmentedControl else {
 			return
 		}
-		Settings().updatePushPreferences(segment.selectedSegmentIndex)
+		Settings().updatePushPreference(segment.selectedSegmentIndex)
     }
 
 	// MARK: - Private Methods -
