@@ -55,7 +55,7 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 			else {
 				return
 		}
-		if Settings().isPad() {
+		if Settings().isPad {
 			NotificationCenter.default.post(name: .updateSelectedPost, object: link)
 		}
 	}

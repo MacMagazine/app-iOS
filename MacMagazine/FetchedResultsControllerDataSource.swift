@@ -81,7 +81,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
 			notFound.text = "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")."
-			notFound.textColor = Settings().isDarkMode() ? .white : .black
+			notFound.textColor = Settings().darkModeColor
 			notFound.textAlignment = .center
 			tableView.backgroundView = notFound
 			tableView.separatorStyle = .none

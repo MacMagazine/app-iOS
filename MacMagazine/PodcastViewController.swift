@@ -63,7 +63,7 @@ class PodcastViewController: UIViewController {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        delegate.supportedInterfaceOrientation = Settings().isPhone() ? .portrait : .all
+        delegate.supportedInterfaceOrientation = Settings().orientations
     }
 
     fileprivate func rotate() {

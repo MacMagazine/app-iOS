@@ -9,6 +9,8 @@
 import OneSignal
 import UIKit
 
+// MARK: -
+
 enum Definitions {
 	static let darkMode = "darkMode"
 	static let fontSize = "font-size-settings"
@@ -19,36 +21,46 @@ enum Definitions {
 	static let pushPreferences = "pushPreferences"
 }
 
+// MARK: -
+
 struct Settings {
 
-    func isPhone() -> Bool {
+	// MARK: - Device -
+
+	var isPhone: Bool {
         return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .compact
     }
 
-    func isPad() -> Bool {
+	var isPad: Bool {
         return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .regular
     }
 
-    func isDarkMode() -> Bool {
+	var orientations: UIInterfaceOrientationMask {
+		return isPhone ? .portrait : .all
+	}
+
+	// MARK: - Dark Mode -
+
+	var isDarkMode: Bool {
 		guard let isDarkMode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Bool else {
 			return false
 		}
 		return isDarkMode
 	}
 
-	func getDarkModeUserAgent() -> String {
-		return isDarkMode() ? "-modoescuro" : ""
+	var darkModeUserAgent: String {
+		return isDarkMode ? "-modoescuro" : ""
 	}
 
-	func getFontSize() -> String {
+	var fontSize: String {
 		guard let sliderFontSize = UserDefaults.standard.object(forKey: Definitions.fontSize) as? String else {
 			return ""
 		}
 		return sliderFontSize
 	}
 
-	func getFontSizeUserAgent() -> String {
-		let sliderFontSize = getFontSize()
+	var fontSizeUserAgent: String {
+		let sliderFontSize = fontSize
 		var fontSize = ""
 		if !sliderFontSize.isEmpty {
 			fontSize = "-\(sliderFontSize)"
@@ -56,7 +68,21 @@ struct Settings {
 		return fontSize
 	}
 
-	func shouldAskForReview() -> Bool {
+	var darkModeimage: String {
+		return isDarkMode ? "_dark" : ""
+	}
+
+	var darkModeColor: UIColor {
+		return isDarkMode ? .white : .black
+	}
+
+	var theme: Theme {
+		return isDarkMode ? DarkTheme() : LightTheme()
+	}
+
+	// MARK: - Review -
+
+	var shouldAskForReview: Bool {
 		guard let askForReview = UserDefaults.standard.object(forKey: Definitions.askForReview) as? Int else {
 			UserDefaults.standard.set(1, forKey: Definitions.askForReview)
 			UserDefaults.standard.synchronize()
@@ -71,14 +97,15 @@ struct Settings {
 
 }
 
+// MARK: -
+
 extension Settings {
 	func applyTheme() {
-		guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
+		guard let _ = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
 			let theme: Theme = LightTheme()
 			theme.apply(for: UIApplication.shared)
 			return
 		}
-		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
 		theme.apply(for: UIApplication.shared)
 	}
 
@@ -94,6 +121,8 @@ extension Settings {
 		}
 	}
 }
+
+// MARK: - Push -
 
 enum PushPreferences {
 	static let featured = "featured_posts"
