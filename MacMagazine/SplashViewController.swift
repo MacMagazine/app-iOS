@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		logo.image = UIImage(named: "logo\(Settings().isDarkMode() ? "_dark" : "")")
+		logo.image = UIImage(named: "logo\(Settings().darkModeimage)")
 	}
 
 	override func viewDidAppear(_ animated: Bool) {

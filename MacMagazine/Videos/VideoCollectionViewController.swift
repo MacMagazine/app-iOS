@@ -255,7 +255,7 @@ extension VideoCollectionViewController {
 
 		let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
 		notFound.text = message
-		notFound.textColor = Settings().isDarkMode() ? .white : .black
+		notFound.textColor = Settings().darkModeColor
 		notFound.textAlignment = .center
 		collectionView.backgroundView = notFound
 	}

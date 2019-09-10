@@ -154,7 +154,7 @@ class ResultsViewController: UITableViewController {
 	func showMessage(_ message: String) {
 		let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
 		messageLabel.text = message
-		messageLabel.textColor = Settings().isDarkMode() ? .white : .black
+		messageLabel.textColor = Settings().darkModeColor
 		messageLabel.textAlignment = .center
 		messageLabel.numberOfLines = 0
 

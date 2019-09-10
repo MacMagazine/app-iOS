@@ -41,7 +41,7 @@ extension AppDelegate {
 		WatchSessionManager.shared.startSession()
 
 		// AppStore Review
-		if Settings().shouldAskForReview() {
+		if Settings().shouldAskForReview {
 			SKStoreReviewController.requestReview()
 		}
 

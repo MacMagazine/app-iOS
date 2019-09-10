@@ -32,12 +32,11 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let theme: Theme = Settings().isDarkMode() ? DarkTheme() : LightTheme()
-        tableView.backgroundColor = theme.backgroundColor
+        tableView.backgroundColor = Settings().theme.backgroundColor
 
         version = getAppVersion()
 
-        let sliderFontSize = Settings().getFontSize()
+        let sliderFontSize = Settings().fontSize
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
 
 		let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
@@ -45,7 +44,7 @@ class SettingsTableViewController: UITableViewController {
 		self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
         self.iconOption3.alpha = iconName ?? IconOptions.option1 == IconOptions.option3 ? 1 : 0.6
 
-		pushOptions.selectedSegmentIndex = Settings().getPushPreference()
+		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
 		guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
@@ -59,7 +58,7 @@ class SettingsTableViewController: UITableViewController {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        delegate.supportedInterfaceOrientation = Settings().isPhone() ? .portrait : .all
+        delegate.supportedInterfaceOrientation = Settings().orientations
 
         applyTheme()
 	}
@@ -133,20 +132,17 @@ class SettingsTableViewController: UITableViewController {
 		guard let segment = sender as? AppSegmentedControl else {
 			return
 		}
-		Settings().updatePushPreferences(segment.selectedSegmentIndex)
+		Settings().updatePushPreference(segment.selectedSegmentIndex)
     }
 
 	// MARK: - Private Methods -
 
     fileprivate func applyTheme() {
-        let isDarkMode = Settings().isDarkMode()
+        Settings().theme.apply(for: UIApplication.shared)
 
-		let theme: Theme = isDarkMode ? DarkTheme() : LightTheme()
-        theme.apply(for: UIApplication.shared)
-
-		darkMode.isOn = isDarkMode
+		darkMode.isOn = Settings().isDarkMode
 		NotificationCenter.default.post(name: .reloadWeb, object: nil)
-        tableView.backgroundColor = theme.backgroundColor
+        tableView.backgroundColor = Settings().theme.backgroundColor
     }
 
 }
@@ -159,7 +155,7 @@ extension SettingsTableViewController {
 		static let option1 = "option_1"
 		static let option2 = "option_2"
         static let option3 = "option_3"
-        static let type = Settings().isPhone() ? "phone" : "tablet"
+        static let type = Settings().isPhone ? "phone" : "tablet"
         static let icon1 = "\(type)_1"
         static let icon2 = "\(type)_2"
         static let icon3 = "\(type)_3"

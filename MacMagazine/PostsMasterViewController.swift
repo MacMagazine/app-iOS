@@ -79,7 +79,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 
-		if Settings().isPad() {
+		if Settings().isPad {
 			NotificationCenter.default.addObserver(self, selector: #selector(onUpdateSelectedPost(_:)), name: .updateSelectedPost, object: nil)
 		}
 
@@ -111,16 +111,16 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = Settings().isPad()
+		clearsSelectionOnViewWillAppear = Settings().isPad
 
         super.viewWillAppear(animated)
 
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        delegate.supportedInterfaceOrientation = Settings().isPhone() ? .portrait : .all
+        delegate.supportedInterfaceOrientation = Settings().orientations
 
-        if Settings().isPhone() {
+        if Settings().isPhone {
 			selectedIndexPath = nil
 		}
 
@@ -204,7 +204,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			}
 			updateLastSelectedPost(link: link)
 		}
-		if Settings().isPhone() {
+		if Settings().isPhone {
 			self.tableView.deselectRow(at: indexPath, animated: true)
 		}
 	}
@@ -305,7 +305,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                             let indexPath = IndexPath(row: 0, section: 0)
                             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
 
-                            if Settings().isPad() {
+                            if Settings().isPad {
                                 self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
                             } else {
                                 self.didSelectRowAt(indexPath: indexPath)
@@ -373,7 +373,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func processTabletSelection() {
-        if Settings().isPad() &&
+        if Settings().isPad &&
             tableView.numberOfSections > 0 {
 
 			getLastSelection { indexPath in
@@ -388,7 +388,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func processPhoneSelection() {
-		if Settings().isPhone() &&
+		if Settings().isPhone &&
 			tableView.numberOfSections > 0 {
 
 			getLastSelection { indexPath in
@@ -542,8 +542,7 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 
 	func previewActionCancel() {
 		// Just in case, return the default theme colors
-		let theme: Theme = Settings().isDarkMode() ? DarkTheme() : LightTheme()
-		theme.apply(for: UIApplication.shared)
+		Settings().theme.apply(for: UIApplication.shared)
 
 		guard let index = self.tableView.indexPathForSelectedRow else {
 			return
@@ -605,7 +604,7 @@ extension PostsMasterViewController {
 
 		if !openRecentPost ||
 			viewDidAppear {
-			if Settings().isPad() {
+			if Settings().isPad {
 				processTabletSelection()
 			} else {
 				processPhoneSelection()
@@ -655,9 +654,9 @@ func showDetailController(with link: String) {
 		// Force first tab to present losing of reference
 		tabController.selectedIndex = 0
 		if let splitVC = tabController.selectedViewController as? UISplitViewController,
-			let navVC = splitVC.children[Settings().isPhone() ? 0 : 1] as? UINavigationController {
+			let navVC = splitVC.children[Settings().isPhone ? 0 : 1] as? UINavigationController {
 
-			if Settings().isPhone() {
+			if Settings().isPhone {
 				splitVC.showDetailViewController(controller, sender: nil)
 			} else {
 				// Need to add the controller to navigation to see the nav bar
