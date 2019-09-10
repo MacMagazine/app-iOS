@@ -12,7 +12,7 @@ import UIKit
 
 class PushNotification {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
-		let notificationReceived: OSHandleNotificationReceivedBlock = { result in
+		let notificationReceived: OSHandleNotificationReceivedBlock = { _ in
 			self.updateDatabase(for: nil)
 		}
 
@@ -38,8 +38,6 @@ class PushNotification {
 extension PushNotification {
 	func updateDatabase(for url: String?) {
 
-		logD(url)
-
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
 
@@ -55,9 +53,11 @@ extension PushNotification {
 				images.append(post.artworkURL)
 				CoreDataStack.shared.save(post: post)
 
-				if let url = url, post.link == url {
+				if let url = url,
+					post.link == url ||
+						post.guid == url {
 					DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-						showDetailController(with: url)
+						showDetailController(with: post.link)
 					}
 				}
 			}

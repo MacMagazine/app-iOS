@@ -20,6 +20,7 @@ struct XMLPost {
 	var duration: String = ""
 	var podcastFrame: String = ""
 	var favorite: Bool = false
+	var guid: String = ""
 
 	fileprivate func decodeHTMLString(string: String) -> String {
 		guard let encodedData = string.data(using: String.Encoding.utf8) else {
@@ -118,6 +119,8 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 				if isComplication {
 					parser.abortParsing()
 				}
+			case "guid":
+				currentPost.guid = value
 			default:
 				return
 			}
