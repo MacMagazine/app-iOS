@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Kingfisher
 import WatchConnectivity
 
 class WatchSessionManager: NSObject {
@@ -39,10 +40,17 @@ extension WatchSessionManager: WCSessionDelegate {
 	func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
 		if message["request"] as? String == "posts" {
 
-            API().getPosts(page: 0) { post in
+			var images: [String] = []
+
+			API().getPosts(page: 0) { post in
                 DispatchQueue.main.async {
                     guard let post = post else {
-                        CoreDataStack.shared.getPostsForWatch { watchPosts in
+						// Prefetch images to be able to sent to Apple Watch
+						let urls = images.compactMap { URL(string: $0) }
+						let prefetcher = ImagePrefetcher(urls: urls)
+						prefetcher.start()
+
+						CoreDataStack.shared.getPostsForWatch { watchPosts in
                             do {
                                 let jsonData = try JSONEncoder().encode(watchPosts)
                                 replyHandler(["posts": jsonData])
@@ -53,6 +61,7 @@ extension WatchSessionManager: WCSessionDelegate {
                         }
                         return
                     }
+					images.append(post.artworkURL)
                     CoreDataStack.shared.save(post: post)
                 }
             }
