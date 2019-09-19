@@ -28,14 +28,22 @@ extension String {
         return dateFormatter.date(from: self) ?? Date()
     }
 
+    fileprivate func currentCalendar() -> Calendar {
+        var calendar = Calendar.current
+        if let timeZone = TimeZone(identifier: "America/Sao_Paulo") {
+            calendar.timeZone = timeZone
+        }
+        return calendar
+    }
+
 	func toHeaderDate() -> String {
 		// Expected date format: "20190227"
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyyMMdd"
-		dateFormatter.timeZone = TimeZone(abbreviation: "BRT")
+		dateFormatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
 		let date = dateFormatter.date(from: self) ?? Date()
 
-		let calendar = Calendar.current
+		let calendar = currentCalendar()
 		if calendar.isDateInToday(date) {
 			return "HOJE"
 		}
@@ -50,10 +58,7 @@ extension String {
 	func toComplicationDate() -> String {
 		let dateToUse = self.toDate()
 
-		var calendar = Calendar.current
-		if let timeZone = TimeZone(identifier: "America/Sao_Paulo") {
-			calendar.timeZone = timeZone
-		}
+        let calendar = currentCalendar()
 		let day = String(format: "%02d", calendar.component(.day, from: dateToUse))
 		let month = String(format: "%02d", calendar.component(.month, from: dateToUse))
 		let hour = String(format: "%02d", calendar.component(.hour, from: dateToUse))
