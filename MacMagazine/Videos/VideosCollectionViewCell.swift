@@ -23,6 +23,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBOutlet weak private var favorite: UIButton!
 	@IBOutlet weak private var viewsLabel: UILabel!
 	@IBOutlet weak private var likesLabel: UILabel!
+	@IBOutlet weak private var durationLabel: PaddingLabel!
 
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
@@ -36,13 +37,10 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		favorite.isEnabled = true
 
 		headlineLabel.text = object.title
-		var subhead = object.pubDate?.watchDate() ?? ""
-		if let duration = object.duration {
-			subhead = "\(subhead) | \(duration.toSubHeaderDate())"
-		}
-		subheadlineLabel.text = subhead
+		subheadlineLabel.text = object.pubDate?.watchDate()
 		viewsLabel.text = object.views
 		likesLabel.text = object.likes
+		durationLabel.text = object.duration?.toSubHeaderDate()
 
 		guard let artworkURL = object.artworkURL else {
 			return
@@ -67,6 +65,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
 		viewsLabel.text = object.views
 		likesLabel.text = object.likes
+		durationLabel.text = object.duration.toSubHeaderDate()
 
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
@@ -83,6 +82,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBAction private func play(_ sender: Any) {
 		thumbnailImageView.isHidden = true
 		playButton.isHidden = true
+		durationLabel.isHidden = true
 		youtubeWebView?.play()
 
         // Handoff
@@ -116,6 +116,7 @@ extension VideosCollectionViewCell: WKScriptMessageHandler {
 		if message.name == "videoPaused" {
 			self.thumbnailImageView.isHidden = false
 			self.playButton.isHidden = false
+			self.durationLabel.isHidden = false
 		}
 	}
 }

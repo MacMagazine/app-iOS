@@ -51,6 +51,7 @@
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
 		9B93F1B422AC5554003AF1B1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */; };
 		9B93F1B622AC5592003AF1B1 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B93F1B522AC5592003AF1B1 /* Splash.storyboard */; };
+		9B98C33323885EEF0094EBBA /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98C33223885EEF0094EBBA /* LabelExtension.swift */; };
 		9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7F8F226B6111000534CA /* WebKit.framework */; };
 		9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */; };
 		9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C7F93226B6AF4000534CA /* soundcloud.js */; };
@@ -233,6 +234,7 @@
 		9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		9B93F1B522AC5592003AF1B1 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 7.xcdatamodel"; sourceTree = "<group>"; };
+		9B98C33223885EEF0094EBBA /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		9B9C7F8F226B6111000534CA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudPlayer.swift; sourceTree = "<group>"; };
 		9B9C7F93226B6AF4000534CA /* soundcloud.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = soundcloud.js; sourceTree = "<group>"; };
@@ -352,9 +354,10 @@
 			isa = PBXGroup;
 			children = (
 				9B0DD44B2226E9320016C567 /* DateExtensions.swift */,
+				9B98C33223885EEF0094EBBA /* LabelExtension.swift */,
 				9B0DD44E2226FD150016C567 /* StringExtensions.swift */,
-				9BF356271F6208F70081BE90 /* UIColorExtensions.swift */,
 				9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */,
+				9BF356271F6208F70081BE90 /* UIColorExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1089,6 +1092,7 @@
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
+				9B98C33323885EEF0094EBBA /* LabelExtension.swift in Sources */,
 				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */,

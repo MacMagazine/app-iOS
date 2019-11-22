@@ -76,6 +76,30 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-9k-bAJ" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
+                                            <rect key="frame" x="250.5" y="143" width="41.5" height="18"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
                                         <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcQ-Dv-MPg">
                                             <rect key="frame" x="120" y="54.5" width="60" height="60"/>
                                             <accessibility key="accessibilityConfiguration" label="Reproduzir video"/>
@@ -190,11 +214,14 @@
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZgJ-bP-KyS" secondAttribute="trailing" id="3No-kk-I3O"/>
+                                    <constraint firstItem="hfJ-9k-bAJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lNX-c7-cbD" secondAttribute="leading" symbolic="YES" id="3Yc-em-CDc"/>
                                     <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerX" secondItem="6QJ-Gr-4fx" secondAttribute="centerX" id="4m4-fb-dnt"/>
+                                    <constraint firstItem="hfJ-9k-bAJ" firstAttribute="bottom" secondItem="6QJ-Gr-4fx" secondAttribute="bottom" constant="-8" id="5iw-th-Ksm"/>
                                     <constraint firstItem="aJr-W4-YSb" firstAttribute="top" secondItem="ZgJ-bP-KyS" secondAttribute="bottom" constant="6" id="6Qc-Cd-akI"/>
                                     <constraint firstItem="ZgJ-bP-KyS" firstAttribute="top" secondItem="lNX-c7-cbD" secondAttribute="top" id="DUm-Ta-owq"/>
                                     <constraint firstAttribute="trailing" secondItem="kza-MX-Z9k" secondAttribute="trailing" id="LYc-Tp-2qB"/>
                                     <constraint firstItem="6QJ-Gr-4fx" firstAttribute="centerY" secondItem="ZgJ-bP-KyS" secondAttribute="centerY" id="LaP-hL-iGA"/>
+                                    <constraint firstItem="hfJ-9k-bAJ" firstAttribute="trailing" secondItem="6QJ-Gr-4fx" secondAttribute="trailing" constant="-8" id="Tb0-dC-yTQ"/>
                                     <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerY" secondItem="6QJ-Gr-4fx" secondAttribute="centerY" id="Yz8-p8-g7Z"/>
                                     <constraint firstItem="ZgJ-bP-KyS" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leading" id="ZoU-Tv-mUl"/>
                                     <constraint firstItem="6QJ-Gr-4fx" firstAttribute="centerX" secondItem="ZgJ-bP-KyS" secondAttribute="centerX" id="bUW-hv-JK6"/>
@@ -206,6 +233,7 @@
                                     <constraint firstItem="6QJ-Gr-4fx" firstAttribute="width" secondItem="ZgJ-bP-KyS" secondAttribute="width" id="ya2-zk-KBu"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="durationLabel" destination="hfJ-9k-bAJ" id="fti-tg-7di"/>
                                     <outlet property="favorite" destination="yAF-vV-0Rf" id="4Ns-B2-8nq"/>
                                     <outlet property="headlineLabel" destination="5dK-RX-Lqi" id="bhn-oq-bjk"/>
                                     <outlet property="likesLabel" destination="pTp-wz-Hfk" id="55K-jG-FFR"/>
