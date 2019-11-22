@@ -21,6 +21,7 @@ struct XMLPost {
 	var podcastFrame: String = ""
 	var favorite: Bool = false
 	var guid: String = ""
+	var postId: String = ""
 
 	fileprivate func decodeHTMLString(string: String) -> String {
 		guard let encodedData = string.data(using: String.Encoding.utf8) else {
@@ -84,6 +85,8 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 			value = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
 			switch elementName {
+			case "post-id":
+				currentPost.postId = value
 			case "title":
 				currentPost.title = value
 			case "link":

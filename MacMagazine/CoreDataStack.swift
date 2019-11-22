@@ -116,19 +116,24 @@ class CoreDataStack {
 	}
 
 	func getAll(_ completion: @escaping ([Post]) -> Void) {
-		get(nil, completion: completion)
+		get(nil, field: nil, completion: completion)
 	}
 
 	func get(post link: String, completion: @escaping ([Post]) -> Void) {
-		get(link, completion: completion)
+		get(link, field: "link", completion: completion)
 	}
 
-	func get(_ link: String?, completion: @escaping ([Post]) -> Void) {
+	func get(id: String, completion: @escaping ([Post]) -> Void) {
+		get(id, field: "postId", completion: completion)
+	}
+
+	func get(_ value: String?, field: String?, completion: @escaping ([Post]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
 		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 
-		if let link = link {
-			request.predicate = NSPredicate(format: "link == %@", link)
+		if let value = value,
+			let field = field {
+			request.predicate = NSPredicate(format: "%K == %@", field, value)
 		}
 
 		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
@@ -149,7 +154,7 @@ class CoreDataStack {
 
 	func save(post: XMLPost) {
 		// Cannot duplicate links
-		get(post: post.link) { items in
+		get(id: post.postId) { items in
 			if items.isEmpty {
 				self.insert(post: post)
 			} else {
@@ -173,6 +178,7 @@ class CoreDataStack {
 		newItem.headerDate = post.pubDate.toDate().sortedDate()
 		newItem.favorite = false
         newItem.podcastFrame = post.podcastFrame
+		newItem.postId = post.postId
 	}
 
 	func update(post: Post, with item: XMLPost) {
@@ -187,6 +193,7 @@ class CoreDataStack {
 		post.duration = item.duration
 		post.headerDate = item.pubDate.toDate().sortedDate()
         post.podcastFrame = item.podcastFrame
+		post.postId = item.postId
 	}
 
 	// MARK: - Entity Video -
