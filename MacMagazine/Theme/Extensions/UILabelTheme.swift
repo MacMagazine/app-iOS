@@ -12,6 +12,7 @@ class AppHeadline: UILabel {}
 class AppSubhead: UILabel {}
 class AppSmallFont: UILabel {}
 class AppBigFont: UILabel {}
+class AppFootnote: UILabel {}
 class AppLabel: UILabel {}
 class VideoViewLikeLabel: UILabel {}
 class VideoViewLikeDataLabel: UILabel {}
@@ -50,6 +51,19 @@ extension AppSubhead {
         }
         set {
             let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .subheadline)
+            self.font = UIFont(descriptor: font, size: font.pointSize * newValue)
+        }
+    }
+}
+
+extension AppFootnote {
+    @objc dynamic override var fontSize: CGFloat {
+        get {
+            let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote)
+            return font.pointSize
+        }
+        set {
+            let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote)
             self.font = UIFont(descriptor: font, size: font.pointSize * newValue)
         }
     }

@@ -77,9 +77,9 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-9k-bAJ" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="250.5" y="143" width="41.5" height="18"/>
+                                            <rect key="frame" x="255.5" y="145" width="36.5" height="16"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>

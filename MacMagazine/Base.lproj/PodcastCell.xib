@@ -3,7 +3,7 @@
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -49,15 +49,15 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kvq-mm-4qb">
                                         <rect key="frame" x="0.0" y="42.333333333333343" width="343" height="21"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="270.66666666666669" height="21"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppFootnote" customModule="MacMagazine" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="278.66666666666669" y="0.0" width="64.333333333333314" height="21"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppFootnote" customModule="MacMagazine" customModuleProvider="target">
+                                                <rect key="frame" x="286" y="0.0" width="57" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
