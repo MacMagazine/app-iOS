@@ -232,6 +232,7 @@
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		9B93F1B522AC5592003AF1B1 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 7.xcdatamodel"; sourceTree = "<group>"; };
 		9B9C7F8F226B6111000534CA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudPlayer.swift; sourceTree = "<group>"; };
 		9B9C7F93226B6AF4000534CA /* soundcloud.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = soundcloud.js; sourceTree = "<group>"; };
@@ -1263,7 +1264,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1296,7 +1297,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1327,7 +1328,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1363,7 +1364,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1397,7 +1398,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1431,7 +1432,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1578,7 +1579,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1604,7 +1605,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1722,6 +1723,7 @@
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */,
 				9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */,
 				9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */,
 				9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */,
@@ -1729,7 +1731,7 @@
 				9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */,
 				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */;
+			currentVersion = 9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -88,4 +88,29 @@ extension String {
 		return decoded ?? self
 	}
 
+	func toSubHeaderDate() -> String {
+		// Expected date format: "PT4M13S"
+		// PT = fixed
+		// 4M = 4 minutes
+		// 13S = 13 seconds
+		let formattedDuration = self
+			.replacingOccurrences(of: "PT", with: "")
+			.replacingOccurrences(of: "H", with: ":")
+			.replacingOccurrences(of: "M", with: ":")
+			.replacingOccurrences(of: "S", with: "")
+
+        let components = formattedDuration.components(separatedBy: ":")
+        var duration = ""
+        for component in components {
+            duration = duration.isEmpty ? duration : duration + ":"
+            if component.count < 2 {
+                duration += "0" + component
+                continue
+            }
+            duration += component
+        }
+
+        return duration
+	}
+
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
+        <attribute name="artworkURL" optional="YES" attributeType="String"/>
+        <attribute name="categorias" optional="YES" attributeType="String"/>
+        <attribute name="duration" optional="YES" attributeType="String"/>
+        <attribute name="excerpt" optional="YES" attributeType="String"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="headerDate" optional="YES" attributeType="String"/>
+        <attribute name="link" optional="YES" attributeType="String"/>
+        <attribute name="podcast" optional="YES" attributeType="String"/>
+        <attribute name="podcastFrame" optional="YES" attributeType="String"/>
+        <attribute name="podcastURL" optional="YES" attributeType="String"/>
+        <attribute name="postId" optional="YES" attributeType="String"/>
+        <attribute name="pubDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="postId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Video" representedClassName="Video" syncable="YES" codeGenerationType="class">
+        <attribute name="artworkURL" optional="YES" attributeType="String"/>
+        <attribute name="duration" optional="YES" attributeType="String"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="likes" optional="YES" attributeType="String"/>
+        <attribute name="pubDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="videoId" optional="YES" attributeType="String"/>
+        <attribute name="views" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Post" positionX="-63" positionY="-18" width="128" height="238"/>
+        <element name="Video" positionX="-63" positionY="72" width="128" height="163"/>
+    </elements>
+</model>

@@ -121,15 +121,22 @@ class VideoCollectionViewController: UICollectionViewController {
 			}
 			API().getVideosStatistics(videoIds) { statistics in
 				guard let stats = statistics?.items else {
+					self.endGetVideos()
 					return
 				}
 				DispatchQueue.main.async {
-					self.isLoading = false
 					CoreDataStack.shared.save(playlist: videos, statistics: stats)
-					self.collectionView.reloadData()
-					self.navigationItem.titleView = self.logoView
+					self.endGetVideos()
 				}
 			}
+		}
+	}
+
+	fileprivate func endGetVideos() {
+		DispatchQueue.main.async {
+			self.isLoading = false
+			self.collectionView.reloadData()
+			self.navigationItem.titleView = self.logoView
 		}
 	}
 

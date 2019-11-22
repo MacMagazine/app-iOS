@@ -36,7 +36,11 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		favorite.isEnabled = true
 
 		headlineLabel.text = object.title
-		subheadlineLabel.text = object.pubDate?.watchDate()
+		var subhead = object.pubDate?.watchDate() ?? ""
+		if let duration = object.duration {
+			subhead = "\(subhead) | \(duration.toSubHeaderDate())"
+		}
+		subheadlineLabel.text = subhead
 		viewsLabel.text = object.views
 		likesLabel.text = object.likes
 

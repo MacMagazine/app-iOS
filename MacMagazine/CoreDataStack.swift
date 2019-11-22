@@ -157,7 +157,9 @@ class CoreDataStack {
 	func save(post: XMLPost) {
 		// Cannot duplicate links
 		get(post: post) { [weak self] items in
-            guard let self = self else { return }
+            guard let self = self else {
+				return
+			}
 			if items.isEmpty {
                 self.insert(post: post)
 			} else {
@@ -236,17 +238,19 @@ class CoreDataStack {
 
 			var likes = ""
 			var views = ""
+			var duration = ""
 			let stat = statistics.filter {
 				$0.id == videoId
 			}
 			if !stat.isEmpty {
 				views = stat[0].statistics?.viewCount ?? ""
 				likes = stat[0].statistics?.likeCount ?? ""
+				duration = stat[0].contentDetails?.duration ?? ""
 			}
 
 			let artworkURL = $0.snippet?.thumbnails?.maxres?.url ?? $0.snippet?.thumbnails?.high?.url ?? ""
 
-			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes)
+			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes, duration: duration)
 		}
 
 		mappedVideos.forEach { video in
@@ -270,6 +274,7 @@ class CoreDataStack {
 		newItem.videoId = video.videoId
 		newItem.likes = video.likes
 		newItem.views = video.views
+		newItem.duration = video.duration
 	}
 
 	func update(video: Video, with item: JSONVideo) {
@@ -279,6 +284,7 @@ class CoreDataStack {
 		video.videoId = item.videoId
 		video.likes = item.likes
 		video.views = item.views
+		video.duration = item.duration
 	}
 
 }

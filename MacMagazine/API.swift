@@ -41,7 +41,7 @@ class API {
 		static let pageToken = "pageToken="
 
 		static let statistics = "\(youtubeURL)/videos"
-		static let statisticsPart = "part=statistics"
+		static let statisticsPart = "part=statistics,contentDetails"
 		static let videoId = "id="
 
 		static let videoSearch = "\(youtubeURL)/search"
