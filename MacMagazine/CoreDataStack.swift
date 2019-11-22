@@ -116,24 +116,26 @@ class CoreDataStack {
 	}
 
 	func getAll(_ completion: @escaping ([Post]) -> Void) {
-		get(nil, field: nil, completion: completion)
+		get(predicate: nil, completion: completion)
 	}
 
-	func get(post link: String, completion: @escaping ([Post]) -> Void) {
-		get(link, field: "link", completion: completion)
+	func get(link: String, completion: @escaping ([Post]) -> Void) {
+		get(predicate: NSPredicate(format: "link == %@", link), completion: completion)
 	}
 
-	func get(id: String, completion: @escaping ([Post]) -> Void) {
-		get(id, field: "postId", completion: completion)
+	func get(post: XMLPost, completion: @escaping ([Post]) -> Void) {
+        let link = NSPredicate(format: "link == %@", post.link)
+        let postId = NSPredicate(format: "postId == %@", post.postId)
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [link, postId])
+        get(predicate: predicate, completion: completion)
 	}
 
-	func get(_ value: String?, field: String?, completion: @escaping ([Post]) -> Void) {
+	func get(predicate: NSPredicate?, completion: @escaping ([Post]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
 		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 
-		if let value = value,
-			let field = field {
-			request.predicate = NSPredicate(format: "%K == %@", field, value)
+		if let predicate = predicate {
+			request.predicate = predicate
 		}
 
 		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
@@ -154,9 +156,10 @@ class CoreDataStack {
 
 	func save(post: XMLPost) {
 		// Cannot duplicate links
-		get(id: post.postId) { items in
+		get(post: post) { [weak self] items in
+            guard let self = self else { return }
 			if items.isEmpty {
-				self.insert(post: post)
+                self.insert(post: post)
 			} else {
 				self.update(post: items[0], with: post)
 			}
