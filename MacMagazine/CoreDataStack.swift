@@ -116,19 +116,26 @@ class CoreDataStack {
 	}
 
 	func getAll(_ completion: @escaping ([Post]) -> Void) {
-		get(nil, completion: completion)
+		get(predicate: nil, completion: completion)
 	}
 
-	func get(post link: String, completion: @escaping ([Post]) -> Void) {
-		get(link, completion: completion)
+	func get(link: String, completion: @escaping ([Post]) -> Void) {
+		get(predicate: NSPredicate(format: "link == %@", link), completion: completion)
 	}
 
-	func get(_ link: String?, completion: @escaping ([Post]) -> Void) {
+	func get(post: XMLPost, completion: @escaping ([Post]) -> Void) {
+        let link = NSPredicate(format: "link == %@", post.link)
+        let postId = NSPredicate(format: "postId == %@", post.postId)
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [link, postId])
+        get(predicate: predicate, completion: completion)
+	}
+
+	func get(predicate: NSPredicate?, completion: @escaping ([Post]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
 		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 
-		if let link = link {
-			request.predicate = NSPredicate(format: "link == %@", link)
+		if let predicate = predicate {
+			request.predicate = predicate
 		}
 
 		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
@@ -149,9 +156,12 @@ class CoreDataStack {
 
 	func save(post: XMLPost) {
 		// Cannot duplicate links
-		get(post: post.link) { items in
+		get(post: post) { [weak self] items in
+            guard let self = self else {
+				return
+			}
 			if items.isEmpty {
-				self.insert(post: post)
+                self.insert(post: post)
 			} else {
 				self.update(post: items[0], with: post)
 			}
@@ -173,6 +183,7 @@ class CoreDataStack {
 		newItem.headerDate = post.pubDate.toDate().sortedDate()
 		newItem.favorite = false
         newItem.podcastFrame = post.podcastFrame
+		newItem.postId = post.postId
 	}
 
 	func update(post: Post, with item: XMLPost) {
@@ -187,6 +198,7 @@ class CoreDataStack {
 		post.duration = item.duration
 		post.headerDate = item.pubDate.toDate().sortedDate()
         post.podcastFrame = item.podcastFrame
+		post.postId = item.postId
 	}
 
 	// MARK: - Entity Video -
@@ -226,17 +238,19 @@ class CoreDataStack {
 
 			var likes = ""
 			var views = ""
+			var duration = ""
 			let stat = statistics.filter {
 				$0.id == videoId
 			}
 			if !stat.isEmpty {
 				views = stat[0].statistics?.viewCount ?? ""
 				likes = stat[0].statistics?.likeCount ?? ""
+				duration = stat[0].contentDetails?.duration ?? ""
 			}
 
 			let artworkURL = $0.snippet?.thumbnails?.maxres?.url ?? $0.snippet?.thumbnails?.high?.url ?? ""
 
-			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes)
+			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes, duration: duration)
 		}
 
 		mappedVideos.forEach { video in
@@ -260,6 +274,7 @@ class CoreDataStack {
 		newItem.videoId = video.videoId
 		newItem.likes = video.likes
 		newItem.views = video.views
+		newItem.duration = video.duration
 	}
 
 	func update(video: Video, with item: JSONVideo) {
@@ -269,6 +284,7 @@ class CoreDataStack {
 		video.videoId = item.videoId
 		video.likes = item.likes
 		video.views = item.views
+		video.duration = item.duration
 	}
 
 }

@@ -51,6 +51,7 @@
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
 		9B93F1B422AC5554003AF1B1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */; };
 		9B93F1B622AC5592003AF1B1 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B93F1B522AC5592003AF1B1 /* Splash.storyboard */; };
+		9B98C33323885EEF0094EBBA /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98C33223885EEF0094EBBA /* LabelExtension.swift */; };
 		9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7F8F226B6111000534CA /* WebKit.framework */; };
 		9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */; };
 		9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C7F93226B6AF4000534CA /* soundcloud.js */; };
@@ -192,6 +193,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 6.xcdatamodel"; sourceTree = "<group>"; };
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9B0DD4492226BAF60016C567 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -231,6 +233,8 @@
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		9B93F1B522AC5592003AF1B1 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 7.xcdatamodel"; sourceTree = "<group>"; };
+		9B98C33223885EEF0094EBBA /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		9B9C7F8F226B6111000534CA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudPlayer.swift; sourceTree = "<group>"; };
 		9B9C7F93226B6AF4000534CA /* soundcloud.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = soundcloud.js; sourceTree = "<group>"; };
@@ -350,9 +354,10 @@
 			isa = PBXGroup;
 			children = (
 				9B0DD44B2226E9320016C567 /* DateExtensions.swift */,
+				9B98C33223885EEF0094EBBA /* LabelExtension.swift */,
 				9B0DD44E2226FD150016C567 /* StringExtensions.swift */,
-				9BF356271F6208F70081BE90 /* UIColorExtensions.swift */,
 				9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */,
+				9BF356271F6208F70081BE90 /* UIColorExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -719,7 +724,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BB4BC70225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch" */;
 			buildPhases = (
-				9BB4BC73225B9ADF00559170 /* Run update version Script */,
 				9BB4BC4B225B99F500559170 /* Resources */,
 				9BB4BC6F225B99F700559170 /* Embed App Extensions */,
 				9BF9654E225E1DB800BAF22D /* Frameworks */,
@@ -740,7 +744,6 @@
 			buildConfigurationList = 9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch Extension" */;
 			buildPhases = (
 				9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */,
-				9BB4BC75225B9B8000559170 /* Run update version Script */,
 				9BB4BC55225B99F600559170 /* Sources */,
 				9BB4BC56225B99F600559170 /* Frameworks */,
 				9B5D4043225EA38F00315963 /* Run Sign Framework Script */,
@@ -760,7 +763,6 @@
 			buildConfigurationList = 9BCAD68B1F47A08100B54526 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
 				9BA5527D2225CE1D00B3FA23 /* Run Swiftlint Script */,
-				9B578C2D1F47A1D00086C6A7 /* Run update version Script */,
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
@@ -943,20 +945,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9B578C2D1F47A1D00086C6A7 /* Run update version Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run update version Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\nbN=$((bN + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"${SRCROOT}/MacMagazineNotificationServiceExtension/Info.plist\"\n\nfi\n";
-		};
 		9B5D4043225EA38F00315963 /* Run Sign Framework Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1037,42 +1025,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		9BB4BC73225B9ADF00559170 /* Run update version Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run update version Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nif [ $CONFIGURATION == Release ]; then\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\nfi\n";
-		};
-		9BB4BC75225B9B8000559170 /* Run update version Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run update version Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN + 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\nfi\n";
-		};
 		9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1140,6 +1092,7 @@
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
+				9B98C33323885EEF0094EBBA /* LabelExtension.swift in Sources */,
 				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */,
@@ -1325,7 +1278,7 @@
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
@@ -1334,6 +1287,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOG_ENABLED";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1357,7 +1311,7 @@
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1365,6 +1319,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -1377,7 +1332,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1389,7 +1344,7 @@
 				IBSC_MODULE = MacMagazineWatch_Extension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
@@ -1399,6 +1354,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOG_ENABLED";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
@@ -1412,7 +1368,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1424,7 +1380,7 @@
 				IBSC_MODULE = MacMagazineWatch_Extension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1433,6 +1389,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
@@ -1445,7 +1402,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1456,7 +1413,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
@@ -1466,6 +1423,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOG_ENABLED";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
@@ -1478,7 +1436,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1489,7 +1447,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -1498,6 +1456,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
@@ -1624,7 +1583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1635,10 +1594,11 @@
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOG_ENABLED";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1649,7 +1609,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1660,10 +1620,11 @@
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -1766,13 +1727,15 @@
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */,
+				9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */,
 				9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */,
 				9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */,
 				9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */,
 				9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */,
 				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */;
+			currentVersion = 9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

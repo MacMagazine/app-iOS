@@ -99,7 +99,7 @@ class PostTests: XCTestCase {
 		let expectation = self.expectation(description: "Testing API for a valid data on database...")
 		expectation.expectedFulfillmentCount = 1
 		
-		CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { posts in
+		CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { posts in
 			XCTAssertEqual(posts[0].categorias?.contains("Destaques"), false, "Post shouldn't be 'Destaque'")
 			expectation.fulfill()
 		}
@@ -124,7 +124,7 @@ class PostTests: XCTestCase {
 				XCTAssertEqual(posts.count, 2, "Should have 2 posts")
 
 				CoreDataStack.shared.delay(0.4) {
-					CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { db in
+					CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { db in
 						XCTAssertEqual(db.count, 1, "Should retrieve only 1 post")
 
 						expectation.fulfill()
@@ -159,7 +159,7 @@ extension PostTests {
 		parseExample { post in
 			guard let post = post else {
 				CoreDataStack.shared.delay(0.4) {
-					CoreDataStack.shared.get(post: self.examplePost.getValidLink()) { posts in
+					CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { posts in
 						onCompletion(posts)
 					}
 				}

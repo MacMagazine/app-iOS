@@ -30,6 +30,7 @@ struct Item<T: Codable>: Codable {
 	var id: T?
 	var snippet: Snippet?
 	var statistics: Statistics?
+	var contentDetails: Details?
 }
 
 struct Snippet: Codable {
@@ -76,6 +77,15 @@ struct Statistics: Codable {
 	var commentCount: String?
 }
 
+struct Details: Codable {
+	var duration: String?
+	var dimension: String?
+	var definition: String?
+	var caption: String?
+	var licensedContent: Bool?
+	var projection: String?
+}
+
 struct JSONVideo {
 	var title: String = ""
 	var videoId: String = ""
@@ -83,6 +93,7 @@ struct JSONVideo {
 	var artworkURL: String = ""
 	var views: String = ""
 	var likes: String = ""
+	var duration: String = ""
 }
 
 // MARK: - Videos Methods -

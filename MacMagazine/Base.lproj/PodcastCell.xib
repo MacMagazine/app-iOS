@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,13 +13,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tks-Xo-Anw" id="iuT-I4-yCC">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dPr-Vt-BPt">
                         <rect key="frame" x="16" y="16" width="343" height="243"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-1P-Tdb">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-1P-Tdb">
                                 <rect key="frame" x="0.0" y="0.0" width="343" height="171.66666666666666"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zrP-1P-Tdb" secondAttribute="height" multiplier="20:10" id="9l1-yy-OYf"/>
@@ -51,15 +49,15 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kvq-mm-4qb">
                                         <rect key="frame" x="0.0" y="42.333333333333343" width="343" height="21"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="270.66666666666669" height="21"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppFootnote" customModule="MacMagazine" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="278.66666666666669" y="0.0" width="64.333333333333314" height="21"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppFootnote" customModule="MacMagazine" customModuleProvider="target">
+                                                <rect key="frame" x="286" y="0.0" width="57" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -75,7 +73,7 @@
                         <variation key="heightClass=regular-widthClass=regular" axis="horizontal"/>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav_on" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k" customClass="FavoriteImageView" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="348" y="5.9999999999999964" width="21" height="21"/>
+                        <rect key="frame" x="348" y="6" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="QYw-WD-7Rk"/>
                             <constraint firstAttribute="height" constant="21" id="bik-fu-VEU"/>
@@ -100,6 +98,7 @@
                 <outlet property="subheadlineLabel" destination="4Gu-AC-b1g" id="hbB-gb-nfQ"/>
                 <outlet property="thumbnailImageView" destination="zrP-1P-Tdb" id="gHh-5L-slS"/>
             </connections>
+            <point key="canvasLocation" x="130" y="154"/>
         </tableViewCell>
     </objects>
     <resources>

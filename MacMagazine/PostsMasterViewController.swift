@@ -364,7 +364,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		if date.addingTimeInterval(12 * 60 * 60) > Date() ||
 			comeFrom3DTouch {
 			comeFrom3DTouch = false
-			CoreDataStack.shared.get(post: link) { posts in
+			CoreDataStack.shared.get(link: link) { posts in
 				completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
 			}
 		} else {
@@ -565,7 +565,7 @@ extension PostsMasterViewController {
 		guard let link = notification.object as? String else {
 			return
 		}
-		CoreDataStack.shared.get(post: link) { posts in
+		CoreDataStack.shared.get(link: link) { posts in
 			let indexPath = self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0)
 			self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
 
