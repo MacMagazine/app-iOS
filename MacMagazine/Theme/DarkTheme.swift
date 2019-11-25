@@ -20,6 +20,8 @@ struct DarkTheme: Theme {
     let secondaryTint: UIColor = UIColor(hex: "808080", alpha: 1)
     let onTint: UIColor = UIColor(hex: "0097d4", alpha: 1)
 
+    let selectedSegmentTintColor: UIColor = .lightGray
+
     let backgroundColor: UIColor = .black
     let cellBackgroundColor: UIColor = UIColor(hex: "181818", alpha: 1)
     let separatorColor: UIColor = .lightGray

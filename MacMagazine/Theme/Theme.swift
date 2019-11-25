@@ -27,6 +27,8 @@ protocol Theme {
     var secondaryTint: UIColor { get }
     var onTint: UIColor { get }
 
+    var selectedSegmentTintColor: UIColor { get }
+
     var backgroundColor: UIColor { get }
     var cellBackgroundColor: UIColor { get }
     var separatorColor: UIColor { get }
@@ -215,7 +217,12 @@ extension Theme {
 
 		// SEGMENTCONTROL
 
-		AppSegmentedControl.appearance().tintColor = tint
+        AppSegmentedControl.appearance().with {
+            $0.tintColor = tint
+            if #available(iOS 13.0, *) {
+                $0.selectedSegmentTintColor = selectedSegmentTintColor
+            }
+        }
 		UILabel.appearance(whenContainedInInstancesOf: [AppSegmentedControl.self]).with {
 			$0.textColor = tint
 			$0.fontSize = CGFloat(0.785)
