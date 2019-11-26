@@ -17,7 +17,8 @@ class API {
 		static let disqus = "disqus.com"
 
 		// Wordpress
-		static let feed = "https://macmagazine.uol.com.br/feed/"
+        static let mm = "https://macmagazine.uol.com.br/"
+		static let feed = "\(mm)feed/"
 		static let paged = "paged="
 		static let posts = "cat=-101"
 		static let podcast = "cat=101"
@@ -64,7 +65,11 @@ class API {
 
     // MARK: - Public methods -
 
-	func getCookies() -> [HTTPCookie]? {
+    func getMMURL() -> String {
+        return APIParams.mm
+    }
+
+    func getCookies() -> [HTTPCookie]? {
 		let cookieStore = HTTPCookieStorage.shared
 		return cookieStore.cookies
 	}

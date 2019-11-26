@@ -9,6 +9,7 @@
 import CoreData
 import CoreSpotlight
 import Kingfisher
+import SafariServices
 import UIKit
 
 // MARK: - Extensions -
@@ -665,4 +666,35 @@ func showDetailController(with link: String) {
 			}
 		}
 	}
+}
+
+// MARK: - Peek&Pop -
+
+extension PostsMasterViewController {
+    @IBAction private func easterEgg(_ sender: Any) {
+        let api = API().getMMURL()
+        let urls = ["\(api)sobre/",
+                    "\(api)usados-apple/",
+                    "\(api)equipe/",
+                    "\(api)patroes/",
+                    "\(api)tour/"
+        ]
+        guard let url = URL(string: urls[Int.random(in: 0..<urls.count)]) else {
+            return
+        }
+        openInSafari(url)
+    }
+
+    func openInSafari(_ url: URL) {
+        if url.scheme?.lowercased().contains("http") ?? false {
+            let safari = SFSafariViewController(url: url)
+            if Settings().isDarkMode {
+                safari.preferredBarTintColor = UIColor.black
+            }
+            safari.dismissButtonStyle = .close
+            safari.modalPresentationStyle = .overFullScreen
+
+            self.present(safari, animated: true, completion: nil)
+        }
+    }
 }

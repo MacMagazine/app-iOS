@@ -14,13 +14,14 @@ class SplashViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		logo.image = UIImage(named: "logo\(Settings().darkModeimage)")
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		delay(0.6) {
+        logo.image = UIImage(named: "logo\(Settings().darkModeimage)")
+
+        delay(0.6) {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "main") as? UITabBarController,
                 let appDelegate = UIApplication.shared.delegate as? AppDelegate,
