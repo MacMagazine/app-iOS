@@ -73,13 +73,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="mos-l0-Ml2">
+                        <barButtonItem key="leftBarButtonItem" image="filter" id="vUZ-wN-Khb">
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar posts favoritos"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="showFavorites:" destination="Jej-5Q-aqJ" id="Xng-DI-R8j"/>
+                                <segue destination="pPA-17-c5g" kind="popoverPresentation" popoverAnchorBarButtonItem="vUZ-wN-Khb" id="Jdn-Af-wbU">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Ml7-gR-vKk">
@@ -93,7 +95,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favorite" destination="mos-l0-Ml2" id="oNt-bX-D7R"/>
                         <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
                         <outlet property="spin" destination="uE4-5b-xTc" id="Vwt-Qm-yfC"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
@@ -126,6 +127,34 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="425" y="-2885"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="Umv-bi-ZPA">
+            <objects>
+                <tableViewController id="pPA-17-c5g" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="09M-Nx-SZo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filter" id="6Dt-uy-mzq">
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Dt-uy-mzq" id="rU6-xw-dr9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pPA-17-c5g" id="6co-zJ-paN"/>
+                            <outlet property="delegate" destination="pPA-17-c5g" id="CKu-M4-L3g"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oe2-Xx-XyT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1322" y="-2885"/>
         </scene>
         <!--Posts Detail View Controller-->
         <scene sceneID="fYa-LD-1Wl">
@@ -200,7 +229,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_off" width="21" height="21"/>
+        <image name="filter" width="23" height="21"/>
         <image name="logo" width="415" height="350"/>
         <image name="logo_dark" width="509" height="419"/>
         <image name="tab_posts" width="22" height="24"/>

@@ -55,7 +55,7 @@ class WebViewController: UIViewController {
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 
-		webView?.navigationDelegate = self
+        webView?.navigationDelegate = self
 		webView?.uiDelegate = self
 
 		// Make sure that all cookies are loaded before
@@ -117,16 +117,16 @@ class WebViewController: UIViewController {
 	}
 
 	func loadWebView(url: URL) {
-		UserDefaults.standard.removeObject(forKey: "offset")
+        UserDefaults.standard.removeObject(forKey: "offset")
 
-		// Changes the WKWebView user agent in order to hide some CSS/HT elements
-		webView?.customUserAgent = "MacMagazine\(Settings().darkModeUserAgent)\(Settings().fontSizeUserAgent)"
-		webView?.allowsBackForwardNavigationGestures = false
-		webView?.load(URLRequest(url: url))
+        // Changes the WKWebView user agent in order to hide some CSS/HT elements
+        webView?.customUserAgent = "MacMagazine\(Settings().darkModeUserAgent)\(Settings().fontSizeUserAgent)"
+        webView?.allowsBackForwardNavigationGestures = false
+        webView?.load(URLRequest(url: url))
 
-		self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+        self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
 
-		forceReload = false
+        forceReload = false
 	}
 
 	// MARK: - Actions -
@@ -147,7 +147,12 @@ class WebViewController: UIViewController {
 			let link = post.link,
 			let url = URL(string: link)
 			else {
-				return
+                guard let url = postURL else {
+                    return
+                }
+                let items: [Any] =  [webView.title ?? "", url]
+                Share().present(at: share, using: items)
+                return
 		}
 		let items: [Any] =  [post.title ?? "", url]
 		Share().present(at: share, using: items)
@@ -217,6 +222,10 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 		self.navigationItem.rightBarButtonItems = nil
+
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationItem.rightBarButtonItems = [share]
+        }
 
         userActivity?.becomeCurrent()
 }
@@ -290,14 +299,20 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 extension WebViewController {
 
 	func pushNavigation(_ url: URL) {
-		let storyboard = UIStoryboard(name: "WebView", bundle: nil)
-		guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
-			return
-		}
-		controller.postURL = url
+        // Prevent double pushViewController due decidePolicyFor navigationAction == .other
+        if self.navigationController?.viewControllers.count ?? 0 <= 1 {
+            let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+                return
+            }
+            controller.postURL = url
 
-		controller.modalPresentationStyle = .overFullScreen
-		self.navigationController?.pushViewController(controller, animated: true)
+            controller.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            loadWebView(url: url)
+            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+        }
 	}
 
 	func openInSafari(_ url: URL) {
