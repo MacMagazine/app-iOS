@@ -45,7 +45,7 @@ protocol Theme {
 	var keyboardStyle: UIKeyboardAppearance { get }
 
     func apply(for application: UIApplication)
-    func extend()
+    func extend(_ application: UIApplication)
 }
 
 extension UIColor {
@@ -60,17 +60,30 @@ extension UIColor {
 extension Theme {
 
     func apply(for application: UIApplication) {
+        if #available(iOS 13.0, *) {
+            extend(application)
+        } else {
+            extend(application)
+        }
 
-		// WINDOW
+        // Ensure existing views render with new theme
+        // https://developer.apple.com/documentation/uikit/uiappearance
+        application.windows.reload()
+    }
+
+    // Optionally extend theme
+    func extend(_ application: UIApplication) {
+
+        // WINDOW
 
         application.keyWindow?.tintColor = tint
 
-		// VIEW
+        // VIEW
 
-		AppView.appearance().with {
-			$0.tintColor = backgroundColor
-			$0.backgroundColor = backgroundColor
-		}
+        AppView.appearance().with {
+            $0.tintColor = backgroundColor
+            $0.backgroundColor = backgroundColor
+        }
 
         // TABBAR
 
@@ -100,16 +113,16 @@ extension Theme {
 
         // SEARCHBAR
 
-		UISearchBar.appearance().with {
-			$0.barTintColor = barTintColor
-			$0.setSearchFieldBackgroundImage(UIColor.lightGray.withAlphaComponent(0.3).image(), for: .normal)
-			$0.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
-		}
-		UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).with {
-			$0.textColor = textColor
-			$0.placeholderColor = placeholderTextColor
-			$0.keyboardAppearance = keyboardStyle
-		}
+        UISearchBar.appearance().with {
+            $0.barTintColor = barTintColor
+            $0.setSearchFieldBackgroundImage(UIColor.lightGray.withAlphaComponent(0.3).image(), for: .normal)
+            $0.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
+        }
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).with {
+            $0.textColor = textColor
+            $0.placeholderColor = placeholderTextColor
+            $0.keyboardAppearance = keyboardStyle
+        }
 
         // TABLEVIEW
 
@@ -126,21 +139,21 @@ extension Theme {
 
         UIView.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).backgroundColor = backgroundColor
 
-		UIRefreshControl.appearance().with {
-			$0.tintColor = tint
-			$0.backgroundColor = backgroundColor
-		}
+        UIRefreshControl.appearance().with {
+            $0.tintColor = tint
+            $0.backgroundColor = backgroundColor
+        }
 
-		// COLLECTIONVIEW
+        // COLLECTIONVIEW
 
-		UICollectionView.appearance().with {
-			$0.backgroundColor = backgroundColor
-		}
-		AppCollectionViewCell.appearance().with {
-			$0.backgroundColor = cellBackgroundColor
-		}
+        UICollectionView.appearance().with {
+            $0.backgroundColor = backgroundColor
+        }
+        AppCollectionViewCell.appearance().with {
+            $0.backgroundColor = cellBackgroundColor
+        }
 
-		// LABEL
+        // LABEL
 
         var fontSize = 1.0
         if let sliderFontSize = UserDefaults.standard.object(forKey: "font-size-settings") as? String {
@@ -157,13 +170,13 @@ extension Theme {
         AppLabel.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
             $0.textColor = labelColor
         }
-		UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
-			$0.textColor = headerFooterColor
-			$0.fontSize = CGFloat(0.8)
-		}
-		AppLabel.appearance().with {
-			$0.textColor = .black
-		}
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
+            $0.textColor = headerFooterColor
+            $0.fontSize = CGFloat(0.8)
+        }
+        AppLabel.appearance().with {
+            $0.textColor = .black
+        }
         AppHeadline.appearance().with {
             $0.textColor = labelColor
             $0.fontSize = CGFloat(fontSize)
@@ -180,34 +193,34 @@ extension Theme {
             $0.textColor = labelColor
             $0.fontSize = CGFloat(1.0)
         }
-		VideoViewLikeLabel.appearance().with {
-			$0.textColor = videoLabelColor
-			$0.fontSize = CGFloat(0.65)
-		}
-		VideoViewLikeDataLabel.appearance().with {
-			$0.textColor = secondaryLabelColor
-			$0.fontSize = CGFloat(0.9)
-		}
+        VideoViewLikeLabel.appearance().with {
+            $0.textColor = videoLabelColor
+            $0.fontSize = CGFloat(0.65)
+        }
+        VideoViewLikeDataLabel.appearance().with {
+            $0.textColor = secondaryLabelColor
+            $0.fontSize = CGFloat(0.9)
+        }
 
-		// BUTTON
+        // BUTTON
 
         UIButton.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
             $0.setTitleColor(tint, for: .normal)
             $0.borderColor = tint
-			$0.backgroundColor = .clear
+            $0.backgroundColor = .clear
         }
 
-		AppButton.appearance().tintColor = tint
+        AppButton.appearance().tintColor = tint
 
-		// IMAGE
+        // IMAGE
 
-		AppImageView.appearance().with {
-			$0.borderColor = UIColor(hex: "dddddd", alpha: 1)
-		}
-		FavoriteImageView.appearance().tintColor = tint
-		NavLogoImageView.appearance().hightlightLogo = hightlightLogo
+        AppImageView.appearance().with {
+            $0.borderColor = UIColor(hex: "dddddd", alpha: 1)
+        }
+        FavoriteImageView.appearance().tintColor = tint
+        NavLogoImageView.appearance().hightlightLogo = hightlightLogo
 
-		// SWITCH
+        // SWITCH
 
         UISwitch.appearance().onTintColor = onTint
 
@@ -215,7 +228,7 @@ extension Theme {
 
         UISlider.appearance().tintColor = tint
 
-		// SEGMENTCONTROL
+        // SEGMENTCONTROL
 
         AppSegmentedControl.appearance().with {
             $0.tintColor = tint
@@ -223,29 +236,21 @@ extension Theme {
                 $0.selectedSegmentTintColor = selectedSegmentTintColor
             }
         }
-		UILabel.appearance(whenContainedInInstancesOf: [AppSegmentedControl.self]).with {
-			$0.textColor = tint
-			$0.fontSize = CGFloat(0.785)
-		}
+        UILabel.appearance(whenContainedInInstancesOf: [AppSegmentedControl.self]).with {
+            $0.textColor = tint
+            $0.fontSize = CGFloat(0.785)
+        }
 
-		// WEBVIEW
+        // WEBVIEW
 
-		WKWebView.appearance().with {
-			$0.backgroundColor = backgroundColor
-		}
+        WKWebView.appearance().with {
+            $0.backgroundColor = backgroundColor
+        }
 
-		// ACTIVITYINDICATOR
+        // ACTIVITYINDICATOR
 
-		UIActivityIndicatorView.appearance().color = tint
+        UIActivityIndicatorView.appearance().color = tint
 
-		extend()
-
-        // Ensure existing views render with new theme
-        // https://developer.apple.com/documentation/uikit/uiappearance
-        application.windows.reload()
     }
-
-    // Optionally extend theme
-    func extend() {}
 
 }

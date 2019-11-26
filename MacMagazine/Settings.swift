@@ -23,6 +23,12 @@ enum Definitions {
 
 // MARK: -
 
+enum Appearance: Int {
+    case light = 0
+    case dark
+    case native
+}
+
 struct Settings {
 
 	// MARK: - Device -
@@ -41,12 +47,31 @@ struct Settings {
 
 	// MARK: - Dark Mode -
 
-	var isDarkMode: Bool {
-		guard let isDarkMode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Bool else {
-			return false
-		}
-		return isDarkMode
-	}
+    var supportsNativeDarkMode: Bool {
+        if #available(iOS 13.0, *) {
+            return true
+        }
+        return false
+    }
+
+    var appearance: Appearance {
+        guard let mode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Int else {
+            guard let darkMode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Bool else {
+                return .light
+            }
+            return darkMode ? .dark : .light
+        }
+        return Appearance(rawValue: mode) ?? .light
+    }
+
+    var isDarkMode: Bool {
+        if #available(iOS 13.0, *) {
+            if appearance == .native {
+                return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.userInterfaceStyle == .dark
+            }
+        }
+        return appearance == .dark
+    }
 
 	var darkModeUserAgent: String {
 		return isDarkMode ? "-modoescuro" : ""
@@ -101,22 +126,18 @@ struct Settings {
 
 extension Settings {
 	func applyTheme() {
-		guard let _ = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-			let theme: Theme = LightTheme()
-			theme.apply(for: UIApplication.shared)
-			return
-		}
 		theme.apply(for: UIApplication.shared)
+        NotificationCenter.default.post(name: .reloadWeb, object: nil)
 	}
 
 	func applyLightTheme() {
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+		if isDarkMode {
 			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
 		}
 	}
 
 	func applyDarkTheme() {
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+		if isDarkMode {
 			UIApplication.shared.keyWindow?.tintColor = DarkTheme().tint
 		}
 	}

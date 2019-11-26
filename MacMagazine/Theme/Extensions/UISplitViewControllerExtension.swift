@@ -10,9 +10,6 @@ import UIKit
 
 extension UISplitViewController {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
-        guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-            return .default
-        }
-        return isDarkMode ? .lightContent : .default
+        return Settings().isDarkMode ? .lightContent : .default
     }
 }

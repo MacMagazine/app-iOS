@@ -303,7 +303,7 @@ extension WebViewController {
 	func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {
 			let safari = SFSafariViewController(url: url)
-			if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+			if Settings().isDarkMode {
 				safari.preferredBarTintColor = UIColor.black
 			}
 			safari.dismissButtonStyle = .close

@@ -28,6 +28,10 @@ extension AppDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
     }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Settings().applyTheme()
+    }
 }
 
 // MARK: - Setup -

@@ -16,11 +16,7 @@ extension NavLogoImageView {
 	@objc dynamic var hightlightLogo: Bool {
 		get { return isHighlighted }
 		set {
-			guard let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool else {
-				isHighlighted = false
-				return
-			}
-			isHighlighted = isDarkMode
+			isHighlighted = Settings().isDarkMode
 		}
 	}
 }

@@ -16,14 +16,15 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Properties -
 
     @IBOutlet private weak var fontSize: UISlider!
-    @IBOutlet private weak var darkMode: UISwitch!
-    @IBOutlet private weak var reportProblem: UITableViewCell!
+    @IBOutlet private weak var reportProblem: AppTableViewCell!
 
 	@IBOutlet private weak var iconOption1: UIImageView!
 	@IBOutlet private weak var iconOption2: UIImageView!
     @IBOutlet private weak var iconOption3: UIImageView!
 
 	@IBOutlet private weak var pushOptions: AppSegmentedControl!
+
+    @IBOutlet private weak var darkModeSegmentControl: AppSegmentedControl!
 
     var version: String = ""
 
@@ -46,14 +47,18 @@ class SettingsTableViewController: UITableViewController {
 
 		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
-		guard MFMailComposeViewController.canSendMail() else {
+        guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
 			return
 		}
-	}
+    }
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+
+        if !Settings().supportsNativeDarkMode {
+            darkModeSegmentControl.removeSegment(at: 2, animated: false)
+        }
 
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -65,9 +70,23 @@ class SettingsTableViewController: UITableViewController {
 
 	// MARK: - TableView Methods -
 
+    fileprivate func getHeaders() -> [String] {
+        var header = ["MACMAGAZINE \(version)", "RECEBER PUSHES PARA", "TAMANHO DA FONTE"]
+        header.append("APARÊNCIA")
+        header.append("ÍCONE DO APLICATIVO")
+        header.append("")
+
+        return header
+    }
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let header = ["MACMAGAZINE \(version)", "RECEBER PUSHES PARA", "TAMANHO DA FONTE", "", "ÍCONE DO APLICATIVO", ""]
-		return header[section] == "" ? nil : header[section]
+        let header = getHeaders()
+        if header.isEmpty ||
+            (header.count - 1) < section ||
+            header[section] == "" {
+            return nil
+        }
+		return header[section]
     }
 
     // MARK: - View Methods -
@@ -87,7 +106,7 @@ class SettingsTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 			self.dismiss(animated: true)
 		})
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+		if Settings().isDarkMode {
 			alertController.view.tintColor = LightTheme().tint
 		}
 		self.present(alertController, animated: true)
@@ -118,11 +137,10 @@ class SettingsTableViewController: UITableViewController {
     }
 
     @IBAction private func changeDarkMode(_ sender: Any) {
-        guard let darkModeSwitch = sender as? UISwitch else {
+        guard let darkMode = sender as? UISegmentedControl else {
             return
         }
-
-        UserDefaults.standard.set(darkModeSwitch.isOn, forKey: Definitions.darkMode)
+        UserDefaults.standard.set(darkMode.selectedSegmentIndex, forKey: Definitions.darkMode)
         UserDefaults.standard.synchronize()
 
         applyTheme()
@@ -138,10 +156,8 @@ class SettingsTableViewController: UITableViewController {
 	// MARK: - Private Methods -
 
     fileprivate func applyTheme() {
-        Settings().theme.apply(for: UIApplication.shared)
-
-		darkMode.isOn = Settings().isDarkMode
-		NotificationCenter.default.post(name: .reloadWeb, object: nil)
+        Settings().applyTheme()
+        darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
         tableView.backgroundColor = Settings().theme.backgroundColor
     }
 
@@ -193,7 +209,7 @@ extension SettingsTableViewController {
 		}
 
 		// Temporary change the colors
-		if let isDarkMode = UserDefaults.standard.object(forKey: "darkMode") as? Bool, isDarkMode {
+		if Settings().isDarkMode {
 			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
 		}
 
