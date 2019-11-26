@@ -239,10 +239,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	@IBAction private func search(_ sender: Any) {
 		navigationItem.searchController = searchController
-		resultsTableController?.showTyping()
-		searchController?.searchBar.becomeFirstResponder()
+        navigationItem.hidesSearchBarWhenScrolling = false
+        resultsTableController?.showTyping()
 
-		Settings().applyTheme()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.searchController?.searchBar.becomeFirstResponder()
+            Settings().applyTheme()
+        }
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {

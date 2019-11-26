@@ -79,10 +79,13 @@ class PodcastViewController: UIViewController {
 	// MARK: - Actions -
 
 	@IBAction private func search(_ sender: Any) {
-		navigationItem.searchController = searchController
-		searchController?.searchBar.becomeFirstResponder()
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
 
-		Settings().applyTheme()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.searchController?.searchBar.becomeFirstResponder()
+            Settings().applyTheme()
+        }
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
