@@ -201,6 +201,19 @@ class CoreDataStack {
 		post.postId = item.postId
 	}
 
+    func getCategories(completion: @escaping ([String]) -> Void) {
+        var categories = [String]()
+        getAll { posts in
+            posts.forEach {
+                guard let dbCategories = $0.categorias?.components(separatedBy: ",") else {
+                    return
+                }
+                categories.append(contentsOf: dbCategories)
+            }
+            completion(categories)
+        }
+    }
+
 	// MARK: - Entity Video -
 
 	func get(video videoId: String, completion: @escaping ([Video]) -> Void) {

@@ -48,7 +48,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var detailViewController: PostsDetailViewController?
 
 	@IBOutlet private weak var logoView: UIView!
-	@IBOutlet private weak var favorite: UIBarButtonItem!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
 
 	var lastContentOffset = CGPoint()
@@ -65,7 +64,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	private var resultsTableController: ResultsViewController?
 	var posts = [XMLPost]()
 
-	var showFavorites = false
     let categoryPredicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
@@ -151,27 +149,37 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let navController = segue.destination as? UINavigationController,
-			let controller = navController.topViewController as? PostsDetailViewController,
-			let indexPath = selectedIndexPath
-			else {
-				return
-		}
+        if segue.identifier == "showFilter" {
+            guard let filterVC = segue.destination as? FilterTableViewController else {
+                return
+            }
+            filterVC.callback = { [weak self] category in
+                self?.show(filter: category)
+            }
 
-		guard let _ = navigationItem.searchController else {
-			// Normal Posts table
-			if tableView.indexPathForSelectedRow != nil {
-				guard let post = fetchController?.object(at: indexPath) else {
-					return
-				}
-				prepareDetailController(controller, using: links, compare: post.link)
-			}
-			return
-		}
-		// Search Posts table
-		if resultsTableController?.tableView.indexPathForSelectedRow != nil {
-			prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
-		}
+        } else {
+            guard let navController = segue.destination as? UINavigationController,
+                let controller = navController.topViewController as? PostsDetailViewController,
+                let indexPath = selectedIndexPath
+                else {
+                    return
+            }
+
+            guard let _ = navigationItem.searchController else {
+                // Normal Posts table
+                if tableView.indexPathForSelectedRow != nil {
+                    guard let post = fetchController?.object(at: indexPath) else {
+                        return
+                    }
+                    prepareDetailController(controller, using: links, compare: post.link)
+                }
+                return
+            }
+            // Search Posts table
+            if resultsTableController?.tableView.indexPathForSelectedRow != nil {
+                prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
+            }
+        }
 	}
 
 	// MARK: - View Methods -
@@ -248,31 +256,60 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         }
 	}
 
-	@IBAction private func showFavorites(_ sender: Any) {
-		showFavorites = !showFavorites
-        if showFavorites {
-			fetchController?.fetchRequest.predicate = favoritePredicate
-			fetchController?.filteringFavorite = true
+    // MARK: - Local methods -
 
-			self.navigationItem.titleView = nil
-			self.navigationItem.title = "Favoritos"
-			favorite.image = UIImage(named: "fav_on")
+    fileprivate func show(filter: String?) {
+        guard let category = filter else {
+            showAll()
+            return
+        }
+
+        if category.isEmpty {
+            favorites()
         } else {
-			fetchController?.fetchRequest.predicate = nil
-			fetchController?.filteringFavorite = false
+            showCategory(category)
+        }
+    }
 
-			self.navigationItem.titleView = logoView
-			self.navigationItem.title = nil
-			favorite.image = UIImage(named: "fav_off")
-		}
+    fileprivate func showAll() {
+        fetchController?.fetchRequest.predicate = nil
+        fetchController?.filteringFavorite = false
 
-		fetchController?.reloadData()
-		UIView.transition(with: tableView, duration: 0.4, options: showFavorites ? .transitionFlipFromRight : .transitionFlipFromLeft, animations: {
-			self.tableView.reloadData()
-		})
+        self.navigationItem.titleView = logoView
+        self.navigationItem.title = nil
+
+        reloadController(.transitionFlipFromLeft)
+    }
+
+    fileprivate func favorites() {
+        fetchController?.fetchRequest.predicate = favoritePredicate
+        fetchController?.filteringFavorite = true
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Favoritos"
+
+        reloadController(.transitionFlipFromRight)
 	}
 
-	// MARK: - Local methods -
+    fileprivate func showCategory(_ category: String) {
+        fetchController?.fetchRequest.predicate = NSPredicate(format: "categorias contains[cd] %@", category)
+        fetchController?.filteringFavorite = true
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = category
+
+        reloadController(.transitionFlipFromRight)
+    }
+
+    fileprivate func reloadController(_ direction: UIView.AnimationOptions) {
+        fetchController?.reloadData()
+        UIView.transition(with: tableView,
+                          duration: 0.4,
+                          options: direction,
+                          animations: {
+            self.tableView.reloadData()
+        })
+    }
 
     fileprivate func hasData() -> Bool {
         return (fetchController?.hasData() ?? false) && !spin.isAnimating

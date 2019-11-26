@@ -43,6 +43,8 @@
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
+		9B7A41C1238DAC9000BA85C0 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C0238DAC9000BA85C0 /* FilterTableViewController.swift */; };
+		9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
 		9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */; };
@@ -225,6 +227,8 @@
 		9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EMTLoadingIndicator.framework; sourceTree = "<group>"; };
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityExtensions.swift; sourceTree = "<group>"; };
+		9B7A41C0238DAC9000BA85C0 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
 		9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +357,7 @@
 		9B02AE4D1F5C515A00EA1A6F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */,
 				9B0DD44B2226E9320016C567 /* DateExtensions.swift */,
 				9B98C33223885EEF0094EBBA /* LabelExtension.swift */,
 				9B0DD44E2226FD150016C567 /* StringExtensions.swift */,
@@ -622,6 +627,7 @@
 			children = (
 				9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */,
+				9B7A41C0238DAC9000BA85C0 /* FilterTableViewController.swift */,
 			);
 			name = Posts;
 			sourceTree = "<group>";
@@ -1084,6 +1090,7 @@
 				9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */,
 				9B93F1B422AC5554003AF1B1 /* SplashViewController.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
+				9B7A41C1238DAC9000BA85C0 /* FilterTableViewController.swift in Sources */,
 				9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */,
 				9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */,
 				9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */,
@@ -1106,6 +1113,7 @@
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
+				9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */,
 				9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */,
 				9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */,
 				9BD4CBAE228C6B8B00836955 /* UIImageViewTheme.swift in Sources */,
