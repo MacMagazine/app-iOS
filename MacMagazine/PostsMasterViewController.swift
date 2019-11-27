@@ -100,7 +100,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos posts..."
 		searchController?.hidesNavigationBarDuringPresentation = true
-		self.definesPresentationContext = true
+        self.definesPresentationContext = true
+        self.extendedLayoutIncludesOpaqueBars = true
 
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -483,7 +484,9 @@ extension PostsMasterViewController {
         lastContentOffset = offset
 
         // Pull to Refresh
-        if offset.y < -100 && navigationItem.titleView == logoView {
+        if offset.y < -100 &&
+            navigationItem.titleView == logoView &&
+            navigationItem.searchController == nil {
 			showSpin()
         }
     }
@@ -527,8 +530,8 @@ extension PostsMasterViewController: UISearchBarDelegate {
 		posts = []
 		resultsTableController?.posts = posts
 		searchBar.resignFirstResponder()
-		navigationItem.searchController = nil
-	}
+        self.navigationItem.searchController = nil
+    }
 }
 
 // MARK: - UIViewControllerPreviewingDelegate -

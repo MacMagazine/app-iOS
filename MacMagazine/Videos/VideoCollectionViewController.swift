@@ -60,6 +60,7 @@ class VideoCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
+        self.extendedLayoutIncludesOpaqueBars = true
 
 		searchController = UISearchController(searchResultsController: nil)
 		searchController?.searchBar.autocapitalizationType = .none
@@ -239,7 +240,9 @@ extension VideoCollectionViewController {
 		lastContentOffset = offset
 
 		// Pull to Refresh
-		if offset.y < -100 && navigationItem.titleView == logoView {
+		if offset.y < -100 &&
+            navigationItem.titleView == logoView &&
+            navigationItem.searchController == nil {
 			pageToken = ""
 			getVideos()
 		}

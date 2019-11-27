@@ -26,6 +26,7 @@ class PodcastViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
+        self.extendedLayoutIncludesOpaqueBars = true
 
 		playerHeight.constant = 0.0
 
