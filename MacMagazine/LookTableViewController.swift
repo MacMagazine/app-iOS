@@ -18,14 +18,15 @@ class LookTableViewController: UITableViewController {
     @IBOutlet private weak var iconOption2: UIImageView!
     @IBOutlet private weak var iconOption3: UIImageView!
 
+    @IBOutlet private weak var appearanceCell1: AppTableViewCell!
+    @IBOutlet private weak var appearanceCell2: AppTableViewCell!
+    @IBOutlet private weak var darkModeSystem: UISwitch!
     @IBOutlet private weak var darkModeSegmentControl: AppSegmentedControl!
 
     // MARK: - View lifecycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.backgroundColor = Settings().theme.backgroundColor
 
         let sliderFontSize = Settings().fontSize
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
@@ -39,17 +40,13 @@ class LookTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if !Settings().supportsNativeDarkMode {
-            darkModeSegmentControl.removeSegment(at: 2, animated: false)
-        }
-        darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
-
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         delegate.supportedInterfaceOrientation = Settings().orientations
 
-//        applyTheme()
+        tableView.backgroundColor = Settings().theme.backgroundColor
+        setupAppearanceSettings()
     }
 
     // MARK: - View Methods -
@@ -78,6 +75,17 @@ class LookTableViewController: UITableViewController {
         applyTheme()
     }
 
+    @IBAction private func changeAppearanceFollowSystem(_ sender: Any) {
+        guard let followSystem = sender as? UISwitch else {
+            return
+        }
+        UserDefaults.standard.set(followSystem.isOn ? Appearance.native.rawValue : darkModeSegmentControl.selectedSegmentIndex, forKey: Definitions.darkMode)
+        UserDefaults.standard.synchronize()
+
+        applyTheme()
+        setupAppearanceSettings()
+    }
+
     @IBAction private func changeDarkMode(_ sender: Any) {
         guard let darkMode = sender as? UISegmentedControl else {
             return
@@ -89,6 +97,29 @@ class LookTableViewController: UITableViewController {
     }
 
     // MARK: - Private Methods -
+
+    fileprivate func setupAppearanceSettings() {
+        appearanceCell1.isUserInteractionEnabled = Settings().supportsNativeDarkMode
+        darkModeSystem.isOn = Settings().supportsNativeDarkMode && Settings().appearance == .native
+        if !appearanceCell1.isUserInteractionEnabled {
+            appearanceCell1.subviews[0].subviews.forEach {
+                if let view = $0 as? UILabel {
+                    view.isEnabled = false
+                }
+                if let view = $0 as? UISwitch {
+                    view.isEnabled = false
+                }
+            }
+        }
+
+        appearanceCell2.isUserInteractionEnabled = !darkModeSystem.isOn
+        darkModeSegmentControl.selectedSegmentIndex = Settings().isDarkMode ? 1 : 0
+        appearanceCell2.subviews[0].subviews.forEach {
+            if let view = $0 as? UISegmentedControl {
+                view.isEnabled = appearanceCell2.isUserInteractionEnabled
+            }
+        }
+    }
 
     fileprivate func applyTheme() {
         Settings().applyTheme()

@@ -406,8 +406,37 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="APARÊNCIA" id="84a-FX-W0x">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="nuM-Qw-S8K" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="OHX-YP-A3s" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="285.5" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHX-YP-A3s" id="Ue2-YK-jkW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seguir Sistema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ews-39-8uI" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="14.5" width="115" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pM3-Vj-A6f">
+                                                    <rect key="frame" x="343" y="9.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="changeAppearanceFollowSystem:" destination="Im0-Sm-NBu" eventType="valueChanged" id="aCX-vw-dBq"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="pM3-Vj-A6f" secondAttribute="trailing" constant="22" id="7b6-Pj-Nes"/>
+                                                <constraint firstItem="pM3-Vj-A6f" firstAttribute="centerY" secondItem="Ue2-YK-jkW" secondAttribute="centerY" id="dWC-wq-2GX"/>
+                                                <constraint firstItem="ews-39-8uI" firstAttribute="centerY" secondItem="Ue2-YK-jkW" secondAttribute="centerY" id="mPd-XO-K9x"/>
+                                                <constraint firstItem="ews-39-8uI" firstAttribute="leading" secondItem="Ue2-YK-jkW" secondAttribute="leading" constant="20" id="tQN-Wh-Ii8"/>
+                                                <constraint firstItem="pM3-Vj-A6f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ews-39-8uI" secondAttribute="trailing" constant="8" symbolic="YES" id="you-T6-biD"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="nuM-Qw-S8K" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="335.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuM-Qw-S8K" id="dbb-1A-bDj">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -421,7 +450,6 @@
                                                     <segments>
                                                         <segment title="Claro"/>
                                                         <segment title="Escuro"/>
-                                                        <segment title="Nativo"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="changeDarkMode:" destination="Im0-Sm-NBu" eventType="valueChanged" id="Def-Vr-z0M"/>
@@ -444,7 +472,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Aparência" id="oYG-Z7-taN"/>
                     <connections>
+                        <outlet property="appearanceCell1" destination="OHX-YP-A3s" id="ayn-3C-dXb"/>
+                        <outlet property="appearanceCell2" destination="nuM-Qw-S8K" id="xOW-cs-Cxh"/>
                         <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="mH6-Yy-nKQ"/>
+                        <outlet property="darkModeSystem" destination="pM3-Vj-A6f" id="idO-tW-cgE"/>
                         <outlet property="fontSize" destination="8Xj-Ri-tHM" id="MzF-Kn-8en"/>
                         <outlet property="iconOption1" destination="WFw-2p-qsH" id="Mp7-af-W5o"/>
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="0jL-3V-srO"/>
