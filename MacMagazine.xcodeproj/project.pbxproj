@@ -28,6 +28,7 @@
 		9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */; };
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
+		9B420B06238FEE29005A2084 /* LookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B05238FEE29005A2084 /* LookTableViewController.swift */; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
@@ -217,6 +218,7 @@
 		9B3224302260DD78005CF974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/Videos.storyboard; sourceTree = SOURCE_ROOT; };
 		9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 5.xcdatamodel"; sourceTree = "<group>"; };
 		9B3C7A712263D643001146A4 /* YouTubePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
+		9B420B05238FEE29005A2084 /* LookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookTableViewController.swift; sourceTree = "<group>"; };
 		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
 		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 			children = (
 				9BA9393C2260DDB8004005AA /* Settings.storyboard */,
 				9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */,
+				9B420B05238FEE29005A2084 /* LookTableViewController.swift */,
 			);
 			name = Ajustes;
 			sourceTree = "<group>";
@@ -1091,6 +1094,7 @@
 				9B93F1B422AC5554003AF1B1 /* SplashViewController.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
 				9B7A41C1238DAC9000BA85C0 /* FilterTableViewController.swift in Sources */,
+				9B420B06238FEE29005A2084 /* LookTableViewController.swift in Sources */,
 				9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */,
 				9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */,
 				9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */,

@@ -60,11 +60,7 @@ extension UIColor {
 extension Theme {
 
     func apply(for application: UIApplication) {
-        if #available(iOS 13.0, *) {
-            extend(application)
-        } else {
-            extend(application)
-        }
+        extend(application)
 
         // Ensure existing views render with new theme
         // https://developer.apple.com/documentation/uikit/uiappearance
@@ -103,12 +99,9 @@ extension Theme {
             $0.titleTextAttributes = [
                 .foregroundColor: labelColor
             ]
-
-            if #available(iOS 11.0, *) {
-                $0.largeTitleTextAttributes = [
-                    .foregroundColor: labelColor
-                ]
-            }
+            $0.largeTitleTextAttributes = [
+                .foregroundColor: labelColor
+            ]
         }
 
         // SEARCHBAR
@@ -132,8 +125,8 @@ extension Theme {
         }
 
         AppTableViewCell.appearance().with {
-            $0.backgroundColor = .clear
-            $0.contentColor = cellBackgroundColor
+            $0.backgroundColor = cellBackgroundColor
+            $0.contentView.backgroundColor = cellBackgroundColor
             $0.selectionColor = selectionColor
         }
 
