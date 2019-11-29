@@ -318,12 +318,7 @@ extension WebViewController {
 	func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {
 			let safari = SFSafariViewController(url: url)
-			if Settings().isDarkMode {
-				safari.preferredBarTintColor = UIColor.black
-			}
-			safari.dismissButtonStyle = .close
-			safari.modalPresentationStyle = .overFullScreen
-
+            safari.setup()
 			self.present(safari, animated: true, completion: nil)
 		}
 	}

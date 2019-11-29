@@ -29,6 +29,8 @@
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
 		9B420B06238FEE29005A2084 /* LookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B05238FEE29005A2084 /* LookTableViewController.swift */; };
+		9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */; };
+		9B420B0A239156DE005A2084 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
@@ -219,6 +221,8 @@
 		9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 5.xcdatamodel"; sourceTree = "<group>"; };
 		9B3C7A712263D643001146A4 /* YouTubePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
 		9B420B05238FEE29005A2084 /* LookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookTableViewController.swift; sourceTree = "<group>"; };
+		9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewControllerExtensions.swift; sourceTree = "<group>"; };
+		9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
 		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
@@ -570,6 +574,7 @@
 		9BD135E3222804BF00A0B627 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */,
 				9BD4CBAD228C6B8B00836955 /* UIImageViewTheme.swift */,
 				9BD1360E22283DF300A0B627 /* UILabelTheme.swift */,
 				9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */,
@@ -578,6 +583,7 @@
 				9BD135E4222804E500A0B627 /* UIViewTheme.swift */,
 				9BD135E6222804E500A0B627 /* UIWindowTheme.swift */,
 				9BD135E1222804A600A0B627 /* With.swift */,
+				9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1115,12 +1121,14 @@
 				9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
+				9B420B0A239156DE005A2084 /* UIAlertControllerExtensions.swift in Sources */,
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */,
 				9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */,
 				9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */,
 				9BD4CBAE228C6B8B00836955 /* UIImageViewTheme.swift in Sources */,
+				9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */,
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
 				9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */,
 				9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */,

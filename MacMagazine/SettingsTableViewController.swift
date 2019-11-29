@@ -80,9 +80,7 @@ class SettingsTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 			self.dismiss(animated: true)
 		})
-		if Settings().isDarkMode {
-			alertController.view.tintColor = LightTheme().tint
-		}
+        alertController.setup()
 		self.present(alertController, animated: true)
 	}
 

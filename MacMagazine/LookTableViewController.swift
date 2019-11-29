@@ -174,7 +174,8 @@ extension LookTableViewController {
         }
 
         // Temporary change the colors
-        if Settings().isDarkMode {
+        if Settings().appearance != .native &&
+            Settings().isDarkMode {
             UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
         }
 
