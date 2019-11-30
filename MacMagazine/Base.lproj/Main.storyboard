@@ -72,26 +72,34 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <barButtonItem key="leftBarButtonItem" image="filter" id="vUZ-wN-Khb">
+                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="vUZ-wN-Khb">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="pPA-17-c5g" kind="show" identifier="showFilter" id="q9O-vT-LhX"/>
+                                <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Ml7-gR-vKk">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="search:" destination="Jej-5Q-aqJ" id="dZ9-cr-Rlt"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="search" id="Ml7-gR-vKk">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="search:" destination="Jej-5Q-aqJ" id="dZ9-cr-Rlt"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="filter" id="zCA-ze-Txv">
+                                <connections>
+                                    <segue destination="pPA-17-c5g" kind="show" identifier="showFilter" id="anQ-Qp-hIi"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="favorite" destination="vUZ-wN-Khb" id="TPH-rv-xwZ"/>
                         <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
                         <outlet property="spin" destination="uE4-5b-xTc" id="Vwt-Qm-yfC"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
@@ -236,12 +244,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fav_off" width="21" height="21"/>
         <image name="filter" width="23" height="21"/>
         <image name="logo" width="415" height="350"/>
         <image name="logo_dark" width="509" height="419"/>
         <image name="tab_posts" width="22" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YQQ-bx-LIJ"/>
+        <segue reference="lNV-kD-aRc"/>
     </inferredMetricsTieBreakers>
 </document>

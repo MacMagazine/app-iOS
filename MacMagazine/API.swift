@@ -8,6 +8,13 @@
 
 import UIKit
 
+struct Category: Codable {
+    var title: String = ""
+    var parent: String = ""
+    var order: Int = 0
+    var id: Int = 0
+}
+
 class API {
 
 	// MARK: - Definitions -
@@ -23,6 +30,8 @@ class API {
 		static let posts = "cat=-101"
 		static let podcast = "cat=101"
 		static let search = "s="
+        static let restAPI = "\(mm)wp-json/menus/v2/"
+        static let categories = "categories"
 
 		// YouTube
 		static let salt = "AppDelegateNSObject"
@@ -119,7 +128,47 @@ class API {
 		executeGetContent(host)
 	}
 
+    func getCategories(_ completion: (([Category]?) -> Void)?) {
+        let host = "\(APIParams.restAPI)\(APIParams.categories)"
+
+        guard let url = URL(string: "\(host.escape())") else {
+            return
+        }
+
+        #if os(iOS)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        #endif
+        Network.get(url: url) { (data: Data?, _: String?) in
+            #if os(iOS)
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+            #endif
+
+            guard let data = data,
+                let categories = self.decodeJSON(data)
+            else {
+                completion?(nil)
+                return
+            }
+            DispatchQueue.main.async {
+                completion?(categories)
+            }
+        }
+    }
+
     // MARK: - Internal methods -
+
+    fileprivate func decodeJSON(_ data: Data) -> [Category]? {
+        let decoder = JSONDecoder()
+
+        do {
+            return try decoder.decode([Category].self, from: data)
+
+        } catch {
+            return nil
+        }
+    }
 
     fileprivate func executeGetContent(_ host: String) {
 		cleanCookies()

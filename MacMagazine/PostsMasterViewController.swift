@@ -49,6 +49,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
+    @IBOutlet private weak var favorite: UIBarButtonItem!
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -244,73 +245,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		}
 	}
 
-	// MARK: - Actions methods -
-
-	@IBAction private func search(_ sender: Any) {
-		navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        resultsTableController?.showTyping()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            self.searchController?.searchBar.becomeFirstResponder()
-            Settings().applyTheme()
-        }
-	}
-
     // MARK: - Local methods -
-
-    fileprivate func show(filter: String?) {
-        guard let category = filter else {
-            showAll()
-            return
-        }
-
-        if category.isEmpty {
-            favorites()
-        } else {
-            showCategory(category)
-        }
-    }
-
-    fileprivate func showAll() {
-        fetchController?.fetchRequest.predicate = nil
-        fetchController?.filteringFavorite = false
-
-        self.navigationItem.titleView = logoView
-        self.navigationItem.title = nil
-
-        reloadController(.transitionFlipFromLeft)
-    }
-
-    fileprivate func favorites() {
-        fetchController?.fetchRequest.predicate = favoritePredicate
-        fetchController?.filteringFavorite = true
-
-        self.navigationItem.titleView = nil
-        self.navigationItem.title = "Favoritos"
-
-        reloadController(.transitionFlipFromRight)
-	}
-
-    fileprivate func showCategory(_ category: String) {
-        fetchController?.fetchRequest.predicate = NSPredicate(format: "categorias contains[cd] %@", category)
-        fetchController?.filteringFavorite = true
-
-        self.navigationItem.titleView = nil
-        self.navigationItem.title = category
-
-        reloadController(.transitionFlipFromRight)
-    }
-
-    fileprivate func reloadController(_ direction: UIView.AnimationOptions) {
-        fetchController?.reloadData()
-        UIView.transition(with: tableView,
-                          duration: 0.4,
-                          options: direction,
-                          animations: {
-            self.tableView.reloadData()
-        })
-    }
 
     fileprivate func hasData() -> Bool {
         return (fetchController?.hasData() ?? false) && !spin.isAnimating
@@ -734,5 +669,94 @@ extension PostsMasterViewController {
             safari.setup()
             self.present(safari, animated: true, completion: nil)
         }
+    }
+}
+
+// MARK: - Favorite Action methods -
+
+extension PostsMasterViewController {
+    @IBAction private func showHideFavorites(_ sender: Any) {
+        if favorite.image == UIImage(named: "fav_on") {
+            favorite.image = UIImage(named: "fav_off")
+            hideFavorites()
+        } else {
+            favorite.image = UIImage(named: "fav_on")
+            showFavorites()
+        }
+    }
+
+    fileprivate func showFavorites() {
+        fetchController?.fetchRequest.predicate = favoritePredicate
+        fetchController?.filteringFavorite = true
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Favoritos"
+
+        reloadController(.transitionFlipFromRight)
+    }
+
+    fileprivate func hideFavorites() {
+        fetchController?.fetchRequest.predicate = nil
+        fetchController?.filteringFavorite = false
+
+        self.navigationItem.titleView = logoView
+        self.navigationItem.title = nil
+
+        reloadController(.transitionFlipFromLeft)
+    }
+
+    fileprivate func reloadController(_ direction: UIView.AnimationOptions) {
+        fetchController?.reloadData()
+        UIView.transition(with: tableView,
+                          duration: 0.4,
+                          options: direction,
+                          animations: {
+            self.tableView.reloadData()
+        })
+    }
+}
+
+// MARK: - Search Action methods -
+
+extension PostsMasterViewController {
+    @IBAction private func search(_ sender: Any) {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        resultsTableController?.showTyping()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.searchController?.searchBar.becomeFirstResponder()
+            Settings().applyTheme()
+        }
+    }
+}
+
+// MARK: - Categories Action methods -
+
+extension PostsMasterViewController {
+    fileprivate func show(filter: String?) {
+        guard let category = filter else {
+            showAll()
+            return
+        }
+        showCategory(category)
+    }
+
+    fileprivate func showAll() {
+        fetchController?.fetchRequest.predicate = nil
+
+        self.navigationItem.titleView = logoView
+        self.navigationItem.title = nil
+
+        reloadController(.transitionFlipFromLeft)
+    }
+
+    fileprivate func showCategory(_ category: String) {
+        fetchController?.fetchRequest.predicate = NSPredicate(format: "categorias contains[cd] %@", category)
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = category
+
+        reloadController(.transitionFlipFromRight)
     }
 }

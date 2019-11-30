@@ -13,7 +13,7 @@ class FilterTableViewController: UITableViewController {
     // MARK: - Properties -
 
     var callback: ((String?) -> Void)?
-    var categories = [String]()
+    var categories = [Category]()
 
     // MARK: - View Lifecycle -
 
@@ -23,8 +23,11 @@ class FilterTableViewController: UITableViewController {
         navigationItem.title = "Filtrar"
         tableView.backgroundColor = Settings().theme.backgroundColor
 
-        CoreDataStack.shared.getCategories { [weak self] categories in
-            self?.categories = categories.removingDuplicates().sorted()
+        API().getCategories { [weak self] categories in
+            guard let categories = categories else {
+                return
+            }
+            self?.categories = categories
             self?.tableView.reloadData()
         }
     }
@@ -32,26 +35,19 @@ class FilterTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section > 1 ? "CATEGORIAS" : nil
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section > 1 ? categories.count : 1
+        return categories.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filter", for: indexPath)
 
         // Configure the cell...
-        if indexPath.section > 1 {
-            cell.textLabel?.text = categories[indexPath.row]
-        } else {
-            cell.textLabel?.text = "Mostrar \(indexPath.section == 0 ? "Tudo" : "Favoritos")"
-        }
+        cell.textLabel?.text = categories[indexPath.row].title
+
         return cell
     }
 
@@ -60,14 +56,8 @@ class FilterTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        switch indexPath.section {
-        case 0:
-            callback?(nil)
-        case 1:
-            callback?("")
-        default:
-            callback?(categories[indexPath.row])
-        }
+        callback?(categories[indexPath.row].title)
+
         self.navigationController?.popViewController(animated: true)
     }
 
