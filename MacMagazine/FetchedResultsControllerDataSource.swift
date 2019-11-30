@@ -34,12 +34,9 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
     public let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 
-	var filteringFavorite = false
-
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Post> in
 		// Initialize Fetched Results Controller
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-//		controller.delegate = self
 
 		return controller
 	}()
@@ -77,10 +74,14 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	func numberOfSections(in tableView: UITableView) -> Int {
 		let numSections = sections()
 
-		if (numSections == 0 || rows(in: 0) == 0) && filteringFavorite {
+		let favorite = fetchRequest.predicate?.predicateFormat.contains("favorite") ?? false
+		let category = fetchRequest.predicate?.predicateFormat.contains("categorias") ?? false
+
+		if (numSections == 0 || rows(in: 0) == 0) &&
+			(favorite || category) {
 
 			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-			notFound.text = "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")."
+			notFound.text = favorite ? "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")" : "Nenhum resultado encontrado"
 			notFound.textColor = Settings().darkModeColor
 			notFound.textAlignment = .center
 			tableView.backgroundView = notFound
