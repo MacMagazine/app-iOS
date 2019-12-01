@@ -28,7 +28,6 @@
 		9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */; };
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
-		9B420B06238FEE29005A2084 /* LookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B05238FEE29005A2084 /* LookTableViewController.swift */; };
 		9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */; };
 		9B420B0A239156DE005A2084 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
@@ -220,7 +219,6 @@
 		9B3224302260DD78005CF974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MacMagazine/Base.lproj/Videos.storyboard; sourceTree = SOURCE_ROOT; };
 		9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 5.xcdatamodel"; sourceTree = "<group>"; };
 		9B3C7A712263D643001146A4 /* YouTubePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
-		9B420B05238FEE29005A2084 /* LookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookTableViewController.swift; sourceTree = "<group>"; };
 		9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewControllerExtensions.swift; sourceTree = "<group>"; };
 		9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
@@ -656,7 +654,6 @@
 			children = (
 				9BA9393C2260DDB8004005AA /* Settings.storyboard */,
 				9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */,
-				9B420B05238FEE29005A2084 /* LookTableViewController.swift */,
 			);
 			name = Ajustes;
 			sourceTree = "<group>";
@@ -778,6 +775,7 @@
 			buildConfigurationList = 9BCAD68B1F47A08100B54526 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
 				9BA5527D2225CE1D00B3FA23 /* Run Swiftlint Script */,
+				9B79B43423941C3400303703 /* Run Update Bundle version script */,
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
@@ -1004,6 +1002,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		9B79B43423941C3400303703 /* Run Update Bundle version script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Update Bundle version script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\nxcrun agvtool next-version -all\nfi\n";
+		};
 		9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1100,7 +1116,6 @@
 				9B93F1B422AC5554003AF1B1 /* SplashViewController.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
 				9B7A41C1238DAC9000BA85C0 /* FilterTableViewController.swift in Sources */,
-				9B420B06238FEE29005A2084 /* LookTableViewController.swift in Sources */,
 				9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */,
 				9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */,
 				9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */,

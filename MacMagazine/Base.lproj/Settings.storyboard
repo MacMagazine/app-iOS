@@ -76,100 +76,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="weY-1J-5YR">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="4kE-dx-gH9" style="IBUITableViewCellStyleDefault" id="biI-je-92P" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="414" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="biI-je-92P" id="9cg-fO-eqU">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Aparência" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4kE-dx-gH9" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Im0-Sm-NBu" kind="show" id="fyR-7I-tuH"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="UtS-7J-auh">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="290" width="414" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Goh-iK-82H">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <state key="normal" title="Relatar problema no app"/>
-                                                    <connections>
-                                                        <action selector="reportProblem:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="AYG-c0-re3"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Goh-iK-82H" firstAttribute="top" secondItem="k1Z-8E-Rhb" secondAttribute="top" id="A0e-qF-dc0"/>
-                                                <constraint firstItem="Goh-iK-82H" firstAttribute="leading" secondItem="k1Z-8E-Rhb" secondAttribute="leading" id="iJy-cx-em2"/>
-                                                <constraint firstAttribute="bottom" secondItem="Goh-iK-82H" secondAttribute="bottom" id="jrW-HJ-sHH"/>
-                                                <constraint firstAttribute="trailing" secondItem="Goh-iK-82H" secondAttribute="trailing" id="sSA-yZ-P54"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="75e-Ta-Gqd" id="WH3-wz-C1j"/>
-                            <outlet property="delegate" destination="75e-Ta-Gqd" id="rMF-n0-2k9"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="ggi-NI-mUc">
-                        <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="xxe-SM-Zn7">
-                            <rect key="frame" x="132" y="5.5" width="150" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Nf-pcb" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
-                        <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2284" y="-710"/>
-        </scene>
-        <!--Aparência-->
-        <scene sceneID="vQp-bS-LJx">
-            <objects>
-                <tableViewController id="Im0-Sm-NBu" customClass="LookTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="28" sectionFooterHeight="18" estimatedSectionFooterHeight="28" id="qBd-76-Mtv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
                             <tableViewSection headerTitle="ÍCONE DO APLICATIVO" id="xNE-VJ-p0K">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="74" id="rt5-Cn-lyN" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="74"/>
+                                        <rect key="frame" x="0.0" y="224" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rt5-Cn-lyN" id="e0z-VH-ecP">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
@@ -205,7 +115,7 @@
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
-                                                                        <action selector="changeAppIcon:" destination="Im0-Sm-NBu" eventType="touchUpInside" id="Lf8-Ga-t7h"/>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="yuS-A1-UOu"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -245,7 +155,7 @@
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
-                                                                        <action selector="changeAppIcon:" destination="Im0-Sm-NBu" eventType="touchUpInside" id="tBp-1P-LiK"/>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="8Fi-VB-a5Z"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -285,7 +195,7 @@
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
-                                                                        <action selector="changeAppIcon:" destination="Im0-Sm-NBu" eventType="touchUpInside" id="zRX-WZ-KTy"/>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="zhA-p7-osp"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -317,7 +227,7 @@
                             <tableViewSection headerTitle="TAMANHO DA FONTE" id="lz6-nM-2mu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="44" id="VYt-Vq-PHi" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="185.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="354" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VYt-Vq-PHi" id="rmi-XG-BsJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -371,7 +281,7 @@
                                                     <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
-                                                        <action selector="changeFontSize:" destination="Im0-Sm-NBu" eventType="valueChanged" id="4Wt-DF-IQp"/>
+                                                        <action selector="changeFontSize:" destination="75e-Ta-Gqd" eventType="valueChanged" id="YEF-fJ-jqi"/>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67r-rv-sEa" customClass="AppBigFont" customModule="MacMagazine" customModuleProvider="target">
@@ -407,7 +317,7 @@
                             <tableViewSection headerTitle="APARÊNCIA" id="84a-FX-W0x">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="OHX-YP-A3s" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="285.5" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="454" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHX-YP-A3s" id="Ue2-YK-jkW">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -422,7 +332,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pM3-Vj-A6f">
                                                     <rect key="frame" x="343" y="9.5" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="changeAppearanceFollowSystem:" destination="Im0-Sm-NBu" eventType="valueChanged" id="aCX-vw-dBq"/>
+                                                        <action selector="changeAppearanceFollowSystem:" destination="75e-Ta-Gqd" eventType="valueChanged" id="R3G-T0-hpS"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -436,7 +346,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="nuM-Qw-S8K" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="335.5" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="504" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuM-Qw-S8K" id="dbb-1A-bDj">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -452,7 +362,7 @@
                                                         <segment title="Escuro"/>
                                                     </segments>
                                                     <connections>
-                                                        <action selector="changeDarkMode:" destination="Im0-Sm-NBu" eventType="valueChanged" id="Def-Vr-z0M"/>
+                                                        <action selector="changeDarkMode:" destination="75e-Ta-Gqd" eventType="valueChanged" id="WyD-D5-aBp"/>
                                                     </connections>
                                                 </segmentedControl>
                                             </subviews>
@@ -464,27 +374,70 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="UtS-7J-auh">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="590" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Goh-iK-82H">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Relatar problema no app"/>
+                                                    <connections>
+                                                        <action selector="reportProblem:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="AYG-c0-re3"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Goh-iK-82H" firstAttribute="top" secondItem="k1Z-8E-Rhb" secondAttribute="top" id="A0e-qF-dc0"/>
+                                                <constraint firstItem="Goh-iK-82H" firstAttribute="leading" secondItem="k1Z-8E-Rhb" secondAttribute="leading" id="iJy-cx-em2"/>
+                                                <constraint firstAttribute="bottom" secondItem="Goh-iK-82H" secondAttribute="bottom" id="jrW-HJ-sHH"/>
+                                                <constraint firstAttribute="trailing" secondItem="Goh-iK-82H" secondAttribute="trailing" id="sSA-yZ-P54"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="Im0-Sm-NBu" id="f5E-hx-h0x"/>
-                            <outlet property="delegate" destination="Im0-Sm-NBu" id="2XR-a5-n5A"/>
+                            <outlet property="dataSource" destination="75e-Ta-Gqd" id="WH3-wz-C1j"/>
+                            <outlet property="delegate" destination="75e-Ta-Gqd" id="rMF-n0-2k9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Aparência" id="oYG-Z7-taN"/>
+                    <navigationItem key="navigationItem" id="ggi-NI-mUc">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="xxe-SM-Zn7">
+                            <rect key="frame" x="132" y="5.5" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Nf-pcb" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </navigationItem>
                     <connections>
-                        <outlet property="appearanceCell1" destination="OHX-YP-A3s" id="ayn-3C-dXb"/>
-                        <outlet property="appearanceCell2" destination="nuM-Qw-S8K" id="xOW-cs-Cxh"/>
-                        <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="mH6-Yy-nKQ"/>
-                        <outlet property="darkModeSystem" destination="pM3-Vj-A6f" id="idO-tW-cgE"/>
-                        <outlet property="fontSize" destination="8Xj-Ri-tHM" id="MzF-Kn-8en"/>
-                        <outlet property="iconOption1" destination="WFw-2p-qsH" id="Mp7-af-W5o"/>
-                        <outlet property="iconOption2" destination="B7r-eJ-ky4" id="0jL-3V-srO"/>
-                        <outlet property="iconOption3" destination="eO4-rq-SKc" id="Xvl-d3-EIU"/>
+                        <outlet property="appearanceCell1" destination="OHX-YP-A3s" id="JMV-ZU-qv9"/>
+                        <outlet property="appearanceCell2" destination="nuM-Qw-S8K" id="5MK-ab-51K"/>
+                        <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="IZv-c0-y4T"/>
+                        <outlet property="darkModeSystem" destination="pM3-Vj-A6f" id="bsN-6T-Grz"/>
+                        <outlet property="fontSize" destination="8Xj-Ri-tHM" id="JKl-S7-96y"/>
+                        <outlet property="iconOption1" destination="WFw-2p-qsH" id="Czh-Vk-S7a"/>
+                        <outlet property="iconOption2" destination="B7r-eJ-ky4" id="IWR-VX-3jh"/>
+                        <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
+                        <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
+                        <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zzJ-ys-EnW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1468" y="-710"/>
+            <point key="canvasLocation" x="-2284" y="-710"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="Odw-wy-fvT">
