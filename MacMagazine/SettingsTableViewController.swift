@@ -53,13 +53,14 @@ class SettingsTableViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+        tableView.backgroundColor = Settings().theme.backgroundColor
+        applyTheme()
+        setupAppearanceSettings()
+
+		guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         delegate.supportedInterfaceOrientation = Settings().orientations
-
-        tableView.backgroundColor = Settings().theme.backgroundColor
-        setupAppearanceSettings()
 	}
 
 	// MARK: - TableView Methods -
@@ -83,6 +84,24 @@ class SettingsTableViewController: UITableViewController {
         }
 		return header[section]
     }
+
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if indexPath.section == 4 {
+			if indexPath.row == 0 &&
+				appearanceCell1.isHidden {
+				return 0
+			}
+			if indexPath.row == 1 &&
+				appearanceCell2.isHidden {
+				return 0
+			}
+		}
+		if indexPath.section == 5 &&
+			reportProblem.isHidden {
+			return 0
+		}
+		return indexPath.section == 2 ? 74 : 50
+	}
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -214,6 +233,7 @@ extension SettingsTableViewController {
                 }
             }
         }
+		appearanceCell1.isHidden = !appearanceCell1.isUserInteractionEnabled
 
         appearanceCell2.isUserInteractionEnabled = !darkModeSystem.isOn
         darkModeSegmentControl.selectedSegmentIndex = Settings().isDarkMode ? 1 : 0
@@ -222,6 +242,9 @@ extension SettingsTableViewController {
                 view.isEnabled = appearanceCell2.isUserInteractionEnabled
             }
         }
+		appearanceCell2.isHidden = !appearanceCell2.isUserInteractionEnabled
+
+		tableView.reloadData()
     }
 
     fileprivate func applyTheme() {
