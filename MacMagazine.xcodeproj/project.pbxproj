@@ -45,7 +45,7 @@
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
-		9B7A41C1238DAC9000BA85C0 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C0238DAC9000BA85C0 /* FilterTableViewController.swift */; };
+		9B7A41C1238DAC9000BA85C0 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C0238DAC9000BA85C0 /* CategoriesTableViewController.swift */; };
 		9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
@@ -231,7 +231,7 @@
 		9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EMTLoadingIndicator.framework; sourceTree = "<group>"; };
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityExtensions.swift; sourceTree = "<group>"; };
-		9B7A41C0238DAC9000BA85C0 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		9B7A41C0238DAC9000BA85C0 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
 		9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -426,9 +426,9 @@
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
-				9BCAD6801F47A08100B54526 /* Main.storyboard */,
-				9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */,
 				9B93F1B522AC5592003AF1B1 /* Splash.storyboard */,
+				9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */,
+				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -448,6 +448,14 @@
 				9B911180225BC513000A6AC3 /* WatchSessionManager.swift */,
 			);
 			name = Watch;
+			sourceTree = "<group>";
+		};
+		9B93D22423951B9300B454AC /* Categorias */ = {
+			isa = PBXGroup;
+			children = (
+				9B7A41C0238DAC9000BA85C0 /* CategoriesTableViewController.swift */,
+			);
+			name = Categorias;
 			sourceTree = "<group>";
 		};
 		9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */ = {
@@ -631,9 +639,9 @@
 		9BE697D71F487D5A0048D68D /* Posts */ = {
 			isa = PBXGroup;
 			children = (
+				9B93D22423951B9300B454AC /* Categorias */,
 				9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */,
 				9BCAD67E1F47A08100B54526 /* PostsDetailViewController.swift */,
-				9B7A41C0238DAC9000BA85C0 /* FilterTableViewController.swift */,
 			);
 			name = Posts;
 			sourceTree = "<group>";
@@ -775,7 +783,6 @@
 			buildConfigurationList = 9BCAD68B1F47A08100B54526 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
 				9BA5527D2225CE1D00B3FA23 /* Run Swiftlint Script */,
-				9B79B43423941C3400303703 /* Run Update Bundle version script */,
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
@@ -1002,24 +1009,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		9B79B43423941C3400303703 /* Run Update Bundle version script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Update Bundle version script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nif [ $CONFIGURATION == Release ]; then\nxcrun agvtool next-version -all\nfi\n";
-		};
 		9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1115,7 +1104,7 @@
 				9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */,
 				9B93F1B422AC5554003AF1B1 /* SplashViewController.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
-				9B7A41C1238DAC9000BA85C0 /* FilterTableViewController.swift in Sources */,
+				9B7A41C1238DAC9000BA85C0 /* CategoriesTableViewController.swift in Sources */,
 				9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */,
 				9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */,
 				9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */,
@@ -1303,7 +1292,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1336,7 +1325,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1367,7 +1356,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1403,7 +1392,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1437,7 +1426,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1471,7 +1460,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1618,7 +1607,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1644,7 +1633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

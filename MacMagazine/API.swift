@@ -27,11 +27,13 @@ class API {
         static let mm = "https://macmagazine.uol.com.br/"
 		static let feed = "\(mm)feed/"
 		static let paged = "paged="
-		static let posts = "cat=-101"
-		static let podcast = "cat=101"
+		static let cat = "cat="
+		static let posts = "\(cat)-101"
+		static let podcast = "\(cat)101"
 		static let search = "s="
         static let restAPI = "\(mm)wp-json/menus/v2/"
         static let categories = "categories"
+		static let tag = "tag="
 
 		// YouTube
 		static let salt = "AppDelegateNSObject"
@@ -119,6 +121,12 @@ class API {
     func searchPosts(_ text: String, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
         let host = "\(APIParams.feed)?\(APIParams.search)'\(text)'"
+        executeGetContent(host)
+    }
+
+    func searchPosts(category: String, _ completion: ((XMLPost?) -> Void)?) {
+        onCompletion = completion
+		let host = "\(APIParams.feed)?\(APIParams.tag)'\(category.replacingOccurrences(of: " ", with: "-"))'"
         executeGetContent(host)
     }
 

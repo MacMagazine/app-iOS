@@ -191,7 +191,7 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="59.5" height="74"/>
-                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo azul">
+                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
@@ -331,6 +331,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pM3-Vj-A6f">
                                                     <rect key="frame" x="343" y="9.5" width="51" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Toque para alterar" label="Seguir aparência do sistema"/>
                                                     <connections>
                                                         <action selector="changeAppearanceFollowSystem:" destination="75e-Ta-Gqd" eventType="valueChanged" id="R3G-T0-hpS"/>
                                                     </connections>

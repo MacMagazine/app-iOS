@@ -16,6 +16,7 @@ protocol ResultsViewControllerDelegate: AnyObject {
 
 extension ResultsViewControllerDelegate {
 	func didSelectResultRowAt(indexPath: IndexPath) {}
+	func setFavorite(_ favorited: Bool, atIndexPath: IndexPath) {}
 }
 
 class ResultsViewController: UITableViewController {

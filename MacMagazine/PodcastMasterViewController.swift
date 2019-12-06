@@ -14,7 +14,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	// MARK: - Properties -
 
     var fetchController: FetchedResultsControllerDataSource?
-	var detailViewController: PostsDetailViewController?
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up

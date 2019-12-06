@@ -65,7 +65,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	private var resultsTableController: ResultsViewController?
 	var posts = [XMLPost]()
 
-    let categoryPredicate = NSPredicate(format: "NOT categorias CONTAINS[cd] %@", "Podcast")
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
 
     // MARK: - View Lifecycle -
@@ -150,37 +149,38 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showFilter" {
-            guard let filterVC = segue.destination as? FilterTableViewController else {
+        if segue.identifier == "showCategories" {
+            guard let vc = segue.destination as? CategoriesTableViewController else {
                 return
             }
-            filterVC.callback = { [weak self] category in
-                self?.show(filter: category)
+            vc.callback = { [weak self] category in
+                self?.searchPosts(category: category)
             }
 
-        } else {
-            guard let navController = segue.destination as? UINavigationController,
-                let controller = navController.topViewController as? PostsDetailViewController,
-                let indexPath = selectedIndexPath
-                else {
-                    return
-            }
+		} else {
 
-            guard let _ = navigationItem.searchController else {
-                // Normal Posts table
-                if tableView.indexPathForSelectedRow != nil {
-                    guard let post = fetchController?.object(at: indexPath) else {
-                        return
-                    }
-                    prepareDetailController(controller, using: links, compare: post.link)
-                }
-                return
-            }
-            // Search Posts table
-            if resultsTableController?.tableView.indexPathForSelectedRow != nil {
-                prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
-            }
-        }
+			guard let navController = segue.destination as? UINavigationController,
+				let controller = navController.topViewController as? PostsDetailViewController,
+				let indexPath = selectedIndexPath
+				else {
+					return
+			}
+
+			guard let _ = navigationItem.searchController else {
+				// Normal Posts table
+				if tableView.indexPathForSelectedRow != nil {
+					guard let post = fetchController?.object(at: indexPath) else {
+						return
+					}
+					prepareDetailController(controller, using: links, compare: post.link)
+				}
+				return
+			}
+			// Search Posts table
+			if resultsTableController?.tableView.indexPathForSelectedRow != nil {
+				prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
+			}
+		}
 	}
 
 	// MARK: - View Methods -
@@ -376,29 +376,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		}
 	}
 
-	fileprivate func searchPosts(_ text: String) {
-		var items: [CSSearchableItem] = []
-
-		let processResponse: (XMLPost?) -> Void = { post in
-			guard let post = post else {
-				DispatchQueue.main.async {
-					self.posts.sort(by: {
-						$0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
-					})
-					CSSearchableIndex.default().indexSearchableItems(items)
-
-					self.resultsTableController?.posts = self.posts
-				}
-				return
-			}
-			self.posts.append(post)
-			CoreDataStack.shared.save(post: post)
-			items.append(self.createSearchableItem(post))
-		}
-		posts = []
-		API().searchPosts(text, processResponse)
-	}
-
 }
 
 // MARK: - Scroll detection -
@@ -420,7 +397,8 @@ extension PostsMasterViewController {
         // Pull to Refresh
         if offset.y < -100 &&
             navigationItem.titleView == logoView &&
-            navigationItem.searchController == nil {
+            navigationItem.searchController == nil &&
+			fetchController?.fetchRequest.predicate == nil {
 			showSpin()
         }
     }
@@ -455,16 +433,32 @@ extension PostsMasterViewController: UISearchBarDelegate {
 		guard let text = searchBar.text else {
 			return
 		}
+		fetchController?.fetchRequest.predicate = nil
 		resultsTableController?.posts = []
 		resultsTableController?.showSpin()
 		searchPosts(text)
 	}
 
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		if searchText.isEmpty &&
+			fetchController?.fetchRequest.predicate != nil {
+			fetchController?.fetchRequest.predicate = nil
+			reloadController(.transitionFlipFromLeft)
+			searchBar.resignFirstResponder()
+			navigationItem.searchController = nil
+		}
+	}
+
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		if fetchController?.fetchRequest.predicate != nil {
+			fetchController?.fetchRequest.predicate = nil
+			reloadController(.transitionFlipFromLeft)
+		}
+
 		posts = []
 		resultsTableController?.posts = posts
 		searchBar.resignFirstResponder()
-        self.navigationItem.searchController = nil
+        navigationItem.searchController = nil
     }
 }
 
@@ -645,7 +639,7 @@ func showDetailController(with link: String) {
 	}
 }
 
-// MARK: - Peek&Pop -
+// MARK: - Easter Egg -
 
 extension PostsMasterViewController {
     @IBAction private func easterEgg(_ sender: Any) {
@@ -726,34 +720,56 @@ extension PostsMasterViewController {
             Settings().applyTheme()
         }
     }
-}
 
-// MARK: - Categories Action methods -
+	fileprivate func searchPosts(_ text: String) {
+		var items: [CSSearchableItem] = []
+		let processResponse: (XMLPost?) -> Void = { post in
+			guard let post = post else {
+				DispatchQueue.main.async {
+					self.posts.sort(by: {
+						$0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
+					})
+					CSSearchableIndex.default().indexSearchableItems(items)
 
-extension PostsMasterViewController {
-    fileprivate func show(filter: String?) {
-        guard let category = filter else {
-            showAll()
-            return
-        }
-        showCategory(category)
-    }
+					self.resultsTableController?.posts = self.posts
+				}
+				return
+			}
+			self.posts.append(post)
+			CoreDataStack.shared.save(post: post)
+			items.append(self.createSearchableItem(post))
+		}
 
-    fileprivate func showAll() {
-        fetchController?.fetchRequest.predicate = nil
+		posts = []
+		API().searchPosts(text, processResponse)
+	}
 
-        self.navigationItem.titleView = logoView
-        self.navigationItem.title = nil
+	fileprivate func searchPosts(category: String) {
+        showSpin()
 
-        reloadController(.transitionFlipFromLeft)
-    }
+		var items: [CSSearchableItem] = []
+		let processResponse: (XMLPost?) -> Void = { post in
+			guard let post = post else {
+				DispatchQueue.main.async {
+                    self.hideSpin()
 
-    fileprivate func showCategory(_ category: String) {
-        fetchController?.fetchRequest.predicate = NSPredicate(format: "categorias contains[cd] %@", category)
+					CSSearchableIndex.default().indexSearchableItems(items)
 
-        self.navigationItem.titleView = nil
-        self.navigationItem.title = category
+					self.fetchController?.fetchRequest.predicate = NSPredicate(format: "categorias contains[cd] %@", category)
+					self.reloadController(.transitionFlipFromRight)
+				}
+				return
+			}
+			CoreDataStack.shared.save(post: post)
+			items.append(self.createSearchableItem(post))
+		}
 
-        reloadController(.transitionFlipFromRight)
-    }
+		if navigationItem.searchController == nil {
+			navigationItem.searchController = self.searchController
+			navigationItem.hidesSearchBarWhenScrolling = false
+		}
+		searchController?.searchBar.text = category
+
+		API().searchPosts(category: category, processResponse)
+	}
 }
