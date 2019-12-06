@@ -82,26 +82,15 @@
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="search" id="ceM-9M-5Kt">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="search:" destination="Jej-5Q-aqJ" id="bQZ-df-4od"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Categories" image="categories" id="Ml7-gR-vKk">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="y7U-Gz-Nn8" kind="show" identifier="showCategories" id="pZ6-xX-Gmm"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ceM-9M-5Kt">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="search:" destination="Jej-5Q-aqJ" id="bQZ-df-4od"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="favorite" destination="vUZ-wN-Khb" id="TPH-rv-xwZ"/>
@@ -214,7 +203,7 @@
             <objects>
                 <tableViewController id="y7U-Gz-Nn8" customClass="CategoriesTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sJC-Ug-bGa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -270,7 +259,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="categories" width="24" height="23"/>
         <image name="fav_off" width="21" height="21"/>
         <image name="logo" width="415" height="350"/>
         <image name="logo_dark" width="509" height="419"/>
