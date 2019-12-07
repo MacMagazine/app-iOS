@@ -61,6 +61,10 @@ class CategoriesTableViewController: UITableViewController {
         return 1
     }
 
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+		return "Lista de Categorias"
+	}
+
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return isFiltering ? filteredCategories.count : categories.count
     }

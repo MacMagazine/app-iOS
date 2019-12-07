@@ -439,22 +439,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 		searchPosts(text)
 	}
 
-	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		if searchText.isEmpty &&
-			fetchController?.fetchRequest.predicate != nil {
-			fetchController?.fetchRequest.predicate = nil
-			reloadController(.transitionFlipFromLeft)
-			searchBar.resignFirstResponder()
-			navigationItem.searchController = nil
-		}
-	}
-
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-		if fetchController?.fetchRequest.predicate != nil {
-			fetchController?.fetchRequest.predicate = nil
-			reloadController(.transitionFlipFromLeft)
-		}
-
 		posts = []
 		resultsTableController?.posts = posts
 		searchBar.resignFirstResponder()
@@ -765,10 +750,7 @@ extension PostsMasterViewController {
 		}
 
 		if navigationItem.searchController == nil {
-			navigationItem.searchController = self.searchController
-			navigationItem.hidesSearchBarWhenScrolling = false
 		}
-		searchController?.searchBar.text = category
 
 		API().searchPosts(category: category, processResponse)
 	}

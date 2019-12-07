@@ -82,13 +82,13 @@
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ceM-9M-5Kt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Ox-zf-Apm">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="search:" destination="Jej-5Q-aqJ" id="bQZ-df-4od"/>
+                                <action selector="search:" destination="Jej-5Q-aqJ" id="rJa-zU-jEd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -73,6 +73,11 @@ extension Theme {
         // WINDOW
 
         application.keyWindow?.tintColor = tint
+		if #available(iOS 13.0, *) {
+			if Settings().appearance != .native {
+				application.keyWindow?.overrideUserInterfaceStyle = Settings().isDarkMode ? .dark : .light
+			}
+		}
 
         // VIEW
 

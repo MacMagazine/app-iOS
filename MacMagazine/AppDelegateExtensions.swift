@@ -31,7 +31,7 @@ extension AppDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         Settings().applyTheme()
-    }
+	}
 }
 
 // MARK: - Setup -

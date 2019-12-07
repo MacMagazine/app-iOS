@@ -34,6 +34,8 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(onRefreshAfterBackground(_:)), name: .refreshAfterBackground, object: nil)
+
 		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
         let sliderFontSize = Settings().fontSize
@@ -204,6 +206,20 @@ extension SettingsTableViewController {
         UserDefaults.standard.set(followSystem.isOn ? Appearance.native.rawValue : darkModeSegmentControl.selectedSegmentIndex, forKey: Definitions.darkMode)
         UserDefaults.standard.synchronize()
 
+		if #available(iOS 13.0, *) {
+			if followSystem.isOn {
+				let application = UIApplication.shared
+				application.keyWindow?.overrideUserInterfaceStyle = .unspecified
+
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+					application.keyWindow?.overrideUserInterfaceStyle = application.keyWindow?.rootViewController?.traitCollection.userInterfaceStyle ?? .light
+
+					self.applyTheme()
+					self.setupAppearanceSettings()
+				}
+			}
+		}
+
         applyTheme()
         setupAppearanceSettings()
     }
@@ -322,4 +338,14 @@ extension SettingsTableViewController {
         }
     }
 
+}
+
+// MARK: - Notifications -
+
+extension SettingsTableViewController {
+    @objc func onRefreshAfterBackground(_ notification: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+			self.tableView.backgroundColor = Settings().theme.backgroundColor
+        }
+    }
 }
