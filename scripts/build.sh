@@ -11,11 +11,11 @@ echo "*********************"
 echo "*     Archiving     *"
 echo "*********************"
 xcrun agvtool next-version -all
-xcrun xcodebuild -workspace MacMagazine.xcworkspace -scheme MacMagazine\ Stg -archivePath $ARCHIVE_NAME.xcarchive archive
+xcrun xcodebuild -project MacMagazine.xcodeproj -scheme MacMagazine -archivePath $ARCHIVE_NAME.xcarchive archive
 echo "**********************"
 echo "*     Exporting      *"
 echo "**********************"
-xcrun xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath . -exportOptionsPlist ExportOptions.plist
+xcrun xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath . -exportOptionsPlist ./scripts/ExportOptions.plist
 echo "************************************"
 echo "*     Upload to iTunesConnect      *"
 echo "************************************"
