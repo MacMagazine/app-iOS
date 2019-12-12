@@ -9,7 +9,7 @@ env:
   global:
     - |
       - APP_NAME="MacMagazine"
-      - 'DEVELOPER_NAME="iPhone Distribution: Brit Solucoes Integradas de Tecnologia Ltda. (7PXVC8PJ97)"'
+      - DEVELOPER_NAME="iPhone Distribution: Brit Solucoes Integradas de Tecnologia Ltda. (7PXVC8PJ97)"
       - PROFILE_NAME="Distribution"
       - IPA_NAME="MacMagazine"
       - ARCHIVE_NAME="MacMagazine"
