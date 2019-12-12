@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>method</key>
+        <string>app-store</string>
+    <key>teamID</key>
+        <string>7PXVC8PJ97</string>
+    <key>uploadBitcode</key>
+    <false/>
+    <key>compileBitcode</key>
+        <false/>
+    <key>uploadSymbols</key>
+        <true/>
+    <key>signingStyle</key>
+        <string>manual</string>
+    <key>signingCertificate</key>
+        <string>iPhone Distribution: Brit Solucoes Integradas de Tecnologia Ltda.</string>
+    <key>provisioningProfiles</key>
+        <dict>
+            <key>com.brit.macmagazine</key>
+            <string>Distribution</string>
+        </dict>
+</dict>
+</plist>

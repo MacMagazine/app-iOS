@@ -3,3 +3,25 @@ osx_image: xcode11.2
 xcode_project: MacMagazine.xcodeproj
 xcode_scheme: MacMagazine
 xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
+dd:
+  secure: FEugsNgvT0v0bRb18ctZoUjQVRiuQEa6Gd+OKbIinHuQSy9zhlFYF6HdT3sx97vx0XMbjy/4U24a+ntWt5MHTBLFSHb7CMbvyCDWDXan5tN1zXsUiEBfKvreIQYw4z6QxDjVu1qXMNODivQOnvAOwhK2CpOajoDboZtm9gsMBEkLBj//d1eu9aDTnSyNRYjL0V7Y8kYJ+5Q4CzCFFPq03WvJZ6pblNHIgEMhSl8TPBW5kia2cAzNf1ic3uvxLFOg1ruz9asmi1gIGSm7F+F75hX/i++ueRZZlCX0F6CT/yCzwnLGOJQrBAUsiGLSzMTOSV04vi5XHu3GKUoU9ODbFuszQjyjb4M+YsMs6dKEjTeu2Z7gXNlf4lVJOOo3/1WCPqqB+JAgDfPo6rMCP1fLn2dvid5Q0Uy5nDCKjzfRilNb9/5UCe58kv3U4divF5OpY64mOfugaTfvfOosiJBzr+0MAzf/twiHbst3hXJZ2Jg+MkisH4XHvnL7rZ0IUP0CqDBVu4QjIyQ12LOj/AUsSAA5iX+I4WCJwJl0vkvGhrw4qkz4Pwan7fBd4m7i3W9bHxcuhZLXh/K1mn5QSNlrGokkHbbOs5cyZVeLmDSN+zDLMKItFrMeUVNAacjo3Mzl4gWw0geKMC9Kz3fQAJ17G6gZlsPtJ6hGzV0dZPKwsLQ=
+env:
+  global:
+    APP_NAME="MacMagazine"
+    'DEVELOPER_NAME="iPhone Distribution: Brit Solucoes Integradas de Tecnologia Ltda. (7PXVC8PJ97)"'
+    PROFILE_NAME="Distribution"
+    IPA_NAME="MacMagazine"
+    ARCHIVE_NAME="MacMagazine"
+    secure: Tm6EEf02HTJjZxc3w1HZgBwCsj3AlzXMYzGnxyiEzQ1wi1L6WU6lT4yKCLZvL86eZOQSPUNb1l8rP9XaUIPzjJJSNwE8IiFnTCpY82d0ADyFLhCreko0Zl+8B4GR4dxgbh8B5IDLFkiHf5Wlqap9sqLEdI4iO9X/4eD6r1IG/dIt/XmEsnye+K/Ncnkeer07MeqKecs2EbFYtPyPopvera0vznxc45Kj1Jxqh0/VDGa8nvwsq/d2uBlAXoOKaC3iKfWwGo7rpJex9KFsXKa0TDUXIcZIW+tioFFRDYOXFgoAZuvWkInoc+fzih24MOBRK/XFKtj0a7oT3uQRBfUKUcTgrhrQ9Ji0DLcKUBp5Rf7t+e8e/OxKnTw/E3sDqge+KG6OEAz8ZmLbJGfY2NOHqv6BE2JYHRLHkNajed3GOH/eTYl3wyRLqz5RUJWYpU8yQvgKMvFyWp8ryhGux9NPfg1gJWN6A4MMg3VxAs88pb0bqeiRqtRP9YD46sdikBjEE93TDTVRVnoKtvpzRi7s80VKLSP8uO038thfHjID5J3LPr+fqElCBw+L5WnRcg2BUH8C3CLNLILPvi7pFRU/dd+Rmn6tWkTO6P/D81poor3VSE0dSeeG+0r4PAcgopSyHAW5QWDtp1YZOqUoOsqplBKU+4eSmCPvGPHR3qTEV3E=
+branches:
+  only:
+  - release/4.0
+before_script:
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/Distribution.mobileprovision.enc -d -a -out scripts/profile/Distribution.mobileprovision
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+- "./scripts/add-key.sh"
+script:
+- "./scripts/build.sh"
+after_script:
+- "./scripts/remove-key.sh"
