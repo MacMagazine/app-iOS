@@ -15,13 +15,13 @@ env:
     secure: Tm6EEf02HTJjZxc3w1HZgBwCsj3AlzXMYzGnxyiEzQ1wi1L6WU6lT4yKCLZvL86eZOQSPUNb1l8rP9XaUIPzjJJSNwE8IiFnTCpY82d0ADyFLhCreko0Zl+8B4GR4dxgbh8B5IDLFkiHf5Wlqap9sqLEdI4iO9X/4eD6r1IG/dIt/XmEsnye+K/Ncnkeer07MeqKecs2EbFYtPyPopvera0vznxc45Kj1Jxqh0/VDGa8nvwsq/d2uBlAXoOKaC3iKfWwGo7rpJex9KFsXKa0TDUXIcZIW+tioFFRDYOXFgoAZuvWkInoc+fzih24MOBRK/XFKtj0a7oT3uQRBfUKUcTgrhrQ9Ji0DLcKUBp5Rf7t+e8e/OxKnTw/E3sDqge+KG6OEAz8ZmLbJGfY2NOHqv6BE2JYHRLHkNajed3GOH/eTYl3wyRLqz5RUJWYpU8yQvgKMvFyWp8ryhGux9NPfg1gJWN6A4MMg3VxAs88pb0bqeiRqtRP9YD46sdikBjEE93TDTVRVnoKtvpzRi7s80VKLSP8uO038thfHjID5J3LPr+fqElCBw+L5WnRcg2BUH8C3CLNLILPvi7pFRU/dd+Rmn6tWkTO6P/D81poor3VSE0dSeeG+0r4PAcgopSyHAW5QWDtp1YZOqUoOsqplBKU+4eSmCPvGPHR3qTEV3E=
 branches:
   only:
-  - release/4.0
+    - release/4.0
 before_script:
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/Distribution.mobileprovision.enc -d -a -out scripts/profile/Distribution.mobileprovision
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
-- "./scripts/add-key.sh"
+  - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/Distribution.mobileprovision.enc -d -a -out scripts/profile/Distribution.mobileprovision
+  - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+  - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+  - "./scripts/add-key.sh"
 script:
-- "./scripts/build.sh"
+  - "./scripts/build.sh"
 after_script:
-- "./scripts/remove-key.sh"
+  - "./scripts/remove-key.sh"
