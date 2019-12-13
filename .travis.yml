@@ -22,5 +22,5 @@ jobs:
 stages:
   - name: test
     if: type = pull_request
-- name: deploy
+  - name: deploy
     if: type = push AND branch = "$BRANCH"
