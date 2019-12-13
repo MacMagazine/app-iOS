@@ -5,14 +5,14 @@ osx_image: xcode11.2
 #xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
 
 env:
-  global:
   - 'DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"'
   - 'COMPANY="Brit Solucoes Integradas de Tecnologia Ltda."'
   - COMPANY_ID="7PXVC8PJ97"
+  - BRANCH="release/4.0"
+  global:
   - APP_NAME="MacMagazine"
   - 'DEVELOPER_NAME="iPhone Distribution: $COMPAY ($COMPANY_ID)"'
   - PROFILE_NAME="MacMagazine"
-  - BRANCH="release/4.0"
 
 jobs:
   include:
@@ -22,4 +22,4 @@ jobs:
 
 stages:
   - name: test
-    if: type = push AND branch = "$BRANCH"
+    if: type = push
