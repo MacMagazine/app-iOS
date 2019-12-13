@@ -22,4 +22,4 @@ jobs:
 
 stages:
   - name: test
-    if: type = push
+    if: type = pull_request
