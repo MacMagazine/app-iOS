@@ -6,19 +6,19 @@ osx_image: xcode11.2
 
 env:
   global:
-  - APP_NAME="MacMagazine"
-  - 'DEVELOPER_NAME="iPhone Distribution: $COMPAY ($COMPANY_ID)"'
-  - PROFILE_NAME="MacMagazine"
-  - 'DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"'
   - 'COMPANY="Brit Solucoes Integradas de Tecnologia Ltda."'
   - COMPANY_ID="7PXVC8PJ97"
+  - APP_NAME="MacMagazine"
+  - 'DEVELOPER_NAME="iPhone Distribution: $COMPANY ($COMPANY_ID)"'
+  - PROFILE_NAME="MacMagazine"
+  - 'DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"'
   - BRANCH="release/4.0"
 
 jobs:
   include:
     - stage: test
       script:
-      - xcodebuild test -project $APP_NAME.xcodeproj -scheme $APP_NAME -destination $DESTINATION
+      - xcodebuild test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
 
 stages:
   - name: test
