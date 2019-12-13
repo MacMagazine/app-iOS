@@ -6,13 +6,12 @@ xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
 before_install:
 - |
   brew update
-  brew install swiftlint
   gem install xcpretty -N --no-ri --no-doc
   gem update fastlane
 script:
 - |
   set -o pipefail
-  xcodebuild clean analyze test -project {xcode_project} -scheme {xcode_scheme} -destination {xcode_destination} | xcpretty
+  xcodebuild clean analyze test -project {xcode_project} -scheme {xcode_scheme} -destination "{xcode_destination}" | xcpretty
 after_success:
 - "./scripts/testflight.sh"
 env:
