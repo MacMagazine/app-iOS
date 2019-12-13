@@ -14,10 +14,11 @@ jobs:
   include:
     - stage: test
       script:
-      - xcodebuild test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
+      - xcodebuild clean analyze -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
+      - xcodebuild clean test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
     - stage: deploy
       script:
-      - xcodebuild -project "$APP_NAME".xcodeproj -scheme "$APP_NAME"
+      - xcodebuild -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -allowProvisioningUpdates
 
 stages:
   - name: test
