@@ -2,16 +2,12 @@ language: swift
 osx_image: xcode11.2
 xcode_project: MacMagazine.xcodeproj
 xcode_scheme: MacMagazine
-xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
 before_install:
 - |
   brew update
-  gem install xcpretty -N --no-ri --no-doc
   gem update fastlane
 script:
-- |
-  set -o pipefail
-  xcodebuild clean analyze test -project {xcode_project} -scheme {xcode_scheme} -destination "{xcode_destination}" | xcpretty
+- xcodebuild clean analyze test -project MacMagazine.xcodeproj -scheme MacMagazine -destination "platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"
 after_success:
 - "./scripts/testflight.sh"
 env:
