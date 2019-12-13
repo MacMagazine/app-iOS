@@ -1,5 +1,25 @@
 language: swift
 osx_image: xcode11.2
-xcode_project: MacMagazine.xcodeproj
-xcode_scheme: MacMagazine
-xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
+#xcode_project: MacMagazine.xcodeproj
+#xcode_scheme: MacMagazine
+#xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
+
+env:
+  global:
+  - 'DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"'
+  - 'COMPANY="Brit Solucoes Integradas de Tecnologia Ltda."'
+  - COMPANY_ID="7PXVC8PJ97"
+  - APP_NAME="MacMagazine"
+  - 'DEVELOPER_NAME="iPhone Distribution: $COMPAY ($COMPANY_ID)"'
+  - PROFILE_NAME="MacMagazine"
+  - BRANCH="release/4.0"
+
+jobs:
+  include:
+    - stage: test
+      script:
+      - "xcodebuild test -project $APP_NAME.xcodeproj -scheme $APP_NAME -destination '$DESTINATION'"
+
+stages:
+  - name: test
+    if: type = push AND branch = $BRANCH
