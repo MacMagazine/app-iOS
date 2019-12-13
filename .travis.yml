@@ -9,7 +9,6 @@ env:
   - 'DEVELOPER_NAME="iPhone Distribution: $COMPANY ($COMPANY_ID)"'
   - PROFILE_NAME="MacMagazine"
   - 'DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"'
-  - BRANCH="release/4.0"
 
 jobs:
   include:
@@ -24,4 +23,4 @@ stages:
   - name: test
     if: type = pull_request
   - name: deploy
-    if: type = push AND branch = "$BRANCH"
+    if: type = push AND branch = release/4.0
