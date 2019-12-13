@@ -22,4 +22,4 @@ jobs:
 
 stages:
   - name: test
-    if: type = push AND branch = $BRANCH
+    if: type = push AND branch = "$BRANCH"
