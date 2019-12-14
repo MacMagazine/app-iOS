@@ -9,5 +9,5 @@ if [[ "$TRAVIS_BRANCH" != "release/4.0" ]]; then
   exit 0
 fi
 
-fastlane matchappstore
+fastlane match appstore
 fastlane beta
