@@ -1,28 +1,5 @@
 language: swift
 osx_image: xcode11.2
-env:
-  global:
-  - COMPANY="Brit Solucoes Integradas de Tecnologia Ltda."
-  - COMPANY_ID="7PXVC8PJ97"
-  - 'DEVELOPER_NAME="iPhone Distribution: $COMPANY ($COMPANY_ID)"'
-  - DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"
-  secure: LuORckBjf0QV1QFYzWbnV21GBjIyrQXDnDIDYRTGkxLc62pqLXFDhdr0mPRTSKlxl2kDoYNbGGStcFRaiukoYfI/AFp3UKycV5qpAeBiQpseR1MdwWe2disyUmYvqXlk+n5lvP41P8P+J5nRek0Kv5UdLU6V36bS60/7Ho73wTPItFEx8Oj/BTJlMOYkuSmKoE7pCzvd4XrX3+bgPNjgWL98eA89adi9EOqUqRs39mtvPqxV8zf8rJ90iCXNopaL3WMy2DVYoVjw28s4TXZiI1ROy569MPSbi7jLTv/RifoC7+1+xYEiZVL7gZ80dIqi/OwwnDXf1l7gSqETGjSe0oNTnGBbN0zDD7AiRRqNESXOEMz9iX0avLozc5jXCKlj19eI6qStAibaoFsIsG/I2NNDfstbgHVb/J60sSfoygSsj5d6hp6FlIZjHxjmwmgj4kkJi3VYyFser0UpeK7R6HosHQLa4akSeJsSyuKokvQ44nhLTmOkn9WzWGwUr0RnUDGdOxalGERchvSX9Ee6zuaYG41GET9mhQiqZWyRFEnI38WSTDZzWlp2lxwRNHcR2roJe0RDmpUmJZ7902+ILAjM1uMIhu9pMd/32QteAtE3CVejTjjxgalcxEKyXvQ2ZzhyaH3YHfweS57tzDUHDfiN1vXesIH6QmTAAM7stmM=
-jobs:
-  include:
-  - stage: test
-    script:
-    - xcodebuild clean analyze test -project MacMagazine.xcodeproj -scheme MacMagazine -destination "platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"
-  - stage: deploy
-    before_script:
-    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
-    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
-    script:
-    - "./scripts/add-key.sh"
-    - security list-keychains -s ios-build.keychain
-    - xcodebuild archive -project MacMagazine.xcodeproj -scheme MacMagazine -allowProvisioningUpdates -destination "generic/platform=iOS" -archivePath MacMagazine
-    - xcodebuild -exportArchive -allowProvisioningUpdates -archivePath MacMagazine.xcarchive -exportPath . -exportOptionsPlist scripts/ExportOptions.plist
-stages:
-- name: test
-  if: type = pull_request
-- name: deploy
-  if: type = push AND branch = release/4.0
+xcode_project: MacMagazine.xcodeproj
+xcode_scheme: MacMagazine
+xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
