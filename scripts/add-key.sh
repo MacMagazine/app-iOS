@@ -20,7 +20,7 @@ openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a
 # Add certificates to keychain and allow codesign to access them
 security import ./scripts/certs/AppleWWDRCA.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
 security import ./scripts/certs/dist.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-security import ./scripts/certs/dist.p12 -k ~/Library/Keychains/ios-build.keychain -P "$KEY_PASSWORD" -T /usr/bin/codesign
+security import ./scripts/certs/dist.p12 -k ~/Library/Keychains/ios-build.keychain -P "$ENCRYPTION_SECRET" -T /usr/bin/codesign
 
 # Put the provisioning profile in place
 #mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
