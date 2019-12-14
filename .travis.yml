@@ -9,17 +9,20 @@ env:
   - PROFILE_NAME="MacMagazine"
   - DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"
   - BRANCH="release/4.0"
-  secure: "H/bNaO+EaXo7YqP69PV3EpSHHjf52cEcVEG61nx8iaiUHt0jfOsaZb6bB5n8pRDM3rpT9r1V47pj7gZbQzRbFVPFncUzKFKePTV9NbsPV9AM6S/Ra7xHFxBBtrr+Jja7S4w33r4MmTYHFJujqQLtCr/otPbMjsO/DX7ch9aD6YkvQDS/KLTMYSd8PO5Nwyse0cyW7GXRK32IjhXrfFkWDbnaZHBwUVSW2MSBpW+rZt2T8HgwqyP9pkykEHlIis0HxFkFbR2BeDA+mFJvEtEimvkVmWMGghl5mrSF/ytn1T2XNVqLhlc91MTTYntZmuKXz4xnY5T3BDsa6csleUS7hB5c/X33vm2vcYLULWhkMCIJmtVWfcjDFNXuB1I195jQJ+i6EHdh8PLefCVH6xh3UGLP7UZVG2wQn/jmdU2eTMrMlFI3GIezr2nz3xDH+XcTAt6xteU1rBwdYO71ZZGk9aySY/qJOjVScT61ynbnPyv2QwWfWzYL+WoSk43mTOX9m7cy32l18tZA+kGVepDk34BcJx9XGXnELBOOejrGiqkNWhRbXAx13l8XIUjCdpe24XtqCnHdK3afK0Zw33vzpTcBNbd3CJB6M2gW2EOFRiArgf8KHySTokT37LZJwC+3aZPSm558GWVY8XOySAZJxZio7sTXnBQfjwgQYu4p6yE="
-  secure: "w3F8ZL1mvjkCT524TFjVPBA4S5eDhSIcO9+ZtGUkoEp6t9VCp7+vzlg9fJDS9PM5uWgr9ejNgoNE+hXH9RzzuzsiSDFnz8r+ScCl/rBOdZm/329vCB1dkClJ6CKHtfhefuJ0tyTrGyD742/rDYKfNlvX04YO8oeIdRRCd/i2W0F+NuElIw15JIhiyNkY3ae+m5zL5EFyPn+OfUmPtIwbeqA1WqJoLlTgjQxOnbXx764kA0dVzHk6l+mPL6v/dZiy83EfpplHGPnfMRhxTHon7iWjaGJUplqG+cB41n9qXWPMVNMMnPoYfaR4mErIfLBgfxsbvUX564az6Y5t3FA+/kA1en9aj7SNDc9c8bOT25E1TBRg0Xyc3ryvWyH8sGiwKZPNPtRU3r/4WSUQjtfiRtX8Z5L2mV8HDibtXZ8Rf+D85mx3gojvZ55RO94NSbElvDYJnm6V2qHH7BpFWfBC+/KxUDz+bYOyahEydxJBRxVsKae3/L0ZpQBDUQ/MGf3A/xrTzjv4LGhyNJgfQw3Lh11wemSOXcgoC3MLKb//cSj+8iqWykC53lR78diq8KXhdiV/Q2GmdLu8KW375ruGwThXIjxo4BD+1E+nsnEOFt/VOO1uDsMK0Dd5+5FHa8Tu0oefP6hwB+ds9M9OQV/4oM5xZlCUywgkzkSN0Z0nlPk="
+  - secure: LuORckBjf0QV1QFYzWbnV21GBjIyrQXDnDIDYRTGkxLc62pqLXFDhdr0mPRTSKlxl2kDoYNbGGStcFRaiukoYfI/AFp3UKycV5qpAeBiQpseR1MdwWe2disyUmYvqXlk+n5lvP41P8P+J5nRek0Kv5UdLU6V36bS60/7Ho73wTPItFEx8Oj/BTJlMOYkuSmKoE7pCzvd4XrX3+bgPNjgWL98eA89adi9EOqUqRs39mtvPqxV8zf8rJ90iCXNopaL3WMy2DVYoVjw28s4TXZiI1ROy569MPSbi7jLTv/RifoC7+1+xYEiZVL7gZ80dIqi/OwwnDXf1l7gSqETGjSe0oNTnGBbN0zDD7AiRRqNESXOEMz9iX0avLozc5jXCKlj19eI6qStAibaoFsIsG/I2NNDfstbgHVb/J60sSfoygSsj5d6hp6FlIZjHxjmwmgj4kkJi3VYyFser0UpeK7R6HosHQLa4akSeJsSyuKokvQ44nhLTmOkn9WzWGwUr0RnUDGdOxalGERchvSX9Ee6zuaYG41GET9mhQiqZWyRFEnI38WSTDZzWlp2lxwRNHcR2roJe0RDmpUmJZ7902+ILAjM1uMIhu9pMd/32QteAtE3CVejTjjxgalcxEKyXvQ2ZzhyaH3YHfweS57tzDUHDfiN1vXesIH6QmTAAM7stmM=
+  - secure: qRI0c5ssdJfqg54SQRf7TVJ5+QA26r2f3SqVFoFhIyZaAfkoa4HH1coozXswvfKwAQxRrOb8dvKUNvWKwmSxO6ja2H422zxy7W2V1yFJoxUwQ4tDLXxz7SpmPVzJn8FUSvBKtPQd5CFta1Vs23/BoC4zWeWdw12/YVpYhb9RZsksSz/Iiv0s04ENxrOnqDBkFGPICKeM+3z/uMGjpzlJdJmVCF11ZQD6uKZzoU1DJ+GpFlPEsvuXOIOJhNueA23RSmnRuboOrvwl8Tl5FpU35LBB4i6OYhSbeBPvud+IhSHGlrX9bGIDbHANRJdxPKgqZ7fMOFVvNcxvDagv+ZsMsbV+qzDc7FlPAHKDSSFiCeEqR7TP+2OrxT7/suO6DHnksRgenuBrewv5f9UCr2C62UJNwas8GL2IZxAilO9tn7lI2Cu6wXUYFJVMRrQRsx9CSLdrJi0gPfz7fybZhWjtY3qMR6y7TVGtx4NNIO8JjXscUARTtYKDyF/7AYRYZbp6e6qLmFu0fQEZz9gS87kgkd8h1y9hV1MmVhDzYZC1LRm9+JNKzsjhF/i9tZAvdofsZUif8qq4ahzbiayrTiqKeFr5bvucedwL2LA15NqEAcP78nLBm4e+jTjxdu5gNwL2E6IgKOvOBYpE6K8kuJ+RiJ4E1op4cDEKzVr9ORvePpQ=
 jobs:
   include:
   - stage: test
     script:
-    - xcodebuild clean analyze test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
+    - xcodebuild clean analyze test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME"
+      -destination "$DESTINATION"
   - stage: deploy
     before_script:
-    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
-    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d
+      -a -out scripts/certs/dist.cer
+    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d
+      -a -out scripts/certs/dist.p12
     script:
     - "./scripts/add-key.sh"
     - "./scripts/bundle.sh"
