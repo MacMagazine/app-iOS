@@ -14,13 +14,13 @@ security unlock-keychain -p travis ios-build.keychain
 security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
 
 # Decrypt certificates
-openssl aes-256-cbc -k $ENCRYPTION_SECRET -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
-openssl aes-256-cbc -k $ENCRYPTION_SECRET -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
 
 # Add certificates to keychain and allow codesign to access them
 security import ./scripts/certs/AppleWWDRCA.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
 security import ./scripts/certs/dist.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-security import ./scripts/certs/dist.p12 -k ~/Library/Keychains/ios-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
+security import ./scripts/certs/dist.p12 -k ~/Library/Keychains/ios-build.keychain -P "$KEY_PASSWORD" -T /usr/bin/codesign
 
 # Put the provisioning profile in place
 #mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles

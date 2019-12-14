@@ -20,7 +20,7 @@ jobs:
     - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
     script:
     - "./scripts/add-key.sh"
-    - "./scripts/add-key.sh"
+    - "./scripts/bundle.sh"
 stages:
 - name: test
   if: type = pull_request
