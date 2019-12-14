@@ -14,17 +14,16 @@ jobs:
   include:
   - stage: test
     script:
-    - xcodebuild clean analyze test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME"
-      -destination "$DESTINATION"
+    - xcodebuild clean analyze test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
   - stage: deploy
     before_script:
-    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d
-      -a -out scripts/certs/dist.cer
-    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d
-      -a -out scripts/certs/dist.p12
+    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
     script:
     - "./scripts/add-key.sh"
-    - "./scripts/bundle.sh"
+    - security list-keychains -s ios-build.keychain
+    - xcodebuild archive -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -allowProvisioningUpdates -destination 'generic/platform=iOS' -archivePath $APP_NAME DEVELOPMENT_TEAM="$COMPANY_ID"
+    - xcodebuild -exportArchive -allowProvisioningUpdates -archivePath $APP_NAME.xcarchive -exportPath . -exportOptionsPlist scripts/ExportOptions.plist
 stages:
 - name: test
   if: type = pull_request
