@@ -1,16 +1,30 @@
 language: swift
 osx_image: xcode11.2
-xcode_project: MacMagazine.xcodeproj
-xcode_scheme: MacMagazine
-before_install:
-- |
-  brew update
-  gem update fastlane
-script:
-- xcodebuild clean analyze test -project MacMagazine.xcodeproj -scheme MacMagazine -destination "platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"
-after_success:
-- "./scripts/testflight.sh"
 env:
   global:
-  - secure: OWHe2Qf8cDedYLaN98qNct/8AgCuOZJyddjtiikZhteXzmSvaTet6oVPWmhlfpPl4l71EEQBC0bNi2pZoZKrwc5TzsiWFAq2uUR3cW9JtVKkxvcMRDTbi1mDH2B2CNbo4JmNoA/hksnau9cp1P3rojURDyOMbT3Dv3JYz2c/TpwTuKWPubiNBe0VCxueZ06ElNaX51ayEtJUv8xyEpqc9nvi1blxotjv7V/JYjCm7X6dvDRFVq7OYQuQH51mWxdMrtxuCGhzB6kFYq4uYlByPUmVUbffCu9Zqf5npdMUWW9B9Mu8sWgiwL2clze10TC+nbXlTWmfdL+bDF6GD1zIJd06bf/LZy5vX92DpGB0alL1g79HILpUa3RisqEwu2yGM1EJ+7Q7UcWPL43NI1qfFSZ4aruf6t3PaHPlKPenB/s/gBZtmAtKAoowzHbRuxzyVHKqB/ic/w9X7GoLbACenlStpvTZ1TmQ7TGvf7vN57dWuhvZ0vOOgs4igZs6O9d2b84H4B8lsKVEST9EQ+/BWQnCRacw1JxC8bgP+X1boPdpaJdZ0LHrDGRVOFoFbiqdg3PSBbbmCJwe9iyEcZkqL0Yg+8LDMPmFtV0CNEdCdV48w++l1/MVzlTYoNPz5MxIUMcpP01iV4a6wPSW4VCPFNe8PcouDhgVNxcAMtUE0lU=
-  - secure: FeBqTe41GYw4ec6obOdbcU5wF0xWYokum9QSk1zDGjNojwJXkz/Q9ZcnRDupLg3NSM/YRYcOrOi3blbjlvtP8xb0etb+b1bAxyOw4uS6JGsXH4kl3IiZMxI4Fpwsy/5YpKfsDy7uXV+UkffFePLMltTfObjdL5jaBZYergJpQA7GdkAlLj2kfgnTSJ4I+N8TMlfyhZCfgRnoA414cryvqbq8rz148ZbPeSSTvbdsGXSDDYvTDbqTC9VEIyoZdOdXDRClXI0+zow06CQpGqW+f9w1D6n0TvAgi518bNJem2bvs/v7l4VdXzmzbf2R10yCR2rP/O9gSYoQ0Kq2mmQtT4bFUuSsD9BqmliSD2khWGy96xCee+y8VOLF/KwK3kHmcXm/UDROEdI6PS7SlIJmbmIQ7VWcdEiymfosi32C3U2gijgdcDiSt03qpPAIRD9Tn23p+GSVouHDE/cQdJg2tHUQCZmyOSn3omSY/3boj1sQtNqdPdYF14atiAlJQp9DfCMSax30Bmf/odsHZJWmoWZvYKWkseN0OXRX1t/Z7ARJU+D39e215oo/Us5Olv95iMIKCAlCERr0zIosbj9pqgl97G5YLqg7ZeBxy0fy/d9++HrCRZYfbZEbgHGZuK5yiykkY4UOcl3MbVOaTHz6Vm1rX9Go420Z+8uz2iwhE7k=
+  - COMPANY="Brit Solucoes Integradas de Tecnologia Ltda."
+  - COMPANY_ID="7PXVC8PJ97"
+  - APP_NAME="MacMagazine"
+  - 'DEVELOPER_NAME="iPhone Distribution: $COMPANY ($COMPANY_ID)"'
+  - PROFILE_NAME="MacMagazine"
+  - DESTINATION="platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro"
+  - BRANCH="release/4.0"
+jobs:
+  include:
+  - stage: test
+    script:
+    - xcodebuild clean analyze test -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -destination "$DESTINATION"
+  - stage: deploy
+    before_script:
+    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+    - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+    script:
+    - "./scripts/add-key.sh"
+    - "./scripts/add-key.sh"
+stages:
+- name: test
+  if: type = pull_request
+- name: deploy
+  if: type = push AND branch = release/4.0
+dd:
+  secure: BOJ/TARPtpTB+ECfFlQGVZ0WBtYQ5PqAa7UNszveQlHl6x44AqsqgjrDvvANSTb+l3BGMrgtns6ro1enPghJM5HkyW04h+bhM5y4mMNZxvPGh+Z9Ko9xmg3NwoEvizYNvnFwe2A+5oopyxn6wwX844iQiY6u4UdfErOABRQgb7xSftEujwylRv6F/2lnU1FYj9pW461p0CQF/ldLgQMrx6SiQoaexclYv+4wLlzzxICUXfgECGo4a8F9g53XTO/jVKQdl3CRHjNKrW1Tu3KjD46vdkrD3JI1GgY6YeodxMDEsatsMahNupLiWHm8PjsieG5qrMNCsn8cEZKyyYKlB90b7yxqWC/KP5qsgaXCWac3NoQbm5fquCNWc/ri+uFNsNIDU36BBUiMV5yAjIhDRUzCyJrnuVBUE3yy4NT9xpvKkgJebw42cQU7fpu6tJscrEPYPtqw09A3h8y7aVM0WY7n5COPHhCbkZ7XIFbvYFq5XlWYOPj3tSfFjbhreWSwK93TnCErWILfkOv2ViaQ2Co/3mZVMUZTktLwWHq3ek0nIcpgN6PCOHfik96JEhVUfjTzINXem8q3D2ATGPEqj5vrTskw3IkF27lr5MbkPd1n/SAvmmN3tl7VKswQBIxRDWQhWvFFqUbQfil7LTrjd1x/rjECl3quY32SuJPyEKo=
