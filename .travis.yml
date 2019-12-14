@@ -22,8 +22,8 @@ jobs:
     script:
     - "./scripts/add-key.sh"
     - security list-keychains -s ios-build.keychain
-    - xcodebuild archive -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -allowProvisioningUpdates -destination 'generic/platform=iOS' -archivePath $APP_NAME DEVELOPMENT_TEAM="$COMPANY_ID"
-    - xcodebuild -exportArchive -allowProvisioningUpdates -archivePath $APP_NAME.xcarchive -exportPath . -exportOptionsPlist scripts/ExportOptions.plist
+    - xcodebuild archive -project "$APP_NAME".xcodeproj -scheme "$APP_NAME" -allowProvisioningUpdates -destination "generic/platform=iOS" -archivePath "$APP_NAME" DEVELOPMENT_TEAM="$COMPANY_ID"
+    - xcodebuild -exportArchive -allowProvisioningUpdates -archivePath "$APP_NAME".xcarchive -exportPath . -exportOptionsPlist scripts/ExportOptions.plist
 stages:
 - name: test
   if: type = pull_request
