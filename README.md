@@ -33,4 +33,5 @@ Para cada bug/nova funcionalidade que for desenvolver, crie uma nova branch, no 
 
 Bom desenvolvimento.
 
+Equipe MM
 :-)
