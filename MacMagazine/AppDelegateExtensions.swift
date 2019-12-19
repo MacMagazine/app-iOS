@@ -95,8 +95,11 @@ extension AppDelegate: UITabBarControllerDelegate {
 					navVC.visibleViewController == detail {
 					navVC.popViewController(animated: true)
 				} else {
-					vc.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-					vc.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+                    if vc.tableView.numberOfSections > 0 &&
+                        vc.tableView.numberOfRows(inSection: 0) > 0 {
+                        vc.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+                        vc.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+                    }
 				}
 			}
 			previousController = vc
