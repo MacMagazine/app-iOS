@@ -1292,7 +1292,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1325,7 +1325,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1339,6 +1339,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
 				SWIFT_VERSION = 5.0;
@@ -1357,7 +1358,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1394,7 +1395,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1410,6 +1411,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
@@ -1429,7 +1431,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1464,7 +1466,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1479,6 +1481,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = LOG_ENABLED;
@@ -1612,7 +1615,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1640,7 +1643,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
