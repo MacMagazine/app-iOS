@@ -1,5 +1,5 @@
 # App do MacMagazine para iOS
-[![Build Status](https://app.bitrise.io/app/6f28cb498b13bb1c/status.svg?token=2PD4qUNQM_mN0irLn8idyA)](https://app.bitrise.io/app/6f28cb498b13bb1c)
+[![Build Status](https://travis-ci.org/MacMagazine/app-iOS.svg?branch=release%2F4.0)](https://travis-ci.org/MacMagazine/app-iOS)
 
 O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_), para que a enorme comunidade de desenvolvedores/leitores do site possa colaborar e construir um app cada vez melhor e mais completo.
 
