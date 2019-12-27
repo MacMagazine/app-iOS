@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -89,13 +89,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="59" height="74"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="46" height="74"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
-                                                            <rect key="frame" x="59" y="0.0" width="59.5" height="74"/>
+                                                            <rect key="frame" x="46" y="0.0" width="46" height="74"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="8.5" width="57" height="57"/>
+                                                                    <rect key="frame" x="-5.5" y="8.5" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
                                                                         <constraint firstAttribute="width" constant="57" id="XYi-HN-HK1"/>
@@ -110,7 +110,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="74"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="74"/>
                                                                     <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo branco">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -129,13 +129,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
-                                                            <rect key="frame" x="118.5" y="0.0" width="59" height="74"/>
+                                                            <rect key="frame" x="92" y="0.0" width="46" height="74"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
-                                                            <rect key="frame" x="177.5" y="0.0" width="59" height="74"/>
+                                                            <rect key="frame" x="138" y="0.0" width="46" height="74"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="8.5" width="57" height="57"/>
+                                                                    <rect key="frame" x="-5.5" y="8.5" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
                                                                         <constraint firstAttribute="width" constant="57" id="TwA-5I-6vQ"/>
@@ -150,7 +150,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="59" height="74"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="74"/>
                                                                     <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo azul">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -169,13 +169,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-2y-DWs">
-                                                            <rect key="frame" x="236.5" y="0.0" width="59" height="74"/>
+                                                            <rect key="frame" x="184" y="0.0" width="46" height="74"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAV-0s-5g5">
-                                                            <rect key="frame" x="295.5" y="0.0" width="59.5" height="74"/>
+                                                            <rect key="frame" x="230" y="0.0" width="46" height="74"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_3" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
-                                                                    <rect key="frame" x="1.5" y="8.5" width="57" height="57"/>
+                                                                    <rect key="frame" x="-5.5" y="8.5" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="Yp0-Ks-C6t"/>
                                                                         <constraint firstAttribute="width" constant="57" id="e8q-N3-fur"/>
@@ -190,8 +190,8 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="74"/>
-                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo preto">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="74"/>
+                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone azul do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
@@ -208,8 +208,50 @@
                                                                 <constraint firstItem="eO4-rq-SKc" firstAttribute="centerY" secondItem="SAV-0s-5g5" secondAttribute="centerY" id="rc4-Y7-PCp"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" id="ztK-RH-PGY">
+                                                            <rect key="frame" x="276" y="0.0" width="46" height="74"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" id="sKm-lV-8cI">
+                                                            <rect key="frame" x="322" y="0.0" width="46" height="74"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_4" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-ve-Aqk" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                    <rect key="frame" x="-5.5" y="8.5" width="57" height="57"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="57" id="5Ds-K5-mAM"/>
+                                                                        <constraint firstAttribute="width" constant="57" id="zQr-br-QBT"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="12"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_4" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G3-2f-b5R">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="74"/>
+                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone claro do aplicativo com fundo preto">
+                                                                        <accessibilityTraits key="traits" button="YES"/>
+                                                                    </accessibility>
+                                                                    <connections>
+                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ko2-h5-kjq"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="3G3-2f-b5R" secondAttribute="trailing" id="Y5p-iR-8pb"/>
+                                                                <constraint firstItem="3G3-2f-b5R" firstAttribute="leading" secondItem="sKm-lV-8cI" secondAttribute="leading" id="bvy-CZ-N7I"/>
+                                                                <constraint firstItem="g7c-ve-Aqk" firstAttribute="centerX" secondItem="sKm-lV-8cI" secondAttribute="centerX" id="eVG-fc-Xni"/>
+                                                                <constraint firstItem="g7c-ve-Aqk" firstAttribute="centerY" secondItem="sKm-lV-8cI" secondAttribute="centerY" id="g0m-kJ-Ujz"/>
+                                                                <constraint firstItem="3G3-2f-b5R" firstAttribute="top" secondItem="sKm-lV-8cI" secondAttribute="top" id="jS2-yH-3m9"/>
+                                                                <constraint firstAttribute="bottom" secondItem="3G3-2f-b5R" secondAttribute="bottom" id="nPv-cV-4gf"/>
+                                                            </constraints>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
-                                                            <rect key="frame" x="355" y="0.0" width="59" height="74"/>
+                                                            <rect key="frame" x="368" y="0.0" width="46" height="74"/>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -432,6 +474,7 @@
                         <outlet property="iconOption1" destination="WFw-2p-qsH" id="Czh-Vk-S7a"/>
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="IWR-VX-3jh"/>
                         <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
+                        <outlet property="iconOption4" destination="g7c-ve-Aqk" id="H20-Vt-eSe"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
@@ -466,6 +509,7 @@
         <image name="phone_1" width="1024" height="1024"/>
         <image name="phone_2" width="1024" height="1024"/>
         <image name="phone_3" width="1024" height="1024"/>
+        <image name="phone_4" width="1024" height="1024"/>
         <image name="tab_settings" width="24" height="25"/>
     </resources>
 </document>

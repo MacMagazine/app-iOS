@@ -23,6 +23,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var iconOption1: UIImageView!
     @IBOutlet private weak var iconOption2: UIImageView!
     @IBOutlet private weak var iconOption3: UIImageView!
+    @IBOutlet private weak var iconOption4: UIImageView!
 
     @IBOutlet private weak var appearanceCell1: AppTableViewCell!
     @IBOutlet private weak var appearanceCell2: AppTableViewCell!
@@ -45,6 +46,7 @@ class SettingsTableViewController: UITableViewController {
         self.iconOption1.alpha = iconName ?? IconOptions.option1 == IconOptions.option1 ? 1 : 0.6
         self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
         self.iconOption3.alpha = iconName ?? IconOptions.option1 == IconOptions.option3 ? 1 : 0.6
+        self.iconOption4.alpha = iconName ?? IconOptions.option1 == IconOptions.option4 ? 1 : 0.6
 
         guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
@@ -278,10 +280,12 @@ extension SettingsTableViewController {
         static let option1 = "option_1"
         static let option2 = "option_2"
         static let option3 = "option_3"
+        static let option4 = "option_4"
         static let type = Settings().isPhone ? "phone" : "tablet"
         static let icon1 = "\(type)_1"
         static let icon2 = "\(type)_2"
         static let icon3 = "\(type)_3"
+        static let icon4 = "\(type)_4"
 
         func getIcon(for option: String) -> String? {
             var icon: String?
@@ -293,6 +297,8 @@ extension SettingsTableViewController {
                 icon = IconOptions.icon2
             case IconOptions.option3:
                 icon = IconOptions.icon3
+            case IconOptions.option4:
+                icon = IconOptions.icon4
             default:
                 break
             }
@@ -334,6 +340,7 @@ extension SettingsTableViewController {
                 self.iconOption1.alpha = iconName == IconOptions.option1 ? 1 : 0.6
                 self.iconOption2.alpha = iconName == IconOptions.option2 ? 1 : 0.6
                 self.iconOption3.alpha = iconName == IconOptions.option3 ? 1 : 0.6
+                self.iconOption4.alpha = iconName == IconOptions.option4 ? 1 : 0.6
             }
         }
     }
