@@ -43,6 +43,8 @@ class WebViewController: UIViewController {
 	}
 
 	var forceReload: Bool = false
+	var previousIsDarkMode: Bool = false
+	var previousFonteSize: String = ""
 
 	// MARK: - View lifecycle -
 
@@ -117,7 +119,8 @@ class WebViewController: UIViewController {
 	}
 
 	func loadWebView(url: URL) {
-        UserDefaults.standard.removeObject(forKey: "offset")
+		previousIsDarkMode = Settings().isDarkMode
+		previousFonteSize = Settings().fontSizeUserAgent
 
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
         webView?.customUserAgent = "MacMagazine\(Settings().darkModeUserAgent)\(Settings().fontSizeUserAgent)"
@@ -196,8 +199,11 @@ extension WebViewController {
 	}
 
 	@objc func reload(_ notification: Notification) {
-		forceReload = true
-		reload()
+		if previousIsDarkMode != Settings().isDarkMode ||
+			previousFonteSize != Settings().fontSizeUserAgent {
+			forceReload = true
+			reload()
+		}
 	}
 
 	@objc func onFavoriteUpdated(_ notification: Notification) {
