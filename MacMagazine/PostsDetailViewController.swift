@@ -38,9 +38,9 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		setViewControllers([controller], direction: .forward, animated: true, completion: nil)
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+		Settings().changeTheme(based: previousTraitCollection)
 	}
 
 	// MARK: - PageViewController -

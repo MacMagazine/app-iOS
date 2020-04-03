@@ -67,6 +67,12 @@ class SettingsTableViewController: UITableViewController {
         delegate.supportedInterfaceOrientation = Settings().orientations
 	}
 
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+		Settings().changeTheme(based: previousTraitCollection)
+        tableView.backgroundColor = Settings().theme.backgroundColor
+	}
+
 	// MARK: - TableView Methods -
 
     fileprivate func getHeaders() -> [String] {

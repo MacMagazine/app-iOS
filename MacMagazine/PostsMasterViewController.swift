@@ -135,6 +135,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		viewDidAppear = true
 	}
 
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+		Settings().changeTheme(based: previousTraitCollection)
+	}
+
     override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
