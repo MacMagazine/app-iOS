@@ -55,10 +55,12 @@ class SoundcloudPlayer: WKWebView {
 	// MARK: - Methods -
 
 	func play() {
+        UIApplication.shared.isIdleTimerDisabled = true
 		self.evaluateJavaScript("widget1.play()")
 	}
 
 	func pause() {
+        UIApplication.shared.isIdleTimerDisabled = false
 		self.evaluateJavaScript("widget1.pause()")
 	}
 

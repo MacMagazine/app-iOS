@@ -29,11 +29,9 @@ class PlayerViewController: UIViewController {
         didSet {
 			if podcast?.frame == frame {
 				if isHidden {
-					UIApplication.shared.isIdleTimerDisabled = true
 					show?(true)
 					scPlayer?.play()
 				} else {
-					UIApplication.shared.isIdleTimerDisabled = false
 					show?(false)
 					scPlayer?.pause()
 				}
