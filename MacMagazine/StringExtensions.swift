@@ -102,12 +102,9 @@ extension String {
         let components = formattedDuration.components(separatedBy: ":")
         var duration = ""
         for component in components {
+            let value = Int(component) ?? 0
             duration = duration.isEmpty ? duration : duration + ":"
-            if component.count < 2 {
-                duration += "0" + component
-                continue
-            }
-            duration += component
+            duration += String(format: "%02d", value)
         }
 
         return duration

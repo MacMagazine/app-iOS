@@ -67,6 +67,11 @@ class PodcastViewController: UIViewController {
         delegate.supportedInterfaceOrientation = Settings().orientations
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        Settings().changeTheme(based: previousTraitCollection)
+    }
+
     fileprivate func rotate() {
 		if self.tabBarController?.selectedIndex == 1 {
 			guard let vc = self.children[0] as? PodcastMasterViewController else {
