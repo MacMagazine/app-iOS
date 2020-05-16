@@ -69,7 +69,6 @@ class SettingsTableViewController: UITableViewController {
 
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-		Settings().changeTheme(based: previousTraitCollection)
         tableView.backgroundColor = Settings().theme.backgroundColor
 	}
 
@@ -213,20 +212,6 @@ extension SettingsTableViewController {
         }
         UserDefaults.standard.set(followSystem.isOn ? Appearance.native.rawValue : darkModeSegmentControl.selectedSegmentIndex, forKey: Definitions.darkMode)
         UserDefaults.standard.synchronize()
-
-		if #available(iOS 13.0, *) {
-			if followSystem.isOn {
-				let application = UIApplication.shared
-				application.keyWindow?.overrideUserInterfaceStyle = .unspecified
-
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-					application.keyWindow?.overrideUserInterfaceStyle = application.keyWindow?.rootViewController?.traitCollection.userInterfaceStyle ?? .light
-
-					self.applyTheme()
-					self.setupAppearanceSettings()
-				}
-			}
-		}
 
         applyTheme()
         setupAppearanceSettings()

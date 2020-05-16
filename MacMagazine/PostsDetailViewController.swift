@@ -38,11 +38,6 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		setViewControllers([controller], direction: .forward, animated: true, completion: nil)
 	}
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-		Settings().changeTheme(based: previousTraitCollection)
-	}
-
 	// MARK: - PageViewController -
 
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
