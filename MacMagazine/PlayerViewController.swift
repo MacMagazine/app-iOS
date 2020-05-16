@@ -27,6 +27,8 @@ class PlayerViewController: UIViewController {
 
     var podcast: Podcast? {
         didSet {
+            scPlayer.soundEffect = nil
+
 			if podcast?.frame == frame {
 				if isHidden {
 					show?(true)

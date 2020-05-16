@@ -51,6 +51,7 @@
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
 		9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */; };
+		9B8A5D7C247099B700C601E0 /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A5D7B247099B700C601E0 /* sound.wav */; };
 		9B91117D225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
@@ -241,6 +242,7 @@
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
 		9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
 		9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		9B8A5D7B247099B700C601E0 /* sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound.wav; sourceTree = "<group>"; };
 		9B91117C225BC100000A6AC3 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -416,11 +418,11 @@
 		9B3C7A6E2263B9D7001146A4 /* Webview */ = {
 			isa = PBXGroup;
 			children = (
+				9B9C7F93226B6AF4000534CA /* soundcloud.js */,
+				9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */,
 				9BA939422260DE0A004005AA /* WebView.storyboard */,
 				9B7036F6224FCB0400F68654 /* WebViewController.swift */,
 				9B3C7A712263D643001146A4 /* YouTubePlayer.swift */,
-				9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */,
-				9B9C7F93226B6AF4000534CA /* soundcloud.js */,
 			);
 			path = Webview;
 			sourceTree = "<group>";
@@ -428,15 +430,16 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BF9656D225E3ACD00BAF22D /* Frameworks */,
 				9BD4E971225CFDEC00683B88 /* icons */,
-				9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
-				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
+				9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */,
+				9BCAD6801F47A08100B54526 /* Main.storyboard */,
+				9B8A5D7B247099B700C601E0 /* sound.wav */,
 				9B93F1B522AC5592003AF1B1 /* Splash.storyboard */,
 				9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */,
-				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -956,6 +959,7 @@
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
+				9B8A5D7C247099B700C601E0 /* sound.wav in Resources */,
 				9B1514C022BE73740039DA28 /* tablet_3.png in Resources */,
 				9BB252C223B670630054631B /* phone_4@3x.png in Resources */,
 				9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */,

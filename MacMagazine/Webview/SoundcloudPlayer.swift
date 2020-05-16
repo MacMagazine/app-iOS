@@ -6,12 +6,15 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 import WebKit
 
 class SoundcloudPlayer: WKWebView {
 
 	// MARK: - Properties -
+
+    var soundEffect: AVAudioPlayer?
 
 	var soundCloudWidget: String {
 		return """
@@ -57,12 +60,15 @@ class SoundcloudPlayer: WKWebView {
 	func play() {
         UIApplication.shared.isIdleTimerDisabled = true
 		self.evaluateJavaScript("widget1.play()")
+        startListeners()
 	}
 
 	func pause() {
         UIApplication.shared.isIdleTimerDisabled = false
 		self.evaluateJavaScript("widget1.pause()")
-	}
+        soundEffect?.stop()
+        stopListeners()
+    }
 
 }
 
@@ -94,4 +100,55 @@ extension SoundcloudPlayer {
 		let when = DispatchTime.now() + delay
 		DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
 	}
+}
+
+extension SoundcloudPlayer {
+    func startListeners() {
+        let notificationCenter = NotificationCenter.default
+
+        notificationCenter.addObserver(self,
+                                       selector: #selector(appMovedToBackground),
+                                       name: UIApplication.didEnterBackgroundNotification,
+                                       object: nil)
+
+        notificationCenter.addObserver(self,
+                                       selector: #selector(appMovedToForeground),
+                                       name: UIApplication.willEnterForegroundNotification,
+                                       object: nil)
+    }
+
+    func stopListeners() {
+        let notificationCenter = NotificationCenter.default
+
+        notificationCenter.removeObserver(self,
+                                          name: UIApplication.willEnterForegroundNotification,
+                                          object: nil)
+
+        notificationCenter.removeObserver(self,
+                                          name: UIApplication.didEnterBackgroundNotification,
+                                          object: nil)
+    }
+
+    @objc func appMovedToBackground() {
+        guard let path = Bundle.main.path(forResource: "sound.wav", ofType: nil) else {
+                return
+        }
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers])
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            soundEffect = try AVAudioPlayer(contentsOf: url)
+            soundEffect?.volume = 0
+            soundEffect?.numberOfLoops = -1
+            soundEffect?.play()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    @objc func appMovedToForeground() {
+        soundEffect?.stop()
+    }
 }
