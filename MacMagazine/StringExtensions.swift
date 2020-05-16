@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum Format {
+enum Format: CaseIterable {
 	static let wordpress = "EEE, dd MMM yyyy HH:mm:ss +0000"
-	static let youtube = "yyyy-MM-dd'T'HH:mm:ss.000'Z'"
+    static let youtube = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 }
 
 extension String {
@@ -22,10 +22,10 @@ extension String {
 	func toDate(_ format: String?) -> Date {
         // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         dateFormatter.dateFormat = format ?? Format.wordpress
-		dateFormatter.locale = Locale(identifier: "en_US")
-		dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        return dateFormatter.date(from: self) ?? Date()
+        return dateFormatter.date(from: self.replacingOccurrences(of: ".000", with: "")) ?? Date()
     }
 
     fileprivate func currentCalendar() -> Calendar {
