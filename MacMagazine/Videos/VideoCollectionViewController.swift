@@ -103,11 +103,6 @@ class VideoCollectionViewController: UICollectionViewController {
         userActivity?.invalidate()
     }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-		Settings().changeTheme(based: previousTraitCollection)
-	}
-
 	// MARK: - Local methods -
 
 	fileprivate func getVideos() {

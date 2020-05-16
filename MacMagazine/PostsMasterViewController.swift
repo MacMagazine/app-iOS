@@ -135,10 +135,13 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		viewDidAppear = true
 	}
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-		Settings().changeTheme(based: previousTraitCollection)
-	}
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            Settings().changeTheme(based: newCollection)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

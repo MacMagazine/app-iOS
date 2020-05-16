@@ -52,9 +52,9 @@ class PodcastViewController: UIViewController {
 		super.viewWillTransition(to: size, with: coordinator)
 
 		coordinator.animate(alongsideTransition: { _ in
-			self.rotate()
+			self.reloadData()
 		}, completion: { _ in
-			self.rotate()
+			self.reloadData()
 		})
 	}
 
@@ -67,16 +67,11 @@ class PodcastViewController: UIViewController {
         delegate.supportedInterfaceOrientation = Settings().orientations
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        Settings().changeTheme(based: previousTraitCollection)
-    }
-
-    fileprivate func rotate() {
+    fileprivate func reloadData() {
 		if self.tabBarController?.selectedIndex == 1 {
-			guard let vc = self.children[0] as? PodcastMasterViewController else {
-				return
-			}
+            guard let vc = self.children[0] as? PodcastMasterViewController else {
+                return
+            }
 			vc.tableView.reloadData()
 			vc.resultsTableController?.tableView.reloadData()
 		}

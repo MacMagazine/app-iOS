@@ -109,8 +109,8 @@ struct Settings {
 		if #available(iOS 13.0, *) {
 			if let style = previousTraitCollection?.userInterfaceStyle,
 				appearance == .native &&
-					((style == .dark && !isDarkMode) ||
-					(style == .light && isDarkMode)) {
+					((style == .dark && isDarkMode) ||
+					(style == .light && !isDarkMode)) {
 				applyTheme()
 			}
 		}
