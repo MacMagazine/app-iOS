@@ -15,11 +15,7 @@ enum Format: CaseIterable {
 
 extension String {
 
-	func toDate() -> Date {
-		return toDate(nil)
-	}
-
-	func toDate(_ format: String?) -> Date {
+	func toDate(_ format: String? = nil) -> Date {
         // Expected date format: "Tue, 26 Feb 2019 23:00:53 +0000"
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
