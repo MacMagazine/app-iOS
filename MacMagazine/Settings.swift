@@ -107,7 +107,9 @@ struct Settings {
 
 	func changeTheme(based previousTraitCollection: UITraitCollection?) {
 		if #available(iOS 13.0, *) {
+            let state = UIApplication.shared.applicationState
 			if let style = previousTraitCollection?.userInterfaceStyle,
+                state == .active,
 				appearance == .native &&
 					((style == .dark && isDarkMode) ||
 					(style == .light && !isDarkMode)) {
