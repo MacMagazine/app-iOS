@@ -403,10 +403,9 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 		let ratio: CGFloat = 1.778
 
 		// Number of items per column based on device screen size
-		let divider = screen.width < 600 ? 1 : screen.width > 768 ? 3 : 2
-
+        let divider = screen.width < 600.0 ? 1 : screen.width > 768.0 ? 3 : 2
 		// margin of 20px
-		let width = (screen.width - CGFloat((divider + 1) * 20)) / CGFloat(divider)
+        let width = CGFloat(Int((screen.width - CGFloat((divider + 1) * 20)) / CGFloat(divider)))
 
 		// image has a bottom margin of 120px to accomodate labels and buttons
 		// 10px distance betwwen thumb and labels
@@ -415,7 +414,7 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 		// 5px bottom margin
 		let height = (width / ratio) + 120
 
-		return CGSize(width: width, height: height)
+        return CGSize(width: width, height: height)
 	}
 }
 

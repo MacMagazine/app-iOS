@@ -54,8 +54,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
 	var lastPage = -1
-	var comeFrom3DTouch = false
-	var openRecentPost = false
+
+    var comeFrom3DTouch = false
 	var viewDidAppear = false
 
 	var selectedIndexPath: IndexPath?
@@ -66,6 +66,15 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var posts = [XMLPost]()
 
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
+
+    enum Status {
+        case firstLoad
+        case lastOpenedPost
+        case recentPost
+        case unknown
+    }
+
+    var status = Status.firstLoad
 
     // MARK: - View Lifecycle -
 
@@ -125,6 +134,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         if !hasData() {
 			lastPage = -1
+            status = .firstLoad
+        } else {
+            status = .lastOpenedPost
         }
 	}
 
@@ -284,8 +296,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     self.hideSpin()
 
                     if paged < 1 {
-                        if self.openRecentPost {
-                            // Came from 3D touch, openRecentPost
+                        if self.status == .recentPost {
+                            // Came from 3D touch
                             let indexPath = IndexPath(row: 0, section: 0)
                             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
 
@@ -294,13 +306,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                             } else {
                                 self.didSelectRowAt(indexPath: indexPath)
                             }
-
+                            self.status = .unknown
                         } else {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                                 self.processSelection()
                             }
                         }
-                        self.openRecentPost = false
                     }
                     return
                 }
@@ -323,17 +334,20 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func processSelection() {
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-			if self.lastPage == -1 {
-				self.lastPage = 0
+        if status == .firstLoad {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.lastPage = 0
                 self.getPosts(paged: 0)
 			}
 		}
-		processTabletSelection()
+        if status == .firstLoad ||
+            status == .lastOpenedPost {
+            processTabletSelection()
+        }
 	}
 
 	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
-		if openRecentPost {
+        if status == .recentPost {
 			completion(IndexPath(row: 0, section: 0))
 		}
 
@@ -365,6 +379,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 					if self.hasData() {
 						self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
 						self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
+                        self.status = .unknown
 					}
 				}
 			}
@@ -565,9 +580,9 @@ extension PostsMasterViewController {
 
 	fileprivate func processOption(openRecentPost: Bool) {
 		comeFrom3DTouch = true
-		self.openRecentPost = openRecentPost
+        status = openRecentPost ? .recentPost : .lastOpenedPost
 
-		if !openRecentPost ||
+        if status == .lastOpenedPost ||
 			viewDidAppear {
 			if Settings().isPad {
 				processTabletSelection()
