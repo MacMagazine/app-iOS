@@ -344,6 +344,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
             status == .lastOpenedPost {
             processTabletSelection()
         }
+        if Settings().isPhone {
+            self.status = .unknown
+        }
 	}
 
 	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
