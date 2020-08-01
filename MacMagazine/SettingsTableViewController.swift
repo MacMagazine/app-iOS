@@ -119,23 +119,56 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - View Methods -
 
 	@IBAction private func clearCache(_ sender: Any) {
-		// Delete all posts and podcasts
-		CoreDataStack.shared.flush()
+        let alertController = UIAlertController(title: "Limpar cache", message: "Escolha uma opção", preferredStyle: .actionSheet)
 
-		// Delete all downloaded images
-		ImageCache.default.clearDiskCache()
+        alertController.addAction(UIAlertAction(title: "Limpar tudo", style: .destructive) { _ in
+            self.flush(.all)
+        })
 
-		// Clean Spotlight search indexes
-		CSSearchableIndex.default().deleteAllSearchableItems(completionHandler: nil)
+        alertController.addAction(UIAlertAction(title: "Limpar e manter Favoritos", style: .default) { _ in
+            self.flush(.keepFavorite)
+        })
 
-		// Feedback message
-		let alertController = UIAlertController(title: "Cache limpo!", message: "Todo o conteúdo do app será agora recarregado.", preferredStyle: .alert)
-		alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-			self.dismiss(animated: true)
-		})
+        alertController.addAction(UIAlertAction(title: "Limpar e manter status de leitura", style: .default) { _ in
+            self.flush(.keepReadStatus)
+        })
+
+        alertController.addAction(UIAlertAction(title: "Limpar e manter favoritos e status de leitura", style: .default) { _ in
+            self.flush(.keepAllStatus)
+        })
+
+        alertController.addAction(UIAlertAction(title: "Apagar somente imagens", style: .default) { _ in
+            self.flush(.imagesOnly)
+        })
+
+        alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+            self.dismiss(animated: true)
+        })
+
         alertController.setup()
-		self.present(alertController, animated: true)
+        self.present(alertController, animated: true)
 	}
+
+    fileprivate func flush(_ type: FlushType) {
+        // Delete all posts and podcasts
+        CoreDataStack.shared.flush(type: type)
+
+        // Delete all downloaded images
+        ImageCache.default.clearDiskCache()
+
+        // Clean Spotlight search indexes
+        CSSearchableIndex.default().deleteAllSearchableItems(completionHandler: nil)
+
+        // Feedback message
+        let alertController = UIAlertController(title: "Cache limpo!", message: "O conteúdo do app será recarregado.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
+
+            self.dismiss(animated: true)
+        })
+        alertController.setup()
+        self.present(alertController, animated: true)
+    }
 
 	@IBAction private func setPushMode(_ sender: Any) {
 		guard let segment = sender as? AppSegmentedControl else {

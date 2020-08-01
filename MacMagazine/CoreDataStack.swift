@@ -9,6 +9,14 @@
 import CoreData
 import Foundation
 
+enum FlushType {
+    case all
+    case keepFavorite
+    case keepReadStatus
+    case keepAllStatus
+    case imagesOnly
+}
+
 class CoreDataStack {
 
 	// MARK: - Singleton -
@@ -66,13 +74,35 @@ class CoreDataStack {
 		}
 	}
 
-	func flush() {
-		flush(entityName: postEntityName)
-		flush(entityName: videoEntityName)
+    func flush(type: FlushType) {
+        flush(entityName: postEntityName, type: type)
+		flush(entityName: videoEntityName, type: type)
 	}
 
-	func flush(entityName: String) {
-		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+	func flush(entityName: String, type: FlushType) {
+        if type == .imagesOnly {
+            return
+        }
+
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+
+        if type != .all &&
+            entityName == postEntityName {
+
+            let readPredicate = NSPredicate(format: "read == %@", NSNumber(value: false))
+            let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: false))
+
+            if type == .keepReadStatus {
+                request.predicate = readPredicate
+            }
+            if type == .keepFavorite {
+                request.predicate = favoritePredicate
+            }
+            if type == .keepAllStatus {
+                request.predicate = NSCompoundPredicate(type: .and,
+                                                        subpredicates: [readPredicate, favoritePredicate])
+            }
+        }
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
 		deleteRequest.resultType = .resultTypeObjectIDs
 
