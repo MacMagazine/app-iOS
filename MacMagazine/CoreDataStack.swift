@@ -184,6 +184,7 @@ class CoreDataStack {
 		newItem.favorite = false
         newItem.podcastFrame = post.podcastFrame
 		newItem.postId = post.postId
+        newItem.read = false
 	}
 
 	func update(post: Post, with item: XMLPost) {

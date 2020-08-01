@@ -234,6 +234,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         }
 
         userActivity?.becomeCurrent()
+
+        updatePostReadStatus(link: webView.url?.absoluteString)
 }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -336,6 +338,21 @@ extension WebViewController {
 		let when = DispatchTime.now() + delay
 		DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
 	}
+}
+
+extension WebViewController {
+    func updatePostReadStatus(link: String?) {
+        guard let post = link else {
+            return
+        }
+
+        CoreDataStack.shared.get(link: post) { items in
+            if !items.isEmpty {
+                items[0].read = true
+                CoreDataStack.shared.save()
+            }
+        }
+    }
 }
 
 // MARK: - Extensions -

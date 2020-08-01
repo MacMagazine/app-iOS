@@ -165,9 +165,12 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	}
 
 	internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+
 		var identifier = "normalCell"
 		let object = fetchedResultsController.object(at: indexPath)
-		if object.categorias?.contains("Destaques") ?? false {
+		if object.categorias?.contains("Destaques") ?? false ||
+            contentSize > .extraExtraExtraLarge {
 			identifier = "featuredCell"
 		}
 

@@ -145,6 +145,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
         handoff.webpageURL = URL(string: url)
         userActivity = handoff
         userActivity?.becomeCurrent()
+
+        fetchController?.object(at: indexPath)?.read = true
+        CoreDataStack.shared.save()
     }
 
     func configureResult(cell: PostCell, atIndexPath: IndexPath) {
