@@ -38,6 +38,22 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		setViewControllers([controller], direction: .forward, animated: true, completion: nil)
 	}
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        guard let link = links[selectedIndex].link else {
+            return
+        }
+        updatePostHandoff(title: links[selectedIndex].title, link: link)
+        updatePostReadStatus(link: link)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        userActivity?.invalidate()
+    }
+
 	// MARK: - PageViewController -
 
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -53,6 +69,9 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		if Settings().isPad {
 			NotificationCenter.default.post(name: .updateSelectedPost, object: link)
 		}
+
+        updatePostHandoff(title: links[index].title, link: link)
+        updatePostReadStatus(link: link)
 	}
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -96,4 +115,29 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	}
 
+}
+
+extension PostsDetailViewController {
+    func updatePostReadStatus(link: String) {
+        CoreDataStack.shared.get(link: link) { items in
+            if !items.isEmpty {
+                items[0].read = true
+                CoreDataStack.shared.save()
+            }
+        }
+    }
+}
+
+// Handoff
+extension PostsDetailViewController {
+    func updatePostHandoff(title: String?, link: String) {
+        userActivity?.invalidate()
+
+        let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
+        handoff.title = title
+        handoff.webpageURL = URL(string: link)
+        userActivity = handoff
+
+        userActivity?.becomeCurrent()
+    }
 }

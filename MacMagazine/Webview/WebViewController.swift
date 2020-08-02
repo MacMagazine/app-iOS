@@ -90,7 +90,6 @@ class WebViewController: UIViewController {
 		super.viewWillDisappear(animated)
 
 		NotificationCenter.default.removeObserver(self, name: .favoriteUpdated, object: nil)
-        userActivity?.invalidate()
 	}
 
 	// MARK: - Local methods -
@@ -107,14 +106,6 @@ class WebViewController: UIViewController {
         if webView?.url != url ||
 			forceReload {
 			loadWebView(url: url)
-
-            // Handoff
-            userActivity?.invalidate()
-
-            let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
-            handoff.title = post.title
-            handoff.webpageURL = URL(string: link)
-            userActivity = handoff
         }
 	}
 
@@ -232,10 +223,6 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         if self.navigationController?.viewControllers.count ?? 0 > 1 {
             self.navigationItem.rightBarButtonItems = [share]
         }
-
-        userActivity?.becomeCurrent()
-
-        updatePostReadStatus(link: webView.url?.absoluteString)
 }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -338,21 +325,6 @@ extension WebViewController {
 		let when = DispatchTime.now() + delay
 		DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
 	}
-}
-
-extension WebViewController {
-    func updatePostReadStatus(link: String?) {
-        guard let post = link else {
-            return
-        }
-
-        CoreDataStack.shared.get(link: post) { items in
-            if !items.isEmpty {
-                items[0].read = true
-                CoreDataStack.shared.save()
-            }
-        }
-    }
 }
 
 // MARK: - Extensions -
