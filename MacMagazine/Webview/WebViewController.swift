@@ -60,6 +60,19 @@ class WebViewController: UIViewController {
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
 
+        let scriptSource = """
+            var images = document.getElementsByTagName('img');
+            for(var i = 0; i < images.length; i++) {
+                images[i].addEventListener("click", function() {
+                    window.webkit.messageHandlers.imageTapped.postMessage(this.src);
+                }, false);
+            }
+        """
+        let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView?.configuration.userContentController.addUserScript(script)
+
+        webView?.configuration.userContentController.add(self, name: "imageTapped")
+
 		// Make sure that all cookies are loaded before
 		// That's prevent Disqus from being loogoff
 		let cookies = API().getDisqusCookies()
@@ -223,7 +236,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         if self.navigationController?.viewControllers.count ?? 0 > 1 {
             self.navigationItem.rightBarButtonItems = [share]
         }
-}
+    }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
 
@@ -325,6 +338,18 @@ extension WebViewController {
 		let when = DispatchTime.now() + delay
 		DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
 	}
+}
+
+extension WebViewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let body = message.body as? String,
+            let url = URL(string: body) else {
+            return
+        }
+        if url.isMMAddress() {
+            openInSafari(url)
+        }
+    }
 }
 
 // MARK: - Extensions -
