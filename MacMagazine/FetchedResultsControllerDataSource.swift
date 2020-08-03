@@ -112,9 +112,20 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-		let favoritar = UIContextualAction(style: .normal, title: nil) {
-			_, _, boolValue in
+        let read = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
+            let object = self.fetchedResultsController.object(at: indexPath)
+            CoreDataStack.shared.get(link: object.link ?? "") { items in
+                if !items.isEmpty {
+                    items[0].read = !items[0].read
+                    CoreDataStack.shared.save()
 
+                    object.read = items[0].read
+                    boolValue(true)
+                }
+            }
+        }
+
+        let favoritar = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
 			let object = self.fetchedResultsController.object(at: indexPath)
 			Favorite().updatePostStatus(using: object.link ?? "") { isFavoriteOn in
 				object.favorite = isFavoriteOn
@@ -122,21 +133,24 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 				boolValue(true)
 			}
 		}
+
 		let object = self.fetchedResultsController.object(at: indexPath)
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
 		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
-		favoritar.accessibilityLabel = "Favoritar"
+        favoritar.accessibilityLabel = object.favorite ? "Desfavoritar" : "Favoritar"
 
-		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
+        read.image = UIImage(named: "read\(object.read ? "" : "_off")")
+        read.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+        read.accessibilityLabel = object.read ? "Marcar como não lida" : "Marcar como lida"
+
+		let swipeActions = UISwipeActionsConfiguration(actions: [read, favoritar])
 		swipeActions.performsFirstActionWithFullSwipe = true
 		return swipeActions
 	}
 
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-		let compatilhar = UIContextualAction(style: .normal, title: nil) {
-			_, _, boolValue in
-
+		let compatilhar = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
 			let post = self.fetchedResultsController.object(at: indexPath)
 			guard let link = post.link,
 				let url = URL(string: link)
