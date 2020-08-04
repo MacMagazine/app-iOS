@@ -41,7 +41,8 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard let link = links[selectedIndex].link else {
+        guard !links.isEmpty,
+            let link = links[selectedIndex].link else {
             return
         }
         updatePostHandoff(title: links[selectedIndex].title, link: link)
