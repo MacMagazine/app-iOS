@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
@@ -202,6 +203,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		681E881524D95CBC00887AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCellXL.xib; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 6.xcdatamodel"; sourceTree = "<group>"; };
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -530,9 +532,10 @@
 		9BC9B12F1F5C96A500C4DF17 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9B4A8FA422357A0800A49239 /* FeaturedCell.xib */,
+				681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */,
 				9BA939452260DE37004005AA /* HeaderCell.xib */,
 				9B4A8FA122357A0300A49239 /* NormalCell.xib */,
-				9B4A8FA422357A0800A49239 /* FeaturedCell.xib */,
 				9B4A8FA722357A0D00A49239 /* PodcastCell.xib */,
 				9BC9B12D1F5C960700C4DF17 /* PostCell.swift */,
 			);
@@ -967,6 +970,7 @@
 				9BCAD6841F47A08100B54526 /* Assets.xcassets in Resources */,
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
+				681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */,
 				9B1514BC22BE73010039DA28 /* phone_3@2x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
@@ -1212,6 +1216,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				681E881524D95CBC00887AA8 /* Base */,
+			);
+			name = FeaturedCellXL.xib;
+			sourceTree = "<group>";
+		};
 		9B32242F2260DD78005CF974 /* Videos.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

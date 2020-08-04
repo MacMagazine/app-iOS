@@ -409,11 +409,27 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 		// image has a bottom margin of 120px to accomodate labels and buttons
 		// 10px distance betwwen thumb and labels
-		// 80px for labels
 		// 25px for fav and share buttons
 		// 5px bottom margin
-		let height = (width / ratio) + 120
+        // 80px for labels
+        var labels: CGFloat = 80.0
 
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+        switch contentSize {
+        case .extraExtraExtraLarge,
+             .accessibilityMedium,
+             .accessibilityLarge:
+            labels *= 2
+        case .accessibilityExtraLarge:
+            labels *= 3
+        case .accessibilityExtraExtraLarge,
+             .accessibilityExtraExtraExtraLarge:
+            labels *= 4
+        default:
+            break
+        }
+
+        let height = (width / ratio) + 40.0 + labels
         return CGSize(width: width, height: height)
 	}
 }

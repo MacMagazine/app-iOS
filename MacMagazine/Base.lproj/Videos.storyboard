@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -172,7 +172,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="U4V-EJ-PXU" secondAttribute="trailing" id="HgR-no-FZT"/>
                                                 <constraint firstItem="IQP-0Z-f9n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xRM-UO-WvK" secondAttribute="trailing" priority="250" constant="8" symbolic="YES" id="MQa-nW-X1f"/>
                                                 <constraint firstItem="E20-PT-GFs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" priority="250" constant="8" symbolic="YES" id="Qdh-2C-JT4"/>
-                                                <constraint firstAttribute="height" constant="80" id="TOm-MJ-N61"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="TOm-MJ-N61"/>
                                                 <constraint firstItem="IQP-0Z-f9n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" priority="250" constant="8" symbolic="YES" id="Un3-2t-Fgo"/>
                                                 <constraint firstItem="U4V-EJ-PXU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5dK-RX-Lqi" secondAttribute="trailing" constant="10" id="aaT-U6-zH1"/>
                                                 <constraint firstAttribute="trailing" secondItem="E20-PT-GFs" secondAttribute="trailing" id="flB-HE-a1g"/>
@@ -215,6 +215,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZgJ-bP-KyS" secondAttribute="trailing" id="3No-kk-I3O"/>
                                     <constraint firstItem="hfJ-9k-bAJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lNX-c7-cbD" secondAttribute="leading" symbolic="YES" id="3Yc-em-CDc"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="kza-MX-Z9k" secondAttribute="bottom" constant="12" id="3oL-MZ-3xK"/>
                                     <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerX" secondItem="6QJ-Gr-4fx" secondAttribute="centerX" id="4m4-fb-dnt"/>
                                     <constraint firstItem="hfJ-9k-bAJ" firstAttribute="bottom" secondItem="6QJ-Gr-4fx" secondAttribute="bottom" constant="-8" id="5iw-th-Ksm"/>
                                     <constraint firstItem="aJr-W4-YSb" firstAttribute="top" secondItem="ZgJ-bP-KyS" secondAttribute="bottom" constant="6" id="6Qc-Cd-akI"/>

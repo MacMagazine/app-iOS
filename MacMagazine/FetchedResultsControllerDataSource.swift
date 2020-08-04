@@ -50,6 +50,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 		self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: featuredCellNib, bundle: nil), forCellReuseIdentifier: "featuredCell")
+        self.tableView?.register(UINib(nibName: "FeaturedCellXL", bundle: nil), forCellReuseIdentifier: "featuredCellXL")
     }
 
     func setup(tableView: UITableView) {
@@ -183,9 +184,15 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 		var identifier = "normalCell"
 		let object = fetchedResultsController.object(at: indexPath)
-		if object.categorias?.contains("Destaques") ?? false ||
+
+        if object.categorias?.contains("Destaques") ?? false ||
             contentSize > .extraExtraExtraLarge {
 			identifier = "featuredCell"
+
+            if !(object.podcast?.isEmpty ?? false) &&
+                contentSize > .extraExtraExtraLarge {
+                identifier = "featuredCellXL"
+            }
 		}
 
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {

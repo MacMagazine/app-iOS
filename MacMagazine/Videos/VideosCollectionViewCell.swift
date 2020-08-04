@@ -37,6 +37,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		favorite.isEnabled = true
 
 		headlineLabel.text = object.title
+        setLines(for: headlineLabel)
 		subheadlineLabel.text = object.pubDate?.watchDate()
 		viewsLabel.text = object.views
 		likesLabel.text = object.likes
@@ -62,7 +63,8 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		favorite.isEnabled = false
 
 		headlineLabel.text = object.title
-		subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
+        setLines(for: headlineLabel)
+        subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
 		viewsLabel.text = object.views
 		likesLabel.text = object.likes
 		durationLabel.text = object.duration.toSubHeaderDate()
@@ -76,6 +78,24 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		youtubeWebView?.videoId = object.videoId
 	}
+
+    fileprivate func setLines(for label: UILabel) {
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+        switch contentSize {
+        case .extraExtraExtraLarge,
+             .accessibilityMedium,
+             .accessibilityLarge:
+            label.numberOfLines = 3
+        case .accessibilityExtraLarge:
+            label.numberOfLines = 4
+        case .accessibilityExtraExtraLarge:
+            label.numberOfLines = 5
+        case .accessibilityExtraExtraExtraLarge:
+            label.numberOfLines = 4
+        default:
+            break
+        }
+    }
 
 	// MARK: - Actions methods -
 
