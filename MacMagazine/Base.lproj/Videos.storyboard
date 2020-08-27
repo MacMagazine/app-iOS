@@ -77,7 +77,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-9k-bAJ" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="255.5" y="145" width="36.5" height="16"/>
+                                            <rect key="frame" x="247.5" y="137" width="44.5" height="24"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -185,7 +185,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kza-MX-Z9k">
-                                            <rect key="frame" x="0.0" y="255" width="300" height="25"/>
+                                            <rect key="frame" x="0.0" y="265" width="300" height="25"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="25"/>
@@ -215,7 +215,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZgJ-bP-KyS" secondAttribute="trailing" id="3No-kk-I3O"/>
                                     <constraint firstItem="hfJ-9k-bAJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lNX-c7-cbD" secondAttribute="leading" symbolic="YES" id="3Yc-em-CDc"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="kza-MX-Z9k" secondAttribute="bottom" constant="12" id="3oL-MZ-3xK"/>
+                                    <constraint firstAttribute="bottom" secondItem="kza-MX-Z9k" secondAttribute="bottom" constant="10" id="3oL-MZ-3xK"/>
                                     <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerX" secondItem="6QJ-Gr-4fx" secondAttribute="centerX" id="4m4-fb-dnt"/>
                                     <constraint firstItem="hfJ-9k-bAJ" firstAttribute="bottom" secondItem="6QJ-Gr-4fx" secondAttribute="bottom" constant="-8" id="5iw-th-Ksm"/>
                                     <constraint firstItem="aJr-W4-YSb" firstAttribute="top" secondItem="ZgJ-bP-KyS" secondAttribute="bottom" constant="6" id="6Qc-Cd-akI"/>
@@ -227,7 +227,7 @@
                                     <constraint firstItem="ZgJ-bP-KyS" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leading" id="ZoU-Tv-mUl"/>
                                     <constraint firstItem="6QJ-Gr-4fx" firstAttribute="centerX" secondItem="ZgJ-bP-KyS" secondAttribute="centerX" id="bUW-hv-JK6"/>
                                     <constraint firstItem="aJr-W4-YSb" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leadingMargin" id="d4M-pX-7cC"/>
-                                    <constraint firstItem="kza-MX-Z9k" firstAttribute="top" secondItem="aJr-W4-YSb" secondAttribute="bottom" id="drj-rt-8nR"/>
+                                    <constraint firstItem="kza-MX-Z9k" firstAttribute="top" secondItem="aJr-W4-YSb" secondAttribute="bottom" constant="10" id="drj-rt-8nR"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="aJr-W4-YSb" secondAttribute="trailing" id="hva-ov-ANi"/>
                                     <constraint firstItem="kza-MX-Z9k" firstAttribute="leading" secondItem="lNX-c7-cbD" secondAttribute="leading" id="qLx-fC-vvL"/>
                                     <constraint firstItem="6QJ-Gr-4fx" firstAttribute="height" secondItem="ZgJ-bP-KyS" secondAttribute="height" id="x4w-eH-pKa"/>
