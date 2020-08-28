@@ -60,7 +60,6 @@ echo -e "  (\x1B[32m✓\x1B[0m) Provided Bundle Version: ${bundle_version}"
 
 echo ""
 /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${bundle_version}" "${info_plist_file}"
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${bundle_version_short}" "${info_plist_file}"
 
 # ---- REPLACED BUILD VERSION - 1 ----
 REPLACED_BUNDLE_VERSION=`sed -n '/CURRENT_PROJECT_VERSION/{s/CURRENT_PROJECT_VERSION = //;s/;//;s/^[[:space:]]*//;p;q;}' ./${project_name}.xcodeproj/project.pbxproj`
