@@ -113,7 +113,7 @@
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJr-W4-YSb">
-                                            <rect key="frame" x="8" y="175" width="284" height="80"/>
+                                            <rect key="frame" x="8" y="175" width="284" height="79"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRM-UO-WvK" customClass="VideoViewLikeDataLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
@@ -128,33 +128,33 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4V-EJ-PXU" customClass="VideoViewLikeDataLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="277" y="2" width="7" height="18"/>
+                                                    <rect key="frame" x="277" y="1.5" width="7" height="18"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIEWS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQP-0Z-f9n" customClass="VideoViewLikeLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="238" y="20" width="46" height="18"/>
+                                                    <rect key="frame" x="238" y="19.5" width="46" height="18"/>
                                                     <accessibility key="accessibilityConfiguration" label="Visualizações"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3UV-Kj-DKw">
-                                                    <rect key="frame" x="264" y="36" width="20" height="8"/>
+                                                    <rect key="frame" x="264" y="35.5" width="20" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="8" id="UCP-ZE-acI"/>
                                                         <constraint firstAttribute="width" constant="20" id="UaL-O2-N5p"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTp-wz-Hfk" customClass="VideoViewLikeDataLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="277" y="42" width="7" height="18"/>
+                                                    <rect key="frame" x="277" y="41.5" width="7" height="18"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKES" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E20-PT-GFs" customClass="VideoViewLikeLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="244" y="60" width="40" height="18"/>
+                                                    <rect key="frame" x="244" y="59.5" width="40" height="18"/>
                                                     <accessibility key="accessibilityConfiguration" label="Curtidas"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
@@ -185,10 +185,10 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kza-MX-Z9k">
-                                            <rect key="frame" x="0.0" y="265" width="300" height="25"/>
+                                            <rect key="frame" x="0.0" y="264" width="300" height="36"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="36"/>
                                                     <accessibility key="accessibilityConfiguration" label="Favoritar"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" image="fav_off"/>
@@ -198,7 +198,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="150" y="0.0" width="150" height="25"/>
+                                                    <rect key="frame" x="150" y="0.0" width="150" height="36"/>
                                                     <accessibility key="accessibilityConfiguration" label="Compartilhar"/>
                                                     <state key="normal" image="share_on"/>
                                                     <connections>
@@ -207,7 +207,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="25" id="TPl-n0-s7F"/>
+                                                <constraint firstAttribute="height" constant="36" id="TPl-n0-s7F"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
@@ -215,7 +215,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZgJ-bP-KyS" secondAttribute="trailing" id="3No-kk-I3O"/>
                                     <constraint firstItem="hfJ-9k-bAJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lNX-c7-cbD" secondAttribute="leading" symbolic="YES" id="3Yc-em-CDc"/>
-                                    <constraint firstAttribute="bottom" secondItem="kza-MX-Z9k" secondAttribute="bottom" constant="10" id="3oL-MZ-3xK"/>
+                                    <constraint firstAttribute="bottom" secondItem="kza-MX-Z9k" secondAttribute="bottom" id="3oL-MZ-3xK"/>
                                     <constraint firstItem="LcQ-Dv-MPg" firstAttribute="centerX" secondItem="6QJ-Gr-4fx" secondAttribute="centerX" id="4m4-fb-dnt"/>
                                     <constraint firstItem="hfJ-9k-bAJ" firstAttribute="bottom" secondItem="6QJ-Gr-4fx" secondAttribute="bottom" constant="-8" id="5iw-th-Ksm"/>
                                     <constraint firstItem="aJr-W4-YSb" firstAttribute="top" secondItem="ZgJ-bP-KyS" secondAttribute="bottom" constant="6" id="6Qc-Cd-akI"/>
