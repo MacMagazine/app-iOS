@@ -4,15 +4,30 @@
 set -e
 
 # ---- READ PARAMS ----
-while getopts ":p:i:" opt; do
+while getopts ":p:i:b:" opt; do
     case $opt in
         p) project_name="$OPTARG";;
         i) info_plist_file="$OPTARG";;
+        b) build_version="$OPTARG";;
         \?) echo "Invalid option -$OPTARG" >&2;;
     esac
 done
 
 echo ""
+
+# ---- PROJECT FILE ----
+if [ -z "${project_name}" ] ; then
+    for file in *.xcodeproj
+    do
+      project_name="${file%.*}"
+    done
+fi
+if [ -z "${project_name}" ] ; then
+    echo -e "\x1B[31m✗ PROJECT FILE (.xcodeproj) DOESN'T EXIST AT PATH: $PWD\x1B[0m"
+    echo -e "\x1B[31m[✗] Exiting...\x1B[0m"
+    echo ""
+    exit 1
+fi
 
 # ---- PLIST FILE ----
 if [ ! -f "${info_plist_file}" ] ; then
@@ -37,9 +52,7 @@ if [ -z "${ORIGINAL_BUNDLE_VERSION}" ] ; then
 fi
 echo "  Original Bundle Version String: $ORIGINAL_BUNDLE_VERSION"
 
-NEWSUBVERSION=`echo $ORIGINAL_BUNDLE_VERSION | awk -F "." '{print $4}'`
-NEWSUBVERSION=$(($NEWSUBVERSION + 1))
-bundle_version=`echo $ORIGINAL_BUNDLE_VERSION | awk -F "." '{print $1 "." $2 "." $3 ".'$NEWSUBVERSION'" }'`
+bundle_version=`echo $ORIGINAL_BUNDLE_VERSION | awk -F "." '{print $1 "." $2 "." $3 ".'$build_version'" }'`
 
 echo -e "  (\x1B[32m✓\x1B[0m) Provided Bundle Version: ${bundle_version}"
 
