@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -266,100 +266,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="TAMANHO DA FONTE" id="lz6-nM-2mu">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="VYt-Vq-PHi" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="360" width="414" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VYt-Vq-PHi" id="rmi-XG-BsJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwT-Tn-dDI" customClass="AppSmallFont" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="14" width="12" height="22"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvg-IN-K0M">
-                                                    <rect key="frame" x="34" y="20" width="1" height="10"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="1" id="iW6-pn-9qS"/>
-                                                        <constraint firstAttribute="height" constant="10" id="lVW-HZ-mVz"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHp-J6-tBh">
-                                                    <rect key="frame" x="203.5" y="20" width="1" height="10"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="1" id="1Z0-H4-9Ci"/>
-                                                        <constraint firstAttribute="height" constant="10" id="FpO-jb-UEr"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyP-zY-hVG">
-                                                    <rect key="frame" x="373" y="20" width="1" height="10"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="1" id="6p5-eS-c4G"/>
-                                                        <constraint firstAttribute="height" constant="10" id="OBx-NV-vsf"/>
-                                                    </constraints>
-                                                </view>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xj-Ri-tHM">
-                                                    <rect key="frame" x="32" y="10" width="344" height="31"/>
-                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o tamanho da fonte" label="Alterar o tamanho da fonte"/>
-                                                    <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <connections>
-                                                        <action selector="changeFontSize:" destination="75e-Ta-Gqd" eventType="valueChanged" id="YEF-fJ-jqi"/>
-                                                    </connections>
-                                                </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67r-rv-sEa" customClass="AppBigFont" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="379" y="8.5" width="19" height="33"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Fonte grande">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="lvg-IN-K0M" firstAttribute="leading" secondItem="8Xj-Ri-tHM" secondAttribute="leading" id="5xS-fg-aMg"/>
-                                                <constraint firstItem="8Xj-Ri-tHM" firstAttribute="leading" secondItem="rmi-XG-BsJ" secondAttribute="leading" constant="34" id="DKJ-BC-DtV"/>
-                                                <constraint firstItem="iHp-J6-tBh" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="F7c-ML-sYc"/>
-                                                <constraint firstItem="8Xj-Ri-tHM" firstAttribute="centerY" secondItem="rmi-XG-BsJ" secondAttribute="centerY" id="JQN-Sg-9oT"/>
-                                                <constraint firstItem="lvg-IN-K0M" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="NwO-iE-vEb"/>
-                                                <constraint firstItem="JyP-zY-hVG" firstAttribute="trailing" secondItem="8Xj-Ri-tHM" secondAttribute="trailing" id="OQB-km-eE7"/>
-                                                <constraint firstAttribute="trailing" secondItem="8Xj-Ri-tHM" secondAttribute="trailing" constant="40" id="XoK-PA-Ep0"/>
-                                                <constraint firstItem="SwT-Tn-dDI" firstAttribute="centerY" secondItem="rmi-XG-BsJ" secondAttribute="centerY" id="aUW-1S-GFb"/>
-                                                <constraint firstAttribute="trailing" secondItem="67r-rv-sEa" secondAttribute="trailing" constant="16" id="gke-XN-nIQ"/>
-                                                <constraint firstItem="iHp-J6-tBh" firstAttribute="centerX" secondItem="8Xj-Ri-tHM" secondAttribute="centerX" id="kQy-lf-eKt"/>
-                                                <constraint firstItem="67r-rv-sEa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SwT-Tn-dDI" secondAttribute="trailing" constant="8" symbolic="YES" id="keK-nU-aTO"/>
-                                                <constraint firstItem="JyP-zY-hVG" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="tSE-nP-Ywl"/>
-                                                <constraint firstItem="67r-rv-sEa" firstAttribute="centerY" secondItem="rmi-XG-BsJ" secondAttribute="centerY" id="vEr-yd-UYN"/>
-                                                <constraint firstItem="SwT-Tn-dDI" firstAttribute="leading" secondItem="rmi-XG-BsJ" secondAttribute="leading" constant="16" id="xqM-sy-b2q"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="APARÊNCIA" id="84a-FX-W0x">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="OHX-YP-A3s" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="466" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="360" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHX-YP-A3s" id="Ue2-YK-jkW">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -389,7 +299,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nuM-Qw-S8K" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="516" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="410" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuM-Qw-S8K" id="dbb-1A-bDj">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -415,12 +325,165 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="92" id="VYt-Vq-PHi" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="460" width="414" height="92"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VYt-Vq-PHi" id="rmi-XG-BsJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanho da Fonte" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EJy-cP-B5M" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="14" width="150" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwT-Tn-dDI" customClass="AppSmallFont" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="48" width="12" height="22"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvg-IN-K0M">
+                                                    <rect key="frame" x="34" y="54" width="1" height="10"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                    </accessibility>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="1" id="iW6-pn-9qS"/>
+                                                        <constraint firstAttribute="height" constant="10" id="lVW-HZ-mVz"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHp-J6-tBh">
+                                                    <rect key="frame" x="203.5" y="54" width="1" height="10"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                    </accessibility>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="1" id="1Z0-H4-9Ci"/>
+                                                        <constraint firstAttribute="height" constant="10" id="FpO-jb-UEr"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyP-zY-hVG">
+                                                    <rect key="frame" x="373" y="54" width="1" height="10"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                    </accessibility>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="1" id="6p5-eS-c4G"/>
+                                                        <constraint firstAttribute="height" constant="10" id="OBx-NV-vsf"/>
+                                                    </constraints>
+                                                </view>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xj-Ri-tHM">
+                                                    <rect key="frame" x="32" y="44" width="344" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o tamanho da fonte" label="Alterar o tamanho da fonte"/>
+                                                    <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <connections>
+                                                        <action selector="changeFontSize:" destination="75e-Ta-Gqd" eventType="valueChanged" id="YEF-fJ-jqi"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67r-rv-sEa" customClass="AppBigFont" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="379" y="42.5" width="19" height="33"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte grande">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lvg-IN-K0M" firstAttribute="leading" secondItem="8Xj-Ri-tHM" secondAttribute="leading" id="5xS-fg-aMg"/>
+                                                <constraint firstItem="8Xj-Ri-tHM" firstAttribute="leading" secondItem="rmi-XG-BsJ" secondAttribute="leading" constant="34" id="DKJ-BC-DtV"/>
+                                                <constraint firstItem="iHp-J6-tBh" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="F7c-ML-sYc"/>
+                                                <constraint firstItem="SwT-Tn-dDI" firstAttribute="top" secondItem="EJy-cP-B5M" secondAttribute="bottom" constant="12" id="G1k-rP-mFv"/>
+                                                <constraint firstItem="lvg-IN-K0M" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="NwO-iE-vEb"/>
+                                                <constraint firstItem="JyP-zY-hVG" firstAttribute="trailing" secondItem="8Xj-Ri-tHM" secondAttribute="trailing" id="OQB-km-eE7"/>
+                                                <constraint firstItem="67r-rv-sEa" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="XLr-aN-dqm"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Xj-Ri-tHM" secondAttribute="trailing" constant="40" id="XoK-PA-Ep0"/>
+                                                <constraint firstAttribute="trailing" secondItem="67r-rv-sEa" secondAttribute="trailing" constant="16" id="gke-XN-nIQ"/>
+                                                <constraint firstItem="iHp-J6-tBh" firstAttribute="centerX" secondItem="8Xj-Ri-tHM" secondAttribute="centerX" id="kQy-lf-eKt"/>
+                                                <constraint firstItem="67r-rv-sEa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SwT-Tn-dDI" secondAttribute="trailing" constant="8" symbolic="YES" id="keK-nU-aTO"/>
+                                                <constraint firstItem="8Xj-Ri-tHM" firstAttribute="centerY" secondItem="SwT-Tn-dDI" secondAttribute="centerY" id="oDD-hJ-JXi"/>
+                                                <constraint firstItem="JyP-zY-hVG" firstAttribute="centerY" secondItem="8Xj-Ri-tHM" secondAttribute="centerY" id="tSE-nP-Ywl"/>
+                                                <constraint firstItem="SwT-Tn-dDI" firstAttribute="leading" secondItem="rmi-XG-BsJ" secondAttribute="leading" constant="16" id="xqM-sy-b2q"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="92" id="Jrd-t5-7DG" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="552" width="414" height="92"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jrd-t5-7DG" id="mp3-Xn-Avg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transparência do Post Lido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vG-V8-mcP" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="14" width="218" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBb-ih-zay" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="48" width="35" height="20.5"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="80" minValue="40" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-ZE-Kkk">
+                                                    <rect key="frame" x="61" y="43.5" width="284.5" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o tamanho da fonte" label="Alterar o tamanho da fonte"/>
+                                                    <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <connections>
+                                                        <action selector="changeReadTransparency:" destination="75e-Ta-Gqd" eventType="valueChanged" id="GxI-Lc-SNQ"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRE-mv-lKH" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="355.5" y="48" width="42.5" height="20.5"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fonte grande">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TRE-mv-lKH" firstAttribute="leading" secondItem="MpC-ZE-Kkk" secondAttribute="trailing" constant="12" id="7Zb-aD-Mxh"/>
+                                                <constraint firstItem="yBb-ih-zay" firstAttribute="top" secondItem="4vG-V8-mcP" secondAttribute="bottom" constant="12" id="85V-Xm-71P"/>
+                                                <constraint firstItem="TRE-mv-lKH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yBb-ih-zay" secondAttribute="trailing" constant="8" symbolic="YES" id="Fxd-wJ-RZS"/>
+                                                <constraint firstItem="yBb-ih-zay" firstAttribute="leading" secondItem="mp3-Xn-Avg" secondAttribute="leading" constant="16" id="OHM-85-ocz"/>
+                                                <constraint firstItem="TRE-mv-lKH" firstAttribute="centerY" secondItem="MpC-ZE-Kkk" secondAttribute="centerY" id="Vu7-Ht-FCl"/>
+                                                <constraint firstAttribute="trailing" secondItem="TRE-mv-lKH" secondAttribute="trailing" constant="16" id="eTe-ji-qvc"/>
+                                                <constraint firstItem="MpC-ZE-Kkk" firstAttribute="centerY" secondItem="yBb-ih-zay" secondAttribute="centerY" id="eeN-63-NMy"/>
+                                                <constraint firstItem="MpC-ZE-Kkk" firstAttribute="leading" secondItem="yBb-ih-zay" secondAttribute="trailing" constant="12" id="ll9-gp-LkB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="UtS-7J-auh">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="602" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="680" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -476,12 +539,13 @@
                         <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
                         <outlet property="iconOption4" destination="g7c-ve-Aqk" id="H20-Vt-eSe"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
+                        <outlet property="readTransparency" destination="MpC-ZE-Kkk" id="8fe-gO-5QD"/>
                         <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2284" y="-710"/>
+            <point key="canvasLocation" x="-2284.057971014493" y="-710.49107142857144"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="Odw-wy-fvT">

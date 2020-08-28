@@ -19,6 +19,7 @@ class SettingsTableViewController: UITableViewController {
 	@IBOutlet private weak var pushOptions: AppSegmentedControl!
 
     @IBOutlet private weak var fontSize: UISlider!
+    @IBOutlet private weak var readTransparency: UISlider!
 
     @IBOutlet private weak var iconOption1: UIImageView!
     @IBOutlet private weak var iconOption2: UIImageView!
@@ -47,6 +48,9 @@ class SettingsTableViewController: UITableViewController {
         self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
         self.iconOption3.alpha = iconName ?? IconOptions.option1 == IconOptions.option3 ? 1 : 0.6
         self.iconOption4.alpha = iconName ?? IconOptions.option1 == IconOptions.option4 ? 1 : 0.6
+
+        let transparency = Settings().transparency
+        readTransparency.value = Float(transparency * 100.0)
 
         guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
@@ -78,7 +82,6 @@ class SettingsTableViewController: UITableViewController {
         var header = ["MACMAGAZINE \(getAppVersion())"]
 		header.append("RECEBER PUSHES PARA")
 		header.append("ÍCONE DO APLICATIVO")
-		header.append("TAMANHO DA FONTE")
 		header.append("APARÊNCIA")
 		header.append("")
         return header
@@ -95,21 +98,29 @@ class SettingsTableViewController: UITableViewController {
     }
 
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if indexPath.section == 4 {
-			if indexPath.row == 0 &&
-				appearanceCell1.isHidden {
-				return 0
-			}
-			if indexPath.row == 1 &&
-				appearanceCell2.isHidden {
-				return 0
-			}
-		}
-		if indexPath.section == 5 &&
-			reportProblem.isHidden {
-			return 0
-		}
-		return indexPath.section == 2 ? 74 : 50
+        let regular: CGFloat = 50.0
+
+        switch indexPath.section {
+        case 2:         // "ÍCONE DO APLICATIVO"
+            return 74
+        case 3:         // "APARÊNCIA"
+            switch indexPath.row {
+            case 0:     // "AJUSTES NATIVO"
+                return appearanceCell1.isHidden ? 0 : regular
+            case 1:     // "CLARO/ESCURO/AUTO"
+                return appearanceCell2.isHidden ? 0 : regular
+            case 2:     // "TAMANHO DA FONTE"
+                return 92
+            case 3:     // "TRANSPARENCIA LIDO"
+                return 92
+            default:
+                return regular
+            }
+        case 4:         // "REPORTAR PROBLEMA"
+            return reportProblem.isHidden ? 0 : regular
+        default:
+            return regular
+        }
 	}
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -258,6 +269,17 @@ extension SettingsTableViewController {
         UserDefaults.standard.synchronize()
 
         applyTheme()
+    }
+
+    @IBAction private func changeReadTransparency(_ sender: Any) {
+        guard let slider = sender as? UISlider else {
+            return
+        }
+
+        UserDefaults.standard.set(slider.value / 100.0, forKey: Definitions.transparency)
+        UserDefaults.standard.synchronize()
+
+        NotificationCenter.default.post(name: .reloadData, object: nil)
     }
 
     // MARK: - Private Methods -

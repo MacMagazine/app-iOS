@@ -64,7 +64,9 @@ class ResultsViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-		let favoritar = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
+        let object = self.posts[indexPath.row]
+
+		let favoritar = UIContextualAction(style: .normal, title: (object.favorite ? "Desfavoritar" : "Favoritar")) { _, _, boolValue in
 			var object = self.posts[indexPath.row]
 			Favorite().updatePostStatus(using: object.link) { isFavoriteOn in
 				object.favorite = isFavoriteOn
@@ -74,7 +76,6 @@ class ResultsViewController: UITableViewController {
 			}
 		}
 
-		let object = self.posts[indexPath.row]
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
 		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
 		favoritar.accessibilityLabel = "Favoritar"
@@ -101,7 +102,7 @@ class ResultsViewController: UITableViewController {
 
 			boolValue(true)
 		}
-		compatilhar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		compatilhar.backgroundColor = UIColor(hex: "67BB0B", alpha: 1)
 		compatilhar.image = UIImage(named: "share")
 		compatilhar.accessibilityLabel = "Compartilhar"
 

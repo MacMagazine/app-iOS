@@ -53,9 +53,9 @@ class PostCell: AppTableViewCell {
         thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: defaultImage))
 
-        headlineLabel?.alpha = (object.read ? 0.5 : 1)
-        subheadlineLabel?.alpha = (object.read ? 0.5 : 1)
-        thumbnailImageView.alpha = (object.read ? 0.5 : 1)
+        headlineLabel?.alpha = (object.read ? Settings().transparency : 1)
+        subheadlineLabel?.alpha = (object.read ? Settings().transparency : 1)
+        thumbnailImageView.alpha = (object.read ? Settings().transparency : 1)
     }
 
 	func configureSearchPost(_ object: XMLPost) {
@@ -92,10 +92,10 @@ class PostCell: AppTableViewCell {
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
 
-        headlineLabel?.alpha = (object.read ? 0.5 : 1)
-        subheadlineLabel?.alpha = (object.read ? 0.5 : 1)
-        thumbnailImageView.alpha = (object.read ? 0.5 : 1)
-        lengthlineLabel.alpha = (object.read ? 0.5 : 1)
+        headlineLabel?.alpha = (object.read ? Settings().transparency : 1)
+        subheadlineLabel?.alpha = (object.read ? Settings().transparency : 1)
+        thumbnailImageView.alpha = (object.read ? Settings().transparency : 1)
+        lengthlineLabel.alpha = (object.read ? Settings().transparency : 1)
 }
 
 	func configureSearchPodcast(_ object: XMLPost) {

@@ -19,6 +19,7 @@ enum Definitions {
 	static let askForReview = "askForReview"
 	static let all_posts_pushes = "all_posts_pushes"
 	static let pushPreferences = "pushPreferences"
+    static let transparency = "transparency"
 }
 
 // MARK: -
@@ -117,6 +118,13 @@ struct Settings {
 			}
 		}
 	}
+
+    var transparency: CGFloat {
+        guard let transparency = UserDefaults.standard.object(forKey: Definitions.transparency) as? CGFloat else {
+            return 0.8
+        }
+        return transparency
+    }
 
 	// MARK: - Review -
 

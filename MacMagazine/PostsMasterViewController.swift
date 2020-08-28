@@ -91,6 +91,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			NotificationCenter.default.addObserver(self, selector: #selector(onUpdateSelectedPost(_:)), name: .updateSelectedPost, object: nil)
 		}
 
+        NotificationCenter.default.addObserver(self, selector: #selector(onReloadData(_:)), name: .reloadData, object: nil)
+
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
 
@@ -575,6 +577,10 @@ extension PostsMasterViewController {
 			UserDefaults.standard.synchronize()
 		}
 	}
+
+    @objc func onReloadData(_ notification: Notification) {
+        self.tableView.reloadData()
+    }
 }
 
 // MARK: - Peek&Pop -
