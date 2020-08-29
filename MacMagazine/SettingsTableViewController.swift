@@ -145,6 +145,13 @@ class SettingsTableViewController: UITableViewController {
             self.dismiss(animated: true)
         })
 
+        if let popoverController = alertController.popoverPresentationController {
+            if let button = sender as? UIButton {
+                popoverController.sourceView = button
+                popoverController.sourceRect = CGRect(x: button.bounds.midX, y: button.bounds.midY, width: 0, height: 0)
+            }
+        }
+
         alertController.setup()
         self.present(alertController, animated: true)
 	}
