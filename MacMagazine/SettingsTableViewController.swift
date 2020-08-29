@@ -161,7 +161,8 @@ class SettingsTableViewController: UITableViewController {
         })
 
         if let popoverController = alertController.popoverPresentationController {
-            if let button = sender as? UIButton {
+            if let gesture = sender as? UILongPressGestureRecognizer,
+                let button = gesture.view as? UIButton {
                 popoverController.sourceView = button
                 popoverController.sourceRect = CGRect(x: button.bounds.midX, y: button.bounds.midY, width: 0, height: 0)
             }
