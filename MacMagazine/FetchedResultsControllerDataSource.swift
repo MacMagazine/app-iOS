@@ -115,7 +115,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
         let object = self.fetchedResultsController.object(at: indexPath)
 
-        let read = UIContextualAction(style: .normal, title: (object.read ? "Marcar como não Lido" : "Marcar como Lido")) { _, _, boolValue in
+        let read = UIContextualAction(style: .normal, title: (object.read ? "Não Lido" : "Lido")) { _, _, boolValue in
             let object = self.fetchedResultsController.object(at: indexPath)
             CoreDataStack.shared.get(link: object.link ?? "") { items in
                 if !items.isEmpty {
@@ -143,7 +143,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
         read.image = UIImage(named: "read\(object.read ? "" : "_off")")
         read.backgroundColor = UIColor(hex: "9B9B9B", alpha: 1)
-        read.accessibilityLabel = object.read ? "Marcar como não lido" : "Marcar como lido"
+        read.accessibilityLabel = object.read ? "Não lido" : "Lido"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [read, favoritar])
 		swipeActions.performsFirstActionWithFullSwipe = true

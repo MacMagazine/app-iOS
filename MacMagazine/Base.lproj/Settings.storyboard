@@ -28,10 +28,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XF-p8-Zfg">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                                     <accessibility key="accessibilityConfiguration" label="Limpar cache do app"/>
+                                                    <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Limpar cache do app"/>
                                                     <connections>
                                                         <action selector="clearCache:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="GGU-Tf-yqI"/>
+                                                        <outletCollection property="gestureRecognizers" destination="Aw5-9L-f2b" appends="YES" id="MN3-s1-VCX"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -544,6 +546,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Aw5-9L-f2b">
+                    <connections>
+                        <action selector="clearCacheWithOptions:" destination="75e-Ta-Gqd" id="xSv-GI-Rcp"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2284.057971014493" y="-710.49107142857144"/>
         </scene>

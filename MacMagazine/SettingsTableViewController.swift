@@ -130,6 +130,10 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - View Methods -
 
 	@IBAction private func clearCache(_ sender: Any) {
+        self.flush(.keepAllStatus)
+    }
+
+    @IBAction private func clearCacheWithOptions(_ sender: Any) {
         let alertController = UIAlertController(title: "Limpar cache", message: "Escolha uma opção", preferredStyle: .actionSheet)
 
         alertController.addAction(UIAlertAction(title: "Limpar tudo", style: .destructive) { _ in
