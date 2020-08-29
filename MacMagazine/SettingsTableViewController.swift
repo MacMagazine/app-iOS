@@ -19,17 +19,20 @@ class SettingsTableViewController: UITableViewController {
 	@IBOutlet private weak var pushOptions: AppSegmentedControl!
 
     @IBOutlet private weak var fontSize: UISlider!
-    @IBOutlet private weak var readTransparency: UISlider!
 
     @IBOutlet private weak var iconOption1: UIImageView!
     @IBOutlet private weak var iconOption2: UIImageView!
     @IBOutlet private weak var iconOption3: UIImageView!
     @IBOutlet private weak var iconOption4: UIImageView!
 
-    @IBOutlet private weak var appearanceCell1: AppTableViewCell!
-    @IBOutlet private weak var appearanceCell2: AppTableViewCell!
+    @IBOutlet private weak var appearanceCellDarkMode: AppTableViewCell!
+    @IBOutlet private weak var appearanceCellDarkModeType: AppTableViewCell!
+    @IBOutlet private weak var appearanceCellIntensity: AppTableViewCell!
     @IBOutlet private weak var darkModeSystem: UISwitch!
     @IBOutlet private weak var darkModeSegmentControl: AppSegmentedControl!
+
+    @IBOutlet private weak var intensityPostRead: UISwitch!
+    @IBOutlet private weak var readTransparency: UISlider!
 
     // MARK: - View lifecycle -
 
@@ -50,7 +53,10 @@ class SettingsTableViewController: UITableViewController {
         self.iconOption4.alpha = iconName ?? IconOptions.option1 == IconOptions.option4 ? 1 : 0.6
 
         let transparency = Settings().transparency
+        intensityPostRead.isOn = transparency < 1
         readTransparency.value = Float(transparency * 100.0)
+
+        appearanceCellIntensity.isHidden = true
 
         guard MFMailComposeViewController.canSendMail() else {
 			reportProblem.isHidden = true
@@ -99,6 +105,7 @@ class SettingsTableViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let regular: CGFloat = 50.0
+        let large: CGFloat = 94.0
 
         switch indexPath.section {
         case 2:         // "ÍCONE DO APLICATIVO"
@@ -106,13 +113,13 @@ class SettingsTableViewController: UITableViewController {
         case 3:         // "APARÊNCIA"
             switch indexPath.row {
             case 0:     // "AJUSTES NATIVO"
-                return appearanceCell1.isHidden ? 0 : regular
+                return appearanceCellDarkMode.isHidden ? 0 : regular
             case 1:     // "CLARO/ESCURO/AUTO"
-                return appearanceCell2.isHidden ? 0 : regular
+                return appearanceCellDarkModeType.isHidden ? 0 : regular
             case 2:     // "TAMANHO DA FONTE"
-                return 92
-            case 3:     // "TRANSPARENCIA LIDO"
-                return 92
+                return large
+            case 4:     // "INTENSIDADE POST LIDO"
+                return appearanceCellIntensity.isHidden ? 0 : large
             default:
                 return regular
             }
@@ -134,42 +141,45 @@ class SettingsTableViewController: UITableViewController {
     }
 
     @IBAction private func clearCacheWithOptions(_ sender: Any) {
-        let alertController = UIAlertController(title: "Limpar cache", message: "Escolha uma opção", preferredStyle: .actionSheet)
+        guard let gesture = sender as? UILongPressGestureRecognizer,
+            let button = gesture.view as? UIButton else {
+            return
+        }
+        if gesture.state == .began {
+            let alertController = UIAlertController(title: "Limpar cache", message: "Escolha uma opção", preferredStyle: .actionSheet)
 
-        alertController.addAction(UIAlertAction(title: "Limpar tudo", style: .destructive) { _ in
-            self.flush(.all)
-        })
+            alertController.addAction(UIAlertAction(title: "Limpar tudo", style: .destructive) { _ in
+                self.flush(.all)
+            })
 
-        alertController.addAction(UIAlertAction(title: "Limpar e manter Favoritos", style: .default) { _ in
-            self.flush(.keepFavorite)
-        })
+            alertController.addAction(UIAlertAction(title: "Limpar e manter Favoritos", style: .default) { _ in
+                self.flush(.keepFavorite)
+            })
 
-        alertController.addAction(UIAlertAction(title: "Limpar e manter status de leitura", style: .default) { _ in
-            self.flush(.keepReadStatus)
-        })
+            alertController.addAction(UIAlertAction(title: "Limpar e manter status de leitura", style: .default) { _ in
+                self.flush(.keepReadStatus)
+            })
 
-        alertController.addAction(UIAlertAction(title: "Limpar e manter favoritos e status de leitura", style: .default) { _ in
-            self.flush(.keepAllStatus)
-        })
+            alertController.addAction(UIAlertAction(title: "Limpar e manter favoritos e status de leitura", style: .default) { _ in
+                self.flush(.keepAllStatus)
+            })
 
-        alertController.addAction(UIAlertAction(title: "Apagar somente imagens", style: .default) { _ in
-            self.flush(.imagesOnly)
-        })
+            alertController.addAction(UIAlertAction(title: "Apagar somente imagens", style: .default) { _ in
+                self.flush(.imagesOnly)
+            })
 
-        alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel) { _ in
-            self.dismiss(animated: true)
-        })
+            alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+                self.dismiss(animated: true)
+            })
 
-        if let popoverController = alertController.popoverPresentationController {
-            if let gesture = sender as? UILongPressGestureRecognizer,
-                let button = gesture.view as? UIButton {
+            if let popoverController = alertController.popoverPresentationController {
                 popoverController.sourceView = button
                 popoverController.sourceRect = CGRect(x: button.bounds.midX, y: button.bounds.midY, width: 0, height: 0)
             }
-        }
 
-        alertController.setup()
-        self.present(alertController, animated: true)
+            alertController.setup()
+            self.present(alertController, animated: true)
+        }
 	}
 
     fileprivate func flush(_ type: FlushType) {
@@ -283,24 +293,56 @@ extension SettingsTableViewController {
         applyTheme()
     }
 
-    @IBAction private func changeReadTransparency(_ sender: Any) {
-        guard let slider = sender as? UISlider else {
+    @IBAction private func enableReadIntensity(_ sender: Any) {
+        guard let intensity = sender as? UISwitch else {
             return
         }
 
-        UserDefaults.standard.set(slider.value / 100.0, forKey: Definitions.transparency)
+        let value: Float = intensity.isOn ? 50.0 : 100.0
+
+        setIntensity(value)
+        readTransparency.setValue(value, animated: true)
+
+        if !intensity.isOn {
+            appearanceCellIntensity.isHidden = true
+            self.tableView.reloadData()
+        }
+    }
+
+    @IBAction private func showReadIntensitySlider(_ sender: Any) {
+        guard let gesture = sender as? UILongPressGestureRecognizer else {
+            return
+        }
+        if gesture.state == .began {
+            let transparency = Settings().transparency
+            readTransparency.value = Float(transparency * 100.0)
+
+            appearanceCellIntensity.isHidden = !appearanceCellIntensity.isHidden
+            self.tableView.reloadData()
+        }
+    }
+
+    @IBAction private func changeReadTransparencyIntensity(_ sender: Any) {
+        guard let slider = sender as? UISlider else {
+            return
+        }
+        setIntensity(slider.value)
+    }
+
+    // MARK: - Private Methods -
+
+    fileprivate func setIntensity(_ intensity: Float) {
+        UserDefaults.standard.set(intensity / 100.0, forKey: Definitions.transparency)
         UserDefaults.standard.synchronize()
 
         NotificationCenter.default.post(name: .reloadData, object: nil)
     }
 
-    // MARK: - Private Methods -
-
     fileprivate func setupAppearanceSettings() {
-        appearanceCell1.isUserInteractionEnabled = Settings().supportsNativeDarkMode
+        appearanceCellDarkMode.isUserInteractionEnabled = Settings().supportsNativeDarkMode
         darkModeSystem.isOn = Settings().supportsNativeDarkMode && Settings().appearance == .native
-        if !appearanceCell1.isUserInteractionEnabled {
-            appearanceCell1.subviews[0].subviews.forEach {
+        if !appearanceCellDarkMode.isUserInteractionEnabled {
+            appearanceCellDarkMode.subviews[0].subviews.forEach {
                 if let view = $0 as? UILabel {
                     view.isEnabled = false
                 }
@@ -309,16 +351,16 @@ extension SettingsTableViewController {
                 }
             }
         }
-		appearanceCell1.isHidden = !appearanceCell1.isUserInteractionEnabled
+		appearanceCellDarkMode.isHidden = !appearanceCellDarkMode.isUserInteractionEnabled
 
-        appearanceCell2.isUserInteractionEnabled = !darkModeSystem.isOn
+        appearanceCellDarkModeType.isUserInteractionEnabled = !darkModeSystem.isOn
         darkModeSegmentControl.selectedSegmentIndex = Settings().isDarkMode ? 1 : 0
-        appearanceCell2.subviews[0].subviews.forEach {
+        appearanceCellDarkModeType.subviews[0].subviews.forEach {
             if let view = $0 as? UISegmentedControl {
-                view.isEnabled = appearanceCell2.isUserInteractionEnabled
+                view.isEnabled = appearanceCellDarkModeType.isUserInteractionEnabled
             }
         }
-		appearanceCell2.isHidden = !appearanceCell2.isUserInteractionEnabled
+		appearanceCellDarkModeType.isHidden = !appearanceCellDarkModeType.isUserInteractionEnabled
 
 		tableView.reloadData()
     }

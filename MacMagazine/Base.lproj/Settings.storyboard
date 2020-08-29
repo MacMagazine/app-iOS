@@ -334,7 +334,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanho da Fonte" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EJy-cP-B5M" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanho da fonte" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EJy-cP-B5M" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="14" width="150" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <accessibility key="accessibilityConfiguration" label="Fonte pequena">
@@ -423,14 +423,48 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2JV-mQ-7Gk" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="552" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2JV-mQ-7Gk" id="itV-9F-rxd">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diminuir intensidade do post lido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3v-vs-c8M" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="14.5" width="251" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Dw-eO-rm7">
+                                                    <rect key="frame" x="343" y="9.5" width="51" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Toque para alterar" label="Diminuir intesidade do post lido"/>
+                                                    <connections>
+                                                        <action selector="enableReadIntensity:" destination="75e-Ta-Gqd" eventType="valueChanged" id="4u2-vB-1NC"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7Dw-eO-rm7" firstAttribute="centerY" secondItem="itV-9F-rxd" secondAttribute="centerY" id="1pO-fB-6j3"/>
+                                                <constraint firstItem="7Dw-eO-rm7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="y3v-vs-c8M" secondAttribute="trailing" constant="8" symbolic="YES" id="5hs-8U-6mc"/>
+                                                <constraint firstItem="y3v-vs-c8M" firstAttribute="centerY" secondItem="itV-9F-rxd" secondAttribute="centerY" id="6Vx-VM-WRl"/>
+                                                <constraint firstItem="y3v-vs-c8M" firstAttribute="leading" secondItem="itV-9F-rxd" secondAttribute="leading" constant="20" id="Bbn-42-cR9"/>
+                                                <constraint firstAttribute="trailing" secondItem="7Dw-eO-rm7" secondAttribute="trailing" constant="22" id="Sga-kZ-oqC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="hO1-PN-CFW" appends="YES" id="ClI-pc-yzG"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="92" id="Jrd-t5-7DG" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="552" width="414" height="92"/>
+                                        <rect key="frame" x="0.0" y="602" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jrd-t5-7DG" id="mp3-Xn-Avg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transparência do Post Lido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vG-V8-mcP" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intensidade do post lido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vG-V8-mcP" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="14" width="218" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <accessibility key="accessibilityConfiguration" label="Fonte pequena">
@@ -442,7 +476,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBb-ih-zay" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="48" width="35" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                    <accessibility key="accessibilityConfiguration" label="40%">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -451,16 +485,16 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="80" minValue="40" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-ZE-Kkk">
                                                     <rect key="frame" x="61" y="43.5" width="284.5" height="31"/>
-                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o tamanho da fonte" label="Alterar o tamanho da fonte"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o valor da intensidade do post lido" label="Alterar a intensidade do post lido"/>
                                                     <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
-                                                        <action selector="changeReadTransparency:" destination="75e-Ta-Gqd" eventType="valueChanged" id="GxI-Lc-SNQ"/>
+                                                        <action selector="changeReadTransparencyIntensity:" destination="75e-Ta-Gqd" eventType="valueChanged" id="GxI-Lc-SNQ"/>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRE-mv-lKH" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="355.5" y="48" width="42.5" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Fonte grande">
+                                                    <accessibility key="accessibilityConfiguration" label="100%">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -485,7 +519,7 @@
                             <tableViewSection id="UtS-7J-auh">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="680" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="730" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -531,8 +565,9 @@
                         </view>
                     </navigationItem>
                     <connections>
-                        <outlet property="appearanceCell1" destination="OHX-YP-A3s" id="JMV-ZU-qv9"/>
-                        <outlet property="appearanceCell2" destination="nuM-Qw-S8K" id="5MK-ab-51K"/>
+                        <outlet property="appearanceCellDarkMode" destination="OHX-YP-A3s" id="JMV-ZU-qv9"/>
+                        <outlet property="appearanceCellDarkModeType" destination="nuM-Qw-S8K" id="5MK-ab-51K"/>
+                        <outlet property="appearanceCellIntensity" destination="Jrd-t5-7DG" id="V2H-2r-XRn"/>
                         <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="IZv-c0-y4T"/>
                         <outlet property="darkModeSystem" destination="pM3-Vj-A6f" id="bsN-6T-Grz"/>
                         <outlet property="fontSize" destination="8Xj-Ri-tHM" id="JKl-S7-96y"/>
@@ -540,6 +575,7 @@
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="IWR-VX-3jh"/>
                         <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
                         <outlet property="iconOption4" destination="g7c-ve-Aqk" id="H20-Vt-eSe"/>
+                        <outlet property="intensityPostRead" destination="7Dw-eO-rm7" id="9ma-Ex-EZF"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="readTransparency" destination="MpC-ZE-Kkk" id="8fe-gO-5QD"/>
                         <outlet property="reportProblem" destination="sDf-L1-92h" id="VEV-i6-N08"/>
@@ -549,6 +585,11 @@
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Aw5-9L-f2b">
                     <connections>
                         <action selector="clearCacheWithOptions:" destination="75e-Ta-Gqd" id="xSv-GI-Rcp"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="hO1-PN-CFW">
+                    <connections>
+                        <action selector="showReadIntensitySlider:" destination="75e-Ta-Gqd" id="12u-7R-qiS"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
