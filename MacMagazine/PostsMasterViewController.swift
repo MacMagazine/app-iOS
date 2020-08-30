@@ -116,6 +116,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         // Execute the fetch to display the data
         fetchController?.reloadData()
+
+        favorite.accessibilityLabel = "Listar posts favoritos."
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -609,6 +611,7 @@ extension PostsMasterViewController {
 
 func prepareDetailController(_ controller: PostsDetailViewController, using links: [PostData], compare link: String?) {
 	controller.navigationItem.leftItemsSupplementBackButton = true
+
 	controller.selectedIndex = links.firstIndex(where: { $0.link == link }) ?? 0
 	controller.links = links
 	controller.createWebViewController = createWebViewController
@@ -682,9 +685,11 @@ extension PostsMasterViewController {
     @IBAction private func showHideFavorites(_ sender: Any) {
         if favorite.image == UIImage(named: "fav_on") {
             favorite.image = UIImage(named: "fav_off")
+            favorite.accessibilityLabel = "Listar posts favoritos."
             hideFavorites()
         } else {
             favorite.image = UIImage(named: "fav_on")
+            favorite.accessibilityLabel = "Listar posts."
             showFavorites()
         }
     }

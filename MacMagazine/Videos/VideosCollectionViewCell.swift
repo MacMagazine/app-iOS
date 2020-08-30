@@ -35,12 +35,16 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		favorite.isSelected = object.favorite
 		favorite.isEnabled = true
+        setFavoriteButtonAccessibility(isEnabled: object.favorite)
 
 		headlineLabel.text = object.title
+        headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
         setLines(for: headlineLabel)
 		subheadlineLabel.text = object.pubDate?.watchDate()
 		viewsLabel.text = object.views
+        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
 		likesLabel.text = object.likes
+        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
 		durationLabel.text = object.duration?.toSubHeaderDate()
 
 		guard let artworkURL = object.artworkURL else {
@@ -52,8 +56,11 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		youtubeWebView?.scrollView.isScrollEnabled = false
 		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
 		youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
+        youtubeWebView.isAccessibilityElement = false
 
 		youtubeWebView?.videoId = object.videoId
+        
+        
 	}
 
 	func configureVideo(with object: JSONVideo) {
@@ -61,12 +68,16 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		favorite.isSelected = false
 		favorite.isEnabled = false
+        setFavoriteButtonAccessibility(isEnabled: false)
 
 		headlineLabel.text = object.title
+        headlineLabel.accessibilityLabel = "Título: \(object.title)"
         setLines(for: headlineLabel)
         subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
 		viewsLabel.text = object.views
+        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views)."
 		likesLabel.text = object.likes
+        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes)."
 		durationLabel.text = object.duration.toSubHeaderDate()
 
 		thumbnailImageView.kf.indicatorType = .activity
@@ -78,6 +89,14 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		youtubeWebView?.videoId = object.videoId
 	}
+
+    private func setFavoriteButtonAccessibility(isEnabled: Bool) {
+        if isEnabled {
+            favorite.accessibilityLabel = "Desfavoritar o video."
+        } else {
+            favorite.accessibilityLabel = "Favoritar o video."
+        }
+    }
 
     fileprivate func setLines(for label: UILabel) {
         let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
@@ -126,6 +145,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBAction private func favorite(_ sender: Any) {
 		Favorite().updateVideoStatus(using: videoId) { isFavoriteOn in
 			self.favorite.isSelected = isFavoriteOn
+            self.setFavoriteButtonAccessibility(isEnabled: isFavoriteOn)
 		}
 	}
 
