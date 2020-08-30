@@ -294,7 +294,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
 
                     // When post == nil, indicates the last post retrieved
-                    self.fetchController?.reloadData()
                     self.hideSpin()
 
                     if paged < 1 {
@@ -410,7 +409,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 extension PostsMasterViewController {
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-		if navigationItem.titleView == spin {
+		if navigationItem.titleView == spin &&
+            direction == .up {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 				self.getPosts(paged: 0)
 			}

@@ -73,7 +73,8 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     // MARK: - Scroll detection -
 
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-		if isLoading {
+		if isLoading &&
+            direction == .up {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 				self.getPodcasts(paged: 0)
 			}
@@ -207,7 +208,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
                 guard let post = post else {
                     // When post == nil, indicates the last post retrieved
-                    self.fetchController?.reloadData()
                     return
                 }
                 if !post.duration.isEmpty {
