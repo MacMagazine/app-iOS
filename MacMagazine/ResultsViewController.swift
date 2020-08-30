@@ -77,7 +77,7 @@ class ResultsViewController: UITableViewController {
 		}
 
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
-		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		favoritar.backgroundColor = UIColor(hex: "d18f08", alpha: 1)
 		favoritar.accessibilityLabel = "Favoritar"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
@@ -87,7 +87,7 @@ class ResultsViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-		let compatilhar = UIContextualAction(style: .normal, title: nil) { _, _, boolValue in
+		let compatilhar = UIContextualAction(style: .normal, title: "Compartilhar") { _, _, boolValue in
 
 			let post = self.posts[indexPath.row]
 			let link = post.link

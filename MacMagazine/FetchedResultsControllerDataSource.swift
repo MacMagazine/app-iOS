@@ -115,7 +115,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
         let object = self.fetchedResultsController.object(at: indexPath)
 
-        let read = UIContextualAction(style: .normal, title: (object.read ? "Ler" : "Lido")) { _, _, boolValue in
+        let read = UIContextualAction(style: .normal, title: (object.read ? "Não Lido" : "Lido")) { _, _, boolValue in
             let object = self.fetchedResultsController.object(at: indexPath)
             CoreDataStack.shared.get(link: object.link ?? "") { items in
                 if !items.isEmpty {
@@ -128,7 +128,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
             }
         }
 
-        let favoritar = UIContextualAction(style: .normal, title: (object.favorite ? "Favorito" : "Favoritar")) { _, _, boolValue in
+        let favoritar = UIContextualAction(style: .normal, title: (object.favorite ? "Desfavoritar" : "Favoritar")) { _, _, boolValue in
 			let object = self.fetchedResultsController.object(at: indexPath)
 			Favorite().updatePostStatus(using: object.link ?? "") { isFavoriteOn in
 				object.favorite = isFavoriteOn
@@ -138,11 +138,11 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
-		favoritar.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+		favoritar.backgroundColor = UIColor(hex: "d18f08", alpha: 1)
         favoritar.accessibilityLabel = object.favorite ? "Desfavoritar" : "Favoritar"
 
         read.image = UIImage(named: "read\(object.read ? "" : "_off")")
-        read.backgroundColor = UIColor(hex: "9B9B9B", alpha: 1)
+        read.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
         read.accessibilityLabel = object.read ? "Desmarcar como Lido" : "Marcar como Lido"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [read, favoritar])
