@@ -33,6 +33,7 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet private weak var intensityPostRead: UISwitch!
     @IBOutlet private weak var readTransparency: UISlider!
+    @IBOutlet private weak var readTransparencyValue: AppLabel!
 
     // MARK: - View lifecycle -
 
@@ -55,6 +56,7 @@ class SettingsTableViewController: UITableViewController {
         let transparency = Settings().transparency
         intensityPostRead.isOn = transparency < 1
         readTransparency.value = Float(transparency * 100.0)
+        readTransparencyValue.text = "\(String(describing: Int(readTransparency.value)))%"
 
         appearanceCellIntensity.isHidden = true
 
@@ -316,6 +318,7 @@ extension SettingsTableViewController {
         if gesture.state == .began {
             let transparency = Settings().transparency
             readTransparency.value = Float(transparency * 100.0)
+            readTransparencyValue.text = "\(String(describing: Int(readTransparency.value)))%"
 
             appearanceCellIntensity.isHidden = !appearanceCellIntensity.isHidden
             self.tableView.reloadData()
@@ -332,6 +335,8 @@ extension SettingsTableViewController {
     // MARK: - Private Methods -
 
     fileprivate func setIntensity(_ intensity: Float) {
+        readTransparencyValue.text = "\(String(describing: Int(intensity)))%"
+
         UserDefaults.standard.set(intensity / 100.0, forKey: Definitions.transparency)
         UserDefaults.standard.synchronize()
 

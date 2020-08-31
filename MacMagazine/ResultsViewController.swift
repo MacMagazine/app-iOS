@@ -77,8 +77,8 @@ class ResultsViewController: UITableViewController {
 		}
 
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
-		favoritar.backgroundColor = UIColor(hex: "d18f08", alpha: 1)
-		favoritar.accessibilityLabel = "Favoritar"
+		favoritar.backgroundColor = UIColor(hex: "CD7701", alpha: 1)
+		favoritar.accessibilityLabel = (object.favorite ? "Desfavoritar" : "Favoritar")
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
 		swipeActions.performsFirstActionWithFullSwipe = true
