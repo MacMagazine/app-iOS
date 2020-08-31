@@ -66,7 +66,7 @@ class ResultsViewController: UITableViewController {
 
         let object = self.posts[indexPath.row]
 
-		let favoritar = UIContextualAction(style: .normal, title: (object.favorite ? "Desfavoritar" : "Favoritar")) { _, _, boolValue in
+		let favoritar = UIContextualAction(style: .normal, title: "Favorito") { _, _, boolValue in
 			var object = self.posts[indexPath.row]
 			Favorite().updatePostStatus(using: object.link) { isFavoriteOn in
 				object.favorite = isFavoriteOn
@@ -77,8 +77,8 @@ class ResultsViewController: UITableViewController {
 		}
 
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
-		favoritar.backgroundColor = UIColor(hex: "CD7701", alpha: 1)
-		favoritar.accessibilityLabel = (object.favorite ? "Desfavoritar" : "Favoritar")
+		favoritar.backgroundColor = UIColor(hex: "e49d4c", alpha: 1)
+		favoritar.accessibilityLabel = "Favorito"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
 		swipeActions.performsFirstActionWithFullSwipe = true

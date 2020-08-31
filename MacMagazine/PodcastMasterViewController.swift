@@ -87,7 +87,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		lastContentOffset = offset
 
         // Pull to Refresh
-        if offset.y < -100 &&
+        if offset.y < -150 &&
             navigationItem.searchController == nil {
 			showSpin?()
 			isLoading = true

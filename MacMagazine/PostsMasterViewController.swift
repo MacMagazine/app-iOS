@@ -419,11 +419,11 @@ extension PostsMasterViewController {
 
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
-        direction = offset.y > lastContentOffset.y && offset.y > 100 ? .down : .up
+        direction = offset.y > lastContentOffset.y ? .down : .up
         lastContentOffset = offset
 
         // Pull to Refresh
-        if offset.y < -100 &&
+        if offset.y < -150 &&
             navigationItem.titleView == logoView &&
             navigationItem.searchController == nil &&
 			fetchController?.fetchRequest.predicate == nil {

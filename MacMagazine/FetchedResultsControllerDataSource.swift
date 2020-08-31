@@ -128,7 +128,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
             }
         }
 
-        let favoritar = UIContextualAction(style: .normal, title: (object.favorite ? "Desfavoritar" : "Favoritar")) { _, _, boolValue in
+        let favoritar = UIContextualAction(style: .normal, title: "Favorito") { _, _, boolValue in
 			let object = self.fetchedResultsController.object(at: indexPath)
 			Favorite().updatePostStatus(using: object.link ?? "") { isFavoriteOn in
 				object.favorite = isFavoriteOn
@@ -138,8 +138,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 
 		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
-		favoritar.backgroundColor = UIColor(hex: "CD7701", alpha: 1)
-        favoritar.accessibilityLabel = object.favorite ? "Desfavoritar" : "Favoritar"
+		favoritar.backgroundColor = UIColor(hex: "e49d4c", alpha: 1)
+        favoritar.accessibilityLabel = "Favorito"
 
         read.image = UIImage(named: "read\(object.read ? "" : "_off")")
         read.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
