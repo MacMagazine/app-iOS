@@ -24,6 +24,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBOutlet weak private var viewsLabel: UILabel!
 	@IBOutlet weak private var likesLabel: UILabel!
 	@IBOutlet weak private var durationLabel: PaddingLabel!
+    @IBOutlet weak private var share: AppButton!
 
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
@@ -41,11 +42,14 @@ class VideosCollectionViewCell: AppCollectionViewCell {
         headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
         setLines(for: headlineLabel)
 		subheadlineLabel.text = object.pubDate?.watchDate()
+        subheadlineLabel.isAccessibilityElement = true
+        subheadlineLabel.accessibilityLabel = object.pubDate?.watchDate().setDateAndTimeAccessibility()
 		viewsLabel.text = object.views
         viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
 		likesLabel.text = object.likes
         likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
 		durationLabel.text = object.duration?.toSubHeaderDate()
+        durationLabel.accessibilityLabel = object.duration?.toSubHeaderDate().setTimeAccessibility()
 
 		guard let artworkURL = object.artworkURL else {
 			return
@@ -59,8 +63,15 @@ class VideosCollectionViewCell: AppCollectionViewCell {
         youtubeWebView.isAccessibilityElement = false
 
 		youtubeWebView?.videoId = object.videoId
-        
-        
+
+        accessibilityElements = [playButton as Any,
+                                 durationLabel as Any,
+                                 subheadlineLabel as Any,
+                                 headlineLabel as Any,
+                                 viewsLabel as Any,
+                                 likesLabel as Any,
+                                 favorite as Any,
+                                 share as Any]
 	}
 
 	func configureVideo(with object: JSONVideo) {
@@ -74,11 +85,14 @@ class VideosCollectionViewCell: AppCollectionViewCell {
         headlineLabel.accessibilityLabel = "Título: \(object.title)"
         setLines(for: headlineLabel)
         subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
+        subheadlineLabel.isAccessibilityElement = true
+        subheadlineLabel.accessibilityLabel = object.pubDate.toDate(Format.youtube).watchDate().setDateAndTimeAccessibility()
 		viewsLabel.text = object.views
         viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views)."
 		likesLabel.text = object.likes
         likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes)."
 		durationLabel.text = object.duration.toSubHeaderDate()
+        durationLabel.accessibilityLabel = object.duration.toSubHeaderDate().setTimeAccessibility()
 
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))

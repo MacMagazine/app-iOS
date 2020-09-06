@@ -68,17 +68,31 @@ extension String {
             let minutes = array[1]
             let seconds = array[2]
 
-            return "\(getHoursString(string: hours))\(getMinutesString(string: minutes))\(getSecondsString(string: seconds))"
+            return "\(getHoursString(string: hours))\(getMinutesString(string: minutes, elementsQuantity: 3))\(getSecondsString(string: seconds))"
         } else if array.count == 2 {
             let minutes = array[0]
             let seconds = array[1]
 
-            return "\(getMinutesString(string: minutes))\(getSecondsString(string: seconds))"
+            return "\(getMinutesString(string: minutes, elementsQuantity: 2))\(getSecondsString(string: seconds))"
         } else {
             let seconds = array[0]
 
             return "\(getSecondsString(string: seconds))"
         }
+    }
+
+    func setDateAndTimeAccessibility() -> String {
+        let array = self.split { $0 == " " }.map( String.init )
+
+        // Expected format: "dd/MM/yyyy HH:mm"
+        guard array.count == 2 else {
+            return ""
+        }
+
+        let date = array[0]
+        let time = array[1]
+
+        return "Video postado: \(date.toHeaderDate(with: "dd/MM/yyyy")), \(time.setTimeAccessibility())."
     }
 
     private func getHoursString(string: String) -> String {
@@ -91,13 +105,13 @@ extension String {
         }
     }
 
-    private func getMinutesString(string: String) -> String {
+    private func getMinutesString(string: String, elementsQuantity: Int) -> String {
         if Int(string) == 0 {
             return " "
         } else if Int(string) == 1 {
-            return ", Um minuto"
+            return elementsQuantity == 2 ? "Um minuto" : ", Um minuto"
         } else {
-            return ", \(string) minutos"
+            return elementsQuantity == 2 ? "\(string) minutos" : ", \(string) minutos"
         }
     }
 
