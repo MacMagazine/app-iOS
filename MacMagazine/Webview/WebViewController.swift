@@ -56,6 +56,7 @@ class WebViewController: UIViewController {
 
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+        self.parent?.navigationItem.leftBarButtonItem?.accessibilityLabel = "Voltar"
 
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self

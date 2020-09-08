@@ -103,7 +103,9 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 				return nil
 		}
 		let currentSection = sections[section]
-		header.setHeader(currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate())
+
+        // Expected date format: "20190227"
+        header.setHeader(currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate(with: "yyyyMMdd"))
 		return header
 	}
 
