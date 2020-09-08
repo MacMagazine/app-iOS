@@ -24,6 +24,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBOutlet weak private var viewsLabel: UILabel!
 	@IBOutlet weak private var likesLabel: UILabel!
 	@IBOutlet weak private var durationLabel: PaddingLabel!
+    @IBOutlet weak private var share: AppButton!
 
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
@@ -35,13 +36,20 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		favorite.isSelected = object.favorite
 		favorite.isEnabled = true
+        setFavoriteButtonAccessibility(isEnabled: object.favorite)
 
 		headlineLabel.text = object.title
+        headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
         setLines(for: headlineLabel)
 		subheadlineLabel.text = object.pubDate?.watchDate()
+        subheadlineLabel.isAccessibilityElement = true
+        subheadlineLabel.accessibilityLabel = object.pubDate?.watchDate().setDateAndTimeAccessibility()
 		viewsLabel.text = object.views
+        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
 		likesLabel.text = object.likes
+        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
 		durationLabel.text = object.duration?.toSubHeaderDate()
+        durationLabel.accessibilityLabel = object.duration?.toSubHeaderDate().setTimeAccessibility()
 
 		guard let artworkURL = object.artworkURL else {
 			return
@@ -52,8 +60,18 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		youtubeWebView?.scrollView.isScrollEnabled = false
 		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
 		youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
+        youtubeWebView.isAccessibilityElement = false
 
 		youtubeWebView?.videoId = object.videoId
+
+        accessibilityElements = [playButton as Any,
+                                 durationLabel as Any,
+                                 subheadlineLabel as Any,
+                                 headlineLabel as Any,
+                                 viewsLabel as Any,
+                                 likesLabel as Any,
+                                 favorite as Any,
+                                 share as Any]
 	}
 
 	func configureVideo(with object: JSONVideo) {
@@ -61,13 +79,20 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		favorite.isSelected = false
 		favorite.isEnabled = false
+        setFavoriteButtonAccessibility(isEnabled: false)
 
 		headlineLabel.text = object.title
+        headlineLabel.accessibilityLabel = "Título: \(object.title)"
         setLines(for: headlineLabel)
         subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
+        subheadlineLabel.isAccessibilityElement = true
+        subheadlineLabel.accessibilityLabel = object.pubDate.toDate(Format.youtube).watchDate().setDateAndTimeAccessibility()
 		viewsLabel.text = object.views
+        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views)."
 		likesLabel.text = object.likes
+        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes)."
 		durationLabel.text = object.duration.toSubHeaderDate()
+        durationLabel.accessibilityLabel = object.duration.toSubHeaderDate().setTimeAccessibility()
 
 		thumbnailImageView.kf.indicatorType = .activity
 		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
@@ -78,6 +103,14 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 		youtubeWebView?.videoId = object.videoId
 	}
+
+    private func setFavoriteButtonAccessibility(isEnabled: Bool) {
+        if isEnabled {
+            favorite.accessibilityLabel = "Desfavoritar o video."
+        } else {
+            favorite.accessibilityLabel = "Favoritar o video."
+        }
+    }
 
     fileprivate func setLines(for label: UILabel) {
         let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
@@ -126,6 +159,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBAction private func favorite(_ sender: Any) {
 		Favorite().updateVideoStatus(using: videoId) { isFavoriteOn in
 			self.favorite.isSelected = isFavoriteOn
+            self.setFavoriteButtonAccessibility(isEnabled: isFavoriteOn)
 		}
 	}
 

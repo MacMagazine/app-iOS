@@ -32,10 +32,9 @@ extension String {
         return calendar
     }
 
-	func toHeaderDate() -> String {
-		// Expected date format: "20190227"
+    func toHeaderDate(with dateFormat: String) -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyyMMdd"
+		dateFormatter.dateFormat = dateFormat
 		dateFormatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
 		let date = dateFormatter.date(from: self) ?? Date()
 
@@ -50,6 +49,81 @@ extension String {
 		dateFormatter.dateFormat = "EEEE, dd 'DE' MMMM"
 		return dateFormatter.string(from: date).uppercased()
 	}
+
+    func setHeaderDateAccessibility() -> String {
+        if self == "HOJE" {
+            return "Posts de Hoje."
+        } else if self == "ONTEM" {
+            return "Posts de Ontem."
+        } else {
+            return "Posts de \(self)."
+        }
+    }
+
+    func setTimeAccessibility() -> String {
+        let array = self.split { $0 == ":" }.map( String.init )
+
+        if array.count == 3 {
+            let hours = array[0]
+            let minutes = array[1]
+            let seconds = array[2]
+
+            return "\(getHoursString(string: hours))\(getMinutesString(string: minutes, elementsQuantity: 3))\(getSecondsString(string: seconds))"
+        } else if array.count == 2 {
+            let minutes = array[0]
+            let seconds = array[1]
+
+            return "\(getMinutesString(string: minutes, elementsQuantity: 2))\(getSecondsString(string: seconds))"
+        } else {
+            let seconds = array[0]
+
+            return "\(getSecondsString(string: seconds))"
+        }
+    }
+
+    func setDateAndTimeAccessibility() -> String {
+        let array = self.split { $0 == " " }.map( String.init )
+
+        // Expected format: "dd/MM/yyyy HH:mm"
+        guard array.count == 2 else {
+            return ""
+        }
+
+        let date = array[0]
+        let time = array[1]
+
+        return "Video postado: \(date.toHeaderDate(with: "dd/MM/yyyy")), \(time.setTimeAccessibility())."
+    }
+
+    private func getHoursString(string: String) -> String {
+        if Int(string) == 1 {
+            return "Uma hora"
+        } else if Int(string) == 2 {
+            return "Duas horas"
+        } else {
+            return "\(string) horas"
+        }
+    }
+
+    private func getMinutesString(string: String, elementsQuantity: Int) -> String {
+        if Int(string) == 0 {
+            return " "
+        } else if Int(string) == 1 {
+            return elementsQuantity == 2 ? "Um minuto" : ", Um minuto"
+        } else {
+            return elementsQuantity == 2 ? "\(string) minutos" : ", \(string) minutos"
+        }
+    }
+
+    private func getSecondsString(string: String) -> String {
+        if Int(string) == 0 {
+            return "."
+        } else if Int(string) == 1 {
+            return " e um segundo."
+        } else {
+            return " e \(string) segundos."
+        }
+    }
 
 	func toComplicationDate() -> String {
 		let dateToUse = self.toDate()

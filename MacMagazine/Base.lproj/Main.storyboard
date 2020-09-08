@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,17 +74,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
                         <barButtonItem key="leftBarButtonItem" image="fav_off" id="vUZ-wN-Khb">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Ox-zf-Apm">
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts."/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -258,6 +254,9 @@
             <point key="canvasLocation" x="1364" y="-2885"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="lNV-kD-aRc"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="fav_off" width="21" height="21"/>
         <image name="logo" width="415" height="350"/>
@@ -267,7 +266,4 @@
         <image name="tab_settings" width="24" height="25"/>
         <image name="tab_video" width="35" height="24"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="lNV-kD-aRc"/>
-    </inferredMetricsTieBreakers>
 </document>
