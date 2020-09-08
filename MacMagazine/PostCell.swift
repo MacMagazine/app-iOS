@@ -85,9 +85,23 @@ class PostCell: AppTableViewCell {
     func configurePodcast(_ object: Post) {
         headlineLabel?.text = object.title
         headlineLabel?.accessibilityLabel = "Título: \(object.title ?? "Não especificado")."
+
         subheadlineLabel?.text = object.pubDate?.cellDate()
-        // Expected date format: "01/01/2020"
         subheadlineLabel?.accessibilityLabel = "Postado em: \(object.pubDate?.cellDate().toHeaderDate(with: "dd/MM/yyyy") ?? "Não especificado")."
+
+        favoriteImageView.alpha = (object.favorite ? 1 : 0)
+        setFavoriteImageViewAccessibility(isEnabled: object.favorite)
+
+        headlineLabel?.alpha = (object.read ? Settings().transparency : 1)
+        subheadlineLabel?.alpha = (object.read ? Settings().transparency : 1)
+        thumbnailImageView.alpha = (object.read ? Settings().transparency : 1)
+        lengthlineLabel.alpha = (object.read ? Settings().transparency : 1)
+
+        guard let artworkURL = object.artworkURL else {
+            return
+        }
+        thumbnailImageView.kf.indicatorType = .activity
+        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
 
         guard let duration = object.duration else {
             lengthlineLabel?.text = nil
@@ -96,32 +110,19 @@ class PostCell: AppTableViewCell {
         }
 
         lengthlineLabel?.text = "duração: \(duration)"
-        lengthlineLabel?.accessibilityLabel = "Duração: \(duration.setTimeAccessibility())"
+        lengthlineLabel?.accessibilityLabel = "Duração: \(duration.toAccessibilityTime())"
 
-        favoriteImageView.alpha = (object.favorite ? 1 : 0)
-        setFavoriteImageViewAccessibility(isEnabled: object.favorite)
-
-        guard let artworkURL = object.artworkURL else {
-            return
-        }
-        thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
-
-        headlineLabel?.alpha = (object.read ? Settings().transparency : 1)
-        subheadlineLabel?.alpha = (object.read ? Settings().transparency : 1)
-        thumbnailImageView.alpha = (object.read ? Settings().transparency : 1)
-        lengthlineLabel.alpha = (object.read ? Settings().transparency : 1)
-}
+    }
 
     func configureSearchPodcast(_ object: XMLPost) {
         headlineLabel?.text = object.title
         headlineLabel?.accessibilityLabel = "Título: \(object.title)."
-        subheadlineLabel?.text = object.pubDate.toDate().cellDate()
 
-        // Expected date format: "01/01/2020"
+        subheadlineLabel?.text = object.pubDate.toDate().cellDate()
         subheadlineLabel?.accessibilityLabel = "Postado em: \(object.pubDate.toDate().cellDate().toHeaderDate(with: "dd/MM/yyyy"))."
+
         lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
-        lengthlineLabel?.accessibilityLabel = object.duration.isEmpty ? "" : "Duração: \(object.duration.setTimeAccessibility())"
+        lengthlineLabel?.accessibilityLabel = object.duration.isEmpty ? "" : "Duração: \(object.duration.toAccessibilityTime())"
 
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))

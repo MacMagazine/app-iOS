@@ -60,7 +60,7 @@ extension String {
         }
     }
 
-    func setTimeAccessibility() -> String {
+    func toAccessibilityTime() -> String {
         let array = self.split { $0 == ":" }.map( String.init )
 
         if array.count == 3 {
@@ -81,7 +81,7 @@ extension String {
         }
     }
 
-    func setDateAndTimeAccessibility() -> String {
+    func toAccessibilityDateAndTime() -> String {
         let array = self.split { $0 == " " }.map( String.init )
 
         // Expected format: "dd/MM/yyyy HH:mm"
@@ -92,7 +92,7 @@ extension String {
         let date = array[0]
         let time = array[1]
 
-        return "Video postado em: \(date.toHeaderDate(with: "dd/MM/yyyy")), \(time.setTimeAccessibility())."
+        return "Video postado em: \(date.toHeaderDate(with: "dd/MM/yyyy")), \(time.toAccessibilityTime())."
     }
 
     private func getHoursString(string: String) -> String {
