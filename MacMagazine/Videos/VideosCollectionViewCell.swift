@@ -29,109 +29,49 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
 
+    struct VideoInfo {
+        var videoId: String?
+        var canFavorite: Bool
+        var isFavorite: Bool
+        var title: String?
+        var subtitle: String?
+        var views: String?
+        var likes: String?
+        var duration: String?
+        var thumb: String?
+    }
+
 	// MARK: - Setup methods -
 
 	func configureVideo(with object: Video) {
-		videoId = object.videoId
-
-		favorite.isSelected = object.favorite
-		favorite.isEnabled = true
-        setFavoriteButtonAccessibility(isEnabled: object.favorite)
-
-		headlineLabel.text = object.title
-        headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
-        setLines(for: headlineLabel)
-		subheadlineLabel.text = object.pubDate?.watchDate()
-        subheadlineLabel.isAccessibilityElement = true
-        subheadlineLabel.accessibilityLabel = object.pubDate?.watchDate().setDateAndTimeAccessibility()
-		viewsLabel.text = object.views
-        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
-		likesLabel.text = object.likes
-        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
-		durationLabel.text = object.duration?.toSubHeaderDate()
-        durationLabel.accessibilityLabel = object.duration?.toSubHeaderDate().setTimeAccessibility()
-
-		guard let artworkURL = object.artworkURL else {
-			return
-		}
-		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
-
-		youtubeWebView?.scrollView.isScrollEnabled = false
-		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
-		youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
-        youtubeWebView.isAccessibilityElement = false
-
-		youtubeWebView?.videoId = object.videoId
-
-        accessibilityElements = [playButton as Any,
-                                 durationLabel as Any,
-                                 subheadlineLabel as Any,
-                                 headlineLabel as Any,
-                                 viewsLabel as Any,
-                                 likesLabel as Any,
-                                 favorite as Any,
-                                 share as Any]
-	}
+        let info = VideoInfo(videoId: object.videoId,
+                             canFavorite: true,
+                             isFavorite: object.favorite,
+                             title: object.title,
+                             subtitle: object.pubDate?.watchDate(),
+                             views: object.views,
+                             likes: object.likes,
+                             duration: object.duration?.toSubHeaderDate(),
+                             thumb: object.artworkURL)
+        showVideoInfo(info)
+    }
 
 	func configureVideo(with object: JSONVideo) {
-		videoId = object.videoId
-
-		favorite.isSelected = false
-		favorite.isEnabled = false
-        setFavoriteButtonAccessibility(isEnabled: false)
-
-		headlineLabel.text = object.title
-        headlineLabel.accessibilityLabel = "Título: \(object.title)"
-        setLines(for: headlineLabel)
-        subheadlineLabel.text = object.pubDate.toDate(Format.youtube).watchDate()
-        subheadlineLabel.isAccessibilityElement = true
-        subheadlineLabel.accessibilityLabel = object.pubDate.toDate(Format.youtube).watchDate().setDateAndTimeAccessibility()
-		viewsLabel.text = object.views
-        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views)."
-		likesLabel.text = object.likes
-        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes)."
-		durationLabel.text = object.duration.toSubHeaderDate()
-        durationLabel.accessibilityLabel = object.duration.toSubHeaderDate().setTimeAccessibility()
-
-		thumbnailImageView.kf.indicatorType = .activity
-		thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
-
-		youtubeWebView?.scrollView.isScrollEnabled = false
-		youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
-		youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
-
-		youtubeWebView?.videoId = object.videoId
+        let info = VideoInfo(videoId: object.videoId,
+                             canFavorite: false,
+                             isFavorite: false,
+                             title: object.title,
+                             subtitle: object.pubDate.toDate(Format.youtube).watchDate(),
+                             views: object.views,
+                             likes: object.likes,
+                             duration: object.duration.toSubHeaderDate(),
+                             thumb: object.artworkURL)
+        showVideoInfo(info)
 	}
+}
 
-    private func setFavoriteButtonAccessibility(isEnabled: Bool) {
-        if isEnabled {
-            favorite.accessibilityLabel = "Desfavoritar o video."
-        } else {
-            favorite.accessibilityLabel = "Favoritar o video."
-        }
-    }
-
-    fileprivate func setLines(for label: UILabel) {
-        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
-        switch contentSize {
-        case .extraExtraExtraLarge,
-             .accessibilityMedium,
-             .accessibilityLarge:
-            label.numberOfLines = 3
-        case .accessibilityExtraLarge:
-            label.numberOfLines = 4
-        case .accessibilityExtraExtraLarge:
-            label.numberOfLines = 5
-        case .accessibilityExtraExtraExtraLarge:
-            label.numberOfLines = 4
-        default:
-            break
-        }
-    }
-
-	// MARK: - Actions methods -
-
+// MARK: - Actions methods -
+extension VideosCollectionViewCell {
 	@IBAction private func play(_ sender: Any) {
 		thumbnailImageView.isHidden = true
 		playButton.isHidden = true
@@ -163,6 +103,81 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 		}
 	}
 
+}
+
+extension VideosCollectionViewCell {
+    fileprivate func setFavoriteButtonAccessibility(isEnabled: Bool) {
+        if isEnabled {
+            favorite.accessibilityLabel = "Desfavoritar o video."
+        } else {
+            favorite.accessibilityLabel = "Favoritar o video."
+        }
+    }
+
+    fileprivate func setLines(for label: UILabel) {
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+        switch contentSize {
+        case .extraExtraExtraLarge,
+             .accessibilityMedium,
+             .accessibilityLarge:
+            label.numberOfLines = 3
+        case .accessibilityExtraLarge:
+            label.numberOfLines = 4
+        case .accessibilityExtraExtraLarge:
+            label.numberOfLines = 5
+        case .accessibilityExtraExtraExtraLarge:
+            label.numberOfLines = 4
+        default:
+            break
+        }
+    }
+
+    fileprivate func showVideoInfo(_ object: VideoInfo) {
+        videoId = object.videoId
+
+        favorite.isSelected = object.isFavorite
+        favorite.isEnabled = object.canFavorite
+        setFavoriteButtonAccessibility(isEnabled: object.isFavorite)
+
+        headlineLabel.text = object.title
+        headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
+        setLines(for: headlineLabel)
+
+        subheadlineLabel.text = object.subtitle
+        subheadlineLabel.isAccessibilityElement = true
+        subheadlineLabel.accessibilityLabel = object.subtitle?.toAccessibilityDateAndTime()
+
+        viewsLabel.text = object.views
+        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
+
+        likesLabel.text = object.likes
+        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
+
+        durationLabel.text = object.duration
+        durationLabel.accessibilityLabel = object.duration?.toAccessibilityTime()
+
+        youtubeWebView?.scrollView.isScrollEnabled = false
+        youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
+        youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
+        youtubeWebView.isAccessibilityElement = false
+
+        youtubeWebView?.videoId = object.videoId
+
+        accessibilityElements = [playButton as Any,
+                                 durationLabel as Any,
+                                 subheadlineLabel as Any,
+                                 headlineLabel as Any,
+                                 viewsLabel as Any,
+                                 likesLabel as Any,
+                                 favorite as Any,
+                                 share as Any]
+
+        guard let artworkURL = object.thumb else {
+            return
+        }
+        thumbnailImageView.kf.indicatorType = .activity
+        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
+    }
 }
 
 extension VideosCollectionViewCell: WKScriptMessageHandler {

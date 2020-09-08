@@ -20,6 +20,7 @@ extension Notification.Name {
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
 	static let updateSelectedPost = Notification.Name("updateSelectedPost")
     static let refreshAfterBackground = Notification.Name("refreshAfterBackground")
+    static let reloadData = Notification.Name("reloadData")
 }
 
 // MARK: - Update content -

@@ -42,6 +42,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 		// Do any additional setup after loading the view, typically from a nib.
 		NotificationCenter.default.addObserver(self, selector: #selector(onScrollToTop(_:)), name: .scrollToTop, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onReloadData(_:)), name: .reloadData, object: nil)
 
 		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
         fetchController?.delegate = self
@@ -71,16 +72,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
     // MARK: - Scroll detection -
 
-	@objc func onScrollToTop(_ notification: Notification) {
-        if tableView.numberOfSections > 0 &&
-            tableView.numberOfRows(inSection: 0) > 0 {
-            tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
-        }
-	}
-
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-		if isLoading {
+		if isLoading &&
+            direction == .up {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 				self.getPodcasts(paged: 0)
 			}
@@ -93,7 +87,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		lastContentOffset = offset
 
         // Pull to Refresh
-        if offset.y < -100 &&
+        if offset.y < -150 &&
             navigationItem.searchController == nil {
 			showSpin?()
 			isLoading = true
@@ -214,7 +208,6 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
                 guard let post = post else {
                     // When post == nil, indicates the last post retrieved
-                    self.fetchController?.reloadData()
                     return
                 }
                 if !post.duration.isEmpty {
@@ -246,4 +239,20 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		API().searchPodcasts(text, processResponse)
 	}
 
+}
+
+// MARK: - Notifications -
+
+extension PodcastMasterViewController {
+    @objc func onScrollToTop(_ notification: Notification) {
+        if tableView.numberOfSections > 0 &&
+            tableView.numberOfRows(inSection: 0) > 0 {
+            tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+        }
+    }
+
+    @objc func onReloadData(_ notification: Notification) {
+        self.tableView.reloadData()
+    }
 }

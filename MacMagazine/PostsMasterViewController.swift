@@ -91,6 +91,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			NotificationCenter.default.addObserver(self, selector: #selector(onUpdateSelectedPost(_:)), name: .updateSelectedPost, object: nil)
 		}
 
+        NotificationCenter.default.addObserver(self, selector: #selector(onReloadData(_:)), name: .reloadData, object: nil)
+
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
 
@@ -294,7 +296,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
 
                     // When post == nil, indicates the last post retrieved
-                    self.fetchController?.reloadData()
                     self.hideSpin()
 
                     if paged < 1 {
@@ -410,7 +411,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 extension PostsMasterViewController {
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-		if navigationItem.titleView == spin {
+		if navigationItem.titleView == spin &&
+            direction == .up {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
 				self.getPosts(paged: 0)
 			}
@@ -419,11 +421,11 @@ extension PostsMasterViewController {
 
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
-        direction = offset.y > lastContentOffset.y && offset.y > 100 ? .down : .up
+        direction = offset.y > lastContentOffset.y ? .down : .up
         lastContentOffset = offset
 
         // Pull to Refresh
-        if offset.y < -100 &&
+        if offset.y < -150 &&
             navigationItem.titleView == logoView &&
             navigationItem.searchController == nil &&
 			fetchController?.fetchRequest.predicate == nil {
@@ -577,6 +579,10 @@ extension PostsMasterViewController {
 			UserDefaults.standard.synchronize()
 		}
 	}
+
+    @objc func onReloadData(_ notification: Notification) {
+        self.tableView.reloadData()
+    }
 }
 
 // MARK: - Peek&Pop -
