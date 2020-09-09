@@ -121,7 +121,7 @@ struct Settings {
 
     var transparency: CGFloat {
         guard let transparency = UserDefaults.standard.object(forKey: Definitions.transparency) as? CGFloat else {
-            return 0.8
+            return 0.4
         }
         return transparency
     }
