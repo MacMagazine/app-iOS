@@ -7,6 +7,7 @@ O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_
 - Posts com imagens dos artigos
 - Compartilhamento de posts
 - Favoritar posts
+- Leitura de posts em fullscreen
 - Podcasts, com compartilhamento e favoritar
 - Videos, com compartilhamento e favoritar
 - Buscas em Posts, Podcasts e Videos
