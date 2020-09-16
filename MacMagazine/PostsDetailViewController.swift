@@ -32,6 +32,8 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		// Do any additional setup after loading the view, typically from a nib.
 		dataSource = self
 		delegate = self
+        
+        splitViewController?.presentsWithGesture = false
 
 		var controller = UIViewController()
 		if !orderedViewControllers.isEmpty {

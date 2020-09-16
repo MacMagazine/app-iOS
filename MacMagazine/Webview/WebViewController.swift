@@ -51,6 +51,10 @@ class WebViewController: UIViewController {
 	var forceReload: Bool = false
 	var previousIsDarkMode: Bool = false
 	var previousFonteSize: String = ""
+    
+    var sideBarIsClosed: Bool {
+        self.splitViewController?.preferredDisplayMode == .allVisible
+    }
 
 	// MARK: - View lifecycle -
 
@@ -61,6 +65,7 @@ class WebViewController: UIViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
 
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+        toggleSide.image = UIImage(named: sideBarIsClosed ? "eye" : "eye_slash")
 		if Settings().isPad {
             self.parent?.navigationItem.rightBarButtonItems = [share, favorite, toggleSide]
         } else {
@@ -235,6 +240,7 @@ extension WebViewController {
 			if post?.link == object.link {
 				post?.favorito = object.favorite
 				favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+                toggleSide.image = UIImage(named: sideBarIsClosed ? "eye" : "eye_slash")
 				self.parent?.navigationItem.rightBarButtonItems = [share, favorite, toggleSide]
 			}
 		}
