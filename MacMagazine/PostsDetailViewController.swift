@@ -14,11 +14,13 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	var selectedIndex = 0
 	var links: [PostData] = []
-	var createWebViewController: ((PostData) -> UIViewController?)?
+	var createWebViewController: ((PostData) -> WebViewController?)?
 
 	private(set) lazy var orderedViewControllers: [UIViewController] = {
 		return links.map { post in
-			return self.createWebViewController?(post) ?? UIViewController()
+            let webVC = self.createWebViewController?(post)
+            webVC?.presentationDelegate = self
+			return webVC ?? UIViewController()
 		}
 	}()
 
@@ -140,5 +142,17 @@ extension PostsDetailViewController {
         userActivity = handoff
 
         userActivity?.becomeCurrent()
+    }
+}
+
+// Open-Close SideBar
+extension PostsDetailViewController : WebViewControllerContentDelegate {
+    
+    func toggleSideBar(_ completion: @escaping (Bool) -> Void) {
+        UIView.animate(withDuration: 1.0) {
+            let splitIsClosed = self.splitViewController?.displayMode == .primaryHidden
+            self.splitViewController?.preferredDisplayMode = splitIsClosed ? .allVisible : .primaryHidden
+            completion(splitIsClosed)
+        }
     }
 }

@@ -480,7 +480,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 // MARK: - UIViewControllerPreviewingDelegate -
 
 extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebViewControllerDelegate {
-
+    
 	func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
 
 		guard let indexPath = tableView.indexPathForRow(at: location),
@@ -491,10 +491,9 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 		tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
 		previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
-		guard let webController = createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite)) as? WebViewController else {
-			return nil
-		}
-		webController.delegate = self
+		let webController = createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite))
+		
+        webController?.delegate = self
 
 		return webController
 	}
@@ -536,7 +535,6 @@ extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebView
 		}
 		self.tableView.deselectRow(at: index, animated: true)
 	}
-
 }
 
 // MARK: - Notifications -
@@ -623,7 +621,7 @@ func prepareDetailController(_ controller: PostsDetailViewController, using link
 	controller.createWebViewController = createWebViewController
 }
 
-func createWebViewController(post: PostData) -> UIViewController? {
+func createWebViewController(post: PostData) -> WebViewController? {
 	let storyboard = UIStoryboard(name: "WebView", bundle: nil)
 	guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
 		return nil

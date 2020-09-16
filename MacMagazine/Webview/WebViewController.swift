@@ -16,6 +16,10 @@ protocol WebViewControllerDelegate {
 	func previewActionCancel()
 }
 
+protocol WebViewControllerContentDelegate : UIViewController {
+    func toggleSideBar(_ completion: @escaping (Bool) -> Void)
+}
+
 class WebViewController: UIViewController {
 
 	// MARK: - Properties -
@@ -24,8 +28,10 @@ class WebViewController: UIViewController {
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 	@IBOutlet private weak var share: UIBarButtonItem!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var toggleSide: UIBarButtonItem!
 
 	var delegate: WebViewControllerDelegate?
+    var presentationDelegate: WebViewControllerContentDelegate?
 
 	var post: PostData? {
 		didSet {
@@ -55,7 +61,11 @@ class WebViewController: UIViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
 
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
-		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+		if Settings().isPad {
+            self.parent?.navigationItem.rightBarButtonItems = [share, favorite, toggleSide]
+        } else {
+            self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+        }
         self.parent?.navigationItem.leftBarButtonItem?.accessibilityLabel = "Voltar"
 
         webView?.navigationDelegate = self
@@ -165,6 +175,12 @@ class WebViewController: UIViewController {
 		let items: [Any] =  [post.title ?? "", url]
 		Share().present(at: share, using: items)
 	}
+    
+    @IBAction private func toggleSide(_ sender: Any) {
+        self.presentationDelegate?.toggleSideBar { isClosed in
+            self.toggleSide.image = UIImage(named: isClosed ? "eye" : "eye_slash")
+        }
+    }
 
 	// MARK: - UIPreviewAction -
 
@@ -219,7 +235,7 @@ extension WebViewController {
 			if post?.link == object.link {
 				post?.favorito = object.favorite
 				favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
-				self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+				self.parent?.navigationItem.rightBarButtonItems = [share, favorite, toggleSide]
 			}
 		}
 	}
@@ -231,7 +247,11 @@ extension WebViewController {
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+        if Settings().isPad {
+            self.parent?.navigationItem.rightBarButtonItems = [share, favorite, toggleSide]
+        } else {
+            self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+        }
 		self.navigationItem.rightBarButtonItems = nil
 
         if self.navigationController?.viewControllers.count ?? 0 > 1 {
