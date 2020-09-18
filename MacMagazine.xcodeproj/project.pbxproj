@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */; };
+		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
+		685315FD25153AE6008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FC25153AE6008F6CDC /* Kingfisher */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
@@ -120,10 +122,6 @@
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
 		9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82C9D25150E3000D765A5 /* OneSignal */; };
 		9BF82CA425150E4200D765A5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CA325150E4200D765A5 /* OneSignal */; };
-		9BF82CC12515169100D765A5 /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC02515169100D765A5 /* KingfisherDynamic */; };
-		9BF82CC22515169100D765A5 /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC02515169100D765A5 /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		9BF82CC7251516AF00D765A5 /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC6251516AF00D765A5 /* KingfisherDynamic */; };
-		9BF82CC8251516AF00D765A5 /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC6251516AF00D765A5 /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,7 +195,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9BF82CC22515169100D765A5 /* KingfisherDynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,7 +205,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9BF82CC8251516AF00D765A5 /* KingfisherDynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,7 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BF82CC7251516AF00D765A5 /* KingfisherDynamic in Frameworks */,
+				685315FD25153AE6008F6CDC /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,10 +362,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
-				9BF82CC12515169100D765A5 /* KingfisherDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,7 +786,7 @@
 			);
 			name = MacMagazineWatchExtension;
 			packageProductDependencies = (
-				9BF82CC6251516AF00D765A5 /* KingfisherDynamic */,
+				685315FC25153AE6008F6CDC /* Kingfisher */,
 			);
 			productName = "MacMagazineWatch Extension";
 			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */;
@@ -817,7 +813,7 @@
 			name = MacMagazine;
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
-				9BF82CC02515169100D765A5 /* KingfisherDynamic */,
+				685315FA25153ADE008F6CDC /* Kingfisher */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1305,7 +1301,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1333,7 +1329,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1361,7 +1357,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1399,7 +1395,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1436,7 +1432,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1469,7 +1465,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1619,7 +1615,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1648,7 +1644,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.3;
+				CURRENT_PROJECT_VERSION = 4.2.0.39;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1793,6 +1789,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		685315FA25153ADE008F6CDC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		685315FC25153AE6008F6CDC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		9BF82C9D25150E3000D765A5 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
@@ -1802,16 +1808,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
 			productName = OneSignal;
-		};
-		9BF82CC02515169100D765A5 /* KingfisherDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = KingfisherDynamic;
-		};
-		9BF82CC6251516AF00D765A5 /* KingfisherDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = KingfisherDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 

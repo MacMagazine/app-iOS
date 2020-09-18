@@ -186,8 +186,11 @@ class API {
         }
 
 		#if os(iOS)
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		#endif
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+        #endif
+
         Network.get(url: url) { (data: Data?, _: String?) in
 			#if os(iOS)
 			DispatchQueue.main.async {
