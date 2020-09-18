@@ -147,7 +147,11 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         read.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
         read.accessibilityLabel = object.read ? "Desmarcar como Lido" : "Marcar como Lido"
 
-		let swipeActions = UISwipeActionsConfiguration(actions: [read, favoritar])
+        var buttons = [favoritar]
+        if Settings().transparency < 1 {
+            buttons = [read, favoritar]
+        }
+		let swipeActions = UISwipeActionsConfiguration(actions: buttons)
 		swipeActions.performsFirstActionWithFullSwipe = true
 		return swipeActions
 	}

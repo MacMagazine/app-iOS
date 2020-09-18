@@ -154,7 +154,7 @@ class SettingsTableViewController: UITableViewController {
                 self.flush(.all)
             })
 
-            alertController.addAction(UIAlertAction(title: "Limpar e manter Favoritos", style: .default) { _ in
+            alertController.addAction(UIAlertAction(title: "Limpar e manter favoritos", style: .default) { _ in
                 self.flush(.keepFavorite)
             })
 

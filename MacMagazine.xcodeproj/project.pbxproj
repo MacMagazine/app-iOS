@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,8 +36,6 @@
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
 		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
-		9B5D4041225EA36200315963 /* EMTLoadingIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */; };
-		9B5D4042225EA36200315963 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */; };
 		9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
@@ -65,7 +63,6 @@
 		9B9C7F9C226BF836000534CA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F9B226BF836000534CA /* NotificationService.swift */; };
 		9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B9C7FAE226C0F5A000534CA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
-		9B9C7FAF226C1622000534CA /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
 		9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7FB0226CA192000534CA /* PushNotification.swift */; };
 		9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393C2260DDB8004005AA /* Settings.storyboard */; };
 		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
@@ -81,14 +78,13 @@
 		9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */; };
 		9BB2CA722264B8890012ACD6 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA712264B8890012ACD6 /* Share.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
-		9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
 		9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */; };
 		9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC62225B99F600559170 /* ComplicationController.swift */; };
 		9BB4BC65225B99F700559170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC64225B99F700559170 /* Assets.xcassets */; };
 		9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */; };
 		9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB94D13225DF023000FA38E /* LoadingController.swift */; };
-		9BBFD57C2283518C005E6897 /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7FA7226BFBBC000534CA /* OneSignal.framework */; };
 		9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
@@ -122,7 +118,12 @@
 		9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC8F2296F88800649C0F /* AppDelegateExtensions.swift */; };
 		9BF356281F6208F70081BE90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF356271F6208F70081BE90 /* UIColorExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
-		9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF96571225E3ACD00BAF22D /* Kingfisher.framework */; };
+		9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82C9D25150E3000D765A5 /* OneSignal */; };
+		9BF82CA425150E4200D765A5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CA325150E4200D765A5 /* OneSignal */; };
+		9BF82CC12515169100D765A5 /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC02515169100D765A5 /* KingfisherDynamic */; };
+		9BF82CC22515169100D765A5 /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC02515169100D765A5 /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9BF82CC7251516AF00D765A5 /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC6251516AF00D765A5 /* KingfisherDynamic */; };
+		9BF82CC8251516AF00D765A5 /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CC6251516AF00D765A5 /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,7 +175,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				9BB4BC5A225B99F600559170 /* MacMagazineWatch Extension.appex in Embed App Extensions */,
+				9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +189,28 @@
 				9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BF82CC32515169100D765A5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9BF82CC22515169100D765A5 /* KingfisherDynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BF82CC9251516AF00D765A5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9BF82CC8251516AF00D765A5 /* KingfisherDynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BF9654F225E1DB800BAF22D /* Embed Frameworks */ = {
@@ -237,7 +260,6 @@
 		9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 3.xcdatamodel"; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9B6F9659225E5A060075ED89 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EMTLoadingIndicator.framework; sourceTree = "<group>"; };
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityExtensions.swift; sourceTree = "<group>"; };
 		9B7A41C0238DAC9000BA85C0 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
@@ -259,7 +281,6 @@
 		9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9C7F9B226BF836000534CA /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		9B9C7F9D226BF836000534CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9B9C7FA7226BFBBC000534CA /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OneSignal.framework; sourceTree = "<group>"; };
 		9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazine.entitlements; sourceTree = "<group>"; };
 		9B9C7FAD226BFEEC000534CA /* MacMagazineNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		9B9C7FB0226CA192000534CA /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
@@ -278,7 +299,7 @@
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MacMagazineWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineWatchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		9BB4BC62225B99F600559170 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -322,8 +343,6 @@
 		9BE697DD1F487EEF0048D68D /* PostsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTests.swift; sourceTree = "<group>"; };
 		9BF356271F6208F70081BE90 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDataSource.swift; sourceTree = "<group>"; };
-		9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
-		9BF96571225E3ACD00BAF22D /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,7 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BBFD57C2283518C005E6897 /* OneSignal.framework in Frameworks */,
+				9BF82CA425150E4200D765A5 /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,8 +358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B5D4041225EA36200315963 /* EMTLoadingIndicator.framework in Frameworks */,
-				9B5D4042225EA36200315963 /* Kingfisher.framework in Frameworks */,
+				9BF82CC7251516AF00D765A5 /* KingfisherDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,9 +367,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
+				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
-				9BF96572225E3AD500BAF22D /* Kingfisher.framework in Frameworks */,
-				9B9C7FAF226C1622000534CA /* OneSignal.framework in Frameworks */,
+				9BF82CC12515169100D765A5 /* KingfisherDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +454,6 @@
 			children = (
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				68F61C1F24F9524200A4E195 /* Config.xcconfig */,
-				9BF9656D225E3ACD00BAF22D /* Frameworks */,
 				9BD4E971225CFDEC00683B88 /* icons */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
@@ -518,7 +535,7 @@
 			path = MacMagazineWatch;
 			sourceTree = "<group>";
 		};
-		9BB4BC5D225B99F600559170 /* MacMagazineWatch Extension */ = {
+		9BB4BC5D225B99F600559170 /* MacMagazineWatchExtension */ = {
 			isa = PBXGroup;
 			children = (
 				9BB94D13225DF023000FA38E /* LoadingController.swift */,
@@ -528,7 +545,7 @@
 				9BB4BC64225B99F700559170 /* Assets.xcassets */,
 				9BB4BC66225B99F700559170 /* Info.plist */,
 			);
-			path = "MacMagazineWatch Extension";
+			path = MacMagazineWatchExtension;
 			sourceTree = "<group>";
 		};
 		9BC9B12F1F5C96A500C4DF17 /* Cells */ = {
@@ -550,7 +567,7 @@
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
 				9BE697CE1F4874C20048D68D /* MacMagazineTests */,
 				9BB4BC4E225B99F500559170 /* MacMagazineWatch */,
-				9BB4BC5D225B99F600559170 /* MacMagazineWatch Extension */,
+				9BB4BC5D225B99F600559170 /* MacMagazineWatchExtension */,
 				9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */,
 				9BCAD6781F47A08100B54526 /* Products */,
 				9BF96565225E371900BAF22D /* Frameworks */,
@@ -563,7 +580,7 @@
 				9BCAD6771F47A08100B54526 /* MacMagazine.app */,
 				9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */,
 				9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */,
-				9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */,
+				9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */,
 				9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */,
 			);
 			name = Products;
@@ -713,33 +730,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9BF9656D225E3ACD00BAF22D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9BF9656E225E3ACD00BAF22D /* watchOS */,
-				9BF96570225E3ACD00BAF22D /* iOS */,
-			);
-			path = Frameworks;
-			sourceTree = SOURCE_ROOT;
-		};
-		9BF9656E225E3ACD00BAF22D /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				9B6F965C225E6A170075ED89 /* EMTLoadingIndicator.framework */,
-				9BF9656F225E3ACD00BAF22D /* Kingfisher.framework */,
-			);
-			path = watchOS;
-			sourceTree = "<group>";
-		};
-		9BF96570225E3ACD00BAF22D /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				9B9C7FA7226BFBBC000534CA /* OneSignal.framework */,
-				9BF96571225E3ACD00BAF22D /* Kingfisher.framework */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -757,6 +747,9 @@
 			dependencies = (
 			);
 			name = MacMagazineNotificationServiceExtension;
+			packageProductDependencies = (
+				9BF82CA325150E4200D765A5 /* OneSignal */,
+			);
 			productName = MacMagazineNotificationServiceExtension;
 			productReference = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -781,23 +774,26 @@
 			productReference = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		9BB4BC58225B99F600559170 /* MacMagazineWatch Extension */ = {
+		9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch Extension" */;
+			buildConfigurationList = 9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatchExtension" */;
 			buildPhases = (
 				9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */,
 				9BB4BC55225B99F600559170 /* Sources */,
 				9BB4BC56225B99F600559170 /* Frameworks */,
-				9B5D4043225EA38F00315963 /* Run Sign Framework Script */,
 				9BB4BC57225B99F600559170 /* Resources */,
+				9BF82CC9251516AF00D765A5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "MacMagazineWatch Extension";
+			name = MacMagazineWatchExtension;
+			packageProductDependencies = (
+				9BF82CC6251516AF00D765A5 /* KingfisherDynamic */,
+			);
 			productName = "MacMagazineWatch Extension";
-			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatch Extension.appex */;
+			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		9BCAD6761F47A08100B54526 /* MacMagazine */ = {
@@ -808,9 +804,9 @@
 				9BCAD6731F47A08100B54526 /* Sources */,
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
-				9B70370B22500FD500F68654 /* Run Sign Framework Script */,
 				9BB4BC71225B99F700559170 /* Embed Watch Content */,
 				9B9C7FA4226BF836000534CA /* Embed App Extensions */,
+				9BF82CC32515169100D765A5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -819,6 +815,10 @@
 				9BB4BC68225B99F700559170 /* PBXTargetDependency */,
 			);
 			name = MacMagazine;
+			packageProductDependencies = (
+				9BF82C9D25150E3000D765A5 /* OneSignal */,
+				9BF82CC02515169100D765A5 /* KingfisherDynamic */,
+			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
 			productType = "com.apple.product-type.application";
@@ -848,7 +848,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
 					9B9C7F98226BF835000534CA = {
@@ -906,6 +906,10 @@
 				Base,
 			);
 			mainGroup = 9BCAD66E1F47A08100B54526;
+			packageReferences = (
+				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
+				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -913,7 +917,7 @@
 				9BCAD6761F47A08100B54526 /* MacMagazine */,
 				9BE697CC1F4874C20048D68D /* MacMagazineTests */,
 				9BB4BC4C225B99F500559170 /* MacMagazineWatch */,
-				9BB4BC58225B99F600559170 /* MacMagazineWatch Extension */,
+				9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */,
 				9B9C7F98226BF835000534CA /* MacMagazineNotificationServiceExtension */,
 			);
 		};
@@ -1010,50 +1014,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		9B5D4043225EA38F00315963 /* Run Sign Framework Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Frameworks/watchOS/Kingfisher.framework",
-				"$(SRCROOT)/Frameworks/watchOS/EMTLoadingIndicator.framework",
-			);
-			name = "Run Sign Framework Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/EMTLoadingIndicator.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		9B70370B22500FD500F68654 /* Run Sign Framework Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Frameworks/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Frameworks/iOS/OneSignal.framework",
-			);
-			name = "Run Sign Framework Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OneSignal.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1221,7 +1181,7 @@
 		};
 		9BB4BC5C225B99F600559170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9BB4BC58225B99F600559170 /* MacMagazineWatch Extension */;
+			target = 9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */;
 			targetProxy = 9BB4BC5B225B99F600559170 /* PBXContainerItemProxy */;
 		};
 		9BB4BC68225B99F700559170 /* PBXTargetDependency */ = {
@@ -1347,18 +1307,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.2.0.3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 4.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1383,18 +1335,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.2.0.3;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 4.2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
@@ -1421,12 +1365,11 @@
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)/MacMagazineWatchExtension",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks/watchOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = MacMagazineWatch_Extension;
+				IBSC_MODULE = MacMagazineWatchExtension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1460,12 +1403,11 @@
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
+					"$(PROJECT_DIR)/MacMagazineWatchExtension",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks/watchOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = MacMagazineWatch_Extension;
+				IBSC_MODULE = MacMagazineWatchExtension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1499,16 +1441,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
-					"$(PROJECT_DIR)/Frameworks/watchOS",
+					"$(PROJECT_DIR)/MacMagazineWatchExtension",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 4.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1537,16 +1474,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MacMagazineWatch\\ Extension",
-					"$(PROJECT_DIR)/Frameworks/watchOS",
+					"$(PROJECT_DIR)/MacMagazineWatchExtension",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "MacMagazineWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 4.2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
@@ -1588,6 +1520,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1612,7 +1545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1649,6 +1582,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1667,7 +1601,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1691,10 +1625,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks/iOS",
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1721,10 +1654,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks/iOS",
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1794,7 +1726,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch Extension" */ = {
+		9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatchExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9BB4BC6C225B99F700559170 /* Debug */,
@@ -1840,6 +1772,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.15.3;
+			};
+		};
+		9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.15.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9BF82C9D25150E3000D765A5 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignal;
+		};
+		9BF82CA325150E4200D765A5 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignal;
+		};
+		9BF82CC02515169100D765A5 /* KingfisherDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherDynamic;
+		};
+		9BF82CC6251516AF00D765A5 /* KingfisherDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {

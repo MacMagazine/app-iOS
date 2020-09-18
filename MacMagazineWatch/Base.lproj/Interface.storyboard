@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
-    <device id="watch38" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17156" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
+    <device id="watch38"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17034"/>
     </dependencies>
     <scenes>
         <!--MacMagazine-->
@@ -13,7 +12,7 @@
             <objects>
                 <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
-                        <imageView alignment="center" verticalAlignment="center" id="Mjh-1W-EUm"/>
+                        <label alignment="left" text="Carregando ..." id="oHQ-VB-ZBX"/>
                         <group width="1" height="1" alignment="left" layout="vertical" id="GrF-65-IpN">
                             <items>
                                 <label width="1" height="0.59999999999999998" alignment="left" text="Não foi possível obter os posts neste momento." textAlignment="center" numberOfLines="0" id="4G5-2k-WtO"/>
@@ -26,8 +25,8 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="loadingLabel" destination="oHQ-VB-ZBX" id="yMt-8D-KK4"/>
                         <outlet property="reloadGroup" destination="GrF-65-IpN" id="ClH-KU-t8Q"/>
-                        <outlet property="spin" destination="Mjh-1W-EUm" id="dPZ-Ja-Bb0"/>
                     </connections>
                 </controller>
             </objects>
@@ -40,7 +39,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="sR3-AM-Y7W">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Dbu-Ek-N2m"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="byL-Am-gQ5"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="mB8-gp-5A1">
                                     <items>
@@ -75,7 +73,6 @@
                         <outlet property="content" destination="bgJ-Ov-P9Z" id="MIj-bv-dit"/>
                         <outlet property="dateLabel" destination="Ryp-d6-Saf" id="oKh-gC-dyj"/>
                         <outlet property="image" destination="byL-Am-gQ5" id="9nf-Bp-JPt"/>
-                        <outlet property="spin" destination="Dbu-Ek-N2m" id="IPx-TX-p5R"/>
                         <outlet property="titleLabel" destination="boY-tx-SmG" id="9ou-5b-fVa"/>
                         <segue destination="aCm-Ql-Tag" kind="relationship" relationship="nextPage" id="a9N-WP-Pzs"/>
                     </connections>
@@ -90,7 +87,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="psJ-Tc-FcT">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="SGw-fl-GfY"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="UrY-FG-u5w"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="NZo-52-dmy">
                                     <items>
@@ -125,7 +121,6 @@
                         <outlet property="content" destination="jiI-TN-5aF" id="lva-ws-PJc"/>
                         <outlet property="dateLabel" destination="HNS-av-d2h" id="brR-2x-j8h"/>
                         <outlet property="image" destination="UrY-FG-u5w" id="FwL-b6-Aa3"/>
-                        <outlet property="spin" destination="SGw-fl-GfY" id="CO0-S3-GpB"/>
                         <outlet property="titleLabel" destination="yha-Ir-4py" id="FB5-cm-Q4Q"/>
                     </connections>
                 </controller>
@@ -139,7 +134,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="KtJ-MY-OFh">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="eLX-As-hdd"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Bai-wh-tN2"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="fAB-0I-URc">
                                     <items>
@@ -174,7 +168,6 @@
                         <outlet property="content" destination="Vag-Th-Nqa" id="S2N-B5-2ru"/>
                         <outlet property="dateLabel" destination="xGp-G8-3aa" id="2GI-OZ-ei2"/>
                         <outlet property="image" destination="Bai-wh-tN2" id="6xX-9X-rEe"/>
-                        <outlet property="spin" destination="eLX-As-hdd" id="jDz-uF-bZK"/>
                         <outlet property="titleLabel" destination="iLm-2e-Y4Q" id="B9J-li-q90"/>
                         <segue destination="0h6-bj-cf1" kind="relationship" relationship="nextPage" id="pjd-o9-v7l"/>
                     </connections>
@@ -189,7 +182,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="fcr-Dw-5Su">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="sPX-nC-x76"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="1sO-4h-nQY"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="e2T-vc-CEp">
                                     <items>
@@ -224,7 +216,6 @@
                         <outlet property="content" destination="Qa8-We-Hku" id="wXO-uZ-nri"/>
                         <outlet property="dateLabel" destination="c0i-Wv-Tze" id="1Jq-3K-WaT"/>
                         <outlet property="image" destination="1sO-4h-nQY" id="k1L-Nn-xJH"/>
-                        <outlet property="spin" destination="sPX-nC-x76" id="JYF-wk-oHe"/>
                         <outlet property="titleLabel" destination="nJB-G2-Au5" id="hbh-BY-1Ri"/>
                         <segue destination="gyA-pH-xNr" kind="relationship" relationship="nextPage" id="LbO-lM-k2n"/>
                     </connections>
@@ -239,7 +230,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="Shc-GA-yEz">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="zed-Dn-hAN"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="ehq-b7-JzK"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="VYW-w0-fPd">
                                     <items>
@@ -274,7 +264,6 @@
                         <outlet property="content" destination="Yb7-i7-VFu" id="z0e-6O-dSf"/>
                         <outlet property="dateLabel" destination="AHk-L8-R1W" id="4Kl-hA-SdS"/>
                         <outlet property="image" destination="ehq-b7-JzK" id="eaZ-fq-Y9W"/>
-                        <outlet property="spin" destination="zed-Dn-hAN" id="cLK-wn-zfL"/>
                         <outlet property="titleLabel" destination="9lQ-3S-7WQ" id="gLN-D5-lP3"/>
                         <segue destination="J5I-Gx-AZV" kind="relationship" relationship="nextPage" id="xV8-yg-14r"/>
                     </connections>
@@ -289,7 +278,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="mD4-wE-GEP">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="833-wC-dgD"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="t2v-5j-a8M"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="E6G-UV-frB">
                                     <items>
@@ -324,7 +312,6 @@
                         <outlet property="content" destination="Ndf-Cq-MtC" id="1bN-3z-aFm"/>
                         <outlet property="dateLabel" destination="AMa-yz-r3N" id="oTc-aw-7vJ"/>
                         <outlet property="image" destination="t2v-5j-a8M" id="fSl-nf-g2f"/>
-                        <outlet property="spin" destination="833-wC-dgD" id="ZL0-Un-YbO"/>
                         <outlet property="titleLabel" destination="dFQ-1c-t2K" id="VEP-BU-3B8"/>
                         <segue destination="6at-Ic-eAe" kind="relationship" relationship="nextPage" id="mx4-2R-XHb"/>
                     </connections>
@@ -339,7 +326,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="ddE-7d-xqJ">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="LqM-7W-QdI"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="Np1-eh-JgW"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="h3z-Hy-LtC">
                                     <items>
@@ -374,7 +360,6 @@
                         <outlet property="content" destination="FGc-YY-FVl" id="jbN-is-DBE"/>
                         <outlet property="dateLabel" destination="8yf-vX-fcD" id="8xE-nq-FgP"/>
                         <outlet property="image" destination="Np1-eh-JgW" id="BIR-HT-59N"/>
-                        <outlet property="spin" destination="LqM-7W-QdI" id="xWP-T8-Abe"/>
                         <outlet property="titleLabel" destination="Ngf-Gl-hle" id="ha9-bg-oXb"/>
                         <segue destination="Cnc-TD-fHb" kind="relationship" relationship="nextPage" id="VTb-ON-UsK"/>
                     </connections>
@@ -389,7 +374,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="FxZ-D3-ZfX">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="5Qa-Wv-LYY"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="OAu-aw-CQ2"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="b2M-SO-HSu">
                                     <items>
@@ -424,7 +408,6 @@
                         <outlet property="content" destination="GIK-xN-cUL" id="1uN-hX-aIP"/>
                         <outlet property="dateLabel" destination="GIz-6D-A9L" id="AcY-NX-oKU"/>
                         <outlet property="image" destination="OAu-aw-CQ2" id="siA-D5-kBt"/>
-                        <outlet property="spin" destination="5Qa-Wv-LYY" id="2Dy-M2-9Su"/>
                         <outlet property="titleLabel" destination="HMV-pW-7yC" id="pmg-d3-hdN"/>
                         <segue destination="3er-GV-j8p" kind="relationship" relationship="nextPage" id="WSN-Rd-Q7Z"/>
                     </connections>
@@ -439,7 +422,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="6Fg-Av-NRI">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="SzG-7l-QFN"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="DS5-hf-xNa"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="hrO-5Z-lJc">
                                     <items>
@@ -474,7 +456,6 @@
                         <outlet property="content" destination="GRl-H9-F4Z" id="bH8-77-jcc"/>
                         <outlet property="dateLabel" destination="qZQ-aL-x5a" id="239-v1-wF4"/>
                         <outlet property="image" destination="DS5-hf-xNa" id="t0E-bS-8Ez"/>
-                        <outlet property="spin" destination="SzG-7l-QFN" id="uW5-e8-Qbw"/>
                         <outlet property="titleLabel" destination="v8V-DV-7tb" id="680-T6-MAb"/>
                         <segue destination="KeD-e3-aOl" kind="relationship" relationship="nextPage" id="i4V-gh-asK"/>
                     </connections>
@@ -489,7 +470,6 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" id="nqv-T1-tBI">
                             <items>
-                                <imageView alignment="right" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="M89-HP-eLq"/>
                                 <imageView width="1" height="1" alignment="center" alpha="0.40000000000000002" contentMode="scaleAspectFill" id="4Lz-pY-qse"/>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="usz-WK-w0I">
                                     <items>
@@ -524,7 +504,6 @@
                         <outlet property="content" destination="yks-VZ-pLg" id="kHr-uY-CbG"/>
                         <outlet property="dateLabel" destination="7qM-A0-4TA" id="SnM-bX-nVQ"/>
                         <outlet property="image" destination="4Lz-pY-qse" id="8mg-na-UuH"/>
-                        <outlet property="spin" destination="M89-HP-eLq" id="MNZ-a0-bPQ"/>
                         <outlet property="titleLabel" destination="J15-yU-mvA" id="ZmB-Wg-oJY"/>
                         <segue destination="m1l-3B-QBI" kind="relationship" relationship="nextPage" id="AfC-qK-QQt"/>
                     </connections>
