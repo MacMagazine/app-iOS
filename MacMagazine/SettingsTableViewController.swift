@@ -92,6 +92,7 @@ class SettingsTableViewController: UITableViewController {
 		header.append("ÍCONE DO APLICATIVO")
 		header.append("APARÊNCIA")
 		header.append("")
+        header.append("")
         return header
     }
 
@@ -212,7 +213,20 @@ class SettingsTableViewController: UITableViewController {
 		Settings().updatePushPreference(segment.selectedSegmentIndex)
     }
 
-	// MARK: - Private Methods -
+    @IBAction private func login(_ sender: Any) {
+        if let url = URL(string: API.APIParams.patrao) {
+            let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+                return
+            }
+            controller.postURL = url
+
+            controller.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+
+    // MARK: - Private Methods -
 
     fileprivate func getAppVersion() -> String {
         let bundle = Bundle(for: type(of: self))
@@ -461,3 +475,5 @@ extension SettingsTableViewController {
         }
     }
 }
+
+// if webView.url?.absoluteString == "https://macmagazine.uol.com.br/wp-admin/profile.php"

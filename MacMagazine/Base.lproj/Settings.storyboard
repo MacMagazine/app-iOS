@@ -532,6 +532,36 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="rn7-Qe-BFE">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8C1-SO-fuW" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="816" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8C1-SO-fuW" id="rZP-Yq-hvv">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-p7-cYL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Limpar cache do app"/>
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Login de Patrão"/>
+                                                    <connections>
+                                                        <action selector="login:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="77K-Mj-mBK"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7cO-p7-cYL" firstAttribute="top" secondItem="rZP-Yq-hvv" secondAttribute="top" id="Dzu-pn-9pN"/>
+                                                <constraint firstItem="7cO-p7-cYL" firstAttribute="leading" secondItem="rZP-Yq-hvv" secondAttribute="leading" id="JTg-sk-hZw"/>
+                                                <constraint firstAttribute="bottom" secondItem="7cO-p7-cYL" secondAttribute="bottom" id="mRr-0g-OV2"/>
+                                                <constraint firstAttribute="trailing" secondItem="7cO-p7-cYL" secondAttribute="trailing" id="zwV-pf-64f"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="75e-Ta-Gqd" id="WH3-wz-C1j"/>

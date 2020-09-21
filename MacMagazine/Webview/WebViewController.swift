@@ -74,9 +74,23 @@ class WebViewController: UIViewController {
 
         webView?.configuration.userContentController.add(self, name: "imageTapped")
 
-		// Make sure that all cookies are loaded before
-		// That's prevent Disqus from being loogoff
-		let cookies = API().getDisqusCookies()
+		// Make sure that all cookies are loaded before continue
+        // to prevent Disqus from being loogoff
+        var cookies = API().getDisqusCookies()
+        cookies.append(contentsOf: API().getMMCookies())
+
+//        // and to set MM properties to load right the content
+//        if let patrao = HTTPCookie(properties: [
+//            .domain: API.APIParams.mmDomain,
+//            .path: "/",
+//            .name: "patr",
+//            .value: "true",
+//            .secure: "false",
+//            .expires: NSDate(timeIntervalSinceNow: 31556926)
+//        ]) {
+//            cookies.append(patrao)
+//        }
+print(cookies)
 		var cookiesLeft = cookies.count
 		if cookies.isEmpty {
 			reload()
@@ -235,7 +249,9 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 		self.navigationItem.rightBarButtonItems = nil
 
         if self.navigationController?.viewControllers.count ?? 0 > 1 {
-            self.navigationItem.rightBarButtonItems = [share]
+            if !(webView.url?.absoluteString.contains("loginpatrao") ?? true) {
+                self.navigationItem.rightBarButtonItems = [share]
+            }
         }
     }
 
@@ -256,23 +272,34 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 	}
 
 	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
 		var actionPolicy: WKNavigationActionPolicy = .allow
 
 		guard let url = navigationAction.request.url else {
 			decisionHandler(actionPolicy)
 			return
 		}
-		let isMMAddress = url.isMMAddress()
 
 		switch navigationAction.navigationType {
 		case .linkActivated:
-			if isMMAddress {
+			if url.isMMAddress() {
 				pushNavigation(url)
 			} else {
 				openInSafari(url)
 			}
 			actionPolicy = .cancel
+
+        case .formSubmitted:
+print(webView.url?.absoluteString ?? "")
+            if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
+                if webView.isLoading {
+                    if webView.url?.absoluteString == "https://macmagazine.uol.com.br/wp-admin/profile.php" {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            self.navigationController?.popViewController(animated: true)
+                            NotificationCenter.default.post(name: .reloadWeb, object: nil)
+                        }
+                    }
+                }
+            }
 
 		case .other:
 			if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
@@ -287,7 +314,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 						}
 					}
 				} else {
-					if isMMAddress {
+					if url.isMMAddress() {
 						pushNavigation(url)
 					} else {
 						openInSafari(url)
@@ -351,33 +378,4 @@ extension WebViewController: WKScriptMessageHandler {
             openInSafari(url)
         }
     }
-}
-
-// MARK: - Extensions -
-
-extension URL {
-
-	enum Address {
-		static let disqus = "disqus.com"
-		static let macmagazine = "macmagazine.uol.com.br"
-		static let blank = "about:blank"
-	}
-
-	func isKnownAddress() -> Bool {
-		return self.absoluteString.contains(Address.disqus) ||
-			self.absoluteString.contains(Address.macmagazine)
-	}
-
-	func isMMAddress() -> Bool {
-		return self.absoluteString.contains(Address.macmagazine)
-	}
-
-	func isDisqusAddress() -> Bool {
-		return self.absoluteString.contains(Address.disqus)
-	}
-
-	func isBlankAddress() -> Bool {
-		return self.absoluteString.contains(Address.blank)
-	}
-
 }

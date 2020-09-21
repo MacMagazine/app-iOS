@@ -15,6 +15,35 @@ struct Category: Codable {
     var id: Int = 0
 }
 
+// MARK: - Extensions -
+
+extension URL {
+
+    enum Address {
+        static let disqus = API.APIParams.disqus
+        static let macmagazine = API.APIParams.mmDomain
+        static let blank = "about:blank"
+    }
+
+    func isKnownAddress() -> Bool {
+        return self.absoluteString.contains(Address.disqus) ||
+            self.absoluteString.contains(Address.macmagazine)
+    }
+
+    func isMMAddress() -> Bool {
+        return self.absoluteString.contains(Address.macmagazine)
+    }
+
+    func isDisqusAddress() -> Bool {
+        return self.absoluteString.contains(Address.disqus)
+    }
+
+    func isBlankAddress() -> Bool {
+        return self.absoluteString.contains(Address.blank)
+    }
+
+}
+
 class API {
 
 	// MARK: - Definitions -
@@ -23,9 +52,11 @@ class API {
 		// Disqus
 		static let disqus = "disqus.com"
 
-		// Wordpress
-        static let mm = "https://macmagazine.uol.com.br/"
+        // Wordpress
+        static let mmDomain = "macmagazine.uol.com.br"
+        static let mm = "https://\(mmDomain)/"
 		static let feed = "\(mm)feed/"
+        static let patrao = "\(mm)loginpatrao"
 		static let paged = "paged="
 		static let cat = "cat="
 		static let posts = "\(cat)-101"
@@ -82,6 +113,7 @@ class API {
 
     func getCookies() -> [HTTPCookie]? {
 		let cookieStore = HTTPCookieStorage.shared
+        print(cookieStore.cookies ?? [])
 		return cookieStore.cookies
 	}
 
@@ -92,7 +124,14 @@ class API {
 		return disqus ?? []
 	}
 
-	func cleanCookies() {
+    func getMMCookies() -> [HTTPCookie] {
+        let mm = getCookies()?.filter {
+            return $0.domain.contains(APIParams.mmDomain)
+        }
+        return mm ?? []
+    }
+
+    func cleanCookies() {
 		let cookieStore = HTTPCookieStorage.shared
 		for cookie in getCookies() ?? [] {
 			if !cookie.domain.contains(APIParams.disqus) {
