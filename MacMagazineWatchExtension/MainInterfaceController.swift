@@ -6,7 +6,6 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Kingfisher
 import WatchKit
 
 class MainInterfaceController: WKInterfaceController {
@@ -45,13 +44,6 @@ class MainInterfaceController: WKInterfaceController {
 			titleLabel.setText(item.title)
 			dateLabel.setText(item.pubDate)
 			content.setText(item.excerpt)
-
-			guard let thumbnail = item.thumbnail,
-				let url = URL(string: thumbnail) else {
-					return
-			}
-            image.kf.setImage(with: url,
-                              placeholder: UIImage(named: "image_logo"))
 		}
 	}
 
@@ -60,7 +52,6 @@ class MainInterfaceController: WKInterfaceController {
 	}
 
 	@IBAction private func clearCache() {
-		ImageCache.default.clearDiskCache()
 		reload()
 	}
 
