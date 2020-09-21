@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */; };
-		68402B7E251903810053C69E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68402B7D251903810053C69E /* Kingfisher */; };
+		68402B9925192ED90053C69E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68402B9825192ED90053C69E /* Kingfisher */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
@@ -354,7 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68402B7E251903810053C69E /* Kingfisher in Frameworks */,
+				68402B9925192ED90053C69E /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +766,8 @@
 				9BB4BC5C225B99F600559170 /* PBXTargetDependency */,
 			);
 			name = MacMagazineWatch;
+			packageProductDependencies = (
+			);
 			productName = MacMagazineWatch;
 			productReference = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */;
 			productType = "com.apple.product-type.application.watchapp2";
@@ -786,7 +788,7 @@
 			);
 			name = MacMagazineWatchExtension;
 			packageProductDependencies = (
-				68402B7D251903810053C69E /* Kingfisher */,
+				68402B9825192ED90053C69E /* Kingfisher */,
 			);
 			productName = "MacMagazineWatch Extension";
 			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */;
@@ -1301,7 +1303,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1329,7 +1331,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1357,7 +1359,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1395,7 +1397,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1432,7 +1434,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1465,7 +1467,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1615,7 +1617,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1644,7 +1646,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.0.39;
+				CURRENT_PROJECT_VERSION = 4.2.0.36;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1783,13 +1785,13 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.15.1;
+				minimumVersion = 5.15.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		68402B7D251903810053C69E /* Kingfisher */ = {
+		68402B9825192ED90053C69E /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;

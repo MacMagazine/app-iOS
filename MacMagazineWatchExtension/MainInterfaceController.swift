@@ -42,7 +42,6 @@ class MainInterfaceController: WKInterfaceController {
 
 			self.setTitle(title)
 
-            logD(item)
 			titleLabel.setText(item.title)
 			dateLabel.setText(item.pubDate)
 			content.setText(item.excerpt)
@@ -51,16 +50,8 @@ class MainInterfaceController: WKInterfaceController {
 				let url = URL(string: thumbnail) else {
 					return
 			}
-            logI("Beginning Loading image: \(url)")
             image.kf.setImage(with: url,
-                              placeholder: UIImage(named: "image_logo"), completionHandler: { result in
-                                switch result {
-                                case .success(let value):
-                                    logI("Task done for: \(value.source.url?.absoluteString ?? "")")
-                                case .failure(let error):
-                                    logE("Job failed: \(error.localizedDescription)")
-                                }
-                              })
+                              placeholder: UIImage(named: "image_logo"))
 		}
 	}
 
@@ -69,7 +60,7 @@ class MainInterfaceController: WKInterfaceController {
 	}
 
 	@IBAction private func clearCache() {
-		ImageCache.default.clearDiskCache()
+//		ImageCache.default.clearDiskCache()
 		reload()
 	}
 

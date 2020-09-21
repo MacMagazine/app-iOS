@@ -23,7 +23,7 @@ class LoadingController: WKInterfaceController {
         didSet {
             if let _posts = posts, !_posts.isEmpty {
 				DispatchQueue.main.async {
-					logI("Prefetch images to be able to sent to Apple Watch")
+					// Prefetch images to be able to sent to Apple Watch
 					let urls: [URL] = _posts.compactMap {
 						guard let thumbnail = $0.thumbnail else {
 							return nil
@@ -33,16 +33,14 @@ class LoadingController: WKInterfaceController {
 					let prefetcher = ImagePrefetcher(urls: urls)
 					prefetcher.start()
 
-                    logI("")
-					let pages: [String] = Array(1..._posts.count).compactMap {
+                    let pages: [String] = Array(0..._posts.count).compactMap {
 						"Page\($0)"
 					}
-                    logD(pages)
-					let contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
+					var contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
 						["title": "\(index + 1) de \(_posts.count)", "post": element]
 					}
-                    logD(contexts)
-					WKInterfaceController.reloadRootPageControllers(withNames: pages, contexts: contexts, orientation: .horizontal, pageIndex: 0)
+                    contexts.insert(["title": "MacMagazine", "post": ""], at: 0)
+					WKInterfaceController.reloadRootPageControllers(withNames: pages, contexts: contexts, orientation: .horizontal, pageIndex: 1)
 				}
 			} else {
 				if retries > 0 {
@@ -95,7 +93,6 @@ class LoadingController: WKInterfaceController {
     }
 
     func getPosts() {
-        logD(#function)
         if WCSession.default.isReachable {
 			WCSession.default.sendMessage(["request": "posts"], replyHandler: { response in
                 guard let jsonData = response["posts"] as? Data else {
@@ -105,7 +102,6 @@ class LoadingController: WKInterfaceController {
                 }
 
 				do {
-                    logI("Decoding response")
                     self.posts = try JSONDecoder().decode([PostData].self, from: jsonData)
                 } catch {
 					logE(error.localizedDescription)

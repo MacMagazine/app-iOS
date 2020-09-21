@@ -375,5 +375,28 @@
             </objects>
             <point key="canvasLocation" x="24" y="-305"/>
         </scene>
+        <!--MacMagazine-->
+        <scene sceneID="fqD-jr-hUh">
+            <objects>
+                <controller identifier="Page0" title="MacMagazine" hidesWhenLoading="NO" id="8qG-Hr-6Ul" customClass="MainInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
+                    <items>
+                        <button width="1" alignment="left" title="Atualizar" id="qJh-TW-O3A">
+                            <connections>
+                                <action selector="reload" destination="8qG-Hr-6Ul" id="3SM-Ky-HPz"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Limpar Cache" id="lLV-oK-VJQ">
+                            <connections>
+                                <action selector="clearCache" destination="8qG-Hr-6Ul" id="dc2-PH-iwq"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="G9F-9W-eVK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-262" y="-681"/>
+        </scene>
     </scenes>
 </document>
