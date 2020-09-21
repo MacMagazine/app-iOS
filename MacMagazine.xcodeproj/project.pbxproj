@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */; };
+		68402B7E251903810053C69E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68402B7D251903810053C69E /* Kingfisher */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
-		685315FD25153AE6008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FC25153AE6008F6CDC /* Kingfisher */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
@@ -354,7 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				685315FD25153AE6008F6CDC /* Kingfisher in Frameworks */,
+				68402B7E251903810053C69E /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,7 +786,7 @@
 			);
 			name = MacMagazineWatchExtension;
 			packageProductDependencies = (
-				685315FC25153AE6008F6CDC /* Kingfisher */,
+				68402B7D251903810053C69E /* Kingfisher */,
 			);
 			productName = "MacMagazineWatch Extension";
 			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */;
@@ -1789,12 +1789,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		685315FA25153ADE008F6CDC /* Kingfisher */ = {
+		68402B7D251903810053C69E /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		685315FC25153AE6008F6CDC /* Kingfisher */ = {
+		685315FA25153ADE008F6CDC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;

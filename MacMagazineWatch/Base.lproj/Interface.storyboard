@@ -12,11 +12,15 @@
             <objects>
                 <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="Carregando ..." id="oHQ-VB-ZBX"/>
+                        <label alignment="left" accessibilityLabel="Carregando" text="Carregando ..." id="oHQ-VB-ZBX">
+                            <accessibilityTraits key="accessibilityTraits" staticText="YES" notEnabled="YES"/>
+                        </label>
                         <group width="1" height="1" alignment="left" layout="vertical" id="GrF-65-IpN">
                             <items>
-                                <label width="1" height="0.59999999999999998" alignment="left" text="Não foi possível obter os posts neste momento." textAlignment="center" numberOfLines="0" id="4G5-2k-WtO"/>
-                                <button width="1" alignment="left" title="Tentar Novamente" id="UaG-re-OLP">
+                                <label width="1" height="0.59999999999999998" alignment="left" accessibilityLabel="Não foi possível obter os posts neste momento." text="Não foi possível obter os posts neste momento." textAlignment="center" numberOfLines="0" id="4G5-2k-WtO">
+                                    <accessibilityTraits key="accessibilityTraits" staticText="YES" notEnabled="YES"/>
+                                </label>
+                                <button width="1" alignment="left" accessibilityLabel="Tentar novamente." title="Tentar Novamente" id="UaG-re-OLP">
                                     <connections>
                                         <action selector="load" destination="4mM-Hh-YOV" id="9sv-pV-ihE"/>
                                     </connections>
@@ -53,22 +57,8 @@
                             </items>
                         </group>
                         <label width="1" height="16" alignment="left" id="676-kQ-0px"/>
-                        <label width="1" alignment="left" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
+                        <label width="1" alignment="left" accessibilityLabel="Página 1 de 10" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
                     </items>
-                    <menu key="menu" id="6TI-ce-UKl">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="5kG-Di-pfw">
-                                <connections>
-                                    <action selector="reload" destination="AgC-eL-Hgc" id="Jgv-ps-PVC"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="oQg-6Z-coR">
-                                <connections>
-                                    <action selector="clearCache" destination="AgC-eL-Hgc" id="NI9-nV-4xe"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="bgJ-Ov-P9Z" id="MIj-bv-dit"/>
                         <outlet property="dateLabel" destination="Ryp-d6-Saf" id="oKh-gC-dyj"/>
@@ -103,20 +93,6 @@
                         <label width="1" height="16" alignment="left" id="U6t-5b-0eQ"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="jiI-TN-5aF"/>
                     </items>
-                    <menu key="menu" id="qXE-aR-iBc">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="Igd-nF-f7H">
-                                <connections>
-                                    <action selector="reload" destination="0h6-bj-cf1" id="GVe-kP-orf"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="lpf-H0-k3c">
-                                <connections>
-                                    <action selector="clearCache" destination="0h6-bj-cf1" id="dKy-xC-9az"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="jiI-TN-5aF" id="lva-ws-PJc"/>
                         <outlet property="dateLabel" destination="HNS-av-d2h" id="brR-2x-j8h"/>
@@ -150,20 +126,6 @@
                         <label width="1" height="16" alignment="left" id="fBx-sT-MEy"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vag-Th-Nqa"/>
                     </items>
-                    <menu key="menu" id="IbB-mY-B3j">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="cm3-ga-Lvf">
-                                <connections>
-                                    <action selector="reload" destination="gyA-pH-xNr" id="Znh-Tm-MBp"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="TJm-lh-dWJ">
-                                <connections>
-                                    <action selector="clearCache" destination="gyA-pH-xNr" id="ME4-ch-nME"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="Vag-Th-Nqa" id="S2N-B5-2ru"/>
                         <outlet property="dateLabel" destination="xGp-G8-3aa" id="2GI-OZ-ei2"/>
@@ -198,20 +160,6 @@
                         <label width="1" height="16" alignment="left" id="9gy-B1-x4v"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Qa8-We-Hku"/>
                     </items>
-                    <menu key="menu" id="ciQ-5N-tb5">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="MkR-ZE-cvf">
-                                <connections>
-                                    <action selector="reload" destination="J5I-Gx-AZV" id="1CI-kI-dfU"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="7KU-8X-e7g">
-                                <connections>
-                                    <action selector="clearCache" destination="J5I-Gx-AZV" id="nIa-cz-6py"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="Qa8-We-Hku" id="wXO-uZ-nri"/>
                         <outlet property="dateLabel" destination="c0i-Wv-Tze" id="1Jq-3K-WaT"/>
@@ -246,20 +194,6 @@
                         <label width="1" height="16" alignment="left" id="wI6-eC-pbP"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Yb7-i7-VFu"/>
                     </items>
-                    <menu key="menu" id="ylj-Zh-Wct">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="lHx-DT-0il">
-                                <connections>
-                                    <action selector="reload" destination="6at-Ic-eAe" id="oIH-qs-Icv"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="oYh-Sk-q3X">
-                                <connections>
-                                    <action selector="clearCache" destination="6at-Ic-eAe" id="kNH-Tp-yLA"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="Yb7-i7-VFu" id="z0e-6O-dSf"/>
                         <outlet property="dateLabel" destination="AHk-L8-R1W" id="4Kl-hA-SdS"/>
@@ -294,20 +228,6 @@
                         <label width="1" height="16" alignment="left" id="75u-Mp-x7j"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Ndf-Cq-MtC"/>
                     </items>
-                    <menu key="menu" id="Joo-vV-bEX">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="fgR-GC-gXB">
-                                <connections>
-                                    <action selector="reload" destination="Cnc-TD-fHb" id="2xL-2R-V2s"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="CGr-lW-iwg">
-                                <connections>
-                                    <action selector="clearCache" destination="Cnc-TD-fHb" id="s2X-Ba-TmO"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="Ndf-Cq-MtC" id="1bN-3z-aFm"/>
                         <outlet property="dateLabel" destination="AMa-yz-r3N" id="oTc-aw-7vJ"/>
@@ -342,20 +262,6 @@
                         <label width="1" height="16" alignment="left" id="zI4-ht-41z"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="FGc-YY-FVl"/>
                     </items>
-                    <menu key="menu" id="UVr-Ks-3qp">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="Bbb-sR-6Fk">
-                                <connections>
-                                    <action selector="reload" destination="3er-GV-j8p" id="9jd-S7-5hj"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="vpA-zd-9bK">
-                                <connections>
-                                    <action selector="clearCache" destination="3er-GV-j8p" id="S8b-O5-Z2p"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="FGc-YY-FVl" id="jbN-is-DBE"/>
                         <outlet property="dateLabel" destination="8yf-vX-fcD" id="8xE-nq-FgP"/>
@@ -390,20 +296,6 @@
                         <label width="1" height="16" alignment="left" id="wtc-pG-qwp"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="GIK-xN-cUL"/>
                     </items>
-                    <menu key="menu" id="oXq-gV-pTw">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="Wck-Es-dsB">
-                                <connections>
-                                    <action selector="reload" destination="KeD-e3-aOl" id="Wj5-7f-Q7c"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="6uV-ZD-jaj">
-                                <connections>
-                                    <action selector="clearCache" destination="KeD-e3-aOl" id="h2J-sD-9L8"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="GIK-xN-cUL" id="1uN-hX-aIP"/>
                         <outlet property="dateLabel" destination="GIz-6D-A9L" id="AcY-NX-oKU"/>
@@ -438,20 +330,6 @@
                         <label width="1" height="16" alignment="left" id="KWG-Pb-ala"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="GRl-H9-F4Z"/>
                     </items>
-                    <menu key="menu" id="C5f-ag-5cF">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="HQQ-Qo-QBr">
-                                <connections>
-                                    <action selector="reload" destination="m1l-3B-QBI" id="Eyh-lv-jrB"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="7yw-uU-Xwt">
-                                <connections>
-                                    <action selector="clearCache" destination="m1l-3B-QBI" id="Q7b-oW-riJ"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="GRl-H9-F4Z" id="bH8-77-jcc"/>
                         <outlet property="dateLabel" destination="qZQ-aL-x5a" id="239-v1-wF4"/>
@@ -486,20 +364,6 @@
                         <label width="1" height="16" alignment="left" id="cv7-u4-yjk"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="yks-VZ-pLg"/>
                     </items>
-                    <menu key="menu" id="nGf-g5-yCQ">
-                        <items>
-                            <menuItem title="Recarregar" icon="repeat" id="pAU-YC-27H">
-                                <connections>
-                                    <action selector="reload" destination="aCm-Ql-Tag" id="k8E-uk-fc6"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Limpar Cache" icon="trash" id="gbl-uf-3LP">
-                                <connections>
-                                    <action selector="clearCache" destination="aCm-Ql-Tag" id="HHF-Cc-kQh"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="content" destination="yks-VZ-pLg" id="kHr-uY-CbG"/>
                         <outlet property="dateLabel" destination="7qM-A0-4TA" id="SnM-bX-nVQ"/>
