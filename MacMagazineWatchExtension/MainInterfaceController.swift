@@ -60,7 +60,7 @@ class MainInterfaceController: WKInterfaceController {
 	}
 
 	@IBAction private func clearCache() {
-//		ImageCache.default.clearDiskCache()
+		ImageCache.default.clearDiskCache()
 		reload()
 	}
 
