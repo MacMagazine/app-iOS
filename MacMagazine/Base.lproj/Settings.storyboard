@@ -594,6 +594,7 @@
                         <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
                         <outlet property="iconOption4" destination="g7c-ve-Aqk" id="H20-Vt-eSe"/>
                         <outlet property="intensityPostRead" destination="7Dw-eO-rm7" id="9ma-Ex-EZF"/>
+                        <outlet property="patraoButton" destination="7cO-p7-cYL" id="3Ns-Ex-nrD"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="readTransparency" destination="MpC-ZE-Kkk" id="8fe-gO-5QD"/>
                         <outlet property="readTransparencyValue" destination="TRE-mv-lKH" id="3Yn-cB-2XR"/>

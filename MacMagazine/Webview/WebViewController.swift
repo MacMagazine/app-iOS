@@ -48,7 +48,7 @@ class WebViewController: UIViewController {
 
 	// MARK: - View lifecycle -
 
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
 		// Do any additional setup after loading the view.
@@ -74,38 +74,7 @@ class WebViewController: UIViewController {
 
         webView?.configuration.userContentController.add(self, name: "imageTapped")
 
-		// Make sure that all cookies are loaded before continue
-        // to prevent Disqus from being loogoff
-        var cookies = API().getDisqusCookies()
-        cookies.append(contentsOf: API().getMMCookies())
-
-//        // and to set MM properties to load right the content
-//        if let patrao = HTTPCookie(properties: [
-//            .domain: API.APIParams.mmDomain,
-//            .path: "/",
-//            .name: "patr",
-//            .value: "true",
-//            .secure: "false",
-//            .expires: NSDate(timeIntervalSinceNow: 31556926)
-//        ]) {
-//            cookies.append(patrao)
-//        }
-print(cookies)
-		var cookiesLeft = cookies.count
-		if cookies.isEmpty {
-			reload()
-		} else {
-			cookies.forEach { cookie in
-				webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
-					cookiesLeft -= 1
-					if cookiesLeft <= 0 {
-						DispatchQueue.main.async {
-							self.reload()
-						}
-					}
-				}
-			}
-		}
+        setupCookies()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -121,6 +90,69 @@ print(cookies)
 	}
 
 	// MARK: - Local methods -
+
+    fileprivate func setupCookies() {
+        // Make sure that all cookies are loaded before continue
+        // to prevent Disqus from being loogoff
+        // and to set MM properties to load right the content
+        webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
+            var cookies = cookies
+
+            // Dark mode
+            if let darkmode = HTTPCookie(properties: [
+                .domain: API.APIParams.mmDomain,
+                .path: "/",
+                .name: "darkmode",
+                .value: Settings().darkModeUserAgent,
+                .secure: "false",
+                .expires: NSDate(timeIntervalSinceNow: 31556926)
+            ]) {
+                cookies.append(darkmode)
+            }
+
+            // Font size
+            if let font = HTTPCookie(properties: [
+                .domain: API.APIParams.mmDomain,
+                .path: "/",
+                .name: "fonte",
+                .value: Settings().fontSizeUserAgent,
+                .secure: "false",
+                .expires: NSDate(timeIntervalSinceNow: 31556926)
+            ]) {
+                cookies.append(font)
+            }
+
+            // Disqus cookies
+            cookies.append(contentsOf: API().getDisqusCookies())
+
+            var cookiesLeft = cookies.count
+            if cookies.isEmpty {
+                self.reload()
+            } else {
+                cookies.forEach { cookie in
+                    if cookie.name == "patr" && !Settings().isPatrao {
+                        self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie) {
+                            cookiesLeft -= 1
+                            if cookiesLeft <= 0 {
+                                DispatchQueue.main.async {
+                                    self.reload()
+                                }
+                            }
+                        }
+                    } else {
+                        self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
+                            cookiesLeft -= 1
+                            if cookiesLeft <= 0 {
+                                DispatchQueue.main.async {
+                                    self.reload()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	func configureView() {
 		// Update the user interface for the detail item.
@@ -142,12 +174,11 @@ print(cookies)
 		previousFonteSize = Settings().fontSizeUserAgent
 
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
-        webView?.customUserAgent = "MacMagazine\(Settings().darkModeUserAgent)\(Settings().fontSizeUserAgent)"
+        webView?.customUserAgent = "MacMagazine"
         webView?.allowsBackForwardNavigationGestures = false
         webView?.load(URLRequest(url: url))
 
         self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
-
         forceReload = false
 	}
 
@@ -212,16 +243,18 @@ extension WebViewController {
 			guard let url = postURL else {
 				return
 			}
-			loadWebView(url: url)
+            loadWebView(url: url)
 			self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
 		}
 	}
 
 	@objc func reload(_ notification: Notification) {
 		if previousIsDarkMode != Settings().isDarkMode ||
-			previousFonteSize != Settings().fontSizeUserAgent {
-			forceReload = true
-			reload()
+			previousFonteSize != Settings().fontSizeUserAgent ||
+            notification.object != nil {
+
+            forceReload = true
+            reload()
 		}
 	}
 
@@ -271,7 +304,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 		return nil
 	}
 
-	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 		var actionPolicy: WKNavigationActionPolicy = .allow
 
 		guard let url = navigationAction.request.url else {
@@ -279,24 +312,16 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 			return
 		}
 
-		switch navigationAction.navigationType {
+        switch navigationAction.navigationType {
 		case .linkActivated:
-			if url.isMMAddress() {
-				pushNavigation(url)
-			} else {
-				openInSafari(url)
-			}
+            openURLinBrowser(url)
 			actionPolicy = .cancel
 
         case .formSubmitted:
-print(webView.url?.absoluteString ?? "")
             if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
                 if webView.isLoading {
-                    if webView.url?.absoluteString == "https://macmagazine.uol.com.br/wp-admin/profile.php" {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            self.navigationController?.popViewController(animated: true)
-                            NotificationCenter.default.post(name: .reloadWeb, object: nil)
-                        }
+                    if checkIsDesiredURL(webView.url?.absoluteString) {
+                        actionPolicy = .cancel
                     }
                 }
             }
@@ -304,21 +329,11 @@ print(webView.url?.absoluteString ?? "")
 		case .other:
 			if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
 				if webView.isLoading {
-					if webView.url?.absoluteString == "https://disqus.com/next/login-success/" {
-						actionPolicy = .cancel
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-							self.navigationController?.popViewController(animated: true)
-							DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-								NotificationCenter.default.post(name: .reloadWeb, object: nil)
-							}
-						}
-					}
+                    if checkIsDesiredURL(webView.url?.absoluteString) {
+                        actionPolicy = .cancel
+                    }
 				} else {
-					if url.isMMAddress() {
-						pushNavigation(url)
-					} else {
-						openInSafari(url)
-					}
+                    openURLinBrowser(url)
 					actionPolicy = .cancel
 				}
 			}
@@ -329,6 +344,45 @@ print(webView.url?.absoluteString ?? "")
 
 		decisionHandler(actionPolicy)
 	}
+
+    fileprivate func backAndReload() {
+        webView?.navigationDelegate = nil
+        webView?.uiDelegate = nil
+        webView = nil
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                NotificationCenter.default.post(name: .reloadWeb, object: true)
+            }
+        }
+    }
+
+    fileprivate func checkIsDesiredURL(_ url: String?) -> Bool {
+        let mmURL = "https://macmagazine.uol.com.br/wp-admin/profile.php"
+        let disqusURL = "https://disqus.com/next/login-success/"
+
+        var returnValue = false
+        if url == mmURL ||
+            url == disqusURL {
+            returnValue = true
+
+            if url == mmURL {
+                var settings = Settings()
+                settings.isPatrao = true
+            }
+            backAndReload()
+        }
+        return returnValue
+    }
+
+    fileprivate func openURLinBrowser(_ url: URL) {
+        if url.isMMAddress() {
+            pushNavigation(url)
+        } else {
+            openInSafari(url)
+        }
+    }
 
 }
 

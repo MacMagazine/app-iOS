@@ -20,6 +20,7 @@ enum Definitions {
 	static let all_posts_pushes = "all_posts_pushes"
 	static let pushPreferences = "pushPreferences"
     static let transparency = "transparency"
+    static let mm_patrao = "mm_patrao"
 }
 
 // MARK: -
@@ -75,7 +76,7 @@ struct Settings {
     }
 
 	var darkModeUserAgent: String {
-		return isDarkMode ? "-modoescuro" : ""
+		return isDarkMode ? "true" : "false"
 	}
 
 	var fontSize: String {
@@ -87,9 +88,9 @@ struct Settings {
 
 	var fontSizeUserAgent: String {
 		let sliderFontSize = fontSize
-		var fontSize = ""
+		var fontSize = "normal"
 		if !sliderFontSize.isEmpty {
-			fontSize = "-\(sliderFontSize)"
+            fontSize = "\(sliderFontSize)".replacingOccurrences(of: "fonte", with: "")
 		}
 		return fontSize
 	}
@@ -124,6 +125,16 @@ struct Settings {
             return 0.4
         }
         return transparency
+    }
+
+    var isPatrao: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Definitions.mm_patrao)
+        }
+        set(value) {
+            UserDefaults.standard.set(value, forKey: Definitions.mm_patrao)
+            UserDefaults.standard.synchronize()
+        }
     }
 
 	// MARK: - Review -

@@ -35,6 +35,8 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var readTransparency: UISlider!
     @IBOutlet private weak var readTransparencyValue: AppLabel!
 
+    @IBOutlet private weak var patraoButton: UIButton!
+
     // MARK: - View lifecycle -
 
     override func viewDidLoad() {
@@ -77,6 +79,8 @@ class SettingsTableViewController: UITableViewController {
             return
         }
         delegate.supportedInterfaceOrientation = Settings().orientations
+
+        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login de Patrão", for: .normal)
 	}
 
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -214,16 +218,22 @@ class SettingsTableViewController: UITableViewController {
     }
 
     @IBAction private func login(_ sender: Any) {
-        if let url = URL(string: API.APIParams.patrao) {
-            let storyboard = UIStoryboard(name: "WebView", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
-                return
-            }
-            controller.postURL = url
+        if Settings().isPatrao {
+            var settings = Settings()
+            settings.isPatrao = false
+        } else {
+            if let url = URL(string: API.APIParams.patrao) {
+                let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+                    return
+                }
+                controller.postURL = url
 
-            controller.modalPresentationStyle = .overFullScreen
-            self.navigationController?.pushViewController(controller, animated: true)
+                controller.modalPresentationStyle = .overFullScreen
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
         }
+        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login de Patrão", for: .normal)
     }
 
     // MARK: - Private Methods -

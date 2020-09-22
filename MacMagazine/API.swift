@@ -111,31 +111,26 @@ class API {
         return APIParams.mm
     }
 
-    func getCookies() -> [HTTPCookie]? {
-		let cookieStore = HTTPCookieStorage.shared
-        print(cookieStore.cookies ?? [])
-		return cookieStore.cookies
-	}
+    func getCookies(_ domain: String? = nil) -> [HTTPCookie]? {
+        let cookies = HTTPCookieStorage.shared.cookies
 
-	func getDisqusCookies() -> [HTTPCookie] {
-		let disqus = getCookies()?.filter {
-			return $0.domain.contains(APIParams.disqus)
-		}
-		return disqus ?? []
-	}
-
-    func getMMCookies() -> [HTTPCookie] {
-        let mm = getCookies()?.filter {
-            return $0.domain.contains(APIParams.mmDomain)
+        guard let domain = domain else {
+            return cookies
         }
-        return mm ?? []
+
+        return cookies?.filter {
+            return $0.domain.contains(domain)
+        }
+	}
+
+    func getDisqusCookies() -> [HTTPCookie] {
+        return getCookies(APIParams.disqus) ?? []
     }
 
     func cleanCookies() {
-		let cookieStore = HTTPCookieStorage.shared
 		for cookie in getCookies() ?? [] {
 			if !cookie.domain.contains(APIParams.disqus) {
-				cookieStore.deleteCookie(cookie)
+                HTTPCookieStorage.shared.deleteCookie(cookie)
 			}
 		}
 	}
