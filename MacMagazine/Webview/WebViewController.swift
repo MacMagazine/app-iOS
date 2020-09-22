@@ -282,7 +282,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 		self.navigationItem.rightBarButtonItems = nil
 
         if self.navigationController?.viewControllers.count ?? 0 > 1 {
-            if !(webView.url?.absoluteString.contains("loginpatrao") ?? true) {
+            if (webView.url?.isMMAddress() ?? false) &&
+                (webView.url?.absoluteString.contains("/post/") ?? false) {
                 self.navigationItem.rightBarButtonItems = [share]
             }
         }
