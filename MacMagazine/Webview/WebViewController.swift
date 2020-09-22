@@ -94,9 +94,15 @@ class WebViewController: UIViewController {
     fileprivate func setupCookies() {
         // Make sure that all cookies are loaded before continue
         // to prevent Disqus from being loogoff
-        // and to set MM properties to load right the content
+        // and to set MM properties to properly load the content
         webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
             var cookies = cookies
+
+            // Previous Disqus cookies
+            cookies.append(contentsOf: API().getDisqusCookies())
+
+            // Previous MM cookies
+            cookies.append(contentsOf: API().getMMCookies())
 
             // Dark mode
             if let darkmode = HTTPCookie(properties: [
@@ -122,14 +128,12 @@ class WebViewController: UIViewController {
                 cookies.append(font)
             }
 
-            // Disqus cookies
-            cookies.append(contentsOf: API().getDisqusCookies())
-
             var cookiesLeft = cookies.count
             if cookies.isEmpty {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
+                    print("\(cookie.domain) - \(cookie.name)")
                     if cookie.name == "patr" && !Settings().isPatrao {
                         self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie) {
                             cookiesLeft -= 1

@@ -127,9 +127,14 @@ class API {
         return getCookies(APIParams.disqus) ?? []
     }
 
+    func getMMCookies() -> [HTTPCookie] {
+        return getCookies(APIParams.mmDomain) ?? []
+    }
+
     func cleanCookies() {
 		for cookie in getCookies() ?? [] {
-			if !cookie.domain.contains(APIParams.disqus) {
+			if !cookie.domain.contains(APIParams.disqus) &&
+                !cookie.domain.contains(APIParams.mmDomain) {
                 HTTPCookieStorage.shared.deleteCookie(cookie)
 			}
 		}
