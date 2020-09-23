@@ -116,6 +116,7 @@ struct Settings {
 					((style == .dark && isDarkMode) ||
 					(style == .light && !isDarkMode)) {
 				applyTheme()
+                NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
 			}
 		}
 	}

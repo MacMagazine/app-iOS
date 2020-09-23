@@ -21,6 +21,7 @@ extension Notification.Name {
 	static let updateSelectedPost = Notification.Name("updateSelectedPost")
     static let refreshAfterBackground = Notification.Name("refreshAfterBackground")
     static let reloadData = Notification.Name("reloadData")
+    static let updateCookie = Notification.Name("updateCookie")
 }
 
 // MARK: - Update content -

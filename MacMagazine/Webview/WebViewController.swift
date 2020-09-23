@@ -53,6 +53,7 @@ class WebViewController: UIViewController {
 
 		// Do any additional setup after loading the view.
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCookie(_:)), name: .updateCookie, object: nil)
 
 		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
@@ -60,6 +61,7 @@ class WebViewController: UIViewController {
 
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
+        webView?.configuration.websiteDataStore.httpCookieStore.add(self)
 
         let scriptSource = """
             var images = document.getElementsByTagName('img');
@@ -90,72 +92,6 @@ class WebViewController: UIViewController {
 	}
 
 	// MARK: - Local methods -
-
-    fileprivate func setupCookies() {
-        // Make sure that all cookies are loaded before continue
-        // to prevent Disqus from being loogoff
-        // and to set MM properties to properly load the content
-        webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
-            var cookies = cookies
-
-            // Previous Disqus cookies
-            cookies.append(contentsOf: API().getDisqusCookies())
-
-            // Previous MM cookies
-            cookies.append(contentsOf: API().getMMCookies())
-
-            // Dark mode
-            if let darkmode = HTTPCookie(properties: [
-                .domain: API.APIParams.mmDomain,
-                .path: "/",
-                .name: "darkmode",
-                .value: Settings().darkModeUserAgent,
-                .secure: "false",
-                .expires: NSDate(timeIntervalSinceNow: 31556926)
-            ]) {
-                cookies.append(darkmode)
-            }
-
-            // Font size
-            if let font = HTTPCookie(properties: [
-                .domain: API.APIParams.mmDomain,
-                .path: "/",
-                .name: "fonte",
-                .value: Settings().fontSizeUserAgent,
-                .secure: "false",
-                .expires: NSDate(timeIntervalSinceNow: 31556926)
-            ]) {
-                cookies.append(font)
-            }
-
-            var cookiesLeft = cookies.count
-            if cookies.isEmpty {
-                self.reload()
-            } else {
-                cookies.forEach { cookie in
-                    if cookie.name == "patr" && !Settings().isPatrao {
-                        self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie) {
-                            cookiesLeft -= 1
-                            if cookiesLeft <= 0 {
-                                DispatchQueue.main.async {
-                                    self.reload()
-                                }
-                            }
-                        }
-                    } else {
-                        self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
-                            cookiesLeft -= 1
-                            if cookiesLeft <= 0 {
-                                DispatchQueue.main.async {
-                                    self.reload()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 
 	func configureView() {
 		// Update the user interface for the detail item.
@@ -273,6 +209,120 @@ extension WebViewController {
 			}
 		}
 	}
+}
+
+// MARK: - Cookies -
+
+extension WebViewController: WKHTTPCookieStoreObserver {
+
+    func cookiesDidChange(in cookieStore: WKHTTPCookieStore) {
+        // leave it for debug
+//        cookieStore.getAllCookies({(cookies: [HTTPCookie]) in
+//            cookies.forEach({(cookie: HTTPCookie) in
+//                if cookie.domain == API.APIParams.mmDomain {
+//                    print("NAME: \(cookie.name) -> VALUE: \(cookie.value)")
+//                }
+//            })
+//        })
+    }
+
+    fileprivate func setCookie(_ cookie: HTTPCookie?, _ callback: (() -> Void)?) {
+        guard let cookie = cookie else {
+            return
+        }
+        self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: callback)
+    }
+
+    fileprivate func deleteCookie(_ cookie: HTTPCookie, _ callback: (() -> Void)?) {
+        self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: callback)
+    }
+
+    fileprivate func updateCountAndReload(_ cookiesLeft: inout Int) {
+        cookiesLeft -= 1
+        if cookiesLeft <= 0 {
+            DispatchQueue.main.async {
+                self.reload()
+            }
+        }
+    }
+
+    fileprivate func createDarkModeCookie() -> HTTPCookie? {
+        return HTTPCookie(properties: [
+            .domain: API.APIParams.mmDomain,
+            .path: "/",
+            .name: "darkmode",
+            .value: Settings().darkModeUserAgent,
+            .secure: "false",
+            .expires: NSDate(timeIntervalSinceNow: 3600)
+        ])
+    }
+
+    fileprivate func createFonteCookie() -> HTTPCookie? {
+        return HTTPCookie(properties: [
+            .domain: API.APIParams.mmDomain,
+            .path: "/",
+            .name: "fonte",
+            .value: Settings().fontSizeUserAgent,
+            .secure: "false",
+            .expires: NSDate(timeIntervalSinceNow: 3600)
+        ])
+    }
+
+    fileprivate func setupCookies() {
+        // Make sure that all cookies are loaded before continue
+        // to prevent Disqus from being loogoff
+        // and to set MM properties to properly load the content
+        webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
+            var cookies = cookies
+
+            // Previous Disqus cookies
+            cookies.append(contentsOf: API().getDisqusCookies())
+
+            // Previous MM cookies
+            cookies.append(contentsOf: API().getMMCookies())
+
+            // Dark mode
+            if let darkmode = self.createDarkModeCookie() {
+                cookies.append(darkmode)
+            }
+
+            // Font size
+            if let font = self.createFonteCookie() {
+                cookies.append(font)
+            }
+
+            var cookiesLeft = cookies.count
+
+            if cookies.isEmpty {
+                self.reload()
+            } else {
+                cookies.forEach { cookie in
+                    if cookie.name == "patr" && !Settings().isPatrao {
+                        self.deleteCookie(cookie) {
+                            self.updateCountAndReload(&cookiesLeft)
+                        }
+                    } else {
+                        self.setCookie(cookie) {
+                            self.updateCountAndReload(&cookiesLeft)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @objc func updateCookie(_ notification: Notification) {
+        guard let cookieName = notification.object as? String else {
+            return
+        }
+
+        if cookieName == Definitions.fontSize {
+            self.setCookie(self.createFonteCookie(), nil)
+        }
+        if cookieName == Definitions.darkMode {
+            self.setCookie(self.createDarkModeCookie(), nil)
+        }
+    }
 
 }
 
@@ -353,7 +403,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             self.navigationController?.popViewController(animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                NotificationCenter.default.post(name: .reloadWeb, object: true)
+                NotificationCenter.default.post(name: .reloadWeb, object: nil)
             }
         }
     }

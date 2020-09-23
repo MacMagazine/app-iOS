@@ -296,6 +296,8 @@ extension SettingsTableViewController {
         UserDefaults.standard.synchronize()
 
         applyTheme()
+
+        NotificationCenter.default.post(name: .updateCookie, object: Definitions.fontSize)
     }
 
     @IBAction private func changeAppearanceFollowSystem(_ sender: Any) {
@@ -307,6 +309,8 @@ extension SettingsTableViewController {
 
         applyTheme()
         setupAppearanceSettings()
+
+        NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
     }
 
     @IBAction private func changeDarkMode(_ sender: Any) {
@@ -317,6 +321,8 @@ extension SettingsTableViewController {
         UserDefaults.standard.synchronize()
 
         applyTheme()
+
+        NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
     }
 
     @IBAction private func enableReadIntensity(_ sender: Any) {
