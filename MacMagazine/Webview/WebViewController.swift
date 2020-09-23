@@ -133,11 +133,22 @@ class WebViewController: UIViewController {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
-                    self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
-                        cookiesLeft -= 1
-                        if cookiesLeft <= 0 {
-                            DispatchQueue.main.async {
-                                self.reload()
+                    if cookie.name == "patr" && !Settings().isPatrao {
+                        self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie) {
+                            cookiesLeft -= 1
+                            if cookiesLeft <= 0 {
+                                DispatchQueue.main.async {
+                                    self.reload()
+                                }
+                            }
+                        }
+                    } else {
+                        self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
+                            cookiesLeft -= 1
+                            if cookiesLeft <= 0 {
+                                DispatchQueue.main.async {
+                                    self.reload()
+                                }
                             }
                         }
                     }
