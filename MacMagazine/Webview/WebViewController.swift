@@ -133,23 +133,11 @@ class WebViewController: UIViewController {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
-                    print("\(cookie.domain) - \(cookie.name)")
-                    if cookie.name == "patr" && !Settings().isPatrao {
-                        self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie) {
-                            cookiesLeft -= 1
-                            if cookiesLeft <= 0 {
-                                DispatchQueue.main.async {
-                                    self.reload()
-                                }
-                            }
-                        }
-                    } else {
-                        self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
-                            cookiesLeft -= 1
-                            if cookiesLeft <= 0 {
-                                DispatchQueue.main.async {
-                                    self.reload()
-                                }
+                    self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
+                        cookiesLeft -= 1
+                        if cookiesLeft <= 0 {
+                            DispatchQueue.main.async {
+                                self.reload()
                             }
                         }
                     }
@@ -325,18 +313,14 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         case .formSubmitted:
             if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
                 if webView.isLoading {
-                    if checkIsDesiredURL(webView.url?.absoluteString) {
-                        actionPolicy = .cancel
-                    }
+                    _ = checkIsDesiredURL(webView.url?.absoluteString)
                 }
             }
 
 		case .other:
 			if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
 				if webView.isLoading {
-                    if checkIsDesiredURL(webView.url?.absoluteString) {
-                        actionPolicy = .cancel
-                    }
+                    _ = checkIsDesiredURL(webView.url?.absoluteString)
 				} else {
                     openURLinBrowser(url)
 					actionPolicy = .cancel
