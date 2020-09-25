@@ -10,7 +10,7 @@ import UIKit
 
 struct Share {
 	func present<T>(at location: T?, using items: [Any]) {
-		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(named: "safari")) { items in
+		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(systemName: "safari")) { items in
 			for item in items {
 				guard let url = URL(string: "\(item)") else {
 					continue
