@@ -218,7 +218,6 @@ extension Theme {
             $0.borderColor = UIColor(hex: "dddddd", alpha: 1)
         }
         FavoriteImageView.appearance().tintColor = tint
-        NavLogoImageView.appearance().hightlightLogo = hightlightLogo
 
         // SWITCH
 

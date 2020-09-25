@@ -10,13 +10,3 @@ import UIKit
 
 class AppImageView: UIImageView {}
 class FavoriteImageView: UIImageView {}
-class NavLogoImageView: UIImageView {}
-
-extension NavLogoImageView {
-	@objc dynamic var hightlightLogo: Bool {
-		get { return isHighlighted }
-		set {
-			isHighlighted = Settings().isDarkMode
-		}
-	}
-}

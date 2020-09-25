@@ -574,7 +574,7 @@
                             <rect key="frame" x="132" y="5.5" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Nf-pcb" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Nf-pcb">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -619,7 +619,7 @@
         <scene sceneID="Odw-wy-fvT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aBB-qV-jdy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ajustes" image="tab_settings" id="Z3D-d2-gj4"/>
+                    <tabBarItem key="tabBarItem" title="Ajustes" image="gear" catalog="system" id="Z3D-d2-gj4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="9fV-k2-BIj" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -636,13 +636,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="logo" width="415" height="350"/>
-        <image name="logo_dark" width="509" height="419"/>
         <image name="phone_1" width="1024" height="1024"/>
         <image name="phone_2" width="1024" height="1024"/>
         <image name="phone_3" width="1024" height="1024"/>
         <image name="phone_4" width="1024" height="1024"/>
-        <image name="tab_settings" width="24" height="25"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

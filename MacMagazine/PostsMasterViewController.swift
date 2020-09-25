@@ -173,39 +173,28 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showCategories" {
-            guard let vc = segue.destination as? CategoriesTableViewController else {
+        guard let navController = segue.destination as? UINavigationController,
+            let controller = navController.topViewController as? PostsDetailViewController,
+            let indexPath = selectedIndexPath
+            else {
                 return
+        }
+
+        guard let _ = navigationItem.searchController else {
+            // Normal Posts table
+            if tableView.indexPathForSelectedRow != nil {
+                guard let post = fetchController?.object(at: indexPath) else {
+                    return
+                }
+                prepareDetailController(controller, using: links, compare: post.link)
             }
-            vc.callback = { [weak self] category in
-                self?.searchPosts(category: category)
-            }
-
-		} else {
-
-			guard let navController = segue.destination as? UINavigationController,
-				let controller = navController.topViewController as? PostsDetailViewController,
-				let indexPath = selectedIndexPath
-				else {
-					return
-			}
-
-			guard let _ = navigationItem.searchController else {
-				// Normal Posts table
-				if tableView.indexPathForSelectedRow != nil {
-					guard let post = fetchController?.object(at: indexPath) else {
-						return
-					}
-					prepareDetailController(controller, using: links, compare: post.link)
-				}
-				return
-			}
-			// Search Posts table
-			if resultsTableController?.tableView.indexPathForSelectedRow != nil {
-				prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
-			}
-		}
-	}
+            return
+        }
+        // Search Posts table
+        if resultsTableController?.tableView.indexPathForSelectedRow != nil {
+            prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
+        }
+    }
 
 	// MARK: - View Methods -
 

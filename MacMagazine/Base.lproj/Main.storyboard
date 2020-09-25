@@ -47,7 +47,7 @@
         <scene sceneID="hct-bz-jAy">
             <objects>
                 <splitViewController title="Posts" id="Yhy-9h-hZ1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Posts" image="tab_posts" id="iZz-lw-mOc"/>
+                    <tabBarItem key="tabBarItem" title="Posts" image="doc.plaintext" catalog="system" id="iZz-lw-mOc"/>
                     <connections>
                         <segue destination="kKX-hy-fjk" kind="relationship" relationship="masterViewController" id="xsv-wY-uN5"/>
                         <segue destination="fD0-My-KZk" kind="relationship" relationship="detailViewController" id="YQQ-bx-LIJ"/>
@@ -72,7 +72,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="vUZ-wN-Khb">
+                        <barButtonItem key="leftBarButtonItem" image="star.fill" catalog="system" id="vUZ-wN-Khb">
                             <connections>
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
@@ -108,7 +108,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-ag-GL7" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-ag-GL7">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <gestureRecognizers/>
@@ -132,7 +132,7 @@
                             <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" highlightedImage="logo_dark" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Ii-zjF" customClass="NavLogoImageView" customModule="MacMagazine" customModuleProvider="target">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Ii-zjF">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -167,7 +167,7 @@
         <scene sceneID="FpV-KZ-2K0">
             <objects>
                 <viewControllerPlaceholder storyboardName="Settings" id="MYM-JC-OdO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ajustes" image="tab_settings" id="wV3-N1-zCG"/>
+                    <tabBarItem key="tabBarItem" title="Ajustes" image="gear" catalog="system" id="wV3-N1-zCG"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bro-dR-P8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -177,7 +177,7 @@
         <scene sceneID="gnL-PL-Ct8">
             <objects>
                 <viewControllerPlaceholder storyboardName="Videos" id="wVH-Tk-Ppy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Vídeos" image="tab_video" id="xql-qS-XnW"/>
+                    <tabBarItem key="tabBarItem" title="Vídeos" image="play.rectangle.fill" catalog="system" id="xql-qS-XnW"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6w-Ql-N2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,7 +187,7 @@
         <scene sceneID="vrS-A0-pzw">
             <objects>
                 <viewControllerPlaceholder storyboardName="Podcast" id="CQc-7I-wjH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Podcast" image="tab_noar" id="fCt-kj-RXs"/>
+                    <tabBarItem key="tabBarItem" title="Podcast" image="mic.fill" catalog="system" id="fCt-kj-RXs"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQD-92-niO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -195,15 +195,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lNV-kD-aRc"/>
+        <segue reference="YQQ-bx-LIJ"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="fav_off" width="21" height="21"/>
+        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="logo" width="415" height="350"/>
-        <image name="logo_dark" width="509" height="419"/>
-        <image name="tab_noar" width="24" height="28"/>
-        <image name="tab_posts" width="22" height="24"/>
-        <image name="tab_settings" width="24" height="25"/>
-        <image name="tab_video" width="35" height="24"/>
+        <image name="mic.fill" catalog="system" width="108" height="128"/>
+        <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>
 </document>
