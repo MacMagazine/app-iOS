@@ -39,9 +39,9 @@ class PostCell: AppTableViewCell {
         headlineLabel?.text = object.title
         headlineLabel?.accessibilityLabel = "Título: \(object.title ?? "Não especificado")."
 
-        var defaultImage = "image_logo_feature\(Settings().darkModeimage)"
+        var defaultImage = "image_logo_feature"
         if object.categorias?.contains("Destaques") == false {
-            defaultImage = "image_logo\(Settings().darkModeimage)"
+            defaultImage = "image_logo"
             if subheadlineLabel != nil {
                 subheadlineLabel?.text = object.excerpt
                 subheadlineLabel?.accessibilityLabel = "Descrição: \(object.excerpt ?? "Não especificado")"
@@ -66,9 +66,9 @@ class PostCell: AppTableViewCell {
         headlineLabel?.text = object.title
         headlineLabel?.accessibilityLabel = "Título: \(object.title)."
 
-        var defaultImage = "image_logo_feature\(Settings().darkModeimage)"
+        var defaultImage = "image_logo_feature"
         if object.categories.contains("Destaques") == false {
-            defaultImage = "image_logo\(Settings().darkModeimage)"
+            defaultImage = "image_logo"
             if subheadlineLabel != nil {
                 subheadlineLabel?.text = object.excerpt
                 subheadlineLabel?.accessibilityLabel = "Descrição: \(object.excerpt)"
@@ -101,7 +101,7 @@ class PostCell: AppTableViewCell {
             return
         }
         thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
+        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
 
         guard let duration = object.duration else {
             lengthlineLabel?.text = nil
@@ -125,7 +125,7 @@ class PostCell: AppTableViewCell {
         lengthlineLabel?.accessibilityLabel = object.duration.isEmpty ? "" : "Duração: \(object.duration.toAccessibilityTime())"
 
         thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
+        thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: "image_logo_feature"))
 
         favoriteImageView.isHidden = true
         setFavoriteImageViewAccessibility(isEnabled: false)

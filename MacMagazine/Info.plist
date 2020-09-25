@@ -146,16 +146,16 @@
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>postBack</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>arrowshape.turn.up.left</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Voltar ao último post visualizado</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>openLastSeenPost</string>
 		</dict>
 		<dict>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>tab_posts</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>doc.plaintext</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Abrir o último post publicado</string>
 			<key>UIApplicationShortcutItemType</key>

@@ -1,12 +1,22 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "image_logo_feature.pdf"
+      "filename" : "image_logo_feature.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "image_logo_feature_dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

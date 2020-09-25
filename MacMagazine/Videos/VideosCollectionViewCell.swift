@@ -176,7 +176,7 @@ extension VideosCollectionViewCell {
             return
         }
         thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature\(Settings().darkModeimage)"))
+        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
     }
 }
 
