@@ -55,7 +55,7 @@ class WebViewController: UIViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateCookie(_:)), name: .updateCookie, object: nil)
 
-		favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+		favorite.image = UIImage(systemName: post?.favorito ?? false ? "star.fill" : "star")
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
         self.parent?.navigationItem.leftBarButtonItem?.accessibilityLabel = "Voltar"
 
@@ -130,7 +130,7 @@ class WebViewController: UIViewController {
 				return
 		}
 		Favorite().updatePostStatus(using: link) { isFavoriteOn in
-			self.favorite.image = UIImage(named: isFavoriteOn ? "fav_on" : "fav_off")
+            self.favorite.image = UIImage(systemName: isFavoriteOn ? "star.fill" : "star")
 		}
 	}
 
@@ -204,7 +204,7 @@ extension WebViewController {
 			}
 			if post?.link == object.link {
 				post?.favorito = object.favorite
-				favorite.image = UIImage(named: post?.favorito ?? false ? "fav_on" : "fav_off")
+                favorite.image = UIImage(systemName: post?.favorito ?? false ? "star.fill" : "star")
 				self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
 			}
 		}

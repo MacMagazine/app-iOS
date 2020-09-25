@@ -9,4 +9,3 @@
 import UIKit
 
 class AppImageView: UIImageView {}
-class FavoriteImageView: UIImageView {}

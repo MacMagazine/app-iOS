@@ -217,7 +217,6 @@ extension Theme {
         AppImageView.appearance().with {
             $0.borderColor = UIColor(hex: "dddddd", alpha: 1)
         }
-        FavoriteImageView.appearance().tintColor = tint
 
         // SWITCH
 

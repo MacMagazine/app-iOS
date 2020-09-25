@@ -678,13 +678,13 @@ extension PostsMasterViewController {
 
 extension PostsMasterViewController {
     @IBAction private func showHideFavorites(_ sender: Any) {
-        if favorite.image == UIImage(named: "fav_on") {
-            favorite.image = UIImage(named: "fav_off")
-            favorite.accessibilityLabel = "Listar posts favoritos."
+        if favorite.image == UIImage(systemName: "star.fill") {
+            favorite.image = UIImage(systemName: "star")
+            favorite.accessibilityLabel = "Listar posts."
             hideFavorites()
         } else {
-            favorite.image = UIImage(named: "fav_on")
-            favorite.accessibilityLabel = "Listar posts."
+            favorite.image = UIImage(systemName: "star.fill")
+            favorite.accessibilityLabel = "Listar posts favoritos."
             showFavorites()
         }
     }

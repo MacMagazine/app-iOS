@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -190,9 +191,11 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="36"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" image="fav_off"/>
-                                                    <state key="selected" image="fav_on"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <state key="normal">
+                                                        <imageReference key="image" image="star" catalog="system" symbolScale="default"/>
+                                                    </state>
+                                                    <state key="selected" image="star.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="favorite:" destination="lNX-c7-cbD" eventType="touchUpInside" id="9Gr-fq-6m4"/>
                                                     </connections>
@@ -259,7 +262,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="fVw-Ev-d1Z">
-                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="EeU-sK-M4J">
+                        <barButtonItem key="leftBarButtonItem" image="star.fill" catalog="system" id="EeU-sK-M4J">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar videos favoritos"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
@@ -310,11 +313,11 @@
         </designable>
     </designables>
     <resources>
-        <image name="fav_off" width="21" height="21"/>
-        <image name="fav_on" width="21" height="21"/>
         <image name="logo" width="415" height="350"/>
         <image name="play" width="500" height="500"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="share_on" width="16" height="20"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>
 </document>

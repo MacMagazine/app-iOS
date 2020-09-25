@@ -98,11 +98,11 @@ class PodcastViewController: UIViewController {
 		if vc.showFavorites {
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
-			favorite.image = UIImage(named: "fav_on")
+			favorite.image = UIImage(systemName: "star")
 		} else {
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil
-			favorite.image = UIImage(named: "fav_off")
+			favorite.image = UIImage(systemName: "star.fill")
 		}
     }
 

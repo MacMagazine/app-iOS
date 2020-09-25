@@ -86,7 +86,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="fav_off" id="DiB-v8-Kg9">
+                        <barButtonItem key="leftBarButtonItem" image="star.fill" catalog="system" id="DiB-v8-Kg9">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar podcasts favoritos"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
@@ -172,8 +172,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav_off" width="21" height="21"/>
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>
 </document>

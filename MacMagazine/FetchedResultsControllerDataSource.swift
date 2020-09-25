@@ -139,12 +139,12 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 			}
 		}
 
-		favoritar.image = UIImage(named: "fav_cell\(object.favorite ? "" : "_off")")
-		favoritar.backgroundColor = UIColor(hex: "e49d4c", alpha: 1)
+		favoritar.image = UIImage(systemName: "star\(object.favorite ? "" : ".fill")")
+        favoritar.backgroundColor = UIColor.systemBlue
         favoritar.accessibilityLabel = "Favorito"
 
         read.image = UIImage(named: "read\(object.read ? "" : "_off")")
-        read.backgroundColor = UIColor(hex: "0097d4", alpha: 1)
+        read.backgroundColor = UIColor.systemOrange
         read.accessibilityLabel = object.read ? "Desmarcar como Lido" : "Marcar como Lido"
 
         var buttons = [favoritar]

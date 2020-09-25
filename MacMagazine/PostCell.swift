@@ -31,7 +31,7 @@ class PostCell: AppTableViewCell {
     @IBOutlet private weak var subheadlineLabel: UILabel!
     @IBOutlet private weak var lengthlineLabel: UILabel!
     @IBOutlet private weak var thumbnailImageView: UIImageView!
-    @IBOutlet private weak var favoriteImageView: FavoriteImageView!
+    @IBOutlet private weak var favoriteImageView: UIImageView!
 
     // MARK: - Methods -
 
