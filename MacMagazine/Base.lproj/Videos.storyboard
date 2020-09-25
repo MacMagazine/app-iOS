@@ -203,7 +203,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
                                                     <rect key="frame" x="150" y="0.0" width="150" height="36"/>
                                                     <accessibility key="accessibilityConfiguration" label="Compartilhar video."/>
-                                                    <state key="normal" image="share_on"/>
+                                                    <state key="normal" image="square.and.arrow.up" catalog="system"/>
                                                     <connections>
                                                         <action selector="share:" destination="lNX-c7-cbD" eventType="touchUpInside" id="a6C-7P-3sa"/>
                                                     </connections>
@@ -316,7 +316,7 @@
         <image name="logo" width="415" height="350"/>
         <image name="play" width="500" height="500"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
-        <image name="share_on" width="16" height="20"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>

@@ -173,8 +173,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 			boolValue(true)
 		}
-		compatilhar.backgroundColor = UIColor(hex: "67BB0B", alpha: 1)
-		compatilhar.image = UIImage(named: "share")
+        compatilhar.backgroundColor = UIColor.systemGreen
+		compatilhar.image = UIImage(systemName: "square.and.arrow.up")
 		compatilhar.accessibilityLabel = "Compartilhar"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [compatilhar])

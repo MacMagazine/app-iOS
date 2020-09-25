@@ -57,7 +57,7 @@
                         <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="share_nav" id="dA3-eY-eOM">
+                <barButtonItem image="square.and.arrow.up" catalog="system" id="dA3-eY-eOM">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Compartilhar"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
@@ -71,7 +71,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="share_nav" width="17" height="21"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
     </resources>
 </document>
