@@ -75,7 +75,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-9k-bAJ" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                                            <rect key="frame" x="243.5" y="137" width="44.5" height="24"/>
+                                            <rect key="frame" x="251.5" y="145" width="36.5" height="16"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -189,7 +189,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kza-MX-Z9k">
                                             <rect key="frame" x="0.0" y="260" width="300" height="36"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <state key="normal">
@@ -200,7 +200,7 @@
                                                         <action selector="favorite:" destination="lNX-c7-cbD" eventType="touchUpInside" id="9Gr-fq-6m4"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T" customClass="AppButton" customModule="MacMagazine" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T">
                                                     <rect key="frame" x="150" y="0.0" width="150" height="36"/>
                                                     <accessibility key="accessibilityConfiguration" label="Compartilhar video."/>
                                                     <state key="normal" image="square.and.arrow.up" catalog="system"/>
@@ -309,7 +309,7 @@
     </scenes>
     <designables>
         <designable name="hfJ-9k-bAJ">
-            <size key="intrinsicContentSize" width="44.5" height="24"/>
+            <size key="intrinsicContentSize" width="36.5" height="16"/>
         </designable>
     </designables>
     <resources>

@@ -143,7 +143,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         favoritar.backgroundColor = UIColor.systemBlue
         favoritar.accessibilityLabel = "Favorito"
 
-        read.image = UIImage(named: "read\(object.read ? "" : "_off")")
+        read.image = UIImage(systemName: "bubble.left\(object.read ? "" : ".fill")")
         read.backgroundColor = UIColor.systemOrange
         read.accessibilityLabel = object.read ? "Desmarcar como Lido" : "Marcar como Lido"
 

@@ -11,7 +11,6 @@ import WebKit
 
 class AppTabBar: UITabBar {}
 class AppNavigationBar: UINavigationBar {}
-class AppButton: UIButton {}
 class AppSegmentedControl: UISegmentedControl {}
 class AppCollectionViewCell: UICollectionViewCell {}
 
@@ -209,8 +208,6 @@ extension Theme {
             $0.borderColor = tint
             $0.backgroundColor = .clear
         }
-
-        AppButton.appearance().tintColor = tint
 
         // IMAGE
 

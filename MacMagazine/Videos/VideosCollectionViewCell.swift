@@ -24,7 +24,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 	@IBOutlet weak private var viewsLabel: UILabel!
 	@IBOutlet weak private var likesLabel: UILabel!
 	@IBOutlet weak private var durationLabel: PaddingLabel!
-    @IBOutlet weak private var share: AppButton!
+    @IBOutlet weak private var share: UIButton!
 
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
