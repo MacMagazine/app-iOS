@@ -131,7 +131,7 @@ class ResultsViewController: UITableViewController {
 	// MARK: - View methods -
 
 	func showSpin() {
-		let spin = UIActivityIndicatorView(style: .whiteLarge)
+		let spin = UIActivityIndicatorView(style: .large)
 		spin.startAnimating()
 		tableView.backgroundView = spin
 		tableView.separatorStyle = .none

@@ -121,7 +121,7 @@ extension AppDelegate {
 	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
 		if shortcutItem.type == "openLastSeenPost" ||
 			shortcutItem.type == "openMostRecentPost" {
-			guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
+			guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
 				return
 			}
 			tabController.selectedIndex = 0

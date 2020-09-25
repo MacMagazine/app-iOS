@@ -146,14 +146,7 @@ extension API {
 			return
 		}
 
-		DispatchQueue.main.async {
-			UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		}
 		Network.getVdeos(url: url) { (data: Data?, _: String?) in
-			DispatchQueue.main.async {
-				UIApplication.shared.isNetworkActivityIndicatorVisible = false
-			}
-
 			guard let data = data else {
 				if isSearch ?? false {
 					self.onVideoSearchCompletion?(nil)

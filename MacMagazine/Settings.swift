@@ -36,11 +36,11 @@ struct Settings {
 	// MARK: - Device -
 
 	var isPhone: Bool {
-        return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .compact
+        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.traitCollection.horizontalSizeClass == .compact
     }
 
 	var isPad: Bool {
-        return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.horizontalSizeClass == .regular
+        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.traitCollection.horizontalSizeClass == .regular
     }
 
 	var orientations: UIInterfaceOrientationMask {
@@ -69,7 +69,7 @@ struct Settings {
     var isDarkMode: Bool {
         if #available(iOS 13.0, *) {
             if appearance == .native {
-                return UIApplication.shared.keyWindow?.rootViewController?.traitCollection.userInterfaceStyle == .dark
+                return UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.traitCollection.userInterfaceStyle == .dark
             }
         }
         return appearance == .dark
@@ -165,13 +165,13 @@ extension Settings {
 
 	func applyLightTheme() {
 		if isDarkMode {
-			UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.tintColor = LightTheme().tint
 		}
 	}
 
 	func applyDarkTheme() {
 		if isDarkMode {
-			UIApplication.shared.keyWindow?.tintColor = DarkTheme().tint
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.tintColor = DarkTheme().tint
 		}
 	}
 }

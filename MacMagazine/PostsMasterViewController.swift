@@ -640,7 +640,7 @@ func showDetailController(with link: String) {
 	CoreDataStack.shared.links { links in
 		prepareDetailController(controller, using: links, compare: link)
 
-		guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController else {
+		guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
 			return
 		}
 		// Force first tab to present losing of reference

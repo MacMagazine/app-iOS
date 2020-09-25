@@ -459,7 +459,7 @@ extension SettingsTableViewController {
         // Temporary change the colors
         if Settings().appearance != .native &&
             Settings().isDarkMode {
-            UIApplication.shared.keyWindow?.tintColor = LightTheme().tint
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.tintColor = LightTheme().tint
         }
 
         UIApplication.shared.setAlternateIconName(icon) { error in

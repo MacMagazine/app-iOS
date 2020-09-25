@@ -258,7 +258,7 @@ extension VideoCollectionViewController {
 		if isSearching {
 			message = "Nenhum resultado encontrado"
 			guard let _ = videos else {
-				let spin = UIActivityIndicatorView(style: .whiteLarge)
+				let spin = UIActivityIndicatorView(style: .large)
 				spin.startAnimating()
 				collectionView.backgroundView = spin
 
