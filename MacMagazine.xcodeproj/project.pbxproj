@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
@@ -219,6 +220,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		681E881524D95CBC00887AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCellXL.xib; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 				9BA9393C2260DDB8004005AA /* Settings.storyboard */,
 				685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */,
 				685E4306252227420028FAA0 /* SettingsHeaderCell.xib */,
+				68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */,
 				9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */,
 			);
 			name = Ajustes;
@@ -951,6 +954,7 @@
 				9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */,
 				9BB252C423B670630054631B /* tablet_4@2x.png in Resources */,
 				9B1514BF22BE73740039DA28 /* tablet_3@2x.png in Resources */,
+				68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */,
 				9B1514BB22BE73010039DA28 /* phone_3.png in Resources */,
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
@@ -1180,6 +1184,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68012EBF252295600094A204 /* Base */,
+			);
+			name = SettingsSubHeaderCell.xib;
+			sourceTree = "<group>";
+		};
 		681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

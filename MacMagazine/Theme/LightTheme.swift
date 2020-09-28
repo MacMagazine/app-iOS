@@ -24,7 +24,7 @@ struct LightTheme: Theme {
 
     let backgroundColor: UIColor = UIColor(hex: "efeef3", alpha: 1)
     let cellBackgroundColor: UIColor = .white
-    let separatorColor: UIColor = .lightGray
+    let separatorColor: UIColor = .systemGray
     let selectionColor: UIColor = UIColor(hex: "008ACA", alpha: 0.3)
 	let videoCellBackgroundColor: UIColor = .lightGray
 

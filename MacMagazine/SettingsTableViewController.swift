@@ -46,6 +46,7 @@ class SettingsTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onRefreshAfterBackground(_:)), name: .refreshAfterBackground, object: nil)
 
         self.tableView?.register(UINib(nibName: "SettingsHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
+        self.tableView?.register(UINib(nibName: "SettingsSubHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "subHeaderCell")
 
 		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
@@ -80,7 +81,7 @@ class SettingsTableViewController: UITableViewController {
         }
         delegate.supportedInterfaceOrientation = Settings().orientations
 
-        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login de Patrão", for: .normal)
+        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login para patrões", for: .normal)
 	}
 
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -95,16 +96,18 @@ class SettingsTableViewController: UITableViewController {
 		header.append("Notificações push")
 		header.append("Aparência")
         header.append("Ícone do app")
-        header.append("MacMagazine versão \(getAppVersion())")
+        header.append("Sobre")
         return header
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as? SettingsHeaderCell else {
+        let headers = getHeaders()
+        let identifier = section == headers.count - 1 ? "subHeaderCell" : "headerCell"
+
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as? SettingsHeaderCell else {
             return nil
         }
 
-        let headers = getHeaders()
         if headers.isEmpty ||
             (headers.count - 1) < section ||
             headers[section] == "" {
@@ -115,28 +118,18 @@ class SettingsTableViewController: UITableViewController {
         return header
     }
 
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let header = getHeaders()
-//        if header.isEmpty ||
-//            (header.count - 1) < section ||
-//            header[section] == "" {
-//            return nil
-//        }
-//		return header[section]
-//    }
-
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let regular: CGFloat = 50.0
         let large: CGFloat = 94.0
 
         switch indexPath.section {
         case 2:         // "ÍCONE DO APLICATIVO"
-            return 74
+            return 105
         case 1:         // "APARÊNCIA"
             switch indexPath.row {
-            case 2:     // "TAMANHO DA FONTE"
+            case 3:     // "TAMANHO DA FONTE"
                 return large
-            case 3:     // "INTENSIDADE POST LIDO"
+            case 2:     // "INTENSIDADE POST LIDO"
                 return appearanceCellIntensity.isHidden ? 0 : large
             default:
                 return regular
@@ -249,17 +242,8 @@ class SettingsTableViewController: UITableViewController {
                 self.navigationController?.pushViewController(controller, animated: true)
             }
         }
-        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login de Patrão", for: .normal)
+        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login para patrões", for: .normal)
     }
-
-    // MARK: - Private Methods -
-
-    fileprivate func getAppVersion() -> String {
-        let bundle = Bundle(for: type(of: self))
-        let appVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String
-        return "\(appVersion ?? "0")"
-    }
-
 }
 
 // MARK: - Mail Methods -
@@ -269,7 +253,7 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 	@IBAction private func reportProblem(_ sender: Any) {
 		let composeVC = MFMailComposeViewController()
 		composeVC.mailComposeDelegate = self
-		composeVC.setSubject("Relato de problema no app MacMagazine \(getAppVersion())")
+        composeVC.setSubject("Relato de problema no app MacMagazine \(Settings().appVersion)")
 		composeVC.setToRecipients(["contato@macmagazine.com.br"])
 
 		// Temporary change the colors
@@ -444,10 +428,23 @@ extension SettingsTableViewController {
     }
 
     fileprivate func setIconOptionsSelection(selected iconName: String) {
-        self.iconOption1Selected.alpha = iconName == IconOptions.option1 ? 1 : 0
-        self.iconOption2Selected.alpha = iconName == IconOptions.option2 ? 1 : 0
-        self.iconOption3Selected.alpha = iconName == IconOptions.option3 ? 1 : 0
-        self.iconOption4Selected.alpha = iconName == IconOptions.option4 ? 1 : 0
+        let selectedImage = UIImage(systemName: "checkmark.circle.fill")
+        let normal = UIImage(systemName: "circle")
+
+        let tintSelectedColor = UIColor.systemBlue
+        let tintColor = UIColor.systemGray
+
+        self.iconOption1Selected.image = iconName == IconOptions.option1 ? selectedImage : normal
+        self.iconOption1Selected.tintColor = iconName == IconOptions.option1 ? tintSelectedColor : tintColor
+
+        self.iconOption2Selected.image = iconName == IconOptions.option2 ? selectedImage : normal
+        self.iconOption2Selected.tintColor = iconName == IconOptions.option2 ? tintSelectedColor : tintColor
+
+        self.iconOption3Selected.image = iconName == IconOptions.option3 ? selectedImage : normal
+        self.iconOption3Selected.tintColor = iconName == IconOptions.option3 ? tintSelectedColor : tintColor
+
+        self.iconOption4Selected.image = iconName == IconOptions.option4 ? selectedImage : normal
+        self.iconOption4Selected.tintColor = iconName == IconOptions.option4 ? tintSelectedColor : tintColor
     }
 
     fileprivate func changeIcon(to iconName: String) {

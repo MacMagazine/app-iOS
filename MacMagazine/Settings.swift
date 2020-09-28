@@ -209,3 +209,12 @@ extension Settings {
 		OneSignal.sendTag("notification_preferences", value: segment == 0 ? PushPreferences.all : PushPreferences.featured)
 	}
 }
+
+extension Settings {
+    class AsClass {}
+    var appVersion: String {
+        let bundle = Bundle(for: Settings.AsClass.self)
+        let appVersion = bundle.infoDictionary?["CFBundleShortVersionString"] as? String
+        return "\(appVersion ?? "0")"
+    }
+}

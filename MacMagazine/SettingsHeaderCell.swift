@@ -13,10 +13,12 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
     // MARK: - Properties -
 
     @IBOutlet private weak var headerLabel: UILabel!
+    @IBOutlet private weak var subHeaderLabel: UILabel!
 
     // MARK: - Methods -
 
     func setHeader(_ text: String?) {
         headerLabel?.text = text
+        subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
     }
 }

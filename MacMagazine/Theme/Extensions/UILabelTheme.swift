@@ -75,10 +75,7 @@ extension AppSmallFont {
             return 18.0
         }
         set {
-            guard let font = self.font else {
-                return
-            }
-            self.font = UIFont(name: font.fontName, size: 18.0)
+            self.font = .systemFont(ofSize: 18.0)
         }
     }
 }
@@ -89,10 +86,7 @@ extension AppBigFont {
             return 28.0
         }
         set {
-            guard let font = self.font else {
-                return
-            }
-            self.font = UIFont(name: font.fontName, size: 28.0)
+            self.font = .systemFont(ofSize: 28.0)
         }
     }
 }

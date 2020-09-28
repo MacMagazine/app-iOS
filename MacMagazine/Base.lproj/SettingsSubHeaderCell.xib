@@ -16,21 +16,31 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-Go-OLY">
-                    <rect key="frame" x="12" y="12" width="390" height="878"/>
+                    <rect key="frame" x="12" y="12" width="390" height="869.5"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <color key="textColor" name="MMDarkGreyWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-0s-alt">
+                    <rect key="frame" x="12" y="881.5" width="390" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" name="MMDarkGreyWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="tXz-Go-OLY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="TOb-5g-njE"/>
-                <constraint firstAttribute="trailing" secondItem="tXz-Go-OLY" secondAttribute="trailing" constant="12" id="fpd-lt-7MH"/>
-                <constraint firstAttribute="bottom" secondItem="tXz-Go-OLY" secondAttribute="bottom" constant="6" id="usI-2r-4PX"/>
-                <constraint firstItem="tXz-Go-OLY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="xNb-wV-Jpo"/>
+                <constraint firstAttribute="bottom" secondItem="gxr-0s-alt" secondAttribute="bottom" id="4tx-Bo-Q54"/>
+                <constraint firstAttribute="trailing" secondItem="tXz-Go-OLY" secondAttribute="trailing" constant="12" id="FAF-ee-wH2"/>
+                <constraint firstItem="gxr-0s-alt" firstAttribute="top" secondItem="tXz-Go-OLY" secondAttribute="bottom" id="c0c-yr-P3q"/>
+                <constraint firstAttribute="trailing" secondItem="gxr-0s-alt" secondAttribute="trailing" constant="12" id="lve-S1-Udu"/>
+                <constraint firstItem="tXz-Go-OLY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="qeZ-zN-6GX"/>
+                <constraint firstItem="gxr-0s-alt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="t4q-OG-qsi"/>
+                <constraint firstItem="tXz-Go-OLY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="vln-f1-Un3"/>
             </constraints>
             <connections>
                 <outlet property="headerLabel" destination="tXz-Go-OLY" id="1eA-2I-cQe"/>
+                <outlet property="subHeaderLabel" destination="gxr-0s-alt" id="kYZ-6l-udE"/>
             </connections>
             <point key="canvasLocation" x="139" y="110"/>
         </view>
