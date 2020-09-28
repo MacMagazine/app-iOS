@@ -53,7 +53,7 @@ class SettingsTableViewController: UITableViewController {
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
 
         let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
-        setIconOptionsSelection(selected: iconName ?? "iconOption1")
+        setIconOptionsSelection(selected: iconName ?? "option_1")
 
         let transparency = Settings().transparency
         intensityPostRead.isOn = transparency < 1
