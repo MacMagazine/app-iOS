@@ -71,13 +71,13 @@ extension Theme {
 
         // WINDOW
 
-        application.keyWindow?.tintColor = tint
+        application.windows.first(where: { $0.isKeyWindow })?.tintColor = tint
 		if #available(iOS 13.0, *) {
             let overrideInterfaceStyle: UIUserInterfaceStyle = Settings().appearance == .native
                 ? .unspecified
                 : Settings().isDarkMode ? .dark : .light
 
-            application.keyWindow?.overrideUserInterfaceStyle = overrideInterfaceStyle
+            application.windows.first(where: { $0.isKeyWindow })?.overrideUserInterfaceStyle = overrideInterfaceStyle
 		}
 
         // VIEW
@@ -138,11 +138,6 @@ extension Theme {
 
         UIView.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).backgroundColor = backgroundColor
 
-        UIRefreshControl.appearance().with {
-            $0.tintColor = tint
-            $0.backgroundColor = backgroundColor
-        }
-
         // COLLECTIONVIEW
 
         UICollectionView.appearance().with {
@@ -169,7 +164,7 @@ extension Theme {
         AppLabel.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
             $0.textColor = labelColor
         }
-        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
+        AppLabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
             $0.textColor = headerFooterColor
             $0.fontSize = CGFloat(0.8)
         }

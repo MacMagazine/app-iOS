@@ -24,11 +24,12 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var iconOption2: UIImageView!
     @IBOutlet private weak var iconOption3: UIImageView!
     @IBOutlet private weak var iconOption4: UIImageView!
+    @IBOutlet private weak var iconOption1Selected: UIImageView!
+    @IBOutlet private weak var iconOption2Selected: UIImageView!
+    @IBOutlet private weak var iconOption3Selected: UIImageView!
+    @IBOutlet private weak var iconOption4Selected: UIImageView!
 
-    @IBOutlet private weak var appearanceCellDarkMode: AppTableViewCell!
-    @IBOutlet private weak var appearanceCellDarkModeType: AppTableViewCell!
     @IBOutlet private weak var appearanceCellIntensity: AppTableViewCell!
-    @IBOutlet private weak var darkModeSystem: UISwitch!
     @IBOutlet private weak var darkModeSegmentControl: AppSegmentedControl!
 
     @IBOutlet private weak var intensityPostRead: UISwitch!
@@ -44,16 +45,15 @@ class SettingsTableViewController: UITableViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(onRefreshAfterBackground(_:)), name: .refreshAfterBackground, object: nil)
 
+        self.tableView?.register(UINib(nibName: "SettingsHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
+
 		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
         let sliderFontSize = Settings().fontSize
         fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
 
         let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
-        self.iconOption1.alpha = iconName ?? IconOptions.option1 == IconOptions.option1 ? 1 : 0.6
-        self.iconOption2.alpha = iconName ?? IconOptions.option1 == IconOptions.option2 ? 1 : 0.6
-        self.iconOption3.alpha = iconName ?? IconOptions.option1 == IconOptions.option3 ? 1 : 0.6
-        self.iconOption4.alpha = iconName ?? IconOptions.option1 == IconOptions.option4 ? 1 : 0.6
+        setIconOptionsSelection(selected: iconName ?? "iconOption1")
 
         let transparency = Settings().transparency
         intensityPostRead.isOn = transparency < 1
@@ -91,24 +91,39 @@ class SettingsTableViewController: UITableViewController {
 	// MARK: - TableView Methods -
 
     fileprivate func getHeaders() -> [String] {
-        var header = ["MACMAGAZINE \(getAppVersion())"]
-		header.append("RECEBER PUSHES PARA")
-		header.append("ÍCONE DO APLICATIVO")
-		header.append("APARÊNCIA")
-		header.append("")
-        header.append("")
+        var header = [String]()
+		header.append("Notificações push")
+		header.append("Aparência")
+        header.append("Ícone do app")
+        header.append("MacMagazine versão \(getAppVersion())")
         return header
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let header = getHeaders()
-        if header.isEmpty ||
-            (header.count - 1) < section ||
-            header[section] == "" {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as? SettingsHeaderCell else {
             return nil
         }
-		return header[section]
+
+        let headers = getHeaders()
+        if headers.isEmpty ||
+            (headers.count - 1) < section ||
+            headers[section] == "" {
+            return nil
+        }
+
+        header.setHeader(headers[section])
+        return header
     }
+
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        let header = getHeaders()
+//        if header.isEmpty ||
+//            (header.count - 1) < section ||
+//            header[section] == "" {
+//            return nil
+//        }
+//		return header[section]
+//    }
 
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let regular: CGFloat = 50.0
@@ -117,21 +132,22 @@ class SettingsTableViewController: UITableViewController {
         switch indexPath.section {
         case 2:         // "ÍCONE DO APLICATIVO"
             return 74
-        case 3:         // "APARÊNCIA"
+        case 1:         // "APARÊNCIA"
             switch indexPath.row {
-            case 0:     // "AJUSTES NATIVO"
-                return appearanceCellDarkMode.isHidden ? 0 : regular
-            case 1:     // "CLARO/ESCURO/AUTO"
-                return appearanceCellDarkModeType.isHidden ? 0 : regular
             case 2:     // "TAMANHO DA FONTE"
                 return large
-            case 4:     // "INTENSIDADE POST LIDO"
+            case 3:     // "INTENSIDADE POST LIDO"
                 return appearanceCellIntensity.isHidden ? 0 : large
             default:
                 return regular
             }
-        case 4:         // "REPORTAR PROBLEMA"
-            return reportProblem.isHidden ? 0 : regular
+        case 3:         // "REPORTAR PROBLEMA"
+            switch indexPath.row {
+                case 2:
+                    return reportProblem.isHidden ? 0 : regular
+                default:
+                    return regular
+            }
         default:
             return regular
         }
@@ -374,30 +390,7 @@ extension SettingsTableViewController {
     }
 
     fileprivate func setupAppearanceSettings() {
-        appearanceCellDarkMode.isUserInteractionEnabled = Settings().supportsNativeDarkMode
-        darkModeSystem.isOn = Settings().supportsNativeDarkMode && Settings().appearance == .native
-        if !appearanceCellDarkMode.isUserInteractionEnabled {
-            appearanceCellDarkMode.subviews[0].subviews.forEach {
-                if let view = $0 as? UILabel {
-                    view.isEnabled = false
-                }
-                if let view = $0 as? UISwitch {
-                    view.isEnabled = false
-                }
-            }
-        }
-		appearanceCellDarkMode.isHidden = !appearanceCellDarkMode.isUserInteractionEnabled
-
-        appearanceCellDarkModeType.isUserInteractionEnabled = !darkModeSystem.isOn
-        darkModeSegmentControl.selectedSegmentIndex = Settings().isDarkMode ? 1 : 0
-        appearanceCellDarkModeType.subviews[0].subviews.forEach {
-            if let view = $0 as? UISegmentedControl {
-                view.isEnabled = appearanceCellDarkModeType.isUserInteractionEnabled
-            }
-        }
-		appearanceCellDarkModeType.isHidden = !appearanceCellDarkModeType.isUserInteractionEnabled
-
-		tableView.reloadData()
+        darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
     }
 
     fileprivate func applyTheme() {
@@ -450,6 +443,13 @@ extension SettingsTableViewController {
         changeIcon(to: option)
     }
 
+    fileprivate func setIconOptionsSelection(selected iconName: String) {
+        self.iconOption1Selected.alpha = iconName == IconOptions.option1 ? 1 : 0
+        self.iconOption2Selected.alpha = iconName == IconOptions.option2 ? 1 : 0
+        self.iconOption3Selected.alpha = iconName == IconOptions.option3 ? 1 : 0
+        self.iconOption4Selected.alpha = iconName == IconOptions.option4 ? 1 : 0
+    }
+
     fileprivate func changeIcon(to iconName: String) {
         guard UIApplication.shared.supportsAlternateIcons,
             let icon = IconOptions().getIcon(for: iconName) else {
@@ -472,10 +472,7 @@ extension SettingsTableViewController {
                 UserDefaults.standard.set(iconName, forKey: Definitions.icon)
                 UserDefaults.standard.synchronize()
 
-                self.iconOption1.alpha = iconName == IconOptions.option1 ? 1 : 0.6
-                self.iconOption2.alpha = iconName == IconOptions.option2 ? 1 : 0.6
-                self.iconOption3.alpha = iconName == IconOptions.option3 ? 1 : 0.6
-                self.iconOption4.alpha = iconName == IconOptions.option4 ? 1 : 0.6
+                self.setIconOptionsSelection(selected: iconName)
             }
         }
     }
