@@ -128,7 +128,7 @@ class SettingsTableViewController: UITableViewController {
         case 1:         // "APARÊNCIA"
             switch indexPath.row {
             case 3:     // "TAMANHO DA FONTE"
-                return large
+                return 0//large
             case 2:     // "INTENSIDADE POST LIDO"
                 return appearanceCellIntensity.isHidden ? 0 : large
             default:
