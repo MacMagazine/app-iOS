@@ -162,14 +162,6 @@ extension Theme {
             $0.textColor = secondaryLabelColor
             $0.fontSize = CGFloat(fontSize)
         }
-        AppSmallFont.appearance().with {
-            $0.textColor = labelColor
-            $0.fontSize = CGFloat(1.0)
-        }
-        AppBigFont.appearance().with {
-            $0.textColor = labelColor
-            $0.fontSize = CGFloat(1.0)
-        }
         VideoViewLikeLabel.appearance().with {
             $0.textColor = videoLabelColor
             $0.fontSize = CGFloat(0.65)

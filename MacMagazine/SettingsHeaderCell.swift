@@ -19,6 +19,6 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
 
     func setHeader(_ text: String?) {
         headerLabel?.text = text
-        subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
+        subHeaderLabel?.text = "versão \(Settings().appVersion)"
     }
 }

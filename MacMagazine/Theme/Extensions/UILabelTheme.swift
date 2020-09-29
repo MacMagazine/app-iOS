@@ -10,8 +10,6 @@ import UIKit
 
 class AppHeadline: UILabel {}
 class AppSubhead: UILabel {}
-class AppSmallFont: UILabel {}
-class AppBigFont: UILabel {}
 class AppFootnote: UILabel {}
 class AppLabel: UILabel {}
 class VideoViewLikeLabel: UILabel {}
@@ -65,28 +63,6 @@ extension AppFootnote {
         set {
             let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote)
             self.font = UIFont(descriptor: font, size: font.pointSize * newValue)
-        }
-    }
-}
-
-extension AppSmallFont {
-    @objc dynamic override var fontSize: CGFloat {
-        get {
-            return 18.0
-        }
-        set {
-            self.font = .systemFont(ofSize: 18.0)
-        }
-    }
-}
-
-extension AppBigFont {
-    @objc dynamic override var fontSize: CGFloat {
-        get {
-            return 28.0
-        }
-        set {
-            self.font = .systemFont(ofSize: 28.0)
         }
     }
 }

@@ -124,12 +124,12 @@ class SettingsTableViewController: UITableViewController {
             if appearanceCellIntensity.isHidden {
                 return RowSize.zero
             } else {
-                return RowSize.icons
+                return RowSize.intensity
             }
         }
         // "ÍCONE DO APLICATIVO"
         if indexPath.section == 2 {
-            return RowSize.intensity
+            return RowSize.icons
         }
         return RowSize.normal
     }
