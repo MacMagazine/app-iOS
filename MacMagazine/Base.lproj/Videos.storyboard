@@ -14,7 +14,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jD-dP-dNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Videos" image="play.rectangle.fill" catalog="system" id="4hU-Rq-N3T"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

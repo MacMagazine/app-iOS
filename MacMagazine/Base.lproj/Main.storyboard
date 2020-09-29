@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,7 +32,7 @@
         <scene sceneID="ZIo-pw-Xnt">
             <objects>
                 <navigationController title="PostsNavigation" id="kKX-hy-fjk" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -65,6 +66,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" systemColor="systemGray4Color"/>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="Jej-5Q-aqJ" id="pLE-kF-Jzm"/>
@@ -150,7 +152,7 @@
             <objects>
                 <navigationController title="PostsDetailNavigation" automaticallyAdjustsScrollViewInsets="NO" id="fD0-My-KZk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -195,7 +197,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YQQ-bx-LIJ"/>
+        <segue reference="lNV-kD-aRc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
@@ -204,5 +206,8 @@
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

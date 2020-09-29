@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,7 +14,7 @@
                 <navigationController title="NoArNavigation" automaticallyAdjustsScrollViewInsets="NO" id="GbX-Zp-bIv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Podcast" image="mic.fill" catalog="system" id="59e-2Y-DJH"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ" customClass="AppNavigationBar" customModule="MacMagazine" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -34,6 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="608"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" systemColor="systemGray4Color"/>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="dI9-bf-84Z" id="vKx-lk-Tcp"/>
@@ -175,5 +177,8 @@
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

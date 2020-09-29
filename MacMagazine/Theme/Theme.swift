@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 class AppTabBar: UITabBar {}
-class AppNavigationBar: UINavigationBar {}
 class AppSegmentedControl: UISegmentedControl {}
 class AppCollectionViewCell: UICollectionViewCell {}
 
@@ -30,7 +29,6 @@ protocol Theme {
 
     var backgroundColor: UIColor { get }
     var cellBackgroundColor: UIColor { get }
-    var separatorColor: UIColor { get }
     var selectionColor: UIColor { get }
 	var videoCellBackgroundColor: UIColor { get }
 
@@ -96,20 +94,6 @@ extension Theme {
             $0.unselectedItemTintColor = secondaryTint
         }
 
-        // NAVBAR
-
-        AppNavigationBar.appearance().with {
-            $0.barStyle = barStyle
-            $0.barTintColor = barTintColor
-            $0.tintColor = tint
-            $0.titleTextAttributes = [
-                .foregroundColor: labelColor
-            ]
-            $0.largeTitleTextAttributes = [
-                .foregroundColor: labelColor
-            ]
-        }
-
         // SEARCHBAR
 
         UISearchBar.appearance().with {
@@ -127,7 +111,6 @@ extension Theme {
 
         UITableView.appearance().with {
             $0.backgroundColor = backgroundColor
-            $0.separatorColor = separatorColor
         }
 
         AppTableViewCell.appearance().with {
@@ -194,14 +177,6 @@ extension Theme {
         VideoViewLikeDataLabel.appearance().with {
             $0.textColor = secondaryLabelColor
             $0.fontSize = CGFloat(0.9)
-        }
-
-        // BUTTON
-
-        UIButton.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
-            $0.setTitleColor(tint, for: .normal)
-            $0.borderColor = tint
-            $0.backgroundColor = .clear
         }
 
         // IMAGE

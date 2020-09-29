@@ -24,7 +24,6 @@ struct DarkTheme: Theme {
 
     let backgroundColor: UIColor = .black
     let cellBackgroundColor: UIColor = UIColor(hex: "181818", alpha: 1)
-    let separatorColor: UIColor = .systemGray
     let selectionColor: UIColor = .gray
 	let videoCellBackgroundColor: UIColor = .gray
 

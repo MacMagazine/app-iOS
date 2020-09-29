@@ -15,10 +15,7 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Properties -
 
-    @IBOutlet private weak var reportProblem: AppTableViewCell!
 	@IBOutlet private weak var pushOptions: AppSegmentedControl!
-
-    @IBOutlet private weak var fontSize: UISlider!
 
     @IBOutlet private weak var iconOption1: UIImageView!
     @IBOutlet private weak var iconOption2: UIImageView!
@@ -48,10 +45,10 @@ class SettingsTableViewController: UITableViewController {
         self.tableView?.register(UINib(nibName: "SettingsHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "SettingsSubHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "subHeaderCell")
 
-		pushOptions.selectedSegmentIndex = Settings().pushPreference
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
 
-        let sliderFontSize = Settings().fontSize
-        fontSize.value = sliderFontSize == "fontemenor" ? 0.0 : sliderFontSize == "fontemaior" ? 2.0 : 1.0
+		pushOptions.selectedSegmentIndex = Settings().pushPreference
 
         let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
         setIconOptionsSelection(selected: iconName ?? "option_1")
@@ -62,11 +59,6 @@ class SettingsTableViewController: UITableViewController {
         readTransparencyValue.text = "\(String(describing: Int(readTransparency.value)))%"
 
         appearanceCellIntensity.isHidden = true
-
-        guard MFMailComposeViewController.canSendMail() else {
-			reportProblem.isHidden = true
-			return
-		}
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -118,33 +110,29 @@ class SettingsTableViewController: UITableViewController {
         return header
     }
 
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let regular: CGFloat = 50.0
-        let large: CGFloat = 94.0
-
-        switch indexPath.section {
-        case 2:         // "ÍCONE DO APLICATIVO"
-            return 105
-        case 1:         // "APARÊNCIA"
-            switch indexPath.row {
-            case 3:     // "TAMANHO DA FONTE"
-                return 0//large
-            case 2:     // "INTENSIDADE POST LIDO"
-                return appearanceCellIntensity.isHidden ? 0 : large
-            default:
-                return regular
-            }
-        case 3:         // "REPORTAR PROBLEMA"
-            switch indexPath.row {
-                case 2:
-                    return reportProblem.isHidden ? 0 : regular
-                default:
-                    return regular
-            }
-        default:
-            return regular
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        struct RowSize {
+            static let zero: CGFloat = 0
+            static let icons: CGFloat = 105
+            static let intensity: CGFloat = 94
+            static let normal: CGFloat = UITableView.automaticDimension
         }
-	}
+
+        // "INTENSIDADE POST LIDO"
+        if indexPath.section == 1 &&
+            indexPath.row == 2 {
+            if appearanceCellIntensity.isHidden {
+                return RowSize.zero
+            } else {
+                return RowSize.icons
+            }
+        }
+        // "ÍCONE DO APLICATIVO"
+        if indexPath.section == 2 {
+            return RowSize.intensity
+        }
+        return RowSize.normal
+    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -251,21 +239,20 @@ class SettingsTableViewController: UITableViewController {
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 
 	@IBAction private func reportProblem(_ sender: Any) {
-		let composeVC = MFMailComposeViewController()
-		composeVC.mailComposeDelegate = self
+        guard MFMailComposeViewController.canSendMail() else {
+            return
+        }
+
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
         composeVC.setSubject("Relato de problema no app MacMagazine \(Settings().appVersion)")
-		composeVC.setToRecipients(["contato@macmagazine.com.br"])
+        composeVC.setToRecipients(["contato@macmagazine.com.br"])
 
-		// Temporary change the colors
-		Settings().applyLightTheme()
-
-		self.present(composeVC, animated: true, completion: nil)
+        self.present(composeVC, animated: true, completion: nil)
 	}
 
 	public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-		controller.dismiss(animated: true) {
-			Settings().applyDarkTheme()
-		}
+		controller.dismiss(animated: true)
 	}
 
 }
@@ -273,32 +260,6 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 // MARK: - Appearance Methods -
 
 extension SettingsTableViewController {
-
-    @IBAction private func changeFontSize(_ sender: Any) {
-        guard let slider = sender as? UISlider else {
-            return
-        }
-
-        var fontSize = ""
-        var roundedValue = 1
-
-        if slider.value < 0.65 {
-            roundedValue = 0
-            fontSize = "fontemenor"
-        }
-        if slider.value > 1.4 {
-            roundedValue = 2
-            fontSize = "fontemaior"
-        }
-        slider.value = Float(roundedValue)
-
-        UserDefaults.standard.set(fontSize, forKey: Definitions.fontSize)
-        UserDefaults.standard.synchronize()
-
-        applyTheme()
-
-        NotificationCenter.default.post(name: .updateCookie, object: Definitions.fontSize)
-    }
 
     @IBAction private func changeAppearanceFollowSystem(_ sender: Any) {
         guard let followSystem = sender as? UISwitch else {

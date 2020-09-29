@@ -15,15 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-Go-OLY">
-                    <rect key="frame" x="12" y="12" width="390" height="869.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-Go-OLY">
+                    <rect key="frame" x="12" y="12" width="390" height="868"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                     <color key="textColor" name="MMDarkGreyWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-0s-alt">
-                    <rect key="frame" x="12" y="881.5" width="390" height="14.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-0s-alt">
+                    <rect key="frame" x="12" y="880" width="390" height="16"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <color key="textColor" name="MMDarkGreyWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
