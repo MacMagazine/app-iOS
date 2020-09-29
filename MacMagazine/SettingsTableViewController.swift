@@ -15,7 +15,7 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Properties -
 
-	@IBOutlet private weak var pushOptions: AppSegmentedControl!
+	@IBOutlet private weak var pushOptions: UISegmentedControl!
 
     @IBOutlet private weak var iconOption1: UIImageView!
     @IBOutlet private weak var iconOption2: UIImageView!
@@ -26,12 +26,12 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var iconOption3Selected: UIImageView!
     @IBOutlet private weak var iconOption4Selected: UIImageView!
 
-    @IBOutlet private weak var appearanceCellIntensity: AppTableViewCell!
-    @IBOutlet private weak var darkModeSegmentControl: AppSegmentedControl!
+    @IBOutlet private weak var darkModeSegmentControl: UISegmentedControl!
 
     @IBOutlet private weak var intensityPostRead: UISwitch!
+    @IBOutlet private weak var appearanceCellIntensity: UITableViewCell!
     @IBOutlet private weak var readTransparency: UISlider!
-    @IBOutlet private weak var readTransparencyValue: AppLabel!
+    @IBOutlet private weak var readTransparencyValue: UILabel!
 
     @IBOutlet private weak var patraoButton: UIButton!
 
@@ -40,33 +40,17 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(onRefreshAfterBackground(_:)), name: .refreshAfterBackground, object: nil)
-
         self.tableView?.register(UINib(nibName: "SettingsHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "SettingsSubHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "subHeaderCell")
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
 
-		pushOptions.selectedSegmentIndex = Settings().pushPreference
-
-        let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
-        setIconOptionsSelection(selected: iconName ?? "option_1")
-
-        let transparency = Settings().transparency
-        intensityPostRead.isOn = transparency < 1
-        readTransparency.value = Float(transparency * 100.0)
-        readTransparencyValue.text = "\(String(describing: Int(readTransparency.value)))%"
-
-        appearanceCellIntensity.isHidden = true
+        setInitialValues()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-
-        tableView.backgroundColor = Settings().theme.backgroundColor
-        applyTheme()
-        setupAppearanceSettings()
 
 		guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -79,6 +63,7 @@ class SettingsTableViewController: UITableViewController {
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         tableView.backgroundColor = Settings().theme.backgroundColor
+        tableView.reloadData()
 	}
 
 	// MARK: - TableView Methods -
@@ -115,7 +100,7 @@ class SettingsTableViewController: UITableViewController {
             static let zero: CGFloat = 0
             static let icons: CGFloat = 105
             static let intensity: CGFloat = 94
-            static let normal: CGFloat = UITableView.automaticDimension
+            static let automaticDimension: CGFloat = UITableView.automaticDimension
         }
 
         // "INTENSIDADE POST LIDO"
@@ -124,22 +109,24 @@ class SettingsTableViewController: UITableViewController {
             if appearanceCellIntensity.isHidden {
                 return RowSize.zero
             } else {
-                return RowSize.intensity
+                return RowSize.automaticDimension
             }
         }
         // "ÍCONE DO APLICATIVO"
         if indexPath.section == 2 {
             return RowSize.icons
         }
-        return RowSize.normal
+        return RowSize.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
 
-    // MARK: - View Methods -
+// MARK: - Cache -
 
+extension SettingsTableViewController {
 	@IBAction private func clearCache(_ sender: Any) {
         self.flush(.keepAllStatus)
     }
@@ -206,14 +193,22 @@ class SettingsTableViewController: UITableViewController {
         alertController.setup()
         self.present(alertController, animated: true)
     }
+}
 
+// MARK: - Push -
+
+extension SettingsTableViewController {
 	@IBAction private func setPushMode(_ sender: Any) {
-		guard let segment = sender as? AppSegmentedControl else {
+		guard let segment = sender as? UISegmentedControl else {
 			return
 		}
 		Settings().updatePushPreference(segment.selectedSegmentIndex)
     }
+}
 
+// MARK: - Login patrons -
+
+extension SettingsTableViewController {
     @IBAction private func login(_ sender: Any) {
         if Settings().isPatrao {
             var settings = Settings()
@@ -234,10 +229,29 @@ class SettingsTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Initial Values -
+
+extension SettingsTableViewController {
+    fileprivate func setInitialValues() {
+        pushOptions.selectedSegmentIndex = Settings().pushPreference
+
+        let iconName = UserDefaults.standard.string(forKey: Definitions.icon)
+        setIconOptionsSelection(selected: iconName ?? "option_1")
+
+        let transparency = Settings().transparency
+        intensityPostRead.isOn = transparency < 1
+        readTransparency.value = Float(transparency * 100.0)
+        readTransparencyValue.text = "\(String(describing: Int(readTransparency.value)))%"
+
+        appearanceCellIntensity.isHidden = true
+
+        darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
+    }
+}
+
 // MARK: - Mail Methods -
 
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
-
 	@IBAction private func reportProblem(_ sender: Any) {
         guard MFMailComposeViewController.canSendMail() else {
             return
@@ -254,25 +268,11 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 	public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
 		controller.dismiss(animated: true)
 	}
-
 }
 
 // MARK: - Appearance Methods -
 
 extension SettingsTableViewController {
-
-    @IBAction private func changeAppearanceFollowSystem(_ sender: Any) {
-        guard let followSystem = sender as? UISwitch else {
-            return
-        }
-        UserDefaults.standard.set(followSystem.isOn ? Appearance.native.rawValue : darkModeSegmentControl.selectedSegmentIndex, forKey: Definitions.darkMode)
-        UserDefaults.standard.synchronize()
-
-        applyTheme()
-        setupAppearanceSettings()
-
-        NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
-    }
 
     @IBAction private func changeDarkMode(_ sender: Any) {
         guard let darkMode = sender as? UISegmentedControl else {
@@ -281,7 +281,7 @@ extension SettingsTableViewController {
         UserDefaults.standard.set(darkMode.selectedSegmentIndex, forKey: Definitions.darkMode)
         UserDefaults.standard.synchronize()
 
-        applyTheme()
+        Settings().applyTheme()
 
         NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
     }
@@ -323,8 +323,6 @@ extension SettingsTableViewController {
         setIntensity(slider.value)
     }
 
-    // MARK: - Private Methods -
-
     fileprivate func setIntensity(_ intensity: Float) {
         readTransparencyValue.text = "\(String(describing: Int(intensity)))%"
 
@@ -332,15 +330,6 @@ extension SettingsTableViewController {
         UserDefaults.standard.synchronize()
 
         NotificationCenter.default.post(name: .reloadData, object: nil)
-    }
-
-    fileprivate func setupAppearanceSettings() {
-        darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
-    }
-
-    fileprivate func applyTheme() {
-        Settings().applyTheme()
-        tableView.backgroundColor = Settings().theme.backgroundColor
     }
 
 }
@@ -392,7 +381,7 @@ extension SettingsTableViewController {
         let selectedImage = UIImage(systemName: "checkmark.circle.fill")
         let normal = UIImage(systemName: "circle")
 
-        let tintSelectedColor = UIColor.systemBlue
+        let tintSelectedColor = UIColor(named: "MMBlue")
         let tintColor = UIColor.systemGray
 
         self.iconOption1Selected.image = iconName == IconOptions.option1 ? selectedImage : normal
@@ -414,19 +403,8 @@ extension SettingsTableViewController {
                 return
         }
 
-        // Temporary change the colors
-        if Settings().appearance != .native &&
-            Settings().isDarkMode {
-            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.tintColor = LightTheme().tint
-        }
-
         UIApplication.shared.setAlternateIconName(icon) { error in
             if error == nil {
-                // Return to theme settings
-                DispatchQueue.main.async {
-                    self.applyTheme()
-                }
-
                 UserDefaults.standard.set(iconName, forKey: Definitions.icon)
                 UserDefaults.standard.synchronize()
 
@@ -436,15 +414,3 @@ extension SettingsTableViewController {
     }
 
 }
-
-// MARK: - Notifications -
-
-extension SettingsTableViewController {
-    @objc func onRefreshAfterBackground(_ notification: Notification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-			self.tableView.backgroundColor = Settings().theme.backgroundColor
-        }
-    }
-}
-
-// if webView.url?.absoluteString == "https://macmagazine.uol.com.br/wp-admin/profile.php"

@@ -9,27 +9,17 @@
 import UIKit
 import WebKit
 
-class AppTabBar: UITabBar {}
-class AppSegmentedControl: UISegmentedControl {}
 class AppCollectionViewCell: UICollectionViewCell {}
 
 protocol Theme {
-	var hightlightLogo: Bool { get }
+    var tint: UIColor { get }
 
-	var videoLabelColor: UIColor { get }
+    var videoLabelColor: UIColor { get }
 
-	var barStyle: UIBarStyle { get }
 	var barTintColor: UIColor { get }
-
-	var tint: UIColor { get }
-    var secondaryTint: UIColor { get }
-    var onTint: UIColor { get }
-
-    var selectedSegmentTintColor: UIColor { get }
 
     var backgroundColor: UIColor { get }
     var cellBackgroundColor: UIColor { get }
-    var selectionColor: UIColor { get }
 	var videoCellBackgroundColor: UIColor { get }
 
     var headerFooterColor: UIColor { get }
@@ -38,8 +28,6 @@ protocol Theme {
     var subtleLabelColor: UIColor { get }
     var textColor: UIColor { get }
     var placeholderTextColor: UIColor { get }
-
-	var keyboardStyle: UIKeyboardAppearance { get }
 
     func apply(for application: UIApplication)
     func extend(_ application: UIApplication)
@@ -70,28 +58,15 @@ extension Theme {
         // WINDOW
 
         application.windows.first(where: { $0.isKeyWindow })?.tintColor = tint
-		if #available(iOS 13.0, *) {
-            let overrideInterfaceStyle: UIUserInterfaceStyle = Settings().appearance == .native
-                ? .unspecified
-                : Settings().isDarkMode ? .dark : .light
 
-            application.windows.first(where: { $0.isKeyWindow })?.overrideUserInterfaceStyle = overrideInterfaceStyle
-		}
+        let selectedMode: UIUserInterfaceStyle = Settings().isDarkMode ? .dark : .light
+        let overrideInterfaceStyle: UIUserInterfaceStyle = Settings().appearance == .native ? .unspecified : selectedMode
+        application.windows.first(where: { $0.isKeyWindow })?.overrideUserInterfaceStyle = overrideInterfaceStyle
 
-        // VIEW
+        // SEGMENTCONTROL
 
-        AppView.appearance().with {
-            $0.tintColor = backgroundColor
-            $0.backgroundColor = backgroundColor
-        }
-
-        // TABBAR
-
-        AppTabBar.appearance().with {
-            $0.barStyle = barStyle
-            $0.barTintColor = barTintColor
-            $0.tintColor = tint
-            $0.unselectedItemTintColor = secondaryTint
+        UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).with {
+            $0.textColor = tint
         }
 
         // SEARCHBAR
@@ -104,22 +79,7 @@ extension Theme {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).with {
             $0.textColor = textColor
             $0.placeholderColor = placeholderTextColor
-            $0.keyboardAppearance = keyboardStyle
         }
-
-        // TABLEVIEW
-
-        UITableView.appearance().with {
-            $0.backgroundColor = backgroundColor
-        }
-
-        AppTableViewCell.appearance().with {
-            $0.backgroundColor = cellBackgroundColor
-            $0.contentView.backgroundColor = cellBackgroundColor
-            $0.selectionColor = selectionColor
-        }
-
-        UIView.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).backgroundColor = backgroundColor
 
         // COLLECTIONVIEW
 
@@ -171,42 +131,11 @@ extension Theme {
             $0.fontSize = CGFloat(0.9)
         }
 
-        // IMAGE
-
-        AppImageView.appearance().with {
-            $0.borderColor = UIColor(hex: "dddddd", alpha: 1)
-        }
-
-        // SWITCH
-
-        UISwitch.appearance().onTintColor = onTint
-
-        // SLIDER
-
-        UISlider.appearance().tintColor = tint
-
-        // SEGMENTCONTROL
-
-        AppSegmentedControl.appearance().with {
-            $0.tintColor = tint
-            if #available(iOS 13.0, *) {
-                $0.selectedSegmentTintColor = selectedSegmentTintColor
-            }
-        }
-        UILabel.appearance(whenContainedInInstancesOf: [AppSegmentedControl.self]).with {
-            $0.textColor = tint
-            $0.fontSize = CGFloat(0.785)
-        }
-
         // WEBVIEW
 
         WKWebView.appearance().with {
             $0.backgroundColor = backgroundColor
         }
-
-        // ACTIVITYINDICATOR
-
-        UIActivityIndicatorView.appearance().color = tint
 
     }
 

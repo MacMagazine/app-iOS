@@ -9,22 +9,14 @@
 import UIKit
 
 struct LightTheme: Theme {
-	let hightlightLogo: Bool = false
+    let tint: UIColor = UIColor(named: "MMBlueWhite") ?? .systemBlue
 
-	let videoLabelColor: UIColor = UIColor(hex: "0097d4", alpha: 1)
+    let videoLabelColor: UIColor = UIColor(hex: "0097d4", alpha: 1)
 
-	let barStyle: UIBarStyle = .default
     let barTintColor: UIColor = .white
-
-    let tint: UIColor = UIColor(hex: "0097d4", alpha: 1)
-    let secondaryTint: UIColor = .lightGray
-    let onTint: UIColor = UIColor(hex: "0097d4", alpha: 1)
-
-    let selectedSegmentTintColor: UIColor = .white
 
     let backgroundColor: UIColor = UIColor(hex: "efeef3", alpha: 1)
     let cellBackgroundColor: UIColor = .white
-    let selectionColor: UIColor = UIColor(hex: "008ACA", alpha: 0.3)
 	let videoCellBackgroundColor: UIColor = .lightGray
 
 	let headerFooterColor: UIColor = .darkGray
@@ -33,6 +25,4 @@ struct LightTheme: Theme {
     let subtleLabelColor: UIColor = .lightGray
     let textColor: UIColor = .black
     let placeholderTextColor: UIColor = .gray
-
-	let keyboardStyle: UIKeyboardAppearance = .light
 }

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -129,6 +130,7 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="Lp5-lG-nYC">
                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="color" name="MMBlueWhite"/>
                 </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="-428" y="-1178"/>
@@ -177,6 +179,9 @@
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="MMBlueWhite">
+            <color red="0.0" green="0.59215686274509804" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

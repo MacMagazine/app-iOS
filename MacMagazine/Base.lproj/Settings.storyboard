@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,14 +21,14 @@
                         <sections>
                             <tableViewSection id="tzb-GF-QmQ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="r1N-CG-9fg" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="r1N-CG-9fg">
                                         <rect key="frame" x="0.0" y="18" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r1N-CG-9fg" id="nqX-io-A7H">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-pV-sjC" customClass="AppSegmentedControl" customModule="MacMagazine" customModuleProvider="target">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-pV-sjC">
                                                     <rect key="frame" x="57" y="9.5" width="300" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="lrT-ld-A6F"/>
@@ -36,6 +37,7 @@
                                                         <segment title="Todos os posts"/>
                                                         <segment title="Somente destaques"/>
                                                     </segments>
+                                                    <color key="tintColor" name="MMBlueWhite"/>
                                                     <connections>
                                                         <action selector="setPushMode:" destination="75e-Ta-Gqd" eventType="valueChanged" id="nYL-Uy-ioU"/>
                                                     </connections>
@@ -51,14 +53,14 @@
                             </tableViewSection>
                             <tableViewSection id="84a-FX-W0x">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nuM-Qw-S8K" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nuM-Qw-S8K">
                                         <rect key="frame" x="0.0" y="104" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuM-Qw-S8K" id="dbb-1A-bDj">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fHa-3y-5QZ" customClass="AppSegmentedControl" customModule="MacMagazine" customModuleProvider="target">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fHa-3y-5QZ">
                                                     <rect key="frame" x="57" y="9.5" width="300" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="zab-0a-L2V"/>
@@ -68,6 +70,7 @@
                                                         <segment title="Escura"/>
                                                         <segment title="Sistema"/>
                                                     </segments>
+                                                    <color key="tintColor" name="MMBlueWhite"/>
                                                     <connections>
                                                         <action selector="changeDarkMode:" destination="75e-Ta-Gqd" eventType="valueChanged" id="WyD-D5-aBp"/>
                                                     </connections>
@@ -79,22 +82,23 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2JV-mQ-7Gk" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2JV-mQ-7Gk">
                                         <rect key="frame" x="0.0" y="154" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2JV-mQ-7Gk" id="itV-9F-rxd">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identificar posts já lidos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3v-vs-c8M" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="14.5" width="179.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identificar posts já lidos" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3v-vs-c8M">
+                                                    <rect key="frame" x="20" y="11" width="179.5" height="28"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Dw-eO-rm7">
                                                     <rect key="frame" x="343" y="9.5" width="51" height="31"/>
                                                     <accessibility key="accessibilityConfiguration" hint="Toque para alterar" label="Diminuir intesidade do post lido"/>
+                                                    <color key="onTintColor" name="MMBlue"/>
                                                     <connections>
                                                         <action selector="enableReadIntensity:" destination="75e-Ta-Gqd" eventType="valueChanged" id="4u2-vB-1NC"/>
                                                     </connections>
@@ -102,10 +106,14 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="7Dw-eO-rm7" firstAttribute="centerY" secondItem="itV-9F-rxd" secondAttribute="centerY" id="1pO-fB-6j3"/>
+                                                <constraint firstItem="7Dw-eO-rm7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="itV-9F-rxd" secondAttribute="top" constant="9.5" id="41h-Ox-lnu"/>
                                                 <constraint firstItem="7Dw-eO-rm7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="y3v-vs-c8M" secondAttribute="trailing" constant="8" symbolic="YES" id="5hs-8U-6mc"/>
                                                 <constraint firstItem="y3v-vs-c8M" firstAttribute="centerY" secondItem="itV-9F-rxd" secondAttribute="centerY" id="6Vx-VM-WRl"/>
                                                 <constraint firstItem="y3v-vs-c8M" firstAttribute="leading" secondItem="itV-9F-rxd" secondAttribute="leading" constant="20" id="Bbn-42-cR9"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="y3v-vs-c8M" secondAttribute="bottom" id="H7s-Qh-kKo"/>
                                                 <constraint firstAttribute="trailing" secondItem="7Dw-eO-rm7" secondAttribute="trailing" constant="22" id="Sga-kZ-oqC"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7Dw-eO-rm7" secondAttribute="bottom" constant="9.5" id="aqp-r5-hmm"/>
+                                                <constraint firstItem="y3v-vs-c8M" firstAttribute="top" secondItem="itV-9F-rxd" secondAttribute="topMargin" id="ylh-Rj-bwP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
@@ -113,48 +121,56 @@
                                             <outletCollection property="gestureRecognizers" destination="hO1-PN-CFW" appends="YES" id="ClI-pc-yzG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="92" id="Jrd-t5-7DG" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="92" id="Jrd-t5-7DG">
                                         <rect key="frame" x="0.0" y="204" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jrd-t5-7DG" id="mp3-Xn-Avg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intensidade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vG-V8-mcP" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="14" width="218" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Fonte pequena">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="40" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-ZE-Kkk">
-                                                    <rect key="frame" x="14" y="43.5" width="337.5" height="31"/>
-                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o valor da intensidade do post lido" label="Alterar a intensidade do post lido"/>
-                                                    <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <connections>
-                                                        <action selector="changeReadTransparencyIntensity:" destination="75e-Ta-Gqd" eventType="valueChanged" id="GxI-Lc-SNQ"/>
-                                                    </connections>
-                                                </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRE-mv-lKH" customClass="AppLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="361.5" y="48" width="36.5" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label="100%">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vaa-Yq-bF2">
+                                                    <rect key="frame" x="20" y="6" width="374" height="80"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intensidade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vG-V8-mcP">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                                            <accessibility key="accessibilityConfiguration" label="Fonte pequena">
+                                                                <bool key="isElement" value="NO"/>
+                                                            </accessibility>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UFK-Af-zFx">
+                                                            <rect key="frame" x="0.0" y="50" width="374" height="30"/>
+                                                            <subviews>
+                                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="40" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-ZE-Kkk">
+                                                                    <rect key="frame" x="-2" y="0.0" width="325" height="31"/>
+                                                                    <accessibility key="accessibilityConfiguration" hint="Deslize para alterar o valor da intensidade do post lido" label="Alterar a intensidade do post lido"/>
+                                                                    <color key="minimumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="maximumTrackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <connections>
+                                                                        <action selector="changeReadTransparencyIntensity:" destination="75e-Ta-Gqd" eventType="valueChanged" id="GxI-Lc-SNQ"/>
+                                                                    </connections>
+                                                                </slider>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRE-mv-lKH">
+                                                                    <rect key="frame" x="331" y="0.0" width="43" height="30"/>
+                                                                    <accessibility key="accessibilityConfiguration" label="100%">
+                                                                        <bool key="isElement" value="NO"/>
+                                                                    </accessibility>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="TRE-mv-lKH" firstAttribute="leading" secondItem="MpC-ZE-Kkk" secondAttribute="trailing" constant="12" id="7Zb-aD-Mxh"/>
-                                                <constraint firstItem="MpC-ZE-Kkk" firstAttribute="leading" secondItem="mp3-Xn-Avg" secondAttribute="leading" constant="16" id="Vh3-mi-IbH"/>
-                                                <constraint firstItem="TRE-mv-lKH" firstAttribute="centerY" secondItem="MpC-ZE-Kkk" secondAttribute="centerY" id="Vu7-Ht-FCl"/>
-                                                <constraint firstItem="TRE-mv-lKH" firstAttribute="top" secondItem="4vG-V8-mcP" secondAttribute="bottom" constant="12" id="W2B-Dw-R97"/>
-                                                <constraint firstAttribute="trailing" secondItem="TRE-mv-lKH" secondAttribute="trailing" constant="16" id="eTe-ji-qvc"/>
+                                                <constraint firstItem="vaa-Yq-bF2" firstAttribute="top" secondItem="mp3-Xn-Avg" secondAttribute="top" constant="6" id="6zX-bC-7sa"/>
+                                                <constraint firstAttribute="trailing" secondItem="vaa-Yq-bF2" secondAttribute="trailing" constant="20" id="JCt-sI-UTJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="vaa-Yq-bF2" secondAttribute="bottom" constant="6" id="bWD-zb-mT7"/>
+                                                <constraint firstItem="vaa-Yq-bF2" firstAttribute="leading" secondItem="mp3-Xn-Avg" secondAttribute="leading" constant="20" id="d43-dd-Pv4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -162,7 +178,7 @@
                             </tableViewSection>
                             <tableViewSection id="xNE-VJ-p0K">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="105" id="rt5-Cn-lyN" customClass="AppTableViewCell" customModule="MacMagazine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="105" id="rt5-Cn-lyN">
                                         <rect key="frame" x="0.0" y="332" width="414" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rt5-Cn-lyN" id="e0z-VH-ecP">
@@ -178,7 +194,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
                                                             <rect key="frame" x="46" y="0.0" width="46" height="105"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH">
                                                                     <rect key="frame" x="-5.5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
@@ -191,11 +207,14 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                             <real key="value" value="1"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-hn-nX1">
                                                                     <rect key="frame" x="13" y="76.5" width="20" height="19"/>
-                                                                    <color key="tintColor" systemColor="systemBlueColor"/>
+                                                                    <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
@@ -224,7 +243,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
                                                             <rect key="frame" x="138" y="0.0" width="46" height="105"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4">
                                                                     <rect key="frame" x="-5.5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
@@ -237,11 +256,14 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                             <real key="value" value="1"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-hM-m4r">
                                                                     <rect key="frame" x="13" y="76.5" width="20" height="19"/>
-                                                                    <color key="tintColor" systemColor="systemBlueColor"/>
+                                                                    <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
@@ -270,7 +292,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAV-0s-5g5">
                                                             <rect key="frame" x="230" y="0.0" width="46" height="105"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_3" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_3" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc">
                                                                     <rect key="frame" x="-5.5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="Yp0-Ks-C6t"/>
@@ -283,11 +305,14 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                             <real key="value" value="1"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XlY-PV-F4I">
                                                                     <rect key="frame" x="13" y="76.5" width="20" height="19"/>
-                                                                    <color key="tintColor" systemColor="systemBlueColor"/>
+                                                                    <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
@@ -318,7 +343,7 @@
                                                             <rect key="frame" x="322" y="0.0" width="46" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_4" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-ve-Aqk" customClass="AppImageView" customModule="MacMagazine" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_4" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-ve-Aqk">
                                                                     <rect key="frame" x="-5.5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5Ds-K5-mAM"/>
@@ -331,11 +356,14 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                             <real key="value" value="1"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-mP-ySM">
                                                                     <rect key="frame" x="13" y="76.5" width="20" height="19"/>
-                                                                    <color key="tintColor" systemColor="systemBlueColor"/>
+                                                                    <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_4" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G3-2f-b5R">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
@@ -384,7 +412,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login para patrões" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qr4-Bs-iNM">
-                                                    <rect key="frame" x="6" y="6" width="414" height="50"/>
+                                                    <rect key="frame" x="6" y="6" width="402" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES"/>
                                                         <bool key="isElement" value="NO"/>
@@ -397,7 +425,9 @@
                                                     <rect key="frame" x="6" y="6" width="402" height="38"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <state key="normal" title="Login para patrões"/>
+                                                    <state key="normal" title="Login para patrões">
+                                                        <color key="titleColor" name="MMBlueWhite"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="login:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="77K-Mj-mBK"/>
                                                     </connections>
@@ -406,12 +436,12 @@
                                             <constraints>
                                                 <constraint firstItem="7cO-p7-cYL" firstAttribute="top" secondItem="rZP-Yq-hvv" secondAttribute="top" constant="6" id="2Jt-b1-haF"/>
                                                 <constraint firstAttribute="bottom" secondItem="7cO-p7-cYL" secondAttribute="bottom" constant="6" id="34v-Ro-p4R"/>
-                                                <constraint firstItem="qr4-Bs-iNM" firstAttribute="trailing" secondItem="rZP-Yq-hvv" secondAttribute="trailing" constant="6" id="PvD-Hf-sQk"/>
-                                                <constraint firstItem="qr4-Bs-iNM" firstAttribute="leading" secondItem="rZP-Yq-hvv" secondAttribute="leading" constant="6" id="hKs-D1-lKy"/>
+                                                <constraint firstItem="qr4-Bs-iNM" firstAttribute="leading" secondItem="rZP-Yq-hvv" secondAttribute="leading" constant="6" id="JJ0-hQ-UPM"/>
+                                                <constraint firstItem="qr4-Bs-iNM" firstAttribute="top" secondItem="rZP-Yq-hvv" secondAttribute="top" constant="6" id="ZHE-Nf-fsY"/>
+                                                <constraint firstAttribute="bottom" secondItem="qr4-Bs-iNM" secondAttribute="bottom" constant="6" id="bxd-YX-nid"/>
+                                                <constraint firstAttribute="trailing" secondItem="qr4-Bs-iNM" secondAttribute="trailing" constant="6" id="gS8-am-ico"/>
                                                 <constraint firstAttribute="trailing" secondItem="7cO-p7-cYL" secondAttribute="trailing" constant="6" id="hSF-Za-yIp"/>
                                                 <constraint firstItem="7cO-p7-cYL" firstAttribute="leading" secondItem="rZP-Yq-hvv" secondAttribute="leading" constant="6" id="kcy-1W-8oM"/>
-                                                <constraint firstItem="qr4-Bs-iNM" firstAttribute="top" secondItem="rZP-Yq-hvv" secondAttribute="top" constant="6" id="li7-mE-5cx"/>
-                                                <constraint firstItem="qr4-Bs-iNM" firstAttribute="bottom" secondItem="rZP-Yq-hvv" secondAttribute="bottom" constant="6" id="qgo-pJ-EVT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -435,7 +465,9 @@
                                                     <rect key="frame" x="6" y="6" width="402" height="38"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <state key="normal" title="Limpar cache do app"/>
+                                                    <state key="normal" title="Limpar cache do app">
+                                                        <color key="titleColor" name="MMBlueWhite"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="clearCache:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="GGU-Tf-yqI"/>
                                                         <outletCollection property="gestureRecognizers" destination="Aw5-9L-f2b" appends="YES" id="MN3-s1-VCX"/>
@@ -473,7 +505,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Goh-iK-82H">
                                                     <rect key="frame" x="6" y="6" width="402" height="38"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <state key="normal" title="Relatar problema/bug no app"/>
+                                                    <state key="normal" title="Relatar problema/bug no app">
+                                                        <color key="titleColor" name="MMBlueWhite"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="reportProblem:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="AYG-c0-re3"/>
                                                     </connections>
@@ -573,11 +607,14 @@
         <image name="phone_2" width="1024" height="1024"/>
         <image name="phone_3" width="1024" height="1024"/>
         <image name="phone_4" width="1024" height="1024"/>
+        <namedColor name="MMBlue">
+            <color red="0.0" green="0.59215686274509804" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MMBlueWhite">
+            <color red="0.0" green="0.59215686274509804" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
