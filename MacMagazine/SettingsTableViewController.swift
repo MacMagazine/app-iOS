@@ -46,6 +46,7 @@ class SettingsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
 
+//        readTransparency.translatesAutoresizingMaskIntoConstraints = true
         setInitialValues()
     }
 
