@@ -45,6 +45,8 @@ extension AppDelegate {
               let splitViewController = tabBarViewController.viewControllers?.first as? UISplitViewController else {
             return
         }
+        tabBarViewController.delegate = self
+
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = .allVisible
         splitViewController.preferredPrimaryColumnWidthFraction = 0.33
