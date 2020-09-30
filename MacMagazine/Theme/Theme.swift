@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 class AppCollectionViewCell: UICollectionViewCell {}
+class AppView: UIView {}
 
 protocol Theme {
     var tint: UIColor { get }
@@ -31,15 +32,6 @@ protocol Theme {
 
     func apply(for application: UIApplication)
     func extend(_ application: UIApplication)
-}
-
-extension UIColor {
-	func image(_ size: CGSize = CGSize(width: 1, height: 38)) -> UIImage {
-		return UIGraphicsImageRenderer(size: size).image { rendererContext in
-			self.setFill()
-			rendererContext.fill(CGRect(origin: .zero, size: size))
-		}
-	}
 }
 
 extension Theme {
@@ -67,18 +59,6 @@ extension Theme {
 
         UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).with {
             $0.textColor = tint
-        }
-
-        // SEARCHBAR
-
-        UISearchBar.appearance().with {
-            $0.barTintColor = barTintColor
-            $0.setSearchFieldBackgroundImage(UIColor.lightGray.withAlphaComponent(0.3).image(), for: .normal)
-            $0.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
-        }
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).with {
-            $0.textColor = textColor
-            $0.placeholderColor = placeholderTextColor
         }
 
         // COLLECTIONVIEW
@@ -125,10 +105,6 @@ extension Theme {
         VideoViewLikeLabel.appearance().with {
             $0.textColor = videoLabelColor
             $0.fontSize = CGFloat(0.65)
-        }
-        VideoViewLikeDataLabel.appearance().with {
-            $0.textColor = secondaryLabelColor
-            $0.fontSize = CGFloat(0.9)
         }
 
         // WEBVIEW

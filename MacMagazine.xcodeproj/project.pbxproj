@@ -35,7 +35,6 @@
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
 		9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */; };
-		9B420B0A239156DE005A2084 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
@@ -57,7 +56,7 @@
 		9B91117D225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
-		9B98C33323885EEF0094EBBA /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98C33223885EEF0094EBBA /* LabelExtension.swift */; };
+		9B98C33323885EEF0094EBBA /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98C33223885EEF0094EBBA /* UILabelExtension.swift */; };
 		9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C7F8F226B6111000534CA /* WebKit.framework */; };
 		9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */; };
 		9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C7F93226B6AF4000534CA /* soundcloud.js */; };
@@ -96,7 +95,7 @@
 		9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */; };
 		9BD135E02228042C00A0B627 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135DF2228042C00A0B627 /* Theme.swift */; };
 		9BD135E2222804A600A0B627 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E1222804A600A0B627 /* With.swift */; };
-		9BD135E7222804E500A0B627 /* UIViewTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E4222804E500A0B627 /* UIViewTheme.swift */; };
+		9BD135E7222804E500A0B627 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E4222804E500A0B627 /* UIViewExtensions.swift */; };
 		9BD135E8222804E500A0B627 /* UITableViewCellTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E5222804E500A0B627 /* UITableViewCellTheme.swift */; };
 		9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135E6222804E500A0B627 /* UIWindowTheme.swift */; };
 		9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135F92228064800A0B627 /* DarkTheme.swift */; };
@@ -248,7 +247,6 @@
 		9B3AABCC2264C83800095AC0 /* macmagazine 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 5.xcdatamodel"; sourceTree = "<group>"; };
 		9B3C7A712263D643001146A4 /* YouTubePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
 		9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewControllerExtensions.swift; sourceTree = "<group>"; };
-		9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		9B4A8F942235377400A49239 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
 		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
@@ -268,7 +266,7 @@
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 7.xcdatamodel"; sourceTree = "<group>"; };
-		9B98C33223885EEF0094EBBA /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
+		9B98C33223885EEF0094EBBA /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		9B9C7F8F226B6111000534CA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudPlayer.swift; sourceTree = "<group>"; };
 		9B9C7F93226B6AF4000534CA /* soundcloud.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = soundcloud.js; sourceTree = "<group>"; };
@@ -313,7 +311,7 @@
 		9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		9BD135DF2228042C00A0B627 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9BD135E1222804A600A0B627 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
-		9BD135E4222804E500A0B627 /* UIViewTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewTheme.swift; sourceTree = "<group>"; };
+		9BD135E4222804E500A0B627 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		9BD135E5222804E500A0B627 /* UITableViewCellTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCellTheme.swift; sourceTree = "<group>"; };
 		9BD135E6222804E500A0B627 /* UIWindowTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowTheme.swift; sourceTree = "<group>"; };
 		9BD135F92228064800A0B627 /* DarkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
@@ -387,10 +385,11 @@
 			children = (
 				9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */,
 				9B0DD44B2226E9320016C567 /* DateExtensions.swift */,
-				9B98C33223885EEF0094EBBA /* LabelExtension.swift */,
 				9B0DD44E2226FD150016C567 /* StringExtensions.swift */,
 				9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */,
 				9BF356271F6208F70081BE90 /* UIColorExtensions.swift */,
+				9B98C33223885EEF0094EBBA /* UILabelExtension.swift */,
+				9BD135E4222804E500A0B627 /* UIViewExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -598,12 +597,10 @@
 			isa = PBXGroup;
 			children = (
 				9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */,
-				9B420B09239156DE005A2084 /* UIAlertControllerExtensions.swift */,
 				9BD1360E22283DF300A0B627 /* UILabelTheme.swift */,
 				9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */,
 				9BD135E5222804E500A0B627 /* UITableViewCellTheme.swift */,
 				9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */,
-				9BD135E4222804E500A0B627 /* UIViewTheme.swift */,
 				9BD135E6222804E500A0B627 /* UIWindowTheme.swift */,
 				9BD135E1222804A600A0B627 /* With.swift */,
 			);
@@ -1088,7 +1085,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD135E7222804E500A0B627 /* UIViewTheme.swift in Sources */,
+				9BD135E7222804E500A0B627 /* UIViewExtensions.swift in Sources */,
 				9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */,
 				9B1BA5E4222B22980059F692 /* Settings.swift in Sources */,
 				9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */,
@@ -1102,7 +1099,7 @@
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
-				9B98C33323885EEF0094EBBA /* LabelExtension.swift in Sources */,
+				9B98C33323885EEF0094EBBA /* UILabelExtension.swift in Sources */,
 				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */,
@@ -1114,7 +1111,6 @@
 				9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
-				9B420B0A239156DE005A2084 /* UIAlertControllerExtensions.swift in Sources */,
 				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */,

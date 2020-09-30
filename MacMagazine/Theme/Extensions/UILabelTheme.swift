@@ -13,7 +13,6 @@ class AppSubhead: UILabel {}
 class AppFootnote: UILabel {}
 class AppLabel: UILabel {}
 class VideoViewLikeLabel: UILabel {}
-class VideoViewLikeDataLabel: UILabel {}
 
 public extension UILabel {
     @objc dynamic var fontSize: CGFloat {
@@ -65,30 +64,4 @@ extension AppFootnote {
             self.font = UIFont(descriptor: font, size: font.pointSize * newValue)
         }
     }
-}
-
-extension VideoViewLikeLabel {
-	@objc dynamic override var fontSize: CGFloat {
-		get {
-			let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .subheadline)
-			return font.pointSize
-		}
-		set {
-			let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .subheadline)
-			self.font = UIFont(descriptor: font, size: font.pointSize * newValue)
-		}
-	}
-}
-
-extension VideoViewLikeDataLabel {
-	@objc dynamic override var fontSize: CGFloat {
-		get {
-			let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .subheadline)
-			return font.pointSize
-		}
-		set {
-			let font = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .subheadline)
-			self.font = UIFont(descriptor: font, size: font.pointSize * newValue)
-		}
-	}
 }

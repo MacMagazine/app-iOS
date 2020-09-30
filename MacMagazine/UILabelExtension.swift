@@ -1,5 +1,5 @@
 //
-//  LabelExtension.swift
+//  UILabelExtension.swift
 //  MacMagazine
 //
 //  Created by Cassio Rossi on 22/11/19.
@@ -24,5 +24,14 @@ import UIKit
         let size = super.intrinsicContentSize
         return CGSize(width: size.width + leftInset + rightInset,
                       height: size.height + topInset + bottomInset)
+    }
+}
+
+extension UILabel {
+    func textHeight(withWidth width: CGFloat) -> CGFloat {
+        guard let text = text else {
+            return 0
+        }
+        return text.height(withWidth: width, font: font)
     }
 }

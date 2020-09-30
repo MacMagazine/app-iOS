@@ -17,6 +17,12 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var favorite: UIBarButtonItem!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 
+    @IBOutlet private weak var collectionLayout: UICollectionViewFlowLayout! {
+        didSet {
+            collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+    }
+
 	var isSearching = false
 	var videos: [JSONVideo]?
 
@@ -101,6 +107,11 @@ class VideoCollectionViewController: UICollectionViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         userActivity?.invalidate()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        collectionView.reloadData()
     }
 
 	// MARK: - Local methods -
@@ -253,25 +264,28 @@ extension VideoCollectionViewController {
 
 extension VideoCollectionViewController {
 
-	func showNotFound() {
-		var message = isLoading ? "Carregando..." : "Você ainda não favoritou nenhum vídeo."
-		if isSearching {
-			message = "Nenhum resultado encontrado"
-			guard let _ = videos else {
-				let spin = UIActivityIndicatorView(style: .large)
-				spin.startAnimating()
-				collectionView.backgroundView = spin
+    func showNotFound() {
+        var message = isLoading ? "Carregando..." : "Você ainda não favoritou nenhum vídeo."
+        if isSearching {
+            message = "Nenhum resultado encontrado"
+            guard let _ = videos else {
+                let spin = UIActivityIndicatorView(style: .large)
+                spin.startAnimating()
+                collectionView.backgroundView = spin
 
-				return
-			}
-		}
+                return
+            }
+        }
 
-		let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-		notFound.text = message
-		notFound.textColor = Settings().darkModeColor
-		notFound.textAlignment = .center
-		collectionView.backgroundView = notFound
-	}
+        let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        notFound.font = UIFont.preferredFont(forTextStyle: .body)
+        notFound.textAlignment = .center
+        notFound.adjustsFontForContentSizeCategory = true
+        notFound.lineBreakMode = .byWordWrapping
+        notFound.numberOfLines = 0
+        notFound.text = message
+        collectionView.backgroundView = notFound
+    }
 
 	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		if isSearching {
@@ -397,6 +411,7 @@ extension VideoCollectionViewController: NSFetchedResultsControllerDelegate {
 
 extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var height: CGFloat = 0
 
 		let screen = UIScreen.main.bounds.size
 		// YouTube thumbnail images size (16:9)
@@ -407,29 +422,30 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 		// margin of 20px
         let width = CGFloat(Int((screen.width - CGFloat((divider + 1) * 20)) / CGFloat(divider)))
 
-		// image has a bottom margin of 120px to accomodate labels and buttons
-		// 10px distance betwwen thumb and labels
-		// 25px for fav and share buttons
-		// 5px bottom margin
-        // 80px for labels
-        var labels: CGFloat = 80.0
+        height += (width / ratio)   // YouTube thumb
 
-        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
-        switch contentSize {
-        case .extraExtraExtraLarge,
-             .accessibilityMedium,
-             .accessibilityLarge:
-            labels *= 2
-        case .accessibilityExtraLarge:
-            labels *= 3
-        case .accessibilityExtraExtraLarge,
-             .accessibilityExtraExtraExtraLarge:
-            labels *= 4
-        default:
-            break
-        }
+		// cell content
+        height += 12.0  // Top/Bottom margins
 
-        let height = (width / ratio) + 40.0 + labels
+        let object = fetchedResultsController.object(at: indexPath)
+
+        // pub date
+        let dateHeight = object.pubDate?.watchDate().height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .subheadline)) ?? 0.0
+        height += dateHeight
+
+        // title
+        let titleHeight = object.title?.height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .headline)) ?? 0.0
+        height += titleHeight
+
+        // toolbar (view / likes / favorite / share)
+        let viewsCountHeight = object.views?.height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote)) ?? 0.0
+        let viewsHeight = "VIEWS".height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote))
+        let likesCountHeight = object.likes?.height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote)) ?? 0.0
+        let likesHeight = "LIKES".height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote))
+        height += max(viewsCountHeight + viewsHeight, likesCountHeight + likesHeight)
+
+        height += 4 * 6.0  // All stack elements spacing
+
         return CGSize(width: width, height: height)
 	}
 }

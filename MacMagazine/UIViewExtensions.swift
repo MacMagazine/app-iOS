@@ -1,5 +1,5 @@
 //
-//  UIViewTheme.swift
+//  UIViewExtensions.swift
 //  MacMagazine
 //
 //  Created by Cassio Rossi on 28/02/2019.
@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-class AppView: UIView {}
 
 public extension UIView {
 

@@ -46,7 +46,6 @@ class SettingsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
 
-//        readTransparency.translatesAutoresizingMaskIntoConstraints = true
         setInitialValues()
     }
 
@@ -63,7 +62,6 @@ class SettingsTableViewController: UITableViewController {
 
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        tableView.backgroundColor = Settings().theme.backgroundColor
         tableView.reloadData()
 	}
 
@@ -169,7 +167,6 @@ extension SettingsTableViewController {
                 popoverController.sourceRect = CGRect(x: button.bounds.midX, y: button.bounds.midY, width: 0, height: 0)
             }
 
-            alertController.setup()
             self.present(alertController, animated: true)
         }
 	}
@@ -191,7 +188,6 @@ extension SettingsTableViewController {
 
             self.dismiss(animated: true)
         })
-        alertController.setup()
         self.present(alertController, animated: true)
     }
 }

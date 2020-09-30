@@ -114,24 +114,6 @@ extension VideosCollectionViewCell {
         }
     }
 
-    fileprivate func setLines(for label: UILabel) {
-        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
-        switch contentSize {
-        case .extraExtraExtraLarge,
-             .accessibilityMedium,
-             .accessibilityLarge:
-            label.numberOfLines = 3
-        case .accessibilityExtraLarge:
-            label.numberOfLines = 4
-        case .accessibilityExtraExtraLarge:
-            label.numberOfLines = 5
-        case .accessibilityExtraExtraExtraLarge:
-            label.numberOfLines = 4
-        default:
-            break
-        }
-    }
-
     fileprivate func showVideoInfo(_ object: VideoInfo) {
         videoId = object.videoId
 
@@ -141,7 +123,6 @@ extension VideosCollectionViewCell {
 
         headlineLabel.text = object.title
         headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
-        setLines(for: headlineLabel)
 
         subheadlineLabel.text = object.subtitle
         subheadlineLabel.isAccessibilityElement = true

@@ -6,7 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Format: CaseIterable {
 	static let wordpress = "EEE, dd MMM yyyy HH:mm:ss +0000"
@@ -178,4 +178,9 @@ extension String {
         return duration
 	}
 
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font: font], context: nil)
+        return actualSize.height
+    }
 }
