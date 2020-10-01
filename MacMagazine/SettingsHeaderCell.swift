@@ -18,7 +18,11 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
     // MARK: - Methods -
 
     func setHeader(_ text: String?) {
+        let font = UIFont.boldSystemFont(ofSize: 22)
+        let fontMetrics = UIFontMetrics(forTextStyle: .title2)
+        headerLabel?.font = fontMetrics.scaledFont(for: font)
+
         headerLabel?.text = text
-        subHeaderLabel?.text = "versão \(Settings().appVersion)"
+        subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
     }
 }

@@ -16,13 +16,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-Go-OLY">
-                    <rect key="frame" x="12" y="12" width="390" height="868"/>
+                    <rect key="frame" x="12" y="12" width="390" height="862"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                     <color key="textColor" name="MMDarkGreyWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-0s-alt">
-                    <rect key="frame" x="12" y="880" width="390" height="16"/>
+                    <rect key="frame" x="12" y="874" width="390" height="16"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <color key="textColor" name="MMDarkGreyWhite"/>
                     <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="gxr-0s-alt" secondAttribute="bottom" id="4tx-Bo-Q54"/>
+                <constraint firstAttribute="bottom" secondItem="gxr-0s-alt" secondAttribute="bottom" constant="6" id="4tx-Bo-Q54"/>
                 <constraint firstAttribute="trailing" secondItem="tXz-Go-OLY" secondAttribute="trailing" constant="12" id="FAF-ee-wH2"/>
                 <constraint firstItem="gxr-0s-alt" firstAttribute="top" secondItem="tXz-Go-OLY" secondAttribute="bottom" id="c0c-yr-P3q"/>
                 <constraint firstAttribute="trailing" secondItem="gxr-0s-alt" secondAttribute="trailing" constant="12" id="lve-S1-Udu"/>
@@ -42,7 +42,7 @@
                 <outlet property="headerLabel" destination="tXz-Go-OLY" id="1eA-2I-cQe"/>
                 <outlet property="subHeaderLabel" destination="gxr-0s-alt" id="kYZ-6l-udE"/>
             </connections>
-            <point key="canvasLocation" x="139" y="110"/>
+            <point key="canvasLocation" x="-181" y="66"/>
         </view>
     </objects>
     <resources>

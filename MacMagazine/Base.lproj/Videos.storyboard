@@ -107,7 +107,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
                                                     <accessibility key="accessibilityConfiguration" label="Reproduzir video."/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" image="play.circle.fill" catalog="system">
+                                                    <state key="normal">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="72"/>
                                                     </state>
                                                     <connections>
@@ -237,12 +237,14 @@
                                     <outlet property="durationLabel" destination="hfJ-9k-bAJ" id="fti-tg-7di"/>
                                     <outlet property="favorite" destination="yAF-vV-0Rf" id="4Ns-B2-8nq"/>
                                     <outlet property="headlineLabel" destination="5dK-RX-Lqi" id="bhn-oq-bjk"/>
-                                    <outlet property="likesLabel" destination="aFa-PE-Vcz" id="rh7-2R-23C"/>
+                                    <outlet property="likesLabel" destination="GoZ-cr-aab" id="dw3-WQ-XI8"/>
+                                    <outlet property="likesNumberLabel" destination="aFa-PE-Vcz" id="j4C-nE-r1T"/>
                                     <outlet property="playButton" destination="LcQ-Dv-MPg" id="wYv-1s-BIZ"/>
                                     <outlet property="share" destination="ybp-wG-Y4T" id="2Vr-3z-Icd"/>
                                     <outlet property="subheadlineLabel" destination="xRM-UO-WvK" id="HnG-rO-F5X"/>
                                     <outlet property="thumbnailImageView" destination="6QJ-Gr-4fx" id="OIA-hk-a9V"/>
-                                    <outlet property="viewsLabel" destination="U4V-EJ-PXU" id="gf1-vS-qDL"/>
+                                    <outlet property="viewsLabel" destination="IQP-0Z-f9n" id="jT2-Te-xI2"/>
+                                    <outlet property="viewsNumberLabel" destination="U4V-EJ-PXU" id="6CQ-n4-QWv"/>
                                     <outlet property="youtubeWebView" destination="ZgJ-bP-KyS" id="h2D-9T-ZnX"/>
                                 </connections>
                             </collectionViewCell>
@@ -306,7 +308,6 @@
     </designables>
     <resources>
         <image name="logo" width="415" height="350"/>
-        <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>

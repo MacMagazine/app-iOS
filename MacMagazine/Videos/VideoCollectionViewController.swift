@@ -64,7 +64,7 @@ class VideoCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		navigationItem.titleView = logoView
+        navigationItem.titleView = logoView
 		navigationItem.title = nil
         self.extendedLayoutIncludesOpaqueBars = true
 
@@ -114,7 +114,7 @@ class VideoCollectionViewController: UICollectionViewController {
         collectionView.reloadData()
     }
 
-	// MARK: - Local methods -
+    // MARK: - Local methods -
 
 	fileprivate func getVideos() {
 		navigationItem.titleView = self.spin
