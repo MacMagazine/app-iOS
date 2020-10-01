@@ -425,26 +425,23 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
         height += (width / ratio)   // YouTube thumb
 
 		// cell content
-        height += 12.0  // Top/Bottom margins
+        height += 4.0 + 6.0 + 8.0 + 10.0  // Top/Bottom margins + Separation between title and buttons + delta to fit
 
         let object = fetchedResultsController.object(at: indexPath)
+        let labelWidth = width - 12.0   // margins
 
         // pub date
-        let dateHeight = object.pubDate?.watchDate().height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .subheadline)) ?? 0.0
+        let dateHeight = object.pubDate?.watchDate().height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .caption2)) ?? 0.0
         height += dateHeight
 
         // title
-        let titleHeight = object.title?.height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .headline)) ?? 0.0
+        let titleHeight = object.title?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .title3)) ?? 0.0
         height += titleHeight
 
         // toolbar (view / likes / favorite / share)
-        let viewsCountHeight = object.views?.height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote)) ?? 0.0
-        let viewsHeight = "VIEWS".height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote))
-        let likesCountHeight = object.likes?.height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote)) ?? 0.0
-        let likesHeight = "LIKES".height(withWidth: width, font: UIFont.preferredFont(forTextStyle: .footnote))
-        height += max(viewsCountHeight + viewsHeight, likesCountHeight + likesHeight)
-
-        height += 4 * 6.0  // All stack elements spacing
+        let viewsCountHeight = object.views?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .caption2)) ?? 0.0
+        let likesCountHeight = object.likes?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .caption2)) ?? 0.0
+        height += min(25, max(viewsCountHeight, likesCountHeight))  // minimun size of the stack with buttons
 
         return CGSize(width: width, height: height)
 	}

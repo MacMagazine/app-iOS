@@ -27,10 +27,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
     @IBOutlet weak private var share: UIButton!
 
     @IBOutlet weak private var viewsLabel: UILabel!
-    @IBOutlet weak private var viewsNumberLabel: UILabel!
-
     @IBOutlet weak private var likesLabel: UILabel!
-    @IBOutlet weak private var likesNumberLabel: UILabel!
 
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
@@ -134,11 +131,11 @@ extension VideosCollectionViewCell {
         subheadlineLabel.isAccessibilityElement = true
         subheadlineLabel.accessibilityLabel = object.subtitle?.toAccessibilityDateAndTime()
 
-        viewsNumberLabel.text = object.views
-        viewsNumberLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
+        viewsLabel.text = object.views
+        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
 
-        likesNumberLabel.text = object.likes
-        likesNumberLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
+        likesLabel.text = object.likes
+        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
 
         durationLabel.text = object.duration
         durationLabel.accessibilityLabel = object.duration?.toAccessibilityTime()
@@ -154,8 +151,8 @@ extension VideosCollectionViewCell {
                                  durationLabel as Any,
                                  subheadlineLabel as Any,
                                  headlineLabel as Any,
-                                 viewsNumberLabel as Any,
-                                 likesNumberLabel as Any,
+                                 viewsLabel as Any,
+                                 likesLabel as Any,
                                  favorite as Any,
                                  share as Any]
 
@@ -164,11 +161,6 @@ extension VideosCollectionViewCell {
         }
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
-
-        // Makes VIEWS/LIKES the same font size
-        print("views: \(viewsNumberLabel.fontSize) | likes: \(likesNumberLabel.fontSize)")
-        print("views: \(viewsNumberLabel.font.pointSize) | likes: \(likesNumberLabel.font.pointSize)")
-        print("views: \(viewsNumberLabel.font.xHeight) | likes: \(likesNumberLabel.font.xHeight)")
     }
 }
 
