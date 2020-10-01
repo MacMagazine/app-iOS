@@ -65,9 +65,6 @@ extension Theme {
             }
         }
 
-        AppLabel.appearance(whenContainedInInstancesOf: [AppTableViewCell.self]).with {
-            $0.textColor = labelColor
-        }
         AppLabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
             $0.textColor = headerFooterColor
             $0.fontSize = CGFloat(0.8)
