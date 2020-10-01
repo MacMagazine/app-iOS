@@ -90,7 +90,7 @@ extension String {
         }
 
         let date = array[0]
-        let time = array[1]
+        let time = "\(array[1]):00"     // format is HH:mm and accessibility expects HH:mm:ss
 
         return "Video postado em: \(date.toHeaderDate(with: "dd/MM/yyyy")), \(time.toAccessibilityTime())."
     }

@@ -17,6 +17,10 @@ class SettingsTableViewController: UITableViewController {
 
 	@IBOutlet private weak var pushOptions: UISegmentedControl!
 
+    @IBOutlet private weak var iconOption1Btn: UIButton!
+    @IBOutlet private weak var iconOption2Btn: UIButton!
+    @IBOutlet private weak var iconOption3Btn: UIButton!
+    @IBOutlet private weak var iconOption4Btn: UIButton!
     @IBOutlet private weak var iconOption1: UIImageView!
     @IBOutlet private weak var iconOption2: UIImageView!
     @IBOutlet private weak var iconOption3: UIImageView!
@@ -34,6 +38,11 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var readTransparencyValue: UILabel!
 
     @IBOutlet private weak var patraoButton: UIButton!
+
+    static let iconOption1AccLabel = "Ícone do aplicativo com fundo branco."
+    static let iconOption2AccLabel = "Ícone do aplicativo com fundo azul."
+    static let iconOption3AccLabel = "Ícone azul do aplicativo com fundo preto."
+    static let iconOption4AccLabel = "Ícone claro do aplicativo com fundo preto."
 
     // MARK: - View lifecycle -
 
@@ -381,17 +390,21 @@ extension SettingsTableViewController {
         let tintSelectedColor = UIColor(named: "MMBlue")
         let tintColor = UIColor.systemGray
 
-        self.iconOption1Selected.image = iconName == IconOptions.option1 ? selectedImage : normal
-        self.iconOption1Selected.tintColor = iconName == IconOptions.option1 ? tintSelectedColor : tintColor
+        iconOption1Selected.image = iconName == IconOptions.option1 ? selectedImage : normal
+        iconOption1Selected.tintColor = iconName == IconOptions.option1 ? tintSelectedColor : tintColor
+        iconOption1Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption1AccLabel) \(iconName == IconOptions.option1 ? "Selecionado." : "")"
 
-        self.iconOption2Selected.image = iconName == IconOptions.option2 ? selectedImage : normal
-        self.iconOption2Selected.tintColor = iconName == IconOptions.option2 ? tintSelectedColor : tintColor
+        iconOption2Selected.image = iconName == IconOptions.option2 ? selectedImage : normal
+        iconOption2Selected.tintColor = iconName == IconOptions.option2 ? tintSelectedColor : tintColor
+        iconOption2Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption2AccLabel) \(iconName == IconOptions.option2 ? "Selecionado." : "")"
 
-        self.iconOption3Selected.image = iconName == IconOptions.option3 ? selectedImage : normal
-        self.iconOption3Selected.tintColor = iconName == IconOptions.option3 ? tintSelectedColor : tintColor
+        iconOption3Selected.image = iconName == IconOptions.option3 ? selectedImage : normal
+        iconOption3Selected.tintColor = iconName == IconOptions.option3 ? tintSelectedColor : tintColor
+        iconOption3Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption3AccLabel) \(iconName == IconOptions.option3 ? "Selecionado." : "")"
 
-        self.iconOption4Selected.image = iconName == IconOptions.option4 ? selectedImage : normal
-        self.iconOption4Selected.tintColor = iconName == IconOptions.option4 ? tintSelectedColor : tintColor
+        iconOption4Selected.image = iconName == IconOptions.option4 ? selectedImage : normal
+        iconOption4Selected.tintColor = iconName == IconOptions.option4 ? tintSelectedColor : tintColor
+        iconOption4Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption4AccLabel) \(iconName == IconOptions.option4 ? "Selecionado." : "")"
     }
 
     fileprivate func changeIcon(to iconName: String) {

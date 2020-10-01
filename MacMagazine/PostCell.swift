@@ -91,7 +91,7 @@ extension PostCell {
         }
 
         durationLabel?.text = "\(duration)"
-        durationLabel?.accessibilityLabel = "Duração: \(duration.toAccessibilityTime())"
+        durationLabel?.accessibilityLabel = "Duração do podcast: \(duration.toAccessibilityTime())"
     }
 
     fileprivate func setContent(_ object: XMLPost, isPodcast: Bool = false) {
@@ -115,7 +115,7 @@ extension PostCell {
         thumbnailImageView.kf.setImage(with: URL(string: object.artworkURL), placeholder: UIImage(named: defaultImage))
 
         durationLabel?.text = object.duration.isEmpty ? nil : "\(object.duration)"
-        durationLabel?.accessibilityLabel = object.duration.isEmpty ? "" : "Duração: \(object.duration.toAccessibilityTime())"
+        durationLabel?.accessibilityLabel = object.duration.isEmpty ? "" : "Duração do podcast: \(object.duration.toAccessibilityTime())"
 
         favoriteImageView.isHidden = !object.favorite
     }

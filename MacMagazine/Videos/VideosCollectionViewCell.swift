@@ -127,27 +127,39 @@ extension VideosCollectionViewCell {
         headlineLabel.font = Settings().getMetricBoldFont(forTextStyle: .title3)
 
         headlineLabel.text = object.title
-        headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
+        headlineLabel.accessibilityLabel = "Video: \(object.title ?? "Não especificado.")"
 
         subheadlineLabel.text = object.subtitle
         subheadlineLabel.isAccessibilityElement = true
         subheadlineLabel.accessibilityLabel = object.subtitle?.toAccessibilityDateAndTime()
 
         viewsLabel.text = object.views
-        viewsLabel.accessibilityLabel = "Total de visualizações: \(object.views ?? "Não informado.")."
+        if let views = object.views {
+            viewsLabel.accessibilityLabel = "\(views) visualizações."
+        }
 
         likesLabel.text = object.likes
-        likesLabel.accessibilityLabel = "Total de curtidas: \(object.likes ?? "Não informado.")."
+        if let likes = object.likes {
+            likesLabel.accessibilityLabel = "\(likes) curtidas."
+        }
 
         durationLabel.text = object.duration
-        durationLabel.accessibilityLabel = object.duration?.toAccessibilityTime()
+        if let duration = object.duration {
+            durationLabel.accessibilityLabel = "duração: \(duration.toAccessibilityTime())"
+        }
 
         youtubeWebView?.scrollView.isScrollEnabled = false
         youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
         youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
-        youtubeWebView.isAccessibilityElement = false
+        youtubeWebView?.isAccessibilityElement = false
 
         youtubeWebView?.videoId = object.videoId
+
+        guard let artworkURL = object.thumb else {
+            return
+        }
+        thumbnailImageView.kf.indicatorType = .activity
+        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
 
         accessibilityElements = [playButton as Any,
                                  durationLabel as Any,
@@ -157,12 +169,6 @@ extension VideosCollectionViewCell {
                                  likesLabel as Any,
                                  favorite as Any,
                                  share as Any]
-
-        guard let artworkURL = object.thumb else {
-            return
-        }
-        thumbnailImageView.kf.indicatorType = .activity
-        thumbnailImageView.kf.setImage(with: URL(string: artworkURL), placeholder: UIImage(named: "image_logo_feature"))
     }
 }
 

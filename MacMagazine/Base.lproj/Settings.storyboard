@@ -89,13 +89,16 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identificar posts já lidos" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3v-vs-c8M">
                                                     <rect key="frame" x="20" y="11" width="179.5" height="28"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Dw-eO-rm7">
                                                     <rect key="frame" x="343" y="9.5" width="51" height="31"/>
-                                                    <accessibility key="accessibilityConfiguration" hint="Toque para alterar" label="Diminuir intesidade do post lido"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Identificar posts já lidos."/>
                                                     <color key="onTintColor" name="MMBlue"/>
                                                     <connections>
                                                         <action selector="enableReadIntensity:" destination="75e-Ta-Gqd" eventType="valueChanged" id="4u2-vB-1NC"/>
@@ -219,7 +222,7 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
-                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo branco">
+                                                                    <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo branco">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
@@ -268,7 +271,7 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
-                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone do aplicativo com fundo azul">
+                                                                    <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo azul">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
@@ -317,7 +320,7 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
-                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone azul do aplicativo com fundo preto">
+                                                                    <accessibility key="accessibilityConfiguration" label="Ícone azul do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
@@ -368,7 +371,7 @@
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_4" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G3-2f-b5R">
                                                                     <rect key="frame" x="0.0" y="0.0" width="46" height="105"/>
-                                                                    <accessibility key="accessibilityConfiguration" hint="Altera o ícone do aplicativo" label="Ícone claro do aplicativo com fundo preto">
+                                                                    <accessibility key="accessibilityConfiguration" label="Ícone claro do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
                                                                     <connections>
@@ -570,12 +573,16 @@
                         <outlet property="appearanceCellIntensity" destination="Jrd-t5-7DG" id="V2H-2r-XRn"/>
                         <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="IZv-c0-y4T"/>
                         <outlet property="iconOption1" destination="WFw-2p-qsH" id="Czh-Vk-S7a"/>
+                        <outlet property="iconOption1Btn" destination="xMf-nN-nab" id="aLt-uo-J7r"/>
                         <outlet property="iconOption1Selected" destination="zaa-hn-nX1" id="B5b-RE-JOs"/>
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="IWR-VX-3jh"/>
+                        <outlet property="iconOption2Btn" destination="Wcj-XM-fT5" id="vyJ-ro-MBQ"/>
                         <outlet property="iconOption2Selected" destination="mJ4-hM-m4r" id="sXp-5J-xce"/>
                         <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
+                        <outlet property="iconOption3Btn" destination="Yeb-ut-fnF" id="Azn-Kl-pY5"/>
                         <outlet property="iconOption3Selected" destination="XlY-PV-F4I" id="RZf-AX-Q5D"/>
                         <outlet property="iconOption4" destination="g7c-ve-Aqk" id="H20-Vt-eSe"/>
+                        <outlet property="iconOption4Btn" destination="3G3-2f-b5R" id="RBP-o8-x4b"/>
                         <outlet property="iconOption4Selected" destination="ZeS-mP-ySM" id="1UG-Cu-HoD"/>
                         <outlet property="intensityPostRead" destination="7Dw-eO-rm7" id="9ma-Ex-EZF"/>
                         <outlet property="patraoButton" destination="7cO-p7-cYL" id="3Ns-Ex-nrD"/>
