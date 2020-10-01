@@ -4,86 +4,93 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="featuredCell" rowHeight="314" id="tks-Xo-Anw" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="podcastCell" rowHeight="314" id="tks-Xo-Anw" customClass="PostCell" customModule="MacMagazine" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="279"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tks-Xo-Anw" id="iuT-I4-yCC">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="279"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dPr-Vt-BPt">
-                        <rect key="frame" x="16" y="16" width="343" height="247"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-1P-Tdb">
-                                <rect key="frame" x="0.0" y="0.0" width="343" height="171.66666666666666"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="zrP-1P-Tdb" secondAttribute="height" multiplier="20:10" id="9l1-yy-OYf"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="343" id="xtJ-eN-bQF">
-                                        <variation key="heightClass=compact-widthClass=compact" constant="200"/>
-                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
-                                    </constraint>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ajt-fg-0fw">
-                                <rect key="frame" x="0.0" y="179.66666666666666" width="343" height="67.333333333333343"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAk-1v-1ps" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="ZBm-4V-YZx"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <color key="textColor" red="0.15161636470000001" green="0.1685162932" blue="0.18932646510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kvq-mm-4qb">
-                                        <rect key="frame" x="0.0" y="51" width="343" height="16.333333333333329"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label" customClass="AppFootnote" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="278.33333333333331" height="16.333333333333332"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="duração: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="AppFootnote" customModule="MacMagazine" customModuleProvider="target">
-                                                <rect key="frame" x="286.33333333333331" y="0.0" width="56.666666666666686" height="16.333333333333332"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" red="0.56580191849999995" green="0.57890999320000003" blue="0.59462702270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <variation key="heightClass=compact-widthClass=compact" axis="horizontal"/>
-                        <variation key="heightClass=regular-widthClass=regular" axis="horizontal"/>
-                    </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-1P-Tdb">
+                        <rect key="frame" x="16" y="16" width="343" height="171.66666666666666"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="zrP-1P-Tdb" secondAttribute="height" multiplier="20:10" id="9l1-yy-OYf"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="343" id="xtJ-eN-bQF">
+                                <variation key="heightClass=compact-widthClass=compact" constant="200"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                            </constraint>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k">
                         <rect key="frame" x="348" y="5.6666666666666679" width="21" height="20.666666666666664"/>
+                        <color key="tintColor" name="MMBlue"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="QYw-WD-7Rk"/>
                             <constraint firstAttribute="height" constant="21" id="bik-fu-VEU"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
+                        <rect key="frame" x="305" y="153.33333333333334" width="42" height="22.333333333333343"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label">
+                        <rect key="frame" x="16" y="193.66666666666666" width="343" height="27"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAk-1v-1ps" userLabel="Headline Label">
+                        <rect key="frame" x="16" y="220.66666666666666" width="343" height="42.333333333333343"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dPr-Vt-BPt" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="Ax8-Oe-tkp"/>
-                    <constraint firstItem="dPr-Vt-BPt" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="topMargin" id="LSY-nE-nbx"/>
+                    <constraint firstAttribute="bottom" secondItem="hAk-1v-1ps" secondAttribute="bottom" constant="16" id="23T-eW-rRA"/>
+                    <constraint firstItem="zrP-1P-Tdb" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="3wV-tD-ny9"/>
+                    <constraint firstItem="B5u-aS-IBP" firstAttribute="bottom" secondItem="zrP-1P-Tdb" secondAttribute="bottom" constant="-12" id="7CA-B7-f4F"/>
+                    <constraint firstItem="B5u-aS-IBP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="20" symbolic="YES" id="ESI-K0-aVk"/>
+                    <constraint firstItem="4Gu-AC-b1g" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="FnF-G0-YNb"/>
+                    <constraint firstAttribute="trailing" secondItem="zrP-1P-Tdb" secondAttribute="trailing" constant="16" id="G7R-39-KfR"/>
+                    <constraint firstItem="hAk-1v-1ps" firstAttribute="top" secondItem="4Gu-AC-b1g" secondAttribute="bottom" id="KYI-sN-TSw"/>
+                    <constraint firstItem="B5u-aS-IBP" firstAttribute="trailing" secondItem="zrP-1P-Tdb" secondAttribute="trailing" constant="-12" id="KxL-m4-cO3"/>
+                    <constraint firstItem="hAk-1v-1ps" firstAttribute="leading" secondItem="iuT-I4-yCC" secondAttribute="leading" constant="16" id="UKb-L9-hER"/>
                     <constraint firstItem="Lw1-da-P8k" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" constant="6" id="WM3-mU-tQe"/>
-                    <constraint firstAttribute="trailing" secondItem="dPr-Vt-BPt" secondAttribute="trailing" constant="16" id="fbA-eW-IfW"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="dPr-Vt-BPt" secondAttribute="bottom" id="uZ2-g0-Olm"/>
+                    <constraint firstItem="4Gu-AC-b1g" firstAttribute="top" secondItem="zrP-1P-Tdb" secondAttribute="bottom" constant="6" id="juY-Bg-IHM"/>
+                    <constraint firstItem="zrP-1P-Tdb" firstAttribute="top" secondItem="iuT-I4-yCC" secondAttribute="top" constant="16" id="kEa-Lb-UHX"/>
+                    <constraint firstAttribute="trailing" secondItem="4Gu-AC-b1g" secondAttribute="trailing" constant="16" id="uBo-iD-wH0"/>
                     <constraint firstAttribute="trailing" secondItem="Lw1-da-P8k" secondAttribute="trailing" constant="6" id="wcw-rV-22N"/>
+                    <constraint firstAttribute="trailing" secondItem="hAk-1v-1ps" secondAttribute="trailing" constant="16" id="zvk-VZ-wyp"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </tableViewCellContentView>
@@ -98,8 +105,19 @@
             <point key="canvasLocation" x="128.80000000000001" y="182.88177339901478"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="B5u-aS-IBP">
+            <size key="intrinsicContentSize" width="42" height="22.333333333333336"/>
+        </designable>
+    </designables>
     <resources>
         <image name="image_logo_feature" width="686" height="320"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="MMBlue">
+            <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

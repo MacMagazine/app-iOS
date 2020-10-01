@@ -12,7 +12,6 @@ class AppHeadline: UILabel {}
 class AppSubhead: UILabel {}
 class AppFootnote: UILabel {}
 class AppLabel: UILabel {}
-class VideoViewLikeLabel: UILabel {}
 
 public extension UILabel {
     @objc dynamic var fontSize: CGFloat {

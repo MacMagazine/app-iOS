@@ -210,7 +210,6 @@ class VideoCollectionViewController: UICollectionViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.searchController?.searchBar.becomeFirstResponder()
-            Settings().applyTheme()
         }
 	}
 
@@ -277,14 +276,7 @@ extension VideoCollectionViewController {
             }
         }
 
-        let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-        notFound.font = UIFont.preferredFont(forTextStyle: .body)
-        notFound.textAlignment = .center
-        notFound.adjustsFontForContentSizeCategory = true
-        notFound.lineBreakMode = .byWordWrapping
-        notFound.numberOfLines = 0
-        notFound.text = message
-        collectionView.backgroundView = notFound
+        collectionView.backgroundView = Settings().createLabel(message: message, size: collectionView.bounds.size)
     }
 
 	override func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -96,7 +96,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		navigationItem.titleView = logoView
 		navigationItem.title = nil
 
-		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: "headerDate", featuredCellNib: "FeaturedCell")
+		fetchController = FetchedResultsControllerDataSource(post: self.tableView, group: "headerDate")
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "headerDate", ascending: false),
                                                          NSSortDescriptor(key: "pubDate", ascending: false)]

@@ -10,25 +10,15 @@ import UIKit
 import WebKit
 
 class AppCollectionViewCell: UICollectionViewCell {}
-class AppView: UIView {}
 
 protocol Theme {
     var tint: UIColor { get }
-
-    var videoLabelColor: UIColor { get }
-
-	var barTintColor: UIColor { get }
-
-    var backgroundColor: UIColor { get }
-    var cellBackgroundColor: UIColor { get }
-	var videoCellBackgroundColor: UIColor { get }
 
     var headerFooterColor: UIColor { get }
     var labelColor: UIColor { get }
     var secondaryLabelColor: UIColor { get }
     var subtleLabelColor: UIColor { get }
     var textColor: UIColor { get }
-    var placeholderTextColor: UIColor { get }
 
     func apply(for application: UIApplication)
     func extend(_ application: UIApplication)
@@ -59,15 +49,6 @@ extension Theme {
 
         UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).with {
             $0.textColor = tint
-        }
-
-        // COLLECTIONVIEW
-
-        UICollectionView.appearance().with {
-            $0.backgroundColor = backgroundColor
-        }
-        AppCollectionViewCell.appearance().with {
-            $0.backgroundColor = cellBackgroundColor
         }
 
         // LABEL
@@ -102,17 +83,6 @@ extension Theme {
             $0.textColor = secondaryLabelColor
             $0.fontSize = CGFloat(fontSize)
         }
-        VideoViewLikeLabel.appearance().with {
-            $0.textColor = videoLabelColor
-            $0.fontSize = CGFloat(0.65)
-        }
-
-        // WEBVIEW
-
-        WKWebView.appearance().with {
-            $0.backgroundColor = backgroundColor
-        }
-
     }
 
 }

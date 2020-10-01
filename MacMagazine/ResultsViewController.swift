@@ -77,7 +77,7 @@ class ResultsViewController: UITableViewController {
 		}
 
 		favoritar.image = UIImage(systemName: "star\(object.favorite ? "" : ".fill")")
-        favoritar.backgroundColor = UIColor.systemBlue
+        favoritar.backgroundColor = UIColor(named: "MMBlue") ?? .systemBlue
 		favoritar.accessibilityLabel = "Favorito"
 
 		let swipeActions = UISwipeActionsConfiguration(actions: [favoritar])
@@ -154,13 +154,7 @@ class ResultsViewController: UITableViewController {
 	}
 
 	func showMessage(_ message: String) {
-		let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-		messageLabel.text = message
-		messageLabel.textColor = Settings().darkModeColor
-		messageLabel.textAlignment = .center
-		messageLabel.numberOfLines = 0
-
-		tableView.backgroundView = messageLabel
+		tableView.backgroundView = Settings().createLabel(message: message, size: tableView.bounds.size)
 		tableView.separatorStyle = .none
 
 		tableView.reloadData()

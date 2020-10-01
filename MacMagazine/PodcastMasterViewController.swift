@@ -44,7 +44,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		NotificationCenter.default.addObserver(self, selector: #selector(onScrollToTop(_:)), name: .scrollToTop, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onReloadData(_:)), name: .reloadData, object: nil)
 
-		fetchController = FetchedResultsControllerDataSource(withTable: self.tableView, group: nil, featuredCellNib: "PodcastCell")
+		fetchController = FetchedResultsControllerDataSource(podcast: self.tableView)
         fetchController?.delegate = self
         fetchController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
 		let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, isPodcastPredicate])
@@ -121,14 +121,14 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 		if selectedIndex == indexPath {
         	tableView.deselectRow(at: indexPath, animated: true)
 			selectedIndex = nil
-		}
-		selectedIndex = indexPath
-
-		guard let object = fetchController?.object(at: indexPath) else {
-                return
-		}
-		let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL, frame: object.podcastFrame)
-		play?(podcast)
+        } else {
+            selectedIndex = indexPath
+        }
+        guard let object = fetchController?.object(at: indexPath) else {
+            return
+        }
+        let podcast = Podcast(title: object.title, duration: object.duration, url: object.podcastURL, frame: object.podcastFrame)
+        play?(podcast)
 
         // Handoff
         guard let url = object.link else {

@@ -43,13 +43,21 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	// MARK: - Initialization methods -
 
-    init(withTable tableView: UITableView, group: String?, featuredCellNib: String) {
+    init(podcast tableView: UITableView) {
+        super.init()
+        setup(tableView: tableView)
+
+        self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "podcastCell")
+    }
+
+    init(post tableView: UITableView, group: String?) {
         super.init()
         self.groupedBy = group
         setup(tableView: tableView)
 
-		self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
-        self.tableView?.register(UINib(nibName: featuredCellNib, bundle: nil), forCellReuseIdentifier: "featuredCell")
+        self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
+        self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
+        self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
         self.tableView?.register(UINib(nibName: "FeaturedCellXL", bundle: nil), forCellReuseIdentifier: "featuredCellXL")
     }
 
@@ -57,7 +65,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView = tableView
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
-        self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
     }
 
 	// MARK: - Scroll detection -
@@ -81,11 +88,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		if (numSections == 0 || rows(in: 0) == 0) &&
 			(favorite || category) {
 
-			let notFound = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-			notFound.text = favorite ? "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")" : "Nenhum resultado encontrado"
-			notFound.textColor = Settings().darkModeColor
-			notFound.textAlignment = .center
-			tableView.backgroundView = notFound
+			let message = favorite ? "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")" : "Nenhum resultado encontrado"
+            tableView.backgroundView = Settings().createLabel(message: message, size: tableView.bounds.size)
 			tableView.separatorStyle = .none
 
 		} else {
@@ -140,7 +144,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 
 		favoritar.image = UIImage(systemName: "star\(object.favorite ? "" : ".fill")")
-        favoritar.backgroundColor = UIColor.systemBlue
+        favoritar.backgroundColor = UIColor(named: "MMBlue") ?? .systemBlue
         favoritar.accessibilityLabel = "Favorito"
 
         read.image = UIImage(systemName: "bubble.left\(object.read ? "" : ".fill")")
@@ -201,6 +205,10 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
                 identifier = "featuredCellXL"
             }
 		}
+
+        if !(object.podcast?.isEmpty ?? true) {
+            identifier = "podcastCell"
+        }
 
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {
 			fatalError("Unexpected Index Path")

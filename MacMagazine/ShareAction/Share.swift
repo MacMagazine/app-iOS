@@ -48,8 +48,7 @@ struct Share {
 				}
 			}
 		}
-		UILabel.appearance().textColor = .black
-		Settings().applyLightTheme()
+
         UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.present(activityVC, animated: true)
 	}
 }

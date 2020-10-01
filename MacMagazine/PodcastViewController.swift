@@ -85,7 +85,6 @@ class PodcastViewController: UIViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.searchController?.searchBar.becomeFirstResponder()
-            Settings().applyTheme()
         }
 	}
 

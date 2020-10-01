@@ -109,7 +109,7 @@ class PostCell: AppTableViewCell {
             return
         }
 
-        lengthlineLabel?.text = "duração: \(duration)"
+        lengthlineLabel?.text = "\(duration)"
         lengthlineLabel?.accessibilityLabel = "Duração: \(duration.toAccessibilityTime())"
 
     }
@@ -121,7 +121,7 @@ class PostCell: AppTableViewCell {
         subheadlineLabel?.text = object.pubDate.toDate().cellDate()
         subheadlineLabel?.accessibilityLabel = "Postado em: \(object.pubDate.toDate().cellDate().toHeaderDate(with: "dd/MM/yyyy"))."
 
-        lengthlineLabel?.text = object.duration.isEmpty ? nil : "duração: \(object.duration)"
+        lengthlineLabel?.text = object.duration.isEmpty ? nil : "\(object.duration)"
         lengthlineLabel?.accessibilityLabel = object.duration.isEmpty ? "" : "Duração: \(object.duration.toAccessibilityTime())"
 
         thumbnailImageView.kf.indicatorType = .activity

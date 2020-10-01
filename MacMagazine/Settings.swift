@@ -226,3 +226,18 @@ extension Settings {
         return fontMetrics.scaledFont(for: font)
     }
 }
+
+extension Settings {
+    func createLabel(message: String, size: CGSize) -> UILabel {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .center
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textColor = .label
+        label.text = message
+
+        return label
+    }
+}
