@@ -219,24 +219,23 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	}
 
 	func searchPodcasts(_ text: String) {
-		let processResponse: (XMLPost?) -> Void = { post in
-			guard let post = post else {
-				DispatchQueue.main.async {
-					self.posts.sort(by: {
-						$0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
-					})
-
-					self.resultsTableController?.posts = self.posts
-				}
-				return
-			}
-			if !post.duration.isEmpty {
-				self.posts.append(post)
-				CoreDataStack.shared.save(post: post)
-			}
-		}
 		posts = []
-		API().searchPodcasts(text, processResponse)
+        API().searchPodcasts(text) { post in
+            guard let post = post else {
+                self.posts.removeDuplicates()
+                self.posts.sort(by: {
+                    $0.pubDate.toDate().sortedDate().compare($1.pubDate.toDate().sortedDate()) == .orderedDescending
+                })
+                DispatchQueue.main.async {
+                    self.resultsTableController?.posts = self.posts
+                }
+                return
+            }
+            if !post.duration.isEmpty {
+                self.posts.append(post)
+                CoreDataStack.shared.save(post: post)
+            }
+        }
 	}
 
 }

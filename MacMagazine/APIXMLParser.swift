@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct XMLPost {
+struct XMLPost: Hashable {
 	var title: String = ""
 	var link: String = ""
 	var pubDate: String = ""
