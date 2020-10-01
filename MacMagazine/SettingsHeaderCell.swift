@@ -18,7 +18,7 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
     // MARK: - Methods -
 
     func setHeader(_ text: String?) {
-        headerLabel?.font = Settings().getMetricFont(forTextStyle: .title2)
+        headerLabel?.font = Settings().getMetricBoldFont(forTextStyle: .title2)
 
         headerLabel?.text = text
         subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"

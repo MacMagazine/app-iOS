@@ -349,8 +349,6 @@ extension VideoCollectionViewController {
 		return cell
 	}
 
-	// MARK: - UICollectionViewDelegate -
-
 	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 		return false
 	}
@@ -409,6 +407,8 @@ extension VideoCollectionViewController: NSFetchedResultsControllerDelegate {
 
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout -
+
 extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat = 0
@@ -435,7 +435,7 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
         height += dateHeight
 
         // title
-        let titleHeight = object.title?.height(withWidth: labelWidth, font: Settings().getMetricFont(forTextStyle: .title3)) ?? 0.0
+        let titleHeight = object.title?.height(withWidth: labelWidth, font: Settings().getMetricBoldFont(forTextStyle: .title3)) ?? 0.0
         height += titleHeight
 
         // toolbar (view / likes / favorite / share)

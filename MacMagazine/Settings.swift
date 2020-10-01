@@ -220,7 +220,7 @@ extension Settings {
 }
 
 extension Settings {
-    func getMetricFont(forTextStyle: UIFont.TextStyle) -> UIFont {
+    func getMetricBoldFont(forTextStyle: UIFont.TextStyle) -> UIFont {
         let font = UIFont.boldSystemFont(ofSize: 22)
         let fontMetrics = UIFontMetrics(forTextStyle: forTextStyle)
         return fontMetrics.scaledFont(for: font)
