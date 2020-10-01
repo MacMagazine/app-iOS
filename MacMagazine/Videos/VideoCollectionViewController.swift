@@ -425,7 +425,7 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
         height += (width / ratio)   // YouTube thumb
 
 		// cell content
-        height += 4.0 + 6.0 + 8.0 + 10.0  // Top/Bottom margins + Separation between title and buttons + delta to fit
+        height += 4.0 + 12.0 + 12.0 + 14.0  // Top/Bottom margins + Separation between title and buttons + delta to fit
 
         let object = fetchedResultsController.object(at: indexPath)
         let labelWidth = width - 12.0   // margins
@@ -435,13 +435,13 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
         height += dateHeight
 
         // title
-        let titleHeight = object.title?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .title3)) ?? 0.0
+        let titleHeight = object.title?.height(withWidth: labelWidth, font: Settings().getMetricFont(forTextStyle: .title3)) ?? 0.0
         height += titleHeight
 
         // toolbar (view / likes / favorite / share)
         let viewsCountHeight = object.views?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .caption2)) ?? 0.0
         let likesCountHeight = object.likes?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .caption2)) ?? 0.0
-        height += min(25, max(viewsCountHeight, likesCountHeight))  // minimun size of the stack with buttons
+        height += min(32, max(viewsCountHeight, likesCountHeight))  // minimun size of the stack with buttons
 
         return CGSize(width: width, height: height)
 	}

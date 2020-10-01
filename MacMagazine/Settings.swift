@@ -218,3 +218,11 @@ extension Settings {
         return "\(appVersion ?? "0")"
     }
 }
+
+extension Settings {
+    func getMetricFont(forTextStyle: UIFont.TextStyle) -> UIFont {
+        let font = UIFont.boldSystemFont(ofSize: 22)
+        let fontMetrics = UIFontMetrics(forTextStyle: forTextStyle)
+        return fontMetrics.scaledFont(for: font)
+    }
+}

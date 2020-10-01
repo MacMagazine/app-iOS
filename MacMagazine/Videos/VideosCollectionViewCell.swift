@@ -124,6 +124,8 @@ extension VideosCollectionViewCell {
         favorite.isEnabled = object.canFavorite
         setFavoriteButtonAccessibility(isEnabled: object.isFavorite)
 
+        headlineLabel.font = Settings().getMetricFont(forTextStyle: .title3)
+
         headlineLabel.text = object.title
         headlineLabel.accessibilityLabel = "Título: \(object.title ?? "Não especificado.")"
 
