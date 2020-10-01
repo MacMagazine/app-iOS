@@ -14,12 +14,6 @@ class AppCollectionViewCell: UICollectionViewCell {}
 protocol Theme {
     var tint: UIColor { get }
 
-    var headerFooterColor: UIColor { get }
-    var labelColor: UIColor { get }
-    var secondaryLabelColor: UIColor { get }
-    var subtleLabelColor: UIColor { get }
-    var textColor: UIColor { get }
-
     func apply(for application: UIApplication)
     func extend(_ application: UIApplication)
 }
@@ -51,35 +45,6 @@ extension Theme {
             $0.textColor = tint
         }
 
-        // LABEL
-
-        var fontSize = 1.0
-        if let sliderFontSize = UserDefaults.standard.object(forKey: "font-size-settings") as? String {
-            switch sliderFontSize {
-            case "fontemenor":
-                fontSize = 0.9
-            case "fontemaior":
-                fontSize = 1.1
-            default:
-                fontSize = 1.0
-            }
-        }
-
-        AppLabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).with {
-            $0.textColor = headerFooterColor
-            $0.fontSize = CGFloat(0.8)
-        }
-        AppLabel.appearance().with {
-            $0.textColor = .black
-        }
-        AppHeadline.appearance().with {
-            $0.textColor = labelColor
-            $0.fontSize = CGFloat(fontSize)
-        }
-        AppSubhead.appearance().with {
-            $0.textColor = secondaryLabelColor
-            $0.fontSize = CGFloat(fontSize)
-        }
     }
 
 }

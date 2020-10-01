@@ -107,7 +107,7 @@ struct Settings {
 		return isDarkMode ? DarkTheme() : LightTheme()
 	}
 
-	func changeTheme(based previousTraitCollection: UITraitCollection?) {
+	func updateCookies(based previousTraitCollection: UITraitCollection?) {
 		if #available(iOS 13.0, *) {
             let state = UIApplication.shared.applicationState
 			if let style = previousTraitCollection?.userInterfaceStyle,
@@ -115,7 +115,6 @@ struct Settings {
 				appearance == .native &&
 					((style == .dark && isDarkMode) ||
 					(style == .light && !isDarkMode)) {
-				applyTheme()
                 NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
 			}
 		}
@@ -166,12 +165,6 @@ extension Settings {
 	func applyLightTheme() {
 		if isDarkMode {
             UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.tintColor = LightTheme().tint
-		}
-	}
-
-	func applyDarkTheme() {
-		if isDarkMode {
-            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.tintColor = DarkTheme().tint
 		}
 	}
 }
@@ -231,6 +224,7 @@ extension Settings {
     func createLabel(message: String, size: CGSize) -> UILabel {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.isAccessibilityElement = true
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping

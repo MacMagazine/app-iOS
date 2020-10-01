@@ -10,10 +10,6 @@ import SafariServices
 
 extension SFSafariViewController {
     func setup() {
-        if Settings().appearance != .native &&
-            Settings().isDarkMode {
-            self.preferredBarTintColor = UIColor.black
-        }
         self.dismissButtonStyle = .close
         self.modalPresentationStyle = .overFullScreen
     }

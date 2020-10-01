@@ -155,18 +155,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         super.willTransition(to: newCollection, with: coordinator)
 
         coordinator.animate(alongsideTransition: nil) { _ in
-            Settings().changeTheme(based: newCollection)
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
-    func setup() {
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: self.tableView)
+            Settings().updateCookies(based: newCollection)
         }
     }
 
@@ -466,68 +455,6 @@ extension PostsMasterViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: - UIViewControllerPreviewingDelegate -
-
-extension PostsMasterViewController: UIViewControllerPreviewingDelegate, WebViewControllerDelegate {
-
-	func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-
-		guard let indexPath = tableView.indexPathForRow(at: location),
-			let post = self.fetchController?.object(at: indexPath)
-			else {
-				return nil
-		}
-		tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-		previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-
-		guard let webController = createWebViewController(post: PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite)) as? WebViewController else {
-			return nil
-		}
-		webController.delegate = self
-
-		return webController
-	}
-
-	func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-		guard let index = self.tableView.indexPathForSelectedRow else {
-			return
-		}
-		selectedIndexPath = index
-		self.links = fetchController?.links() ?? []
-		self.performSegue(withIdentifier: "showDetail", sender: self)
-	}
-
-	func previewActionFavorite(_ post: PostData?) {
-		previewActionCancel()
-		Favorite().updatePostStatus(using: post?.link ?? "")
-	}
-
-	func previewActionShare(_ post: PostData?) {
-		previewActionCancel()
-
-		guard let link = post?.link,
-			let url = URL(string: link)
-			else {
-				return
-		}
-
-		let items: [Any] = [post?.title ?? "", url]
-		let view: UIView? = nil
-		Share().present(at: view, using: items)
-	}
-
-	func previewActionCancel() {
-		// Just in case, return the default theme colors
-		Settings().theme.apply(for: UIApplication.shared)
-
-		guard let index = self.tableView.indexPathForSelectedRow else {
-			return
-		}
-		self.tableView.deselectRow(at: index, animated: true)
-	}
-
-}
-
 // MARK: - Notifications -
 
 extension PostsMasterViewController {
@@ -728,7 +655,6 @@ extension PostsMasterViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.searchController?.searchBar.becomeFirstResponder()
-            Settings().applyTheme()
         }
     }
 

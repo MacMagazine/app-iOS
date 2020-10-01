@@ -10,10 +10,4 @@ import UIKit
 
 struct LightTheme: Theme {
     let tint: UIColor = UIColor(named: "MMBlueWhite") ?? .systemBlue
-
-	let headerFooterColor: UIColor = .darkGray
-    let labelColor: UIColor = .black
-    let secondaryLabelColor: UIColor = .darkGray
-    let subtleLabelColor: UIColor = .lightGray
-    let textColor: UIColor = .black
 }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
-		681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
@@ -100,8 +99,6 @@
 		9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135F92228064800A0B627 /* DarkTheme.swift */; };
 		9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FA2228064800A0B627 /* LightTheme.swift */; };
 		9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */; };
-		9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */; };
-		9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1360E22283DF300A0B627 /* UILabelTheme.swift */; };
 		9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E972225CFDEC00683B88 /* phone_2@3x.png */; };
 		9BD4E97B225CFDEC00683B88 /* tablet_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */; };
 		9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E974225CFDEC00683B88 /* tablet_2.png */; };
@@ -217,7 +214,6 @@
 
 /* Begin PBXFileReference section */
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
-		681E881524D95CBC00887AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCellXL.xib; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
@@ -314,8 +310,6 @@
 		9BD135F92228064800A0B627 /* DarkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		9BD135FA2228064800A0B627 /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerExtension.swift; sourceTree = "<group>"; };
-		9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldTheme.swift; sourceTree = "<group>"; };
-		9BD1360E22283DF300A0B627 /* UILabelTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelTheme.swift; sourceTree = "<group>"; };
 		9BD4E972225CFDEC00683B88 /* phone_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_2@3x.png"; sourceTree = "<group>"; };
 		9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_1@2x.png"; sourceTree = "<group>"; };
 		9BD4E974225CFDEC00683B88 /* tablet_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_2.png; sourceTree = "<group>"; };
@@ -381,9 +375,11 @@
 			children = (
 				9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */,
 				9B0DD44B2226E9320016C567 /* DateExtensions.swift */,
+				9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */,
 				9B0DD44E2226FD150016C567 /* StringExtensions.swift */,
 				9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */,
 				9B98C33223885EEF0094EBBA /* UILabelExtension.swift */,
+				9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */,
 				9BD135E4222804E500A0B627 /* UIViewExtensions.swift */,
 			);
 			name = Extensions;
@@ -529,7 +525,6 @@
 			isa = PBXGroup;
 			children = (
 				9B4A8FA422357A0800A49239 /* FeaturedCell.xib */,
-				681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */,
 				9BA939452260DE37004005AA /* HeaderCell.xib */,
 				9B4A8FA122357A0300A49239 /* NormalCell.xib */,
 				9B4A8FA722357A0D00A49239 /* PodcastCell.xib */,
@@ -591,10 +586,6 @@
 		9BD135E3222804BF00A0B627 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */,
-				9BD1360E22283DF300A0B627 /* UILabelTheme.swift */,
-				9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */,
-				9BD135FF222822A600A0B627 /* UITextFieldTheme.swift */,
 				9BD135E6222804E500A0B627 /* UIWindowTheme.swift */,
 				9BD135E1222804A600A0B627 /* With.swift */,
 			);
@@ -954,7 +945,6 @@
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */,
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
-				681E881624D95CBC00887AA8 /* FeaturedCellXL.xib in Resources */,
 				9B1514BC22BE73010039DA28 /* phone_3@2x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
@@ -1105,7 +1095,6 @@
 				9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */,
 				9BD135E2222804A600A0B627 /* With.swift in Sources */,
 				9BD135FB2228064900A0B627 /* DarkTheme.swift in Sources */,
-				9BD1360F22283DF300A0B627 /* UILabelTheme.swift in Sources */,
 				9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */,
 				9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */,
 				9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */,
@@ -1123,7 +1112,6 @@
 				9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
 				9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */,
-				9BD13600222822A600A0B627 /* UITextFieldTheme.swift in Sources */,
 				9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1174,14 +1162,6 @@
 				68012EBF252295600094A204 /* Base */,
 			);
 			name = SettingsSubHeaderCell.xib;
-			sourceTree = "<group>";
-		};
-		681E881424D95CBC00887AA8 /* FeaturedCellXL.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				681E881524D95CBC00887AA8 /* Base */,
-			);
-			name = FeaturedCellXL.xib;
 			sourceTree = "<group>";
 		};
 		685E4306252227420028FAA0 /* SettingsHeaderCell.xib */ = {

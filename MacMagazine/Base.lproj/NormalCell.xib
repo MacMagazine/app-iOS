@@ -4,6 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,16 +37,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-sP-jlV">
                                 <rect key="frame" x="88" y="0.0" width="255" height="101"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pt-cm-c6G" userLabel="Headline Label" customClass="AppHeadline" customModule="MacMagazine" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pt-cm-c6G" userLabel="Headline Label">
                                         <rect key="frame" x="0.0" y="0.0" width="255" height="64.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Configura as novidades: open source, dynamic typing e mais! Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMg-Si-BGK" userLabel="Subheadline Label" customClass="AppSubhead" customModule="MacMagazine" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Configura as novidades: open source, dynamic typing e mais! Configura as novidades: open source, dynamic typing e mais!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMg-Si-BGK" userLabel="Subheadline Label">
                                         <rect key="frame" x="0.0" y="70.5" width="255" height="30.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -56,6 +58,7 @@
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2mt-5S-7M3">
                         <rect key="frame" x="348" y="5.5" width="21" height="21"/>
+                        <color key="tintColor" name="MMBlueWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="10V-bz-leO"/>
                             <constraint firstAttribute="width" constant="21" id="P99-6P-QA4"/>
@@ -85,5 +88,11 @@
     <resources>
         <image name="image_logo" width="144" height="200"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="MMBlueWhite">
+            <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

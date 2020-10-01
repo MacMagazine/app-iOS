@@ -47,7 +47,6 @@ class ResultsViewController: UITableViewController {
 
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
         self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
-        self.tableView?.register(UINib(nibName: "FeaturedCellXL", bundle: nil), forCellReuseIdentifier: "featuredCellXL")
 
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -113,10 +112,16 @@ class ResultsViewController: UITableViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		var identifier = "normalCell"
-		if posts[indexPath.row].categories.contains("Destaques") {
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+
+        var identifier = "normalCell"
+        if posts[indexPath.row].categories.contains("Destaques") ||
+            contentSize > .extraExtraExtraLarge {
 			identifier = "featuredCell"
 		}
+        if !posts[indexPath.row].podcastURL.isEmpty {
+            identifier = "podcastCell"
+        }
 
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PostCell else {
 			fatalError("Unexpected Index Path")

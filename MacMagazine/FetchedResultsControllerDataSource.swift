@@ -58,7 +58,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
         self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
-        self.tableView?.register(UINib(nibName: "FeaturedCellXL", bundle: nil), forCellReuseIdentifier: "featuredCellXL")
     }
 
     func setup(tableView: UITableView) {
@@ -199,11 +198,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         if object.categorias?.contains("Destaques") ?? false ||
             contentSize > .extraExtraExtraLarge {
 			identifier = "featuredCell"
-
-            if !(object.podcast?.isEmpty ?? false) &&
-                contentSize > .extraExtraExtraLarge {
-                identifier = "featuredCellXL"
-            }
 		}
 
         if !(object.podcast?.isEmpty ?? true) {

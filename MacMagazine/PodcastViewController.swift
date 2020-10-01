@@ -46,6 +46,8 @@ class PodcastViewController: UIViewController {
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
 		self.definesPresentationContext = true
+
+        favorite.accessibilityLabel = "Listar podcasts favoritos."
     }
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -98,11 +100,13 @@ class PodcastViewController: UIViewController {
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
 			favorite.image = UIImage(systemName: "star")
+            favorite.accessibilityLabel = "Listar podcasts."
 		} else {
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil
 			favorite.image = UIImage(systemName: "star.fill")
-		}
+            favorite.accessibilityLabel = "Listar podcasts favoritos."
+        }
     }
 
     // MARK: - Methods -
