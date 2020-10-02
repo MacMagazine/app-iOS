@@ -169,9 +169,9 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Splash</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Splash</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

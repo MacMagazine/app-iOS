@@ -12,14 +12,13 @@ class SplashViewController: UIViewController {
 
 	@IBOutlet private weak var logo: UIImageView!
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
-	}
-
-	override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-        logo.image = UIImage(named: "logo\(Settings().darkModeimage)")
+        if Settings().isDarkMode {
+            view.backgroundColor = .black
+            logo.image = UIImage(named: "logo", in: nil, compatibleWith: UITraitCollection(userInterfaceStyle: .dark))
+        }
 
         delay(0.6) {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -42,13 +41,6 @@ class SplashViewController: UIViewController {
                               options: .transitionCrossDissolve,
                               animations: {
                 window.rootViewController = controller
-            }, completion: { _ in
-                guard let navVC = splitViewController.viewControllers.first as? UINavigationController,
-                    let vc = navVC.viewControllers.first as? PostsMasterViewController
-                    else {
-                        return
-                }
-                vc.setup()
             })
 		}
 	}

@@ -40,17 +40,6 @@ extension AppDelegate {
 
 extension AppDelegate {
 	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        // Splitview settings
-        guard let tabBarViewController = window?.rootViewController as? UITabBarController,
-              let splitViewController = tabBarViewController.viewControllers?.first as? UISplitViewController else {
-            return
-        }
-        tabBarViewController.delegate = self
-
-        splitViewController.delegate = self
-        splitViewController.preferredDisplayMode = .allVisible
-        splitViewController.preferredPrimaryColumnWidthFraction = 0.33
-
         // Apply custom thmee (Dark/Light)
 		Settings().applyTheme()
 

@@ -12,6 +12,8 @@
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
 		68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
+		68EF53502527103000FCBD3C /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68EF534E2527103000FCBD3C /* Splash.storyboard */; };
+		68EF53552527125E00FCBD3C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
@@ -217,6 +219,7 @@
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
+		68EF534F2527103000FCBD3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Splash.storyboard; sourceTree = "<group>"; };
 		68F61C1F24F9524200A4E195 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 6.xcdatamodel"; sourceTree = "<group>"; };
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -442,6 +445,7 @@
 				9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */,
 				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 				9B8A5D7B247099B700C601E0 /* sound.wav */,
+				68EF534E2527103000FCBD3C /* Splash.storyboard */,
 				9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */,
 			);
 			name = Resources;
@@ -938,6 +942,7 @@
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
+				68EF53502527103000FCBD3C /* Splash.storyboard in Resources */,
 				9B8A5D7C247099B700C601E0 /* sound.wav in Resources */,
 				9B1514C022BE73740039DA28 /* tablet_3.png in Resources */,
 				9BB252C223B670630054631B /* phone_4@3x.png in Resources */,
@@ -1108,6 +1113,7 @@
 				9B91117D225BC100000A6AC3 /* PostData.swift in Sources */,
 				9BD135E02228042C00A0B627 /* Theme.swift in Sources */,
 				9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */,
+				68EF53552527125E00FCBD3C /* SplashViewController.swift in Sources */,
 				685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */,
 				9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
@@ -1170,6 +1176,14 @@
 				685E4305252227420028FAA0 /* Base */,
 			);
 			name = SettingsHeaderCell.xib;
+			sourceTree = "<group>";
+		};
+		68EF534E2527103000FCBD3C /* Splash.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68EF534F2527103000FCBD3C /* Base */,
+			);
+			name = Splash.storyboard;
 			sourceTree = "<group>";
 		};
 		9B32242F2260DD78005CF974 /* Videos.storyboard */ = {
