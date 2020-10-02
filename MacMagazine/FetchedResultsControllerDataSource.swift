@@ -58,7 +58,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
         self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
-        self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "podcastCell")
     }
 
     func setup(tableView: UITableView) {
@@ -200,8 +199,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
             contentSize > .extraExtraExtraLarge {
 			identifier = "featuredCell"
 		}
-
-        if !(object.podcast?.isEmpty ?? true) {
+        if !(object.podcast?.isEmpty ?? true) &&
+            (delegate as? PodcastMasterViewController) != nil {
             identifier = "podcastCell"
         }
 

@@ -116,6 +116,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 36
+
         // Execute the fetch to display the data
         fetchController?.reloadData()
 
