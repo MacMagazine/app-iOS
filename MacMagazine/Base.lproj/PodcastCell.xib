@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_logo_feature" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-1P-Tdb">
-                        <rect key="frame" x="16" y="16" width="200" height="100"/>
+                        <rect key="frame" x="16" y="16" width="343" height="171.66666666666666"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="zrP-1P-Tdb" secondAttribute="height" multiplier="20:10" id="9l1-yy-OYf"/>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="343" id="xtJ-eN-bQF">
@@ -34,7 +34,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lw1-da-P8k">
-                        <rect key="frame" x="22" y="21.5" width="21" height="21"/>
+                        <rect key="frame" x="22" y="21.666666666666668" width="21" height="20.666666666666661"/>
                         <color key="tintColor" name="MMBlue"/>
                         <accessibility key="accessibilityConfiguration" label="Podcast marcado como favorito.">
                             <accessibilityTraits key="traits" none="YES"/>
@@ -46,7 +46,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="162" y="81.5" width="42" height="22.5"/>
+                        <rect key="frame" x="305" y="153" width="42" height="22.666666666666657"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,14 +69,14 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label">
-                        <rect key="frame" x="232" y="16" width="127" height="13.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="28/12/2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gu-AC-b1g" userLabel="Subheadline Label">
+                        <rect key="frame" x="16" y="193.66666666666666" width="343" height="13.333333333333343"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAk-1v-1ps" userLabel="Headline Label">
-                        <rect key="frame" x="232" y="29.5" width="127" height="130.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confira o novo aplicativo do MacMagazine para iPhone Confira o novo aplicativo do" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAk-1v-1ps" userLabel="Headline Label">
+                        <rect key="frame" x="16" y="207" width="343" height="42.333333333333343"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
     </objects>
     <designables>
         <designable name="B5u-aS-IBP">
-            <size key="intrinsicContentSize" width="42" height="22.5"/>
+            <size key="intrinsicContentSize" width="42" height="22.333333333333336"/>
         </designable>
     </designables>
     <resources>

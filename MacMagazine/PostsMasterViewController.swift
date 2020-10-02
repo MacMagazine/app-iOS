@@ -606,11 +606,11 @@ extension PostsMasterViewController {
 extension PostsMasterViewController {
     @IBAction private func showHideFavorites(_ sender: Any) {
         if fetchController?.fetchRequest.predicate == nil {
-            favorite.image = UIImage(systemName: "star")
+            favorite.image = UIImage(systemName: "star.fill")
             favorite.accessibilityLabel = "Listar posts."
             showFavorites()
         } else {
-            favorite.image = UIImage(systemName: "star.fill")
+            favorite.image = UIImage(systemName: "star")
             favorite.accessibilityLabel = "Listar posts favoritos."
             hideFavorites()
         }

@@ -75,7 +75,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
-                        <barButtonItem key="leftBarButtonItem" image="star.fill" catalog="system" id="vUZ-wN-Khb">
+                        <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="vUZ-wN-Khb">
                             <color key="tintColor" name="MMBlueWhite"/>
                             <connections>
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
@@ -201,7 +201,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YQQ-bx-LIJ"/>
+        <segue reference="lNV-kD-aRc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
@@ -209,7 +209,7 @@
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

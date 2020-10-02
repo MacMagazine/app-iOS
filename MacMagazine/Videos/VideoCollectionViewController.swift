@@ -220,13 +220,13 @@ class VideoCollectionViewController: UICollectionViewController {
 
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
-			favorite.image = UIImage(systemName: "star")
+			favorite.image = UIImage(systemName: "star.fill")
 		} else {
 			fetchedResultsController.fetchRequest.predicate = nil
 
 			self.navigationItem.titleView = logoView
 			self.navigationItem.title = nil
-			favorite.image = UIImage(systemName: "star.fill")
+			favorite.image = UIImage(systemName: "star")
 		}
 
 		do {
@@ -420,14 +420,14 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
         height += 4.0 + 12.0 + 12.0 + 14.0  // Top/Bottom margins + Separation between title and buttons + delta to fit
 
         let object = fetchedResultsController.object(at: indexPath)
-        let labelWidth = width - 12.0   // margins
+        let labelWidth = width - 20.0   // margins
 
         // pub date
         let dateHeight = object.pubDate?.watchDate().height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .caption2)) ?? 0.0
         height += dateHeight
 
         // title
-        let titleHeight = object.title?.height(withWidth: labelWidth, font: Settings().getMetricBoldFont(forTextStyle: .title3)) ?? 0.0
+        let titleHeight = object.title?.height(withWidth: labelWidth, font: UIFont.preferredFont(forTextStyle: .headline)) ?? 0.0
         height += titleHeight
 
         // toolbar (view / likes / favorite / share)

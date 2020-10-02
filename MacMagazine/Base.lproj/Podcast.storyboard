@@ -89,7 +89,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="star.fill" catalog="system" id="DiB-v8-Kg9">
+                        <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="DiB-v8-Kg9">
                             <color key="tintColor" name="MMBlueWhite"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Acessar podcasts favoritos"/>
@@ -180,7 +180,7 @@
     <resources>
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
