@@ -163,9 +163,6 @@ class WebViewController: UIViewController {
 			self?.delegate?.previewActionCancel()
 		}
 
-		// Temporary change the colors
-		Settings().applyLightTheme()
-
 		return [favoritar, compartilhar, cancelar]
 	}
 
@@ -322,6 +319,9 @@ extension WebViewController: WKHTTPCookieStoreObserver {
         if cookieName == Definitions.darkMode {
             self.setCookie(self.createDarkModeCookie(), nil)
         }
+
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+        webView.reload()
     }
 
 }

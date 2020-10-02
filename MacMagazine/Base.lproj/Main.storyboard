@@ -32,7 +32,7 @@
         <!--PostsNavigation-->
         <scene sceneID="ZIo-pw-Xnt">
             <objects>
-                <navigationController title="PostsNavigation" id="kKX-hy-fjk" sceneMemberID="viewController">
+                <navigationController title="PostsNavigation" extendedLayoutIncludesOpaqueBars="YES" id="kKX-hy-fjk" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -48,7 +48,7 @@
         <!--Posts-->
         <scene sceneID="hct-bz-jAy">
             <objects>
-                <splitViewController title="Posts" id="Yhy-9h-hZ1" sceneMemberID="viewController">
+                <splitViewController title="Posts" extendedLayoutIncludesOpaqueBars="YES" id="Yhy-9h-hZ1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Posts" image="doc.plaintext" catalog="system" id="iZz-lw-mOc"/>
                     <connections>
                         <segue destination="kKX-hy-fjk" kind="relationship" relationship="masterViewController" id="xsv-wY-uN5"/>
@@ -76,11 +76,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
                         <barButtonItem key="leftBarButtonItem" image="star.fill" catalog="system" id="vUZ-wN-Khb">
+                            <color key="tintColor" name="MMBlueWhite"/>
                             <connections>
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Ox-zf-Apm">
+                            <color key="tintColor" name="MMBlueWhite"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts."/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
@@ -129,7 +131,7 @@
         <!--Posts Detail View Controller-->
         <scene sceneID="fYa-LD-1Wl">
             <objects>
-                <pageViewController storyboardIdentifier="detailController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="detailController" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qRi-qc-cAu">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="2RS-0E-jz0">
@@ -152,7 +154,7 @@
         <!--PostsDetailNavigation-->
         <scene sceneID="xa0-Qk-bfW">
             <objects>
-                <navigationController title="PostsDetailNavigation" automaticallyAdjustsScrollViewInsets="NO" id="fD0-My-KZk" sceneMemberID="viewController">
+                <navigationController title="PostsDetailNavigation" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="fD0-My-KZk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -209,7 +211,7 @@
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlueWhite">
-            <color red="0.0" green="0.59215686274509804" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
