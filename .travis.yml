@@ -2,4 +2,4 @@ language: swift
 osx_image: xcode12.0
 xcode_project: MacMagazine.xcodeproj
 xcode_scheme: MacMagazine
-xcode_destination: platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro
+xcode_destination: platform=iOS Simulator,name=Generic iOS Simulator Device
