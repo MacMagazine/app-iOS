@@ -79,24 +79,31 @@ struct Settings {
 		return isDarkMode ? "true" : "false"
 	}
 
-	var fontSize: String {
-		guard let sliderFontSize = UserDefaults.standard.object(forKey: Definitions.fontSize) as? String else {
-			return ""
-		}
-		return sliderFontSize
-	}
-
 	var fontSizeUserAgent: String {
-		let sliderFontSize = fontSize
-		var fontSize = "normal"
-		if !sliderFontSize.isEmpty {
-            fontSize = "\(sliderFontSize)".replacingOccurrences(of: "fonte", with: "")
-		}
-		return fontSize
-	}
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+        switch contentSize {
+            case .unspecified,
+                 .large,
+                 .extraLarge,
+                 .extraExtraLarge:
+                return "normal"
 
-	var darkModeimage: String {
-		return isDarkMode ? "_dark" : ""
+            case .extraSmall,
+                 .small,
+                 .medium:
+                return "menor"
+
+            case .extraExtraExtraLarge,
+                 .accessibilityMedium,
+                 .accessibilityLarge,
+                 .accessibilityExtraLarge,
+                 .accessibilityExtraExtraLarge,
+                 .accessibilityExtraExtraExtraLarge:
+                return "maior"
+
+            default:
+                return "normal"
+        }
 	}
 
 	var darkModeColor: UIColor {
