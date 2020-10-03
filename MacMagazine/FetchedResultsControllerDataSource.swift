@@ -120,7 +120,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
         let object = self.fetchedResultsController.object(at: indexPath)
 
-        let read = UIContextualAction(style: .normal, title: (object.read ? "Não Lido" : "Lido")) { _, _, boolValue in
+        let read = UIContextualAction(style: .normal, title: (object.read ? "Não\nLido" : "Lido")) { _, _, boolValue in
             let object = self.fetchedResultsController.object(at: indexPath)
             CoreDataStack.shared.get(link: object.link ?? "") { items in
                 if !items.isEmpty {
