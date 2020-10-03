@@ -57,6 +57,7 @@ class SettingsTableViewController: UITableViewController {
 
         self.tableView?.register(UINib(nibName: "SettingsHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "SettingsSubHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "subHeaderCell")
+        self.tableView?.register(UINib(nibName: "SettingsDisclaimerFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "disclaimerFooter")
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
@@ -107,6 +108,28 @@ class SettingsTableViewController: UITableViewController {
 
         header.setHeader(headers[section])
         return header
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == getHeaders().count - 1 {
+            guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
+                return 18
+            }
+            let labelWidth = CGFloat(Int(tableView.bounds.size.width - 24.0))
+            return footer.disclaimerHeight(width: labelWidth)
+        }
+        return 18
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == getHeaders().count - 1 {
+            guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
+                return nil
+            }
+            footer.showDisclaimerFooter()
+            return footer
+        }
+        return nil
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
+		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
@@ -217,6 +218,7 @@
 
 /* Begin PBXFileReference section */
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
+		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 			isa = PBXGroup;
 			children = (
 				9BA9393C2260DDB8004005AA /* Settings.storyboard */,
+				683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */,
 				685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */,
 				685E4306252227420028FAA0 /* SettingsHeaderCell.xib */,
 				68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */,
@@ -943,6 +946,7 @@
 				9B1514BB22BE73010039DA28 /* phone_3.png in Resources */,
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
+				683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
 				68EF53502527103000FCBD3C /* Splash.storyboard in Resources */,
 				9B8A5D7C247099B700C601E0 /* sound.wav in Resources */,
