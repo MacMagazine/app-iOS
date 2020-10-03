@@ -131,17 +131,18 @@ extension VideosCollectionViewCell {
         subheadlineLabel.isAccessibilityElement = true
         subheadlineLabel.accessibilityLabel = object.subtitle?.toAccessibilityDateAndTime()
 
-        viewsLabel.text = object.views
+        viewsLabel.text = object.views?.formattedNumber()
         if let views = object.views {
             viewsLabel.accessibilityLabel = "\(views) visualizações."
         }
 
-        likesLabel.text = object.likes
+        likesLabel.text = object.likes?.formattedNumber()
         if let likes = object.likes {
             likesLabel.accessibilityLabel = "\(likes) curtidas."
         }
 
         durationLabel.text = object.duration
+        durationLabel.alpha = 0.9
         if let duration = object.duration {
             durationLabel.accessibilityLabel = "duração: \(duration.toAccessibilityTime())"
         }

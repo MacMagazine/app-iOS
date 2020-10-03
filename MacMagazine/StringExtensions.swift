@@ -183,4 +183,20 @@ extension String {
         let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font: font], context: nil)
         return actualSize.height
     }
+
+    func formattedNumber() -> String {
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.numberStyle = .decimal
+        guard let value = Int(self) else {
+            return ""
+        }
+        let valueNumber = NSNumber(value: value)
+        let number = formatter.string(from: valueNumber)
+        return number ?? ""
+    }
+
+    func llamaCase() -> String {
+        return "\(self.first?.lowercased() ?? "")\(self.dropFirst())"
+    }
 }

@@ -46,7 +46,7 @@
                         </constraints>
                     </imageView>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                        <rect key="frame" x="305" y="153" width="42" height="22.666666666666657"/>
+                        <rect key="frame" x="305" y="153.33333333333334" width="42" height="22.333333333333343"/>
                         <color key="backgroundColor" name="MMBlack90"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,7 +141,7 @@
         <image name="image_logo_feature" width="686" height="320"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlack90">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MMBlue">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

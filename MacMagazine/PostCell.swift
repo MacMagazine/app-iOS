@@ -29,7 +29,7 @@ class PostCell: UITableViewCell {
 
     @IBOutlet private weak var headlineLabel: UILabel!
     @IBOutlet private weak var subheadlineLabel: UILabel!
-    @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet private weak var durationLabel: PaddingLabel!
     @IBOutlet private weak var thumbnailImageView: UIImageView!
     @IBOutlet private weak var favoriteImageView: UIImageView!
 

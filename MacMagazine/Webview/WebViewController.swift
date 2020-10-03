@@ -336,7 +336,7 @@ extension WebViewController: WKHTTPCookieStoreObserver {
         }
 
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
-        webView.reload()
+        webView?.reload()
     }
 
 }

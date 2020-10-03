@@ -39,10 +39,16 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet private weak var patraoButton: UIButton!
 
-    static let iconOption1AccLabel = "Ícone do aplicativo com fundo branco."
-    static let iconOption2AccLabel = "Ícone do aplicativo com fundo azul."
-    static let iconOption3AccLabel = "Ícone azul do aplicativo com fundo preto."
-    static let iconOption4AccLabel = "Ícone claro do aplicativo com fundo preto."
+    enum IconOptionAccessibilityLabel: String {
+        case whiteBackground = "Ícone do aplicativo com fundo branco."
+        case blueBackground = "Ícone do aplicativo com fundo azul."
+        case blueOverBlack = "Ícone azul do aplicativo com fundo preto."
+        case whiteOverBlack = "Ícone claro do aplicativo com fundo preto."
+
+        func accessibilityText(selected: Bool) -> String {
+            return "\(self)\(selected ? " Selected." : "")"
+        }
+    }
 
     // MARK: - View lifecycle -
 
@@ -66,7 +72,7 @@ class SettingsTableViewController: UITableViewController {
         }
         delegate.supportedInterfaceOrientation = Settings().orientations
 
-        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login para patrões", for: .normal)
+        patraoButton.setTitle(Settings().loginPatrao, for: .normal)
 	}
 
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -231,7 +237,7 @@ extension SettingsTableViewController {
                 self.navigationController?.pushViewController(controller, animated: true)
             }
         }
-        patraoButton.setTitle(Settings().isPatrao ? "Logoff" : "Login para patrões", for: .normal)
+        patraoButton.setTitle(Settings().loginPatrao, for: .normal)
     }
 }
 
@@ -392,19 +398,19 @@ extension SettingsTableViewController {
 
         iconOption1Selected.image = iconName == IconOptions.option1 ? selectedImage : normal
         iconOption1Selected.tintColor = iconName == IconOptions.option1 ? tintSelectedColor : tintColor
-        iconOption1Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption1AccLabel) \(iconName == IconOptions.option1 ? "Selecionado." : "")"
+        iconOption1Btn.accessibilityLabel = IconOptionAccessibilityLabel.whiteBackground.accessibilityText(selected: iconName == IconOptions.option1)
 
         iconOption2Selected.image = iconName == IconOptions.option2 ? selectedImage : normal
         iconOption2Selected.tintColor = iconName == IconOptions.option2 ? tintSelectedColor : tintColor
-        iconOption2Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption2AccLabel) \(iconName == IconOptions.option2 ? "Selecionado." : "")"
+        iconOption2Btn.accessibilityLabel = IconOptionAccessibilityLabel.blueBackground.accessibilityText(selected: iconName == IconOptions.option2)
 
         iconOption3Selected.image = iconName == IconOptions.option3 ? selectedImage : normal
         iconOption3Selected.tintColor = iconName == IconOptions.option3 ? tintSelectedColor : tintColor
-        iconOption3Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption3AccLabel) \(iconName == IconOptions.option3 ? "Selecionado." : "")"
+        iconOption3Btn.accessibilityLabel = IconOptionAccessibilityLabel.blueOverBlack.accessibilityText(selected: iconName == IconOptions.option3)
 
         iconOption4Selected.image = iconName == IconOptions.option4 ? selectedImage : normal
         iconOption4Selected.tintColor = iconName == IconOptions.option4 ? tintSelectedColor : tintColor
-        iconOption4Btn.accessibilityLabel = "\(SettingsTableViewController.iconOption4AccLabel) \(iconName == IconOptions.option4 ? "Selecionado." : "")"
+        iconOption4Btn.accessibilityLabel = IconOptionAccessibilityLabel.whiteOverBlack.accessibilityText(selected: iconName == IconOptions.option4)
     }
 
     fileprivate func changeIcon(to iconName: String) {

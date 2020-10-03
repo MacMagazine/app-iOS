@@ -81,29 +81,17 @@ struct Settings {
 
 	var fontSizeUserAgent: String {
         let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
-        switch contentSize {
-            case .unspecified,
-                 .large,
-                 .extraLarge,
-                 .extraExtraLarge:
-                return "normal"
-
-            case .extraSmall,
-                 .small,
-                 .medium:
-                return "menor"
-
-            case .extraExtraExtraLarge,
-                 .accessibilityMedium,
-                 .accessibilityLarge,
-                 .accessibilityExtraLarge,
-                 .accessibilityExtraExtraLarge,
-                 .accessibilityExtraExtraExtraLarge:
-                return "maior"
-
-            default:
-                return "normal"
+        if contentSize == .unspecified {
+            return "large"
         }
+        let size = contentSize.rawValue.replacingOccurrences(of: "UICTContentSizeCategory", with: "")
+            .replacingOccurrences(of: "X", with: "Extra")
+            .replacingOccurrences(of: "L", with: "Large")
+            .replacingOccurrences(of: "S", with: "Small")
+            .replacingOccurrences(of: "M", with: "Medium")
+            .llamaCase()
+
+        return size
 	}
 
 	var darkModeColor: UIColor {
@@ -142,6 +130,10 @@ struct Settings {
             UserDefaults.standard.set(value, forKey: Definitions.mm_patrao)
             UserDefaults.standard.synchronize()
         }
+    }
+
+    var loginPatrao: String {
+        return isPatrao ? "Logoff de patrão" : "Login para patrões"
     }
 
 	// MARK: - Review -
