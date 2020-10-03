@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
+		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
+		683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683271AD25291512004BD4DA /* WhatsNew.storyboard */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
@@ -219,6 +221,8 @@
 /* Begin PBXFileReference section */
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
+		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
+		683271AC25291512004BD4DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WhatsNew.storyboard; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
@@ -376,6 +380,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		683271A2252914AF004BD4DA /* WhatsNew */ = {
+			isa = PBXGroup;
+			children = (
+				683271AD25291512004BD4DA /* WhatsNew.storyboard */,
+				683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */,
+			);
+			path = WhatsNew;
+			sourceTree = "<group>";
+		};
 		9B02AE4D1F5C515A00EA1A6F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +453,7 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				683271A2252914AF004BD4DA /* WhatsNew */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				68F61C1F24F9524200A4E195 /* Config.xcconfig */,
 				9BD4E971225CFDEC00683B88 /* icons */,
@@ -959,6 +973,7 @@
 				9B1514BC22BE73010039DA28 /* phone_3@2x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
+				683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */,
 				9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */,
 				9BB252C523B670630054631B /* phone_4@2x.png in Resources */,
 			);
@@ -1092,6 +1107,7 @@
 				9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */,
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
+				683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
 				9B98C33323885EEF0094EBBA /* UILabelExtension.swift in Sources */,
@@ -1174,6 +1190,14 @@
 				68012EBF252295600094A204 /* Base */,
 			);
 			name = SettingsSubHeaderCell.xib;
+			sourceTree = "<group>";
+		};
+		683271AD25291512004BD4DA /* WhatsNew.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				683271AC25291512004BD4DA /* Base */,
+			);
+			name = WhatsNew.storyboard;
 			sourceTree = "<group>";
 		};
 		685E4306252227420028FAA0 /* SettingsHeaderCell.xib */ = {

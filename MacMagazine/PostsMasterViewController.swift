@@ -153,6 +153,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 		processSelection()
 		viewDidAppear = true
+
+        if Settings().whatsNew != Settings().appVersion {
+            self.performSegue(withIdentifier: "showWhatsNewSegue", sender: self)
+        }
 	}
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -21,13 +21,13 @@ class SplashViewController: UIViewController {
         }
 
         delay(0.6) {
-			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
             guard let controller = storyboard.instantiateViewController(withIdentifier: "main") as? UITabBarController,
-                let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                let splitViewController = controller.viewControllers?.first as? UISplitViewController,
-                let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-                else {
-                    return
+                  let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                  let splitViewController = controller.viewControllers?.first as? UISplitViewController,
+                  let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
+                return
             }
 
 			controller.delegate = appDelegate
@@ -40,8 +40,8 @@ class SplashViewController: UIViewController {
                               duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
-                window.rootViewController = controller
-            })
+                                window.rootViewController = controller
+                              })
 		}
 	}
 

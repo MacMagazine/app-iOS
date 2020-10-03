@@ -21,6 +21,7 @@ enum Definitions {
 	static let pushPreferences = "pushPreferences"
     static let transparency = "transparency"
     static let mm_patrao = "mm_patrao"
+    static let whatsnew = "whatsnew"
 }
 
 // MARK: -
@@ -134,6 +135,16 @@ struct Settings {
 
     var loginPatrao: String {
         return isPatrao ? "Logoff de patrão" : "Login para patrões"
+    }
+
+    var whatsNew: String {
+        get {
+            return UserDefaults.standard.string(forKey: Definitions.whatsnew) ?? ""
+        }
+        set(value) {
+            UserDefaults.standard.set(value, forKey: Definitions.whatsnew)
+            UserDefaults.standard.synchronize()
+        }
     }
 
 	// MARK: - Review -

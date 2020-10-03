@@ -97,7 +97,7 @@
                         <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
                         <outlet property="spin" destination="uE4-5b-xTc" id="Vwt-Qm-yfC"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
-                        <segue destination="RIZ-SC-AGK" kind="presentation" identifier="showWhatsNewSegue" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="ONS-UC-hHR"/>
+                        <segue destination="jkr-OC-PMp" kind="presentation" identifier="showWhatsNewSegue" modalPresentationStyle="pageSheet" modalTransitionStyle="coverVertical" id="ONS-UC-hHR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmD-xa-eeh" sceneMemberID="firstResponder"/>
@@ -224,13 +224,33 @@
             </objects>
             <point key="canvasLocation" x="-2797" y="-2046"/>
         </scene>
-        <!--WhatsNew-->
-        <scene sceneID="l9F-2d-Y8K">
+        <!--Table View Controller-->
+        <scene sceneID="DbI-7b-tSB">
             <objects>
-                <viewControllerPlaceholder storyboardName="WhatsNew" id="RIZ-SC-AGK" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b3n-Ps-AQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="jkr-OC-PMp" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q1Y-WD-e4X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="W0X-Y8-QRO">
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W0X-Y8-QRO" id="BnQ-si-bco">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jkr-OC-PMp" id="kya-DC-XG6"/>
+                            <outlet property="delegate" destination="jkr-OC-PMp" id="gGP-uB-eCe"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KMS-vU-Cg4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142" y="-2886"/>
+            <point key="canvasLocation" x="1364" y="-2885"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -248,6 +268,9 @@
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
