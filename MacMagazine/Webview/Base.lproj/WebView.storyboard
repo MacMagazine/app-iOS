@@ -40,13 +40,33 @@
                     <navigationItem key="navigationItem" id="mof-85-jGR"/>
                     <connections>
                         <outlet property="favorite" destination="cRF-ml-ok5" id="eB5-nD-52J"/>
-                        <outlet property="fullscreenMode" destination="3p9-uv-5s7" id="BAC-4t-A2F"/>
+                        <outlet property="fullscreenMode" destination="0M8-cs-1dn" id="bHo-oI-b0y"/>
                         <outlet property="share" destination="dA3-eY-eOM" id="eFL-mL-ZYw"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
-                        <outlet property="splitviewMode" destination="cjb-s3-7R1" id="XNw-Q6-hcp"/>
+                        <outlet property="splitviewMode" destination="eJ1-9u-bNS" id="ij9-fH-WQY"/>
                         <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>
                     </connections>
                 </viewController>
+                <barButtonItem image="rectangle" catalog="system" id="0M8-cs-1dn" userLabel="Fullscreen">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Entrar no modo fullscreen"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterFullscreenMode:" destination="uJA-Vl-hWR" id="82v-ps-GKK"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="sidebar.left" catalog="system" id="eJ1-9u-bNS" userLabel="SplitView">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Sair do modo fullscreen"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterSplitViewMode:" destination="uJA-Vl-hWR" id="P4p-z7-L07"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QJ7-qP-eRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="x4L-t4-vbR">
                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -59,9 +79,6 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Favoritar"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
-                    </connections>
                 </barButtonItem>
                 <barButtonItem image="square.and.arrow.up" catalog="system" id="dA3-eY-eOM" userLabel="Compatilhar">
                     <color key="tintColor" name="MMBlueWhite"/>
@@ -69,36 +86,13 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Compartilhar"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem image="rectangle.lefthalf.inset.fill.arrow.left" catalog="system" id="3p9-uv-5s7" userLabel="Fullscreen">
-                    <color key="tintColor" name="MMBlueWhite"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Entrar no modo fullscreen"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="enterFullscreenMode:" destination="uJA-Vl-hWR" id="i8T-ug-SQH"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem image="sidebar.left" catalog="system" id="cjb-s3-7R1" userLabel="SplitView">
-                    <color key="tintColor" name="MMBlueWhite"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Sair do modo fullscreen"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="enterSplitViewMode:" destination="uJA-Vl-hWR" id="aXR-UQ-w72"/>
-                    </connections>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1294" y="-2116"/>
         </scene>
     </scenes>
     <resources>
-        <image name="rectangle.lefthalf.inset.fill.arrow.left" catalog="system" width="128" height="93"/>
+        <image name="rectangle" catalog="system" width="128" height="93"/>
         <image name="sidebar.left" catalog="system" width="128" height="93"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>

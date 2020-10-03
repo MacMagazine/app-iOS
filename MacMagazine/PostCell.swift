@@ -62,7 +62,7 @@ extension PostCell {
         headlineLabel?.alpha = (object.read ? Settings().transparency : 1)
         subheadlineLabel?.alpha = (object.read ? Settings().transparency : 1)
         thumbnailImageView?.alpha = (object.read ? Settings().transparency : 1)
-        durationLabel?.alpha = (object.read ? Settings().transparency : 1)
+        durationLabel?.alpha = (object.read ? Settings().transparency : 0.90)
 
         guard let artworkURL = object.artworkURL else {
             return

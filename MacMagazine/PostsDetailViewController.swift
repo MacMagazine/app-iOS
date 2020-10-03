@@ -12,6 +12,9 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	// MARK: - Properties -
 
+    @IBOutlet private weak var fullscreenMode: UIBarButtonItem!
+    @IBOutlet private weak var splitviewMode: UIBarButtonItem!
+
 	var selectedIndex = 0
 	var links: [PostData] = []
 	var createWebViewController: ((PostData) -> UIViewController?)?
@@ -21,6 +24,8 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 			return self.createWebViewController?(post) ?? UIViewController()
 		}
 	}()
+
+    var showFullscreenModeButton = true
 
 	// MARK: - View lifecycle -
 
@@ -36,7 +41,12 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 			controller = orderedViewControllers[selectedIndex]
 		}
 		setViewControllers([controller], direction: .forward, animated: true, completion: nil)
-	}
+
+        if Settings().isPad &&
+            self.splitViewController != nil {
+            navigationItem.leftBarButtonItem = fullscreenMode
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -129,7 +139,8 @@ extension PostsDetailViewController {
     }
 }
 
-// Handoff
+// MARK: - Handoff -
+
 extension PostsDetailViewController {
     func updatePostHandoff(title: String?, link: String) {
         userActivity?.invalidate()
@@ -140,5 +151,39 @@ extension PostsDetailViewController {
         userActivity = handoff
 
         userActivity?.becomeCurrent()
+    }
+}
+
+// MARK: - Fullscreen Mode -
+
+extension PostsDetailViewController {
+    @IBAction private func enterFullscreenMode(_ sender: Any?) {
+        showFullscreenModeButton = false
+        UIView.animate(withDuration: 0.4,
+                       animations: {
+                        self.splitViewController?.preferredDisplayMode = .primaryHidden
+                       },
+                       completion: { _ in
+                        self.navigationItem.leftBarButtonItem = self.splitviewMode
+                       })
+    }
+
+    func enterFullscreenMode() {
+        self.enterFullscreenMode(fullscreenMode)
+    }
+
+    @IBAction private func enterSplitViewMode(_ sender: Any?) {
+        showFullscreenModeButton = true
+        UIView.animate(withDuration: 0.4,
+                       animations: {
+                        self.splitViewController?.preferredDisplayMode = .allVisible
+                       },
+                       completion: { _ in
+                        self.navigationItem.leftBarButtonItem = self.fullscreenMode
+                       })
+    }
+
+    func enterSplitViewMode() {
+        self.enterSplitViewMode(splitviewMode)
     }
 }

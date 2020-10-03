@@ -146,7 +146,31 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </navigationItem>
+                    <connections>
+                        <outlet property="fullscreenMode" destination="STi-bH-ZBR" id="mNH-Hk-vi9"/>
+                        <outlet property="splitviewMode" destination="Vtl-gq-n89" id="W5z-X3-cSF"/>
+                    </connections>
                 </pageViewController>
+                <barButtonItem image="rectangle" catalog="system" id="STi-bH-ZBR" userLabel="Fullscreen">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Entrar no modo fullscreen"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterFullscreenMode:" destination="oLg-jw-p4c" id="rGG-Hg-tEF"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="sidebar.left" catalog="system" id="Vtl-gq-n89" userLabel="SplitView">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Sair do modo fullscreen"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterSplitViewMode:" destination="oLg-jw-p4c" id="FhU-c5-YW7"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGQ-1P-xj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1364" y="-2116.1919040479761"/>
@@ -209,6 +233,8 @@
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="rectangle" catalog="system" width="128" height="93"/>
+        <image name="sidebar.left" catalog="system" width="128" height="93"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

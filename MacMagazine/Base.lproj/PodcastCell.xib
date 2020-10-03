@@ -45,7 +45,7 @@
                             <constraint firstAttribute="height" constant="21" id="bik-fu-VEU"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
+                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-aS-IBP" userLabel="Subheadline Label" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
                         <rect key="frame" x="305" y="153" width="42" height="22.666666666666657"/>
                         <color key="backgroundColor" name="MMBlack90"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>

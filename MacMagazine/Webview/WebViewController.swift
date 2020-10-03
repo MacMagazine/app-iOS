@@ -24,8 +24,6 @@ class WebViewController: UIViewController {
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 	@IBOutlet private weak var share: UIBarButtonItem!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
-    @IBOutlet private weak var fullscreenMode: UIBarButtonItem!
-    @IBOutlet private weak var splitviewMode: UIBarButtonItem!
 
 	var delegate: WebViewControllerDelegate?
 
@@ -48,7 +46,12 @@ class WebViewController: UIViewController {
 	var previousIsDarkMode: Bool = false
 	var previousFonteSize: String = ""
 
-	// MARK: - View lifecycle -
+    @IBOutlet private weak var fullscreenMode: UIBarButtonItem!
+    @IBOutlet private weak var splitviewMode: UIBarButtonItem!
+
+    var showFullscreenModeButton = true
+
+    // MARK: - View lifecycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +61,14 @@ class WebViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateCookie(_:)), name: .updateCookie, object: nil)
 
 		favorite.image = UIImage(systemName: post?.favorito ?? false ? "star.fill" : "star")
-		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
-        if Settings().isPad {
-            self.parent?.navigationItem.leftBarButtonItem = fullscreenMode
+
+        if Settings().isPad &&
+            self.splitViewController != nil &&
+            self.navigationController?.viewControllers.count ?? 0 > 1 {
+
+            self.navigationItem.leftItemsSupplementBackButton = true
+            self.navigationItem.leftBarButtonItem = showFullscreenModeButton ? fullscreenMode : splitviewMode
         }
-        self.parent?.navigationItem.leftBarButtonItem?.accessibilityLabel = "Voltar"
 
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
@@ -88,7 +94,7 @@ class WebViewController: UIViewController {
 		super.viewWillAppear(animated)
 
 		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
-	}
+    }
 
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
@@ -156,23 +162,23 @@ class WebViewController: UIViewController {
 	}
 
     @IBAction private func enterFullscreenMode(_ sender: Any) {
-        UIView.animate(withDuration: 0.4,
-                       animations: {
-                        self.splitViewController?.preferredDisplayMode = .primaryHidden
-                       },
-                       completion: { _ in
-                        self.parent?.navigationItem.leftBarButtonItem = self.splitviewMode
-                       })
+        print(#function)
+        guard let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController else {
+            return
+        }
+        parent.enterFullscreenMode()
+        self.navigationItem.leftBarButtonItem = self.splitviewMode
+        self.webView.reload()
     }
 
     @IBAction private func enterSplitViewMode(_ sender: Any) {
-        UIView.animate(withDuration: 0.4,
-                       animations: {
-                        self.splitViewController?.preferredDisplayMode = .allVisible
-                       },
-                       completion: { _ in
-                        self.parent?.navigationItem.leftBarButtonItem = self.fullscreenMode
-                       })
+        print(#function)
+        guard let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController else {
+            return
+        }
+        parent.enterSplitViewMode()
+        self.navigationItem.leftBarButtonItem = self.fullscreenMode
+        self.webView.reload()
     }
 
 }
@@ -455,6 +461,9 @@ extension WebViewController {
                 return
             }
             controller.postURL = url
+            if let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController {
+                controller.showFullscreenModeButton = parent.showFullscreenModeButton
+            }
 
             controller.modalPresentationStyle = .overFullScreen
             self.navigationController?.pushViewController(controller, animated: true)
