@@ -14,6 +14,7 @@ O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_
 - `WKWebView` para leitura dos artigos e visualização dos comentários
 - Modo Escuro
 - Fontes dinâmicas para melhor visualização
+- Leitura dos posts em fullscreen no iPad
 - App para `watchOS`
 
 ## Bug Reporting e Feature request
