@@ -26,7 +26,6 @@ class PodcastViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.titleView = logoView
 		self.navigationItem.title = nil
-        self.extendedLayoutIncludesOpaqueBars = true
 
 		playerHeight.constant = 0.0
 
@@ -45,7 +44,9 @@ class PodcastViewController: UIViewController {
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
-		self.definesPresentationContext = true
+        searchController?.searchBar.returnKeyType = .search
+
+        self.extendedLayoutIncludesOpaqueBars = true
 
         favorite.accessibilityLabel = "Listar podcasts favoritos."
     }

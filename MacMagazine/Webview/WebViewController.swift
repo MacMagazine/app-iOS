@@ -24,6 +24,8 @@ class WebViewController: UIViewController {
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 	@IBOutlet private weak var share: UIBarButtonItem!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var fullscreenMode: UIBarButtonItem!
+    @IBOutlet private weak var splitviewMode: UIBarButtonItem!
 
 	var delegate: WebViewControllerDelegate?
 
@@ -57,6 +59,9 @@ class WebViewController: UIViewController {
 
 		favorite.image = UIImage(systemName: post?.favorito ?? false ? "star.fill" : "star")
 		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
+        if Settings().isPad {
+            self.parent?.navigationItem.leftBarButtonItem = fullscreenMode
+        }
         self.parent?.navigationItem.leftBarButtonItem?.accessibilityLabel = "Voltar"
 
         webView?.navigationDelegate = self
@@ -150,21 +155,25 @@ class WebViewController: UIViewController {
 		Share().present(at: share, using: items)
 	}
 
-	// MARK: - UIPreviewAction -
+    @IBAction private func enterFullscreenMode(_ sender: Any) {
+        UIView.animate(withDuration: 0.4,
+                       animations: {
+                        self.splitViewController?.preferredDisplayMode = .primaryHidden
+                       },
+                       completion: { _ in
+                        self.parent?.navigationItem.leftBarButtonItem = self.splitviewMode
+                       })
+    }
 
-	override var previewActionItems: [UIPreviewActionItem] {
-		let favoritar = UIPreviewAction(title: "Favoritar", style: .default) { [weak self] _, _ in
-			self?.delegate?.previewActionFavorite(self?.post)
-		}
-		let compartilhar = UIPreviewAction(title: "Compartilhar", style: .default) { [weak self] _, _ in
-			self?.delegate?.previewActionShare(self?.post)
-		}
-		let cancelar = UIPreviewAction(title: "Cancelar", style: .destructive) { [weak self] _, _  in
-			self?.delegate?.previewActionCancel()
-		}
-
-		return [favoritar, compartilhar, cancelar]
-	}
+    @IBAction private func enterSplitViewMode(_ sender: Any) {
+        UIView.animate(withDuration: 0.4,
+                       animations: {
+                        self.splitViewController?.preferredDisplayMode = .allVisible
+                       },
+                       completion: { _ in
+                        self.parent?.navigationItem.leftBarButtonItem = self.fullscreenMode
+                       })
+    }
 
 }
 

@@ -40,8 +40,10 @@
                     <navigationItem key="navigationItem" id="mof-85-jGR"/>
                     <connections>
                         <outlet property="favorite" destination="cRF-ml-ok5" id="eB5-nD-52J"/>
+                        <outlet property="fullscreenMode" destination="3p9-uv-5s7" id="BAC-4t-A2F"/>
                         <outlet property="share" destination="dA3-eY-eOM" id="eFL-mL-ZYw"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
+                        <outlet property="splitviewMode" destination="cjb-s3-7R1" id="XNw-Q6-hcp"/>
                         <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>
                     </connections>
                 </viewController>
@@ -51,7 +53,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="color" name="MMBlueWhite"/>
                 </activityIndicatorView>
-                <barButtonItem image="star" catalog="system" id="cRF-ml-ok5">
+                <barButtonItem image="star" catalog="system" id="cRF-ml-ok5" userLabel="Favoritar">
                     <color key="tintColor" name="MMBlueWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Favoritar"/>
@@ -61,7 +63,7 @@
                         <action selector="favorite:" destination="uJA-Vl-hWR" id="zvQ-9Z-B9t"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="square.and.arrow.up" catalog="system" id="dA3-eY-eOM">
+                <barButtonItem image="square.and.arrow.up" catalog="system" id="dA3-eY-eOM" userLabel="Compatilhar">
                     <color key="tintColor" name="MMBlueWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Compartilhar"/>
@@ -71,11 +73,33 @@
                         <action selector="share:" destination="uJA-Vl-hWR" id="euH-nm-WIj"/>
                     </connections>
                 </barButtonItem>
+                <barButtonItem image="rectangle.lefthalf.inset.fill.arrow.left" catalog="system" id="3p9-uv-5s7" userLabel="Fullscreen">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Entrar no modo fullscreen"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterFullscreenMode:" destination="uJA-Vl-hWR" id="i8T-ug-SQH"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="sidebar.left" catalog="system" id="cjb-s3-7R1" userLabel="SplitView">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Sair do modo fullscreen"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterSplitViewMode:" destination="uJA-Vl-hWR" id="aXR-UQ-w72"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1294" y="-2116"/>
         </scene>
     </scenes>
     <resources>
+        <image name="rectangle.lefthalf.inset.fill.arrow.left" catalog="system" width="128" height="93"/>
+        <image name="sidebar.left" catalog="system" width="128" height="93"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlueWhite">

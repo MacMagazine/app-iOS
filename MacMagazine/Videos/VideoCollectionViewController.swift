@@ -66,14 +66,15 @@ class VideoCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         navigationItem.titleView = logoView
 		navigationItem.title = nil
-        self.extendedLayoutIncludesOpaqueBars = true
 
 		searchController = UISearchController(searchResultsController: nil)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos vídeos..."
 		searchController?.hidesNavigationBarDuringPresentation = true
-		self.definesPresentationContext = true
+        searchController?.searchBar.returnKeyType = .search
+
+        self.extendedLayoutIncludesOpaqueBars = true
 
 		pageToken = ""
 		getVideos()
@@ -266,7 +267,7 @@ extension VideoCollectionViewController {
     func showNotFound() {
         var message = isLoading ? "Carregando..." : "Você ainda não favoritou nenhum vídeo."
         if isSearching {
-            message = "Nenhum resultado encontrado"
+            message = "Nenhum resultado encontrado."
             guard let _ = videos else {
                 let spin = UIActivityIndicatorView(style: .large)
                 spin.startAnimating()

@@ -87,7 +87,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		if (numSections == 0 || rows(in: 0) == 0) &&
 			(favorite || category) {
 
-			let message = favorite ? "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")" : "Nenhum resultado encontrado"
+			let message = favorite ? "Você ainda não favoritou nenhum \(self.groupedBy == nil ? "podcast" : "post")." : "Nenhum resultado encontrado."
             tableView.backgroundView = Settings().createLabel(message: message, size: tableView.bounds.size)
 			tableView.separatorStyle = .none
 

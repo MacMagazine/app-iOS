@@ -110,7 +110,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos posts..."
 		searchController?.hidesNavigationBarDuringPresentation = true
-        self.definesPresentationContext = true
+        searchController?.searchBar.returnKeyType = .search
+
         self.extendedLayoutIncludesOpaqueBars = true
 
 		tableView.rowHeight = UITableView.automaticDimension
