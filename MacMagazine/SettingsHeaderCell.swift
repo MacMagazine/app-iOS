@@ -33,11 +33,11 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
 
         let font = UIFont.preferredFont(forTextStyle: .caption1)
 
-        let prefix = "MacMagazine é um projeto de código aberto no "
+        let prefix = "MacMagazine é um "
         let prefixAttributedString = NSMutableAttributedString(string: prefix, attributes: [.font: font,
                                                                                             .foregroundColor: UIColor.label])
 
-        let linkGithub = "GitHub"
+        let linkGithub = "projeto de código aberto no GitHub"
         let linkGithubAttributedString = NSMutableAttributedString(string: linkGithub,
                                                                    attributes: [.font: font,
                                                                                 .link: github])
@@ -46,16 +46,21 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
         let suffixAttributedString = NSMutableAttributedString(string: suffix, attributes: [.font: font,
                                                                                             .foregroundColor: UIColor.label])
 
-        let linkKazzio = "KazzioSoftware."
+        let linkKazzio = "KazzioSoftware"
         let linkKazzioAttributedString = NSMutableAttributedString(string: linkKazzio,
                                                                    attributes: [.font: font,
                                                                                 .link: kazzio])
+
+        let endText = "."
+        let endTextAttributedString = NSMutableAttributedString(string: endText, attributes: [.font: font,
+                                                                                              .foregroundColor: UIColor.label])
 
         let fullAttributedString = NSMutableAttributedString()
         fullAttributedString.append(prefixAttributedString)
         fullAttributedString.append(linkGithubAttributedString)
         fullAttributedString.append(suffixAttributedString)
         fullAttributedString.append(linkKazzioAttributedString)
+        fullAttributedString.append(endTextAttributedString)
 
         return fullAttributedString
     }
