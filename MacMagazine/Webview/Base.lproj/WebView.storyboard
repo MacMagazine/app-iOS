@@ -79,6 +79,9 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Favoritar"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="favorite:" destination="uJA-Vl-hWR" id="lBm-HJ-z0i"/>
+                    </connections>
                 </barButtonItem>
                 <barButtonItem image="square.and.arrow.up" catalog="system" id="dA3-eY-eOM" userLabel="Compatilhar">
                     <color key="tintColor" name="MMBlueWhite"/>
@@ -86,6 +89,9 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Compartilhar"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="share:" destination="uJA-Vl-hWR" id="6xt-6n-JCh"/>
+                    </connections>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1294" y="-2116"/>

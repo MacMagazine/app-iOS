@@ -128,6 +128,8 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 }
 
+// MARK: - Read status -
+
 extension PostsDetailViewController {
     func updatePostReadStatus(link: String) {
         CoreDataStack.shared.get(link: link) { items in

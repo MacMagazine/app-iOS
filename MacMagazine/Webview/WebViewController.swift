@@ -51,6 +51,13 @@ class WebViewController: UIViewController {
 
     var showFullscreenModeButton = true
 
+    struct Login {
+        var currentScroll = CGPoint(x: 0, y: 0)
+        var shouldScrollToPoint: CGPoint?
+        var isLogged = false
+    }
+    var login = Login()
+
     // MARK: - View lifecycle -
 
     override func viewDidLoad() {
@@ -72,6 +79,7 @@ class WebViewController: UIViewController {
 
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
+        webView?.scrollView.delegate = self
         webView?.configuration.websiteDataStore.httpCookieStore.add(self)
 
         let scriptSource = """
@@ -188,7 +196,7 @@ class WebViewController: UIViewController {
 extension WebViewController {
 
 	func reload() {
-		if post != nil {
+        if post != nil {
 			configureView()
 		} else if postURL != nil {
 			guard let url = postURL else {
@@ -343,6 +351,14 @@ extension WebViewController: WKHTTPCookieStoreObserver {
 
 // MARK: - WebView Delegate -
 
+extension WebViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        login.currentScroll = scrollView.contentOffset
+    }
+}
+
+// MARK: - WebView Delegate -
+
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
@@ -355,6 +371,14 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
                 self.navigationItem.rightBarButtonItems = [share]
             }
         }
+
+        delay(0.4) {
+            guard let offset = self.login.shouldScrollToPoint else {
+                return
+            }
+            webView.scrollView.setContentOffset(offset, animated: true)
+            self.login.shouldScrollToPoint = nil
+        }
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -365,6 +389,9 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 			}
 
 			if url.isKnownAddress() {
+                if url.isDisqusAddress() {
+                    login.shouldScrollToPoint = login.currentScroll
+                }
 				pushNavigation(url)
 			} else {
 				openInSafari(url)
@@ -389,17 +416,24 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         case .formSubmitted:
             if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
                 if webView.isLoading {
-                    _ = checkIsDesiredURL(webView.url?.absoluteString)
+                    actionPolicy = processLogin(of: webView.url?.absoluteString)
                 }
             }
 
 		case .other:
 			if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
 				if webView.isLoading {
-                    _ = checkIsDesiredURL(webView.url?.absoluteString)
+                    if !login.isLogged {
+                        actionPolicy = processLogin(of: webView.url?.absoluteString)
+                    }
 				} else {
-                    openURLinBrowser(url)
-					actionPolicy = .cancel
+                    let isTwitter = webView.url?.isTwitterAddress() ?? false
+                    let isLogged = login.isLogged
+
+                    if !(isTwitter && !isLogged) {
+                        openURLinBrowser(url)
+                        actionPolicy = .cancel
+                    }
 				}
 			}
 
@@ -411,34 +445,41 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 	}
 
     fileprivate func backAndReload() {
-        webView?.navigationDelegate = nil
-        webView?.uiDelegate = nil
-        webView = nil
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        delay(0.8) {
             self.navigationController?.popViewController(animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                NotificationCenter.default.post(name: .reloadWeb, object: nil)
+            self.delay(0.8) {
+                NotificationCenter.default.post(name: .reloadWeb, object: true)
             }
         }
     }
 
-    fileprivate func checkIsDesiredURL(_ url: String?) -> Bool {
+    fileprivate func processLogin(of url: String?) -> WKNavigationActionPolicy {
+        var actionPolicy: WKNavigationActionPolicy = .allow
+
         let mmURL = "https://macmagazine.uol.com.br/wp-admin/profile.php"
         let disqusURL = "https://disqus.com/next/login-success/"
 
-        var returnValue = false
+        let googleURL = "https://accounts.google."
+        let googlePath = "/accounts/SetSID"
+        let isGoogle = (url?.contains(googleURL) ?? false) && (url?.contains(googlePath) ?? false)
+
+        let twitterURL = "https://disqus.com/_ax/twitter/complete"
+        let isTwitter = url?.contains(twitterURL) ?? false
+
         if url == mmURL ||
-            url == disqusURL {
-            returnValue = true
+            url == disqusURL ||
+            isGoogle ||
+            isTwitter {
 
             if url == mmURL {
                 var settings = Settings()
                 settings.isPatrao = true
             }
+            actionPolicy = .cancel
+            login.isLogged = true
             backAndReload()
         }
-        return returnValue
+        return actionPolicy
     }
 
     fileprivate func openURLinBrowser(_ url: URL) {

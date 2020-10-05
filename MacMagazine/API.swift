@@ -23,6 +23,7 @@ extension URL {
         static let disqus = API.APIParams.disqus
         static let macmagazine = API.APIParams.mmDomain
         static let blank = "about:blank"
+        static let twitter = "https://api.twitter.com/oauth/authenticate"
     }
 
     func isKnownAddress() -> Bool {
@@ -36,6 +37,10 @@ extension URL {
 
     func isDisqusAddress() -> Bool {
         return self.absoluteString.contains(Address.disqus)
+    }
+
+    func isTwitterAddress() -> Bool {
+        return self.absoluteString.contains(Address.twitter)
     }
 
     func isBlankAddress() -> Bool {
