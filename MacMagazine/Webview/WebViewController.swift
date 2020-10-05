@@ -467,10 +467,12 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         let twitterURL = "https://disqus.com/_ax/twitter/complete"
         let isTwitter = url?.contains(twitterURL) ?? false
 
+        let facebookURL = "https://disqus.com/_ax/facebook/complete"
+        let isFacebook = url?.contains(facebookURL) ?? false
+
         if url == mmURL ||
             url == disqusURL ||
-            isGoogle ||
-            isTwitter {
+            isGoogle || isTwitter || isFacebook {
 
             if url == mmURL {
                 var settings = Settings()
