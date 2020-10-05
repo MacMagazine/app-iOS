@@ -7,6 +7,9 @@
 //
 
 import UIKit
+#if os(iOS)
+import WebKit
+#endif
 
 struct Category: Codable {
     var title: String = ""
@@ -117,7 +120,14 @@ class API {
     }
 
     func getCookies(_ domain: String? = nil) -> [HTTPCookie]? {
-        let cookies = HTTPCookieStorage.shared.cookies
+        var cookies = HTTPCookieStorage.shared.cookies
+
+        #if os(iOS)
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.httpCookieStore.getAllCookies { cookiesOnStore in
+            cookies?.append(contentsOf: cookiesOnStore)
+        }
+        #endif
 
         guard let domain = domain else {
             return cookies

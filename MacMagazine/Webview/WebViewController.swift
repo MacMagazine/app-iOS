@@ -170,7 +170,6 @@ class WebViewController: UIViewController {
 	}
 
     @IBAction private func enterFullscreenMode(_ sender: Any) {
-        print(#function)
         guard let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController else {
             return
         }
@@ -180,7 +179,6 @@ class WebViewController: UIViewController {
     }
 
     @IBAction private func enterSplitViewMode(_ sender: Any) {
-        print(#function)
         guard let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController else {
             return
         }
@@ -237,13 +235,13 @@ extension WebViewController: WKHTTPCookieStoreObserver {
 
     func cookiesDidChange(in cookieStore: WKHTTPCookieStore) {
         // leave it for debug
-//        cookieStore.getAllCookies({(cookies: [HTTPCookie]) in
-//            cookies.forEach({(cookie: HTTPCookie) in
-//                if cookie.domain == API.APIParams.mmDomain {
-//                    print("NAME: \(cookie.name) -> VALUE: \(cookie.value)")
-//                }
-//            })
-//        })
+        cookieStore.getAllCookies({(cookies: [HTTPCookie]) in
+            cookies.forEach({(cookie: HTTPCookie) in
+                if cookie.domain.contains(API.APIParams.disqus) {
+                    logD("DOMAIN: \(cookie.domain) | NAME: \(cookie.name) -> VALUE: \(cookie.value)")
+                }
+            })
+        })
     }
 
     fileprivate func setCookie(_ cookie: HTTPCookie?, _ callback: (() -> Void)?) {
@@ -260,6 +258,9 @@ extension WebViewController: WKHTTPCookieStoreObserver {
     fileprivate func updateCountAndReload(_ cookiesLeft: inout Int) {
         cookiesLeft -= 1
         if cookiesLeft <= 0 {
+            UserDefaults.standard.set(false, forKey: Definitions.deleteAllCookies)
+            UserDefaults.standard.synchronize()
+
             DispatchQueue.main.async {
                 self.reload()
             }
@@ -317,11 +318,13 @@ extension WebViewController: WKHTTPCookieStoreObserver {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
-                    if cookie.name == "patr" && !Settings().isPatrao {
+                    if (cookie.name == "patr" && !Settings().isPatrao) ||
+                        UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
                         }
                     } else {
+                        if cookie.domain.contains(API.APIParams.disqus) { logD(cookie) }
                         self.setCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
                         }
@@ -408,23 +411,29 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 			return
 		}
 
+        logD("\(#function)\n\(String(describing: webView.url?.absoluteString))")
+
         switch navigationAction.navigationType {
 		case .linkActivated:
             openURLinBrowser(url)
 			actionPolicy = .cancel
 
         case .formSubmitted:
+            logD(".formSubmitted - \(webView.isLoading)")
+
             if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
                 if webView.isLoading {
-                    actionPolicy = processLogin(of: webView.url?.absoluteString)
+                    actionPolicy = processLogin(for: webView.url?.absoluteString)
                 }
             }
 
 		case .other:
-			if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
+            logD(".other - \(webView.isLoading)")
+
+            if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
 				if webView.isLoading {
                     if !login.isLogged {
-                        actionPolicy = processLogin(of: webView.url?.absoluteString)
+                        actionPolicy = processLogin(for: webView.url?.absoluteString)
                     }
 				} else {
                     let isTwitter = webView.url?.isTwitterAddress() ?? false
@@ -453,7 +462,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         }
     }
 
-    fileprivate func processLogin(of url: String?) -> WKNavigationActionPolicy {
+    fileprivate func processLogin(for url: String?) -> WKNavigationActionPolicy {
         var actionPolicy: WKNavigationActionPolicy = .allow
 
         let mmURL = "https://macmagazine.uol.com.br/wp-admin/profile.php"

@@ -22,6 +22,7 @@ enum Definitions {
     static let transparency = "transparency"
     static let mm_patrao = "mm_patrao"
     static let whatsnew = "whatsnew"
+    static let deleteAllCookies = "deleteAllCookies"
 }
 
 // MARK: -
@@ -80,6 +81,16 @@ struct Settings {
 		return isDarkMode ? "true" : "false"
 	}
 
+    var darkModeColor: UIColor {
+        return isDarkMode ? .white : .black
+    }
+
+    var theme: Theme {
+        return isDarkMode ? DarkTheme() : LightTheme()
+    }
+
+    // MARK: - Fonts -
+
 	var fontSizeUserAgent: String {
         let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
         if contentSize == .unspecified {
@@ -95,13 +106,7 @@ struct Settings {
         return size
 	}
 
-	var darkModeColor: UIColor {
-		return isDarkMode ? .white : .black
-	}
-
-	var theme: Theme {
-		return isDarkMode ? DarkTheme() : LightTheme()
-	}
+    // MARK: - Cookies -
 
 	func updateCookies(based previousTraitCollection: UITraitCollection?) {
 		if #available(iOS 13.0, *) {
@@ -116,12 +121,16 @@ struct Settings {
 		}
 	}
 
+    // MARK: - Read Intensity -
+
     var transparency: CGFloat {
         guard let transparency = UserDefaults.standard.object(forKey: Definitions.transparency) as? CGFloat else {
             return 0.4
         }
         return transparency
     }
+
+    // MARK: - Patrão -
 
     var isPatrao: Bool {
         get {
@@ -136,6 +145,8 @@ struct Settings {
     var loginPatrao: String {
         return isPatrao ? "Logoff de patrão" : "Login para patrões"
     }
+
+    // MARK: - What's New -
 
     var whatsNew: String {
         get {
@@ -164,7 +175,7 @@ struct Settings {
 
 }
 
-// MARK: -
+// MARK: - Theme -
 
 extension Settings {
 	func applyTheme() {
@@ -212,6 +223,8 @@ extension Settings {
 		OneSignal.sendTag("notification_preferences", value: segment == 0 ? PushPreferences.all : PushPreferences.featured)
 	}
 }
+
+// MARK: - Others -
 
 extension Settings {
     class AsClass {}

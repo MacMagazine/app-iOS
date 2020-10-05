@@ -219,6 +219,12 @@ extension SettingsTableViewController {
         // Clean Spotlight search indexes
         CSSearchableIndex.default().deleteAllSearchableItems(completionHandler: nil)
 
+        // Clean cookies
+        if type == .all {
+            UserDefaults.standard.set(true, forKey: Definitions.deleteAllCookies)
+            UserDefaults.standard.synchronize()
+        }
+
         // Feedback message
         let alertController = UIAlertController(title: "Cache limpo!", message: "O conteúdo do app será recarregado.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in

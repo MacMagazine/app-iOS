@@ -144,7 +144,7 @@ extension SoundcloudPlayer {
             soundEffect?.numberOfLoops = -1
             soundEffect?.play()
         } catch {
-            print(error.localizedDescription)
+            logE(error.localizedDescription)
         }
     }
 

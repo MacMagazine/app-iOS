@@ -50,7 +50,7 @@ class VideoCollectionViewController: UICollectionViewController {
 			try controller.performFetch()
 		} catch {
 			let fetchError = error as NSError
-			print("\(fetchError), \(fetchError.userInfo)")
+			logE("\(fetchError), \(fetchError.userInfo)")
 		}
 
 		return controller

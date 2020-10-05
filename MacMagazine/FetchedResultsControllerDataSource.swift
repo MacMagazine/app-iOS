@@ -225,7 +225,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
             try fetchedResultsController.performFetch()
 		} catch {
-			print("An error occurred")
+			logE("An error occurred")
 		}
 	}
 
