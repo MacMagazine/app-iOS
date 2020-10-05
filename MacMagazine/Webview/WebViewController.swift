@@ -10,12 +10,6 @@ import SafariServices
 import UIKit
 import WebKit
 
-protocol WebViewControllerDelegate {
-	func previewActionFavorite(_ post: PostData?)
-	func previewActionShare(_ post: PostData?)
-	func previewActionCancel()
-}
-
 class WebViewController: UIViewController {
 
 	// MARK: - Properties -
@@ -24,8 +18,6 @@ class WebViewController: UIViewController {
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
 	@IBOutlet private weak var share: UIBarButtonItem!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
-
-	var delegate: WebViewControllerDelegate?
 
 	var post: PostData? {
 		didSet {
