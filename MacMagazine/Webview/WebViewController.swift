@@ -227,13 +227,13 @@ extension WebViewController: WKHTTPCookieStoreObserver {
 
     func cookiesDidChange(in cookieStore: WKHTTPCookieStore) {
         // leave it for debug
-        cookieStore.getAllCookies({(cookies: [HTTPCookie]) in
-            cookies.forEach({(cookie: HTTPCookie) in
-                if cookie.domain.contains(API.APIParams.disqus) {
-                    logD("DOMAIN: \(cookie.domain) | NAME: \(cookie.name) -> VALUE: \(cookie.value)")
-                }
-            })
-        })
+//        cookieStore.getAllCookies({(cookies: [HTTPCookie]) in
+//            cookies.forEach({(cookie: HTTPCookie) in
+//                if cookie.domain.contains(API.APIParams.disqus) {
+//                    logD("DOMAIN: \(cookie.domain) | NAME: \(cookie.name) -> VALUE: \(cookie.value)")
+//                }
+//            })
+//        })
     }
 
     fileprivate func setCookie(_ cookie: HTTPCookie?, _ callback: (() -> Void)?) {
