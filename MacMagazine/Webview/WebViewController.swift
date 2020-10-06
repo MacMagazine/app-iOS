@@ -316,7 +316,6 @@ extension WebViewController: WKHTTPCookieStoreObserver {
                             self.updateCountAndReload(&cookiesLeft)
                         }
                     } else {
-                        if cookie.domain.contains(API.APIParams.disqus) { logD(cookie) }
                         self.setCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
                         }
@@ -403,16 +402,12 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 			return
 		}
 
-        logD("\(#function)\n\(String(describing: webView.url?.absoluteString))")
-
         switch navigationAction.navigationType {
 		case .linkActivated:
             openURLinBrowser(url)
 			actionPolicy = .cancel
 
         case .formSubmitted:
-            logD(".formSubmitted - \(webView.isLoading)")
-
             if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
                 if webView.isLoading {
                     actionPolicy = processLogin(for: webView.url?.absoluteString)
@@ -420,8 +415,6 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             }
 
 		case .other:
-            logD(".other - \(webView.isLoading)")
-
             if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
 				if webView.isLoading {
                     if !login.isLogged {
