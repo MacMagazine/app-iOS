@@ -120,14 +120,7 @@ class API {
     }
 
     func getCookies(_ domain: String? = nil) -> [HTTPCookie]? {
-        var cookies = HTTPCookieStorage.shared.cookies
-
-        #if os(iOS)
-        let dataStore = WKWebsiteDataStore.default()
-        dataStore.httpCookieStore.getAllCookies { cookiesOnStore in
-            cookies?.append(contentsOf: cookiesOnStore)
-        }
-        #endif
+        let cookies = HTTPCookieStorage.shared.cookies
 
         guard let domain = domain else {
             return cookies

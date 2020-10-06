@@ -140,9 +140,7 @@ extension API {
 	}
 
 	fileprivate func executeGetVideoContent(_ host: String, isSearch: Bool? = false) {
-        DispatchQueue.main.async {
-            self.cleanCookies()
-        }
+        self.cleanCookies()
 
 		guard let url = URL(string: "\(host)") else {
 			return
