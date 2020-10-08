@@ -15,11 +15,6 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-        if Settings().isDarkMode {
-            view.backgroundColor = .black
-            logo.image = UIImage(named: "logo", in: nil, compatibleWith: UITraitCollection(userInterfaceStyle: .dark))
-        }
-
         delay(0.6) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
