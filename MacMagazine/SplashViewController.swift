@@ -13,7 +13,10 @@ class SplashViewController: UIViewController {
 	@IBOutlet private weak var logo: UIImageView!
 
     override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
+        super.viewDidAppear(animated)
+
+        view.backgroundColor = Settings().isDarkMode ? .black : .white
+        logo.image = UIImage(named: "splash\(Settings().isDarkMode ? "_dark" : "")")
 
         delay(0.6) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
