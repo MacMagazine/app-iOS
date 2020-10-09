@@ -15,13 +15,25 @@ struct PostData: Codable {
 	var favorito: Bool = false
 	var pubDate: String?
 	var excerpt: String?
+    var postId: String?
+    var shortURL: String?
 
-    init(title: String?, link: String?, thumbnail: String?, favorito: Bool, pubDate: String? = "", excerpt: String? = "") {
+    init(title: String?,
+         link: String?,
+         thumbnail: String?,
+         favorito: Bool,
+         pubDate: String? = "",
+         excerpt: String? = "",
+         postId: String? = "",
+         shortURL: String? = "") {
+
 		self.title = title
 		self.link = link
 		self.thumbnail = thumbnail
 		self.favorito = favorito
 		self.pubDate = pubDate
 		self.excerpt = excerpt
+        self.postId = postId
+        self.shortURL = shortURL
 	}
 }

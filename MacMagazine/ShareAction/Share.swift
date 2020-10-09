@@ -9,7 +9,7 @@
 import UIKit
 
 struct Share {
-	func present<T>(at location: T?, using items: [Any]) {
+    func present<T>(at location: T?, using items: [Any], activities: [UIActivityExtensions]? = nil) {
 		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(systemName: "safari")) { items in
 			for item in items {
 				guard let url = URL(string: "\(item)") else {
@@ -31,13 +31,17 @@ struct Share {
 				}
 			}
 		}
-		var activities = [safari]
+		var applicationActivities = [UIActivityExtensions]()
+        if let activities = activities {
+            applicationActivities.append(contentsOf: activities)
+        }
+        applicationActivities.append(safari)
 		if let url = URL(string: "googlechrome://"),
 			UIApplication.shared.canOpenURL(url) {
-			activities.append(chrome)
+            applicationActivities.append(chrome)
 		}
 
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: activities)
+		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: applicationActivities)
 		if let ppc = activityVC.popoverPresentationController {
 			if location != nil {
 				if let view = location as? UIView {

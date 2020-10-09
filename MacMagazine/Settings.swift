@@ -172,7 +172,6 @@ struct Settings {
 
 		return askForReview % 50 == 0
 	}
-
 }
 
 // MARK: - Theme -

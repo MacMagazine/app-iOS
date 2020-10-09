@@ -29,6 +29,10 @@ extension URL {
         static let twitter = "https://api.twitter.com/oauth/authenticate"
     }
 
+    func isMMPost() -> Bool {
+        return self.absoluteString.contains("/post/")
+    }
+
     func isKnownAddress() -> Bool {
         return self.absoluteString.contains(Address.disqus) ||
             self.absoluteString.contains(Address.macmagazine)
@@ -119,35 +123,6 @@ class API {
         return APIParams.mm
     }
 
-    func getCookies(_ domain: String? = nil) -> [HTTPCookie]? {
-        let cookies = HTTPCookieStorage.shared.cookies
-
-        guard let domain = domain else {
-            return cookies
-        }
-
-        return cookies?.filter {
-            return $0.domain.contains(domain)
-        }
-	}
-
-    func getDisqusCookies() -> [HTTPCookie] {
-        return getCookies(APIParams.disqus) ?? []
-    }
-
-    func getMMCookies() -> [HTTPCookie] {
-        return getCookies(APIParams.mmDomain) ?? []
-    }
-
-    func cleanCookies() {
-		for cookie in getCookies() ?? [] {
-			if !cookie.domain.contains(APIParams.disqus) &&
-                !cookie.domain.contains(APIParams.mmDomain) {
-                HTTPCookieStorage.shared.deleteCookie(cookie)
-			}
-		}
-	}
-
 	func getComplications(_ completion: ((XMLPost?) -> Void)?) {
 		isComplication = true
 		getPosts(page: 0, completion)
@@ -217,7 +192,7 @@ class API {
     }
 
     fileprivate func executeGetContent(_ host: String) {
-		cleanCookies()
+        Cookies().cleanCookies()
 
         guard let url = URL(string: "\(host.escape())") else {
             return

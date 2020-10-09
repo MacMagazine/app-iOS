@@ -22,6 +22,7 @@ extension Notification.Name {
     static let refreshAfterBackground = Notification.Name("refreshAfterBackground")
     static let reloadData = Notification.Name("reloadData")
     static let updateCookie = Notification.Name("updateCookie")
+    static let reloadAfterLogin = Notification.Name("reloadAfterLogin")
 }
 
 // MARK: - Update content -

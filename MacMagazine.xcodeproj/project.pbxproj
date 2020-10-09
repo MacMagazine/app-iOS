@@ -15,6 +15,9 @@
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
 		6891F76C2527B7A80008E774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
+		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
+		68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
+		68BCEA2F252F6F500082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		68EF53502527103000FCBD3C /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68EF534E2527103000FCBD3C /* Splash.storyboard */; };
 		68EF53552527125E00FCBD3C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */; };
@@ -226,6 +229,9 @@
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
+		68B969A22530DBA20035B641 /* DisqusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisqusViewController.swift; sourceTree = "<group>"; };
+		68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 9.xcdatamodel"; sourceTree = "<group>"; };
+		68BCEA2B252F6E5F0082704D /* Cookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookies.swift; sourceTree = "<group>"; };
 		68EF534F2527103000FCBD3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Splash.storyboard; sourceTree = "<group>"; };
 		68F61C1F24F9524200A4E195 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -441,6 +447,8 @@
 		9B3C7A6E2263B9D7001146A4 /* Webview */ = {
 			isa = PBXGroup;
 			children = (
+				68BCEA2B252F6E5F0082704D /* Cookies.swift */,
+				68B969A22530DBA20035B641 /* DisqusViewController.swift */,
 				9B9C7F93226B6AF4000534CA /* soundcloud.js */,
 				9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */,
 				9BA939422260DE0A004005AA /* WebView.storyboard */,
@@ -1078,6 +1086,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */,
+				68BCEA2F252F6F500082704D /* Cookies.swift in Sources */,
 				9BB2CA6A226488C80012ACD6 /* APIXMLParser.swift in Sources */,
 				9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */,
 				9B6F965B225E5A060075ED89 /* Logger.swift in Sources */,
@@ -1111,6 +1120,7 @@
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
 				9B98C33323885EEF0094EBBA /* UILabelExtension.swift in Sources */,
+				68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */,
 				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */,
@@ -1139,6 +1149,7 @@
 				685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */,
 				9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
+				68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */,
 				9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */,
 				9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */,
 			);
@@ -1831,6 +1842,7 @@
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */,
 				6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */,
 				9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */,
 				9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */,
@@ -1840,7 +1852,7 @@
 				9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */,
 				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */;
+			currentVersion = 68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

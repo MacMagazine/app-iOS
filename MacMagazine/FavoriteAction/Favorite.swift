@@ -11,7 +11,7 @@ import Foundation
 struct Favorite {
 
 	func updatePostStatus(using link: String, _ completion: ((Bool) -> Void)? = nil) {
-		CoreDataStack.shared.get(link: link) { items in
+        CoreDataStack.shared.get(link: link) { (items: [Post]) in
 			if !items.isEmpty {
 				items[0].favorite = !items[0].favorite
 				CoreDataStack.shared.save()

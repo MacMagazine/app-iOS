@@ -153,6 +153,15 @@ class CoreDataStack {
 		get(predicate: NSPredicate(format: "link == %@", link), completion: completion)
 	}
 
+    func get(link: String, completion: @escaping ([PostData]) -> Void) {
+        get(link: link) { (posts: [Post]) in
+            let response = posts.map {
+                PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: $0.favorite, postId: $0.postId, shortURL: $0.shortURL)
+            }
+            completion(response)
+        }
+    }
+
 	func get(post: XMLPost, completion: @escaping ([Post]) -> Void) {
         let link = NSPredicate(format: "link == %@", post.link)
         let postId = NSPredicate(format: "postId == %@", post.postId)
@@ -215,6 +224,7 @@ class CoreDataStack {
         newItem.podcastFrame = post.podcastFrame
 		newItem.postId = post.postId
         newItem.read = false
+        newItem.shortURL = post.shortURL
 	}
 
 	func update(post: Post, with item: XMLPost) {
@@ -230,6 +240,7 @@ class CoreDataStack {
 		post.headerDate = item.pubDate.toDate().sortedDate()
         post.podcastFrame = item.podcastFrame
 		post.postId = item.postId
+        post.shortURL = item.shortURL
 	}
 
     func getCategories(completion: @escaping ([String]) -> Void) {

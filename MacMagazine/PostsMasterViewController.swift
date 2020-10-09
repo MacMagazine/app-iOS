@@ -238,7 +238,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectResultRowAt(indexPath: IndexPath) {
 		selectedIndexPath = indexPath
-		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: $0.favorite) }
+		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: $0.favorite, postId: $0.postId, shortURL: $0.shortURL) }
 		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
 
@@ -476,7 +476,7 @@ extension PostsMasterViewController {
 		guard let link = notification.object as? String else {
 			return
 		}
-		CoreDataStack.shared.get(link: link) { posts in
+		CoreDataStack.shared.get(link: link) { (posts: [Post]) in
 			let indexPath = self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0)
 			self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
 

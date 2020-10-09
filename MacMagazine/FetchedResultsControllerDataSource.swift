@@ -122,7 +122,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
         let read = UIContextualAction(style: .normal, title: (object.read ? "Não\nLido" : "Lido")) { _, _, boolValue in
             let object = self.fetchedResultsController.object(at: indexPath)
-            CoreDataStack.shared.get(link: object.link ?? "") { items in
+            CoreDataStack.shared.get(link: object.link ?? "") { (items: [Post]) in
                 if !items.isEmpty {
                     items[0].read = !items[0].read
                     CoreDataStack.shared.save()
@@ -321,7 +321,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 		var response = [PostData]()
 		for post in posts {
-			response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite))
+            response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite, postId: post.postId, shortURL: post.shortURL))
 		}
 		return response
 	}

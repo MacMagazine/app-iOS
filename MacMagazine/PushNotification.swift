@@ -55,7 +55,7 @@ extension PushNotification {
 
 				if let url = url,
 					post.link == url ||
-						post.guid == url {
+						post.shortURL == url {
 					DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 						showDetailController(with: post.link)
 					}

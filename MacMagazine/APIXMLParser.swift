@@ -20,8 +20,8 @@ struct XMLPost: Hashable {
 	var duration: String = ""
 	var podcastFrame: String = ""
 	var favorite: Bool = false
-	var guid: String = ""
 	var postId: String = ""
+    var shortURL: String = ""
 
 	fileprivate func decodeHTMLString(string: String) -> String {
 		guard let encodedData = string.data(using: String.Encoding.utf8) else {
@@ -123,7 +123,7 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 					parser.abortParsing()
 				}
 			case "guid":
-				currentPost.guid = value
+				currentPost.shortURL = value
 			default:
 				return
 			}

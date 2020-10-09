@@ -16,8 +16,8 @@ class WebViewController: UIViewController {
 
 	@IBOutlet private weak var webView: WKWebView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
-	@IBOutlet private weak var share: UIBarButtonItem!
-	@IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var actions: UIBarButtonItem!
+    @IBOutlet private weak var comments: UIBarButtonItem!
 
 	var post: PostData? {
 		didSet {
@@ -43,13 +43,6 @@ class WebViewController: UIViewController {
 
     var showFullscreenModeButton = true
 
-    struct Login {
-        var currentScroll = CGPoint(x: 0, y: 0)
-        var shouldScrollToPoint: CGPoint?
-        var isLogged = false
-    }
-    var login = Login()
-
     // MARK: - View lifecycle -
 
     override func viewDidLoad() {
@@ -58,8 +51,6 @@ class WebViewController: UIViewController {
 		// Do any additional setup after loading the view.
 		NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: .reloadWeb, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateCookie(_:)), name: .updateCookie, object: nil)
-
-		favorite.image = UIImage(systemName: post?.favorito ?? false ? "star.fill" : "star")
 
         if Settings().isPad &&
             self.splitViewController != nil &&
@@ -71,8 +62,7 @@ class WebViewController: UIViewController {
 
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
-        webView?.scrollView.delegate = self
-        webView?.configuration.websiteDataStore.httpCookieStore.add(self)
+        self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
 
         let scriptSource = """
             var images = document.getElementsByTagName('img');
@@ -89,18 +79,6 @@ class WebViewController: UIViewController {
 
         setupCookies()
     }
-
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-
-		NotificationCenter.default.addObserver(self, selector: #selector(onFavoriteUpdated(_:)), name: .favoriteUpdated, object: nil)
-    }
-
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-
-		NotificationCenter.default.removeObserver(self, name: .favoriteUpdated, object: nil)
-	}
 
 	// MARK: - Local methods -
 
@@ -134,17 +112,6 @@ class WebViewController: UIViewController {
 
 	// MARK: - Actions -
 
-	@IBAction private func favorite(_ sender: Any) {
-		guard let post = post,
-			let link = post.link
-			else {
-				return
-		}
-		Favorite().updatePostStatus(using: link) { isFavoriteOn in
-            self.favorite.image = UIImage(systemName: isFavoriteOn ? "star.fill" : "star")
-		}
-	}
-
 	@IBAction private func share(_ sender: Any) {
 		guard let post = post,
 			let link = post.link,
@@ -157,8 +124,16 @@ class WebViewController: UIViewController {
                 Share().present(at: share, using: items)
                 return
 		}
-		let items: [Any] =  [post.title ?? "", url]
-		Share().present(at: share, using: items)
+
+        let favorito = UIActivityExtensions(title: "Favorito",
+                                            image: UIImage(systemName: post.favorito ? "star.fill" : "star")) { _ in
+            Favorite().updatePostStatus(using: link) { [weak self] isFavorite in
+                self?.post?.favorito = isFavorite
+            }
+        }
+
+        let items: [Any] =  [post.title ?? "", url]
+		Share().present(at: share, using: items, activities: [favorito])
 	}
 
     @IBAction private func enterFullscreenMode(_ sender: Any) {
@@ -179,6 +154,9 @@ class WebViewController: UIViewController {
         self.webView.reload()
     }
 
+    @IBAction private func showComments(_ sender: Any) {
+        performSegue(withIdentifier: "showCommentsSegue", sender: self)
+    }
 }
 
 // MARK: - Notifications -
@@ -206,35 +184,11 @@ extension WebViewController {
             reload()
 		}
 	}
-
-	@objc func onFavoriteUpdated(_ notification: Notification) {
-		if Settings().isPad {
-			guard let object = notification.object as? Post else {
-				return
-			}
-			if post?.link == object.link {
-				post?.favorito = object.favorite
-                favorite.image = UIImage(systemName: post?.favorito ?? false ? "star.fill" : "star")
-				self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
-			}
-		}
-	}
 }
 
 // MARK: - Cookies -
 
-extension WebViewController: WKHTTPCookieStoreObserver {
-
-    func cookiesDidChange(in cookieStore: WKHTTPCookieStore) {
-        // leave it for debug
-//        cookieStore.getAllCookies({(cookies: [HTTPCookie]) in
-//            cookies.forEach({(cookie: HTTPCookie) in
-//                if cookie.domain.contains(API.APIParams.disqus) {
-//                    logD("DOMAIN: \(cookie.domain) | NAME: \(cookie.name) -> VALUE: \(cookie.value)")
-//                }
-//            })
-//        })
-    }
+extension WebViewController {
 
     fileprivate func setCookie(_ cookie: HTTPCookie?, _ callback: (() -> Void)?) {
         guard let cookie = cookie else {
@@ -259,28 +213,6 @@ extension WebViewController: WKHTTPCookieStoreObserver {
         }
     }
 
-    fileprivate func createDarkModeCookie() -> HTTPCookie? {
-        return HTTPCookie(properties: [
-            .domain: API.APIParams.mmDomain,
-            .path: "/",
-            .name: "darkmode",
-            .value: Settings().darkModeUserAgent,
-            .secure: "false",
-            .expires: NSDate(timeIntervalSinceNow: 3600)
-        ])
-    }
-
-    fileprivate func createFonteCookie() -> HTTPCookie? {
-        return HTTPCookie(properties: [
-            .domain: API.APIParams.mmDomain,
-            .path: "/",
-            .name: "fonte",
-            .value: Settings().fontSizeUserAgent,
-            .secure: "false",
-            .expires: NSDate(timeIntervalSinceNow: 3600)
-        ])
-    }
-
     fileprivate func setupCookies() {
         // Make sure that all cookies are loaded before continue
         // to prevent Disqus from being loogoff
@@ -288,20 +220,19 @@ extension WebViewController: WKHTTPCookieStoreObserver {
         webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
             var cookies = cookies
 
-            // Previous Disqus cookies
-            cookies.append(contentsOf: API().getDisqusCookies())
-
-            // Previous MM cookies
-            cookies.append(contentsOf: API().getMMCookies())
-
             // Dark mode
-            if let darkmode = self.createDarkModeCookie() {
+            if let darkmode = Cookies().createDarkModeCookie(Settings().darkModeUserAgent) {
                 cookies.append(darkmode)
             }
 
             // Font size
-            if let font = self.createFonteCookie() {
+            if let font = Cookies().createFonteCookie(Settings().fontSizeUserAgent) {
                 cookies.append(font)
+            }
+
+            // Version
+            if let appVersion = Cookies().createVersionCookie(Settings().appVersion) {
+                cookies.append(appVersion)
             }
 
             var cookiesLeft = cookies.count
@@ -330,25 +261,23 @@ extension WebViewController: WKHTTPCookieStoreObserver {
             return
         }
 
+        var cookie: HTTPCookie?
         if cookieName == Definitions.fontSize {
-            self.setCookie(self.createFonteCookie(), nil)
+            cookie = Cookies().createFonteCookie(Settings().fontSizeUserAgent)
         }
         if cookieName == Definitions.darkMode {
-            self.setCookie(self.createDarkModeCookie(), nil)
+            cookie = Cookies().createDarkModeCookie(Settings().darkModeUserAgent)
         }
 
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
-        webView?.reload()
+        guard let cookieToSet = cookie else {
+            return
+        }
+        self.setCookie(cookieToSet) {
+            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: self.spin)]
+            self.webView?.reload()
+        }
     }
 
-}
-
-// MARK: - WebView Delegate -
-
-extension WebViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        login.currentScroll = scrollView.contentOffset
-    }
 }
 
 // MARK: - WebView Delegate -
@@ -356,22 +285,20 @@ extension WebViewController: UIScrollViewDelegate {
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-		self.parent?.navigationItem.rightBarButtonItems = [share, favorite]
-		self.navigationItem.rightBarButtonItems = nil
-
-        if self.navigationController?.viewControllers.count ?? 0 > 1 {
-            if (webView.url?.isMMAddress() ?? false) &&
-                (webView.url?.absoluteString.contains("/post/") ?? false) {
-                self.navigationItem.rightBarButtonItems = [share]
+        var items = [UIBarButtonItem]()
+        if webView.url?.isMMAddress() ?? false {
+            items.append(actions)
+            if post != nil {
+                items.append(comments)
             }
         }
 
-        delay(0.4) {
-            guard let offset = self.login.shouldScrollToPoint else {
-                return
-            }
-            webView.scrollView.setContentOffset(offset, animated: true)
-            self.login.shouldScrollToPoint = nil
+        self.parent?.navigationItem.rightBarButtonItems = items
+		self.navigationItem.rightBarButtonItems = nil
+
+        if self.navigationController?.viewControllers.count ?? 0 > 1 &&
+            webView.url?.isMMPost() ?? false {
+            self.navigationItem.rightBarButtonItems = items
         }
     }
 
@@ -382,11 +309,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 				return nil
 			}
 
-			if url.isKnownAddress() {
-                if url.isDisqusAddress() {
-                    login.shouldScrollToPoint = login.currentScroll
-                }
-				pushNavigation(url)
+			if url.isMMAddress() {
+				pushNavigation(url, isPost: url.isMMPost())
 			} else {
 				openInSafari(url)
 			}
@@ -408,28 +332,20 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 			actionPolicy = .cancel
 
         case .formSubmitted:
-            if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
-                if webView.isLoading {
-                    actionPolicy = processLogin(for: webView.url?.absoluteString)
-                }
+            if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString &&
+                webView.isLoading {
+                actionPolicy = processLogin(for: webView.url?.absoluteString)
             }
 
 		case .other:
-            if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString {
-				if webView.isLoading {
-                    if !login.isLogged {
-                        actionPolicy = processLogin(for: webView.url?.absoluteString)
-                    }
-				} else {
-                    let isTwitter = webView.url?.isTwitterAddress() ?? false
-                    let isLogged = login.isLogged
-
-                    if !(isTwitter && !isLogged) {
-                        openURLinBrowser(url)
-                        actionPolicy = .cancel
-                    }
-				}
-			}
+            if url.absoluteString == navigationAction.request.mainDocumentURL?.absoluteString &&
+                webView.isLoading {
+                if navigationAction.request.url?.absoluteString.contains("https://disqus.com/next/login-success") ?? false {
+                    actionPolicy = .cancel
+                    self.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(name: .reloadAfterLogin, object: nil)
+                }
+            }
 
 		default:
 			break
@@ -451,28 +367,12 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         var actionPolicy: WKNavigationActionPolicy = .allow
 
         let mmURL = "https://macmagazine.uol.com.br/wp-admin/profile.php"
-        let disqusURL = "https://disqus.com/next/login-success/"
 
-        let googleURL = "https://accounts.google."
-        let googlePath = "/accounts/SetSID"
-        let isGoogle = (url?.contains(googleURL) ?? false) && (url?.contains(googlePath) ?? false)
+        if url == mmURL {
+            var settings = Settings()
+            settings.isPatrao = true
 
-        let twitterURL = "https://disqus.com/_ax/twitter/complete"
-        let isTwitter = url?.contains(twitterURL) ?? false
-
-        let facebookURL = "https://disqus.com/_ax/facebook/complete"
-        let isFacebook = url?.contains(facebookURL) ?? false
-
-        if url == mmURL ||
-            url == disqusURL ||
-            isGoogle || isTwitter || isFacebook {
-
-            if url == mmURL {
-                var settings = Settings()
-                settings.isPatrao = true
-            }
             actionPolicy = .cancel
-            login.isLogged = true
             backAndReload()
         }
         return actionPolicy
@@ -480,35 +380,54 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
     fileprivate func openURLinBrowser(_ url: URL) {
         if url.isMMAddress() {
-            pushNavigation(url)
+            pushNavigation(url, isPost: url.isMMPost())
         } else {
             openInSafari(url)
         }
     }
-
 }
 
 extension WebViewController {
 
-	func pushNavigation(_ url: URL) {
+    func pushNavigation(_ url: URL, isPost: Bool) {
         // Prevent double pushViewController due decidePolicyFor navigationAction == .other
         if self.navigationController?.viewControllers.count ?? 0 <= 1 {
             let storyboard = UIStoryboard(name: "WebView", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
                 return
             }
-            controller.postURL = url
-            if let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController {
-                controller.showFullscreenModeButton = parent.showFullscreenModeButton
+            processURL(url, isPost) { post, url in
+                controller.post = post
+                controller.postURL = url
+                if let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController {
+                    controller.showFullscreenModeButton = parent.showFullscreenModeButton
+                }
+
+                controller.modalPresentationStyle = .overFullScreen
+                self.navigationController?.pushViewController(controller, animated: true)
             }
 
-            controller.modalPresentationStyle = .overFullScreen
-            self.navigationController?.pushViewController(controller, animated: true)
         } else {
             loadWebView(url: url)
             self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
         }
 	}
+
+    fileprivate func processURL(_ url: URL, _ isPost: Bool, _ completionHandler: @escaping ((PostData?, URL?)) -> Void) {
+        var data: PostData?
+
+        let group = DispatchGroup()
+        group.enter()
+
+        CoreDataStack.shared.get(link: url.absoluteString) { (posts: [PostData]) in
+            data = posts.isEmpty ? nil : posts.first
+            group.leave()
+        }
+
+        group.notify(queue: .main) {
+            completionHandler((data, data == nil ? url : nil))
+        }
+    }
 
 	func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {
@@ -536,5 +455,18 @@ extension WebViewController: WKScriptMessageHandler {
         if url.isMMAddress() {
             openInSafari(url)
         }
+    }
+}
+
+// MARK: - Segues -
+
+extension WebViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navController = segue.destination as? UINavigationController,
+              let controller = navController.topViewController as? DisqusViewController,
+              let post = post else {
+            return
+        }
+        controller.post = post
     }
 }

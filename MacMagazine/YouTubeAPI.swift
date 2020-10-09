@@ -140,7 +140,7 @@ extension API {
 	}
 
 	fileprivate func executeGetVideoContent(_ host: String, isSearch: Bool? = false) {
-        self.cleanCookies()
+        Cookies().cleanCookies()
 
 		guard let url = URL(string: "\(host)") else {
 			return

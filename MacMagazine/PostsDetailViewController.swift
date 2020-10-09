@@ -132,7 +132,7 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 extension PostsDetailViewController {
     func updatePostReadStatus(link: String) {
-        CoreDataStack.shared.get(link: link) { items in
+        CoreDataStack.shared.get(link: link) { (items: [Post]) in
             if !items.isEmpty {
                 items[0].read = true
                 CoreDataStack.shared.save()
