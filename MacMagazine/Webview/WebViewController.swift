@@ -121,7 +121,7 @@ class WebViewController: UIViewController {
                     return
                 }
                 let items: [Any] =  [webView.title ?? "", url]
-                Share().present(at: share, using: items)
+                Share().present(at: actions, using: items)
                 return
 		}
 
@@ -133,7 +133,7 @@ class WebViewController: UIViewController {
         }
 
         let items: [Any] =  [post.title ?? "", url]
-		Share().present(at: share, using: items, activities: [favorito])
+		Share().present(at: actions, using: items, activities: [favorito])
 	}
 
     @IBAction private func enterFullscreenMode(_ sender: Any) {
