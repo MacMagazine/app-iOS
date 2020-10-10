@@ -80,7 +80,7 @@
                         <action selector="showComments:" destination="uJA-Vl-hWR" id="Opz-bV-ySR"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="square.and.arrow.up.on.square" catalog="system" id="RvR-Td-SUx" userLabel="Actions">
+                <barButtonItem systemItem="action" id="RvR-Td-SUx" userLabel="Actions">
                     <color key="tintColor" name="MMBlueWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Abrir opções como Favoritar e Compartilhar"/>
@@ -159,7 +159,6 @@
     <resources>
         <image name="rectangle" catalog="system" width="128" height="93"/>
         <image name="sidebar.left" catalog="system" width="128" height="93"/>
-        <image name="square.and.arrow.up.on.square" catalog="system" width="117" height="128"/>
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
