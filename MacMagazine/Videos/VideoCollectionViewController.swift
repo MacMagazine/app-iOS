@@ -23,7 +23,10 @@ class VideoCollectionViewController: UICollectionViewController {
         }
     }
 
-	var isSearching = false
+    var isPlaying = false
+    var needsReload = false
+
+    var isSearching = false
 	var videos: [JSONVideo]?
 
 	var isLoading = true
@@ -112,7 +115,10 @@ class VideoCollectionViewController: UICollectionViewController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        collectionView.reloadData()
+        if !isPlaying {
+            collectionView.reloadData()
+        }
+        needsReload = isPlaying
     }
 
     // MARK: - Local methods -
@@ -327,7 +333,9 @@ extension VideoCollectionViewController {
 			fatalError("Unexpected Index Path")
 		}
 
-		// Configure the cell
+        cell.isPlaying = playerStatus
+
+        // Configure the cell
 		if isSearching {
 			guard let videos = videos else {
 				return cell
@@ -346,6 +354,13 @@ extension VideoCollectionViewController {
 		return false
 	}
 
+    fileprivate func playerStatus(_ status: Bool) {
+        isPlaying = status
+        if needsReload {
+            collectionView.reloadData()
+            needsReload = false
+        }
+    }
 }
 
 // MARK: - FetchedResultsController Delegate -

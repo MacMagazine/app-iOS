@@ -29,6 +29,8 @@ class VideosCollectionViewCell: AppCollectionViewCell {
     @IBOutlet weak private var viewsLabel: UILabel!
     @IBOutlet weak private var likesLabel: UILabel!
 
+    var isPlaying: ((Bool) -> Void)?
+
 	var videoId: String?
 	let youTubeURL = "https://www.youtube.com/watch?v="
 
@@ -80,6 +82,7 @@ extension VideosCollectionViewCell {
 		playButton.isHidden = true
 		durationLabel.isHidden = true
 		youtubeWebView?.play()
+        isPlaying?(true)
 
         // Handoff
         let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
@@ -177,6 +180,7 @@ extension VideosCollectionViewCell: WKScriptMessageHandler {
 			self.thumbnailImageView.isHidden = false
 			self.playButton.isHidden = false
 			self.durationLabel.isHidden = false
+            self.isPlaying?(false)
 		}
 	}
 }
