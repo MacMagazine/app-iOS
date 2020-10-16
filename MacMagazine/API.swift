@@ -22,36 +22,12 @@ struct Category: Codable {
 
 extension URL {
 
-    enum Address {
-        static let disqus = API.APIParams.disqus
-        static let macmagazine = API.APIParams.mmDomain
-        static let blank = "about:blank"
-        static let twitter = "https://api.twitter.com/oauth/authenticate"
-    }
-
     func isMMPost() -> Bool {
-        return self.absoluteString.contains("/post/")
-    }
-
-    func isKnownAddress() -> Bool {
-        return self.absoluteString.contains(Address.disqus) ||
-            self.absoluteString.contains(Address.macmagazine)
+        return isMMAddress() && self.absoluteString.contains("/post/")
     }
 
     func isMMAddress() -> Bool {
-        return self.absoluteString.contains(Address.macmagazine)
-    }
-
-    func isDisqusAddress() -> Bool {
-        return self.absoluteString.contains(Address.disqus)
-    }
-
-    func isTwitterAddress() -> Bool {
-        return self.absoluteString.contains(Address.twitter)
-    }
-
-    func isBlankAddress() -> Bool {
-        return self.absoluteString.contains(Address.blank)
+        return self.absoluteString.contains(API.APIParams.mmDomain)
     }
 
 }
@@ -65,7 +41,30 @@ class API {
 		static let disqus = "disqus.com"
 
         // Wordpress
-        static let mmDomain = "macmagazine.uol.com.br"
+        static let domainMM = "macmagazine.com.br"
+        static let domainUOL = "macmagazine.uol.com.br"
+        static let mmDomain: String = {
+            // Specify date components
+            var dateComponents = DateComponents()
+            dateComponents.year = 2020
+            dateComponents.month = 10
+            dateComponents.day = 26
+            dateComponents.timeZone = TimeZone(abbreviation: "BRT")
+            dateComponents.hour = 7
+            dateComponents.minute = 00
+
+            // Create date from components
+            let calendar = Calendar.current
+            guard let migrationDate = calendar.date(from: dateComponents) else {
+                return domainUOL
+            }
+
+            let result = calendar.compare(migrationDate, to: Date(), toGranularity: .minute)
+            let isSameDay = result == .orderedSame
+
+            return result == .orderedAscending ? domainMM : domainUOL
+        }()
+
         static let mm = "https://\(mmDomain)/"
 		static let feed = "\(mm)feed/"
         static let patrao = "\(mm)loginpatrao"
