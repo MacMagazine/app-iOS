@@ -36,14 +36,9 @@ class API {
 
 	// MARK: - Definitions -
 
-	enum APIParams {
-		// Disqus
-		static let disqus = "disqus.com"
-
-        // Wordpress
-        static let domainMM = "macmagazine.com.br"
-        static let domainUOL = "macmagazine.uol.com.br"
-        static let mmDomain: String = {
+    enum APIParams {
+        // Temporary code to migrate from UOL URL
+        static let isMigrationdate: Bool = {
             // Specify date components
             var dateComponents = DateComponents()
             dateComponents.year = 2020
@@ -56,13 +51,21 @@ class API {
             // Create date from components
             let calendar = Calendar.current
             guard let migrationDate = calendar.date(from: dateComponents) else {
-                return domainUOL
+                return false
             }
 
             let result = calendar.compare(migrationDate, to: Date(), toGranularity: .minute)
-            let isSameDay = result == .orderedSame
+            return result == .orderedAscending
+        }()
 
-            return result == .orderedAscending ? domainMM : domainUOL
+        // Disqus
+		static let disqus = "disqus.com"
+
+        // Wordpress
+        static let domainMM = "macmagazine.com.br"
+        static let domainUOL = "macmagazine.uol.com.br"
+        static let mmDomain: String = {
+            return isMigrationdate ? domainMM : domainUOL
         }()
 
         static let mm = "https://\(mmDomain)/"

@@ -27,9 +27,14 @@ class PushNotification {
 			self.updateDatabase(for: url["url"])
 		}
 
-		let key: [UInt8] = [114, 66, 66, 33, 7, 95, 7, 81, 76, 21, 6, 42, 97, 98, 86, 91, 80, 6, 89, 35, 20, 18, 116, 72, 14, 87, 1, 81, 18, 85, 123, 55, 120, 4, 89, 81]
+        // Old Old Key
+        var key: [UInt8] = [114, 66, 66, 33, 7, 95, 7, 81, 76, 21, 6, 42, 97, 98, 86, 91, 80, 6, 89, 35, 20, 18, 116, 72, 14, 87, 1, 81, 18, 85, 123, 55, 120, 4, 89, 81]
+        if API.APIParams.isMigrationdate {
+            // New App Key
+            key = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
+        }
 
-		OneSignal.initWithLaunchOptions(options, appId: Obfuscator().reveal(key: key), handleNotificationReceived: notificationReceived, handleNotificationAction: notificationAction, settings: [kOSSettingsKeyAutoPrompt: false])
+        OneSignal.initWithLaunchOptions(options, appId: Obfuscator().reveal(key: key), handleNotificationReceived: notificationReceived, handleNotificationAction: notificationAction, settings: [kOSSettingsKeyAutoPrompt: false])
 		OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
 		OneSignal.promptForPushNotifications(userResponse: { _ in })
 	}

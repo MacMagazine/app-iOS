@@ -223,6 +223,7 @@
 
 /* Begin PBXFileReference section */
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
+		682A1609253A3A99004DD59E /* GeneralTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTests.swift; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
 		683271AC25291512004BD4DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WhatsNew.storyboard; sourceTree = "<group>"; };
@@ -657,6 +658,7 @@
 		9BE697CE1F4874C20048D68D /* MacMagazineTests */ = {
 			isa = PBXGroup;
 			children = (
+				682A1609253A3A99004DD59E /* GeneralTests.swift */,
 				9BE697D11F4874C20048D68D /* Info.plist */,
 				9B1386D4229A987F0033783E /* Mocks */,
 				9BDCDC862296DCB000649C0F /* NetworkTests.swift */,
