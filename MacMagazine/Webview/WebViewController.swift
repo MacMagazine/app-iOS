@@ -17,7 +17,6 @@ class WebViewController: UIViewController {
 	@IBOutlet private weak var webView: WKWebView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var actions: UIBarButtonItem!
-    @IBOutlet private weak var comments: UIBarButtonItem!
 
 	var post: PostData? {
 		didSet {
@@ -33,6 +32,8 @@ class WebViewController: UIViewController {
 			loadWebView(url: url)
 		}
 	}
+
+    var commentsURL: String = ""
 
 	var forceReload: Bool = false
 	var previousIsDarkMode: Bool = false
@@ -152,10 +153,6 @@ class WebViewController: UIViewController {
         parent.enterSplitViewMode()
         self.navigationItem.leftBarButtonItem = self.fullscreenMode
         self.webView.reload()
-    }
-
-    @IBAction private func showComments(_ sender: Any) {
-        performSegue(withIdentifier: "showCommentsSegue", sender: self)
     }
 }
 
@@ -288,9 +285,6 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         var items = [UIBarButtonItem]()
         if webView.url?.isMMAddress() ?? false {
             items.append(actions)
-            if post != nil {
-                items.append(comments)
-            }
         }
 
         self.parent?.navigationItem.rightBarButtonItems = items
@@ -328,7 +322,14 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
         switch navigationAction.navigationType {
 		case .linkActivated:
-            openURLinBrowser(url)
+            if navigationAction.request.url?.absoluteString.contains("comments://") ?? false {
+                if let URL = navigationAction.request.url?.absoluteString.replacingOccurrences(of: "comments://", with: "") {
+                    commentsURL = URL.replacingOccurrences(of: "%20", with: " ")
+                    self.performSegue(withIdentifier: "showComments", sender: self)
+                }
+            } else {
+                openURLinBrowser(url)
+            }
 			actionPolicy = .cancel
 
         case .formSubmitted:
@@ -350,6 +351,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 		default:
 			break
 		}
+//        performSegue(withIdentifier: "showCommentsSegue", sender: self)
 
 		decisionHandler(actionPolicy)
 	}
@@ -463,10 +465,9 @@ extension WebViewController: WKScriptMessageHandler {
 extension WebViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navController = segue.destination as? UINavigationController,
-              let controller = navController.topViewController as? DisqusViewController,
-              let post = post else {
+              let controller = navController.topViewController as? DisqusViewController else {
             return
         }
-        controller.post = post
+        controller.commentsURL = commentsURL
     }
 }

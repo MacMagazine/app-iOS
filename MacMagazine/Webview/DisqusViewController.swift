@@ -14,7 +14,7 @@ class DisqusViewController: UIViewController {
     @IBOutlet private weak var webView: WKWebView!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
 
-    var post: PostData?
+    var commentsURL: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,16 +102,8 @@ extension DisqusViewController {
 
 extension DisqusViewController {
     func loadDisqus() {
-        guard let postId = post?.postId,
-              let shortURL = post?.shortURL else {
-            self.navigationController?.popViewController(animated: true)
-            return
-        }
-
-        let idPost = "\(postId) \(shortURL)"
-
         let content = """
-            var disqus_identifier = '\(idPost)';
+            var disqus_identifier = '\(commentsURL)';
             var disqus_shortname = 'macmagazinecombr';
             (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://macmagazinecombr.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();

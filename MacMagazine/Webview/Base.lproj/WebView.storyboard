@@ -40,7 +40,6 @@
                     <navigationItem key="navigationItem" id="mof-85-jGR"/>
                     <connections>
                         <outlet property="actions" destination="RvR-Td-SUx" id="Z8Z-Ej-jPH"/>
-                        <outlet property="comments" destination="Dsh-T7-hiC" id="YBz-Ts-fNn"/>
                         <outlet property="fullscreenMode" destination="0M8-cs-1dn" id="bHo-oI-b0y"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
                         <outlet property="splitviewMode" destination="eJ1-9u-bNS" id="ij9-fH-WQY"/>
@@ -74,12 +73,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="color" name="MMBlueWhite"/>
                 </activityIndicatorView>
-                <barButtonItem systemItem="compose" id="Dsh-T7-hiC" userLabel="Comentarios">
-                    <color key="tintColor" name="MMBlueWhite"/>
-                    <connections>
-                        <action selector="showComments:" destination="uJA-Vl-hWR" id="Opz-bV-ySR"/>
-                    </connections>
-                </barButtonItem>
                 <barButtonItem systemItem="action" id="RvR-Td-SUx" userLabel="Actions">
                     <color key="tintColor" name="MMBlueWhite"/>
                     <userDefinedRuntimeAttributes>
