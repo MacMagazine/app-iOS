@@ -25,7 +25,7 @@ class DisqusViewController: UIViewController {
         webView?.navigationDelegate = self
         webView?.uiDelegate = self
         webView?.allowsBackForwardNavigationGestures = false
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+        self.navigationItem.titleView = spin
 
         self.loadWebView()
     }
@@ -35,6 +35,7 @@ class DisqusViewController: UIViewController {
 
         coordinator.animate(alongsideTransition: nil) { _ in
             self.delay(0.8) {
+                NotificationCenter.default.post(name: .reloadWeb, object: nil)
                 self.loadWebView()
             }
         }
@@ -65,11 +66,16 @@ class DisqusViewController: UIViewController {
         let when = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
+
+    @IBAction private func close(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension DisqusViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-        self.navigationItem.rightBarButtonItems = nil
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Comentários"
     }
 }
 
@@ -88,7 +94,6 @@ extension DisqusViewController: WKUIDelegate {
 }
 
 extension DisqusViewController {
-
     func pushNavigation(_ url: URL, forcePush: Bool = false) {
         // Prevent double pushViewController due decidePolicyFor navigationAction == .other
         let storyboard = UIStoryboard(name: "WebView", bundle: nil)

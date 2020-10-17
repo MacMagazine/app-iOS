@@ -305,7 +305,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
 
-		if !(navigationAction.targetFrame?.isMainFrame ?? false) {
+        if !(navigationAction.targetFrame?.isMainFrame ?? false) {
 			guard let url = navigationAction.request.url else {
 				return nil
 			}
@@ -322,7 +322,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 		var actionPolicy: WKNavigationActionPolicy = .allow
 
-		guard let url = navigationAction.request.url else {
+        guard let url = navigationAction.request.url else {
 			decisionHandler(actionPolicy)
 			return
 		}

@@ -115,7 +115,14 @@
                             <constraint firstItem="0UI-5C-Et9" firstAttribute="top" secondItem="vF9-S9-hxO" secondAttribute="bottom" id="rjW-Ur-uH7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Comentários" id="L52-kM-KQA"/>
+                    <navigationItem key="navigationItem" title="Comentários" id="L52-kM-KQA">
+                        <barButtonItem key="rightBarButtonItem" image="xmark.circle" catalog="system" id="eSg-wG-FpQ">
+                            <color key="tintColor" name="MMBlueWhite"/>
+                            <connections>
+                                <action selector="close:" destination="fFA-EA-ptZ" id="878-qe-YiP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="spin" destination="gpp-Uq-P1j" id="dQG-a3-SK1"/>
                         <outlet property="webView" destination="vF9-S9-hxO" id="n7p-Ka-eZV"/>
@@ -138,6 +145,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2oR-ir-Egs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" systemColor="systemGray5Color"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -152,11 +160,15 @@
     <resources>
         <image name="rectangle" catalog="system" width="128" height="93"/>
         <image name="sidebar.left" catalog="system" width="128" height="93"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
