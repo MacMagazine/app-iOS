@@ -263,7 +263,7 @@ extension SettingsTableViewController {
                 controller.postURL = url
 
                 controller.modalPresentationStyle = .overFullScreen
-                self.navigationController?.pushViewController(controller, animated: true)
+                show(controller, sender: self)
             }
         }
         patraoButton.setTitle(Settings().loginPatrao, for: .normal)

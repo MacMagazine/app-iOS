@@ -547,7 +547,7 @@ func prepareDetailController(_ controller: PostsDetailViewController, using link
 	controller.createWebViewController = createWebViewController
 }
 
-func createWebViewController(post: PostData) -> UIViewController? {
+func createWebViewController(post: PostData) -> WebViewController? {
 	let storyboard = UIStoryboard(name: "WebView", bundle: nil)
 	guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
 		return nil

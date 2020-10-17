@@ -392,19 +392,18 @@ extension WebViewController {
     func pushNavigation(_ url: URL, isPost: Bool) {
         // Prevent double pushViewController due decidePolicyFor navigationAction == .other
         if self.navigationController?.viewControllers.count ?? 0 <= 1 {
-            let storyboard = UIStoryboard(name: "WebView", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
-                return
-            }
             processURL(url, isPost) { post, url in
+                let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController else {
+                    return
+                }
                 controller.post = post
                 controller.postURL = url
+
                 if let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController {
                     controller.showFullscreenModeButton = parent.showFullscreenModeButton
                 }
-
-                controller.modalPresentationStyle = .overFullScreen
-                self.navigationController?.pushViewController(controller, animated: true)
+                self.show(controller, sender: self)
             }
 
         } else {

@@ -17,11 +17,11 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	var selectedIndex = 0
 	var links: [PostData] = []
-	var createWebViewController: ((PostData) -> UIViewController?)?
+	var createWebViewController: ((PostData) -> WebViewController?)?
 
 	private(set) lazy var orderedViewControllers: [UIViewController] = {
 		return links.map { post in
-			return self.createWebViewController?(post) ?? UIViewController()
+			return self.createWebViewController?(post) ?? WebViewController()
 		}
 	}()
 

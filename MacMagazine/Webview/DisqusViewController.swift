@@ -96,7 +96,7 @@ extension DisqusViewController {
             return
         }
         controller.postURL = url
-        self.navigationController?.pushViewController(controller, animated: true)
+        show(controller, sender: self)
     }
 }
 
