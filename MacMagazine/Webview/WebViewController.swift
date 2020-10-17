@@ -325,7 +325,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             if navigationAction.request.url?.absoluteString.contains("comments://") ?? false {
                 if let URL = navigationAction.request.url?.absoluteString.replacingOccurrences(of: "comments://", with: "") {
                     commentsURL = URL.replacingOccurrences(of: "%20", with: " ")
-                    self.performSegue(withIdentifier: "showComments", sender: self)
+                    self.performSegue(withIdentifier: "showCommentsSegue", sender: self)
                 }
             } else {
                 openURLinBrowser(url)
@@ -351,8 +351,6 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 		default:
 			break
 		}
-//        performSegue(withIdentifier: "showCommentsSegue", sender: self)
-
 		decisionHandler(actionPolicy)
 	}
 
