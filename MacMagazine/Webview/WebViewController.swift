@@ -63,7 +63,8 @@ class WebViewController: UIViewController {
 
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
-        self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+
+        setRightButtomItems([UIBarButtonItem(customView: spin)])
 
         let scriptSource = """
             var images = document.getElementsByTagName('img');
@@ -107,7 +108,8 @@ class WebViewController: UIViewController {
         webView?.allowsBackForwardNavigationGestures = false
         webView?.load(URLRequest(url: url))
 
-        self.parent?.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
+        setRightButtomItems([UIBarButtonItem(customView: spin)])
+
         forceReload = false
 	}
 
@@ -168,7 +170,6 @@ extension WebViewController {
 				return
 			}
             loadWebView(url: url)
-			self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
 		}
 	}
 
@@ -270,7 +271,7 @@ extension WebViewController {
             return
         }
         self.setCookie(cookieToSet) {
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: self.spin)]
+            self.setRightButtomItems([UIBarButtonItem(customView: self.spin)])
             self.webView?.reload()
         }
     }
@@ -281,19 +282,25 @@ extension WebViewController {
 
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
+    fileprivate func setRightButtomItems(_ buttons: [UIBarButtonItem]) {
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationItem.rightBarButtonItems = buttons
+        } else {
+            self.parent?.navigationItem.rightBarButtonItems = buttons
+        }
+    }
+
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-        var items = [UIBarButtonItem]()
-        if webView.url?.isMMAddress() ?? false {
-            items.append(actions)
+        self.navigationItem.rightBarButtonItems = nil
+
+        if webView.url?.isMMPost() ?? false {
+            var items = [UIBarButtonItem]()
+            if webView.url?.isMMAddress() ?? false {
+                items.append(actions)
+            }
+            setRightButtomItems(items)
         }
 
-        self.parent?.navigationItem.rightBarButtonItems = items
-		self.navigationItem.rightBarButtonItems = nil
-
-        if self.navigationController?.viewControllers.count ?? 0 > 1 &&
-            webView.url?.isMMPost() ?? false {
-            self.navigationItem.rightBarButtonItems = items
-        }
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -408,7 +415,6 @@ extension WebViewController {
 
         } else {
             loadWebView(url: url)
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: spin)]
         }
 	}
 
