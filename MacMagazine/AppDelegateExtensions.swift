@@ -109,7 +109,7 @@ extension AppDelegate: UITabBarControllerDelegate {
 		} else if let navVC = viewController as? UINavigationController,
 			let vc = navVC.children[0] as? VideoCollectionViewController {
 			if previousController == vc {
-				vc.collectionView.setContentOffset(.zero, animated: true)
+                vc.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
 			}
 			previousController = vc
 		}
