@@ -38,7 +38,7 @@ class API {
 
     enum APIParams {
         // Temporary code to migrate from UOL URL
-        static let isMigrationdate: Bool = {
+        static let isMigrationDate: Bool = {
             // Specify date components
             var dateComponents = DateComponents()
             dateComponents.year = 2020
@@ -65,7 +65,7 @@ class API {
         static let domainMM = "macmagazine.com.br"
         static let domainUOL = "macmagazine.uol.com.br"
         static let mmDomain: String = {
-            return isMigrationdate ? domainMM : domainUOL
+            return isMigrationDate ? domainMM : domainUOL
         }()
 
         static let mm = "https://\(mmDomain)/"

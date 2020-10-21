@@ -373,7 +373,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     fileprivate func processLogin(for url: String?) -> WKNavigationActionPolicy {
         var actionPolicy: WKNavigationActionPolicy = .allow
 
-        let mmURL = "https://macmagazine.uol.com.br/wp-admin/profile.php"
+        let mmURL = "\(API.APIParams.mm)/wp-admin/profile.php"
 
         if url == mmURL {
             var settings = Settings()

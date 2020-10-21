@@ -102,10 +102,9 @@ class NetworkTests: XCTestCase {
 extension NetworkTests {
 
 	fileprivate func getHost() -> URL? {
-		let feed = "https://macmagazine.uol.com.br/feed/"
 		let paged = "paged=0"
 
-		let host = "\(feed)?\(paged)"
+        let host = "\(API.APIParams.feed)?\(paged)"
 		guard let url = URL(string: "\(host.escape())") else {
 			return nil
 		}
