@@ -30,6 +30,28 @@ extension URL {
         return self.absoluteString.contains(API.APIParams.mmDomain)
     }
 
+    func isAppStore() -> Bool {
+        return self.absoluteString.contains("apps.apple.com")
+    }
+
+    func isAppStoreBadge() -> Bool {
+        return self.absoluteString.contains("badge_appstore") ||
+            self.absoluteString.contains("badge_macappstore")
+    }
+
+    func appStoreId() -> String? {
+        var id: String?
+        let components = self.absoluteString.split(separator: "/")
+        if let lastComponent = components.last {
+            let splittedComponents = lastComponent.split(separator: "?")
+            splittedComponents.forEach { component in
+                if component.contains("id") {
+                    id = component.replacingOccurrences(of: "id", with: "")
+                }
+            }
+        }
+        return id
+    }
 }
 
 class API {

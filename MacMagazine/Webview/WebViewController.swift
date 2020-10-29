@@ -7,6 +7,7 @@
 //
 
 import SafariServices
+import StoreKit
 import UIKit
 import WebKit
 
@@ -82,8 +83,6 @@ class WebViewController: UIViewController {
         // Get URL for comments
         let commentsScriptSource = """
             var comments = document.querySelectorAll('[data-disqus-identifier]');
-            console.log(comments);
-            console.log(comments[0].dataset.disqusIdentifier);
             window.webkit.messageHandlers.gotCommentURLHandler.postMessage(comments[0].dataset.disqusIdentifier);
         """
         let commmentsScript = WKUserScript(source: commentsScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
@@ -325,7 +324,14 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 			if url.isMMAddress() {
 				pushNavigation(url, isPost: url.isMMPost())
-			} else {
+
+            } else if url.isAppStore() {
+                guard let id = url.appStoreId() else {
+                    return nil
+                }
+                openStoreProduct(with: id)
+
+            } else {
 				openInSafari(url)
 			}
 		}
@@ -474,7 +480,8 @@ extension WebViewController: WKScriptMessageHandler {
                       let url = URL(string: body) else {
                     return
                 }
-                if url.isMMAddress() {
+                if url.isMMAddress() &&
+                    !url.isAppStoreBadge() {
                     openInSafari(url)
                 }
 
@@ -499,5 +506,25 @@ extension WebViewController {
             return
         }
         controller.commentsURL = commentsURL
+    }
+}
+
+// MARK: - StoreKit -
+
+extension WebViewController: SKStoreProductViewControllerDelegate {
+    func openStoreProduct(with identifier: String) {
+        let storeViewController = SKStoreProductViewController()
+        storeViewController.delegate = self
+
+        let parameters = [SKStoreProductParameterITunesItemIdentifier: identifier]
+        storeViewController.loadProduct(withParameters: parameters) { [weak self] loaded, _ in
+            if loaded {
+                self?.present(storeViewController, animated: true, completion: nil)
+            }
+        }
+    }
+
+    private func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 }
