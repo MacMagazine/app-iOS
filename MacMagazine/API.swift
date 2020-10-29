@@ -167,15 +167,16 @@ class API {
             return
         }
 
-        Network.get(url: url) { (data: Data?, _: String?) in
-            guard let data = data,
-                let categories = self.decodeJSON(data)
-            else {
-                completion?(nil)
-                return
-            }
-            DispatchQueue.main.async {
-                completion?(categories)
+        Network.get(url: url) { (result: Result<Data, RestAPIError>) in
+            switch result {
+                case .failure(_):
+                    completion?(nil)
+
+                case .success(let response):
+                    let categories = self.decodeJSON(response)
+                    DispatchQueue.main.async {
+                        completion?(categories)
+                    }
             }
         }
     }
@@ -200,12 +201,16 @@ class API {
             return
         }
 
-        Network.get(url: url) { (data: Data?, _: String?) in
-            guard let data = data else {
-				self.onCompletion?(nil)
-                return
+        Network.get(url: url) { (result: Result<Data, RestAPIError>) in
+            switch result {
+                case .failure(_):
+                    self.onCompletion?(nil)
+
+                case .success(let response):
+                    self.parse(response,
+                               onCompletion: self.onCompletion,
+                               isComplication: self.isComplication)
             }
-            self.parse(data, onCompletion: self.onCompletion, isComplication: self.isComplication)
         }
     }
 

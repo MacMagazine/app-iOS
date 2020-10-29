@@ -146,16 +146,21 @@ extension API {
 			return
 		}
 
-		Network.getVdeos(url: url) { (data: Data?, _: String?) in
-			guard let data = data else {
-				if isSearch ?? false {
-					self.onVideoSearchCompletion?(nil)
-				} else {
-					self.onVideoCompletion?(nil)
-				}
-				return
-			}
-			self.parse(data, isSearch: isSearch, onVideoCompletion: self.onVideoCompletion, onVideoSearchCompletion: self.onVideoSearchCompletion)
+        Network.getVdeos(url: url) { (result: Result<Data, RestAPIError>) in
+            switch result {
+                case .failure(_):
+                    if isSearch ?? false {
+                        self.onVideoSearchCompletion?(nil)
+                    } else {
+                        self.onVideoCompletion?(nil)
+                    }
+
+                case .success(let response):
+                    self.parse(response,
+                               isSearch: isSearch,
+                               onVideoCompletion: self.onVideoCompletion,
+                               onVideoSearchCompletion: self.onVideoSearchCompletion)
+            }
 		}
 	}
 

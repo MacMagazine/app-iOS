@@ -262,7 +262,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	fileprivate func getPosts(paged: Int) {
         var images: [String] = []
-        var items: [CSSearchableItem] = []
+        var searchableItems: [CSSearchableItem] = []
+        var posts: [XMLPost] = []
 
         showSpin()
 
@@ -275,7 +276,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     prefetcher.start()
 
                     // Index all items to Spotlight
-                    CSSearchableIndex.default().indexSearchableItems(items) {
+                    CSSearchableIndex.default().indexSearchableItems(searchableItems) {
                         if let error = $0 {
                             logE(error.localizedDescription)
                         }
@@ -283,6 +284,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
                     // When post == nil, indicates the last post retrieved
                     self.hideSpin()
+
+                    CoreDataStack.shared.save(posts: posts)
 
                     if paged < 1 {
                         if self.status == .recentPost {
@@ -305,9 +308,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     return
                 }
                 images.append(post.artworkURL)
-                CoreDataStack.shared.save(post: post)
-
-                items.append(self.createSearchableItem(post))
+                posts.append(post)
+                searchableItems.append(self.createSearchableItem(post))
             }
         }
 	}

@@ -208,6 +208,43 @@ class CoreDataStack {
 		}
 	}
 
+    func save(posts: [XMLPost]) {
+        let objectsToInsert = posts.map {[
+            "title": $0.title,
+            "link": $0.link,
+            "excerpt": $0.excerpt.toHtmlDecoded(),
+            "artworkURL": $0.artworkURL.escape(),
+            "categorias": $0.getCategorias(),
+            "pubDate": $0.pubDate.toDate(),
+            "podcast": $0.podcast,
+            "podcastURL": $0.podcastURL,
+            "duration": $0.duration,
+            "headerDate": $0.pubDate.toDate().sortedDate(),
+            "favorite": false,
+            "podcastFrame": $0.podcastFrame,
+            "postId": $0.postId,
+            "read": false,
+            "shortURL": $0.shortURL
+        ]}
+        print(objectsToInsert.count)
+        self.viewContext.performAndWait {
+            do {
+                let insertRequest = NSBatchInsertRequest(entity: Post.entity(), objects: objectsToInsert)
+                guard let insertResult = try self.viewContext.execute(insertRequest) as? NSBatchInsertResult else {
+                    return
+                }
+                if insertResult.resultType == .statusOnly &&
+                    (insertResult.result as? Bool) == true {
+                    print("batch inserted successful")
+                    self.save()
+                }
+
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
 	func insert(post: XMLPost) {
 		let newItem = Post(context: viewContext)
 		newItem.title = post.title

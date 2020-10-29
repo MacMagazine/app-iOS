@@ -66,18 +66,29 @@ class WebViewController: UIViewController {
 
         setRightButtomItems([UIBarButtonItem(customView: spin)])
 
-        let scriptSource = """
+        // Tap image to zoom
+        let imageScriptSource = """
             var images = document.getElementsByTagName('img');
             for(var i = 0; i < images.length; i++) {
                 images[i].addEventListener("click", function() {
-                    window.webkit.messageHandlers.imageTapped.postMessage(this.src);
+                    window.webkit.messageHandlers.imageTappedHandler.postMessage(this.src);
                 }, false);
             }
         """
-        let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        webView?.configuration.userContentController.addUserScript(script)
+        let iamgeScript = WKUserScript(source: imageScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView?.configuration.userContentController.addUserScript(iamgeScript)
+        webView?.configuration.userContentController.add(self, name: "imageTappedHandler")
 
-        webView?.configuration.userContentController.add(self, name: "imageTapped")
+        // Get URL for comments
+        let commentsScriptSource = """
+            var comments = document.querySelectorAll('[data-disqus-identifier]');
+            console.log(comments);
+            console.log(comments[0].dataset.disqusIdentifier);
+            window.webkit.messageHandlers.gotCommentURLHandler.postMessage(comments[0].dataset.disqusIdentifier);
+        """
+        let commmentsScript = WKUserScript(source: commentsScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView?.configuration.userContentController.addUserScript(commmentsScript)
+        webView?.configuration.userContentController.add(self, name: "gotCommentURLHandler")
 
         setupCookies()
     }
@@ -229,7 +240,7 @@ extension WebViewController {
             }
 
             // Version
-            if let appVersion = Cookies().createVersionCookie(Settings().appVersion) {
+            if let appVersion = Cookies().createVersionCookie("4.2.0") {
                 cookies.append(appVersion)
             }
 
@@ -301,6 +312,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             setRightButtomItems(items)
         }
 
+        // Get Comments URL
+
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -334,6 +347,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
                     commentsURL = URL.replacingOccurrences(of: "%20", with: " ")
                     self.performSegue(withIdentifier: "showCommentsSegue", sender: self)
                 }
+            } else if navigationAction.request.url?.absoluteString.contains("#disqus_thread") ?? false {
+                self.performSegue(withIdentifier: "showCommentsSegue", sender: self)
             } else {
                 openURLinBrowser(url)
             }
@@ -373,7 +388,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     fileprivate func processLogin(for url: String?) -> WKNavigationActionPolicy {
         var actionPolicy: WKNavigationActionPolicy = .allow
 
-        let mmURL = "\(API.APIParams.mm)/wp-admin/profile.php"
+        let mmURL = "\(API.APIParams.mm)wp-admin/profile.php"
 
         if url == mmURL {
             var settings = Settings()
@@ -453,12 +468,24 @@ extension WebViewController {
 
 extension WebViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let body = message.body as? String,
-            let url = URL(string: body) else {
-            return
-        }
-        if url.isMMAddress() {
-            openInSafari(url)
+        switch message.name {
+            case "imageTappedHandler":
+                guard let body = message.body as? String,
+                      let url = URL(string: body) else {
+                    return
+                }
+                if url.isMMAddress() {
+                    openInSafari(url)
+                }
+
+            case "gotCommentURLHandler":
+                guard let body = message.body as? String else {
+                    return
+                }
+                commentsURL = body
+
+            default:
+                break
         }
     }
 }
