@@ -59,35 +59,13 @@ class API {
 	// MARK: - Definitions -
 
     enum APIParams {
-        // Temporary code to migrate from UOL URL
-        static let isMigrationDate: Bool = {
-            // Specify date components
-            var dateComponents = DateComponents()
-            dateComponents.year = 2020
-            dateComponents.month = 10
-            dateComponents.day = 26
-            dateComponents.timeZone = TimeZone(abbreviation: "BRT")
-            dateComponents.hour = 7
-            dateComponents.minute = 00
-
-            // Create date from components
-            let calendar = Calendar.current
-            guard let migrationDate = calendar.date(from: dateComponents) else {
-                return false
-            }
-
-            let result = calendar.compare(migrationDate, to: Date(), toGranularity: .minute)
-            return result == .orderedAscending
-        }()
-
         // Disqus
 		static let disqus = "disqus.com"
 
         // Wordpress
         static let domainMM = "macmagazine.com.br"
-        static let domainUOL = "macmagazine.uol.com.br"
         static let mmDomain: String = {
-            return isMigrationDate ? domainMM : domainUOL
+            return domainMM
         }()
 
         static let mm = "https://\(mmDomain)/"

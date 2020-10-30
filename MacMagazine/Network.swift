@@ -29,7 +29,10 @@ class Network {
 
         let request = self.setHeaders(url: url, method: "GET")
 
-        let defaultSession = URLSession(configuration: URLSessionConfiguration.ephemeral)
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+
+        let defaultSession = URLSession(configuration: configuration)
         defaultSession.dataTask(with: request) { data, response, _ in
 
             guard let httpResponse = response as? HTTPURLResponse,
@@ -48,7 +51,10 @@ class Network {
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
 
-		let defaultSession = URLSession(configuration: URLSessionConfiguration.ephemeral)
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+
+        let defaultSession = URLSession(configuration: configuration)
 		defaultSession.dataTask(with: request) { data, response, _ in
 
             guard let httpResponse = response as? HTTPURLResponse,

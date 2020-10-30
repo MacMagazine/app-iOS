@@ -217,7 +217,7 @@ Requer o <strong>iOS 12.1</strong> ou superior</div></div>
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 	}
 	func getValidProvider() -> String {
-		return "<atom:link href=\"https://macmagazine.uol.com.br/feed/?paged=0\" rel=\"self\" type=\"application/rss+xml\" />"
+		return "<atom:link href=\"https://macmagazine.com.br/feed/?paged=0\" rel=\"self\" type=\"application/rss+xml\" />"
 	}
 	
 	func getValidTitle() -> String {

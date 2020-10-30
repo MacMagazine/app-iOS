@@ -295,6 +295,11 @@ extension SettingsTableViewController {
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 	@IBAction private func reportProblem(_ sender: Any) {
         guard MFMailComposeViewController.canSendMail() else {
+            if let url = URL(string: "mailto:contato@macmagazine.com.br?subject=Relato de problema no app MacMagazine \(Settings().appVersion)"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+
             return
         }
 

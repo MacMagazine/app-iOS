@@ -102,8 +102,9 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
-			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
-			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
+			let page = Int(tableView.rowNumber(indexPath: indexPath) / 16)
+			if page >= lastPage &&
+                tableView.rowNumber(indexPath: indexPath) % 16 == 0 {
 				lastPage = page
 				self.getPodcasts(paged: page)
 			}
@@ -203,11 +204,11 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
         showSpin?()
         API().getPodcasts(page: paged) { post in
             DispatchQueue.main.async {
-				self.isLoading = false
-                self.hideSpin?()
-
                 guard let post = post else {
                     // When post == nil, indicates the last post retrieved
+                    self.isLoading = false
+                    self.hideSpin?()
+
                     return
                 }
                 if !post.duration.isEmpty {

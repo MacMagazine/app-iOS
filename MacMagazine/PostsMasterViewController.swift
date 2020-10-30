@@ -263,7 +263,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	fileprivate func getPosts(paged: Int) {
         var images: [String] = []
         var searchableItems: [CSSearchableItem] = []
-        var posts: [XMLPost] = []
 
         showSpin()
 
@@ -284,8 +283,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
                     // When post == nil, indicates the last post retrieved
                     self.hideSpin()
-
-                    CoreDataStack.shared.save(posts: posts)
 
                     if paged < 1 {
                         if self.status == .recentPost {
@@ -308,8 +305,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     return
                 }
                 images.append(post.artworkURL)
-                posts.append(post)
                 searchableItems.append(self.createSearchableItem(post))
+
+                CoreDataStack.shared.save(post: post)
             }
         }
 	}

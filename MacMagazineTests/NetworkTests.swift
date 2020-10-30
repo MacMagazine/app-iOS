@@ -115,9 +115,15 @@ extension NetworkTests {
 		guard let url = getHost() else {
 			return
 		}
-		Network.get(url: url) { (data: Data?, _: String?) in
-			completion(data)
-		}
+        Network.get(url: url) { (result: Result<Data, RestAPIError>) in
+            switch result {
+                case .failure(_):
+                    completion(nil)
+
+                case .success(let response):
+                    completion(response)
+            }
+        }
 	}
 
 }
