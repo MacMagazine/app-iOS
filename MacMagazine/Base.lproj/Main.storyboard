@@ -74,6 +74,7 @@
                             <outlet property="delegate" destination="Jej-5Q-aqJ" id="Uu3-rx-L80"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
                         <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="vUZ-wN-Khb">
                             <color key="tintColor" name="MMBlueWhite"/>
