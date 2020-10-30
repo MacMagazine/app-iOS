@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 protocol FetchedResultsControllerDelegate: AnyObject {
-	func willDisplayCell(indexPath: IndexPath)
+    func willDisplayCell(indexPath: IndexPath)
 	func didSelectRowAt(indexPath: IndexPath)
 	func configure(cell: PostCell, atIndexPath: IndexPath)
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
@@ -186,7 +186,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	}
 
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		delegate?.willDisplayCell(indexPath: indexPath)
+        delegate?.willDisplayCell(indexPath: indexPath)
 	}
 
 	internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

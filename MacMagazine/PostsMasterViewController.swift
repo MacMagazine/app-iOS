@@ -197,8 +197,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
-			let page = Int(tableView.rowNumber(indexPath: indexPath) / 14) + 1
-			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 14 == 0 {
+			let page = Int(tableView.rowNumber(indexPath: indexPath) / 19) + 1
+			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 19 == 0 {
 				lastPage = page
 				self.getPosts(paged: page)
 			}
