@@ -131,6 +131,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>MacMagazine deseja ter acesso à sua câmera para prestar um serviço melhor para você.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>MacMagazine deseja ter acesso à sua localização para prestar um serviço melhor para você.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
