@@ -31,7 +31,8 @@ extension URL {
     }
 
     func isAppStore() -> Bool {
-        return self.absoluteString.contains("apps.apple.com")
+        return self.absoluteString.contains("apps.apple.com") ||
+            self.absoluteString.contains("itunes.apple.com")
     }
 
     func isAppStoreBadge() -> Bool {

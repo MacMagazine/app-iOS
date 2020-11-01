@@ -69,16 +69,26 @@ class WebViewController: UIViewController {
 
         // Tap image to zoom
         let imageScriptSource = """
-            var images = document.getElementsByTagName('img');
+            var images = document.querySelectorAll('[data-full-url]');
             for(var i = 0; i < images.length; i++) {
                 images[i].addEventListener("click", function() {
-                    window.webkit.messageHandlers.imageTappedHandler.postMessage(this.src);
+                    window.webkit.messageHandlers.imageTappedHandler.postMessage(this.dataset.fullUrl);
                 }, false);
             }
         """
-        let iamgeScript = WKUserScript(source: imageScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        webView?.configuration.userContentController.addUserScript(iamgeScript)
+        let imageScript = WKUserScript(source: imageScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView?.configuration.userContentController.addUserScript(imageScript)
         webView?.configuration.userContentController.add(self, name: "imageTappedHandler")
+
+        // Disable Galley
+        let disableGalleryScriptSource = """
+            var links = document.getElementsByClassName('fancybox');
+            for(var i = 0; i < links.length; i++) {
+                links[i].href = '';
+            }
+        """
+        let galleryScript = WKUserScript(source: disableGalleryScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView?.configuration.userContentController.addUserScript(galleryScript)
 
         // Get URL for comments
         let commentsScriptSource = """
@@ -322,7 +332,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 				return nil
 			}
 
-			if url.isMMAddress() {
+            if url.isMMAddress() {
 				pushNavigation(url, isPost: url.isMMPost())
 
             } else if url.isAppStore() {
