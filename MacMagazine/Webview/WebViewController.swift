@@ -84,7 +84,7 @@ class WebViewController: UIViewController {
         let disableGalleryScriptSource = """
             var links = document.getElementsByClassName('fancybox');
             for(var i = 0; i < links.length; i++) {
-                links[i].href = '';
+                links[i].href = 'javascript:void(0);return false;';
             }
         """
         let galleryScript = WKUserScript(source: disableGalleryScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
