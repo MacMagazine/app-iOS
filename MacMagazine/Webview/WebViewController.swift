@@ -521,20 +521,11 @@ extension WebViewController {
 
 // MARK: - StoreKit -
 
-extension WebViewController: SKStoreProductViewControllerDelegate {
+extension WebViewController {
     func openStoreProduct(with identifier: String) {
         let storeViewController = SKStoreProductViewController()
-        storeViewController.delegate = self
+        self.present(storeViewController, animated: true, completion: nil)
 
-        let parameters = [SKStoreProductParameterITunesItemIdentifier: identifier]
-        storeViewController.loadProduct(withParameters: parameters) { [weak self] loaded, _ in
-            if loaded {
-                self?.present(storeViewController, animated: true, completion: nil)
-            }
-        }
-    }
-
-    private func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
-        viewController.dismiss(animated: true, completion: nil)
+        storeViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: identifier])
     }
 }
