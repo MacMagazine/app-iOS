@@ -136,7 +136,7 @@ class WebViewController: UIViewController {
 	// MARK: - Actions -
 
 	@IBAction private func share(_ sender: Any) {
-		guard let post = post,
+        guard let post = post,
 			let link = post.link,
 			let url = URL(string: link)
 			else {
@@ -303,10 +303,12 @@ extension WebViewController {
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
     fileprivate func setRightButtomItems(_ buttons: [UIBarButtonItem]) {
-        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+        if let parent = self.parent,
+           parent.isKind(of: UINavigationController.self) {
             self.navigationItem.rightBarButtonItems = buttons
         } else {
-            self.parent?.navigationItem.rightBarButtonItems = buttons
+            let detailController = self.navigationController?.viewControllers.filter { $0.isKind(of: PostsDetailViewController.self) }
+            detailController?.first?.navigationItem.rightBarButtonItems = buttons
         }
     }
 
@@ -320,9 +322,6 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             }
             setRightButtomItems(items)
         }
-
-        // Get Comments URL
-
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
