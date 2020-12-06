@@ -14,6 +14,8 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
     @IBOutlet private weak var fullscreenMode: UIBarButtonItem!
     @IBOutlet private weak var splitviewMode: UIBarButtonItem!
+    @IBOutlet private weak var spin: UIActivityIndicatorView!
+    @IBOutlet private weak var actions: UIBarButtonItem!
 
 	var selectedIndex = 0
 	var links: [PostData] = []
@@ -26,6 +28,14 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 	}()
 
     var showFullscreenModeButton = true
+
+    struct PostToShare {
+        var title: String
+        var link: URL
+        var favorite: Bool
+    }
+
+    var shareInfo: PostToShare?
 
 	// MARK: - View lifecycle -
 
@@ -57,6 +67,14 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
         }
         updatePostHandoff(title: links[selectedIndex].title, link: link)
         updatePostReadStatus(link: link)
+
+        guard let title = links[selectedIndex].title,
+              let url = URL(string: link) else {
+            return
+        }
+        shareInfo = PostToShare(title: title,
+                                link: url,
+                                favorite: links[selectedIndex].favorito)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,13 +95,21 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 			else {
 				return
 		}
-		if Settings().isPad {
+        if Settings().isPad {
 			NotificationCenter.default.post(name: .updateSelectedPost, object: link)
 		}
 
         updatePostHandoff(title: links[index].title, link: link)
         updatePostReadStatus(link: link)
-	}
+
+        guard let title = links[index].title,
+              let url = URL(string: link) else {
+            return
+        }
+        shareInfo = PostToShare(title: title,
+                                link: url,
+                                favorite: links[index].favorito)
+    }
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
@@ -187,5 +213,43 @@ extension PostsDetailViewController {
 
     func enterSplitViewMode() {
         self.enterSplitViewMode(splitviewMode)
+    }
+}
+
+// MARK: - SHARE -
+
+extension PostsDetailViewController {
+    @IBAction private func share(_ sender: Any) {
+        guard let shareInfo = shareInfo else {
+            return
+
+        }
+        let items: [Any] =  [shareInfo.title, shareInfo.link]
+
+        let favorito = UIActivityExtensions(title: "Favorito",
+                                            image: UIImage(systemName: shareInfo.favorite ? "star.fill" : "star")) { _ in
+            Favorite().updatePostStatus(using: shareInfo.link.absoluteString) { [weak self] isFavorite in
+                guard let self = self else {
+                    return
+                }
+
+                self.shareInfo?.favorite = isFavorite
+                for index in 0..<self.links.count where self.links[index].link == self.shareInfo?.link.absoluteString {
+                    self.links[index].favorito = isFavorite
+                }
+            }
+        }
+
+        Share().present(at: actions, using: items, activities: [favorito])
+    }
+
+    func setRightButtomItems(_ buttons: [RightButtons]) {
+        let rightButtons: [UIBarButtonItem] = buttons.map {
+            switch $0 {
+                case .spin:     return UIBarButtonItem(customView: spin)
+                case .actions:  return actions
+            }
+        }
+        self.navigationItem.rightBarButtonItems = rightButtons
     }
 }

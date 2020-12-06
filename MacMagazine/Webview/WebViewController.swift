@@ -11,6 +11,11 @@ import StoreKit
 import UIKit
 import WebKit
 
+enum RightButtons {
+    case spin
+    case actions
+}
+
 class WebViewController: UIViewController {
 
 	// MARK: - Properties -
@@ -65,7 +70,7 @@ class WebViewController: UIViewController {
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
 
-        setRightButtomItems([UIBarButtonItem(customView: spin)])
+        setRightButtomItems([.spin])
 
         // Tap image to zoom
         let imageScriptSource = """
@@ -128,7 +133,7 @@ class WebViewController: UIViewController {
         webView?.allowsBackForwardNavigationGestures = false
         webView?.load(URLRequest(url: url))
 
-        setRightButtomItems([UIBarButtonItem(customView: spin)])
+        setRightButtomItems([.spin])
 
         forceReload = false
 	}
@@ -136,27 +141,11 @@ class WebViewController: UIViewController {
 	// MARK: - Actions -
 
 	@IBAction private func share(_ sender: Any) {
-        guard let post = post,
-			let link = post.link,
-			let url = URL(string: link)
-			else {
-                guard let url = postURL else {
-                    return
-                }
-                let items: [Any] =  [webView.title ?? "", url]
-                Share().present(at: actions, using: items)
-                return
-		}
-
-        let favorito = UIActivityExtensions(title: "Favorito",
-                                            image: UIImage(systemName: post.favorito ? "star.fill" : "star")) { _ in
-            Favorite().updatePostStatus(using: link) { [weak self] isFavorite in
-                self?.post?.favorito = isFavorite
-            }
+        guard let url = postURL else {
+            return
         }
-
-        let items: [Any] =  [post.title ?? "", url]
-		Share().present(at: actions, using: items, activities: [favorito])
+        let items: [Any] =  [webView.title ?? "", url]
+        Share().present(at: actions, using: items)
 	}
 
     @IBAction private func enterFullscreenMode(_ sender: Any) {
@@ -291,7 +280,7 @@ extension WebViewController {
             return
         }
         self.setCookie(cookieToSet) {
-            self.setRightButtomItems([UIBarButtonItem(customView: self.spin)])
+            self.setRightButtomItems([.spin])
             self.webView?.reload()
         }
     }
@@ -302,23 +291,36 @@ extension WebViewController {
 
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
-    fileprivate func setRightButtomItems(_ buttons: [UIBarButtonItem]) {
+    fileprivate func getPostsDetailViewController() -> PostsDetailViewController? {
         if let parent = self.parent,
            parent.isKind(of: UINavigationController.self) {
-            self.navigationItem.rightBarButtonItems = buttons
-        } else {
-            let detailController = self.navigationController?.viewControllers.filter { $0.isKind(of: PostsDetailViewController.self) }
-            detailController?.first?.navigationItem.rightBarButtonItems = buttons
+            return nil
         }
+        let detailController = self.navigationController?.viewControllers.filter { $0.isKind(of: PostsDetailViewController.self) }
+        return detailController?.first as? PostsDetailViewController
+    }
+
+    fileprivate func setRightButtomItems(_ buttons: [RightButtons]) {
+        guard let vc = getPostsDetailViewController() else {
+            let rightButtons: [UIBarButtonItem] = buttons.map {
+                switch $0 {
+                    case .spin:     return UIBarButtonItem(customView: spin)
+                    case .actions:  return actions
+                }
+            }
+            self.navigationItem.rightBarButtonItems = rightButtons
+            return
+        }
+        vc.setRightButtomItems(buttons)
     }
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
         self.navigationItem.rightBarButtonItems = nil
 
         if webView.url?.isMMPost() ?? false {
-            var items = [UIBarButtonItem]()
+            var items = [RightButtons]()
             if webView.url?.isMMAddress() ?? false {
-                items.append(actions)
+                items.append(.actions)
             }
             setRightButtomItems(items)
         }

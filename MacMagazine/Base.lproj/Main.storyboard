@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -149,7 +149,9 @@
                         </view>
                     </navigationItem>
                     <connections>
+                        <outlet property="actions" destination="qtC-QX-vqI" id="CrH-un-snW"/>
                         <outlet property="fullscreenMode" destination="STi-bH-ZBR" id="mNH-Hk-vi9"/>
+                        <outlet property="spin" destination="uU0-Hy-QFf" id="7L2-Z9-efx"/>
                         <outlet property="splitviewMode" destination="Vtl-gq-n89" id="W5z-X3-cSF"/>
                     </connections>
                 </pageViewController>
@@ -173,6 +175,21 @@
                         <action selector="enterSplitViewMode:" destination="oLg-jw-p4c" id="FhU-c5-YW7"/>
                     </connections>
                 </barButtonItem>
+                <barButtonItem systemItem="action" id="qtC-QX-vqI" userLabel="Actions">
+                    <color key="tintColor" name="MMBlueWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Abrir opções como Favoritar e Compartilhar"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="share:" destination="oLg-jw-p4c" id="JXB-hm-Koy"/>
+                    </connections>
+                </barButtonItem>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="uU0-Hy-QFf">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="color" name="MMBlueWhite"/>
+                </activityIndicatorView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGQ-1P-xj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1364" y="-2116.1919040479761"/>
