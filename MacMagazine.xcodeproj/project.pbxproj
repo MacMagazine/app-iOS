@@ -1807,7 +1807,7 @@
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.15.3;
+				minimumVersion = 2.16.0;
 			};
 		};
 		9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {

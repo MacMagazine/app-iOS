@@ -141,12 +141,34 @@ class WebViewController: UIViewController {
 	// MARK: - Actions -
 
 	@IBAction private func share(_ sender: Any) {
-        guard let url = postURL else {
+        guard let post = post,
+              let link = post.link,
+              let url = URL(string: link) else {
+
+            guard let url = postURL else {
+                let alertController = UIAlertController(title: "MacMagazine", message: "Não há nada para compartilhar", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    self.dismiss(animated: true)
+                })
+                self.present(alertController, animated: true)
+
+                return
+            }
+            let items: [Any] =  [webView.title ?? "", url]
+            Share().present(at: actions, using: items)
             return
         }
-        let items: [Any] =  [webView.title ?? "", url]
-        Share().present(at: actions, using: items)
-	}
+
+        let favorito = UIActivityExtensions(title: "Favorito",
+                                            image: UIImage(systemName: post.favorito ? "star.fill" : "star")) { _ in
+            Favorite().updatePostStatus(using: link) { [weak self] isFavorite in
+                self?.post?.favorito = isFavorite
+            }
+        }
+
+        let items: [Any] =  [post.title ?? "", url]
+        Share().present(at: actions, using: items, activities: [favorito])
+    }
 
     @IBAction private func enterFullscreenMode(_ sender: Any) {
         guard let parent = self.navigationController?.viewControllers[0] as? PostsDetailViewController else {

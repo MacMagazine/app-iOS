@@ -221,9 +221,15 @@ extension PostsDetailViewController {
 extension PostsDetailViewController {
     @IBAction private func share(_ sender: Any) {
         guard let shareInfo = shareInfo else {
-            return
+            let alertController = UIAlertController(title: "MacMagazine", message: "Não há nada para compartilhar", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                self.dismiss(animated: true)
+            })
+            self.present(alertController, animated: true)
 
+            return
         }
+
         let items: [Any] =  [shareInfo.title, shareInfo.link]
 
         let favorito = UIActivityExtensions(title: "Favorito",
