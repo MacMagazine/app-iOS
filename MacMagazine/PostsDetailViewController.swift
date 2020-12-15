@@ -230,7 +230,7 @@ extension PostsDetailViewController {
             return
         }
 
-        let items: [Any] =  [shareInfo.title, shareInfo.link]
+        let items: [Any] = [shareInfo.title, shareInfo.link]
 
         let favorito = UIActivityExtensions(title: "Favorito",
                                             image: UIImage(systemName: shareInfo.favorite ? "star.fill" : "star")) { _ in

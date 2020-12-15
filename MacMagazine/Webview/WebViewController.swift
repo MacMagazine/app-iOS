@@ -154,7 +154,7 @@ class WebViewController: UIViewController {
 
                 return
             }
-            let items: [Any] =  [webView.title ?? "", url]
+            let items: [Any] = [webView.title ?? "", url]
             Share().present(at: actions, using: items)
             return
         }
@@ -166,7 +166,7 @@ class WebViewController: UIViewController {
             }
         }
 
-        let items: [Any] =  [post.title ?? "", url]
+        let items: [Any] = [post.title ?? "", url]
         Share().present(at: actions, using: items, activities: [favorito])
     }
 
