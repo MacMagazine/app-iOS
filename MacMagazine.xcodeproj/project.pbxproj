@@ -14,6 +14,8 @@
 		5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
 		5EB2018B25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
 		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5EB2019625B3670B00E17642 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2019525B3670B00E17642 /* Provider.swift */; };
+		5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC510D25B385FC006FB270 /* PostCell.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
@@ -244,6 +246,8 @@
 		5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = MacMagazineWidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		5EB2018725B3665100E17642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB2018925B3665100E17642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EB2019525B3670B00E17642 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		5EDC510D25B385FC006FB270 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
@@ -424,6 +428,8 @@
 				5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */,
 				5EB2018725B3665100E17642 /* Assets.xcassets */,
 				5EB2018925B3665100E17642 /* Info.plist */,
+				5EB2019525B3670B00E17642 /* Provider.swift */,
+				5EDC510D25B385FC006FB270 /* PostCell.swift */,
 			);
 			path = MacMagazineWidgetExtension;
 			sourceTree = "<group>";
@@ -1153,7 +1159,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */,
+				5EB2019625B3670B00E17642 /* Provider.swift in Sources */,
 				5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */,
+				5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

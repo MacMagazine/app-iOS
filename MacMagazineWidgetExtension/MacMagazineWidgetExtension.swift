@@ -10,42 +10,26 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
-    }
-
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
-        completion(entry)
-    }
-
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
-    }
-}
-
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
 }
 
 struct MacMagazineWidgetExtensionEntryView : View {
-    var entry: Provider.Entry
+    @Environment(\.widgetFamily) var widgetFamily
+    var entry: SimpleEntry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        switch widgetFamily {
+        case .systemSmall:
+            PostCell()
+        case .systemMedium:
+            Text("medium")
+        case .systemLarge:
+            Text("large")
+        @unknown default:
+            Text("other size")
+        }
     }
 }
 
@@ -64,7 +48,9 @@ struct MacMagazineWidgetExtension: Widget {
 
 struct MacMagazineWidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
-        MacMagazineWidgetExtensionEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            MacMagazineWidgetExtensionEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+        }
     }
 }
