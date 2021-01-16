@@ -115,7 +115,7 @@ class API {
     var onCompletion: ((XMLPost?) -> Void)?
 	var isComplication = false
 
-	#if os(iOS)
+	#if os(iOS) && !WIDGET
 	var onVideoCompletion: ((YouTube<String>?) -> Void)?
 	var onVideoSearchCompletion: ((YouTube<ResourceId>?) -> Void)?
 	#endif

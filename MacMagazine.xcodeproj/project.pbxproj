@@ -16,6 +16,13 @@
 		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5EB2019625B3670B00E17642 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2019525B3670B00E17642 /* Provider.swift */; };
 		5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC510D25B385FC006FB270 /* PostCell.swift */; };
+		5EDC511225B38734006FB270 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
+		5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
+		5EDC511A25B38791006FB270 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
+		5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
+		5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
+		5EDC514025B38A1E006FB270 /* LastPostsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC513F25B38A1E006FB270 /* LastPostsEntry.swift */; };
+		5EDE58EC25B38CA300945C23 /* LastPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* LastPostsWidget.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
@@ -1161,7 +1168,12 @@
 				5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */,
 				5EB2019625B3670B00E17642 /* Provider.swift in Sources */,
 				5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */,
+				5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */,
 				5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */,
+				5EDC511225B38734006FB270 /* API.swift in Sources */,
+				5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */,
+				5EDC511A25B38791006FB270 /* Network.swift in Sources */,
+				5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
