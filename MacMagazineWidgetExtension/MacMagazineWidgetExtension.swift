@@ -10,46 +10,23 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationIntent
-}
-
-struct MacMagazineWidgetExtensionEntryView : View {
-    @Environment(\.widgetFamily) var widgetFamily
-    var entry: SimpleEntry
-
-    var body: some View {
-        switch widgetFamily {
-        case .systemSmall:
-            PostCell()
-        case .systemMedium:
-            Text("medium")
-        case .systemLarge:
-            Text("large")
-        @unknown default:
-            Text("other size")
-        }
-    }
-}
-
 @main
 struct MacMagazineWidgetExtension: Widget {
-    let kind: String = "MacMagazineWidgetExtension"
+    let kind: String = "MacMagazineRecentPostsWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            MacMagazineWidgetExtensionEntryView(entry: entry)
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: RecentPostsProvider()) { entry in
+            RecentPostsWidget(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Notícias Recentes")
+        .description("Acompanhe as últimas notícias do universo Apple.")
     }
 }
 
 struct MacMagazineWidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MacMagazineWidgetExtensionEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            RecentPostsWidget(entry: RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: []))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
     }

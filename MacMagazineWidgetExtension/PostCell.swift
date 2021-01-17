@@ -10,43 +10,72 @@ import SwiftUI
 import WidgetKit
 
 struct PostCell: View {
+    @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.redactionReasons) var redactionReasons
+    
+    let post: PostData
+    
+    var titleFont: Font { widgetFamily == .systemSmall ? .caption : .subheadline }
+    
+    var coverImage: some View {
+        let image: Image
+        
+        if redactionReasons == .placeholder {
+            image = Image("widgetPlaceholder")
+        } else {
+            if let imageData = post.image {
+                image = Image(uiImage: UIImage(data: imageData)!)
+            } else {
+                image = Image("widgetPlaceholder")
+            }
+        }
+        
+        return image.resizable()
+            .scaledToFill()
+            .unredacted()
+    }
+    
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30)
+                    .unredacted()
+            }
+            .shadow(color: Color.black.opacity(0.2), radius: 1)
+            .padding([.top, .trailing])
+            
             Spacer()
             
             VStack {
                 HStack {
-                    Text("Titulo do Post")
-                        .font(.subheadline)
+                    Text(post.title)
+                        .font(titleFont)
+                        .bold()
                         .multilineTextAlignment(.leading)
-                        .lineLimit(3)
                     Spacer(minLength: 0)
                 }
-                HStack {
-                    (Text("POR ") + Text("LUIZ GUSTAVO RIBEIRO").bold())
-                        .lineLimit(2)
-                    Spacer(minLength: 0)
-                }.font(.system(size: 8)).padding(.top, 3)
             }
             .shadow(color: .black, radius: 5)
             .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.black]), startPoint: .top, endPoint: .bottom))
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.black]), startPoint: .top, endPoint: .bottom))
         }
         .foregroundColor(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
-        .background(
-            Image("CoverSample")
-                .resizable()
-                .scaledToFill()
-        )
+        .background(coverImage)
         .background(Color.white)
     }
 }
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostCell()
+        PostCell(post: .placeholder)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .redacted(reason: .placeholder)
     }
 }
