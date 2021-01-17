@@ -23,11 +23,23 @@ struct RecentPostsWidget : View {
         } else {
             switch widgetFamily {
             case .systemSmall:
-                PostCell(post: content[0])
+                PostCell(post: content[0], style: .cover)
             case .systemMedium:
-                Text("medium")
+                VStack {
+                    PostCell(post: content[0], style: .row)
+                    PostCell(post: content[1], style: .row)
+                }.padding()
             case .systemLarge:
-                Text("large")
+                GeometryReader { geo in
+                    VStack(spacing: 0) {
+                        PostCell(post: content[0], style: .cover)
+                            .frame(height: 0.5 * geo.size.height)
+                        VStack {
+                            PostCell(post: content[1], style: .row)
+                            PostCell(post: content[2], style: .row)
+                        }.padding()
+                    }
+                }
             @unknown default:
                 Text("other size")
             }
@@ -37,7 +49,7 @@ struct RecentPostsWidget : View {
 
 struct RecentPostsWidget_Previews: PreviewProvider {
     static var previews: some View {
-        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: []))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: [.placeholder, .placeholder, .placeholder, .placeholder]))
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

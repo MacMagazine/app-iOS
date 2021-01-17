@@ -11,11 +11,11 @@ import WidgetKit
 
 struct RecentPostsProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> RecentPostsEntry {
-        RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: [.placeholder])
+        RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: [.placeholder, .placeholder, .placeholder])
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (RecentPostsEntry) -> ()) {
-        let entry = RecentPostsEntry(date: Date(), configuration: configuration, posts: [.placeholder])
+        let entry = RecentPostsEntry(date: Date(), configuration: configuration, posts: [.placeholder, .placeholder, .placeholder, .placeholder])
         completion(entry)
     }
 
@@ -42,7 +42,7 @@ struct RecentPostsProvider: IntentTimelineProvider {
                 group.enter()
                 ImageLoader.load(url: url) { data in
                     if let data = data {
-                        let post = PostData(id: xmlPost.postId, title: xmlPost.title, image: data, pubDate: xmlPost.pubDate)
+                        let post = PostData(id: xmlPost.postId, title: xmlPost.title, description: xmlPost.excerpt, image: data, pubDate: xmlPost.pubDate)
                         posts.insert(post)
                     }
                     group.leave()

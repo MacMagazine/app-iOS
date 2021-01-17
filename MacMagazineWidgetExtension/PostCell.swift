@@ -14,28 +14,48 @@ struct PostCell: View {
     @Environment(\.redactionReasons) var redactionReasons
     
     let post: PostData
+    let style: Style
     
-    var titleFont: Font { widgetFamily == .systemSmall ? .caption : .subheadline }
+    enum Style { case cover, row }
     
-    var coverImage: some View {
-        let image: Image
-        
+    var image: Image {
         if redactionReasons == .placeholder {
-            image = Image("widgetPlaceholder")
+            return Image("widgetPlaceholder")
         } else {
             if let imageData = post.image {
-                image = Image(uiImage: UIImage(data: imageData)!)
+                return Image(uiImage: UIImage(data: imageData)!)
             } else {
-                image = Image("widgetPlaceholder")
+                return Image("widgetPlaceholder")
             }
         }
-        
-        return image.resizable()
+    }
+    
+    var coverImage: some View {
+        image.resizable()
             .scaledToFill()
             .unredacted()
     }
     
+    var title: some View {
+        HStack {
+            Text(post.title)
+                .font(.caption)
+                .bold()
+                .multilineTextAlignment(.leading)
+            Spacer(minLength: 0)
+        }
+    }
+    
     var body: some View {
+        switch style {
+        case .cover:
+            coverStyle
+        case .row:
+            rowStyle
+        }
+    }
+    
+    var coverStyle: some View {
         VStack {
             HStack {
                 Spacer()
@@ -52,11 +72,17 @@ struct PostCell: View {
             
             VStack {
                 HStack {
-                    Text(post.title)
-                        .font(titleFont)
-                        .bold()
-                        .multilineTextAlignment(.leading)
-                    Spacer(minLength: 0)
+                    title
+                    Spacer()
+                }
+                if widgetFamily == .systemLarge {
+                    HStack {
+                        Text(post.description)
+                            .font(.caption2)
+                            .foregroundColor(.gray)
+                            .lineLimit(2)
+                        Spacer()
+                    }
                 }
             }
             .shadow(color: .black, radius: 5)
@@ -69,13 +95,57 @@ struct PostCell: View {
         .edgesIgnoringSafeArea(.all)
         .background(coverImage)
         .background(Color.white)
+        .clipped()
+    }
+    
+    var rowStyle: some View {
+        GeometryReader { geo in
+            HStack {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 0.2 * geo.size.width, height: geo.size.height)
+                    .clipped()
+                    .cornerRadius(8)
+                VStack {
+                    Spacer()
+                    title
+                    if widgetFamily == .systemLarge {
+                        HStack {
+                            Text(post.description)
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+                            Spacer()
+                        }
+                    }
+                    Spacer()
+                }
+            }
+        }
     }
 }
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostCell(post: .placeholder)
+        PostCell(post: .placeholder, style: .cover)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .redacted(reason: .placeholder)
+        VStack {
+            PostCell(post: .placeholder, style: .row)
+            PostCell(post: .placeholder, style: .row)
+        }.padding()
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//            .redacted(reason: .placeholder)
+        GeometryReader { geo in
+            VStack {
+                PostCell(post: .placeholder, style: .cover)
+                    .frame(height: 0.5 * geo.size.height)
+                VStack {
+                    PostCell(post: .placeholder, style: .row)
+                    PostCell(post: .placeholder, style: .row)
+                }.padding()
+            }
+        }
+        .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

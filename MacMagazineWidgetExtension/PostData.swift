@@ -11,8 +11,9 @@ import Foundation
 struct PostData: Identifiable, Hashable {
     let id: String
     let title: String
+    let description: String
     let image: Data?
     let pubDate: String
     
-    static var placeholder: PostData { .init(id: "", title: "Título do Conteúdo", image: nil, pubDate: "") }
+    static var placeholder: PostData { .init(id: "", title: "Agora o aplicativo do MacMagazine tem widgets para você adicionar à tela inicial do seu iPhone", description: "Descrição", image: nil, pubDate: "") }
 }
