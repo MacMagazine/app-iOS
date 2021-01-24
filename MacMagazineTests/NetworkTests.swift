@@ -6,8 +6,8 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import XCTest
 @testable import MacMagazine
+import XCTest
 
 // Tests to be performed:
 // 1) Get Posts from Wordpress
@@ -41,8 +41,8 @@ class NetworkTests: XCTestCase {
 	func testNetworkGetShouldReturnValidData() {
 		let expectation = self.expectation(description: "Testing Network for a valid Data...")
 		expectation.expectedFulfillmentCount = 1
-		
-		getPosts { data in
+
+        getPosts { data in
 			XCTAssertNotNil(data, "Network response should not be nil")
 			guard let xmlResponse = data?.toString() else {
 				XCTFail("Data should not be nil")
@@ -80,8 +80,8 @@ class NetworkTests: XCTestCase {
 	func testAPIReturnValidData() {
 		let expectation = self.expectation(description: "Testing API for a valid Data...")
 		expectation.expectedFulfillmentCount = 1
-		
-		// After getting the XML file from Wordpress, each XML parse call the closure to continue
+
+        // After getting the XML file from Wordpress, each XML parse call the closure to continue
 		// When the parse ended, a nil is returned back to the closure
 		API().getPosts(page: 0) { post in
 			guard let post = post else {

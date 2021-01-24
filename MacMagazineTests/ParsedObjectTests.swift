@@ -6,8 +6,8 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import XCTest
 @testable import MacMagazine
+import XCTest
 
 // Tests to be performed:
 // 1) Create a mock test

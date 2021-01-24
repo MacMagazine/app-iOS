@@ -6,8 +6,8 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import XCTest
 @testable import MacMagazine
+import XCTest
 
 class VideoTests: XCTestCase {
 
@@ -50,8 +50,8 @@ class VideoTests: XCTestCase {
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
 		}
 	}
-	
-	func testAPIReturnValidData() {
+
+    func testAPIReturnValidData() {
 		let expectation = self.expectation(description: "Testing API for a valid Data...")
 		expectation.expectedFulfillmentCount = 1
 
@@ -89,8 +89,8 @@ class VideoTests: XCTestCase {
 			XCTAssertEqual(stats.count, 2, "Items should be equal to 2")
 			expectation.fulfill()
 		}
-		
-		waitForExpectations(timeout: 30) { error in
+
+        waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
 		}
 	}
@@ -122,23 +122,23 @@ class VideoTests: XCTestCase {
 	func testVideoAPI() {
 		let expectation = self.expectation(description: "Testing API for a valid Data...")
 		expectation.expectedFulfillmentCount = 1
-		
-		API().getVideosStatistics(videoIds) { statistics in
+
+        API().getVideosStatistics(videoIds) { statistics in
 			guard let stats = statistics?.items else {
 				XCTAssertNil(statistics?.items, "API response must not be nil")
 				return
 			}
-			
-			XCTAssertEqual(stats[0].kind, "youtube#video", "API response kind must match")
+
+            XCTAssertEqual(stats[0].kind, "youtube#video", "API response kind must match")
 			XCTAssertEqual(stats[0].id, "Sx399pq69SA", "API response id must match")
-			
-			XCTAssertEqual(stats[1].kind, "youtube#video", "API response kind must match")
+
+            XCTAssertEqual(stats[1].kind, "youtube#video", "API response kind must match")
 			XCTAssertEqual(stats[1].id, "PJYAOYHC1Xw", "API response id must match")
-			
-			expectation.fulfill()
+
+            expectation.fulfill()
 		}
-		
-		waitForExpectations(timeout: 30) { error in
+
+        waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
 		}
 	}
@@ -146,8 +146,8 @@ class VideoTests: XCTestCase {
 	func testGetVideo() {
 		XCTAssertNotNil(videoExample, "Example post should exist")
 	}
-	
-	func testParseExampleVideo() {
+
+    func testParseExampleVideo() {
 		guard let video = videoExample,
 			let stats = videoStatsExample
 			else {
@@ -162,11 +162,11 @@ class VideoTests: XCTestCase {
 			}
 			XCTAssertEqual(parsedVideo.kind, self.exampleVideo.getExampleKind(), "API response kind must match")
 			XCTAssertEqual(parsedVideo.nextPageToken, self.exampleVideo.getExampleNextPageToken(), "API response nextPageToken must match")
-			
-			XCTAssertNotNil(parsedVideo.pageInfo, "pageInfo should not be nil")
+
+            XCTAssertNotNil(parsedVideo.pageInfo, "pageInfo should not be nil")
 			XCTAssertEqual(parsedVideo.pageInfo?.totalResults, self.exampleVideo.getExamplePageInfoTotalResults(), "API response pageInfo.totalResults must match")
-			
-			XCTAssertNotNil(parsedVideo.items, "items should not be nil")
+
+            XCTAssertNotNil(parsedVideo.items, "items should not be nil")
 			XCTAssertEqual(parsedVideo.items?.count, 1, "There should be only 1 item")
 			if !(parsedVideo.items?.isEmpty ?? true) {
 				XCTAssertEqual(parsedVideo.items?[0].id, self.exampleVideo.getExampleItemsId(), "API response items.id must match")
@@ -180,16 +180,16 @@ class VideoTests: XCTestCase {
 				return
 			}
 			XCTAssertEqual(parsedVideoStats.kind, self.exampleVideo.getExampleStatKind(), "API response kind must match")
-			
-			XCTAssertNotNil(parsedVideoStats.pageInfo, "pageInfo should not be nil")
+
+            XCTAssertNotNil(parsedVideoStats.pageInfo, "pageInfo should not be nil")
 			XCTAssertEqual(parsedVideoStats.pageInfo?.totalResults, self.exampleVideo.getExampleStatsPageInfoTotalResults(), "API response pageInfo.totalResults must match")
-			
-			XCTAssertNotNil(parsedVideoStats.items, "items should not be nil")
+
+            XCTAssertNotNil(parsedVideoStats.items, "items should not be nil")
 			XCTAssertEqual(parsedVideoStats.items?.count, 1, "There should be only 1 item")
 			if !(parsedVideoStats.items?.isEmpty ?? true) {
 				XCTAssertEqual(parsedVideoStats.items?[0].id, self.exampleVideo.getExampleStatsItemsId(), "API response items.id must match")
-				
-				XCTAssertNotNil(parsedVideoStats.items?[0].statistics, "items should not be nil")
+
+                XCTAssertNotNil(parsedVideoStats.items?[0].statistics, "items should not be nil")
 				XCTAssertEqual(parsedVideoStats.items?[0].statistics?.viewCount, self.exampleVideo.getExampleStatsStatisticsViewCount(), "API response items.statistics.viewCount must match")
 				XCTAssertEqual(parsedVideoStats.items?[0].statistics?.likeCount, self.exampleVideo.getExampleStatsStatisticsLikeCount(), "API response items.statistics.likeCount must match")
 			}
@@ -206,8 +206,8 @@ class VideoTests: XCTestCase {
 			if !video.isEmpty {
 				XCTAssertEqual(video[0].videoId, self.exampleVideo.getExampleVideoId(), "videoId must match")
 			}
-			
-			expectation.fulfill()
+
+            expectation.fulfill()
 		}
 
 		waitForExpectations(timeout: 30) { error in
@@ -253,8 +253,8 @@ extension VideoTests {
 				XCTFail("Example video should exist")
 				return
 		}
-		
-		var parsedVideo: YouTube<String>?
+
+        var parsedVideo: YouTube<String>?
 		let onVideoCompletion = { (videos: YouTube<String>?) in
 			parsedVideo = videos
 		}
@@ -266,8 +266,8 @@ extension VideoTests {
 					XCTFail("parsedVideoStats should exist")
 					return
 			}
-			
-			CoreDataStack.shared.save(playlist: parsedVideo, statistics: stats)
+
+            CoreDataStack.shared.save(playlist: parsedVideo, statistics: stats)
 			CoreDataStack.shared.delay(0.4) {
 				CoreDataStack.shared.get(video: self.exampleVideo.getExampleVideoId()) { video in
 					onCompletion(video)
