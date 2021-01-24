@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6CE94725B39C69007CF232 /* PostDataExtension.swift */; };
-		5EB2018025B3664C00E17642 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2017F25B3664C00E17642 /* WidgetKit.framework */; };
-		5EB2018225B3664C00E17642 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2018125B3664C00E17642 /* SwiftUI.framework */; };
 		5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */; };
 		5EB2018825B3665100E17642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2018725B3665100E17642 /* Assets.xcassets */; };
 		5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
@@ -387,8 +385,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */,
-				5EB2018225B3664C00E17642 /* SwiftUI.framework in Frameworks */,
-				5EB2018025B3664C00E17642 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
