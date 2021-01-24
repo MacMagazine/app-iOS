@@ -15,7 +15,8 @@
 		5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
 		5EB2018B25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
 		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5EB2019625B3670B00E17642 /* RecentPostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2019525B3670B00E17642 /* RecentPostsProvider.swift */; };
+		5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */; };
+		5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0897A25BDA5D300DAEF73 /* Kingfisher */; };
 		5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC510D25B385FC006FB270 /* PostCell.swift */; };
 		5EDC511225B38734006FB270 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
@@ -24,7 +25,6 @@
 		5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */; };
 		5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */; };
-		5EE134EE25B3B0D8002ADD60 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE134ED25B3B0D8002ADD60 /* ImageLoader.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
@@ -256,12 +256,10 @@
 		5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = MacMagazineWidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		5EB2018725B3665100E17642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB2018925B3665100E17642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EB2019525B3670B00E17642 /* RecentPostsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsProvider.swift; sourceTree = "<group>"; };
+		5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentPostsProvider.swift; sourceTree = "<group>"; };
 		5EDC510D25B385FC006FB270 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsEntry.swift; sourceTree = "<group>"; };
 		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
-		5EE134E025B3ACC9002ADD60 /* MacMagazineWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
-		5EE134ED25B3B0D8002ADD60 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */,
 				5EB2018225B3664C00E17642 /* SwiftUI.framework in Frameworks */,
 				5EB2018025B3664C00E17642 /* WidgetKit.framework in Frameworks */,
 			);
@@ -445,7 +444,6 @@
 				5EB2018925B3665100E17642 /* Info.plist */,
 				5EDC510D25B385FC006FB270 /* PostCell.swift */,
 				5E6CE94725B39C69007CF232 /* PostData.swift */,
-				5EE134ED25B3B0D8002ADD60 /* ImageLoader.swift */,
 			);
 			path = MacMagazineWidgetExtension;
 			sourceTree = "<group>";
@@ -453,7 +451,7 @@
 		5EDE58EA25B38C7B00945C23 /* RecentPosts */ = {
 			isa = PBXGroup;
 			children = (
-				5EB2019525B3670B00E17642 /* RecentPostsProvider.swift */,
+				5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */,
 				5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */,
 				5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */,
 			);
@@ -639,7 +637,6 @@
 		9BCAD66E1F47A08100B54526 = {
 			isa = PBXGroup;
 			children = (
-				5EE134E025B3ACC9002ADD60 /* MacMagazineWidgetExtensionExtension.entitlements */,
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
 				9BE697CE1F4874C20048D68D /* MacMagazineTests */,
 				9BB4BC4E225B99F500559170 /* MacMagazineWatch */,
@@ -821,6 +818,9 @@
 			dependencies = (
 			);
 			name = MacMagazineWidgetExtensionExtension;
+			packageProductDependencies = (
+				5EC0897A25BDA5D300DAEF73 /* Kingfisher */,
+			);
 			productName = MacMagazineWidgetExtensionExtension;
 			productReference = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1187,17 +1187,16 @@
 			files = (
 				5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */,
 				5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */,
-				5EB2019625B3670B00E17642 /* RecentPostsProvider.swift in Sources */,
 				5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */,
 				5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */,
 				5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */,
 				5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */,
 				5E6CE96325B3ABCF007CF232 /* PostData.swift in Sources */,
 				5EDC511225B38734006FB270 /* API.swift in Sources */,
+				5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */,
 				5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */,
 				5EDC511A25B38791006FB270 /* Network.swift in Sources */,
 				5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */,
-				5EE134EE25B3B0D8002ADD60 /* ImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1461,8 +1460,9 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtensionExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4.2.2.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1472,6 +1472,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 4.2.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
@@ -1491,8 +1492,9 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtensionExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4.2.2.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1502,6 +1504,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 4.2.2;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2024,6 +2027,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5EC0897A25BDA5D300DAEF73 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		685315FA25153ADE008F6CDC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;

@@ -8,6 +8,7 @@
 
 import Foundation
 import WidgetKit
+import Kingfisher
 
 struct RecentPostsProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> RecentPostsEntry {
@@ -40,12 +41,14 @@ struct RecentPostsProvider: IntentTimelineProvider {
             DispatchQueue.global().async {
                 guard let url = URL(string: xmlPost.artworkURL) else { return }
                 group.enter()
-                ImageLoader.load(url: url) { data in
-                    if let data = data {
-                        let post = PostData(id: xmlPost.postId, title: xmlPost.title, description: xmlPost.excerpt, image: data, pubDate: xmlPost.pubDate)
+                KingfisherManager.shared.retrieveImage(with: url, options: nil) { result in
+                    if case let .success(imageResult) = result {
+                        print("ok")
+                        let post = PostData(id: xmlPost.postId, title: xmlPost.title, description: xmlPost.excerpt, image: imageResult.image.pngData(), pubDate: xmlPost.pubDate)
                         posts.insert(post)
+                        group.leave()
+                        
                     }
-                    group.leave()
                 }
             }
         }

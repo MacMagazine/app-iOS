@@ -130,16 +130,10 @@ class API {
 		isComplication = true
 		getPosts(page: 0, completion)
 	}
-    
+
     func getPosts(page: Int = 0, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
         let host = "\(APIParams.feed)?\(APIParams.paged)\(page)"
-        executeGetContent(host)
-    }
-    
-    func getWidget(_ completion: ((XMLPost?) -> Void)?) {
-        onCompletion = completion
-        let host = "\(APIParams.feed)?\(APIParams.paged)\(1)"
         executeGetContent(host)
     }
 
