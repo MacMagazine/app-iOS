@@ -49,7 +49,15 @@ struct RecentPostsProvider: IntentTimelineProvider {
                 KingfisherManager.shared.retrieveImage(with: url, options: nil) { result in
                     if case let .success(imageResult) = result {
                         print("ok")
-                        let post = PostData(title: xmlPost.title, link: xmlPost.link, thumbnail: xmlPost.artworkURL, favorito: xmlPost.favorite, pubDate: xmlPost.pubDate, excerpt: xmlPost.excerpt, postId: xmlPost.postId, shortURL: xmlPost.shortURL, imageData: imageResult.image.pngData())
+                        let post = PostData(title: xmlPost.title,
+                                            link: xmlPost.link,
+                                            thumbnail: xmlPost.artworkURL,
+                                            favorito: xmlPost.favorite,
+                                            pubDate: xmlPost.pubDate,
+                                            excerpt: xmlPost.excerpt,
+                                            postId: xmlPost.postId,
+                                            shortURL: xmlPost.shortURL,
+                                            imageData: imageResult.image.pngData())
                         posts.insert(post)
                         group.leave()
                     }
