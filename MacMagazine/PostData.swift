@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PostData: Codable {
+struct PostData: Codable, Hashable {
 	var title: String?
 	var link: String?
 	var thumbnail: String?
@@ -17,6 +17,7 @@ struct PostData: Codable {
 	var excerpt: String?
     var postId: String?
     var shortURL: String?
+    let imageData: Data?
 
     init(title: String?,
          link: String?,
@@ -25,7 +26,8 @@ struct PostData: Codable {
          pubDate: String? = "",
          excerpt: String? = "",
          postId: String? = "",
-         shortURL: String? = "") {
+         shortURL: String? = "",
+         imageData: Data? = nil) {
 
 		self.title = title
 		self.link = link
@@ -35,5 +37,6 @@ struct PostData: Codable {
 		self.excerpt = excerpt
         self.postId = postId
         self.shortURL = shortURL
+        self.imageData = imageData
 	}
 }

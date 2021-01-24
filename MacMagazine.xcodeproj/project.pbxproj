@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6CE94725B39C69007CF232 /* PostDataExtension.swift */; };
+		5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */; };
+		5EB2018825B3665100E17642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2018725B3665100E17642 /* Assets.xcassets */; };
+		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */; };
+		5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0897A25BDA5D300DAEF73 /* Kingfisher */; };
+		5EC0898C25BDB87A00DAEF73 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
+		5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC510D25B385FC006FB270 /* PostCell.swift */; };
+		5EDC511225B38734006FB270 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
+		5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
+		5EDC511A25B38791006FB270 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
+		5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
+		5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
+		5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */; };
+		5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
@@ -125,6 +140,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5EB2018C25B3665100E17642 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BCAD66F1F47A08100B54526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5EB2017D25B3664C00E17642;
+			remoteInfo = MacMagazineWidgetExtensionExtension;
+		};
 		9B9C7F9E226BF836000534CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9BCAD66F1F47A08100B54526 /* Project object */;
@@ -162,6 +184,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */,
 				9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -222,6 +245,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E6CE94725B39C69007CF232 /* PostDataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataExtension.swift; sourceTree = "<group>"; };
+		5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB2017F25B3664C00E17642 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		5EB2018125B3664C00E17642 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMagazineWidgetExtension.swift; sourceTree = "<group>"; };
+		5EB2018725B3665100E17642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5EB2018925B3665100E17642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentPostsProvider.swift; sourceTree = "<group>"; };
+		5EDC510D25B385FC006FB270 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsEntry.swift; sourceTree = "<group>"; };
+		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +377,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5EB2017B25B3664C00E17642 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9C7F96226BF835000534CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,6 +428,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5EB2018325B3664C00E17642 /* MacMagazineWidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+				5EDE58EA25B38C7B00945C23 /* RecentPosts */,
+				5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */,
+				5EB2018725B3665100E17642 /* Assets.xcassets */,
+				5EB2018925B3665100E17642 /* Info.plist */,
+				5EDC510D25B385FC006FB270 /* PostCell.swift */,
+				5E6CE94725B39C69007CF232 /* PostDataExtension.swift */,
+			);
+			path = MacMagazineWidgetExtension;
+			sourceTree = "<group>";
+		};
+		5EDE58EA25B38C7B00945C23 /* RecentPosts */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */,
+				5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */,
+				5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */,
+			);
+			path = RecentPosts;
+			sourceTree = "<group>";
+		};
 		683271A2252914AF004BD4DA /* WhatsNew */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +635,7 @@
 				9BB4BC4E225B99F500559170 /* MacMagazineWatch */,
 				9BB4BC5D225B99F600559170 /* MacMagazineWatchExtension */,
 				9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */,
+				5EB2018325B3664C00E17642 /* MacMagazineWidgetExtension */,
 				9BCAD6781F47A08100B54526 /* Products */,
 				9BF96565225E371900BAF22D /* Frameworks */,
 			);
@@ -583,6 +649,7 @@
 				9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */,
 				9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */,
 				9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */,
+				5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -722,6 +789,8 @@
 			children = (
 				9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */,
 				9B9C7F8F226B6111000534CA /* WebKit.framework */,
+				5EB2017F25B3664C00E17642 /* WidgetKit.framework */,
+				5EB2018125B3664C00E17642 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -729,6 +798,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5EB2017D25B3664C00E17642 /* MacMagazineWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EB2019125B3665100E17642 /* Build configuration list for PBXNativeTarget "MacMagazineWidgetExtensionExtension" */;
+			buildPhases = (
+				5EB2017A25B3664C00E17642 /* Sources */,
+				5EB2017B25B3664C00E17642 /* Frameworks */,
+				5EB2017C25B3664C00E17642 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacMagazineWidgetExtensionExtension;
+			packageProductDependencies = (
+				5EC0897A25BDA5D300DAEF73 /* Kingfisher */,
+			);
+			productName = MacMagazineWidgetExtensionExtension;
+			productReference = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9B9C7F98226BF835000534CA /* MacMagazineNotificationServiceExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B9C7FA1226BF836000534CA /* Build configuration list for PBXNativeTarget "MacMagazineNotificationServiceExtension" */;
@@ -810,6 +899,7 @@
 			dependencies = (
 				9B9C7F9F226BF836000534CA /* PBXTargetDependency */,
 				9BB4BC68225B99F700559170 /* PBXTargetDependency */,
+				5EB2018D25B3665100E17642 /* PBXTargetDependency */,
 			);
 			name = MacMagazine;
 			packageProductDependencies = (
@@ -844,10 +934,13 @@
 		9BCAD66F1F47A08100B54526 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
+					5EB2017D25B3664C00E17642 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					9B9C7F98226BF835000534CA = {
 						CreatedOnToolsVersion = 10.2.1;
 						DevelopmentTeam = 7PXVC8PJ97;
@@ -916,11 +1009,20 @@
 				9BB4BC4C225B99F500559170 /* MacMagazineWatch */,
 				9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */,
 				9B9C7F98226BF835000534CA /* MacMagazineNotificationServiceExtension */,
+				5EB2017D25B3664C00E17642 /* MacMagazineWidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5EB2017C25B3664C00E17642 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EB2018825B3665100E17642 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9C7F97226BF835000534CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1072,6 +1174,25 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5EB2017A25B3664C00E17642 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */,
+				5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */,
+				5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */,
+				5EC0898C25BDB87A00DAEF73 /* PostData.swift in Sources */,
+				5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */,
+				5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */,
+				5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */,
+				5EDC511225B38734006FB270 /* API.swift in Sources */,
+				5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */,
+				5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */,
+				5EDC511A25B38791006FB270 /* Network.swift in Sources */,
+				5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9C7F95226BF835000534CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1172,6 +1293,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5EB2018D25B3665100E17642 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5EB2017D25B3664C00E17642 /* MacMagazineWidgetExtensionExtension */;
+			targetProxy = 5EB2018C25B3665100E17642 /* PBXContainerItemProxy */;
+		};
 		9B9C7F9F226BF836000534CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9B9C7F98226BF835000534CA /* MacMagazineNotificationServiceExtension */;
@@ -1318,6 +1444,69 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5EB2018F25B3665100E17642 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.2.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG WIDGET";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5EB2019025B3665100E17642 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				DEVELOPMENT_TEAM = 7PXVC8PJ97;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.2.2;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WIDGET;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		9B9C7FA2226BF836000534CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1745,6 +1934,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5EB2019125B3665100E17642 /* Build configuration list for PBXNativeTarget "MacMagazineWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EB2018F25B3665100E17642 /* Debug */,
+				5EB2019025B3665100E17642 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9B9C7FA1226BF836000534CA /* Build configuration list for PBXNativeTarget "MacMagazineNotificationServiceExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1821,6 +2019,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5EC0897A25BDA5D300DAEF73 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		685315FA25153ADE008F6CDC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
