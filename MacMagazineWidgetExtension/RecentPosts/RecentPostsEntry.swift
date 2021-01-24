@@ -11,6 +11,5 @@ import WidgetKit
 
 struct RecentPostsEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationIntent
     let posts: [PostData]
 }

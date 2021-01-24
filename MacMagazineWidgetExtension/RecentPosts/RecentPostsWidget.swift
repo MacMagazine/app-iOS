@@ -18,7 +18,7 @@ struct RecentPostsWidget: View {
     var body: some View {
         if content.isEmpty {
             Text("Nenhum conteúdo")
-                .font(.subheadline)
+                .font(.headline)
                 .padding()
         } else {
             switch widgetFamily {
@@ -49,7 +49,7 @@ struct RecentPostsWidget: View {
 
 struct RecentPostsWidget_Previews: PreviewProvider {
     static var previews: some View {
-        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: [.placeholder, .placeholder, .placeholder, .placeholder]))
+        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder, .placeholder]))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .environment(\.sizeCategory, .extraLarge)
     }

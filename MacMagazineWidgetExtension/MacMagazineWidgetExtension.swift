@@ -15,7 +15,7 @@ struct MacMagazineWidgetExtension: Widget {
     let kind: String = "MacMagazineRecentPostsWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: RecentPostsProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: RecentPostsProvider()) { entry in
             RecentPostsWidget(entry: entry)
         }
         .configurationDisplayName("Notícias Recentes")
@@ -27,7 +27,7 @@ struct MacMagazineWidgetExtension: Widget {
 struct MacMagazineWidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecentPostsWidget(entry: RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: []))
+            RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: []))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
     }

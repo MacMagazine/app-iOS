@@ -10,8 +10,6 @@
 		5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6CE94725B39C69007CF232 /* PostDataExtension.swift */; };
 		5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */; };
 		5EB2018825B3665100E17642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2018725B3665100E17642 /* Assets.xcassets */; };
-		5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
-		5EB2018B25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */; };
 		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */; };
 		5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0897A25BDA5D300DAEF73 /* Kingfisher */; };
@@ -252,7 +250,6 @@
 		5EB2017F25B3664C00E17642 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		5EB2018125B3664C00E17642 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMagazineWidgetExtension.swift; sourceTree = "<group>"; };
-		5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = MacMagazineWidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		5EB2018725B3665100E17642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB2018925B3665100E17642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentPostsProvider.swift; sourceTree = "<group>"; };
@@ -436,7 +433,6 @@
 			children = (
 				5EDE58EA25B38C7B00945C23 /* RecentPosts */,
 				5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */,
-				5EB2018625B3664C00E17642 /* MacMagazineWidgetExtension.intentdefinition */,
 				5EB2018725B3665100E17642 /* Assets.xcassets */,
 				5EB2018925B3665100E17642 /* Info.plist */,
 				5EDC510D25B385FC006FB270 /* PostCell.swift */,
@@ -1183,7 +1179,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */,
-				5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */,
 				5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */,
 				5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */,
 				5EC0898C25BDB87A00DAEF73 /* PostData.swift in Sources */,
@@ -1264,7 +1259,6 @@
 				9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */,
 				9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */,
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
-				5EB2018B25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */,
 				9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */,
 				9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,

@@ -10,17 +10,13 @@ import Foundation
 import Kingfisher
 import WidgetKit
 
-struct RecentPostsProvider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> RecentPostsEntry {
-        RecentPostsEntry(date: Date(), configuration: ConfigurationIntent(), posts: [.placeholder, .placeholder, .placeholder])
-    }
-
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (RecentPostsEntry) -> Void) {
-        let entry = RecentPostsEntry(date: Date(), configuration: configuration, posts: [.placeholder, .placeholder, .placeholder, .placeholder])
+struct RecentPostsProvider: TimelineProvider {
+    func getSnapshot(in context: Context, completion: @escaping (RecentPostsEntry) -> Void) {
+        let entry = RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<RecentPostsEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<RecentPostsEntry>) -> Void) {
         var posts: Set<PostData> = []
 
         let group = DispatchGroup()
@@ -35,7 +31,7 @@ struct RecentPostsProvider: IntentTimelineProvider {
                     return
                 }
 
-                let entry = RecentPostsEntry(date: currentDate, configuration: configuration, posts: posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
+                let entry = RecentPostsEntry(date: currentDate, posts: posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
 
                 let timeline = Timeline(entries: [entry], policy: .after(nextDate))
                 completion(timeline)
@@ -64,5 +60,9 @@ struct RecentPostsProvider: IntentTimelineProvider {
                 }
             }
         }
+    }
+
+    func placeholder(in context: Context) -> RecentPostsEntry {
+        RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
     }
 }
