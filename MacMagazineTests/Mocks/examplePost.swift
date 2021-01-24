@@ -219,8 +219,8 @@ Requer o <strong>iOS 12.1</strong> ou superior</div></div>
 	func getValidProvider() -> String {
 		return "<atom:link href=\"https://macmagazine.com.br/feed/?paged=0\" rel=\"self\" type=\"application/rss+xml\" />"
 	}
-	
-	func getValidTitle() -> String {
+
+    func getValidTitle() -> String {
 		return "Novo app garante que todos os seus contatos do iPhone tenham fotos atualizadas"
 	}
 	func getValidLink() -> String {
@@ -249,4 +249,3 @@ Requer o <strong>iOS 12.1</strong> ou superior</div></div>
 		return getValidCategories().joined(separator: ",")
 	}
 }
-

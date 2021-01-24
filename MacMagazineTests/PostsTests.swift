@@ -6,8 +6,8 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
-import XCTest
 @testable import MacMagazine
+import XCTest
 
 // Tests to be performed:
 // 1) Create a mock test
@@ -36,8 +36,8 @@ class PostTests: XCTestCase {
 	func testGetPost() {
 		XCTAssertNotNil(postExample, "Example post should exist")
 	}
-	
-	func testParseAndSaveExample() {
+
+    func testParseAndSaveExample() {
 		let expectation = self.expectation(description: "Testing API for a valid data on database...")
 		expectation.expectedFulfillmentCount = 1
 
@@ -46,8 +46,8 @@ class PostTests: XCTestCase {
 				XCTFail("Database is empty")
 			} else {
 				XCTAssertEqual(posts.count, 1, "Should retrieve only 1 post")
-				
-				XCTAssertEqual(posts[0].title, self.examplePost.getValidTitle(), "API response title must match")
+
+                XCTAssertEqual(posts[0].title, self.examplePost.getValidTitle(), "API response title must match")
 				XCTAssertEqual(posts[0].link, self.examplePost.getValidLink(), "API response link must match")
 				XCTAssertEqual(posts[0].pubDate, self.examplePost.getValidDBPubdate(), "API response date should must match")
 				XCTAssertEqual(posts[0].artworkURL, self.examplePost.getValidArtworkURL(), "API response artworkURL must match")
@@ -58,8 +58,8 @@ class PostTests: XCTestCase {
 				XCTAssertEqual(posts[0].excerpt, self.examplePost.getValidDBExcerpt(), "API response excerpt must match")
 				XCTAssertEqual(posts[0].categorias, self.examplePost.getValidDBCategories(), "API response categories must match")
 			}
-			
-			expectation.fulfill()
+
+            expectation.fulfill()
 		}
 
 		waitForExpectations(timeout: 30) { error in
@@ -76,13 +76,13 @@ class PostTests: XCTestCase {
 				XCTFail("Database is empty")
 			} else {
 				XCTAssertEqual(posts.count, 1, "Should retrieve only 1 post")
-				
-				XCTAssertEqual(posts[0].favorite, false, "API response favorite must be false")
-				
-				Favorite().updatePostStatus(using: self.examplePost.getValidLink()) { isFavoriteOn in
+
+                XCTAssertEqual(posts[0].favorite, false, "API response favorite must be false")
+
+                Favorite().updatePostStatus(using: self.examplePost.getValidLink()) { isFavoriteOn in
 					XCTAssertEqual(isFavoriteOn, true, "API response favorite must be true")
-					
-					Favorite().updatePostStatus(using: self.examplePost.getValidLink()) { isFavoriteOn in
+
+                    Favorite().updatePostStatus(using: self.examplePost.getValidLink()) { isFavoriteOn in
 						XCTAssertEqual(isFavoriteOn, false, "API response favorite must be false")
 						expectation.fulfill()
 					}
@@ -98,7 +98,7 @@ class PostTests: XCTestCase {
 	func testPostDestaque() {
 		let expectation = self.expectation(description: "Testing API for a valid data on database...")
 		expectation.expectedFulfillmentCount = 1
-		
+
         CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { (posts: [Post]) in
 			XCTAssertEqual(posts[0].categorias?.contains("Destaques"), false, "Post shouldn't be 'Destaque'")
 			expectation.fulfill()
