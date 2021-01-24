@@ -25,14 +25,14 @@ struct RecentPostsProvider: IntentTimelineProvider {
         
         let group = DispatchGroup()
         
-        API().getPosts(page: 1) { xmlPost in
+        API().getPosts(page: 0) { xmlPost in
             guard let xmlPost = xmlPost else {
                 group.wait()
                 
                 let currentDate = Date()
                 let nextDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
                 
-                let entry = RecentPostsEntry(date: currentDate, configuration: configuration, posts: posts.sorted(by: { $0.pubDate > $1.pubDate }))
+                let entry = RecentPostsEntry(date: currentDate, configuration: configuration, posts: posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
 
                 let timeline = Timeline(entries: [entry], policy: .after(nextDate))
                 completion(timeline)
@@ -44,7 +44,7 @@ struct RecentPostsProvider: IntentTimelineProvider {
                 KingfisherManager.shared.retrieveImage(with: url, options: nil) { result in
                     if case let .success(imageResult) = result {
                         print("ok")
-                        let post = PostData(id: xmlPost.postId, title: xmlPost.title, description: xmlPost.excerpt, image: imageResult.image.pngData(), pubDate: xmlPost.pubDate)
+                        let post = PostData(title: xmlPost.title, link: xmlPost.link, thumbnail: xmlPost.artworkURL, favorito: xmlPost.favorite, pubDate: xmlPost.pubDate, excerpt: xmlPost.excerpt, postId: xmlPost.postId, shortURL: xmlPost.shortURL, imageData: imageResult.image.pngData())
                         posts.insert(post)
                         group.leave()
                         

@@ -128,20 +128,29 @@ extension AppDelegate: UITabBarControllerDelegate {
 	}
 }
 
+// MARK: - Widget DeepLink -
+
+extension AppDelegate {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        showDetailController(with: url.absoluteString)
+        return true
+    }
+}
+
 // MARK: - Shortcut -
 
 extension AppDelegate {
-	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-		if shortcutItem.type == "openLastSeenPost" ||
-			shortcutItem.type == "openMostRecentPost" {
-			guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
-				return
-			}
-			tabController.selectedIndex = 0
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "openLastSeenPost" ||
+            shortcutItem.type == "openMostRecentPost" {
+            guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+                return
+            }
+            tabController.selectedIndex = 0
 
-			NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
-		}
-	}
+            NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
+        }
+    }
 }
 
 // MARK: - Spotlight search -

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E6CE96325B3ABCF007CF232 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6CE94725B39C69007CF232 /* PostData.swift */; };
+		5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6CE94725B39C69007CF232 /* PostDataExtension.swift */; };
 		5EB2018025B3664C00E17642 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2017F25B3664C00E17642 /* WidgetKit.framework */; };
 		5EB2018225B3664C00E17642 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2018125B3664C00E17642 /* SwiftUI.framework */; };
 		5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */; };
@@ -17,6 +17,7 @@
 		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */; };
 		5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0897A25BDA5D300DAEF73 /* Kingfisher */; };
+		5EC0898C25BDB87A00DAEF73 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC510D25B385FC006FB270 /* PostCell.swift */; };
 		5EDC511225B38734006FB270 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
@@ -248,7 +249,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5E6CE94725B39C69007CF232 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		5E6CE94725B39C69007CF232 /* PostDataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataExtension.swift; sourceTree = "<group>"; };
 		5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB2017F25B3664C00E17642 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		5EB2018125B3664C00E17642 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -443,7 +444,7 @@
 				5EB2018725B3665100E17642 /* Assets.xcassets */,
 				5EB2018925B3665100E17642 /* Info.plist */,
 				5EDC510D25B385FC006FB270 /* PostCell.swift */,
-				5E6CE94725B39C69007CF232 /* PostData.swift */,
+				5E6CE94725B39C69007CF232 /* PostDataExtension.swift */,
 			);
 			path = MacMagazineWidgetExtension;
 			sourceTree = "<group>";
@@ -1189,9 +1190,10 @@
 				5EB2018A25B3665100E17642 /* MacMagazineWidgetExtension.intentdefinition in Sources */,
 				5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */,
 				5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */,
+				5EC0898C25BDB87A00DAEF73 /* PostData.swift in Sources */,
 				5EDC512225B387A4006FB270 /* StringExtensions.swift in Sources */,
 				5EDC510E25B385FC006FB270 /* PostCell.swift in Sources */,
-				5E6CE96325B3ABCF007CF232 /* PostData.swift in Sources */,
+				5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */,
 				5EDC511225B38734006FB270 /* API.swift in Sources */,
 				5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */,
 				5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */,

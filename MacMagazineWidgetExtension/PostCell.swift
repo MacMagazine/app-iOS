@@ -22,7 +22,7 @@ struct PostCell: View {
         if redactionReasons == .placeholder {
             return Image("widgetPlaceholder")
         } else {
-            if let imageData = post.image {
+            if let imageData = post.imageData {
                 return Image(uiImage: UIImage(data: imageData)!)
             } else {
                 return Image("widgetPlaceholder")
@@ -38,7 +38,7 @@ struct PostCell: View {
     
     var title: some View {
         HStack {
-            Text(post.title)
+            Text(post.title ?? "")
                 .font(.caption)
                 .bold()
                 .multilineTextAlignment(.leading)
@@ -47,12 +47,14 @@ struct PostCell: View {
     }
     
     var body: some View {
-        switch style {
-        case .cover:
-            coverStyle
-        case .row:
-            rowStyle
-        }
+        Link(destination: URL(string: post.link ?? "")!, label: {
+            switch style {
+            case .cover:
+                coverStyle
+            case .row:
+                rowStyle
+            }
+        })
     }
     
     var coverStyle: some View {
@@ -75,9 +77,9 @@ struct PostCell: View {
                     title
                     Spacer()
                 }
-                if widgetFamily == .systemLarge {
+                if widgetFamily == .systemLarge, let excerpt = post.excerpt {
                     HStack {
-                        Text(post.description)
+                        Text(excerpt)
                             .font(.caption2)
                             .foregroundColor(.gray)
                             .lineLimit(2)
@@ -110,9 +112,9 @@ struct PostCell: View {
                 VStack {
                     Spacer()
                     title
-                    if widgetFamily == .systemLarge {
+                    if widgetFamily == .systemLarge, let excerpt = post.excerpt {
                         HStack {
-                            Text(post.description)
+                            Text(excerpt)
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
