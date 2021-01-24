@@ -431,12 +431,12 @@
 		5EB2018325B3664C00E17642 /* MacMagazineWidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
-				5EDE58EA25B38C7B00945C23 /* RecentPosts */,
-				5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */,
 				5EB2018725B3665100E17642 /* Assets.xcassets */,
 				5EB2018925B3665100E17642 /* Info.plist */,
+				5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */,
 				5EDC510D25B385FC006FB270 /* PostCell.swift */,
 				5E6CE94725B39C69007CF232 /* PostDataExtension.swift */,
+				5EDE58EA25B38C7B00945C23 /* RecentPosts */,
 			);
 			path = MacMagazineWidgetExtension;
 			sourceTree = "<group>";
@@ -444,8 +444,8 @@
 		5EDE58EA25B38C7B00945C23 /* RecentPosts */ = {
 			isa = PBXGroup;
 			children = (
-				5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */,
 				5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */,
+				5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */,
 				5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */,
 			);
 			path = RecentPosts;
@@ -478,10 +478,10 @@
 		9B0DD4482226B9600016C567 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				9B25F5082260967A0057FBF9 /* Obfuscator.swift */,
-				9B02AE491F5C507000EA1A6F /* Network.swift */,
 				9B0DD4492226BAF60016C567 /* API.swift */,
 				9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */,
+				9B02AE491F5C507000EA1A6F /* Network.swift */,
+				9B25F5082260967A0057FBF9 /* Obfuscator.swift */,
 				9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */,
 			);
 			name = API;
@@ -630,14 +630,14 @@
 		9BCAD66E1F47A08100B54526 = {
 			isa = PBXGroup;
 			children = (
+				9BF96565225E371900BAF22D /* Frameworks */,
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
+				9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */,
 				9BE697CE1F4874C20048D68D /* MacMagazineTests */,
 				9BB4BC4E225B99F500559170 /* MacMagazineWatch */,
 				9BB4BC5D225B99F600559170 /* MacMagazineWatchExtension */,
-				9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */,
 				5EB2018325B3664C00E17642 /* MacMagazineWidgetExtension */,
 				9BCAD6781F47A08100B54526 /* Products */,
-				9BF96565225E371900BAF22D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -802,6 +802,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EB2019125B3665100E17642 /* Build configuration list for PBXNativeTarget "MacMagazineWidgetExtensionExtension" */;
 			buildPhases = (
+				9B9371E825BE10B0008AFF3C /* Run Swiftlint Script */,
 				5EB2017A25B3664C00E17642 /* Sources */,
 				5EB2017B25B3664C00E17642 /* Frameworks */,
 				5EB2017C25B3664C00E17642 /* Resources */,
@@ -1100,6 +1101,24 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		68829F8524D9D3E800E21056 /* Run Swiftlint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftlint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		9B9371E825BE10B0008AFF3C /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1454,17 +1473,17 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
@@ -1486,17 +1505,17 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1516,13 +1535,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
@@ -1544,13 +1563,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1572,7 +1591,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1587,7 +1606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
@@ -1611,7 +1630,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1626,7 +1645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1649,7 +1668,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1660,7 +1679,7 @@
 				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
@@ -1683,7 +1702,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1694,7 +1713,7 @@
 				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -1834,7 +1853,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1847,7 +1866,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1863,7 +1882,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.2.2.0;
+				CURRENT_PROJECT_VERSION = 4.3.0.0;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1876,7 +1895,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 4.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
