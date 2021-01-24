@@ -9,5 +9,5 @@
 import Foundation
 
 extension PostData {
-    static var placeholder: PostData { .init(title: "Agora o aplicativo do MacMagazine tem widgets para você adicionar à tela inicial do seu iPhone", link: "", thumbnail: "", favorito: false, pubDate: "", excerpt: "Descrição", postId: "", shortURL: "", imageData: nil)}
+    static var placeholder: PostData { .init(title: "Agora o aplicativo do MacMagazine tem widgets para você adicionar à tela inicial do seu iPhone", link: "", thumbnail: "", favorito: false, pubDate: "", excerpt: "Descrição", postId: "", shortURL: "", imageData: nil) }
 }

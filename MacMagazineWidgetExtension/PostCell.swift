@@ -12,30 +12,30 @@ import WidgetKit
 struct PostCell: View {
     @Environment(\.widgetFamily) var widgetFamily
     @Environment(\.redactionReasons) var redactionReasons
-    
+
     let post: PostData
     let style: Style
-    
+
     enum Style { case cover, row }
-    
+
     var image: Image {
         if redactionReasons == .placeholder {
             return Image("widgetPlaceholder")
         } else {
-            if let imageData = post.imageData {
-                return Image(uiImage: UIImage(data: imageData)!)
+            if let imageData = post.imageData, let uiImage = UIImage(data: imageData) {
+                return Image(uiImage: uiImage)
             } else {
                 return Image("widgetPlaceholder")
             }
         }
     }
-    
+
     var coverImage: some View {
         image.resizable()
             .scaledToFill()
             .unredacted()
     }
-    
+
     var title: some View {
         HStack {
             Text(post.title ?? "")
@@ -45,18 +45,27 @@ struct PostCell: View {
             Spacer(minLength: 0)
         }
     }
-    
-    var body: some View {
-        Link(destination: URL(string: post.link ?? "")!, label: {
-            switch style {
-            case .cover:
-                coverStyle
-            case .row:
-                rowStyle
-            }
-        })
+
+    @ViewBuilder
+    var cell: some View {
+        switch style {
+        case .cover:
+            coverStyle
+        case .row:
+            rowStyle
+        }
     }
-    
+
+    var body: some View {
+        if let link = post.link, let url = URL(string: link) {
+            Link(destination: url) {
+                cell
+            }
+        } else {
+            cell
+        }
+    }
+
     var coverStyle: some View {
         VStack {
             HStack {
@@ -69,9 +78,7 @@ struct PostCell: View {
             }
             .shadow(color: Color.black.opacity(0.2), radius: 1)
             .padding([.top, .trailing])
-            
             Spacer()
-            
             VStack {
                 HStack {
                     title
@@ -99,7 +106,7 @@ struct PostCell: View {
         .background(Color.white)
         .clipped()
     }
-    
+
     var rowStyle: some View {
         GeometryReader { geo in
             HStack {

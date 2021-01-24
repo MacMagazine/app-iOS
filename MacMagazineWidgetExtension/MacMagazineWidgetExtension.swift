@@ -6,9 +6,9 @@
 //  Copyright © 2021 MacMagazine. All rights reserved.
 //
 
-import WidgetKit
-import SwiftUI
 import Intents
+import SwiftUI
+import WidgetKit
 
 @main
 struct MacMagazineWidgetExtension: Widget {

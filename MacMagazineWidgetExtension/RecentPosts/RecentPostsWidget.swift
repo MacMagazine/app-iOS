@@ -9,10 +9,10 @@
 import SwiftUI
 import WidgetKit
 
-struct RecentPostsWidget : View {
+struct RecentPostsWidget: View {
     @Environment(\.widgetFamily) var widgetFamily
     var entry: RecentPostsEntry
-    
+
     var content: [PostData] { entry.posts }
 
     var body: some View {
