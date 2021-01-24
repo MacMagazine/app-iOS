@@ -8,6 +8,7 @@
 
 import OneSignal
 import UserNotifications
+import WidgetKit
 
 class NotificationService: UNNotificationServiceExtension {
 
@@ -24,6 +25,10 @@ class NotificationService: UNNotificationServiceExtension {
 			OneSignal.didReceiveNotificationExtensionRequest(self.receivedRequest, with: self.bestAttemptContent)
 			contentHandler(bestAttemptContent)
 		}
+
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
 	}
 
 	override func serviceExtensionTimeWillExpire() {
