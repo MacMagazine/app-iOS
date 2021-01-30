@@ -16,34 +16,31 @@ struct RecentPostsWidget: View {
     var content: [PostData] { entry.posts }
 
     var body: some View {
-        if content.isEmpty {
-            Text("Nenhum conteúdo")
-                .font(.headline)
-                .padding()
-        } else {
-            switch widgetFamily {
-            case .systemSmall:
-                PostCell(post: content[0], style: .cover)
-            case .systemMedium:
-                VStack {
-                    PostCell(post: content[0], style: .row)
-                    PostCell(post: content[1], style: .row)
-                }.padding()
-            case .systemLarge:
-                GeometryReader { geo in
+        Group {
+            if content.isEmpty {
+                Text("Nenhum conteúdo disponível.")
+                    .font(.headline)
+                    .padding()
+            } else {
+                switch widgetFamily {
+                case .systemSmall:
+                    PostCell(post: content[0], style: .cover)
+                case .systemMedium:
                     VStack(spacing: 0) {
                         PostCell(post: content[0], style: .cover)
-                            .frame(height: 0.45 * geo.size.height)
-                        VStack {
-                            PostCell(post: content[1], style: .row)
-                            PostCell(post: content[2], style: .row)
-                        }.padding()
+                        PostCell(post: content[1], style: .cover)
                     }
+                case .systemLarge:
+                    VStack(spacing: 0) {
+                        PostCell(post: content[0], style: .cover)
+                        PostCell(post: content[1], style: .cover)
+                        PostCell(post: content[2], style: .cover)
+                    }
+                @unknown default:
+                    Text("Tamanho incompatível.")
                 }
-            @unknown default:
-                Text("other size")
             }
-        }
+        }.background(Color(.secondarySystemBackground))
     }
 }
 

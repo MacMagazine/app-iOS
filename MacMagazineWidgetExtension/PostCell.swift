@@ -43,73 +43,56 @@ struct PostCell: View {
     }
 
     var contentView: some View {
-        HStack {
-            Text(post.title ?? "")
-                .font(.subheadline)
-                .multilineTextAlignment(.leading)
-            Spacer()
+        VStack(spacing: 2) {
+            if let title = post.title {
+                HStack {
+                    Text(title)
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                    Spacer(minLength: 0)
+                }
+            }
         }
     }
 
     var body: some View {
-        if let link = post.link, let url = URL(string: link) {
-            Link(destination: url) {
+        Group {
+            if let link = post.link, let url = URL(string: link) {
+                Link(destination: url) {
+                    cell
+                }
+            } else {
                 cell
-                    .background(Color(UIColor.systemGray6))
-                    .cornerRadius(8)
             }
-        } else {
-            cell
-                .background(Color(UIColor.systemGray6))
-                .cornerRadius(8)
         }
     }
 
     var coverStyle: some View {
         VStack {
-            HStack {
-                Spacer()
-                Image("logo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40)
-                    .unredacted()
-            }
-            .shadow(color: Color.black.opacity(0.4), radius: 1)
-            .padding([.top, .trailing])
             Spacer(minLength: 0)
             contentView.shadow(color: .black, radius: 5)
-            .padding([.horizontal, .bottom])
+            .padding()
         }
         .background(
             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.black]), startPoint: .top, endPoint: .bottom))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .background(image.resizable().scaledToFill())
+        .background(Color.white)
         .clipped()
         .colorScheme(.dark)
     }
 
     var rowStyle: some View {
         GeometryReader { geo in
-            HStack {
-                Spacer(minLength: 4)
-                VStack {
-                    Spacer()
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: (0.8 * geo.size.height) / (101 / 70), // to match cell on a Post
-                               height: 0.8 * geo.size.height)
-                        .clipped()
-                        .cornerRadius(8)
-                    Spacer()
-                }
-                VStack {
-                    Spacer()
-                    contentView
-                    Spacer()
-                }
+            HStack(spacing: 8) {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 0.18 * geo.size.width, height: geo.size.height)
+                    .clipped()
+                    .cornerRadius(8)
+                contentView
             }
         }
     }
@@ -119,24 +102,20 @@ struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             VStack {
-                PostCell(post: .placeholder, style: .row)
-                PostCell(post: .placeholder, style: .row)
-            }.padding()
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                PostCell(post: .placeholder, style: .cover)
+                PostCell(post: .placeholder, style: .cover)
+            }
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
             .environment(\.sizeCategory, .extraExtraLarge)
             GeometryReader { geo in
                 VStack {
                     PostCell(post: .placeholder, style: .cover)
-                        .frame(height: 0.5 * geo.size.height)
-                    VStack {
-                        PostCell(post: .placeholder, style: .row)
-                        PostCell(post: .placeholder, style: .row)
-                    }.padding()
+                    PostCell(post: .placeholder, style: .cover)
+                    PostCell(post: .placeholder, style: .cover)
                 }
             }
             .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
-//        .redacted(reason: .placeholder)
         .environment(\.sizeCategory, .extraLarge)
     }
 }
