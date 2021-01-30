@@ -132,7 +132,13 @@ extension AppDelegate: UITabBarControllerDelegate {
 
 extension AppDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        showDetailController(with: url.absoluteString)
+        CoreDataStack.shared.get(link: url.absoluteString) { (items: [Post]) in
+            if items.isEmpty {
+                PushNotification().updateDatabase(for: url.absoluteString)
+            } else {
+                showDetailController(with: url.absoluteString)
+            }
+        }
         return true
     }
 }

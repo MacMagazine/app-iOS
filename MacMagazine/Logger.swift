@@ -36,11 +36,7 @@ class Log {
     }
 
     private static var isLoggingEnabled: Bool {
-        #if LOG_ENABLED
         return true
-        #else
-        return false
-        #endif
     }
 
     // MARK: - Logging methods -
