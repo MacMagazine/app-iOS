@@ -57,7 +57,7 @@ struct PostCell: View {
 
     var body: some View {
         Group {
-            if let link = post.link, let url = URL(string: link) {
+            if let url = post.url {
                 Link(destination: url) {
                     cell
                 }
@@ -107,12 +107,10 @@ struct PostCell_Previews: PreviewProvider {
             }
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             .environment(\.sizeCategory, .extraExtraLarge)
-            GeometryReader { geo in
-                VStack {
-                    PostCell(post: .placeholder, style: .cover)
-                    PostCell(post: .placeholder, style: .cover)
-                    PostCell(post: .placeholder, style: .cover)
-                }
+            VStack {
+                PostCell(post: .placeholder, style: .cover)
+                PostCell(post: .placeholder, style: .cover)
+                PostCell(post: .placeholder, style: .cover)
             }
             .previewContext(WidgetPreviewContext(family: .systemLarge))
         }

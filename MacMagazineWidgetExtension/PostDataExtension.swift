@@ -18,4 +18,11 @@ extension PostData {
                                              postId: "",
                                              shortURL: "",
                                              imageData: nil) }
+
+    var url: URL? {
+        guard let link = link, let url = URL(string: link) else {
+            return nil
+        }
+        return url
+    }
 }

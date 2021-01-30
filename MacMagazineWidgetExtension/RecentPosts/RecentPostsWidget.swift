@@ -25,15 +25,20 @@ struct RecentPostsWidget: View {
                 switch widgetFamily {
                 case .systemSmall:
                     PostCell(post: content[0], style: .cover)
+                        .widgetURL(content[0].url)
+
                 case .systemMedium:
                     VStack(spacing: 0) {
                         PostCell(post: content[0], style: .cover)
+                        Divider()
                         PostCell(post: content[1], style: .cover)
                     }
                 case .systemLarge:
                     VStack(spacing: 0) {
                         PostCell(post: content[0], style: .cover)
+                        Divider()
                         PostCell(post: content[1], style: .cover)
+                        Divider()
                         PostCell(post: content[2], style: .cover)
                     }
                 @unknown default:

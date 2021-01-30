@@ -20,7 +20,6 @@ struct MacMagazineWidgetExtension: Widget {
         }
         .configurationDisplayName("Notícias Recentes")
         .description("Acompanhe as últimas notícias do universo Apple.")
-        .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
 
