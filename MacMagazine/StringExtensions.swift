@@ -133,11 +133,11 @@ extension String {
 		let minutes = String(format: "%02d", calendar.component(.minute, from: dateToUse))
 
 		if calendar.isDateInToday(dateToUse) {
-			return "@\(hour):\(minutes)"
+			return "HOJE \(hour):\(minutes)"
 		} else if calendar.isDateInYesterday(dateToUse) {
-			return "ONTEM @\(hour):\(minutes)"
+			return "ONTEM \(hour):\(minutes)"
 		}
-		return "\(day)/\(month) @\(hour):\(minutes)"
+		return "\(day)/\(month) \(hour):\(minutes)"
 	}
 
 	func escape() -> String {

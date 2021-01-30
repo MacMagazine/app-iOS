@@ -43,24 +43,11 @@ struct PostCell: View {
     }
 
     var contentView: some View {
-        VStack(spacing: 2) {
-            if let title = post.title {
-                HStack {
-                    Text(title)
-                        .font(.callout)
-                        .bold()
-                        .multilineTextAlignment(.leading)
-                    Spacer(minLength: 0)
-                }
-            }
-            if let pubDate = post.pubDate {
-                HStack {
-                    Spacer()
-                    Text(pubDate.toComplicationDate())
-                        .font(.caption2)
-                        .foregroundColor(.gray)
-                }
-            }
+        HStack {
+            Text(post.title ?? "")
+                .font(.subheadline)
+                .multilineTextAlignment(.leading)
+            Spacer()
         }
     }
 
@@ -68,9 +55,13 @@ struct PostCell: View {
         if let link = post.link, let url = URL(string: link) {
             Link(destination: url) {
                 cell
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(8)
             }
         } else {
             cell
+                .background(Color(UIColor.systemGray6))
+                .cornerRadius(8)
         }
     }
 
@@ -81,10 +72,10 @@ struct PostCell: View {
                 Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 30)
+                    .frame(width: 40)
                     .unredacted()
             }
-            .shadow(color: Color.black.opacity(0.2), radius: 1)
+            .shadow(color: Color.black.opacity(0.4), radius: 1)
             .padding([.top, .trailing])
             Spacer(minLength: 0)
             contentView.shadow(color: .black, radius: 5)
@@ -95,21 +86,30 @@ struct PostCell: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .background(image.resizable().scaledToFill())
-        .background(Color.white)
         .clipped()
         .colorScheme(.dark)
     }
 
     var rowStyle: some View {
         GeometryReader { geo in
-            HStack(spacing: 8) {
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 0.18 * geo.size.width, height: geo.size.height)
-                    .clipped()
-                    .cornerRadius(8)
-                contentView
+            HStack {
+                Spacer(minLength: 4)
+                VStack {
+                    Spacer()
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: (0.8 * geo.size.height) / (101 / 70), // to match cell on a Post
+                               height: 0.8 * geo.size.height)
+                        .clipped()
+                        .cornerRadius(8)
+                    Spacer()
+                }
+                VStack {
+                    Spacer()
+                    contentView
+                    Spacer()
+                }
             }
         }
     }

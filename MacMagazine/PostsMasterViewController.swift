@@ -11,6 +11,7 @@ import CoreSpotlight
 import Kingfisher
 import SafariServices
 import UIKit
+import WidgetKit
 
 // MARK: - Extensions -
 
@@ -283,6 +284,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
                     // When post == nil, indicates the last post retrieved
                     self.hideSpin()
+
+                    // Reload Widgets
+                    if #available(iOS 14.0, *) {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
 
                     if paged < 1 {
                         if self.status == .recentPost {
