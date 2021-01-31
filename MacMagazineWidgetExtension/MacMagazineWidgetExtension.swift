@@ -6,7 +6,6 @@
 //  Copyright © 2021 MacMagazine. All rights reserved.
 //
 
-import Intents
 import SwiftUI
 import WidgetKit
 

@@ -17,7 +17,6 @@ struct PostData: Codable, Hashable {
 	var excerpt: String?
     var postId: String?
     var shortURL: String?
-    let imageData: Data?
 
     init(title: String?,
          link: String?,
@@ -26,8 +25,7 @@ struct PostData: Codable, Hashable {
          pubDate: String? = "",
          excerpt: String? = "",
          postId: String? = "",
-         shortURL: String? = "",
-         imageData: Data? = nil) {
+         shortURL: String? = "") {
 
 		self.title = title
 		self.link = link
@@ -37,6 +35,5 @@ struct PostData: Codable, Hashable {
 		self.excerpt = excerpt
         self.postId = postId
         self.shortURL = shortURL
-        self.imageData = imageData
 	}
 }

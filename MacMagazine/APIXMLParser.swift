@@ -48,20 +48,23 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 	var processItem = false
 	var value = ""
 	var attributes: [String: String]?
-	var isComplication = false
+	var numberOfPosts = -1
+    var parsedPosts = 0
 
 	// MARK: - Init -
 
-	init(onCompletion: ((XMLPost?) -> Void)?, isComplication: Bool) {
+	init(onCompletion: ((XMLPost?) -> Void)?, numberOfPosts: Int) {
 		self.onCompletion = onCompletion
-		self.isComplication = isComplication
+		self.numberOfPosts = numberOfPosts
 	}
 
 	// MARK: - Parse Delegate -
 
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
 
-		value = ""
+        parsedPosts = 0
+
+        value = ""
 		if elementName == "item" {
 			processItem = true
 			currentPost = XMLPost()
@@ -118,8 +121,10 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 				currentPost.podcastFrame = value
 			case "item":
 				onCompletion?(currentPost)
+                parsedPosts += 1
 				processItem = false
-				if isComplication {
+				if numberOfPosts > 0 &&
+                    parsedPosts >= numberOfPosts {
 					parser.abortParsing()
 				}
 			case "guid":

@@ -11,57 +11,49 @@ import Kingfisher
 import WidgetKit
 
 struct RecentPostsProvider: TimelineProvider {
-    func getSnapshot(in context: Context, completion: @escaping (RecentPostsEntry) -> Void) {
-        let entry = RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
-        completion(entry)
+    func placeholder(in context: Context) -> RecentPostsEntry {
+        RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<RecentPostsEntry>) -> Void) {
-        var posts: Set<PostData> = []
-
-        let group = DispatchGroup()
-
-        API().getPosts(page: 0) { xmlPost in
-            guard let xmlPost = xmlPost else {
-                group.wait()
-
-                let currentDate = Date()
-                guard let nextDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) else {
-                    completion(.init(entries: [], policy: .atEnd))
-                    return
-                }
-
-                let entry = RecentPostsEntry(date: currentDate, posts: posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
-
-                let timeline = Timeline(entries: [entry], policy: .after(nextDate))
-                completion(timeline)
-                return
-            }
-            DispatchQueue.global().async {
-                guard let url = URL(string: xmlPost.artworkURL) else {
-                    return
-                }
-                group.enter()
-                KingfisherManager.shared.retrieveImage(with: url, options: nil) { result in
-                    if case let .success(imageResult) = result {
-                        let post = PostData(title: xmlPost.title,
-                                            link: xmlPost.link,
-                                            thumbnail: xmlPost.artworkURL,
-                                            favorito: xmlPost.favorite,
-                                            pubDate: xmlPost.pubDate,
-                                            excerpt: xmlPost.excerpt,
-                                            postId: xmlPost.postId,
-                                            shortURL: xmlPost.shortURL,
-                                            imageData: imageResult.image.pngData())
-                        posts.insert(post)
-                        group.leave()
-                    }
-                }
-            }
+    func getSnapshot(in context: Context, completion: @escaping (RecentPostsEntry) -> Void) {
+        getWidgetContent { posts in
+            let entry = RecentPostsEntry(date: Date(), posts: posts)
+            completion(entry)
         }
     }
 
-    func placeholder(in context: Context) -> RecentPostsEntry {
-        RecentPostsEntry(date: Date(), posts: [.placeholder])
+    func getTimeline(in context: Context, completion: @escaping (Timeline<RecentPostsEntry>) -> Void) {
+        getWidgetContent { posts in
+            let currentDate = Date()
+            guard let nextDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) else {
+                completion(.init(entries: [], policy: .atEnd))
+                return
+            }
+            let entry = RecentPostsEntry(date: currentDate, posts: posts)
+            let timeline = Timeline(entries: [entry], policy: .after(nextDate))
+            completion(timeline)
+        }
+    }
+}
+
+extension RecentPostsProvider {
+    fileprivate func getWidgetContent(onCompletion: @escaping (([PostData]) -> Void)) {
+        var posts = [PostData]()
+
+        API().getWidgets { xmlPost in
+            guard let xmlPost = xmlPost else {
+                onCompletion(posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
+                return
+            }
+            let post = PostData(title: xmlPost.title,
+                                link: xmlPost.link,
+                                thumbnail: xmlPost.artworkURL,
+                                favorito: xmlPost.favorite,
+                                pubDate: xmlPost.pubDate,
+                                excerpt: xmlPost.excerpt,
+                                postId: xmlPost.postId,
+                                shortURL: xmlPost.shortURL)
+            posts.append(post)
+        }
     }
 }

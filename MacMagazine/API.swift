@@ -113,7 +113,7 @@ class API {
 	// MARK: - Properties -
 
     var onCompletion: ((XMLPost?) -> Void)?
-	var isComplication = false
+	var numberOfPosts = -1
 
 	#if os(iOS) && !WIDGET
 	var onVideoCompletion: ((YouTube<String>?) -> Void)?
@@ -127,9 +127,14 @@ class API {
     }
 
 	func getComplications(_ completion: ((XMLPost?) -> Void)?) {
-		isComplication = true
+        numberOfPosts = 1
 		getPosts(page: 0, completion)
 	}
+
+    func getWidgets(_ completion: ((XMLPost?) -> Void)?) {
+        numberOfPosts = 3
+        getPosts(page: 0, completion)
+    }
 
     func getPosts(page: Int = 0, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
@@ -210,7 +215,7 @@ class API {
                 case .success(let response):
                     self.parse(response,
                                onCompletion: self.onCompletion,
-                               isComplication: self.isComplication)
+                               numberOfPosts: self.numberOfPosts)
             }
         }
     }
@@ -218,9 +223,9 @@ class API {
 }
 
 extension API {
-	func parse(_ data: Data, onCompletion: ((XMLPost?) -> Void)?, isComplication: Bool) {
+	func parse(_ data: Data, onCompletion: ((XMLPost?) -> Void)?, numberOfPosts: Int) {
 		let parser = XMLParser(data: data)
-		let apiParser = APIXMLParser(onCompletion: onCompletion, isComplication: isComplication)
+		let apiParser = APIXMLParser(onCompletion: onCompletion, numberOfPosts: numberOfPosts)
 		parser.delegate = apiParser
 		parser.parse()
 	}

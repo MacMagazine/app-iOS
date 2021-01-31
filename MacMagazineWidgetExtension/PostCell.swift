@@ -6,6 +6,7 @@
 //  Copyright © 2021 MacMagazine. All rights reserved.
 //
 
+import KingfisherSwiftUI
 import SwiftUI
 import WidgetKit
 
@@ -19,16 +20,13 @@ struct PostCell: View {
 
     enum Style { case cover, row }
 
-    var image: Image {
+    var image: KFImage {
         if redactionReasons == .placeholder {
-            return Image("image_logo_feature")
+            return KFImage(URL(string: ""))
+                .placeholder { Image("image_logo_feature") }
         } else {
-            if let imageData = post.imageData,
-               let uiImage = UIImage(data: imageData) {
-                return Image(uiImage: uiImage)
-            } else {
-                return Image("image_logo_feature")
-            }
+            return KFImage(URL(string: post.thumbnail ?? ""))
+                .placeholder { Image("image_logo_feature") }
         }
     }
 
@@ -101,13 +99,13 @@ struct PostCell: View {
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VStack {
+            VStack(spacing: 1) {
                 PostCell(post: .placeholder, style: .cover)
                 PostCell(post: .placeholder, style: .cover)
             }
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             .environment(\.sizeCategory, .extraExtraLarge)
-            VStack {
+            VStack(spacing: 1) {
                 PostCell(post: .placeholder, style: .cover)
                 PostCell(post: .placeholder, style: .cover)
                 PostCell(post: .placeholder, style: .cover)

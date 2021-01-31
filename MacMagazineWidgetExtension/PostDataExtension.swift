@@ -9,18 +9,18 @@
 import Foundation
 
 extension PostData {
-    static var placeholder: PostData { .init(title: "Acompanhe as últimas notícias do universo Apple.",
-                                             link: "",
-                                             thumbnail: "",
-                                             favorito: false,
-                                             pubDate: "",
-                                             excerpt: "Adicione o widget à tela inicial do seu dispositivo.",
-                                             postId: "",
-                                             shortURL: "",
-                                             imageData: nil) }
+    static var placeholder = PostData(title: "Acompanhe as últimas notícias do universo Apple.",
+                                      link: "",
+                                      thumbnail: "",
+                                      favorito: false,
+                                      pubDate: "",
+                                      excerpt: "Adicione o widget à tela inicial do seu dispositivo.",
+                                      postId: "",
+                                      shortURL: "")
 
     var url: URL? {
-        guard let link = link, let url = URL(string: link) else {
+        guard let link = link,
+              let url = URL(string: link) else {
             return nil
         }
         return url

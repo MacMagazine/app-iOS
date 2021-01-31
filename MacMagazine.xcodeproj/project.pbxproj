@@ -67,6 +67,8 @@
 		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
+		9B61D91725C7088200EA8085 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9B61D91625C7088200EA8085 /* KingfisherSwiftUI */; };
+		9B61D92125C714B000EA8085 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B6F965A225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
@@ -382,6 +384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B61D91725C7088200EA8085 /* KingfisherSwiftUI in Frameworks */,
 				5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,6 +818,7 @@
 			name = MacMagazineWidgetExtensionExtension;
 			packageProductDependencies = (
 				5EC0897A25BDA5D300DAEF73 /* Kingfisher */,
+				9B61D91625C7088200EA8085 /* KingfisherSwiftUI */,
 			);
 			productName = MacMagazineWidgetExtensionExtension;
 			productReference = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */;
@@ -1208,6 +1212,7 @@
 				5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */,
 				5EDC511225B38734006FB270 /* API.swift in Sources */,
 				5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */,
+				9B61D92125C714B000EA8085 /* Logger.swift in Sources */,
 				5EDC511E25B3879C006FB270 /* Cookies.swift in Sources */,
 				5EDC511A25B38791006FB270 /* Network.swift in Sources */,
 				5EDC511625B3873F006FB270 /* APIXMLParser.swift in Sources */,
@@ -2049,6 +2054,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9B61D91625C7088200EA8085 /* KingfisherSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherSwiftUI;
 		};
 		9BF82C9D25150E3000D765A5 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
