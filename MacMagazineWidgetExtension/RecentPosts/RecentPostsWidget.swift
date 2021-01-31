@@ -28,30 +28,28 @@ struct RecentPostsWidget: View {
                         .widgetURL(content[0].url)
 
                 case .systemMedium:
-                    VStack(spacing: 0) {
-                        PostCell(post: content[0], style: .cover)
-                        Divider()
-                        PostCell(post: content[1], style: .cover)
+                    VStack(spacing: 1) {
+                        ForEach(0 ..< min(2, content.count)) { index in
+                            PostCell(post: content[index], style: .cover)
+                        }
                     }
                 case .systemLarge:
-                    VStack(spacing: 0) {
-                        PostCell(post: content[0], style: .cover)
-                        Divider()
-                        PostCell(post: content[1], style: .cover)
-                        Divider()
-                        PostCell(post: content[2], style: .cover)
+                    VStack(spacing: 1) {
+                        ForEach(0 ..< min(3, content.count)) { index in
+                            PostCell(post: content[index], style: .cover)
+                        }
                     }
                 @unknown default:
                     Text("Tamanho incompatível.")
                 }
             }
-        }.background(Color(.secondarySystemBackground))
+        }.background(Color.white)
     }
 }
 
 struct RecentPostsWidget_Previews: PreviewProvider {
     static var previews: some View {
-        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder, .placeholder]))
+        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .environment(\.sizeCategory, .extraLarge)
     }

@@ -21,13 +21,13 @@ struct PostCell: View {
 
     var image: Image {
         if redactionReasons == .placeholder {
-            return Image("widgetPlaceholder")
+            return Image("image_logo_feature")
         } else {
             if let imageData = post.imageData,
                let uiImage = UIImage(data: imageData) {
                 return Image(uiImage: uiImage)
             } else {
-                return Image("widgetPlaceholder")
+                return Image("image_logo_feature")
             }
         }
     }

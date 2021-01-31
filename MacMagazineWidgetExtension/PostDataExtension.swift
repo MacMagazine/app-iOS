@@ -9,7 +9,7 @@
 import Foundation
 
 extension PostData {
-    static var placeholder: PostData { .init(title: "Acompanhe as notícias do App MacMagazine",
+    static var placeholder: PostData { .init(title: "Acompanhe as últimas notícias do universo Apple.",
                                              link: "",
                                              thumbnail: "",
                                              favorito: false,

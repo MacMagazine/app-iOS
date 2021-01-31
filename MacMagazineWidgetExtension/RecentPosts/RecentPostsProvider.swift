@@ -44,7 +44,6 @@ struct RecentPostsProvider: TimelineProvider {
                 group.enter()
                 KingfisherManager.shared.retrieveImage(with: url, options: nil) { result in
                     if case let .success(imageResult) = result {
-                        print("ok")
                         let post = PostData(title: xmlPost.title,
                                             link: xmlPost.link,
                                             thumbnail: xmlPost.artworkURL,
@@ -63,6 +62,6 @@ struct RecentPostsProvider: TimelineProvider {
     }
 
     func placeholder(in context: Context) -> RecentPostsEntry {
-        RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
+        RecentPostsEntry(date: Date(), posts: [.placeholder])
     }
 }

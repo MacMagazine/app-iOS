@@ -18,8 +18,8 @@ struct MacMagazineWidgetExtension: Widget {
         StaticConfiguration(kind: kind, provider: RecentPostsProvider()) { entry in
             RecentPostsWidget(entry: entry)
         }
-        .configurationDisplayName("Notícias Recentes")
-        .description("Acompanhe as últimas notícias do universo Apple.")
+        .configurationDisplayName("Universo Apple")
+        .description("Acompanhe as últimas notícias pelo App MacMagazine.")
     }
 }
 
