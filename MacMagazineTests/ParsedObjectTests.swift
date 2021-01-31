@@ -63,7 +63,7 @@ class ParsedObjectTests: XCTestCase {
 			expectation.fulfill()
 		}
 
-		API().parse(post, onCompletion: onCompletion, isComplication: false)
+		API().parse(post, onCompletion: onCompletion, numberOfPosts: 1)
 
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")

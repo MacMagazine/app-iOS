@@ -135,7 +135,7 @@ class PostTests: XCTestCase {
 			posts.append(post)
 			CoreDataStack.shared.save(post: post)
 		}
-		API().parse(data, onCompletion: completion, isComplication: false)
+		API().parse(data, onCompletion: completion, numberOfPosts: 2)
 
 		waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
@@ -152,7 +152,7 @@ extension PostTests {
 		}
 		API().parse(example, onCompletion: { (post: XMLPost?) in
 			onCompletion(post)
-		}, isComplication: false)
+		}, numberOfPosts: -1)
 	}
 
 	func savePost(_ onCompletion: @escaping (([Post]) -> Void)) {
