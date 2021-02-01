@@ -123,7 +123,7 @@ class PostTests: XCTestCase {
 			guard let post = post else {
 				XCTAssertEqual(posts.count, 2, "Should have 2 posts")
 
-				CoreDataStack.shared.delay(0.4) {
+				delay(0.4) {
                     CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { (db: [Post]) in
 						XCTAssertEqual(db.count, 1, "Should retrieve only 1 post")
 
@@ -158,7 +158,7 @@ extension PostTests {
 	func savePost(_ onCompletion: @escaping (([Post]) -> Void)) {
 		parseExample { post in
 			guard let post = post else {
-				CoreDataStack.shared.delay(0.4) {
+				delay(0.4) {
 					CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { posts in
 						onCompletion(posts)
 					}

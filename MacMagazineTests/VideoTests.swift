@@ -268,7 +268,7 @@ extension VideoTests {
 			}
 
             CoreDataStack.shared.save(playlist: parsedVideo, statistics: stats)
-			CoreDataStack.shared.delay(0.4) {
+			delay(0.4) {
 				CoreDataStack.shared.get(video: self.exampleVideo.getExampleVideoId()) { video in
 					onCompletion(video)
 				}
