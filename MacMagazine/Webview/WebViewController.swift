@@ -418,7 +418,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     fileprivate func backAndReload() {
         delay(0.8) {
             self.navigationController?.popViewController(animated: true)
-            self.delay(0.8) {
+            delay(0.8) {
                 NotificationCenter.default.post(name: .reloadWeb, object: true)
             }
         }
@@ -496,13 +496,6 @@ extension WebViewController {
 		}
 	}
 
-}
-
-extension WebViewController {
-	func delay(_ delay: Double, closure: @escaping () -> Void) {
-		let when = DispatchTime.now() + delay
-		DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
-	}
 }
 
 extension WebViewController: WKScriptMessageHandler {

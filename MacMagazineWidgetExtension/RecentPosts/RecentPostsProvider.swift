@@ -24,13 +24,7 @@ struct RecentPostsProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<RecentPostsEntry>) -> Void) {
         getWidgetContent { posts in
-            let currentDate = Date()
-            guard let nextDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) else {
-                completion(.init(entries: [], policy: .atEnd))
-                return
-            }
-            let entry = RecentPostsEntry(date: currentDate, posts: posts)
-            let timeline = Timeline(entries: [entry], policy: .after(nextDate))
+            let timeline = Timeline(entries: [RecentPostsEntry(date: Date(), posts: posts)], policy: .atEnd)
             completion(timeline)
         }
     }

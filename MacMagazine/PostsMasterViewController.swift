@@ -584,9 +584,18 @@ func showDetailController(with link: String) {
 				// Need to add the controller to navigation to see the nav bar
 				navVC.viewControllers = [controller]
 				splitVC.showDetailViewController(navVC, sender: nil)
-			}
+
+                delay(0.4) {
+                    NotificationCenter.default.post(name: .updateSelectedPost, object: link)
+                }
+            }
 		}
 	}
+}
+
+func delay(_ delay: Double, closure: @escaping () -> Void) {
+    let when = DispatchTime.now() + delay
+    DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
 }
 
 // MARK: - Easter Egg -

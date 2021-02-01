@@ -9,12 +9,12 @@
 import Foundation
 
 extension PostData {
-    static var placeholder = PostData(title: "Acompanhe as últimas notícias do universo Apple.",
+    static var placeholder = PostData(title: "MacMagazine",
                                       link: "",
                                       thumbnail: "",
                                       favorito: false,
                                       pubDate: "",
-                                      excerpt: "Adicione o widget à tela inicial do seu dispositivo.",
+                                      excerpt: "Confira nossos últimos posts!",
                                       postId: "",
                                       shortURL: "")
 

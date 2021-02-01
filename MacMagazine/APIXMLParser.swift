@@ -62,8 +62,6 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
 
-        parsedPosts = 0
-
         value = ""
 		if elementName == "item" {
 			processItem = true

@@ -80,9 +80,9 @@ extension SoundcloudPlayer: WKNavigationDelegate {
 			do {
 				let code = try String(contentsOfFile: resource, encoding: .utf8)
 				self.evaluateJavaScript(code) { _, _ in
-					self.delay(0.2) {
+					delay(0.2) {
 						self.evaluateJavaScript(self.soundCloudWidget) { _, _ in
-							self.delay(0.2) {
+							delay(0.2) {
 								self.play()
 							}
 						}
@@ -92,13 +92,6 @@ extension SoundcloudPlayer: WKNavigationDelegate {
 				logE(error.localizedDescription)
 			}
 		}
-	}
-}
-
-extension SoundcloudPlayer {
-	func delay(_ delay: Double, closure: @escaping () -> Void) {
-		let when = DispatchTime.now() + delay
-		DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
 	}
 }
 

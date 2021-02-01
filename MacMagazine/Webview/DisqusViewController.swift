@@ -34,7 +34,7 @@ class DisqusViewController: UIViewController {
         super.willTransition(to: newCollection, with: coordinator)
 
         coordinator.animate(alongsideTransition: nil) { _ in
-            self.delay(0.8) {
+            delay(0.8) {
                 NotificationCenter.default.post(name: .reloadWeb, object: nil)
                 self.loadWebView()
             }
@@ -60,11 +60,6 @@ class DisqusViewController: UIViewController {
 
         self.loadDisqus()
         self.webView?.loadHTMLString(content, baseURL: nil)
-    }
-
-    fileprivate func delay(_ delay: Double, closure: @escaping () -> Void) {
-        let when = DispatchTime.now() + delay
-        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
 
     @IBAction private func close(_ sender: Any) {
