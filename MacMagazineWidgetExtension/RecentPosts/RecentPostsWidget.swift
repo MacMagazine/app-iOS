@@ -24,19 +24,18 @@ struct RecentPostsWidget: View {
             } else {
                 switch widgetFamily {
                 case .systemSmall:
-                    PostCell(post: content[0], style: .cover)
-                        .widgetURL(content[0].url)
+                    PostCell(post: content[0])
 
                 case .systemMedium:
                     VStack(spacing: 1) {
                         ForEach(0 ..< min(2, content.count)) { index in
-                            PostCell(post: content[index], style: .cover)
+                            PostCell(post: content[index])
                         }
                     }
                 case .systemLarge:
                     VStack(spacing: 1) {
                         ForEach(0 ..< min(3, content.count)) { index in
-                            PostCell(post: content[index], style: .cover)
+                            PostCell(post: content[index])
                         }
                     }
                 @unknown default:

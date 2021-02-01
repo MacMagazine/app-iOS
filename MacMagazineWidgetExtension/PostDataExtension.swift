@@ -9,20 +9,26 @@
 import Foundation
 
 extension PostData {
-    static var placeholder = PostData(title: "MacMagazine",
+    static var placeholder = PostData(title: "Acompanhe as últimas notícias do universo Apple.",
                                       link: "",
                                       thumbnail: "",
                                       favorito: false,
                                       pubDate: "",
-                                      excerpt: "Confira nossos últimos posts!",
+                                      excerpt: "Adicione o widget à tela inicial do seu dispositivo.",
                                       postId: "",
                                       shortURL: "")
 
-    var url: URL? {
-        guard let link = link,
-              let url = URL(string: link) else {
-            return nil
+    var url: URL {
+        return URL(staticString: link ?? "")
+    }
+}
+
+extension URL {
+    init(staticString string: String) {
+        guard let url = URL(string: "\(string)") else {
+            preconditionFailure("Invalid static URL string: \(string)")
         }
-        return url
+
+        self = url
     }
 }

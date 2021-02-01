@@ -16,9 +16,6 @@ struct PostCell: View {
     @Environment(\.accessibilityEnabled) var accessibilityEnabled
 
     let post: PostData
-    let style: Style
-
-    enum Style { case cover, row }
 
     var image: KFImage {
         if redactionReasons == .placeholder {
@@ -31,12 +28,15 @@ struct PostCell: View {
     }
 
     @ViewBuilder
-    var cell: some View {
-        switch style {
-        case .cover:
+    var body: some View {
+        switch widgetFamily {
+        case .systemSmall:
             coverStyle
-        case .row:
-            rowStyle
+                .widgetURL(post.url)
+        default:
+            Link(destination: post.url) {
+                coverStyle
+            }
         }
     }
 
@@ -49,18 +49,6 @@ struct PostCell: View {
                         .multilineTextAlignment(.leading)
                     Spacer(minLength: 0)
                 }
-            }
-        }
-    }
-
-    var body: some View {
-        Group {
-            if let url = post.url {
-                Link(destination: url) {
-                    cell
-                }
-            } else {
-                cell
             }
         }
     }
@@ -80,35 +68,21 @@ struct PostCell: View {
         .clipped()
         .colorScheme(.dark)
     }
-
-    var rowStyle: some View {
-        GeometryReader { geo in
-            HStack(spacing: 8) {
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 0.18 * geo.size.width, height: geo.size.height)
-                    .clipped()
-                    .cornerRadius(8)
-                contentView
-            }
-        }
-    }
 }
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             VStack(spacing: 1) {
-                PostCell(post: .placeholder, style: .cover)
-                PostCell(post: .placeholder, style: .cover)
+                PostCell(post: .placeholder)
+                PostCell(post: .placeholder)
             }
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             .environment(\.sizeCategory, .extraExtraLarge)
             VStack(spacing: 1) {
-                PostCell(post: .placeholder, style: .cover)
-                PostCell(post: .placeholder, style: .cover)
-                PostCell(post: .placeholder, style: .cover)
+                PostCell(post: .placeholder)
+                PostCell(post: .placeholder)
+                PostCell(post: .placeholder)
             }
             .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
