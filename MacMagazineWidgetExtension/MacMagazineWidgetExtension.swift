@@ -18,7 +18,7 @@ struct MacMagazineWidgetExtension: Widget {
             RecentPostsWidget(entry: entry)
         }
         .configurationDisplayName("MacMagazine")
-        .description("onfira nossos últimos posts!")
+        .description("Confira nossos últimos posts!")
     }
 }
 
