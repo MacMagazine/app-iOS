@@ -23,6 +23,14 @@ class LoadingController: WKInterfaceController {
         didSet {
             if let _posts = posts, !_posts.isEmpty {
 				DispatchQueue.main.async {
+                    let pages: [String] = Array(0..._posts.count).compactMap {
+                        "Page\($0)"
+                    }
+                    var contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
+                        ["title": "\(index + 1) de \(_posts.count)", "post": element]
+                    }
+                    contexts.insert(["title": "MacMagazine", "post": ""], at: 0)
+
                     // Prefetch images to be able to sent to Apple Watch
                     let urls: [URL] = _posts.compactMap {
                         guard let thumbnail = $0.thumbnail else {
@@ -30,17 +38,9 @@ class LoadingController: WKInterfaceController {
                         }
                         return URL(string: thumbnail)
                     }
-                    let prefetcher = ImagePrefetcher(urls: urls)
-                    prefetcher.start()
-
-                    let pages: [String] = Array(0..._posts.count).compactMap {
-						"Page\($0)"
-					}
-					var contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
-						["title": "\(index + 1) de \(_posts.count)", "post": element]
-					}
-                    contexts.insert(["title": "MacMagazine", "post": ""], at: 0)
-					WKInterfaceController.reloadRootPageControllers(withNames: pages, contexts: contexts, orientation: .horizontal, pageIndex: 1)
+                    ImagePrefetcher(urls: urls, completionHandler: { _, _, _ in
+                        WKInterfaceController.reloadRootPageControllers(withNames: pages, contexts: contexts, orientation: .horizontal, pageIndex: 1)
+                    }).start()
 				}
 			} else {
 				if retries > 0 {
