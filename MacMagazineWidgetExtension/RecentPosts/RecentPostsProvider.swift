@@ -37,10 +37,10 @@ extension RecentPostsProvider {
         API().getWidgets { xmlPost in
             guard let xmlPost = xmlPost else {
                 let urls = posts.compactMap { $0.thumbnail }.compactMap { URL(string: $0) }
-                let prefetcher = ImagePrefetcher(urls: urls)
-                prefetcher.start()
+                ImagePrefetcher(urls: urls, completionHandler: { _, _, _ in
+                    onCompletion(posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
+                }).start()
 
-                onCompletion(posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
                 return
             }
             let post = PostData(title: xmlPost.title,

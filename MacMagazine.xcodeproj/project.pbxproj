@@ -63,6 +63,7 @@
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
 		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
+		9B560FB625C9C29600F62992 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9B560FB525C9C29600F62992 /* Kingfisher */; };
 		9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
@@ -401,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B560FB625C9C29600F62992 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +885,7 @@
 			);
 			name = MacMagazineWatchExtension;
 			packageProductDependencies = (
+				9B560FB525C9C29600F62992 /* Kingfisher */,
 			);
 			productName = "MacMagazineWatch Extension";
 			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */;
@@ -2051,6 +2054,11 @@
 			productName = Kingfisher;
 		};
 		685315FA25153ADE008F6CDC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		9B560FB525C9C29600F62992 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
