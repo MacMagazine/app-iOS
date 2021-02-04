@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var previousController: UIViewController?
     var supportedInterfaceOrientation: UIInterfaceOrientationMask = .all
 
+    var widgetSpotlightPost: String?
+
 	// MARK: - Window lifecycle -
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

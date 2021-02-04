@@ -38,7 +38,7 @@ extension RecentPostsProvider {
             guard let xmlPost = xmlPost else {
                 let urls = posts.compactMap { $0.thumbnail }.compactMap { URL(string: $0) }
                 ImagePrefetcher(urls: urls, completionHandler: { _, _, _ in
-                    onCompletion(posts.sorted(by: { $0.pubDate ?? "" > $1.pubDate ?? "" }))
+                    onCompletion(posts)
                 }).start()
 
                 return

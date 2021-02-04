@@ -131,7 +131,15 @@ extension AppDelegate: UITabBarControllerDelegate {
 // MARK: - Widget DeepLink -
 
 extension AppDelegate {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_ application: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+
+        guard let _ = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+            widgetSpotlightPost = url.absoluteString
+            return true
+        }
+
         CoreDataStack.shared.get(link: url.absoluteString) { (items: [Post]) in
             if items.isEmpty {
                 PushNotification().updateDatabase(for: url.absoluteString)
@@ -165,6 +173,10 @@ extension AppDelegate {
 	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 		if userActivity.activityType == CSSearchableItemActionType {
 			if let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
+                guard let _ = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+                    widgetSpotlightPost = identifier
+                    return true
+                }
 				showDetailController(with: identifier)
 				return true
 			}

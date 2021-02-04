@@ -158,6 +158,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         if Settings().whatsNew != Settings().appVersion {
             self.performSegue(withIdentifier: "showWhatsNewSegue", sender: self)
         }
+
+        if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+            showDetailController(with: post)
+            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
+        }
 	}
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -570,6 +575,7 @@ func showDetailController(with link: String) {
 	CoreDataStack.shared.links { links in
 		prepareDetailController(controller, using: links, compare: link)
 
+        logE(UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController)
 		guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
 			return
 		}
