@@ -215,7 +215,7 @@ class VideoCollectionViewController: UICollectionViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        delay(0.01) {
             self.searchController?.searchBar.becomeFirstResponder()
         }
 	}

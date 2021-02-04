@@ -308,7 +308,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                             }
                             self.status = .unknown
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            delay(0.4) {
                                 self.processSelection()
                             }
                         }
@@ -335,7 +335,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	fileprivate func processSelection() {
         if status == .firstLoad {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            delay(0.4) {
                 self.lastPage = 0
                 self.getPosts(paged: 0)
 			}
@@ -410,7 +410,7 @@ extension PostsMasterViewController {
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if navigationItem.titleView == spin &&
             direction == .up {
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+			delay(0.4) {
 				self.getPosts(paged: 0)
 			}
 		}
@@ -478,7 +478,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 
 extension PostsMasterViewController {
     @objc func onRefreshAfterBackground(_ notification: Notification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        delay(0.2) {
             self.getPosts(paged: 0)
         }
     }
@@ -682,7 +682,7 @@ extension PostsMasterViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         resultsTableController?.showTyping()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        delay(0.01) {
             self.searchController?.searchBar.becomeFirstResponder()
         }
     }

@@ -53,7 +53,7 @@ class YouTubePlayer: WKWebView {
 			guard let _ = videoId else {
 				return
 			}
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+			delay(0.4) {
 				self.loadHTMLString(self.embedVideoHtml, baseURL: nil)
 			}
 		}

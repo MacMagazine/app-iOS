@@ -75,7 +75,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if isLoading &&
             direction == .up {
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+			delay(0.4) {
 				self.getPodcasts(paged: 0)
 			}
 		}
