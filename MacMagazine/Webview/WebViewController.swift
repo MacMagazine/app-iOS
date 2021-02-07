@@ -85,7 +85,7 @@ class WebViewController: UIViewController {
         webView?.configuration.userContentController.addUserScript(imageScript)
         webView?.configuration.userContentController.add(self, name: "imageTappedHandler")
 
-        // Disable Galley
+        // Disable Gallery
         let disableGalleryScriptSource = """
             var links = document.getElementsByClassName('fancybox');
             for(var i = 0; i < links.length; i++) {
@@ -94,6 +94,16 @@ class WebViewController: UIViewController {
         """
         let galleryScript = WKUserScript(source: disableGalleryScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         webView?.configuration.userContentController.addUserScript(galleryScript)
+
+        // Disable Gallery - site novo
+        let disableNewGalleryScriptSource = """
+            var links = document.getElementsByClassName('pk-image-popup');
+            for(var i = 0; i < links.length; i++) {
+                links[i].href = 'javascript:void(0);return false;';
+            }
+        """
+        let newGalleryScript = WKUserScript(source: disableNewGalleryScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView?.configuration.userContentController.addUserScript(newGalleryScript)
 
         // Get URL for comments
         let commentsScriptSource = """
