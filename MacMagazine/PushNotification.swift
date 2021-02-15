@@ -37,6 +37,7 @@ class PushNotification {
 
 extension PushNotification {
 	func updateDatabase(for url: String?) {
+        logD("Load after push - \(url ?? "")")
 
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
@@ -57,6 +58,7 @@ extension PushNotification {
 					post.link == url ||
 						post.shortURL == url {
 					delay(0.1) {
+                        logD("Opening showDetailController - \(post.link)")
 						showDetailController(with: post.link)
 					}
 				}

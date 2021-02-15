@@ -160,6 +160,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         }
 
         if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+            logD("Has widgetSpotlightPost - \(post)")
             showDetailController(with: post)
             (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
         }
@@ -575,7 +576,6 @@ func showDetailController(with link: String) {
 	CoreDataStack.shared.links { links in
 		prepareDetailController(controller, using: links, compare: link)
 
-        logE(UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController)
 		guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
 			return
 		}

@@ -25,10 +25,6 @@ extension PostData {
 
 extension URL {
     init(staticString string: String) {
-        guard let url = URL(string: "\(string)") else {
-            preconditionFailure("Invalid static URL string: \(string)")
-        }
-
-        self = url
+        self = URL(string: "\(string)") ?? URL(staticString: "widget://")
     }
 }
