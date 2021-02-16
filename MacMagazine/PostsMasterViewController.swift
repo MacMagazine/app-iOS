@@ -489,7 +489,12 @@ extension PostsMasterViewController {
 			return
 		}
 		CoreDataStack.shared.get(link: link) { (posts: [Post]) in
-			let indexPath = self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0)
+            var indexPath = IndexPath(row: 0, section: 0)
+            logD(link)
+            logD(posts.description)
+            if !posts.isEmpty {
+                indexPath = self.fetchController?.indexPath(for: posts[0]) ?? indexPath
+            }
 			self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
 
 			// Validate selection

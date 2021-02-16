@@ -135,15 +135,14 @@ extension AppDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
 
-        guard let _ = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
-            widgetSpotlightPost = url.absoluteString
-            return true
-        }
-
         CoreDataStack.shared.get(link: url.absoluteString) { (items: [Post]) in
             if items.isEmpty {
                 PushNotification().updateDatabase(for: url.absoluteString)
             } else {
+                guard let _ = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+                    self.widgetSpotlightPost = url.absoluteString
+                    return
+                }
                 showDetailController(with: url.absoluteString)
             }
         }
