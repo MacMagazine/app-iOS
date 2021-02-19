@@ -158,12 +158,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         if Settings().whatsNew != Settings().appVersion {
             self.performSegue(withIdentifier: "showWhatsNewSegue", sender: self)
         }
-
-        if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
-            logD("Has widgetSpotlightPost - \(post)")
-            showDetailController(with: post)
-            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
-        }
 	}
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -312,6 +306,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                             delay(0.4) {
                                 self.processSelection()
                             }
+                        }
+                        if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+                            logD("Has widgetSpotlightPost - \(post)")
+                            showDetailController(with: post)
                         }
                     }
                     return
@@ -600,6 +598,7 @@ func showDetailController(with link: String) {
                     NotificationCenter.default.post(name: .updateSelectedPost, object: link)
                 }
             }
+            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
 		}
 	}
 }
