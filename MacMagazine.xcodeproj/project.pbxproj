@@ -48,8 +48,8 @@
 		9B1386E9229ADE850033783E /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE697DD1F487EEF0048D68D /* PostsTests.swift */; };
 		9B1386EA229AEC6C0033783E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B1386EC229AF6D60033783E /* exampleVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386EB229AF6D60033783E /* exampleVideo.swift */; };
-		9B1514BB22BE73010039DA28 /* phone_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514B922BE73010039DA28 /* phone_3.png */; };
-		9B1514BC22BE73010039DA28 /* phone_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BA22BE73010039DA28 /* phone_3@2x.png */; };
+		9B1514BB22BE73010039DA28 /* phone_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514B922BE73010039DA28 /* phone_3@2x.png */; };
+		9B1514BC22BE73010039DA28 /* phone_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BA22BE73010039DA28 /* phone_3@3x.png */; };
 		9B1514BF22BE73740039DA28 /* tablet_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BD22BE73740039DA28 /* tablet_3@2x.png */; };
 		9B1514C022BE73740039DA28 /* tablet_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BE22BE73740039DA28 /* tablet_3.png */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
@@ -282,8 +282,8 @@
 		9B1386D7229A9B4A0033783E /* examplePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = examplePost.swift; sourceTree = "<group>"; };
 		9B1386D9229AA6680033783E /* VideoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTests.swift; sourceTree = "<group>"; };
 		9B1386EB229AF6D60033783E /* exampleVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exampleVideo.swift; sourceTree = "<group>"; };
-		9B1514B922BE73010039DA28 /* phone_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone_3.png; sourceTree = "<group>"; };
-		9B1514BA22BE73010039DA28 /* phone_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_3@2x.png"; sourceTree = "<group>"; };
+		9B1514B922BE73010039DA28 /* phone_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_3@2x.png"; sourceTree = "<group>"; };
+		9B1514BA22BE73010039DA28 /* phone_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_3@3x.png"; sourceTree = "<group>"; };
 		9B1514BD22BE73740039DA28 /* tablet_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_3@2x.png"; sourceTree = "<group>"; };
 		9B1514BE22BE73740039DA28 /* tablet_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_3.png; sourceTree = "<group>"; };
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -701,8 +701,8 @@
 				9BD4E979225CFDEC00683B88 /* phone_1@3x.png */,
 				9BD4E976225CFDEC00683B88 /* phone_2@2x.png */,
 				9BD4E972225CFDEC00683B88 /* phone_2@3x.png */,
-				9B1514B922BE73010039DA28 /* phone_3.png */,
-				9B1514BA22BE73010039DA28 /* phone_3@2x.png */,
+				9B1514B922BE73010039DA28 /* phone_3@2x.png */,
+				9B1514BA22BE73010039DA28 /* phone_3@3x.png */,
 				9BB252C123B670620054631B /* phone_4@2x.png */,
 				9BB252BE23B670620054631B /* phone_4@3x.png */,
 				9BD4E975225CFDEC00683B88 /* tablet_1.png */,
@@ -1077,7 +1077,7 @@
 				9BB252C423B670630054631B /* tablet_4@2x.png in Resources */,
 				9B1514BF22BE73740039DA28 /* tablet_3@2x.png in Resources */,
 				68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */,
-				9B1514BB22BE73010039DA28 /* phone_3.png in Resources */,
+				9B1514BB22BE73010039DA28 /* phone_3@2x.png in Resources */,
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
 				683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */,
@@ -1090,7 +1090,7 @@
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */,
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
-				9B1514BC22BE73010039DA28 /* phone_3@2x.png in Resources */,
+				9B1514BC22BE73010039DA28 /* phone_3@3x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
 				683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */,
