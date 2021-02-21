@@ -290,6 +290,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                         WidgetCenter.shared.reloadAllTimelines()
                     }
 
+                    if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+                        logD("Has widgetSpotlightPost - \(post)")
+                        showDetailController(with: post)
+                        return
+                    }
+
                     if paged < 1 {
                         if self.status == .recentPost {
                             // Came from 3D touch
@@ -306,10 +312,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                             delay(0.4) {
                                 self.processSelection()
                             }
-                        }
-                        if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
-                            logD("Has widgetSpotlightPost - \(post)")
-                            showDetailController(with: post)
                         }
                     }
                     return
@@ -577,6 +579,9 @@ func showDetailController(with link: String) {
 		return
 	}
 	CoreDataStack.shared.links { links in
+        logD(link)
+        logD(links.map { $0.link })
+
 		prepareDetailController(controller, using: links, compare: link)
 
 		guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {

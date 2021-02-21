@@ -48,7 +48,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 	// MARK: - Setup methods -
 
-	func configureVideo(with object: Video) {
+	func configureVideo(with object: Video, _ isPlaying: Bool = false) {
         let info = VideoInfo(videoId: object.videoId,
                              canFavorite: true,
                              isFavorite: object.favorite,
@@ -58,10 +58,10 @@ class VideosCollectionViewCell: AppCollectionViewCell {
                              likes: object.likes,
                              duration: object.duration?.toSubHeaderDate(),
                              thumb: object.artworkURL)
-        showVideoInfo(info)
+        showVideoInfo(info, isPlaying)
     }
 
-	func configureVideo(with object: JSONVideo) {
+	func configureVideo(with object: JSONVideo, _ isPlaying: Bool = false) {
         let info = VideoInfo(videoId: object.videoId,
                              canFavorite: false,
                              isFavorite: false,
@@ -71,7 +71,7 @@ class VideosCollectionViewCell: AppCollectionViewCell {
                              likes: object.likes,
                              duration: object.duration.toSubHeaderDate(),
                              thumb: object.artworkURL)
-        showVideoInfo(info)
+        showVideoInfo(info, isPlaying)
 	}
 }
 
@@ -120,7 +120,7 @@ extension VideosCollectionViewCell {
         }
     }
 
-    fileprivate func showVideoInfo(_ object: VideoInfo) {
+    fileprivate func showVideoInfo(_ object: VideoInfo, _ isPlaying: Bool = false) {
         videoId = object.videoId
 
         favorite.isSelected = object.isFavorite
@@ -155,7 +155,9 @@ extension VideosCollectionViewCell {
         youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
         youtubeWebView?.isAccessibilityElement = false
 
-        youtubeWebView?.videoId = object.videoId
+        if !isPlaying {
+            youtubeWebView?.videoId = object.videoId
+        }
 
         guard let artworkURL = object.thumb else {
             return
