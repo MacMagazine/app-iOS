@@ -21,8 +21,9 @@ class NotificationService: UNNotificationServiceExtension {
 		self.contentHandler = contentHandler
 		bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-		if let bestAttemptContent = bestAttemptContent {
-			OneSignal.didReceiveNotificationExtensionRequest(self.receivedRequest, with: self.bestAttemptContent)
+		if let bestAttemptContent = bestAttemptContent,
+           let receivedRequest = receivedRequest {
+			OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent)
 			contentHandler(bestAttemptContent)
 		}
 
@@ -34,8 +35,10 @@ class NotificationService: UNNotificationServiceExtension {
 	override func serviceExtensionTimeWillExpire() {
 		// Called just before the extension will be terminated by the system.
 		// Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-		if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
-			OneSignal.serviceExtensionTimeWillExpireRequest(self.receivedRequest, with: self.bestAttemptContent)
+		if let contentHandler = contentHandler,
+           let bestAttemptContent = bestAttemptContent,
+           let receivedRequest = receivedRequest {
+			OneSignal.serviceExtensionTimeWillExpireRequest(receivedRequest, with: bestAttemptContent)
 			contentHandler(bestAttemptContent)
 		}
 	}

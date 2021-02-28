@@ -12,33 +12,45 @@ import UIKit
 
 class PushNotification {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
-		let notificationReceived: OSHandleNotificationReceivedBlock = { _ in
-			self.updateDatabase(for: nil)
-		}
-
-		let notificationAction: OSHandleNotificationActionBlock = { result in
-			// This block gets called when the user reacts to a notification received
-			guard let payload = result?.notification.payload,
-				let additionalData = payload.additionalData,
-				let url = additionalData as? [String: String]
-				else {
-					return
-			}
-			self.updateDatabase(for: url["url"])
-		}
-
         let key: [UInt8] = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
 
-        OneSignal.initWithLaunchOptions(options, appId: Obfuscator().reveal(key: key), handleNotificationReceived: notificationReceived, handleNotificationAction: notificationAction, settings: [kOSSettingsKeyAutoPrompt: false])
-		OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
+        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_VERBOSE)
+        OneSignal.initWithLaunchOptions(options)
+        OneSignal.setAppId(Obfuscator().reveal(key: key))
+
 		OneSignal.promptForPushNotifications(userResponse: { _ in })
-	}
+
+        let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
+            logD("Received Notification: \(notification.notificationId ?? "no id")")
+            logD("launchURL: \(notification.launchURL ?? "no launch url")")
+            logD("content_available = \(notification.contentAvailable)")
+
+            self.updateDatabase(for: nil)
+            completion(nil)
+        }
+
+        OneSignal.setNotificationWillShowInForegroundHandler(notifWillShowInForegroundHandler)
+
+        let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
+            // This block gets called when the user reacts to a notification received
+            let notification: OSNotification = result.notification
+            guard let additionalData = notification.additionalData,
+                  let url = additionalData as? [String: String] else {
+                return
+            }
+
+            logD("Message: \(notification.body ?? "empty body")")
+            logD("additionalData: \(additionalData)")
+
+            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
+        }
+
+        OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+    }
 }
 
 extension PushNotification {
 	func updateDatabase(for url: String?) {
-        logD("Load after push - \(url ?? "")")
-
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
 
@@ -58,7 +70,6 @@ extension PushNotification {
 					post.link == url ||
 						post.shortURL == url {
 					delay(0.1) {
-                        logD("Opening showDetailController - \(post.link)")
 						showDetailController(with: post.link)
 					}
 				}

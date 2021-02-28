@@ -49,7 +49,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 	}
 
 	func reloadData() {
-		logI("")
 		let complicationsController = ComplicationController()
 		complicationsController.reloadData()
 	}

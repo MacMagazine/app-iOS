@@ -291,7 +291,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
 
                     if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
-                        logD("Has widgetSpotlightPost - \(post)")
                         showDetailController(with: post)
                         return
                     }
@@ -490,8 +489,6 @@ extension PostsMasterViewController {
 		}
 		CoreDataStack.shared.get(link: link) { (posts: [Post]) in
             var indexPath = IndexPath(row: 0, section: 0)
-            logD(link)
-            logD(posts.description)
             if !posts.isEmpty {
                 indexPath = self.fetchController?.indexPath(for: posts[0]) ?? indexPath
             }
@@ -579,9 +576,6 @@ func showDetailController(with link: String) {
 		return
 	}
 	CoreDataStack.shared.links { links in
-        logD(link)
-        logD(links.map { $0.link })
-
 		prepareDetailController(controller, using: links, compare: link)
 
 		guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {

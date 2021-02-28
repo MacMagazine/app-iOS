@@ -1,0 +1,14 @@
+{
+	"Simulator Target Bundle": "com.brit.macmagazine",
+    "aps": {
+	    "alert" : {
+            "title" : "MacMagazine",
+            "body" : "Final Cut Pro poderá migrar para modelo de assinatura",
+        },
+        "sound": "default",
+        "badge": 1
+    },
+    "additionalData": {
+	    "url": "https://macmagazine.com.br/post/2021/02/24/final-cut-pro-podera-migrar-para-modelo-de-assinatura/"
+	}
+}
