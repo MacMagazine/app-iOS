@@ -20,7 +20,7 @@ class PushNotification {
 		OneSignal.promptForPushNotifications(userResponse: { _ in })
 
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
-            self.updateDatabase(for: nil)
+            self.updateDatabase()
             completion(notification)
         }
 
@@ -42,7 +42,7 @@ class PushNotification {
 }
 
 extension PushNotification {
-	func updateDatabase(for url: String?) {
+	func updateDatabase() {
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
 
@@ -57,14 +57,6 @@ extension PushNotification {
 				}
 				images.append(post.artworkURL)
 				CoreDataStack.shared.save(post: post)
-
-				if let url = url,
-					post.link == url ||
-						post.shortURL == url {
-					delay(0.1) {
-						showDetailController(with: post.link)
-					}
-				}
 			}
 		}
 	}
