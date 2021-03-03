@@ -31,11 +31,17 @@ extension Notification.Name {
 extension AppDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
+        SKPaymentQueue.default().add(StoreObserver.shared)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         Settings().applyTheme()
 	}
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        // Remove the observer.
+        SKPaymentQueue.default().remove(StoreObserver.shared)
+    }
 }
 
 // MARK: - Setup -

@@ -39,6 +39,12 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet private weak var patraoButton: UIButton!
 
+    // swiftlint:disable private_outlet
+    @IBOutlet weak var buyBtn: UIButton!
+    @IBOutlet weak var spin: UIActivityIndicatorView!
+    @IBOutlet weak var restoreBtn: UIButton!
+    // swiftlint:enable private_outlet
+
     enum IconOptionAccessibilityLabel: String {
         case whiteBackground = "Ícone do aplicativo com fundo branco."
         case blueBackground = "Ícone do aplicativo com fundo azul."
@@ -63,6 +69,7 @@ class SettingsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
 
         setInitialValues()
+        setupInApp()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +95,7 @@ class SettingsTableViewController: UITableViewController {
 		header.append("Notificações push")
 		header.append("Aparência")
         header.append("Ícone do app")
+        header.append("Assinaturas")
         header.append("Sobre")
         return header
     }
