@@ -22,8 +22,6 @@
 		5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */; };
 		5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
-		680C470525EF0242002A3DC7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C470425EF0242002A3DC7 /* Protocols.swift */; };
-		680C471125EF0871002A3DC7 /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C471025EF0871002A3DC7 /* Definitions.swift */; };
 		682CD11425EF869000FB46FB /* ReceiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682CD11325EF869000FB46FB /* ReceiptManager.swift */; };
 		682CD12725EFA29200FB46FB /* InAppPurchase in Frameworks */ = {isa = PBXBuildFile; productRef = 682CD12625EFA29200FB46FB /* InAppPurchase */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
@@ -266,8 +264,6 @@
 		5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsEntry.swift; sourceTree = "<group>"; };
 		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
-		680C470425EF0242002A3DC7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		680C471025EF0871002A3DC7 /* Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 		682CD10E25EF1C7300FB46FB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		682CD11325EF869000FB46FB /* ReceiptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptManager.swift; sourceTree = "<group>"; };
 		682CD11F25EF981400FB46FB /* InAppPurchase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InAppPurchase; sourceTree = "<group>"; };
@@ -476,8 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				682CD10E25EF1C7300FB46FB /* Configuration.storekit */,
-				680C471025EF0871002A3DC7 /* Definitions.swift */,
-				680C470425EF0242002A3DC7 /* Protocols.swift */,
 				682CD11325EF869000FB46FB /* ReceiptManager.swift */,
 				68E740C725EF12C1003A9BD9 /* SettingsTableViewControllerAssinaturas.swift */,
 			);
@@ -1298,7 +1292,6 @@
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
 				683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */,
-				680C470525EF0242002A3DC7 /* Protocols.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				682CD11425EF869000FB46FB /* ReceiptManager.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
@@ -1331,7 +1324,6 @@
 				9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */,
 				68EF53552527125E00FCBD3C /* SplashViewController.swift in Sources */,
 				685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */,
-				680C471125EF0871002A3DC7 /* Definitions.swift in Sources */,
 				9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
 				68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */,

@@ -43,8 +43,9 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var patraoButton: UIButton!
 
     @IBOutlet weak var buyBtn: UIButton!
-    @IBOutlet weak var spin: UIActivityIndicatorView!
     @IBOutlet weak var buyMessage: UILabel!
+    @IBOutlet weak var purchasedMessage: UILabel!
+    @IBOutlet weak var spin: UIActivityIndicatorView!
     @IBOutlet weak var restoreBtn: UIButton!
     // swiftlint:enable private_outlet
 
@@ -125,22 +126,24 @@ class SettingsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == getHeaders().count - 1 {
+        if section == getHeaders().count - 1 ||
+            section == getHeaders().count - 2 {
             guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
                 return 18
             }
             let labelWidth = CGFloat(Int(tableView.bounds.size.width - 24.0))
-            return footer.disclaimerHeight(width: labelWidth)
+            return footer.footerHeight(width: labelWidth, type: section == getHeaders().count - 1 ? .disclaimer : .subscription)
         }
         return 18
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == getHeaders().count - 1 {
+        if section == getHeaders().count - 1 ||
+            section == getHeaders().count - 2 {
             guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
                 return nil
             }
-            footer.showDisclaimerFooter()
+            footer.showFooter(type: section == getHeaders().count - 1 ? .disclaimer : .subscription)
             return footer
         }
         return nil

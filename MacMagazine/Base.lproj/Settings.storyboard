@@ -415,6 +415,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você já é nosso assinante!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aJ-LD-PBA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
                                                     <rect key="frame" x="20" y="6" width="172" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
@@ -458,9 +467,13 @@
                                                 <constraint firstAttribute="bottom" secondItem="VmZ-d3-AFQ" secondAttribute="bottom" constant="6" id="Ivb-U0-yjg"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerY" secondItem="yMw-Ps-gvb" secondAttribute="centerY" id="KON-Qw-m7w"/>
                                                 <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" relation="lessThanOrEqual" secondItem="VmZ-d3-AFQ" secondAttribute="trailing" constant="122" id="Qeh-TU-wfe"/>
+                                                <constraint firstItem="4aJ-LD-PBA" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" id="ThT-vJ-qMW"/>
+                                                <constraint firstAttribute="trailing" secondItem="4aJ-LD-PBA" secondAttribute="trailing" id="W5g-lc-gfo"/>
                                                 <constraint firstItem="yMw-Ps-gvb" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="10" id="aOY-zI-y3L"/>
+                                                <constraint firstAttribute="bottom" secondItem="4aJ-LD-PBA" secondAttribute="bottom" id="cIz-c6-2li"/>
                                                 <constraint firstItem="VmZ-d3-AFQ" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="cbM-in-ZcN"/>
                                                 <constraint firstItem="yMw-Ps-gvb" firstAttribute="centerY" secondItem="NVq-BB-T8u" secondAttribute="centerY" id="t4n-mf-U40"/>
+                                                <constraint firstItem="4aJ-LD-PBA" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" id="xMy-nB-cM6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -698,6 +711,7 @@
                         <outlet property="iconOption4Selected" destination="ZeS-mP-ySM" id="1UG-Cu-HoD"/>
                         <outlet property="intensityPostRead" destination="7Dw-eO-rm7" id="9ma-Ex-EZF"/>
                         <outlet property="patraoButton" destination="7cO-p7-cYL" id="3Ns-Ex-nrD"/>
+                        <outlet property="purchasedMessage" destination="4aJ-LD-PBA" id="3xK-iW-f4x"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="readTransparency" destination="MpC-ZE-Kkk" id="8fe-gO-5QD"/>
                         <outlet property="readTransparencyValue" destination="TRE-mv-lKH" id="3Yn-cB-2XR"/>

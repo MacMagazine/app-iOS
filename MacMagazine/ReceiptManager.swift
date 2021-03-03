@@ -34,3 +34,6 @@ class ReceiptManager: NSObject {
     func validate(receipt: Data, secret: String) {
     }
 }
+// 4c45fb4914c84b80919c254d937e4210
+// MMReceiptSalt
+// [121, 46, 102, 80, 5, 7, 93, 73, 69, 103, 2, 84, 64, 47, 117, 98, 92, 82, 92, 10, 66, 65, 103, 5, 85, 71, 122, 40, 102, 87, 82, 85]

@@ -28,6 +28,7 @@ extension SettingsTableViewController {
         spin.stopAnimating()
         buyBtn.isEnabled = canPurchase
         restoreBtn.isEnabled = canPurchase
+        purchasedMessage.isHidden = true
 
         if canPurchase {
             InAppPurchase.shared.$error
@@ -123,9 +124,11 @@ extension SettingsTableViewController {
 
             case .purchasedSuccess:
                 buyBtn.isHidden = true
-                buyMessage.text = "Você já é assinante."
+                buyMessage.isHidden = true
+                purchasedMessage.isHidden = false
                 restoreBtn.isEnabled = false
                 patraoButton.isEnabled = false
+
                 var settings = Settings()
                 settings.purchased = true
 
@@ -135,6 +138,3 @@ extension SettingsTableViewController {
         }
     }
 }
-// 4c45fb4914c84b80919c254d937e4210
-// MMReceiptSalt
-// [121, 46, 102, 80, 5, 7, 93, 73, 69, 103, 2, 84, 64, 47, 117, 98, 92, 82, 92, 10, 66, 65, 103, 5, 85, 71, 122, 40, 102, 87, 82, 85]

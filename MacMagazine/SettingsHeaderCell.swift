@@ -25,7 +25,7 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
         subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
     }
 
-    var createDisclaimerAttributedString: NSAttributedString {
+    var disclaimerAttributedString: NSAttributedString {
         guard let github = URL(string: "https://github.com/MacMagazine/app-iOS"),
               let kazzio = URL(string: "http://kazziosoftware.com") else {
             return NSMutableAttributedString()
@@ -65,14 +65,46 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
         return fullAttributedString
     }
 
-    func showDisclaimerFooter() {
-        footerLabel?.attributedText = createDisclaimerAttributedString
+    var subscriptionAttributedString: NSAttributedString {
+        let font = UIFont.preferredFont(forTextStyle: .caption1)
+
+        let text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício."
+        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: font,
+                                                                                    .foregroundColor: UIColor.label])
+
+        let fullAttributedString = NSMutableAttributedString()
+        fullAttributedString.append(attributedString)
+        return fullAttributedString
+    }
+
+    func showFooter(type: FooterType) {
+        if type == .disclaimer {
+            footerLabel?.attributedText = disclaimerAttributedString
+        } else {
+            footerLabel?.attributedText = subscriptionAttributedString
+        }
         footerLabel?.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MMBlue") ?? UIColor.systemBlue]
     }
 
-    func disclaimerHeight(width: CGFloat) -> CGFloat {
-        let height = createDisclaimerAttributedString.string.height(withWidth: width,
+    func footerHeight(width: CGFloat, type: FooterType) -> CGFloat {
+        var height: CGFloat = 0
+
+        switch type {
+            case .disclaimer:
+                height = disclaimerAttributedString.string.height(withWidth: width,
+                                                                  font: UIFont.preferredFont(forTextStyle: .caption1))
+
+            default:
+                height = subscriptionAttributedString.string.height(withWidth: width,
                                                                     font: UIFont.preferredFont(forTextStyle: .caption1))
+        }
+
         return height + 36 + 24
     }
+
+}
+
+enum FooterType {
+    case disclaimer
+    case subscription
 }
