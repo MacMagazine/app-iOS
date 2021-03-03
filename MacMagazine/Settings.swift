@@ -21,6 +21,7 @@ enum Definitions {
 	static let pushPreferences = "pushPreferences"
     static let transparency = "transparency"
     static let mm_patrao = "mm_patrao"
+    static let purchased = "purchased"
     static let whatsnew = "whatsnew"
     static let deleteAllCookies = "deleteAllCookies"
 }
@@ -138,6 +139,16 @@ struct Settings {
         }
         set(value) {
             UserDefaults.standard.set(value, forKey: Definitions.mm_patrao)
+            UserDefaults.standard.synchronize()
+        }
+    }
+
+    var purchased: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Definitions.purchased)
+        }
+        set(value) {
+            UserDefaults.standard.set(value, forKey: Definitions.purchased)
             UserDefaults.standard.synchronize()
         }
     }

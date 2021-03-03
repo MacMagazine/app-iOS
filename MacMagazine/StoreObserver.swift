@@ -53,12 +53,6 @@ class StoreObserver: NSObject {
 
     // MARK: - Properties -
 
-    var isAuthorizedForPayments: Bool {
-        return SKPaymentQueue.canMakePayments()
-    }
-
-    var purchased = [SKPaymentTransaction]()
-
     var restored = [SKPaymentTransaction]()
     fileprivate var hasRestorablePurchases = false
 
@@ -67,13 +61,6 @@ class StoreObserver: NSObject {
     // MARK: - Initializer -
 
     private override init() {}
-
-    // MARK: - Submit Payment Request -
-
-    func buy(_ product: SKProduct) {
-        let payment = SKMutablePayment(product: product)
-        SKPaymentQueue.default().add(payment)
-    }
 
     // MARK: - Restore All Restorable Purchases -
 
@@ -86,19 +73,11 @@ class StoreObserver: NSObject {
 
     // MARK: - Handle Payment Transactions -
 
-    fileprivate func handlePurchased(_ transaction: SKPaymentTransaction) {
-        purchased.append(transaction)
-print("\(Messages.deliverContent) \(transaction.payment.productIdentifier).")
-
-        SKPaymentQueue.default().finishTransaction(transaction)
-    }
-
     fileprivate func handleFailed(_ transaction: SKPaymentTransaction) {
         var message = "\(Messages.purchaseOf) \(transaction.payment.productIdentifier) \(Messages.failed)"
 
         if let error = transaction.error {
             message += "\n\(Messages.error) \(error.localizedDescription)"
-print("\(Messages.error) \(error.localizedDescription)")
         }
 
         // Do not send any notifications when the user cancels the purchase.
@@ -132,13 +111,9 @@ extension StoreObserver: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch transaction.transactionState {
-            case .purchasing: break
+            case .purchasing, .purchased: break
             // Do not block the UI. Allow the user to continue using the app.
-            case .deferred: print(Messages.deferred)
-            // The purchase was successful.
-            case .purchased: handlePurchased(transaction)
-            // The transaction failed.
-            case .failed: handleFailed(transaction)
+            case .deferred, .failed: handleFailed(transaction)
             // There're restored products.
             case .restored: handleRestored(transaction)
             @unknown default: fatalError(Messages.unknownPaymentTransaction)
@@ -146,11 +121,7 @@ extension StoreObserver: SKPaymentTransactionObserver {
         }
     }
 
-    func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-print("\(transaction.payment.productIdentifier) \(Messages.removed)")
-        }
-    }
+    func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {}
 
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         if let error = error as? SKError, error.code != .paymentCancelled {

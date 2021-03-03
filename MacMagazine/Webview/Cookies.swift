@@ -66,4 +66,15 @@ struct Cookies {
             .expires: NSDate(timeIntervalSinceNow: 3600)
         ])
     }
+
+    func createPurchasedCookie(_ value: String) -> HTTPCookie? {
+        return HTTPCookie(properties: [
+            .domain: mm,
+            .path: "/",
+            .name: "patr",
+            .value: value,
+            .secure: "false",
+            .expires: NSDate(timeIntervalSinceNow: 3600)
+        ])
+    }
 }

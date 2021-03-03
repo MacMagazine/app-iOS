@@ -6,7 +6,9 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import Combine
 import CoreSpotlight
+import InAppPurchase
 import Kingfisher
 import MessageUI
 import UIKit
@@ -42,8 +44,12 @@ class SettingsTableViewController: UITableViewController {
     // swiftlint:disable private_outlet
     @IBOutlet weak var buyBtn: UIButton!
     @IBOutlet weak var spin: UIActivityIndicatorView!
+    @IBOutlet weak var buyMessage: UILabel!
     @IBOutlet weak var restoreBtn: UIButton!
     // swiftlint:enable private_outlet
+
+    var cancellables = Set<AnyCancellable>()
+    var selectedProduct: Product?
 
     enum IconOptionAccessibilityLabel: String {
         case whiteBackground = "Ícone do aplicativo com fundo branco."

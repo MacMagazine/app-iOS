@@ -1,0 +1,50 @@
+{
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "0A60022E",
+      "localizations" : [
+
+      ],
+      "name" : "Assinaturas",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "10.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "33E27B74",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remova as propagandas com a assinatura mensal",
+              "displayName" : "Assinatura mensal",
+              "locale" : "pt_BR"
+            },
+            {
+              "description" : "Subscribe to remove ads",
+              "displayName" : "Monthly subscription",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "MMASSINATURAMENSAL",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Assinatura mensal",
+          "subscriptionGroupID" : "0A60022E",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 0
+  }
+}

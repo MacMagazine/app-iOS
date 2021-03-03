@@ -24,8 +24,9 @@
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		680C46F925EEFF63002A3DC7 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C46F725EEFF63002A3DC7 /* StoreObserver.swift */; };
 		680C470525EF0242002A3DC7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C470425EF0242002A3DC7 /* Protocols.swift */; };
-		680C470C25EF07F7002A3DC7 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C46F825EEFF63002A3DC7 /* StoreManager.swift */; };
 		680C471125EF0871002A3DC7 /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C471025EF0871002A3DC7 /* Definitions.swift */; };
+		682CD11425EF869000FB46FB /* ReceiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682CD11325EF869000FB46FB /* ReceiptManager.swift */; };
+		682CD12725EFA29200FB46FB /* InAppPurchase in Frameworks */ = {isa = PBXBuildFile; productRef = 682CD12625EFA29200FB46FB /* InAppPurchase */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
 		683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683271AD25291512004BD4DA /* WhatsNew.storyboard */; };
@@ -267,9 +268,11 @@
 		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		680C46F725EEFF63002A3DC7 /* StoreObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
-		680C46F825EEFF63002A3DC7 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		680C470425EF0242002A3DC7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		680C471025EF0871002A3DC7 /* Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
+		682CD10E25EF1C7300FB46FB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		682CD11325EF869000FB46FB /* ReceiptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptManager.swift; sourceTree = "<group>"; };
+		682CD11F25EF981400FB46FB /* InAppPurchase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InAppPurchase; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
 		683271AC25291512004BD4DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WhatsNew.storyboard; sourceTree = "<group>"; };
@@ -424,6 +427,7 @@
 			files = (
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
+				682CD12725EFA29200FB46FB /* InAppPurchase in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
 				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
@@ -473,10 +477,11 @@
 		680C46F625EEFF43002A3DC7 /* Assinaturas */ = {
 			isa = PBXGroup;
 			children = (
+				682CD10E25EF1C7300FB46FB /* Configuration.storekit */,
 				680C471025EF0871002A3DC7 /* Definitions.swift */,
 				680C470425EF0242002A3DC7 /* Protocols.swift */,
+				682CD11325EF869000FB46FB /* ReceiptManager.swift */,
 				68E740C725EF12C1003A9BD9 /* SettingsTableViewControllerAssinaturas.swift */,
-				680C46F825EEFF63002A3DC7 /* StoreManager.swift */,
 				680C46F725EEFF63002A3DC7 /* StoreObserver.swift */,
 			);
 			name = Assinaturas;
@@ -661,6 +666,7 @@
 		9BCAD66E1F47A08100B54526 = {
 			isa = PBXGroup;
 			children = (
+				682CD11F25EF981400FB46FB /* InAppPurchase */,
 				9BF96565225E371900BAF22D /* Frameworks */,
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
 				9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */,
@@ -941,6 +947,7 @@
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
+				682CD12625EFA29200FB46FB /* InAppPurchase */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1297,11 +1304,11 @@
 				683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */,
 				680C470525EF0242002A3DC7 /* Protocols.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
+				682CD11425EF869000FB46FB /* ReceiptManager.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
 				9B98C33323885EEF0094EBBA /* UILabelExtension.swift in Sources */,
 				68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */,
 				9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */,
-				680C470C25EF07F7002A3DC7 /* StoreManager.swift in Sources */,
 				9B0DD44C2226E9320016C567 /* DateExtensions.swift in Sources */,
 				9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */,
 				9BD135E9222804E500A0B627 /* UIWindowTheme.swift in Sources */,
@@ -2082,6 +2089,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		682CD12625EFA29200FB46FB /* InAppPurchase */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = InAppPurchase;
 		};
 		685315FA25153ADE008F6CDC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

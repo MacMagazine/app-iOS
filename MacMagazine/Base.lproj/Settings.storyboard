@@ -434,7 +434,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="3Oh-Fx-497"/>
                                                     </constraints>
-                                                    <state key="normal" title="R$ 10,99">
+                                                    <state key="normal" title="-">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <state key="disabled">
@@ -676,6 +676,7 @@
                     <connections>
                         <outlet property="appearanceCellIntensity" destination="Jrd-t5-7DG" id="V2H-2r-XRn"/>
                         <outlet property="buyBtn" destination="yMw-Ps-gvb" id="Xdb-xW-ayj"/>
+                        <outlet property="buyMessage" destination="VmZ-d3-AFQ" id="kIz-Lg-m6V"/>
                         <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="IZv-c0-y4T"/>
                         <outlet property="iconOption1" destination="WFw-2p-qsH" id="Czh-Vk-S7a"/>
                         <outlet property="iconOption1Btn" destination="xMf-nN-nab" id="aLt-uo-J7r"/>

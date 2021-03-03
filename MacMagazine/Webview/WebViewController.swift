@@ -274,13 +274,19 @@ extension WebViewController {
                 cookies.append(appVersion)
             }
 
+            // Purchased
+            if Settings().purchased,
+               let cookie = Cookies().createPurchasedCookie("true") {
+                cookies.append(cookie)
+            }
+
             var cookiesLeft = cookies.count
 
             if cookies.isEmpty {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
-                    if (cookie.name == "patr" && !Settings().isPatrao) ||
+                    if (cookie.name == "patr" && (!Settings().isPatrao || !Settings().purchased)) ||
                         UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
