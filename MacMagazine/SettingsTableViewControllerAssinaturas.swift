@@ -116,6 +116,7 @@ extension SettingsTableViewController {
                 buyBtn.isHidden = true
                 buyMessage.text = "Você já é assinante."
                 restoreBtn.isEnabled = false
+                patraoButton.isEnabled = false
                 var settings = Settings()
                 settings.purchased = true
 

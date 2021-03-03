@@ -286,7 +286,7 @@ extension WebViewController {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
-                    if (cookie.name == "patr" && (!Settings().isPatrao || !Settings().purchased)) ||
+                    if (cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased) ||
                         UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)

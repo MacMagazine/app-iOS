@@ -486,6 +486,9 @@
                                                     <state key="normal" title="Recuperar assinatura">
                                                         <color key="titleColor" name="MMBlueWhite"/>
                                                     </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" systemColor="systemGray3Color"/>
+                                                    </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
                                                             <integer key="value" value="1"/>
@@ -532,6 +535,9 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Login para patrões">
                                                         <color key="titleColor" name="MMBlueWhite"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" systemColor="systemGray3Color"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
@@ -749,6 +755,9 @@
         </namedColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

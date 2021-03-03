@@ -39,9 +39,9 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var readTransparency: UISlider!
     @IBOutlet private weak var readTransparencyValue: UILabel!
 
-    @IBOutlet private weak var patraoButton: UIButton!
-
     // swiftlint:disable private_outlet
+    @IBOutlet weak var patraoButton: UIButton!
+
     @IBOutlet weak var buyBtn: UIButton!
     @IBOutlet weak var spin: UIActivityIndicatorView!
     @IBOutlet weak var buyMessage: UILabel!
