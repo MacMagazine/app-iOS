@@ -109,7 +109,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headers = getHeaders()
-        let identifier = section == headers.count - 1 ? "subHeaderCell" : "headerCell"
+        let identifier = section == headers.count - 1 || section == getHeaders().count - 2 ? "subHeaderCell" : "headerCell"
 
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as? SettingsHeaderCell else {
             return nil
@@ -121,29 +121,27 @@ class SettingsTableViewController: UITableViewController {
             return nil
         }
 
-        header.setHeader(headers[section])
+        header.setHeader(headers[section], type: section == getHeaders().count - 1 ? .version : .subscription)
         return header
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == getHeaders().count - 1 ||
-            section == getHeaders().count - 2 {
+        if section == getHeaders().count - 1 {
             guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
                 return 18
             }
             let labelWidth = CGFloat(Int(tableView.bounds.size.width - 24.0))
-            return footer.footerHeight(width: labelWidth, type: section == getHeaders().count - 1 ? .disclaimer : .subscription)
+            return footer.footerHeight(width: labelWidth)
         }
         return 18
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == getHeaders().count - 1 ||
-            section == getHeaders().count - 2 {
+        if section == getHeaders().count - 1 {
             guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
                 return nil
             }
-            footer.showFooter(type: section == getHeaders().count - 1 ? .disclaimer : .subscription)
+            footer.showFooter()
             return footer
         }
         return nil

@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum HeaderType {
+    case version
+    case subscription
+}
+
 class SettingsHeaderCell: UITableViewHeaderFooterView {
 
     // MARK: - Properties -
@@ -18,11 +23,16 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
 
     // MARK: - Methods -
 
-    func setHeader(_ text: String?) {
+    func setHeader(_ text: String?, type: HeaderType) {
         headerLabel?.font = Settings().getMetricBoldFont(forTextStyle: .title2)
 
         headerLabel?.text = text
-        subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
+        if type == .version {
+            subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
+        } else {
+            subHeaderLabel?.text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício."
+        }
+
     }
 
     var disclaimerAttributedString: NSAttributedString {
@@ -65,46 +75,15 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
         return fullAttributedString
     }
 
-    var subscriptionAttributedString: NSAttributedString {
-        let font = UIFont.preferredFont(forTextStyle: .caption1)
-
-        let text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício."
-        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: font,
-                                                                                    .foregroundColor: UIColor.label])
-
-        let fullAttributedString = NSMutableAttributedString()
-        fullAttributedString.append(attributedString)
-        return fullAttributedString
-    }
-
-    func showFooter(type: FooterType) {
-        if type == .disclaimer {
-            footerLabel?.attributedText = disclaimerAttributedString
-        } else {
-            footerLabel?.attributedText = subscriptionAttributedString
-        }
+    func showFooter() {
+        footerLabel?.attributedText = disclaimerAttributedString
         footerLabel?.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MMBlue") ?? UIColor.systemBlue]
     }
 
-    func footerHeight(width: CGFloat, type: FooterType) -> CGFloat {
-        var height: CGFloat = 0
-
-        switch type {
-            case .disclaimer:
-                height = disclaimerAttributedString.string.height(withWidth: width,
-                                                                  font: UIFont.preferredFont(forTextStyle: .caption1))
-
-            default:
-                height = subscriptionAttributedString.string.height(withWidth: width,
-                                                                    font: UIFont.preferredFont(forTextStyle: .caption1))
-        }
-
+    func footerHeight(width: CGFloat) -> CGFloat {
+        let height = disclaimerAttributedString.string.height(withWidth: width,
+                                                              font: UIFont.preferredFont(forTextStyle: .caption1))
         return height + 36 + 24
     }
 
-}
-
-enum FooterType {
-    case disclaimer
-    case subscription
 }
