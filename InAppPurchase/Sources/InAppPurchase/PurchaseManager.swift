@@ -34,6 +34,11 @@ extension PurchaseManager: SKPaymentTransactionObserver {
             }
         }
     }
+
+    func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
+        print(#function)
+        SKPaymentQueue.default().remove(self)
+    }
 }
 
 // MARK: -

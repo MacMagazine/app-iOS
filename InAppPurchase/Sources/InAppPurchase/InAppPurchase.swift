@@ -81,5 +81,27 @@ public class InAppPurchase: ObservableObject {
 
     // MARK: - Restore -
 
+    public func restore() {
+        cancellables.forEach { $0.cancel() }
+
+        RestoreManager.shared.$success
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink {
+                self.success = $0
+            }
+            .store(in: &cancellables)
+
+        RestoreManager.shared.$error
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink {
+                self.error = $0
+            }
+            .store(in: &cancellables)
+
+        RestoreManager.shared.restore()
+    }
+
     // MARK: - Receipts -
 }

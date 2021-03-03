@@ -22,7 +22,6 @@
 		5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */; };
 		5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
-		680C46F925EEFF63002A3DC7 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C46F725EEFF63002A3DC7 /* StoreObserver.swift */; };
 		680C470525EF0242002A3DC7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C470425EF0242002A3DC7 /* Protocols.swift */; };
 		680C471125EF0871002A3DC7 /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C471025EF0871002A3DC7 /* Definitions.swift */; };
 		682CD11425EF869000FB46FB /* ReceiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682CD11325EF869000FB46FB /* ReceiptManager.swift */; };
@@ -267,7 +266,6 @@
 		5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsEntry.swift; sourceTree = "<group>"; };
 		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
-		680C46F725EEFF63002A3DC7 /* StoreObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
 		680C470425EF0242002A3DC7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		680C471025EF0871002A3DC7 /* Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 		682CD10E25EF1C7300FB46FB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
@@ -482,7 +480,6 @@
 				680C470425EF0242002A3DC7 /* Protocols.swift */,
 				682CD11325EF869000FB46FB /* ReceiptManager.swift */,
 				68E740C725EF12C1003A9BD9 /* SettingsTableViewControllerAssinaturas.swift */,
-				680C46F725EEFF63002A3DC7 /* StoreObserver.swift */,
 			);
 			name = Assinaturas;
 			sourceTree = "<group>";
@@ -1289,7 +1286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BD135E7222804E500A0B627 /* UIViewExtensions.swift in Sources */,
-				680C46F925EEFF63002A3DC7 /* StoreObserver.swift in Sources */,
 				9B0DD44F2226FD150016C567 /* StringExtensions.swift in Sources */,
 				9B1BA5E4222B22980059F692 /* Settings.swift in Sources */,
 				9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */,

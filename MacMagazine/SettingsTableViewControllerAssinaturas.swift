@@ -43,13 +43,22 @@ extension SettingsTableViewController {
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        SKPaymentQueue.default().remove(StoreObserver.shared)
-    }
-
     @IBAction private func recover(_ sender: Any) {
-        StoreObserver.shared.restore()
+        processingStatus(.processing)
+
+        InAppPurchase.shared.$success
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink {
+                if $0 {
+                    self.processingStatus(.purchasedSuccess)
+                } else {
+                    self.processingStatus(.fail)
+                }
+            }
+            .store(in: &cancellables)
+
+        InAppPurchase.shared.restore()
     }
 
     @IBAction private func buy(_ sender: Any) {
