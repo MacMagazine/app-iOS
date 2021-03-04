@@ -22,9 +22,7 @@ class ProductManager: NSObject, ObservableObject {
 
 extension ProductManager: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        if !response.products.isEmpty {
-            products = response.products
-        }
+        products = response.products
     }
 }
 
