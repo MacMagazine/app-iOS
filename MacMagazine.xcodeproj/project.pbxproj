@@ -26,10 +26,10 @@
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
 		683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683271AD25291512004BD4DA /* WhatsNew.storyboard */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
+		685CD6EC25F1937F002347D8 /* InAppPurchase in Frameworks */ = {isa = PBXBuildFile; productRef = 685CD6EB25F1937F002347D8 /* InAppPurchase */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
 		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
-		68BC076925F0DC9700FFECE3 /* InAppPurchase in Frameworks */ = {isa = PBXBuildFile; productRef = 68BC076825F0DC9700FFECE3 /* InAppPurchase */; };
 		68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68BCEA2F252F6F500082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68E740C825EF12C2003A9BD9 /* SettingsTableViewControllerAssinaturas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E740C725EF12C1003A9BD9 /* SettingsTableViewControllerAssinaturas.swift */; };
@@ -263,7 +263,6 @@
 		5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsEntry.swift; sourceTree = "<group>"; };
 		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
-		681F4E2325F0CD0B008190D9 /* InAppPurchase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InAppPurchase; sourceTree = "<group>"; };
 		682CD10E25EF1C7300FB46FB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
@@ -419,9 +418,9 @@
 			files = (
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
-				68BC076925F0DC9700FFECE3 /* InAppPurchase in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
 				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
+				685CD6EC25F1937F002347D8 /* InAppPurchase in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,7 +653,6 @@
 		9BCAD66E1F47A08100B54526 = {
 			isa = PBXGroup;
 			children = (
-				681F4E2325F0CD0B008190D9 /* InAppPurchase */,
 				9BF96565225E371900BAF22D /* Frameworks */,
 				9BCAD6791F47A08100B54526 /* MacMagazine */,
 				9B9C7F9A226BF836000534CA /* MacMagazineNotificationServiceExtension */,
@@ -935,7 +933,7 @@
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
-				68BC076825F0DC9700FFECE3 /* InAppPurchase */,
+				685CD6EB25F1937F002347D8 /* InAppPurchase */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1030,6 +1028,7 @@
 			packageReferences = (
 				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				685CD6EA25F1937F002347D8 /* XCRemoteSwiftPackageReference "inapppurchase" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -2050,6 +2049,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		685CD6EA25F1937F002347D8 /* XCRemoteSwiftPackageReference "inapppurchase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://kasros@bitbucket.org/kasros/inapppurchase.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 		9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
@@ -2079,8 +2086,9 @@
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		68BC076825F0DC9700FFECE3 /* InAppPurchase */ = {
+		685CD6EB25F1937F002347D8 /* InAppPurchase */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 685CD6EA25F1937F002347D8 /* XCRemoteSwiftPackageReference "inapppurchase" */;
 			productName = InAppPurchase;
 		};
 		9B560FB525C9C29600F62992 /* Kingfisher */ = {
