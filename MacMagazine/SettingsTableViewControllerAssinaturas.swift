@@ -31,14 +31,6 @@ extension SettingsTableViewController {
         purchasedMessage.isHidden = true
 
         if canPurchase {
-            InAppPurchase.shared.$error
-                .receive(on: RunLoop.main)
-                .compactMap { $0 }
-                .sink { _ in
-                    self.processingStatus(.fail)
-                }
-                .store(in: &cancellables)
-
             if Settings().purchased {
                 processingStatus(.purchasedSuccess)
             } else {
@@ -49,6 +41,14 @@ extension SettingsTableViewController {
 
     @IBAction private func recover(_ sender: Any) {
         processingStatus(.processing)
+
+        InAppPurchase.shared.$error
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink { _ in
+                self.processingStatus(.fail)
+            }
+            .store(in: &cancellables)
 
         InAppPurchase.shared.$success
             .receive(on: RunLoop.main)
@@ -72,6 +72,14 @@ extension SettingsTableViewController {
 
         processingStatus(.processing)
 
+        InAppPurchase.shared.$error
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink { _ in
+                self.processingStatus(.fail)
+            }
+            .store(in: &cancellables)
+
         InAppPurchase.shared.$success
             .receive(on: RunLoop.main)
             .compactMap { $0 }
@@ -93,6 +101,14 @@ extension SettingsTableViewController {
 extension SettingsTableViewController {
     fileprivate func fetchProductInformation() {
         processingStatus(.processing)
+
+        InAppPurchase.shared.$error
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink { _ in
+                self.processingStatus(.fail)
+            }
+            .store(in: &cancellables)
 
         InAppPurchase.shared.$products
             .receive(on: RunLoop.main)

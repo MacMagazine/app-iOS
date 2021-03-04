@@ -118,6 +118,6 @@ public class InAppPurchase: ObservableObject {
             }
             .store(in: &cancellables)
 
-        ReceiptManager.shared.readReceipt()
+        ReceiptManager.shared.validateReceipt()
     }
 }

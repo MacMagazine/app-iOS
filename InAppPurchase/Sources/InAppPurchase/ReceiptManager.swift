@@ -23,10 +23,12 @@ class ReceiptManager: NSObject, ObservableObject {
     @Published var status: ReceiptStatus?
 
     func readReceipt() {
-        if hasValidReceipt &&
-            hasValidSigning,
-           let payload = OpenSSLManager.shared.payload {
-            status = validate(receipt: payload)
+        if hasValidReceipt {
+            if hasValidSigning {
+                if let payload = OpenSSLManager.shared.payload {
+                    status = validate(receipt: payload)
+                }
+            }
         }
     }
 
@@ -37,7 +39,8 @@ class ReceiptManager: NSObject, ObservableObject {
             status = .notPresent
             return false
         }
-
+        print(receiptUrl.absoluteString)
+        print(receiptData.base64EncodedString())
         // Convert from Data to PKCS7
         guard let pkcs7 = OpenSSLManager.shared.convert(receipt: receiptData) else {
             status = .unknownFormat
@@ -67,6 +70,8 @@ class ReceiptManager: NSObject, ObservableObject {
             status = .invalidAppleRootCertificate
             return false
         }
+        print(rootCertUrl.absoluteString)
+        print(rootCertData.base64EncodedString())
 
         // Convert from Data to X509
         guard let rootCertX509 = OpenSSLManager.shared.convert(certificate: rootCertData) else {
@@ -130,5 +135,39 @@ extension ReceiptManager {
         }
         let data = Data(bytes: addr, count: 16)
         return data
+    }
+}
+
+extension ReceiptManager {
+    func validateReceipt() {
+        #if DEBUG
+        let urlString = "https://sandbox.itunes.apple.com/verifyReceipt"
+        #else
+        let urlString = "https://buy.itunes.apple.com/verifyReceipt"
+        #endif
+
+        guard let receiptURL = Bundle.main.appStoreReceiptURL, let receiptString = try? Data(contentsOf: receiptURL).base64EncodedString() , let url = URL(string: urlString) else {
+            return
+        }
+
+        let requestData : [String : Any] = ["receipt-data" : receiptString,
+                                            "password" : "4c45fb4914c84b80919c254d937e4210",
+                                            "exclude-old-transactions" : false]
+        let httpBody = try? JSONSerialization.data(withJSONObject: requestData, options: [])
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = httpBody
+        URLSession.shared.dataTask(with: request)  { (data, response, error) in
+            // convert data to Dictionary and view purchases
+            DispatchQueue.main.async {
+                if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    // your non-consumable and non-renewing subscription receipts are in `in_app` array
+                    // your auto-renewable subscription receipts are in `latest_receipt_info` array
+                    print(jsonData)
+                }
+            }
+        }.resume()
     }
 }

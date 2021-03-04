@@ -93,6 +93,7 @@ class OpenSSLManager {
         OPENSSL_init_crypto(UInt64(OPENSSL_INIT_ADD_ALL_DIGESTS), nil)
 
         // Verify receipt using root certificate
+        OpenSSL_add_all_digests()
         let verificationResult = PKCS7_verify(receipt, nil, store, nil, nil, 0)
         guard verificationResult == 1  else {
             return false

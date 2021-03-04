@@ -196,7 +196,7 @@ extension AppDelegate {
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink {
-                print($0)
+                print("\(#function) - \($0)")
                 var settings = Settings()
                 settings.purchased = $0 == .validationSuccess
             }
