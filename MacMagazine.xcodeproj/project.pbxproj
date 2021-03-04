@@ -22,11 +22,11 @@
 		5EDC514025B38A1E006FB270 /* RecentPostsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */; };
 		5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
+		6813B20725F1ABC200BB3DE8 /* InAppPurchase in Frameworks */ = {isa = PBXBuildFile; productRef = 6813B20625F1ABC200BB3DE8 /* InAppPurchase */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
 		683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683271AD25291512004BD4DA /* WhatsNew.storyboard */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
-		685CD6EC25F1937F002347D8 /* InAppPurchase in Frameworks */ = {isa = PBXBuildFile; productRef = 685CD6EB25F1937F002347D8 /* InAppPurchase */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
 		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
@@ -418,9 +418,9 @@
 			files = (
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
+				6813B20725F1ABC200BB3DE8 /* InAppPurchase in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
 				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
-				685CD6EC25F1937F002347D8 /* InAppPurchase in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -933,7 +933,7 @@
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
-				685CD6EB25F1937F002347D8 /* InAppPurchase */,
+				6813B20625F1ABC200BB3DE8 /* InAppPurchase */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1028,7 +1028,7 @@
 			packageReferences = (
 				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				685CD6EA25F1937F002347D8 /* XCRemoteSwiftPackageReference "inapppurchase" */,
+				6813B20525F1ABC200BB3DE8 /* XCRemoteSwiftPackageReference "inapppurchase" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -2049,9 +2049,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		685CD6EA25F1937F002347D8 /* XCRemoteSwiftPackageReference "inapppurchase" */ = {
+		6813B20525F1ABC200BB3DE8 /* XCRemoteSwiftPackageReference "inapppurchase" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://kasros@bitbucket.org/kasros/inapppurchase.git";
+			repositoryURL = "https://bitbucket.org/kasros/inapppurchase.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.0.1;
@@ -2081,15 +2081,15 @@
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
+		6813B20625F1ABC200BB3DE8 /* InAppPurchase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6813B20525F1ABC200BB3DE8 /* XCRemoteSwiftPackageReference "inapppurchase" */;
+			productName = InAppPurchase;
+		};
 		685315FA25153ADE008F6CDC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		685CD6EB25F1937F002347D8 /* InAppPurchase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 685CD6EA25F1937F002347D8 /* XCRemoteSwiftPackageReference "inapppurchase" */;
-			productName = InAppPurchase;
 		};
 		9B560FB525C9C29600F62992 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
