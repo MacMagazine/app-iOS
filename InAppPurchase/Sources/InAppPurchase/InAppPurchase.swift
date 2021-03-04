@@ -104,4 +104,20 @@ public class InAppPurchase: ObservableObject {
     }
 
     // MARK: - Receipts -
+
+    @Published public var status: ReceiptStatus?
+
+    public func validateReceipt() {
+        cancellables.forEach { $0.cancel() }
+
+        ReceiptManager.shared.$status
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink {
+                self.status = $0
+            }
+            .store(in: &cancellables)
+
+        ReceiptManager.shared.readReceipt()
+    }
 }

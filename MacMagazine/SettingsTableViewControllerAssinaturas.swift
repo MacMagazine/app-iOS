@@ -39,8 +39,11 @@ extension SettingsTableViewController {
                 }
                 .store(in: &cancellables)
 
-            // Fetch product information.
-            fetchProductInformation()
+            if Settings().purchased {
+                processingStatus(.purchasedSuccess)
+            } else {
+                fetchProductInformation()
+            }
         }
     }
 

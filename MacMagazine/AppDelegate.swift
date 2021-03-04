@@ -6,6 +6,7 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 @UIApplicationMain
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var supportedInterfaceOrientation: UIInterfaceOrientationMask = .all
 
     var widgetSpotlightPost: String?
+
+    var cancellables = Set<AnyCancellable>()
 
 	// MARK: - Window lifecycle -
 

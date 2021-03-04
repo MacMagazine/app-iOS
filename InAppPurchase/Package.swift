@@ -12,7 +12,9 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-        .target(name: "InAppPurchase", dependencies: []),
-        .testTarget(name: "InAppPurchaseTests", dependencies: ["InAppPurchase"])
+        .target(name: "InAppPurchase",
+                dependencies: ["OpenSSL"],
+                resources: [.process("Resources")]),
+        .binaryTarget(name: "OpenSSL", path: "artifacts/OpenSSL.xcframework")
     ]
 )

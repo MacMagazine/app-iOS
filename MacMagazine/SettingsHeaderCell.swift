@@ -30,7 +30,7 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
         if type == .version {
             subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
         } else {
-            subHeaderLabel?.text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício."
+            subHeaderLabel?.text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício.\n"
         }
 
     }

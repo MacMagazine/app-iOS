@@ -143,6 +143,12 @@ struct Settings {
         }
     }
 
+    var loginPatrao: String {
+        return isPatrao ? "Logoff de patrão" : "Login para patrões"
+    }
+
+    // MARK: - Assinatura -
+
     var purchased: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Definitions.purchased)
@@ -151,10 +157,6 @@ struct Settings {
             UserDefaults.standard.set(value, forKey: Definitions.purchased)
             UserDefaults.standard.synchronize()
         }
-    }
-
-    var loginPatrao: String {
-        return isPatrao ? "Logoff de patrão" : "Login para patrões"
     }
 
     // MARK: - What's New -
