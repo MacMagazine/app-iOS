@@ -1,0 +1,11 @@
+framework module InAppPurchase {
+  umbrella header "InAppPurchase.h"
+
+  export *
+  module * { export * }
+}
+
+module InAppPurchase.Swift {
+    header "InAppPurchase-Swift.h"
+    requires objc
+}

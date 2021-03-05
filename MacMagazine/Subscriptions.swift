@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import InAppPurchase
 
 enum InAppPurchaseStatus {
     case canPurchase
@@ -16,9 +17,6 @@ enum InAppPurchaseStatus {
     case purchasedSuccess
     case fail
 }
-
-#if canImport(InAppPurchase)
-import InAppPurchase
 
 class Subscriptions {
 
@@ -36,7 +34,7 @@ class Subscriptions {
     func checkSubscriptions() {
         cancellables.forEach { $0.cancel() }
 
-        InAppPurchase.shared.$error
+        InAppPurchaseManager.shared.$error
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { _ in
@@ -45,7 +43,7 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.$status
+        InAppPurchaseManager.shared.$status
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink {
@@ -54,11 +52,11 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.validateReceipt(subscription: identifier)
+        InAppPurchaseManager.shared.validateReceipt(subscription: identifier)
     }
 
     func getProducts() {
-        if InAppPurchase.shared.canPurchase {
+        if InAppPurchaseManager.shared.canPurchase {
             if Settings().purchased {
                 status?(.purchasedSuccess)
             } else {
@@ -77,7 +75,7 @@ class Subscriptions {
 
         status?(.processing)
 
-        InAppPurchase.shared.$error
+        InAppPurchaseManager.shared.$error
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { _ in
@@ -85,7 +83,7 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.$success
+        InAppPurchaseManager.shared.$success
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink {
@@ -97,7 +95,7 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.buy(product: product)
+        InAppPurchaseManager.shared.buy(product: product)
     }
 
     func recover() {
@@ -105,7 +103,7 @@ class Subscriptions {
 
         status?(.processing)
 
-        InAppPurchase.shared.$error
+        InAppPurchaseManager.shared.$error
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { _ in
@@ -113,7 +111,7 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.$success
+        InAppPurchaseManager.shared.$success
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink {
@@ -125,7 +123,7 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.restore()
+        InAppPurchaseManager.shared.restore()
     }
 
 }
@@ -136,7 +134,7 @@ extension Subscriptions {
 
         status?(.processing)
 
-        InAppPurchase.shared.$error
+        InAppPurchaseManager.shared.$error
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { _ in
@@ -144,7 +142,7 @@ extension Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.$products
+        InAppPurchaseManager.shared.$products
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink {
@@ -158,26 +156,6 @@ extension Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.getProducts(for: [identifier])
+        InAppPurchaseManager.shared.getProducts(for: [identifier])
     }
 }
-
-#else
-
-class Subscriptions {
-
-    static let shared = Subscriptions()
-
-    var status: ((InAppPurchaseStatus) -> Void)?
-
-    func checkSubscriptions() {
-        var settings = Settings()
-        settings.purchased = false
-    }
-
-    func getProducts() {}
-    func buy() {}
-    func recover() {}
-}
-
-#endif

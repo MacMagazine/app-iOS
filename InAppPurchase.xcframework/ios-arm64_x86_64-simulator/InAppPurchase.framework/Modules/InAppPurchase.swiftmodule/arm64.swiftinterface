@@ -1,0 +1,103 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name InAppPurchase
+import Combine
+import CommonCrypto
+import Foundation
+import Foundation/*.Bundle*/
+@_exported import InAppPurchase
+import StoreKit
+import Swift
+import UIKit
+public enum ReceiptStatus {
+  case invalid
+  case expired
+  case validationSuccess
+  public static func == (a: InAppPurchase.ReceiptStatus, b: InAppPurchase.ReceiptStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class ASN1Decoder {
+  @objc deinit
+}
+@inlinable @inline(__always) internal func isHighTag(_ number: Swift.UInt8) -> Swift.Bool {
+	return number == 0x1f
+}
+@inlinable @inline(__always) internal func lastTagNumber(_ byte: Swift.UInt8) -> Swift.Bool {
+	return (byte & 0x80) == 0x1f
+}
+@inlinable @inline(__always) internal func lengthIsShortForm(_ byte: Swift.UInt8) -> Swift.Bool {
+	return (byte & 0x80) == 0
+}
+@inlinable @inline(__always) internal func longFormLength(_ byte: Swift.UInt8) -> Swift.UInt8 {
+	return (byte & 0x7f)
+}
+@inlinable @inline(__always) internal func highBits(_ field: Swift.UInt8, _ cnt: Swift.UInt8) -> Swift.UInt8 {
+	return field >> (UInt8(MemoryLayout.size(ofValue: field))*8 - cnt)
+}
+@inlinable @inline(__always) internal func tlvConstructed(tag: Swift.UInt8) -> Swift.Bool {
+	return tag & 0x20 != 0
+}
+public struct Product {
+  public var title: Swift.String?
+  public var description: Swift.String?
+  public var price: Swift.String?
+  public var identifier: Swift.String?
+  public var subscription: Swift.String?
+}
+@_hasMissingDesignatedInitializers public class InAppPurchaseManager : Combine.ObservableObject {
+  public static let shared: InAppPurchase.InAppPurchaseManager
+  public var canPurchase: Swift.Bool {
+    get
+  }
+  @Combine.Published @_projectedValueProperty($error) public var error: Swift.Error? {
+    get
+    set
+    _modify
+  }
+  public var $error: Combine.Published<Swift.Error?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($products) public var products: [InAppPurchase.Product]? {
+    get
+    set
+    _modify
+  }
+  public var $products: Combine.Published<[InAppPurchase.Product]?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    set
+  }
+  public func getProducts(for identifiers: [Swift.String])
+  @Combine.Published @_projectedValueProperty($success) public var success: Swift.Bool? {
+    get
+    set
+    _modify
+  }
+  public var $success: Combine.Published<Swift.Bool?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    set
+  }
+  public func buy(product: InAppPurchase.Product)
+  public func restore()
+  @Combine.Published @_projectedValueProperty($status) public var status: InAppPurchase.ReceiptStatus? {
+    get
+    set
+    _modify
+  }
+  public var $status: Combine.Published<InAppPurchase.ReceiptStatus?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    set
+  }
+  public func validateReceipt(subscription: Swift.String)
+  @objc deinit
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+}
+extension InAppPurchase.ReceiptStatus : Swift.Equatable {}
+extension InAppPurchase.ReceiptStatus : Swift.Hashable {}
