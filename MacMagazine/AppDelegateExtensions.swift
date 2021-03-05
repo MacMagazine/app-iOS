@@ -6,9 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Combine
 import CoreSpotlight
-import InAppPurchase
 import Kingfisher
 import StoreKit
 import UIKit
@@ -39,7 +37,7 @@ extension AppDelegate {
         Settings().applyTheme()
 
         // Check subscriptions and update status
-        subscriptions()
+        Subscriptions.shared.checkSubscriptions()
 	}
 }
 
@@ -177,31 +175,4 @@ extension AppDelegate {
 		}
 		return false
 	}
-}
-
-// MARK: - Subscriptions -
-
-extension AppDelegate {
-    func subscriptions() {
-        InAppPurchase.shared.$error
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink { _ in
-                var settings = Settings()
-                settings.purchased = false
-            }
-            .store(in: &cancellables)
-
-        InAppPurchase.shared.$status
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink {
-                print("\(#function) - \($0)")
-                var settings = Settings()
-                settings.purchased = $0 == .validationSuccess
-            }
-            .store(in: &cancellables)
-
-        InAppPurchase.shared.validateReceipt()
-    }
 }

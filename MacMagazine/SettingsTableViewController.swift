@@ -6,9 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import Combine
 import CoreSpotlight
-import InAppPurchase
 import Kingfisher
 import MessageUI
 import UIKit
@@ -39,18 +37,13 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var readTransparency: UISlider!
     @IBOutlet private weak var readTransparencyValue: UILabel!
 
-    // swiftlint:disable private_outlet
-    @IBOutlet weak var patraoButton: UIButton!
+    @IBOutlet private weak var patraoButton: UIButton!
 
-    @IBOutlet weak var buyBtn: UIButton!
-    @IBOutlet weak var buyMessage: UILabel!
-    @IBOutlet weak var purchasedMessage: UILabel!
-    @IBOutlet weak var spin: UIActivityIndicatorView!
-    @IBOutlet weak var restoreBtn: UIButton!
-    // swiftlint:enable private_outlet
-
-    var cancellables = Set<AnyCancellable>()
-    var selectedProduct: Product?
+    @IBOutlet private weak var buyBtn: UIButton!
+    @IBOutlet private weak var buyMessage: UILabel!
+    @IBOutlet private weak var purchasedMessage: UILabel!
+    @IBOutlet private weak var spin: UIActivityIndicatorView!
+    @IBOutlet private weak var restoreBtn: UIButton!
 
     enum IconOptionAccessibilityLabel: String {
         case whiteBackground = "Ícone do aplicativo com fundo branco."
@@ -76,7 +69,7 @@ class SettingsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
 
         setInitialValues()
-        setupInApp()
+        startInAppPurchase()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -478,4 +471,67 @@ extension SettingsTableViewController {
         }
     }
 
+}
+
+// MARK: - Subscriptions -
+
+extension SettingsTableViewController {
+    @IBAction private func recover(_ sender: Any) {
+        Subscriptions.shared.recover()
+    }
+
+    @IBAction private func buy(_ sender: Any) {
+        Subscriptions.shared.buy()
+    }
+
+    fileprivate func startInAppPurchase() {
+        spin.stopAnimating()
+        buyBtn.isHidden = false
+        buyBtn.setTitle("-", for: .normal)
+        buyBtn.isEnabled = false
+        buyBtn.backgroundColor = UIColor(named: "MMGrayWhite")
+        purchasedMessage.isHidden = true
+        restoreBtn.isEnabled = false
+
+        Subscriptions.shared.status = { status in
+            self.spin.stopAnimating()
+            self.buyBtn.isHidden = false
+            self.buyBtn.setTitle("-", for: .normal)
+            self.restoreBtn.isEnabled = true
+
+            switch status {
+                case .canPurchase:
+                    self.buyBtn.isEnabled = true
+                    self.buyBtn.backgroundColor = UIColor(named: "MMBlue")
+                    self.restoreBtn.isEnabled = true
+                    self.purchasedMessage.isHidden = true
+
+                case .processing:
+                    self.spin.startAnimating()
+                    self.buyBtn.isHidden = true
+
+                case .gotProductPrice(let price):
+                    self.buyBtn.setTitle(price, for: .normal)
+
+                case .purchasedSuccess:
+                    self.buyBtn.isHidden = true
+                    self.buyMessage.isHidden = true
+                    self.purchasedMessage.isHidden = false
+                    self.restoreBtn.isEnabled = false
+                    self.patraoButton.isEnabled = false
+
+                    var settings = Settings()
+                    settings.purchased = true
+
+                case .fail:
+                    self.buyBtn.isEnabled = false
+                    self.buyBtn.backgroundColor = UIColor(named: "MMGrayWhite")
+
+                    var settings = Settings()
+                    settings.purchased = false
+            }
+        }
+
+        Subscriptions.shared.getProducts()
+    }
 }
