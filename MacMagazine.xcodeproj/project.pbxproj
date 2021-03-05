@@ -59,7 +59,7 @@
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
 		9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */; };
 		9B283DB925F2D19D0008922E /* InAppPurchase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; };
-		9B283DBA25F2D19D0008922E /* InAppPurchase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B283DBA25F2D19D0008922E /* InAppPurchase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
 		9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */; };
