@@ -24,6 +24,8 @@ class Subscriptions {
 
     static let shared = Subscriptions()
 
+    let identifier = "MMASSINATURAMENSAL"
+
     var cancellables = Set<AnyCancellable>()
     var selectedProduct: Product?
 
@@ -32,6 +34,8 @@ class Subscriptions {
     // MARK: - Methods -
 
     func checkSubscriptions() {
+        cancellables.forEach { $0.cancel() }
+
         InAppPurchase.shared.$error
             .receive(on: RunLoop.main)
             .compactMap { $0 }
@@ -50,7 +54,7 @@ class Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.validateReceipt()
+        InAppPurchase.shared.validateReceipt(subscription: identifier)
     }
 
     func getProducts() {
@@ -65,6 +69,8 @@ class Subscriptions {
     }
 
     func buy() {
+        cancellables.forEach { $0.cancel() }
+
         guard let product = selectedProduct else {
             return
         }
@@ -95,6 +101,8 @@ class Subscriptions {
     }
 
     func recover() {
+        cancellables.forEach { $0.cancel() }
+
         status?(.processing)
 
         InAppPurchase.shared.$error
@@ -124,6 +132,8 @@ class Subscriptions {
 
 extension Subscriptions {
     fileprivate func fetchProductInformation() {
+        cancellables.forEach { $0.cancel() }
+
         status?(.processing)
 
         InAppPurchase.shared.$error
@@ -148,7 +158,7 @@ extension Subscriptions {
             }
             .store(in: &cancellables)
 
-        InAppPurchase.shared.getProducts(for: ["MMASSINATURAMENSAL"])
+        InAppPurchase.shared.getProducts(for: [identifier])
     }
 }
 

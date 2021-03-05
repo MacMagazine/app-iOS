@@ -509,6 +509,7 @@ extension SettingsTableViewController {
                 case .processing:
                     self.spin.startAnimating()
                     self.buyBtn.isHidden = true
+                    self.restoreBtn.isEnabled = false
 
                 case .gotProductPrice(let price):
                     self.buyBtn.setTitle(price, for: .normal)
