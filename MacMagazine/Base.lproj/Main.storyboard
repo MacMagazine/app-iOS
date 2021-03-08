@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MM Live-->
+        <!--Live View Controller-->
         <scene sceneID="eNS-7x-zOf">
             <objects>
                 <viewController id="14s-0C-24v" customClass="MMLiveViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw0-e0-6p0">
-                                <rect key="frame" x="16" y="44" width="358" height="717"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="756"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -31,20 +31,34 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Xw0-e0-6p0" firstAttribute="leading" secondItem="A54-fq-tRK" secondAttribute="leadingMargin" id="9N0-F8-S4L"/>
-                            <constraint firstItem="Xw0-e0-6p0" firstAttribute="trailing" secondItem="A54-fq-tRK" secondAttribute="trailingMargin" id="O4R-Da-ai9"/>
+                            <constraint firstItem="Xw0-e0-6p0" firstAttribute="leading" secondItem="A54-fq-tRK" secondAttribute="leading" id="9N0-F8-S4L"/>
+                            <constraint firstItem="Xw0-e0-6p0" firstAttribute="trailing" secondItem="A54-fq-tRK" secondAttribute="trailing" id="O4R-Da-ai9"/>
                             <constraint firstItem="Xw0-e0-6p0" firstAttribute="top" secondItem="ROc-Xc-Hyy" secondAttribute="bottom" id="Uhd-DY-4mK"/>
                             <constraint firstItem="n60-EV-RDL" firstAttribute="top" secondItem="Xw0-e0-6p0" secondAttribute="bottom" id="nhf-DZ-xqd"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MM Live" image="antenna.radiowaves.left.and.right" catalog="system" id="46L-LQ-gTw"/>
+                    <navigationItem key="navigationItem" id="URb-53-j4n">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="twA-3I-XfB">
+                            <rect key="frame" x="132" y="5.6666666666666661" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <gestureRecognizers/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="webView" destination="Xw0-e0-6p0" id="Jta-LA-2hQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dfn-1n-qyk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1460" y="-1780.6596701649178"/>
+            <point key="canvasLocation" x="-530.76923076923072" y="-1780.8056872037914"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KNm-9d-eYv">
@@ -57,7 +71,7 @@
                     </tabBar>
                     <connections>
                         <outlet property="delegate" destination="CTw-bn-pvv" id="Ppe-mA-yQF"/>
-                        <segue destination="14s-0C-24v" kind="relationship" relationship="viewControllers" id="fVz-Tr-CD0"/>
+                        <segue destination="99K-fS-T6T" kind="relationship" relationship="viewControllers" id="fVz-Tr-CD0"/>
                         <segue destination="Yhy-9h-hZ1" kind="relationship" relationship="viewControllers" id="HkX-0o-vzg"/>
                         <segue destination="CQc-7I-wjH" kind="relationship" relationship="viewControllers" id="Pat-DE-2eX"/>
                         <segue destination="wVH-Tk-Ppy" kind="relationship" relationship="viewControllers" id="V9h-Db-yoA"/>
@@ -232,7 +246,7 @@
                 </activityIndicatorView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGQ-1P-xj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1364" y="-2116.1919040479761"/>
+            <point key="canvasLocation" x="2292.3076923076924" y="-2116.350710900474"/>
         </scene>
         <!--PostsDetailNavigation-->
         <scene sceneID="xa0-Qk-bfW">
@@ -250,7 +264,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOQ-7p-jzt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="431.19999999999999" y="-2116.1919040479761"/>
+            <point key="canvasLocation" x="1360" y="-2116.350710900474"/>
         </scene>
         <!--Settings-->
         <scene sceneID="FpV-KZ-2K0">
@@ -289,6 +303,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3n-Ps-AQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1142" y="-2886"/>
+        </scene>
+        <!--MM Live-->
+        <scene sceneID="CH2-Mz-ONF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="99K-fS-T6T" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="MM Live" image="antenna.radiowaves.left.and.right" catalog="system" id="46L-LQ-gTw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W8H-UC-7v2">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="14s-0C-24v" kind="relationship" relationship="rootViewController" id="Zhf-Xu-LJ4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N2N-fY-oU3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1460" y="-1780.8056872037914"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

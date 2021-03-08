@@ -38,7 +38,7 @@ class SplashViewController: UIViewController {
                                   options: .transitionCrossDissolve,
                                   animations: {
                                     window.rootViewController = controller
-                                    if !isLive {
+                                    if isLive {
                                         TabBarController.shared.removeIndexes([0])
                                     }
                                   })
