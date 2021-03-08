@@ -230,3 +230,26 @@ extension API {
 		parser.parse()
 	}
 }
+
+extension API {
+    static func isMMLive(onCompletion: ((Bool) -> Void)?) {
+        guard let url = URL(string: "https://live.macmagazine.com.br/live.html") else {
+            onCompletion?(false)
+            return
+        }
+
+        Network.get(url: url) { (result: Result<Data, RestAPIError>) in
+            switch result {
+                case .failure(_):
+                    onCompletion?(false)
+
+                case .success(let response):
+                    guard let site = String(data: response, encoding: .utf8) else {
+                        onCompletion?(false)
+                        return
+                    }
+                    onCompletion?(!(site.contains("MM Live foi encerrado")))
+            }
+        }
+    }
+}
