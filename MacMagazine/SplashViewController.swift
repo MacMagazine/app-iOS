@@ -23,12 +23,10 @@ class SplashViewController: UIViewController {
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "main") as? UITabBarController,
                   let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                  let splitViewController = controller.viewControllers?.first as? UISplitViewController,
+                  let splitViewController = controller.viewControllers?[1] as? UISplitViewController,
                   let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
                 return
             }
-
-			controller.delegate = appDelegate
 
 			splitViewController.delegate = appDelegate
 			splitViewController.preferredDisplayMode = .allVisible
@@ -39,6 +37,7 @@ class SplashViewController: UIViewController {
                               options: .transitionCrossDissolve,
                               animations: {
                                 window.rootViewController = controller
+                                //TabBarController.shared.removeIndexes([0])
                               })
 		}
 	}

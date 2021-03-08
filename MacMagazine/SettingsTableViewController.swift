@@ -69,7 +69,7 @@ class SettingsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
 
         setInitialValues()
-        startInAppPurchase()
+        setupInAppPurchase()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -477,14 +477,14 @@ extension SettingsTableViewController {
 
 extension SettingsTableViewController {
     @IBAction private func recover(_ sender: Any) {
-        Subscriptions.shared.recover()
+        Subscriptions.shared.restore()
     }
 
     @IBAction private func buy(_ sender: Any) {
-        Subscriptions.shared.buy()
+        Subscriptions.shared.purchase()
     }
 
-    fileprivate func startInAppPurchase() {
+    fileprivate func setupInAppPurchase() {
         spin.stopAnimating()
         buyBtn.isHidden = false
         buyBtn.setTitle("-", for: .normal)
@@ -493,43 +493,58 @@ extension SettingsTableViewController {
         purchasedMessage.isHidden = true
         restoreBtn.isEnabled = false
 
-        Subscriptions.shared.status = { status in
-            self.spin.stopAnimating()
-            self.buyBtn.isHidden = false
-            self.buyBtn.setTitle("-", for: .normal)
-            self.restoreBtn.isEnabled = true
+        Subscriptions.shared.status = { [weak self] status in
+            self?.spin.stopAnimating()
+            self?.buyBtn.isHidden = false
+            self?.buyMessage.isHidden = false
+            self?.restoreBtn.isEnabled = true
 
             switch status {
-                case .canPurchase:
-                    self.buyBtn.isEnabled = true
-                    self.buyBtn.backgroundColor = UIColor(named: "MMBlue")
-                    self.restoreBtn.isEnabled = true
-                    self.purchasedMessage.isHidden = true
+                case .canPurchase,
+                     .expired:
+                    self?.buyBtn.isEnabled = true
+                    self?.buyBtn.backgroundColor = UIColor(named: "MMBlue")
+                    self?.restoreBtn.isEnabled = true
+                    self?.purchasedMessage.isHidden = true
 
-                case .processing:
-                    self.spin.startAnimating()
-                    self.buyBtn.isHidden = true
-                    self.restoreBtn.isEnabled = false
+                    var settings = Settings()
+                    settings.purchased = false
+
+            case .processing:
+                    self?.spin.startAnimating()
+                    self?.buyBtn.isHidden = true
+                    self?.restoreBtn.isEnabled = false
 
                 case .gotProductPrice(let price):
-                    self.buyBtn.setTitle(price, for: .normal)
+                    self?.buyBtn.setTitle(price, for: .normal)
 
                 case .purchasedSuccess:
-                    self.buyBtn.isHidden = true
-                    self.buyMessage.isHidden = true
-                    self.purchasedMessage.isHidden = false
-                    self.restoreBtn.isEnabled = false
-                    self.patraoButton.isEnabled = false
+                    self?.buyBtn.isHidden = true
+                    self?.buyMessage.isHidden = true
+                    self?.purchasedMessage.isHidden = false
+                    self?.restoreBtn.isEnabled = false
+                    self?.patraoButton.isEnabled = false
 
                     var settings = Settings()
                     settings.purchased = true
 
                 case .fail:
-                    self.buyBtn.isEnabled = false
-                    self.buyBtn.backgroundColor = UIColor(named: "MMGrayWhite")
+                    self?.buyBtn.isEnabled = false
+                    self?.buyBtn.backgroundColor = UIColor(named: "MMGrayWhite")
+                    self?.buyBtn.setTitle("-", for: .normal)
 
                     var settings = Settings()
                     settings.purchased = false
+            }
+
+            if status == .expired {
+                let alertController = UIAlertController(title: "MacMagazine",
+                                                        message: "Sua assinatura está expirada.",
+                                                        preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    self?.dismiss(animated: true)
+                })
+                self?.present(alertController, animated: true)
             }
         }
 

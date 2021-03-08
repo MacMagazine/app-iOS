@@ -10,11 +10,12 @@ import Combine
 import Foundation
 import InAppPurchase
 
-enum InAppPurchaseStatus {
+enum InAppPurchaseStatus: Equatable {
     case canPurchase
     case processing
     case gotProductPrice(String)
     case purchasedSuccess
+    case expired
     case fail
 }
 
@@ -24,33 +25,50 @@ class Subscriptions {
 
     let identifier = "MMASSINATURAMENSAL"
 
-    var cancellables = Set<AnyCancellable>()
-    var selectedProduct: Product?
+    var productCancellable: AnyCancellable?
+    var purchaseCancellable: AnyCancellable?
+    var receiptCancellable: AnyCancellable?
 
+    var selectedProduct: Product?
     var status: ((InAppPurchaseStatus) -> Void)?
 
     // MARK: - Methods -
 
     func checkSubscriptions() {
-        cancellables.forEach { $0.cancel() }
+        productCancellable?.cancel()
+        purchaseCancellable?.cancel()
+        receiptCancellable?.cancel()
 
-        InAppPurchaseManager.shared.$error
+        receiptCancellable = InAppPurchaseManager.shared.$status
             .receive(on: RunLoop.main)
             .compactMap { $0 }
-            .sink { _ in
+            .sink { [weak self] rsp in
+                logD(rsp)
+
                 var settings = Settings()
                 settings.purchased = false
-            }
-            .store(in: &cancellables)
 
-        InAppPurchaseManager.shared.$status
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink {
-                var settings = Settings()
-                settings.purchased = $0 == .validationSuccess
+                switch rsp {
+                    case .failure(_):
+                        self?.status?(.canPurchase)
+
+                    case .success(let response):
+                        switch response {
+                        case .retrieving,
+                             .purchasing,
+                             .restoring,
+                             .validating:
+                            self?.status?(.processing)
+                        case .validated:
+                            settings.purchased = true
+                            self?.status?(.purchasedSuccess)
+                        case .expired:
+                            self?.status?(.expired)
+                        default:
+                            self?.status?(.canPurchase)
+                        }
+                }
             }
-            .store(in: &cancellables)
 
         InAppPurchaseManager.shared.validateReceipt(subscription: identifier)
     }
@@ -66,95 +84,84 @@ class Subscriptions {
         }
     }
 
-    func buy() {
-        cancellables.forEach { $0.cancel() }
+    func purchase() {
+        buy(restore: false)
+    }
+
+    func restore() {
+        buy(restore: true)
+    }
+
+    fileprivate func buy(restore: Bool) {
+        productCancellable?.cancel()
+        purchaseCancellable?.cancel()
+        receiptCancellable?.cancel()
+
+        status?(.processing)
+
+        purchaseCancellable = InAppPurchaseManager.shared.$status
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink { [weak self] rsp in
+                logD(rsp)
+
+                switch rsp {
+                    case .failure(_):
+                        self?.status?(.canPurchase)
+
+                    case .success(let response):
+                        var status: InAppPurchaseStatus {
+                            switch response {
+                            case .purchased:
+                                return .purchasedSuccess
+                            case .purchasing,
+                                 .restoring,
+                                 .restored:
+                                return .processing
+                            default:
+                                return .canPurchase
+                            }
+                        }
+                        self?.status?(status)
+                        if response == .restored && restore {
+                            self?.checkSubscriptions()
+                        }
+                }
+            }
 
         guard let product = selectedProduct else {
             return
         }
-
-        status?(.processing)
-
-        InAppPurchaseManager.shared.$error
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink { _ in
-                self.status?(.fail)
-            }
-            .store(in: &cancellables)
-
-        InAppPurchaseManager.shared.$success
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink {
-                if $0 {
-                    self.status?(.purchasedSuccess)
-                } else {
-                    self.status?(.fail)
-                }
-            }
-            .store(in: &cancellables)
-
-        InAppPurchaseManager.shared.buy(product: product)
+        InAppPurchaseManager.shared.purchase(product: restore ? nil : product)
     }
-
-    func recover() {
-        cancellables.forEach { $0.cancel() }
-
-        status?(.processing)
-
-        InAppPurchaseManager.shared.$error
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink { _ in
-                self.status?(.fail)
-            }
-            .store(in: &cancellables)
-
-        InAppPurchaseManager.shared.$success
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink {
-                if $0 {
-                    self.status?(.purchasedSuccess)
-                } else {
-                    self.status?(.fail)
-                }
-            }
-            .store(in: &cancellables)
-
-        InAppPurchaseManager.shared.restore()
-    }
-
 }
 
 extension Subscriptions {
     fileprivate func fetchProductInformation() {
-        cancellables.forEach { $0.cancel() }
+        productCancellable?.cancel()
+        purchaseCancellable?.cancel()
+        receiptCancellable?.cancel()
 
         status?(.processing)
 
-        InAppPurchaseManager.shared.$error
+        productCancellable = InAppPurchaseManager.shared.$products
             .receive(on: RunLoop.main)
             .compactMap { $0 }
-            .sink { _ in
-                self.status?(.fail)
-            }
-            .store(in: &cancellables)
+            .sink { [weak self] rsp in
+                switch rsp {
+                    case .failure(_):
+                        self?.status?(.fail)
 
-        InAppPurchaseManager.shared.$products
-            .receive(on: RunLoop.main)
-            .compactMap { $0 }
-            .sink {
-                guard let product = $0.first,
-                      let price = product.price else {
-                    self.status?(.fail)
-                    return
+                    case .success(let response):
+                        guard let product = response.first,
+                              let price = product.price else {
+                            self?.status?(.fail)
+                            return
+                        }
+                        self?.selectedProduct = product
+                        self?.status?(.gotProductPrice(price))
                 }
-                self.selectedProduct = product
-                self.status?(.gotProductPrice(price))
             }
-            .store(in: &cancellables)
 
         InAppPurchaseManager.shared.getProducts(for: [identifier])
     }

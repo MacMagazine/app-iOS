@@ -9,16 +9,12 @@ import Foundation/*.Bundle*/
 import StoreKit
 import Swift
 import UIKit
-public enum ReceiptStatus {
-  case invalid
-  case expired
-  case validationSuccess
-  public static func == (a: InAppPurchase.ReceiptStatus, b: InAppPurchase.ReceiptStatus) -> Swift.Bool
-  public var hashValue: Swift.Int {
-    get
-  }
-  public func hash(into hasher: inout Swift.Hasher)
-}
+import os.log
+import os
+public func logD(_ object: Any?, filename: Swift.String = #file, line: Swift.Int = #line, column: Swift.Int = #column, funcName: Swift.String = #function)
+public func logI(_ object: Any?, filename: Swift.String = #file, line: Swift.Int = #line, column: Swift.Int = #column, funcName: Swift.String = #function)
+public func logW(_ object: Any?, filename: Swift.String = #file, line: Swift.Int = #line, column: Swift.Int = #column, funcName: Swift.String = #function)
+public func logE(_ object: Any?, filename: Swift.String = #file, line: Swift.Int = #line, column: Swift.Int = #column, funcName: Swift.String = #function)
 @_hasMissingDesignatedInitializers open class ASN1Decoder {
   @objc deinit
 }
@@ -47,57 +43,66 @@ public struct Product {
   public var identifier: Swift.String?
   public var subscription: Swift.String?
 }
+public enum InAppStatus {
+  case retrieving
+  case retrieved
+  case purchasing
+  case purchased
+  case restoring
+  case restored
+  case validating
+  case validated
+  case expired
+  case unknown
+  public static func == (a: InAppPurchase.InAppStatus, b: InAppPurchase.InAppStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum InAppError : Swift.Error {
+  case retrieving
+  case purchasing
+  case restoring
+  case validating
+  public static func == (a: InAppPurchase.InAppError, b: InAppPurchase.InAppError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
 @_hasMissingDesignatedInitializers public class InAppPurchaseManager : Combine.ObservableObject {
   public static let shared: InAppPurchase.InAppPurchaseManager
   public var canPurchase: Swift.Bool {
     get
   }
-  @Combine.Published @_projectedValueProperty($error) public var error: Swift.Error? {
+  @Combine.Published @_projectedValueProperty($status) public var status: Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>? {
     get
     set
     _modify
   }
-  public var $error: Combine.Published<Swift.Error?>.Publisher {
+  public var $status: Combine.Published<Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>?>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
     set
   }
-  @Combine.Published @_projectedValueProperty($products) public var products: [InAppPurchase.Product]? {
+  @Combine.Published @_projectedValueProperty($products) public var products: Swift.Result<[InAppPurchase.Product], InAppPurchase.InAppError>? {
     get
     set
     _modify
   }
-  public var $products: Combine.Published<[InAppPurchase.Product]?>.Publisher {
+  public var $products: Combine.Published<Swift.Result<[InAppPurchase.Product], InAppPurchase.InAppError>?>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
     set
   }
   public func getProducts(for identifiers: [Swift.String])
-  @Combine.Published @_projectedValueProperty($success) public var success: Swift.Bool? {
-    get
-    set
-    _modify
-  }
-  public var $success: Combine.Published<Swift.Bool?>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
-    set
-  }
-  public func buy(product: InAppPurchase.Product)
-  public func restore()
-  @Combine.Published @_projectedValueProperty($status) public var status: InAppPurchase.ReceiptStatus? {
-    get
-    set
-    _modify
-  }
-  public var $status: Combine.Published<InAppPurchase.ReceiptStatus?>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
-    set
-  }
+  public func purchase(product: InAppPurchase.Product? = nil)
   public func validateReceipt(subscription: Swift.String)
   @objc deinit
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
-extension InAppPurchase.ReceiptStatus : Swift.Equatable {}
-extension InAppPurchase.ReceiptStatus : Swift.Hashable {}
+extension InAppPurchase.InAppStatus : Swift.Equatable {}
+extension InAppPurchase.InAppStatus : Swift.Hashable {}
+extension InAppPurchase.InAppError : Swift.Equatable {}
+extension InAppPurchase.InAppError : Swift.Hashable {}

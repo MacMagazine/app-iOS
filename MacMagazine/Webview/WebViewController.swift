@@ -148,7 +148,21 @@ class WebViewController: UIViewController {
         forceReload = false
 	}
 
-	// MARK: - Actions -
+    func setRightButtomItems(_ buttons: [RightButtons]) {
+        guard let vc = getPostsDetailViewController() else {
+            let rightButtons: [UIBarButtonItem] = buttons.map {
+                switch $0 {
+                    case .spin:     return UIBarButtonItem(customView: spin)
+                    case .actions:  return actions
+                }
+            }
+            self.navigationItem.rightBarButtonItems = rightButtons
+            return
+        }
+        vc.setRightButtomItems(buttons)
+    }
+
+    // MARK: - Actions -
 
 	@IBAction private func share(_ sender: Any) {
         guard let post = post,
@@ -336,20 +350,6 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         }
         let detailController = self.navigationController?.viewControllers.filter { $0.isKind(of: PostsDetailViewController.self) }
         return detailController?.first as? PostsDetailViewController
-    }
-
-    fileprivate func setRightButtomItems(_ buttons: [RightButtons]) {
-        guard let vc = getPostsDetailViewController() else {
-            let rightButtons: [UIBarButtonItem] = buttons.map {
-                switch $0 {
-                    case .spin:     return UIBarButtonItem(customView: spin)
-                    case .actions:  return actions
-                }
-            }
-            self.navigationItem.rightBarButtonItems = rightButtons
-            return
-        }
-        vc.setRightButtomItems(buttons)
     }
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {

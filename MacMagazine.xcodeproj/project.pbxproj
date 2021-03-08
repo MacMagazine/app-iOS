@@ -25,6 +25,8 @@
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
 		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
 		683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683271AD25291512004BD4DA /* WhatsNew.storyboard */; };
+		683BFB0025F667E8000C841F /* MMLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683BFAFF25F667E8000C841F /* MMLiveViewController.swift */; };
+		683BFB0B25F66E37000C841F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683BFB0A25F66E37000C841F /* TabBarController.swift */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
@@ -58,11 +60,11 @@
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
 		9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */; };
-		9B283DB925F2D19D0008922E /* InAppPurchase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; };
-		9B283DBA25F2D19D0008922E /* InAppPurchase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
 		9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */; };
+		9B48046625F4EE9B0026AFF0 /* InAppPurchase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; };
+		9B48046725F4EE9B0026AFF0 /* InAppPurchase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A8F942235377400A49239 /* ResultsViewController.swift */; };
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
@@ -186,6 +188,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9B48046825F4EE9B0026AFF0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9B48046725F4EE9B0026AFF0 /* InAppPurchase.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9C7FA4226BF836000534CA /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,17 +231,6 @@
 				9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BF82CC32515169100D765A5 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9B283DBA25F2D19D0008922E /* InAppPurchase.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BF82CC9251516AF00D765A5 /* Embed Frameworks */ = {
@@ -269,6 +271,8 @@
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
 		683271AC25291512004BD4DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WhatsNew.storyboard; sourceTree = "<group>"; };
+		683BFAFF25F667E8000C841F /* MMLiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMLiveViewController.swift; sourceTree = "<group>"; };
+		683BFB0A25F66E37000C841F /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
@@ -422,7 +426,7 @@
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
-				9B283DB925F2D19D0008922E /* InAppPurchase.xcframework in Frameworks */,
+				9B48046625F4EE9B0026AFF0 /* InAppPurchase.xcframework in Frameworks */,
 				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
 			);
@@ -531,6 +535,7 @@
 				9B9C7FB0226CA192000534CA /* PushNotification.swift */,
 				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
 				9B1BA5E3222B22980059F692 /* Settings.swift */,
+				683BFB0A25F66E37000C841F /* TabBarController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 			children = (
 				68BCEA2B252F6E5F0082704D /* Cookies.swift */,
 				68B969A22530DBA20035B641 /* DisqusViewController.swift */,
+				683BFAFF25F667E8000C841F /* MMLiveViewController.swift */,
 				9B9C7F93226B6AF4000534CA /* soundcloud.js */,
 				9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */,
 				9BA939422260DE0A004005AA /* WebView.storyboard */,
@@ -924,7 +930,7 @@
 				9BCAD6751F47A08100B54526 /* Resources */,
 				9BB4BC71225B99F700559170 /* Embed Watch Content */,
 				9B9C7FA4226BF836000534CA /* Embed App Extensions */,
-				9BF82CC32515169100D765A5 /* Embed Frameworks */,
+				9B48046825F4EE9B0026AFF0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1283,6 +1289,7 @@
 				9BD135DD2227364C00A0B627 /* SettingsTableViewController.swift in Sources */,
 				9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */,
 				9BCAD67F1F47A08100B54526 /* PostsDetailViewController.swift in Sources */,
+				683BFB0B25F66E37000C841F /* TabBarController.swift in Sources */,
 				6897160525F21F120030A16C /* Subscriptions.swift in Sources */,
 				9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */,
 				9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */,
@@ -1321,6 +1328,7 @@
 				9B4A8F952235377400A49239 /* ResultsViewController.swift in Sources */,
 				68EF53552527125E00FCBD3C /* SplashViewController.swift in Sources */,
 				685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */,
+				683BFB0025F667E8000C841F /* MMLiveViewController.swift in Sources */,
 				9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */,
 				9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */,
 				68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */,

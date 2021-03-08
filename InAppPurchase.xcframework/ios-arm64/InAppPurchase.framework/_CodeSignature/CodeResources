@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		fAoH220PbtJldgYT/ge/x/k2EFc=
+		XGsdHdj19tjRswGKJMRYhTEOC1Q=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		fAoH220PbtJldgYT/ge/x/k2EFc=
+		XGsdHdj19tjRswGKJMRYhTEOC1Q=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		bMZKxGwLWeS10KQnz4/y+RQNO3s=
+		x3prYXRoaG0wHcDAGa1IAJnsubY=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		e7taYwW+DeApJgNAAwuKsQzxef0=
+		n2CM7mC4H9JDTCxBHA5SBIEVXho=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -46,11 +46,11 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		bMZKxGwLWeS10KQnz4/y+RQNO3s=
+		x3prYXRoaG0wHcDAGa1IAJnsubY=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		e7taYwW+DeApJgNAAwuKsQzxef0=
+		n2CM7mC4H9JDTCxBHA5SBIEVXho=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -84,14 +84,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			P5kxvuNPniPzKCTWhyMKFJ+igeA/lGRy8TN8BN785H0=
+			7FlVOgTJYmkQi3KEwHGBa/fJ/WoDV/5bE9UIe4PCh4U=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			P5kxvuNPniPzKCTWhyMKFJ+igeA/lGRy8TN8BN785H0=
+			7FlVOgTJYmkQi3KEwHGBa/fJ/WoDV/5bE9UIe4PCh4U=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -105,14 +105,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QhahzVmUizxvrfhufExzxT7Wrk7pXKVmoAhixRehZIU=
+			FdHnDKQKHB/+TKZ1DxHbM0LOIC8XrFX/4g2SMgDsccA=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TafFvnrqK+smSJ2/Vl5meCLBdds6jhziY1yHu6wGcYY=
+			qeIuocHU4gNBA2Ey20Ad2Ra4E+osIrJk+VwZJ0hy02A=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
@@ -126,14 +126,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QhahzVmUizxvrfhufExzxT7Wrk7pXKVmoAhixRehZIU=
+			FdHnDKQKHB/+TKZ1DxHbM0LOIC8XrFX/4g2SMgDsccA=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TafFvnrqK+smSJ2/Vl5meCLBdds6jhziY1yHu6wGcYY=
+			qeIuocHU4gNBA2Ey20Ad2Ra4E+osIrJk+VwZJ0hy02A=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
