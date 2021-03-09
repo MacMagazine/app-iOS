@@ -18,6 +18,9 @@ class SplashViewController: UIViewController {
         view.backgroundColor = Settings().isDarkMode ? .black : .white
         logo.image = UIImage(named: "splash\(Settings().isDarkMode ? "_dark" : "")")
 
+        // Check subscriptions and update status
+        Subscriptions.shared.checkSubscriptions()
+
         API.isMMLive { isLive in
             delay(0.6) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -38,7 +41,7 @@ class SplashViewController: UIViewController {
                                   options: .transitionCrossDissolve,
                                   animations: {
                                     window.rootViewController = controller
-                                    if isLive {
+                                    if !isLive {
                                         TabBarController.shared.removeIndexes([0])
                                     }
                                   })

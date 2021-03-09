@@ -18,15 +18,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		7vjPFmA/umny/b5AaDbAw8VYEbE=
+		vjGsg566sKkPAX3zxo2CDsR5xQ8=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		XGsdHdj19tjRswGKJMRYhTEOC1Q=
+		bL/qQuS5QRKgunVW+3k94asp20A=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		XGsdHdj19tjRswGKJMRYhTEOC1Q=
+		bL/qQuS5QRKgunVW+3k94asp20A=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		n2CM7mC4H9JDTCxBHA5SBIEVXho=
+		2oqg5n9HBPesKYMR4THjYlN/iM4=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		n2CM7mC4H9JDTCxBHA5SBIEVXho=
+		2oqg5n9HBPesKYMR4THjYlN/iM4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -84,14 +84,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7FlVOgTJYmkQi3KEwHGBa/fJ/WoDV/5bE9UIe4PCh4U=
+			70urMk2EDddShGDFcJdIO79cWGS4hRYwCu4+RPY/1X8=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7FlVOgTJYmkQi3KEwHGBa/fJ/WoDV/5bE9UIe4PCh4U=
+			70urMk2EDddShGDFcJdIO79cWGS4hRYwCu4+RPY/1X8=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -112,7 +112,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qeIuocHU4gNBA2Ey20Ad2Ra4E+osIrJk+VwZJ0hy02A=
+			9SzKXWGF9oisR6CH0uh1evUPk7JNVhmqj09V1k6n5t0=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
@@ -133,7 +133,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qeIuocHU4gNBA2Ey20Ad2Ra4E+osIrJk+VwZJ0hy02A=
+			9SzKXWGF9oisR6CH0uh1evUPk7JNVhmqj09V1k6n5t0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

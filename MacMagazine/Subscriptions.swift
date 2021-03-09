@@ -148,6 +148,8 @@ extension Subscriptions {
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { [weak self] rsp in
+                logD(rsp)
+
                 switch rsp {
                     case .failure(_):
                         self?.status?(.fail)

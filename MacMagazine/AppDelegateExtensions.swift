@@ -31,13 +31,13 @@ extension Notification.Name {
 extension AppDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
+
+        // Check subscriptions and update status
+        Subscriptions.shared.checkSubscriptions()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         Settings().applyTheme()
-
-        // Check subscriptions and update status
-        Subscriptions.shared.checkSubscriptions()
 	}
 }
 

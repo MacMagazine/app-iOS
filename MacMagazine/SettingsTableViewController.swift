@@ -510,7 +510,7 @@ extension SettingsTableViewController {
                     var settings = Settings()
                     settings.purchased = false
 
-            case .processing:
+                case .processing:
                     self?.spin.startAnimating()
                     self?.buyBtn.isHidden = true
                     self?.restoreBtn.isEnabled = false
