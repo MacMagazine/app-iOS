@@ -45,6 +45,8 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var restoreBtn: UIButton!
 
+    var price: String = "-"
+
     enum IconOptionAccessibilityLabel: String {
         case whiteBackground = "Ícone do aplicativo com fundo branco."
         case blueBackground = "Ícone do aplicativo com fundo azul."
@@ -489,42 +491,32 @@ extension SettingsTableViewController {
     }
 
     fileprivate func setupInAppPurchase() {
-        spin.stopAnimating()
-        buyBtn.isHidden = false
-        buyBtn.setTitle("-", for: .normal)
-        buyBtn.isEnabled = false
-        buyBtn.backgroundColor = UIColor(named: "MMGrayWhite")
-        purchasedMessage.isHidden = true
+        enableBuyObjects(true)
         restoreBtn.isEnabled = false
 
         Subscriptions.shared.status = { [weak self] status in
-            self?.spin.stopAnimating()
-            self?.buyBtn.isHidden = false
-            self?.buyMessage.isHidden = false
             self?.restoreBtn.isEnabled = true
 
             switch status {
                 case .canPurchase,
                      .expired:
-                    self?.buyBtn.isEnabled = true
-                    self?.buyBtn.backgroundColor = UIColor(named: "MMBlue")
-                    self?.restoreBtn.isEnabled = true
-                    self?.purchasedMessage.isHidden = true
+
+                    self?.showBuyObjects(true)
 
                     var settings = Settings()
                     settings.purchased = false
 
                 case .processing:
+                    self?.showBuyObjects(false)
                     self?.spin.startAnimating()
-                    self?.buyBtn.isHidden = true
                     self?.restoreBtn.isEnabled = false
 
                 case .gotProductPrice(let price):
-                    self?.buyBtn.setTitle(price, for: .normal)
+                    self?.price = price
+                    self?.enableBuyObjects(true)
 
                 case .purchasedSuccess:
-                    self?.buyBtn.isHidden = true
-                    self?.buyMessage.isHidden = true
+                    self?.showBuyObjects(false)
                     self?.purchasedMessage.isHidden = false
                     self?.restoreBtn.isEnabled = false
                     self?.patraoButton.isEnabled = false
@@ -533,9 +525,7 @@ extension SettingsTableViewController {
                     settings.purchased = true
 
                 case .fail:
-                    self?.buyBtn.isEnabled = false
-                    self?.buyBtn.backgroundColor = UIColor(named: "MMGrayWhite")
-                    self?.buyBtn.setTitle("-", for: .normal)
+                    self?.enableBuyObjects(false)
 
                     var settings = Settings()
                     settings.purchased = false
@@ -543,7 +533,7 @@ extension SettingsTableViewController {
 
             if status == .expired {
                 let alertController = UIAlertController(title: "MacMagazine",
-                                                        message: "Sua assinatura está expirada.",
+                                                        message: "Sua assinatura está vencidda.",
                                                         preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                     self?.dismiss(animated: true)
@@ -553,5 +543,19 @@ extension SettingsTableViewController {
         }
 
         Subscriptions.shared.getProducts()
+    }
+
+    fileprivate func showBuyObjects(_ show: Bool) {
+        spin.stopAnimating()
+        buyBtn.isHidden = !show
+        buyMessage.isHidden = !show
+        purchasedMessage.isHidden = true
+    }
+
+    fileprivate func enableBuyObjects(_ enable: Bool) {
+        showBuyObjects(true)
+        buyBtn.setTitle(enable ? price : "-", for: .normal)
+        buyBtn.backgroundColor = UIColor(named: enable ? "MMBlue" : "MMGrayWhite")
+        buyBtn.isEnabled = enable
     }
 }
