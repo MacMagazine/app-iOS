@@ -76,16 +76,6 @@ public enum InAppError : Swift.Error {
   public var canPurchase: Swift.Bool {
     get
   }
-  @Combine.Published @_projectedValueProperty($status) public var status: Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>? {
-    get
-    set
-    _modify
-  }
-  public var $status: Combine.Published<Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>?>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
-    set
-  }
   @Combine.Published @_projectedValueProperty($products) public var products: Swift.Result<[InAppPurchase.Product], InAppPurchase.InAppError>? {
     get
     set
@@ -97,6 +87,16 @@ public enum InAppError : Swift.Error {
     set
   }
   public func getProducts(for identifiers: [Swift.String])
+  @Combine.Published @_projectedValueProperty($status) public var status: Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>? {
+    get
+    set
+    _modify
+  }
+  public var $status: Combine.Published<Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    set
+  }
   public func purchase(product: InAppPurchase.Product? = nil)
   public func validateReceipt(subscription: Swift.String)
   @objc deinit

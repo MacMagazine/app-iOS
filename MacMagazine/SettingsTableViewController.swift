@@ -477,7 +477,11 @@ extension SettingsTableViewController {
 
 extension SettingsTableViewController {
     @IBAction private func recover(_ sender: Any) {
-        Subscriptions.shared.restore()
+        guard let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        Subscriptions.shared.restore()
     }
 
     @IBAction private func buy(_ sender: Any) {

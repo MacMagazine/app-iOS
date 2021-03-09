@@ -496,7 +496,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Goh-iK-82H">
                                                     <rect key="frame" x="6" y="6" width="402" height="38"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <state key="normal" title="Recuperar assinatura">
+                                                    <state key="normal" title="Gerenciar assinaturas">
                                                         <color key="titleColor" name="MMBlueWhite"/>
                                                     </state>
                                                     <state key="disabled">

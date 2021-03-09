@@ -31,6 +31,7 @@ class Subscriptions {
 
     var selectedProduct: Product?
     var status: ((InAppPurchaseStatus) -> Void)?
+    var isPurchasing: Bool = false
 
     // MARK: - Methods -
 
@@ -107,31 +108,34 @@ class Subscriptions {
 
                 switch rsp {
                     case .failure(_):
+                        self?.isPurchasing = false
                         self?.status?(.canPurchase)
 
                     case .success(let response):
                         var status: InAppPurchaseStatus {
                             switch response {
                             case .purchased:
+                                self?.isPurchasing = false
                                 return .purchasedSuccess
                             case .purchasing,
-                                 .restoring,
-                                 .restored:
+                                 .restoring:
+                                return .processing
+                            case .restored:
+                                self?.checkSubscriptions()
                                 return .processing
                             default:
+                                self?.isPurchasing = false
                                 return .canPurchase
                             }
                         }
                         self?.status?(status)
-                        if response == .restored && restore {
-                            self?.checkSubscriptions()
-                        }
                 }
             }
 
         guard let product = selectedProduct else {
             return
         }
+        isPurchasing = true
         InAppPurchaseManager.shared.purchase(product: restore ? nil : product)
     }
 }

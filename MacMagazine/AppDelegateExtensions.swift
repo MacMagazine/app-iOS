@@ -37,7 +37,9 @@ extension AppDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        Settings().applyTheme()
+        if Subscriptions.shared.isPurchasing {
+            Settings().applyTheme()
+        }
 	}
 }
 
