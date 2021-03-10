@@ -42,6 +42,14 @@ public struct Product {
   public var price: Swift.String?
   public var identifier: Swift.String?
   public var subscription: Swift.String?
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension SKProduct {
+  @objc override dynamic open var debugDescription: Swift.String {
+    @objc get
+  }
 }
 public enum InAppStatus {
   case retrieving

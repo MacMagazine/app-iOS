@@ -3,7 +3,8 @@
 
   ],
   "settings" : {
-
+    "_locale" : "pt_BR",
+    "_storefront" : "BRA"
   },
   "subscriptionGroups" : [
     {
@@ -43,6 +44,11 @@
       ]
     }
   ],
+  "subscriptionOffersKeyPair" : {
+    "id" : "CA6C26D9",
+    "privateKey" : "MF8CAQEEGFNdmXwbztKRElvBEQRj1CQDG7Zr+BCz1KAKBggqhkjOPQMBAaE0AzIA\nBBNChsXDXfzhsrIodoIHyP3B1CiiB/WphGoPJmcfQePk1ZUw5ws7eLGqVN45qEUA\nkw==",
+    "publicKey" : "MEkwEwYHKoZIzj0CAQYIKoZIzj0DAQEDMgAEE0KGxcNd/OGysih2ggfI/cHUKKIH\n9amEag8mZx9B4+TVlTDnCzt4sapU3jmoRQCT"
+  },
   "version" : {
     "major" : 1,
     "minor" : 0

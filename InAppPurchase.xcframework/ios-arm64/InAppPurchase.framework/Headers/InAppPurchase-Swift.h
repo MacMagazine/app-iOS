@@ -188,6 +188,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import StoreKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -206,6 +207,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+
+@interface SKProduct (SWIFT_EXTENSION(InAppPurchase))
+@property (nonatomic, readonly, copy) NSString * _Nonnull debugDescription;
+@end
 
 
 #if __has_attribute(external_source_symbol)

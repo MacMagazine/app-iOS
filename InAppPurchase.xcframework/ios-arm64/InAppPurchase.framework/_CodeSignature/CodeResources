@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/InAppPurchase-Swift.h</key>
 		<data>
-		HEM6KOFxTksDcZo/K+SK0ZHmVPk=
+		KSSHSM7C+k3hSMoeE9iMjPbBCIQ=
 		</data>
 		<key>Headers/InAppPurchase.h</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		NFivjOn3sa+lQpEcTpPPEL5JJqc=
+		H8YOHUk64Q1IC2AqgTjIh86fE2o=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		NFivjOn3sa+lQpEcTpPPEL5JJqc=
+		H8YOHUk64Q1IC2AqgTjIh86fE2o=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		+T3dU30Bbgqf60XvqwNTau+hrC0=
+		hA7Hr7Zx/pIgG+3iM0JR8DnvEnE=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		glf9BS5LQ3/YNjFPBg9tGIscL2A=
+		b3+lgme0Z5xGO1sTglajd2GLWN4=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -46,15 +46,19 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		+T3dU30Bbgqf60XvqwNTau+hrC0=
+		hA7Hr7Zx/pIgG+3iM0JR8DnvEnE=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		glf9BS5LQ3/YNjFPBg9tGIscL2A=
+		b3+lgme0Z5xGO1sTglajd2GLWN4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		tRmTIyjoYK8GcEHBSq71bCajCpU=
+		</data>
+		<key>StoreKitTestCertificate.cer</key>
+		<data>
+		jLu6KSMedfyak93h25M6IVZIHSQ=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -70,7 +74,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			l0OIFoQ926V0ARavX4Jp5QfCcWcOR/NLI1rbH0UNME4=
+			INFAq0I0m75HeroUo4Js8EGjQ01zAbr60DkYjALGeNI=
 			</data>
 		</dict>
 		<key>Headers/InAppPurchase.h</key>
@@ -84,14 +88,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5MeHjYQHgJjODUHV8SGsxK4kXVTHEWUD7dN+6cq7b1Q=
+			xOue4cAQ2EU6R/ZsvEVMiOd2d1BhleSOdhmmctUSSxE=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5MeHjYQHgJjODUHV8SGsxK4kXVTHEWUD7dN+6cq7b1Q=
+			xOue4cAQ2EU6R/ZsvEVMiOd2d1BhleSOdhmmctUSSxE=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -105,14 +109,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vnsV6Rwbpw8vm1sJGjnce9lW8XBoVg1LiBD5DMSZToM=
+			7abeqc+kSVaO3thBfppXneQ/H70UovhfGLkZQ8TFWaQ=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			36A1OdrwWjmdc3Thj59kFSYBoXIGunjQpYe7EbLpX5Y=
+			g+iRczn8OObfcm2rsj3rr9uKSSxKEmi0WwdEPHdpFMc=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
@@ -126,14 +130,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vnsV6Rwbpw8vm1sJGjnce9lW8XBoVg1LiBD5DMSZToM=
+			7abeqc+kSVaO3thBfppXneQ/H70UovhfGLkZQ8TFWaQ=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			36A1OdrwWjmdc3Thj59kFSYBoXIGunjQpYe7EbLpX5Y=
+			g+iRczn8OObfcm2rsj3rr9uKSSxKEmi0WwdEPHdpFMc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -141,6 +145,13 @@
 			<key>hash2</key>
 			<data>
 			CjZ8Eej1q4DGWrd4sMgAIfpUnWpYLcxRfThPKkFacso=
+			</data>
+		</dict>
+		<key>StoreKitTestCertificate.cer</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/wujbnIdLbdB0qoR5hEu94v3ExtGx/A1sAiR0EXIZP4=
 			</data>
 		</dict>
 	</dict>
