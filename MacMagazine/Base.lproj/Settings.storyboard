@@ -611,6 +611,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="clearCache:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ADA-e3-v3h"/>
+                                                        <outletCollection property="gestureRecognizers" destination="Aw5-9L-f2b" appends="YES" id="qmX-Y8-kt1"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

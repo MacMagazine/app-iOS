@@ -42,7 +42,7 @@ class SplashViewController: UIViewController {
                                   animations: {
                                     window.rootViewController = controller
                                     if !isLive {
-                                        //TabBarController.shared.removeIndexes([0])
+//                                        TabBarController.shared.removeIndexes([0])
                                     }
                                   })
             }

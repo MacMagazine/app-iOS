@@ -21,7 +21,22 @@ class MMLiveViewController: WebViewController {
         postURL = URL(string: "https://live.macmagazine.com.br/live.html")
     }
 
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            delay(0.8) {
+                NotificationCenter.default.post(name: .reloadWeb, object: nil)
+            }
+        }
+    }
+
+    @IBAction private func refresh(_ sender: Any) {
+        reload()
+    }
+
     // MARK: - Override -
 
     override func setRightButtomItems(_ buttons: [RightButtons]) {}
+    override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {}
 }

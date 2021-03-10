@@ -135,7 +135,15 @@ class WebViewController: UIViewController {
 	}
 
 	func loadWebView(url: URL) {
-		previousIsDarkMode = Settings().isDarkMode
+        if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
+            let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
+            let date = Date(timeIntervalSince1970: 0)
+            if let websiteDataTypes = websiteDataTypes as? Set<String> {
+                WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: date, completionHandler: {})
+            }
+        }
+
+        previousIsDarkMode = Settings().isDarkMode
 		previousFonteSize = Settings().fontSizeUserAgent
 
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
@@ -144,7 +152,6 @@ class WebViewController: UIViewController {
         webView?.load(URLRequest(url: url))
 
         setRightButtomItems([.spin])
-
         forceReload = false
 	}
 

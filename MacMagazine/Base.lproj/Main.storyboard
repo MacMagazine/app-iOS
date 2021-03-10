@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="n60-EV-RDL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A54-fq-tRK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw0-e0-6p0">
                                 <rect key="frame" x="0.0" y="88" width="390" height="756"/>
@@ -51,6 +51,12 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Piz-og-PMY">
+                            <color key="tintColor" name="MMBlueWhite"/>
+                            <connections>
+                                <action selector="refresh:" destination="14s-0C-24v" id="nLr-mz-JH9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="webView" destination="Xw0-e0-6p0" id="Jta-LA-2hQ"/>

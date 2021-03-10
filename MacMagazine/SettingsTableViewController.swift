@@ -233,6 +233,8 @@ extension SettingsTableViewController {
         if type == .all {
             UserDefaults.standard.set(true, forKey: Definitions.deleteAllCookies)
             UserDefaults.standard.synchronize()
+
+            NotificationCenter.default.post(name: .reloadWeb, object: "")
         }
 
         // Feedback message
