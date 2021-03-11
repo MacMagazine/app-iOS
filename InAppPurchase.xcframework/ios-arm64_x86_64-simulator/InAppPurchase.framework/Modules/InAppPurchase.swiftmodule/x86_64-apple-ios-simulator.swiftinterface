@@ -107,6 +107,7 @@ public enum InAppError : Swift.Error {
   }
   public func purchase(product: InAppPurchase.Product? = nil)
   public func validateReceipt(subscription: Swift.String)
+  public func refreshReceipt(subscription: Swift.String)
   @objc deinit
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }

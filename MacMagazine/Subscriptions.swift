@@ -71,7 +71,7 @@ class Subscriptions {
                 }
             }
 
-        InAppPurchaseManager.shared.validateReceipt(subscription: identifier)
+        InAppPurchaseManager.shared.refreshReceipt(subscription: identifier)
     }
 
     func getProducts() {

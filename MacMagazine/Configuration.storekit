@@ -3,8 +3,10 @@
 
   ],
   "settings" : {
+    "_askToBuyEnabled" : false,
     "_locale" : "pt_BR",
-    "_storefront" : "BRA"
+    "_storefront" : "BRA",
+    "_timeRate" : 5
   },
   "subscriptionGroups" : [
     {
