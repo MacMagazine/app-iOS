@@ -17,7 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var previousController: UIViewController?
     var supportedInterfaceOrientation: UIInterfaceOrientationMask = .all
 
-    var widgetSpotlightPost: String?
+    var isMMLive: Bool = false
+
+    var widgetSpotlightPost: String? {
+        didSet {
+            // Move to 2nd tab
+            guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+                return
+            }
+            tabController.selectedIndex = isMMLive ? 1 : 0
+        }
+    }
 
 	// MARK: - Window lifecycle -
 

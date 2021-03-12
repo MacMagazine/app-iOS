@@ -582,8 +582,9 @@ func showDetailController(with link: String) {
 			return
 		}
 		// Force first tab to present losing of reference
-		tabController.selectedIndex = 0
-		if let splitVC = tabController.selectedViewController as? UISplitViewController,
+        tabController.selectedIndex = (UIApplication.shared.delegate as? AppDelegate)?.isMMLive ?? false ? 1 : 0
+
+        if let splitVC = tabController.selectedViewController as? UISplitViewController,
 			let navVC = splitVC.children[Settings().isPhone ? 0 : 1] as? UINavigationController {
 
 			if Settings().isPhone {
