@@ -46,7 +46,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		MQUquN1It9Otl5JnuBwhVTbsqOY=
+		SutLRWqnDrLyMDeUAuKKx95r/1Y=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		MQUquN1It9Otl5JnuBwhVTbsqOY=
+		SutLRWqnDrLyMDeUAuKKx95r/1Y=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		w6hDXJTNm4S/jF6xA7Rlku8yEM8=
+		T2wkSRGsIeJzwCoyhFCVJ9wn7lY=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		w6hDXJTNm4S/jF6xA7Rlku8yEM8=
+		T2wkSRGsIeJzwCoyhFCVJ9wn7lY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -162,7 +162,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LNCIX0f0JQFdRrKNBlIythi02LsySxZtR+twZJ+NAxk=
+			QvwrYezoqeQZ6m/3/SY42KEXDoZ7SPM/C5q9l1ZIGMk=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
@@ -183,7 +183,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LNCIX0f0JQFdRrKNBlIythi02LsySxZtR+twZJ+NAxk=
+			QvwrYezoqeQZ6m/3/SY42KEXDoZ7SPM/C5q9l1ZIGMk=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -204,7 +204,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RLhQXvWliYAtLLWCqkwa6MCjZCCrEKJvKVvDKvXdZ/Q=
+			3SGDbQfFfbYDiy9U7X/gdJiMRmIHHmJIyrpQQqOLJiw=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/x86_64.swiftdoc</key>
@@ -225,7 +225,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RLhQXvWliYAtLLWCqkwa6MCjZCCrEKJvKVvDKvXdZ/Q=
+			3SGDbQfFfbYDiy9U7X/gdJiMRmIHHmJIyrpQQqOLJiw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

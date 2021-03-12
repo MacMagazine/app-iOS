@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		eVoKgkJfLJYan4+m6PF1e5xm9s8=
+		xY2+HWy+n+qGKrXt761SDLTLEdA=
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		eVoKgkJfLJYan4+m6PF1e5xm9s8=
+		xY2+HWy+n+qGKrXt761SDLTLEdA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -116,7 +116,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BISxoi6e8CRREj0o0trPf/+qQKtjgMgOa6R2sSZdh00=
+			e75u4vU+2kHGxrmvWF+dzVZ35XOiMPuUDrk5T2If6ow=
 			</data>
 		</dict>
 		<key>Modules/InAppPurchase.swiftmodule/arm64.swiftdoc</key>
@@ -137,7 +137,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BISxoi6e8CRREj0o0trPf/+qQKtjgMgOa6R2sSZdh00=
+			e75u4vU+2kHGxrmvWF+dzVZ35XOiMPuUDrk5T2If6ow=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
