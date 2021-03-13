@@ -22,6 +22,8 @@ class SplashViewController: UIViewController {
         Subscriptions.shared.checkSubscriptions()
 
         API.isMMLive { isLive in
+            (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
+
             delay(0.6) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
@@ -42,7 +44,7 @@ class SplashViewController: UIViewController {
                                   animations: {
                                     window.rootViewController = controller
                                     if !isLive {
-//                                        TabBarController.shared.removeIndexes([0])
+                                        TabBarController.shared.removeIndexes([0])
                                     }
                                   })
             }

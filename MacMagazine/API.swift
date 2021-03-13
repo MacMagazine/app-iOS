@@ -248,7 +248,8 @@ extension API {
                         onCompletion?(false)
                         return
                     }
-                    onCompletion?(!(site.contains("MM Live foi encerrado")))
+                    onCompletion?(true)
+//                    onCompletion?(!(site.contains("MM Live foi encerrado")))
             }
         }
     }
