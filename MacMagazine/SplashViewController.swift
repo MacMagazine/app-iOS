@@ -22,7 +22,9 @@ class SplashViewController: UIViewController {
         Subscriptions.shared.checkSubscriptions()
 
         API.isMMLive { isLive in
-            (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
+            DispatchQueue.main.async {
+                (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
+            }
 
             delay(0.6) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

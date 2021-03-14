@@ -18,7 +18,7 @@ class MMLiveViewController: WebViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        postURL = URL(string: "https://live.macmagazine.com.br/live.html")
+        postURL = URL(string: "https://live.macmagazine.com.br/live.html\(Settings().isDarkMode ? "?theme=dark" : "")")
     }
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -26,6 +26,7 @@ class MMLiveViewController: WebViewController {
 
         coordinator.animate(alongsideTransition: nil) { _ in
             delay(0.8) {
+                self.postURL = URL(string: "https://live.macmagazine.com.br/live.html\(Settings().isDarkMode ? "?theme=dark" : "")")
                 NotificationCenter.default.post(name: .reloadWeb, object: nil)
             }
         }
