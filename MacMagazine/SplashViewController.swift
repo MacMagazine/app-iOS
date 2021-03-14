@@ -46,6 +46,9 @@ class SplashViewController: UIViewController {
                                     if !isLive {
                                         TabBarController.shared.removeIndexes([0])
                                     }
+                                    if (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost != nil {
+                                        TabBarController.shared.selectIndex(isLive ? 1 : 0)
+                                    }
                                   })
             }
         }
