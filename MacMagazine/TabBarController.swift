@@ -38,6 +38,13 @@ class TabBarController: NSObject, UITabBarControllerDelegate {
         }
     }
 
+    func resetTabs() {
+        guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+            return
+        }
+        tabController.viewControllers = self.controllers
+    }
+
     // MARK: - Delegate -
 
     // Tap 2x to Top

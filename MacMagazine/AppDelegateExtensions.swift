@@ -34,6 +34,18 @@ extension AppDelegate {
 
         // Check subscriptions and update status
         Subscriptions.shared.checkSubscriptions()
+
+        // Check if MM Live is active
+        Settings().isMMLive { isLive in
+            DispatchQueue.main.async {
+                (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
+                if !isLive {
+                    TabBarController.shared.removeIndexes([0])
+                } else {
+                    TabBarController.shared.resetTabs()
+                }
+            }
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

@@ -22,14 +22,14 @@
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw0-e0-6p0">
                                 <rect key="frame" x="0.0" y="20" width="390" height="824"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" name="MMWhiteGrey6"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" name="MMWhiteGrey6"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Xw0-e0-6p0" secondAttribute="trailing" id="3ci-im-pEe"/>
                             <constraint firstItem="n60-EV-RDL" firstAttribute="top" secondItem="Xw0-e0-6p0" secondAttribute="bottom" id="Jte-L5-YSO"/>
@@ -352,9 +352,9 @@
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="MMWhiteGrey6">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

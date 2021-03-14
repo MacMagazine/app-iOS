@@ -9,15 +9,18 @@
 import Kingfisher
 import OneSignal
 import UIKit
+import UserNotifications
 
-class PushNotification {
+class PushNotification: NSObject {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
         let key: [UInt8] = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
 
         OneSignal.initWithLaunchOptions(options)
         OneSignal.setAppId(Obfuscator().reveal(key: key))
 
-		OneSignal.promptForPushNotifications(userResponse: { _ in })
+		OneSignal.promptForPushNotifications(userResponse: { _ in
+            self.setLocalNotification()
+        })
 
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
             self.updateDatabase()
@@ -60,4 +63,81 @@ extension PushNotification {
 			}
 		}
 	}
+}
+
+// MARK: - Local notification -
+
+extension PushNotification: UNUserNotificationCenterDelegate {
+    func setLocalNotification(for event: MMLive? = nil) {
+        UNUserNotificationCenter.current().delegate = self
+
+        var _event = event
+        if event == nil {
+            guard let saved = UserDefaults.standard.object(forKey: Definitions.mmLive) as? Data,
+                  let decoded = try? JSONDecoder().decode(MMLive.self, from: saved) else {
+                return
+            }
+            _event = decoded
+        }
+
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized {
+
+                guard let event = _event  else {
+                    return
+                }
+
+                let start = UNMutableNotificationContent()
+                start.title = "MM Live irá começar"
+                start.subtitle = "Acompanhe ao vivo o evento."
+                start.sound = UNNotificationSound.default
+
+                // show this notification five seconds from `inicio`
+                let startTrigger = UNTimeIntervalNotificationTrigger(timeInterval: event.inicio.timeIntervalSince(Date()), repeats: false)
+
+                // choose a random identifier
+                let startRequest = UNNotificationRequest(identifier: "MMLiveWillStart", content: start, trigger: startTrigger)
+
+                // add our notification request
+                UNUserNotificationCenter.current().add(startRequest)
+
+                let end = UNMutableNotificationContent()
+                end.title = "MM Live foi encerrada"
+                end.subtitle = "Obrigado por nos acompanhar."
+                end.sound = UNNotificationSound.default
+
+                // show this notification five seconds from `fim`
+                let endTrigger = UNTimeIntervalNotificationTrigger(timeInterval: event.fim.timeIntervalSince(Date()), repeats: false)
+
+                // choose a random identifier
+                let endRequest = UNNotificationRequest(identifier: "MMLiveEnded", content: end, trigger: endTrigger)
+
+                // add our notification request
+                UNUserNotificationCenter.current().add(endRequest)
+            }
+        }
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+
+        if response.notification.request.identifier == "MMLiveWillStart" {
+            TabBarController.shared.resetTabs()
+            TabBarController.shared.selectIndex(0)
+        }
+
+        if response.notification.request.identifier == "MMLiveEnded" {
+            TabBarController.shared.removeIndexes([0])
+            TabBarController.shared.selectIndex(0)
+        }
+
+        completionHandler()
+    }
 }

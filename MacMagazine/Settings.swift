@@ -202,6 +202,9 @@ struct Settings {
             let isLive = Date() > event.inicio && Date() < event.fim
             event.lastChecked = Date()
 
+            // Set Local Push Notifications
+            PushNotification().setLocalNotification(for: event)
+
             if let encoded = try? JSONEncoder().encode(event) {
                 UserDefaults.standard.set(encoded, forKey: Definitions.mmLive)
             }
