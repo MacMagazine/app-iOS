@@ -81,6 +81,8 @@ class API {
         static let categories = "categories"
 		static let tag = "tag="
 
+        static let mmlive = "mmlive.json"
+
 		// YouTube
 		static let salt = "AppDelegateNSObject"
 		static let keyParam = "key="
@@ -231,25 +233,39 @@ extension API {
 	}
 }
 
+struct MMLive: Codable {
+    var inicio: Date
+    var fim: Date
+    var lastChecked: Date?
+}
+
 extension API {
-    static func isMMLive(onCompletion: ((Bool) -> Void)?) {
-        guard let url = URL(string: "https://live.macmagazine.com.br/live.html") else {
-            onCompletion?(false)
+    static func mmLive(onCompletion: ((MMLive?) -> Void)?) {
+        let host = "\(APIParams.mm)\(APIParams.mmlive)"
+
+        guard let url = URL(string: "\(host.escape())") else {
+            onCompletion?(nil)
             return
         }
 
         Network.get(url: url) { (result: Result<Data, RestAPIError>) in
             switch result {
                 case .failure(_):
-                    onCompletion?(false)
+                    onCompletion?(nil)
 
                 case .success(let response):
-                    guard let site = String(data: response, encoding: .utf8) else {
-                        onCompletion?(false)
-                        return
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .secondsSince1970
+
+                        let event = try decoder.decode(MMLive.self, from: response)
+
+                        DispatchQueue.main.async {
+                            onCompletion?(event)
+                        }
+                    } catch {
+                        onCompletion?(nil)
                     }
-                    onCompletion?(true)
-//                    onCompletion?(!(site.contains("MM Live foi encerrado")))
             }
         }
     }

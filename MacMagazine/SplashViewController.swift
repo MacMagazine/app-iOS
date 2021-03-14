@@ -21,7 +21,7 @@ class SplashViewController: UIViewController {
         // Check subscriptions and update status
         Subscriptions.shared.checkSubscriptions()
 
-        API.isMMLive { isLive in
+        Settings().isMMLive { isLive in
             DispatchQueue.main.async {
                 (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
             }

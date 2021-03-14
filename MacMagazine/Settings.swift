@@ -24,6 +24,7 @@ enum Definitions {
     static let purchased = "purchased"
     static let whatsnew = "whatsnew"
     static let deleteAllCookies = "deleteAllCookies"
+    static let mmLive = "mmLive"
 }
 
 // MARK: -
@@ -168,6 +169,44 @@ struct Settings {
         set(value) {
             UserDefaults.standard.set(value, forKey: Definitions.whatsnew)
             UserDefaults.standard.synchronize()
+        }
+    }
+
+    // MARK: - Check MM Live -
+
+    func isMMLive(_ onCompletion: ((Bool) -> Void)?) {
+        guard let event = UserDefaults.standard.object(forKey: Definitions.mmLive) as? Data,
+              let decoded = try? JSONDecoder().decode(MMLive.self, from: event),
+              let lastChecked = decoded.lastChecked else {
+            getMMLive { isLive in
+                onCompletion?(isLive)
+            }
+            return
+        }
+        if Date() > lastChecked.addingTimeInterval(86400) {    // 24 hours
+            getMMLive { isLive in
+                onCompletion?(isLive)
+            }
+        } else {
+            let isLive = Date() > decoded.inicio && Date() < decoded.fim
+            onCompletion?(isLive)
+        }
+    }
+
+    fileprivate func getMMLive(_ onCompletion: ((Bool) -> Void)?) {
+        API.mmLive { event in
+            guard var event = event else {
+                onCompletion?(false)
+                return
+            }
+            let isLive = Date() > event.inicio && Date() < event.fim
+            event.lastChecked = Date()
+
+            if let encoded = try? JSONEncoder().encode(event) {
+                UserDefaults.standard.set(encoded, forKey: Definitions.mmLive)
+            }
+
+            onCompletion?(isLive)
         }
     }
 
