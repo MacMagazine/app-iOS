@@ -199,6 +199,7 @@ struct Settings {
                 onCompletion?(false)
                 return
             }
+
             let isLive = Date() > event.inicio && Date() < event.fim
             event.lastChecked = Date()
 

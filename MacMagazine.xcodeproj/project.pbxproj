@@ -34,6 +34,7 @@
 		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
 		68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68BCEA2F252F6F500082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
+		68DE861025FF77E600413E62 /* mmlive.json in Resources */ = {isa = PBXBuildFile; fileRef = 68DE860F25FF77E600413E62 /* mmlive.json */; };
 		68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E740D625EF1AE5003A9BD9 /* StoreKit.framework */; };
 		68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
 		68EF53502527103000FCBD3C /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68EF534E2527103000FCBD3C /* Splash.storyboard */; };
@@ -280,6 +281,7 @@
 		68B969A22530DBA20035B641 /* DisqusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisqusViewController.swift; sourceTree = "<group>"; };
 		68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 9.xcdatamodel"; sourceTree = "<group>"; };
 		68BCEA2B252F6E5F0082704D /* Cookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookies.swift; sourceTree = "<group>"; };
+		68DE860F25FF77E600413E62 /* mmlive.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mmlive.json; sourceTree = "<group>"; };
 		68E740D625EF1AE5003A9BD9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		68EF534F2527103000FCBD3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Splash.storyboard; sourceTree = "<group>"; };
 		68F61C1F24F9524200A4E195 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
 				9B1BA5E3222B22980059F692 /* Settings.swift */,
 				683BFB0A25F66E37000C841F /* TabBarController.swift */,
+				68DE860F25FF77E600413E62 /* mmlive.json */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1097,6 +1100,7 @@
 				9BB252C323B670630054631B /* tablet_4.png in Resources */,
 				68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */,
 				9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */,
+				68DE861025FF77E600413E62 /* mmlive.json in Resources */,
 				9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */,
 				9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */,
 				9BA939442260DE0A004005AA /* WebView.storyboard in Resources */,

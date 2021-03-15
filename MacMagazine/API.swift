@@ -240,6 +240,27 @@ struct MMLive: Codable {
 }
 
 extension API {
+    static func mmLiveMock(onCompletion: ((MMLive?) -> Void)?) {
+        guard let path = Bundle(for: Self.self).path(forResource: "mmlive", ofType: "json"),
+              let content = FileManager.default.contents(atPath: path) else {
+            onCompletion?(nil)
+            return
+        }
+
+        do {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .secondsSince1970
+
+            let event = try decoder.decode(MMLive.self, from: content)
+
+            DispatchQueue.main.async {
+                onCompletion?(event)
+            }
+        } catch {
+            onCompletion?(nil)
+        }
+    }
+
     static func mmLive(onCompletion: ((MMLive?) -> Void)?) {
         let host = "\(APIParams.mm)\(APIParams.mmlive)"
 
