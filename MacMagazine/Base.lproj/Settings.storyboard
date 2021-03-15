@@ -424,8 +424,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
-                                                    <rect key="frame" x="20" y="10" width="201" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
+                                                    <rect key="frame" x="20" y="0.0" width="230" height="50"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -434,10 +434,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMw-Ps-gvb">
-                                                    <rect key="frame" x="241" y="10" width="100" height="30"/>
+                                                    <rect key="frame" x="270" y="10" width="100" height="30"/>
                                                     <color key="backgroundColor" name="MMBlue"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="wzv-4J-dgO"/>
+                                                        <constraint firstAttribute="width" constant="100" id="wzv-4J-dgO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="-">
@@ -462,15 +462,14 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="VmZ-d3-AFQ" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="BO0-Ob-0u6"/>
-                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="05X-vX-2u1" secondAttribute="trailing" priority="750" constant="36" id="Iwq-Mm-Htx"/>
-                                                <constraint firstAttribute="bottom" secondItem="VmZ-d3-AFQ" secondAttribute="bottom" constant="10" id="PHh-jE-KmY"/>
+                                                <constraint firstAttribute="bottom" secondItem="VmZ-d3-AFQ" secondAttribute="bottom" id="PHh-jE-KmY"/>
                                                 <constraint firstItem="4aJ-LD-PBA" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" id="ThT-vJ-qMW"/>
                                                 <constraint firstAttribute="trailing" secondItem="4aJ-LD-PBA" secondAttribute="trailing" id="W5g-lc-gfo"/>
                                                 <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="VmZ-d3-AFQ" secondAttribute="trailing" constant="20" id="c3V-GL-1mr"/>
                                                 <constraint firstAttribute="bottom" secondItem="4aJ-LD-PBA" secondAttribute="bottom" id="cIz-c6-2li"/>
                                                 <constraint firstAttribute="bottom" secondItem="yMw-Ps-gvb" secondAttribute="bottom" constant="10" id="fu1-cZ-pNB"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yMw-Ps-gvb" secondAttribute="trailing" constant="20" id="oFi-fm-44P"/>
-                                                <constraint firstItem="VmZ-d3-AFQ" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="10" id="tqK-ed-dp1"/>
+                                                <constraint firstAttribute="trailing" secondItem="yMw-Ps-gvb" secondAttribute="trailing" constant="20" id="oFi-fm-44P"/>
+                                                <constraint firstItem="VmZ-d3-AFQ" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" id="tqK-ed-dp1"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerY" secondItem="NVq-BB-T8u" secondAttribute="centerY" id="wPT-aG-wHY"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerX" secondItem="NVq-BB-T8u" secondAttribute="centerX" id="wVm-ek-BiU"/>
                                                 <constraint firstItem="4aJ-LD-PBA" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" id="xMy-nB-cM6"/>
