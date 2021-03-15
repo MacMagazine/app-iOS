@@ -168,6 +168,11 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        if indexPath.section == 3 &&
+            indexPath.row == 0 {
+            Subscriptions.shared.purchase()
+        }
     }
 }
 
@@ -485,7 +490,6 @@ extension SettingsTableViewController {
             return
         }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//        Subscriptions.shared.restore()
     }
 
     @IBAction private func buy(_ sender: Any) {
@@ -520,7 +524,7 @@ extension SettingsTableViewController {
                 case .purchasedSuccess:
                     self?.showBuyObjects(false)
                     self?.purchasedMessage.isHidden = false
-                    self?.restoreBtn.isEnabled = false
+                    self?.restoreBtn.isEnabled = true
                     self?.patraoButton.isEnabled = false
 
                     var settings = Settings()
@@ -535,7 +539,7 @@ extension SettingsTableViewController {
 
             if status == .expired {
                 let alertController = UIAlertController(title: "MacMagazine",
-                                                        message: "Sua assinatura está vencidda.",
+                                                        message: "Sua assinatura está vencida.",
                                                         preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                     self?.dismiss(animated: true)
