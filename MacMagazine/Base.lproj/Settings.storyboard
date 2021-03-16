@@ -424,15 +424,29 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
-                                                    <rect key="frame" x="20" y="0.0" width="230" height="50"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="fyJ-jK-hkk">
+                                                    <rect key="frame" x="20" y="4" width="240" height="42"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="25.333333333333332"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <bool key="isElement" value="NO"/>
+                                                            </accessibility>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Sua assinatura está vencida." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAh-mM-GrP">
+                                                            <rect key="frame" x="0.0" y="25.333333333333329" width="240" height="16.666666666666671"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <bool key="isElement" value="NO"/>
+                                                            </accessibility>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                                            <color key="textColor" systemColor="systemRedColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMw-Ps-gvb">
                                                     <rect key="frame" x="270" y="10" width="100" height="30"/>
                                                     <color key="backgroundColor" name="MMBlue"/>
@@ -461,18 +475,18 @@
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="VmZ-d3-AFQ" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="BO0-Ob-0u6"/>
-                                                <constraint firstAttribute="bottom" secondItem="VmZ-d3-AFQ" secondAttribute="bottom" id="PHh-jE-KmY"/>
+                                                <constraint firstAttribute="bottom" secondItem="fyJ-jK-hkk" secondAttribute="bottom" constant="4" id="Bhg-g3-4Ph"/>
+                                                <constraint firstItem="fyJ-jK-hkk" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="4" id="Gle-gv-63H"/>
                                                 <constraint firstItem="4aJ-LD-PBA" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" id="ThT-vJ-qMW"/>
                                                 <constraint firstAttribute="trailing" secondItem="4aJ-LD-PBA" secondAttribute="trailing" id="W5g-lc-gfo"/>
-                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="VmZ-d3-AFQ" secondAttribute="trailing" constant="20" id="c3V-GL-1mr"/>
                                                 <constraint firstAttribute="bottom" secondItem="4aJ-LD-PBA" secondAttribute="bottom" id="cIz-c6-2li"/>
                                                 <constraint firstAttribute="bottom" secondItem="yMw-Ps-gvb" secondAttribute="bottom" constant="10" id="fu1-cZ-pNB"/>
                                                 <constraint firstAttribute="trailing" secondItem="yMw-Ps-gvb" secondAttribute="trailing" constant="20" id="oFi-fm-44P"/>
-                                                <constraint firstItem="VmZ-d3-AFQ" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" id="tqK-ed-dp1"/>
+                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="fyJ-jK-hkk" secondAttribute="trailing" constant="10" id="roq-nS-3Hw"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerY" secondItem="NVq-BB-T8u" secondAttribute="centerY" id="wPT-aG-wHY"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerX" secondItem="NVq-BB-T8u" secondAttribute="centerX" id="wVm-ek-BiU"/>
                                                 <constraint firstItem="4aJ-LD-PBA" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" id="xMy-nB-cM6"/>
+                                                <constraint firstItem="fyJ-jK-hkk" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="y4s-hb-MtS"/>
                                                 <constraint firstItem="yMw-Ps-gvb" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="10" id="ytA-EI-KVu"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -718,6 +732,7 @@
                         <outlet property="readTransparencyValue" destination="TRE-mv-lKH" id="3Yn-cB-2XR"/>
                         <outlet property="restoreBtn" destination="Goh-iK-82H" id="tDK-gB-Fbx"/>
                         <outlet property="spin" destination="05X-vX-2u1" id="740-ek-oar"/>
+                        <outlet property="subtitleBuyMessage" destination="VAh-mM-GrP" id="4qe-OY-gNR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxf-4h-Ddh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -732,7 +747,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2284.057971014493" y="-710.49107142857144"/>
+            <point key="canvasLocation" x="-2284.6153846153848" y="-710.90047393364921"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="Odw-wy-fvT">
@@ -776,6 +791,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

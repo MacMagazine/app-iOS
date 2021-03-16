@@ -41,6 +41,7 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet private weak var buyBtn: UIButton!
     @IBOutlet private weak var buyMessage: UILabel!
+    @IBOutlet private weak var subtitleBuyMessage: UILabel!
     @IBOutlet private weak var purchasedMessage: UILabel!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var restoreBtn: UIButton!
@@ -506,11 +507,11 @@ extension SettingsTableViewController {
             switch status {
                 case .canPurchase,
                      .expired:
-
                     self?.showBuyObjects(true)
-
                     var settings = Settings()
                     settings.purchased = false
+
+                    self?.subtitleBuyMessage.isHidden = status != .expired
 
                 case .processing:
                     self?.showBuyObjects(false)
@@ -520,6 +521,7 @@ extension SettingsTableViewController {
                 case .gotProductPrice(let price):
                     self?.price = price
                     self?.enableBuyObjects(true)
+                    Subscriptions.shared.checkSubscriptions()
 
                 case .purchasedSuccess:
                     self?.showBuyObjects(false)
@@ -536,16 +538,6 @@ extension SettingsTableViewController {
                     var settings = Settings()
                     settings.purchased = false
             }
-
-            if status == .expired {
-                let alertController = UIAlertController(title: "MacMagazine",
-                                                        message: "Sua assinatura está vencida.",
-                                                        preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                    self?.dismiss(animated: true)
-                })
-                self?.present(alertController, animated: true)
-            }
         }
 
         Subscriptions.shared.getProducts()
@@ -555,6 +547,9 @@ extension SettingsTableViewController {
         spin.stopAnimating()
         buyBtn.isHidden = !show
         buyMessage.isHidden = !show
+
+        subtitleBuyMessage.isHidden = true
+
         purchasedMessage.isHidden = true
     }
 
