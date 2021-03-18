@@ -27,14 +27,9 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Remova as propagandas com a assinatura mensal",
-              "displayName" : "Assinatura mensal",
+              "description" : "1 mês sem propagandas em nossos posts",
+              "displayName" : "Remover propagandas",
               "locale" : "pt_BR"
-            },
-            {
-              "description" : "Subscribe to remove ads",
-              "displayName" : "Monthly subscription",
-              "locale" : "en_US"
             }
           ],
           "productID" : "MMASSINATURAMENSAL",

@@ -505,20 +505,33 @@ extension SettingsTableViewController {
             self?.restoreBtn.isEnabled = true
 
             switch status {
-                case .canPurchase,
-                     .expired:
+                case .canPurchase:
                     self?.showBuyObjects(true)
                     var settings = Settings()
                     settings.purchased = false
 
-                    self?.subtitleBuyMessage.isHidden = status != .expired
+                case .expired:
+                    self?.showBuyObjects(true)
+                    var settings = Settings()
+                    settings.purchased = false
+
+                    self?.subtitleBuyMessage.text = "Sua assinatura está vencida"
+                    self?.subtitleBuyMessage.textColor = .systemRed
 
                 case .processing:
                     self?.showBuyObjects(false)
                     self?.spin.startAnimating()
                     self?.restoreBtn.isEnabled = false
 
-                case .gotProductPrice(let price):
+                case .gotProduct(let product):
+                    guard let price = product.price,
+                          let title = product.title,
+                          let subtitle = product.description else {
+                        self?.enableBuyObjects(false)
+                        return
+                    }
+                    self?.buyMessage.text = title
+                    self?.subtitleBuyMessage.text = subtitle
                     self?.price = price
                     self?.enableBuyObjects(true)
                     Subscriptions.shared.checkSubscriptions()
@@ -547,9 +560,7 @@ extension SettingsTableViewController {
         spin.stopAnimating()
         buyBtn.isHidden = !show
         buyMessage.isHidden = !show
-
-        subtitleBuyMessage.isHidden = true
-
+        subtitleBuyMessage.isHidden = !show
         purchasedMessage.isHidden = true
     }
 

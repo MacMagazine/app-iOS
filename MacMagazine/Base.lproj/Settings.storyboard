@@ -424,29 +424,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="fyJ-jK-hkk">
-                                                    <rect key="frame" x="20" y="4" width="240" height="42"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="25.333333333333332"/>
-                                                            <accessibility key="accessibilityConfiguration">
-                                                                <bool key="isElement" value="NO"/>
-                                                            </accessibility>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Sua assinatura está vencida." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAh-mM-GrP">
-                                                            <rect key="frame" x="0.0" y="25.333333333333329" width="240" height="16.666666666666671"/>
-                                                            <accessibility key="accessibilityConfiguration">
-                                                                <bool key="isElement" value="NO"/>
-                                                            </accessibility>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                            <color key="textColor" systemColor="systemRedColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMw-Ps-gvb">
                                                     <rect key="frame" x="270" y="10" width="100" height="30"/>
                                                     <color key="backgroundColor" name="MMBlue"/>
@@ -469,25 +446,46 @@
                                                         <action selector="buy:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ZDt-SY-sOP"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
+                                                    <rect key="frame" x="20" y="7.9999999999999982" width="240" height="20.333333333333329"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Erro ao obter opções" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VAh-mM-GrP">
+                                                    <rect key="frame" x="20" y="28.333333333333332" width="240" height="13.666666666666668"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" name="MMDarkGreyWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="05X-vX-2u1">
                                                     <rect key="frame" x="185" y="15" width="20" height="20"/>
                                                     <color key="color" name="MMBlueWhite"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="fyJ-jK-hkk" secondAttribute="bottom" constant="4" id="Bhg-g3-4Ph"/>
-                                                <constraint firstItem="fyJ-jK-hkk" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="4" id="Gle-gv-63H"/>
+                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="VmZ-d3-AFQ" secondAttribute="trailing" constant="10" id="GwS-Qa-Rby"/>
+                                                <constraint firstItem="VmZ-d3-AFQ" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="S0F-bg-pbm"/>
+                                                <constraint firstItem="VAh-mM-GrP" firstAttribute="top" secondItem="VmZ-d3-AFQ" secondAttribute="bottom" id="Sdv-fi-imn"/>
                                                 <constraint firstItem="4aJ-LD-PBA" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" id="ThT-vJ-qMW"/>
                                                 <constraint firstAttribute="trailing" secondItem="4aJ-LD-PBA" secondAttribute="trailing" id="W5g-lc-gfo"/>
+                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="centerY" secondItem="NVq-BB-T8u" secondAttribute="centerY" id="afg-c7-jW3"/>
+                                                <constraint firstAttribute="bottom" secondItem="VAh-mM-GrP" secondAttribute="bottom" constant="8" id="b49-DQ-KOu"/>
                                                 <constraint firstAttribute="bottom" secondItem="4aJ-LD-PBA" secondAttribute="bottom" id="cIz-c6-2li"/>
-                                                <constraint firstAttribute="bottom" secondItem="yMw-Ps-gvb" secondAttribute="bottom" constant="10" id="fu1-cZ-pNB"/>
+                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="VAh-mM-GrP" secondAttribute="trailing" constant="10" id="eeV-cd-1jt"/>
+                                                <constraint firstItem="VAh-mM-GrP" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="fi7-s5-FAf"/>
+                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="10" id="jYD-s0-gI1"/>
                                                 <constraint firstAttribute="trailing" secondItem="yMw-Ps-gvb" secondAttribute="trailing" constant="20" id="oFi-fm-44P"/>
-                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="leading" secondItem="fyJ-jK-hkk" secondAttribute="trailing" constant="10" id="roq-nS-3Hw"/>
+                                                <constraint firstItem="VmZ-d3-AFQ" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="8" id="uIR-te-RG2"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerY" secondItem="NVq-BB-T8u" secondAttribute="centerY" id="wPT-aG-wHY"/>
                                                 <constraint firstItem="05X-vX-2u1" firstAttribute="centerX" secondItem="NVq-BB-T8u" secondAttribute="centerX" id="wVm-ek-BiU"/>
                                                 <constraint firstItem="4aJ-LD-PBA" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" id="xMy-nB-cM6"/>
-                                                <constraint firstItem="fyJ-jK-hkk" firstAttribute="leading" secondItem="NVq-BB-T8u" secondAttribute="leading" constant="20" id="y4s-hb-MtS"/>
-                                                <constraint firstItem="yMw-Ps-gvb" firstAttribute="top" secondItem="NVq-BB-T8u" secondAttribute="top" constant="10" id="ytA-EI-KVu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -783,6 +781,9 @@
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="MMDarkGreyWhite">
+            <color white="0.25" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -791,9 +792,6 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

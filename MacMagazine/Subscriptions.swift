@@ -10,10 +10,10 @@ import Combine
 import Foundation
 import InAppPurchase
 
-enum InAppPurchaseStatus: Equatable {
+enum InAppPurchaseStatus {
     case canPurchase
     case processing
-    case gotProductPrice(String)
+    case gotProduct(Product)
     case purchasedSuccess
     case expired
     case fail
@@ -157,15 +157,14 @@ extension Subscriptions {
                         self?.status?(.fail)
 
                     case .success(let response):
-                        guard let product = response.first,
-                              let price = product.price else {
+                        guard let product = response.first else {
                             self?.status?(.fail)
                             return
                         }
                         logD(product.debugDescription)
 
                         self?.selectedProduct = product
-                        self?.status?(.gotProductPrice(price))
+                        self?.status?(.gotProduct(product))
                 }
             }
 
