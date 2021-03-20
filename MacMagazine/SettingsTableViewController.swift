@@ -9,7 +9,6 @@
 import CoreSpotlight
 import Kingfisher
 import MessageUI
-import SafariServices
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
@@ -101,20 +100,12 @@ class SettingsTableViewController: UITableViewController {
         header.append("Ícone do app")
         header.append("Assinaturas")
         header.append("Sobre")
-        header.append("")
         return header
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == SettingsTableViewController.getHeaders.count - 1 {
-            return 0.1
-        }
-        return UITableView.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headers = SettingsTableViewController.getHeaders
-        let identifier = section == headers.count - 2 || section == headers.count - 3 ? "subHeaderCell" : "headerCell"
+        let identifier = section == headers.count - 1 || section == headers.count - 2 ? "subHeaderCell" : "headerCell"
 
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as? SettingsHeaderCell else {
             return nil
@@ -126,26 +117,24 @@ class SettingsTableViewController: UITableViewController {
             return nil
         }
 
-        header.setHeader(headers[section], type: section == headers.count - 2 ? .version : .subscription)
+        header.setHeader(headers[section], type: section == headers.count - 1 ? .version : .subscription)
         return header
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == SettingsTableViewController.getHeaders.count - 2 {
+        let height: CGFloat = 18
+        if section == SettingsTableViewController.getHeaders.count - 1 {
             guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
-                return 18
+                return height
             }
             let labelWidth = CGFloat(Int(tableView.bounds.size.width - 24.0))
-            return footer.footerHeight(width: labelWidth)
+            return footer.footerHeight(width: labelWidth) + 18
         }
-        if section == SettingsTableViewController.getHeaders.count - 2 {
-            return 4
-        }
-        return 18
+        return height
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == SettingsTableViewController.getHeaders.count - 2 {
+        if section == SettingsTableViewController.getHeaders.count - 1 {
             guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
                 return nil
             }
@@ -581,20 +570,5 @@ extension SettingsTableViewController {
         buyBtn.setTitle(enable ? price : "-", for: .normal)
         buyBtn.backgroundColor = UIColor(named: enable ? "MMBlue" : "MMGrayWhite")
         buyBtn.isEnabled = enable
-    }
-}
-
-// MARK: - Privacidade -
-
-extension SettingsTableViewController {
-    @IBAction private func showPrivacy(_ sender: Any) {
-        guard let url = URL(string: "https://macmagazine.com.br/politica-privacidade/") else {
-            return
-        }
-        if url.scheme?.lowercased().contains("http") ?? false {
-            let safari = SFSafariViewController(url: url)
-            safari.setup()
-            self.present(safari, animated: true, completion: nil)
-        }
     }
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2020 MacMagazine. All rights reserved.
 //
 
+import SafariServices
 import UIKit
 
 enum HeaderType {
@@ -86,4 +87,26 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
         return height + 36 + 24
     }
 
+}
+
+// MARK: - Privacidade -
+
+extension SettingsHeaderCell {
+    @IBAction private func showPrivacy(_ sender: Any) {
+        openSafari(url: "https://macmagazine.com.br/politica-privacidade/")
+    }
+
+    @IBAction private func showTermsUse(_ sender: Any) {
+        openSafari(url: "https://macmagazine.com.br/termos-de-uso/")
+    }
+
+    fileprivate func openSafari(url: String) {
+        guard let url = URL(string: url),
+              url.scheme?.lowercased().contains("http") != nil else {
+            return
+        }
+        let safari = SFSafariViewController(url: url)
+        safari.setup()
+        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.present(safari, animated: true)
+    }
 }

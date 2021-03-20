@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,25 +15,49 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbQ-SB-mSh">
-                    <rect key="frame" x="12" y="12" width="390" height="860"/>
+                    <rect key="frame" x="12" y="12" width="390" height="822"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="EPs-79-Mem">
+                    <rect key="frame" x="0.0" y="858" width="414" height="26"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJO-SV-nH8">
+                            <rect key="frame" x="0.0" y="0.0" width="165" height="26"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                            <state key="normal" title="Termos de Uso"/>
+                            <connections>
+                                <action selector="showTermsUse:" destination="iN0-l3-epB" eventType="touchUpInside" id="awR-Jy-RQm"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="275-8k-sfp">
+                            <rect key="frame" x="165" y="0.0" width="249" height="26"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                            <state key="normal" title="Política de Privacidade"/>
+                            <connections>
+                                <action selector="showPrivacy:" destination="iN0-l3-epB" eventType="touchUpInside" id="xv4-Ws-NnF"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="nbQ-SB-mSh" secondAttribute="trailing" constant="12" id="ASu-7T-koA"/>
-                <constraint firstAttribute="bottom" secondItem="nbQ-SB-mSh" secondAttribute="bottom" constant="24" id="Xhy-3V-4OR"/>
+                <constraint firstAttribute="trailing" secondItem="EPs-79-Mem" secondAttribute="trailing" id="FJD-E9-t9J"/>
+                <constraint firstItem="EPs-79-Mem" firstAttribute="top" secondItem="nbQ-SB-mSh" secondAttribute="bottom" constant="24" id="P7v-0E-wdo"/>
                 <constraint firstItem="nbQ-SB-mSh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="baK-gl-D5l"/>
                 <constraint firstItem="nbQ-SB-mSh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="c6u-h4-9km"/>
+                <constraint firstItem="EPs-79-Mem" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gkA-d6-qVo"/>
+                <constraint firstAttribute="bottom" secondItem="EPs-79-Mem" secondAttribute="bottom" constant="12" id="hzk-ss-iQV"/>
             </constraints>
             <connections>
                 <outlet property="footerLabel" destination="nbQ-SB-mSh" id="GUe-XQ-5AZ"/>
             </connections>
-            <point key="canvasLocation" x="139" y="117"/>
+            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </view>
     </objects>
     <resources>
