@@ -685,6 +685,43 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="TtX-G6-E09">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="bVG-g8-pTh">
+                                        <rect key="frame" x="0.0" y="795" width="390" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bVG-g8-pTh" id="btU-WT-TQg">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Lyl-NQ-p77">
+                                                    <rect key="frame" x="6" y="6" width="378" height="38"/>
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                                    <state key="normal" title="Ver nossos Termos de Uso e Política de Privacidade">
+                                                        <color key="titleColor" name="MMBlueWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontForContentSizeCategory" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="showPrivacy:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="aqI-pP-m45"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Lyl-NQ-p77" secondAttribute="trailing" constant="6" id="S4j-3G-1Cf"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lyl-NQ-p77" secondAttribute="bottom" constant="6" id="Yd6-Se-tLc"/>
+                                                <constraint firstItem="Lyl-NQ-p77" firstAttribute="leading" secondItem="btU-WT-TQg" secondAttribute="leading" constant="6" id="eTL-yT-aJy"/>
+                                                <constraint firstItem="Lyl-NQ-p77" firstAttribute="top" secondItem="btU-WT-TQg" secondAttribute="top" constant="6" id="vKJ-4F-mvt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="75e-Ta-Gqd" id="WH3-wz-C1j"/>

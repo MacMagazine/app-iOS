@@ -27,14 +27,14 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "1 mês sem propagandas em nossos posts",
+              "description" : "Assinatura mensal",
               "displayName" : "Remover propagandas",
               "locale" : "pt_BR"
             }
           ],
           "productID" : "MMASSINATURAMENSAL",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Assinatura mensal",
+          "referenceName" : "Remover propagandas",
           "subscriptionGroupID" : "0A60022E",
           "type" : "RecurringSubscription"
         }
