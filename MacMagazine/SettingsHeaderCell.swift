@@ -84,7 +84,7 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
     func footerHeight(width: CGFloat) -> CGFloat {
         let height = disclaimerAttributedString.string.height(withWidth: width,
                                                               font: UIFont.preferredFont(forTextStyle: .caption1))
-        return height + 36 + 24
+        return height
     }
 
 }

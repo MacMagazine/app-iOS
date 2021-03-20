@@ -128,7 +128,7 @@ class SettingsTableViewController: UITableViewController {
                 return height
             }
             let labelWidth = CGFloat(Int(tableView.bounds.size.width - 24.0))
-            return footer.footerHeight(width: labelWidth) + 18
+            return footer.footerHeight(width: labelWidth) + 24 + 12 + 32 + 24   // Margins (3*12) + Stack (32) + delta
         }
         return height
     }
