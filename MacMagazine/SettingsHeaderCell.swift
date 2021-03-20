@@ -79,6 +79,8 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
     func showFooter() {
         footerLabel?.attributedText = disclaimerAttributedString
         footerLabel?.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MMBlue") ?? UIColor.systemBlue]
+        footerLabel?.textContainerInset = UIEdgeInsets.zero
+        footerLabel?.textContainer.lineFragmentPadding = 0
     }
 
     func footerHeight(width: CGFloat) -> CGFloat {

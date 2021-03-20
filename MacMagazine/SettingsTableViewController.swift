@@ -124,11 +124,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let height: CGFloat = 18
         if section == SettingsTableViewController.getHeaders.count - 1 {
-            guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
-                return height
-            }
-            let labelWidth = CGFloat(Int(tableView.bounds.size.width - 24.0))
-            return footer.footerHeight(width: labelWidth) + 24 + 12 + 32 + 24   // Margins (3*12) + Stack (32) + delta
+            return UITableView.automaticDimension
         }
         return height
     }
