@@ -59,17 +59,6 @@ extension AppDelegate {
 
 extension AppDelegate {
 	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        // Temporary flush all cache
-        if Settings().whatsNew != Settings().appVersion &&
-            Settings().appVersion == "4.2.1" {
-
-            CoreDataStack.shared.flush(type: .all)
-            ImageCache.default.clearDiskCache()
-            CSSearchableIndex.default().deleteAllSearchableItems(completionHandler: nil)
-            UserDefaults.standard.set(true, forKey: Definitions.deleteAllCookies)
-            UserDefaults.standard.synchronize()
-        }
-
         // Apply custom thmee (Dark/Light)
 		Settings().applyTheme()
 

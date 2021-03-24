@@ -153,7 +153,12 @@ class WebViewController: UIViewController {
 
         setRightButtomItems([.spin])
         forceReload = false
-	}
+
+        delay(0.01) {
+            self.webView?.alpha = 0
+        }
+
+}
 
     func setRightButtomItems(_ buttons: [RightButtons]) {
         guard let vc = getPostsDetailViewController() else {
@@ -290,11 +295,6 @@ extension WebViewController {
                 cookies.append(font)
             }
 
-            // Version
-            if let appVersion = Cookies().createVersionCookie("4.2.0") {
-                cookies.append(appVersion)
-            }
-
             // Purchased
             if Settings().purchased,
                let cookie = Cookies().createPurchasedCookie("true") {
@@ -369,6 +369,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             }
             setRightButtomItems(items)
         }
+
+        self.webView?.alpha = 1
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
