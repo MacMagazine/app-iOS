@@ -29,11 +29,19 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-TB-4Ft">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="6ad-TB-4Ft" secondAttribute="bottom" id="0aC-hN-X9O"/>
                             <constraint firstItem="cpQ-3F-pZB" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="8WW-eq-IfG"/>
                             <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="cpQ-3F-pZB" secondAttribute="bottom" id="K5H-r3-AdM"/>
                             <constraint firstItem="cpQ-3F-pZB" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="WuL-UJ-Anh"/>
+                            <constraint firstItem="6ad-TB-4Ft" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="cSs-0r-gyO"/>
+                            <constraint firstItem="6ad-TB-4Ft" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="iuw-gz-FLO"/>
+                            <constraint firstAttribute="trailing" secondItem="6ad-TB-4Ft" secondAttribute="trailing" id="kmh-Jn-G2A"/>
                             <constraint firstAttribute="trailing" secondItem="cpQ-3F-pZB" secondAttribute="trailing" id="wE0-uR-qf0"/>
                         </constraints>
                     </view>
@@ -41,6 +49,7 @@
                     <connections>
                         <outlet property="actions" destination="RvR-Td-SUx" id="Z8Z-Ej-jPH"/>
                         <outlet property="fullscreenMode" destination="0M8-cs-1dn" id="bHo-oI-b0y"/>
+                        <outlet property="hideView" destination="6ad-TB-4Ft" id="4cS-qX-KVb"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
                         <outlet property="splitviewMode" destination="eJ1-9u-bNS" id="ij9-fH-WQY"/>
                         <outlet property="webView" destination="cpQ-3F-pZB" id="3Ad-T3-z9d"/>

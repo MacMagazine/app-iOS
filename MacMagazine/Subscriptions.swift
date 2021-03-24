@@ -17,6 +17,7 @@ enum InAppPurchaseStatus {
     case purchasedSuccess
     case expired
     case fail
+    case disabled
 }
 
 class Subscriptions {
@@ -35,7 +36,7 @@ class Subscriptions {
 
     // MARK: - Methods -
 
-    func checkSubscriptions() {
+    func checkSubscriptions(_ onCompletion: ((Bool) -> Void)? = nil) {
         productCancellable?.cancel()
         purchaseCancellable?.cancel()
         receiptCancellable?.cancel()
@@ -44,10 +45,7 @@ class Subscriptions {
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { [weak self] rsp in
-                logD(rsp)
-
-                var settings = Settings()
-                settings.purchased = false
+                onCompletion?(false)
 
                 switch rsp {
                     case .failure(_):
@@ -61,7 +59,7 @@ class Subscriptions {
                              .validating:
                             self?.status?(.processing)
                         case .validated:
-                            settings.purchased = true
+                            onCompletion?(true)
                             self?.status?(.purchasedSuccess)
                         case .expired:
                             self?.status?(.expired)
@@ -82,6 +80,8 @@ class Subscriptions {
                 status?(.canPurchase)
                 fetchProductInformation()
             }
+        } else {
+            status?(.disabled)
         }
     }
 
@@ -104,7 +104,6 @@ class Subscriptions {
             .receive(on: RunLoop.main)
             .compactMap { $0 }
             .sink { [weak self] rsp in
-                logD(rsp)
 
                 switch rsp {
                     case .failure(_):

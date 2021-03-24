@@ -112,7 +112,6 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
     }
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-
 		guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
 			return nil
 		}
@@ -132,7 +131,6 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 	}
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-
 		guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
 			return nil
 		}

@@ -40,8 +40,8 @@ struct Cookies {
             .path: "/",
             .name: "darkmode",
             .value: value,
-            .secure: "false",
-            .expires: NSDate(timeIntervalSinceNow: 3600)
+            .secure: "true",
+            .expires: NSDate(timeIntervalSinceNow: 60)
         ])
     }
 
@@ -51,8 +51,8 @@ struct Cookies {
             .path: "/",
             .name: "fonte",
             .value: value,
-            .secure: "false",
-            .expires: NSDate(timeIntervalSinceNow: 3600)
+            .secure: "true",
+            .expires: NSDate(timeIntervalSinceNow: 60)
         ])
     }
 
@@ -62,8 +62,8 @@ struct Cookies {
             .path: "/",
             .name: "version",
             .value: value,
-            .secure: "false",
-            .expires: NSDate(timeIntervalSinceNow: 3600)
+            .secure: "true",
+            .expires: NSDate(timeIntervalSinceNow: 60)
         ])
     }
 
@@ -73,8 +73,8 @@ struct Cookies {
             .path: "/",
             .name: "patr",
             .value: value,
-            .secure: "false",
-            .expires: NSDate(timeIntervalSinceNow: 3600)
+            .secure: "true",
+            .expires: NSDate(timeIntervalSinceNow: 60)
         ])
     }
 }

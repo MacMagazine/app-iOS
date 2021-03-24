@@ -33,7 +33,10 @@ extension AppDelegate {
         NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
 
         // Check subscriptions and update status
-        Subscriptions.shared.checkSubscriptions()
+        Subscriptions.shared.checkSubscriptions { response in
+            var settings = Settings()
+            settings.purchased = response
+        }
 
         // Check if MM Live is active
         Settings().isMMLive { isLive in

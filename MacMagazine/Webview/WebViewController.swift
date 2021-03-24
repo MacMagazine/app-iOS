@@ -21,14 +21,11 @@ class WebViewController: UIViewController {
 	// MARK: - Properties -
 
 	@IBOutlet private weak var webView: WKWebView!
+    @IBOutlet private weak var hideView: UIView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var actions: UIBarButtonItem!
 
-	var post: PostData? {
-		didSet {
-			configureView()
-		}
-	}
+	var post: PostData?
 
 	var postURL: URL? {
 		didSet {
@@ -67,10 +64,10 @@ class WebViewController: UIViewController {
             self.navigationItem.leftBarButtonItem = showFullscreenModeButton ? fullscreenMode : splitviewMode
         }
 
+        setupCookies()
+
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
-
-        setRightButtomItems([.spin])
 
         // Tap image to zoom
         let imageScriptSource = """
@@ -113,8 +110,6 @@ class WebViewController: UIViewController {
         let commmentsScript = WKUserScript(source: commentsScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         webView?.configuration.userContentController.addUserScript(commmentsScript)
         webView?.configuration.userContentController.add(self, name: "gotCommentURLHandler")
-
-        setupCookies()
     }
 
 	// MARK: - Local methods -
@@ -146,19 +141,14 @@ class WebViewController: UIViewController {
         previousIsDarkMode = Settings().isDarkMode
 		previousFonteSize = Settings().fontSizeUserAgent
 
+        setRightButtomItems([.spin])
+        forceReload = false
+
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
         webView?.customUserAgent = "MacMagazine"
         webView?.allowsBackForwardNavigationGestures = false
         webView?.load(URLRequest(url: url))
-
-        setRightButtomItems([.spin])
-        forceReload = false
-
-        delay(0.01) {
-            self.webView?.alpha = 0
-        }
-
-}
+    }
 
     func setRightButtomItems(_ buttons: [RightButtons]) {
         guard let vc = getPostsDetailViewController() else {
@@ -339,7 +329,6 @@ extension WebViewController {
             return
         }
         self.setCookie(cookieToSet) {
-            self.setRightButtomItems([.spin])
             self.webView?.reload()
         }
     }
@@ -359,6 +348,11 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         return detailController?.first as? PostsDetailViewController
     }
 
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
+        setRightButtomItems([.spin])
+        hideView.alpha = 1
+    }
+
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
         self.navigationItem.rightBarButtonItems = nil
 
@@ -370,7 +364,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             setRightButtomItems(items)
         }
 
-        self.webView?.alpha = 1
+        hideView.alpha = 0
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

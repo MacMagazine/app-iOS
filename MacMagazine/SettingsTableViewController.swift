@@ -501,16 +501,15 @@ extension SettingsTableViewController {
         Subscriptions.shared.status = { [weak self] status in
             self?.restoreBtn.isEnabled = true
 
+            var settings = Settings()
+            settings.purchased = false
+
             switch status {
                 case .canPurchase:
                     self?.showBuyObjects(true)
-                    var settings = Settings()
-                    settings.purchased = false
 
                 case .expired:
                     self?.showBuyObjects(true)
-                    var settings = Settings()
-                    settings.purchased = false
 
                     self?.subtitleBuyMessage.text = "Sua assinatura está vencida"
                     self?.subtitleBuyMessage.textColor = .systemRed
@@ -542,11 +541,15 @@ extension SettingsTableViewController {
                     var settings = Settings()
                     settings.purchased = true
 
-                case .fail:
+                case .disabled:
                     self?.enableBuyObjects(false)
 
-                    var settings = Settings()
-                    settings.purchased = false
+                    self?.subtitleBuyMessage.text = "Compras dentro de Apps desabilitada."
+                    self?.subtitleBuyMessage.textColor = .systemRed
+                    self?.restoreBtn.isEnabled = false
+
+                case .fail:
+                    self?.enableBuyObjects(false)
             }
         }
 
