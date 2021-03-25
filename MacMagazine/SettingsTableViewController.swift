@@ -161,6 +161,7 @@ class SettingsTableViewController: UITableViewController {
         if indexPath.section == 2 {
             return RowSize.icons
         }
+
         return RowSize.automaticDimension
     }
 
@@ -168,7 +169,8 @@ class SettingsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         if indexPath.section == 3 &&
-            indexPath.row == 0 {
+            indexPath.row == 0 &&
+            !buyBtn.isHidden {
             Subscriptions.shared.purchase()
         }
     }
@@ -502,6 +504,7 @@ extension SettingsTableViewController {
 
         Subscriptions.shared.status = { [weak self] status in
             self?.restoreBtn.isEnabled = true
+            self?.subtitleBuyMessage.textColor = UIColor(named: "MMDarkGreyWhite")
 
             var settings = Settings()
             settings.purchased = false
@@ -531,6 +534,7 @@ extension SettingsTableViewController {
                     self?.buyMessage.text = title
                     self?.subtitleBuyMessage.text = subtitle
                     self?.price = price
+                    self?.buyBtn.setTitle(price, for: .normal)
                     self?.enableBuyObjects(true)
                     Subscriptions.shared.checkSubscriptions()
 
@@ -552,14 +556,13 @@ extension SettingsTableViewController {
 
                 case .fail:
                     self?.enableBuyObjects(false)
+                    self?.subtitleBuyMessage.textColor = .systemRed
             }
         }
 
+        hideObjects(Settings().isPatrao)
         if !Settings().isPatrao {
             Subscriptions.shared.getProducts()
-        } else {
-            enableBuyObjects(false)
-            subtitleBuyMessage.isHidden = true
         }
     }
 
@@ -573,8 +576,13 @@ extension SettingsTableViewController {
 
     fileprivate func enableBuyObjects(_ enable: Bool) {
         showBuyObjects(true)
-        buyBtn.setTitle(enable ? price : "-", for: .normal)
-        buyBtn.backgroundColor = UIColor(named: enable ? "MMBlue" : "MMGrayWhite")
         buyBtn.isEnabled = enable
+        buyBtn.isHidden = !enable
+    }
+
+    fileprivate func hideObjects(_ enable: Bool) {
+        showBuyObjects(!enable)
+        purchasedMessage.isHidden = !enable
+        purchasedMessage.text = enable ? "Você está logado como patrão!" : "Você já é nosso assinante!"
     }
 }
