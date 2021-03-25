@@ -572,34 +572,48 @@ func createWebViewController(post: PostData) -> WebViewController? {
 
 func showDetailController(with link: String) {
 	let storyboard = UIStoryboard(name: "Main", bundle: nil)
-	guard let controller = storyboard.instantiateViewController(withIdentifier: "detailController") as? PostsDetailViewController else {
-		return
-	}
+	guard let controller = storyboard.instantiateViewController(withIdentifier: "detailController") as? PostsDetailViewController,
+          let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+        return
+    }
+
 	CoreDataStack.shared.links { links in
-		prepareDetailController(controller, using: links, compare: link)
+        // Check if URL exist
+        if links.firstIndex(where: { $0.link == link }) != nil {
+            prepareDetailController(controller, using: links, compare: link)
 
-		guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
-			return
-		}
-		// Force first tab to present losing of reference
-        tabController.selectedIndex = (UIApplication.shared.delegate as? AppDelegate)?.isMMLive ?? false ? 1 : 0
+            // Force first tab to present losing of reference
+            tabController.selectedIndex = (UIApplication.shared.delegate as? AppDelegate)?.isMMLive ?? false ? 1 : 0
 
-        if let splitVC = tabController.selectedViewController as? UISplitViewController,
-			let navVC = splitVC.children[Settings().isPhone ? 0 : 1] as? UINavigationController {
+            if let splitVC = tabController.selectedViewController as? UISplitViewController,
+               let navVC = splitVC.children[Settings().isPhone ? 0 : 1] as? UINavigationController {
 
-			if Settings().isPhone {
-				splitVC.showDetailViewController(controller, sender: nil)
-			} else {
-				// Need to add the controller to navigation to see the nav bar
-				navVC.viewControllers = [controller]
-				splitVC.showDetailViewController(navVC, sender: nil)
+                if Settings().isPhone {
+                    splitVC.showDetailViewController(controller, sender: nil)
+                } else {
+                    // Need to add the controller to navigation to see the nav bar
+                    navVC.viewControllers = [controller]
+                    splitVC.showDetailViewController(navVC, sender: nil)
 
-                delay(0.4) {
-                    NotificationCenter.default.post(name: .updateSelectedPost, object: link)
+                    delay(0.4) {
+                        NotificationCenter.default.post(name: .updateSelectedPost, object: link)
+                    }
                 }
             }
-            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
-		}
+        } else {
+            // Open single view
+            let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "PostDetail") as? WebViewController,
+                  let url = URL(string: link) else {
+                return
+            }
+            let navVC = UINavigationController(rootViewController: controller)
+            controller.postURL = url
+            navVC.modalPresentationStyle = .automatic
+            tabController.show(navVC, sender: nil)
+        }
+
+        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
 	}
 }
 

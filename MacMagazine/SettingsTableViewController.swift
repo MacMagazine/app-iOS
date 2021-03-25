@@ -72,7 +72,6 @@ class SettingsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
 
         setInitialValues()
-        setupInAppPurchase()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +83,7 @@ class SettingsTableViewController: UITableViewController {
         delegate.supportedInterfaceOrientation = Settings().orientations
 
         patraoButton.setTitle(Settings().loginPatrao, for: .normal)
+        setupInAppPurchase()
 	}
 
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -269,6 +269,8 @@ extension SettingsTableViewController {
         if Settings().isPatrao {
             var settings = Settings()
             settings.isPatrao = false
+
+            setupInAppPurchase()
         } else {
             if let url = URL(string: API.APIParams.patrao) {
                 let storyboard = UIStoryboard(name: "WebView", bundle: nil)
@@ -553,7 +555,12 @@ extension SettingsTableViewController {
             }
         }
 
-        Subscriptions.shared.getProducts()
+        if !Settings().isPatrao {
+            Subscriptions.shared.getProducts()
+        } else {
+            enableBuyObjects(false)
+            subtitleBuyMessage.isHidden = true
+        }
     }
 
     fileprivate func showBuyObjects(_ show: Bool) {

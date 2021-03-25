@@ -248,10 +248,11 @@ extension PostsDetailViewController {
     }
 
     func setRightButtomItems(_ buttons: [RightButtons]) {
-        let rightButtons: [UIBarButtonItem] = buttons.map {
+        let rightButtons: [UIBarButtonItem] = buttons.compactMap {
             switch $0 {
                 case .spin:     return UIBarButtonItem(customView: spin)
                 case .actions:  return actions
+                default:        return nil
             }
         }
         self.navigationItem.rightBarButtonItems = rightButtons

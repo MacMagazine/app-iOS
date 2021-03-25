@@ -14,6 +14,7 @@ import WebKit
 enum RightButtons {
     case spin
     case actions
+    case close
 }
 
 class WebViewController: UIViewController {
@@ -24,6 +25,7 @@ class WebViewController: UIViewController {
     @IBOutlet private weak var hideView: UIView!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var actions: UIBarButtonItem!
+    @IBOutlet private weak var close: UIBarButtonItem!
 
 	var post: PostData?
 
@@ -141,7 +143,6 @@ class WebViewController: UIViewController {
         previousIsDarkMode = Settings().isDarkMode
 		previousFonteSize = Settings().fontSizeUserAgent
 
-        setRightButtomItems([.spin])
         forceReload = false
 
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
@@ -156,6 +157,7 @@ class WebViewController: UIViewController {
                 switch $0 {
                     case .spin:     return UIBarButtonItem(customView: spin)
                     case .actions:  return actions
+                    case .close:    return close
                 }
             }
             self.navigationItem.rightBarButtonItems = rightButtons
@@ -212,6 +214,10 @@ class WebViewController: UIViewController {
         parent.enterSplitViewMode()
         self.navigationItem.leftBarButtonItem = self.fullscreenMode
         self.webView.reload()
+    }
+
+    @IBAction private func close(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -349,8 +355,9 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
-        setRightButtomItems([.spin])
+        self.navigationItem.rightBarButtonItems = nil
         hideView.alpha = 1
+        spin.startAnimating()
     }
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
@@ -362,9 +369,15 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
                 items.append(.actions)
             }
             setRightButtomItems(items)
+        } else {
+            setRightButtomItems([.close])
+        }
+        if post == nil {
+            setRightButtomItems([.close])
         }
 
         hideView.alpha = 0
+        spin.stopAnimating()
     }
 
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

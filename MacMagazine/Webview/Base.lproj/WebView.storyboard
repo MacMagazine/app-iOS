@@ -31,6 +31,13 @@
                             </wkWebView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-TB-4Ft">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="x4L-t4-vbR">
+                                        <rect key="frame" x="197" y="399" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="color" name="MMBlueWhite"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -48,6 +55,7 @@
                     <navigationItem key="navigationItem" id="mof-85-jGR"/>
                     <connections>
                         <outlet property="actions" destination="RvR-Td-SUx" id="Z8Z-Ej-jPH"/>
+                        <outlet property="close" destination="UaW-sk-ER6" id="QBt-S6-uIq"/>
                         <outlet property="fullscreenMode" destination="0M8-cs-1dn" id="bHo-oI-b0y"/>
                         <outlet property="hideView" destination="6ad-TB-4Ft" id="4cS-qX-KVb"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
@@ -77,11 +85,6 @@
                     </connections>
                 </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QJ7-qP-eRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="x4L-t4-vbR">
-                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="color" name="MMBlueWhite"/>
-                </activityIndicatorView>
                 <barButtonItem systemItem="action" id="RvR-Td-SUx" userLabel="Actions">
                     <color key="tintColor" name="MMBlueWhite"/>
                     <userDefinedRuntimeAttributes>
@@ -90,6 +93,11 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="share:" destination="uJA-Vl-hWR" id="NDj-vl-ME9"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="xmark.circle" catalog="system" id="UaW-sk-ER6">
+                    <connections>
+                        <action selector="close:" destination="uJA-Vl-hWR" id="Cyu-Fc-WYf"/>
                     </connections>
                 </barButtonItem>
             </objects>
