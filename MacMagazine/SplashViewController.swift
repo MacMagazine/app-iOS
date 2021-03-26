@@ -19,7 +19,10 @@ class SplashViewController: UIViewController {
         logo.image = UIImage(named: "splash\(Settings().isDarkMode ? "_dark" : "")")
 
         // Check subscriptions and update status
-        Subscriptions.shared.checkSubscriptions()
+        Subscriptions.shared.checkSubscriptions { response in
+            var settings = Settings()
+            settings.purchased = response
+        }
 
         Settings().isMMLive { isLive in
             DispatchQueue.main.async {

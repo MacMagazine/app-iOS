@@ -46,7 +46,7 @@ class Subscriptions {
             .compactMap { $0 }
             .sink { [weak self] rsp in
                 onCompletion?(false)
-
+print(rsp)
                 switch rsp {
                     case .failure(_):
                         self?.status?(.canPurchase)
