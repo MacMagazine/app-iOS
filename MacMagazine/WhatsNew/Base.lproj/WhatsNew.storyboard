@@ -21,7 +21,7 @@
                         <sections>
                             <tableViewSection id="Kf0-Bk-VMS">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="pGP-jd-j0q" style="IBUITableViewCellStyleDefault" id="hcO-N8-nHJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="pGP-jd-j0q" style="IBUITableViewCellStyleDefault" id="hcO-N8-nHJ">
                                         <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hcO-N8-nHJ" id="wsy-1e-IAg">
