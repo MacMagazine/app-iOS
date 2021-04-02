@@ -66,8 +66,6 @@ class WebViewController: UIViewController {
             self.navigationItem.leftBarButtonItem = showFullscreenModeButton ? fullscreenMode : splitviewMode
         }
 
-        setupCookies()
-
         webView?.navigationDelegate = self
 		webView?.uiDelegate = self
 
@@ -112,6 +110,8 @@ class WebViewController: UIViewController {
         let commmentsScript = WKUserScript(source: commentsScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         webView?.configuration.userContentController.addUserScript(commmentsScript)
         webView?.configuration.userContentController.add(self, name: "gotCommentURLHandler")
+
+        setupCookies()
     }
 
 	// MARK: - Local methods -
@@ -120,7 +120,7 @@ class WebViewController: UIViewController {
 		// Update the user interface for the detail item.
 		guard let post = post,
 			let link = post.link,
-			let url = URL(string: link)
+			let url = URL(string: "https://macmagazine.com.br/testecookies.html")
 			else {
 				return
 		}
@@ -281,6 +281,14 @@ extension WebViewController {
         webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
             var cookies = cookies
 
+            if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
+                cookies.forEach { cookie in
+                    self.deleteCookie(cookie) {
+                        print("\(cookie.name) apagado")
+                    }
+                }
+            }
+
             // Dark mode
             if let darkmode = Cookies().createDarkModeCookie(Settings().darkModeUserAgent) {
                 cookies.append(darkmode)
@@ -292,7 +300,7 @@ extension WebViewController {
             }
 
             // Purchased
-            if Settings().purchased,
+            if Settings().purchased || Settings().isPatrao,
                let cookie = Cookies().createPurchasedCookie("true") {
                 cookies.append(cookie)
             }
@@ -303,8 +311,7 @@ extension WebViewController {
                 self.reload()
             } else {
                 cookies.forEach { cookie in
-                    if (cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased) ||
-                        UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
+                    if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
                         }
