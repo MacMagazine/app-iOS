@@ -298,9 +298,15 @@ extension WebViewController {
             }
 
             // Purchased
-            if Settings().purchased || Settings().isPatrao,
-               let cookie = Cookies().createPurchasedCookie("true") {
-                cookies.append(cookie)
+            if Settings().purchased || Settings().isPatrao {
+               if let purchased = Cookies().createPurchasedCookie("true") {
+                    cookies.append(purchased)
+let alertController = UIAlertController(title: "Cookies", message: purchased.name, preferredStyle: .alert)
+alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+self.dismiss(animated: true)
+})
+self.present(alertController, animated: true)
+                }
             }
 
             var cookiesLeft = cookies.count
@@ -308,21 +314,19 @@ extension WebViewController {
             if cookies.isEmpty {
                 self.reload()
             } else {
-                // Feedback message
-                let alertController = UIAlertController(title: "Cookies", message: "\(cookies.map { $0.name })", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                    self.dismiss(animated: true)
-                })
-                self.present(alertController, animated: true)
+let alertController = UIAlertController(title: "Cookies", message: "\(cookies.map { $0.name })", preferredStyle: .alert)
+alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+self.dismiss(animated: true)
+})
+self.present(alertController, animated: true)
 
                 cookies.forEach { cookie in
                     if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
-                        // Feedback message
-                        let alertController = UIAlertController(title: "Cookies", message: "patr apagado", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                            self.dismiss(animated: true)
-                        })
-                        self.present(alertController, animated: true)
+let alertController = UIAlertController(title: "Cookies", message: "patr apagado", preferredStyle: .alert)
+alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+self.dismiss(animated: true)
+})
+self.present(alertController, animated: true)
 
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
