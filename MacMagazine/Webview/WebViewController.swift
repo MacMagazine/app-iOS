@@ -27,6 +27,8 @@ class WebViewController: UIViewController {
     @IBOutlet private weak var actions: UIBarButtonItem!
     @IBOutlet private weak var close: UIBarButtonItem!
 
+    @IBOutlet private weak var debug: UILabel!
+
 	var post: PostData?
 
 	var postURL: URL? {
@@ -117,7 +119,9 @@ class WebViewController: UIViewController {
 	// MARK: - Local methods -
 
 	func configureView() {
-		// Update the user interface for the detail item.
+self.debug.text = self.debug.text ?? "" + #function
+
+        // Update the user interface for the detail item.
 		guard let post = post,
 			let link = post.link,
 			let url = URL(string: "https://macmagazine.com.br/testecookies.html")
@@ -132,6 +136,8 @@ class WebViewController: UIViewController {
 	}
 
 	func loadWebView(url: URL) {
+self.debug.text = self.debug.text ?? "" + #function
+
         if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
             let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
             let date = Date(timeIntervalSince1970: 0)
@@ -226,6 +232,7 @@ class WebViewController: UIViewController {
 extension WebViewController {
 
 	func reload() {
+self.debug.text = self.debug.text ?? "" + #function
         if post != nil {
 			configureView()
 		} else if postURL != nil {
@@ -275,6 +282,8 @@ extension WebViewController {
     }
 
     fileprivate func setupCookies() {
+        debug.text = #function
+
         // Make sure that all cookies are loaded before continue
         // to prevent Disqus from being loogoff
         // and to set MM properties to properly load the content
@@ -301,11 +310,7 @@ extension WebViewController {
             if Settings().purchased || Settings().isPatrao {
                if let purchased = Cookies().createPurchasedCookie("true") {
                     cookies.append(purchased)
-let alertController = UIAlertController(title: "Cookies", message: purchased.name, preferredStyle: .alert)
-alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-self.dismiss(animated: true)
-})
-self.present(alertController, animated: true)
+self.debug.text = self.debug.text ?? "" + "\nPATR"
                 }
             }
 
@@ -314,19 +319,11 @@ self.present(alertController, animated: true)
             if cookies.isEmpty {
                 self.reload()
             } else {
-let alertController = UIAlertController(title: "Cookies", message: "\(cookies.map { $0.name })", preferredStyle: .alert)
-alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-self.dismiss(animated: true)
-})
-self.present(alertController, animated: true)
+self.debug.text = self.debug.text ?? "" + "\n\(cookies.map { $0.name })"
 
                 cookies.forEach { cookie in
                     if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
-let alertController = UIAlertController(title: "Cookies", message: "patr apagado", preferredStyle: .alert)
-alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-self.dismiss(animated: true)
-})
-self.present(alertController, animated: true)
+self.debug.text = self.debug.text ?? "" + "\nPATR APAGADO"
 
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
@@ -399,7 +396,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
             setRightButtomItems([.close])
         }
 
-        hideView.alpha = 0
+//        hideView.alpha = 0
         spin.stopAnimating()
     }
 
