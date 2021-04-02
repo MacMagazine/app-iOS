@@ -113,13 +113,14 @@ class WebViewController: UIViewController {
         webView?.configuration.userContentController.addUserScript(commmentsScript)
         webView?.configuration.userContentController.add(self, name: "gotCommentURLHandler")
 
+        self.debug.text = ""
         setupCookies()
     }
 
 	// MARK: - Local methods -
 
 	func configureView() {
-self.debug.text = self.debug.text ?? "" + #function
+self.debug.text = "\(self.debug.text ?? "")\n\(#function)"
 
         // Update the user interface for the detail item.
 		guard let post = post,
@@ -136,7 +137,7 @@ self.debug.text = self.debug.text ?? "" + #function
 	}
 
 	func loadWebView(url: URL) {
-self.debug.text = self.debug.text ?? "" + #function
+self.debug.text = "\(self.debug.text ?? "")\n\(#function)"
 
         if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
             let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
@@ -232,7 +233,7 @@ self.debug.text = self.debug.text ?? "" + #function
 extension WebViewController {
 
 	func reload() {
-self.debug.text = self.debug.text ?? "" + #function
+self.debug.text = "\(self.debug.text ?? "")\n\(#function)"
         if post != nil {
 			configureView()
 		} else if postURL != nil {
@@ -282,7 +283,7 @@ extension WebViewController {
     }
 
     fileprivate func setupCookies() {
-        debug.text = #function
+self.debug.text = "\(self.debug.text ?? "")\n\(#function)"
 
         // Make sure that all cookies are loaded before continue
         // to prevent Disqus from being loogoff
@@ -310,7 +311,7 @@ extension WebViewController {
             if Settings().purchased || Settings().isPatrao {
                if let purchased = Cookies().createPurchasedCookie("true") {
                     cookies.append(purchased)
-self.debug.text = self.debug.text ?? "" + "\nPATR"
+self.debug.text = "\(self.debug.text ?? "")\nPATR set"
                 }
             }
 
@@ -319,11 +320,11 @@ self.debug.text = self.debug.text ?? "" + "\nPATR"
             if cookies.isEmpty {
                 self.reload()
             } else {
-self.debug.text = self.debug.text ?? "" + "\n\(cookies.map { $0.name })"
+self.debug.text = "\(self.debug.text ?? "")\n\(cookies.map { $0.name })"
 
                 cookies.forEach { cookie in
                     if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
-self.debug.text = self.debug.text ?? "" + "\nPATR APAGADO"
+self.debug.text = "\(self.debug.text ?? "")\nPATR Apagado"
 
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
@@ -375,12 +376,14 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
+self.debug.text = "\(self.debug.text ?? "")\n\(#function)"
         self.navigationItem.rightBarButtonItems = nil
         hideView.alpha = 1
         spin.startAnimating()
     }
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
+self.debug.text = "\(self.debug.text ?? "")\n\(#function)"
         self.navigationItem.rightBarButtonItems = nil
 
         if webView.url?.isMMPost() ?? false {
