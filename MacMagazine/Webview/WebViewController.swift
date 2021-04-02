@@ -117,8 +117,6 @@ class WebViewController: UIViewController {
 	// MARK: - Local methods -
 
 	func configureView() {
-logD(#function)
-
         // Update the user interface for the detail item.
 		guard let post = post,
 			let link = post.link,
@@ -134,8 +132,6 @@ logD(#function)
 	}
 
 	func loadWebView(url: URL) {
-logD(#function)
-
         if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
             let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
             let date = Date(timeIntervalSince1970: 0)
@@ -230,8 +226,6 @@ logD(#function)
 extension WebViewController {
 
 	func reload() {
-logD(#function)
-
         if post != nil {
 			configureView()
 		} else if postURL != nil {
@@ -281,8 +275,6 @@ extension WebViewController {
     }
 
     fileprivate func setupCookies() {
-logD(#function)
-
         // Make sure that all cookies are loaded before continue
         // to prevent Disqus from being loogoff
         // and to set MM properties to properly load the content
@@ -306,12 +298,9 @@ logD(#function)
             }
 
             // Purchased
-logD("Settings().purchased: \(Settings().purchased)")
-logD("Settings().isPatrao: \(Settings().isPatrao)")
             if Settings().purchased || Settings().isPatrao {
                if let purchased = Cookies().createPurchasedCookie("true") {
                     cookies.append(purchased)
-logD("PATR set")
                 }
             }
 
@@ -320,12 +309,8 @@ logD("PATR set")
             if cookies.isEmpty {
                 self.reload()
             } else {
-logD(cookies.map { $0.name })
-
                 cookies.forEach { cookie in
                     if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
-logD("PATR Apagado")
-
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
                         }
@@ -376,14 +361,12 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
-logD(#function)
         self.navigationItem.rightBarButtonItems = nil
         hideView.alpha = 1
         spin.startAnimating()
     }
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-logD(#function)
         self.navigationItem.rightBarButtonItems = nil
 
         if webView.url?.isMMPost() ?? false {

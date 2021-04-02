@@ -152,11 +152,9 @@ struct Settings {
 
     var purchased: Bool {
         get {
-logD("purchased: \(UserDefaults.standard.bool(forKey: Definitions.purchased))")
             return UserDefaults.standard.bool(forKey: Definitions.purchased)
         }
         set(value) {
-logD(value)
             UserDefaults.standard.set(value, forKey: Definitions.purchased)
             UserDefaults.standard.synchronize()
         }

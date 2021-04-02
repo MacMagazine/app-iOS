@@ -44,11 +44,12 @@ class Subscriptions {
         receiptCancellable = InAppPurchaseManager.shared.$status
             .receive(on: RunLoop.main)
             .compactMap { $0 }
+            .removeDuplicates()
             .sink { [weak self] rsp in
-                onCompletion?(false)
 
                 switch rsp {
                     case .failure(_):
+                        onCompletion?(false)
                         self?.status?(.canPurchase)
 
                     case .success(let response):
@@ -62,8 +63,10 @@ class Subscriptions {
                             onCompletion?(true)
                             self?.status?(.purchasedSuccess)
                         case .expired:
+                            onCompletion?(false)
                             self?.status?(.expired)
                         default:
+                            onCompletion?(false)
                             self?.status?(.canPurchase)
                         }
                 }
@@ -103,6 +106,7 @@ class Subscriptions {
         purchaseCancellable = InAppPurchaseManager.shared.$status
             .receive(on: RunLoop.main)
             .compactMap { $0 }
+            .removeDuplicates()
             .sink { [weak self] rsp in
 
                 switch rsp {
@@ -160,8 +164,6 @@ extension Subscriptions {
                             self?.status?(.fail)
                             return
                         }
-                        logD(product.debugDescription)
-
                         self?.selectedProduct = product
                         self?.status?(.gotProduct(product))
                 }

@@ -506,14 +506,17 @@ extension SettingsTableViewController {
             self?.restoreBtn.isEnabled = true
             self?.subtitleBuyMessage.textColor = UIColor(named: "MMDarkGreyWhite")
 
-            var settings = Settings()
-            settings.purchased = false
-
             switch status {
                 case .canPurchase:
+                    var settings = Settings()
+                    settings.purchased = false
+
                     self?.showBuyObjects(true)
 
                 case .expired:
+                    var settings = Settings()
+                    settings.purchased = false
+
                     self?.showBuyObjects(true)
 
                     self?.subtitleBuyMessage.text = "Sua assinatura está vencida"

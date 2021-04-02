@@ -20,7 +20,6 @@ class SplashViewController: UIViewController {
 
         // Check subscriptions and update status
         Subscriptions.shared.checkSubscriptions { response in
-logD(response)
             var settings = Settings()
             settings.purchased = response
         }
