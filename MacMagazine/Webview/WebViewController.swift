@@ -283,9 +283,7 @@ extension WebViewController {
 
             if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
                 cookies.forEach { cookie in
-                    self.deleteCookie(cookie) {
-                        print("\(cookie.name) apagado")
-                    }
+                    self.deleteCookie(cookie, nil)
                 }
             }
 
@@ -310,8 +308,22 @@ extension WebViewController {
             if cookies.isEmpty {
                 self.reload()
             } else {
+                // Feedback message
+                let alertController = UIAlertController(title: "Cookies", message: "\(cookies.map { $0.name })", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    self.dismiss(animated: true)
+                })
+                self.present(alertController, animated: true)
+
                 cookies.forEach { cookie in
                     if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
+                        // Feedback message
+                        let alertController = UIAlertController(title: "Cookies", message: "patr apagado", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                            self.dismiss(animated: true)
+                        })
+                        self.present(alertController, animated: true)
+
                         self.deleteCookie(cookie) {
                             self.updateCountAndReload(&cookiesLeft)
                         }
