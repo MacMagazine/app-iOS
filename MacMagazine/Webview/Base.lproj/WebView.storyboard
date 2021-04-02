@@ -68,6 +68,7 @@
                     <connections>
                         <outlet property="actions" destination="RvR-Td-SUx" id="Z8Z-Ej-jPH"/>
                         <outlet property="close" destination="UaW-sk-ER6" id="QBt-S6-uIq"/>
+                        <outlet property="debug" destination="Glq-Lz-pE7" id="Cia-6P-tSu"/>
                         <outlet property="fullscreenMode" destination="0M8-cs-1dn" id="bHo-oI-b0y"/>
                         <outlet property="hideView" destination="6ad-TB-4Ft" id="4cS-qX-KVb"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
