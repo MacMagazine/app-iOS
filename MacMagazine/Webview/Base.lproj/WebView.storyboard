@@ -30,27 +30,15 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-TB-4Ft">
-                                <rect key="frame" x="0.0" y="444" width="414" height="418"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="x4L-t4-vbR">
-                                        <rect key="frame" x="197" y="199" width="20" height="20"/>
+                                        <rect key="frame" x="197" y="399" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="color" name="MMBlueWhite"/>
                                     </activityIndicatorView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Glq-Lz-pE7">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Glq-Lz-pE7" secondAttribute="trailing" id="AxH-6y-ehw"/>
-                                    <constraint firstItem="Glq-Lz-pE7" firstAttribute="leading" secondItem="6ad-TB-4Ft" secondAttribute="leading" id="CMh-Bx-feg"/>
-                                    <constraint firstAttribute="bottom" secondItem="Glq-Lz-pE7" secondAttribute="bottom" id="gsZ-WA-mi7"/>
-                                    <constraint firstItem="Glq-Lz-pE7" firstAttribute="top" secondItem="6ad-TB-4Ft" secondAttribute="top" id="vZk-wm-IGK"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <constraints>
@@ -58,7 +46,7 @@
                             <constraint firstItem="cpQ-3F-pZB" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="8WW-eq-IfG"/>
                             <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="cpQ-3F-pZB" secondAttribute="bottom" id="K5H-r3-AdM"/>
                             <constraint firstItem="cpQ-3F-pZB" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="WuL-UJ-Anh"/>
-                            <constraint firstItem="6ad-TB-4Ft" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" constant="400" id="cSs-0r-gyO"/>
+                            <constraint firstItem="6ad-TB-4Ft" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="cSs-0r-gyO"/>
                             <constraint firstItem="6ad-TB-4Ft" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="iuw-gz-FLO"/>
                             <constraint firstAttribute="trailing" secondItem="6ad-TB-4Ft" secondAttribute="trailing" id="kmh-Jn-G2A"/>
                             <constraint firstAttribute="trailing" secondItem="cpQ-3F-pZB" secondAttribute="trailing" id="wE0-uR-qf0"/>
@@ -68,7 +56,6 @@
                     <connections>
                         <outlet property="actions" destination="RvR-Td-SUx" id="Z8Z-Ej-jPH"/>
                         <outlet property="close" destination="UaW-sk-ER6" id="QBt-S6-uIq"/>
-                        <outlet property="debug" destination="Glq-Lz-pE7" id="Cia-6P-tSu"/>
                         <outlet property="fullscreenMode" destination="0M8-cs-1dn" id="bHo-oI-b0y"/>
                         <outlet property="hideView" destination="6ad-TB-4Ft" id="4cS-qX-KVb"/>
                         <outlet property="spin" destination="x4L-t4-vbR" id="mcM-QW-Jhg"/>
