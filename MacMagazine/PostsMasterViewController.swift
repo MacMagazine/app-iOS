@@ -312,6 +312,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                                 self.processSelection()
                             }
                         }
+                        if let shortcutAction = (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction {
+                            NotificationCenter.default.post(name: shortcutAction, object: nil)
+                            (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction = nil
+                        }
                     }
                     return
                 }
