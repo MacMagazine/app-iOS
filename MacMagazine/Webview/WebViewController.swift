@@ -120,7 +120,7 @@ class WebViewController: UIViewController {
         // Update the user interface for the detail item.
 		guard let post = post,
 			let link = post.link,
-			let url = URL(string: "https://macmagazine.com.br/testecookies.html")
+			let url = URL(string: link)
 			else {
 				return
 		}
