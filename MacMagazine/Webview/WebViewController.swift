@@ -251,26 +251,65 @@ extension WebViewController {
 
 extension WebViewController {
 
-    fileprivate func setCookie(_ cookie: HTTPCookie?, _ callback: (() -> Void)?) {
-        guard let cookie = cookie else {
-            return
-        }
-        self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: callback)
-    }
+    fileprivate func set(cookies: [HTTPCookie], _ callback: (() -> Void)?) {
+        // Set cookies syncronuos
+        let group = DispatchGroup()
+        group.enter()
 
-    fileprivate func deleteCookie(_ cookie: HTTPCookie, _ callback: (() -> Void)?) {
-        self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: callback)
-    }
-
-    fileprivate func updateCountAndReload(_ cookiesLeft: inout Int) {
-        cookiesLeft -= 1
-        if cookiesLeft <= 0 {
-            UserDefaults.standard.set(false, forKey: Definitions.deleteAllCookies)
-            UserDefaults.standard.synchronize()
-
-            DispatchQueue.main.async {
-                self.reload()
+        var cookiesLeft = cookies.count
+        cookies.forEach { cookie in
+            self.webView?.configuration.websiteDataStore.httpCookieStore.setCookie(cookie) {
+                cookiesLeft -= 1
+                if cookiesLeft <= 0 {
+                    group.leave()
+                }
             }
+        }
+
+        group.notify(queue: .main) {
+            callback?()
+        }
+    }
+
+    fileprivate func delete(cookies: [HTTPCookie], _ callback: (() -> Void)? = nil) {
+        // Set cookies syncronuos
+        let group = DispatchGroup()
+        group.enter()
+
+        var cookiesLeft = cookies.count
+        cookies.forEach { cookie in
+            self.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie) {
+                cookiesLeft -= 1
+                if cookiesLeft <= 0 {
+                    group.leave()
+                }
+            }
+        }
+
+        group.notify(queue: .main) {
+            callback?()
+        }
+    }
+
+    fileprivate func deleteAllCookies(_ callback: (() -> Void)?) {
+        if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
+            let group = DispatchGroup()
+            group.enter()
+
+            webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
+                self.delete(cookies: cookies) {
+                    group.leave()
+                }
+            }
+
+            group.notify(queue: .main) {
+                UserDefaults.standard.set(false, forKey: Definitions.deleteAllCookies)
+                UserDefaults.standard.synchronize()
+
+                callback?()
+            }
+        } else {
+            callback?()
         }
     }
 
@@ -278,48 +317,46 @@ extension WebViewController {
         // Make sure that all cookies are loaded before continue
         // to prevent Disqus from being loogoff
         // and to set MM properties to properly load the content
-        webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
-            var cookies = cookies
 
-            if UserDefaults.standard.bool(forKey: Definitions.deleteAllCookies) {
-                cookies.forEach { cookie in
-                    self.deleteCookie(cookie, nil)
+        deleteAllCookies {
+            // Set cookies syncronuos
+            let group = DispatchGroup()
+            group.enter()
+
+            self.webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
+                var cookies = cookies
+
+                // Dark mode
+                if let darkmode = Cookies().createDarkModeCookie(Settings().darkModeUserAgent) {
+                    cookies.append(darkmode)
                 }
-            }
 
-            // Dark mode
-            if let darkmode = Cookies().createDarkModeCookie(Settings().darkModeUserAgent) {
-                cookies.append(darkmode)
-            }
-
-            // Font size
-            if let font = Cookies().createFonteCookie(Settings().fontSizeUserAgent) {
-                cookies.append(font)
-            }
-
-            // Purchased
-            if Settings().purchased || Settings().isPatrao {
-               if let purchased = Cookies().createPurchasedCookie("true") {
-                    cookies.append(purchased)
+                // Font size
+                if let font = Cookies().createFonteCookie(Settings().fontSizeUserAgent) {
+                    cookies.append(font)
                 }
-            }
 
-            var cookiesLeft = cookies.count
+                // Purchased
+                if Settings().purchased || Settings().isPatrao {
+                    if let purchased = Cookies().createPurchasedCookie("true") {
+                        cookies.append(purchased)
+                    }
+                } else {
+                    let patrCookie = cookies.filter { $0.name == "patr" }
+                    self.delete(cookies: patrCookie)
+                }
 
-            if cookies.isEmpty {
-                self.reload()
-            } else {
-                cookies.forEach { cookie in
-                    if cookie.name == "patr" && !Settings().isPatrao && !Settings().purchased {
-                        self.deleteCookie(cookie) {
-                            self.updateCountAndReload(&cookiesLeft)
-                        }
-                    } else {
-                        self.setCookie(cookie) {
-                            self.updateCountAndReload(&cookiesLeft)
-                        }
+                if cookies.isEmpty {
+                    group.leave()
+                } else {
+                    self.set(cookies: cookies) {
+                        group.leave()
                     }
                 }
+            }
+
+            group.notify(queue: .main) {
+                self.reload()
             }
         }
     }
@@ -340,7 +377,7 @@ extension WebViewController {
         guard let cookieToSet = cookie else {
             return
         }
-        self.setCookie(cookieToSet) {
+        self.set(cookies: [cookieToSet]) {
             self.webView?.reload()
         }
     }
