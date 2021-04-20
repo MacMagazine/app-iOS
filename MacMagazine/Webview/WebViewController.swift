@@ -6,6 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import PassKit
 import SafariServices
 import StoreKit
 import UIKit
@@ -463,6 +464,10 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
                 }
             } else if navigationAction.request.url?.absoluteString.contains("#disqus_thread") ?? false {
                 self.performSegue(withIdentifier: "showCommentsSegue", sender: self)
+            } else if navigationAction.request.url?.absoluteString.hasSuffix(".pkpass") ?? false {
+                if let url = navigationAction.request.url {
+                    openPassKit(url: url)
+                }
             } else {
                 openURLinBrowser(url)
             }
@@ -618,5 +623,38 @@ extension WebViewController {
         self.present(storeViewController, animated: true, completion: nil)
 
         storeViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: identifier])
+    }
+}
+
+// MARK: - PassKit -
+
+extension WebViewController: PKAddPassesViewControllerDelegate {
+    func openPassKit(url: URL) {
+        Network.get(url: url) { (result: Result<Data, RestAPIError>) in
+            switch result {
+                case .failure(_):   break
+
+                case .success(let response):
+                    self.processPass(response)
+            }
+        }
+    }
+
+    fileprivate func processPass(_ pass: Data) {
+        do {
+            let pass = try PKPass(data: pass)
+            DispatchQueue.main.async {
+                guard let pkvc = PKAddPassesViewController(pass: pass) else { return }
+                pkvc.delegate = self
+                self.present(pkvc, animated: true, completion: nil)
+            }
+
+        } catch {
+            logE(error.localizedDescription)
+        }
+    }
+
+    func addPassesViewControllerDidFinish(_ controller: PKAddPassesViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

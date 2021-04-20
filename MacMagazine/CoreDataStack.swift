@@ -226,28 +226,32 @@ class CoreDataStack {
         get(predicate: predicate, completion: completion)
 	}
 
+    func get<T>(predicate: NSPredicate?, entity: String, context: NSManagedObjectContext, completion: @escaping ([T]) -> Void) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
+
+        if let predicate = predicate {
+            request.predicate = predicate
+        }
+
+        // Creates `asynchronousFetchRequest` with the fetch request and the completion closure
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asynchronousFetchResult in
+            guard let result = asynchronousFetchResult.finalResult as? [T] else {
+                completion([])
+                return
+            }
+            completion(result)
+        }
+
+        do {
+            try context.execute(asynchronousFetchRequest)
+        } catch let error {
+            logE(error.localizedDescription)
+        }
+    }
+
 	func get(predicate: NSPredicate?, completion: @escaping ([Post]) -> Void) {
-		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
-		request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
-
-		if let predicate = predicate {
-			request.predicate = predicate
-		}
-
-		// Creates `asynchronousFetchRequest` with the fetch request and the completion closure
-		let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asynchronousFetchResult in
-			guard let result = asynchronousFetchResult.finalResult as? [Post] else {
-				completion([])
-				return
-			}
-			completion(result)
-		}
-
-		do {
-			try viewContext.execute(asynchronousFetchRequest)
-		} catch let error {
-			logE(error.localizedDescription)
-		}
+        get(predicate: predicate, entity: postEntityName, context: viewContext, completion: completion)
 	}
 
 	func save(post: XMLPost) {
@@ -504,11 +508,14 @@ extension CoreDataStack {
      */
     @objc
     fileprivate func storeRemoteChange(_ notification: Notification) {
+        processDuplicates()
+
         // Process persistent history to merge changes from other coordinators.
         historyQueue.addOperation {
             self.processPersistentHistory()
         }
     }
+
 }
 
 // MARK: - Persistent history processing -
@@ -586,7 +593,7 @@ extension CoreDataStack {
                 deduplicateVideo(object: object, performingContext: performingContext)
 
             case Configuration.entity().name:
-                deduplicateConfiguration(object: object, performingContext: performingContext)
+                deduplicateConfiguration(performingContext: performingContext)
 
             default:
                 break
@@ -633,7 +640,7 @@ extension CoreDataStack {
         }
     }
 
-    fileprivate func deduplicateConfiguration(object: DeDuplicate, performingContext: NSManagedObjectContext) {
+    fileprivate func deduplicateConfiguration(performingContext: NSManagedObjectContext) {
         // Fetch all objects with the same key
         let fetchRequest: NSFetchRequest<Configuration> = Configuration.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "key == %@", appTransactionAuthorName)
@@ -655,5 +662,79 @@ extension NSPersistentContainer {
         let context = newBackgroundContext()
         context.transactionAuthor = appTransactionAuthorName
         return context
+    }
+}
+
+extension CoreDataStack {
+    fileprivate func getDuplicates(in context: NSManagedObjectContext, entity: String, key: String) -> [[String: AnyObject]]? {
+        var expressionDescriptions = [AnyObject]()
+        expressionDescriptions.append(key as AnyObject)
+
+        let expressionDescription = NSExpressionDescription()
+        expressionDescription.name = "count"
+        expressionDescription.expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: key)])
+        expressionDescription.expressionResultType = .integer32AttributeType
+        expressionDescriptions.append(expressionDescription)
+
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        request.propertiesToGroupBy = [key]
+        request.resultType = .dictionaryResultType
+        request.sortDescriptors = [NSSortDescriptor(key: key, ascending: true)]
+        request.propertiesToFetch = expressionDescriptions
+
+        var results: [[String: AnyObject]]?
+
+        do {
+            results = try context.fetch(request) as? [[String: AnyObject]]
+        } catch _ {
+            results = nil
+        }
+
+        return results?.filter { ($0["count"] as? Int) ?? 0 > 1 }
+    }
+
+    fileprivate func getDuplicatedPosts(in context: NSManagedObjectContext) -> [[String: AnyObject]]? {
+        return getDuplicates(in: context, entity: postEntityName, key: "postId")
+    }
+
+    fileprivate func getDuplicatedVideos(in context: NSManagedObjectContext) -> [[String: AnyObject]]? {
+        return getDuplicates(in: context, entity: videoEntityName, key: "videoId")
+    }
+
+    fileprivate func processDuplicates() {
+        let taskContext = persistentContainer.newBackgroundContext()
+        taskContext.performAndWait {
+            getDuplicatedPosts(in: taskContext)?.forEach { duplicates in
+                guard let postId = duplicates["postId"] as? String else { return }
+                get(predicate: NSPredicate(format: "postId == %@", postId),
+                    entity: postEntityName,
+                    context: taskContext) { (posts: [Post]) in
+
+                    var duplicated = posts
+                    duplicated.removeFirst()
+                    duplicated.forEach { object in
+                        do { taskContext.delete(object) }
+                    }
+                    try? taskContext.save()
+                }
+            }
+
+            getDuplicatedVideos(in: taskContext)?.forEach { duplicates in
+                guard let videoId = duplicates["videoId"] as? String else { return }
+                get(predicate: NSPredicate(format: "videoId == %@", videoId),
+                    entity: videoEntityName,
+                    context: taskContext) { (videos: [Video]) in
+
+                    var duplicated = videos
+                    duplicated.removeFirst()
+                    duplicated.forEach { object in
+                        do { taskContext.delete(object) }
+                    }
+                    try? taskContext.save()
+                }
+            }
+
+            deduplicateConfiguration(performingContext: taskContext)
+        }
     }
 }

@@ -81,7 +81,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-9k-bAJ" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="256" y="144.5" width="34" height="14.5"/>
+                                                    <rect key="frame" x="248" y="136.5" width="42" height="22.5"/>
                                                     <color key="backgroundColor" name="MMBlack90"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -311,7 +311,7 @@
     </scenes>
     <designables>
         <designable name="hfJ-9k-bAJ">
-            <size key="intrinsicContentSize" width="34" height="14.5"/>
+            <size key="intrinsicContentSize" width="42" height="22.5"/>
         </designable>
     </designables>
     <resources>
