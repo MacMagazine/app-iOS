@@ -402,6 +402,14 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         self.navigationItem.rightBarButtonItems = nil
         hideView.alpha = 1
         spin.startAnimating()
+
+        Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { timer in
+            DispatchQueue.main.async {
+                self.hideView.alpha = 0
+                self.spin.stopAnimating()
+            }
+            timer.invalidate()
+        }
     }
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
