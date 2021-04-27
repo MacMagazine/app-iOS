@@ -76,6 +76,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
     var status = Status.firstLoad
+    var shortcutStatus = Status.unknown
 
     // MARK: - View Lifecycle -
 
@@ -296,7 +297,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
 
                     if paged < 1 {
-                        if self.status == .recentPost {
+                        if self.status == .recentPost ||
+                            self.shortcutStatus == .recentPost {
                             // Came from 3D touch
                             let indexPath = IndexPath(row: 0, section: 0)
                             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
@@ -307,6 +309,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                                 self.didSelectRowAt(indexPath: indexPath)
                             }
                             self.status = .unknown
+                            self.shortcutStatus = .unknown
                         } else {
                             delay(0.4) {
                                 self.processSelection()
@@ -354,31 +357,32 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
-        if status == .recentPost {
+        if status == .recentPost ||
+            shortcutStatus == .recentPost {
 			completion(IndexPath(row: 0, section: 0))
-		}
-
-		guard let selectedPostLink = UserDefaults.standard.object(forKey: "selectedPostLink") as? [String: AnyObject],
-			let link = selectedPostLink["link"] as? String,
-			let date = selectedPostLink["date"] as? Date
-			else {
-				completion(IndexPath(row: 0, section: 0))
-				return
-		}
-		// Check for 12h selection
-		if date.addingTimeInterval(12 * 60 * 60) > Date() ||
-			comeFrom3DTouch {
-			comeFrom3DTouch = false
-            CoreDataStack.shared.get(link: link) { (posts: [Post]) in
-                if posts.isEmpty {
-                    completion(IndexPath(row: 0, section: 0))
-                } else {
-                    completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+        } else {
+            guard let selectedPostLink = UserDefaults.standard.object(forKey: "selectedPostLink") as? [String: AnyObject],
+                  let link = selectedPostLink["link"] as? String,
+                  let date = selectedPostLink["date"] as? Date
+            else {
+                completion(IndexPath(row: 0, section: 0))
+                return
+            }
+            // Check for 12h selection
+            if date.addingTimeInterval(12 * 60 * 60) > Date() ||
+                comeFrom3DTouch {
+                comeFrom3DTouch = false
+                CoreDataStack.shared.get(link: link) { (posts: [Post]) in
+                    if posts.isEmpty {
+                        completion(IndexPath(row: 0, section: 0))
+                    } else {
+                        completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+                    }
                 }
-			}
-		} else {
-			completion(IndexPath(row: 0, section: 0))
-		}
+            } else {
+                completion(IndexPath(row: 0, section: 0))
+            }
+        }
 	}
 
 	fileprivate func processTabletSelection() {
@@ -387,11 +391,10 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 			getLastSelection { indexPath in
 				if self.tableView.numberOfSections >= indexPath.section && self.tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
-					if self.hasData() {
-						self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
-						self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
-                        self.status = .unknown
-					}
+                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+                    self.fetchController?.tableView(self.tableView, didSelectRowAt: indexPath)
+                    self.status = .unknown
+                    self.shortcutStatus = .unknown
 				}
 			}
         }
@@ -402,9 +405,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 			tableView.numberOfSections > 0 {
 
 			getLastSelection { indexPath in
-				if self.tableView.numberOfSections >= indexPath.section && self.tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row && self.hasData() {
-					self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+				if self.tableView.numberOfSections >= indexPath.section &&
+                    self.tableView.numberOfRows(inSection: indexPath.section) >= indexPath.row {
+
+                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
 					self.didSelectRowAt(indexPath: indexPath)
+                    self.shortcutStatus = .unknown
 				}
 			}
 		}
@@ -535,9 +541,8 @@ extension PostsMasterViewController {
 
 extension PostsMasterViewController {
 
-	fileprivate func processOption(openRecentPost: Bool) {
+	fileprivate func processOption() {
 		comeFrom3DTouch = true
-        status = openRecentPost ? .recentPost : .lastOpenedPost
 
         if status == .lastOpenedPost ||
 			viewDidAppear {
@@ -550,11 +555,15 @@ extension PostsMasterViewController {
 	}
 
 	@objc func onShortcutActionLastPost(_ notification: Notification) {
-		processOption(openRecentPost: false)
+        status = .lastOpenedPost
+        shortcutStatus = .lastOpenedPost
+        processOption()
 	}
 
 	@objc func onShortcutActionRecentPost(_ notification: Notification) {
-		processOption(openRecentPost: true)
+        status = .recentPost
+        shortcutStatus = .recentPost
+		processOption()
 	}
 
 }
