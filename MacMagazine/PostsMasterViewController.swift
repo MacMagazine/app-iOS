@@ -369,8 +369,12 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		if date.addingTimeInterval(12 * 60 * 60) > Date() ||
 			comeFrom3DTouch {
 			comeFrom3DTouch = false
-			CoreDataStack.shared.get(link: link) { posts in
-				completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+            CoreDataStack.shared.get(link: link) { (posts: [Post]) in
+                if posts.isEmpty {
+                    completion(IndexPath(row: 0, section: 0))
+                } else {
+                    completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+                }
 			}
 		} else {
 			completion(IndexPath(row: 0, section: 0))

@@ -20,6 +20,22 @@
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A54-fq-tRK">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mik-YF-7y9">
+                                <rect key="frame" x="185" y="412" width="20" height="20"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Isk-e5-HGR">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <color key="tintColor" name="MMBlueWhite"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="HY7-HU-xfA"/>
+                                    <constraint firstItem="Isk-e5-HGR" firstAttribute="centerX" secondItem="Mik-YF-7y9" secondAttribute="centerX" id="PRr-RI-lyS"/>
+                                    <constraint firstAttribute="height" constant="20" id="QkF-g7-Zl5"/>
+                                    <constraint firstItem="Isk-e5-HGR" firstAttribute="centerY" secondItem="Mik-YF-7y9" secondAttribute="centerY" id="UBD-9v-ngf"/>
+                                </constraints>
+                            </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw0-e0-6p0">
                                 <rect key="frame" x="0.0" y="20" width="390" height="824"/>
                                 <color key="backgroundColor" name="MMWhiteGrey6"/>
@@ -32,9 +48,11 @@
                         <color key="backgroundColor" name="MMWhiteGrey6"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Xw0-e0-6p0" secondAttribute="trailing" id="3ci-im-pEe"/>
+                            <constraint firstItem="Mik-YF-7y9" firstAttribute="centerX" secondItem="A54-fq-tRK" secondAttribute="centerX" id="FeQ-0i-k8m"/>
                             <constraint firstItem="n60-EV-RDL" firstAttribute="top" secondItem="Xw0-e0-6p0" secondAttribute="bottom" id="Jte-L5-YSO"/>
                             <constraint firstItem="Xw0-e0-6p0" firstAttribute="leading" secondItem="A54-fq-tRK" secondAttribute="leading" id="T9h-R9-Apa"/>
                             <constraint firstItem="Xw0-e0-6p0" firstAttribute="top" secondItem="ROc-Xc-Hyy" secondAttribute="bottom" constant="20" id="row-rM-fHl"/>
+                            <constraint firstItem="Mik-YF-7y9" firstAttribute="centerY" secondItem="A54-fq-tRK" secondAttribute="centerY" id="sfK-Ow-Hms"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="URb-53-j4n">
@@ -59,6 +77,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="hideView" destination="Mik-YF-7y9" id="feE-to-nEy"/>
+                        <outlet property="spin" destination="Isk-e5-HGR" id="pi5-Pl-67z"/>
                         <outlet property="webView" destination="Xw0-e0-6p0" id="Jta-LA-2hQ"/>
                     </connections>
                 </viewController>
@@ -355,6 +375,9 @@
         <namedColor name="MMWhiteGrey6">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

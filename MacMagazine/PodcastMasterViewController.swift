@@ -102,7 +102,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	func willDisplayCell(indexPath: IndexPath) {
 		if direction == .down {
-			let page = Int(tableView.rowNumber(indexPath: indexPath) / 16)
+			let page = Int(tableView.rowNumber(indexPath: indexPath) / 16) + 1
 			if page >= lastPage &&
                 tableView.rowNumber(indexPath: indexPath) % 16 == 0 {
 				lastPage = page

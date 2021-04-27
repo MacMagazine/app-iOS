@@ -116,7 +116,7 @@ whitelist_rules: # rules enabled
   - for_where
   # where clauses are preferred over a single if inside a for.
   
-  - conditional_returns_on_newline
+  #- conditional_returns_on_newline
   # Conditional statements should always return on the next line
     
   - shorthand_operator

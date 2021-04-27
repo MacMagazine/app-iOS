@@ -561,7 +561,6 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				683271A2252914AF004BD4DA /* WhatsNew */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				68F61C1F24F9524200A4E195 /* Config.xcconfig */,
 				9BD4E971225CFDEC00683B88 /* icons */,
@@ -572,6 +571,7 @@
 				9B8A5D7B247099B700C601E0 /* sound.wav */,
 				68EF534E2527103000FCBD3C /* Splash.storyboard */,
 				9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */,
+				683271A2252914AF004BD4DA /* WhatsNew */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

@@ -65,6 +65,10 @@ class Subscriptions {
                         case .expired:
                             onCompletion?(false)
                             self?.status?(.expired)
+
+                            guard let self = self else { return }
+                            InAppPurchaseManager.shared.refreshReceipt(subscription: self.identifier)
+
                         default:
                             onCompletion?(false)
                             self?.status?(.canPurchase)
@@ -72,7 +76,7 @@ class Subscriptions {
                 }
             }
 
-        InAppPurchaseManager.shared.refreshReceipt(subscription: identifier)
+        InAppPurchaseManager.shared.validateReceipt(subscription: identifier)
     }
 
     func getProducts() {

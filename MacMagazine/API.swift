@@ -144,7 +144,7 @@ class API {
         executeGetContent(host)
     }
 
-    func getPodcasts(page: Int = 0, _ completion: ((XMLPost?) -> Void)?) {
+    func getPodcasts(page: Int = 1, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
         let host = "\(APIParams.feed)?\(APIParams.podcast)&\(APIParams.paged)\(page)"
         executeGetContent(host)
