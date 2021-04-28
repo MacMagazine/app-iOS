@@ -41,12 +41,14 @@ class Subscriptions {
         purchaseCancellable?.cancel()
         receiptCancellable?.cancel()
 
+        var retry = 1
+
         receiptCancellable = InAppPurchaseManager.shared.$status
             .receive(on: RunLoop.main)
             .compactMap { $0 }
+            .dropFirst()
             .removeDuplicates()
             .sink { [weak self] rsp in
-
                 switch rsp {
                     case .failure(_):
                         onCompletion?(false)
@@ -66,8 +68,12 @@ class Subscriptions {
                             onCompletion?(false)
                             self?.status?(.expired)
 
-                            guard let self = self else { return }
-                            InAppPurchaseManager.shared.refreshReceipt(subscription: self.identifier)
+                            retry -= 1
+                            if retry == 0 {
+                                // Try to self refresh receipt
+                                guard let self = self else { return }
+                                InAppPurchaseManager.shared.refreshReceipt(subscription: self.identifier)
+                            }
 
                         default:
                             onCompletion?(false)
@@ -112,7 +118,6 @@ class Subscriptions {
             .compactMap { $0 }
             .removeDuplicates()
             .sink { [weak self] rsp in
-
                 switch rsp {
                     case .failure(_):
                         self?.isPurchasing = false
