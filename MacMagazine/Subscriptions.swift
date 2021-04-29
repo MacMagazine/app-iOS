@@ -46,7 +46,7 @@ class Subscriptions {
             .compactMap { $0 }
             .removeDuplicates()
             .sink { [weak self] rsp in
-
+logW(rsp)
                 switch rsp {
                     case .failure(_):
                         onCompletion?(false)

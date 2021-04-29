@@ -34,6 +34,8 @@
 		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
 		68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68BCEA2F252F6F500082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
+		68C932F9263AAA41002630EE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 68C932F8263AAA41002630EE /* FirebaseAnalytics */; };
+		68C93301263AAA85002630EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68C932FD263AAA85002630EE /* GoogleService-Info.plist */; };
 		68DE861025FF77E600413E62 /* mmlive.json in Resources */ = {isa = PBXBuildFile; fileRef = 68DE860F25FF77E600413E62 /* mmlive.json */; };
 		68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E740D625EF1AE5003A9BD9 /* StoreKit.framework */; };
 		68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
@@ -281,6 +283,7 @@
 		68B969A22530DBA20035B641 /* DisqusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisqusViewController.swift; sourceTree = "<group>"; };
 		68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 9.xcdatamodel"; sourceTree = "<group>"; };
 		68BCEA2B252F6E5F0082704D /* Cookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookies.swift; sourceTree = "<group>"; };
+		68C932FD263AAA85002630EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		68DE860F25FF77E600413E62 /* mmlive.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mmlive.json; sourceTree = "<group>"; };
 		68E740D625EF1AE5003A9BD9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		68EF534F2527103000FCBD3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Splash.storyboard; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C932F9263AAA41002630EE /* FirebaseAnalytics in Frameworks */,
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
@@ -563,6 +567,7 @@
 			children = (
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				68F61C1F24F9524200A4E195 /* Config.xcconfig */,
+				68C932FD263AAA85002630EE /* GoogleService-Info.plist */,
 				9BD4E971225CFDEC00683B88 /* icons */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
@@ -946,6 +951,7 @@
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
+				68C932F8263AAA41002630EE /* FirebaseAnalytics */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1040,6 +1046,7 @@
 			packageReferences = (
 				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -1123,6 +1130,7 @@
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */,
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
+				68C93301263AAA85002630EE /* GoogleService-Info.plist in Resources */,
 				9B1514BC22BE73010039DA28 /* phone_3@3x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
@@ -2066,6 +2074,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.1;
+			};
+		};
 		9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
@@ -2094,6 +2110,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		68C932F8263AAA41002630EE /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 		9B560FB525C9C29600F62992 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
