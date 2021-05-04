@@ -31,10 +31,11 @@
 		685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685E4306252227420028FAA0 /* SettingsHeaderCell.xib */; };
 		685E430A252227D80028FAA0 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */; };
 		6897160525F21F120030A16C /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897160425F21F120030A16C /* Subscriptions.swift */; };
-		68A2867F2619D7DE0048FE77 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A2867E2619D7DE0048FE77 /* CloudKit.framework */; };
 		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
 		68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68BCEA2F252F6F500082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
+		68C932F9263AAA41002630EE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 68C932F8263AAA41002630EE /* FirebaseAnalytics */; };
+		68C93301263AAA85002630EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68C932FD263AAA85002630EE /* GoogleService-Info.plist */; };
 		68DE861025FF77E600413E62 /* mmlive.json in Resources */ = {isa = PBXBuildFile; fileRef = 68DE860F25FF77E600413E62 /* mmlive.json */; };
 		68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E740D625EF1AE5003A9BD9 /* StoreKit.framework */; };
 		68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAD6831F47A08100B54526 /* Assets.xcassets */; };
@@ -269,7 +270,6 @@
 		5EDC513F25B38A1E006FB270 /* RecentPostsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsEntry.swift; sourceTree = "<group>"; };
 		5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostsWidget.swift; sourceTree = "<group>"; };
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
-		680386382619E3D200457BF0 /* macmagazine 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 10.xcdatamodel"; sourceTree = "<group>"; };
 		682CD10E25EF1C7300FB46FB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
 		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
@@ -280,12 +280,10 @@
 		685E4305252227420028FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		685E4309252227D80028FAA0 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		6897160425F21F120030A16C /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
-		6899E4DC261A67B90011E010 /* macmagazine 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 11.xcdatamodel"; sourceTree = "<group>"; };
-		68A2867A2619D7D60048FE77 /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazine.entitlements; sourceTree = "<group>"; };
-		68A2867E2619D7DE0048FE77 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		68B969A22530DBA20035B641 /* DisqusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisqusViewController.swift; sourceTree = "<group>"; };
 		68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 9.xcdatamodel"; sourceTree = "<group>"; };
 		68BCEA2B252F6E5F0082704D /* Cookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookies.swift; sourceTree = "<group>"; };
+		68C932FD263AAA85002630EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		68DE860F25FF77E600413E62 /* mmlive.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mmlive.json; sourceTree = "<group>"; };
 		68E740D625EF1AE5003A9BD9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		68EF534F2527103000FCBD3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Splash.storyboard; sourceTree = "<group>"; };
@@ -341,6 +339,7 @@
 		9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9C7F9B226BF836000534CA /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		9B9C7F9D226BF836000534CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazine.entitlements; sourceTree = "<group>"; };
 		9B9C7FAD226BFEEC000534CA /* MacMagazineNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		9B9C7FB0226CA192000534CA /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		9BA9393D2260DDB8004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
@@ -429,7 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68A2867F2619D7DE0048FE77 /* CloudKit.framework in Frameworks */,
+				68C932F9263AAA41002630EE /* FirebaseAnalytics in Frameworks */,
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
@@ -566,17 +565,18 @@
 		9B578C2E1F47A2A40086C6A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				683271A2252914AF004BD4DA /* WhatsNew */,
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				68F61C1F24F9524200A4E195 /* Config.xcconfig */,
+				68C932FD263AAA85002630EE /* GoogleService-Info.plist */,
 				9BD4E971225CFDEC00683B88 /* icons */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
-				68A2867A2619D7D60048FE77 /* MacMagazine.entitlements */,
+				9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */,
 				9BCAD6801F47A08100B54526 /* Main.storyboard */,
 				9B8A5D7B247099B700C601E0 /* sound.wav */,
 				68EF534E2527103000FCBD3C /* Splash.storyboard */,
 				9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */,
+				683271A2252914AF004BD4DA /* WhatsNew */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -828,7 +828,6 @@
 		9BF96565225E371900BAF22D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				68A2867E2619D7DE0048FE77 /* CloudKit.framework */,
 				9B283DB825F2D19D0008922E /* InAppPurchase.xcframework */,
 				68E740D625EF1AE5003A9BD9 /* StoreKit.framework */,
 				9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */,
@@ -952,6 +951,7 @@
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
+				68C932F8263AAA41002630EE /* FirebaseAnalytics */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1046,6 +1046,7 @@
 			packageReferences = (
 				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -1129,6 +1130,7 @@
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */,
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
+				68C93301263AAA85002630EE /* GoogleService-Info.plist in Resources */,
 				9B1514BC22BE73010039DA28 /* phone_3@3x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
@@ -1583,7 +1585,6 @@
 		9B9C7FA2226BF836000534CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1610,7 +1611,6 @@
 		9B9C7FA3226BF836000534CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1920,6 +1920,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 4.4.2;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1950,6 +1951,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 4.4.2;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = MacMagazine;
@@ -2072,6 +2074,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.1;
+			};
+		};
 		9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
@@ -2101,6 +2111,11 @@
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
+		68C932F8263AAA41002630EE /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
 		9B560FB525C9C29600F62992 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
@@ -2127,8 +2142,6 @@
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6899E4DC261A67B90011E010 /* macmagazine 11.xcdatamodel */,
-				680386382619E3D200457BF0 /* macmagazine 10.xcdatamodel */,
 				68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */,
 				6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */,
 				9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */,
@@ -2139,7 +2152,7 @@
 				9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */,
 				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 6899E4DC261A67B90011E010 /* macmagazine 11.xcdatamodel */;
+			currentVersion = 68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

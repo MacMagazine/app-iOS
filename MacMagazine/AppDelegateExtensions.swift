@@ -7,6 +7,7 @@
 //
 
 import CoreSpotlight
+import Firebase
 import Kingfisher
 import StoreKit
 import UIKit
@@ -77,6 +78,9 @@ extension AppDelegate {
 
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
+
+		// Firebase
+		FirebaseApp.configure()
 	}
 }
 
