@@ -53,13 +53,6 @@ struct Settings {
 
 	// MARK: - Dark Mode -
 
-    var supportsNativeDarkMode: Bool {
-        if #available(iOS 13.0, *) {
-            return true
-        }
-        return false
-    }
-
     var appearance: Appearance {
         guard let mode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Int else {
             guard let darkMode = UserDefaults.standard.object(forKey: Definitions.darkMode) as? Bool else {
@@ -71,10 +64,8 @@ struct Settings {
     }
 
     var isDarkMode: Bool {
-        if #available(iOS 13.0, *) {
-            if appearance == .native {
-                return UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.traitCollection.userInterfaceStyle == .dark
-            }
+        if appearance == .native {
+            return UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.traitCollection.userInterfaceStyle == .dark
         }
         return appearance == .dark
     }
@@ -111,16 +102,14 @@ struct Settings {
     // MARK: - Cookies -
 
 	func updateCookies(based previousTraitCollection: UITraitCollection?) {
-		if #available(iOS 13.0, *) {
-            let state = UIApplication.shared.applicationState
-			if let style = previousTraitCollection?.userInterfaceStyle,
-                state == .active,
-				appearance == .native &&
-					((style == .dark && isDarkMode) ||
-					(style == .light && !isDarkMode)) {
-                NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
-			}
-		}
+        let state = UIApplication.shared.applicationState
+        if let style = previousTraitCollection?.userInterfaceStyle,
+            state == .active,
+            appearance == .native &&
+                ((style == .dark && isDarkMode) ||
+                (style == .light && !isDarkMode)) {
+            NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
+        }
 	}
 
     // MARK: - Read Intensity -
