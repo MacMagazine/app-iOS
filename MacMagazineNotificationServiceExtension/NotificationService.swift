@@ -23,7 +23,7 @@ class NotificationService: UNNotificationServiceExtension {
 
 		if let bestAttemptContent = bestAttemptContent,
            let receivedRequest = receivedRequest {
-			OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent)
+            OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
 			contentHandler(bestAttemptContent)
 		}
 

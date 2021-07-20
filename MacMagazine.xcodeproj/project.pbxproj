@@ -34,7 +34,6 @@
 		68B969A32530DBA20035B641 /* DisqusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B969A22530DBA20035B641 /* DisqusViewController.swift */; };
 		68BCEA2C252F6E5F0082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
 		68BCEA2F252F6F500082704D /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BCEA2B252F6E5F0082704D /* Cookies.swift */; };
-		68C932F9263AAA41002630EE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 68C932F8263AAA41002630EE /* FirebaseAnalytics */; };
 		68C93301263AAA85002630EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68C932FD263AAA85002630EE /* GoogleService-Info.plist */; };
 		68DE861025FF77E600413E62 /* mmlive.json in Resources */ = {isa = PBXBuildFile; fileRef = 68DE860F25FF77E600413E62 /* mmlive.json */; };
 		68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E740D625EF1AE5003A9BD9 /* StoreKit.framework */; };
@@ -428,7 +427,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68C932F9263AAA41002630EE /* FirebaseAnalytics in Frameworks */,
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
@@ -951,7 +949,6 @@
 			packageProductDependencies = (
 				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
-				68C932F8263AAA41002630EE /* FirebaseAnalytics */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1046,7 +1043,6 @@
 			packageReferences = (
 				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -1166,7 +1162,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		9B9371E825BE10B0008AFF3C /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1184,7 +1180,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1202,7 +1198,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		9BA5527D2225CE1D00B3FA23 /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1220,7 +1216,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1238,7 +1234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2074,14 +2070,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.11.1;
-			};
-		};
 		9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
@@ -2110,11 +2098,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		68C932F8263AAA41002630EE /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 68C932F7263AAA41002630EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
 		};
 		9B560FB525C9C29600F62992 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

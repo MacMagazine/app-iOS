@@ -115,7 +115,21 @@ class WebViewController: UIViewController {
         setupCookies()
     }
 
-	// MARK: - Local methods -
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Hack to reload content on iPads
+        configureView()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // Hack to force a inline video to stop playning
+        webView?.loadHTMLString("", baseURL: nil)
+    }
+
+    // MARK: - Local methods -
 
 	func configureView() {
         // Update the user interface for the detail item.
