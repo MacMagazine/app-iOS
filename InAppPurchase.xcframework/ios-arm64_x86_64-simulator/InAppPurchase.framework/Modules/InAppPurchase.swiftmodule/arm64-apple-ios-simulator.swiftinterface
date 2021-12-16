@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name InAppPurchase
 import Combine
 import CommonCrypto
@@ -9,6 +9,7 @@ import Foundation/*.Bundle*/
 import StoreKit
 import Swift
 import UIKit
+import _Concurrency
 import os.log
 import os
 public func logD(_ object: Any?, filename: Swift.String = #file, line: Swift.Int = #line, column: Swift.Int = #column, funcName: Swift.String = #function)
@@ -46,7 +47,7 @@ public struct Product {
     get
   }
 }
-extension SKProduct {
+extension StoreKit.SKProduct {
   @objc override dynamic open var debugDescription: Swift.String {
     @objc get
   }
@@ -63,10 +64,10 @@ public enum InAppStatus {
   case expired
   case unknown
   public static func == (a: InAppPurchase.InAppStatus, b: InAppPurchase.InAppStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum InAppError : Swift.Error {
   case retrieving
@@ -74,10 +75,10 @@ public enum InAppError : Swift.Error {
   case restoring
   case validating
   public static func == (a: InAppPurchase.InAppError, b: InAppPurchase.InAppError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @_hasMissingDesignatedInitializers public class InAppPurchaseManager : Combine.ObservableObject {
   public static let shared: InAppPurchase.InAppPurchaseManager
@@ -91,7 +92,7 @@ public enum InAppError : Swift.Error {
   }
   public var $products: Combine.Published<Swift.Result<[InAppPurchase.Product], InAppPurchase.InAppError>?>.Publisher {
     get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
   public func getProducts(for identifiers: [Swift.String])
@@ -102,14 +103,14 @@ public enum InAppError : Swift.Error {
   }
   public var $status: Combine.Published<Swift.Result<InAppPurchase.InAppStatus, InAppPurchase.InAppError>?>.Publisher {
     get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, OSX 11.0, *)
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
   public func purchase(product: InAppPurchase.Product? = nil)
   public func validateReceipt(subscription: Swift.String)
   public func refreshReceipt(subscription: Swift.String)
-  @objc deinit
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
 }
 extension InAppPurchase.InAppStatus : Swift.Equatable {}
 extension InAppPurchase.InAppStatus : Swift.Hashable {}

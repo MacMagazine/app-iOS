@@ -357,15 +357,17 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	}
 
 	fileprivate func getLastSelection(_ completion: @escaping (IndexPath) -> Void) {
+        let zeroedIndexPath = IndexPath(row: 0, section: 0)
+
         if status == .recentPost ||
             shortcutStatus == .recentPost {
-			completion(IndexPath(row: 0, section: 0))
+			completion(zeroedIndexPath)
         } else {
             guard let selectedPostLink = UserDefaults.standard.object(forKey: "selectedPostLink") as? [String: AnyObject],
                   let link = selectedPostLink["link"] as? String,
                   let date = selectedPostLink["date"] as? Date
             else {
-                completion(IndexPath(row: 0, section: 0))
+                completion(zeroedIndexPath)
                 return
             }
             // Check for 12h selection
@@ -374,13 +376,14 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                 comeFrom3DTouch = false
                 CoreDataStack.shared.get(link: link) { (posts: [Post]) in
                     if posts.isEmpty {
-                        completion(IndexPath(row: 0, section: 0))
+                        completion(zeroedIndexPath)
                     } else {
-                        completion(self.fetchController?.indexPath(for: posts[0]) ?? IndexPath(row: 0, section: 0))
+                        self.selectedIndexPath = self.fetchController?.indexPath(for: posts[0])
+                        completion(self.selectedIndexPath ?? zeroedIndexPath)
                     }
                 }
             } else {
-                completion(IndexPath(row: 0, section: 0))
+                completion(zeroedIndexPath)
             }
         }
 	}

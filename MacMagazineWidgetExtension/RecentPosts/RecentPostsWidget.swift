@@ -32,12 +32,17 @@ struct RecentPostsWidget: View {
                             PostCell(post: content[index])
                         }
                     }
+
                 case .systemLarge:
                     VStack(spacing: 1) {
                         ForEach(0 ..< min(3, content.count)) { index in
                             PostCell(post: content[index])
                         }
                     }
+
+                case .systemExtraLarge:
+                    Text("Tamanho incompatível.")
+
                 @unknown default:
                     Text("Tamanho incompatível.")
                 }
