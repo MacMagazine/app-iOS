@@ -17,19 +17,15 @@ import XCTest
 
 class PostTests: XCTestCase {
 
-	var postExample: Data?
+    var postExample: Data? = ExamplePost().getExamplePost()
 	let examplePost = ExamplePost()
 
 	override func setUp() {
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-		guard let post = self.examplePost.getExamplePost() else {
-			return
-		}
-		postExample = post
+        // Put setup code here. This method is called before the invocation of each test method in the class.
 	}
 
 	override func tearDown() {
-		// Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
 		super.tearDown()
 	}
 
@@ -74,6 +70,7 @@ class PostTests: XCTestCase {
 		savePost { posts in
 			if posts.isEmpty {
 				XCTFail("Database is empty")
+                expectation.fulfill()
 			} else {
 				XCTAssertEqual(posts.count, 1, "Should retrieve only 1 post")
 
@@ -99,12 +96,13 @@ class PostTests: XCTestCase {
 		let expectation = self.expectation(description: "Testing API for a valid data on database...")
 		expectation.expectedFulfillmentCount = 1
 
-        CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { (posts: [Post]) in
-			XCTAssertEqual(posts[0].categorias?.contains("Destaques"), false, "Post shouldn't be 'Destaque'")
-			expectation.fulfill()
-		}
+        savePost { posts in
+            XCTAssertEqual(posts.count, 1)
+            XCTAssertEqual(posts[0].categorias?.contains("Destaques"), false, "Post shouldn't be 'Destaque'")
+            expectation.fulfill()
+        }
 
-		waitForExpectations(timeout: 30) { error in
+        waitForExpectations(timeout: 30) { error in
 			XCTAssertNil(error, "Error occurred: \(String(describing: error))")
 		}
 	}
@@ -123,10 +121,9 @@ class PostTests: XCTestCase {
 			guard let post = post else {
 				XCTAssertEqual(posts.count, 2, "Should have 2 posts")
 
-				delay(0.4) {
+				delay(0.1) {
                     CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { (db: [Post]) in
 						XCTAssertEqual(db.count, 1, "Should retrieve only 1 post")
-
 						expectation.fulfill()
 					}
 				}
@@ -142,6 +139,73 @@ class PostTests: XCTestCase {
 		}
 	}
 
+    func testDeleteFromDB() {
+        let expectation = self.expectation(description: "Testing delete post from database...")
+        expectation.expectedFulfillmentCount = 1
+
+        CoreDataStack.shared.flush(type: .all)
+
+        // 1. Make sure there is no saved posts
+        self.getAllPosts(count: 0) {
+            // 2. Parse and save posts
+            self.load(data: MockPosts().posts, count: 20) { _ in
+                // 3. Make sure the number of saved posts matches
+                self.getAllPosts(count: 20) {
+                    // 4. Load new set of posts
+                    self.load(data: MockPosts2().posts, count: 18) { posts in
+                        // 5. Make sure the number of saved posts still matches
+                        self.getAllPosts(count: 20) {
+                            // 6. There are two posts to delete
+                            CoreDataStack.shared.delete(posts.map { $0.postId }, page: 0)
+
+                            // 7. Make sure the number of saved posts still matches
+                            self.getAllPosts(count: 18) {
+                                expectation.fulfill()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        waitForExpectations(timeout: 30) { error in
+            XCTAssertNil(error, "Error occurred: \(String(describing: error))")
+        }
+    }
+
+    func testNothingToDeleteFromDB() {
+        let expectation = self.expectation(description: "Testing nothing to delete post from database...")
+        expectation.expectedFulfillmentCount = 1
+
+        CoreDataStack.shared.flush(type: .all)
+
+        // 1. Make sure there is no saved posts
+        self.getAllPosts(count: 0) {
+            // 2. Parse and save posts
+            self.load(data: MockPosts2().posts, count: 18) { _ in
+                // 3. Make sure the number of saved posts matches
+                self.getAllPosts(count: 18) {
+                    // 4. Load new set of posts
+                    self.load(data: MockPosts().posts, count: 20) { posts in
+                        // 5. Make sure the number of saved posts still matches
+                        self.getAllPosts(count: 20) {
+                            // 6. There are two posts to delete
+                            CoreDataStack.shared.delete(posts.map { $0.postId }, page: 0)
+
+                            // 7. Make sure the number of saved posts still matches
+                            self.getAllPosts(count: 20) {
+                                expectation.fulfill()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        waitForExpectations(timeout: 30) { error in
+            XCTAssertNil(error, "Error occurred: \(String(describing: error))")
+        }
+    }
 }
 
 extension PostTests {
@@ -168,4 +232,34 @@ extension PostTests {
 			CoreDataStack.shared.save(post: post)
 		}
 	}
+}
+
+extension PostTests {
+    func getAllPosts(count: Int, onCompletion: (() -> Void)?) {
+        delay(0.2) {
+            CoreDataStack.shared.getAll { posts in
+                XCTAssertEqual(posts.count, count)
+                onCompletion?()
+            }
+        }
+    }
+
+    func load(data: Data?, count: Int, onCompletion: (([XMLPost]) -> Void)?) {
+        guard let data = data else {
+            XCTFail("Example posts should exist")
+            return
+        }
+
+        var posts: [XMLPost] = []
+        let completion = { (post: XMLPost?) in
+            guard let post = post else {
+                XCTAssertEqual(posts.count, count)
+                onCompletion?(posts)
+                return
+            }
+            posts.append(post)
+            CoreDataStack.shared.save(post: post)
+        }
+        API().parse(data, onCompletion: completion, numberOfPosts: -1)
+    }
 }

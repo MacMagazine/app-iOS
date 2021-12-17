@@ -32,13 +32,19 @@ class CoreDataStack {
 
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "macmagazine")
+
+        #if TEST
+        container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+        #endif
+
 		container.loadPersistentStores { _, error in
 			guard let error = error as NSError? else {
 				return
 			}
 			fatalError("Unresolved error: \(error), \(error.userInfo)")
 		}
-		// To prevent duplicates, ignore any object that came later
+
+        // To prevent duplicates, ignore any object that came later
 		container.viewContext.mergePolicy = NSRollbackMergePolicy
 		return container
 	}()
@@ -120,7 +126,7 @@ class CoreDataStack {
 		}
 	}
 
-	// MARK: - Post Video -
+	// MARK: - Entity Posts -
 
 	func getPostsForWatch(completion: @escaping ([PostData]) -> Void) {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
@@ -243,6 +249,66 @@ class CoreDataStack {
         post.shortURL = item.shortURL
 	}
 
+    func get(page: Int, limit: Int, completion: @escaping ([Post]) -> Void) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
+        request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
+        request.fetchOffset = page
+        request.fetchLimit = limit
+
+        // Creates `asynchronousFetchRequest` with the fetch request and the completion closure
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: request) { asynchronousFetchResult in
+            guard let result = asynchronousFetchResult.finalResult as? [Post] else {
+                completion([])
+                return
+            }
+            completion(result)
+        }
+
+        do {
+            try viewContext.execute(asynchronousFetchRequest)
+        } catch let error {
+            logE(error.localizedDescription)
+        }
+    }
+
+    func delete(_ posts: [String], page: Int) {
+        // 1. Retrieve the (posts.count * page) objects from the database
+        // 2. Exclude those in both arrays
+        // 3. Delete from DB the remaining ids
+
+        // 1.
+        get(page: page * posts.count, limit: posts.count) { [weak self] dbPosts in
+            let existingIds = dbPosts.map { $0.postId }
+
+            // 2.
+            let difference = Array(Set(existingIds).subtracting(posts))
+
+            // 3.
+            self?.flush(difference)
+        }
+    }
+
+    func flush(_ ids: [String?]) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
+        request.predicate = NSPredicate(format: "postId IN %@", ids)
+
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        deleteRequest.resultType = .resultTypeObjectIDs
+
+        do {
+            let result = try viewContext.execute(deleteRequest) as? NSBatchDeleteResult
+            guard let objectIDs = result?.result as? [NSManagedObjectID] else {
+                return
+            }
+
+            // Updates the main context
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
+
+        } catch {
+            fatalError("Failed to execute request: \(error)")
+        }
+    }
+
     func getCategories(completion: @escaping ([String]) -> Void) {
         var categories = [String]()
         getAll { posts in
@@ -252,7 +318,9 @@ class CoreDataStack {
                 }
                 categories.append(contentsOf: dbCategories)
             }
-            completion(categories)
+            completion(Array(Set(categories)).sorted {
+                $0.compare($1, locale: Locale(identifier: "pt-BR")) == .orderedAscending
+            })
         }
     }
 

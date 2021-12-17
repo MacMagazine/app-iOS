@@ -41,7 +41,17 @@ struct Share {
             applicationActivities.append(chrome)
 		}
 
-		let activityVC = UIActivityViewController(activityItems: items, applicationActivities: applicationActivities)
+        let customCopy = UIActivityExtensions(title: "Copiar Link", image: UIImage(systemName: "link")) { items in
+            for item in items {
+                guard let url = URL(string: "\(item)") else {
+                    continue
+                }
+                UIPasteboard.general.url = url
+            }
+        }
+        applicationActivities.append(customCopy)
+
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: applicationActivities)
 		if let ppc = activityVC.popoverPresentationController {
 			if location != nil {
 				if let view = location as? UIView {

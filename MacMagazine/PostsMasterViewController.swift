@@ -6,6 +6,7 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import Combine
 import CoreData
 import CoreSpotlight
 import Kingfisher
@@ -51,6 +52,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var keywords: UIBarButtonItem!
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -77,6 +79,27 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
     var status = Status.firstLoad
     var shortcutStatus = Status.unknown
+
+    var cancellable: AnyCancellable?
+    var selection = [String]() {
+        didSet {
+            if selection.isEmpty {
+                cancellable?.cancel()
+
+                fetchController?.fetchRequest.predicate = nil
+                reloadController(.transitionCrossDissolve)
+
+            } else {
+                fetchController?.fetchRequest.predicate = nil
+                var predicates = [NSPredicate]()
+                selection.forEach { selection in
+                    predicates.append(NSPredicate(format: "categorias contains[cd] %@", selection))
+                }
+                fetchController?.fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+                reloadController(.transitionCrossDissolve)
+            }
+        }
+    }
 
     // MARK: - View Lifecycle -
 
@@ -172,26 +195,43 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - Segues -
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navController = segue.destination as? UINavigationController,
-            let controller = navController.topViewController as? PostsDetailViewController,
-            let indexPath = selectedIndexPath
-            else {
-                return
-        }
+        if segue.identifier == "showKeywordsSegue" {
+            guard let navVC = segue.destination as? UINavigationController,
+                  let vc = navVC.children.first as? KeywordsTableViewController else {
+                      return
+                  }
 
-        guard let _ = navigationItem.searchController else {
-            // Normal Posts table
-            if tableView.indexPathForSelectedRow != nil {
-                guard let post = fetchController?.object(at: indexPath) else {
-                    return
+            cancellable = vc.$selection
+                .receive(on: RunLoop.main)
+                .dropFirst()
+                .compactMap { $0 }
+                .removeDuplicates()
+                .sink { [weak self] selection in
+                    self?.selection = selection
                 }
-                prepareDetailController(controller, using: links, compare: post.link)
+
+        } else {
+            guard let navController = segue.destination as? UINavigationController,
+                let controller = navController.topViewController as? PostsDetailViewController,
+                let indexPath = selectedIndexPath
+                else {
+                    return
             }
-            return
-        }
-        // Search Posts table
-        if resultsTableController?.tableView.indexPathForSelectedRow != nil {
-            prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
+
+            guard let _ = navigationItem.searchController else {
+                // Normal Posts table
+                if tableView.indexPathForSelectedRow != nil {
+                    guard let post = fetchController?.object(at: indexPath) else {
+                        return
+                    }
+                    prepareDetailController(controller, using: links, compare: post.link)
+                }
+                return
+            }
+            // Search Posts table
+            if resultsTableController?.tableView.indexPathForSelectedRow != nil {
+                prepareDetailController(controller, using: links, compare: posts[indexPath.row].link)
+            }
         }
     }
 
@@ -263,6 +303,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
+        var postId: [String] = []
         var images: [String] = []
         var searchableItems: [CSSearchableItem] = []
 
@@ -271,6 +312,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         API().getPosts(page: paged) { post in
             DispatchQueue.main.async {
                 guard let post = post else {
+                    CoreDataStack.shared.delete(postId, page: paged)
+
                     // Prefetch images to be able to sent to Apple Watch
                     let urls = images.compactMap { URL(string: $0) }
                     let prefetcher = ImagePrefetcher(urls: urls)
@@ -322,6 +365,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
                     return
                 }
+                postId.append(post.postId)
                 images.append(post.artworkURL)
                 searchableItems.append(self.createSearchableItem(post))
 
@@ -378,8 +422,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     if posts.isEmpty {
                         completion(zeroedIndexPath)
                     } else {
-                        self.selectedIndexPath = self.fetchController?.indexPath(for: posts[0])
-                        completion(self.selectedIndexPath ?? zeroedIndexPath)
+                        completion(self.fetchController?.indexPath(for: posts[0]) ?? zeroedIndexPath)
                     }
                 }
             } else {

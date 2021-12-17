@@ -6,7 +6,7 @@
 //  Copyright © 2021 MacMagazine. All rights reserved.
 //
 
-import KingfisherSwiftUI
+import Kingfisher
 import SwiftUI
 import WidgetKit
 
