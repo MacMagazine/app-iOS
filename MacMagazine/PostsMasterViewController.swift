@@ -83,6 +83,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     var cancellable: AnyCancellable?
     var selection = [String]() {
         didSet {
+            selectedIndexPath = nil
+
             if selection.isEmpty {
                 cancellable?.cancel()
 
