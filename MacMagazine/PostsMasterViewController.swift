@@ -810,9 +810,6 @@ extension PostsMasterViewController {
 			items.append(self.createSearchableItem(post))
 		}
 
-		if navigationItem.searchController == nil {
-		}
-
 		API().searchPosts(category: category, processResponse)
 	}
 }

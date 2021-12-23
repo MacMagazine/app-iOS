@@ -12,8 +12,8 @@
         <!--NoArNavigation-->
         <scene sceneID="vsx-Zo-BK5">
             <objects>
-                <navigationController title="NoArNavigation" automaticallyAdjustsScrollViewInsets="NO" id="GbX-Zp-bIv" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                <navigationController title="NoArNavigation" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="GbX-Zp-bIv" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Podcast" image="mic.fill" catalog="system" id="59e-2Y-DJH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ">
@@ -39,7 +39,7 @@
         <!--NoAr-->
         <scene sceneID="D62-wU-79y">
             <objects>
-                <tableViewController title="NoAr" clearsSelectionOnViewWillAppear="NO" id="dI9-bf-84Z" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="NoAr" extendedLayoutIncludesOpaqueBars="YES" clearsSelectionOnViewWillAppear="NO" id="dI9-bf-84Z" customClass="PodcastMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="podcast" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="1" sectionFooterHeight="1" id="M41-4U-Ums">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="608"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,6 +51,7 @@
                             <outlet property="delegate" destination="dI9-bf-84Z" id="Rwn-da-3s1"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfs-yV-yEe" sceneMemberID="firstResponder"/>
             </objects>
@@ -59,23 +60,23 @@
         <!--Podcast View Controller-->
         <scene sceneID="yun-cy-K9P">
             <objects>
-                <viewController id="3UV-U7-cDa" customClass="PodcastViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="3UV-U7-cDa" customClass="PodcastViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xvo-5h-vIB"/>
                         <viewControllerLayoutGuide type="bottom" id="Sxe-hu-yMD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SlD-dw-tjD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="608"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="608"/>
                                 <connections>
                                     <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-MC-Tvc">
-                                <rect key="frame" x="0.0" y="608" width="414" height="166"/>
+                                <rect key="frame" x="0.0" y="696" width="414" height="166"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="166" id="3US-UY-uQE"/>
                                 </constraints>
@@ -95,7 +96,7 @@
                             <constraint firstAttribute="trailing" secondItem="7Pr-nE-zS6" secondAttribute="trailing" id="kUk-Nd-AxK"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="DiB-v8-Kg9">

@@ -48,7 +48,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         setup(tableView: tableView)
 
         self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "podcastCell")
-        self.tableView?.sectionHeaderHeight = UITableView.automaticDimension
     }
 
     init(post tableView: UITableView, group: String?) {
@@ -59,15 +58,16 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
         self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
-
-        self.tableView?.sectionHeaderHeight = UITableView.automaticDimension
-        self.tableView?.estimatedSectionHeaderHeight = 36
     }
 
     func setup(tableView: UITableView) {
         self.tableView = tableView
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
+
+        if #available(iOS 15.0, *) {
+            self.tableView?.sectionHeaderTopPadding = 0
+        }
     }
 
 	// MARK: - Scroll detection -
