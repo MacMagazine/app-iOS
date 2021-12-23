@@ -77,8 +77,6 @@ class VideoCollectionViewController: UICollectionViewController {
 		searchController?.hidesNavigationBarDuringPresentation = true
         searchController?.searchBar.returnKeyType = .search
 
-        self.extendedLayoutIncludesOpaqueBars = true
-
 		pageToken = ""
 		getVideos()
 	}

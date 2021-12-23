@@ -1,4 +1,8 @@
 {
+  "identifier" : "B267CFDB",
+  "nonRenewingSubscriptions" : [
+
+  ],
   "products" : [
 
   ],
@@ -48,6 +52,6 @@
   },
   "version" : {
     "major" : 1,
-    "minor" : 0
+    "minor" : 1
   }
 }

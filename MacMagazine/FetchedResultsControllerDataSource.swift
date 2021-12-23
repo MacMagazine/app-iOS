@@ -48,6 +48,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         setup(tableView: tableView)
 
         self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "podcastCell")
+        self.tableView?.sectionHeaderHeight = UITableView.automaticDimension
     }
 
     init(post tableView: UITableView, group: String?) {
@@ -58,6 +59,9 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
         self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
+
+        self.tableView?.sectionHeaderHeight = UITableView.automaticDimension
+        self.tableView?.estimatedSectionHeaderHeight = 36
     }
 
     func setup(tableView: UITableView) {
@@ -99,7 +103,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return numSections
 	}
 
-	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		guard let sections = fetchedResultsController.sections,
 			let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as? HeaderCell
 			else {

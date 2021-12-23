@@ -139,8 +139,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController?.hidesNavigationBarDuringPresentation = true
         searchController?.searchBar.returnKeyType = .search
 
-        self.extendedLayoutIncludesOpaqueBars = true
-
 		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
 

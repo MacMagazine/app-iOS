@@ -46,8 +46,6 @@ class PodcastViewController: UIViewController {
 		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
         searchController?.searchBar.returnKeyType = .search
 
-        self.extendedLayoutIncludesOpaqueBars = true
-
         favorite.accessibilityLabel = "Listar podcasts favoritos."
     }
 

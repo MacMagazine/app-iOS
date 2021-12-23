@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,6 +55,7 @@
                             <constraint firstItem="Mik-YF-7y9" firstAttribute="centerY" secondItem="A54-fq-tRK" secondAttribute="centerY" id="sfK-Ow-Hms"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="URb-53-j4n">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="twA-3I-XfB">
@@ -90,10 +91,14 @@
         <scene sceneID="KNm-9d-eYv">
             <objects>
                 <tabBarController storyboardIdentifier="main" id="Rqn-ok-aGY" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="bfV-7o-pYQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </tabBarAppearance>
                     </tabBar>
                     <connections>
                         <outlet property="delegate" destination="CTw-bn-pvv" id="Ppe-mA-yQF"/>
@@ -116,6 +121,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <connections>
                         <segue destination="Jej-5Q-aqJ" kind="relationship" relationship="rootViewController" id="eqf-5Z-Rsy"/>
@@ -142,8 +153,8 @@
         <!--Posts-->
         <scene sceneID="R3C-Oo-scN">
             <objects>
-                <tableViewController title="Posts" clearsSelectionOnViewWillAppear="NO" id="Jej-5Q-aqJ" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="33" sectionFooterHeight="22" id="BzE-Hd-ooV">
+                <tableViewController title="Posts" extendedLayoutIncludesOpaqueBars="YES" clearsSelectionOnViewWillAppear="NO" id="Jej-5Q-aqJ" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="posts" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="33" estimatedSectionHeaderHeight="33" sectionFooterHeight="1" id="BzE-Hd-ooV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -154,7 +165,6 @@
                             <outlet property="delegate" destination="Jej-5Q-aqJ" id="Uu3-rx-L80"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="Posts" id="Gac-4y-scy">
                         <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="vUZ-wN-Khb">
                             <color key="tintColor" name="MMBlueWhite"/>
@@ -230,7 +240,7 @@
                     <navigationItem key="navigationItem" id="qRi-qc-cAu">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="2RS-0E-jz0">
-                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                            <rect key="frame" x="120" y="5.6666666666666679" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Ii-zjF">
@@ -295,6 +305,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -340,7 +356,7 @@
             <objects>
                 <tableViewController id="VC6-80-6Xw" customClass="KeywordsTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="yci-zU-bZL">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="734"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" translucent="NO" id="tqn-Em-7No">
@@ -400,7 +416,7 @@
                 <viewControllerPlaceholder storyboardName="WhatsNew" id="RIZ-SC-AGK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3n-Ps-AQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142" y="-2886"/>
+            <point key="canvasLocation" x="1119" y="-2871"/>
         </scene>
         <!--MM Live-->
         <scene sceneID="CH2-Mz-ONF">
@@ -417,6 +433,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="W8H-UC-7v2">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -432,9 +454,15 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vKg-gH-mjD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="juU-We-4Hu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="juU-We-4Hu">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -447,19 +475,19 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lNV-kD-aRc"/>
+        <segue reference="YQQ-bx-LIJ"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="antenna.radiowaves.left.and.right" catalog="system" width="128" height="109"/>
-        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="antenna.radiowaves.left.and.right" catalog="system" width="32" height="32"/>
+        <image name="doc.plaintext" catalog="system" width="32" height="32"/>
+        <image name="gear" catalog="system" width="32" height="32"/>
         <image name="line.3.horizontal.circle" width="13" height="13"/>
         <image name="logo" width="415" height="350"/>
-        <image name="mic.fill" catalog="system" width="108" height="128"/>
-        <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
-        <image name="rectangle" catalog="system" width="128" height="93"/>
-        <image name="sidebar.left" catalog="system" width="128" height="93"/>
-        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="mic.fill" catalog="system" width="32" height="32"/>
+        <image name="play.rectangle.fill" catalog="system" width="32" height="32"/>
+        <image name="rectangle" catalog="system" width="32" height="32"/>
+        <image name="sidebar.left" catalog="system" width="32" height="32"/>
+        <image name="star" catalog="system" width="32" height="32"/>
         <namedColor name="MMBlueWhite">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
