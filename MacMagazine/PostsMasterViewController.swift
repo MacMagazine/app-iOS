@@ -52,7 +52,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var favorite: UIBarButtonItem!
-    @IBOutlet private weak var keywords: UIBarButtonItem!
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up

@@ -173,32 +173,19 @@
                                 <action selector="showHideFavorites:" destination="Jej-5Q-aqJ" id="YFz-s2-Y8R"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="search" id="9Ox-zf-Apm">
-                                <color key="tintColor" name="MMBlueWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts."/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="search:" destination="Jej-5Q-aqJ" id="rJa-zU-jEd"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="line.3.horizontal.circle" id="aPe-aT-D0n">
-                                <color key="tintColor" name="MMBlueWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Filtrar por palavras-chave"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="vKg-gH-mjD" kind="presentation" identifier="showKeywordsSegue" modalPresentationStyle="formSheet" id="H2a-wg-4d5"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Ox-zf-Apm">
+                            <color key="tintColor" name="MMBlueWhite"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Buscar posts."/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="search:" destination="Jej-5Q-aqJ" id="rJa-zU-jEd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="favorite" destination="vUZ-wN-Khb" id="TPH-rv-xwZ"/>
-                        <outlet property="keywords" destination="aPe-aT-D0n" id="rl3-N1-RWS"/>
                         <outlet property="logoView" destination="JbQ-Qw-e5R" id="blr-18-g4m"/>
                         <outlet property="spin" destination="uE4-5b-xTc" id="Vwt-Qm-yfC"/>
                         <segue destination="fD0-My-KZk" kind="showDetail" identifier="showDetail" id="lNV-kD-aRc"/>
@@ -357,7 +344,7 @@
             <objects>
                 <tableViewController id="VC6-80-6Xw" customClass="KeywordsTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="yci-zU-bZL">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="734"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" translucent="NO" id="tqn-Em-7No">
@@ -417,7 +404,7 @@
                 <viewControllerPlaceholder storyboardName="WhatsNew" id="RIZ-SC-AGK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3n-Ps-AQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1119" y="-2871"/>
+            <point key="canvasLocation" x="1028" y="-2886"/>
         </scene>
         <!--MM Live-->
         <scene sceneID="CH2-Mz-ONF">
@@ -456,7 +443,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vKg-gH-mjD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="juU-We-4Hu">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -482,7 +469,6 @@
         <image name="antenna.radiowaves.left.and.right" catalog="system" width="32" height="32"/>
         <image name="doc.plaintext" catalog="system" width="32" height="32"/>
         <image name="gear" catalog="system" width="32" height="32"/>
-        <image name="line.3.horizontal.circle" width="13" height="13"/>
         <image name="logo" width="415" height="350"/>
         <image name="mic.fill" catalog="system" width="32" height="32"/>
         <image name="play.rectangle.fill" catalog="system" width="32" height="32"/>
