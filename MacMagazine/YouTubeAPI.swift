@@ -78,6 +78,8 @@ struct Statistics: Codable {
 }
 
 struct Details: Codable {
+    var videoId: String?
+    var videoPublishedAt: String?
 	var duration: String?
 	var dimension: String?
 	var definition: String?

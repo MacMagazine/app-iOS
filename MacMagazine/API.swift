@@ -92,7 +92,7 @@ class API {
 		static let sort = "order=date"
 
 		static let playlistItems = "\(youtubeURL)/playlistItems"
-		static let playlistPart = "part=snippet"
+		static let playlistPart = "part=snippet,contentDetails"
 
 		static let playlistIdParam = "playlistId="
 		static let playlistId: [UInt8] = [20, 37, 70, 30, 44, 1, 41, 16, 8, 61, 4, 24, 1, 22, 43, 45, 28, 0, 5, 41, 69, 25, 8, 36]

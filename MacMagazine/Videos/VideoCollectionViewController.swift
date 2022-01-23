@@ -301,7 +301,9 @@ extension VideoCollectionViewController {
 		if isSearching {
 			if videos?.isEmpty ?? true {
 				showNotFound()
-			}
+            } else {
+                collectionView.backgroundView = nil
+            }
 			return videos?.count ?? 0
 		} else {
 			guard let sections = fetchedResultsController.sections else {

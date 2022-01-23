@@ -373,7 +373,15 @@ class CoreDataStack {
 
 			let artworkURL = $0.snippet?.thumbnails?.maxres?.url ?? $0.snippet?.thumbnails?.high?.url ?? ""
 
-			return JSONVideo(title: title, videoId: videoId, pubDate: $0.snippet?.publishedAt ?? "", artworkURL: artworkURL, views: views, likes: likes, duration: duration)
+            // swiftlint:disable vertical_parameter_alignment_on_call
+			return JSONVideo(title: title,
+                             videoId: videoId,
+                             pubDate: $0.contentDetails?.videoPublishedAt ?? $0.snippet?.publishedAt ?? "",
+                             artworkURL: artworkURL,
+                             views: views,
+                             likes: likes,
+                             duration: duration)
+            // swiftlint:disable vertical_parameter_alignment_on_call
 		}
 
 		mappedVideos.forEach { video in
