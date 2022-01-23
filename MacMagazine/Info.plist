@@ -16,7 +16,8 @@
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>icon_120</string>
+					<string>icon_120@2x</string>
+					<string>icon_120@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -76,7 +77,7 @@
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>icon_152</string>
+					<string>icon_152@2x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -85,7 +86,7 @@
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>icon_167</string>
+					<string>icon_167@2x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>

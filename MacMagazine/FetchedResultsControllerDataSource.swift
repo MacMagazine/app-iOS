@@ -325,7 +325,14 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 		var response = [PostData]()
 		for post in posts {
-            response.append(PostData(title: post.title, link: post.link, thumbnail: post.artworkURL, favorito: post.favorite, postId: post.postId, shortURL: post.shortURL))
+            let postData = PostData(title: post.title,
+                                    link: post.link,
+                                    thumbnail: post.artworkURL,
+                                    favorito: post.favorite,
+                                    postId: post.postId,
+                                    shortURL: post.shortURL,
+                                    playable: post.playable)
+            response.append(postData)
 		}
 		return response
 	}

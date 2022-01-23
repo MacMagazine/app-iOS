@@ -126,7 +126,9 @@ class WebViewController: UIViewController {
         super.viewWillDisappear(animated)
 
         // Hack to force a inline video to stop playning
-        webView?.loadHTMLString("", baseURL: nil)
+        if post?.playable ?? false {
+            webView?.loadHTMLString("", baseURL: nil)
+        }
     }
 
     // MARK: - Local methods -

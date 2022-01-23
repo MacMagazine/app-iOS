@@ -22,6 +22,7 @@ struct XMLPost: Hashable {
 	var favorite: Bool = false
 	var postId: String = ""
     var shortURL: String = ""
+    var playable: Bool = false
 
 	fileprivate func decodeHTMLString(string: String) -> String {
 		guard let encodedData = string.data(using: String.Encoding.utf8) else {
@@ -127,6 +128,8 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 				}
 			case "guid":
 				currentPost.shortURL = value
+            case "content:encoded":
+                currentPost.playable = value.contains("youtube.com/embed/")
 			default:
 				return
 			}

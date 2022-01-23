@@ -231,6 +231,7 @@ class CoreDataStack {
 		newItem.postId = post.postId
         newItem.read = false
         newItem.shortURL = post.shortURL
+        newItem.playable = post.playable
 	}
 
 	func update(post: Post, with item: XMLPost) {
@@ -247,6 +248,7 @@ class CoreDataStack {
         post.podcastFrame = item.podcastFrame
 		post.postId = item.postId
         post.shortURL = item.shortURL
+        post.playable = item.playable
 	}
 
     func get(page: Int, limit: Int, completion: @escaping ([Post]) -> Void) {

@@ -323,6 +323,7 @@
 		9B4D8D02279DBE5700D6AD17 /* icon_120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_120@2x.png"; sourceTree = "<group>"; };
 		9B4D8D03279DBE5700D6AD17 /* icon_167@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_167@2x.png"; sourceTree = "<group>"; };
 		9B4D8D04279DBE5700D6AD17 /* icon_152@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_152@2x.png"; sourceTree = "<group>"; };
+		9B4D8D08279DFE1E00D6AD17 /* macmagazine 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 10.xcdatamodel"; sourceTree = "<group>"; };
 		9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 3.xcdatamodel"; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9B6F9659225E5A060075ED89 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -2392,6 +2393,7 @@
 		9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9B4D8D08279DFE1E00D6AD17 /* macmagazine 10.xcdatamodel */,
 				68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */,
 				6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */,
 				9B98C331238848CB0094EBBA /* macmagazine 7.xcdatamodel */,
@@ -2402,7 +2404,7 @@
 				9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */,
 				9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */,
 			);
-			currentVersion = 68B969A62530E35F0035B641 /* macmagazine 9.xcdatamodel */;
+			currentVersion = 9B4D8D08279DFE1E00D6AD17 /* macmagazine 10.xcdatamodel */;
 			path = macmagazine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
