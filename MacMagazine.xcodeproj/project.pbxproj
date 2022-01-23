@@ -71,6 +71,9 @@
 		9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA122357A0300A49239 /* NormalCell.xib */; };
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
 		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
+		9B4D8D05279DBE5800D6AD17 /* icon_120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D8D02279DBE5700D6AD17 /* icon_120@2x.png */; };
+		9B4D8D06279DBE5800D6AD17 /* icon_167@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D8D03279DBE5700D6AD17 /* icon_167@2x.png */; };
+		9B4D8D07279DBE5800D6AD17 /* icon_152@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D8D04279DBE5700D6AD17 /* icon_152@2x.png */; };
 		9B560FB625C9C29600F62992 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9B560FB525C9C29600F62992 /* Kingfisher */; };
 		9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
@@ -317,6 +320,9 @@
 		9B4A8FA022357A0300A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NormalCell.xib; sourceTree = "<group>"; };
 		9B4A8FA322357A0800A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeaturedCell.xib; sourceTree = "<group>"; };
 		9B4A8FA622357A0D00A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PodcastCell.xib; sourceTree = "<group>"; };
+		9B4D8D02279DBE5700D6AD17 /* icon_120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_120@2x.png"; sourceTree = "<group>"; };
+		9B4D8D03279DBE5700D6AD17 /* icon_167@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_167@2x.png"; sourceTree = "<group>"; };
+		9B4D8D04279DBE5700D6AD17 /* icon_152@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_152@2x.png"; sourceTree = "<group>"; };
 		9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 3.xcdatamodel"; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9B6F9659225E5A060075ED89 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -732,6 +738,9 @@
 		9BD4E971225CFDEC00683B88 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				9B4D8D02279DBE5700D6AD17 /* icon_120@2x.png */,
+				9B4D8D04279DBE5700D6AD17 /* icon_152@2x.png */,
+				9B4D8D03279DBE5700D6AD17 /* icon_167@2x.png */,
 				9BD4E977225CFDEC00683B88 /* phone_1@2x.png */,
 				9BD4E979225CFDEC00683B88 /* phone_1@3x.png */,
 				9BD4E976225CFDEC00683B88 /* phone_2@2x.png */,
@@ -1106,15 +1115,18 @@
 				9BB252C323B670630054631B /* tablet_4.png in Resources */,
 				68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */,
 				9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */,
+				9B4D8D06279DBE5800D6AD17 /* icon_167@2x.png in Resources */,
 				68DE861025FF77E600413E62 /* mmlive.json in Resources */,
 				9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */,
 				9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */,
 				9BA939442260DE0A004005AA /* WebView.storyboard in Resources */,
 				9B3224312260DD78005CF974 /* Videos.storyboard in Resources */,
 				9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */,
+				9B4D8D07279DBE5800D6AD17 /* icon_152@2x.png in Resources */,
 				9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */,
 				9BB252C423B670630054631B /* tablet_4@2x.png in Resources */,
 				9B1514BF22BE73740039DA28 /* tablet_3@2x.png in Resources */,
+				9B4D8D05279DBE5800D6AD17 /* icon_120@2x.png in Resources */,
 				68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */,
 				9B1514BB22BE73010039DA28 /* phone_3@2x.png in Resources */,
 				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
