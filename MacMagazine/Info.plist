@@ -12,6 +12,15 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>icon_120</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_120</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 			<key>phone_1</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -63,6 +72,24 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>icon_152</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_152</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon_167</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_167</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 			<key>tablet_1</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
