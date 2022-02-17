@@ -163,7 +163,7 @@ class WebViewController: UIViewController {
         forceReload = false
 
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
-        webView?.customUserAgent = "MacMagazine"
+        webView?.customUserAgent = "Mozilla/5.0 (iPhone) MacMagazine"
         webView?.allowsBackForwardNavigationGestures = false
         webView?.load(URLRequest(url: url))
     }
