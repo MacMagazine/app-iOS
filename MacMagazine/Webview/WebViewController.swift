@@ -163,9 +163,13 @@ class WebViewController: UIViewController {
         forceReload = false
 
         // Changes the WKWebView user agent in order to hide some CSS/HT elements
-        webView?.customUserAgent = "Mozilla/5.0 (iPhone) MacMagazine"
         webView?.allowsBackForwardNavigationGestures = false
-        webView?.load(URLRequest(url: url))
+        webView?.evaluateJavaScript("navigator.userAgent") { [weak self] result, _ in
+            if let userAgent = result as? String {
+                self?.webView?.customUserAgent = userAgent + "/MacMagazine"
+            }
+            self?.webView?.load(URLRequest(url: url))
+        }
     }
 
     func setRightButtomItems(_ buttons: [RightButtons]) {
