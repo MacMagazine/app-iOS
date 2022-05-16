@@ -23,8 +23,6 @@
 		5EDE58EC25B38CA300945C23 /* RecentPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE58EB25B38CA300945C23 /* RecentPostsWidget.swift */; };
 		68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */; };
 		683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */; };
-		683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */; };
-		683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683271AD25291512004BD4DA /* WhatsNew.storyboard */; };
 		683BFB0025F667E8000C841F /* MMLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683BFAFF25F667E8000C841F /* MMLiveViewController.swift */; };
 		683BFB0B25F66E37000C841F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683BFB0A25F66E37000C841F /* TabBarController.swift */; };
 		685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 685315FA25153ADE008F6CDC /* Kingfisher */; };
@@ -54,8 +52,6 @@
 		9B1386EC229AF6D60033783E /* exampleVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1386EB229AF6D60033783E /* exampleVideo.swift */; };
 		9B1514BB22BE73010039DA28 /* phone_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514B922BE73010039DA28 /* phone_3@2x.png */; };
 		9B1514BC22BE73010039DA28 /* phone_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BA22BE73010039DA28 /* phone_3@3x.png */; };
-		9B1514BF22BE73740039DA28 /* tablet_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BD22BE73740039DA28 /* tablet_3@2x.png */; };
-		9B1514C022BE73740039DA28 /* tablet_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B1514BE22BE73740039DA28 /* tablet_3.png */; };
 		9B1BA5E4222B22980059F692 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BA5E3222B22980059F692 /* Settings.swift */; };
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
@@ -85,6 +81,20 @@
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
 		9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */; };
 		9B8A5D7C247099B700C601E0 /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A5D7B247099B700C601E0 /* sound.wav */; };
+		9B8B1D1828326474005F9AC4 /* tablet_3@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D0C28326474005F9AC4 /* tablet_3@3x~ipad.png */; };
+		9B8B1D1928326474005F9AC4 /* tablet_4@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D0D28326474005F9AC4 /* tablet_4@2x~ipad.png */; };
+		9B8B1D1A28326474005F9AC4 /* tablet_4@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D0E28326474005F9AC4 /* tablet_4@3x~ipad.png */; };
+		9B8B1D1B28326474005F9AC4 /* tablet_4~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D0F28326474005F9AC4 /* tablet_4~ipad.png */; };
+		9B8B1D1C28326474005F9AC4 /* tablet_1~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1028326474005F9AC4 /* tablet_1~ipad.png */; };
+		9B8B1D1D28326474005F9AC4 /* tablet_1@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1128326474005F9AC4 /* tablet_1@3x~ipad.png */; };
+		9B8B1D1E28326474005F9AC4 /* tablet_2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1228326474005F9AC4 /* tablet_2@2x~ipad.png */; };
+		9B8B1D1F28326474005F9AC4 /* tablet_3~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1328326474005F9AC4 /* tablet_3~ipad.png */; };
+		9B8B1D2028326474005F9AC4 /* tablet_2~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1428326474005F9AC4 /* tablet_2~ipad.png */; };
+		9B8B1D2128326474005F9AC4 /* tablet_1@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1528326474005F9AC4 /* tablet_1@2x~ipad.png */; };
+		9B8B1D2228326474005F9AC4 /* tablet_2@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1628326474005F9AC4 /* tablet_2@3x~ipad.png */; };
+		9B8B1D2328326474005F9AC4 /* tablet_3@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D1728326474005F9AC4 /* tablet_3@2x~ipad.png */; };
+		9B8B1D2728326896005F9AC4 /* WhatsNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B8B1D2428326896005F9AC4 /* WhatsNew.storyboard */; };
+		9B8B1D2828326896005F9AC4 /* WhatsNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B1D2628326896005F9AC4 /* WhatsNewTableViewController.swift */; };
 		9B91117D225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B91117E225BC100000A6AC3 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
 		9B911181225BC513000A6AC3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B911180225BC513000A6AC3 /* WatchSessionManager.swift */; };
@@ -103,8 +113,6 @@
 		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
 		9BA939472260DE37004005AA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939452260DE37004005AA /* HeaderCell.xib */; };
 		9BB252C223B670630054631B /* phone_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB252BE23B670620054631B /* phone_4@3x.png */; };
-		9BB252C323B670630054631B /* tablet_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB252BF23B670620054631B /* tablet_4.png */; };
-		9BB252C423B670630054631B /* tablet_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB252C023B670620054631B /* tablet_4@2x.png */; };
 		9BB252C523B670630054631B /* phone_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB252C123B670620054631B /* phone_4@2x.png */; };
 		9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
 		9BB2CA6A226488C80012ACD6 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
@@ -135,12 +143,8 @@
 		9BD135FC2228064900A0B627 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FA2228064800A0B627 /* LightTheme.swift */; };
 		9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */; };
 		9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E972225CFDEC00683B88 /* phone_2@3x.png */; };
-		9BD4E97B225CFDEC00683B88 /* tablet_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */; };
-		9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E974225CFDEC00683B88 /* tablet_2.png */; };
-		9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E975225CFDEC00683B88 /* tablet_1.png */; };
 		9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E976225CFDEC00683B88 /* phone_2@2x.png */; };
 		9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
-		9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */; };
 		9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E979225CFDEC00683B88 /* phone_1@3x.png */; };
 		9BD4E98A225D431100683B88 /* phone_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4E977225CFDEC00683B88 /* phone_1@2x.png */; };
 		9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC862296DCB000649C0F /* NetworkTests.swift */; };
@@ -271,8 +275,6 @@
 		68012EBF252295600094A204 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsSubHeaderCell.xib; sourceTree = "<group>"; };
 		682CD10E25EF1C7300FB46FB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		683271962528D0E2004BD4DA /* SettingsDisclaimerFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsDisclaimerFooter.xib; sourceTree = "<group>"; };
-		683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
-		683271AC25291512004BD4DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WhatsNew.storyboard; sourceTree = "<group>"; };
 		683BFAFF25F667E8000C841F /* MMLiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMLiveViewController.swift; sourceTree = "<group>"; };
 		683BFB0A25F66E37000C841F /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6854805024D5E6BF008FAAC6 /* macmagazine 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 8.xcdatamodel"; sourceTree = "<group>"; };
@@ -299,8 +301,6 @@
 		9B1386EB229AF6D60033783E /* exampleVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exampleVideo.swift; sourceTree = "<group>"; };
 		9B1514B922BE73010039DA28 /* phone_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_3@2x.png"; sourceTree = "<group>"; };
 		9B1514BA22BE73010039DA28 /* phone_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_3@3x.png"; sourceTree = "<group>"; };
-		9B1514BD22BE73740039DA28 /* tablet_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_3@2x.png"; sourceTree = "<group>"; };
-		9B1514BE22BE73740039DA28 /* tablet_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_3.png; sourceTree = "<group>"; };
 		9B1BA5E3222B22980059F692 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9B25F5072260896B0057FBF9 /* macmagazine 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 4.xcdatamodel"; sourceTree = "<group>"; };
 		9B25F5082260967A0057FBF9 /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
@@ -327,6 +327,20 @@
 		9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
 		9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		9B8A5D7B247099B700C601E0 /* sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound.wav; sourceTree = "<group>"; };
+		9B8B1D0C28326474005F9AC4 /* tablet_3@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_3@3x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D0D28326474005F9AC4 /* tablet_4@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_4@2x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D0E28326474005F9AC4 /* tablet_4@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_4@3x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D0F28326474005F9AC4 /* tablet_4~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_4~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1028326474005F9AC4 /* tablet_1~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_1~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1128326474005F9AC4 /* tablet_1@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_1@3x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1228326474005F9AC4 /* tablet_2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2@2x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1328326474005F9AC4 /* tablet_3~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_3~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1428326474005F9AC4 /* tablet_2~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1528326474005F9AC4 /* tablet_1@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_1@2x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1628326474005F9AC4 /* tablet_2@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2@3x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D1728326474005F9AC4 /* tablet_3@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_3@2x~ipad.png"; sourceTree = "<group>"; };
+		9B8B1D2528326896005F9AC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WhatsNew.storyboard; sourceTree = "<group>"; };
+		9B8B1D2628326896005F9AC4 /* WhatsNewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewTableViewController.swift; sourceTree = "<group>"; };
 		9B91117C225BC100000A6AC3 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		9B911180225BC513000A6AC3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -348,8 +362,6 @@
 		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
 		9BA939462260DE37004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HeaderCell.xib; sourceTree = "<group>"; };
 		9BB252BE23B670620054631B /* phone_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_4@3x.png"; sourceTree = "<group>"; };
-		9BB252BF23B670620054631B /* tablet_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_4.png; sourceTree = "<group>"; };
-		9BB252C023B670620054631B /* tablet_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_4@2x.png"; sourceTree = "<group>"; };
 		9BB252C123B670620054631B /* phone_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_4@2x.png"; sourceTree = "<group>"; };
 		9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIXMLParser.swift; sourceTree = "<group>"; };
 		9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAPI.swift; sourceTree = "<group>"; };
@@ -384,12 +396,8 @@
 		9BD135FA2228064800A0B627 /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		9BD135FD2228089900A0B627 /* UISplitViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerExtension.swift; sourceTree = "<group>"; };
 		9BD4E972225CFDEC00683B88 /* phone_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_2@3x.png"; sourceTree = "<group>"; };
-		9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_1@2x.png"; sourceTree = "<group>"; };
-		9BD4E974225CFDEC00683B88 /* tablet_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_2.png; sourceTree = "<group>"; };
-		9BD4E975225CFDEC00683B88 /* tablet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablet_1.png; sourceTree = "<group>"; };
 		9BD4E976225CFDEC00683B88 /* phone_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_2@2x.png"; sourceTree = "<group>"; };
 		9BD4E977225CFDEC00683B88 /* phone_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@2x.png"; sourceTree = "<group>"; };
-		9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablet_2@2x.png"; sourceTree = "<group>"; };
 		9BD4E979225CFDEC00683B88 /* phone_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_1@3x.png"; sourceTree = "<group>"; };
 		9BDCDC862296DCB000649C0F /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		9BDCDC8F2296F88800649C0F /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
@@ -490,8 +498,8 @@
 		683271A2252914AF004BD4DA /* WhatsNew */ = {
 			isa = PBXGroup;
 			children = (
-				683271AD25291512004BD4DA /* WhatsNew.storyboard */,
-				683271A3252914E8004BD4DA /* WhatsNewTableViewController.swift */,
+				9B8B1D2428326896005F9AC4 /* WhatsNew.storyboard */,
+				9B8B1D2628326896005F9AC4 /* WhatsNewTableViewController.swift */,
 			);
 			path = WhatsNew;
 			sourceTree = "<group>";
@@ -739,14 +747,18 @@
 				9B1514BA22BE73010039DA28 /* phone_3@3x.png */,
 				9BB252C123B670620054631B /* phone_4@2x.png */,
 				9BB252BE23B670620054631B /* phone_4@3x.png */,
-				9BD4E975225CFDEC00683B88 /* tablet_1.png */,
-				9BD4E973225CFDEC00683B88 /* tablet_1@2x.png */,
-				9BD4E974225CFDEC00683B88 /* tablet_2.png */,
-				9BD4E978225CFDEC00683B88 /* tablet_2@2x.png */,
-				9B1514BE22BE73740039DA28 /* tablet_3.png */,
-				9B1514BD22BE73740039DA28 /* tablet_3@2x.png */,
-				9BB252BF23B670620054631B /* tablet_4.png */,
-				9BB252C023B670620054631B /* tablet_4@2x.png */,
+				9B8B1D1528326474005F9AC4 /* tablet_1@2x~ipad.png */,
+				9B8B1D1128326474005F9AC4 /* tablet_1@3x~ipad.png */,
+				9B8B1D1028326474005F9AC4 /* tablet_1~ipad.png */,
+				9B8B1D1228326474005F9AC4 /* tablet_2@2x~ipad.png */,
+				9B8B1D1628326474005F9AC4 /* tablet_2@3x~ipad.png */,
+				9B8B1D1428326474005F9AC4 /* tablet_2~ipad.png */,
+				9B8B1D1728326474005F9AC4 /* tablet_3@2x~ipad.png */,
+				9B8B1D0C28326474005F9AC4 /* tablet_3@3x~ipad.png */,
+				9B8B1D1328326474005F9AC4 /* tablet_3~ipad.png */,
+				9B8B1D0D28326474005F9AC4 /* tablet_4@2x~ipad.png */,
+				9B8B1D0E28326474005F9AC4 /* tablet_4@3x~ipad.png */,
+				9B8B1D0F28326474005F9AC4 /* tablet_4~ipad.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";
@@ -1108,40 +1120,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA939472260DE37004005AA /* HeaderCell.xib in Resources */,
-				9BD4E97B225CFDEC00683B88 /* tablet_1@2x.png in Resources */,
 				9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */,
-				9BB252C323B670630054631B /* tablet_4.png in Resources */,
 				68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */,
+				9B8B1D2128326474005F9AC4 /* tablet_1@2x~ipad.png in Resources */,
 				9BD4E97E225CFDEC00683B88 /* phone_2@2x.png in Resources */,
+				9B8B1D1D28326474005F9AC4 /* tablet_1@3x~ipad.png in Resources */,
 				68DE861025FF77E600413E62 /* mmlive.json in Resources */,
 				9BD4E97A225CFDEC00683B88 /* phone_2@3x.png in Resources */,
-				9BD4E980225CFDEC00683B88 /* tablet_2@2x.png in Resources */,
 				9BA939442260DE0A004005AA /* WebView.storyboard in Resources */,
 				9B3224312260DD78005CF974 /* Videos.storyboard in Resources */,
 				9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */,
-				9BD4E97C225CFDEC00683B88 /* tablet_2.png in Resources */,
-				9BB252C423B670630054631B /* tablet_4@2x.png in Resources */,
-				9B1514BF22BE73740039DA28 /* tablet_3@2x.png in Resources */,
+				9B8B1D2328326474005F9AC4 /* tablet_3@2x~ipad.png in Resources */,
 				68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */,
 				9B1514BB22BE73010039DA28 /* phone_3@2x.png in Resources */,
-				9BD4E97D225CFDEC00683B88 /* tablet_1.png in Resources */,
 				9BD4E981225CFDEC00683B88 /* phone_1@3x.png in Resources */,
+				9B8B1D2228326474005F9AC4 /* tablet_2@3x~ipad.png in Resources */,
+				9B8B1D1928326474005F9AC4 /* tablet_4@2x~ipad.png in Resources */,
 				683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */,
+				9B8B1D1C28326474005F9AC4 /* tablet_1~ipad.png in Resources */,
+				9B8B1D2728326896005F9AC4 /* WhatsNew.storyboard in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
+				9B8B1D1B28326474005F9AC4 /* tablet_4~ipad.png in Resources */,
 				68EF53502527103000FCBD3C /* Splash.storyboard in Resources */,
 				9BF886902832522100086514 /* Categories.storyboard in Resources */,
 				9B8A5D7C247099B700C601E0 /* sound.wav in Resources */,
-				9B1514C022BE73740039DA28 /* tablet_3.png in Resources */,
 				9BB252C223B670630054631B /* phone_4@3x.png in Resources */,
+				9B8B1D2028326474005F9AC4 /* tablet_2~ipad.png in Resources */,
+				9B8B1D1F28326474005F9AC4 /* tablet_3~ipad.png in Resources */,
 				9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */,
 				9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */,
 				685E4304252227420028FAA0 /* SettingsHeaderCell.xib in Resources */,
+				9B8B1D1E28326474005F9AC4 /* tablet_2@2x~ipad.png in Resources */,
+				9B8B1D1A28326474005F9AC4 /* tablet_4@3x~ipad.png in Resources */,
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
 				9B1514BC22BE73010039DA28 /* phone_3@3x.png in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
-				683271AB25291512004BD4DA /* WhatsNew.storyboard in Resources */,
 				9BD4E97F225CFDEC00683B88 /* phone_1@2x.png in Resources */,
+				9B8B1D1828326474005F9AC4 /* tablet_3@3x~ipad.png in Resources */,
 				9BB252C523B670630054631B /* phone_4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1315,7 +1331,6 @@
 				9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */,
 				9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */,
 				9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */,
-				683271A4252914E8004BD4DA /* WhatsNewTableViewController.swift in Sources */,
 				9BB2CA722264B8890012ACD6 /* Share.swift in Sources */,
 				9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */,
 				9B98C33323885EEF0094EBBA /* UILabelExtension.swift in Sources */,
@@ -1338,6 +1353,7 @@
 				9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */,
 				9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */,
 				9BD135FE2228089900A0B627 /* UISplitViewControllerExtension.swift in Sources */,
+				9B8B1D2828326896005F9AC4 /* WhatsNewTableViewController.swift in Sources */,
 				9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */,
 				9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
@@ -1410,14 +1426,6 @@
 			name = SettingsSubHeaderCell.xib;
 			sourceTree = "<group>";
 		};
-		683271AD25291512004BD4DA /* WhatsNew.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				683271AC25291512004BD4DA /* Base */,
-			);
-			name = WhatsNew.storyboard;
-			sourceTree = "<group>";
-		};
 		685E4306252227420028FAA0 /* SettingsHeaderCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1464,6 +1472,14 @@
 				9B4A8FA622357A0D00A49239 /* Base */,
 			);
 			name = PodcastCell.xib;
+			sourceTree = "<group>";
+		};
+		9B8B1D2428326896005F9AC4 /* WhatsNew.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B8B1D2528326896005F9AC4 /* Base */,
+			);
+			name = WhatsNew.storyboard;
 			sourceTree = "<group>";
 		};
 		9BA9393C2260DDB8004005AA /* Settings.storyboard */ = {
@@ -1543,7 +1559,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1553,7 +1569,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
@@ -1576,7 +1592,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1586,7 +1602,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1606,13 +1622,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
@@ -1633,13 +1649,13 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1720,7 +1736,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
@@ -1735,7 +1751,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1778,7 +1794,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1793,7 +1809,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
@@ -1815,7 +1831,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1826,7 +1842,7 @@
 				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
@@ -1848,13 +1864,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineNotificationServiceExtension;
@@ -1876,7 +1892,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1886,7 +1902,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
@@ -1907,7 +1923,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1922,7 +1938,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
@@ -1946,7 +1962,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1961,7 +1977,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1983,7 +1999,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1994,7 +2010,7 @@
 				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
@@ -2017,7 +2033,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2028,7 +2044,7 @@
 				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -2167,7 +2183,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
@@ -2182,7 +2198,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2199,7 +2215,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.4.0;
+				CURRENT_PROJECT_VERSION = 4.4.5.1;
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = 7PXVC8PJ97;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2213,7 +2229,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.4;
+				MARKETING_VERSION = 4.4.5;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";

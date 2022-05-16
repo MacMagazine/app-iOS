@@ -53,7 +53,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>AppIcon60x60</string>
+				<string>phone_1</string>
 			</array>
 			<key>CFBundleIconName</key>
 			<string>AppIcon60x60</string>
@@ -106,7 +106,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string></string>
+				<string>tablet_1</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>

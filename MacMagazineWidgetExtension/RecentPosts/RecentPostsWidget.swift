@@ -12,7 +12,6 @@ import WidgetKit
 struct RecentPostsWidget: View {
     @Environment(\.widgetFamily) var widgetFamily
     var entry: RecentPostsEntry
-
     var content: [PostData] { entry.posts }
 
     var body: some View {
@@ -28,14 +27,16 @@ struct RecentPostsWidget: View {
 
                 case .systemMedium:
                     VStack(spacing: 1) {
-                        ForEach(0 ..< min(2, content.count)) { index in
+                        ForEach(0 ..< min(2, content.count),
+                                id: \.self) { index in
                             PostCell(post: content[index])
                         }
                     }
 
                 case .systemLarge:
                     VStack(spacing: 1) {
-                        ForEach(0 ..< min(3, content.count)) { index in
+                        ForEach(0 ..< min(3, content.count),
+                                id: \.self) { index in
                             PostCell(post: content[index])
                         }
                     }
