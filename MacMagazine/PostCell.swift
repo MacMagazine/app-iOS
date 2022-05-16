@@ -55,7 +55,7 @@ class PostCell: UITableViewCell {
 extension PostCell {
     fileprivate func setContent(_ object: Post, isPodcast: Bool = false) {
         headlineLabel?.text = object.title
-        headlineLabel?.accessibilityLabel = "Título: \(object.title ?? "Não especificado")."
+        headlineLabel?.accessibilityLabel = "\(object.title ?? "Não especificado")."
 
         favoriteImageView.alpha = (object.favorite ? 1 : 0)
 
@@ -75,7 +75,7 @@ extension PostCell {
             defaultImage = "image_logo"
             if subheadlineLabel != nil {
                 subheadlineLabel?.text = object.excerpt
-                subheadlineLabel?.accessibilityLabel = "Descrição: \(object.excerpt ?? "Não especificado")"
+                subheadlineLabel?.accessibilityLabel = "\(object.excerpt ?? "Não especificado")"
             }
         } else if isPodcast {
             subheadlineLabel?.text = object.pubDate?.cellDate()
