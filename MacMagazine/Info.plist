@@ -172,6 +172,8 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>Splash</string>
 	<key>UIMainStoryboardFile</key>

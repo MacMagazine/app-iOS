@@ -26,7 +26,7 @@ class Log {
         case w = "[⚠️]" // warning
     }
 
-    static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS"
+    static var dateFormat = "yyyy-MM-dd HH:mm:ssSSS"
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
@@ -133,6 +133,7 @@ class Log {
             }
             let logger = OSLog(subsystem: bundle, category: "MacMagazineApp")
             os_log("%{public}@", log: logger, message)
+            FileManager.default.save(message)
         }
     }
 }
@@ -173,4 +174,25 @@ public func logE(_ object: Any?,
                  column: Int = #column,
                  funcName: String = #function) {
     Log.error(object, filename: filename, line: line, column: column, funcName: funcName)
+}
+
+extension FileManager {
+    fileprivate var documentsDirectory: URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+
+    fileprivate func save(_ content: String) {
+        let url = documentsDirectory.appendingPathComponent("log.txt")
+
+        if FileManager.default.fileExists(atPath: url.path),
+           let fileHandle = try? FileHandle(forWritingTo: url),
+           let data = "\(content)\n".data(using: .utf8) {
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(data)
+            fileHandle.closeFile()
+        } else {
+            try? "\(content)\n".write(to: url, atomically: true, encoding: .utf8)
+        }
+    }
 }

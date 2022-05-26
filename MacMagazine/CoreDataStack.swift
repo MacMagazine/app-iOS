@@ -112,15 +112,20 @@ class CoreDataStack {
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
 		deleteRequest.resultType = .resultTypeObjectIDs
 
+        logD(request.predicate)
+
 		do {
 			let result = try viewContext.execute(deleteRequest) as? NSBatchDeleteResult
 			guard let objectIDs = result?.result as? [NSManagedObjectID] else {
 				return
 			}
 
-			// Updates the main context
-			NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
+            logD(objectIDs)
 
+            if !objectIDs.isEmpty {
+                // Updates the main context
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
+            }
 		} catch {
 			fatalError("Failed to execute request: \(error)")
 		}
@@ -232,7 +237,9 @@ class CoreDataStack {
         newItem.read = false
         newItem.shortURL = post.shortURL
         newItem.playable = post.playable || !post.duration.isEmpty
-	}
+
+        logD(newItem)
+    }
 
 	func update(post: Post, with item: XMLPost) {
 		post.title = item.title
@@ -249,7 +256,9 @@ class CoreDataStack {
 		post.postId = item.postId
         post.shortURL = item.shortURL
         post.playable = item.playable || !item.duration.isEmpty
-	}
+
+        logD(post)
+    }
 
     func get(page: Int, limit: Int, completion: @escaping ([Post]) -> Void) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
@@ -273,9 +282,10 @@ class CoreDataStack {
         }
     }
 
+    // Delete temporary posts
     func delete(_ posts: [String], page: Int) {
         // 1. Retrieve the (posts.count * page) objects from the database
-        // 2. Exclude those in both arrays
+        // 2. Exclude those in both arrays keeping flags (read/favorite)
         // 3. Delete from DB the remaining ids
 
         // 1.
@@ -294,6 +304,8 @@ class CoreDataStack {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
         request.predicate = NSPredicate(format: "postId IN %@", ids)
 
+        logD(request.predicate)
+
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
         deleteRequest.resultType = .resultTypeObjectIDs
 
@@ -303,8 +315,12 @@ class CoreDataStack {
                 return
             }
 
-            // Updates the main context
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
+            logD(objectIDs)
+
+            if !objectIDs.isEmpty {
+                // Updates the main context
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
+            }
 
         } catch {
             fatalError("Failed to execute request: \(error)")
@@ -408,7 +424,7 @@ class CoreDataStack {
 		newItem.likes = video.likes
 		newItem.views = video.views
 		newItem.duration = video.duration
-	}
+    }
 
 	func update(video: Video, with item: JSONVideo) {
 		video.title = item.title
@@ -418,6 +434,5 @@ class CoreDataStack {
 		video.likes = item.likes
 		video.views = item.views
 		video.duration = item.duration
-	}
-
+    }
 }
