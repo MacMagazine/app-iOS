@@ -74,7 +74,7 @@
          <EnvironmentVariable
             key = "OS_ACTIVITY_MODE"
             value = "${DEBUG_ACTIVITY_MODE}"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <StoreKitConfigurationFileReference

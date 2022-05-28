@@ -311,7 +311,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         API().getPosts(page: paged) { post in
             DispatchQueue.main.async {
                 guard let post = post else {
-                    CoreDataStack.shared.delete(postId, page: paged)
+                    CoreDataStack.shared.delete(postId, page: paged == 0 ? 0 : paged - 1)
 
                     // Prefetch images to be able to sent to Apple Watch
                     let urls = images.compactMap { URL(string: $0) }

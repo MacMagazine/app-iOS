@@ -237,8 +237,6 @@ class CoreDataStack {
         newItem.read = false
         newItem.shortURL = post.shortURL
         newItem.playable = post.playable || !post.duration.isEmpty
-
-        logD(newItem)
     }
 
 	func update(post: Post, with item: XMLPost) {
@@ -256,8 +254,6 @@ class CoreDataStack {
 		post.postId = item.postId
         post.shortURL = item.shortURL
         post.playable = item.playable || !item.duration.isEmpty
-
-        logD(post)
     }
 
     func get(page: Int, limit: Int, completion: @escaping ([Post]) -> Void) {
@@ -288,9 +284,14 @@ class CoreDataStack {
         // 2. Exclude those in both arrays keeping flags (read/favorite)
         // 3. Delete from DB the remaining ids
 
+        logD("page: \(page), offset: \(page * posts.count), limit: \(posts.count)")
+
         // 1.
         get(page: page * posts.count, limit: posts.count) { [weak self] dbPosts in
-            let existingIds = dbPosts.map { $0.postId }
+            let existingIds: [String] = dbPosts.compactMap { $0.postId }
+
+            logD("posts: \(posts.joined(separator: ", "))")
+            logD("existingIds: \(existingIds.joined(separator: ", "))")
 
             // 2.
             let difference = Array(Set(existingIds).subtracting(posts))
@@ -311,11 +312,11 @@ class CoreDataStack {
 
         do {
             let result = try viewContext.execute(deleteRequest) as? NSBatchDeleteResult
-            guard let objectIDs = result?.result as? [NSManagedObjectID] else {
+            guard let objectIDs = result?.result as? [Post] else {
                 return
             }
 
-            logD(objectIDs)
+            logD(objectIDs.map { $0.postId })
 
             if !objectIDs.isEmpty {
                 // Updates the main context

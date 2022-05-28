@@ -220,7 +220,7 @@ extension PostTests {
 	}
 
 	func savePost(_ onCompletion: @escaping (([Post]) -> Void)) {
-		parseExample { post in
+        parseExample { post in
 			guard let post = post else {
 				delay(0.4) {
 					CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { posts in
