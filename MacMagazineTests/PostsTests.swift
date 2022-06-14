@@ -156,7 +156,7 @@ class PostTests: XCTestCase {
                         // 5. Make sure the number of saved posts still matches
                         self.getAllPosts(count: 20) {
                             // 6. There are two posts to delete
-                            CoreDataStack.shared.delete(posts.map { $0.postId }, page: 0)
+                            CoreDataStack.shared.delete(posts.map { $0.postId })
 
                             // 7. Make sure the number of saved posts still matches
                             self.getAllPosts(count: 18) {
@@ -190,7 +190,7 @@ class PostTests: XCTestCase {
                         // 5. Make sure the number of saved posts still matches
                         self.getAllPosts(count: 20) {
                             // 6. There are two posts to delete
-                            CoreDataStack.shared.delete(posts.map { $0.postId }, page: 0)
+                            CoreDataStack.shared.delete(posts.map { $0.postId })
 
                             // 7. Make sure the number of saved posts still matches
                             self.getAllPosts(count: 20) {
