@@ -21,11 +21,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var widgetSpotlightPost: String? {
         didSet {
-            // Move to 2nd tab
-            guard let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
-                return
-            }
-            tabController.selectedIndex = isMMLive ? 1 : 0
+            logD(widgetSpotlightPost)
+
+            // Push Notification or Widget tapped
+//            var appNotReady = true
+//
+//            while appNotReady {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                    let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController
+//                    if tabController != nil {
+//                        appNotReady = false
+//                        tabController?.selectedIndex = self.isMMLive ? 1 : 0
+//                    } else {
+//                        logE(tabController)
+//                    }
+//                }
+//            }
         }
     }
 

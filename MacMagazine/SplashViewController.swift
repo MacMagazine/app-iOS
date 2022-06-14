@@ -47,14 +47,17 @@ class SplashViewController: UIViewController {
                                   duration: 0.4,
                                   options: .transitionCrossDissolve,
                                   animations: {
-                                    window.rootViewController = controller
-                                    if !isLive {
-                                        TabBarController.shared.removeIndexes([0])
-                                    }
-                                    if (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost != nil {
-                                        TabBarController.shared.selectIndex(isLive ? 1 : 0)
-                                    }
-                                  })
+                    window.rootViewController = controller
+                    if !isLive {
+                        TabBarController.shared.removeIndexes([0])
+                    }
+                },
+                                  completion: { finished in
+                    if finished &&
+                        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost != nil {
+                        TabBarController.shared.selectIndex(isLive ? 1 : 0)
+                    }
+                })
             }
         }
 	}

@@ -102,6 +102,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         }
     }
 
+    var postId: [String] = []
+
     // MARK: - View Lifecycle -
 
 	override func viewDidLoad() {
@@ -302,16 +304,25 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
-        var postId: [String] = []
+        logD(paged)
+
+        if paged == 0 {
+            self.postId = []
+        }
+
         var images: [String] = []
         var searchableItems: [CSSearchableItem] = []
 
         showSpin()
 
-        API().getPosts(page: paged) { post in
+        API().getPosts(page: paged) { [weak self] post in
+            guard let self = self else { return }
+
             DispatchQueue.main.async {
                 guard let post = post else {
-                    CoreDataStack.shared.delete(postId, page: paged == 0 ? 0 : paged - 1)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        CoreDataStack.shared.delete(self.postId)
+                    }
 
                     // Prefetch images to be able to sent to Apple Watch
                     let urls = images.compactMap { URL(string: $0) }
@@ -364,7 +375,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
                     return
                 }
-                postId.append(post.postId)
+                self.postId.append(post.postId)
                 images.append(post.artworkURL)
                 searchableItems.append(self.createSearchableItem(post))
 
@@ -636,6 +647,7 @@ func showDetailController(with link: String) {
 	let storyboard = UIStoryboard(name: "Main", bundle: nil)
 	guard let controller = storyboard.instantiateViewController(withIdentifier: "detailController") as? PostsDetailViewController,
           let tabController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+        logE("Failed TabController - \(String(describing: UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController))")
         return
     }
 
@@ -670,6 +682,15 @@ func showDetailController(with link: String) {
                 return
             }
             let navVC = UINavigationController(rootViewController: controller)
+
+            if #available(iOS 15.0, *) {
+                let navigationBarAppearance = UINavigationBarAppearance()
+                navigationBarAppearance.configureWithDefaultBackground()
+                UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+                UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            }
+
             controller.postURL = url
             navVC.modalPresentationStyle = .automatic
             tabController.show(navVC, sender: nil)

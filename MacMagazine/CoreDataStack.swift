@@ -256,10 +256,9 @@ class CoreDataStack {
         post.playable = item.playable || !item.duration.isEmpty
     }
 
-    func get(page: Int, limit: Int, completion: @escaping ([Post]) -> Void) {
+    func get(limit: Int, completion: @escaping ([Post]) -> Void) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
         request.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
-        request.fetchOffset = page
         request.fetchLimit = limit
 
         // Creates `asynchronousFetchRequest` with the fetch request and the completion closure
@@ -279,29 +278,34 @@ class CoreDataStack {
     }
 
     // Delete temporary posts
-    func delete(_ posts: [String], page: Int) {
-        // 1. Retrieve the (posts.count * page) objects from the database
+    func delete(_ posts: [String]) {
+        // 1. Retrieve the (posts.count) objects from the database
         // 2. Exclude those in both arrays keeping flags (read/favorite)
         // 3. Delete from DB the remaining ids
 
-        logD("page: \(page), offset: \(page * posts.count), limit: \(posts.count)")
+        logD("limit: \(posts.count)")
 
         // 1.
-        get(page: page * posts.count, limit: posts.count) { [weak self] dbPosts in
+        get(limit: posts.count) { [weak self] dbPosts in
             let existingIds: [String] = dbPosts.compactMap { $0.postId }
+            let xxx: [String] = dbPosts.compactMap { "(\(String(describing: $0.postId))) \(String(describing: $0.title))" }
 
             logD("posts: \(posts.joined(separator: ", "))")
             logD("existingIds: \(existingIds.joined(separator: ", "))")
+            logD("xxx: \(xxx.joined(separator: ", "))")
 
             // 2.
             let difference = Array(Set(existingIds).subtracting(posts))
+            logD("difference: \(difference.joined(separator: ", "))")
 
             // 3.
-            self?.flush(difference)
+            if !difference.isEmpty {
+                self?.flush(difference)
+            }
         }
     }
 
-    func flush(_ ids: [String?]) {
+    func flush(_ ids: [String]) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
         request.predicate = NSPredicate(format: "postId IN %@", ids)
 
@@ -316,12 +320,8 @@ class CoreDataStack {
                 return
             }
 
-            logD(objectIDs.map { $0.postId })
-
-            if !objectIDs.isEmpty {
-                // Updates the main context
-                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
-            }
+            // Updates the main context
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
 
         } catch {
             fatalError("Failed to execute request: \(error)")

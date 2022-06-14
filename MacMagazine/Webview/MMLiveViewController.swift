@@ -21,6 +21,14 @@ class MMLiveViewController: WebViewController {
         postURL = URL(string: "https://live.macmagazine.com.br/live.html\(Settings().isDarkMode ? "?theme=dark" : "")")
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost != nil {
+            TabBarController.shared.selectIndex(1)
+        }
+    }
+
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
 
