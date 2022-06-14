@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "1a7b5480eb750a8e171654b9b1cb0a2cbeb27a55",
+        "version" : "7.2.1"
+      }
+    },
+    {
+      "identity" : "onesignal-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
+      "state" : {
+        "revision" : "ade86d74adecf20cbff9d83055cebfd4cc5d2964",
+        "version" : "3.10.3"
+      }
+    }
+  ],
+  "version" : 2
+}
