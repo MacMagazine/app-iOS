@@ -46,6 +46,14 @@
                BlueprintName = "MacMagazineTests"
                ReferencedContainer = "container:MacMagazine.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "PostTests/testDeleteFromDB()">
+               </Test>
+               <Test
+                  Identifier = "PostTests/testNothingToDeleteFromDB()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
