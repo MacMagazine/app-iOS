@@ -322,6 +322,7 @@ class CoreDataStack {
 
             // Updates the main context
             NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: objectIDs], into: [self.viewContext])
+            self.save()
 
         } catch {
             fatalError("Failed to execute request: \(error)")

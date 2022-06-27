@@ -320,9 +320,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
             DispatchQueue.main.async {
                 guard let post = post else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        CoreDataStack.shared.delete(self.postId)
-                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                        CoreDataStack.shared.delete(self.postId)
+//                    }
 
                     // Prefetch images to be able to sent to Apple Watch
                     let urls = images.compactMap { URL(string: $0) }
