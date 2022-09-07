@@ -17,11 +17,12 @@
                         <viewControllerLayoutGuide type="top" id="ROc-Xc-Hyy"/>
                         <viewControllerLayoutGuide type="bottom" id="n60-EV-RDL"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A54-fq-tRK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                    <view key="view" contentMode="scaleToFill" id="A54-fq-tRK">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="673"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mik-YF-7y9">
-                                <rect key="frame" x="185" y="412" width="20" height="20"/>
+                                <rect key="frame" x="185" y="326.66666666666669" width="20" height="20"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Isk-e5-HGR">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -37,7 +38,7 @@
                                 </constraints>
                             </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw0-e0-6p0">
-                                <rect key="frame" x="0.0" y="20" width="390" height="824"/>
+                                <rect key="frame" x="0.0" y="20" width="390" height="653"/>
                                 <color key="backgroundColor" name="MMWhiteGrey6"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>

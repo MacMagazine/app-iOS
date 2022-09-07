@@ -87,7 +87,7 @@ extension VideosCollectionViewCell {
         // Handoff
         let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
         handoff.title = headlineLabel.text
-        handoff.webpageURL = URL(string: "https://www.youtube.com/watch?v=\(youtubeWebView?.videoId ?? "")")
+        handoff.webpageURL = URL(string: "\(youTubeURL)\(youtubeWebView?.videoId ?? "")")
         userActivity = handoff
         userActivity?.becomeCurrent()
     }

@@ -12,13 +12,15 @@ import WebKit
 
 class MMLiveViewController: WebViewController {
 
+    let liveURL = "https://macmagazine.com.br/live"
+
     // MARK: - View lifecycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        postURL = URL(string: "https://live.macmagazine.com.br/live.html\(Settings().isDarkMode ? "?theme=dark" : "")")
+        postURL = URL(string: liveURL)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -32,9 +34,10 @@ class MMLiveViewController: WebViewController {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
 
-        coordinator.animate(alongsideTransition: nil) { _ in
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
             delay(0.8) {
-                self.postURL = URL(string: "https://live.macmagazine.com.br/live.html\(Settings().isDarkMode ? "?theme=dark" : "")")
+                guard let self = self else { return }
+                self.postURL = URL(string: self.liveURL)
                 NotificationCenter.default.post(name: .reloadWeb, object: nil)
             }
         }
