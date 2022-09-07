@@ -41,7 +41,10 @@ struct RecentPostsWidget: View {
                         }
                     }
 
-                case .systemExtraLarge:
+                case .systemExtraLarge,
+                        .accessoryCircular,
+                        .accessoryRectangular,
+                        .accessoryInline:
                     Text("Tamanho incompatível.")
 
                 @unknown default:

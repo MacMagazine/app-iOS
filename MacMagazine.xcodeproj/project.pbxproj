@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E6CE96325B3ABCF007CF232 /* PostDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6CE94725B39C69007CF232 /* PostDataExtension.swift */; };
 		5EB2018525B3664C00E17642 /* MacMagazineWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */; };
-		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5EC0897025BDA42000DAEF73 /* RecentPostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0896F25BDA42000DAEF73 /* RecentPostsProvider.swift */; };
 		5EC0897B25BDA5D300DAEF73 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0897A25BDA5D300DAEF73 /* Kingfisher */; };
 		5EC0898C25BDB87A00DAEF73 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91117C225BC100000A6AC3 /* PostData.swift */; };
@@ -105,7 +105,7 @@
 		9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F91226B6142000534CA /* SoundcloudPlayer.swift */; };
 		9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C7F93226B6AF4000534CA /* soundcloud.js */; };
 		9B9C7F9C226BF836000534CA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7F9B226BF836000534CA /* NotificationService.swift */; };
-		9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B9C7FAE226C0F5A000534CA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B9C7FB1226CA192000534CA /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C7FB0226CA192000534CA /* PushNotification.swift */; };
 		9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393C2260DDB8004005AA /* Settings.storyboard */; };
@@ -120,7 +120,7 @@
 		9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */; };
 		9BB2CA722264B8890012ACD6 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA712264B8890012ACD6 /* Share.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
-		9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
 		9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */; };
 		9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC62225B99F600559170 /* ComplicationController.swift */; };
@@ -205,27 +205,27 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9B9C7FA4226BF836000534CA /* Embed App Extensions */ = {
+		9B9C7FA4226BF836000534CA /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed App Extensions */,
-				9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed App Extensions */,
+				5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9BB4BC6F225B99F700559170 /* Embed App Extensions */ = {
+		9BB4BC6F225B99F700559170 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed App Extensions */,
+				9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BB4BC71225B99F700559170 /* Embed Watch Content */ = {
@@ -867,7 +867,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EB2019125B3665100E17642 /* Build configuration list for PBXNativeTarget "MacMagazineWidgetExtensionExtension" */;
 			buildPhases = (
-				9B9371E825BE10B0008AFF3C /* Run Swiftlint Script */,
 				5EB2017A25B3664C00E17642 /* Sources */,
 				5EB2017B25B3664C00E17642 /* Frameworks */,
 				5EB2017C25B3664C00E17642 /* Resources */,
@@ -888,7 +887,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B9C7FA1226BF836000534CA /* Build configuration list for PBXNativeTarget "MacMagazineNotificationServiceExtension" */;
 			buildPhases = (
-				9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */,
 				9B9C7F95226BF835000534CA /* Sources */,
 				9B9C7F96226BF835000534CA /* Frameworks */,
 				9B9C7F97226BF835000534CA /* Resources */,
@@ -909,9 +907,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BB4BC70225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch" */;
 			buildPhases = (
-				68829F8524D9D3E800E21056 /* Run Swiftlint Script */,
 				9BB4BC4B225B99F500559170 /* Resources */,
-				9BB4BC6F225B99F700559170 /* Embed App Extensions */,
+				9BB4BC6F225B99F700559170 /* Embed Foundation Extensions */,
 				9BF9654E225E1DB800BAF22D /* Frameworks */,
 				9BF9654F225E1DB800BAF22D /* Embed Frameworks */,
 			);
@@ -931,7 +928,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatchExtension" */;
 			buildPhases = (
-				9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */,
 				9BB4BC55225B99F600559170 /* Sources */,
 				9BB4BC56225B99F600559170 /* Frameworks */,
 				9BB4BC57225B99F600559170 /* Resources */,
@@ -958,7 +954,7 @@
 				9BCAD6741F47A08100B54526 /* Frameworks */,
 				9BCAD6751F47A08100B54526 /* Resources */,
 				9BB4BC71225B99F700559170 /* Embed Watch Content */,
-				9B9C7FA4226BF836000534CA /* Embed App Extensions */,
+				9B9C7FA4226BF836000534CA /* Embed Foundation Extensions */,
 				9B48046825F4EE9B0026AFF0 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1002,7 +998,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
 					5EB2017D25B3664C00E17642 = {
@@ -1172,80 +1168,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		68829F8524D9D3E800E21056 /* Run Swiftlint Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Swiftlint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		9B9371E825BE10B0008AFF3C /* Run Swiftlint Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Swiftlint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		9B9C7FA6226BF8BE000534CA /* Run Swiftlint Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Swiftlint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 		9BA5527D2225CE1D00B3FA23 /* Run Swiftlint Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Swiftlint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		9BB4BC76225B9B9F00559170 /* Run Swiftlint Script */ = {
-			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -2366,7 +2291,7 @@
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 3.11.0;
 			};
 		};
 		9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -2374,7 +2299,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 7.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
