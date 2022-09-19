@@ -41,24 +41,40 @@ struct RecentPostsWidget: View {
                         }
                     }
 
-                case .systemExtraLarge,
-                        .accessoryCircular,
-                        .accessoryRectangular,
+                case .accessoryRectangular,
                         .accessoryInline:
+                if #available(iOSApplicationExtension 16.0, *) {
+                    PostCell(post: content[0])
+                } else {
+                    Text("Tamanho incompatível.")
+                }
+
+                case .systemExtraLarge,
+                        .accessoryCircular:
                     Text("Tamanho incompatível.")
 
                 @unknown default:
                     Text("Tamanho incompatível.")
                 }
             }
-        }.background(Color.white)
+        }
     }
 }
 
 struct RecentPostsWidget_Previews: PreviewProvider {
     static var previews: some View {
-        RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
-            .environment(\.sizeCategory, .extraLarge)
+        Group {
+            if #available(iOSApplicationExtension 16.0, *) {
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
+                    .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+                    .previewDisplayName("Rectangular")
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
+                    .previewContext(WidgetPreviewContext(family: .accessoryInline))
+                    .previewDisplayName("Inline")
+            }
+            RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+                .previewDisplayName("Large")
+        }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
             <objects>
                 <tableViewController id="75e-Ta-Gqd" customClass="SettingsTableViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="50" estimatedRowHeight="50" sectionHeaderHeight="18" estimatedSectionHeaderHeight="28" sectionFooterHeight="18" estimatedSectionFooterHeight="28" id="4LF-mM-ZFe">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="756"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="753"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" systemColor="systemGray4Color"/>
@@ -88,7 +88,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identificar posts já lidos" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3v-vs-c8M">
-                                                    <rect key="frame" x="20" y="11" width="153.33333333333334" height="28"/>
+                                                    <rect key="frame" x="20" y="11" width="179.66666666666666" height="28"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -193,13 +193,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="105"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
-                                                            <rect key="frame" x="43.333333333333329" y="0.0" width="43.333333333333329" height="105"/>
+                                                            <rect key="frame" x="66.666666666666657" y="0.0" width="66.666666666666657" height="105"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH">
-                                                                    <rect key="frame" x="-6.6666666666666714" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
                                                                         <constraint firstAttribute="width" constant="57" id="XYi-HN-HK1"/>
@@ -217,11 +217,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-hn-nX1">
-                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="23.666666666666657" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo branco">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -242,13 +242,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
-                                                            <rect key="frame" x="86.666666666666671" y="0.0" width="43.333333333333329" height="105"/>
+                                                            <rect key="frame" x="133.33333333333334" y="0.0" width="66.666666666666657" height="105"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
-                                                            <rect key="frame" x="130" y="0.0" width="43.333333333333343" height="105"/>
+                                                            <rect key="frame" x="200" y="0.0" width="66.666666666666686" height="105"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4">
-                                                                    <rect key="frame" x="-6.6666666666666714" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
                                                                         <constraint firstAttribute="width" constant="57" id="TwA-5I-6vQ"/>
@@ -266,11 +266,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-hM-m4r">
-                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="23.666666666666657" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo azul">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -291,13 +291,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-2y-DWs">
-                                                            <rect key="frame" x="173.33333333333334" y="0.0" width="43.333333333333343" height="105"/>
+                                                            <rect key="frame" x="266.66666666666669" y="0.0" width="66.666666666666686" height="105"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAV-0s-5g5">
-                                                            <rect key="frame" x="216.66666666666666" y="0.0" width="43.333333333333343" height="105"/>
+                                                            <rect key="frame" x="333.33333333333331" y="0.0" width="66.666666666666686" height="105"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_3" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc">
-                                                                    <rect key="frame" x="-6.6666666666666572" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="Yp0-Ks-C6t"/>
                                                                         <constraint firstAttribute="width" constant="57" id="e8q-N3-fur"/>
@@ -315,11 +315,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XlY-PV-F4I">
-                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="23.666666666666686" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone azul do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -340,15 +340,15 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" id="ztK-RH-PGY">
-                                                            <rect key="frame" x="260" y="0.0" width="43.333333333333314" height="105"/>
+                                                            <rect key="frame" x="400" y="0.0" width="66.666666666666686" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" id="sKm-lV-8cI">
-                                                            <rect key="frame" x="303.33333333333331" y="0.0" width="43.333333333333314" height="105"/>
+                                                            <rect key="frame" x="466.66666666666669" y="0.0" width="66.666666666666686" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_4" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-ve-Aqk">
-                                                                    <rect key="frame" x="-6.6666666666666288" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5Ds-K5-mAM"/>
                                                                         <constraint firstAttribute="width" constant="57" id="zQr-br-QBT"/>
@@ -366,11 +366,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-mP-ySM">
-                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="23.666666666666629" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_4" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G3-2f-b5R">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone claro do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -391,7 +391,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
-                                                            <rect key="frame" x="346.66666666666669" y="0.0" width="43.333333333333314" height="105"/>
+                                                            <rect key="frame" x="323.33333333333331" y="0.0" width="66.666666666666686" height="105"/>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -447,7 +447,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remover propagandas" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmZ-d3-AFQ">
-                                                    <rect key="frame" x="20" y="8" width="240" height="17"/>
+                                                    <rect key="frame" x="20" y="7.9999999999999982" width="240" height="20.333333333333329"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -456,7 +456,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Erro ao obter produtos" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VAh-mM-GrP">
-                                                    <rect key="frame" x="20" y="25" width="240" height="17"/>
+                                                    <rect key="frame" x="20" y="28.333333333333332" width="240" height="13.666666666666668"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -695,15 +695,20 @@
                     <navigationItem key="navigationItem" id="ggi-NI-mUc">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="xxe-SM-Zn7">
-                            <rect key="frame" x="120" y="5.6666666666666679" width="150" height="33"/>
+                            <rect key="frame" x="155" y="9" width="80" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Nf-pcb">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Nf-pcb">
+                                    <rect key="frame" x="4" y="4" width="72" height="18"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="YHa-Nf-pcb" secondAttribute="bottom" constant="4" id="TFD-nu-zRp"/>
+                                <constraint firstAttribute="trailing" secondItem="YHa-Nf-pcb" secondAttribute="trailing" constant="4" id="Zoh-3E-j76"/>
+                                <constraint firstItem="YHa-Nf-pcb" firstAttribute="leading" secondItem="xxe-SM-Zn7" secondAttribute="leading" constant="4" id="agB-wS-ULt"/>
+                                <constraint firstItem="YHa-Nf-pcb" firstAttribute="top" secondItem="xxe-SM-Zn7" secondAttribute="top" constant="4" id="mDz-aF-SVj"/>
+                            </constraints>
                         </view>
                     </navigationItem>
                     <connections>
@@ -756,7 +761,7 @@
                     <tabBarItem key="tabBarItem" title="Ajustes" image="gear" catalog="system" id="Z3D-d2-gj4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="9fV-k2-BIj">
-                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <navigationBarAppearance key="standardAppearance">
@@ -777,8 +782,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle.fill" catalog="system" width="32" height="32"/>
-        <image name="gear" catalog="system" width="32" height="32"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <image name="logo" width="415" height="350"/>
         <image name="phone_1" width="1024" height="1024"/>
         <image name="phone_2" width="1024" height="1024"/>

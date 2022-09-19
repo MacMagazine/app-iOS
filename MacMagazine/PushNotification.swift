@@ -15,6 +15,7 @@ class PushNotification: NSObject {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
         let key: [UInt8] = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
 
+        OneSignal.setLocationShared(false)
         OneSignal.initWithLaunchOptions(options)
         OneSignal.setAppId(Obfuscator().reveal(key: key))
 

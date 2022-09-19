@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,7 +18,7 @@
                     <tabBarItem key="tabBarItem" title="Videos" image="play.rectangle.fill" catalog="system" id="4hU-Rq-N3T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <navigationBarAppearance key="standardAppearance">
@@ -42,7 +42,7 @@
             <objects>
                 <collectionViewController id="PeN-ph-XhJ" customClass="VideoCollectionViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MOJ-H3-Jtu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="804"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="7iI-GI-Urh">
@@ -88,7 +88,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-9k-bAJ" customClass="PaddingLabel" customModule="MacMagazine" customModuleProvider="target">
-                                                    <rect key="frame" x="250.5" y="137.5" width="39.5" height="21.5"/>
+                                                    <rect key="frame" x="248" y="136.5" width="42" height="22.5"/>
                                                     <color key="backgroundColor" name="MMBlack90"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,19 +129,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dK-RX-Lqi">
-                                                    <rect key="frame" x="10" y="186.5" width="280" height="17"/>
+                                                    <rect key="frame" x="10" y="186.5" width="280" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U4V-EJ-PXU">
-                                                    <rect key="frame" x="10" y="224.5" width="5.5" height="13.5"/>
+                                                    <rect key="frame" x="10" y="228" width="5.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart.bar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LDU-go-0Ig">
-                                                    <rect key="frame" x="19.5" y="224" width="25" height="14.5"/>
+                                                    <rect key="frame" x="19.5" y="227.5" width="25" height="14.5"/>
                                                     <color key="tintColor" name="MMBlueWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="Adz-1q-gzc"/>
@@ -149,13 +149,13 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="thin"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFa-PE-Vcz">
-                                                    <rect key="frame" x="48.5" y="224.5" width="5.5" height="13.5"/>
+                                                    <rect key="frame" x="48.5" y="228" width="5.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand.thumbsup" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vS8-cn-ybr">
-                                                    <rect key="frame" x="58" y="223" width="25" height="16"/>
+                                                    <rect key="frame" x="58" y="227" width="25" height="15"/>
                                                     <color key="tintColor" name="MMBlueWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="cjY-UG-vo4"/>
@@ -163,7 +163,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="thin"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAF-vV-0Rf">
-                                                    <rect key="frame" x="208" y="215.5" width="32" height="32"/>
+                                                    <rect key="frame" x="208" y="219" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="GyG-rn-cmB"/>
                                                         <constraint firstAttribute="width" constant="32" id="N4N-Nh-9al"/>
@@ -180,7 +180,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-wG-Y4T">
-                                                    <rect key="frame" x="258" y="215.5" width="32" height="32"/>
+                                                    <rect key="frame" x="258" y="219" width="32" height="32"/>
                                                     <accessibility key="accessibilityConfiguration" label="Compartilhar video."/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="9CT-7c-e9x"/>
@@ -296,15 +296,20 @@
                     </connections>
                 </collectionViewController>
                 <view contentMode="scaleToFill" id="IzC-fW-mQ9">
-                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J">
-                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J">
+                            <rect key="frame" x="4" y="4" width="72" height="18"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="fHf-2J-25J" firstAttribute="top" secondItem="IzC-fW-mQ9" secondAttribute="top" constant="4" id="QL8-oX-Ska"/>
+                        <constraint firstItem="fHf-2J-25J" firstAttribute="leading" secondItem="IzC-fW-mQ9" secondAttribute="leading" constant="4" id="TlY-lp-IT6"/>
+                        <constraint firstAttribute="bottom" secondItem="fHf-2J-25J" secondAttribute="bottom" constant="4" id="iMq-6n-dFB"/>
+                        <constraint firstAttribute="trailing" secondItem="fHf-2J-25J" secondAttribute="trailing" constant="4" id="zk8-21-CRF"/>
+                    </constraints>
                 </view>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="z7S-we-Rjf">
                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -318,17 +323,17 @@
     </scenes>
     <designables>
         <designable name="hfJ-9k-bAJ">
-            <size key="intrinsicContentSize" width="39.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="42" height="22.5"/>
         </designable>
     </designables>
     <resources>
-        <image name="chart.bar" catalog="system" width="32" height="32"/>
-        <image name="hand.thumbsup" catalog="system" width="32" height="32"/>
+        <image name="chart.bar" catalog="system" width="128" height="89"/>
+        <image name="hand.thumbsup" catalog="system" width="123" height="128"/>
         <image name="logo" width="415" height="350"/>
-        <image name="play.rectangle.fill" catalog="system" width="32" height="32"/>
-        <image name="square.and.arrow.up" catalog="system" width="32" height="32"/>
-        <image name="star" catalog="system" width="32" height="32"/>
-        <image name="star.fill" catalog="system" width="32" height="32"/>
+        <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlack90">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -60,16 +60,21 @@
                     <navigationItem key="navigationItem" id="URb-53-j4n">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="twA-3I-XfB">
-                            <rect key="frame" x="120" y="5.6666666666666679" width="150" height="33"/>
+                            <rect key="frame" x="155" y="9" width="80" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
+                                    <rect key="frame" x="4" y="4" width="72" height="18"/>
                                     <gestureRecognizers/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Mgy-1n-TBw" secondAttribute="trailing" constant="4" id="0FJ-Y3-kre"/>
+                                <constraint firstAttribute="bottom" secondItem="Mgy-1n-TBw" secondAttribute="bottom" constant="4" id="7dm-m6-DCi"/>
+                                <constraint firstItem="Mgy-1n-TBw" firstAttribute="leading" secondItem="twA-3I-XfB" secondAttribute="leading" constant="4" id="IJb-RJ-UV1"/>
+                                <constraint firstItem="Mgy-1n-TBw" firstAttribute="top" secondItem="twA-3I-XfB" secondAttribute="top" constant="4" id="Ia2-DP-eOi"/>
+                            </constraints>
                         </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Piz-og-PMY">
                             <color key="tintColor" name="MMBlueWhite"/>
@@ -204,13 +209,12 @@
                         <action selector="easterEgg:" destination="Jej-5Q-aqJ" id="0P5-dE-TQ7"/>
                     </connections>
                 </tapGestureRecognizer>
-                <view contentMode="scaleToFill" id="JbQ-Qw-e5R">
-                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JbQ-Qw-e5R">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="26"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-ag-GL7">
-                            <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-ag-GL7">
+                            <rect key="frame" x="4" y="4" width="72" height="18"/>
                             <gestureRecognizers/>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="UW2-Vg-UHB" appends="YES" id="5fd-l1-Fmz"/>
@@ -218,6 +222,12 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="lVM-ag-GL7" secondAttribute="trailing" constant="4" id="4yJ-5B-49z"/>
+                        <constraint firstItem="lVM-ag-GL7" firstAttribute="leading" secondItem="JbQ-Qw-e5R" secondAttribute="leading" constant="4" id="L6H-oE-mRA"/>
+                        <constraint firstAttribute="bottom" secondItem="lVM-ag-GL7" secondAttribute="bottom" constant="4" id="cCW-Vz-Su2"/>
+                        <constraint firstItem="lVM-ag-GL7" firstAttribute="top" secondItem="JbQ-Qw-e5R" secondAttribute="top" constant="4" id="qsl-7k-ADw"/>
+                    </constraints>
                 </view>
             </objects>
             <point key="canvasLocation" x="425" y="-2885"/>

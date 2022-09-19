@@ -33,6 +33,9 @@ struct PostCell: View {
         case .systemSmall:
             coverStyle
                 .widgetURL(post.url)
+        case .accessoryRectangular, .accessoryInline:
+            Text(post.title ?? "")
+                .widgetURL(post.url)
         default:
             Link(destination: post.url) {
                 coverStyle
@@ -57,7 +60,7 @@ struct PostCell: View {
         VStack {
             Spacer(minLength: 0)
             contentView.shadow(color: .black, radius: 5)
-            .padding()
+                .padding()
         }
         .background(
             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.black]), startPoint: .top, endPoint: .bottom))
@@ -73,19 +76,29 @@ struct PostCell: View {
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
+            if #available(iOSApplicationExtension 16.0, *) {
+                PostCell(post: .placeholder)
+                    .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+                    .previewDisplayName("Rectangular")
+                PostCell(post: .placeholder)
+                    .previewContext(WidgetPreviewContext(family: .accessoryInline))
+                    .previewDisplayName("Inline")
+            }
             VStack(spacing: 1) {
                 PostCell(post: .placeholder)
                 PostCell(post: .placeholder)
             }
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             .environment(\.sizeCategory, .extraExtraLarge)
+            .previewDisplayName("Medium")
+
             VStack(spacing: 1) {
                 PostCell(post: .placeholder)
                 PostCell(post: .placeholder)
                 PostCell(post: .placeholder)
             }
             .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .previewDisplayName("Large")
         }
-        .environment(\.sizeCategory, .extraLarge)
     }
 }
