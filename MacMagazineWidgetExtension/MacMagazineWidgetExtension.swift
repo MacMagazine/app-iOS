@@ -44,14 +44,14 @@ struct MacMagazineWidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             if #available(iOSApplicationExtension 16.0, *) {
-                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: []))
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                     .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
                     .previewDisplayName("Rectangular")
-                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: []))
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                     .previewContext(WidgetPreviewContext(family: .accessoryInline))
                     .previewDisplayName("Inline")
             }
-            RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: []))
+            RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .previewDisplayName("Small")
         }

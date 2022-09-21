@@ -19,7 +19,6 @@ struct RecentPostsWidget: View {
             if content.isEmpty {
                 Text("Nenhum conteúdo disponível.")
                     .font(.headline)
-                    .padding()
             } else {
                 switch widgetFamily {
                 case .systemSmall:
@@ -65,10 +64,10 @@ struct RecentPostsWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             if #available(iOSApplicationExtension 16.0, *) {
-                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                     .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
                     .previewDisplayName("Rectangular")
-                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                     .previewContext(WidgetPreviewContext(family: .accessoryInline))
                     .previewDisplayName("Inline")
             }

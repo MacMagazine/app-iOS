@@ -33,9 +33,27 @@ struct PostCell: View {
         case .systemSmall:
             coverStyle
                 .widgetURL(post.url)
-        case .accessoryRectangular, .accessoryInline:
-            Text(post.title ?? "")
+
+        case .accessoryInline:
+            Text("MM \(post.title ?? "")")
                 .widgetURL(post.url)
+
+        case .accessoryRectangular:
+            HStack(spacing: 5) {
+                VStack {
+                    Image("logo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                    Spacer(minLength: 0)
+                }
+                VStack(spacing: 0) {
+                    Text(post.title ?? "")
+                        .widgetURL(post.url)
+                    Spacer(minLength: 0)
+                }
+            }
+
         default:
             Link(destination: post.url) {
                 coverStyle
