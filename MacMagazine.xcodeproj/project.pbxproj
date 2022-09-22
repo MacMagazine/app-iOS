@@ -1915,7 +1915,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Watch App";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Wildcard";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1985,7 +1985,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitExtension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Watch App";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Wildcard";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
