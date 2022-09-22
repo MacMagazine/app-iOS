@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>destination</key>
+	<string>export</string>
+	<key>manageAppVersionAndBuildNumber</key>
+	<true/>
+	<key>method</key>
+	<string>app-store</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.brit.macmagazine</key>
+		<string>MacMagazine</string>
+		<key>com.brit.macmagazine.MacMagazinePushNotificationServiceExtension</key>
+		<string>MacMagazine Notification Extension</string>
+		<key>com.brit.macmagazine.MacMagazineWidgetExtension</key>
+		<string>MacMagazine Widget</string>
+		<key>com.brit.macmagazine.watchkitapp</key>
+		<string>MacMagazine Wildcard</string>
+		<key>com.brit.macmagazine.watchkitapp.watchkitExtension</key>
+		<string>MacMagazine Wildcard</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Distribution</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>A5VW9QUF9L</string>
+	<key>uploadSymbols</key>
+	<true/>
+</dict>
+</plist>
