@@ -18,6 +18,7 @@ struct PostData: Codable, Hashable {
     var postId: String?
     var shortURL: String?
     var playable: Bool = false
+    var count: Int = 0
 
     init(title: String?,
          link: String?,
@@ -27,7 +28,8 @@ struct PostData: Codable, Hashable {
          excerpt: String? = "",
          postId: String? = "",
          shortURL: String? = "",
-         playable: Bool = false) {
+         playable: Bool = false,
+         count: Int = 0) {
 
 		self.title = title
 		self.link = link
@@ -38,5 +40,6 @@ struct PostData: Codable, Hashable {
         self.postId = postId
         self.shortURL = shortURL
         self.playable = playable
+        self.count = count
 	}
 }

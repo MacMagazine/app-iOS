@@ -309,7 +309,7 @@ extension Settings {
 extension Settings {
     func showBadge() {
         if UserDefaults.standard.bool(forKey: Definitions.badge) {
-            UIApplication.shared.applicationIconBadgeNumber = CoreDataStack.shared.numberOfUnreadPosts()
+            UIApplication.shared.applicationIconBadgeNumber = Helper().badgeCount
         } else {
             UIApplication.shared.applicationIconBadgeNumber = 0
         }

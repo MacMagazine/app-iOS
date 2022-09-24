@@ -16,7 +16,8 @@ extension PostData {
                                       pubDate: "",
                                       excerpt: "Adicione o widget à tela inicial do seu dispositivo.",
                                       postId: "",
-                                      shortURL: "")
+                                      shortURL: "",
+                                      count: 1580)
 
     var url: URL {
         return URL(staticString: link ?? "")

@@ -41,15 +41,15 @@ struct RecentPostsWidget: View {
                     }
 
                 case .accessoryRectangular,
-                        .accessoryInline:
+                        .accessoryInline,
+                        .accessoryCircular:
                 if #available(iOSApplicationExtension 16.0, *) {
                     PostCell(post: content[0])
                 } else {
                     Text("Tamanho incompatível.")
                 }
 
-                case .systemExtraLarge,
-                        .accessoryCircular:
+                case .systemExtraLarge:
                     Text("Tamanho incompatível.")
 
                 @unknown default:
@@ -70,6 +70,9 @@ struct RecentPostsWidget_Previews: PreviewProvider {
                 RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                     .previewContext(WidgetPreviewContext(family: .accessoryInline))
                     .previewDisplayName("Inline")
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
+                    .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+                    .previewDisplayName("Circular")
             }
             RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))

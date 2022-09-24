@@ -50,7 +50,8 @@ extension RecentPostsProvider {
                                 pubDate: xmlPost.pubDate,
                                 excerpt: xmlPost.excerpt,
                                 postId: xmlPost.postId,
-                                shortURL: xmlPost.shortURL)
+                                shortURL: xmlPost.shortURL,
+                                count: Helper().badgeCount)
             posts.append(post)
         }
     }

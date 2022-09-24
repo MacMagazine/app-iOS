@@ -38,6 +38,20 @@ struct PostCell: View {
             Text("MM \(post.title ?? "")")
                 .widgetURL(post.url)
 
+        case .accessoryCircular:
+            ZStack {
+                Circle()
+                    .stroke(lineWidth: 4)
+                VStack(spacing: 0) {
+                    Image("logo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 18, height: 18)
+                    Text("\(post.count)")
+                        .widgetURL(post.url)
+                }
+            }
+
         case .accessoryRectangular:
             HStack(spacing: 5) {
                 VStack {
@@ -101,6 +115,9 @@ struct PostCell_Previews: PreviewProvider {
                 PostCell(post: .placeholder)
                     .previewContext(WidgetPreviewContext(family: .accessoryInline))
                     .previewDisplayName("Inline")
+                PostCell(post: .placeholder)
+                    .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+                    .previewDisplayName("Circular")
             }
             VStack(spacing: 1) {
                 PostCell(post: .placeholder)

@@ -18,6 +18,7 @@ struct MacMagazineWidgetExtension: Widget {
         if #available(iOS 16, *) {
             return [.accessoryRectangular,
                     .accessoryInline,
+                    .accessoryCircular,
                     .systemSmall,
                     .systemMedium]
         } else {
@@ -50,6 +51,9 @@ struct MacMagazineWidgetExtension_Previews: PreviewProvider {
                 RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                     .previewContext(WidgetPreviewContext(family: .accessoryInline))
                     .previewDisplayName("Inline")
+                RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
+                    .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+                    .previewDisplayName("Circular")
             }
             RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
