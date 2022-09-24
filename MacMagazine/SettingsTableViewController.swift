@@ -46,6 +46,8 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var restoreBtn: UIButton!
 
+    @IBOutlet private weak var badge: UISwitch!
+
     var price: String = "-"
 
     enum IconOptionAccessibilityLabel: String {
@@ -306,6 +308,8 @@ extension SettingsTableViewController {
         appearanceCellIntensity.isHidden = true
 
         darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
+
+        badge.isOn = UserDefaults.standard.bool(forKey: Definitions.badge)
     }
 }
 
@@ -480,6 +484,17 @@ extension SettingsTableViewController {
                 self.setIconOptionsSelection(selected: iconName)
             }
         }
+    }
+
+    @IBAction private func showBadge(_ sender: Any) {
+        guard let badge = sender as? UISwitch else {
+            return
+        }
+
+        UserDefaults.standard.set(badge.isOn, forKey: Definitions.badge)
+        UserDefaults.standard.synchronize()
+
+        Settings().showBadge()
     }
 
 }

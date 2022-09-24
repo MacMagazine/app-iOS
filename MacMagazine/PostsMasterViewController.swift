@@ -51,7 +51,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	@IBOutlet private weak var logoView: UIView!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
-    @IBOutlet private weak var favorite: UIBarButtonItem!
+    @IBOutlet private weak var filter: UIBarButtonItem!
 
 	var lastContentOffset = CGPoint()
 	var direction: Direction = .up
@@ -68,6 +68,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	var posts = [XMLPost]()
 
     let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
+    let notReadPredicate = NSPredicate(format: "read == %@", NSNumber(value: false))
+    let destaquePredicate = NSPredicate(format: "categorias contains[cd] %@", "Destaques")
 
     enum Status {
         case firstLoad
@@ -149,7 +151,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         // Execute the fetch to display the data
         fetchController?.reloadData()
 
-        favorite.accessibilityLabel = "Listar posts favoritos."
+        filter.accessibilityLabel = "Mostrar opções de filtro."
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -373,6 +375,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                             (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction = nil
                         }
                     }
+
+                    Settings().showBadge()
+
                     return
                 }
                 self.postId.append(post.postId)
@@ -734,16 +739,42 @@ extension PostsMasterViewController {
 // MARK: - Favorite Action methods -
 
 extension PostsMasterViewController {
-    @IBAction private func showHideFavorites(_ sender: Any) {
+    @IBAction private func showHideFilter(_ sender: Any) {
         if fetchController?.fetchRequest.predicate == nil {
-            favorite.image = UIImage(systemName: "star.fill")
-            favorite.accessibilityLabel = "Listar posts."
-            showFavorites()
+            filter.image = UIImage(named: "line.3.horizontal.decrease.circle.fill")
+            filter.accessibilityLabel = "Mostrat posts."
+            showFilter()
         } else {
-            favorite.image = UIImage(systemName: "star")
-            favorite.accessibilityLabel = "Listar posts favoritos."
-            hideFavorites()
+            filter.image = UIImage(named: "line.3.horizontal.decrease.circle")
+            filter.accessibilityLabel = "Mostrar opções de filtro."
+            showAllPosts()
         }
+    }
+
+    fileprivate func showFilter() {
+        let alertController = UIAlertController(title: "Filtros", message: "Escolha uma opção", preferredStyle: .actionSheet)
+
+        alertController.addAction(UIAlertAction(title: "Mostrar favoritos", style: .default) { _ in
+            self.showFavorites()
+        })
+
+        alertController.addAction(UIAlertAction(title: "Mostrar posts não lidos", style: .default) { _ in
+            self.showNotRead()
+        })
+
+        alertController.addAction(UIAlertAction(title: "Mostrar destaques", style: .default) { _ in
+            self.showDestaques()
+        })
+
+        alertController.addAction(UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+            self.dismiss(animated: true)
+        })
+
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = filter
+        }
+
+        self.present(alertController, animated: true)
     }
 
     fileprivate func showFavorites() {
@@ -755,7 +786,25 @@ extension PostsMasterViewController {
         reloadController(.transitionFlipFromRight)
     }
 
-    fileprivate func hideFavorites() {
+    fileprivate func showNotRead() {
+        fetchController?.fetchRequest.predicate = notReadPredicate
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Não Lidos"
+
+        reloadController(.transitionFlipFromRight)
+    }
+
+    fileprivate func showDestaques() {
+        fetchController?.fetchRequest.predicate = destaquePredicate
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Destaques"
+
+        reloadController(.transitionFlipFromRight)
+    }
+
+    fileprivate func showAllPosts() {
         fetchController?.fetchRequest.predicate = nil
 
         self.navigationItem.titleView = logoView

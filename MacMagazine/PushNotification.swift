@@ -57,7 +57,9 @@ extension PushNotification {
 					let prefetcher = ImagePrefetcher(urls: urls)
 					prefetcher.start()
 
-					return
+                    Settings().showBadge()
+
+                    return
 				}
 				images.append(post.artworkURL)
 				CoreDataStack.shared.save(post: post)

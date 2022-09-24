@@ -438,3 +438,16 @@ class CoreDataStack {
 		video.duration = item.duration
     }
 }
+
+extension CoreDataStack {
+    func numberOfUnreadPosts() -> Int {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: postEntityName)
+        request.predicate = NSPredicate(format: "read == %@", NSNumber(value: false))
+
+        do {
+            return try viewContext.count(for: request)
+        } catch {
+            return 0
+        }
+    }
+}

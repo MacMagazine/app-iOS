@@ -25,6 +25,7 @@ enum Definitions {
     static let whatsnew = "whatsnew"
     static let deleteAllCookies = "deleteAllCookies"
     static let mmLive = "mmLive"
+    static let badge = "badge"
 }
 
 // MARK: -
@@ -300,5 +301,17 @@ extension Settings {
         label.text = message
 
         return label
+    }
+}
+
+// MARK: - Badge -
+
+extension Settings {
+    func showBadge() {
+        if UserDefaults.standard.bool(forKey: Definitions.badge) {
+            UIApplication.shared.applicationIconBadgeNumber = CoreDataStack.shared.numberOfUnreadPosts()
+        } else {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
 }

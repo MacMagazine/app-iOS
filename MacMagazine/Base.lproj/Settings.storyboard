@@ -193,13 +193,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="105"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
-                                                            <rect key="frame" x="66.666666666666657" y="0.0" width="66.666666666666657" height="105"/>
+                                                            <rect key="frame" x="43.333333333333329" y="0.0" width="43.333333333333329" height="105"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_1" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH">
-                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="-6.6666666666666714" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
                                                                         <constraint firstAttribute="width" constant="57" id="XYi-HN-HK1"/>
@@ -217,11 +217,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-hn-nX1">
-                                                                    <rect key="frame" x="23.666666666666657" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo branco">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -242,13 +242,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
-                                                            <rect key="frame" x="133.33333333333334" y="0.0" width="66.666666666666657" height="105"/>
+                                                            <rect key="frame" x="86.666666666666671" y="0.0" width="43.333333333333329" height="105"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
-                                                            <rect key="frame" x="200" y="0.0" width="66.666666666666686" height="105"/>
+                                                            <rect key="frame" x="130" y="0.0" width="43.333333333333343" height="105"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_2" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4">
-                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="-6.6666666666666714" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
                                                                         <constraint firstAttribute="width" constant="57" id="TwA-5I-6vQ"/>
@@ -266,11 +266,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-hM-m4r">
-                                                                    <rect key="frame" x="23.666666666666657" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo azul">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -291,13 +291,13 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-2y-DWs">
-                                                            <rect key="frame" x="266.66666666666669" y="0.0" width="66.666666666666686" height="105"/>
+                                                            <rect key="frame" x="173.33333333333334" y="0.0" width="43.333333333333343" height="105"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAV-0s-5g5">
-                                                            <rect key="frame" x="333.33333333333331" y="0.0" width="66.666666666666686" height="105"/>
+                                                            <rect key="frame" x="216.66666666666666" y="0.0" width="43.333333333333343" height="105"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_3" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc">
-                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="-6.6666666666666572" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="Yp0-Ks-C6t"/>
                                                                         <constraint firstAttribute="width" constant="57" id="e8q-N3-fur"/>
@@ -315,11 +315,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XlY-PV-F4I">
-                                                                    <rect key="frame" x="23.666666666666686" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone azul do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -340,15 +340,15 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" id="ztK-RH-PGY">
-                                                            <rect key="frame" x="400" y="0.0" width="66.666666666666686" height="105"/>
+                                                            <rect key="frame" x="260" y="0.0" width="43.333333333333314" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" id="sKm-lV-8cI">
-                                                            <rect key="frame" x="466.66666666666669" y="0.0" width="66.666666666666686" height="105"/>
+                                                            <rect key="frame" x="303.33333333333331" y="0.0" width="43.333333333333314" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone_4" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-ve-Aqk">
-                                                                    <rect key="frame" x="5" y="13" width="57" height="57"/>
+                                                                    <rect key="frame" x="-6.6666666666666288" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5Ds-K5-mAM"/>
                                                                         <constraint firstAttribute="width" constant="57" id="zQr-br-QBT"/>
@@ -366,11 +366,11 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-mP-ySM">
-                                                                    <rect key="frame" x="23.666666666666629" y="77" width="19.666666666666671" height="19"/>
+                                                                    <rect key="frame" x="12.000000000000002" y="77" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_4" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G3-2f-b5R">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="105"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone claro do aplicativo com fundo preto">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -391,7 +391,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
-                                                            <rect key="frame" x="323.33333333333331" y="0.0" width="66.666666666666686" height="105"/>
+                                                            <rect key="frame" x="346.66666666666669" y="0.0" width="43.333333333333314" height="105"/>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -404,12 +404,51 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nUb-Aw-emy">
+                                        <rect key="frame" x="0.0" y="437" width="390" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nUb-Aw-emy" id="qFh-dv-Shk">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mostrar posts não lidos no ícone" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TyP-bs-EqM">
+                                                    <rect key="frame" x="20.000000000000014" y="11" width="247.33333333333337" height="28"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s94-yl-rEe">
+                                                    <rect key="frame" x="321" y="9.6666666666666643" width="51" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Identificar posts já lidos."/>
+                                                    <color key="onTintColor" name="MMBlue"/>
+                                                    <connections>
+                                                        <action selector="showBadge:" destination="75e-Ta-Gqd" eventType="valueChanged" id="tNe-CE-geS"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="TyP-bs-EqM" secondAttribute="bottom" id="2qo-qJ-2Vx"/>
+                                                <constraint firstItem="s94-yl-rEe" firstAttribute="centerY" secondItem="qFh-dv-Shk" secondAttribute="centerY" id="AFp-cT-jfl"/>
+                                                <constraint firstItem="TyP-bs-EqM" firstAttribute="top" secondItem="qFh-dv-Shk" secondAttribute="topMargin" id="E6R-cH-4pA"/>
+                                                <constraint firstItem="TyP-bs-EqM" firstAttribute="centerY" secondItem="qFh-dv-Shk" secondAttribute="centerY" id="JP4-rU-yuV"/>
+                                                <constraint firstItem="s94-yl-rEe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qFh-dv-Shk" secondAttribute="top" constant="9.5" id="Msu-DX-bGT"/>
+                                                <constraint firstItem="s94-yl-rEe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TyP-bs-EqM" secondAttribute="trailing" constant="8" symbolic="YES" id="Nze-Yl-brf"/>
+                                                <constraint firstItem="TyP-bs-EqM" firstAttribute="leading" secondItem="qFh-dv-Shk" secondAttribute="leading" constant="20" id="aew-IO-9YP"/>
+                                                <constraint firstAttribute="trailing" secondItem="s94-yl-rEe" secondAttribute="trailing" constant="20" symbolic="YES" id="maL-bJ-4zm"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s94-yl-rEe" secondAttribute="bottom" constant="9.5" id="p1E-42-efw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="QfM-6j-Rfe">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="6CY-xG-Rsz">
-                                        <rect key="frame" x="0.0" y="473" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="523" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6CY-xG-Rsz" id="NVq-BB-T8u">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
@@ -490,7 +529,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sDf-L1-92h">
-                                        <rect key="frame" x="0.0" y="523" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="573" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-L1-92h" id="k1Z-8E-Rhb">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
@@ -538,7 +577,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8C1-SO-fuW">
-                                        <rect key="frame" x="0.0" y="573" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="623" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8C1-SO-fuW" id="rZP-Yq-hvv">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
@@ -592,7 +631,7 @@
                             <tableViewSection id="Hwu-Un-KA8">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Fsx-19-opK">
-                                        <rect key="frame" x="0.0" y="659" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="709" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fsx-19-opK" id="2Fv-Sy-DCz">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
@@ -639,13 +678,13 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2X0-gf-okO">
-                                        <rect key="frame" x="0.0" y="709" width="390" height="50"/>
+                                        <rect key="frame" x="0.0" y="759" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2X0-gf-okO" id="ycF-CO-erd">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Relatar problema/bug no app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-aj-Yg0">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Relatar problema/bug no app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-aj-Yg0">
                                                     <rect key="frame" x="6" y="6" width="378" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
@@ -654,7 +693,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-eq-8vX">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-eq-8vX">
                                                     <rect key="frame" x="6" y="6" width="378" height="38"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Relatar problema/bug no app">
@@ -713,6 +752,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="appearanceCellIntensity" destination="Jrd-t5-7DG" id="V2H-2r-XRn"/>
+                        <outlet property="badge" destination="s94-yl-rEe" id="B3B-3u-oqC"/>
                         <outlet property="buyBtn" destination="yMw-Ps-gvb" id="Xdb-xW-ayj"/>
                         <outlet property="buyMessage" destination="VmZ-d3-AFQ" id="kIz-Lg-m6V"/>
                         <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="IZv-c0-y4T"/>
