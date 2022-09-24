@@ -17,6 +17,15 @@ enum FlushType {
     case imagesOnly
 }
 
+extension URL {
+    static func storeURL(for appGroup: String, databaseName: String) -> URL {
+        guard let fileContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+            fatalError("Shared file container could not be created.")
+        }
+        return fileContainer.appendingPathComponent("\(databaseName).sqlite")
+    }
+}
+
 class CoreDataStack {
 
 	// MARK: - Singleton -
@@ -35,9 +44,13 @@ class CoreDataStack {
 
         #if TEST
         container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+        #else
+        let storeURL = URL.storeURL(for: "group.com.brit.macmagazine.data", databaseName: "group.macmagazine")
+        let storeDescription = NSPersistentStoreDescription(url: storeURL)
+        container.persistentStoreDescriptions = [storeDescription]
         #endif
 
-		container.loadPersistentStores { _, error in
+        container.loadPersistentStores { _, error in
 			guard let error = error as NSError? else {
 				return
 			}

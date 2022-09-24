@@ -363,6 +363,7 @@
 		9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazine.entitlements; sourceTree = "<group>"; };
 		9B9C7FAD226BFEEC000534CA /* MacMagazineNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		9B9C7FB0226CA192000534CA /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
+		9BA77C6C28DF704E0035EEAF /* MacMagazineWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 		9BA9393D2260DDB8004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		9BA939402260DDDA004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Podcast.storyboard; sourceTree = "<group>"; };
 		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
@@ -477,6 +478,7 @@
 				9B0A358625C5B9ED00802494 /* Assets.xcassets */,
 				5EB2018925B3665100E17642 /* Info.plist */,
 				5EB2018425B3664C00E17642 /* MacMagazineWidgetExtension.swift */,
+				9BA77C6C28DF704E0035EEAF /* MacMagazineWidgetExtensionExtension.entitlements */,
 				5EDC510D25B385FC006FB270 /* PostCell.swift */,
 				5E6CE94725B39C69007CF232 /* PostDataExtension.swift */,
 				5EDE58EA25B38C7B00945C23 /* RecentPosts */,
@@ -1489,7 +1491,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.5.0.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
@@ -1521,7 +1523,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1837,7 +1839,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.5.0.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
