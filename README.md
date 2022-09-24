@@ -1,5 +1,5 @@
 # App do MacMagazine para iOS
-[![Build Status](https://travis-ci.org/MacMagazine/app-iOS.svg?branch=release%2F4.2)](https://travis-ci.org/MacMagazine/app-iOS)
+[![Build Status](https://app.bitrise.io/app/b04bb172ee4330fd/status.svg?token=hWsWH4V5VQAavaZAQZMEhA&branch=master)](https://app.bitrise.io/app/b04bb172ee4330fd)
 
 O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_), para que a enorme comunidade de desenvolvedores/leitores do site possa colaborar e construir um app cada vez melhor e mais completo.
 
@@ -16,6 +16,7 @@ O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_
 - Fontes dinâmicas para melhor visualização
 - Leitura dos posts em fullscreen no iPad
 - App para `watchOS`
+- Widgets, tanto na Lock Screen como na Home screen
 
 ## Bug Reporting e Feature request
 Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para cadastrar problemas encontrados ou features desejadas.
@@ -25,7 +26,7 @@ Optamos pela não utilização de Gerenciadores de Dependências, como Cocoapods
 
 Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS suportada é 13+.
 
-Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/4.2`.
+Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/v4`.
 
 Instale o utitlitário [swiftlint](https://github.com/realm/SwiftLint) e observe o [code style](https://github.com/raywenderlich/swift-style-guide) para manter o padrão no desenvolvimento.
 
