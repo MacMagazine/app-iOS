@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="MacMagazine é um projeto de código aberto no GitHub liderado por Cassio Rossi, da KazzioSoftware." adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbQ-SB-mSh">
-                    <rect key="frame" x="12" y="18" width="390" height="810"/>
+                    <rect key="frame" x="20" y="18" width="374" height="810"/>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -58,12 +58,12 @@
                 <constraint firstItem="EPs-79-Mem" firstAttribute="top" secondItem="nbQ-SB-mSh" secondAttribute="bottom" constant="18" id="Dei-ce-Mee"/>
                 <constraint firstAttribute="trailing" secondItem="EPs-79-Mem" secondAttribute="trailing" constant="12" id="FJD-E9-t9J"/>
                 <constraint firstItem="nbQ-SB-mSh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="MRC-y8-bDr"/>
-                <constraint firstItem="nbQ-SB-mSh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="XEm-A8-Xfz"/>
+                <constraint firstItem="nbQ-SB-mSh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="XEm-A8-Xfz"/>
                 <constraint firstItem="yNU-JU-1pz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZgO-ky-8kO"/>
                 <constraint firstAttribute="trailing" secondItem="yNU-JU-1pz" secondAttribute="trailing" id="g5a-2U-pAx"/>
                 <constraint firstItem="EPs-79-Mem" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="gkA-d6-qVo"/>
                 <constraint firstItem="EPs-79-Mem" firstAttribute="top" secondItem="yNU-JU-1pz" secondAttribute="bottom" constant="2" id="pGU-z5-56E"/>
-                <constraint firstAttribute="trailing" secondItem="nbQ-SB-mSh" secondAttribute="trailing" constant="12" id="uny-hF-rh0"/>
+                <constraint firstAttribute="trailing" secondItem="nbQ-SB-mSh" secondAttribute="trailing" constant="20" id="uny-hF-rh0"/>
             </constraints>
             <connections>
                 <outlet property="footerLabel" destination="nbQ-SB-mSh" id="GUe-XQ-5AZ"/>
@@ -73,7 +73,7 @@
     </objects>
     <resources>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

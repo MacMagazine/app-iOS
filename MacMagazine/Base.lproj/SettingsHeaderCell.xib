@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,19 +16,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-Go-OLY">
-                    <rect key="frame" x="12" y="12" width="390" height="878"/>
+                    <rect key="frame" x="20" y="12" width="374" height="878"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" header="YES"/>
                     </accessibility>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                    <color key="textColor" name="MMDarkGreyWhite"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <color key="textColor" name="MMLessDarkGreyWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="tXz-Go-OLY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="TOb-5g-njE"/>
-                <constraint firstAttribute="trailing" secondItem="tXz-Go-OLY" secondAttribute="trailing" constant="12" id="fpd-lt-7MH"/>
+                <constraint firstItem="tXz-Go-OLY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="TOb-5g-njE"/>
+                <constraint firstAttribute="trailing" secondItem="tXz-Go-OLY" secondAttribute="trailing" constant="20" id="fpd-lt-7MH"/>
                 <constraint firstAttribute="bottom" secondItem="tXz-Go-OLY" secondAttribute="bottom" constant="6" id="usI-2r-4PX"/>
                 <constraint firstItem="tXz-Go-OLY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="xNb-wV-Jpo"/>
             </constraints>
@@ -39,8 +39,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="MMDarkGreyWhite">
-            <color white="0.25" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <namedColor name="MMLessDarkGreyWhite">
+            <color white="0.35000002384185791" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
