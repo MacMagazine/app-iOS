@@ -26,8 +26,6 @@ extension URL {
     }
 }
 
-// TODO: Migrate DB
-
 class CoreDataStack {
 
 	// MARK: - Singleton -
@@ -43,13 +41,21 @@ class CoreDataStack {
 
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "macmagazine")
+        let source = container.persistentStoreDescriptions.first?.url
 
         #if TEST
         container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         #else
-        let storeURL = URL.storeURL(for: "group.com.brit.macmagazine.data", databaseName: "group.macmagazine")
-        let storeDescription = NSPersistentStoreDescription(url: storeURL)
-        container.persistentStoreDescriptions = [storeDescription]
+        let appGroupStoreURL = URL.storeURL(for: "group.com.brit.macmagazine.data", databaseName: "group.macmagazine")
+        if FileManager.default.fileExists(atPath: appGroupStoreURL.path) {
+            logI("Using App Group URL")
+
+            let storeDescription = NSPersistentStoreDescription(url: appGroupStoreURL)
+            container.persistentStoreDescriptions = [storeDescription]
+
+            // Migrate DB
+            migrateStore(container, from: source, to: appGroupStoreURL)
+        }
         #endif
 
         container.loadPersistentStores { _, error in
@@ -390,5 +396,34 @@ extension CoreDataStack {
         } catch {
             fatalError("Failed to execute request: \(error)")
         }
+    }
+}
+
+extension CoreDataStack {
+    fileprivate func migrateStore(_ container: NSPersistentContainer,
+                                  from: URL?,
+                                  to: URL) {
+
+        guard let from = from else { return }
+
+        for persistentStoreDescription in container.persistentStoreDescriptions {
+            do {
+                  try container.persistentStoreCoordinator.replacePersistentStore(at: from,
+                                                                                  destinationOptions: persistentStoreDescription.options,
+                                                                                  withPersistentStoreFrom: to,
+                                                                                  sourceOptions: persistentStoreDescription.options,
+                                                                                  ofType: persistentStoreDescription.type)
+              } catch {
+                  logE("Failed to copy persistence store: \(error.localizedDescription)")
+              }
+        }
+
+        do {
+            logI("Remove old store")
+            try FileManager.default.removeItem(at: from)
+        } catch {
+            fatalError("Something went wrong while deleting the old store: \(error.localizedDescription)")
+        }
+
     }
 }
