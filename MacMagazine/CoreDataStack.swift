@@ -26,6 +26,8 @@ extension URL {
     }
 }
 
+// TODO: Migrate DB
+
 class CoreDataStack {
 
 	// MARK: - Singleton -
@@ -367,6 +369,26 @@ extension CoreDataStack {
             return try viewContext.count(for: request)
         } catch {
             return 0
+        }
+    }
+
+    func read(_ type: FlushType, onCompletion: (() -> Void)?) {
+        let batchRequest = NSBatchUpdateRequest(entityName: postEntityName)
+        batchRequest.resultType = .updatedObjectIDsResultType
+        batchRequest.propertiesToUpdate = ["read": NSNumber(value: true)]
+
+        do {
+            let result = try viewContext.execute(batchRequest) as? NSBatchUpdateResult
+            guard let objectIDs = result?.result as? [NSManagedObjectID] else {
+                return
+            }
+            if !objectIDs.isEmpty {
+                // Updates the main context
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSUpdatedObjectsKey: objectIDs], into: [self.viewContext])
+            }
+            onCompletion?()
+        } catch {
+            fatalError("Failed to execute request: \(error)")
         }
     }
 }

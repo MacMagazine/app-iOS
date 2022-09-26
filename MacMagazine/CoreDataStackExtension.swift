@@ -9,9 +9,9 @@
 import CoreData
 import Foundation
 
-extension CoreDataStack {
+// MARK: - Entity Video -
 
-    // MARK: - Entity Video -
+extension CoreDataStack {
 
     func get(video videoId: String, completion: @escaping ([Video]) -> Void) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: videoEntityName)

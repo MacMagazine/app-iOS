@@ -101,13 +101,14 @@ class SettingsTableViewController: UITableViewController {
 		header.append("Aparência")
         header.append("Ícone do app")
         header.append("Assinaturas")
+        header.append("Posts lidos")
         header.append("Sobre")
         return header
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headers = SettingsTableViewController.getHeaders
-        let identifier = section == headers.count - 1 || section == headers.count - 2 ? "subHeaderCell" : "headerCell"
+        let identifier = section == headers.count - 1 || section == 3 ? "subHeaderCell" : "headerCell"
 
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as? SettingsHeaderCell else {
             return nil
@@ -150,18 +151,19 @@ class SettingsTableViewController: UITableViewController {
             static let automaticDimension: CGFloat = UITableView.automaticDimension
         }
 
+        // "ÍCONE DO APLICATIVO"
+        if indexPath.section == 2 {
+            return RowSize.icons
+        }
+
         // "INTENSIDADE POST LIDO"
-        if indexPath.section == 1 &&
-            indexPath.row == 2 {
+        if indexPath.section == 4 &&
+            indexPath.row == 1 {
             if appearanceCellIntensity.isHidden {
                 return RowSize.zero
             } else {
                 return RowSize.automaticDimension
             }
-        }
-        // "ÍCONE DO APLICATIVO"
-        if indexPath.section == 2 {
-            return RowSize.icons
         }
 
         return RowSize.automaticDimension
@@ -354,6 +356,11 @@ extension SettingsTableViewController {
 
         NotificationCenter.default.post(name: .updateCookie, object: Definitions.darkMode)
     }
+}
+
+// MARK: - Posts lidos Methods -
+
+extension SettingsTableViewController {
 
     @IBAction private func enableReadIntensity(_ sender: Any) {
         guard let intensity = sender as? UISwitch else {
@@ -401,6 +408,29 @@ extension SettingsTableViewController {
         NotificationCenter.default.post(name: .reloadData, object: nil)
     }
 
+    @IBAction private func showBadge(_ sender: Any) {
+        guard let badge = sender as? UISwitch else {
+            return
+        }
+
+        UserDefaults.standard.set(badge.isOn, forKey: Definitions.badge)
+        UserDefaults.standard.synchronize()
+
+        Settings().showBadge()
+    }
+
+    @IBAction private func setAllRead(_ sender: Any) {
+        CoreDataStack.shared.read(.all) {
+            let alertController = UIAlertController(title: "MacMagazine!",
+                                                    message: "Todos os posts foram marcados como lido.",
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                Settings().showBadge()
+                self.dismiss(animated: true)
+            })
+            self.present(alertController, animated: true)
+        }
+    }
 }
 
 // MARK: - App Icon Methods -
@@ -485,18 +515,6 @@ extension SettingsTableViewController {
             }
         }
     }
-
-    @IBAction private func showBadge(_ sender: Any) {
-        guard let badge = sender as? UISwitch else {
-            return
-        }
-
-        UserDefaults.standard.set(badge.isOn, forKey: Definitions.badge)
-        UserDefaults.standard.synchronize()
-
-        Settings().showBadge()
-    }
-
 }
 
 // MARK: - Subscriptions -
