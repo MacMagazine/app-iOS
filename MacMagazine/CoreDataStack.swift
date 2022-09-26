@@ -41,17 +41,19 @@ class CoreDataStack {
 
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "macmagazine")
-        let source = container.persistentStoreDescriptions.first?.url
 
         #if TEST
         container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         #else
-        let appGroupStoreURL = URL.storeURL(for: "group.com.brit.macmagazine.data", databaseName: "group.macmagazine")
-        if FileManager.default.fileExists(atPath: appGroupStoreURL.path) {
-            logI("Using App Group URL")
+        let source = container.persistentStoreDescriptions.first?.url
 
-            let storeDescription = NSPersistentStoreDescription(url: appGroupStoreURL)
-            container.persistentStoreDescriptions = [storeDescription]
+        let appGroupStoreURL = URL.storeURL(for: "group.com.brit.macmagazine.data", databaseName: "group.macmagazine")
+        let storeDescription = NSPersistentStoreDescription(url: appGroupStoreURL)
+        container.persistentStoreDescriptions = [storeDescription]
+
+        if let source = source,
+            FileManager.default.fileExists(atPath: source.path) {
+            logI("Migration required")
 
             // Migrate DB
             migrateStore(container, from: source, to: appGroupStoreURL)
@@ -401,10 +403,8 @@ extension CoreDataStack {
 
 extension CoreDataStack {
     fileprivate func migrateStore(_ container: NSPersistentContainer,
-                                  from: URL?,
+                                  from: URL,
                                   to: URL) {
-
-        guard let from = from else { return }
 
         for persistentStoreDescription in container.persistentStoreDescriptions {
             do {
