@@ -408,9 +408,9 @@ extension CoreDataStack {
 
         for persistentStoreDescription in container.persistentStoreDescriptions {
             do {
-                  try container.persistentStoreCoordinator.replacePersistentStore(at: from,
+                  try container.persistentStoreCoordinator.replacePersistentStore(at: to,
                                                                                   destinationOptions: persistentStoreDescription.options,
-                                                                                  withPersistentStoreFrom: to,
+                                                                                  withPersistentStoreFrom: from,
                                                                                   sourceOptions: persistentStoreDescription.options,
                                                                                   ofType: persistentStoreDescription.type)
               } catch {
