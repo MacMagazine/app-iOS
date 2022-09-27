@@ -147,6 +147,8 @@
 	<array>
 		<string>com.brit.macmagazine.details</string>
 	</array>
+	<key>OneSignal_disable_badge_clearing</key>
+	<true/>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
