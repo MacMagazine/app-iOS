@@ -95,84 +95,66 @@ class SettingsTableViewController: UITableViewController {
 
 	// MARK: - TableView Methods -
 
-    static var getHeaders: [String] {
-        var header = [String]()
-		header.append("Notificações push")
-		header.append("Aparência")
-        header.append("Ícone do app")
-        header.append("Assinaturas")
-        header.append("Posts lidos")
-        header.append("Sobre")
+    struct Table {
+        let header: String
+        var cell: String = "headerCell"
+        var type: HeaderType = .none
+        var heightForFooter: CGFloat = 18
+        var footer: String?
+        var heightForRow: CGFloat = UITableView.automaticDimension
+    }
+
+    static var getHeaders: [Table] {
+        var header = [Table]()
+        header.append(Table(header: "Assinaturas", cell: "subHeaderCell", type: .subscription))
+        header.append(Table(header: "Notificações push"))
+        header.append(Table(header: "Aparência"))
+        header.append(Table(header: "Posts lidos"))
+        header.append(Table(header: "Ícone do app", heightForRow: 105))
+        header.append(Table(header: "Sobre",
+                            cell: "subHeaderCell",
+                            type: .version,
+                            heightForFooter: UITableView.automaticDimension,
+                            footer: "disclaimerFooter"))
         return header
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headers = SettingsTableViewController.getHeaders
-        let identifier = section == headers.count - 1 || section == 3 ? "subHeaderCell" : "headerCell"
-
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as? SettingsHeaderCell else {
-            return nil
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headers[section].cell) as? SettingsHeaderCell else {
+                return nil
         }
-
-        if headers.isEmpty ||
-            (headers.count - 1) < section ||
-            headers[section] == "" {
-            return nil
-        }
-
-        header.setHeader(headers[section], type: section == headers.count - 1 ? .version : .subscription)
+        header.setHeader(headers[section].header, type: headers[section].type)
         return header
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let height: CGFloat = 18
-        if section == SettingsTableViewController.getHeaders.count - 1 {
-            return UITableView.automaticDimension
-        }
-        return height
+        return SettingsTableViewController.getHeaders[section].heightForFooter
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == SettingsTableViewController.getHeaders.count - 1 {
-            guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "disclaimerFooter") as? SettingsHeaderCell else {
-                return nil
-            }
-            footer.showFooter()
-            return footer
+        guard let identifier = SettingsTableViewController.getHeaders[section].footer,
+              let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as? SettingsHeaderCell else {
+            return nil
         }
-        return nil
+        footer.showFooter()
+        return footer
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        struct RowSize {
-            static let zero: CGFloat = 0
-            static let icons: CGFloat = 105
-            static let intensity: CGFloat = 94
-            static let automaticDimension: CGFloat = UITableView.automaticDimension
-        }
-
-        // "ÍCONE DO APLICATIVO"
-        if indexPath.section == 2 {
-            return RowSize.icons
-        }
-
         // "INTENSIDADE POST LIDO"
-        if indexPath.section == 4 &&
+        if indexPath.section == 3 &&
             indexPath.row == 1 {
-            if appearanceCellIntensity.isHidden {
-                return RowSize.zero
-            } else {
-                return RowSize.automaticDimension
-            }
+            return appearanceCellIntensity.isHidden ? 0 : UITableView.automaticDimension
         }
 
-        return RowSize.automaticDimension
+        return SettingsTableViewController.getHeaders[indexPath.section].heightForRow
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if indexPath.section == 3 &&
+        if SettingsTableViewController.getHeaders[indexPath.section].type == .subscription &&
             indexPath.row == 0 &&
             !buyBtn.isHidden {
             Subscriptions.shared.purchase()
@@ -421,8 +403,8 @@ extension SettingsTableViewController {
 
     @IBAction private func setAllRead(_ sender: Any) {
         CoreDataStack.shared.read(.all) {
-            let alertController = UIAlertController(title: "MacMagazine!",
-                                                    message: "Todos os posts foram marcados como lido.",
+            let alertController = UIAlertController(title: "Sucesso!",
+                                                    message: "Todos os posts foram marcados como lidos.",
                                                     preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                 Settings().showBadge()

@@ -15,24 +15,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="MacMagazine é um projeto de código aberto no GitHub liderado por Cassio Rossi, da KazzioSoftware." adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbQ-SB-mSh">
-                    <rect key="frame" x="20" y="18" width="374" height="810"/>
+                    <rect key="frame" x="20" y="18" width="374" height="834"/>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNU-JU-1pz">
-                    <rect key="frame" x="0.0" y="843" width="414" height="1"/>
+                    <rect key="frame" x="0.0" y="867" width="414" height="1"/>
                     <color key="backgroundColor" systemColor="systemGray4Color"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="D7m-YO-4dk"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EPs-79-Mem">
-                    <rect key="frame" x="12" y="846" width="390" height="32"/>
+                    <rect key="frame" x="12" y="870" width="390" height="26"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJO-SV-nH8">
-                            <rect key="frame" x="0.0" y="0.0" width="195" height="32"/>
+                            <rect key="frame" x="0.0" y="0.0" width="195" height="26"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <state key="normal" title="Termos de Uso"/>
                             <connections>
@@ -40,7 +40,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="275-8k-sfp">
-                            <rect key="frame" x="195" y="0.0" width="195" height="32"/>
+                            <rect key="frame" x="195" y="0.0" width="195" height="26"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <state key="normal" title="Política de Privacidade"/>
                             <connections>
@@ -49,12 +49,12 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="bTU-GY-lgo"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="bTU-GY-lgo"/>
                     </constraints>
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="EPs-79-Mem" secondAttribute="bottom" constant="18" id="0W5-u8-ebI"/>
+                <constraint firstAttribute="bottom" secondItem="EPs-79-Mem" secondAttribute="bottom" id="0W5-u8-ebI"/>
                 <constraint firstItem="EPs-79-Mem" firstAttribute="top" secondItem="nbQ-SB-mSh" secondAttribute="bottom" constant="18" id="Dei-ce-Mee"/>
                 <constraint firstAttribute="trailing" secondItem="EPs-79-Mem" secondAttribute="trailing" constant="12" id="FJD-E9-t9J"/>
                 <constraint firstItem="nbQ-SB-mSh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="MRC-y8-bDr"/>

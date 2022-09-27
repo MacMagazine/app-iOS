@@ -12,6 +12,7 @@ import UIKit
 enum HeaderType {
     case version
     case subscription
+    case none
 }
 
 class SettingsHeaderCell: UITableViewHeaderFooterView {
@@ -26,14 +27,17 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
 
     func setHeader(_ text: String?, type: HeaderType) {
         headerLabel?.font = Settings().getMetricBoldFont(forTextStyle: .title2)
-
         headerLabel?.text = text
-        if type == .version {
+        switch type {
+        case .version:
             subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
-        } else {
-            subHeaderLabel?.text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício.\n"
-        }
 
+        case .subscription:
+            subHeaderLabel?.text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício.\n"
+
+        default:
+            break
+        }
     }
 
     var disclaimerAttributedString: NSAttributedString {
