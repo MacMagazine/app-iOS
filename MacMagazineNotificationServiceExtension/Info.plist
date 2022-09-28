@@ -27,5 +27,9 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
 	</dict>
+	<key>OneSignal_app_groups_key</key>
+	<string>group.com.brit.macmagazine.onesignal.push</string>
+	<key>OneSignal_disable_badge_clearing</key>
+	<true/>
 </dict>
 </plist>

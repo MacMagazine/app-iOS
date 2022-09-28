@@ -57,7 +57,7 @@ extension PushNotification {
 					let prefetcher = ImagePrefetcher(urls: urls)
 					prefetcher.start()
 
-                    Settings().showBadge()
+                    Helper().showBadge()
 
                     return
 				}

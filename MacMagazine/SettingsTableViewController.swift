@@ -398,7 +398,7 @@ extension SettingsTableViewController {
         UserDefaults.standard.set(badge.isOn, forKey: Definitions.badge)
         UserDefaults.standard.synchronize()
 
-        Settings().showBadge()
+        Helper().showBadge()
     }
 
     @IBAction private func setAllRead(_ sender: Any) {
@@ -407,7 +407,7 @@ extension SettingsTableViewController {
                                                     message: "Todos os posts foram marcados como lidos.",
                                                     preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                Settings().showBadge()
+                Helper().showBadge()
                 self.dismiss(animated: true)
             })
             self.present(alertController, animated: true)

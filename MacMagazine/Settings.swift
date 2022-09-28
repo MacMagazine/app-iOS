@@ -11,25 +11,6 @@ import UIKit
 
 // MARK: -
 
-enum Definitions {
-	static let darkMode = "darkMode"
-	static let fontSize = "font-size-settings"
-	static let icon = "icon"
-	static let watch = "watch"
-	static let askForReview = "askForReview"
-	static let all_posts_pushes = "all_posts_pushes"
-	static let pushPreferences = "pushPreferences"
-    static let transparency = "transparency"
-    static let mm_patrao = "mm_patrao"
-    static let purchased = "purchased"
-    static let whatsnew = "whatsnew"
-    static let deleteAllCookies = "deleteAllCookies"
-    static let mmLive = "mmLive"
-    static let badge = "badge"
-}
-
-// MARK: -
-
 enum Appearance: Int {
     case light = 0
     case dark
@@ -301,17 +282,5 @@ extension Settings {
         label.text = message
 
         return label
-    }
-}
-
-// MARK: - Badge -
-
-extension Settings {
-    func showBadge() {
-        if UserDefaults.standard.bool(forKey: Definitions.badge) {
-            UIApplication.shared.applicationIconBadgeNumber = Helper().badgeCount
-        } else {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
     }
 }
