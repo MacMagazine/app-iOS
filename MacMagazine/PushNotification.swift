@@ -58,6 +58,9 @@ extension PushNotification {
 					let prefetcher = ImagePrefetcher(urls: urls)
 					prefetcher.start()
 
+                    if #available(iOS 14.0, *) {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
                     Helper().showBadge()
 
                     return
@@ -158,20 +161,5 @@ extension PushNotification: UNUserNotificationCenterDelegate {
                 }
             }
         }
-    }
-}
-
-extension AppDelegate {
-    func application(application: UIApplication,
-                     didReceiveRemoteNotification userInfo: [NSObject: AnyObject],
-                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-
-        logI("")
-
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-
-        Helper().showBadge()
     }
 }

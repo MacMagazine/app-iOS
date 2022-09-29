@@ -33,6 +33,7 @@ struct Helper {
     }()
 
     func showBadge() {
+#if UPDATEBADGE
         #if !WIDGET
         if UserDefaults.standard.bool(forKey: Definitions.badge) {
             UIApplication.shared.applicationIconBadgeNumber = badgeCount
@@ -40,5 +41,6 @@ struct Helper {
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
         #endif
+#endif
     }
 }
