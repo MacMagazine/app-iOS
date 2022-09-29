@@ -10,6 +10,7 @@ import Kingfisher
 import OneSignal
 import UIKit
 import UserNotifications
+import WidgetKit
 
 class PushNotification: NSObject {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -157,5 +158,20 @@ extension PushNotification: UNUserNotificationCenterDelegate {
                 }
             }
         }
+    }
+}
+
+extension AppDelegate {
+    func application(application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [NSObject: AnyObject],
+                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+
+        logI("")
+
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+
+        Helper().showBadge()
     }
 }
