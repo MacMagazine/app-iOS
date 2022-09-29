@@ -25,7 +25,7 @@ class PushNotification: NSObject {
         })
 
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
-            self.updateDatabase()
+            Database().update()
             completion(notification)
         }
 
@@ -46,8 +46,8 @@ class PushNotification: NSObject {
     }
 }
 
-extension PushNotification {
-	func updateDatabase() {
+class Database {
+	func update() {
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
 
@@ -161,5 +161,13 @@ extension PushNotification: UNUserNotificationCenterDelegate {
                 }
             }
         }
+    }
+}
+
+extension AppDelegate {
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        Database().update()
     }
 }

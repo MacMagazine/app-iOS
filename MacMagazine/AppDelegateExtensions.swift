@@ -75,10 +75,7 @@ extension AppDelegate {
 
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
-
-        if UserDefaults.standard.bool(forKey: Definitions.badge) {
-            UIApplication.shared.applicationIconBadgeNumber = CoreDataStack.shared.numberOfUnreadPosts()
-        }
+        Helper().showBadge()
     }
 }
 
