@@ -10,13 +10,10 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
-	@IBOutlet private weak var logo: UIImageView!
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         view.backgroundColor = Settings().isDarkMode ? .black : .white
-        logo.image = UIImage(named: "splash\(Settings().isDarkMode ? "_dark" : "")")
 
         // Check subscriptions and update status
         Subscriptions.shared.checkSubscriptions { response in

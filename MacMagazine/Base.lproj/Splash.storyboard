@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S4Y-uy-nhm">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="S4Y-uy-nhm">
                                 <rect key="frame" x="87" y="335" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="TnA-DJ-eqf"/>
@@ -32,9 +32,6 @@
                             <constraint firstItem="S4Y-uy-nhm" firstAttribute="centerY" secondItem="ZlU-KJ-atp" secondAttribute="centerY" id="IN4-oV-gs6"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="logo" destination="S4Y-uy-nhm" id="hd7-hz-ddA"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dpz-YH-jQB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,6 +39,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="splash" width="415" height="350"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
