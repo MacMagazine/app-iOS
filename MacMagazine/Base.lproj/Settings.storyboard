@@ -108,7 +108,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recuperar assinatura" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIh-WB-ECk">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gerenciar assinatura" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIh-WB-ECk">
                                                     <rect key="frame" x="6" y="6" width="338" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
@@ -133,7 +133,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontForContentSizeCategory" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="recover:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="i1O-F0-N87"/>
+                                                        <action selector="manage:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="rxr-ks-utO"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -149,8 +149,56 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8C1-SO-fuW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="tiG-1L-2kk">
                                         <rect key="frame" x="20" y="118" width="350" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tiG-1L-2kk" id="N53-NY-o2P">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recuperar assinatura" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uis-eZ-o1T">
+                                                    <rect key="frame" x="6" y="6" width="338" height="38"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ddx-Xv-QhZ">
+                                                    <rect key="frame" x="6" y="6" width="338" height="38"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Recuperar assinatura">
+                                                        <color key="titleColor" name="MMBlueWhite"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" systemColor="systemGray3Color"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontForContentSizeCategory" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="restore:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="mel-0h-qLa"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ddx-Xv-QhZ" firstAttribute="leading" secondItem="N53-NY-o2P" secondAttribute="leading" constant="6" id="BHK-64-u33"/>
+                                                <constraint firstAttribute="bottom" secondItem="ddx-Xv-QhZ" secondAttribute="bottom" constant="6" id="NRH-Bh-QkG"/>
+                                                <constraint firstAttribute="trailing" secondItem="uis-eZ-o1T" secondAttribute="trailing" constant="6" id="WMe-PQ-bmB"/>
+                                                <constraint firstItem="ddx-Xv-QhZ" firstAttribute="top" secondItem="N53-NY-o2P" secondAttribute="top" constant="6" id="cXz-f5-EW2"/>
+                                                <constraint firstItem="uis-eZ-o1T" firstAttribute="leading" secondItem="N53-NY-o2P" secondAttribute="leading" constant="6" id="foy-9p-CyG"/>
+                                                <constraint firstItem="uis-eZ-o1T" firstAttribute="top" secondItem="N53-NY-o2P" secondAttribute="top" constant="6" id="hL4-DJ-VPc"/>
+                                                <constraint firstAttribute="bottom" secondItem="uis-eZ-o1T" secondAttribute="bottom" constant="6" id="lwZ-IB-GZ1"/>
+                                                <constraint firstAttribute="trailing" secondItem="ddx-Xv-QhZ" secondAttribute="trailing" constant="6" id="wHM-5l-9Da"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8C1-SO-fuW">
+                                        <rect key="frame" x="20" y="168" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8C1-SO-fuW" id="rZP-Yq-hvv">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -204,7 +252,7 @@
                             <tableViewSection id="tzb-GF-QmQ" userLabel="Push">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="r1N-CG-9fg">
-                                        <rect key="frame" x="20" y="204.00000000000003" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="254" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r1N-CG-9fg" id="nqX-io-A7H">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -235,7 +283,7 @@
                             <tableViewSection id="84a-FX-W0x" userLabel="Appearance">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nuM-Qw-S8K">
-                                        <rect key="frame" x="20" y="290" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="340" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuM-Qw-S8K" id="dbb-1A-bDj">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -267,7 +315,7 @@
                             <tableViewSection id="0Lr-Wc-1Cl" userLabel="Read">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="USB-w0-aqd">
-                                        <rect key="frame" x="20" y="376" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="426" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="USB-w0-aqd" id="gmu-tL-BHy">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -309,7 +357,7 @@
                                         <gestureRecognizers/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="92" id="irG-Ww-usz">
-                                        <rect key="frame" x="20" y="426" width="350" height="92"/>
+                                        <rect key="frame" x="20" y="476" width="350" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="irG-Ww-usz" id="uvv-sQ-6Ps">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="92"/>
@@ -365,7 +413,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nUb-Aw-emy">
-                                        <rect key="frame" x="20" y="518" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="568" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nUb-Aw-emy" id="qFh-dv-Shk">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -407,7 +455,7 @@
                                         <gestureRecognizers/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="mk0-qA-3MT">
-                                        <rect key="frame" x="20" y="568" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="618" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mk0-qA-3MT" id="f9W-dy-b3s">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -457,7 +505,7 @@
                             <tableViewSection id="xNE-VJ-p0K" userLabel="Icon">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="105" id="rt5-Cn-lyN">
-                                        <rect key="frame" x="20" y="654" width="350" height="105"/>
+                                        <rect key="frame" x="20" y="704" width="350" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rt5-Cn-lyN" id="e0z-VH-ecP">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="105"/>
@@ -683,13 +731,13 @@
                             <tableViewSection id="Hwu-Un-KA8" userLabel="About">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Fsx-19-opK">
-                                        <rect key="frame" x="20" y="795" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="845" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fsx-19-opK" id="2Fv-Sy-DCz">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Limpar cache do app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5U-jB-AxE">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limpar cache do app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5U-jB-AxE">
                                                     <rect key="frame" x="6" y="6" width="338" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
@@ -698,7 +746,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="jOP-Fj-i8C">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="jOP-Fj-i8C">
                                                     <rect key="frame" x="6" y="6" width="338" height="38"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -730,13 +778,13 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2X0-gf-okO">
-                                        <rect key="frame" x="20" y="845" width="350" height="50"/>
+                                        <rect key="frame" x="20" y="895" width="350" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2X0-gf-okO" id="ycF-CO-erd">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Relatar problema/bug no app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-aj-Yg0">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Relatar problema/bug no app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-aj-Yg0">
                                                     <rect key="frame" x="6" y="6" width="338" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
@@ -745,7 +793,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-eq-8vX">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-eq-8vX">
                                                     <rect key="frame" x="6" y="6" width="338" height="38"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Relatar problema/bug no app">
@@ -821,12 +869,13 @@
                         <outlet property="iconOption4Btn" destination="3G3-2f-b5R" id="RBP-o8-x4b"/>
                         <outlet property="iconOption4Selected" destination="ZeS-mP-ySM" id="1UG-Cu-HoD"/>
                         <outlet property="intensityPostRead" destination="f6f-4V-1ar" id="XJT-mw-Q2Z"/>
+                        <outlet property="manageBtn" destination="Goh-iK-82H" id="M1r-rs-NUv"/>
                         <outlet property="patraoButton" destination="7cO-p7-cYL" id="3Ns-Ex-nrD"/>
                         <outlet property="purchasedMessage" destination="4aJ-LD-PBA" id="3xK-iW-f4x"/>
                         <outlet property="pushOptions" destination="Sj3-pV-sjC" id="2d4-fN-eLT"/>
                         <outlet property="readTransparency" destination="CC6-SN-dTQ" id="1Rh-iY-igM"/>
                         <outlet property="readTransparencyValue" destination="Asi-f8-fQS" id="SRB-5N-ucq"/>
-                        <outlet property="restoreBtn" destination="Goh-iK-82H" id="tDK-gB-Fbx"/>
+                        <outlet property="restoreBtn" destination="ddx-Xv-QhZ" id="q1W-X1-iOo"/>
                         <outlet property="spin" destination="05X-vX-2u1" id="740-ek-oar"/>
                         <outlet property="subtitleBuyMessage" destination="VAh-mM-GrP" id="4qe-OY-gNR"/>
                     </connections>

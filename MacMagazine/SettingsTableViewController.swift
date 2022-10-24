@@ -44,7 +44,8 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var subtitleBuyMessage: UILabel!
     @IBOutlet private weak var purchasedMessage: UILabel!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
-    @IBOutlet private weak var restoreBtn: UIButton!
+    @IBOutlet private weak var manageBtn: UIButton!
+	@IBOutlet private weak var restoreBtn: UIButton!
 
     @IBOutlet private weak var badge: UISwitch!
 
@@ -69,6 +70,7 @@ class SettingsTableViewController: UITableViewController {
         self.tableView?.register(UINib(nibName: "SettingsHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "SettingsSubHeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "subHeaderCell")
         self.tableView?.register(UINib(nibName: "SettingsDisclaimerFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "disclaimerFooter")
+		self.tableView?.register(UINib(nibName: "SettingsTermsFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "termsFooter")
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
@@ -106,7 +108,7 @@ class SettingsTableViewController: UITableViewController {
 
     static var getHeaders: [Table] {
         var header = [Table]()
-        header.append(Table(header: "Assinaturas", cell: "subHeaderCell", type: .subscription))
+        header.append(Table(header: "Assinaturas", cell: "subHeaderCell", type: .subscription, heightForFooter: UITableView.automaticDimension, footer: "termsFooter"))
         header.append(Table(header: "Notificações push"))
         header.append(Table(header: "Aparência"))
         header.append(Table(header: "Posts lidos"))
@@ -502,7 +504,7 @@ extension SettingsTableViewController {
 // MARK: - Subscriptions -
 
 extension SettingsTableViewController {
-    @IBAction private func recover(_ sender: Any) {
+    @IBAction private func manage(_ sender: Any) {
         guard let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") else {
             return
         }
@@ -515,10 +517,12 @@ extension SettingsTableViewController {
 
     fileprivate func setupInAppPurchase() {
         enableBuyObjects(true)
-        restoreBtn.isEnabled = false
+        manageBtn.isEnabled = false
+		restoreBtn.isEnabled = false
 
         Subscriptions.shared.status = { [weak self] status in
-            self?.restoreBtn.isEnabled = true
+            self?.manageBtn.isEnabled = true
+			self?.restoreBtn.isEnabled = true
             self?.subtitleBuyMessage.textColor = UIColor(named: "MMDarkGreyWhite")
 
             switch status {
@@ -540,7 +544,8 @@ extension SettingsTableViewController {
                 case .processing:
                     self?.showBuyObjects(false)
                     self?.spin.startAnimating()
-                    self?.restoreBtn.isEnabled = false
+                    self?.manageBtn.isEnabled = false
+					self?.restoreBtn.isEnabled = false
 
                 case .gotProduct(let product):
                     guard let price = product.price,
@@ -559,7 +564,8 @@ extension SettingsTableViewController {
                 case .purchasedSuccess:
                     self?.showBuyObjects(false)
                     self?.purchasedMessage.isHidden = false
-                    self?.restoreBtn.isEnabled = true
+                    self?.manageBtn.isEnabled = true
+					self?.restoreBtn.isEnabled = false
                     self?.patraoButton.isEnabled = false
 
                     var settings = Settings()
@@ -570,12 +576,22 @@ extension SettingsTableViewController {
 
                     self?.subtitleBuyMessage.text = "Compras dentro de Apps desabilitada."
                     self?.subtitleBuyMessage.textColor = .systemRed
-                    self?.restoreBtn.isEnabled = false
+                    self?.manageBtn.isEnabled = false
+					self?.restoreBtn.isEnabled = false
 
                 case .fail:
                     self?.enableBuyObjects(false)
                     self?.subtitleBuyMessage.textColor = .systemRed
-            }
+
+				case .nothingToRestore:
+					self?.showBuyObjects(true)
+
+					let alertController = UIAlertController(title: "Assinaturas", message: "Nenhuma assinatura disponível para restaurar.", preferredStyle: .alert)
+					alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+						self?.dismiss(animated: true)
+					})
+					self?.present(alertController, animated: true)
+			}
         }
 
         hideObjects(Settings().isPatrao)
@@ -603,4 +619,11 @@ extension SettingsTableViewController {
         purchasedMessage.isHidden = !enable
         purchasedMessage.text = enable ? "Você está logado como patrão!" : "Você já é nosso assinante!"
     }
+}
+
+extension SettingsTableViewController {
+	@IBAction private func restore(_ sender: Any) {
+		Subscriptions.shared.restore()
+	}
+
 }

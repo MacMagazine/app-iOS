@@ -15,54 +15,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="MacMagazine é um projeto de código aberto no GitHub liderado por Cassio Rossi, da KazzioSoftware." adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbQ-SB-mSh">
-                    <rect key="frame" x="20" y="18" width="374" height="834"/>
+                    <rect key="frame" x="20" y="18" width="374" height="870"/>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNU-JU-1pz">
-                    <rect key="frame" x="0.0" y="867" width="414" height="1"/>
-                    <color key="backgroundColor" systemColor="systemGray4Color"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="D7m-YO-4dk"/>
-                    </constraints>
-                </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EPs-79-Mem">
-                    <rect key="frame" x="12" y="870" width="390" height="26"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJO-SV-nH8">
-                            <rect key="frame" x="0.0" y="0.0" width="195" height="26"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                            <state key="normal" title="Termos de Uso"/>
-                            <connections>
-                                <action selector="showTermsUse:" destination="iN0-l3-epB" eventType="touchUpInside" id="awR-Jy-RQm"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="275-8k-sfp">
-                            <rect key="frame" x="195" y="0.0" width="195" height="26"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                            <state key="normal" title="Política de Privacidade"/>
-                            <connections>
-                                <action selector="showPrivacy:" destination="iN0-l3-epB" eventType="touchUpInside" id="xv4-Ws-NnF"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="bTU-GY-lgo"/>
-                    </constraints>
-                </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="EPs-79-Mem" secondAttribute="bottom" id="0W5-u8-ebI"/>
-                <constraint firstItem="EPs-79-Mem" firstAttribute="top" secondItem="nbQ-SB-mSh" secondAttribute="bottom" constant="18" id="Dei-ce-Mee"/>
-                <constraint firstAttribute="trailing" secondItem="EPs-79-Mem" secondAttribute="trailing" constant="12" id="FJD-E9-t9J"/>
+                <constraint firstAttribute="bottom" secondItem="nbQ-SB-mSh" secondAttribute="bottom" constant="8" id="CCu-4Z-jke"/>
                 <constraint firstItem="nbQ-SB-mSh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="MRC-y8-bDr"/>
                 <constraint firstItem="nbQ-SB-mSh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="XEm-A8-Xfz"/>
-                <constraint firstItem="yNU-JU-1pz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZgO-ky-8kO"/>
-                <constraint firstAttribute="trailing" secondItem="yNU-JU-1pz" secondAttribute="trailing" id="g5a-2U-pAx"/>
-                <constraint firstItem="EPs-79-Mem" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="gkA-d6-qVo"/>
-                <constraint firstItem="EPs-79-Mem" firstAttribute="top" secondItem="yNU-JU-1pz" secondAttribute="bottom" constant="2" id="pGU-z5-56E"/>
                 <constraint firstAttribute="trailing" secondItem="nbQ-SB-mSh" secondAttribute="trailing" constant="20" id="uny-hF-rh0"/>
             </constraints>
             <connections>
@@ -74,9 +37,6 @@
     <resources>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

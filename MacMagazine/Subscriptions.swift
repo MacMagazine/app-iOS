@@ -18,6 +18,7 @@ enum InAppPurchaseStatus {
     case expired
     case fail
     case disabled
+	case nothingToRestore
 }
 
 class Subscriptions {
@@ -121,7 +122,7 @@ class Subscriptions {
                 switch rsp {
                     case .failure(_):
                         self?.isPurchasing = false
-                        self?.status?(.canPurchase)
+						self?.status?(restore ? .nothingToRestore : .canPurchase)
 
                     case .success(let response):
                         var status: InAppPurchaseStatus {

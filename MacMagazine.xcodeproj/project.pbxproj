@@ -71,6 +71,7 @@
 		9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
 		9B5DB3BD225FF43B00AC3358 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44B2226E9320016C567 /* DateExtensions.swift */; };
 		9B61D92125C714B000EA8085 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
+		9B66A649290699E7003AC987 /* SettingsTermsFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B66A648290699E7003AC987 /* SettingsTermsFooter.xib */; };
 		9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D0B822229B72100E2C044 /* macmagazine.xcdatamodeld */; };
 		9B6F965A225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
 		9B6F965B225E5A060075ED89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F9659225E5A060075ED89 /* Logger.swift */; };
@@ -323,6 +324,7 @@
 		9B4A8FA622357A0D00A49239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PodcastCell.xib; sourceTree = "<group>"; };
 		9B4D8D08279DFE1E00D6AD17 /* macmagazine 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 10.xcdatamodel"; sourceTree = "<group>"; };
 		9B5D403E225E83DA00315963 /* macmagazine 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 3.xcdatamodel"; sourceTree = "<group>"; };
+		9B66A648290699E7003AC987 /* SettingsTermsFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTermsFooter.xib; sourceTree = "<group>"; };
 		9B6D0B832229B72100E2C044 /* macmagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macmagazine.xcdatamodel; sourceTree = "<group>"; };
 		9B6F9659225E5A060075ED89 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -829,6 +831,7 @@
 				685E4306252227420028FAA0 /* SettingsHeaderCell.xib */,
 				68012EBE252295600094A204 /* SettingsSubHeaderCell.xib */,
 				9BD135DC2227364C00A0B627 /* SettingsTableViewController.swift */,
+				9B66A648290699E7003AC987 /* SettingsTermsFooter.xib */,
 			);
 			name = Ajustes;
 			sourceTree = "<group>";
@@ -1129,6 +1132,7 @@
 				9BA939442260DE0A004005AA /* WebView.storyboard in Resources */,
 				9B3224312260DD78005CF974 /* Videos.storyboard in Resources */,
 				9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */,
+				9B66A649290699E7003AC987 /* SettingsTermsFooter.xib in Resources */,
 				9B8B1D2328326474005F9AC4 /* tablet_3@2x~ipad.png in Resources */,
 				68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */,
 				9B1514BB22BE73010039DA28 /* phone_3@2x.png in Resources */,
