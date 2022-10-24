@@ -114,7 +114,7 @@ class LoadingController: WKInterfaceController {
             })
         } else {
             logE("Companion not reachable")
-            self.posts = []
+            self.posts = nil
         }
     }
 

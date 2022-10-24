@@ -39,34 +39,42 @@ extension WatchSessionManager: WCSessionDelegate {
 
 	func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
 		if message["request"] as? String == "posts" {
-
-			var images: [String] = []
-
-			API().getPosts(page: 0) { post in
-                DispatchQueue.main.async {
-                    guard let post = post else {
-						// Prefetch images to be able to sent to Apple Watch
-						let urls = images.compactMap { URL(string: $0) }
-						let prefetcher = ImagePrefetcher(urls: urls)
-						prefetcher.start()
-
-						CoreDataStack.shared.getPostsForWatch { watchPosts in
-                            do {
-                                let jsonData = try JSONEncoder().encode(watchPosts)
-                                replyHandler(["posts": jsonData])
-                            } catch {
-                                logE(error.localizedDescription)
-                                replyHandler(["posts": []])
-                            }
-                        }
-                        return
-                    }
-					images.append(post.artworkURL)
-                    CoreDataStack.shared.save(post: post)
-                }
-            }
-
+			retrieve(replyHandler: replyHandler)
 		}
 	}
 
+}
+
+extension WatchSessionManager {
+	func retrieve(replyHandler: @escaping ([String: Any]) -> Void) {
+		CoreDataStack.shared.getPostsForWatch { [weak self] watchPosts in
+			do {
+				let jsonData = try JSONEncoder().encode(watchPosts)
+				replyHandler(["posts": jsonData])
+			} catch {
+				logE(error.localizedDescription)
+				self?.load(replyHandler: replyHandler)
+			}
+		}
+	}
+
+	func load(replyHandler: @escaping ([String: Any]) -> Void) {
+		var images: [String] = []
+
+		API().getPosts(page: 0) { [weak self] post in
+			DispatchQueue.main.async {
+				guard let post = post else {
+					// Prefetch images to be able to sent to Apple Watch
+					let urls = images.compactMap { URL(string: $0) }
+					let prefetcher = ImagePrefetcher(urls: urls)
+					prefetcher.start()
+
+					self?.retrieve(replyHandler: replyHandler)
+					return
+				}
+				images.append(post.artworkURL)
+				CoreDataStack.shared.save(post: post)
+			}
+		}
+	}
 }
