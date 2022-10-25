@@ -20,7 +20,8 @@ struct MacMagazineWidgetExtension: Widget {
                     .accessoryInline,
                     .accessoryCircular,
                     .systemSmall,
-                    .systemMedium]
+                    .systemMedium,
+					.systemLarge]
         } else {
             return [.systemSmall,
                     .systemMedium]
@@ -58,6 +59,9 @@ struct MacMagazineWidgetExtension_Previews: PreviewProvider {
             RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder]))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .previewDisplayName("Small")
+			RecentPostsWidget(entry: RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder]))
+				.previewContext(WidgetPreviewContext(family: .systemLarge))
+				.previewDisplayName("Large")
         }
     }
 }
