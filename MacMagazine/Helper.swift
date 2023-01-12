@@ -35,9 +35,11 @@ struct Helper {
 
     func showBadge() {
         #if !WIDGET
-        delay(0.4) {
-            UIApplication.shared.applicationIconBadgeNumber = UserDefaults.standard.bool(forKey: Definitions.badge) ? badgeCount : 0
-        }
+		if UserDefaults.standard.bool(forKey: Definitions.badge) {
+			delay(0.4) {
+				UIApplication.shared.applicationIconBadgeNumber = badgeCount
+			}
+		}
         #endif
     }
 }
