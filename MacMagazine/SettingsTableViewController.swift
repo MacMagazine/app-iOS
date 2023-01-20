@@ -409,7 +409,9 @@ extension SettingsTableViewController {
                                                     message: "Todos os posts foram marcados como lidos.",
                                                     preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                Helper().resetBadge()
+				delay(0.1) {
+					UIApplication.shared.applicationIconBadgeNumber = 0
+				}
                 self.dismiss(animated: true)
             })
             self.present(alertController, animated: true)

@@ -28,32 +28,32 @@ enum Definitions {
 }
 
 struct Helper {
-    var badgeCount: Int = {
-        let count = CoreDataStack.shared.numberOfUnreadPosts()
-        return count
-    }()
+    var badgeCount: Int = { CoreDataStack.shared.numberOfUnreadPosts() }()
 
 	func manageBadge() {
 		if UserDefaults.standard.bool(forKey: Definitions.badge) {
 			showBadge()
-		} else {
-			resetBadge()
 		}
-	}
-
-	func resetBadge() {
-#if !WIDGET
-		UIApplication.shared.applicationIconBadgeNumber = 0
-#endif
 	}
 
 	func showBadge() {
 #if !WIDGET
 		if UserDefaults.standard.bool(forKey: Definitions.badge) {
-			delay(0.4) {
+			delay(0.1) {
 				UIApplication.shared.applicationIconBadgeNumber = badgeCount
 			}
+		} else {
+			UNUserNotificationCenter.current().hideBadge()
 		}
 #endif
     }
+}
+
+extension UNUserNotificationCenter {
+	func hideBadge() {
+		let content = UNMutableNotificationContent()
+		content.badge = -1
+		let request = UNNotificationRequest(identifier: "clearBadge", content: content, trigger: nil)
+		self.add(request, withCompletionHandler: nil)
+	}
 }

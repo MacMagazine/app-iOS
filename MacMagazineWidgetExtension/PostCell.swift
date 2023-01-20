@@ -41,7 +41,7 @@ struct PostCell: View {
         case .accessoryCircular:
             ZStack {
                 Circle()
-                    .stroke(lineWidth: 12)
+                    .stroke(lineWidth: 10)
                 VStack(spacing: 0) {
                     Image("logo")
                         .resizable()

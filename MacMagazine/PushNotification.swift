@@ -24,24 +24,22 @@ class PushNotification: NSObject {
             self.setLocalNotification()
         })
 
+		// This block gets called when the App is in foreground and receives a Push Notification
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
             Database().update()
             completion(notification)
         }
-
         OneSignal.setNotificationWillShowInForegroundHandler(notifWillShowInForegroundHandler)
 
+		// This block gets called when the user reacts to a notification received
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-            // This block gets called when the user reacts to a notification received
             let notification: OSNotification = result.notification
             guard let additionalData = notification.additionalData,
                   let url = additionalData as? [String: String] else {
                 return
             }
-
             (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
         }
-
         OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
     }
 }

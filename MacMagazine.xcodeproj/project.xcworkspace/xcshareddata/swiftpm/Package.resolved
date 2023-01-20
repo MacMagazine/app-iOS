@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
       "state" : {
-        "revision" : "9e27413dba317fb0387757acc45441680ff0f995",
-        "version" : "3.11.2"
+        "revision" : "f5666b1781382e410b2ad17d638bc2de275ce91e",
+        "version" : "3.12.3"
       }
     }
   ],
