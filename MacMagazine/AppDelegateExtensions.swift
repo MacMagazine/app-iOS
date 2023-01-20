@@ -49,8 +49,6 @@ extension AppDelegate {
                 }
             }
         }
-
-		Helper().manageBadge()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

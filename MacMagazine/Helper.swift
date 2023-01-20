@@ -30,20 +30,14 @@ enum Definitions {
 struct Helper {
     var badgeCount: Int = { CoreDataStack.shared.numberOfUnreadPosts() }()
 
-	func manageBadge() {
-		if UserDefaults.standard.bool(forKey: Definitions.badge) {
-			showBadge()
-		}
-	}
-
 	func showBadge() {
 #if !WIDGET
-		if UserDefaults.standard.bool(forKey: Definitions.badge) {
-			delay(0.1) {
+		delay(1) {
+			if UserDefaults.standard.bool(forKey: Definitions.badge) {
 				UIApplication.shared.applicationIconBadgeNumber = badgeCount
+			} else {
+				UNUserNotificationCenter.current().hideBadge()
 			}
-		} else {
-			UNUserNotificationCenter.current().hideBadge()
 		}
 #endif
     }

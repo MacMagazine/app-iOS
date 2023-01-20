@@ -380,7 +380,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
                     return
                 }
-                self.postId.append(post.postId)
+
+				self.postId.append(post.postId)
                 images.append(post.artworkURL)
                 searchableItems.append(self.createSearchableItem(post))
 
