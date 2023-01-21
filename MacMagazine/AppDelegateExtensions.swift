@@ -75,7 +75,6 @@ extension AppDelegate {
 
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
-        Helper().showBadge()
     }
 }
 

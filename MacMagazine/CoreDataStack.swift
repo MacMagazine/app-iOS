@@ -80,7 +80,6 @@ class CoreDataStack {
 
 	func save() {
 		save(nil)
-        Helper().showBadge()
 	}
 
 	func save(_ context: NSManagedObjectContext?) {
