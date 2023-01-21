@@ -306,8 +306,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     }
 
 	fileprivate func getPosts(paged: Int) {
-        logD(paged)
-
         if paged == 0 {
             self.postId = []
         }

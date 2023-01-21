@@ -32,16 +32,12 @@ struct Helper {
 
 	func showBadge() {
 #if !WIDGET
-		logD("counter: \(badgeCount) | show: \(UserDefaults.standard.bool(forKey: Definitions.badge))")
 		delay(1) {
 			if UserDefaults.standard.bool(forKey: Definitions.badge) {
 				UIApplication.shared.applicationIconBadgeNumber = badgeCount
 			} else {
 				UIApplication.shared.applicationIconBadgeNumber = -1
 //				UNUserNotificationCenter.current().hideBadge()
-			}
-			delay(1) {
-				logD(UIApplication.shared.applicationIconBadgeNumber)
 			}
 		}
 #endif
@@ -50,7 +46,6 @@ struct Helper {
 
 extension UNUserNotificationCenter {
 	func hideBadge() {
-		logD(#function)
 		let content = UNMutableNotificationContent()
 		content.badge = -1
 		let request = UNNotificationRequest(identifier: "clearBadge", content: content, trigger: nil)
