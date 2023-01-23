@@ -21,9 +21,17 @@ class NotificationService: UNNotificationServiceExtension {
 		self.contentHandler = contentHandler
 		bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-		if let bestAttemptContent = bestAttemptContent,
-           let receivedRequest = receivedRequest {
-            OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
+		if let bestAttemptContent = bestAttemptContent {
+			logD("bestAttemptContent:\n\(bestAttemptContent.debugDescription)")
+			if let userDefaultsNew = UserDefaults(suiteName: "group.com.brit.macmagazine.onesignal.push") {
+				logD("userDefaultsNew:\n\(userDefaultsNew.dictionaryRepresentation().debugDescription)")
+				logD("=== onesignalBadgeCount: \(userDefaultsNew.integer(forKey: "onesignalBadgeCount"))")
+			}
+			logD("UserDefaults.standard:\n\(UserDefaults.standard.dictionaryRepresentation().debugDescription)")
+
+			if let receivedRequest = receivedRequest {
+				OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
+			}
 			contentHandler(bestAttemptContent)
 		}
 
