@@ -39,7 +39,6 @@ class PushNotification: NSObject {
                 return
             }
             (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
-			logD("notificationOpenedBlock: \(notification)")
         }
         OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
 	}
@@ -60,7 +59,7 @@ class Database {
                     if #available(iOS 14.0, *) {
                         WidgetCenter.shared.reloadAllTimelines()
                     }
-                    Helper().showBadge()
+//                    Helper().showBadge()
 
                     return
 				}
