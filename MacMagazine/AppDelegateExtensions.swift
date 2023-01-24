@@ -76,11 +76,7 @@ extension AppDelegate {
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
 
-		if let userDefaultsNew = UserDefaults(suiteName: "group.com.brit.macmagazine.onesignal.push") {
-			logD("userDefaultsNew:\n\(userDefaultsNew.dictionaryRepresentation().debugDescription)")
-			logD("=== onesignalBadgeCount: \(userDefaultsNew.integer(forKey: "onesignalBadgeCount"))")
-		}
-		logD("UserDefaults.standard:\n\(UserDefaults.standard.dictionaryRepresentation().debugDescription)")
+		logD(Bundle.main.object(forInfoDictionaryKey: "OneSignal_app_groups_key"))
 	}
 }
 
