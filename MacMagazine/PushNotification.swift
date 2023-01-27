@@ -26,7 +26,7 @@ class PushNotification: NSObject {
 
 		// This block gets called when the App is in foreground and receives a Push Notification
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
-			logD("notifWillShowInForegroundHandler:\n\(notification.debugDescription)")
+			logD("notifWillShowInForegroundHandler")
             Database().update()
             completion(notification)
         }
@@ -34,12 +34,12 @@ class PushNotification: NSObject {
 
 		// This block gets called when the user reacts to a notification received
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
+			logD("notificationOpenedBlock")
             let notification: OSNotification = result.notification
             guard let additionalData = notification.additionalData,
                   let url = additionalData as? [String: String] else {
                 return
             }
-			logD("notificationOpenedBlock:\n\(notification.debugDescription)")
             (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
         }
         OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
@@ -163,11 +163,27 @@ extension PushNotification: UNUserNotificationCenterDelegate {
         }
     }
 }
-
+/*
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Database().update()
+
+		logD(userInfo)
+
+		guard let additionalData = userInfo["custom"] as? [String: Any] else {
+			completionHandler(.newData)
+			return
+		}
+		print(additionalData)
+//		print(url)
+//		(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
+
+		if let badge = additionalData["badge_inc"] as? Int {
+			UIApplication.shared.applicationIconBadgeNumber += badge
+		}
+		completionHandler(.newData)
     }
 }
+*/

@@ -75,8 +75,6 @@ extension AppDelegate {
 
 		// Push Notification
 		PushNotification().setup(options: launchOptions)
-
-		logD(Bundle.main.object(forInfoDictionaryKey: "OneSignal_app_groups_key"))
 	}
 }
 

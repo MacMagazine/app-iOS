@@ -28,6 +28,6 @@
 		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
 	</dict>
 	<key>OneSignal_app_groups_key</key>
-	<string>group.com.brit.macmagazine.onesignal.push</string>
+	<string>A5VW9QUF9L.group.com.brit.macmagazine.onesignal.push</string>
 </dict>
 </plist>

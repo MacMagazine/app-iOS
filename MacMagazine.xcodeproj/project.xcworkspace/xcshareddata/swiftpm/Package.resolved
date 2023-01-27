@@ -10,11 +10,11 @@
       }
     },
     {
-      "identity" : "onesignal-ios-sdk",
+      "identity" : "onesignal-xcframework",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
+      "location" : "https://github.com/OneSignal/OneSignal-XCFramework",
       "state" : {
-        "revision" : "f5666b1781382e410b2ad17d638bc2de275ce91e",
+        "revision" : "b87060d4a77ab6b5e96d6655b2587d3cb05e33e5",
         "version" : "3.12.3"
       }
     }

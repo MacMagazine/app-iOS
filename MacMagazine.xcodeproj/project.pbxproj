@@ -78,6 +78,7 @@
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
 		9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */; };
+		9B7F1716298441F0008E3680 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9B7F1715298441F0008E3680 /* OneSignal */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
 		9B872AF22254E21F00A3C1C3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AF12254E21F00A3C1C3 /* PlayerViewController.swift */; };
@@ -151,8 +152,6 @@
 		9BDCDC872296DCB000649C0F /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC862296DCB000649C0F /* NetworkTests.swift */; };
 		9BDCDC902296F88800649C0F /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDCDC8F2296F88800649C0F /* AppDelegateExtensions.swift */; };
 		9BF66D34222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */; };
-		9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82C9D25150E3000D765A5 /* OneSignal */; };
-		9BF82CA425150E4200D765A5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF82CA325150E4200D765A5 /* OneSignal */; };
 		9BF886902832522100086514 /* Categories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF8868E2832522100086514 /* Categories.storyboard */; };
 		9BFD100328DF5F20002B36A6 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9BFD100628DF5F3B002B36A6 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD100528DF5F3B002B36A6 /* Helper.swift */; };
@@ -432,7 +431,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BF82CA425150E4200D765A5 /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,8 +450,8 @@
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
 				9B48046625F4EE9B0026AFF0 /* InAppPurchase.xcframework in Frameworks */,
-				9BF82C9E25150E3000D765A5 /* OneSignal in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
+				9B7F1716298441F0008E3680 /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,7 +910,6 @@
 			);
 			name = MacMagazineNotificationServiceExtension;
 			packageProductDependencies = (
-				9BF82CA325150E4200D765A5 /* OneSignal */,
 			);
 			productName = MacMagazineNotificationServiceExtension;
 			productReference = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */;
@@ -981,8 +978,8 @@
 			);
 			name = MacMagazine;
 			packageProductDependencies = (
-				9BF82C9D25150E3000D765A5 /* OneSignal */,
 				685315FA25153ADE008F6CDC /* Kingfisher */,
+				9B7F1715298441F0008E3680 /* OneSignal */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1066,8 +1063,8 @@
 			);
 			mainGroup = 9BCAD66E1F47A08100B54526;
 			packageReferences = (
-				9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -1569,6 +1566,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 4.5.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1602,6 +1604,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 4.5.1;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -1831,6 +1838,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 4.5.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -2353,12 +2365,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
+		9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.11.0;
+				minimumVersion = 3.0.0;
 			};
 		};
 		9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -2387,14 +2399,9 @@
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		9BF82C9D25150E3000D765A5 /* OneSignal */ = {
+		9B7F1715298441F0008E3680 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
-			productName = OneSignal;
-		};
-		9BF82CA325150E4200D765A5 /* OneSignal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BF82C9C25150E3000D765A5 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			package = 9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
 			productName = OneSignal;
 		};
 /* End XCSwiftPackageProductDependency section */
