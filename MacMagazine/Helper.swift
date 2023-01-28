@@ -48,9 +48,7 @@ extension Helper {
     }
 
 	fileprivate func updateOneSignal(counter: Int) {
-		logD(OneSignalExtensionBadgeHandler.currentCachedBadgeValue())
 		OneSignalExtensionBadgeHandler.updateCachedBadgeValue(counter)
-		logD(OneSignalExtensionBadgeHandler.currentCachedBadgeValue())
 	}
 }
 #endif

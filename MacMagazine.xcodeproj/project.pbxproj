@@ -66,6 +66,7 @@
 		9B4A8FA222357A0800A49239 /* FeaturedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA422357A0800A49239 /* FeaturedCell.xib */; };
 		9B4A8FA522357A0D00A49239 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B4A8FA722357A0D00A49239 /* PodcastCell.xib */; };
 		9B560FB625C9C29600F62992 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9B560FB525C9C29600F62992 /* Kingfisher */; };
+		9B593BA929851E2B00846988 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 9B593BA829851E2B00846988 /* OneSignalExtension */; };
 		9B5DB3BA225FBC6200AC3358 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
 		9B5DB3BB225FBC6200AC3358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
 		9B5DB3BC225FF34A00AC3358 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD44E2226FD150016C567 /* StringExtensions.swift */; };
@@ -431,6 +432,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B593BA929851E2B00846988 /* OneSignalExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +912,7 @@
 			);
 			name = MacMagazineNotificationServiceExtension;
 			packageProductDependencies = (
+				9B593BA829851E2B00846988 /* OneSignalExtension */,
 			);
 			productName = MacMagazineNotificationServiceExtension;
 			productReference = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */;
@@ -2398,6 +2401,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9B593BA829851E2B00846988 /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
 		};
 		9B7F1715298441F0008E3680 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;

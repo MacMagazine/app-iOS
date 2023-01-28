@@ -57,7 +57,7 @@ extension AppDelegate {
 		}
 	}
 
-	func applicationDidEnterBackground(_ application: UIApplication) {
+	func applicationWillResignActive(_ application: UIApplication) {
 		Helper().showBadge()
 	}
 }
