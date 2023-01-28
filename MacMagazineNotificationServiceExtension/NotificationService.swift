@@ -7,6 +7,7 @@
 //
 
 import OneSignal
+import OneSignalExtension
 import UserNotifications
 import WidgetKit
 
@@ -17,28 +18,21 @@ class NotificationService: UNNotificationServiceExtension {
 	var bestAttemptContent: UNMutableNotificationContent?
 
 	override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-
-		logD(#function)
-
 		self.receivedRequest = request
 		self.contentHandler = contentHandler
 		bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-		if let bestAttemptContent = bestAttemptContent {
-			if let receivedRequest = receivedRequest {
-				OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
-			}
-			contentHandler(bestAttemptContent)
+		if #available(iOS 14.0, *) {
+			WidgetCenter.shared.reloadAllTimelines()
 		}
 
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+		if let bestAttemptContent = bestAttemptContent,
+		   let receivedRequest = receivedRequest {
+			OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
+		}
 	}
 
 	override func serviceExtensionTimeWillExpire() {
-		logD(#function)
-
 		// Called just before the extension will be terminated by the system.
 		// Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
 		if let contentHandler = contentHandler,

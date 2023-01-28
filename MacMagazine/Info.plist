@@ -148,7 +148,7 @@
 		<string>com.brit.macmagazine.details</string>
 	</array>
 	<key>OneSignal_app_groups_key</key>
-	<string>A5VW9QUF9L.group.com.brit.macmagazine.onesignal.push</string>
+	<string>group.com.brit.macmagazine.onesignal.push</string>
 	<key>OneSignal_disable_badge_clearing</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

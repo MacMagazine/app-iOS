@@ -29,32 +29,36 @@ extension Notification.Name {
 // MARK: - Update content -
 
 extension AppDelegate {
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
+	func applicationWillEnterForeground(_ application: UIApplication) {
+		NotificationCenter.default.post(name: .refreshAfterBackground, object: nil)
 
-        // Check subscriptions and update status
-        Subscriptions.shared.checkSubscriptions { response in
-            var settings = Settings()
-            settings.purchased = response
-        }
+		// Check subscriptions and update status
+		Subscriptions.shared.checkSubscriptions { response in
+			var settings = Settings()
+			settings.purchased = response
+		}
 
-        // Check if MM Live is active
-        Settings().isMMLive { isLive in
-            DispatchQueue.main.async {
-                (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
-                if !isLive {
-                    TabBarController.shared.removeIndexes([0])
-                } else {
-                    TabBarController.shared.resetTabs()
-                }
-            }
-        }
-    }
+		// Check if MM Live is active
+		Settings().isMMLive { isLive in
+			DispatchQueue.main.async {
+				(UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
+				if !isLive {
+					TabBarController.shared.removeIndexes([0])
+				} else {
+					TabBarController.shared.resetTabs()
+				}
+			}
+		}
+	}
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        if !Subscriptions.shared.isPurchasing {
-            Settings().applyTheme()
-        }
+	func applicationDidBecomeActive(_ application: UIApplication) {
+		if !Subscriptions.shared.isPurchasing {
+			Settings().applyTheme()
+		}
+	}
+
+	func applicationDidEnterBackground(_ application: UIApplication) {
+		Helper().showBadge()
 	}
 }
 

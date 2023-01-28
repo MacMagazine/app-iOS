@@ -374,8 +374,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                         }
                     }
 
-                    Helper().showBadge()
-
                     return
                 }
 

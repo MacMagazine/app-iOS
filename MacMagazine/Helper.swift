@@ -6,6 +6,7 @@
 //  Copyright © 2022 MacMagazine. All rights reserved.
 //
 
+import OneSignalExtension
 import UIKit
 
 // MARK: -
@@ -28,27 +29,28 @@ enum Definitions {
 }
 
 struct Helper {
-    var badgeCount: Int = { CoreDataStack.shared.numberOfUnreadPosts() }()
+	var badgeCount: Int = { CoreDataStack.shared.numberOfUnreadPosts() }()
+}
 
-	func showBadge() {
 #if !WIDGET
+extension Helper {
+	func showBadge() {
 		delay(1) {
 			if UserDefaults.standard.bool(forKey: Definitions.badge) {
 				UIApplication.shared.applicationIconBadgeNumber = badgeCount
+				updateOneSignal(counter: badgeCount)
 			} else {
+				// Icon badge should be set to -1 to disappear but keep history of notifications
 				UIApplication.shared.applicationIconBadgeNumber = -1
-//				UNUserNotificationCenter.current().hideBadge()
+				updateOneSignal(counter: 0)
 			}
 		}
-#endif
     }
-}
 
-extension UNUserNotificationCenter {
-	func hideBadge() {
-		let content = UNMutableNotificationContent()
-		content.badge = -1
-		let request = UNNotificationRequest(identifier: "clearBadge", content: content, trigger: nil)
-		self.add(request, withCompletionHandler: nil)
+	fileprivate func updateOneSignal(counter: Int) {
+		logD(OneSignalExtensionBadgeHandler.currentCachedBadgeValue())
+		OneSignalExtensionBadgeHandler.updateCachedBadgeValue(counter)
+		logD(OneSignalExtensionBadgeHandler.currentCachedBadgeValue())
 	}
 }
+#endif

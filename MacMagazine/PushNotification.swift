@@ -16,6 +16,8 @@ class PushNotification: NSObject {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
         let key: [UInt8] = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
 
+		OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
+
         OneSignal.setLocationShared(false)
         OneSignal.initWithLaunchOptions(options)
         OneSignal.setAppId(Obfuscator().reveal(key: key))
@@ -30,7 +32,7 @@ class PushNotification: NSObject {
             Database().update()
             completion(notification)
         }
-        OneSignal.setNotificationWillShowInForegroundHandler(notifWillShowInForegroundHandler)
+		OneSignal.setNotificationWillShowInForegroundHandler(notifWillShowInForegroundHandler)
 
 		// This block gets called when the user reacts to a notification received
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
@@ -40,9 +42,10 @@ class PushNotification: NSObject {
                   let url = additionalData as? [String: String] else {
                 return
             }
+			logD(url["url"])
             (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
         }
-        OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+		OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
 	}
 }
 
@@ -61,8 +64,6 @@ class Database {
                     if #available(iOS 14.0, *) {
                         WidgetCenter.shared.reloadAllTimelines()
                     }
-//                    Helper().showBadge()
-
                     return
 				}
 				images.append(post.artworkURL)
@@ -163,27 +164,11 @@ extension PushNotification: UNUserNotificationCenterDelegate {
         }
     }
 }
-/*
+
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Database().update()
-
-		logD(userInfo)
-
-		guard let additionalData = userInfo["custom"] as? [String: Any] else {
-			completionHandler(.newData)
-			return
-		}
-		print(additionalData)
-//		print(url)
-//		(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
-
-		if let badge = additionalData["badge_inc"] as? Int {
-			UIApplication.shared.applicationIconBadgeNumber += badge
-		}
-		completionHandler(.newData)
     }
 }
-*/
