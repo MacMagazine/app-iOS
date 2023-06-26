@@ -435,8 +435,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
         self.navigationItem.rightBarButtonItems = nil
 
+        var items = [RightButtons]()
         if webView.url?.isMMPost() ?? false {
-            var items = [RightButtons]()
             if webView.url?.isMMAddress() ?? false {
                 items.append(.actions)
             }
@@ -444,7 +444,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         } else {
             setRightButtomItems([.close])
         }
-        if post == nil {
+        if post == nil && items.isEmpty {
             setRightButtomItems([.close])
         }
 

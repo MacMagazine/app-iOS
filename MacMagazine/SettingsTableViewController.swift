@@ -7,6 +7,7 @@
 //
 
 import CoreSpotlight
+import InAppPurchase
 import Kingfisher
 import MessageUI
 import UIKit
@@ -39,17 +40,16 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet private weak var patraoButton: UIButton!
 
-    @IBOutlet private weak var buyBtn: UIButton!
-    @IBOutlet private weak var buyMessage: UILabel!
-    @IBOutlet private weak var subtitleBuyMessage: UILabel!
+    var products = [Product]()
+
+    @IBOutlet private weak var buyMonthBtn: UIButton!
+    @IBOutlet private weak var buyYearBtn: UIButton!
     @IBOutlet private weak var purchasedMessage: UILabel!
     @IBOutlet private weak var spin: UIActivityIndicatorView!
     @IBOutlet private weak var manageBtn: UIButton!
 	@IBOutlet private weak var restoreBtn: UIButton!
 
     @IBOutlet private weak var badge: UISwitch!
-
-    var price: String = "-"
 
     enum IconOptionAccessibilityLabel: String {
         case whiteBackground = "Ícone do aplicativo com fundo branco."
@@ -108,10 +108,14 @@ class SettingsTableViewController: UITableViewController {
 
     static var getHeaders: [Table] {
         var header = [Table]()
-        header.append(Table(header: "Assinaturas", cell: "subHeaderCell", type: .subscription, heightForFooter: UITableView.automaticDimension, footer: "termsFooter"))
+        header.append(Table(header: "Remover propagandas",
+                            cell: "subHeaderCell",
+                            type: .subscription,
+                            heightForFooter: UITableView.automaticDimension,
+                            footer: "termsFooter"))
         header.append(Table(header: "Notificações push"))
         header.append(Table(header: "Aparência"))
-        header.append(Table(header: "Posts lidos"))
+        header.append(Table(header: "Posts"))
         header.append(Table(header: "Ícone do app", heightForRow: 105))
         header.append(Table(header: "Sobre",
                             cell: "subHeaderCell",
@@ -155,12 +159,6 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        if SettingsTableViewController.getHeaders[indexPath.section].type == .subscription &&
-            indexPath.row == 0 &&
-            !buyBtn.isHidden {
-            Subscriptions.shared.purchase()
-        }
     }
 }
 
@@ -295,6 +293,7 @@ extension SettingsTableViewController {
 
         darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
 
+        badge.isEnabled = intensityPostRead.isOn
         badge.isOn = UserDefaults.standard.bool(forKey: Definitions.badge)
     }
 }
@@ -356,8 +355,14 @@ extension SettingsTableViewController {
         setIntensity(value)
         readTransparency.setValue(value, animated: true)
 
+        badge.isEnabled = intensity.isOn
         if !intensity.isOn {
             appearanceCellIntensity.isHidden = true
+
+            // If Identificar is off, badge is off
+            badge.isOn = false
+            showBadge(badge as Any)
+
             self.tableView.reloadData()
         }
     }
@@ -514,7 +519,9 @@ extension SettingsTableViewController {
     }
 
     @IBAction private func buy(_ sender: Any) {
-        Subscriptions.shared.purchase()
+        let product = products.filter { $0.identifier == (sender as? UIButton)?.accessibilityIdentifier }
+        guard let product = product.first else { return }
+        Subscriptions.shared.purchase(product: product)
     }
 
     fileprivate func setupInAppPurchase() {
@@ -525,7 +532,7 @@ extension SettingsTableViewController {
         Subscriptions.shared.status = { [weak self] status in
             self?.manageBtn.isEnabled = true
 			self?.restoreBtn.isEnabled = true
-            self?.subtitleBuyMessage.textColor = UIColor(named: "MMDarkGreyWhite")
+            self?.purchasedMessage.textColor = UIColor(named: "MMDarkGreyWhite")
 
             switch status {
                 case .canPurchase:
@@ -540,28 +547,36 @@ extension SettingsTableViewController {
 
                     self?.showBuyObjects(true)
 
-                    self?.subtitleBuyMessage.text = "Sua assinatura está vencida"
-                    self?.subtitleBuyMessage.textColor = .systemRed
+                    self?.purchasedMessage.text = "Sua assinatura está vencida"
+                    self?.purchasedMessage.textColor = .systemRed
 
                 case .processing:
                     self?.showBuyObjects(false)
+                    self?.purchasedMessage.isHidden = true
                     self?.spin.startAnimating()
                     self?.manageBtn.isEnabled = false
 					self?.restoreBtn.isEnabled = false
 
-                case .gotProduct(let product):
-                    guard let price = product.price,
-                          let title = product.title,
-                          let subtitle = product.description else {
+                case .gotProducts(let products):
+                    if products.count == 2 {
+                        self?.products = products
+
+                        if let product = products.first,
+                           let price = product.price {
+                            self?.buyMonthBtn.setTitle("\(price) / mês", for: .normal)
+                            self?.buyMonthBtn.accessibilityIdentifier = product.identifier
+                        }
+                        if let product = products.last,
+                           let price = product.price {
+                            self?.buyYearBtn.setTitle("\(price) / ano", for: .normal)
+                            self?.buyYearBtn.accessibilityIdentifier = product.identifier
+                        }
+
+                        self?.enableBuyObjects(true)
+                        Subscriptions.shared.checkSubscriptions()
+                    } else {
                         self?.enableBuyObjects(false)
-                        return
                     }
-                    self?.buyMessage.text = title
-                    self?.subtitleBuyMessage.text = subtitle
-                    self?.price = price
-                    self?.buyBtn.setTitle(price, for: .normal)
-                    self?.enableBuyObjects(true)
-                    Subscriptions.shared.checkSubscriptions()
 
                 case .purchasedSuccess:
                     self?.showBuyObjects(false)
@@ -573,17 +588,20 @@ extension SettingsTableViewController {
                     var settings = Settings()
                     settings.purchased = true
 
+                    self?.purchasedMessage.text = "Você já é nosso assinante!"
+
                 case .disabled:
                     self?.enableBuyObjects(false)
 
-                    self?.subtitleBuyMessage.text = "Compras dentro de Apps desabilitada."
-                    self?.subtitleBuyMessage.textColor = .systemRed
+                    self?.purchasedMessage.text = "Compras dentro de Apps desabilitada."
+                    self?.purchasedMessage.textColor = .systemRed
                     self?.manageBtn.isEnabled = false
 					self?.restoreBtn.isEnabled = false
 
                 case .fail:
                     self?.enableBuyObjects(false)
-                    self?.subtitleBuyMessage.textColor = .systemRed
+                    self?.purchasedMessage.text = "Erro ao obter assinaturas."
+                    self?.purchasedMessage.textColor = .systemRed
 
 				case .nothingToRestore:
 					self?.showBuyObjects(true)
@@ -604,16 +622,17 @@ extension SettingsTableViewController {
 
     fileprivate func showBuyObjects(_ show: Bool) {
         spin.stopAnimating()
-        buyBtn.isHidden = !show
-        buyMessage.isHidden = !show
-        subtitleBuyMessage.isHidden = !show
-        purchasedMessage.isHidden = true
+        buyMonthBtn.isHidden = !show
+        buyYearBtn.isHidden = !show
+        purchasedMessage.isHidden = show
     }
 
     fileprivate func enableBuyObjects(_ enable: Bool) {
         showBuyObjects(true)
-        buyBtn.isEnabled = enable
-        buyBtn.isHidden = !enable
+        buyMonthBtn.isEnabled = enable
+        buyMonthBtn.isHidden = !enable
+        buyYearBtn.isEnabled = enable
+        buyYearBtn.isHidden = !enable
     }
 
     fileprivate func hideObjects(_ enable: Bool) {

@@ -24,6 +24,9 @@
           "adHocOffers" : [
 
           ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "10.90",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -38,7 +41,32 @@
           ],
           "productID" : "MMASSINATURAMENSAL",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Remover propagandas",
+          "referenceName" : "Remover propagandas (mensal)",
+          "subscriptionGroupID" : "0A60022E",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "99.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EC489E7F",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Assinatura anual",
+              "displayName" : "Remover propagandas",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "MMASSINATURAANUAL",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Remover propagandas (anual)",
           "subscriptionGroupID" : "0A60022E",
           "type" : "RecurringSubscription"
         }
@@ -51,7 +79,7 @@
     "publicKey" : "MEkwEwYHKoZIzj0CAQYIKoZIzj0DAQEDMgAEE0KGxcNd/OGysih2ggfI/cHUKKIH\n9amEag8mZx9B4+TVlTDnCzt4sapU3jmoRQCT"
   },
   "version" : {
-    "major" : 1,
-    "minor" : 1
+    "major" : 2,
+    "minor" : 0
   }
 }

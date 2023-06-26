@@ -13,7 +13,7 @@ import InAppPurchase
 enum InAppPurchaseStatus {
     case canPurchase
     case processing
-    case gotProduct(Product)
+    case gotProducts([Product])
     case purchasedSuccess
     case expired
     case fail
@@ -25,13 +25,14 @@ class Subscriptions {
 
     static let shared = Subscriptions()
 
-    let identifier = "MMASSINATURAMENSAL"
+	static let MMASSINATURAANUAL = "MMASSINATURAANUAL"
+	static let MMASSINATURAMENSAL = "MMASSINATURAMENSAL"
+    let identifiers = [MMASSINATURAMENSAL, MMASSINATURAANUAL]
 
     var productCancellable: AnyCancellable?
     var purchaseCancellable: AnyCancellable?
     var receiptCancellable: AnyCancellable?
 
-    var selectedProduct: Product?
     var status: ((InAppPurchaseStatus) -> Void)?
     var isPurchasing: Bool = false
 
@@ -56,6 +57,7 @@ class Subscriptions {
                         self?.status?(.canPurchase)
 
                     case .success(let response):
+					print(response)
                         switch response {
                         case .retrieving,
                              .purchasing,
@@ -71,9 +73,7 @@ class Subscriptions {
 
                             retry -= 1
                             if retry == 0 {
-                                // Try to self refresh receipt
-                                guard let self = self else { return }
-                                InAppPurchaseManager.shared.refreshReceipt(subscription: self.identifier)
+								InAppPurchaseManager.shared.refreshReceipt(subscription: Self.MMASSINATURAMENSAL)
                             }
 
                         default:
@@ -83,7 +83,7 @@ class Subscriptions {
                 }
             }
 
-        InAppPurchaseManager.shared.validateReceipt(subscription: identifier)
+		InAppPurchaseManager.shared.refreshReceipt(subscription: Self.MMASSINATURAANUAL)
     }
 
     func getProducts() {
@@ -99,15 +99,15 @@ class Subscriptions {
         }
     }
 
-    func purchase() {
-        buy(restore: false)
+    func purchase(product: Product) {
+        buy(product: product)
     }
 
     func restore() {
-        buy(restore: true)
+        buy(product: nil)
     }
 
-    fileprivate func buy(restore: Bool) {
+    fileprivate func buy(product: Product?) {
         productCancellable?.cancel()
         purchaseCancellable?.cancel()
         receiptCancellable?.cancel()
@@ -122,7 +122,7 @@ class Subscriptions {
                 switch rsp {
                     case .failure(_):
                         self?.isPurchasing = false
-						self?.status?(restore ? .nothingToRestore : .canPurchase)
+						self?.status?(product == nil ? .nothingToRestore : .canPurchase)
 
                     case .success(let response):
                         var status: InAppPurchaseStatus {
@@ -145,11 +145,8 @@ class Subscriptions {
                 }
             }
 
-        guard let product = selectedProduct else {
-            return
-        }
         isPurchasing = true
-        InAppPurchaseManager.shared.purchase(product: restore ? nil : product)
+        InAppPurchaseManager.shared.purchase(product: product)
     }
 }
 
@@ -170,15 +167,14 @@ extension Subscriptions {
                         self?.status?(.fail)
 
                     case .success(let response):
-                        guard let product = response.first else {
+                        if response.isEmpty {
                             self?.status?(.fail)
-                            return
+                        } else {
+                            self?.status?(.gotProducts(response))
                         }
-                        self?.selectedProduct = product
-                        self?.status?(.gotProduct(product))
                 }
             }
 
-        InAppPurchaseManager.shared.getProducts(for: [identifier])
+        InAppPurchaseManager.shared.getProducts(for: identifiers)
     }
 }
