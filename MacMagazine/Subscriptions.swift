@@ -57,7 +57,6 @@ class Subscriptions {
                         self?.status?(.canPurchase)
 
                     case .success(let response):
-					print(response)
                         switch response {
                         case .retrieving,
                              .purchasing,

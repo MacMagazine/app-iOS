@@ -560,15 +560,16 @@ extension SettingsTableViewController {
                 case .gotProducts(let products):
                     if products.count == 2 {
                         self?.products = products
-
                         if let product = products.first,
-                           let price = product.price {
-                            self?.buyMonthBtn.setTitle("\(price) / mês", for: .normal)
+                           let price = product.price,
+						   let subscription = product.subscription {
+                            self?.buyMonthBtn.setTitle("\(price) / \(subscription)", for: .normal)
                             self?.buyMonthBtn.accessibilityIdentifier = product.identifier
                         }
                         if let product = products.last,
-                           let price = product.price {
-                            self?.buyYearBtn.setTitle("\(price) / ano", for: .normal)
+						   let price = product.price,
+						   let subscription = product.subscription {
+                            self?.buyYearBtn.setTitle("\(price) / \(subscription)", for: .normal)
                             self?.buyYearBtn.accessibilityIdentifier = product.identifier
                         }
 
@@ -576,6 +577,8 @@ extension SettingsTableViewController {
                         Subscriptions.shared.checkSubscriptions()
                     } else {
                         self?.enableBuyObjects(false)
+						self?.purchasedMessage.text = "Erro ao obter assinaturas."
+						self?.purchasedMessage.textColor = .systemRed
                     }
 
                 case .purchasedSuccess:
