@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -849,6 +849,7 @@
                     <connections>
                         <outlet property="appearanceCellIntensity" destination="irG-Ww-usz" id="mPC-Wp-rDE"/>
                         <outlet property="badge" destination="s94-yl-rEe" id="B3B-3u-oqC"/>
+                        <outlet property="badgeMessage" destination="TyP-bs-EqM" id="8q3-kG-zFn"/>
                         <outlet property="buyMonthBtn" destination="unz-wV-LcD" id="v75-eo-NDj"/>
                         <outlet property="buyYearBtn" destination="yMw-Ps-gvb" id="23a-U7-AEl"/>
                         <outlet property="darkModeSegmentControl" destination="fHa-3y-5QZ" id="IZv-c0-y4T"/>

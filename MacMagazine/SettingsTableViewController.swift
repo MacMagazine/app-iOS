@@ -10,6 +10,7 @@ import CoreSpotlight
 import InAppPurchase
 import Kingfisher
 import MessageUI
+import StoreKit
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
@@ -40,7 +41,7 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet private weak var patraoButton: UIButton!
 
-    var products = [Product]()
+	var products = [InAppPurchase.Product]()
 
     @IBOutlet private weak var buyMonthBtn: UIButton!
     @IBOutlet private weak var buyYearBtn: UIButton!
@@ -50,6 +51,7 @@ class SettingsTableViewController: UITableViewController {
 	@IBOutlet private weak var restoreBtn: UIButton!
 
     @IBOutlet private weak var badge: UISwitch!
+	@IBOutlet private weak var badgeMessage: UILabel!
 
     enum IconOptionAccessibilityLabel: String {
         case whiteBackground = "Ícone do aplicativo com fundo branco."
@@ -294,6 +296,7 @@ extension SettingsTableViewController {
         darkModeSegmentControl.selectedSegmentIndex = Settings().appearance.rawValue
 
         badge.isEnabled = intensityPostRead.isOn
+		badgeMessage.textColor = intensityPostRead.isOn ? .label : .gray
         badge.isOn = UserDefaults.standard.bool(forKey: Definitions.badge)
     }
 }
@@ -356,6 +359,7 @@ extension SettingsTableViewController {
         readTransparency.setValue(value, animated: true)
 
         badge.isEnabled = intensity.isOn
+		badgeMessage.textColor = intensity.isOn ? .label : .gray
         if !intensity.isOn {
             appearanceCellIntensity.isHidden = true
 
@@ -524,7 +528,18 @@ extension SettingsTableViewController {
         Subscriptions.shared.purchase(product: product)
     }
 
-    fileprivate func setupInAppPurchase() {
+	fileprivate func setContent(for button: UIButton?, filtering: String, using products: [InAppPurchase.Product]) {
+		print(products)
+		let product = products.first(where: { $0.subscription?.contains(filtering) ?? false })
+		if let price = product?.price,
+		   let subscription = product?.subscription?.replacingOccurrences(of: "1 ", with: ""),
+		   let identifier = product?.identifier {
+			button?.setTitle("\(price)/\(subscription)", for: .normal)
+			button?.accessibilityIdentifier = identifier
+		}
+	}
+
+	fileprivate func setupInAppPurchase() {
         enableBuyObjects(true)
         manageBtn.isEnabled = false
 		restoreBtn.isEnabled = false
@@ -560,18 +575,8 @@ extension SettingsTableViewController {
                 case .gotProducts(let products):
                     if products.count == 2 {
                         self?.products = products
-                        if let product = products.first,
-                           let price = product.price,
-						   let subscription = product.subscription {
-                            self?.buyMonthBtn.setTitle("\(price) / \(subscription)", for: .normal)
-                            self?.buyMonthBtn.accessibilityIdentifier = product.identifier
-                        }
-                        if let product = products.last,
-						   let price = product.price,
-						   let subscription = product.subscription {
-                            self?.buyYearBtn.setTitle("\(price) / \(subscription)", for: .normal)
-                            self?.buyYearBtn.accessibilityIdentifier = product.identifier
-                        }
+						self?.setContent(for: self?.buyMonthBtn, filtering: "mês", using: products)
+						self?.setContent(for: self?.buyYearBtn, filtering: "ano", using: products)
 
                         self?.enableBuyObjects(true)
                         Subscriptions.shared.checkSubscriptions()
