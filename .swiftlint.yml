@@ -101,10 +101,10 @@ whitelist_rules: # rules enabled
   - mark
   # MARK comment should be in valid format. e.g. '// MARK: ...' or '// MARK: - ...'
 
-  - vertical_parameter_alignment
+  #- vertical_parameter_alignment
   # Function parameters should be aligned vertically if they're in multiple lines in a declaration.
 
-  - vertical_parameter_alignment_on_call
+  #- vertical_parameter_alignment_on_call
   # Function parameters should be aligned vertically if they're in multiple lines in a method call.
 
   - empty_parameters
