@@ -63,7 +63,6 @@ class MainInterfaceController: WKInterfaceController {
 	}
 
 	@IBAction private func showMore() {
-		print("CHEGUEI")
 		self.presentController(withName: "DetailController", context: object)
 	}
 }
@@ -86,6 +85,7 @@ class DetailInterfaceController: WKInterfaceController {
 			return
 		}
 		self.object = object
+		self.setTitle("Fechar")
 	}
 
 	override func willActivate() {
@@ -93,7 +93,16 @@ class DetailInterfaceController: WKInterfaceController {
 
 		if let object = self.object,
 		   let item = object["post"] as? PostData {
-			content.setText(item.fullContent)
+
+			let style = NSMutableParagraphStyle()
+			style.paragraphSpacing = 12
+
+			let string = NSMutableAttributedString(string: item.fullContent ?? "")
+			string.addAttribute(.paragraphStyle,
+								value: style,
+								range: NSMakeRange(0, string.length))
+
+			content.setAttributedText(string)
 		}
 	}
 }

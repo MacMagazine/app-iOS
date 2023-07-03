@@ -132,6 +132,11 @@ class APIXMLParser: NSObject, XMLParserDelegate {
             case "content:encoded":
                 currentPost.playable = value.contains("youtube.com/embed/")
 				currentPost.fullContent = value.toHtmlDecoded()
+					.replacingOccurrences(of: "\n\n", with: "\n")
+					.replacingOccurrences(of: "\n\n", with: "\n")
+					.replacingOccurrences(of: "\n\n", with: "\n")
+					.replacingOccurrences(of: "\n\n", with: "\n")
+					.replacingOccurrences(of: "\n\n", with: "\n")
 			default:
 				return
 			}
