@@ -62,4 +62,38 @@ class MainInterfaceController: WKInterfaceController {
 		reload()
 	}
 
+	@IBAction private func showMore() {
+		print("CHEGUEI")
+		self.presentController(withName: "DetailController", context: object)
+	}
+}
+
+class DetailInterfaceController: WKInterfaceController {
+
+	// MARK: - Properties -
+
+	@IBOutlet private weak var content: WKInterfaceLabel!
+
+	var object: [String: Any]?
+
+	// MARK: - App lifecycle -
+
+	override func awake(withContext context: Any?) {
+		super.awake(withContext: context)
+
+		// Configure interface objects here.
+		guard let object = context as? [String: Any] else {
+			return
+		}
+		self.object = object
+	}
+
+	override func willActivate() {
+		super.willActivate()
+
+		if let object = self.object,
+		   let item = object["post"] as? PostData {
+			content.setText(item.fullContent)
+		}
+	}
 }

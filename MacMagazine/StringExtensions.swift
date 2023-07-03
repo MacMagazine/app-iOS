@@ -151,7 +151,7 @@ extension String {
 		let decoded = try? NSAttributedString(data: Data(utf8), options: [
 			.documentType: NSAttributedString.DocumentType.html,
 			.characterEncoding: String.Encoding.utf8.rawValue
-			], documentAttributes: nil).string
+		], documentAttributes: nil).string.replacingOccurrences(of: "&#8230;", with: "...")
 
 		return decoded ?? self
 	}

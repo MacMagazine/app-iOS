@@ -18,13 +18,15 @@ struct PostData: Codable, Hashable {
     var postId: String?
     var shortURL: String?
     var playable: Bool = false
+	var fullContent: String?
 
-    init(title: String?,
+	init(title: String?,
          link: String?,
          thumbnail: String?,
          favorito: Bool,
          pubDate: String? = "",
          excerpt: String? = "",
+		 fullContent: String? = "",
          postId: String? = "",
          shortURL: String? = "",
          playable: Bool = false) {
@@ -35,6 +37,7 @@ struct PostData: Codable, Hashable {
 		self.favorito = favorito
 		self.pubDate = pubDate
 		self.excerpt = excerpt
+		self.fullContent = fullContent
         self.postId = postId
         self.shortURL = shortURL
         self.playable = playable

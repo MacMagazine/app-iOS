@@ -148,6 +148,7 @@ extension LoadingController {
 				 thumbnail: xmlPosts.artworkURL,
 				 favorito: false,
 				 pubDate: xmlPosts.pubDate.toDate().watchDate(),
-				 excerpt: xmlPosts.excerpt)
+				 excerpt: xmlPosts.excerpt.toHtmlDecoded(),
+				 fullContent: xmlPosts.fullContent)
 	}
 }

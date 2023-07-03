@@ -167,7 +167,13 @@ class CoreDataStack {
 				return
 			}
 			let watchPosts = result.map {
-				PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: false, pubDate: $0.pubDate?.watchDate(), excerpt: $0.excerpt)
+				PostData(title: $0.title,
+						 link: $0.link,
+						 thumbnail: $0.artworkURL,
+						 favorito: false,
+						 pubDate: $0.pubDate?.watchDate(),
+						 excerpt: $0.excerpt,
+						 fullContent: $0.fullContent)
 			}
 			completion(watchPosts)
 		}
@@ -247,6 +253,7 @@ class CoreDataStack {
 		newItem.title = post.title
 		newItem.link = post.link
 		newItem.excerpt = post.excerpt.toHtmlDecoded()
+		newItem.fullContent = post.fullContent
 		newItem.artworkURL = post.artworkURL.escape()
 		newItem.categorias = post.getCategorias()
 		newItem.pubDate = post.pubDate.toDate()
@@ -266,6 +273,7 @@ class CoreDataStack {
 		post.title = item.title
 		post.link = item.link
 		post.excerpt = item.excerpt.toHtmlDecoded()
+		post.fullContent = item.fullContent
 		post.artworkURL = item.artworkURL.escape()
 		post.categorias = item.getCategorias()
 		post.pubDate = item.pubDate.toDate()

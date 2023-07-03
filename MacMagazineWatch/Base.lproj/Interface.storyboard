@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="21225" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="21701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
     <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="21040"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="21615"/>
     </dependencies>
     <scenes>
         <!--MacMagazine-->
@@ -57,6 +57,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="676-kQ-0px"/>
                         <label width="1" alignment="left" accessibilityLabel="Página 1 de 10" text="Content" numberOfLines="0" id="bgJ-Ov-P9Z"/>
+                        <button width="1" alignment="left" title="Ver mais" id="Bfc-Tv-Dbb">
+                            <connections>
+                                <action selector="showMore" destination="AgC-eL-Hgc" id="zKv-Y7-Mit"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="bgJ-Ov-P9Z" id="MIj-bv-dit"/>
@@ -67,7 +72,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-262" y="-305"/>
+            <point key="canvasLocation" x="-262" y="-281"/>
         </scene>
         <!--10 de 10-->
         <scene sceneID="46K-iY-8Jz">
@@ -91,6 +96,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="U6t-5b-0eQ"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="jiI-TN-5aF"/>
+                        <button width="1" alignment="left" title="Ver mais" id="zHP-J6-YCB">
+                            <connections>
+                                <action selector="showMore" destination="0h6-bj-cf1" id="vWh-So-UFp"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="jiI-TN-5aF" id="lva-ws-PJc"/>
@@ -124,6 +134,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="fBx-sT-MEy"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Vag-Th-Nqa"/>
+                        <button width="1" alignment="left" title="Ver mais" id="zwU-UX-yrf">
+                            <connections>
+                                <action selector="showMore" destination="gyA-pH-xNr" id="ImS-6H-vkK"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="Vag-Th-Nqa" id="S2N-B5-2ru"/>
@@ -158,6 +173,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="9gy-B1-x4v"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Qa8-We-Hku"/>
+                        <button width="1" alignment="left" title="Ver mais" id="68o-CV-Dhw">
+                            <connections>
+                                <action selector="showMore" destination="J5I-Gx-AZV" id="w2G-Z6-0ko"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="Qa8-We-Hku" id="wXO-uZ-nri"/>
@@ -192,6 +212,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="wI6-eC-pbP"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Yb7-i7-VFu"/>
+                        <button width="1" alignment="left" title="Ver mais" id="DwL-0q-h5c">
+                            <connections>
+                                <action selector="showMore" destination="6at-Ic-eAe" id="eb6-pn-bA4"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="Yb7-i7-VFu" id="z0e-6O-dSf"/>
@@ -203,6 +228,20 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="24" y="159"/>
+        </scene>
+        <!--DetailController-->
+        <scene sceneID="teU-G6-5aL">
+            <objects>
+                <controller identifier="DetailController" id="rJa-a6-odw" customClass="DetailInterfaceController" customModule="MacMagazineWatchExtension">
+                    <items>
+                        <label width="1" alignment="left" text="Label" numberOfLines="0" id="Yg5-ID-9Bb"/>
+                    </items>
+                    <connections>
+                        <outlet property="content" destination="Yg5-ID-9Bb" id="IYV-DS-Brm"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-559" y="141"/>
         </scene>
         <!--6 de 10-->
         <scene sceneID="owl-m6-yTu">
@@ -226,6 +265,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="75u-Mp-x7j"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="Ndf-Cq-MtC"/>
+                        <button width="1" alignment="left" title="Ver mais" id="OAY-dq-4DN">
+                            <connections>
+                                <action selector="showMore" destination="Cnc-TD-fHb" id="rJx-y3-PTl"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="Ndf-Cq-MtC" id="1bN-3z-aFm"/>
@@ -260,6 +304,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="zI4-ht-41z"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="FGc-YY-FVl"/>
+                        <button width="1" alignment="left" title="Ver mais" id="5aY-uL-CiE">
+                            <connections>
+                                <action selector="showMore" destination="3er-GV-j8p" id="CCG-Hk-hsr"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="FGc-YY-FVl" id="jbN-is-DBE"/>
@@ -294,6 +343,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="wtc-pG-qwp"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="GIK-xN-cUL"/>
+                        <button width="1" alignment="left" title="Ver mais" id="Az3-Tk-sq5">
+                            <connections>
+                                <action selector="showMore" destination="KeD-e3-aOl" id="ogI-rg-3F7"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="GIK-xN-cUL" id="1uN-hX-aIP"/>
@@ -328,6 +382,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="KWG-Pb-ala"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="GRl-H9-F4Z"/>
+                        <button width="1" alignment="left" title="Ver mais" id="EDq-6Q-Y0G">
+                            <connections>
+                                <action selector="showMore" destination="m1l-3B-QBI" id="0Qc-aV-uKD"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="GRl-H9-F4Z" id="bH8-77-jcc"/>
@@ -362,6 +421,11 @@
                         </group>
                         <label width="1" height="16" alignment="left" id="cv7-u4-yjk"/>
                         <label width="1" alignment="left" text="Content" numberOfLines="0" id="yks-VZ-pLg"/>
+                        <button width="1" alignment="left" title="Ver mais" id="CHT-2p-YRP">
+                            <connections>
+                                <action selector="showMore" destination="aCm-Ql-Tag" id="FLS-J8-xqN"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="content" destination="yks-VZ-pLg" id="kHr-uY-CbG"/>
