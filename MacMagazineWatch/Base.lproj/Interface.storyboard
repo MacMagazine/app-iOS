@@ -11,7 +11,7 @@
             <objects>
                 <controller identifier="loading" title="MacMagazine" id="4mM-Hh-YOV" customClass="LoadingController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
-                        <label alignment="left" accessibilityLabel="Carregando" text="Carregando. Aguarde ..." id="oHQ-VB-ZBX">
+                        <label width="1" alignment="center" accessibilityLabel="Carregando" text="Carregando.  Aguarde ..." textAlignment="center" numberOfLines="2" id="oHQ-VB-ZBX">
                             <accessibilityTraits key="accessibilityTraits" staticText="YES" notEnabled="YES"/>
                         </label>
                         <group width="1" height="1" alignment="left" layout="vertical" id="GrF-65-IpN">
@@ -46,13 +46,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="mB8-gp-5A1">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="boY-tx-SmG">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="K8G-Mc-9vP">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="Ryp-d6-Saf">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -132,13 +137,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="lJq-Ot-b4g">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="J6I-t5-Dit">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="elN-ko-QGt">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="LvD-Kc-4PY">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -176,13 +186,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="AYq-Xe-FzL">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="7TS-fV-rJ7">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="s6W-e1-jAK">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="dlJ-wR-SBj">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -220,13 +235,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="2yR-mE-U3F">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="J8u-6I-KZH">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="R8Z-8W-YZs">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="M5D-YM-Xgg">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -264,13 +284,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="Xoo-yP-1uI">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="Hvo-Kg-05E">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="0Ow-U5-IMa">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="2e9-sg-V6L">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -308,13 +333,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="ikh-bw-Pdv">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="hLB-Mb-Si5">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="tnh-EO-d2h">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="LTu-NO-46o">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -352,13 +382,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="5aD-Jm-IRO">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="hZb-bn-HwB">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="wEs-rr-2lH">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="6Sj-XK-Rkq">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -396,13 +431,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="HGC-yb-G4I">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="xf6-zK-wy5">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="Amu-An-XBc">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="xjS-Dj-YJN">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -440,13 +480,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="Zkk-bk-iW0">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="0Aw-V0-QyZ">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="F6N-eI-j2o">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="EgF-Gn-pAb">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
@@ -484,13 +529,18 @@
                                 <group width="1" height="1" alignment="left" layout="vertical" id="n1F-ox-exy">
                                     <items>
                                         <label width="1" alignment="left" text="Title" numberOfLines="5" id="1wO-re-iuC">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                         </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="6" bottom="10"/>
+                                </group>
+                                <group width="1" alignment="right" verticalAlignment="bottom" id="MQl-jo-GiS">
+                                    <items>
                                         <label alignment="right" verticalAlignment="bottom" text="date" id="K2G-3Y-98I">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                    <edgeInsets key="margins" left="6" right="6" top="0.0" bottom="6"/>
                                 </group>
                             </items>
                         </group>
