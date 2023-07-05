@@ -116,6 +116,7 @@ class API {
 
     var onCompletion: ((XMLPost?) -> Void)?
 	var numberOfPosts = -1
+	var isWatchPosts = false
 
 	#if os(iOS) && !WIDGET
 	var onVideoCompletion: ((YouTube<String>?) -> Void)?
@@ -144,7 +145,13 @@ class API {
         executeGetContent(host)
     }
 
-    func getPodcasts(page: Int = 1, _ completion: ((XMLPost?) -> Void)?) {
+	func getWatchPosts(_ completion: ((XMLPost?) -> Void)?) {
+		numberOfPosts = 10
+		isWatchPosts = true
+		getPosts(page: 0, completion)
+	}
+
+	func getPodcasts(page: Int = 1, _ completion: ((XMLPost?) -> Void)?) {
         onCompletion = completion
         let host = "\(APIParams.feed)?\(APIParams.podcast)&\(APIParams.paged)\(page)"
         executeGetContent(host)
@@ -228,6 +235,7 @@ extension API {
 	func parse(_ data: Data, onCompletion: ((XMLPost?) -> Void)?, numberOfPosts: Int) {
 		let parser = XMLParser(data: data)
 		let apiParser = APIXMLParser(onCompletion: onCompletion, numberOfPosts: numberOfPosts)
+		apiParser.isWatchPosts = isWatchPosts
 		parser.delegate = apiParser
 		parser.parse()
 	}

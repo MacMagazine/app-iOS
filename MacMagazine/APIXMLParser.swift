@@ -53,6 +53,8 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 	var numberOfPosts = -1
     var parsedPosts = 0
 
+	var isWatchPosts = false
+
 	// MARK: - Init -
 
 	init(onCompletion: ((XMLPost?) -> Void)?, numberOfPosts: Int) {
@@ -131,12 +133,14 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 				currentPost.shortURL = value
             case "content:encoded":
                 currentPost.playable = value.contains("youtube.com/embed/")
-				currentPost.fullContent = value.toHtmlDecoded()
-					.replacingOccurrences(of: "\n\n", with: "\n")
-					.replacingOccurrences(of: "\n\n", with: "\n")
-					.replacingOccurrences(of: "\n\n", with: "\n")
-					.replacingOccurrences(of: "\n\n", with: "\n")
-					.replacingOccurrences(of: "\n\n", with: "\n")
+				if isWatchPosts {
+					currentPost.fullContent = value.toHtmlDecoded()
+						.replacingOccurrences(of: "\n\n", with: "\n")
+						.replacingOccurrences(of: "\n\n", with: "\n")
+						.replacingOccurrences(of: "\n\n", with: "\n")
+						.replacingOccurrences(of: "\n\n", with: "\n")
+						.replacingOccurrences(of: "\n\n", with: "\n")
+				}
 			default:
 				return
 			}

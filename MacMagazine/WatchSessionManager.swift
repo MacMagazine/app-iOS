@@ -61,7 +61,7 @@ extension WatchSessionManager {
 	func load(replyHandler: @escaping ([String: Any]) -> Void) {
 		var images: [String] = []
 
-		API().getPosts(page: 0) { [weak self] post in
+		API().getWatchPosts { [weak self] post in
 			DispatchQueue.main.async {
 				guard let post = post else {
 					// Prefetch images to be able to sent to Apple Watch

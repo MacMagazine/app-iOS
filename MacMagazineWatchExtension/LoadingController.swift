@@ -94,7 +94,7 @@ class LoadingController: WKInterfaceController {
 
 	func getPosts() {
 		var posts = [PostData]()
-		API().getPosts { [weak self] post in
+		API().getWatchPosts { [weak self] post in
 			guard let self = self else { return }
 			guard let post = post,
 				  posts.count < 10 else {
