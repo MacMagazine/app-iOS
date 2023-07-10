@@ -22,37 +22,47 @@ struct Category: Codable {
 
 extension URL {
 
-    func isMMPost() -> Bool {
-        return isMMAddress() && self.absoluteString.contains("/post/")
-    }
+	func isMMPost() -> Bool {
+		return isMMAddress() && self.absoluteString.contains("/post/")
+	}
 
-    func isMMAddress() -> Bool {
-        return self.absoluteString.contains(API.APIParams.mmDomain)
-    }
+	func isMMAddress() -> Bool {
+		return self.absoluteString.prefix(API.APIParams.mm.count) == API.APIParams.mm
+	}
 
-    func isAppStore() -> Bool {
-        return self.absoluteString.contains("apps.apple.com") ||
-            self.absoluteString.contains("itunes.apple.com")
-    }
+	func isAppStore() -> Bool {
+		return self.absoluteString.contains("apps.apple.com") ||
+		self.absoluteString.contains("itunes.apple.com")
+	}
 
-    func isAppStoreBadge() -> Bool {
-        return self.absoluteString.contains("badge_appstore") ||
-            self.absoluteString.contains("badge_macappstore")
-    }
+	func isYouTube() -> Bool {
+		let youTubeURL = "https://www.youtube.com/watch?v="
+		return self.absoluteString.prefix(youTubeURL.count) == youTubeURL
+	}
 
-    func appStoreId() -> String? {
-        var id: String?
-        let components = self.absoluteString.split(separator: "/")
-        if let lastComponent = components.last {
-            let splittedComponents = lastComponent.split(separator: "?")
-            splittedComponents.forEach { component in
-                if component.contains("id") {
-                    id = component.replacingOccurrences(of: "id", with: "")
-                }
-            }
-        }
-        return id
-    }
+	func isAppStoreBadge() -> Bool {
+		return self.absoluteString.contains("badge_appstore") ||
+		self.absoluteString.contains("badge_macappstore")
+	}
+
+	func appStoreId() -> String? {
+		var id: String?
+		let components = self.absoluteString.split(separator: "/")
+		if let lastComponent = components.last {
+			let splittedComponents = lastComponent.split(separator: "?")
+			splittedComponents.forEach { component in
+				if component.contains("id") {
+					id = component.replacingOccurrences(of: "id", with: "")
+				}
+			}
+		}
+		return id
+	}
+
+	func videoId() -> String? {
+		let queryItems = URLComponents(string: self.absoluteString)?.queryItems
+		return queryItems?.first(where: { $0.name == "v" })?.value
+	}
 }
 
 class API {
