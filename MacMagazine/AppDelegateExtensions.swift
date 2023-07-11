@@ -101,7 +101,7 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-
+		logD(url.absoluteString)
         widgetSpotlightPost = url.absoluteString
         return true
     }
@@ -131,6 +131,7 @@ extension AppDelegate {
 		if userActivity.activityType == CSSearchableItemActionType {
 			if let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
                 guard let _ = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController else {
+					logD(identifier)
                     widgetSpotlightPost = identifier
                     return true
                 }

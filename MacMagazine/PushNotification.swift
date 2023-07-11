@@ -176,6 +176,7 @@ extension AppDelegate {
 				  let a = additionalData["a"] as? [String: String] else {
 				return
 			}
+			logD(a["url"])
 			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = a["url"]
 		}
 

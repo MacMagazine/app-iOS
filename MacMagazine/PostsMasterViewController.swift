@@ -345,6 +345,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     }
 
                     if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+						logD(post)
                         showDetailController(with: post)
                         return
                     }
