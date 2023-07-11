@@ -170,7 +170,7 @@ extension AppDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Database().update()
 
-		// Only get notification content with the user tapped it
+		// Only get notification content if the user tap on it
 		if application.applicationState == .inactive {
 			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
 				  let a = additionalData["a"] as? [String: String] else {

@@ -470,6 +470,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 			} else if url.isYouTube() {
 				openYouTube(with: url)
+
 			} else {
 				openInSafari(url)
 			}

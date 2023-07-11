@@ -36,7 +36,8 @@ extension URL {
 	}
 
 	func isYouTube() -> Bool {
-		let youTubeURL = "https://www.youtube.com/watch?v="
+		logD(self.absoluteString)
+		let youTubeURL = "https://www.youtube.com/"
 		return self.absoluteString.prefix(youTubeURL.count) == youTubeURL
 	}
 
