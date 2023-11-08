@@ -144,3 +144,5 @@ force_unwrapping: warning
 implicitly_unwrapped_optional: warning
 empty_count: warning
 shorthand_operator: warning
+line_length:
+  warning: 150

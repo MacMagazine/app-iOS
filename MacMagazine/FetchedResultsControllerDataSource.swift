@@ -224,7 +224,10 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 	func reloadData() {
 		// Execute the fetch to display the data
 		do {
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: groupedBy, cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+																  managedObjectContext: managedObjectContext,
+																  sectionNameKeyPath: groupedBy,
+																  cacheName: nil)
             fetchedResultsController.delegate = self
 
             try fetchedResultsController.performFetch()
@@ -237,6 +240,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		tableView?.beginUpdates()
 	}
 
+	// swiftlint:disable:next line_length
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
 
 		switch type {
@@ -249,6 +253,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 	}
 
+	// swiftlint:disable:next line_length cyclomatic_complexity
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 
 		switch type {

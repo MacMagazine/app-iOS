@@ -77,19 +77,19 @@ extension PushNotification: UNUserNotificationCenterDelegate {
     func setLocalNotification(for event: MMLive? = nil) {
         UNUserNotificationCenter.current().delegate = self
 
-        var _event = event
+        var localEvent = event
         if event == nil {
             guard let saved = UserDefaults.standard.object(forKey: Definitions.mmLive) as? Data,
                   let decoded = try? JSONDecoder().decode(MMLive.self, from: saved) else {
                 return
             }
-            _event = decoded
+            localEvent = decoded
         }
 
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             if settings.authorizationStatus == .authorized {
 
-                guard let event = _event  else {
+                guard let event = localEvent  else {
                     return
                 }
 
@@ -173,11 +173,11 @@ extension AppDelegate {
 		// Only get notification content if the user tap on it
 		if application.applicationState == .inactive {
 			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
-				  let a = additionalData["a"] as? [String: String] else {
+				  let keyA = additionalData["a"] as? [String: String] else {
 				return
 			}
-			logD(a["url"])
-			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = a["url"]
+			logD(keyA["url"])
+			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
 		}
 
 		completionHandler(.newData)

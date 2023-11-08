@@ -12,14 +12,14 @@ class UIActivityExtensions: UIActivity {
 
 	// MARK: - Properties -
 
-	var _activityTitle: String
-	var _activityImage: UIImage?
+	var localActivityTitle: String
+	var localActivityImage: UIImage?
 	var activityItems = [Any]()
 	var action: ([Any]) -> Void
 
 	init(title: String, image: UIImage?, performAction: @escaping ([Any]) -> Void) {
-		_activityTitle = title
-		_activityImage = image
+		localActivityTitle = title
+		localActivityImage = image
 		action = performAction
 		super.init()
 	}
@@ -27,11 +27,11 @@ class UIActivityExtensions: UIActivity {
 	// MARK: - UIActivity override -
 
 	override var activityTitle: String? {
-		return _activityTitle
+		return localActivityTitle
 	}
 
 	override var activityImage: UIImage? {
-		return _activityImage
+		return localActivityImage
 	}
 
 	override var activityType: UIActivity.ActivityType? {

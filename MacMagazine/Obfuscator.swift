@@ -42,8 +42,8 @@ class Obfuscator {
 
 		var encrypted = [UInt8]()
 
-		for t in text.enumerated() {
-			encrypted.append(t.element ^ cipher[t.offset % length])
+		for temp in text.enumerated() {
+			encrypted.append(temp.element ^ cipher[temp.offset % length])
 		}
 
 		#if DEBUG
@@ -71,8 +71,8 @@ class Obfuscator {
 
 		var decrypted = [UInt8]()
 
-		for k in key.enumerated() {
-			decrypted.append(k.element ^ cipher[k.offset % length])
+		for localKey in key.enumerated() {
+			decrypted.append(localKey.element ^ cipher[localKey.offset % length])
 		}
 
 		guard let revealedString = String(bytes: decrypted, encoding: .utf8) else {

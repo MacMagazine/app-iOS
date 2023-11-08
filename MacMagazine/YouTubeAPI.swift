@@ -114,6 +114,7 @@ extension API {
 			pageToken = "&\(APIParams.pageToken)\(token)"
 		}
 
+		// swiftlint:disable:next line_length
 		let host = "\(APIParams.playlistItems)?\(APIParams.playlistPart)&\(APIParams.playlistIdParam)\(playlistId)&\(APIParams.keyParam)\(key)&\(APIParams.maxResults)\(pageToken)&\(APIParams.sort)"
 
 		executeGetVideoContent(host)
@@ -136,6 +137,7 @@ extension API {
 		let key = obfuscator.reveal(key: APIParams.key)
 		let channelId = obfuscator.reveal(key: APIParams.channelId)
 
+		// swiftlint:disable:next line_length
 		let host = "\(APIParams.videoSearch)?\(APIParams.videoSearchPart)&\(APIParams.keyParam)\(key)&\(APIParams.maxResults)&\(APIParams.channel)\(channelId)&\(APIParams.videoQuery)\(text)&\(APIParams.sort)"
 
 		executeGetVideoContent(host, isSearch: true)
@@ -148,27 +150,29 @@ extension API {
 			return
 		}
 
-        Network.getVdeos(url: url) { (result: Result<Data, RestAPIError>) in
-            switch result {
-                case .failure(_):
-                    if isSearch ?? false {
-                        self.onVideoSearchCompletion?(nil)
-                    } else {
-                        self.onVideoCompletion?(nil)
-                    }
+		Network.getVdeos(url: url) { (result: Result<Data, RestAPIError>) in
+			switch result {
+			// swiftlint:disable:next empty_enum_arguments
+			case .failure(_):
+				if isSearch ?? false {
+					self.onVideoSearchCompletion?(nil)
+				} else {
+					self.onVideoCompletion?(nil)
+				}
 
-                case .success(let response):
-                    self.parse(response,
-                               isSearch: isSearch,
-                               onVideoCompletion: self.onVideoCompletion,
-                               onVideoSearchCompletion: self.onVideoSearchCompletion)
-            }
+			case .success(let response):
+				self.parse(response,
+						   isSearch: isSearch,
+						   onVideoCompletion: self.onVideoCompletion,
+						   onVideoSearchCompletion: self.onVideoSearchCompletion)
+			}
 		}
 	}
 
 }
 
 extension API {
+	// swiftlint:disable:next line_length
 	func parse(_ data: Data, isSearch: Bool?, onVideoCompletion: ((YouTube<String>?) -> Void)?, onVideoSearchCompletion: ((YouTube<ResourceId>?) -> Void)?) {
 		do {
 			let decoder = JSONDecoder()

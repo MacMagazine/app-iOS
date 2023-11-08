@@ -22,12 +22,12 @@ extension UITableView {
 			return indexPath.row
 		}
 		var rows = 0
-		for i in 0...indexPath.section {
-			if i == indexPath.section {
+		for temp in 0...indexPath.section {
+			if temp == indexPath.section {
 				rows += indexPath.row
 				break
 			}
-			rows += self.numberOfRows(inSection: i)
+			rows += self.numberOfRows(inSection: temp)
 		}
 		return rows
 	}
@@ -42,6 +42,7 @@ enum Direction {
 
 // MARK: -
 
+// swiftlint:disable:next inclusive_language type_body_length
 class PostsMasterViewController: UITableViewController, FetchedResultsControllerDelegate, ResultsViewControllerDelegate {
 
 	// MARK: - Properties -
@@ -200,11 +201,11 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showKeywordsSegue" {
             guard let navVC = segue.destination as? UINavigationController,
-                  let vc = navVC.children.first as? KeywordsTableViewController else {
+                  let viewController = navVC.children.first as? KeywordsTableViewController else {
                       return
                   }
 
-            cancellable = vc.$selection
+            cancellable = viewController.$selection
                 .receive(on: RunLoop.main)
                 .dropFirst()
                 .compactMap { $0 }
@@ -283,6 +284,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectResultRowAt(indexPath: IndexPath) {
 		selectedIndexPath = indexPath
+		// swiftlint:disable:next line_length
 		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: $0.favorite, postId: $0.postId, shortURL: $0.shortURL) }
 		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
@@ -305,6 +307,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         return (fetchController?.hasData() ?? false) && !spin.isAnimating
     }
 
+	// swiftlint:disable:next function_body_length
 	fileprivate func getPosts(paged: Int) {
         if paged == 0 {
             self.postId = []

@@ -148,8 +148,8 @@ extension Collection {
 		let size = 18
 		var startIndex = self.startIndex
 		let count = self.count
-		let n = count / size + (count % size == 0 ? 0 : 1)
-		return (0..<n).map { _ in
+		let temp = count / size + (count % size == 0 ? 0 : 1)
+		return (0..<temp).map { _ in
 			let endIndex = index(startIndex, offsetBy: size, limitedBy: self.endIndex) ?? self.endIndex
 			defer { startIndex = endIndex }
 			return "\(self[startIndex..<endIndex])"

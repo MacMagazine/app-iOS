@@ -33,6 +33,7 @@ class SettingsHeaderCell: UITableViewHeaderFooterView {
             subHeaderLabel?.text = "VERSÃO \(Settings().appVersion)"
 
         case .subscription:
+			// swiftlint:disable:next line_length
             subHeaderLabel?.text = "Assine o app para navegar por ele sem ver propagandas — ou, alternativamente, use o seu login de patrão (do Patreon ou do Catarse) para usufruir do mesmo benefício.\n"
 
         default:

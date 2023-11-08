@@ -8,6 +8,7 @@
 
 import Foundation
 
+// swiftlint:disable line_length
 struct ExampleVideo {
 
     let exampleVideo = """
@@ -57,5 +58,5 @@ struct ExampleVideo {
 	func getExampleStatsStatisticsLikeCount() -> String {
 		return "755"
 	}
-
 }
+// swiftlint:enable line_length

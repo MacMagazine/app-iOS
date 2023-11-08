@@ -8,6 +8,7 @@
 
 import Foundation
 
+// swiftlint:disable line_length
 struct ExamplePost {
 
 	let examplePost = """
@@ -249,3 +250,4 @@ Requer o <strong>iOS 12.1</strong> ou superior</div></div>
 		return getValidCategories().joined(separator: ",")
 	}
 }
+// swiftlint:enable line_length

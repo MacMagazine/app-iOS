@@ -21,18 +21,18 @@ class LoadingController: WKInterfaceController {
 
 	var posts: [PostData]? {
 		didSet {
-			if let _posts = posts, !_posts.isEmpty {
+			if let myPosts = posts, !myPosts.isEmpty {
 				DispatchQueue.main.async {
-					let pages: [String] = Array(0..._posts.count).compactMap {
+					let pages: [String] = Array(0...myPosts.count).compactMap {
 						"Page\($0)"
 					}
-					var contexts: [[String: Any]] = _posts.enumerated().compactMap { index, element in
-						["title": "\(index + 1) de \(_posts.count)", "post": element]
+					var contexts: [[String: Any]] = myPosts.enumerated().compactMap { index, element in
+						["title": "\(index + 1) de \(myPosts.count)", "post": element]
 					}
 					contexts.insert(["title": "MacMagazine", "post": ""], at: 0)
 
 					// Prefetch images to be able to sent to Apple Watch
-					let urls: [URL] = _posts.compactMap {
+					let urls: [URL] = myPosts.compactMap {
 						guard let thumbnail = $0.thumbnail else {
 							return nil
 						}

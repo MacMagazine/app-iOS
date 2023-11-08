@@ -369,6 +369,7 @@ extension VideoCollectionViewController: NSFetchedResultsControllerDelegate {
 
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {}
 
+	// swiftlint:disable:next line_length
 	private func controller(controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
 
 		switch type {
@@ -385,6 +386,7 @@ extension VideoCollectionViewController: NSFetchedResultsControllerDelegate {
 		}
 	}
 
+	// swiftlint:disable:next line_length
 	private func controller(controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: Any, atIndexPath indexPath: IndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 
 		guard let newIndexPath = newIndexPath,

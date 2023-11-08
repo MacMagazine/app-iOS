@@ -20,10 +20,10 @@ class Log {
     /// - warning: Log type warning
     /// - severe: Log type severe
     enum LogEvent: String {
-        case e = "[‼️]" // error
-        case i = "[ℹ️]" // info
-        case d = "[💬]" // debug
-        case w = "[⚠️]" // warning
+        case error = "[‼️]" // error
+        case info = "[ℹ️]" // info
+        case debug = "[💬]" // debug
+        case warning = "[⚠️]" // warning
     }
 
     static var dateFormat = "yyyy-MM-dd HH:mm:ssSSS"
@@ -54,7 +54,7 @@ class Log {
                                   line: Int = #line,
                                   column: Int = #column,
                                   funcName: String = #function) {
-        showLog(object, filename: filename, line: line, method: funcName, event: LogEvent.e)
+        showLog(object, filename: filename, line: line, method: funcName, event: LogEvent.error)
     }
 
     /// Logs info messages on console with prefix [ℹ️]
@@ -70,7 +70,7 @@ class Log {
                                  line: Int = #line,
                                  column: Int = #column,
                                  funcName: String = #function) {
-        showLog(object, filename: filename, line: line, method: funcName, event: LogEvent.i)
+        showLog(object, filename: filename, line: line, method: funcName, event: LogEvent.info)
     }
 
     /// Logs debug messages on console with prefix [💬]
@@ -86,7 +86,7 @@ class Log {
                                   line: Int = #line,
                                   column: Int = #column,
                                   funcName: String = #function) {
-        showLog("\n\t==> \(object ?? "")", filename: filename, line: line, method: funcName, event: LogEvent.d)
+        showLog("\n\t==> \(object ?? "")", filename: filename, line: line, method: funcName, event: LogEvent.debug)
     }
 
     /// Logs warnings verbosely on console with prefix [⚠️]
@@ -102,7 +102,7 @@ class Log {
                                     line: Int = #line,
                                     column: Int = #column,
                                     funcName: String = #function) {
-        showLog(object, filename: filename, line: line, method: funcName, event: LogEvent.w)
+        showLog(object, filename: filename, line: line, method: funcName, event: LogEvent.warning)
     }
 
     /// Extract the file name from the file path
