@@ -305,7 +305,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         return (fetchController?.hasData() ?? false) && !spin.isAnimating
     }
 
-	// swiftlint:disable:next function_body_length
 	fileprivate func getPosts(paged: Int) {
         if paged == 0 {
             self.postId = []

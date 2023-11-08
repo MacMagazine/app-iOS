@@ -253,7 +253,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		}
 	}
 
-	// swiftlint:disable:next cyclomatic_complexity
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 
 		switch type {

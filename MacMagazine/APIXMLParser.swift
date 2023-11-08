@@ -85,7 +85,6 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 		}
 	}
 
-	// swiftlint:disable:next function_body_length cyclomatic_complexity
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
 		if processItem {
 			value = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
