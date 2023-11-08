@@ -529,7 +529,6 @@ extension SettingsTableViewController {
 	}
 
 	fileprivate func setContent(for button: UIButton?, filtering: String, using products: [InAppPurchase.Product]) {
-		print(products)
 		let product = products.first(where: { $0.subscription?.contains(filtering) ?? false })
 		if let price = product?.price,
 		   let subscription = product?.subscription?.replacingOccurrences(of: "1 ", with: ""),

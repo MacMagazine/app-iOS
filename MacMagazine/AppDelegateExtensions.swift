@@ -74,7 +74,11 @@ extension AppDelegate {
 
 		// AppStore Review
 		if Settings().shouldAskForReview {
-			SKStoreReviewController.requestReview()
+			if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+				DispatchQueue.main.async {
+					SKStoreReviewController.requestReview(in: scene)
+				}
+			}
 		}
 
 		// Push Notification

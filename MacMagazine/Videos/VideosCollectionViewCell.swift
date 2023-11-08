@@ -15,9 +15,10 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 
 	// MARK: - Properties -
 
+	var youtubeWebView: YouTubePlayer?
+
 	@IBOutlet weak private var playButton: UIButton!
 	@IBOutlet weak private var thumbnailImageView: UIImageView!
-	@IBOutlet weak private var youtubeWebView: YouTubePlayer!
     @IBOutlet weak private var durationLabel: PaddingLabel!
 
     @IBOutlet weak private var headlineLabel: UILabel!
@@ -78,11 +79,9 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 // MARK: - Actions methods -
 extension VideosCollectionViewCell {
 	@IBAction private func play(_ sender: Any) {
-		thumbnailImageView.isHidden = true
-		playButton.isHidden = true
-		durationLabel.isHidden = true
-		youtubeWebView?.play()
-        isPlaying?(true)
+		guard let videoId = videoId else { return }
+		youtubeWebView?.videoId = videoId
+		youtubeWebView?.cue(videoId, time: 0)
 
         // Handoff
         let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
@@ -150,15 +149,6 @@ extension VideosCollectionViewCell {
             durationLabel.accessibilityLabel = "duração: \(duration.toAccessibilityTime())"
         }
 
-        youtubeWebView?.scrollView.isScrollEnabled = false
-        youtubeWebView?.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
-        youtubeWebView?.configuration.userContentController.add(self, name: "videoPaused")
-        youtubeWebView?.isAccessibilityElement = false
-
-        if !isPlaying {
-            youtubeWebView?.videoId = object.videoId
-        }
-
         guard let artworkURL = object.thumb else {
             return
         }
@@ -174,15 +164,4 @@ extension VideosCollectionViewCell {
                                  favorite as Any,
                                  share as Any]
     }
-}
-
-extension VideosCollectionViewCell: WKScriptMessageHandler {
-	func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-		if message.name == "videoPaused" {
-			self.thumbnailImageView.isHidden = false
-			self.playButton.isHidden = false
-			self.durationLabel.isHidden = false
-            self.isPlaying?(false)
-		}
-	}
 }

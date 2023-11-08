@@ -1018,7 +1018,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
 					5EB2017D25B3664C00E17642 = {
@@ -1197,7 +1197,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "PATH=\"/opt/homebrew/bin/:${PATH}\"\nexport PATH\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1503,7 +1503,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.6.0.0;
+				CURRENT_PROJECT_VERSION = 4.6.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1513,7 +1513,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.6.0;
+				MARKETING_VERSION = 4.6.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
@@ -1537,7 +1537,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.6.0.0;
+				CURRENT_PROJECT_VERSION = 4.6.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1548,7 +1548,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.6.0;
+				MARKETING_VERSION = 4.6.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1569,18 +1569,18 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.6.0.0;
+				CURRENT_PROJECT_VERSION = 4.6.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.6.0;
+				MARKETING_VERSION = 4.6.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -1606,19 +1606,19 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.6.0.0;
+				CURRENT_PROJECT_VERSION = 4.6.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.6.0;
+				MARKETING_VERSION = 4.6.1;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
@@ -1672,6 +1672,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1715,7 +1716,7 @@
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1744,7 +1745,7 @@
 					"$(PROJECT_DIR)/MacMagazine",
 				);
 				INFOPLIST_FILE = MacMagazineTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1846,18 +1847,18 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.6.0.0;
+				CURRENT_PROJECT_VERSION = 4.6.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.6.0;
+				MARKETING_VERSION = 4.6.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -1883,7 +1884,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.6.0.0;
+				CURRENT_PROJECT_VERSION = 4.6.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1893,7 +1894,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.6.0;
+				MARKETING_VERSION = 4.6.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
@@ -2098,6 +2099,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2160,6 +2162,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2197,7 +2200,7 @@
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2235,7 +2238,7 @@
 				);
 				INFOPLIST_FILE = MacMagazine/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2264,7 +2267,7 @@
 					"$(PROJECT_DIR)/MacMagazine",
 				);
 				INFOPLIST_FILE = MacMagazineTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2292,7 +2295,7 @@
 					"$(PROJECT_DIR)/MacMagazine",
 				);
 				INFOPLIST_FILE = MacMagazineTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -37,7 +37,7 @@ class SplashViewController: UIViewController {
                 }
 
                 splitViewController.delegate = appDelegate
-                splitViewController.preferredDisplayMode = .allVisible
+				splitViewController.preferredDisplayMode = UISplitViewController.DisplayMode.oneBesideSecondary
                 splitViewController.preferredPrimaryColumnWidthFraction = 0.33
 
                 UIView.transition(with: window,

@@ -135,7 +135,7 @@ extension PushNotification: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
         handleMMLive()
-        completionHandler([.alert, .sound])
+        completionHandler([.banner, .sound])
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,

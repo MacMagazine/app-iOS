@@ -79,8 +79,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 class OneSignalPushNotification: NSObject {
 	static func addDevice(token: String) {
 		do {
-			print(token)
-
 			guard let url = URL(string: "https://onesignal.com/api/v1/players") else { return }
 			let headers = ["accept": "application/json",
 						   "Content-Type": "application/json"]

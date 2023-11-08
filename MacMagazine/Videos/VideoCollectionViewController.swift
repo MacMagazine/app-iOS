@@ -8,6 +8,7 @@
 
 import CoreData
 import UIKit
+import WebKit
 
 class VideoCollectionViewController: UICollectionViewController {
 
@@ -16,6 +17,7 @@ class VideoCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var logoView: UIView!
 	@IBOutlet private weak var favorite: UIBarButtonItem!
 	@IBOutlet private weak var spin: UIActivityIndicatorView!
+	@IBOutlet weak private var youtubeWebView: YouTubePlayer!
 
     @IBOutlet private weak var collectionLayout: UICollectionViewFlowLayout! {
         didSet {
@@ -69,6 +71,9 @@ class VideoCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         navigationItem.titleView = logoView
 		navigationItem.title = nil
+
+		navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView: youtubeWebView))
+		setupYouTubePlayer()
 
 		searchController = UISearchController(searchResultsController: nil)
 		searchController?.searchBar.autocapitalizationType = .none
@@ -342,9 +347,11 @@ extension VideoCollectionViewController {
 			}
 			let object = videos[indexPath.item]
 			cell.configureVideo(with: object)
+			cell.youtubeWebView = youtubeWebView
 		} else {
 			let object = fetchedResultsController.object(at: indexPath)
 			cell.configureVideo(with: object)
+			cell.youtubeWebView = youtubeWebView
 		}
 
 		return cell
@@ -474,5 +481,43 @@ extension VideoCollectionViewController: UISearchBarDelegate {
 		searchBar.resignFirstResponder()
 		navigationItem.searchController = nil
 		self.collectionView.reloadData()
+	}
+}
+
+// MARK: - YouTube Player -
+
+extension VideoCollectionViewController {
+	fileprivate func setupYouTubePlayer() {
+		youtubeWebView.autoPlay = false
+		youtubeWebView.scrollView.isScrollEnabled = false
+		youtubeWebView.isAccessibilityElement = false
+
+		youtubeWebView.configuration.userContentController.removeScriptMessageHandler(forName: "videoPaused")
+		youtubeWebView.configuration.userContentController.removeScriptMessageHandler(forName: "stateChanged")
+
+		youtubeWebView.configuration.userContentController.add(self, name: "videoPaused")
+		youtubeWebView.configuration.userContentController.add(self, name: "stateChanged")
+
+		youtubeWebView.load("")
+	}
+}
+
+extension VideoCollectionViewController: WKScriptMessageHandler {
+	func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+		navigationItem.titleView = logoView
+
+		if message.name == "videoPaused" {
+			playerStatus(false)
+		}
+
+		if message.name == "stateChanged" {
+			if youtubeWebView.state(message.body as? Int ?? 6) == .buffering ||
+				youtubeWebView.state(message.body as? Int ?? 6) == .videoCued {
+				navigationItem.titleView = self.spin
+			}
+			if youtubeWebView.state(message.body as? Int ?? 6) == .playing {
+				playerStatus(true)
+			}
+		}
 	}
 }
