@@ -89,8 +89,8 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		if !completed {
 			return
 		}
-		guard let vc = pageViewController.viewControllers?.first as? WebViewController,
-			let index = orderedViewControllers.firstIndex(of: vc),
+		guard let viewController = pageViewController.viewControllers?.first as? WebViewController,
+			let index = orderedViewControllers.firstIndex(of: viewController),
 			let link = links[index].link
 			else {
 				return
@@ -247,14 +247,14 @@ extension PostsDetailViewController {
         Share().present(at: actions, using: items, activities: [favorito])
     }
 
-    func setRightButtomItems(_ buttons: [RightButtons]) {
-        let rightButtons: [UIBarButtonItem] = buttons.compactMap {
-            switch $0 {
-                case .spin:     return UIBarButtonItem(customView: spin)
-                case .actions:  return actions
-                default:        return nil
-            }
-        }
-        self.navigationItem.rightBarButtonItems = rightButtons
-    }
+	func setRightButtomItems(_ buttons: [RightButtons]) {
+		let rightButtons: [UIBarButtonItem] = buttons.compactMap {
+			switch $0 {
+			case .spin:     return UIBarButtonItem(customView: spin)
+			case .actions:  return actions
+			default:        return nil
+			}
+		}
+		self.navigationItem.rightBarButtonItems = rightButtons
+	}
 }

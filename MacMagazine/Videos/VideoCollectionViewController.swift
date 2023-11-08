@@ -32,7 +32,7 @@ class VideoCollectionViewController: UICollectionViewController {
 	var isLoading = true
 	var pageToken: String = ""
 	var lastContentOffset = CGPoint()
-	var direction: Direction = .up
+	var direction: Direction = .goingUp
 
 	var showFavorites = false
 	let favoritePredicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
@@ -123,7 +123,7 @@ class VideoCollectionViewController: UICollectionViewController {
 
 	fileprivate func getVideos() {
 		navigationItem.titleView = self.spin
-		direction = .up
+		direction = .goingUp
 
 		API().getVideos(using: pageToken) { videos in
 			guard let videos = videos,
@@ -251,7 +251,7 @@ class VideoCollectionViewController: UICollectionViewController {
 extension VideoCollectionViewController {
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let offset = scrollView.contentOffset
-		direction = offset.y > lastContentOffset.y && offset.y > 100 ? .down : .up
+		direction = offset.y > lastContentOffset.y && offset.y > 100 ? .goingDown : .goingUp
 		lastContentOffset = offset
 
 		// Pull to Refresh
@@ -272,7 +272,7 @@ extension VideoCollectionViewController {
         var message = isLoading ? "Carregando..." : "Você ainda não favoritou nenhum vídeo."
         if isSearching {
             message = "Nenhum resultado encontrado."
-            guard let _ = videos else {
+            guard videos != nil else {
                 let spin = UIActivityIndicatorView(style: .large)
                 spin.startAnimating()
                 collectionView.backgroundView = spin
@@ -320,7 +320,7 @@ extension VideoCollectionViewController {
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		if direction == .down &&
+		if direction == .goingDown &&
 			indexPath.item % 14 == 0 &&
 			navigationItem.titleView == logoView &&
 			!isSearching {

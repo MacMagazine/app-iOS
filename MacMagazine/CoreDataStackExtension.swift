@@ -68,7 +68,7 @@ extension CoreDataStack {
                              views: views,
                              likes: likes,
                              duration: duration)
-            // swiftlint:disable vertical_parameter_alignment_on_call
+            // swiftlint:enable vertical_parameter_alignment_on_call
         }
 
         mappedVideos.forEach { video in

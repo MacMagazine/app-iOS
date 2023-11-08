@@ -50,7 +50,7 @@ class YouTubePlayer: WKWebView {
 
 	var videoId: String? {
 		didSet {
-			guard let _ = videoId else {
+			guard videoId != nil else {
 				return
 			}
 			delay(0.4) {

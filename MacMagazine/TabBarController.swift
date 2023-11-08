@@ -50,42 +50,42 @@ class TabBarController: NSObject, UITabBarControllerDelegate {
     // Tap 2x to Top
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let navVC = viewController as? UINavigationController,
-           let vc = navVC.children[0] as? UITableViewController {
-            if previousController == vc {
-                vc.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-                vc.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+           let viewController = navVC.children[0] as? UITableViewController {
+            if previousController == viewController {
+                viewController.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+                viewController.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
             }
-            previousController = vc
+            previousController = viewController
         } else if let navVC = viewController as? UINavigationController,
-                  let vc = navVC.children[0] as? PodcastViewController {
-            if previousController == vc {
+                  let viewController = navVC.children[0] as? PodcastViewController {
+            if previousController == viewController {
                 NotificationCenter.default.post(name: .scrollToTop, object: nil)
             }
-            previousController = vc
+            previousController = viewController
         } else if let splitVC = viewController as? UISplitViewController,
                   let navVC = splitVC.children[0] as? UINavigationController,
-                  let vc = navVC.children[0] as? PostsMasterViewController {
-            if previousController == vc || previousController == nil {
+                  let viewController = navVC.children[0] as? PostsMasterViewController {
+            if previousController == viewController || previousController == nil {
                 if navVC.children.count > 1,
                    let navDetail = navVC.children[1] as? UINavigationController,
                    let detail = navDetail.children[0] as? PostsDetailViewController,
                    navVC.visibleViewController == detail {
                     navVC.popViewController(animated: true)
                 } else {
-                    if vc.tableView.numberOfSections > 0 &&
-                        vc.tableView.numberOfRows(inSection: 0) > 0 {
-                        vc.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-                        vc.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+                    if viewController.tableView.numberOfSections > 0 &&
+                        viewController.tableView.numberOfRows(inSection: 0) > 0 {
+                        viewController.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+                        viewController.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
                     }
                 }
             }
-            previousController = vc
+            previousController = viewController
         } else if let navVC = viewController as? UINavigationController,
-                  let vc = navVC.children[0] as? VideoCollectionViewController {
-            if previousController == vc {
-                vc.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
+                  let viewController = navVC.children[0] as? VideoCollectionViewController {
+            if previousController == viewController {
+                viewController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
             }
-            previousController = vc
+            previousController = viewController
         }
     }
 }

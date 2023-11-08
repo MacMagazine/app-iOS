@@ -20,15 +20,6 @@ class PostTests: XCTestCase {
     var postExample: Data? = ExamplePost().getExamplePost()
 	let examplePost = ExamplePost()
 
-	override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-	}
-
-	override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-		super.tearDown()
-	}
-
 	func testGetPost() {
 		XCTAssertNotNil(postExample, "Example post should exist")
 	}
@@ -122,8 +113,8 @@ class PostTests: XCTestCase {
 				XCTAssertEqual(posts.count, 2, "Should have 2 posts")
 
 				delay(0.1) {
-                    CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { (db: [Post]) in
-						XCTAssertEqual(db.count, 1, "Should retrieve only 1 post")
+                    CoreDataStack.shared.get(link: self.examplePost.getValidLink()) { (posts: [Post]) in
+						XCTAssertEqual(posts.count, 1, "Should retrieve only 1 post")
 						expectation.fulfill()
 					}
 				}

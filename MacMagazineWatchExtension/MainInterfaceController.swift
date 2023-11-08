@@ -100,7 +100,7 @@ class DetailInterfaceController: WKInterfaceController {
 			let string = NSMutableAttributedString(string: item.fullContent ?? "")
 			string.addAttribute(.paragraphStyle,
 								value: style,
-								range: NSMakeRange(0, string.length))
+								range: NSRange(location: 0, length: string.length))
 
 			content.setAttributedText(string)
 		}

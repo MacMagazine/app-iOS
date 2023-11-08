@@ -29,18 +29,18 @@ class PodcastViewController: UIViewController {
 
 		playerHeight.constant = 0.0
 
-		guard let vc = self.children[0] as? PodcastMasterViewController else {
+		guard let viewController = self.children[0] as? PodcastMasterViewController else {
 			return
 		}
-		vc.play = play
-        vc.showSpin = showSpin
-        vc.hideSpin = hideSpin
+		viewController.play = play
+        viewController.showSpin = showSpin
+        viewController.hideSpin = hideSpin
 
-		vc.resultsTableController = ResultsViewController()
-		vc.resultsTableController?.delegate = vc
-		vc.resultsTableController?.isPodcast = true
+		viewController.resultsTableController = ResultsViewController()
+		viewController.resultsTableController?.delegate = viewController
+		viewController.resultsTableController?.isPodcast = true
 
-		searchController = UISearchController(searchResultsController: vc.resultsTableController)
+		searchController = UISearchController(searchResultsController: viewController.resultsTableController)
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos podcasts..."
@@ -70,11 +70,11 @@ class PodcastViewController: UIViewController {
 
     fileprivate func reloadData() {
 		if self.tabBarController?.selectedIndex == 1 {
-            guard let vc = self.children[0] as? PodcastMasterViewController else {
+            guard let viewController = self.children[0] as? PodcastMasterViewController else {
                 return
             }
-			vc.tableView.reloadData()
-			vc.resultsTableController?.tableView.reloadData()
+			viewController.tableView.reloadData()
+			viewController.resultsTableController?.tableView.reloadData()
 		}
 	}
 
@@ -90,12 +90,12 @@ class PodcastViewController: UIViewController {
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
-        guard let vc = self.children[0] as? PodcastMasterViewController else {
+        guard let viewController = self.children[0] as? PodcastMasterViewController else {
             return
         }
-        vc.showFavoritesAction()
+        viewController.showFavoritesAction()
 
-		if vc.showFavorites {
+		if viewController.showFavorites {
 			self.navigationItem.titleView = nil
 			self.navigationItem.title = "Favoritos"
 			favorite.image = UIImage(systemName: "star.fill")
@@ -118,11 +118,11 @@ class PodcastViewController: UIViewController {
     }
 
     fileprivate func play(_ podcast: Podcast?) {
-        guard let vc = self.children[1] as? PlayerViewController else {
+        guard let viewController = self.children[1] as? PlayerViewController else {
             return
         }
-		vc.show = showWebView
-        vc.podcast = podcast
+		viewController.show = showWebView
+        viewController.podcast = podcast
     }
 
 }
@@ -131,22 +131,22 @@ class PodcastViewController: UIViewController {
 
 extension PodcastViewController: UISearchBarDelegate {
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-		guard let vc = self.children[0] as? PodcastMasterViewController else {
+		guard let viewController = self.children[0] as? PodcastMasterViewController else {
 			return
 		}
-		vc.resultsTableController?.showTyping()
+		viewController.resultsTableController?.showTyping()
 	}
 
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		guard let text = searchBar.text,
-			let vc = self.children[0] as? PodcastMasterViewController
+			let viewController = self.children[0] as? PodcastMasterViewController
 			else {
 				return
 		}
 		searchBar.resignFirstResponder()
-		vc.resultsTableController?.posts = []
-		vc.resultsTableController?.showSpin()
-		vc.searchPodcasts(text)
+		viewController.resultsTableController?.posts = []
+		viewController.resultsTableController?.showSpin()
+		viewController.searchPodcasts(text)
 	}
 
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

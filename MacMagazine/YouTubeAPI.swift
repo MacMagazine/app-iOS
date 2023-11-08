@@ -114,7 +114,6 @@ extension API {
 			pageToken = "&\(APIParams.pageToken)\(token)"
 		}
 
-		// swiftlint:disable:next line_length
 		let host = "\(APIParams.playlistItems)?\(APIParams.playlistPart)&\(APIParams.playlistIdParam)\(playlistId)&\(APIParams.keyParam)\(key)&\(APIParams.maxResults)\(pageToken)&\(APIParams.sort)"
 
 		executeGetVideoContent(host)
@@ -152,7 +151,6 @@ extension API {
 
 		Network.getVdeos(url: url) { (result: Result<Data, RestAPIError>) in
 			switch result {
-			// swiftlint:disable:next empty_enum_arguments
 			case .failure(_):
 				if isSearch ?? false {
 					self.onVideoSearchCompletion?(nil)
@@ -172,7 +170,6 @@ extension API {
 }
 
 extension API {
-	// swiftlint:disable:next line_length
 	func parse(_ data: Data, isSearch: Bool?, onVideoCompletion: ((YouTube<String>?) -> Void)?, onVideoSearchCompletion: ((YouTube<ResourceId>?) -> Void)?) {
 		do {
 			let decoder = JSONDecoder()

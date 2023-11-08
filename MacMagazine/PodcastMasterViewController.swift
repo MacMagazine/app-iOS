@@ -16,7 +16,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
     var fetchController: FetchedResultsControllerDataSource?
 
 	var lastContentOffset = CGPoint()
-	var direction: Direction = .up
+	var direction: Direction = .goingUp
 	var lastPage = -1
 
 	var searchController: UISearchController?
@@ -74,7 +74,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if isLoading &&
-            direction == .up {
+            direction == .goingUp {
 			delay(0.4) {
 				self.getPodcasts(paged: 0)
 			}
@@ -83,7 +83,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let offset = scrollView.contentOffset
-		direction = offset.y > lastContentOffset.y ? .down : .up
+		direction = offset.y > lastContentOffset.y ? .goingDown : .goingUp
 		lastContentOffset = offset
 
         // Pull to Refresh
@@ -101,7 +101,7 @@ class PodcastMasterViewController: UITableViewController, FetchedResultsControll
 	}
 
 	func willDisplayCell(indexPath: IndexPath) {
-		if direction == .down {
+		if direction == .goingDown {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 16) + 1
 			if page >= lastPage &&
                 tableView.rowNumber(indexPath: indexPath) % 16 == 0 {

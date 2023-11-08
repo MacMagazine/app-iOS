@@ -21,8 +21,8 @@ struct XMLPost: Hashable {
 	var podcastFrame: String = ""
 	var favorite: Bool = false
 	var postId: String = ""
-    var shortURL: String = ""
-    var playable: Bool = false
+	var shortURL: String = ""
+	var playable: Bool = false
 	var fullContent: String = ""
 
 	fileprivate func decodeHTMLString(string: String) -> String {
@@ -51,7 +51,7 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 	var value = ""
 	var attributes: [String: String]?
 	var numberOfPosts = -1
-    var parsedPosts = 0
+	var parsedPosts = 0
 
 	var isWatchPosts = false
 
@@ -64,10 +64,9 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 
 	// MARK: - Parse Delegate -
 
-	// swiftlint:disable:next line_length
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
 
-        value = ""
+		value = ""
 		if elementName == "item" {
 			processItem = true
 			currentPost = XMLPost()
@@ -125,16 +124,16 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 				currentPost.podcastFrame = value
 			case "item":
 				onCompletion?(currentPost)
-                parsedPosts += 1
+				parsedPosts += 1
 				processItem = false
 				if numberOfPosts > 0 &&
-                    parsedPosts >= numberOfPosts {
+					parsedPosts >= numberOfPosts {
 					parser.abortParsing()
 				}
 			case "guid":
 				currentPost.shortURL = value
-            case "content:encoded":
-                currentPost.playable = value.contains("youtube.com/embed/")
+			case "content:encoded":
+				currentPost.playable = value.contains("youtube.com/embed/")
 				if isWatchPosts {
 					currentPost.fullContent = value.toHtmlDecoded()
 						.replacingOccurrences(of: "\n\n", with: "\n")

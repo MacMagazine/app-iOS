@@ -9,6 +9,7 @@
 import UIKit
 
 struct Share {
+	// swiftlint:disable:next cyclomatic_complexity
     func present<T>(at location: T?, using items: [Any], activities: [UIActivityExtensions]? = nil) {
 		let safari = UIActivityExtensions(title: "Abrir no Safari", image: UIImage(systemName: "safari")) { items in
 			for item in items {

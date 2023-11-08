@@ -410,6 +410,7 @@ extension CoreDataStack {
 }
 
 extension CoreDataStack {
+	// swiftlint:disable identifier_name
     fileprivate func migrateStore(_ container: NSPersistentContainer,
                                   from: URL,
                                   to: URL) {
@@ -434,4 +435,5 @@ extension CoreDataStack {
         }
 
     }
+	// swiftlint:enable identifier_name
 }

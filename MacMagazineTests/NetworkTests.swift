@@ -66,7 +66,7 @@ class NetworkTests: XCTestCase {
 		// After getting the XML file from Wordpress, each XML parse call the closure to continue
 		// When the parse ended, a nil is returned back to the closure
 		API().getPosts(page: 0) { post in
-			guard let _ = post else {
+			guard post != nil else {
 				XCTAssertNil(post, "API response after parse must be nil")
 				expectation.fulfill()
 				return
@@ -116,13 +116,13 @@ extension NetworkTests {
 			return
 		}
         Network.get(url: url) { (result: Result<Data, RestAPIError>) in
-            switch result {
-                case .failure(_):
-                    completion(nil)
+			switch result {
+			case .failure(_):
+				completion(nil)
 
-                case .success(let response):
-                    completion(response)
-            }
+			case .success(let response):
+				completion(response)
+			}
         }
 	}
 

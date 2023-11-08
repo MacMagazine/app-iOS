@@ -107,10 +107,10 @@ struct Settings {
 
     var isPatrao: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: Definitions.mm_patrao)
+            return UserDefaults.standard.bool(forKey: Definitions.mmPatrao)
         }
         set(value) {
-            UserDefaults.standard.set(value, forKey: Definitions.mm_patrao)
+            UserDefaults.standard.set(value, forKey: Definitions.mmPatrao)
             UserDefaults.standard.synchronize()
         }
     }
@@ -229,12 +229,12 @@ extension Settings {
 	var pushPreference: Int {
 		guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.pushPreferences) as? Int else {
 			// There is no Push Notification Preference or is old style
-			guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.all_posts_pushes) as? Bool else {
+			guard let pushPreferences = UserDefaults.standard.object(forKey: Definitions.allPostsPushes) as? Bool else {
 				// There is no Push Notification Preference
 				return 0
 			}
 			// Remove old preference
-			UserDefaults.standard.removeObject(forKey: Definitions.all_posts_pushes)
+			UserDefaults.standard.removeObject(forKey: Definitions.allPostsPushes)
 			UserDefaults.standard.synchronize()
 
 			return pushPreferences ? 0 : 1

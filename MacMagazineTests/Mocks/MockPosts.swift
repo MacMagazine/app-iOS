@@ -8,7 +8,7 @@
 
 import Foundation
 
-// swiftlint:disable line_length type_body_length file_length
+// swiftlint:disable line_length
 struct MockPosts {
 
     let example = """
@@ -3055,4 +3055,4 @@ xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0"
         return Data(example.utf8)
     }
 }
-// swiftlint:enable line_length type_body_length file_length
+// swiftlint:enable line_length

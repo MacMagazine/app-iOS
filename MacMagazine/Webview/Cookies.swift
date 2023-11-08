@@ -11,7 +11,7 @@ import Foundation
 struct Cookies {
 
     let disqus = API.APIParams.disqus
-    let mm = API.APIParams.mmDomain
+    let mmDomain = API.APIParams.mmDomain
 
     func getCookies(_ domain: String? = nil) -> [HTTPCookie]? {
         let cookies = HTTPCookieStorage.shared.cookies
@@ -28,7 +28,7 @@ struct Cookies {
     func cleanCookies() {
         for cookie in getCookies() ?? [] {
             if !cookie.domain.contains(disqus) &&
-                !cookie.domain.contains(mm) {
+                !cookie.domain.contains(mmDomain) {
                 HTTPCookieStorage.shared.deleteCookie(cookie)
             }
         }
@@ -36,7 +36,7 @@ struct Cookies {
 
     func createDarkModeCookie(_ value: String) -> HTTPCookie? {
         return HTTPCookie(properties: [
-            .domain: mm,
+            .domain: mmDomain,
             .path: "/",
             .name: "darkmode",
             .value: value,
@@ -47,7 +47,7 @@ struct Cookies {
 
     func createFonteCookie(_ value: String) -> HTTPCookie? {
         return HTTPCookie(properties: [
-            .domain: mm,
+            .domain: mmDomain,
             .path: "/",
             .name: "fonte",
             .value: value,
@@ -58,7 +58,7 @@ struct Cookies {
 
     func createVersionCookie(_ value: String) -> HTTPCookie? {
         return HTTPCookie(properties: [
-            .domain: mm,
+            .domain: mmDomain,
             .path: "/",
             .name: "version",
             .value: value,
@@ -69,7 +69,7 @@ struct Cookies {
 
     func createPurchasedCookie(_ value: String) -> HTTPCookie? {
         return HTTPCookie(properties: [
-            .domain: mm,
+            .domain: mmDomain,
             .path: "/",
             .name: "patr",
             .value: value,

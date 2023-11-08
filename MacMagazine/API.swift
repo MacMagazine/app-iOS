@@ -27,7 +27,7 @@ extension URL {
 	}
 
 	func isMMAddress() -> Bool {
-		return self.absoluteString.prefix(API.APIParams.mm.count) == API.APIParams.mm
+		return self.absoluteString.prefix(API.APIParams.mmURL.count) == API.APIParams.mmURL
 	}
 
 	func isAppStore() -> Bool {
@@ -79,15 +79,15 @@ class API {
             return domainMM
         }()
 
-        static let mm = "https://\(mmDomain)/"
-		static let feed = "\(mm)feed/"
-        static let patrao = "\(mm)loginpatrao"
+        static let mmURL = "https://\(mmDomain)/"
+		static let feed = "\(mmURL)feed/"
+        static let patrao = "\(mmURL)loginpatrao"
 		static let paged = "paged="
 		static let cat = "cat="
 		static let posts = "\(cat)-101"
 		static let podcast = "\(cat)101"
 		static let search = "s="
-        static let restAPI = "\(mm)wp-json/menus/v2/"
+        static let restAPI = "\(mmURL)wp-json/menus/v2/"
         static let categories = "categories"
 		static let tag = "tag="
 
@@ -136,7 +136,7 @@ class API {
     // MARK: - Public methods -
 
     func getMMURL() -> String {
-        return APIParams.mm
+        return APIParams.mmURL
     }
 
 	func getComplications(_ completion: ((XMLPost?) -> Void)?) {
@@ -192,18 +192,18 @@ class API {
             return
         }
 
-        Network.get(url: url) { (result: Result<Data, RestAPIError>) in
-            switch result {
-                case .failure(_):
-                    completion?(nil)
+		Network.get(url: url) { (result: Result<Data, RestAPIError>) in
+			switch result {
+			case .failure(_):
+				completion?(nil)
 
-                case .success(let response):
-                    let categories = self.decodeJSON(response)
-                    DispatchQueue.main.async {
-                        completion?(categories)
-                    }
-            }
-        }
+			case .success(let response):
+				let categories = self.decodeJSON(response)
+				DispatchQueue.main.async {
+					completion?(categories)
+				}
+			}
+		}
     }
 
     // MARK: - Internal methods -
@@ -227,15 +227,15 @@ class API {
         }
 
         Network.get(url: url) { (result: Result<Data, RestAPIError>) in
-            switch result {
-                case .failure(_):
-                    self.onCompletion?(nil)
+			switch result {
+			case .failure(_):
+				self.onCompletion?(nil)
 
-                case .success(let response):
-                    self.parse(response,
-                               onCompletion: self.onCompletion,
-                               numberOfPosts: self.numberOfPosts)
-            }
+			case .success(let response):
+				self.parse(response,
+						   onCompletion: self.onCompletion,
+						   numberOfPosts: self.numberOfPosts)
+			}
         }
     }
 
@@ -280,7 +280,7 @@ extension API {
     }
 
     static func mmLive(onCompletion: ((MMLive?) -> Void)?) {
-        let host = "\(APIParams.mm)\(APIParams.mmlive)"
+        let host = "\(APIParams.mmURL)\(APIParams.mmlive)"
 
         guard let url = URL(string: "\(host.escape())") else {
             onCompletion?(nil)
@@ -289,23 +289,23 @@ extension API {
 
         Network.get(url: url) { (result: Result<Data, RestAPIError>) in
             switch result {
-                case .failure(_):
-                    onCompletion?(nil)
+			case .failure(_):
+				onCompletion?(nil)
 
-                case .success(let response):
-                    do {
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .secondsSince1970
+			case .success(let response):
+				do {
+					let decoder = JSONDecoder()
+					decoder.dateDecodingStrategy = .secondsSince1970
 
-                        let event = try decoder.decode(MMLive.self, from: response)
+					let event = try decoder.decode(MMLive.self, from: response)
 
-                        DispatchQueue.main.async {
-                            onCompletion?(event)
-                        }
-                    } catch {
-                        onCompletion?(nil)
-                    }
-            }
+					DispatchQueue.main.async {
+						onCompletion?(event)
+					}
+				} catch {
+					onCompletion?(nil)
+				}
+			}
         }
     }
 }

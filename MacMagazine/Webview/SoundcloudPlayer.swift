@@ -43,7 +43,7 @@ class SoundcloudPlayer: WKWebView {
 
 	var iFrame: String? {
 		didSet {
-			guard let _ = iFrame else {
+			guard iFrame != nil else {
 				return
 			}
 			iFrame = iFrame?.replacingOccurrences(of: "show_artwork=false", with: "show_artwork=false&download=false&sharing=false")

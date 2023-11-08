@@ -36,13 +36,12 @@ extension UITableView {
 // MARK: -
 
 enum Direction {
-	case down
-	case up
+	case goingDown
+	case goingUp
 }
 
 // MARK: -
 
-// swiftlint:disable:next inclusive_language type_body_length
 class PostsMasterViewController: UITableViewController, FetchedResultsControllerDelegate, ResultsViewControllerDelegate {
 
 	// MARK: - Properties -
@@ -55,7 +54,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
     @IBOutlet private weak var filter: UIBarButtonItem!
 
 	var lastContentOffset = CGPoint()
-	var direction: Direction = .up
+	var direction: Direction = .goingUp
 	var lastPage = -1
 
     var comeFrom3DTouch = false
@@ -222,7 +221,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     return
             }
 
-            guard let _ = navigationItem.searchController else {
+            guard navigationItem.searchController != nil else {
                 // Normal Posts table
                 if tableView.indexPathForSelectedRow != nil {
                     guard let post = fetchController?.object(at: indexPath) else {
@@ -242,7 +241,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 	// MARK: - View Methods -
 
 	func willDisplayCell(indexPath: IndexPath) {
-		if direction == .down {
+		if direction == .goingDown {
 			let page = Int(tableView.rowNumber(indexPath: indexPath) / 19) + 1
 			if page >= lastPage && tableView.rowNumber(indexPath: indexPath) % 19 == 0 {
 				lastPage = page
@@ -284,7 +283,6 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 	func didSelectResultRowAt(indexPath: IndexPath) {
 		selectedIndexPath = indexPath
-		// swiftlint:disable:next line_length
 		self.links = posts.map { PostData(title: $0.title, link: $0.link, thumbnail: $0.artworkURL, favorito: $0.favorite, postId: $0.postId, shortURL: $0.shortURL) }
 		self.performSegue(withIdentifier: "showDetail", sender: self)
 	}
@@ -485,7 +483,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 extension PostsMasterViewController {
 	override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if navigationItem.titleView == spin &&
-            direction == .up {
+            direction == .goingUp {
 			delay(0.4) {
 				self.getPosts(paged: 0)
 			}
@@ -494,7 +492,7 @@ extension PostsMasterViewController {
 
 	override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
-        direction = offset.y > lastContentOffset.y ? .down : .up
+        direction = offset.y > lastContentOffset.y ? .goingDown : .goingUp
         lastContentOffset = offset
 
         // Pull to Refresh

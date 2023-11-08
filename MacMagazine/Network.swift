@@ -12,14 +12,14 @@ enum RestAPIError: Error {
     case network
     case decoding
 
-    var reason: String {
-        switch self {
-            case .network:
-                return "An error occurred while fetching data"
-            case .decoding:
-                return "An error occurred while decoding data"
-        }
-    }
+	var reason: String {
+		switch self {
+		case .network:
+			return "An error occurred while fetching data"
+		case .decoding:
+			return "An error occurred while decoding data"
+		}
+	}
 }
 
 class Network {

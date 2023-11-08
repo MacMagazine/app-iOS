@@ -173,7 +173,7 @@ class WebViewController: UIViewController {
 	}
 
 	func setRightButtomItems(_ buttons: [RightButtons]) {
-		guard let vc = getPostsDetailViewController() else {
+		guard let viewController = getPostsDetailViewController() else {
 			let rightButtons: [UIBarButtonItem] = buttons.map {
 				switch $0 {
 				case .spin:     return UIBarButtonItem(customView: spin)
@@ -184,7 +184,7 @@ class WebViewController: UIViewController {
 			self.navigationItem.rightBarButtonItems = rightButtons
 			return
 		}
-		vc.setRightButtomItems(buttons)
+		viewController.setRightButtomItems(buttons)
 	}
 
 	// MARK: - Actions -
@@ -538,7 +538,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 	fileprivate func processLogin(for url: String?) -> WKNavigationActionPolicy {
 		var actionPolicy: WKNavigationActionPolicy = .allow
 
-		let mmURL = "\(API.APIParams.mm)wp-admin/profile.php"
+		let mmURL = "\(API.APIParams.mmURL)wp-admin/profile.php"
 
 		if url == mmURL {
 			var settings = Settings()
