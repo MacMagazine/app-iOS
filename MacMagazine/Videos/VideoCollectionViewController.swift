@@ -72,7 +72,6 @@ class VideoCollectionViewController: UICollectionViewController {
         navigationItem.titleView = logoView
 		navigationItem.title = nil
 
-		navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView: youtubeWebView))
 		setupYouTubePlayer()
 
 		searchController = UISearchController(searchResultsController: nil)

@@ -79,14 +79,16 @@ class VideosCollectionViewCell: AppCollectionViewCell {
 // MARK: - Actions methods -
 extension VideosCollectionViewCell {
 	@IBAction private func play(_ sender: Any) {
-		guard let videoId = videoId else { return }
-		youtubeWebView?.videoId = videoId
-		youtubeWebView?.cue(videoId, time: 0)
+		guard let videoId = videoId,
+			  let ytView = youtubeWebView else { return }
+		setupYouTubePlayer(ytView)
+		ytView.videoId = videoId
+		ytView.cue(videoId, time: 0)
 
-        // Handoff
+		// Handoff
         let handoff = NSUserActivity(activityType: "com.brit.macmagazine.details")
         handoff.title = headlineLabel.text
-        handoff.webpageURL = URL(string: "\(youTubeURL)\(youtubeWebView?.videoId ?? "")")
+        handoff.webpageURL = URL(string: "\(youTubeURL)\(ytView.videoId ?? "")")
         userActivity = handoff
         userActivity?.becomeCurrent()
     }
@@ -164,4 +166,19 @@ extension VideosCollectionViewCell {
                                  favorite as Any,
                                  share as Any]
     }
+}
+
+extension VideosCollectionViewCell {
+	fileprivate func setupYouTubePlayer(_ view: YouTubePlayer) {
+		view.removeFromSuperview()
+		addSubview(view)
+
+		view.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			view.leadingAnchor.constraint(equalTo: leadingAnchor),
+			view.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+			view.topAnchor.constraint(equalTo: topAnchor),
+			view.bottomAnchor.constraint(equalTo: bottomAnchor)
+		])
+	}
 }
