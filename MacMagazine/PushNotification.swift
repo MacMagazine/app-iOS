@@ -170,17 +170,14 @@ extension AppDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Database().update()
 
-		logI("applicationState: \(application.applicationState.rawValue)")
-
 		// Only get notification content if the user tap on it
-		if application.applicationState == .inactive {
-			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
-				  let keyA = additionalData["a"] as? [String: String] else {
-				return
-			}
-			logD(keyA["url"])
-			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
-		}
+//		if application.applicationState == .inactive {
+//			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
+//				  let keyA = additionalData["a"] as? [String: String] else {
+//				return
+//			}
+//			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
+//		}
 
 		completionHandler(.newData)
     }
