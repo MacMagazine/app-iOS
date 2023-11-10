@@ -26,8 +26,9 @@ class PushNotification: NSObject {
 
 		// This block gets called when the App is in foreground and receives a Push Notification
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
-            Database().update()
-            completion(notification)
+			Database().update {
+				completion(notification)
+			}
         }
 		OneSignal.setNotificationWillShowInForegroundHandler(notifWillShowInForegroundHandler)
 
@@ -45,7 +46,7 @@ class PushNotification: NSObject {
 }
 
 class Database {
-	func update() {
+	func update(onCompletion: (() -> Void)? = nil) {
 		var images: [String] = []
 		API().getPosts(page: 0) { post in
 
@@ -59,6 +60,7 @@ class Database {
                     if #available(iOS 14.0, *) {
                         WidgetCenter.shared.reloadAllTimelines()
                     }
+					onCompletion?()
                     return
 				}
 				images.append(post.artworkURL)
@@ -139,9 +141,10 @@ extension PushNotification: UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
 
-        handleMMLive(true)
-		Database().update()
-        completionHandler()
+		Database().update { [weak self] in
+			self?.handleMMLive(true)
+			completionHandler()
+		}
     }
 
     func handleMMLive(_ select: Bool = false) {
@@ -166,17 +169,16 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Database().update()
-
-		// Only get notification content if the user tap on it
-		if application.applicationState == .inactive {
-			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
-				  let keyA = additionalData["a"] as? [String: String] else {
-				return
+		Database().update {
+			// Only get notification content if the user tap on it
+			if application.applicationState == .inactive {
+				guard let additionalData = userInfo["custom"] as? [String: AnyObject],
+					  let keyA = additionalData["a"] as? [String: String] else {
+					return
+				}
+				(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
 			}
-			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
+			completionHandler(.newData)
 		}
-
-		completionHandler(.newData)
     }
 }
