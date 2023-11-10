@@ -26,7 +26,6 @@ class PushNotification: NSObject {
 
 		// This block gets called when the App is in foreground and receives a Push Notification
         let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
-			logD("notifWillShowInForegroundHandler")
             Database().update()
             completion(notification)
         }
@@ -34,13 +33,11 @@ class PushNotification: NSObject {
 
 		// This block gets called when the user reacts to a notification received
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-			logD("notificationOpenedBlock")
             let notification: OSNotification = result.notification
             guard let additionalData = notification.additionalData,
                   let url = additionalData as? [String: String] else {
                 return
             }
-			logD(url["url"])
             (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
         }
 		OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
@@ -164,20 +161,21 @@ extension PushNotification: UNUserNotificationCenterDelegate {
 }
 
 extension AppDelegate {
-	// OneSignal extension isn't working so we have to manage ourselves
+	// OneSignal extension isn't working when App is in the background, so we have to manage ourselves
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Database().update()
 
 		// Only get notification content if the user tap on it
-//		if application.applicationState == .inactive {
-//			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
-//				  let keyA = additionalData["a"] as? [String: String] else {
-//				return
-//			}
-//			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
-//		}
+		if application.applicationState == .inactive {
+			guard let additionalData = userInfo["custom"] as? [String: AnyObject],
+				  let keyA = additionalData["a"] as? [String: String] else {
+				return
+			}
+			logD(keyA["url"])
+			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
+		}
 
 		completionHandler(.newData)
     }
