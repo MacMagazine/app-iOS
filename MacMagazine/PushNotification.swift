@@ -140,6 +140,7 @@ extension PushNotification: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
 
         handleMMLive(true)
+		Database().update()
         completionHandler()
     }
 
@@ -173,7 +174,6 @@ extension AppDelegate {
 				  let keyA = additionalData["a"] as? [String: String] else {
 				return
 			}
-			logD(keyA["url"])
 			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
 		}
 
