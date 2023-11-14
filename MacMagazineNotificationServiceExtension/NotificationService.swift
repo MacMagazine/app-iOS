@@ -6,7 +6,6 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import OneSignal
 import OneSignalExtension
 import UserNotifications
 import WidgetKit
@@ -28,7 +27,7 @@ class NotificationService: UNNotificationServiceExtension {
 
 		if let bestAttemptContent = bestAttemptContent,
 		   let receivedRequest = receivedRequest {
-			OneSignal.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
+			OneSignalExtension.didReceiveNotificationExtensionRequest(receivedRequest, with: bestAttemptContent, withContentHandler: contentHandler)
 		}
 	}
 
@@ -38,7 +37,7 @@ class NotificationService: UNNotificationServiceExtension {
 		if let contentHandler = contentHandler,
            let bestAttemptContent = bestAttemptContent,
            let receivedRequest = receivedRequest {
-			OneSignal.serviceExtensionTimeWillExpireRequest(receivedRequest, with: bestAttemptContent)
+			OneSignalExtension.serviceExtensionTimeWillExpireRequest(receivedRequest, with: bestAttemptContent)
 			contentHandler(bestAttemptContent)
 		}
 	}

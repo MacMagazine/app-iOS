@@ -6,7 +6,7 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import OneSignal
+import OneSignalFramework
 import UIKit
 
 // MARK: -
@@ -246,7 +246,7 @@ extension Settings {
 		UserDefaults.standard.set(segment, forKey: Definitions.pushPreferences)
 		UserDefaults.standard.synchronize()
 
-		OneSignal.sendTag("notification_preferences", value: segment == 0 ? PushPreferences.all : PushPreferences.featured)
+		OneSignal.User.addTag(key: "notification_preferences", value: segment == 0 ? PushPreferences.all : PushPreferences.featured)
 	}
 }
 

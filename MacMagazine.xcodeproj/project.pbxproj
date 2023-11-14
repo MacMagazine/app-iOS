@@ -79,7 +79,6 @@
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
 		9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */; };
-		9B7F1716298441F0008E3680 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9B7F1715298441F0008E3680 /* OneSignal */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B85CAC82A504237008E905A /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
@@ -132,6 +131,7 @@
 		9BB4BC69225B99F700559170 /* MacMagazineWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */; };
 		9BB94D14225DF023000FA38E /* LoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB94D13225DF023000FA38E /* LoadingController.swift */; };
 		9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBFD57D2284AF06005E6897 /* CoreTelephony.framework */; };
+		9BC161362B02F27200FC03C3 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 9BC161352B02F27200FC03C3 /* OneSignalFramework */; };
 		9BC9B12E1F5C960700C4DF17 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9B12D1F5C960700C4DF17 /* PostCell.swift */; };
 		9BCAD67B1F47A08100B54526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67A1F47A08100B54526 /* AppDelegate.swift */; };
 		9BCAD67D1F47A08100B54526 /* PostsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAD67C1F47A08100B54526 /* PostsMasterViewController.swift */; };
@@ -453,10 +453,10 @@
 			files = (
 				685315FB25153ADE008F6CDC /* Kingfisher in Frameworks */,
 				9BBFD57E2284AF06005E6897 /* CoreTelephony.framework in Frameworks */,
+				9BC161362B02F27200FC03C3 /* OneSignalFramework in Frameworks */,
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
 				9B48046625F4EE9B0026AFF0 /* InAppPurchase.xcframework in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
-				9B7F1716298441F0008E3680 /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,7 +986,7 @@
 			name = MacMagazine;
 			packageProductDependencies = (
 				685315FA25153ADE008F6CDC /* Kingfisher */,
-				9B7F1715298441F0008E3680 /* OneSignal */,
+				9BC161352B02F27200FC03C3 /* OneSignalFramework */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -2393,7 +2393,7 @@
 			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 5.0.0;
 			};
 		};
 		9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -2427,10 +2427,10 @@
 			package = 9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
 			productName = OneSignalExtension;
 		};
-		9B7F1715298441F0008E3680 /* OneSignal */ = {
+		9BC161352B02F27200FC03C3 /* OneSignalFramework */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
-			productName = OneSignal;
+			productName = OneSignalFramework;
 		};
 /* End XCSwiftPackageProductDependency section */
 

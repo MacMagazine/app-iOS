@@ -7,7 +7,7 @@
 //
 
 import Kingfisher
-import OneSignal
+import OneSignalFramework
 import UIKit
 import UserNotifications
 import WidgetKit
@@ -16,32 +16,13 @@ class PushNotification: NSObject {
 	func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
         let key: [UInt8] = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
 
-        OneSignal.setLocationShared(false)
-        OneSignal.initWithLaunchOptions(options)
-        OneSignal.setAppId(Obfuscator().reveal(key: key))
+		OneSignal.initialize(Obfuscator().reveal(key: key), withLaunchOptions: options)
+		OneSignal.Notifications.addForegroundLifecycleListener(self)
+		OneSignal.Notifications.addClickListener(self)
 
-		OneSignal.promptForPushNotifications(userResponse: { _ in
-            self.setLocalNotification()
-        })
-
-		// This block gets called when the App is in foreground and receives a Push Notification
-        let notifWillShowInForegroundHandler: OSNotificationWillShowInForegroundBlock = { notification, completion in
-			Database().update {
-				completion(notification)
-			}
-        }
-		OneSignal.setNotificationWillShowInForegroundHandler(notifWillShowInForegroundHandler)
-
-		// This block gets called when the user reacts to a notification received
-        let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-            let notification: OSNotification = result.notification
-            guard let additionalData = notification.additionalData,
-                  let url = additionalData as? [String: String] else {
-                return
-            }
-            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = url["url"]
-        }
-		OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+		OneSignal.Notifications.requestPermission({ [weak self] _ in
+			self?.setLocalNotification()
+		}, fallbackToSettings: true)
 	}
 }
 
@@ -163,7 +144,7 @@ extension PushNotification: UNUserNotificationCenterDelegate {
         }
     }
 }
-
+/*
 extension AppDelegate {
 	// OneSignal extension isn't working when App is in the background, so we have to manage ourselves
     func application(_ application: UIApplication,
@@ -181,4 +162,25 @@ extension AppDelegate {
 			completionHandler(.newData)
 		}
     }
+}
+*/
+extension PushNotification: OSNotificationLifecycleListener {
+	func onWillDisplay(event: OSNotificationWillDisplayEvent) {
+		event.preventDefault()
+		Database().update {
+			event.notification.display()
+		}
+	}
+}
+
+extension PushNotification: OSNotificationClickListener {
+	func onClick(event: OSNotificationClickEvent) {
+		let notification: OSNotification = event.notification
+		guard let additionalData = notification.additionalData,
+			  let content = additionalData as? [String: String] else {
+			return
+		}
+		logD(content["url"])
+		(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = content["url"]
+	}
 }
