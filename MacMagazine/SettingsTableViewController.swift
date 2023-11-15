@@ -437,11 +437,10 @@ extension SettingsTableViewController {
 		static let option2 = "option_2"
 		static let option3 = "option_3"
 		static let option4 = "option_4"
-		static let type = Settings().isPhone ? "phone" : "tablet"
-		static let icon1 = "\(type)_1"
-		static let icon2 = "\(type)_2"
-		static let icon3 = "\(type)_3"
-		static let icon4 = "\(type)_4"
+		static let icon1 = "AppIcon-1"
+		static let icon2 = "AppIcon-2"
+		static let icon3 = "AppIcon-3"
+		static let icon4 = "AppIcon-4"
 
 		func getIcon(for option: String) -> String? {
 			var icon: String?
