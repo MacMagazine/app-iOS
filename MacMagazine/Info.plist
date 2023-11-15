@@ -8,57 +8,6 @@
 	<string>MacMagazine</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIcons~ipad</key>
-	<dict>
-		<key>CFBundleAlternateIcons</key>
-		<dict>
-			<key>tablet_1</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>tablet_1</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>tablet_2</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>tablet_2</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>tablet_3</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>tablet_3</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>tablet_4</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>tablet_4</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-		</dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>tablet_1</string>
-			</array>
-			<key>UIPrerenderedIcon</key>
-			<false/>
-		</dict>
-	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
