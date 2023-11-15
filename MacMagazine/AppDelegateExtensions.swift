@@ -56,23 +56,18 @@ extension AppDelegate {
 			Settings().applyTheme()
 		}
 	}
-
-	func applicationDidEnterBackground(_ application: UIApplication) {
-		var bgTask = UIBackgroundTaskIdentifier.invalid
-		bgTask = application.beginBackgroundTask(withName: "MMBackgroundTask",
-												 expirationHandler: { () -> Void in
-			application.endBackgroundTask(bgTask)
-			bgTask = .invalid
-		})
-		Helper().showBadge()
-	}
 }
 
 // MARK: - Setup -
 
 extension AppDelegate {
 	func setup(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        // Apply custom thmee (Dark/Light)
+		NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground),
+											   name: UIApplication.willResignActiveNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground),
+											   name: UIApplication.didEnterBackgroundNotification, object: nil)
+
+		// Apply custom thmee (Dark/Light)
 		Settings().applyTheme()
 
 		// Apple Watch Session
@@ -88,7 +83,22 @@ extension AppDelegate {
 		}
 
 		// Push Notification
-		PushNotification().setup(options: launchOptions)
+		pushNotification = PushNotification()
+		pushNotification?.setup(options: launchOptions)
+		pushNotification?.$newContentAvailable
+			.delay(for: 2, scheduler: RunLoop.main)
+			.sink { content in
+				guard let content = content else { return }
+				showDetailController(with: content)
+			}
+			.store(in: &cancellables)
+	}
+}
+
+extension AppDelegate {
+	@objc
+	private func didEnterBackground() {
+		Helper().showBadge()
 	}
 }
 
