@@ -57,7 +57,13 @@ extension AppDelegate {
 		}
 	}
 
-	func applicationWillResignActive(_ application: UIApplication) {
+	func applicationDidEnterBackground(_ application: UIApplication) {
+		var bgTask = UIBackgroundTaskIdentifier.invalid
+		bgTask = application.beginBackgroundTask(withName: "MMBackgroundTask",
+												 expirationHandler: { () -> Void in
+			application.endBackgroundTask(bgTask)
+			bgTask = .invalid
+		})
 		Helper().showBadge()
 	}
 }

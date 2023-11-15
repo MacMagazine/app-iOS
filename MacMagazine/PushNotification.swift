@@ -144,26 +144,7 @@ extension PushNotification: UNUserNotificationCenterDelegate {
         }
     }
 }
-/*
-extension AppDelegate {
-	// OneSignal extension isn't working when App is in the background, so we have to manage ourselves
-    func application(_ application: UIApplication,
-                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-		Database().update {
-			// Only get notification content if the user tap on it
-			if application.applicationState == .inactive {
-				guard let additionalData = userInfo["custom"] as? [String: AnyObject],
-					  let keyA = additionalData["a"] as? [String: String] else {
-					return
-				}
-				(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = keyA["url"]
-			}
-			completionHandler(.newData)
-		}
-    }
-}
-*/
+
 extension PushNotification: OSNotificationLifecycleListener {
 	func onWillDisplay(event: OSNotificationWillDisplayEvent) {
 		event.preventDefault()
@@ -180,7 +161,9 @@ extension PushNotification: OSNotificationClickListener {
 			  let content = additionalData as? [String: String] else {
 			return
 		}
-		logD(content["url"])
-		(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = content["url"]
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+			logD(content["url"])
+			(UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = content["url"]
+		}
 	}
 }
