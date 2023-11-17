@@ -86,7 +86,7 @@ extension AppDelegate {
 		pushNotification = PushNotification()
 		pushNotification?.setup(options: launchOptions)
 		pushNotification?.$newContentAvailable
-			.delay(for: 2, scheduler: RunLoop.main)
+			.delay(for: 1, scheduler: RunLoop.main)
 			.sink { content in
 				guard let content = content else { return }
 				showDetailController(with: content)
