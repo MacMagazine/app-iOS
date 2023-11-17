@@ -24,7 +24,7 @@ class PushNotification: NSObject, ObservableObject {
 
 		OneSignal.Notifications.requestPermission({ [weak self] _ in
 			self?.setLocalNotification()
-		}, fallbackToSettings: true)
+		}, fallbackToSettings: false)
 	}
 }
 
