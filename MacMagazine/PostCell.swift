@@ -103,8 +103,8 @@ extension PostCell {
             !isPodcast {
             defaultImage = "image_logo"
             if subheadlineLabel != nil {
-                subheadlineLabel?.text = object.excerpt
-                subheadlineLabel?.accessibilityLabel = "Descrição: \(object.excerpt)"
+                subheadlineLabel?.text = object.excerpt.toHtmlDecoded()
+                subheadlineLabel?.accessibilityLabel = "Descrição: \(object.excerpt.toHtmlDecoded())"
             }
         } else if isPodcast {
             subheadlineLabel?.text = object.pubDate.toDate().cellDate()
