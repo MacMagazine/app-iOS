@@ -43,6 +43,8 @@
 	<array>
 		<string>com.brit.macmagazine.details</string>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>O MacMagazine gostaria da sua permissão para coletar dados a fim de apresentar publicidade mais adequada aos seus interesses.</string>
 	<key>OneSignal_app_groups_key</key>
 	<string>group.com.brit.macmagazine.onesignal.push</string>
 	<key>OneSignal_disable_badge_clearing</key>

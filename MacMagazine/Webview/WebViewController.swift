@@ -112,6 +112,13 @@ class WebViewController: UIViewController {
 		webView?.configuration.userContentController.addUserScript(commmentsScript)
 		webView?.configuration.userContentController.add(self, name: "gotCommentURLHandler")
 
+		// Prevent tracking
+		let removeBackToBlogScriptSource = "document.getElementById('backtoblog').outerHTML = '';"
+		let removeBackToBlogScript = WKUserScript(source: removeBackToBlogScriptSource,
+												  injectionTime: .atDocumentEnd,
+												  forMainFrameOnly: true)
+		webView?.configuration.userContentController.addUserScript(removeBackToBlogScript)
+
 		setupCookies()
 	}
 
@@ -440,13 +447,16 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 			if webView.url?.isMMAddress() ?? false {
 				items.append(.actions)
 			}
-			setRightButtomItems(items)
 		} else {
-			setRightButtomItems([.close])
+			items.append(.close)
 		}
 		if post == nil && items.isEmpty {
-			setRightButtomItems([.close])
+			items.append(.close)
 		}
+		if webView.url?.isPatrao() ?? false {
+			items.removeAll()
+		}
+		setRightButtomItems(items)
 
 		hideView.alpha = 0
 		spin.stopAnimating()

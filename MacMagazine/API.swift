@@ -22,6 +22,10 @@ struct Category: Codable {
 
 extension URL {
 
+	func isPatrao() -> Bool {
+		return isMMAddress() && self.absoluteString.contains("/wp-login.php") && self.absoluteString.contains("novologin")
+	}
+
 	func isMMPost() -> Bool {
 		return isMMAddress() && self.absoluteString.contains("/post/")
 	}

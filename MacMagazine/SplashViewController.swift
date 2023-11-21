@@ -6,6 +6,8 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
+import AdSupport
+import AppTrackingTransparency
 import UIKit
 
 class SplashViewController: UIViewController {
@@ -21,7 +23,10 @@ class SplashViewController: UIViewController {
             settings.purchased = response
         }
 
-        Settings().isMMLive { isLive in
+		// AppTrackingTransparency
+		ATTrackingManager.requestTrackingAuthorization { _ in }
+
+		Settings().isMMLive { isLive in
             DispatchQueue.main.async {
                 (UIApplication.shared.delegate as? AppDelegate)?.isMMLive = isLive
             }
@@ -58,5 +63,4 @@ class SplashViewController: UIViewController {
             }
         }
 	}
-
 }
