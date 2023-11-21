@@ -6,6 +6,8 @@
 //  Copyright © 2017 MacMagazine. All rights reserved.
 //
 
+import AdSupport
+import AppTrackingTransparency
 import Combine
 import CoreData
 import CoreSpotlight
@@ -181,6 +183,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
 		processSelection()
 		viewDidAppear = true
+
+		// AppTrackingTransparency
+		ATTrackingManager.requestTrackingAuthorization { _ in }
 
 //        if Settings().whatsNew != Settings().appVersion {
 //            self.performSegue(withIdentifier: "showWhatsNewSegue", sender: self)
