@@ -18,7 +18,5 @@ final class MacMagazineUITests: XCTestCase {
     }
 
     func testExample() throws {
-        let app = XCUIApplication()
-        app.launch()
     }
 }

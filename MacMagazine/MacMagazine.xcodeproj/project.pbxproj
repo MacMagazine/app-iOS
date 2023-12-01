@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B5ED8C52B1A3DB200672FF7 /* News in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C42B1A3DB200672FF7 /* News */; };
+		9B5ED8C72B1A3DB200672FF7 /* Podcast in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C62B1A3DB200672FF7 /* Podcast */; };
+		9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C82B1A3DB200672FF7 /* Settings */; };
+		9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8CA2B1A3DB200672FF7 /* Videos */; };
 		9BD78AB42B1A14C70002703B /* MacMagazineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */; };
 		9BD78AB62B1A14C70002703B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB52B1A14C70002703B /* ContentView.swift */; };
 		9BD78ABA2B1A14C80002703B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD78AB92B1A14C80002703B /* Assets.xcassets */; };
@@ -38,6 +42,7 @@
 		9B5ED8C02B1A3B1C00672FF7 /* Podcast */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Podcast; sourceTree = "<group>"; };
 		9B5ED8C12B1A3B4000672FF7 /* Videos */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Videos; sourceTree = "<group>"; };
 		9B5ED8C22B1A3BDD00672FF7 /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
+		9B5ED8CC2B1A3DDB00672FF7 /* MacMagazine.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MacMagazine.xctestplan; sourceTree = "<group>"; };
 		9BD78AB02B1A14C70002703B /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMagazineApp.swift; sourceTree = "<group>"; };
 		9BD78AB52B1A14C70002703B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +62,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */,
+				9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */,
+				9B5ED8C52B1A3DB200672FF7 /* News in Frameworks */,
+				9B5ED8C72B1A3DB200672FF7 /* Podcast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +86,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B2341162B1A3E1300A5C9C0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9BD78AB92B1A14C80002703B /* Assets.xcassets */,
+				9BD78ABE2B1A14C80002703B /* MacMagazine.entitlements */,
+				9B5ED8CC2B1A3DDB00672FF7 /* MacMagazine.xctestplan */,
+				9BD78ABB2B1A14C80002703B /* Preview Content */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9B5ED8BE2B1A3AAA00672FF7 /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +109,13 @@
 			path = ../Features;
 			sourceTree = "<group>";
 		};
+		9B5ED8C32B1A3DB200672FF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9BD78AA72B1A14C60002703B = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +124,7 @@
 				9BD78AC72B1A14C80002703B /* MacMagazineTests */,
 				9BD78AD12B1A14C80002703B /* MacMagazineUITests */,
 				9BD78AB12B1A14C70002703B /* Products */,
+				9B5ED8C32B1A3DB200672FF7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,12 +141,10 @@
 		9BD78AB22B1A14C70002703B /* MacMagazine */ = {
 			isa = PBXGroup;
 			children = (
-				9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */,
 				9BD78AB52B1A14C70002703B /* ContentView.swift */,
-				9BD78AB92B1A14C80002703B /* Assets.xcassets */,
-				9BD78ABE2B1A14C80002703B /* MacMagazine.entitlements */,
 				9BD78ABF2B1A14C80002703B /* Info.plist */,
-				9BD78ABB2B1A14C80002703B /* Preview Content */,
+				9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */,
+				9B2341162B1A3E1300A5C9C0 /* Resources */,
 			);
 			path = MacMagazine;
 			sourceTree = "<group>";
@@ -164,6 +190,12 @@
 			dependencies = (
 			);
 			name = MacMagazine;
+			packageProductDependencies = (
+				9B5ED8C42B1A3DB200672FF7 /* News */,
+				9B5ED8C62B1A3DB200672FF7 /* Podcast */,
+				9B5ED8C82B1A3DB200672FF7 /* Settings */,
+				9B5ED8CA2B1A3DB200672FF7 /* Videos */,
+			);
 			productName = MacMagazine;
 			productReference = 9BD78AB02B1A14C70002703B /* MacMagazine.app */;
 			productType = "com.apple.product-type.application";
@@ -440,10 +472,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0.0;
-				DEVELOPMENT_ASSET_PATHS = "\"MacMagazine/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MacMagazine/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -475,10 +507,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0.0;
-				DEVELOPMENT_ASSET_PATHS = "\"MacMagazine/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MacMagazine/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -621,6 +653,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9B5ED8C42B1A3DB200672FF7 /* News */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = News;
+		};
+		9B5ED8C62B1A3DB200672FF7 /* Podcast */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Podcast;
+		};
+		9B5ED8C82B1A3DB200672FF7 /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Settings;
+		};
+		9B5ED8CA2B1A3DB200672FF7 /* Videos */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Videos;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9BD78AA82B1A14C60002703B /* Project object */;
 }

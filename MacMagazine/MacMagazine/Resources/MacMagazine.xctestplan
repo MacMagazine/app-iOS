@@ -1,0 +1,65 @@
+{
+  "configurations" : [
+    {
+      "id" : "9BE7DFC2-C00A-49B6-8FF8-C9ADB8542234",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MacMagazine.xcodeproj",
+      "identifier" : "9BD78AAF2B1A14C70002703B",
+      "name" : "MacMagazine"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MacMagazine.xcodeproj",
+        "identifier" : "9BD78AC32B1A14C80002703B",
+        "name" : "MacMagazineTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MacMagazine.xcodeproj",
+        "identifier" : "9BD78ACD2B1A14C80002703B",
+        "name" : "MacMagazineUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Features\/News",
+        "identifier" : "NewsTests",
+        "name" : "NewsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Features\/Podcast",
+        "identifier" : "PodcastTests",
+        "name" : "PodcastTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Features\/Settings",
+        "identifier" : "SettingsTests",
+        "name" : "SettingsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Features\/Videos",
+        "identifier" : "VideosTests",
+        "name" : "VideosTests"
+      }
+    }
+  ],
+  "version" : 1
+}
