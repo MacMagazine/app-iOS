@@ -1,10 +1,3 @@
-//
-//  MacMagazineTests.swift
-//  MacMagazineTests
-//
-//  Created by Cassio Rossi on 01/12/2023.
-//
-
 import XCTest
 @testable import MacMagazine
 

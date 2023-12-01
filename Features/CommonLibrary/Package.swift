@@ -4,23 +4,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "Settings",
+    name: "CommonLibrary",
 	platforms: [.iOS(.v16)],
     products: [
-        .library(
-            name: "Settings",
-            targets: ["Settings"]),
+        .library(name: "CommonLibrary", targets: ["CommonLibrary"]),
     ],
 	dependencies: [
-		.package(name: "CommonLibrary", path: "../CommonLibrary"),
 		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master")
 	],
     targets: [
-		.target(name: "Settings",
-				dependencies: ["CommonLibrary",
-							   .product(name: "CoreLibrary", package: "modules"),
+		.target(name: "CommonLibrary",
+				dependencies: [.product(name: "CoreLibrary", package: "modules"),
 							   .product(name: "UIComponentsLibrary", package: "modules")],
-				resources: [.process("Resources")]),
-		.testTarget(name: "SettingsTests", dependencies: ["Settings"]),
+				resources: [.process("Resources")])
     ]
 )

@@ -1,17 +1,14 @@
-//
-//  MacMagazineApp.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 01/12/2023.
-//
-
+import CommonLibrary
+import Settings
 import SwiftUI
+import UIComponentsLibrary
 
 @main
 struct MacMagazineApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			SettingsView()
         }
+		.environment(\.theme, ThemeColorImplementation())
     }
 }

@@ -30,7 +30,7 @@ Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para cadastrar pr
 ## Instruções para colaboração
 Optamos pela não utilização de Gerenciadores de Dependências, como Cocoapods ou Carthage, para permitir um melhor entendimento do projeto, além de servir como estudo de Swift. Porém se tiver uma biblioteca que realmente faça a diferença no projeto, use Swift Package Manager - ou nos escreva para discutirmos a melhor opção.
 
-Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS suportada é 15+.
+Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS suportada é 16+.
 
 Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/v5`.
 

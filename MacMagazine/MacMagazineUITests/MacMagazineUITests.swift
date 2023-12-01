@@ -1,10 +1,3 @@
-//
-//  MacMagazineUITests.swift
-//  MacMagazineUITests
-//
-//  Created by Cassio Rossi on 01/12/2023.
-//
-
 import XCTest
 
 final class MacMagazineUITests: XCTestCase {
