@@ -9,6 +9,3 @@ Docs/
 !*.xcworkspace/contents.xcworkspacedata
 !*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 !*.xcodeproj/project.xcworkspace/xcshareddata
-
-Package.resolved
-!*.xcodeproj/**/Package.resolved
