@@ -21,12 +21,18 @@ O aplicativo do MacMagazine agora é um projeto de código aberto (_open source_
 ## Bug Reporting e Feature request
 Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para cadastrar problemas encontrados ou features desejadas.
 
+## Sobre esta versão
+- Totalmente escrita em Swift e usando SwiftUI
+- Design diferenciado por plataforma
+- Totalmente modular usando Swift Package Manager
+- Analytics usando Firebase
+
 ## Instruções para colaboração
 Optamos pela não utilização de Gerenciadores de Dependências, como Cocoapods ou Carthage, para permitir um melhor entendimento do projeto, além de servir como estudo de Swift. Porém se tiver uma biblioteca que realmente faça a diferença no projeto, use Swift Package Manager - ou nos escreva para discutirmos a melhor opção.
 
-Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS suportada é 13+.
+Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS suportada é 15+.
 
-Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/v4`.
+Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/v5`.
 
 Instale o utitlitário [swiftlint](https://github.com/realm/SwiftLint) e observe o [code style](https://github.com/raywenderlich/swift-style-guide) para manter o padrão no desenvolvimento.
 
