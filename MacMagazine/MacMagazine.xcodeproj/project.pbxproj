@@ -13,6 +13,7 @@
 		9B5ED8C72B1A3DB200672FF7 /* Podcast in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C62B1A3DB200672FF7 /* Podcast */; };
 		9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C82B1A3DB200672FF7 /* Settings */; };
 		9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8CA2B1A3DB200672FF7 /* Videos */; };
+		9BCD66C32B1D428D00EA79A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */; };
 		9BD78AB42B1A14C70002703B /* MacMagazineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */; };
 		9BD78AB62B1A14C70002703B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB52B1A14C70002703B /* ContentView.swift */; };
 		9BD78ABA2B1A14C80002703B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD78AB92B1A14C80002703B /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		9B5ED8C12B1A3B4000672FF7 /* Videos */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Videos; sourceTree = "<group>"; };
 		9B5ED8C22B1A3BDD00672FF7 /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
 		9B5ED8CC2B1A3DDB00672FF7 /* MacMagazine.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MacMagazine.xctestplan; sourceTree = "<group>"; };
+		9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9BD78AB02B1A14C70002703B /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMagazineApp.swift; sourceTree = "<group>"; };
 		9BD78AB52B1A14C70002703B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				9BD78AB52B1A14C70002703B /* ContentView.swift */,
 				9BD78ABF2B1A14C80002703B /* Info.plist */,
+				9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */,
 				9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */,
 				9B2341162B1A3E1300A5C9C0 /* Resources */,
 			);
@@ -276,6 +279,8 @@
 				"pt-BR",
 			);
 			mainGroup = 9BD78AA72B1A14C60002703B;
+			packageReferences = (
+			);
 			productRefGroup = 9BD78AB12B1A14C70002703B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -293,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BD78ABD2B1A14C80002703B /* Preview Assets.xcassets in Resources */,
+				9BCD66C32B1D428D00EA79A3 /* GoogleService-Info.plist in Resources */,
 				9B54949A2B1A48DF00BD51FF /* sound.wav in Resources */,
 				9BD78ABA2B1A14C80002703B /* Assets.xcassets in Resources */,
 			);

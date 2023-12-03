@@ -10,11 +10,13 @@ let package = Package(
         .library(name: "CommonLibrary", targets: ["CommonLibrary"]),
     ],
 	dependencies: [
-		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master")
+		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master"),
+		.package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.0.0")
 	],
     targets: [
 		.target(name: "CommonLibrary",
-				dependencies: [.product(name: "CoreLibrary", package: "modules"),
+				dependencies: [.product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
+							   .product(name: "CoreLibrary", package: "modules"),
 							   .product(name: "UIComponentsLibrary", package: "modules")],
 				resources: [.process("Resources")])
     ]

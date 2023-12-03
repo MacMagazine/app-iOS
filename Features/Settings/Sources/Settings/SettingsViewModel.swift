@@ -1,6 +1,6 @@
+import CommonLibrary
 import CoreData
 import CoreLibrary
-import Foundation
 import SwiftUI
 
 enum IconType: String, CaseIterable {
@@ -69,6 +69,11 @@ extension SettingsViewModel {
 	func setSettings() async {
 		icon = await storage.appIcon
 		mode = await storage.mode
+
+		Analytics.log(settings: [
+			"icon": icon.rawValue as NSObject,
+			"mode": mode.rawValue as NSObject
+		])
 	}
 }
 

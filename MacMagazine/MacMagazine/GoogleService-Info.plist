@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBPIVVrqb__nCNkUV3JKyor4SXsyxZdWOU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>425723842042</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.brit.macmagazine</string>
+	<key>PROJECT_ID</key>
+	<string>macmagazine-2c704</string>
+	<key>STORAGE_BUCKET</key>
+	<string>macmagazine-2c704.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<true/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<false/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<false/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:425723842042:ios:53e8da2bdd2bd37b8ba843</string>
+</dict>
+</plist>
