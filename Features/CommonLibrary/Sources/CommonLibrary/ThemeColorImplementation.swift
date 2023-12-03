@@ -3,20 +3,21 @@ import SwiftUI
 import UIComponentsLibrary
 
 public struct Bubble {
-	let background: Color
-	let text: Color
+	let background: String
+	let text: String
 }
 
 public protocol AppColor {
 	var user: Bubble { get }
 	var assistant: Bubble { get }
+	var tip: TipConfig { get }
 }
 
 public typealias ThemeColor = Themeable & AppColor
 
 public struct ThemeColorImplementation: ThemeColor {
 	public let main = MainColor(background: "MMWhiteGrey6",
-								navigation: "MainDark",
+								navigation: "MMBlack90",
 								tint: "MMBlueWhite",
 								shadow: "Blue")
 
@@ -34,11 +35,14 @@ public struct ThemeColorImplementation: ThemeColor {
 									terciary: "Blue1",
 									destructive: "TabascoDracula")
 
-	public let user = Bubble(background: Color("Secondary", bundle: .module),
-							 text: Color("Gray", bundle: .module))
+	public let tip = TipConfig(background: "MMBlue",
+							   text: "MMBlack90")
 
-	public let assistant = Bubble(background: Color("Blue", bundle: .module),
-								  text: Color.white)
+	public let user = Bubble(background: "Secondary",
+							 text: "Gray")
+
+	public let assistant = Bubble(background: "Blue",
+								  text: "Blue")
 
 	public init() {}
 }

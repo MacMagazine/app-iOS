@@ -20,6 +20,7 @@ public struct SettingsView: View {
 					}
 					.buttonStyle(PlainButtonStyle())
 
+				SettingsTips.subscriptions.tipView(with: theme)
 				Text("Assinaturas -> [] + options")
 					.foregroundColor(theme.text.primary.color)
 				Text("Push -> segment")
@@ -37,12 +38,16 @@ public struct SettingsView: View {
 extension SettingsView {
 	@ViewBuilder
 	private var icons: some View {
+		SettingsTips.appIcon.tipView(with: theme)
+
 		HStack(spacing: 12) {
 			Spacer()
 
 			ForEach(IconType.allCases, id: \.self) { type in
-				Button(action: { Task { await viewModel.change(type) }},
-					   label: {
+				Button(action: {
+					SettingsTips.appIcon.invalidate()
+					Task { await viewModel.change(type) }
+				}, label: {
 					Image(type.rawValue, bundle: .module)
 						.resizable()
 						.aspectRatio(contentMode: .fit)
@@ -66,3 +71,4 @@ extension SettingsView {
 	SettingsView()
 		.environment(\.theme, ThemeColorImplementation())
 }
+
