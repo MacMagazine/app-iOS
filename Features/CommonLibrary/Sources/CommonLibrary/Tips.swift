@@ -38,10 +38,12 @@ struct MMTipViewStyle: TipViewStyle {
 					.aspectRatio(contentMode: .fit)
 					.frame(width: 28, height: 28)
 					.padding(.top, 4)
+					.accessibilityHidden(true)
 
 				configuration.title
 					.font(.title2)
 					.fontWeight(.bold)
+					.accessibilityHint(Text("Dica de como usar o aplicativo."))
 
 				Spacer(minLength: 30)
 
@@ -51,6 +53,7 @@ struct MMTipViewStyle: TipViewStyle {
 					Image(systemName: "xmark")
 						.padding(.top, 4)
 				})
+				.accessibilityLabel("Fechar dica")
 			}
 
 			configuration.message

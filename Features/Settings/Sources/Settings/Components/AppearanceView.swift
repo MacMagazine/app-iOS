@@ -39,8 +39,13 @@ extension AppearanceView {
 	private var appearanceView: some View {
 		Picker("", selection: $viewModel.mode) {
 			Text("Clara").tag(ColorScheme.light)
+				.accessibilityLabel(ColorScheme.light.accessibilityText(selected: viewModel.mode == ColorScheme.light))
+
 			Text("Escura").tag(ColorScheme.dark)
+				.accessibilityLabel(ColorScheme.dark.accessibilityText(selected: viewModel.mode == ColorScheme.dark))
+
 			Text("Sistema").tag(ColorScheme.system)
+				.accessibilityLabel(ColorScheme.system.accessibilityText(selected: viewModel.mode == ColorScheme.system))
 		}
 		.pickerStyle(.segmented)
 		.onChange(of: viewModel.mode) { value in
@@ -68,6 +73,7 @@ extension AppearanceView {
 				)
 				.disabled(viewModel.icon == type)
 				.opacity(viewModel.icon == type ? 0.5 : 1)
+				.accessibilityLabel(type.accessibilityText(selected: viewModel.icon == type))
 				.frame(maxWidth: .infinity)
 			}
 		}

@@ -269,11 +269,11 @@
 			};
 			buildConfigurationList = 9BD78AAB2B1A14C60002703B /* Build configuration list for PBXProject "MacMagazine" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 9BD78AA72B1A14C60002703B;
 			productRefGroup = 9BD78AB12B1A14C70002703B /* Products */;
