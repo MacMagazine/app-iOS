@@ -26,7 +26,7 @@ public struct ThemeColorImplementation: ThemeColor {
 
 	public let text = TextColor(primaryTab: "SharkGallery",
 								primary: "MMBlueWhite",
-								secondary: "Blue",
+								secondary: "MMWhiteGrey6",
 								terciary: "Purple",
 								error: "TabascoDracula")
 

@@ -12,16 +12,36 @@ extension Database {
 		}
 	}
 
-	func update(appIcon: IconType) {
+	var mode: ColorScheme {
+		get async {
+			guard let items = try? await self.get(from: "Settings") as? [Settings] else {
+				return .light
+			}
+			return ColorScheme(rawValue: Int(items.first?.mode ?? 0)) ?? .light
+		}
+	}
+
+	func update(appIcon: IconType? = nil,
+				mode: ColorScheme? = nil) {
 		Task {
 			guard let items = try? await self.get(from: "Settings") as? [Settings],
 				  let item = items.first else {
 				let item = Settings(context: self.mainContext)
-				item.icon = appIcon.rawValue
+				if let appIcon {
+					item.icon = appIcon.rawValue
+				}
+				if let mode {
+					item.mode = Int16(mode.rawValue)
+				}
 				await saveUsingMainActor()
 				return
 			}
-			item.icon = appIcon.rawValue
+			if let appIcon {
+				item.icon = appIcon.rawValue
+			}
+			if let mode {
+				item.mode = Int16(mode.rawValue)
+			}
 			await saveUsingMainActor()
 		}
 	}

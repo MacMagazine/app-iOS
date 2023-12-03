@@ -3,11 +3,11 @@ import SwiftUI
 import TipKit
 
 enum SettingsTips: TipType {
-	case appIcon
+	case appearance
 	case subscriptions
 
 	@available(iOS 17, *)
-	private static var appIconTip: AppIconTip { AppIconTip() }
+	private static var appearanceTip: AppearanceTip { AppearanceTip() }
 
 	@available(iOS 17, *)
 	private static var subscriptionsTip: SubscriptionsTip { SubscriptionsTip() }
@@ -19,8 +19,8 @@ extension SettingsTips {
 		if #available(iOS 17, *) {
 			Group {
 				switch self {
-				case .appIcon:
-					TipView(Self.appIconTip, arrowEdge: .bottom)
+				case .appearance:
+					TipView(Self.appearanceTip, arrowEdge: .bottom)
 
 				case .subscriptions:
 					TipView(Self.subscriptionsTip, arrowEdge: .bottom)
@@ -33,7 +33,7 @@ extension SettingsTips {
 	func invalidate() {
 		if #available(iOS 17, *) {
 			switch self {
-			case .appIcon: Self.appIconTip.invalidate(reason: .actionPerformed)
+			case .appearance: Self.appearanceTip.invalidate(reason: .actionPerformed)
 			case .subscriptions: Self.subscriptionsTip.invalidate(reason: .actionPerformed)
 			}
 		}
@@ -42,7 +42,7 @@ extension SettingsTips {
 	func show() {
 		if #available(iOS 17, *) {
 			switch self {
-			case .appIcon: AppIconTip.isActive = true
+			case .appearance: AppearanceTip.isActive = true
 			case .subscriptions: SubscriptionsTip.isActive = true
 			}
 		}
@@ -50,25 +50,6 @@ extension SettingsTips {
 }
 
 //	_ = content.popoverTip(tip)
-
-@available(iOS 17, *)
-struct AppIconTip: Tip {
-	@Parameter
-	static var isActive: Bool = true
-
-	var title: Text { Text("Escolha o ícone do seu app") }
-	var message: Text? { Text("Customize o app para melhor representar seu jeito.") }
-
-	var rules: [Rule] = [
-		#Rule(Self.$isActive) { $0 == true }
-	]
-
-	var actions: [Action] {
-		SettingsTips.appIcon.add { tip in
-			(tip as? SettingsTips)?.show()
-		}
-	}
-}
 
 @available(iOS 17, *)
 struct SubscriptionsTip: Tip {

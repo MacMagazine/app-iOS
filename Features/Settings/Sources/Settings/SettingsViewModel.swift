@@ -19,8 +19,23 @@ enum IconType: String, CaseIterable {
 	}
 }
 
+public enum ColorScheme: Int {
+	case light = 0
+	case dark = 1
+	case system = 2
+
+	public var colorScheme: SwiftUI.ColorScheme? {
+		switch self {
+		case .light: .light
+		case .dark: .dark
+		case .system: nil
+		}
+	}
+}
+
 public class SettingsViewModel: ObservableObject {
 	@Published var icon: IconType = .normal
+	@Published public var mode: ColorScheme = .light
 
 	public let mainContext: NSManagedObjectContext
 	let storage: Database
@@ -36,6 +51,7 @@ extension SettingsViewModel {
 	@MainActor
 	func setSettings() async {
 		icon = await storage.appIcon
+		mode = await storage.mode
 	}
 }
 
@@ -52,5 +68,10 @@ extension SettingsViewModel {
 			self.icon = icon
 		} catch {
 		}
+	}
+
+	@MainActor
+	func change(_ mode: ColorScheme) async {
+		storage.update(mode: mode)
 	}
 }
