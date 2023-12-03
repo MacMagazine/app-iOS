@@ -49,8 +49,6 @@ extension SettingsTips {
 	}
 }
 
-//	_ = content.popoverTip(tip)
-
 @available(iOS 17, *)
 struct SubscriptionsTip: Tip {
 	@Parameter
