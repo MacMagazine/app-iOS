@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B477EC72B1E709A008987E9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9B477EC62B1E709A008987E9 /* FirebaseCrashlytics */; };
+		9B477EC82B1E75A8008987E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */; };
+		9B477ECC2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 9B477ECB2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		9B54949A2B1A48DF00BD51FF /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9B5494992B1A48DF00BD51FF /* sound.wav */; };
 		9B54949F2B1A57C500BD51FF /* CommonLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B54949E2B1A57C500BD51FF /* CommonLibrary */; };
 		9B5ED8C52B1A3DB200672FF7 /* News in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C42B1A3DB200672FF7 /* News */; };
 		9B5ED8C72B1A3DB200672FF7 /* Podcast in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C62B1A3DB200672FF7 /* Podcast */; };
 		9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C82B1A3DB200672FF7 /* Settings */; };
 		9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8CA2B1A3DB200672FF7 /* Videos */; };
-		9BCD66C32B1D428D00EA79A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */; };
 		9BD78AB42B1A14C70002703B /* MacMagazineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */; };
 		9BD78AB62B1A14C70002703B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB52B1A14C70002703B /* ContentView.swift */; };
 		9BD78ABA2B1A14C80002703B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD78AB92B1A14C80002703B /* Assets.xcassets */; };
@@ -70,7 +72,9 @@
 			files = (
 				9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */,
 				9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */,
+				9B477EC72B1E709A008987E9 /* FirebaseCrashlytics in Frameworks */,
 				9B54949F2B1A57C500BD51FF /* CommonLibrary in Frameworks */,
+				9B477ECC2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				9B5ED8C52B1A3DB200672FF7 /* News in Frameworks */,
 				9B5ED8C72B1A3DB200672FF7 /* Podcast in Frameworks */,
 			);
@@ -206,6 +210,8 @@
 				9B5ED8C82B1A3DB200672FF7 /* Settings */,
 				9B5ED8CA2B1A3DB200672FF7 /* Videos */,
 				9B54949E2B1A57C500BD51FF /* CommonLibrary */,
+				9B477EC62B1E709A008987E9 /* FirebaseCrashlytics */,
+				9B477ECB2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport */,
 			);
 			productName = MacMagazine;
 			productReference = 9BD78AB02B1A14C70002703B /* MacMagazine.app */;
@@ -280,6 +286,7 @@
 			);
 			mainGroup = 9BD78AA72B1A14C60002703B;
 			packageReferences = (
+				9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9BD78AB12B1A14C70002703B /* Products */;
 			projectDirPath = "";
@@ -298,7 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BD78ABD2B1A14C80002703B /* Preview Assets.xcassets in Resources */,
-				9BCD66C32B1D428D00EA79A3 /* GoogleService-Info.plist in Resources */,
+				9B477EC82B1E75A8008987E9 /* GoogleService-Info.plist in Resources */,
 				9B54949A2B1A48DF00BD51FF /* sound.wav in Resources */,
 				9BD78ABA2B1A14C80002703B /* Assets.xcassets in Resources */,
 			);
@@ -497,9 +504,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacMagazine/Info.plist;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "O MacMagazine gostaria da sua permissão para coletar dados a fim de apresentar publicidade mais adequada aos seus interesses.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -508,7 +515,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				OTHER_LDFLAGS = "-Wl,-no_warn_duplicate_libraries";
+				OTHER_LDFLAGS = (
+					"-Wl,-no_warn_duplicate_libraries",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -535,9 +545,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacMagazine/Info.plist;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "O MacMagazine gostaria da sua permissão para coletar dados a fim de apresentar publicidade mais adequada aos seus interesses.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -546,7 +556,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				OTHER_LDFLAGS = "-Wl,-no_warn_duplicate_libraries";
+				OTHER_LDFLAGS = (
+					"-Wl,-no_warn_duplicate_libraries",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -675,7 +688,28 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.18.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		9B477EC62B1E709A008987E9 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		9B477ECB2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
 		9B54949E2B1A57C500BD51FF /* CommonLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonLibrary;

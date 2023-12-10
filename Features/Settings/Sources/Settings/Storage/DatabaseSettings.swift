@@ -21,8 +21,18 @@ extension Database {
 		}
 	}
 
+	var patrao: Bool {
+		get async {
+			guard let items = try? await self.get(from: "Settings") as? [Settings] else {
+				return false
+			}
+			return items.first?.patrao ?? false
+		}
+	}
+
 	func update(appIcon: IconType? = nil,
-				mode: ColorScheme? = nil) {
+				mode: ColorScheme? = nil,
+				patrao: Bool = false) {
 		Task {
 			guard let items = try? await self.get(from: "Settings") as? [Settings],
 				  let item = items.first else {
@@ -33,6 +43,9 @@ extension Database {
 				if let mode {
 					item.mode = Int16(mode.rawValue)
 				}
+				if patrao {
+					item.patrao = patrao
+				}
 				await saveUsingMainActor()
 				return
 			}
@@ -41,6 +54,9 @@ extension Database {
 			}
 			if let mode {
 				item.mode = Int16(mode.rawValue)
+			}
+			if patrao {
+				item.patrao = patrao
 			}
 			await saveUsingMainActor()
 		}

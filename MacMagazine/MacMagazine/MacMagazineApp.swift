@@ -1,4 +1,6 @@
+import AppTrackingTransparency
 import CommonLibrary
+import FirebaseAnalytics
 import FirebaseCore
 import Settings
 import SwiftUI
@@ -12,8 +14,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 	func application(_ application: UIApplication,
 					 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-		// Firebase
+
 		FirebaseApp.configure()
+
+//		ATTrackingManager.requestTrackingAuthorization { status in
+//			Analytics.logEvent("ATTrackingManager", parameters: [:])
+//		}
 
 		return true
 	}
@@ -32,7 +38,7 @@ struct MacMagazineApp: App {
 				.task {
 					if #available(iOS 17, *) {
 						#if DEBUG
-						try? Tips.resetDatastore()
+//						try? Tips.resetDatastore()
 						#endif
 						try? Tips.configure()
 					}

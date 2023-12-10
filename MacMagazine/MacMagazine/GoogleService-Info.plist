@@ -26,5 +26,7 @@
 	<false/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:425723842042:ios:53e8da2bdd2bd37b8ba843</string>
+	<key>GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED</key>
+	<false/>
 </dict>
 </plist>

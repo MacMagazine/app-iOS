@@ -1,3 +1,4 @@
+import Combine
 import CommonLibrary
 import CoreData
 import CoreLibrary
@@ -53,6 +54,10 @@ public enum ColorScheme: Int {
 public class SettingsViewModel: ObservableObject {
 	@Published var icon: IconType = .normal
 	@Published public var mode: ColorScheme = .light
+	@Published public var isPresentingLoginPatrao = false
+	@Published public var isPatrao = false
+
+	private var cancellables: Set<AnyCancellable> = []
 
 	public let mainContext: NSManagedObjectContext
 	let storage: Database
@@ -61,6 +66,19 @@ public class SettingsViewModel: ObservableObject {
 		self.storage = Database(db: "SettingsModel",
 								resource: Bundle.module.url(forResource: "SettingsModel", withExtension: "momd"))
 		self.mainContext = self.storage.mainContext
+
+		observeLoginStatus()
+	}
+}
+
+extension SettingsViewModel {
+	private func observeLoginStatus() {
+		$isPatrao
+			.removeDuplicates()
+			.sink { [weak self] status in
+				self?.storage.update(patrao: status)
+			}
+			.store(in: &cancellables)
 	}
 }
 
@@ -69,10 +87,12 @@ extension SettingsViewModel {
 	func setSettings() async {
 		icon = await storage.appIcon
 		mode = await storage.mode
+		isPatrao = await storage.patrao
 
 		Analytics.log(settings: [
 			"icon": icon.rawValue as NSObject,
-			"mode": mode.rawValue as NSObject
+			"mode": mode.rawValue as NSObject,
+			"patrao": isPatrao as NSObject,
 		])
 	}
 }

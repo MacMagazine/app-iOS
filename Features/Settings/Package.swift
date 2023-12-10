@@ -7,9 +7,7 @@ let package = Package(
     name: "Settings",
 	platforms: [.iOS(.v16)],
     products: [
-        .library(
-            name: "Settings",
-            targets: ["Settings"]),
+        .library(name: "Settings", targets: ["Settings"])
     ],
 	dependencies: [
 		.package(name: "CommonLibrary", path: "../CommonLibrary"),

@@ -89,7 +89,7 @@ extension AppearanceView {
 @available(iOS 17, *)
 struct AppearanceTip: Tip {
 	@Parameter
-	static var isActive: Bool = true
+	static var isActive: Bool = false
 
 	var title: Text { Text("Seu app, seu jeito") }
 	var message: Text? { Text("Escolha a aparência do seu app, incluido modo escuro e ícone do app.") }

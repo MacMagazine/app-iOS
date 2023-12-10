@@ -3,8 +3,8 @@ import SwiftUI
 import TipKit
 
 enum SettingsTips: TipType {
-	case appearance
 	case subscriptions
+	case appearance
 
 	@available(iOS 17, *)
 	private static var appearanceTip: AppearanceTip { AppearanceTip() }
@@ -45,25 +45,6 @@ extension SettingsTips {
 			case .appearance: AppearanceTip.isActive = true
 			case .subscriptions: SubscriptionsTip.isActive = true
 			}
-		}
-	}
-}
-
-@available(iOS 17, *)
-struct SubscriptionsTip: Tip {
-	@Parameter
-	static var isActive: Bool = false
-
-	var title: Text { Text("Remover propagandas") }
-	var message: Text? { Text("Navegue pelo app sem propagandas - ou, alternativamente, use seu login de patrão.") }
-
-	var rules: [Rule] = [
-		#Rule(Self.$isActive) { $0 == true }
-	]
-
-	var actions: [Action] {
-		SettingsTips.subscriptions.add { tip in
-			(tip as? SettingsTips)?.show()
 		}
 	}
 }

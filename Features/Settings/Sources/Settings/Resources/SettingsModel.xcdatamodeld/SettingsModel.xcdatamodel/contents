@@ -3,5 +3,6 @@
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="patrao" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>
