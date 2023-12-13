@@ -21,15 +21,17 @@ struct AppearanceView: View {
 			.font(.headline)
 			.foregroundColor(theme.text.primary.color)) {
 				SettingsTips.appearance.tipView(with: theme)
+					.listRowBackground(Color.clear)
 
 				appearanceView
 					.padding(.vertical, 4)
-					.listRowBackground(theme.main.background.color)
+					.listRowBackground(Color.clear)
 
 				iconsView
 					.padding(.vertical, 4)
-					.listRowBackground(theme.main.background.color)
+					.listRowBackground(Color.clear)
 			}
+			.listRowSeparator(.hidden)
 			.buttonStyle(PlainButtonStyle())
     }
 }

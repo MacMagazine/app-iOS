@@ -56,6 +56,7 @@ public class SettingsViewModel: ObservableObject {
 	@Published public var mode: ColorScheme = .light
 	@Published public var isPresentingLoginPatrao = false
 	@Published public var isPatrao = false
+	@Published public var subscriptionValid = false
 
 	private var cancellables: Set<AnyCancellable> = []
 

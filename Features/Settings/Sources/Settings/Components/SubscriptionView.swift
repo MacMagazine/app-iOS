@@ -6,6 +6,7 @@ import UIComponentsLibrary
 struct SubscriptionView: View {
 	@ObservedObject private var viewModel: SettingsViewModel
 	private let theme: ThemeColor
+	@State private var width: CGFloat?
 
 	init(viewModel: SettingsViewModel,
 		 theme: ThemeColor) {
@@ -14,42 +15,115 @@ struct SubscriptionView: View {
 	}
 
 	var body: some View {
-		Section(header: Text("Remover Propagandas")
-			.font(.headline)
-			.foregroundColor(theme.text.primary.color)) {
-				SettingsTips.subscriptions.tipView(with: theme)
+		Section(content: {
+			SettingsTips.subscriptions.tipView(with: theme)
+				.listRowBackground(Color.clear)
 
-				if viewModel.isPatrao {
-					logoffPatrao
-						.padding(.vertical, 4)
-						.listRowBackground(theme.main.background.color)
+			if viewModel.isPatrao {
+				Button(action: { viewModel.isPatrao = false },
+					   label: {
+					Text("Logoff de patrão".uppercased())
+						.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+				})
+				.padding(.vertical, 4)
+				.buttonStyle(PlainButtonStyle())
+				.listRowBackground(Color.clear)
 
-				} else {
-					Text("Assinaturas -> [] + options")
-						.foregroundColor(theme.text.primary.color)
+			} else if viewModel.subscriptionValid {
+				manageSubscription
 
-					patrao
-						.padding(.vertical, 4)
-						.listRowBackground(theme.main.background.color)
+			} else {
+				sectionSubscription
+				sectionPatrao
+			}
+
+		}, header: {
+			Text("Remover Propagandas")
+				.font(.headline)
+				.foregroundColor(theme.text.primary.color)
+
+		}, footer: {
+			HStack {
+				Button(action: {},
+					   label: {
+					Text("Termos de Uso")
+						.bordered(stroke: .clear)
+				})
+				Spacer(minLength: 0)
+				Button(action: {},
+					   label: {
+					Text("Política de Privacidade")
+						.bordered(stroke: .clear)
+				})
+			}
+			.frame(height: 20)
+		})
+		.listRowSeparator(.hidden)
+
+	}
+
+	@ViewBuilder
+	private var sectionSubscription: some View {
+		ScrollView(.horizontal) {
+			HStack {
+				ForEach(0..<2, id: \.self) { _ in
+					Button(action: {},
+						   label: {
+						VStack {
+							Text("R$ 10,90")
+								.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+							Text("por 1 mês")
+								.font(.caption)
+								.foregroundStyle(theme.text.terciary.color ?? .black)
+						}
+					})
+					.frame(width: 130)
 				}
 			}
-			.buttonStyle(PlainButtonStyle())
+			.frame(minWidth: width)
+		}
+		.buttonStyle(PlainButtonStyle())
+		.listRowBackground(Color.clear)
+		.background(GeometryReader { proxy in
+			Color.clear.onAppear {
+				width = proxy.size.width
+			}
+		})
+
+		HStack {
+			Button(action: {},
+				   label: {
+				Text("Recuperar".uppercased())
+					.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+			})
+
+			manageSubscription
+		}
+		.buttonStyle(PlainButtonStyle())
+		.listRowBackground(Color.clear)
 	}
 
 	@ViewBuilder
-	private var patrao: some View {
+	private var manageSubscription: some View {
+		Button(action: {},
+			   label: {
+			Text("Gerenciar".uppercased())
+				.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+		})
+		.buttonStyle(PlainButtonStyle())
+		.listRowBackground(Color.clear)
+	}
+
+	@ViewBuilder
+	private var sectionPatrao: some View {
 		Button(action: { viewModel.isPresentingLoginPatrao.toggle() },
 			   label: {
-			Text("Sou patrão")
+			Text("Sou patrão".uppercased())
+				.roundedFullSize(fill: theme.button.primary.color ?? .blue)
 		})
-	}
-
-	@ViewBuilder
-	private var logoffPatrao: some View {
-		Button(action: { viewModel.isPatrao = false },
-			   label: {
-			Text("Logoff de patrão")
-		})
+		.padding(.vertical, 4)
+		.buttonStyle(PlainButtonStyle())
+		.listRowBackground(Color.clear)
 	}
 }
 

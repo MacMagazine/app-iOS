@@ -19,30 +19,30 @@ public struct ThemeColorImplementation: ThemeColor {
 	public let main = MainColor(background: "MMWhiteGrey6",
 								navigation: "MMBlack90",
 								tint: "MMBlueWhite",
-								shadow: "Blue")
+								shadow: "")
 
 	public let secondary = SecondaryColor(background: "Secondary")
 	public let tertiary = SecondaryColor(background: "Tertiary")
 
-	public let text = TextColor(primaryTab: "SharkGallery",
+	public let text = TextColor(primaryTab: "",
 								primary: "MMBlueWhite",
 								secondary: "MMWhiteGrey6",
-								terciary: "Purple",
-								error: "TabascoDracula")
+								terciary: "MMLessDarkGreyWhite",
+								error: "")
 
-	public let button = ButtonColor(primary: "Purple",
-									secondary: "Pink",
-									terciary: "Blue1",
-									destructive: "TabascoDracula")
+	public let button = ButtonColor(primary: "MMBlue",
+									secondary: "",
+									terciary: "",
+									destructive: "")
 
 	public let tip = TipConfig(background: "MMBlue",
 							   text: "MMBlack90")
 
-	public let user = Bubble(background: "Secondary",
-							 text: "Gray")
+	public let user = Bubble(background: "",
+							 text: "")
 
-	public let assistant = Bubble(background: "Blue",
-								  text: "Blue")
+	public let assistant = Bubble(background: "",
+								  text: "")
 
 	public init() {}
 }
