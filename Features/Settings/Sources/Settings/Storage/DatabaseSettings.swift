@@ -32,7 +32,7 @@ extension Database {
 
 	func update(appIcon: IconType? = nil,
 				mode: ColorScheme? = nil,
-				patrao: Bool = false) {
+				patrao: Bool? = nil) {
 		Task {
 			guard let items = try? await self.get(from: "Settings") as? [Settings],
 				  let item = items.first else {
@@ -43,7 +43,7 @@ extension Database {
 				if let mode {
 					item.mode = Int16(mode.rawValue)
 				}
-				if patrao {
+				if let patrao {
 					item.patrao = patrao
 				}
 				await saveUsingMainActor()
@@ -55,7 +55,7 @@ extension Database {
 			if let mode {
 				item.mode = Int16(mode.rawValue)
 			}
-			if patrao {
+			if let patrao {
 				item.patrao = patrao
 			}
 			await saveUsingMainActor()

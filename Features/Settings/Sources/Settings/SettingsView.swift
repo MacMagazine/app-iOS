@@ -24,6 +24,7 @@ public struct SettingsView: View {
 		})
 		.task {
 			await viewModel.setSettings()
+			try? await viewModel.getPurchasableProducts()
 		}
 
 		.sheet(isPresented: $viewModel.isPresentingLoginPatrao) {

@@ -2,73 +2,57 @@ import Combine
 import CommonLibrary
 import CoreData
 import CoreLibrary
+import InAppPurchaseLibrary
 import SwiftUI
 
-enum IconType: String, CaseIterable {
-	case normal
-	case alternative
-	case normalInverted
-	case alternativeInverted
-
-	var appIcon: String {
-		switch self {
-		case .normal: "AppIcon-1"
-		case .alternative: "AppIcon-2"
-		case .normalInverted: "AppIcon-3"
-		case .alternativeInverted: "AppIcon-4"
-		}
-	}
-
-	func accessibilityText(selected: Bool) -> String {
-		switch self {
-		case .normal: "Ícone do aplicativo com fundo branco.\(selected ? " Selecionado." : "")"
-		case .alternative: "Ícone do aplicativo com fundo azul.\(selected ? " Selecionado." : "")"
-		case .normalInverted: "Ícone azul do aplicativo com fundo preto.\(selected ? " Selecionado." : "")"
-		case .alternativeInverted: "Ícone claro do aplicativo com fundo preto.\(selected ? " Selecionado." : "")"
-		}
-	}
-}
-
-public enum ColorScheme: Int {
-	case light = 0
-	case dark = 1
-	case system = 2
-
-	public var colorScheme: SwiftUI.ColorScheme? {
-		switch self {
-		case .light: .light
-		case .dark: .dark
-		case .system: nil
-		}
-	}
-
-	func accessibilityText(selected: Bool) -> String {
-		switch self {
-		case .light: "Forçar modo claro para o aplicativo.\(selected ? " Selecionado." : "")"
-		case .dark: "Forçar modo escuro para o aplicativo.\(selected ? " Selecionado." : "")"
-		case .system: "Usar o modo definido pelo sistema para o aplicativo.\(selected ? " Selecionado." : "")"
-		}
-	}
-}
-
 public class SettingsViewModel: ObservableObject {
+	enum Status: Equatable {
+		case loading
+		case done
+		case error(reason: String)
+		case purchasable(ids: [String])
+
+		var reason: String? {
+			switch self {
+			case .error(let reason):
+				return reason
+			default:
+				return nil
+			}
+		}
+
+		var subscriptions: [String] {
+			switch self {
+			case .purchasable(let ids):
+				return ids
+			default:
+				return []
+			}
+		}
+	}
+
 	@Published var icon: IconType = .normal
 	@Published public var mode: ColorScheme = .light
-	@Published public var isPresentingLoginPatrao = false
-	@Published public var isPatrao = false
-	@Published public var subscriptionValid = false
+	@Published var isPresentingLoginPatrao = false
+	@Published var isPatrao = false
+	@Published var subscriptionValid = false
+	@Published var status: Status = .done
+	@Published var products: [Product] = []
 
 	private var cancellables: Set<AnyCancellable> = []
 
 	public let mainContext: NSManagedObjectContext
 	let storage: Database
+	let network: Network
 
-	public init() {
+	public init(network: Network = NetworkAPI()) {
+		self.network = network
 		self.storage = Database(db: "SettingsModel",
 								resource: Bundle.module.url(forResource: "SettingsModel", withExtension: "momd"))
 		self.mainContext = self.storage.mainContext
 
 		observeLoginStatus()
+		observeInAppStatus()
 	}
 }
 
@@ -80,6 +64,25 @@ extension SettingsViewModel {
 				self?.storage.update(patrao: status)
 			}
 			.store(in: &cancellables)
+	}
+
+	private func observeInAppStatus() {
+		Subscriptions.shared.status = { [weak self] status in
+			print(status)
+			switch status {
+			case .gotProducts(let products):
+				self?.products = products
+				self?.status = .done
+
+			case .processing: break
+			case .purchasedSuccess: break
+			case .expired: break
+			case .canPurchase: break
+			case .disabled: break
+			case .fail: break
+			case .nothingToRestore: break
+			}
+		}
 	}
 }
 
@@ -116,5 +119,29 @@ extension SettingsViewModel {
 	@MainActor
 	func change(_ mode: ColorScheme) async {
 		storage.update(mode: mode)
+	}
+}
+
+extension SettingsViewModel {
+	@MainActor
+	func getPurchasableProducts() async throws {
+		do {
+			status = .loading
+			let endpoint = Endpoint.config()
+			MockURLProtocol(bundle: .module).mock(api: endpoint.restAPI)
+
+			let data = try await network.get(url: endpoint.url, headers: nil)
+			let object = try JSONDecoder().decode(PurchaseRequest.self, from: data)
+
+			status = .purchasable(ids: object.subscriptions)
+
+		} catch {
+			status = .error(reason: error.localizedDescription)
+			throw NetworkError.error(reason: error.localizedDescription)
+		}
+	}
+
+	func getProducts(using ids: [String]) {
+		Subscriptions.shared.get(products: ids)
 	}
 }

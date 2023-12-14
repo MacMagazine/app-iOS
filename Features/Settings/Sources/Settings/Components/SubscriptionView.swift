@@ -33,7 +33,26 @@ struct SubscriptionView: View {
 				manageSubscription
 
 			} else {
-				sectionSubscription
+				switch viewModel.status {
+				case .done:
+					sectionSubscription
+					subscriptionOptions
+				case .purchasable(let products):
+					sectionSubscription(ids: products)
+					subscriptionOptions
+				case .loading:
+					HStack {
+						Spacer()
+						ProgressView()
+						Spacer()
+					}
+						.listRowBackground(Color.clear)
+				case .error(let reason):
+					ErrorView(message: reason)
+						.listRowBackground(Color.clear)
+					subscriptionOptions
+				}
+
 				sectionPatrao
 			}
 
@@ -59,22 +78,51 @@ struct SubscriptionView: View {
 			.frame(height: 20)
 		})
 		.listRowSeparator(.hidden)
+	}
 
+	@ViewBuilder
+	private func sectionSubscription(ids: [String]) -> some View {
+		ScrollView(.horizontal) {
+			HStack {
+				ForEach(ids, id: \.self) { _ in
+					VStack {
+						Text("R$ 10,90")
+							.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+						Text("por 1 mês")
+							.font(.caption)
+							.foregroundStyle(theme.text.terciary.color ?? .black)
+					}
+					.redacted(reason: .placeholder)
+					.frame(width: 130)
+				}
+			}
+			.frame(minWidth: width)
+		}
+		.buttonStyle(PlainButtonStyle())
+		.listRowBackground(Color.clear)
+		.background(GeometryReader { proxy in
+			Color.clear.onAppear {
+				width = proxy.size.width
+			}
+		})
+		.onAppear {
+			viewModel.getProducts(using: ids)
+		}
 	}
 
 	@ViewBuilder
 	private var sectionSubscription: some View {
 		ScrollView(.horizontal) {
 			HStack {
-				ForEach(0..<2, id: \.self) { _ in
+				ForEach(viewModel.products, id: \.identifier) { _ in
 					Button(action: {},
 						   label: {
 						VStack {
-							Text("R$ 10,90")
-								.roundedFullSize(fill: theme.button.primary.color ?? .blue)
-							Text("por 1 mês")
-								.font(.caption)
-								.foregroundStyle(theme.text.terciary.color ?? .black)
+//							Text("R$ 10,90")
+//								.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+//							Text("por 1 mês")
+//								.font(.caption)
+//								.foregroundStyle(theme.text.terciary.color ?? .black)
 						}
 					})
 					.frame(width: 130)
@@ -89,7 +137,10 @@ struct SubscriptionView: View {
 				width = proxy.size.width
 			}
 		})
+	}
 
+	@ViewBuilder
+	private var subscriptionOptions: some View {
 		HStack {
 			Button(action: {},
 				   label: {
