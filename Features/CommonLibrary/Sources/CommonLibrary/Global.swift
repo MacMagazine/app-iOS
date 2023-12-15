@@ -13,5 +13,8 @@ public enum APIParams {
 	public static let patraoLoginUrl = "\(mainURL)loginpatrao"
 	public static let patraoSuccessUrl = "\(mainURL)wp-admin/profile.php"
 
+	public static let privacyUrl = "\(mainURL)politica-privacidade/"
+	public static let termsUrl = "\(mainURL)termos-de-uso/"
+
 	public static let feed = "\(mainURL)feed/"
 }

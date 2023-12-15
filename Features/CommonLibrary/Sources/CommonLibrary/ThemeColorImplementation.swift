@@ -13,9 +13,7 @@ public protocol AppColor {
 	var tip: TipConfig { get }
 }
 
-public typealias ThemeColor = Themeable & AppColor
-
-public struct ThemeColorImplementation: ThemeColor {
+public struct ThemeColor: Themeable & AppColor {
 	public let main = MainColor(background: "MMWhiteGrey6",
 								navigation: "MMBlack90",
 								tint: "MMBlueWhite",
@@ -54,7 +52,7 @@ extension String {
 }
 
 struct ThemeEnvironmentKey: EnvironmentKey {
-	static public var defaultValue: ThemeColor = ThemeColorImplementation()
+	static public var defaultValue: ThemeColor = ThemeColor()
 }
 
 extension EnvironmentValues {

@@ -33,8 +33,13 @@ public class SettingsViewModel: ObservableObject {
 
 	@Published var icon: IconType = .normal
 	@Published public var mode: ColorScheme = .light
+
+	@Published var isPresentingPrivacy = false
+	@Published var isPresentingTerms = false
+
 	@Published var isPresentingLoginPatrao = false
 	@Published var isPatrao = false
+
 	@Published var subscriptionValid = false
 	@Published var status: Status = .done
 	@Published var products: [Product] = []
@@ -88,10 +93,10 @@ extension SettingsViewModel {
 
 extension SettingsViewModel {
 	@MainActor
-	func setSettings() async {
-		icon = await storage.appIcon
+	public func getSettings() async {
 		mode = await storage.mode
 		isPatrao = await storage.patrao
+		icon = await storage.appIcon
 
 		Analytics.log(settings: [
 			"icon": icon.rawValue as NSObject,
@@ -134,6 +139,7 @@ extension SettingsViewModel {
 			let object = try JSONDecoder().decode(PurchaseRequest.self, from: data)
 
 			status = .purchasable(ids: object.subscriptions)
+			Subscriptions.shared.get(products: object.subscriptions)
 
 		} catch {
 			status = .error(reason: error.localizedDescription)
@@ -141,7 +147,11 @@ extension SettingsViewModel {
 		}
 	}
 
-	func getProducts(using ids: [String]) {
-		Subscriptions.shared.get(products: ids)
+	func manageSubscriptions() {
+		guard let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") else {
+			return
+		}
+		UIApplication.shared.open(url, options: [:], completionHandler: nil)
 	}
+
 }

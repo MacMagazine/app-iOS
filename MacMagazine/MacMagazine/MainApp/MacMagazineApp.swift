@@ -28,22 +28,35 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct MacMagazineApp: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+	@Environment(\.scenePhase) var scenePhase
 
-	@ObservedObject var settingsViewModel = SettingsViewModel()
+	@ObservedObject var viewModel = MainViewModel()
 
 	var body: some Scene {
 		WindowGroup {
-			SettingsView(viewModel: settingsViewModel)
-				.preferredColorScheme(settingsViewModel.mode.colorScheme)
-				.task {
-					if #available(iOS 17, *) {
-						#if DEBUG
-//						try? Tips.resetDatastore()
-						#endif
-						try? Tips.configure()
+			switch viewModel.currentView {
+			case .splash:
+				Text("")
+					.task {
+						if #available(iOS 17, *) {
+#if DEBUG
+//							try? Tips.resetDatastore()
+#endif
+							try? Tips.configure()
+						}
+						await viewModel.settingsViewModel.getSettings()
+						viewModel.currentView = .settings
 					}
-				}
+
+			case .settings:
+				SettingsView()
+					.environmentObject(viewModel.settingsViewModel)
+
+			case .home:
+				ContentView()
+					.preferredColorScheme(viewModel.settingsViewModel.mode.colorScheme)
+			}
 		}
-		.environment(\.theme, ThemeColorImplementation())
+		.environment(\.theme, viewModel.theme)
 	}
 }

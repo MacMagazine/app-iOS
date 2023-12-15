@@ -101,7 +101,7 @@ public struct NavigationStack<Content: View>: View {
 
 
 #Preview("No title") {
-	NavigationStack(theme: ThemeColorImplementation(), content: {
+	NavigationStack(theme: ThemeColor(), content: {
 		VStack {
 			Text("Cassio")
 			Spacer()
@@ -112,7 +112,7 @@ public struct NavigationStack<Content: View>: View {
 }
 
 #Preview("Custom Background") {
-	NavigationStack(theme: ThemeColorImplementation(),
+	NavigationStack(theme: ThemeColor(),
 					displayMode: .large,
 					title: "Navigation Title",
 					background: .red) {
@@ -125,7 +125,7 @@ public struct NavigationStack<Content: View>: View {
 }
 
 #Preview("Default") {
-	NavigationStack(theme: ThemeColorImplementation(),
+	NavigationStack(theme: ThemeColor(),
 					title: "Navigation Title", content: {
 		VStack {
 			Text("Cassio")

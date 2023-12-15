@@ -3,12 +3,10 @@ import SwiftUI
 import TipKit
 
 struct AppearanceView: View {
-	@ObservedObject private var viewModel: SettingsViewModel
 	private let theme: ThemeColor
+	@EnvironmentObject private var viewModel: SettingsViewModel
 
-	init(viewModel: SettingsViewModel,
-		 theme: ThemeColor) {
-		self.viewModel = viewModel
+	init(theme: ThemeColor) {
 		self.theme = theme
 
 		UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(theme.text.primary.color ?? .primary)], for: .normal)
@@ -84,7 +82,8 @@ extension AppearanceView {
 
 #Preview {
 	List {
-		AppearanceView(viewModel: SettingsViewModel(), theme: ThemeColorImplementation())
+		AppearanceView(theme: ThemeColor())
+			.environmentObject(SettingsViewModel())
 	}
 }
 

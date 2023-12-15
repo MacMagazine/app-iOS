@@ -4,15 +4,10 @@ import TipKit
 import UIComponentsLibrary
 
 struct SubscriptionView: View {
-	@ObservedObject private var viewModel: SettingsViewModel
-	private let theme: ThemeColor
-	@State private var width: CGFloat?
+	@Environment(\.theme) private var theme: ThemeColor
+	@EnvironmentObject private var viewModel: SettingsViewModel
 
-	init(viewModel: SettingsViewModel,
-		 theme: ThemeColor) {
-		self.viewModel = viewModel
-		self.theme = theme
-	}
+	@State private var width: CGFloat?
 
 	var body: some View {
 		Section(content: {
@@ -63,13 +58,13 @@ struct SubscriptionView: View {
 
 		}, footer: {
 			HStack {
-				Button(action: {},
+				Button(action: { viewModel.isPresentingTerms.toggle() },
 					   label: {
 					Text("Termos de Uso")
 						.bordered(stroke: .clear)
 				})
 				Spacer(minLength: 0)
-				Button(action: {},
+				Button(action: { viewModel.isPresentingPrivacy.toggle() },
 					   label: {
 					Text("Política de Privacidade")
 						.bordered(stroke: .clear)
@@ -105,24 +100,21 @@ struct SubscriptionView: View {
 				width = proxy.size.width
 			}
 		})
-		.onAppear {
-			viewModel.getProducts(using: ids)
-		}
 	}
 
 	@ViewBuilder
 	private var sectionSubscription: some View {
 		ScrollView(.horizontal) {
 			HStack {
-				ForEach(viewModel.products, id: \.identifier) { _ in
+				ForEach(viewModel.products, id: \.identifier) { product in
 					Button(action: {},
 						   label: {
 						VStack {
-//							Text("R$ 10,90")
-//								.roundedFullSize(fill: theme.button.primary.color ?? .blue)
-//							Text("por 1 mês")
-//								.font(.caption)
-//								.foregroundStyle(theme.text.terciary.color ?? .black)
+							Text(product.price ?? "")
+								.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+							Text("por \(product.subscription ?? "...")")
+								.font(.caption)
+								.foregroundStyle(theme.text.terciary.color ?? .black)
 						}
 					})
 					.frame(width: 130)
@@ -145,7 +137,8 @@ struct SubscriptionView: View {
 			Button(action: {},
 				   label: {
 				Text("Recuperar".uppercased())
-					.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+					.borderedFullSize(color: theme.button.primary.color ?? .blue,
+									  stroke: theme.button.primary.color ?? .blue)
 			})
 
 			manageSubscription
@@ -156,10 +149,11 @@ struct SubscriptionView: View {
 
 	@ViewBuilder
 	private var manageSubscription: some View {
-		Button(action: {},
+		Button(action: { viewModel.manageSubscriptions() },
 			   label: {
 			Text("Gerenciar".uppercased())
-				.roundedFullSize(fill: theme.button.primary.color ?? .blue)
+				.borderedFullSize(color: theme.button.primary.color ?? .blue,
+								  stroke: theme.button.primary.color ?? .blue)
 		})
 		.buttonStyle(PlainButtonStyle())
 		.listRowBackground(Color.clear)
@@ -180,7 +174,9 @@ struct SubscriptionView: View {
 
 #Preview {
 	List {
-		SubscriptionView(viewModel: SettingsViewModel(), theme: ThemeColorImplementation())
+		SubscriptionView()
+			.environment(\.theme, ThemeColor())
+			.environmentObject(SettingsViewModel())
 	}
 }
 
