@@ -54,20 +54,22 @@ struct SubscriptionView: View {
 		}, header: {
 			Text("Remover Propagandas")
 				.font(.headline)
-				.foregroundColor(theme.text.primary.color)
+				.foregroundColor(theme.text.terciary.color)
 
 		}, footer: {
 			HStack {
 				Button(action: { viewModel.isPresentingTerms.toggle() },
 					   label: {
 					Text("Termos de Uso")
-						.bordered(stroke: .clear)
+						.bordered(color: theme.text.terciary.color ?? .primary,
+								  stroke: .clear)
 				})
 				Spacer(minLength: 0)
 				Button(action: { viewModel.isPresentingPrivacy.toggle() },
 					   label: {
 					Text("Política de Privacidade")
-						.bordered(stroke: .clear)
+						.bordered(color: theme.text.terciary.color ?? .primary,
+								  stroke: .clear)
 				})
 			}
 			.frame(height: 20)

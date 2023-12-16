@@ -29,7 +29,7 @@ public struct ThemeColor: Themeable & AppColor {
 								error: "")
 
 	public let button = ButtonColor(primary: "MMBlue",
-									secondary: "",
+									secondary: "MMBlueWhite",
 									terciary: "",
 									destructive: "")
 

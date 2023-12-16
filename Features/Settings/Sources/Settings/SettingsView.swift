@@ -17,7 +17,7 @@ public struct SettingsView: View {
 				PushOptionsView()
 
 				Text("Posts -> multi")
-				Text("Sobre -> + options")
+				AboutView()
 			}
 			.buttonStyle(PlainButtonStyle())
 		})

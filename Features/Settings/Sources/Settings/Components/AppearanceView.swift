@@ -17,7 +17,7 @@ struct AppearanceView: View {
 	var body: some View {
 		Section(header: Text("Aparência")
 			.font(.headline)
-			.foregroundColor(theme.text.primary.color)) {
+			.foregroundColor(theme.text.terciary.color)) {
 				SettingsTips.appearance.tipView(with: theme)
 					.listRowBackground(Color.clear)
 

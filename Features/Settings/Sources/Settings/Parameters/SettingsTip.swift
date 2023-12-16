@@ -6,6 +6,7 @@ enum SettingsTips: TipType {
 	case subscriptions
 	case appearance
 	case notifications
+	case about
 
 	@available(iOS 17, *)
 	private static var appearanceTip: AppearanceTip { AppearanceTip() }
@@ -15,6 +16,9 @@ enum SettingsTips: TipType {
 
 	@available(iOS 17, *)
 	private static var notificationsTip: PushNotificationTip { PushNotificationTip() }
+
+	@available(iOS 17, *)
+	private static var aboutTip: AboutTip { AboutTip() }
 }
 
 extension SettingsTips {
@@ -31,6 +35,9 @@ extension SettingsTips {
 
 				case .notifications:
 					TipView(Self.notificationsTip, arrowEdge: .bottom)
+
+				case .about:
+					TipView(Self.aboutTip, arrowEdge: .bottom)
 				}
 			}
 			.style(theme: theme)
@@ -43,6 +50,7 @@ extension SettingsTips {
 			case .appearance: Self.appearanceTip.invalidate(reason: .actionPerformed)
 			case .subscriptions: Self.subscriptionsTip.invalidate(reason: .actionPerformed)
 			case .notifications: Self.notificationsTip.invalidate(reason: .actionPerformed)
+			case .about: Self.aboutTip.invalidate(reason: .actionPerformed)
 			}
 		}
 	}
@@ -53,6 +61,7 @@ extension SettingsTips {
 			case .appearance: AppearanceTip.isActive = true
 			case .subscriptions: SubscriptionsTip.isActive = true
 			case .notifications: PushNotificationTip.isActive = true
+			case .about: AboutTip.isActive = true
 			}
 		}
 	}

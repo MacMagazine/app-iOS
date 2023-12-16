@@ -3,6 +3,7 @@ import CommonLibrary
 import CoreData
 import CoreLibrary
 import InAppPurchaseLibrary
+import MessageUI
 import OneSignalFramework
 import SwiftUI
 
@@ -44,6 +45,8 @@ public class SettingsViewModel: ObservableObject {
 	public let mainContext: NSManagedObjectContext
 	let storage: Database
 	let network: Network
+
+	let delegate = MailDelegate()
 
 	public init(network: Network = NetworkAPI()) {
 		self.network = network
@@ -176,5 +179,39 @@ extension SettingsViewModel {
 				subscriptionValid = false
 			}
 		}
+	}
+}
+
+extension SettingsViewModel {
+	func composeMessage() {
+		let destination = "contato@macmagazine.com.br"
+		let subject = "Relato de problema no app MacMagazine \(Bundle.version ?? "versão desconhecida")."
+
+		guard MFMailComposeViewController.canSendMail() else {
+			if let url = URL(string: "mailto:\(destination)?subject=\(subject)"),
+			   UIApplication.shared.canOpenURL(url) {
+				UIApplication.shared.open(url, options: [:], completionHandler: nil)
+			}
+			return
+		}
+
+		let composeVC = MFMailComposeViewController()
+		composeVC.mailComposeDelegate = delegate
+		composeVC.setSubject(subject)
+		composeVC.setToRecipients([destination])
+
+		(UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController?.present(composeVC,
+																												  animated: true,
+																												  completion: nil)
+	}
+}
+
+// MARK: - Mail Methods -
+
+class MailDelegate: NSObject, MFMailComposeViewControllerDelegate {
+	public func mailComposeController(_ controller: MFMailComposeViewController,
+									  didFinishWith result: MFMailComposeResult,
+									  error: Error?) {
+		controller.dismiss(animated: true)
 	}
 }

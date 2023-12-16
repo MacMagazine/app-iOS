@@ -10,7 +10,7 @@ struct PushOptionsView: View {
 	var body: some View {
 		Section(header: Text("Notificações")
 			.font(.headline)
-			.foregroundColor(theme.text.primary.color)) {
+			.foregroundColor(theme.text.terciary.color)) {
 				SettingsTips.subscriptions.tipView(with: theme)
 					.listRowBackground(Color.clear)
 
