@@ -16,15 +16,6 @@ extension Endpoint {
 	}
 }
 
-extension URLSession {
-	func decode<T: Decodable>(_ type: T.Type = T.self,
-							  from url: URL) async throws -> T {
-		let (data, _) = try await data(from: url)
-		let decoded = try JSONDecoder().decode(T.self, from: data)
-		return decoded
-	}
-}
-
 enum NetworkError: Error {
 	case unknown
 	case error(reason: String)
@@ -40,5 +31,10 @@ enum NetworkError: Error {
 }
 
 struct PurchaseRequest: Decodable {
-	let subscriptions: [String]
+	struct Product: Decodable, Equatable {
+		let order: Int
+		let product: String
+	}
+
+	let subscriptions: [PurchaseRequest.Product]
 }

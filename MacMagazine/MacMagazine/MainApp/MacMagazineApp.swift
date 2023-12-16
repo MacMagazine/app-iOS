@@ -51,10 +51,23 @@ struct MacMagazineApp: App {
 			case .settings:
 				SettingsView()
 					.environmentObject(viewModel.settingsViewModel)
+					.onChange(of: scenePhase) { phase in
+						if phase == .active {
+							Task {
+								await viewModel.settingsViewModel.getSettings()
+							}
+						}
+					}
 
 			case .home:
 				ContentView()
-					.preferredColorScheme(viewModel.settingsViewModel.mode.colorScheme)
+					.onChange(of: scenePhase) { phase in
+						if phase == .active {
+							Task {
+								await viewModel.settingsViewModel.getSettings()
+							}
+						}
+					}
 			}
 		}
 		.environment(\.theme, viewModel.theme)

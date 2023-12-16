@@ -1,3 +1,9 @@
 {
-	"subscriptions": ["MMASSINATURAANUAL", "MMASSINATURAMENSAL"]
+"subscriptions": [{
+	"order": 1,
+	"product": "MMASSINATURAANUAL"
+	}, {
+	"order": 0,
+	"product": "MMASSINATURAMENSAL"
+	}]
 }

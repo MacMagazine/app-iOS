@@ -30,9 +30,19 @@ extension Database {
 		}
 	}
 
+	var expirationDate: Date? {
+		get async {
+			guard let items = try? await self.get(from: "Settings") as? [Settings] else {
+				return nil
+			}
+			return items.first?.expiration
+		}
+	}
+
 	func update(appIcon: IconType? = nil,
 				mode: ColorScheme? = nil,
-				patrao: Bool? = nil) {
+				patrao: Bool? = nil,
+				expiration: Date? = nil) {
 		Task {
 			guard let items = try? await self.get(from: "Settings") as? [Settings],
 				  let item = items.first else {
@@ -46,6 +56,9 @@ extension Database {
 				if let patrao {
 					item.patrao = patrao
 				}
+				if let expiration {
+					item.expiration = expiration
+				}
 				await saveUsingMainActor()
 				return
 			}
@@ -57,6 +70,9 @@ extension Database {
 			}
 			if let patrao {
 				item.patrao = patrao
+			}
+			if let expiration {
+				item.expiration = expiration
 			}
 			await saveUsingMainActor()
 		}

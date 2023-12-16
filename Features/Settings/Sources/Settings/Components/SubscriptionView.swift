@@ -33,7 +33,7 @@ struct SubscriptionView: View {
 					sectionSubscription
 					subscriptionOptions
 				case .purchasable(let products):
-					sectionSubscription(ids: products)
+					sectionSubscription(products.count)
 					subscriptionOptions
 				case .loading:
 					HStack {
@@ -76,10 +76,10 @@ struct SubscriptionView: View {
 	}
 
 	@ViewBuilder
-	private func sectionSubscription(ids: [String]) -> some View {
+	private func sectionSubscription(_ count: Int) -> some View {
 		ScrollView(.horizontal) {
 			HStack {
-				ForEach(ids, id: \.self) { _ in
+				ForEach(0..<count, id: \.self) { _ in
 					VStack {
 						Text("R$ 10,90")
 							.roundedFullSize(fill: theme.button.primary.color ?? .blue)
@@ -107,12 +107,12 @@ struct SubscriptionView: View {
 		ScrollView(.horizontal) {
 			HStack {
 				ForEach(viewModel.products, id: \.identifier) { product in
-					Button(action: {},
+					Button(action: { viewModel.purchase(product) },
 						   label: {
 						VStack {
 							Text(product.price ?? "")
 								.roundedFullSize(fill: theme.button.primary.color ?? .blue)
-							Text("por \(product.subscription ?? "...")")
+							Text("por " + (product.subscription ?? "..."))
 								.font(.caption)
 								.foregroundStyle(theme.text.terciary.color ?? .black)
 						}
@@ -134,7 +134,7 @@ struct SubscriptionView: View {
 	@ViewBuilder
 	private var subscriptionOptions: some View {
 		HStack {
-			Button(action: {},
+			Button(action: { viewModel.restore() },
 				   label: {
 				Text("Recuperar".uppercased())
 					.borderedFullSize(color: theme.button.primary.color ?? .blue,

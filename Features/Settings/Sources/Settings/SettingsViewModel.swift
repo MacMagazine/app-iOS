@@ -10,21 +10,12 @@ public class SettingsViewModel: ObservableObject {
 		case loading
 		case done
 		case error(reason: String)
-		case purchasable(ids: [String])
+		case purchasable(products: [PurchaseRequest.Product])
 
-		var reason: String? {
+		var subscriptions: [PurchaseRequest.Product] {
 			switch self {
-			case .error(let reason):
-				return reason
-			default:
-				return nil
-			}
-		}
-
-		var subscriptions: [String] {
-			switch self {
-			case .purchasable(let ids):
-				return ids
+			case .purchasable(let products):
+				return products
 			default:
 				return []
 			}
@@ -45,6 +36,7 @@ public class SettingsViewModel: ObservableObject {
 	@Published var products: [Product] = []
 
 	private var cancellables: Set<AnyCancellable> = []
+	private var updates: Task<Void, Never>? = nil
 
 	public let mainContext: NSManagedObjectContext
 	let storage: Database
@@ -57,7 +49,16 @@ public class SettingsViewModel: ObservableObject {
 		self.mainContext = self.storage.mainContext
 
 		observeLoginStatus()
-		observeInAppStatus()
+
+		updates = InAppPurchaseManager.observeTransactionUpdates { [weak self] result in
+			if let expiration = result.first?.expiration {
+				self?.storage.update(expiration: expiration)
+				self?.subscriptionValid = expiration > Date()
+			} else {
+				self?.storage.update(expiration: Date())
+				self?.subscriptionValid = false
+			}
+		}
 	}
 }
 
@@ -70,25 +71,6 @@ extension SettingsViewModel {
 			}
 			.store(in: &cancellables)
 	}
-
-	private func observeInAppStatus() {
-		Subscriptions.shared.status = { [weak self] status in
-			print(status)
-			switch status {
-			case .gotProducts(let products):
-				self?.products = products
-				self?.status = .done
-
-			case .processing: break
-			case .purchasedSuccess: break
-			case .expired: break
-			case .canPurchase: break
-			case .disabled: break
-			case .fail: break
-			case .nothingToRestore: break
-			}
-		}
-	}
 }
 
 extension SettingsViewModel {
@@ -98,10 +80,15 @@ extension SettingsViewModel {
 		isPatrao = await storage.patrao
 		icon = await storage.appIcon
 
+		if let expirationDate = await storage.expirationDate {
+			subscriptionValid = expirationDate > Date()
+		}
+
 		Analytics.log(settings: [
 			"icon": icon.rawValue as NSObject,
 			"mode": mode.rawValue as NSObject,
 			"patrao": isPatrao as NSObject,
+			"subscriptionValid": subscriptionValid as NSObject
 		])
 	}
 }
@@ -138,8 +125,13 @@ extension SettingsViewModel {
 			let data = try await network.get(url: endpoint.url, headers: nil)
 			let object = try JSONDecoder().decode(PurchaseRequest.self, from: data)
 
-			status = .purchasable(ids: object.subscriptions)
-			Subscriptions.shared.get(products: object.subscriptions)
+			status = .purchasable(products: object.subscriptions)
+
+			let products = try await InAppPurchaseManager.shared.getProducts(for: object.subscriptions.map { $0.product })
+			self.products = status.subscriptions.sorted(by: { $0.order < $1.order }).compactMap { value in
+				products.first(where: { $0.identifier == value.product })
+			}
+			status = .done
 
 		} catch {
 			status = .error(reason: error.localizedDescription)
@@ -154,4 +146,24 @@ extension SettingsViewModel {
 		UIApplication.shared.open(url, options: [:], completionHandler: nil)
 	}
 
+	@MainActor
+	func restore() {
+		Task {
+			try? await InAppPurchaseManager.shared.restore()
+		}
+	}
+
+	@MainActor
+	func purchase(_ product: Product) {
+		Task {
+			if let transaction = try await product.purchase().first(where: { product.identifier == $0.product }),
+			   let expiration = transaction.expiration {
+				storage.update(expiration: expiration)
+				subscriptionValid = expiration > Date()
+			} else {
+				storage.update(expiration: Date())
+				subscriptionValid = false
+			}
+		}
+	}
 }

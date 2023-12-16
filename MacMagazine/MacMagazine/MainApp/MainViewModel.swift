@@ -1,5 +1,6 @@
 import Combine
 import CommonLibrary
+import InAppPurchaseLibrary
 import Settings
 import SwiftUI
 
@@ -23,10 +24,5 @@ class MainViewModel: ObservableObject {
 	// MARK: - Init -
 
 	init() {
-		settingsViewModel.$mode
-			.sink { mode in
-				print(mode.rawValue)
-			}
-			.store(in: &cancellables)
 	}
 }
