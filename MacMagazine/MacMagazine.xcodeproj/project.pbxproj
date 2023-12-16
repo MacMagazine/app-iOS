@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9B3D99692B2D0C04008C8156 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D99682B2D0C04008C8156 /* Configuration.storekit */; };
+		9B3D996C2B2DF984008C8156 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 9B3D996B2B2DF984008C8156 /* OneSignalFramework */; };
 		9B477EC72B1E709A008987E9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9B477EC62B1E709A008987E9 /* FirebaseCrashlytics */; };
 		9B477EC82B1E75A8008987E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */; };
 		9B477ECC2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 9B477ECB2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B3D996C2B2DF984008C8156 /* OneSignalFramework in Frameworks */,
 				9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */,
 				9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */,
 				9B477EC72B1E709A008987E9 /* FirebaseCrashlytics in Frameworks */,
@@ -234,6 +236,7 @@
 				9B54949E2B1A57C500BD51FF /* CommonLibrary */,
 				9B477EC62B1E709A008987E9 /* FirebaseCrashlytics */,
 				9B477ECB2B1E7B38008987E9 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				9B3D996B2B2DF984008C8156 /* OneSignalFramework */,
 			);
 			productName = MacMagazine;
 			productReference = 9BD78AB02B1A14C70002703B /* MacMagazine.app */;
@@ -309,6 +312,7 @@
 			mainGroup = 9BD78AA72B1A14C60002703B;
 			packageReferences = (
 				9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9B3D996A2B2DF984008C8156 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 			);
 			productRefGroup = 9BD78AB12B1A14C70002703B /* Products */;
 			projectDirPath = "";
@@ -713,6 +717,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9B3D996A2B2DF984008C8156 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.5;
+			};
+		};
 		9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -724,6 +736,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9B3D996B2B2DF984008C8156 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B3D996A2B2DF984008C8156 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignalFramework;
+		};
 		9B477EC62B1E709A008987E9 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

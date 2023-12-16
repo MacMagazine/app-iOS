@@ -89,6 +89,7 @@ struct SubscriptionView: View {
 					}
 					.redacted(reason: .placeholder)
 					.frame(width: 130)
+					.accessibilityLabel("Carregando opções de assinaturas.")
 				}
 			}
 			.frame(minWidth: width)
@@ -118,6 +119,7 @@ struct SubscriptionView: View {
 						}
 					})
 					.frame(width: 130)
+					.accessibilityLabel("Assine o App para remover propagandas por \(product.subscription ?? "tempo desconhecido") pagando \(product.price ?? "valor desconhecido").")
 				}
 			}
 			.frame(minWidth: width)
@@ -140,6 +142,7 @@ struct SubscriptionView: View {
 					.borderedFullSize(color: theme.button.primary.color ?? .blue,
 									  stroke: theme.button.primary.color ?? .blue)
 			})
+			.accessibilityLabel("Recupere assinaturas previamente feitas.")
 
 			manageSubscription
 		}
@@ -157,6 +160,7 @@ struct SubscriptionView: View {
 		})
 		.buttonStyle(PlainButtonStyle())
 		.listRowBackground(Color.clear)
+		.accessibilityLabel("Gerencia suas assinaturas do App.")
 	}
 
 	@ViewBuilder
@@ -169,6 +173,7 @@ struct SubscriptionView: View {
 		.padding(.vertical, 4)
 		.buttonStyle(PlainButtonStyle())
 		.listRowBackground(Color.clear)
+		.accessibilityLabel("Fazer login como patrão para remover propagandas.")
 	}
 }
 
@@ -186,7 +191,7 @@ struct SubscriptionsTip: Tip {
 	static var isActive: Bool = true
 
 	var title: Text { Text("Remover propagandas") }
-	var message: Text? { Text("Navegue pelo app sem propagandas - ou, alternativamente, use seu login de patrão.") }
+	var message: Text? { Text("Assine para navegar pelo app sem propagandas - ou, alternativamente, use seu login de patrão.") }
 
 	var rules: [Rule] = [
 		#Rule(Self.$isActive) { $0 == true }

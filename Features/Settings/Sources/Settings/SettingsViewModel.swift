@@ -3,6 +3,7 @@ import CommonLibrary
 import CoreData
 import CoreLibrary
 import InAppPurchaseLibrary
+import OneSignalFramework
 import SwiftUI
 
 public class SettingsViewModel: ObservableObject {
@@ -30,6 +31,8 @@ public class SettingsViewModel: ObservableObject {
 
 	@Published var isPresentingLoginPatrao = false
 	@Published var isPatrao = false
+
+	@Published var notificationType: PushPreferences = .all
 
 	@Published var subscriptionValid = false
 	@Published var status: Status = .done
@@ -79,6 +82,7 @@ extension SettingsViewModel {
 		mode = await storage.mode
 		isPatrao = await storage.patrao
 		icon = await storage.appIcon
+		notificationType = await storage.notification
 
 		if let expirationDate = await storage.expirationDate {
 			subscriptionValid = expirationDate > Date()
@@ -88,6 +92,7 @@ extension SettingsViewModel {
 			"icon": icon.rawValue as NSObject,
 			"mode": mode.rawValue as NSObject,
 			"patrao": isPatrao as NSObject,
+			"notification": notificationType.rawValue as NSObject,
 			"subscriptionValid": subscriptionValid as NSObject
 		])
 	}
@@ -111,6 +116,12 @@ extension SettingsViewModel {
 	@MainActor
 	func change(_ mode: ColorScheme) async {
 		storage.update(mode: mode)
+	}
+
+	@MainActor
+	func change(_ type: PushPreferences) async {
+		storage.update(notification: type.rawValue)
+		OneSignal.User.addTag(key: "notification_preferences", value: type.rawValue)
 	}
 }
 

@@ -4,6 +4,7 @@
         <attribute name="expiration" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notification" optional="YES" attributeType="String"/>
         <attribute name="patrao" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>

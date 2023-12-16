@@ -14,8 +14,8 @@ public struct SettingsView: View {
 			List {
 				SubscriptionView()
 				AppearanceView(theme: theme)
+				PushOptionsView()
 
-				Text("Push -> segment")
 				Text("Posts -> multi")
 				Text("Sobre -> + options")
 			}
