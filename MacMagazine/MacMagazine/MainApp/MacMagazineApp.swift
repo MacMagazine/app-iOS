@@ -34,41 +34,34 @@ struct MacMagazineApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			switch viewModel.currentView {
-			case .splash:
-				Text("")
-					.task {
-						if #available(iOS 17, *) {
+//				SettingsView()
+//					.environmentObject(viewModel.settingsViewModel)
+//					.onChange(of: scenePhase) { phase in
+//						if phase == .active {
+//							Task {
+//								await viewModel.settingsViewModel.getSettings()
+//							}
+//						}
+//					}
+			MainView()
+				.environmentObject(viewModel.settingsViewModel)
+				.task {
+					if #available(iOS 17, *) {
 #if DEBUG
-//							try? Tips.resetDatastore()
+						try? Tips.resetDatastore()
 #endif
-							try? Tips.configure()
-						}
-						await viewModel.settingsViewModel.getSettings()
-						viewModel.currentView = .settings
+						try? Tips.configure()
 					}
-
-			case .settings:
-				SettingsView()
-					.environmentObject(viewModel.settingsViewModel)
-					.onChange(of: scenePhase) { phase in
-						if phase == .active {
-							Task {
-								await viewModel.settingsViewModel.getSettings()
-							}
+					try? await viewModel.settingsViewModel.getPurchasableProducts()
+					await viewModel.settingsViewModel.getSettings()
+				}
+				.onChange(of: scenePhase) { phase in
+					if phase == .active {
+						Task {
+							await viewModel.settingsViewModel.getSettings()
 						}
 					}
-
-			case .home:
-				ContentView()
-					.onChange(of: scenePhase) { phase in
-						if phase == .active {
-							Task {
-								await viewModel.settingsViewModel.getSettings()
-							}
-						}
-					}
-			}
+				}
 		}
 		.environment(\.theme, viewModel.theme)
 	}

@@ -3,17 +3,16 @@ import SwiftUI
 import TipKit
 import UIComponentsLibrary
 
-struct SubscriptionView: View {
+public struct SubscriptionView: View {
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var viewModel: SettingsViewModel
 
 	@State private var width: CGFloat?
 
-	var body: some View {
-		Section(content: {
-			SettingsTips.subscriptions.tipView(with: theme)
-				.listRowBackground(Color.clear)
+	public init() {}
 
+	public var body: some View {
+		Section(content: {
 			if viewModel.isPatrao {
 				Button(action: { viewModel.isPatrao = false },
 					   label: {
@@ -51,30 +50,46 @@ struct SubscriptionView: View {
 				sectionPatrao
 			}
 
-		}, header: {
-			Text("Remover Propagandas")
-				.font(.headline)
-				.foregroundColor(theme.text.terciary.color)
-
 		}, footer: {
 			HStack {
+				Spacer()
 				Button(action: { viewModel.isPresentingTerms.toggle() },
 					   label: {
 					Text("Termos de Uso")
-						.bordered(color: theme.text.terciary.color ?? .primary,
-								  stroke: .clear)
+						.plain(color: theme.text.terciary.color ?? .primary)
 				})
 				Spacer(minLength: 0)
 				Button(action: { viewModel.isPresentingPrivacy.toggle() },
 					   label: {
 					Text("Política de Privacidade")
-						.bordered(color: theme.text.terciary.color ?? .primary,
-								  stroke: .clear)
+						.plain(color: theme.text.terciary.color ?? .primary)
 				})
+				Spacer()
 			}
-			.frame(height: 20)
+			.listRowBackground(Color.clear)
 		})
 		.listRowSeparator(.hidden)
+
+		.sheet(isPresented: $viewModel.isPresentingLoginPatrao) {
+			Webview(title: "Login para patrões",
+					url: APIParams.patraoLoginUrl,
+					isPresenting: $viewModel.isPresentingLoginPatrao,
+					navigationDelegate: WebviewController(isPresenting: $viewModel.isPresentingLoginPatrao,
+														  isPatrao: $viewModel.isPatrao),
+					userScripts: WebviewController().userScripts)
+		}
+
+		.sheet(isPresented: $viewModel.isPresentingTerms) {
+			Webview(title: "Termos de Uso",
+					url: APIParams.termsUrl,
+					isPresenting: $viewModel.isPresentingTerms)
+		}
+
+		.sheet(isPresented: $viewModel.isPresentingPrivacy) {
+			Webview(title: "Política de Privacidade",
+					url: APIParams.privacyUrl,
+					isPresenting: $viewModel.isPresentingPrivacy)
+		}
 	}
 
 	@ViewBuilder
@@ -184,24 +199,5 @@ struct SubscriptionView: View {
 		SubscriptionView()
 			.environment(\.theme, ThemeColor())
 			.environmentObject(SettingsViewModel())
-	}
-}
-
-@available(iOS 17, *)
-struct SubscriptionsTip: Tip {
-	@Parameter
-	static var isActive: Bool = true
-
-	var title: Text { Text("Remover propagandas") }
-	var message: Text? { Text("Assine para navegar pelo app sem propagandas - ou, alternativamente, use seu login de patrão.") }
-
-	var rules: [Rule] = [
-		#Rule(Self.$isActive) { $0 == true }
-	]
-
-	var actions: [Action] {
-		SettingsTips.subscriptions.add { tip in
-			(tip as? SettingsTips)?.show()
-		}
 	}
 }

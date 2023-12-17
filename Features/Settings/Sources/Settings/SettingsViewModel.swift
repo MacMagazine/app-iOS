@@ -130,7 +130,7 @@ extension SettingsViewModel {
 
 extension SettingsViewModel {
 	@MainActor
-	func getPurchasableProducts() async throws {
+	public func getPurchasableProducts() async throws {
 		do {
 			status = .loading
 			let endpoint = Endpoint.config()

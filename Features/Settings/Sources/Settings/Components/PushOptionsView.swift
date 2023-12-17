@@ -3,15 +3,17 @@ import SwiftUI
 import TipKit
 import UIComponentsLibrary
 
-struct PushOptionsView: View {
+public struct PushOptionsView: View {
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var viewModel: SettingsViewModel
 
-	var body: some View {
+	public init() {}
+
+	public var body: some View {
 		Section(header: Text("Notificações")
 			.font(.headline)
 			.foregroundColor(theme.text.terciary.color)) {
-				SettingsTips.subscriptions.tipView(with: theme)
+				SettingsTips.notifications.tipView(with: theme)
 					.listRowBackground(Color.clear)
 
 				optionsView

@@ -2,11 +2,11 @@ import CommonLibrary
 import SwiftUI
 import TipKit
 
-struct AppearanceView: View {
+public struct AppearanceView: View {
 	private let theme: ThemeColor
 	@EnvironmentObject private var viewModel: SettingsViewModel
 
-	init(theme: ThemeColor) {
+	public init(theme: ThemeColor) {
 		self.theme = theme
 
 		UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(theme.text.primary.color ?? .primary)], for: .normal)
@@ -14,7 +14,7 @@ struct AppearanceView: View {
 		UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(theme.main.tint.color ?? .blue)
 	}
 
-	var body: some View {
+	public var body: some View {
 		Section(header: Text("Aparência")
 			.font(.headline)
 			.foregroundColor(theme.text.terciary.color)) {
@@ -55,7 +55,8 @@ extension AppearanceView {
 
 	@ViewBuilder
 	private var iconsView: some View {
-		HStack {
+		LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), alignment: .top)],
+				  spacing: 8) {
 			ForEach(IconType.allCases, id: \.self) { type in
 				Button(action: {
 					SettingsTips.appearance.invalidate()

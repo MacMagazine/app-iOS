@@ -1,0 +1,59 @@
+import Foundation
+import TipKit
+
+@available(iOS 17, *)
+struct SubscriptionsTip: Tip {
+	@Parameter
+	static var isActive: Bool = true
+
+	var title: Text { Text("Remover propagandas") }
+	var message: Text? { Text("Assine para navegar pelo app sem propagandas - ou, alternativamente, use seu login de patrão.") }
+
+	var rules: [Rule] = [
+		#Rule(Self.$isActive) { $0 == true }
+	]
+
+	var actions: [Action] {
+		SideMenuTips.subscriptions.add { tip in
+			(tip as? SideMenuTips)?.show()
+		}
+	}
+}
+
+@available(iOS 17, *)
+struct SettingsTip: Tip {
+	@Parameter
+	static var isActive: Bool = false
+
+	var title: Text { Text("Ajustes") }
+	var message: Text? { Text("Configure o app do seu jeito.") }
+
+	var rules: [Rule] = [
+		#Rule(Self.$isActive) { $0 == true }
+	]
+
+	var actions: [Action] {
+		SideMenuTips.subscriptions.add { tip in
+			(tip as? SideMenuTips)?.show()
+		}
+	}
+}
+
+@available(iOS 17, *)
+struct AboutTip: Tip {
+	@Parameter
+	static var isActive: Bool = false
+
+	var title: Text { Text("O app MacMagazine") }
+	var message: Text? { Text("Participe da criação do app dando sugestões, reportando problemas ou colaborando com nosso código aberto.") }
+
+	var rules: [Rule] = [
+		#Rule(Self.$isActive) { $0 == true }
+	]
+
+	var actions: [Action] {
+		SideMenuTips.about.add { tip in
+			(tip as? SideMenuTips)?.show()
+		}
+	}
+}

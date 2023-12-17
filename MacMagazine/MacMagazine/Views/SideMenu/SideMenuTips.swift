@@ -2,39 +2,32 @@ import CommonLibrary
 import SwiftUI
 import TipKit
 
-enum SettingsTips: TipType {
+public enum SideMenuTips: TipType {
 	case subscriptions
-	case appearance
-	case notifications
+	case settings
 	case about
-
-	@available(iOS 17, *)
-	private static var appearanceTip: AppearanceTip { AppearanceTip() }
 
 	@available(iOS 17, *)
 	private static var subscriptionsTip: SubscriptionsTip { SubscriptionsTip() }
 
 	@available(iOS 17, *)
-	private static var notificationsTip: PushNotificationTip { PushNotificationTip() }
+	private static var settingsTip: SettingsTip { SettingsTip() }
 
 	@available(iOS 17, *)
 	private static var aboutTip: AboutTip { AboutTip() }
 }
 
-extension SettingsTips {
+extension SideMenuTips {
 	@ViewBuilder
-	func tipView(with theme: ThemeColor) -> some View {
+	public func tipView(with theme: ThemeColor) -> some View {
 		if #available(iOS 17, *) {
 			Group {
 				switch self {
-				case .appearance:
-					TipView(Self.appearanceTip, arrowEdge: .bottom)
-
 				case .subscriptions:
 					TipView(Self.subscriptionsTip, arrowEdge: .bottom)
 
-				case .notifications:
-					TipView(Self.notificationsTip, arrowEdge: .bottom)
+				case .settings:
+					TipView(Self.settingsTip, arrowEdge: .bottom)
 
 				case .about:
 					TipView(Self.aboutTip, arrowEdge: .bottom)
@@ -44,23 +37,21 @@ extension SettingsTips {
 		}
 	}
 
-	func invalidate() {
+	public func invalidate() {
 		if #available(iOS 17, *) {
 			switch self {
-			case .appearance: Self.appearanceTip.invalidate(reason: .actionPerformed)
 			case .subscriptions: Self.subscriptionsTip.invalidate(reason: .actionPerformed)
-			case .notifications: Self.notificationsTip.invalidate(reason: .actionPerformed)
+			case .settings: Self.settingsTip.invalidate(reason: .actionPerformed)
 			case .about: Self.aboutTip.invalidate(reason: .actionPerformed)
 			}
 		}
 	}
 
-	func show() {
+	public func show() {
 		if #available(iOS 17, *) {
 			switch self {
-			case .appearance: AppearanceTip.isActive = true
 			case .subscriptions: SubscriptionsTip.isActive = true
-			case .notifications: PushNotificationTip.isActive = true
+			case .settings: SettingsTip.isActive = true
 			case .about: AboutTip.isActive = true
 			}
 		}

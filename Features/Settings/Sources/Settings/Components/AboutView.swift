@@ -3,15 +3,14 @@ import SwiftUI
 import TipKit
 import UIComponentsLibrary
 
-struct AboutView: View {
+public struct AboutView: View {
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var viewModel: SettingsViewModel
 
-	var body: some View {
-		Section(content: {
-			SettingsTips.about.tipView(with: theme)
-				.listRowBackground(Color.clear)
+	public init() {}
 
+	public var body: some View {
+		Section(content: {
 			Button(action: { viewModel.composeMessage() },
 				   label: {
 				Text("Relater problema/bug no app".uppercased())
@@ -33,6 +32,7 @@ struct AboutView: View {
 			.accessibilityLabel("A versão do app é \(Bundle.version ?? "desconhecida").")
 		}, footer: {
 			footerView
+				.listRowBackground(Color.clear)
 		})
 		.listRowSeparator(.hidden)
 	}
@@ -51,24 +51,5 @@ extension AboutView {
 #Preview {
 	List {
 		AboutView()
-	}
-}
-
-@available(iOS 17, *)
-struct AboutTip: Tip {
-	@Parameter
-	static var isActive: Bool = true
-
-	var title: Text { Text("O app MacMagazine") }
-	var message: Text? { Text("Participe da criação do app dando sugestões, reportando problemas ou colaborando com nosso código aberto.") }
-
-	var rules: [Rule] = [
-		#Rule(Self.$isActive) { $0 == true }
-	]
-
-	var actions: [Action] {
-		SettingsTips.about.add { tip in
-			(tip as? SettingsTips)?.show()
-		}
 	}
 }
