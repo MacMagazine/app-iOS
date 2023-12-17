@@ -1,3 +1,5 @@
+import CommonLibrary
+import Settings
 import SwiftUI
 
 struct MainView: View {
@@ -21,4 +23,6 @@ struct MainView: View {
 
 #Preview {
 	MainView()
+		.environmentObject(SettingsViewModel())
+		.environment(\.theme, ThemeColor())
 }

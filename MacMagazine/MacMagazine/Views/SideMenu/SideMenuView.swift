@@ -33,45 +33,46 @@ struct SideMenuView: View {
 		Menu(view: AnyView(Text("Ajustes")),
 			 tip: SideMenuTips.settings,
 			 children: [
-			Menu(view: AnyView(PushOptionsView())),
-			Menu(view: AnyView(AppearanceView(theme: ThemeColor())))
-		]),
+				Menu(view: AnyView(PushOptionsView())),
+				Menu(view: AnyView(AppearanceView(theme: ThemeColor())))
+			 ]),
 		Menu(view: AnyView(AboutView()), tip: SideMenuTips.about)
 	]
 
 	var body: some View {
-		HStack {
-			List {
-				ForEach(items, id: \.id) { row in
-					Group {
-						row.tip?.tipView(with: theme)
+		GeometryReader { geo in
+			HStack {
+				List {
+					ForEach(items, id: \.id) { row in
+						Group {
+							row.tip?.tipView(with: theme)
 
-						if let children = row.children {
-							DisclosureGroup(content: {
-								ForEach(children, id: \.id) { childrenRow in
-									childrenRow.view
-										.listRowSeparator(.hidden)
-										.listRowBackground(Color.clear)
-								}
-							},
-											label: { row.view })
-							.tint(theme.main.tint.color)
+							if let children = row.children {
+								DisclosureGroup(content: {
+									ForEach(children, id: \.id) { childrenRow in
+										childrenRow.view
+									}
+								},
+												label: { row.view })
+								.tint(theme.main.tint.color)
 
-						} else {
-							row.view
+							} else {
+								row.view
+							}
 						}
+						.listRowSeparator(.hidden)
+						.listRowBackground(Color.clear)
 					}
-					.listRowSeparator(.hidden)
-					.listRowBackground(Color.clear)
 				}
-			}
-			.listStyle(.plain)
-			.frame(width: 320)
-			.background(theme.main.background.color ?? .primary)
+				.listStyle(.plain)
+				.frame(width: geo.size.width > 430 ? 400 : geo.size.width * 0.9)
+				.padding(.bottom)
+				.background(theme.main.background.color ?? .primary)
 
-			Spacer()
+				Spacer()
+			}
+			.preferredColorScheme(settingsViewModel.mode.colorScheme)
 		}
-		.preferredColorScheme(settingsViewModel.mode.colorScheme)
 	}
 }
 

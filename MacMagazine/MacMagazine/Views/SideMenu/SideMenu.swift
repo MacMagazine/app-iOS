@@ -41,7 +41,6 @@ struct SideMenu: View {
 
 				content
                     .transition(transition)
-                    .background(.clear)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)

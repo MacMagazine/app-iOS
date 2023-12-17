@@ -31,7 +31,7 @@ public struct AppearanceView: View {
 			}
 			.listRowSeparator(.hidden)
 			.buttonStyle(PlainButtonStyle())
-    }
+}
 }
 
 extension AppearanceView {
@@ -56,7 +56,7 @@ extension AppearanceView {
 	@ViewBuilder
 	private var iconsView: some View {
 		LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), alignment: .top)],
-				  spacing: 8) {
+		spacing: 20) {
 			ForEach(IconType.allCases, id: \.self) { type in
 				Button(action: {
 					SettingsTips.appearance.invalidate()
@@ -75,7 +75,6 @@ extension AppearanceView {
 				.disabled(viewModel.icon == type)
 				.opacity(viewModel.icon == type ? 0.5 : 1)
 				.accessibilityLabel(type.accessibilityText(selected: viewModel.icon == type))
-				.frame(maxWidth: .infinity)
 			}
 		}
 	}
