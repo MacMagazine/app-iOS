@@ -34,15 +34,6 @@ struct MacMagazineApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-//				SettingsView()
-//					.environmentObject(viewModel.settingsViewModel)
-//					.onChange(of: scenePhase) { phase in
-//						if phase == .active {
-//							Task {
-//								await viewModel.settingsViewModel.getSettings()
-//							}
-//						}
-//					}
 			MainView()
 				.environmentObject(viewModel.settingsViewModel)
 				.task {

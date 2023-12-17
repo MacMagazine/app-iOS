@@ -21,6 +21,25 @@ struct SubscriptionsTip: Tip {
 }
 
 @available(iOS 17, *)
+struct PostsTip: Tip {
+	@Parameter
+	static var isActive: Bool = false
+
+	var title: Text { Text("Posts") }
+	var message: Text? { Text("Gerencie a visibilidade dos posts conforme sua preferência.") }
+
+	var rules: [Rule] = [
+		#Rule(Self.$isActive) { $0 == true }
+	]
+
+	var actions: [Action] {
+		SideMenuTips.subscriptions.add { tip in
+			(tip as? SideMenuTips)?.show()
+		}
+	}
+}
+
+@available(iOS 17, *)
 struct SettingsTip: Tip {
 	@Parameter
 	static var isActive: Bool = false

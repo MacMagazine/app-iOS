@@ -31,7 +31,7 @@ public struct ThemeColor: Themeable & AppColor {
 	public let button = ButtonColor(primary: "MMBlue",
 									secondary: "MMBlueWhite",
 									terciary: "",
-									destructive: "")
+									destructive: "TabascoDracula")
 
 	public let tip = TipConfig(background: "MMBlue",
 							   text: "MMBlack90")

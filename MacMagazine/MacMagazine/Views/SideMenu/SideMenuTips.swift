@@ -4,11 +4,15 @@ import TipKit
 
 public enum SideMenuTips: TipType {
 	case subscriptions
+	case posts
 	case settings
 	case about
 
 	@available(iOS 17, *)
 	private static var subscriptionsTip: SubscriptionsTip { SubscriptionsTip() }
+
+	@available(iOS 17, *)
+	private static var postsTip: PostsTip { PostsTip() }
 
 	@available(iOS 17, *)
 	private static var settingsTip: SettingsTip { SettingsTip() }
@@ -26,6 +30,9 @@ extension SideMenuTips {
 				case .subscriptions:
 					TipView(Self.subscriptionsTip, arrowEdge: .bottom)
 
+				case .posts:
+					TipView(Self.postsTip, arrowEdge: .bottom)
+
 				case .settings:
 					TipView(Self.settingsTip, arrowEdge: .bottom)
 
@@ -41,6 +48,7 @@ extension SideMenuTips {
 		if #available(iOS 17, *) {
 			switch self {
 			case .subscriptions: Self.subscriptionsTip.invalidate(reason: .actionPerformed)
+			case .posts: Self.postsTip.invalidate(reason: .actionPerformed)
 			case .settings: Self.settingsTip.invalidate(reason: .actionPerformed)
 			case .about: Self.aboutTip.invalidate(reason: .actionPerformed)
 			}
@@ -51,6 +59,7 @@ extension SideMenuTips {
 		if #available(iOS 17, *) {
 			switch self {
 			case .subscriptions: SubscriptionsTip.isActive = true
+			case .posts: PostsTip.isActive = true
 			case .settings: SettingsTip.isActive = true
 			case .about: AboutTip.isActive = true
 			}

@@ -1,6 +1,5 @@
 import CommonLibrary
 import SwiftUI
-import TipKit
 import UIComponentsLibrary
 
 public struct AboutView: View {

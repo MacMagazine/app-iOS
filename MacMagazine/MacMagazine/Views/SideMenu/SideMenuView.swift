@@ -30,6 +30,9 @@ struct SideMenuView: View {
 		Menu(view: AnyView(Text("Remover Propagandas")),
 			 tip: SideMenuTips.subscriptions,
 			 children: [Menu(view: AnyView(SubscriptionView()))]),
+		Menu(view: AnyView(Text("Posts")),
+			 tip: SideMenuTips.posts,
+			 children: [Menu(view: AnyView(PostsVisibilityView()))]),
 		Menu(view: AnyView(Text("Ajustes")),
 			 tip: SideMenuTips.settings,
 			 children: [
