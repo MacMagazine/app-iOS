@@ -33,18 +33,18 @@ struct PostsTip: Tip {
 	]
 
 	var actions: [Action] {
-		SideMenuTips.subscriptions.add { tip in
+		SideMenuTips.posts.add { tip in
 			(tip as? SideMenuTips)?.show()
 		}
 	}
 }
 
 @available(iOS 17, *)
-struct SettingsTip: Tip {
+struct OptionsTip: Tip {
 	@Parameter
 	static var isActive: Bool = false
 
-	var title: Text { Text("Ajustes") }
+	var title: Text { Text("Opções") }
 	var message: Text? { Text("Configure o app do seu jeito.") }
 
 	var rules: [Rule] = [
@@ -52,7 +52,7 @@ struct SettingsTip: Tip {
 	]
 
 	var actions: [Action] {
-		SideMenuTips.subscriptions.add { tip in
+		SideMenuTips.settings.add { tip in
 			(tip as? SideMenuTips)?.show()
 		}
 	}

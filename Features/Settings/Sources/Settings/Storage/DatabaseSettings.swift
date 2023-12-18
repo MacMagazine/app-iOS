@@ -44,9 +44,25 @@ extension Database {
 		}
 	}
 
+	var postRead: Bool {
+		get async {
+			guard let items = await items else { return false }
+			return items.first?.postRead ?? false
+		}
+	}
+
+	var countOnBadge: Bool {
+		get async {
+			guard let items = await items else { return false }
+			return items.first?.countOnBadge ?? false
+		}
+	}
+
 	func update(appIcon: IconType? = nil,
 				mode: ColorScheme? = nil,
 				patrao: Bool? = nil,
+				postRead: Bool? = nil,
+				countOnBadge: Bool? = nil,
 				expiration: Date? = nil,
 				notification: String? = nil) {
 		Task {
@@ -61,6 +77,12 @@ extension Database {
 				}
 				if let patrao {
 					item.patrao = patrao
+				}
+				if let postRead {
+					item.postRead = postRead
+				}
+				if let countOnBadge {
+					item.countOnBadge = countOnBadge
 				}
 				if let expiration {
 					item.expiration = expiration
@@ -79,6 +101,12 @@ extension Database {
 			}
 			if let patrao {
 				item.patrao = patrao
+			}
+			if let postRead {
+				item.postRead = postRead
+			}
+			if let countOnBadge {
+				item.countOnBadge = countOnBadge
 			}
 			if let expiration {
 				item.expiration = expiration

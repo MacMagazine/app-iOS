@@ -33,7 +33,7 @@ struct SideMenuView: View {
 		Menu(view: AnyView(Text("Posts")),
 			 tip: SideMenuTips.posts,
 			 children: [Menu(view: AnyView(PostsVisibilityView()))]),
-		Menu(view: AnyView(Text("Ajustes")),
+		Menu(view: AnyView(Text("Opções")),
 			 tip: SideMenuTips.settings,
 			 children: [
 				Menu(view: AnyView(PushOptionsView())),
@@ -80,15 +80,25 @@ struct SideMenuView: View {
 }
 
 struct LogoMenuView: View {
+	@Environment(\.theme) private var theme: ThemeColor
+
 	var body: some View {
-		HStack {
+		HStack(spacing: 10) {
 			Spacer()
 			Image("menu")
 				.resizable()
-				.frame(width: 66, height: 50)
+				.aspectRatio(contentMode: .fit)
+				.frame(height: 36)
+
+			Image("MacMagazine")
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(height: 24)
 				.padding(.top, 10)
+
 			Spacer()
 		}
+		.padding(.vertical, 10)
 	}
 }
 

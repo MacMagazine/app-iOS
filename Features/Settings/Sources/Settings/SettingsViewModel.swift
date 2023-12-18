@@ -39,6 +39,9 @@ public class SettingsViewModel: ObservableObject {
 	@Published var status: Status = .done
 	@Published var products: [Product] = []
 
+	@Published var postRead = false
+	@Published var countOnBadge = false
+
 	private var cancellables: Set<AnyCancellable> = []
 	private var updates: Task<Void, Never>? = nil
 
@@ -54,7 +57,7 @@ public class SettingsViewModel: ObservableObject {
 								resource: Bundle.module.url(forResource: "SettingsModel", withExtension: "momd"))
 		self.mainContext = self.storage.mainContext
 
-		observeLoginStatus()
+		observeState()
 
 		updates = InAppPurchaseManager.observeTransactionUpdates { [weak self] result in
 			if let expiration = result.first?.expiration {
@@ -69,11 +72,31 @@ public class SettingsViewModel: ObservableObject {
 }
 
 extension SettingsViewModel {
-	private func observeLoginStatus() {
+	private func observeState() {
 		$isPatrao
+			.receive(on: RunLoop.main)
 			.removeDuplicates()
-			.sink { [weak self] status in
-				self?.storage.update(patrao: status)
+			.sink { [weak self] value in
+				self?.storage.update(patrao: value)
+			}
+			.store(in: &cancellables)
+
+		$postRead
+			.receive(on: RunLoop.main)
+			.removeDuplicates()
+			.sink { [weak self] value in
+				self?.storage.update(postRead: value)
+				if !value {
+					self?.countOnBadge = false
+				}
+			}
+			.store(in: &cancellables)
+
+		$countOnBadge
+			.receive(on: RunLoop.main)
+			.removeDuplicates()
+			.sink { [weak self] value in
+				self?.storage.update(countOnBadge: value)
 			}
 			.store(in: &cancellables)
 	}
@@ -86,6 +109,8 @@ extension SettingsViewModel {
 		isPatrao = await storage.patrao
 		icon = await storage.appIcon
 		notificationType = await storage.notification
+		postRead = await storage.postRead
+		countOnBadge = await storage.countOnBadge
 
 		if let expirationDate = await storage.expirationDate {
 			subscriptionValid = expirationDate > Date()
@@ -96,6 +121,8 @@ extension SettingsViewModel {
 			"mode": mode.rawValue as NSObject,
 			"patrao": isPatrao as NSObject,
 			"notification": notificationType.rawValue as NSObject,
+			"postRead": postRead as NSObject,
+			"countOnBadge": countOnBadge as NSObject,
 			"subscriptionValid": subscriptionValid as NSObject
 		])
 	}

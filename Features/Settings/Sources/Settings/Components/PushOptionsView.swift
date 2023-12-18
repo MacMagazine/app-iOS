@@ -1,6 +1,5 @@
 import CommonLibrary
 import SwiftUI
-import TipKit
 import UIComponentsLibrary
 
 public struct PushOptionsView: View {
@@ -44,24 +43,5 @@ extension PushOptionsView {
 #Preview {
 	List {
 		PushOptionsView()
-	}
-}
-
-@available(iOS 17, *)
-struct PushNotificationTip: Tip {
-	@Parameter
-	static var isActive: Bool = true
-
-	var title: Text { Text("Push Notifications") }
-	var message: Text? { Text("Receba notificações toda vez que um novo post for publicado. Escolha entre qualquer novo post ou somente os posts em Destaque.") }
-
-	var rules: [Rule] = [
-		#Rule(Self.$isActive) { $0 == true }
-	]
-
-	var actions: [Action] {
-		SettingsTips.notifications.add { tip in
-			(tip as? SettingsTips)?.show()
-		}
 	}
 }

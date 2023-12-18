@@ -1,6 +1,5 @@
 import CommonLibrary
 import SwiftUI
-import TipKit
 
 public struct AppearanceView: View {
 	private let theme: ThemeColor
@@ -84,24 +83,5 @@ extension AppearanceView {
 	List {
 		AppearanceView(theme: ThemeColor())
 			.environmentObject(SettingsViewModel())
-	}
-}
-
-@available(iOS 17, *)
-struct AppearanceTip: Tip {
-	@Parameter
-	static var isActive: Bool = false
-
-	var title: Text { Text("Seu app, seu jeito") }
-	var message: Text? { Text("Escolha a aparência do seu app, incluido modo escuro e ícone do app.") }
-
-	var rules: [Rule] = [
-		#Rule(Self.$isActive) { $0 == true }
-	]
-
-	var actions: [Action] {
-		SettingsTips.appearance.add { tip in
-			(tip as? SettingsTips)?.show()
-		}
 	}
 }

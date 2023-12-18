@@ -39,7 +39,7 @@ struct MacMagazineApp: App {
 				.task {
 					if #available(iOS 17, *) {
 #if DEBUG
-						try? Tips.resetDatastore()
+//						try? Tips.resetDatastore()
 #endif
 						try? Tips.configure()
 					}

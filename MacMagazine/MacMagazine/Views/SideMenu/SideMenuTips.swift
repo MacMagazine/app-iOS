@@ -2,7 +2,7 @@ import CommonLibrary
 import SwiftUI
 import TipKit
 
-public enum SideMenuTips: TipType {
+enum SideMenuTips: TipType {
 	case subscriptions
 	case posts
 	case settings
@@ -15,7 +15,7 @@ public enum SideMenuTips: TipType {
 	private static var postsTip: PostsTip { PostsTip() }
 
 	@available(iOS 17, *)
-	private static var settingsTip: SettingsTip { SettingsTip() }
+	private static var settingsTip: OptionsTip { OptionsTip() }
 
 	@available(iOS 17, *)
 	private static var aboutTip: AboutTip { AboutTip() }
@@ -23,7 +23,7 @@ public enum SideMenuTips: TipType {
 
 extension SideMenuTips {
 	@ViewBuilder
-	public func tipView(with theme: ThemeColor) -> some View {
+	func tipView(with theme: ThemeColor) -> some View {
 		if #available(iOS 17, *) {
 			Group {
 				switch self {
@@ -44,7 +44,7 @@ extension SideMenuTips {
 		}
 	}
 
-	public func invalidate() {
+	func invalidate() {
 		if #available(iOS 17, *) {
 			switch self {
 			case .subscriptions: Self.subscriptionsTip.invalidate(reason: .actionPerformed)
@@ -55,12 +55,12 @@ extension SideMenuTips {
 		}
 	}
 
-	public func show() {
+	func show() {
 		if #available(iOS 17, *) {
 			switch self {
 			case .subscriptions: SubscriptionsTip.isActive = true
 			case .posts: PostsTip.isActive = true
-			case .settings: SettingsTip.isActive = true
+			case .settings: OptionsTip.isActive = true
 			case .about: AboutTip.isActive = true
 			}
 		}
