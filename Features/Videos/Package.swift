@@ -5,19 +5,20 @@ import PackageDescription
 
 let package = Package(
     name: "Videos",
+	platforms: [.iOS(.v16)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "Videos",
-            targets: ["Videos"]),
+        .library(name: "Videos", targets: ["Videos"])
     ],
+	dependencies: [
+		.package(name: "CommonLibrary", path: "../CommonLibrary"),
+		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master")
+	],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "Videos"),
-        .testTarget(
-            name: "VideosTests",
-            dependencies: ["Videos"]),
+		.target(name: "Videos",
+				dependencies: ["CommonLibrary",
+							   .product(name: "YouTubeLibrary", package: "modules"),
+							   .product(name: "CoreLibrary", package: "modules"),
+							   .product(name: "UIComponentsLibrary", package: "modules")]),
+        .testTarget(name: "VideosTests", dependencies: ["Videos"])
     ]
 )

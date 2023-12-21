@@ -42,6 +42,8 @@ public class SettingsViewModel: ObservableObject {
 	@Published var postRead = false
 	@Published var countOnBadge = false
 
+	@Published public var cache: Cache?
+
 	private var cancellables: Set<AnyCancellable> = []
 	private var updates: Task<Void, Never>? = nil
 

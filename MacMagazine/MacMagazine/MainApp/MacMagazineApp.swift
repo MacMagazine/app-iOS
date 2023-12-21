@@ -35,6 +35,7 @@ struct MacMagazineApp: App {
 	var body: some Scene {
 		WindowGroup {
 			MainView()
+				.environmentObject(viewModel.videosViewModel)
 				.environmentObject(viewModel.settingsViewModel)
 				.task {
 					if #available(iOS 17, *) {

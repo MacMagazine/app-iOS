@@ -20,7 +20,7 @@ public struct ThemeColor: Themeable & AppColor {
 								shadow: "")
 
 	public let secondary = SecondaryColor(background: "Secondary")
-	public let tertiary = SecondaryColor(background: "Tertiary")
+	public let tertiary = SecondaryColor(background: "MMDarkGreyWhite")
 
 	public let text = TextColor(primaryTab: "",
 								primary: "MMBlueWhite",

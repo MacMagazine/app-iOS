@@ -10,7 +10,7 @@ public struct PostsVisibilityView: View {
 
 	public var body: some View {
 		Section(content: {
-			Button(action: {},
+			Button(action: { viewModel.cache = .readAll },
 				   label: {
 				Text("Marcar todos os posts como lidos".uppercased())
 					.roundedFullSize(fill: theme.button.primary.color ?? .blue)
@@ -23,28 +23,28 @@ public struct PostsVisibilityView: View {
 				.disabled(!viewModel.postRead)
 
 			DisclosureGroup(content: {
-				Button(action: {},
+				Button(action: { viewModel.cache = .keepFavoritesAndStatus },
 					   label: {
 					Text("manter favoritos e status de leitura".uppercased())
 						.roundedFullSize(fill: theme.button.primary.color ?? .blue)
 				})
-				Button(action: {},
+				Button(action: { viewModel.cache = .keepStatus },
 					   label: {
 					Text("manter status de leitura".uppercased())
 						.roundedFullSize(fill: theme.button.primary.color ?? .blue)
 				})
-				Button(action: {},
+				Button(action: { viewModel.cache = .keepFavorites },
 					   label: {
 					Text("manter favoritos".uppercased())
 						.roundedFullSize(fill: theme.button.primary.color ?? .blue)
 				})
-				Button(action: {},
+				Button(action: { viewModel.cache = .cleanImages },
 					   label: {
 					Text("Apagar somente as images".uppercased())
 						.borderedFullSize(color: theme.button.primary.color ?? .blue,
 										  stroke: theme.button.primary.color ?? .blue)
 				})
-				Button(action: {},
+				Button(action: { viewModel.cache = .cleanAll },
 					   label: {
 					Text("Limpar tudo".uppercased())
 						.borderedFullSize(color: theme.button.destructive.color ?? .blue,
