@@ -22,7 +22,7 @@ struct SideMenuView: View {
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var settingsViewModel: SettingsViewModel
 
-	@Binding var selectedView: Int
+	@Binding var selectedView: MainViewModel.Page
 	@Binding var isPresentingMenu: Bool
 
 	let items: [Menu] = [
@@ -74,7 +74,6 @@ struct SideMenuView: View {
 
 				Spacer()
 			}
-			.preferredColorScheme(settingsViewModel.mode.colorScheme)
 		}
 	}
 }
@@ -120,7 +119,7 @@ extension SideMenuView {
 }
 
 #Preview {
-	SideMenuView(selectedView: .constant(0),
+	SideMenuView(selectedView: .constant(MainViewModel.Page.home),
 				 isPresentingMenu: .constant(false))
 	.environmentObject(SettingsViewModel())
 	.environment(\.theme, ThemeColor())

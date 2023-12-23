@@ -5,7 +5,7 @@ import Foundation
 extension Database {
 	private var items: [Settings]? {
 		get async {
-			return try? await self.get(from: "Settings") as? [Settings]
+			return try? await self.get(from: "Settings", using: mainContext) as? [Settings]
 		}
 	}
 
@@ -66,9 +66,9 @@ extension Database {
 				expiration: Date? = nil,
 				notification: String? = nil) {
 		Task {
-			guard let items = try? await self.get(from: "Settings") as? [Settings],
+			guard let items = try? await self.get(from: "Settings", using: mainContext) as? [Settings],
 				  let item = items.first else {
-				let item = Settings(context: self.mainContext)
+				let item = Settings(context: mainContext)
 				if let appIcon {
 					item.icon = appIcon.rawValue
 				}
@@ -90,7 +90,7 @@ extension Database {
 				if let notification {
 					item.notification = notification
 				}
-				await saveUsingMainActor()
+				try? mainContext.save()
 				return
 			}
 			if let appIcon {
@@ -114,7 +114,7 @@ extension Database {
 			if let notification {
 				item.notification = notification
 			}
-			await saveUsingMainActor()
+			try? mainContext.save()
 		}
 	}
 }

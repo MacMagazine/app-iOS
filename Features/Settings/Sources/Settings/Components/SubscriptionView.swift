@@ -89,6 +89,10 @@ public struct SubscriptionView: View {
 					url: APIParams.privacyUrl,
 					isPresenting: $viewModel.isPresentingPrivacy)
 		}
+
+		.onChange(of: viewModel.isPatrao) { value in
+			viewModel.storage.update(patrao: value)
+		}
 	}
 
 	@ViewBuilder

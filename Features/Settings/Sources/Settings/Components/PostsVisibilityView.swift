@@ -60,7 +60,17 @@ public struct PostsVisibilityView: View {
 		.listRowSeparator(.hidden)
 		.listRowBackground(Color.clear)
 		.buttonStyle(PlainButtonStyle())
-    }
+
+		.onChange(of: viewModel.postRead) { value in
+			viewModel.storage.update(postRead: value)
+			if !value {
+				viewModel.countOnBadge = false
+			}
+		}
+		.onChange(of: viewModel.countOnBadge) { value in
+			viewModel.storage.update(countOnBadge: value)
+		}
+	}
 }
 
 #Preview {

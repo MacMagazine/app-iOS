@@ -26,7 +26,7 @@ public struct VideosView: View {
 
 				Spacer()
 
-				Button(action: {},
+				Button(action: { viewModel.options = .all },
 					   label: {
 					Text("ver mais".uppercased())
 						.rounded(fill: theme.button.primary.color ?? .blue)

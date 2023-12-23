@@ -18,6 +18,8 @@
 		9B5ED8C72B1A3DB200672FF7 /* Podcast in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C62B1A3DB200672FF7 /* Podcast */; };
 		9B5ED8C92B1A3DB200672FF7 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8C82B1A3DB200672FF7 /* Settings */; };
 		9B5ED8CB2B1A3DB200672FF7 /* Videos in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5ED8CA2B1A3DB200672FF7 /* Videos */; };
+		9B8FD3252B3625FC001CE106 /* SectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FD3242B3625FC001CE106 /* SectionsView.swift */; };
+		9B8FD3282B376097001CE106 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FD3272B376097001CE106 /* Storage.swift */; };
 		9BB53D742B2F4E09008E6B67 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB53D732B2F4E09008E6B67 /* SideMenu.swift */; };
 		9BB53D762B2F5F81008E6B67 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB53D752B2F5F81008E6B67 /* HomeView.swift */; };
 		9BB53D792B2F608B008E6B67 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB53D782B2F608B008E6B67 /* SideMenuView.swift */; };
@@ -59,6 +61,8 @@
 		9B5ED8C12B1A3B4000672FF7 /* Videos */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Videos; sourceTree = "<group>"; };
 		9B5ED8C22B1A3BDD00672FF7 /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
 		9B5ED8CC2B1A3DDB00672FF7 /* MacMagazine.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MacMagazine.xctestplan; sourceTree = "<group>"; };
+		9B8FD3242B3625FC001CE106 /* SectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsView.swift; sourceTree = "<group>"; };
+		9B8FD3272B376097001CE106 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		9BB53D732B2F4E09008E6B67 /* SideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		9BB53D752B2F5F81008E6B67 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		9BB53D782B2F608B008E6B67 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
@@ -146,6 +150,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9B8FD3262B37607E001CE106 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9B8FD3272B376097001CE106 /* Storage.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9BB53D772B2F6077008E6B67 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +183,7 @@
 			children = (
 				9BB53D752B2F5F81008E6B67 /* HomeView.swift */,
 				9BD78AB52B1A14C70002703B /* MainView.swift */,
+				9B8FD3242B3625FC001CE106 /* SectionsView.swift */,
 				9BB53D772B2F6077008E6B67 /* SideMenu */,
 			);
 			path = Views;
@@ -201,6 +214,7 @@
 		9BD78AB22B1A14C70002703B /* MacMagazine */ = {
 			isa = PBXGroup;
 			children = (
+				9B8FD3262B37607E001CE106 /* Extensions */,
 				9BCD66C22B1D428D00EA79A3 /* GoogleService-Info.plist */,
 				9BD78ABF2B1A14C80002703B /* Info.plist */,
 				9BC79BCB2B2CE45500A41796 /* MainApp */,
@@ -384,12 +398,14 @@
 			files = (
 				9BB53D792B2F608B008E6B67 /* SideMenuView.swift in Sources */,
 				9BD78AB62B1A14C70002703B /* MainView.swift in Sources */,
+				9B8FD3252B3625FC001CE106 /* SectionsView.swift in Sources */,
 				9BD78AB42B1A14C70002703B /* MacMagazineApp.swift in Sources */,
 				9BC79BCA2B2CE44500A41796 /* MainViewModel.swift in Sources */,
 				9BB53D762B2F5F81008E6B67 /* HomeView.swift in Sources */,
 				9BB53D7D2B2F93F8008E6B67 /* Tips.swift in Sources */,
 				9BB53D7B2B2F93A3008E6B67 /* SideMenuTips.swift in Sources */,
 				9BB53D742B2F4E09008E6B67 /* SideMenu.swift in Sources */,
+				9B8FD3282B376097001CE106 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

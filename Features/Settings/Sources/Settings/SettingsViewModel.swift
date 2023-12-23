@@ -1,4 +1,3 @@
-import Combine
 import CommonLibrary
 import CoreData
 import CoreLibrary
@@ -44,7 +43,6 @@ public class SettingsViewModel: ObservableObject {
 
 	@Published public var cache: Cache?
 
-	private var cancellables: Set<AnyCancellable> = []
 	private var updates: Task<Void, Never>? = nil
 
 	public let mainContext: NSManagedObjectContext
@@ -59,8 +57,6 @@ public class SettingsViewModel: ObservableObject {
 								resource: Bundle.module.url(forResource: "SettingsModel", withExtension: "momd"))
 		self.mainContext = self.storage.mainContext
 
-		observeState()
-
 		updates = InAppPurchaseManager.observeTransactionUpdates { [weak self] result in
 			if let expiration = result.first?.expiration {
 				self?.storage.update(expiration: expiration)
@@ -70,37 +66,6 @@ public class SettingsViewModel: ObservableObject {
 				self?.subscriptionValid = false
 			}
 		}
-	}
-}
-
-extension SettingsViewModel {
-	private func observeState() {
-		$isPatrao
-			.receive(on: RunLoop.main)
-			.removeDuplicates()
-			.sink { [weak self] value in
-				self?.storage.update(patrao: value)
-			}
-			.store(in: &cancellables)
-
-		$postRead
-			.receive(on: RunLoop.main)
-			.removeDuplicates()
-			.sink { [weak self] value in
-				self?.storage.update(postRead: value)
-				if !value {
-					self?.countOnBadge = false
-				}
-			}
-			.store(in: &cancellables)
-
-		$countOnBadge
-			.receive(on: RunLoop.main)
-			.removeDuplicates()
-			.sink { [weak self] value in
-				self?.storage.update(countOnBadge: value)
-			}
-			.store(in: &cancellables)
 	}
 }
 

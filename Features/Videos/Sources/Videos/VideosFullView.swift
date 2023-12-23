@@ -7,31 +7,11 @@ import YouTubeLibrary
 
 public struct VideosFullView: View {
 	@Environment(\.theme) private var theme: ThemeColor
-	@ObservedObject private var viewModel: VideosViewModel
-	@Binding var options: VideosViewModel.Options
-	private var title: String
-	private var search: String?
+	@EnvironmentObject private var viewModel: VideosViewModel
+	@State private var title: String = "DICAS"
+	@State private var search: String?
 
-	public init(viewModel: VideosViewModel = VideosViewModel(),
-				options: Binding<VideosViewModel.Options>) {
-		self.viewModel = viewModel
-		_options = options
-
-		switch options.wrappedValue {
-		case .search(let text):
-			search = text
-			title = "DICAS COM \(text)"
-		case .all:
-			search = nil
-			title = "TODAS AS DICAS"
-		case .favorite:
-			search = nil
-			title = "DICAS FAVORITAS"
-		default:
-			search = nil
-			title = "DICAS"
-		}
-	}
+	public init() {}
 
 	public var body: some View {
 		ZStack {
@@ -44,7 +24,7 @@ public struct VideosFullView: View {
 					Spacer()
 					Button(action: {
 						withAnimation {
-							options = .home
+							viewModel.options = .home
 						}
 					}, label: {
 						Image(systemName: "xmark.circle")
@@ -56,7 +36,7 @@ public struct VideosFullView: View {
 				ErrorView(message: viewModel.status.reason, theme: theme)
 					.padding(.top)
 				VideosFullscreenView(api: viewModel.youtube,
-									 favorite: options == .favorite,
+									 favorite: viewModel.options == .favorite,
 									 search: search,
 									 theme: theme)
 				Spacer()
@@ -64,6 +44,21 @@ public struct VideosFullView: View {
 			.padding([.leading, .trailing, .top])
 			.task {
 				try? await viewModel.youtube.getVideos()
+
+				switch viewModel.options {
+				case .search(let text):
+					search = text
+					title = "DICAS COM \(text)"
+				case .all:
+					search = nil
+					title = "TODAS AS DICAS"
+				case .favorite:
+					search = nil
+					title = "DICAS FAVORITAS"
+				default:
+					search = nil
+					title = "DICAS"
+				}
 			}
 		}
 		.environment(\.managedObjectContext, viewModel.context)
@@ -72,7 +67,7 @@ public struct VideosFullView: View {
 
 struct VideosFullView_Previews: PreviewProvider {
 	static var previews: some View {
-		VideosFullView(options: .constant(.all))
+		VideosFullView()
 			.environmentObject(VideosViewModel())
 			.environment(\.theme, ThemeColor())
 	}

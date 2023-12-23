@@ -1,5 +1,6 @@
 import AppTrackingTransparency
 import CommonLibrary
+import CoreLibrary
 import FirebaseAnalytics
 import FirebaseCore
 import Settings
@@ -32,11 +33,19 @@ struct MacMagazineApp: App {
 
 	@ObservedObject var viewModel = MainViewModel()
 
+	@State var colorScheme: SwiftUI.ColorScheme? = DefaultStorage.colorScheme {
+		didSet {
+			DefaultStorage.update(colorScheme)
+		}
+	}
+
 	var body: some Scene {
 		WindowGroup {
 			MainView()
+				.environmentObject(viewModel)
 				.environmentObject(viewModel.videosViewModel)
 				.environmentObject(viewModel.settingsViewModel)
+
 				.task {
 					if #available(iOS 17, *) {
 #if DEBUG
@@ -47,6 +56,7 @@ struct MacMagazineApp: App {
 					try? await viewModel.settingsViewModel.getPurchasableProducts()
 					await viewModel.settingsViewModel.getSettings()
 				}
+
 				.onChange(of: scenePhase) { phase in
 					if phase == .active {
 						Task {
@@ -54,6 +64,11 @@ struct MacMagazineApp: App {
 						}
 					}
 				}
+
+				.onReceive(viewModel.settingsViewModel.$mode) { value in
+					colorScheme = value.colorScheme
+				}
+				.preferredColorScheme(colorScheme)
 		}
 		.environment(\.theme, viewModel.theme)
 	}

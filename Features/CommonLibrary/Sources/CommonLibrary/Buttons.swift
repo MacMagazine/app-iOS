@@ -2,21 +2,25 @@ import SwiftUI
 
 public struct PlainButtonTextStyle: ViewModifier {
 	let color: Color
+	let font: Font
 
-	public init(color: Color) {
+	public init(color: Color,
+				font: Font) {
 		self.color = color
+		self.font = font
 	}
 
 	public func body(content: Content) -> some View {
 		content
-			.font(.caption.weight(.bold))
+			.font(font.weight(.bold))
 			.foregroundColor(color)
 			.padding(8)
 	}
 }
 
 extension Text {
-	public func plain(color: Color = .primary) -> some View {
-		modifier(PlainButtonTextStyle(color: color))
+	public func plain(color: Color = .primary,
+					  font: Font = .caption) -> some View {
+		modifier(PlainButtonTextStyle(color: color, font: font))
 	}
 }

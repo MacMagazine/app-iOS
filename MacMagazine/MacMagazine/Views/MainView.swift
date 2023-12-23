@@ -6,27 +6,30 @@ import YouTubeLibrary
 
 struct MainView: View {
 	@Environment(\.theme) private var theme: ThemeColor
+	@EnvironmentObject private var viewModel: MainViewModel
 	@EnvironmentObject private var videosViewModel: VideosViewModel
 
 	@State var isPresentingMenu = false
-	@State var selectedView = 0
+
+	init() {}
 
 	var body: some View {
 		ZStack {
 			theme.main.background.color
 				.edgesIgnoringSafeArea([.top, .leading, .trailing])
 
-			TabView(selection: $selectedView) {
-				MenuView(isShowing: $isPresentingMenu) {
-					HomeView()
-				}.tag(0)
+			TabView(selection: $viewModel.selectedView) {
+				MenuView(isShowing: $isPresentingMenu,
+						 menu: { AnyView(SectionsView()) },
+						 content: { HomeView() })
+				.tag(MainViewModel.Page.home)
 
-				VideosFullscreenView(api: videosViewModel.youtube,
-									 theme: theme).tag(1)
+				VideosFullView()
+					.tag(MainViewModel.Page.videos)
 			}
 
 			SideMenu(isShowing: $isPresentingMenu,
-					 content: AnyView(SideMenuView(selectedView: $selectedView,
+					 content: AnyView(SideMenuView(selectedView: $viewModel.selectedView,
 												   isPresentingMenu: $isPresentingMenu)))
 		}
 	}
@@ -34,6 +37,7 @@ struct MainView: View {
 
 #Preview {
 	MainView()
+		.environmentObject(MainViewModel())
 		.environmentObject(VideosViewModel())
 		.environment(\.theme, ThemeColor())
 }
