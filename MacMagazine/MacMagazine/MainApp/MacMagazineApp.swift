@@ -43,9 +43,9 @@ struct MacMagazineApp: App {
 		WindowGroup {
 			MainView()
 				.environmentObject(viewModel)
+				.environmentObject(viewModel.newsViewModel)
 				.environmentObject(viewModel.videosViewModel)
 				.environmentObject(viewModel.settingsViewModel)
-				.environmentObject(viewModel.newsViewModel)
 
 				.task {
 					if #available(iOS 17, *) {
@@ -56,6 +56,7 @@ struct MacMagazineApp: App {
 					}
 					try? await viewModel.settingsViewModel.getPurchasableProducts()
 					await viewModel.settingsViewModel.getSettings()
+					try? await viewModel.newsViewModel.getNews()
 				}
 
 				.onChange(of: scenePhase) { phase in

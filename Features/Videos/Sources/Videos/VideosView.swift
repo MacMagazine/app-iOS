@@ -20,7 +20,7 @@ public struct VideosView: View {
 	public var body: some View {
 		VStack {
 			HStack {
-				Text("YouTube")
+				Text("Vídeos")
 					.font(.largeTitle)
 					.foregroundColor(theme.text.terciary.color)
 

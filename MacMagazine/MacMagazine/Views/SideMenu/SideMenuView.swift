@@ -1,4 +1,5 @@
 import CommonLibrary
+import News
 import Settings
 import SwiftUI
 import TipKit
@@ -27,6 +28,9 @@ struct SideMenuView: View {
 
 	let items: [Menu] = [
 		Menu(view: AnyView(LogoMenuView())),
+		Menu(view: AnyView(Text("Categorias")),
+			 tip: SideMenuTips.categories,
+			 children: [Menu(view: AnyView(CategoriesView()))]),
 		Menu(view: AnyView(Text("Remover Propagandas")),
 			 tip: SideMenuTips.subscriptions,
 			 children: [Menu(view: AnyView(SubscriptionView()))]),

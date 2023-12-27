@@ -2,6 +2,25 @@ import Foundation
 import TipKit
 
 @available(iOS 17, *)
+struct CategoriesTip: Tip {
+	@Parameter
+	static var isActive: Bool = true
+
+	var title: Text { Text("Nossas Notícias") }
+	var message: Text? { Text("Escolha uma categoria para ver nosso conteúdo especializado.") }
+
+	var rules: [Rule] = [
+		#Rule(Self.$isActive) { $0 == true }
+	]
+
+	var actions: [Action] {
+		SideMenuTips.categories.add { tip in
+			(tip as? SideMenuTips)?.show()
+		}
+	}
+}
+
+@available(iOS 17, *)
 struct SubscriptionsTip: Tip {
 	@Parameter
 	static var isActive: Bool = true

@@ -34,8 +34,10 @@ class MainViewModel: ObservableObject {
 
 	@Published var selectedView: Page = .home
 
-	let sections = [Section(title: "Notícias", action: {}),
-					Section(title: "YouTube", action: {})]
+	let sections = [Section(title: "Destaques", action: {}),
+					Section(title: "Notícias", action: {}),
+					Section(title: "YouTube", action: {}),
+					Section(title: "Podcast", action: {})]
 
 	// MARK: - Init -
 

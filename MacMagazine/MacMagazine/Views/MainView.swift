@@ -20,6 +20,7 @@ struct MainView: View {
 				.edgesIgnoringSafeArea(.all)
 
 			TabView(selection: $viewModel.selectedView) {
+
 				MenuView(isShowing: $isPresentingMenu,
 						 menu: { AnyView(SectionsView()) },
 						 content: { HomeView() })
@@ -30,6 +31,7 @@ struct MainView: View {
 
 				VideosFullView()
 					.tag(MainViewModel.Page.videos)
+
 			}.tabViewStyle(.page(indexDisplayMode: .never))
 
 			SideMenu(isShowing: $isPresentingMenu,

@@ -5,7 +5,7 @@ import Foundation
 
 public class NewsViewModel: ObservableObject {
 	@Published public var fullScreen: Bool = false
-	@Published public var options: Options = .home
+	@Published public var category: Category = .news
 	@Published var status: Status = .loading
 
 	enum Status: Equatable {
@@ -23,11 +23,28 @@ public class NewsViewModel: ObservableObject {
 		}
 	}
 
-	public enum Options: Equatable {
-		case all
-		case home
-		case favorite
-		case search(text: String)
+	public enum Category: String, CaseIterable {
+		case highlights = "Destaques"
+		case news = ""
+		case podcast = "MacMagazine no Ar"
+		case youtube = "Vídeos"
+		case appletv = "Apple TV+"
+		case reviews = "Review"
+		case tutoriais = "Tutoriais"
+		case rumors = "Rumores"
+
+		var title: String {
+			switch self {
+			case .highlights: "Destaques"
+			case .news: "Notícias"
+			case .podcast: "MacMagazine no Ar"
+			case .youtube: "Vídeos"
+			case .appletv: "Novidades AppleTV+"
+			case .reviews: "Reviews"
+			case .tutoriais: "Tutoriais"
+			case .rumors: "Rumores"
+			}
+		}
 	}
 
 	public let mainContext: NSManagedObjectContext
@@ -45,7 +62,7 @@ public class NewsViewModel: ObservableObject {
 	}
 
 	@MainActor
-	func getNews() async throws {
+	public func getNews() async throws {
 		do {
 			status = .loading
 			let news = try await loadNews()

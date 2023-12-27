@@ -9,7 +9,7 @@ struct HomeView: View {
 
 	var body: some View {
 		GeometryReader { geo in
-			ScrollView {
+			ScrollView(.vertical) {
 				NewsView()
 					.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 
