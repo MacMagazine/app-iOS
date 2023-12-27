@@ -45,6 +45,7 @@ struct MacMagazineApp: App {
 				.environmentObject(viewModel)
 				.environmentObject(viewModel.videosViewModel)
 				.environmentObject(viewModel.settingsViewModel)
+				.environmentObject(viewModel.newsViewModel)
 
 				.task {
 					if #available(iOS 17, *) {

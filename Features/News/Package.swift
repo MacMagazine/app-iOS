@@ -9,8 +9,16 @@ let package = Package(
     products: [
         .library(name: "News", targets: ["News"])
     ],
+	dependencies: [
+		.package(name: "CommonLibrary", path: "../CommonLibrary"),
+		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master")
+	],
     targets: [
-        .target(name: "News"),
+        .target(name: "News",
+				dependencies: ["CommonLibrary",
+							   .product(name: "CoreLibrary", package: "modules"),
+							   .product(name: "UIComponentsLibrary", package: "modules")],
+				resources: [.process("Resources")]),
         .testTarget(name: "NewsTests", dependencies: ["News"])
     ]
 )

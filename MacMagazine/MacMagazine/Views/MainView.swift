@@ -1,4 +1,5 @@
 import CommonLibrary
+import News
 import Settings
 import SwiftUI
 import Videos
@@ -16,7 +17,7 @@ struct MainView: View {
 	var body: some View {
 		ZStack {
 			theme.main.background.color
-				.edgesIgnoringSafeArea([.top, .leading, .trailing])
+				.edgesIgnoringSafeArea(.all)
 
 			TabView(selection: $viewModel.selectedView) {
 				MenuView(isShowing: $isPresentingMenu,
@@ -24,9 +25,12 @@ struct MainView: View {
 						 content: { HomeView() })
 				.tag(MainViewModel.Page.home)
 
+				NewsView()
+					.tag(MainViewModel.Page.news)
+
 				VideosFullView()
 					.tag(MainViewModel.Page.videos)
-			}
+			}.tabViewStyle(.page(indexDisplayMode: .never))
 
 			SideMenu(isShowing: $isPresentingMenu,
 					 content: AnyView(SideMenuView(selectedView: $viewModel.selectedView,

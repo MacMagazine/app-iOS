@@ -1,6 +1,7 @@
 import Combine
 import CommonLibrary
 import CoreLibrary
+import News
 import Settings
 import SwiftUI
 import Videos
@@ -11,6 +12,7 @@ class MainViewModel: ObservableObject {
 
 	enum Page {
 		case home
+		case news
 		case videos
 	}
 
@@ -26,6 +28,7 @@ class MainViewModel: ObservableObject {
 
 	@ObservedObject var videosViewModel = VideosViewModel()
 	@ObservedObject var settingsViewModel = SettingsViewModel()
+	@ObservedObject var newsViewModel = NewsViewModel()
 
 	let theme = ThemeColor()
 

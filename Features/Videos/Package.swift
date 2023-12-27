@@ -18,7 +18,6 @@ let package = Package(
 				dependencies: ["CommonLibrary",
 							   .product(name: "YouTubeLibrary", package: "modules"),
 							   .product(name: "CoreLibrary", package: "modules"),
-							   .product(name: "UIComponentsLibrary", package: "modules")]),
-        .testTarget(name: "VideosTests", dependencies: ["Videos"])
+							   .product(name: "UIComponentsLibrary", package: "modules")])
     ]
 )
