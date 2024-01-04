@@ -82,7 +82,7 @@ extension NewsViewModel {
 			MockURLProtocol(bundle: .module).mock(api: endpoint.restAPI, file: mock?[endpoint.restAPI])
 			let data = try await NetworkAPI(mock: mock).get(url: endpoint.url)
 			return try await withCheckedThrowingContinuation { continuation in
-				parse(data, numberOfPosts: 3, parseFullContent: false, continuation: continuation)
+				parse(data, numberOfPosts: -1, parseFullContent: false, continuation: continuation)
 			}
 
 		} catch {

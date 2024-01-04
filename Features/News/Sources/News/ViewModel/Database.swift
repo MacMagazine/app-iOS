@@ -39,4 +39,8 @@ extension News {
 	var pubDateFormatted: String? {
 		Date(timeIntervalSinceReferenceDate: pubDate).format(using: DateFormat.dateTime)
 	}
+
+	var allCategories: String? {
+		categories?.joined(separator: "|")
+	}
 }

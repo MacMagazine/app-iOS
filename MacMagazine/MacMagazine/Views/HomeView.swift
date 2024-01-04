@@ -8,15 +8,26 @@ struct HomeView: View {
 	@State private var availableWidth: CGFloat = .infinity
 
 	var body: some View {
-		GeometryReader { geo in
-			ScrollView(.vertical) {
-				NewsView()
-					.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+		ScrollViewReader { value in
+			GeometryReader { geo in
+				ScrollView(.vertical) {
+					HighlightsView()
+						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.id(MainViewModel.Page.highlights)
 
-				VideosView(availableWidth: availableWidth)
-			}
-			.onChange(of: geo.size.width) { value in
-				availableWidth = value
+					NewsView()
+						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.id(MainViewModel.Page.news)
+
+					VideosView(availableWidth: availableWidth)
+						.id(MainViewModel.Page.videos)
+				}
+				.onChange(of: geo.size.width) { value in
+					availableWidth = value
+				}
+				.onChange(of: viewModel.selectedSection) { page in
+					value.scrollTo(page)
+				}
 			}
 		}
 	}

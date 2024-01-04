@@ -14,12 +14,14 @@ class MainViewModel: ObservableObject {
 		case home
 		case news
 		case videos
+		case highlights
+		case podcast
 	}
 
 	struct Section: Identifiable {
 		let id = UUID().uuidString
 		let title: String
-		let action: () -> Void
+		let page: Page
 	}
 
 	// MARK: - Properties -
@@ -32,12 +34,13 @@ class MainViewModel: ObservableObject {
 
 	let theme = ThemeColor()
 
-	@Published var selectedView: Page = .home
+	@Published var selectedTab: Page = .home
+	@Published var selectedSection: Page = .highlights
 
-	let sections = [Section(title: "Destaques", action: {}),
-					Section(title: "Notícias", action: {}),
-					Section(title: "YouTube", action: {}),
-					Section(title: "Podcast", action: {})]
+	let sections = [Section(title: "Destaques", page: .highlights),
+					Section(title: "Notícias", page: .news),
+					Section(title: "YouTube", page: .videos),
+					Section(title: "Podcast", page: .podcast)]
 
 	// MARK: - Init -
 
@@ -64,12 +67,18 @@ extension MainViewModel {
 			.sink { [weak self] value in
 				switch value {
 				case .all:
-					self?.selectedView = .videos
+					self?.selectedTab = .videos
 				case .home:
-					self?.selectedView = .home
+					self?.selectedTab = .home
 				default: break
 				}
 			}
 			.store(in: &cancellables)
+	}
+}
+
+extension MainViewModel {
+	func scroll(to view: Page) {
+		selectedSection = view
 	}
 }

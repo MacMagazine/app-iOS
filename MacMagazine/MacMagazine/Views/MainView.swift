@@ -11,6 +11,7 @@ struct MainView: View {
 	@EnvironmentObject private var videosViewModel: VideosViewModel
 
 	@State var isPresentingMenu = false
+	@State var selection = MainViewModel.Page.home
 
 	init() {}
 
@@ -19,7 +20,7 @@ struct MainView: View {
 			theme.main.background.color
 				.edgesIgnoringSafeArea(.all)
 
-			TabView(selection: $viewModel.selectedView) {
+			TabView(selection: $viewModel.selectedTab) {
 
 				MenuView(isShowing: $isPresentingMenu,
 						 menu: { AnyView(SectionsView()) },
@@ -35,7 +36,7 @@ struct MainView: View {
 			}.tabViewStyle(.page(indexDisplayMode: .never))
 
 			SideMenu(isShowing: $isPresentingMenu,
-					 content: AnyView(SideMenuView(selectedView: $viewModel.selectedView,
+					 content: AnyView(SideMenuView(selectedView: $viewModel.selectedTab,
 												   isPresentingMenu: $isPresentingMenu)))
 		}
 	}

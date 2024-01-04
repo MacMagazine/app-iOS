@@ -11,9 +11,6 @@ public struct NewsView: View {
 	public init() {
 		let request: NSFetchRequest<News> = News.fetchRequest()
 		request.sortDescriptors = [NSSortDescriptor(keyPath: \News.pubDate, ascending: false)]
-		request.fetchLimit = 6
-		request.predicate = NSPredicate(format: "NONE categories IN %@", [NewsViewModel.Category.highlights.rawValue])
-
 		_news = FetchRequest(fetchRequest: request)
 	}
 
@@ -39,10 +36,11 @@ public struct NewsView: View {
 			LazyVGrid(columns: [GridItem(.adaptive(minimum: 280),
 										 alignment: .top)],
 					  spacing: 20) {
-				ForEach(0..<min(6, news.count), id: \.self) { index in
+				ForEach(news.filter { !($0.allCategories?.contains(NewsViewModel.Category.highlights.rawValue) ?? true) }.prefix(6), id: \.self) { object in
 					VStack {
-						Text(news[index].title ?? "")
-						Text(news[index].pubDateFormatted ?? "")
+						Text(object.title ?? "")
+						Text(object.pubDateFormatted ?? "")
+						Text(object.allCategories?.contains(NewsViewModel.Category.highlights.rawValue) ?? false ? "TRUE" : "")
 					}
 				}
 			}

@@ -117,7 +117,7 @@ public struct SubscriptionView: View {
 		.buttonStyle(PlainButtonStyle())
 		.listRowBackground(Color.clear)
 		.background(GeometryReader { proxy in
-			Color.clear.onAppear {
+			Path { _ in
 				width = proxy.size.width
 			}
 		})
@@ -147,7 +147,7 @@ public struct SubscriptionView: View {
 		.buttonStyle(PlainButtonStyle())
 		.listRowBackground(Color.clear)
 		.background(GeometryReader { proxy in
-			Color.clear.onAppear {
+			Path { _ in
 				width = proxy.size.width
 			}
 		})
