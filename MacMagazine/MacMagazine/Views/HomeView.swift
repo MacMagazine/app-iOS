@@ -11,7 +11,7 @@ struct HomeView: View {
 		ScrollViewReader { value in
 			GeometryReader { geo in
 				ScrollView(.vertical) {
-					HighlightsView()
+					HighlightsView(availableWidth: availableWidth)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.id(MainViewModel.Page.highlights)
 
@@ -26,7 +26,7 @@ struct HomeView: View {
 					availableWidth = value
 				}
 				.onChange(of: viewModel.selectedSection) { page in
-					value.scrollTo(page)
+					withAnimation { value.scrollTo(page) }
 				}
 			}
 		}

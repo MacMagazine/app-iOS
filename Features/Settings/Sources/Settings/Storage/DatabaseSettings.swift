@@ -18,8 +18,8 @@ extension Database {
 
 	var mode: ColorScheme {
 		get async {
-			guard let items = await items else { return .light }
-			return ColorScheme(rawValue: Int(items.first?.mode ?? 0)) ?? .light
+			guard let items = await items else { return .system }
+			return ColorScheme(rawValue: Int(items.first?.mode ?? 2)) ?? .system
 		}
 	}
 

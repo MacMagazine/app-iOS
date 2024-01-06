@@ -24,7 +24,7 @@ public class SettingsViewModel: ObservableObject {
 	}
 
 	@Published var icon: IconType = .normal
-	@Published public var mode: ColorScheme = .light
+	@Published public var mode: ColorScheme = .system
 
 	@Published var isPresentingPrivacy = false
 	@Published var isPresentingTerms = false

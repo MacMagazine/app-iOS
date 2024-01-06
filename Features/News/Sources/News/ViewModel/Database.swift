@@ -37,7 +37,7 @@ extension Database {
 
 extension News {
 	var pubDateFormatted: String? {
-		Date(timeIntervalSinceReferenceDate: pubDate).format(using: DateFormat.dateTime)
+		Date(timeIntervalSinceReferenceDate: pubDate).format(using: "dd/MM/yyyy・HH:mm")
 	}
 
 	var allCategories: String? {

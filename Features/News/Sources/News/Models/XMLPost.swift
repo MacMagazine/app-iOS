@@ -16,4 +16,5 @@ struct XMLPost: Codable {
 	var shortURL: String = ""
 	var playable: Bool = false
 	var fullContent: String = ""
+	var creator: String = ""
 }

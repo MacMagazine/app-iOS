@@ -17,7 +17,7 @@ public struct NewsView: View {
 	public var body: some View {
 		VStack {
 			HStack {
-				Text("Notícias")
+				Text("Últimas Notícias")
 					.font(.largeTitle)
 					.foregroundColor(theme.text.terciary.color)
 

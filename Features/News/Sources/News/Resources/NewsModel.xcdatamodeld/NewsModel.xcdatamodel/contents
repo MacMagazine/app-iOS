@@ -3,6 +3,7 @@
     <entity name="News" representedClassName="News" syncable="YES" codeGenerationType="class">
         <attribute name="artworkURL" optional="YES" attributeType="String"/>
         <attribute name="categories" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="creator" optional="YES" attributeType="String"/>
         <attribute name="duration" optional="YES" attributeType="String"/>
         <attribute name="excerpt" optional="YES" attributeType="String"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

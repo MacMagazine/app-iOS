@@ -103,6 +103,8 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 			case "content:encoded":
 				currentPost.playable = value.contains("youtube.com/embed/")
 				currentPost.fullContent = parseFullContent ? value.htmlDecoded.clean : ""
+			case "dc:creator":
+				currentPost.creator = value
 			default:
 				return
 			}

@@ -88,3 +88,5 @@ extension String {
 		}
 	}
 }
+
+// var logo_feature: URL { Bundle.module.url(forResource: "logo_feature", withExtension: "pdf") }
