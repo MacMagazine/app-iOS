@@ -20,7 +20,7 @@ struct MainView: View {
 			theme.main.background.color
 				.edgesIgnoringSafeArea(.all)
 
-			TabView(selection: $viewModel.selectedTab) {
+			TabView(selection: $selection) {
 
 				MenuView(isShowing: $isPresentingMenu,
 						 menu: { AnyView(SectionsView()) },
@@ -32,8 +32,13 @@ struct MainView: View {
 
 				VideosFullView()
 					.tag(MainViewModel.Page.videos)
-
-			}.tabViewStyle(.page(indexDisplayMode: .never))
+			}
+			.tabViewStyle(.page(indexDisplayMode: .never))
+			.onReceive(viewModel.$selectedTab) { value in
+				withAnimation {
+					selection = value
+				}
+			}
 
 			SideMenu(isShowing: $isPresentingMenu,
 					 content: AnyView(SideMenuView(selectedView: $viewModel.selectedTab,

@@ -63,7 +63,6 @@ extension MainViewModel {
 		videosViewModel.$options
 			.receive(on: RunLoop.main)
 			.compactMap { $0 }
-			.removeDuplicates()
 			.sink { [weak self] value in
 				switch value {
 				case .all:

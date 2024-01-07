@@ -83,19 +83,19 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-FIRAnalyticsDebugEnabled"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.apple.CoreData.SQLDebug 1"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-FIRDebugEnabled"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-FIRAnalyticsVerboseLoggingEnabled"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <StoreKitConfigurationFileReference
