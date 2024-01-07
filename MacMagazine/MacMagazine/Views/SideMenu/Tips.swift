@@ -23,7 +23,7 @@ struct CategoriesTip: Tip {
 @available(iOS 17, *)
 struct SubscriptionsTip: Tip {
 	@Parameter
-	static var isActive: Bool = true
+	static var isActive: Bool = false
 
 	var title: Text { Text("Remover propagandas") }
 	var message: Text? { Text("Assine para navegar pelo app sem propagandas - ou, alternativamente, use seu login de patrão.") }

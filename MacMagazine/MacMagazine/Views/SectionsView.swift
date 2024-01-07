@@ -9,7 +9,7 @@ struct SectionsView: View {
 		ScrollView(.horizontal) {
 			HStack {
 				ForEach(viewModel.sections, id: \.id) { section in
-					Button(action: { viewModel.scroll(to: section.page) },
+					Button(action: { viewModel.selectedSection = section.page },
 						   label: {
 						Text(section.title)
 							.plain(color: theme.text.terciary.color ?? .primary,

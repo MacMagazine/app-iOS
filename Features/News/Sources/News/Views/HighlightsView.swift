@@ -54,35 +54,14 @@ extension HighlightsView {
 			newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "")
 		}, label: {
 			ZStack {
-				if let imageUrl = URL(string: object.artworkURL ?? "") {
-					CachedAsyncImage(image: imageUrl, contentMode: .fill)
-						.frame(height: width * 9 / 16)
-						.cornerRadius(12, corners: .allCorners)
-				}
-				Rectangle().fill(.black).opacity(0.45)
-					.frame(height: width * 9 / 16)
-					.cornerRadius(12, corners: .allCorners)
+				ImageView(url: URL(string: object.artworkURL ?? ""),
+						  height: width,
+						  overlay: true)
 
 				VStack {
 					Spacer()
-
-					HStack {
-						Text(object.title ?? "")
-							.foregroundColor(.white)
-							.bold()
-							.lineLimit(4)
-							.multilineTextAlignment(.leading)
-						Spacer()
-					}
-
-					HStack {
-						Text(object.creator ?? "")
-						Text(object.pubDateFormatted ?? "")
-						Spacer()
-					}
-					.foregroundColor(.white)
-					.lineLimit(1)
-					.font(.subheadline)
+					TitleView(title: object.title)
+					AuthorView(author: object.creator, date: object.pubDate(format: .mmDateTime))
 				}
 				.shadow(color: .black, radius: 1)
 				.padding(.horizontal, 8)

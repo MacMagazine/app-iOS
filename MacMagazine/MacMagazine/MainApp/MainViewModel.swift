@@ -76,9 +76,3 @@ extension MainViewModel {
 			.store(in: &cancellables)
 	}
 }
-
-extension MainViewModel {
-	func scroll(to view: Page) {
-		selectedSection = view
-	}
-}

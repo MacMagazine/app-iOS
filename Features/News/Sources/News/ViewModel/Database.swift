@@ -36,11 +36,16 @@ extension Database {
 }
 
 extension News {
-	var pubDateFormatted: String? {
-		Date(timeIntervalSinceReferenceDate: pubDate).format(using: "dd/MM/yyyy・HH:mm")
+	func pubDate(format: MMDateFormat) -> String {
+		Date(timeIntervalSinceReferenceDate: pubDate).format(using: format.rawValue)
 	}
 
 	var allCategories: String? {
 		categories?.joined(separator: "|")
 	}
+}
+
+enum MMDateFormat: String {
+	case mmDateOnly = "dd.MM.yy"
+	case mmDateTime = "dd.MM.yyyy・HH:mm"
 }

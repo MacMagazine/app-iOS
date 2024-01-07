@@ -13,10 +13,12 @@ struct HomeView: View {
 				ScrollView(.vertical) {
 					HighlightsView(availableWidth: availableWidth)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.padding(.bottom)
 						.id(MainViewModel.Page.highlights)
 
 					NewsView()
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.padding(.bottom)
 						.id(MainViewModel.Page.news)
 
 					VideosView(availableWidth: availableWidth)
@@ -26,7 +28,7 @@ struct HomeView: View {
 					availableWidth = value
 				}
 				.onChange(of: viewModel.selectedSection) { page in
-					withAnimation { value.scrollTo(page) }
+					withAnimation { value.scrollTo(page, anchor: .top) }
 				}
 			}
 		}
