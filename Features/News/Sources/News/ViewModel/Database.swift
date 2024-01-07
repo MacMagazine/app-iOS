@@ -46,6 +46,6 @@ extension News {
 }
 
 enum MMDateFormat: String {
-	case mmDateOnly = "dd.MM.yy"
-	case mmDateTime = "dd.MM.yyyy・HH:mm"
+	case mmDateOnly = "dd/MM"
+	case mmDateTime = "dd/MM/yy・HH:mm"
 }

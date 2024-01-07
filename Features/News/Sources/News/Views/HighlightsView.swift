@@ -53,20 +53,13 @@ extension HighlightsView {
 		Button(action: { 
 			newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "")
 		}, label: {
-			ZStack {
-				ImageView(url: URL(string: object.artworkURL ?? ""),
-						  height: width,
-						  overlay: true)
-
-				VStack {
-					Spacer()
-					TitleView(title: object.title)
-					AuthorView(author: object.creator, date: object.pubDate(format: .mmDateTime))
-				}
-				.shadow(color: .black, radius: 1)
-				.padding(.horizontal, 8)
-				.padding(.bottom, 8)
-			}
+			CardView(object: CardData(style: .highlight,
+									  title: object.title,
+									  creator: object.creator,
+									  pubDate: object.pubDate(format: .mmDateTime),
+									  artworkURL: object.artworkURL,
+									  width: width,
+									  aspectRatio: 4 / 3))
 		})
 	}
 }

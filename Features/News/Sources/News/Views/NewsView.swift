@@ -34,15 +34,15 @@ public struct NewsView: View {
 				.padding(.top)
 
 			LazyVGrid(columns: [GridItem(.adaptive(minimum: 280),
-										 alignment: .top)],
-					  spacing: 30) {
+										 alignment: .top)]) {
 				ForEach(news.filter { !($0.allCategories?.contains(NewsViewModel.Category.highlights.rawValue) ?? true) }.prefix(8), id: \.self) { object in
-					VStack {
-						TitleView(title: object.title, color: theme.text.primary.color)
-						AuthorView(author: object.creator, date: object.pubDate(format: .mmDateOnly), color: theme.text.terciary.color)
-						Spacer()
-						ImageView(url: URL(string: object.artworkURL ?? ""), height: 120, aspectRatio: 1)
-					}.padding(.horizontal)
+					CardView(object: CardData(style: .imageLast,
+											  title: object.title,
+											  creator: object.creator,
+											  pubDate: object.pubDate(format: .mmDateTime),
+											  artworkURL: object.artworkURL,
+											  width: 120,
+											  aspectRatio: 1))
 				}
 			}
 		}

@@ -2,32 +2,67 @@ import SwiftUI
 import UIComponentsLibrary
 
 struct ImageView: View {
-	private let url: URL
-	private let height: CGFloat
-	private let overlay: Bool
+	enum Style {
+		case followRatio
+		case followRatioWithOverlay
+		case fullWidth
+	}
 
-	init?(url: URL?,
-		  height: CGFloat = .infinity,
-		  aspectRatio: CGFloat = 9 / 16,
-		  overlay: Bool = false) {
+	private let url: URL
+	private let width: CGFloat
+	private let height: CGFloat
+	private let aspectRatio: CGFloat
+	private let style: Style
+
+	init?(style: Style = .followRatioWithOverlay,
+		  url: URL?,
+		  width: CGFloat = .infinity,
+		  height: CGFloat? = nil,
+		  aspectRatio: CGFloat = 16 / 9) {
 		guard let url = url else { return nil }
 		self.url = url
-		self.height = height * aspectRatio
-		self.overlay = overlay
+		self.width = width
+		self.height = height ?? (width / aspectRatio)
+		self.aspectRatio = aspectRatio
+		self.style = style
 	}
 
 	public var body: some View {
+		switch style {
+		case .followRatio: followRatioView
+		case .followRatioWithOverlay: followRatioWithOverlayView
+		case .fullWidth: fullWidthView
+		}
+	}
+}
+
+extension ImageView {
+	@ViewBuilder
+	private var followRatioView: some View {
 		CachedAsyncImage(image: url, contentMode: .fill)
-			.frame(height: height)
+			.frame(width: width, height: height)
 			.cornerRadius(12, corners: .allCorners)
-			.if(overlay) { content in
-				content
+	}
+
+	@ViewBuilder
+	private var followRatioWithOverlayView: some View {
+		CachedAsyncImage(image: url, contentMode: .fill)
 					.overlay {
 						Rectangle().fill(.black).opacity(0.45)
-							.frame(height: height)
-							.cornerRadius(12, corners: .allCorners)
 					}
+			.frame(width: width, height: height)
+			.cornerRadius(12, corners: .allCorners)
+	}
+
+	@ViewBuilder
+	private var fullWidthView: some View {
+		Rectangle().fill(Color(.gray))
+			.frame(height: width)
+			.overlay {
+				CachedAsyncImage(image: url, contentMode: .fill)
 			}
+			.cornerRadius(12, corners: .allCorners)
+			.clipped()
 	}
 }
 

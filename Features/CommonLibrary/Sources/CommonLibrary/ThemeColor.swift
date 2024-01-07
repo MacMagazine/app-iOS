@@ -14,12 +14,12 @@ public protocol AppColor {
 }
 
 public struct ThemeColor: Themeable & AppColor {
-	public let main = MainColor(background: "MMWhiteGrey6",
+	public let main = MainColor(background: "MMGrey6",
 								navigation: "MMBlack90",
 								tint: "MMBlueWhite",
 								shadow: "")
 
-	public let secondary = SecondaryColor(background: "Secondary")
+	public let secondary = SecondaryColor(background: "MMWhiteBlack")
 	public let tertiary = SecondaryColor(background: "MMDarkGreyWhite")
 
 	public let text = TextColor(primaryTab: "",
