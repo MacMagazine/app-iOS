@@ -16,6 +16,10 @@ class MainViewModel: ObservableObject {
 		case videos
 		case highlights
 		case podcast
+		case appletv
+		case reviews
+		case tutoriais
+		case rumors
 	}
 
 	struct Section: Identifiable {
@@ -39,7 +43,7 @@ class MainViewModel: ObservableObject {
 
 	let sections = [Section(title: "Destaques", page: .highlights),
 					Section(title: "Notícias", page: .news),
-					Section(title: "YouTube", page: .videos),
+					Section(title: "Vídeos", page: .videos),
 					Section(title: "Podcast", page: .podcast)]
 
 	// MARK: - Init -

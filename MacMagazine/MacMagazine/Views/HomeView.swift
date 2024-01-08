@@ -11,18 +11,38 @@ struct HomeView: View {
 		ScrollViewReader { value in
 			GeometryReader { geo in
 				ScrollView(.vertical) {
-					HighlightsView(availableWidth: availableWidth)
+					Carrousel(filter: .highlights, fit: availableWidth)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.highlights)
 
-					NewsView()
+					NewsFullView()
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.news)
 
 					VideosView(availableWidth: availableWidth)
 						.id(MainViewModel.Page.videos)
+
+					Carrousel(filter: .appletv, fit: availableWidth)
+						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.padding(.bottom)
+						.id(MainViewModel.Page.appletv)
+
+					Carrousel(filter: .reviews, fit: availableWidth)
+						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.padding(.bottom)
+						.id(MainViewModel.Page.reviews)
+
+					Carrousel(filter: .tutoriais, fit: availableWidth)
+						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.padding(.bottom)
+						.id(MainViewModel.Page.tutoriais)
+
+					Carrousel(filter: .rumors, fit: availableWidth)
+						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
+						.padding(.bottom)
+						.id(MainViewModel.Page.rumors)
 				}
 				.onChange(of: geo.size.width) { value in
 					availableWidth = value

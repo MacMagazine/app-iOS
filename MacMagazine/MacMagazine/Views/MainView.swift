@@ -27,7 +27,7 @@ struct MainView: View {
 						 content: { HomeView() })
 				.tag(MainViewModel.Page.home)
 
-				NewsView()
+				NewsFullView()
 					.tag(MainViewModel.Page.news)
 
 				VideosFullView()

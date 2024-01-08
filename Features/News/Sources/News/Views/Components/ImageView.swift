@@ -57,7 +57,7 @@ extension ImageView {
 	@ViewBuilder
 	private var fullWidthView: some View {
 		Rectangle().fill(Color(.gray))
-			.frame(height: width)
+			.frame(height: height)
 			.overlay {
 				CachedAsyncImage(image: url, contentMode: .fill)
 			}

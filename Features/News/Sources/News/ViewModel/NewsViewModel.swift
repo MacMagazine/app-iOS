@@ -29,7 +29,7 @@ public class NewsViewModel: ObservableObject {
 		case podcast = "MacMagazine no Ar"
 		case youtube = "Vídeos"
 		case appletv = "Apple TV+"
-		case reviews = "Review"
+		case reviews = "Reviews"
 		case tutoriais = "Tutoriais"
 		case rumors = "Rumores"
 
@@ -43,6 +43,52 @@ public class NewsViewModel: ObservableObject {
 			case .reviews: "Reviews"
 			case .tutoriais: "Tutoriais"
 			case .rumors: "Rumores"
+			}
+		}
+
+		var style: CardData.Style {
+			switch self {
+			case .highlights, .reviews: .highlight
+			case .news: .imageLast
+			case .podcast: .imageFirst
+			case .tutoriais, .rumors: .imageFirst
+			default: .simple
+			}
+		}
+
+		var showHeader: Bool {
+			switch self {
+			case .highlights: false
+			default: true
+			}
+		}
+
+		var aspectRatio: Double {
+			switch self {
+			case .highlights: 4 / 3
+			default: 1
+			}
+		}
+
+		var width: CGFloat? {
+			switch self {
+			case .appletv: 100
+			default: nil
+			}
+		}
+
+		var height: CGFloat {
+			switch self {
+			case .news, .tutoriais, .rumors: 120
+			case .appletv: 100
+			default: .infinity
+			}
+		}
+
+		var dateFormat: MMDateFormat {
+			switch self {
+			case .tutoriais, .rumors: .mmDateOnly
+			default: .mmDateTime
 			}
 		}
 	}

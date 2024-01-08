@@ -3,7 +3,7 @@ import CoreData
 import SwiftUI
 import UIComponentsLibrary
 
-public struct NewsView: View {
+public struct NewsFullView: View {
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var viewModel: NewsViewModel
 	@FetchRequest var news: FetchedResults<News>
@@ -16,22 +16,11 @@ public struct NewsView: View {
 
 	public var body: some View {
 		VStack {
-			HStack {
-				Text("Últimas Notícias")
-					.font(.largeTitle)
-					.foregroundColor(theme.text.terciary.color)
-
-				Spacer()
-
-				Button(action: {},
-					   label: {
-					Text("ver mais".uppercased())
-						.rounded(fill: theme.button.primary.color ?? .blue)
-				})
+			HeaderView(title: "Últimas Notícias", theme: theme) {
+//				withAnimation {
+//					viewModel.options = .all
+//				}
 			}
-
-			ErrorView(message: viewModel.status.reason, theme: theme)
-				.padding(.top)
 
 			LazyVGrid(columns: [GridItem(.adaptive(minimum: 280),
 										 alignment: .top)]) {
@@ -41,7 +30,7 @@ public struct NewsView: View {
 											  creator: object.creator,
 											  pubDate: object.pubDate(format: .mmDateTime),
 											  artworkURL: object.artworkURL,
-											  width: 120,
+											  height: 120,
 											  aspectRatio: 1))
 				}
 			}
@@ -51,7 +40,7 @@ public struct NewsView: View {
 }
 
 #Preview {
-	NewsView()
+	NewsFullView()
 		.environmentObject(NewsViewModel())
 		.environment(\.managedObjectContext, NewsViewModel().mainContext)
 }

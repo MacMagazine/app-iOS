@@ -16,7 +16,26 @@ struct CardData {
 	let pubDate: String
 	let artworkURL: String?
 	let width: CGFloat
+	let height: CGFloat
 	let aspectRatio: CGFloat
+
+	init(style: Style,
+		 title: String?,
+		 creator: String?,
+		 pubDate: String,
+		 artworkURL: String?,
+		 width: CGFloat = .infinity,
+		 height: CGFloat = .infinity,
+		 aspectRatio: CGFloat) {
+		self.style = style
+		self.title = title
+		self.creator = creator
+		self.pubDate = pubDate
+		self.artworkURL = artworkURL
+		self.width = width
+		self.height = height
+		self.aspectRatio = aspectRatio
+	}
 }
 
 struct CardView: View {
@@ -44,7 +63,7 @@ extension CardView {
 			TitleView(title: object.title, color: theme.text.terciary.color)
 			AuthorView(author: object.creator, date: object.pubDate, color: theme.text.terciary.color)
 			Spacer()
-			ImageView(style: .fullWidth, url: URL(string: object.artworkURL ?? ""), width: object.width, aspectRatio: object.aspectRatio)
+			ImageView(style: .fullWidth, url: URL(string: object.artworkURL ?? ""), height: object.height, aspectRatio: object.aspectRatio)
 		}
 		.padding()
 		.background {
@@ -56,11 +75,16 @@ extension CardView {
 	@ViewBuilder
 	private var imageFirstView: some View {
 		VStack(spacing: 8) {
-			ImageView(style: .fullWidth, url: URL(string: object.artworkURL ?? ""), width: object.width, aspectRatio: object.aspectRatio)
+			ImageView(style: .fullWidth, url: URL(string: object.artworkURL ?? ""), height: object.height, aspectRatio: object.aspectRatio)
 			Spacer()
-			TitleView(title: object.title, color: theme.text.primary.color)
+			TitleView(title: object.title, color: theme.text.terciary.color)
 			AuthorView(author: object.creator, date: object.pubDate, color: theme.text.terciary.color)
-		}.padding(.horizontal)
+		}
+		.padding()
+		.background {
+			Rectangle().fill(theme.secondary.background.color ?? .white)
+				.cornerRadius(12, corners: .allCorners)
+		}
 	}
 
 	@ViewBuilder
@@ -82,13 +106,13 @@ extension CardView {
 
 	@ViewBuilder
 	private var simpleView: some View {
-		VStack {
-			ImageView(url: URL(string: object.artworkURL ?? ""), width: object.width, aspectRatio: object.aspectRatio)
+		HStack(spacing: 12) {
+			ImageView(style: .followRatio, url: URL(string: object.artworkURL ?? ""), width: object.width, height: object.height, aspectRatio: object.aspectRatio)
 			TitleView(title: object.title, color: theme.text.primary.color)
-		}.padding(.horizontal)
+		}
 	}
 }
 
 #Preview {
-	CardView(object: CardData(style: .imageLast, title: "Title", creator: "Author", pubDate: "", artworkURL: "", width: 1, aspectRatio: 1))
+	CardView(object: CardData(style: .imageLast, title: "Title", creator: "Author", pubDate: "", artworkURL: "", aspectRatio: 1))
 }

@@ -19,22 +19,10 @@ public struct VideosView: View {
 
 	public var body: some View {
 		VStack {
-			HStack {
-				Text("Vídeos")
-					.font(.largeTitle)
-					.foregroundColor(theme.text.terciary.color)
-
-				Spacer()
-
-				Button(action: {
-					withAnimation {
-						viewModel.options = .all
-					}
-				},
-					   label: {
-					Text("ver mais".uppercased())
-						.rounded(fill: theme.button.primary.color ?? .blue)
-				})
+			HeaderView(title: "Vídeos", theme: theme) {
+				withAnimation {
+					viewModel.options = .all
+				}
 			}
 
 			ErrorView(message: viewModel.status.reason, theme: theme)
