@@ -4,10 +4,24 @@ import CoreData
 import CoreLibrary
 import Foundation
 
+public struct NewsToShow {
+	let title: String
+	let url: String
+}
+
 public class NewsViewModel: ObservableObject {
-	@Published public var fullScreen: Bool = false
+	@Published public var options: Options = .home
+	@Published public var newsToShow: NewsToShow = NewsToShow(title: "", url: "")
 	@Published public var category: Category = .news
 	@Published var status: Status = .loading
+
+	public enum Options: Equatable {
+		case all
+		case home
+		case favorite
+		case search(text: String)
+		case filter(category: Category)
+	}
 
 	enum Status: Equatable {
 		case loading
@@ -44,6 +58,32 @@ public class NewsViewModel: ObservableObject {
 			case .reviews: (APIParams.tag, "review")
 			case .tutoriais: (APIParams.cat, "302")
 			case .rumors: (APIParams.cat, "12")
+			}
+		}
+
+		func filter(source: String?) -> Bool {
+			switch self {
+			case .highlights: (source?.contains(NewsViewModel.Category.highlights.rawValue) ?? false)
+			case .news: !(source?.contains(NewsViewModel.Category.highlights.rawValue) ?? true)
+			case .podcast: (source?.contains(NewsViewModel.Category.podcast.rawValue) ?? false)
+			case .youtube: (source?.contains(NewsViewModel.Category.youtube.rawValue) ?? false)
+			case .appletv: (source?.contains(NewsViewModel.Category.appletv.rawValue) ?? false)
+			case .reviews: (source?.contains(NewsViewModel.Category.reviews.rawValue) ?? false)
+			case .tutoriais: (source?.contains(NewsViewModel.Category.tutoriais.rawValue) ?? false)
+			case .rumors: (source?.contains(NewsViewModel.Category.rumors.rawValue) ?? false)
+			}
+		}
+
+		var header: String {
+			switch self {
+			case .highlights: "Destaques"
+			case .news: "Últimas Notícias"
+			case .podcast: "MacMagazine no Ar"
+			case .youtube: "Vídeos"
+			case .appletv: "Novidades AppleTV+"
+			case .reviews: "Reviews"
+			case .tutoriais: "Tutoriais"
+			case .rumors: "Rumores"
 			}
 		}
 

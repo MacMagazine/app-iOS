@@ -40,6 +40,7 @@ class MainViewModel: ObservableObject {
 
 	@Published var selectedTab: Page = .home
 	@Published var selectedSection: Page = .highlights
+	@Published var filter: NewsViewModel.Category = .news
 
 	let sections = [Section(title: "Destaques", page: .highlights),
 					Section(title: "Notícias", page: .news),
@@ -61,6 +62,23 @@ extension MainViewModel {
 			.removeDuplicates()
 			.sink { value in
 				print("value: \(value)")
+			}
+			.store(in: &cancellables)
+
+		newsViewModel.$options
+			.receive(on: RunLoop.main)
+			.compactMap { $0 }
+			.sink { [weak self] value in
+				switch value {
+				case .all:
+					self?.selectedTab = .news
+				case .home:
+					self?.selectedTab = .home
+				case .filter(let category):
+					self?.filter = category
+					self?.selectedTab = .news
+				default: break
+				}
 			}
 			.store(in: &cancellables)
 

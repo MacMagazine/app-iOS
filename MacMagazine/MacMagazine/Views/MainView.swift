@@ -27,7 +27,8 @@ struct MainView: View {
 						 content: { HomeView() })
 				.tag(MainViewModel.Page.home)
 
-				NewsFullView()
+				NewsView(filter: viewModel.filter, fit: .infinity, style: .fullscreen)
+					.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 					.tag(MainViewModel.Page.news)
 
 				VideosFullView()

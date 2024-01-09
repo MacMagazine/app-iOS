@@ -11,12 +11,12 @@ struct HomeView: View {
 		ScrollViewReader { value in
 			GeometryReader { geo in
 				ScrollView(.vertical) {
-					Carrousel(filter: .highlights, fit: availableWidth)
+					NewsView(filter: .highlights, fit: availableWidth, style: .carrousel)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.highlights)
 
-					NewsFullView()
+					NewsView(filter: .news, fit: availableWidth, style: .home)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.news)
@@ -24,22 +24,22 @@ struct HomeView: View {
 					VideosView(availableWidth: availableWidth)
 						.id(MainViewModel.Page.videos)
 
-					Carrousel(filter: .appletv, fit: availableWidth)
+					NewsView(filter: .appletv, fit: availableWidth, style: .carrousel)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.appletv)
 
-					Carrousel(filter: .reviews, fit: availableWidth)
+					NewsView(filter: .reviews, fit: availableWidth, style: .carrousel)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.reviews)
 
-					Carrousel(filter: .tutoriais, fit: availableWidth)
+					NewsView(filter: .tutoriais, fit: availableWidth, style: .carrousel)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.tutoriais)
 
-					Carrousel(filter: .rumors, fit: availableWidth)
+					NewsView(filter: .rumors, fit: availableWidth, style: .carrousel)
 						.environment(\.managedObjectContext, viewModel.newsViewModel.mainContext)
 						.padding(.bottom)
 						.id(MainViewModel.Page.rumors)

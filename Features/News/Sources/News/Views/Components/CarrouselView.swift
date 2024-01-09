@@ -4,20 +4,13 @@ import SwiftUI
 import UIComponentsLibrary
 
 public struct CarrouselView: View {
-	private struct NewsToShow {
-		let title: String
-		let url: String
-	}
-
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var viewModel: NewsViewModel
 	@FetchRequest var news: FetchedResults<News>
 
-	@State private var newsToShow = NewsToShow(title: "", url: "")
-
-	private var filter: NewsViewModel.Category
-	private var width: CGFloat
-	private var limit: Int
+	private let filter: NewsViewModel.Category
+	private let width: CGFloat
+	private let limit: Int
 
 	public init(filter: NewsViewModel.Category,
 				fit width: CGFloat,
@@ -41,13 +34,6 @@ public struct CarrouselView: View {
 				}
 			}
 		}
-		.fullScreenCover(isPresented: Binding(get: { !newsToShow.url.isEmpty },
-											  set: { _, _ in })) {
-			Webview(title: newsToShow.title,
-					url: newsToShow.url,
-					isPresenting: Binding(get: { !newsToShow.url.isEmpty },
-										  set: { _, _ in newsToShow = NewsToShow(title: "", url: "") }))
-		}
 	}
 }
 
@@ -55,7 +41,7 @@ extension CarrouselView {
 	@ViewBuilder
 	private func show(content object: News) -> some View {
 		Button(action: {
-			newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "")
+			viewModel.newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "")
 		}, label: {
 			CardView(object: CardData(style: filter.style,
 									  title: object.title,

@@ -31,6 +31,33 @@ public struct HeaderView: View {
     }
 }
 
-#Preview {
-	HeaderView(title: "Title", theme: ThemeColor()) {}
+public struct HeaderFullView: View {
+	private let title: String
+	private let theme: ThemeColor
+	private let action: () -> Void
+
+	public init(title: String,
+				theme: ThemeColor,
+				action: @escaping () -> Void) {
+		self.title = title
+		self.theme = theme
+		self.action = action
+	}
+
+	public var body: some View {
+		HStack {
+			Button(action: { action() },
+				   label: {
+				Image(systemName: "arrow.left.circle.fill")
+					.tint(theme.tertiary.background.color)
+					.imageScale(.large)
+			})
+
+			Text(title)
+				.font(.largeTitle)
+				.foregroundColor(theme.text.terciary.color)
+
+			Spacer()
+		}
+	}
 }
