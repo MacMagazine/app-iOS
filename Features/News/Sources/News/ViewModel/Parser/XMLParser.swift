@@ -5,6 +5,7 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 	// MARK: - Properties -
 
 	let numberOfPosts: Int
+	let category: String
 	var parseFullContent: Bool
 	let continuation: CheckedContinuation<[XMLPost], Error>?
 
@@ -19,9 +20,11 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 	// MARK: - Init -
 
 	init(numberOfPosts: Int = -1,
+		 category: String,
 		 parseFullContent: Bool = false,
 		 continuation: CheckedContinuation<[XMLPost], Error>?) {
 		self.numberOfPosts = numberOfPosts
+		self.category = category
 		self.parseFullContent = parseFullContent
 		self.continuation = continuation
 	}
@@ -70,6 +73,7 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 			case "category":
 				if currentPost.categories.isEmpty {
 					currentPost.categories = []
+					currentPost.categories.append(category)
 				}
 				currentPost.categories.append(value)
 			case "description":

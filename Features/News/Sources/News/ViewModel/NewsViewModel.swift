@@ -1,4 +1,5 @@
 import Combine
+import CommonLibrary
 import CoreData
 import CoreLibrary
 import Foundation
@@ -32,6 +33,19 @@ public class NewsViewModel: ObservableObject {
 		case reviews = "Reviews"
 		case tutoriais = "Tutoriais"
 		case rumors = "Rumores"
+
+		var query: (String, String)? {
+			switch self {
+			case .highlights: (APIParams.cat, "674")
+			case .news: nil
+			case .podcast: (APIParams.cat, "101")
+			case .youtube: (APIParams.cat, "18")
+			case .appletv: (APIParams.tag, "apple-tv-plus")
+			case .reviews: (APIParams.tag, "review")
+			case .tutoriais: (APIParams.cat, "302")
+			case .rumors: (APIParams.cat, "12")
+			}
+		}
 
 		var title: String {
 			switch self {
@@ -70,6 +84,13 @@ public class NewsViewModel: ObservableObject {
 			}
 		}
 
+		var spacing: CGFloat? {
+			switch self {
+			case .highlights: 2
+			default: nil
+			}
+		}
+
 		var width: CGFloat? {
 			switch self {
 			case .appletv: 100
@@ -87,7 +108,7 @@ public class NewsViewModel: ObservableObject {
 
 		var dateFormat: MMDateFormat {
 			switch self {
-			case .tutoriais, .rumors: .mmDateOnly
+			case .tutoriais, .rumors, .reviews: .mmDateOnly
 			default: .mmDateTime
 			}
 		}
@@ -111,9 +132,15 @@ public class NewsViewModel: ObservableObject {
 	public func getNews() async throws {
 		do {
 			status = .loading
-			let news = try await loadNews()
+			async let highlights = loadNews(query: .highlights)
+			async let appletv = loadNews(query: .appletv)
+			async let reviews = loadNews(query: .reviews)
+			async let tutoriais = loadNews(query: .tutoriais)
+			async let rumors = loadNews(query: .rumors)
+			async let posts = loadNews(query: .news)
+			let news = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
 			status = .done
-			storage.save(news)
+			storage.save(Array(news.joined()))
 		} catch {
 			status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
 		}
@@ -121,14 +148,14 @@ public class NewsViewModel: ObservableObject {
 }
 
 extension NewsViewModel {
-	private func loadNews() async throws -> [XMLPost] {
+	private func loadNews(query: Category) async throws -> [XMLPost] {
 		do {
-			let endpoint = Endpoint.posts(customHost: customHost, paged: 0)
+			let endpoint = Endpoint.posts(customHost: customHost, paged: 0, query: query.query)
 
 			MockURLProtocol(bundle: .module).mock(api: endpoint.restAPI, file: mock?[endpoint.restAPI])
 			let data = try await NetworkAPI(mock: mock).get(url: endpoint.url)
 			return try await withCheckedThrowingContinuation { continuation in
-				parse(data, numberOfPosts: -1, parseFullContent: false, continuation: continuation)
+				parse(data, category: query.rawValue, numberOfPosts: -1, parseFullContent: false, continuation: continuation)
 			}
 
 		} catch {
@@ -138,9 +165,10 @@ extension NewsViewModel {
 }
 
 extension NewsViewModel {
-	private func parse(_ data: Data, numberOfPosts: Int, parseFullContent: Bool, continuation: CheckedContinuation<[XMLPost], Error>?) {
+	private func parse(_ data: Data,category: String, numberOfPosts: Int, parseFullContent: Bool, continuation: CheckedContinuation<[XMLPost], Error>?) {
 		let parser = XMLParser(data: data)
 		let apiParser = APIXMLParser(numberOfPosts: numberOfPosts,
+									 category: category,
 									 parseFullContent: parseFullContent,
 									 continuation: continuation)
 		parser.delegate = apiParser

@@ -19,8 +19,7 @@ public enum APIParams {
 	public static let feed = "/feed/"
 	public static let paged = "paged"
 	public static let cat = "cat"
-	public static let posts = "-101"
-	public static let podcast = "101"
+	public static let tag = "tag"
 	public static let search = "s"
 
 	public static let mmlive = "mmlive.json"

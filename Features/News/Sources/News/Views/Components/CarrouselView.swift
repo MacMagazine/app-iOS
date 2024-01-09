@@ -33,7 +33,7 @@ public struct CarrouselView: View {
 
 	public var body: some View {
 		ScrollView(.horizontal) {
-			HStack(spacing: 4) {
+			HStack(spacing: filter.spacing) {
 				ForEach(news.filter { $0.allCategories?.contains(filter.rawValue) ?? true }.prefix(limit), id: \.self) { object in
 					show(content: object)
 						.frame(width: width)

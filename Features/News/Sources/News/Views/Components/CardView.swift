@@ -108,7 +108,12 @@ extension CardView {
 	private var simpleView: some View {
 		HStack(spacing: 12) {
 			ImageView(style: .followRatio, url: URL(string: object.artworkURL ?? ""), width: object.width, height: object.height, aspectRatio: object.aspectRatio)
-			TitleView(title: object.title, color: theme.text.primary.color)
+			TitleView(title: object.title, color: theme.text.terciary.color)
+		}
+		.padding()
+		.background {
+			Rectangle().fill(theme.secondary.background.color ?? .white)
+				.cornerRadius(12, corners: .allCorners)
 		}
 	}
 }
