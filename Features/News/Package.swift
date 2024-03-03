@@ -17,7 +17,7 @@ let package = Package(
         .target(name: "News",
 				dependencies: ["CommonLibrary",
 							   .product(name: "CoreLibrary", package: "modules"),
-							   .product(name: "UIComponentsLibrary", package: "modules")],
+							   .product(name: "UIComponentsLibrarySpecial", package: "modules")],
 				resources: [.process("Resources")]),
         .testTarget(name: "NewsTests", dependencies: ["News"])
     ]

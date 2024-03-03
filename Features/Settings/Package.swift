@@ -18,7 +18,7 @@ let package = Package(
 				dependencies: ["CommonLibrary",
 							   .product(name: "InAppPurchaseLibrary", package: "modules"),
 							   .product(name: "CoreLibrary", package: "modules"),
-							   .product(name: "UIComponentsLibrary", package: "modules")],
+							   .product(name: "UIComponentsLibrarySpecial", package: "modules")],
 				resources: [.process("Resources")]),
 		.testTarget(name: "SettingsTests", dependencies: ["Settings"]),
     ]
