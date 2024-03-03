@@ -26,7 +26,7 @@ struct NewsFullView: View {
 									 alignment: .top)]) {
 			ForEach(news.filter { filter.filter(source: $0.allCategories) }.prefix(limit ?? news.count), id: \.self) { object in
 				Button(action: {
-					viewModel.newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "")
+					viewModel.newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "", favorite: object.favorite)
 				}, label: {
 					if filter.style == .highlight {
 						GeometryReader { geo in

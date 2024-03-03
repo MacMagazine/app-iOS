@@ -41,7 +41,7 @@ extension CarrouselView {
 	@ViewBuilder
 	private func show(content object: News) -> some View {
 		Button(action: {
-			viewModel.newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "")
+			viewModel.newsToShow = NewsToShow(title: object.title ?? "", url: object.shortURL ?? "", favorite: object.favorite)
 		}, label: {
 			CardView(object: CardData(style: filter.style,
 									  title: object.title,

@@ -1,6 +1,7 @@
 import CommonLibrary
 import SwiftUI
 import UIComponentsLibrary
+import YouTubeLibrary
 
 public enum NewsStyle {
 	case home
@@ -36,7 +37,13 @@ public struct NewsView: View {
 			Webview(title: viewModel.newsToShow.title,
 					url: viewModel.newsToShow.url,
 					isPresenting: Binding(get: { !viewModel.newsToShow.url.isEmpty },
-										  set: { _, _ in viewModel.newsToShow = NewsToShow(title: "", url: "") }))
+										  set: { _, _ in viewModel.newsToShow = NewsToShow(title: "", url: "", favorite: false) }),
+					navigationDelegate: WebviewController(isPresenting: .constant(true),
+														  removeAds: .constant(true)),
+					userScripts: WebviewController().userScripts,
+					scriptMessageHandlers: WebviewController().scriptMessageHandlers,
+					userAgent: "/MacMagazine",
+					extraActions: extraActions)
 		}
 	}
 }
@@ -73,5 +80,37 @@ extension NewsView {
 				}
 			}
 		}
+	}
+}
+
+extension NewsView {
+	@ViewBuilder
+	private var extraActions: some View {
+		Button(action: {
+			let favorite = UIActivityExtensions(title: "Favorito",
+												image: UIImage(systemName: viewModel.newsToShow.favorite ? "star.fill" : "star")) { _ in
+//				Favorite().updatePostStatus(using: link) { [weak self] isFavorite in
+//					self?.post?.favorito = isFavorite
+//				}
+			}
+
+			let customCopy = UIActivityExtensions(title: "Copiar Link", image: UIImage(systemName: "link")) { items in
+				for item in items {
+					guard let url = URL(string: "\(item)") else {
+						continue
+					}
+					UIPasteboard.general.url = url
+				}
+			}
+
+			let items: [Any] = [viewModel.newsToShow.title, viewModel.newsToShow.url]
+
+			Share().present(at: self, using: items, activities: [favorite, customCopy])
+		}, label: {
+			Image(systemName: "square.and.arrow.up.on.square.fill")
+				.imageScale(.large)
+				.foregroundColor(.primary)
+		})
+		.padding(.trailing)
 	}
 }

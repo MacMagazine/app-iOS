@@ -42,6 +42,8 @@ class MainViewModel: ObservableObject {
 	@Published var selectedSection: Page = .highlights
 	@Published var filter: NewsViewModel.Category = .news
 
+	@Published var isLoading: Bool = false
+
 	let sections = [Section(title: "Destaques", page: .highlights),
 					Section(title: "Notícias", page: .news),
 					Section(title: "Vídeos", page: .videos),
@@ -79,6 +81,14 @@ extension MainViewModel {
 					self?.selectedTab = .news
 				default: break
 				}
+			}
+			.store(in: &cancellables)
+
+		newsViewModel.$status
+			.receive(on: RunLoop.main)
+			.compactMap { $0 }
+			.sink { [weak self] value in
+				self?.isLoading = value == .loading
 			}
 			.store(in: &cancellables)
 

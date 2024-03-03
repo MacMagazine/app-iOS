@@ -4,18 +4,22 @@ struct MenuView<Content: View>: View {
 	@Binding var isShowing: Bool
 	@ViewBuilder let menu: AnyView
 	@ViewBuilder let content: Content
+	@EnvironmentObject private var viewModel: MainViewModel
 
 	var body: some View {
 		VStack {
 			HStack{
-				Button {
-					isShowing.toggle()
-				} label: {
-					Image("menu")
-						.resizable()
-						.frame(width: 58, height: 44)
+				if viewModel.isLoading {
+					ProgressView()
+				} else {
+					Button {
+						isShowing.toggle()
+					} label: {
+						Image("menu")
+							.resizable()
+							.frame(width: 58, height: 44)
+					}
 				}
-
 				menu
 			}
 			.padding([.leading, .bottom])

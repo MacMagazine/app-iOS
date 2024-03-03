@@ -7,13 +7,14 @@ import Foundation
 public struct NewsToShow {
 	let title: String
 	let url: String
+	let favorite: Bool
 }
 
 public class NewsViewModel: ObservableObject {
 	@Published public var options: Options = .home
-	@Published public var newsToShow: NewsToShow = NewsToShow(title: "", url: "")
+	@Published public var newsToShow: NewsToShow = NewsToShow(title: "", url: "", favorite: false)
 	@Published public var category: Category = .news
-	@Published var status: Status = .loading
+	@Published public var status: Status = .loading
 
 	public enum Options: Equatable {
 		case all
@@ -23,7 +24,7 @@ public class NewsViewModel: ObservableObject {
 		case filter(category: Category)
 	}
 
-	enum Status: Equatable {
+	public enum Status: Equatable {
 		case loading
 		case done
 		case error(reason: String)
@@ -178,9 +179,8 @@ public class NewsViewModel: ObservableObject {
 			async let tutoriais = loadNews(query: .tutoriais)
 			async let rumors = loadNews(query: .rumors)
 			async let posts = loadNews(query: .news)
-			let news = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
+			_ = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
 			status = .done
-			storage.save(Array(news.joined()))
 		} catch {
 			status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
 		}
@@ -194,10 +194,11 @@ extension NewsViewModel {
 
 			MockURLProtocol(bundle: .module).mock(api: endpoint.restAPI, file: mock?[endpoint.restAPI])
 			let data = try await NetworkAPI(mock: mock).get(url: endpoint.url)
-			return try await withCheckedThrowingContinuation { continuation in
+			let object = try await withCheckedThrowingContinuation { continuation in
 				parse(data, category: query.rawValue, numberOfPosts: -1, parseFullContent: false, continuation: continuation)
 			}
-
+			storage.save(object)
+			return object
 		} catch {
 			throw error
 		}
