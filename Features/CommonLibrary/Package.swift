@@ -11,7 +11,7 @@ let package = Package(
     ],
 	dependencies: [
 		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master"),
-		.package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.0.0")
+		.package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.23.0")
 	],
     targets: [
 		.target(name: "CommonLibrary",

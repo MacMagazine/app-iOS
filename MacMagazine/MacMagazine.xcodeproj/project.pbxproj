@@ -29,7 +29,6 @@
 		9BD78AB42B1A14C70002703B /* MacMagazineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */; };
 		9BD78AB62B1A14C70002703B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AB52B1A14C70002703B /* MainView.swift */; };
 		9BD78ABA2B1A14C80002703B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD78AB92B1A14C80002703B /* Assets.xcassets */; };
-		9BD78ABD2B1A14C80002703B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD78ABC2B1A14C80002703B /* Preview Assets.xcassets */; };
 		9BD78AC92B1A14C80002703B /* MacMagazineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AC82B1A14C80002703B /* MacMagazineTests.swift */; };
 		9BD78AD32B1A14C80002703B /* MacMagazineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AD22B1A14C80002703B /* MacMagazineUITests.swift */; };
 		9BD78AD52B1A14C80002703B /* MacMagazineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD78AD42B1A14C80002703B /* MacMagazineUITestsLaunchTests.swift */; };
@@ -74,7 +73,6 @@
 		9BD78AB32B1A14C70002703B /* MacMagazineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMagazineApp.swift; sourceTree = "<group>"; };
 		9BD78AB52B1A14C70002703B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9BD78AB92B1A14C80002703B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9BD78ABC2B1A14C80002703B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9BD78ABE2B1A14C80002703B /* MacMagazine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazine.entitlements; sourceTree = "<group>"; };
 		9BD78ABF2B1A14C80002703B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BD78AC42B1A14C80002703B /* MacMagazineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacMagazineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +123,6 @@
 				9BD78AB92B1A14C80002703B /* Assets.xcassets */,
 				9BD78ABE2B1A14C80002703B /* MacMagazine.entitlements */,
 				9B5ED8CC2B1A3DDB00672FF7 /* MacMagazine.xctestplan */,
-				9BD78ABB2B1A14C80002703B /* Preview Content */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -222,14 +219,6 @@
 				9BC79BCD2B2CE46500A41796 /* Views */,
 			);
 			path = MacMagazine;
-			sourceTree = "<group>";
-		};
-		9BD78ABB2B1A14C80002703B /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				9BD78ABC2B1A14C80002703B /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		9BD78AC72B1A14C80002703B /* MacMagazineTests */ = {
@@ -367,7 +356,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD78ABD2B1A14C80002703B /* Preview Assets.xcassets in Resources */,
 				9B3D99692B2D0C04008C8156 /* Configuration.storekit in Resources */,
 				9B477EC82B1E75A8008987E9 /* GoogleService-Info.plist in Resources */,
 				9B54949A2B1A48DF00BD51FF /* sound.wav in Resources */,
@@ -571,7 +559,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0.0;
-				DEVELOPMENT_ASSET_PATHS = "\"MacMagazine/Resources/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -612,7 +600,7 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0.0;
-				DEVELOPMENT_ASSET_PATHS = "\"MacMagazine/Resources/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -766,7 +754,7 @@
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.5;
+				minimumVersion = 5.1.3;
 			};
 		};
 		9B477EC32B1E709A008987E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -774,7 +762,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.18.0;
+				minimumVersion = 10.23.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
