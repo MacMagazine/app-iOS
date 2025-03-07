@@ -1,13 +1,13 @@
 {
-  "originHash" : "255298906b5e0fe45154cee505684b0a368e9c7ddaac83f76ceb11094cd38ea6",
+  "originHash" : "d9c4e35e83b2a967cf6f27c5adab141897f643e4393ff7456058fb6322b2d55d",
   "pins" : [
     {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "e6749919f9761d573d37a7d7e78b1b854c191d7f",
-        "version" : "8.1.3"
+        "revision" : "b450a3b30e0767277a6eed7e02dbdebd7d173da0",
+        "version" : "8.3.0"
       }
     },
     {
@@ -15,8 +15,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-XCFramework",
       "state" : {
-        "revision" : "3bc37b379581442be7d6337d01f5c7e5d6a4cdde",
-        "version" : "5.2.9"
+        "revision" : "a7df0fa1cb25ae2920b6ee01fe703fec50639256",
+        "version" : "5.2.10"
+      }
+    },
+    {
+      "identity" : "wonderpush-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wonderpush/wonderpush-ios-sdk",
+      "state" : {
+        "revision" : "88278c06092aff15a317a664164ad4f601960508",
+        "version" : "4.3.1"
       }
     }
   ],
