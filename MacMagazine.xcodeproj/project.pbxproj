@@ -53,8 +53,6 @@
 		9B25F5092260967A0057FBF9 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B25F50B2260A38E0057FBF9 /* VideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50A2260A38E0057FBF9 /* VideosCollectionViewCell.swift */; };
 		9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F50C2260A46D0057FBF9 /* VideoCollectionViewController.swift */; };
-		9B2D06892D7B528B0003538D /* WonderPush in Frameworks */ = {isa = PBXBuildFile; productRef = 9B2D06882D7B528B0003538D /* WonderPush */; };
-		9B2D068B2D7B528B0003538D /* WonderPushExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 9B2D068A2D7B528B0003538D /* WonderPushExtension */; };
 		9B3224312260DD78005CF974 /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B32242F2260DD78005CF974 /* Videos.storyboard */; };
 		9B3C7A722263D643001146A4 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C7A712263D643001146A4 /* YouTubePlayer.swift */; };
 		9B420B0823912D55005A2084 /* SFSafariViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420B0723912D55005A2084 /* SFSafariViewControllerExtensions.swift */; };
@@ -397,7 +395,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B593BA929851E2B00846988 /* OneSignalExtension in Frameworks */,
-				9B2D068B2D7B528B0003538D /* WonderPushExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +416,6 @@
 				68E740D725EF1AE5003A9BD9 /* StoreKit.framework in Frameworks */,
 				9B48046625F4EE9B0026AFF0 /* InAppPurchase.xcframework in Frameworks */,
 				9B9C7F90226B6111000534CA /* WebKit.framework in Frameworks */,
-				9B2D06892D7B528B0003538D /* WonderPush in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,7 +848,6 @@
 			name = MacMagazineNotificationServiceExtension;
 			packageProductDependencies = (
 				9B593BA829851E2B00846988 /* OneSignalExtension */,
-				9B2D068A2D7B528B0003538D /* WonderPushExtension */,
 			);
 			productName = MacMagazineNotificationServiceExtension;
 			productReference = 9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */;
@@ -923,7 +918,6 @@
 			packageProductDependencies = (
 				685315FA25153ADE008F6CDC /* Kingfisher */,
 				9BC161352B02F27200FC03C3 /* OneSignalFramework */,
-				9B2D06882D7B528B0003538D /* WonderPush */,
 			);
 			productName = MacMagazine;
 			productReference = 9BCAD6771F47A08100B54526 /* MacMagazine.app */;
@@ -1010,7 +1004,6 @@
 			packageReferences = (
 				9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
-				9B2D06872D7B528B0003538D /* XCRemoteSwiftPackageReference "wonderpush-ios-sdk" */,
 			);
 			productRefGroup = 9BCAD6781F47A08100B54526 /* Products */;
 			projectDirPath = "";
@@ -2334,14 +2327,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9B2D06872D7B528B0003538D /* XCRemoteSwiftPackageReference "wonderpush-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wonderpush/wonderpush-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.3.0;
-			};
-		};
 		9B7F1714298441F0008E3680 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
@@ -2370,16 +2355,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		9B2D06882D7B528B0003538D /* WonderPush */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B2D06872D7B528B0003538D /* XCRemoteSwiftPackageReference "wonderpush-ios-sdk" */;
-			productName = WonderPush;
-		};
-		9B2D068A2D7B528B0003538D /* WonderPushExtension */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B2D06872D7B528B0003538D /* XCRemoteSwiftPackageReference "wonderpush-ios-sdk" */;
-			productName = WonderPushExtension;
 		};
 		9B560FB525C9C29600F62992 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

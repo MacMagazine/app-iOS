@@ -186,8 +186,8 @@ extension FileManager {
         let url = documentsDirectory.appendingPathComponent("log.txt")
 
         if FileManager.default.fileExists(atPath: url.path),
-           let fileHandle = try? FileHandle(forWritingTo: url),
-           let data = "\(content)\n".data(using: .utf8) {
+           let fileHandle = try? FileHandle(forWritingTo: url) {
+            let data = Data("\(content)\n".utf8)
             fileHandle.seekToEndOfFile()
             fileHandle.write(data)
             fileHandle.closeFile()

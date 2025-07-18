@@ -443,7 +443,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 		self.navigationItem.rightBarButtonItems = nil
 
 		var items = [RightButtons]()
-		if webView.url?.isMMPost() ?? false {
+        if webView.url?.isMMPost() ?? false || webView.url?.isMMImage() ?? false {
 			if webView.url?.isMMAddress() ?? false {
 				items.append(.actions)
 			}

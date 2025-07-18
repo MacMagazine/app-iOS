@@ -305,8 +305,28 @@ extension SettingsTableViewController {
 
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 	@IBAction private func reportProblem(_ sender: Any) {
-		guard MFMailComposeViewController.canSendMail() else {
-			if let url = URL(string: "mailto:contato@macmagazine.com.br?subject=Relato de problema no app MacMagazine \(Settings().appVersion)"),
+        let recipient = "contato@macmagazine.com.br"
+        let subject = "Relato de problema no app MacMagazine \(Settings().appVersion)"
+        let body = """
+Olá MM, gostaria de reportar um problema no app.
+
+- O que aconteceu:
+
+
+- Passos para reproduzir o problema:
+
+
+- Resultado esperado:
+
+
+- Resultado atual:
+
+
+- Anexos:
+"""
+
+        guard MFMailComposeViewController.canSendMail() else {
+			if let url = URL(string: "mailto:\(recipient)?subject=\(subject)&body=\(body)"),
 			   UIApplication.shared.canOpenURL(url) {
 				UIApplication.shared.open(url, options: [:], completionHandler: nil)
 			}
@@ -316,8 +336,9 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 
 		let composeVC = MFMailComposeViewController()
 		composeVC.mailComposeDelegate = self
-		composeVC.setSubject("Relato de problema no app MacMagazine \(Settings().appVersion)")
-		composeVC.setToRecipients(["contato@macmagazine.com.br"])
+		composeVC.setSubject(subject)
+		composeVC.setToRecipients([recipient])
+        composeVC.setMessageBody(body, isHTML: false)
 
 		self.present(composeVC, animated: true, completion: nil)
 	}
