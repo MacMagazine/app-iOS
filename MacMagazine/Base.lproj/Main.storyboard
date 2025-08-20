@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24093.9" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rqn-ok-aGY">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24057"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,11 +17,11 @@
                         <viewControllerLayoutGuide type="bottom" id="n60-EV-RDL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="A54-fq-tRK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="579"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="589"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mik-YF-7y9">
-                                <rect key="frame" x="185" y="279.66666666666669" width="20" height="20"/>
+                                <rect key="frame" x="185" y="284.66666666666669" width="20" height="20"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Isk-e5-HGR">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -37,7 +37,7 @@
                                 </constraints>
                             </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw0-e0-6p0">
-                                <rect key="frame" x="0.0" y="20" width="390" height="559"/>
+                                <rect key="frame" x="0.0" y="20" width="390" height="569"/>
                                 <color key="backgroundColor" name="MMWhiteGrey6"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -58,13 +58,16 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="URb-53-j4n">
                         <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="twA-3I-XfB">
-                            <rect key="frame" x="155" y="9" width="80" height="26"/>
+                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="twA-3I-XfB">
+                            <rect key="frame" x="195" y="22" width="0.0" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
-                                    <rect key="frame" x="4" y="4" width="72" height="18"/>
+                                    <rect key="frame" x="4" y="4" width="90" height="26"/>
                                     <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="26" id="FG4-JE-GWf"/>
+                                    </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -124,7 +127,7 @@
             <objects>
                 <navigationController title="PostsNavigation" id="kKX-hy-fjk" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
-                        <rect key="frame" x="0.0" y="94" width="390" height="54"/>
+                        <rect key="frame" x="0.0" y="94" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -244,12 +247,20 @@
                             <rect key="frame" x="120" y="5.6666666666666679" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Ii-zjF">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Ii-zjF">
+                                    <rect key="frame" x="4" y="4" width="142" height="26"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="26" id="oHZ-ti-ZTS"/>
+                                    </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="18Y-Ii-zjF" secondAttribute="trailing" constant="4" id="9Tl-Dl-g2h"/>
+                                <constraint firstItem="18Y-Ii-zjF" firstAttribute="top" secondItem="2RS-0E-jz0" secondAttribute="top" constant="4" id="Cw8-tN-KkW"/>
+                                <constraint firstItem="18Y-Ii-zjF" firstAttribute="leading" secondItem="2RS-0E-jz0" secondAttribute="leading" constant="4" id="dLA-Yo-Prb"/>
+                                <constraint firstAttribute="bottom" secondItem="18Y-Ii-zjF" secondAttribute="bottom" constant="4" id="fA0-KV-yKA"/>
+                            </constraints>
                         </view>
                     </navigationItem>
                     <connections>
@@ -304,7 +315,7 @@
                 <navigationController title="PostsDetailNavigation" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="fD0-My-KZk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C">
-                        <rect key="frame" x="0.0" y="94" width="390" height="54"/>
+                        <rect key="frame" x="0.0" y="94" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -373,7 +384,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="W8H-UC-7v2">
-                        <rect key="frame" x="0.0" y="94" width="390" height="54"/>
+                        <rect key="frame" x="0.0" y="94" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -415,10 +426,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

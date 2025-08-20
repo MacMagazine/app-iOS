@@ -142,7 +142,7 @@ extension AppDelegate {
 	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 		if userActivity.activityType == CSSearchableItemActionType {
 			if let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
-                guard (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController as? UITabBarController != nil else {
+                guard (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController is UITabBarController else {
                     widgetSpotlightPost = identifier
                     return true
                 }

@@ -76,6 +76,7 @@
 		9B7036F7224FCB0400F68654 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036F6224FCB0400F68654 /* WebViewController.swift */; };
 		9B7036FC224FF80300F68654 /* UIActivityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */; };
 		9B7A41C3238DB52B00BA85C0 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */; };
+		9B82D7BF2E567D1000515803 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82D7BE2E567D1000515803 /* SceneDelegate.swift */; };
 		9B834B942229AE07002C61F9 /* PodcastMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */; };
 		9B85CAC82A504237008E905A /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B25F5082260967A0057FBF9 /* Obfuscator.swift */; };
 		9B872AF02254D5BC00A3C1C3 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B872AEF2254D5BC00A3C1C3 /* PodcastViewController.swift */; };
@@ -308,6 +309,7 @@
 		9B7036F6224FCB0400F68654 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9B7036FB224FF80300F68654 /* UIActivityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityExtensions.swift; sourceTree = "<group>"; };
 		9B7A41C2238DB52B00BA85C0 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		9B82D7BE2E567D1000515803 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9B834B932229AE07002C61F9 /* PodcastMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastMasterViewController.swift; sourceTree = "<group>"; };
 		9B85CAC72A503561008E905A /* MacMagazineWatchExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacMagazineWatchExtension.entitlements; sourceTree = "<group>"; };
 		9B872AEE2254C9E600A3C1C3 /* macmagazine 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -521,11 +523,12 @@
 				9BCAD67A1F47A08100B54526 /* AppDelegate.swift */,
 				9BDCDC8F2296F88800649C0F /* AppDelegateExtensions.swift */,
 				9BF66D33222DCC9A004EE1E9 /* FetchedResultsControllerDataSource.swift */,
+				68DE860F25FF77E600413E62 /* mmlive.json */,
 				9B9C7FB0226CA192000534CA /* PushNotification.swift */,
 				9B4A8F942235377400A49239 /* ResultsViewController.swift */,
+				9B82D7BE2E567D1000515803 /* SceneDelegate.swift */,
 				9B1BA5E3222B22980059F692 /* Settings.swift */,
 				683BFB0A25F66E37000C841F /* TabBarController.swift */,
-				68DE860F25FF77E600413E62 /* mmlive.json */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1209,6 +1212,7 @@
 				9B8B1D2828326896005F9AC4 /* WhatsNewTableViewController.swift in Sources */,
 				9B25F50D2260A46D0057FBF9 /* VideoCollectionViewController.swift in Sources */,
 				9B9C7F92226B6142000534CA /* SoundcloudPlayer.swift in Sources */,
+				9B82D7BF2E567D1000515803 /* SceneDelegate.swift in Sources */,
 				9B6D0B842229B72100E2C044 /* macmagazine.xcdatamodeld in Sources */,
 				9B6F965A225E5A060075ED89 /* Logger.swift in Sources */,
 				9B91117D225BC100000A6AC3 /* PostData.swift in Sources */,
