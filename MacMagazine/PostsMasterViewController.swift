@@ -638,8 +638,8 @@ extension PostsMasterViewController {
         shortcutStatus = .recentPost
 		processOption()
 	}
-	
-	@objc func onShowPostFromWidget(_ notification: Notification) {
+
+    @objc func onShowPostFromWidget(_ notification: Notification) {
 		guard let link = notification.object as? String else {
 			return
 		}
