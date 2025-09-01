@@ -1,48 +1,132 @@
 //
 //  SceneDelegate.swift
-//  test
+//  MacMagazine
 //
 //  Created by Cassio Rossi on 20/08/2025.
 //
 
+import CoreSpotlight
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var shortcutAction: Notification.Name?
+    var widgetSpotlightPost: String?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard (scene as? UIWindowScene) != nil else { return }
+        // Ensure we have a valid UIWindowScene
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        window = UIWindow(windowScene: windowScene)
+        let storyboard = UIStoryboard(name: "Splash", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+
+        // Process any connection options (URLs, shortcuts, etc.)
+        processConnectionOptions(connectionOptions)
     }
 
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+    // MARK: - Private Methods
+
+    private func processConnectionOptions(_ options: UIScene.ConnectionOptions) {
+        // Handle URL contexts (deep links, universal links)
+        for urlContext in options.urlContexts {
+            handleURL(urlContext.url)
+        }
+
+        // Handle shortcut items
+        if let shortcutItem = options.shortcutItem {
+            handleShortcutItem(shortcutItem)
+        }
+
+        // Handle user activities (Handoff, Spotlight, etc.)
+        for userActivity in options.userActivities {
+            handleUserActivity(userActivity)
+        }
+
+        // Handle notification responses
+        if let notificationResponse = options.notificationResponse {
+            handleNotificationResponse(notificationResponse)
+        }
     }
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+    func sceneDidDisconnect(_ scene: UIScene) {}
+    func sceneDidBecomeActive(_ scene: UIScene) {}
+    func sceneWillResignActive(_ scene: UIScene) {}
+    func sceneWillEnterForeground(_ scene: UIScene) {}
+    func sceneDidEnterBackground(_ scene: UIScene) {}
+}
+
+// MARK: - URL and Shortcut Handling
+
+extension SceneDelegate {
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // Handle URLs when the app is already running
+        for urlContext in URLContexts {
+            handleURL(urlContext.url)
+        }
     }
 
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        // Handle shortcut items when the app is already running
+        handleShortcutItem(shortcutItem)
+        completionHandler(true)
     }
 
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        // Handle user activities when the app is already running
+        handleUserActivity(userActivity)
+    }
+}
+
+// MARK: - Shortcut -
+
+extension SceneDelegate {
+    private func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
+        // Handle app shortcut items (3D Touch shortcuts, etc.)
+        if shortcutItem.type == "openLastSeenPost" ||
+            shortcutItem.type == "openMostRecentPost" {
+
+            guard let tabController = Settings.rootViewController as? UITabBarController else {
+                shortcutAction = shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost
+                return
+            }
+            tabController.selectedIndex = 0
+            NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
+        }
+    }
+}
+
+// MARK: - Spotlight search -
+
+extension SceneDelegate {
+    private func handleUserActivity(_ userActivity: NSUserActivity) {
+        // Handle user activities (Handoff, Spotlight search, etc.)
+        print("Handling user activity: \(userActivity.activityType)")
+
+        if userActivity.activityType == CSSearchableItemActionType,
+            let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
+            if Settings.rootViewController is UITabBarController {
+                showDetailController(with: identifier)
+            } else {
+                widgetSpotlightPost = identifier
+            }
+        }
+    }
+}
+
+extension SceneDelegate {
+    private func handleURL(_ url: URL) {
+        // Handle incoming URLs (deep links, universal links)
+        widgetSpotlightPost = url.absoluteString
+        NotificationCenter.default.post(name: .showPostFromWidget, object: url.absoluteString)
     }
 
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+    private func handleNotificationResponse(_ notificationResponse: UNNotificationResponse) {
+        // Handle notification responses
+        logD(notificationResponse.notification.request.identifier)
+        // Implement your notification handling logic here
     }
 }

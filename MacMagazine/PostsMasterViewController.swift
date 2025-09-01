@@ -119,6 +119,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onShowPostFromWidget(_:)), name: .showPostFromWidget, object: nil)
 
 		if Settings().isPad {
 			NotificationCenter.default.addObserver(self, selector: #selector(onUpdateSelectedPost(_:)), name: .updateSelectedPost, object: nil)
@@ -357,7 +358,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     // Reload Widgets
                     WidgetCenter.shared.reloadAllTimelines()
 
-                    if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+                    if let post = Settings.widgetSpotlightPost {
+                        Settings.widgetSpotlightPost = nil
                         showDetailController(with: post)
                         return
                     }
@@ -381,9 +383,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                                 self.processSelection()
                             }
                         }
-                        if let shortcutAction = (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction {
+                        if let shortcutAction = Settings.shortcutAction {
                             NotificationCenter.default.post(name: shortcutAction, object: nil)
-                            (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction = nil
+                            Settings.shortcutAction = nil
                         }
                     }
 
@@ -636,6 +638,13 @@ extension PostsMasterViewController {
         shortcutStatus = .recentPost
 		processOption()
 	}
+	
+	@objc func onShowPostFromWidget(_ notification: Notification) {
+		guard let link = notification.object as? String else {
+			return
+		}
+		showDetailController(with: link)
+	}
 
 }
 
@@ -659,7 +668,7 @@ func createWebViewController(post: PostData) -> WebViewController? {
 }
 
 func showDetailController(with link: String) {
-    guard let rootViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController else {
+    guard let rootViewController = Settings.rootViewController else {
         return
     }
 
@@ -667,7 +676,7 @@ func showDetailController(with link: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
               let tabController = appDelegate.tabBarController else {
             logE("Failed to load tabBarController - saving link")
-            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = link
+            Settings.widgetSpotlightPost = link
             return
         }
 
@@ -711,11 +720,11 @@ func showDetailController(with link: String) {
             open(link: link, mainController: tabController)
         }
 
-        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
+        Settings.widgetSpotlightPost = nil
     }
 
     func open(link: String, mainController: UIViewController?) {
-        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
+        Settings.widgetSpotlightPost = nil
 
         // Open single view
         let storyboard = UIStoryboard(name: "WebView", bundle: nil)

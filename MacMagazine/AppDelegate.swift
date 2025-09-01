@@ -17,8 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var previousController: UIViewController?
     var supportedInterfaceOrientation: UIInterfaceOrientationMask = .all
     var isMMLive: Bool = false
-    var widgetSpotlightPost: String?
-    var shortcutAction: Notification.Name?
     var pushNotification: PushNotification?
     var tabBarController: UITabBarController?
 

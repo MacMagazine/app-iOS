@@ -26,7 +26,7 @@ class MMLiveViewController: WebViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost != nil {
+        if Settings.widgetSpotlightPost != nil {
             TabBarController.shared.selectIndex(1)
         }
     }

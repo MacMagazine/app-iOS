@@ -63,6 +63,6 @@ struct Share {
 			}
 		}
 
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController?.present(activityVC, animated: true)
+        Settings.rootViewController?.present(activityVC, animated: true)
 	}
 }

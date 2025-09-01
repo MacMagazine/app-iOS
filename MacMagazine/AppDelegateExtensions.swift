@@ -6,7 +6,6 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import CoreSpotlight
 import Kingfisher
 import StoreKit
 import UIKit
@@ -16,6 +15,7 @@ import UIKit
 extension Notification.Name {
 	static let shortcutActionLastPost = Notification.Name("shortcutActionLastPost")
 	static let shortcutActionRecentPost = Notification.Name("shortcutActionRecentPost")
+	static let showPostFromWidget = Notification.Name("showPostFromWidget")
 	static let reloadWeb = Notification.Name("reloadWeb")
 	static let scrollToTop = Notification.Name("scrollToTop")
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
@@ -114,42 +114,8 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        widgetSpotlightPost = url.absoluteString
+        print("==> \(#function) \(url.absoluteString)")
+        Settings.widgetSpotlightPost = url.absoluteString
         return true
     }
-}
-
-// MARK: - Shortcut -
-
-extension AppDelegate {
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        if shortcutItem.type == "openLastSeenPost" ||
-            shortcutItem.type == "openMostRecentPost" {
-
-            guard let tabController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController as? UITabBarController else {
-                shortcutAction = shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost
-                return
-            }
-            tabController.selectedIndex = 0
-            NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
-        }
-    }
-}
-
-// MARK: - Spotlight search -
-
-extension AppDelegate {
-	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-		if userActivity.activityType == CSSearchableItemActionType {
-			if let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
-                guard (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController is UITabBarController else {
-                    widgetSpotlightPost = identifier
-                    return true
-                }
-				showDetailController(with: identifier)
-				return true
-			}
-		}
-		return false
-	}
 }
