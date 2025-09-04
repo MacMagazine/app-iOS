@@ -60,7 +60,15 @@
             }
           ],
           "glass" : false,
-          "hidden" : false,
+          "hidden-specializations" : [
+            {
+              "value" : false
+            },
+            {
+              "appearance" : "tinted",
+              "value" : true
+            }
+          ],
           "image-name" : "layer_1.png",
           "name" : "sombra_pasta",
           "position" : {

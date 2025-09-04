@@ -23,6 +23,7 @@
       }
     },
     {
+      "blur-material" : null,
       "layers" : [
         {
           "glass" : false,
