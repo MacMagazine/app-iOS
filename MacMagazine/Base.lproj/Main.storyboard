@@ -59,7 +59,7 @@
                     <navigationItem key="navigationItem" id="URb-53-j4n">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="twA-3I-XfB">
-                            <rect key="frame" x="6240" y="-2210" width="0.0" height="0.0"/>
+                            <rect key="frame" x="49920" y="-18338" width="0.0" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
@@ -126,9 +126,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="MsF-jO-FlS">
                         <rect key="frame" x="0.0" y="94" width="390" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <navigationBarAppearance key="standardAppearance">
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </navigationBarAppearance>
+                        <navigationBarAppearance key="standardAppearance"/>
                         <navigationBarAppearance key="scrollEdgeAppearance"/>
                     </navigationBar>
                     <connections>
@@ -143,6 +141,7 @@
         <scene sceneID="hct-bz-jAy">
             <objects>
                 <splitViewController title="Posts" extendedLayoutIncludesOpaqueBars="YES" id="Yhy-9h-hZ1" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Posts" image="text.page" catalog="system" id="iZz-lw-mOc"/>
                     <connections>
                         <segue destination="kKX-hy-fjk" kind="relationship" relationship="masterViewController" id="xsv-wY-uN5"/>
@@ -160,7 +159,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="posts" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="33" estimatedSectionHeaderHeight="33" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" id="BzE-Hd-ooV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="separatorColor" systemColor="systemGray5Color"/>
                         <sections/>
                         <connections>
@@ -168,6 +167,7 @@
                             <outlet property="delegate" destination="Jej-5Q-aqJ" id="Uu3-rx-L80"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="Gac-4y-scy">
                         <barButtonItem key="leftBarButtonItem" image="line.3.horizontal.decrease.circle" id="vUZ-wN-Khb">
                             <color key="tintColor" name="MMBlueWhite"/>
@@ -398,7 +398,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YQQ-bx-LIJ"/>
+        <segue reference="lNV-kD-aRc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="antenna.radiowaves.left.and.right" catalog="system" width="128" height="111"/>

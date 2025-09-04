@@ -62,7 +62,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
         self.tableView?.sectionHeaderTopPadding = 0
-        self.tableView?.backgroundColor = .systemGroupedBackground
+//        self.tableView?.backgroundColor = .systemGroupedBackground
     }
 
 	// MARK: - Scroll detection -
@@ -111,7 +111,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         headerView.backgroundColor = .clear
 
         let backgroundView = UIView()
-        backgroundView.backgroundColor = .systemBackground
+        backgroundView.backgroundColor = UIColor(named: "MMGray")
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.cornerRadius = 16
 
@@ -122,7 +122,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         titleLabel.rightInset = 10.0
         titleLabel.text = title
         titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        titleLabel.textColor = .label
+        titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
 

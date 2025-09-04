@@ -65,17 +65,17 @@
                         <viewControllerLayoutGuide type="bottom" id="Sxe-hu-yMD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SlD-dw-tjD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="746"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
-                                <rect key="frame" x="0.0" y="150" width="414" height="512"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="512"/>
                                 <connections>
                                     <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-MC-Tvc">
-                                <rect key="frame" x="0.0" y="662" width="414" height="166"/>
+                                <rect key="frame" x="0.0" y="512" width="414" height="166"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="166" id="3US-UY-uQE"/>
                                 </constraints>
@@ -95,7 +95,7 @@
                             <constraint firstAttribute="trailing" secondItem="7Pr-nE-zS6" secondAttribute="trailing" id="kUk-Nd-AxK"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="DiB-v8-Kg9">

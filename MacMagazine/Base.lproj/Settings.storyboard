@@ -247,7 +247,7 @@
                             <tableViewSection id="tzb-GF-QmQ" userLabel="Push">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="r1N-CG-9fg">
-                                        <rect key="frame" x="16" y="254" width="358" height="50"/>
+                                        <rect key="frame" x="16" y="254.00000000000003" width="358" height="49.999999999999972"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r1N-CG-9fg" id="nqX-io-A7H">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="50"/>

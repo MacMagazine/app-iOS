@@ -1,0 +1,32 @@
+{
+  "colors" : [
+    {
+      "color" : {
+        "color-space" : "display-p3",
+        "components" : {
+          "alpha" : "0.700",
+          "blue" : "0xDF",
+          "green" : "0xDC",
+          "red" : "0xDB"
+        }
+      },
+      "idiom" : "iphone"
+    },
+    {
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "0.700",
+          "blue" : "0xDF",
+          "green" : "0xDC",
+          "red" : "0xDB"
+        }
+      },
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
