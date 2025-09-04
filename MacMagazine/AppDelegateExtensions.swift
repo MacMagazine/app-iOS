@@ -114,7 +114,6 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        print("==> \(#function) \(url.absoluteString)")
         Settings.widgetSpotlightPost = url.absoluteString
         return true
     }

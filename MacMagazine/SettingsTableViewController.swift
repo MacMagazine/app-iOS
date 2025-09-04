@@ -124,6 +124,7 @@ class SettingsTableViewController: UITableViewController {
 							type: .version,
 							heightForFooter: UITableView.automaticDimension,
 							footer: "disclaimerFooter"))
+        header.append(Table(header: "", heightForRow: 10))
 		return header
 	}
 

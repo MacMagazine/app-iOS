@@ -106,7 +106,6 @@
 		9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393C2260DDB8004005AA /* Settings.storyboard */; };
 		9BA939412260DDDB004005AA /* Podcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9393F2260DDDA004005AA /* Podcast.storyboard */; };
 		9BA939442260DE0A004005AA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939422260DE0A004005AA /* WebView.storyboard */; };
-		9BA939472260DE37004005AA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA939452260DE37004005AA /* HeaderCell.xib */; };
 		9BB2CA692264883A0012ACD6 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
 		9BB2CA6A226488C80012ACD6 /* APIXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */; };
 		9BB2CA6C226488E40012ACD6 /* YouTubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */; };
@@ -327,7 +326,6 @@
 		9BA9393D2260DDB8004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		9BA939402260DDDA004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Podcast.storyboard; sourceTree = "<group>"; };
 		9BA939432260DE0A004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WebView.storyboard; sourceTree = "<group>"; };
-		9BA939462260DE37004005AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HeaderCell.xib; sourceTree = "<group>"; };
 		9BB2CA682264883A0012ACD6 /* APIXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIXMLParser.swift; sourceTree = "<group>"; };
 		9BB2CA6B226488E40012ACD6 /* YouTubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAPI.swift; sourceTree = "<group>"; };
 		9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
@@ -639,7 +637,6 @@
 			isa = PBXGroup;
 			children = (
 				9B4A8FA422357A0800A49239 /* FeaturedCell.xib */,
-				9BA939452260DE37004005AA /* HeaderCell.xib */,
 				9B4A8FA122357A0300A49239 /* NormalCell.xib */,
 				9B4A8FA722357A0D00A49239 /* PodcastCell.xib */,
 				9BC9B12D1F5C960700C4DF17 /* PostCell.swift */,
@@ -1022,7 +1019,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B06C0FE2E69EC6600B9E302 /* mm_icon_inverted.icon in Resources */,
-				9BA939472260DE37004005AA /* HeaderCell.xib in Resources */,
 				9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */,
 				68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */,
 				68DE861025FF77E600413E62 /* mmlive.json in Resources */,
@@ -1322,14 +1318,6 @@
 				9BA939432260DE0A004005AA /* Base */,
 			);
 			name = WebView.storyboard;
-			sourceTree = "<group>";
-		};
-		9BA939452260DE37004005AA /* HeaderCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BA939462260DE37004005AA /* Base */,
-			);
-			name = HeaderCell.xib;
 			sourceTree = "<group>";
 		};
 		9BB4BC4F225B99F500559170 /* Interface.storyboard */ = {

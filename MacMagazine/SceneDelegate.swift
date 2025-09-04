@@ -104,8 +104,6 @@ extension SceneDelegate {
 extension SceneDelegate {
     private func handleUserActivity(_ userActivity: NSUserActivity) {
         // Handle user activities (Handoff, Spotlight search, etc.)
-        print("Handling user activity: \(userActivity.activityType)")
-
         if userActivity.activityType == CSSearchableItemActionType,
             let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
             if Settings.rootViewController is UITabBarController {

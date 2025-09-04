@@ -53,7 +53,15 @@
         },
         {
           "glass" : false,
-          "hidden" : false,
+          "hidden-specializations" : [
+            {
+              "value" : false
+            },
+            {
+              "appearance" : "tinted",
+              "value" : true
+            }
+          ],
           "image-name" : "layer_0.svg",
           "name" : "gradiente",
           "position-specializations" : [
