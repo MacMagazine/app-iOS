@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24093.9" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24123.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aBB-qV-jdy">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24057"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24062"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -506,17 +506,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4ww-CQ-udS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="105"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4ww-CQ-udS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="105"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="105"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icf-GE-cUm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="105"/>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
-                                                            <rect key="frame" x="39" y="0.0" width="39" height="105"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-6b-LGK">
+                                                            <rect key="frame" x="71.666666666666657" y="0.0" width="71.666666666666657" height="105"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="normal" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH">
-                                                                    <rect key="frame" x="-9" y="13" width="57" height="57"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normal" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-2p-qsH">
+                                                                    <rect key="frame" x="7.3333333333333286" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="5gv-39-GZG"/>
                                                                         <constraint firstAttribute="width" constant="57" id="XYi-HN-HK1"/>
@@ -533,12 +533,12 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-hn-nX1">
-                                                                    <rect key="frame" x="9.6666666666666661" y="76.666666666666671" width="19.666666666666671" height="19"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-hn-nX1">
+                                                                    <rect key="frame" x="26" y="76.666666666666671" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="105"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-nN-nab">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo branco">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -558,14 +558,14 @@
                                                                 <constraint firstAttribute="trailing" secondItem="xMf-nN-nab" secondAttribute="trailing" id="mZW-Qz-dlC"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
-                                                            <rect key="frame" x="78" y="0.0" width="39" height="105"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-7w-snT">
+                                                            <rect key="frame" x="143.33333333333334" y="0.0" width="71.333333333333343" height="105"/>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
-                                                            <rect key="frame" x="117" y="0.0" width="39" height="105"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr4-nf-He3">
+                                                            <rect key="frame" x="214.66666666666666" y="0.0" width="71.666666666666657" height="105"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="alternative" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4">
-                                                                    <rect key="frame" x="-9" y="13" width="57" height="57"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alternative" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-eJ-ky4">
+                                                                    <rect key="frame" x="7.3333333333333428" y="13" width="57" height="57"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="57" id="DaD-gC-iWH"/>
                                                                         <constraint firstAttribute="width" constant="57" id="TwA-5I-6vQ"/>
@@ -582,12 +582,12 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-hM-m4r">
-                                                                    <rect key="frame" x="9.6666666666666732" y="76.666666666666671" width="19.666666666666671" height="19"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-hM-m4r">
+                                                                    <rect key="frame" x="26" y="76.666666666666671" width="19.666666666666671" height="19"/>
                                                                     <color key="tintColor" name="MMBlue"/>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="105"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="option_2" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-XM-fT5">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="105"/>
                                                                     <accessibility key="accessibilityConfiguration" label="Ícone do aplicativo com fundo azul">
                                                                         <accessibilityTraits key="traits" button="YES"/>
                                                                     </accessibility>
@@ -607,108 +607,8 @@
                                                                 <constraint firstItem="Wcj-XM-fT5" firstAttribute="top" secondItem="Kr4-nf-He3" secondAttribute="top" id="wv9-4P-Amr"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-2y-DWs">
-                                                            <rect key="frame" x="156" y="0.0" width="39" height="105"/>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SAV-0s-5g5">
-                                                            <rect key="frame" x="195" y="0.0" width="39" height="105"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="normalInverted" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-rq-SKc">
-                                                                    <rect key="frame" x="-9" y="13" width="57" height="57"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="57" id="Yp0-Ks-C6t"/>
-                                                                        <constraint firstAttribute="width" constant="57" id="e8q-N3-fur"/>
-                                                                    </constraints>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="12"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="1"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                            <color key="value" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </imageView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XlY-PV-F4I">
-                                                                    <rect key="frame" x="9.666666666666659" y="76.666666666666671" width="19.666666666666671" height="19"/>
-                                                                    <color key="tintColor" name="MMBlue"/>
-                                                                </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="option_3" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeb-ut-fnF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="105"/>
-                                                                    <accessibility key="accessibilityConfiguration" label="Ícone azul do aplicativo com fundo preto">
-                                                                        <accessibilityTraits key="traits" button="YES"/>
-                                                                    </accessibility>
-                                                                    <connections>
-                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="zhA-p7-osp"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="Yeb-ut-fnF" secondAttribute="trailing" id="5nr-Al-8uy"/>
-                                                                <constraint firstItem="XlY-PV-F4I" firstAttribute="centerX" secondItem="eO4-rq-SKc" secondAttribute="centerX" id="AkV-gb-zp0"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Yeb-ut-fnF" secondAttribute="bottom" id="Gm3-jA-exR"/>
-                                                                <constraint firstItem="eO4-rq-SKc" firstAttribute="centerX" secondItem="SAV-0s-5g5" secondAttribute="centerX" id="LFP-5i-GYN"/>
-                                                                <constraint firstItem="Yeb-ut-fnF" firstAttribute="top" secondItem="SAV-0s-5g5" secondAttribute="top" id="Mtj-wO-DjI"/>
-                                                                <constraint firstItem="XlY-PV-F4I" firstAttribute="top" secondItem="eO4-rq-SKc" secondAttribute="bottom" constant="6" id="Vmh-gW-Dtk"/>
-                                                                <constraint firstItem="Yeb-ut-fnF" firstAttribute="leading" secondItem="SAV-0s-5g5" secondAttribute="leading" id="njK-3V-Mjp"/>
-                                                                <constraint firstItem="eO4-rq-SKc" firstAttribute="top" secondItem="SAV-0s-5g5" secondAttribute="top" constant="13" id="ygf-jZ-eLE"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" id="ztK-RH-PGY">
-                                                            <rect key="frame" x="233.33333333333337" y="0.0" width="39" height="105"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" id="sKm-lV-8cI">
-                                                            <rect key="frame" x="272.33333333333326" y="0.0" width="38.666666666666686" height="105"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="alternativeInverted" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-ve-Aqk">
-                                                                    <rect key="frame" x="-9" y="13" width="57" height="57"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="57" id="5Ds-K5-mAM"/>
-                                                                        <constraint firstAttribute="width" constant="57" id="zQr-br-QBT"/>
-                                                                    </constraints>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="12"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="1"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                            <color key="value" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </imageView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-mP-ySM">
-                                                                    <rect key="frame" x="9.6666666666666874" y="76.666666666666671" width="19.666666666666671" height="19"/>
-                                                                    <color key="tintColor" name="MMBlue"/>
-                                                                </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="option_4" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G3-2f-b5R">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="38.666666666666664" height="105"/>
-                                                                    <accessibility key="accessibilityConfiguration" label="Ícone claro do aplicativo com fundo preto">
-                                                                        <accessibilityTraits key="traits" button="YES"/>
-                                                                    </accessibility>
-                                                                    <connections>
-                                                                        <action selector="changeAppIcon:" destination="75e-Ta-Gqd" eventType="touchUpInside" id="ko2-h5-kjq"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="ZeS-mP-ySM" firstAttribute="centerX" secondItem="g7c-ve-Aqk" secondAttribute="centerX" id="C1l-5a-kNn"/>
-                                                                <constraint firstItem="ZeS-mP-ySM" firstAttribute="top" secondItem="g7c-ve-Aqk" secondAttribute="bottom" constant="6" id="DC4-mq-Fin"/>
-                                                                <constraint firstAttribute="trailing" secondItem="3G3-2f-b5R" secondAttribute="trailing" id="Y5p-iR-8pb"/>
-                                                                <constraint firstItem="3G3-2f-b5R" firstAttribute="leading" secondItem="sKm-lV-8cI" secondAttribute="leading" id="bvy-CZ-N7I"/>
-                                                                <constraint firstItem="g7c-ve-Aqk" firstAttribute="centerX" secondItem="sKm-lV-8cI" secondAttribute="centerX" id="eVG-fc-Xni"/>
-                                                                <constraint firstItem="3G3-2f-b5R" firstAttribute="top" secondItem="sKm-lV-8cI" secondAttribute="top" id="jS2-yH-3m9"/>
-                                                                <constraint firstAttribute="bottom" secondItem="3G3-2f-b5R" secondAttribute="bottom" id="nPv-cV-4gf"/>
-                                                                <constraint firstItem="g7c-ve-Aqk" firstAttribute="top" secondItem="sKm-lV-8cI" secondAttribute="top" constant="13" id="p5X-SK-O1U"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
-                                                            <rect key="frame" x="311" y="0.0" width="39" height="105"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsZ-QJ-QFG">
+                                                            <rect key="frame" x="286.33333333333331" y="0.0" width="71.666666666666686" height="105"/>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -732,8 +632,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Limpar cache do app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5U-jB-AxE">
-                                                    <rect key="frame" x="6" y="6" width="338" height="38"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limpar cache do app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5U-jB-AxE">
+                                                    <rect key="frame" x="6" y="6" width="346" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -741,8 +641,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="jOP-Fj-i8C">
-                                                    <rect key="frame" x="6" y="6" width="338" height="38"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="jOP-Fj-i8C">
+                                                    <rect key="frame" x="6" y="6" width="346" height="38"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Limpar cache do app">
@@ -779,8 +679,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Relatar problema/bug no app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-aj-Yg0">
-                                                    <rect key="frame" x="6" y="6" width="338" height="38"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Relatar problema/bug no app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-aj-Yg0">
+                                                    <rect key="frame" x="6" y="6" width="346" height="38"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -788,8 +688,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-eq-8vX">
-                                                    <rect key="frame" x="6" y="6" width="338" height="38"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-eq-8vX">
+                                                    <rect key="frame" x="6" y="6" width="346" height="38"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Relatar problema/bug no app">
                                                         <color key="titleColor" name="MMBlueWhite"/>
@@ -861,12 +761,6 @@
                         <outlet property="iconOption2" destination="B7r-eJ-ky4" id="IWR-VX-3jh"/>
                         <outlet property="iconOption2Btn" destination="Wcj-XM-fT5" id="vyJ-ro-MBQ"/>
                         <outlet property="iconOption2Selected" destination="mJ4-hM-m4r" id="sXp-5J-xce"/>
-                        <outlet property="iconOption3" destination="eO4-rq-SKc" id="AJq-gB-7vA"/>
-                        <outlet property="iconOption3Btn" destination="Yeb-ut-fnF" id="Azn-Kl-pY5"/>
-                        <outlet property="iconOption3Selected" destination="XlY-PV-F4I" id="RZf-AX-Q5D"/>
-                        <outlet property="iconOption4" destination="g7c-ve-Aqk" id="H20-Vt-eSe"/>
-                        <outlet property="iconOption4Btn" destination="3G3-2f-b5R" id="RBP-o8-x4b"/>
-                        <outlet property="iconOption4Selected" destination="ZeS-mP-ySM" id="1UG-Cu-HoD"/>
                         <outlet property="intensityPostRead" destination="f6f-4V-1ar" id="XJT-mw-Q2Z"/>
                         <outlet property="manageBtn" destination="Goh-iK-82H" id="M1r-rs-NUv"/>
                         <outlet property="patraoButton" destination="7cO-p7-cYL" id="3Ns-Ex-nrD"/>
@@ -922,12 +816,10 @@
     </scenes>
     <resources>
         <image name="alternative" width="1024" height="1024"/>
-        <image name="alternativeInverted" width="1024" height="1024"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="logo" width="90" height="68.333335876464844"/>
         <image name="normal" width="1024" height="1024"/>
-        <image name="normalInverted" width="1024" height="1024"/>
         <namedColor name="MMBlue">
             <color red="0.0" green="0.59200000762939453" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

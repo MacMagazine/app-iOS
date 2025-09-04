@@ -38,6 +38,11 @@
 		68EF53502527103000FCBD3C /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68EF534E2527103000FCBD3C /* Splash.storyboard */; };
 		68EF53552527125E00FCBD3C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93F1B322AC5554003AF1B1 /* SplashViewController.swift */; };
 		9B02AE4A1F5C507000EA1A6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AE491F5C507000EA1A6F /* Network.swift */; };
+		9B06C0F92E69E8EB00B9E302 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9B06C0F82E69E8EB00B9E302 /* Kingfisher */; };
+		9B06C0FB2E69EBAF00B9E302 /* mm_icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9B06C0FA2E69EBAF00B9E302 /* mm_icon.icon */; };
+		9B06C0FC2E69EBAF00B9E302 /* mm_icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9B06C0FA2E69EBAF00B9E302 /* mm_icon.icon */; };
+		9B06C0FE2E69EC6600B9E302 /* mm_icon_inverted.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9B06C0FD2E69EC6600B9E302 /* mm_icon_inverted.icon */; };
+		9B06C1022E69EFD500B9E302 /* mm_icon_normal.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9B06C1012E69EFD500B9E302 /* mm_icon_normal.icon */; };
 		9B0A358725C5B9ED00802494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0A358625C5B9ED00802494 /* Assets.xcassets */; };
 		9B0B0AB6224693FC00C8C90C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */; };
 		9B0DD44A2226BAF60016C567 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DD4492226BAF60016C567 /* API.swift */; };
@@ -108,7 +113,6 @@
 		9BB2CA702264B05F0012ACD6 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA6F2264B05F0012ACD6 /* Favorite.swift */; };
 		9BB2CA722264B8890012ACD6 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2CA712264B8890012ACD6 /* Share.swift */; };
 		9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB4BC4F225B99F500559170 /* Interface.storyboard */; };
-		9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BB4BC5F225B99F600559170 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */; };
 		9BB4BC61225B99F600559170 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */; };
 		9BB4BC63225B99F600559170 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC62225B99F600559170 /* ComplicationController.swift */; };
@@ -158,13 +162,6 @@
 			remoteGlobalIDString = 9B9C7F98226BF835000534CA;
 			remoteInfo = MacMagazineNotificationServiceExtension;
 		};
-		9BB4BC5B225B99F600559170 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9BCAD66F1F47A08100B54526 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9BB4BC58225B99F600559170;
-			remoteInfo = "MacMagazineWatch Extension";
-		};
 		9BB4BC67225B99F700559170 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9BCAD66F1F47A08100B54526 /* Project object */;
@@ -201,17 +198,6 @@
 			files = (
 				5EB2018E25B3665100E17642 /* MacMagazineWidgetExtensionExtension.appex in Embed Foundation Extensions */,
 				9B9C7FA0226BF836000534CA /* MacMagazineNotificationServiceExtension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BB4BC6F225B99F700559170 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				9BB4BC5A225B99F600559170 /* MacMagazineWatchExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +264,9 @@
 		68F61C1F24F9524200A4E195 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		9B02677F2387581300446C95 /* macmagazine 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "macmagazine 6.xcdatamodel"; sourceTree = "<group>"; };
 		9B02AE491F5C507000EA1A6F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		9B06C0FA2E69EBAF00B9E302 /* mm_icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = mm_icon.icon; sourceTree = "<group>"; };
+		9B06C0FD2E69EC6600B9E302 /* mm_icon_inverted.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = mm_icon_inverted.icon; sourceTree = "<group>"; };
+		9B06C1012E69EFD500B9E302 /* mm_icon_normal.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = mm_icon_normal.icon; sourceTree = "<group>"; };
 		9B0A358625C5B9ED00802494 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B0B0AB5224693FC00C8C90C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9B0DD4492226BAF60016C567 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -346,7 +335,6 @@
 		9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazineWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC50225B99F500559170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9BB4BC54225B99F600559170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineWatchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB4BC5E225B99F600559170 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		9BB4BC60225B99F600559170 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		9BB4BC62225B99F600559170 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -400,14 +388,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9BB4BC56225B99F600559170 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9B560FB625C9C29600F62992 /* Kingfisher in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9BCAD6741F47A08100B54526 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,6 +412,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B560FB625C9C29600F62992 /* Kingfisher in Frameworks */,
+				9B06C0F92E69E8EB00B9E302 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +477,16 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		9B06C1002E69EC9800B9E302 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				9B06C1012E69EFD500B9E302 /* mm_icon_normal.icon */,
+				9B06C0FD2E69EC6600B9E302 /* mm_icon_inverted.icon */,
+				9B06C0FA2E69EBAF00B9E302 /* mm_icon.icon */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		9B0DD4482226B9600016C567 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +545,7 @@
 			children = (
 				9BCAD6831F47A08100B54526 /* Assets.xcassets */,
 				68F61C1F24F9524200A4E195 /* Config.xcconfig */,
+				9B06C1002E69EC9800B9E302 /* Icons */,
 				9BCAD6881F47A08100B54526 /* Info.plist */,
 				9BCAD6851F47A08100B54526 /* LaunchScreen.storyboard */,
 				9B9C7FAC226BFD0F000534CA /* MacMagazine.entitlements */,
@@ -674,7 +667,6 @@
 				9BCAD6771F47A08100B54526 /* MacMagazine.app */,
 				9BE697CD1F4874C20048D68D /* MacMagazineTests.xctest */,
 				9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */,
-				9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */,
 				9B9C7F99226BF835000534CA /* MacMagazineNotificationServiceExtension.appex */,
 				5EB2017E25B3664C00E17642 /* MacMagazineWidgetExtensionExtension.appex */,
 			);
@@ -861,42 +853,22 @@
 			buildConfigurationList = 9BB4BC70225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatch" */;
 			buildPhases = (
 				9BB4BC4B225B99F500559170 /* Resources */,
-				9BB4BC6F225B99F700559170 /* Embed Foundation Extensions */,
 				9BF9654E225E1DB800BAF22D /* Frameworks */,
 				9BF9654F225E1DB800BAF22D /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9BB4BC5C225B99F600559170 /* PBXTargetDependency */,
-			);
-			name = MacMagazineWatch;
-			packageProductDependencies = (
-			);
-			productName = MacMagazineWatch;
-			productReference = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatchExtension" */;
-			buildPhases = (
 				9BB4BC55225B99F600559170 /* Sources */,
-				9BB4BC56225B99F600559170 /* Frameworks */,
-				9BB4BC57225B99F600559170 /* Resources */,
 				9BF82CC9251516AF00D765A5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MacMagazineWatchExtension;
+			name = MacMagazineWatch;
 			packageProductDependencies = (
-				9B560FB525C9C29600F62992 /* Kingfisher */,
+				9B06C0F82E69E8EB00B9E302 /* Kingfisher */,
 			);
-			productName = "MacMagazineWatch Extension";
-			productReference = 9BB4BC59225B99F600559170 /* MacMagazineWatchExtension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productName = MacMagazineWatch;
+			productReference = 9BB4BC4D225B99F500559170 /* MacMagazineWatch.app */;
+			productType = "com.apple.product-type.application";
 		};
 		9BCAD6761F47A08100B54526 /* MacMagazine */ = {
 			isa = PBXNativeTarget;
@@ -952,7 +924,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = MacMagazine;
 				TargetAttributes = {
 					5EB2017D25B3664C00E17642 = {
@@ -967,9 +939,6 @@
 						};
 					};
 					9BB4BC4C225B99F500559170 = {
-						CreatedOnToolsVersion = 10.2;
-					};
-					9BB4BC58225B99F600559170 = {
 						CreatedOnToolsVersion = 10.2;
 					};
 					9BCAD6761F47A08100B54526 = {
@@ -1015,7 +984,6 @@
 				9BCAD6761F47A08100B54526 /* MacMagazine */,
 				9BE697CC1F4874C20048D68D /* MacMagazineTests */,
 				9BB4BC4C225B99F500559170 /* MacMagazineWatch */,
-				9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */,
 				9B9C7F98226BF835000534CA /* MacMagazineNotificationServiceExtension */,
 				5EB2017D25B3664C00E17642 /* MacMagazineWidgetExtensionExtension */,
 			);
@@ -1043,15 +1011,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA127F52B057C46001ECA1A /* Assets.xcassets in Resources */,
-				9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BB4BC57225B99F600559170 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				9B06C0FC2E69EBAF00B9E302 /* mm_icon.icon in Resources */,
 				9BB4BC65225B99F700559170 /* Assets.xcassets in Resources */,
+				9BB4BC51225B99F500559170 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1021,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B06C0FE2E69EC6600B9E302 /* mm_icon_inverted.icon in Resources */,
 				9BA939472260DE37004005AA /* HeaderCell.xib in Resources */,
 				9BA9393E2260DDB8004005AA /* Settings.storyboard in Resources */,
 				68EC284D251E9AED00C859F0 /* Assets.xcassets in Resources */,
@@ -1070,6 +1033,7 @@
 				68012EC0252295600094A204 /* SettingsSubHeaderCell.xib in Resources */,
 				683271972528D0E2004BD4DA /* SettingsDisclaimerFooter.xib in Resources */,
 				9B8B1D2728326896005F9AC4 /* WhatsNew.storyboard in Resources */,
+				9B06C1022E69EFD500B9E302 /* mm_icon_normal.icon in Resources */,
 				9BCAD6871F47A08100B54526 /* LaunchScreen.storyboard in Resources */,
 				68EF53502527103000FCBD3C /* Splash.storyboard in Resources */,
 				9BF886902832522100086514 /* Categories.storyboard in Resources */,
@@ -1080,6 +1044,7 @@
 				9B9C7F94226B6AF4000534CA /* soundcloud.js in Resources */,
 				9BCAD6821F47A08100B54526 /* Main.storyboard in Resources */,
 				9B4A8F9F22357A0300A49239 /* NormalCell.xib in Resources */,
+				9B06C0FB2E69EBAF00B9E302 /* mm_icon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1258,11 +1223,6 @@
 			target = 9B9C7F98226BF835000534CA /* MacMagazineNotificationServiceExtension */;
 			targetProxy = 9B9C7F9E226BF836000534CA /* PBXContainerItemProxy */;
 		};
-		9BB4BC5C225B99F600559170 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9BB4BC58225B99F600559170 /* MacMagazineWatchExtension */;
-			targetProxy = 9BB4BC5B225B99F600559170 /* PBXContainerItemProxy */;
-		};
 		9BB4BC68225B99F700559170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BB4BC4C225B99F500559170 /* MacMagazineWatch */;
@@ -1418,7 +1378,6 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -1456,7 +1415,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
@@ -1492,7 +1450,6 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
@@ -1533,7 +1490,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1600,6 +1556,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1621,6 +1578,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG TEST";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1632,14 +1590,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-4 AppIcon-3 AppIcon-2 AppIcon-1";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
@@ -1671,7 +1628,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
@@ -1700,20 +1656,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MacMagazineWatchExtension/MacMagazineWatchExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazineWatchExtension",
 					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = MacMagazineWatchExtension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1734,42 +1690,6 @@
 			};
 			name = Test;
 		};
-		9BB03BB3276B85AA000B85AD /* Test */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MacMagazineWatchExtension/MacMagazineWatchExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MacMagazineWatchExtension",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.8.1;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitExtension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				WATCHOS_DEPLOYMENT_TARGET = 10.6;
-			};
-			name = Test;
-		};
 		9BB03BB4276B85AA000B85AD /* Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1779,7 +1699,6 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineNotificationServiceExtension/MacMagazineNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineNotificationServiceExtension/Info.plist;
@@ -1820,7 +1739,6 @@
 				CODE_SIGN_ENTITLEMENTS = MacMagazineWidgetExtension/MacMagazineWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MacMagazineWidgetExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -1849,20 +1767,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MacMagazineWatchExtension/MacMagazineWatchExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazineWatchExtension",
 					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = MacMagazineWatchExtension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1887,15 +1805,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MacMagazineWatchExtension/MacMagazineWatchExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1903,7 +1822,6 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = MacMagazineWatchExtension;
 				INFOPLIST_FILE = MacMagazineWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1914,80 +1832,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Wildcard";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				WATCHOS_DEPLOYMENT_TARGET = 10.6;
-			};
-			name = Release;
-		};
-		9BB4BC6C225B99F700559170 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MacMagazineWatchExtension/MacMagazineWatchExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MacMagazineWatchExtension",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.8.1;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitExtension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				WATCHOS_DEPLOYMENT_TARGET = 10.6;
-			};
-			name = Debug;
-		};
-		9BB4BC6D225B99F700559170 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MacMagazineWatchExtension/MacMagazineWatchExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.8.1.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
-				"DEVELOPMENT_TEAM[sdk=watchos*]" = A5VW9QUF9L;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MacMagazineWatchExtension",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MacMagazineWatchExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 4.8.1;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.watchkitExtension;
-				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Wildcard";
 				SDKROOT = watchos;
@@ -2034,6 +1878,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2055,6 +1900,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2097,6 +1943,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2111,6 +1958,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -2123,14 +1971,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-4 AppIcon-3 AppIcon-2 AppIcon-1";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
@@ -2161,7 +2008,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-4 AppIcon-3 AppIcon-2 AppIcon-1";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/MacMagazine.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2169,7 +2016,6 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4.8.1.0;
 				DEBUG_ACTIVITY_MODE = "";
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2202,7 +2048,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
@@ -2231,7 +2076,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacMagazine",
@@ -2274,16 +2118,6 @@
 				9B9C7FA2226BF836000534CA /* Debug */,
 				9BB03BB4276B85AA000B85AD /* Test */,
 				9B9C7FA3226BF836000534CA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9BB4BC6E225B99F700559170 /* Build configuration list for PBXNativeTarget "MacMagazineWatchExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9BB4BC6C225B99F700559170 /* Debug */,
-				9BB03BB3276B85AA000B85AD /* Test */,
-				9BB4BC6D225B99F700559170 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2356,6 +2190,11 @@
 			productName = Kingfisher;
 		};
 		685315FA25153ADE008F6CDC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		9B06C0F82E69E8EB00B9E302 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BF82CBF2515169100D765A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;

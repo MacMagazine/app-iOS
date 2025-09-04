@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "AppIcon-1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +12,6 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AppIcon-1_black.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,13 +23,11 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "appicon_tinted.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
     },
     {
-      "filename" : "AppIcon-1 1.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"
