@@ -39,12 +39,30 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	// MARK: - View lifecycle -
 
+    private func configureContentInsets() {
+		// Configure content inset adjustment behavior for child view controllers
+		for viewController in orderedViewControllers {
+			if let webViewController = viewController as? WebViewController {
+				// Configure the web view's scroll view content inset adjustment behavior
+				webViewController.view.subviews.forEach { subview in
+					if let scrollView = subview as? UIScrollView {
+						scrollView.contentInsetAdjustmentBehavior = .never
+					}
+				}
+			}
+		}
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view, typically from a nib.
 		dataSource = self
 		delegate = self
+
+		// Configure extended layout for content to extend under bars
+		extendedLayoutIncludesOpaqueBars = true
+		edgesForExtendedLayout = .all
 
 		var controller = UIViewController()
 		if !orderedViewControllers.isEmpty {
@@ -60,6 +78,9 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+
+        // Ensure proper content insets for child view controllers
+		configureContentInsets()
 
 		guard !links.isEmpty,
 			  let link = links[selectedIndex].link else {

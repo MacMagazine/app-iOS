@@ -86,6 +86,14 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>openMostRecentPost</string>
 		</dict>
+        <dict>
+            <key>UIApplicationShortcutItemIconSymbolName</key>
+            <string>magnifyingglass</string>
+            <key>UIApplicationShortcutItemTitle</key>
+            <string>Buscar nos posts</string>
+            <key>UIApplicationShortcutItemType</key>
+            <string>openSearchPost</string>
+        </dict>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

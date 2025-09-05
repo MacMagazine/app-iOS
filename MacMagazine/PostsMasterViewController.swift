@@ -120,6 +120,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
         NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShowPostFromWidget(_:)), name: .showPostFromWidget, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionSearchPost(_:)), name: .shortcutActionSearchPost, object: nil)
 
 		if Settings().isPad {
 			NotificationCenter.default.addObserver(self, selector: #selector(onUpdateSelectedPost(_:)), name: .updateSelectedPost, object: nil)
@@ -646,6 +647,12 @@ extension PostsMasterViewController {
 		showDetailController(with: link)
 	}
 
+    @objc func onShortcutActionSearchPost(_ notification: Notification) {
+        delay(0.01) { [weak self] in
+            self?.openSearch()
+        }
+    }
+
 }
 
 // MARK: - Common Methods -
@@ -869,6 +876,10 @@ extension PostsMasterViewController {
 
 extension PostsMasterViewController {
     @IBAction private func search(_ sender: Any) {
+        openSearch()
+    }
+
+    fileprivate func openSearch() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         resultsTableController?.showTyping()

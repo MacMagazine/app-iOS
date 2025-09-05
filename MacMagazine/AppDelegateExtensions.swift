@@ -16,6 +16,7 @@ extension Notification.Name {
 	static let shortcutActionLastPost = Notification.Name("shortcutActionLastPost")
 	static let shortcutActionRecentPost = Notification.Name("shortcutActionRecentPost")
 	static let showPostFromWidget = Notification.Name("showPostFromWidget")
+    static let shortcutActionSearchPost = Notification.Name("shortcutActionSearchPost")
 	static let reloadWeb = Notification.Name("reloadWeb")
 	static let scrollToTop = Notification.Name("scrollToTop")
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")

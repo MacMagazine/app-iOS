@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -368,6 +368,10 @@
 		9BFD100528DF5F3B002B36A6 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9BFD100928DF5F8F002B36A6 /* CoreDataStackExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0F9AA4892E3C0B870099EB48 /* Enums */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Enums; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5EB2017B25B3664C00E17642 /* Frameworks */ = {
@@ -766,6 +770,7 @@
 		9BE697DA1F487DAB0048D68D /* Comum */ = {
 			isa = PBXGroup;
 			children = (
+				0F9AA4892E3C0B870099EB48 /* Enums */,
 				9B0DD4482226B9600016C567 /* API */,
 				9BC9B12F1F5C96A500C4DF17 /* Cells */,
 				9B3C7A5522638012001146A4 /* Controllers */,
@@ -885,6 +890,9 @@
 				9B9C7F9F226BF836000534CA /* PBXTargetDependency */,
 				9BB4BC68225B99F700559170 /* PBXTargetDependency */,
 				5EB2018D25B3665100E17642 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0F9AA4892E3C0B870099EB48 /* Enums */,
 			);
 			name = MacMagazine;
 			packageProductDependencies = (

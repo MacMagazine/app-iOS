@@ -87,14 +87,19 @@ extension SceneDelegate {
     private func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
         // Handle app shortcut items (3D Touch shortcuts, etc.)
         if shortcutItem.type == "openLastSeenPost" ||
-            shortcutItem.type == "openMostRecentPost" {
+            shortcutItem.type == "openMostRecentPost" ||
+            shortcutItem.type == "openSearchPost" {
+
+            let shortcutItem = ShortcutActions(rawValue: shortcutItem.type) ?? .none
 
             guard let tabController = Settings.rootViewController as? UITabBarController else {
-                shortcutAction = shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost
+                shortcutAction = shortcutItem.notificationName
                 return
             }
             tabController.selectedIndex = 0
-            NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
+
+            guard let notificationName = shortcutItem.notificationName else { return }
+            NotificationCenter.default.post(name: notificationName, object: nil)
         }
     }
 }
@@ -105,7 +110,7 @@ extension SceneDelegate {
     private func handleUserActivity(_ userActivity: NSUserActivity) {
         // Handle user activities (Handoff, Spotlight search, etc.)
         if userActivity.activityType == CSSearchableItemActionType,
-            let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
+            let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
             if Settings.rootViewController is UITabBarController {
                 showDetailController(with: identifier)
             } else {
