@@ -115,7 +115,9 @@ struct PostCell: View {
 
     @ViewBuilder
     private var imageForRenderingMode: some View {
-        if renderingMode != .accented {
+        if renderingMode == .accented {
+            Color.clear
+        } else {
             image.resizable().scaledToFill()
         }
     }
