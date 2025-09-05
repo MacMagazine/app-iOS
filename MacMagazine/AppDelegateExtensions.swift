@@ -16,6 +16,7 @@ import UIKit
 extension Notification.Name {
 	static let shortcutActionLastPost = Notification.Name("shortcutActionLastPost")
 	static let shortcutActionRecentPost = Notification.Name("shortcutActionRecentPost")
+    static let shortcutActionSearchPost = Notification.Name("shortcutActionSearchPost")
 	static let reloadWeb = Notification.Name("reloadWeb")
 	static let scrollToTop = Notification.Name("scrollToTop")
 	static let favoriteUpdated = Notification.Name("favoriteUpdated")
@@ -124,14 +125,19 @@ extension AppDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         if shortcutItem.type == "openLastSeenPost" ||
-            shortcutItem.type == "openMostRecentPost" {
+            shortcutItem.type == "openMostRecentPost" ||
+            shortcutItem.type == "openSearchPost" {
+
+            let shortcutItem = ShortcutActions(rawValue: shortcutItem.type) ?? .none
 
             guard let tabController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController as? UITabBarController else {
-                shortcutAction = shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost
+                shortcutAction = shortcutItem.notificationName
                 return
             }
             tabController.selectedIndex = 0
-            NotificationCenter.default.post(name: shortcutItem.type == "openLastSeenPost" ? .shortcutActionLastPost : .shortcutActionRecentPost, object: nil)
+
+            guard let notificationName = shortcutItem.notificationName else { return }
+            NotificationCenter.default.post(name: notificationName, object: nil)
         }
     }
 }
@@ -141,7 +147,7 @@ extension AppDelegate {
 extension AppDelegate {
 	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 		if userActivity.activityType == CSSearchableItemActionType {
-			if let identifier = userActivity.userInfo? [CSSearchableItemActivityIdentifier] as? String {
+			if let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 guard (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController as? UITabBarController != nil else {
                     widgetSpotlightPost = identifier
                     return true
