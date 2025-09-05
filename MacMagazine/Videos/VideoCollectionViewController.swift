@@ -430,7 +430,7 @@ extension VideoCollectionViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat = 0
 
-		let screen = UIScreen.main.bounds.size
+		let screen = collectionView.bounds.size
 		// YouTube thumbnail images size (16:9)
 		let ratio: CGFloat = 1.778
 
