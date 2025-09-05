@@ -30,7 +30,7 @@ class PodcastViewController: UIViewController {
 
         playerHeight.constant = 0.0
 
-		guard let viewController = self.children[0] as? PodcastMasterViewController else {
+		guard let viewController = self.children[1] as? PodcastMasterViewController else {
 			return
 		}
 		viewController.play = play
@@ -71,7 +71,7 @@ class PodcastViewController: UIViewController {
 
     fileprivate func reloadData() {
 		if self.tabBarController?.selectedIndex == 1 {
-            guard let viewController = self.children[0] as? PodcastMasterViewController else {
+            guard let viewController = self.children[1] as? PodcastMasterViewController else {
                 return
             }
 			viewController.tableView.reloadData()
@@ -91,7 +91,7 @@ class PodcastViewController: UIViewController {
 	}
 
 	@IBAction private func showFavorites(_ sender: Any) {
-        guard let viewController = self.children[0] as? PodcastMasterViewController else {
+        guard let viewController = self.children[1] as? PodcastMasterViewController else {
             return
         }
         viewController.showFavoritesAction()
@@ -119,7 +119,7 @@ class PodcastViewController: UIViewController {
     }
 
     fileprivate func play(_ podcast: Podcast?) {
-        guard let viewController = self.children[1] as? PlayerViewController else {
+        guard let viewController = self.children[0] as? PlayerViewController else {
             return
         }
 		viewController.show = showWebView
@@ -132,7 +132,7 @@ class PodcastViewController: UIViewController {
 
 extension PodcastViewController: UISearchBarDelegate {
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-		guard let viewController = self.children[0] as? PodcastMasterViewController else {
+		guard let viewController = self.children[1] as? PodcastMasterViewController else {
 			return
 		}
 		viewController.resultsTableController?.showTyping()
@@ -140,7 +140,7 @@ extension PodcastViewController: UISearchBarDelegate {
 
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		guard let text = searchBar.text,
-			let viewController = self.children[0] as? PodcastMasterViewController
+			let viewController = self.children[1] as? PodcastMasterViewController
 			else {
 				return
 		}

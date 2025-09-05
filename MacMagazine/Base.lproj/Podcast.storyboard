@@ -12,7 +12,6 @@
         <scene sceneID="vsx-Zo-BK5">
             <objects>
                 <navigationController title="NoArNavigation" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="GbX-Zp-bIv" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Podcast" image="microphone.fill" catalog="system" id="59e-2Y-DJH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Tqr-74-5pJ">
@@ -54,7 +53,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfs-yV-yEe" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="644" y="-1285"/>
+            <point key="canvasLocation" x="630" y="-993"/>
         </scene>
         <!--Podcast View Controller-->
         <scene sceneID="yun-cy-K9P">
@@ -68,14 +67,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="746"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="512"/>
-                                <connections>
-                                    <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-MC-Tvc">
-                                <rect key="frame" x="0.0" y="512" width="414" height="166"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="166"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="166" id="3US-UY-uQE"/>
                                 </constraints>
@@ -83,19 +76,25 @@
                                     <segue destination="dJn-2U-uf9" kind="embed" id="GHc-83-1mb"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-nE-zS6">
+                                <rect key="frame" x="0.0" y="166" width="414" height="588"/>
+                                <connections>
+                                    <segue destination="dI9-bf-84Z" kind="embed" id="Esd-kv-Aog"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="slx-MC-Tvc" firstAttribute="leading" secondItem="SlD-dw-tjD" secondAttribute="leading" id="049-Sf-hrY"/>
-                            <constraint firstAttribute="trailing" secondItem="slx-MC-Tvc" secondAttribute="trailing" id="7Xh-Ft-8ae"/>
-                            <constraint firstItem="Sxe-hu-yMD" firstAttribute="top" secondItem="slx-MC-Tvc" secondAttribute="bottom" id="AVO-YF-8mZ"/>
-                            <constraint firstItem="slx-MC-Tvc" firstAttribute="top" secondItem="7Pr-nE-zS6" secondAttribute="bottom" id="Mgj-QU-tea"/>
-                            <constraint firstItem="7Pr-nE-zS6" firstAttribute="leading" secondItem="SlD-dw-tjD" secondAttribute="leading" id="hP9-vx-mMm"/>
-                            <constraint firstItem="7Pr-nE-zS6" firstAttribute="top" secondItem="Xvo-5h-vIB" secondAttribute="bottom" id="icc-Db-zKq"/>
-                            <constraint firstAttribute="trailing" secondItem="7Pr-nE-zS6" secondAttribute="trailing" id="kUk-Nd-AxK"/>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="centerX" secondItem="SlD-dw-tjD" secondAttribute="centerX" id="DaV-MH-300"/>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="leading" secondItem="7Pr-nE-zS6" secondAttribute="leading" id="IjU-en-lh2"/>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="leading" secondItem="SlD-dw-tjD" secondAttribute="leadingMargin" constant="-20" id="JqK-iT-d4B"/>
+                            <constraint firstItem="Sxe-hu-yMD" firstAttribute="top" secondItem="7Pr-nE-zS6" secondAttribute="bottomMargin" id="mkp-oO-6Kn"/>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="top" secondItem="Xvo-5h-vIB" secondAttribute="bottom" id="tDZ-Nw-nio"/>
+                            <constraint firstItem="7Pr-nE-zS6" firstAttribute="top" secondItem="slx-MC-Tvc" secondAttribute="bottom" id="tXz-1f-z1N"/>
+                            <constraint firstItem="slx-MC-Tvc" firstAttribute="trailing" secondItem="7Pr-nE-zS6" secondAttribute="trailing" id="zZ2-Yz-CN9"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="RDY-Ty-82q">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="DiB-v8-Kg9">
@@ -191,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1A-ga-PBM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="643.47826086956525" y="-908.03571428571422"/>
+            <point key="canvasLocation" x="629" y="-1290"/>
         </scene>
     </scenes>
     <resources>
