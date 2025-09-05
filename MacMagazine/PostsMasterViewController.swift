@@ -128,7 +128,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         NotificationCenter.default.addObserver(self, selector: #selector(onReloadData(_:)), name: .reloadData, object: nil)
 
-		navigationItem.titleView = logoView
+        navigationItem.titleView = Settings().isPhone ? logoView : nil
 		navigationItem.title = nil
         navigationItem.preferredSearchBarPlacement = .stacked
 
@@ -511,7 +511,7 @@ extension PostsMasterViewController {
 
         // Pull to Refresh
         if offset.y < -150 &&
-            navigationItem.titleView == logoView &&
+            navigationItem.titleView == (Settings().isPhone ? logoView : nil) &&
             navigationItem.searchController == nil &&
 			fetchController?.fetchRequest.predicate == nil {
 			showSpin()
@@ -532,7 +532,7 @@ extension PostsMasterViewController {
     func hideSpin() {
 		DispatchQueue.main.async {
         	self.spin.stopAnimating()
-        	self.navigationItem.titleView = self.logoView
+            self.navigationItem.titleView = Settings().isPhone ? self.logoView : nil
 		}
     }
 }
@@ -855,7 +855,7 @@ extension PostsMasterViewController {
     fileprivate func showAllPosts() {
         fetchController?.fetchRequest.predicate = nil
 
-        self.navigationItem.titleView = logoView
+        self.navigationItem.titleView = Settings().isPhone ? logoView : nil
         self.navigationItem.title = nil
 
         reloadController(.transitionFlipFromLeft)

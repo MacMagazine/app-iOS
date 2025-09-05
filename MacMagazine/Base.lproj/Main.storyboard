@@ -59,7 +59,7 @@
                     <navigationItem key="navigationItem" id="URb-53-j4n">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="twA-3I-XfB">
-                            <rect key="frame" x="1597440" y="-589760" width="0.0" height="0.0"/>
+                            <rect key="frame" x="3194880" y="-1179644" width="0.0" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
@@ -140,7 +140,7 @@
         <!--Posts-->
         <scene sceneID="hct-bz-jAy">
             <objects>
-                <splitViewController title="Posts" extendedLayoutIncludesOpaqueBars="YES" id="Yhy-9h-hZ1" sceneMemberID="viewController">
+                <splitViewController title="Posts" extendedLayoutIncludesOpaqueBars="YES" allowDoubleColumnStyle="YES" id="Yhy-9h-hZ1" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Posts" image="text.page" catalog="system" id="iZz-lw-mOc"/>
                     <connections>
@@ -157,7 +157,7 @@
             <objects>
                 <tableViewController title="Posts" extendedLayoutIncludesOpaqueBars="YES" clearsSelectionOnViewWillAppear="NO" id="Jej-5Q-aqJ" customClass="PostsMasterViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="posts" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="33" estimatedSectionHeaderHeight="33" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" id="BzE-Hd-ooV">
-                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="695"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="separatorColor" systemColor="systemGray5Color"/>
@@ -237,7 +237,7 @@
                 <pageViewController storyboardIdentifier="detailController" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qRi-qc-cAu">
                         <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="2RS-0E-jz0">
+                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="2RS-0E-jz0">
                             <rect key="frame" x="120" y="5.6666666666666679" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -394,7 +394,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lNV-kD-aRc"/>
+        <segue reference="YQQ-bx-LIJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="antenna.radiowaves.left.and.right" catalog="system" width="128" height="111"/>
