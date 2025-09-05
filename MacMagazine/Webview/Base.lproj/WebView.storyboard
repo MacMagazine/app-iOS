@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-3F-pZB">
-                                <rect key="frame" x="0.0" y="96" width="414" height="732"/>
+                                <rect key="frame" x="0.0" y="96" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
@@ -31,7 +31,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-TB-4Ft">
                                 <rect key="frame" x="0.0" y="96" width="414" height="732"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="x4L-t4-vbR">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" animating="YES" style="medium" id="x4L-t4-vbR">
                                         <rect key="frame" x="197" y="356" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="color" name="MMBlueWhite"/>
@@ -45,7 +45,7 @@
                             <constraint firstItem="cpQ-3F-pZB" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="8WW-eq-IfG"/>
                             <constraint firstItem="x4L-t4-vbR" firstAttribute="centerY" secondItem="cpQ-3F-pZB" secondAttribute="centerY" id="C5K-lv-aXx"/>
                             <constraint firstItem="x4L-t4-vbR" firstAttribute="centerX" secondItem="cpQ-3F-pZB" secondAttribute="centerX" id="G7I-bU-R2y"/>
-                            <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="cpQ-3F-pZB" secondAttribute="bottomMargin" constant="8" id="K5H-r3-AdM"/>
+                            <constraint firstItem="frX-7l-mly" firstAttribute="top" secondItem="cpQ-3F-pZB" secondAttribute="bottomMargin" id="K5H-r3-AdM"/>
                             <constraint firstItem="cpQ-3F-pZB" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="WuL-UJ-Anh"/>
                             <constraint firstItem="6ad-TB-4Ft" firstAttribute="top" secondItem="eKl-mZ-FRj" secondAttribute="bottom" id="cSs-0r-gyO"/>
                             <constraint firstItem="6ad-TB-4Ft" firstAttribute="leading" secondItem="V9J-eg-qh6" secondAttribute="leading" id="iuw-gz-FLO"/>

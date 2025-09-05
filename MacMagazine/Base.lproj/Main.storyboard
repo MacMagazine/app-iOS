@@ -58,8 +58,8 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="URb-53-j4n">
                         <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="twA-3I-XfB">
-                            <rect key="frame" x="399360" y="-147362" width="0.0" height="0.0"/>
+                        <view key="titleView" contentMode="scaleToFill" id="twA-3I-XfB">
+                            <rect key="frame" x="798720" y="-294818" width="0.0" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-1n-TBw">
@@ -237,7 +237,7 @@
                 <pageViewController storyboardIdentifier="detailController" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="oLg-jw-p4c" customClass="PostsDetailViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qRi-qc-cAu">
                         <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="2RS-0E-jz0">
+                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="2RS-0E-jz0">
                             <rect key="frame" x="120" y="5.6666666666666679" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -306,7 +306,7 @@
         <!--PostsDetailNavigation-->
         <scene sceneID="xa0-Qk-bfW">
             <objects>
-                <navigationController title="PostsDetailNavigation" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="fD0-My-KZk" sceneMemberID="viewController">
+                <navigationController title="PostsDetailNavigation" extendedLayoutIncludesOpaqueBars="YES" id="fD0-My-KZk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="J71-xY-G4C">
                         <rect key="frame" x="0.0" y="94" width="390" height="54"/>
