@@ -49,10 +49,11 @@ class DisqusViewController: UIViewController {
 
     fileprivate func loadWebView() {
         let color = Settings().isDarkMode ? "black" : "none"
+        let linkColor = Settings().isDarkMode ? "white" : "#0096D3"
         let content = """
             <html><head>
                 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-                <style>body { background-color: \(color); padding: 20px; }</style>
+                <style>body { background-color: \(color); a { color: \(linkColor) }; padding: 20px; }</style>
             </head>
             <body><div id='disqus_thread'></div>
             </body></html>
