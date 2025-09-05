@@ -14,6 +14,7 @@ struct PostCell: View {
     @Environment(\.widgetFamily) var widgetFamily
     @Environment(\.redactionReasons) var redactionReasons
     @Environment(\.accessibilityEnabled) var accessibilityEnabled
+    @Environment(\.widgetRenderingMode) var renderingMode
 
     let post: PostData
 
@@ -79,6 +80,7 @@ struct PostCell: View {
                     Text(title)
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
+                        .widgetAccentable() // This will be in the accent group in tinted mode
                     Spacer(minLength: 0)
                 }
             }
@@ -88,18 +90,34 @@ struct PostCell: View {
     var coverStyle: some View {
         VStack {
             Spacer(minLength: 0)
-            contentView.shadow(color: .black, radius: 5)
+            contentView
                 .padding()
         }
-        .background(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.black]),
-                                         startPoint: .top,
-                                         endPoint: .bottom))
+        .background(backgroundForRenderingMode)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
-        .background(image.resizable().scaledToFill())
+        .background(imageForRenderingMode)
         .containerBackground(Color.clear, for: .widget)
         .clipped()
         .colorScheme(.dark)
+    }
+
+    @ViewBuilder
+    private var backgroundForRenderingMode: some View {
+        if renderingMode == .accented {
+            Color.clear
+        } else {
+            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.black]),
+                           startPoint: .top,
+                           endPoint: .bottom)
+        }
+    }
+
+    @ViewBuilder
+    private var imageForRenderingMode: some View {
+        if renderingMode != .accented {
+            image.resizable().scaledToFill()
+        }
     }
 }
 
