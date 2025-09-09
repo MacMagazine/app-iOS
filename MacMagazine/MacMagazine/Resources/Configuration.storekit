@@ -1,0 +1,139 @@
+{
+  "identifier" : "B267CFDB",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "pt_BR",
+    "_storefront" : "BRA",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 4,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : {
+          "index" : 1,
+          "type" : "purchase"
+        },
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 5
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "0A60022E",
+      "localizations" : [
+
+      ],
+      "name" : "Assinaturas",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "10.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "33E27B74",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Assinatura mensal",
+              "displayName" : "Remover propagandas",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "MMASSINATURAMENSAL",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Remover propagandas (mensal)",
+          "subscriptionGroupID" : "0A60022E",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "99.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EC489E7F",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Assinatura anual",
+              "displayName" : "Remover propagandas",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "MMASSINATURAANUAL",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Remover propagandas (anual)",
+          "subscriptionGroupID" : "0A60022E",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "subscriptionOffersKeyPair" : {
+    "id" : "CA6C26D9",
+    "privateKey" : "MF8CAQEEGFNdmXwbztKRElvBEQRj1CQDG7Zr+BCz1KAKBggqhkjOPQMBAaE0AzIA\nBBNChsXDXfzhsrIodoIHyP3B1CiiB/WphGoPJmcfQePk1ZUw5ws7eLGqVN45qEUA\nkw==",
+    "publicKey" : "MEkwEwYHKoZIzj0CAQYIKoZIzj0DAQEDMgAEE0KGxcNd/OGysih2ggfI/cHUKKIH\n9amEag8mZx9B4+TVlTDnCzt4sapU3jmoRQCT"
+  },
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
