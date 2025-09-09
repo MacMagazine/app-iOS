@@ -1,0 +1,15 @@
+Carthage/
+Docs/
+.DS_store
+
+## Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+!*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+!*.xcodeproj/project.xcworkspace/xcshareddata
+!*.xcodeproj/project.xcworkspace/xcuserdata
+
+Package.resolved
+!*.xcodeproj/**/Package.resolved
