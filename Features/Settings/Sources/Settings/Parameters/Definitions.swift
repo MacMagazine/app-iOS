@@ -4,15 +4,11 @@ import UIComponentsLibrary
 enum IconType: String, CaseIterable {
 	case normal
 	case alternative
-	case normalInverted
-	case alternativeInverted
 
 	var appIcon: String {
 		switch self {
-		case .normal: "AppIcon-1"
-		case .alternative: "AppIcon-2"
-		case .normalInverted: "AppIcon-3"
-		case .alternativeInverted: "AppIcon-4"
+		case .normal: "mm_icon_normal"
+		case .alternative: "mm_icon_inverted"
 		}
 	}
 
@@ -20,8 +16,6 @@ enum IconType: String, CaseIterable {
 		switch self {
 		case .normal: "Ícone do aplicativo com fundo branco.\(selected ? " Selecionado." : "")"
 		case .alternative: "Ícone do aplicativo com fundo azul.\(selected ? " Selecionado." : "")"
-		case .normalInverted: "Ícone azul do aplicativo com fundo preto.\(selected ? " Selecionado." : "")"
-		case .alternativeInverted: "Ícone claro do aplicativo com fundo preto.\(selected ? " Selecionado." : "")"
 		}
 	}
 }

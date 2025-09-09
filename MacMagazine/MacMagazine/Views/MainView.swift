@@ -21,7 +21,7 @@ struct MainView: View {
                 }
 
                 Tab("Videos", systemImage: "play.rectangle.fill", value: .videos) {
-                    VideosFullView()
+                    VideosView()
                         .ignoresSafeArea(edges: .bottom)
                 }
 

@@ -5,7 +5,6 @@ import FirebaseAnalytics
 import FirebaseCore
 import Settings
 import SwiftUI
-import TipKit
 import UIComponentsLibrary
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -48,10 +47,6 @@ struct MacMagazineApp: App {
 				.environmentObject(viewModel.settingsViewModel)
 
 				.task {
-#if DEBUG
-                    // try? Tips.resetDatastore()
-#endif
-                    try? Tips.configure()
 					try? await viewModel.settingsViewModel.getPurchasableProducts()
 					await viewModel.settingsViewModel.getSettings()
 					try? await viewModel.newsViewModel.getNews()

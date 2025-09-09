@@ -114,6 +114,7 @@ extension SettingsViewModel {
 			storage.update(appIcon: icon)
 			self.icon = icon
 		} catch {
+            print(error.localizedDescription)
 		}
 	}
 

@@ -13,8 +13,6 @@ public struct PushOptionsView: View {
 			.font(.headline)
 			.foregroundColor(theme.text.terciary.color)
             .padding(.vertical)) {
-				SettingsTips.notifications.tipView(with: theme)
-
 				optionsView
                     .padding(.leading)
 			}

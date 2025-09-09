@@ -8,67 +8,44 @@ import YouTubeLibrary
 public struct VideosView: View {
 	@Environment(\.theme) private var theme: ThemeColor
 	@EnvironmentObject private var viewModel: VideosViewModel
+	@State private var search: String?
 
-	@State var action: YouTubePlayerAction = .idle
-
-	private var width: CGFloat
-
-	public init(availableWidth: CGFloat) {
-		self.width = min(360, availableWidth * 0.82)
-	}
+	public init() {}
 
 	public var body: some View {
-		VStack {
-			HeaderView(title: "Vídeos",
-                       type: HeaderButtonType.text("Mais"),
-                       theme: theme) {
-				withAnimation {
-					viewModel.options = .all
+		ZStack {
+			(theme.main.background.color ?? Color(uiColor: .systemGray6))
+			.edgesIgnoringSafeArea(.all)
+
+			VStack {
+				HStack {
+                    Text("Vídeos")
+                        .font(.largeTitle)
+                        .foregroundColor(theme.text.terciary.color)
+
+                    Spacer()
 				}
+
+				ErrorView(message: viewModel.status.reason)
+					.padding(.top)
+				VideosFullscreenView(api: viewModel.youtube,
+									 favorite: viewModel.options == .favorite,
+									 search: search,
+									 theme: theme)
+				Spacer()
 			}
-
-			ErrorView(message: viewModel.status.reason)
-				.padding(.top)
-
-			HomeVideosView(api: viewModel.youtube, theme: theme, width: width)
-				.padding(.bottom)
-				.background(YouTubePlayerView(api: viewModel.youtube,
-											  action: $action).opacity(0))
-
-			Spacer()
+			.padding()
 		}
-		.padding(.horizontal)
 		.environment(\.managedObjectContext, viewModel.context)
 
-		.task {
-			try? await viewModel.youtube.getVideos()
-		}
-
-		.onReceive(viewModel.youtube.$selectedVideo) { value in
-			guard let videoId = value?.videoId else {
-				action = .idle
-				return
-			}
-
-			action = .cue(videoId, value?.current ?? 0)
-		}
-
-		.onChange(of: action) { action in
-			switch action {
-			case .paused(let videoId, let current):
-				viewModel.youtube.update(videoId: videoId, current: current)
-				viewModel.youtube.selectedVideo = nil
-				self.action = .idle
-			default: break
-			}
-		}
-	}
+        .task {
+            try? await viewModel.youtube.getVideos()
+        }
+    }
 }
 
-struct VideosView_Previews: PreviewProvider {
-	static var previews: some View {
-		VideosView(availableWidth: 360)
-			.environmentObject(VideosViewModel())
-			.environment(\.theme, ThemeColor())
-	}
+#Preview {
+    VideosView()
+        .environmentObject(VideosViewModel())
+        .environment(\.theme, ThemeColor())
 }

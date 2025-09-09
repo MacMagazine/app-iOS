@@ -17,7 +17,6 @@ public protocol TipType: CaseIterable, Equatable {
 	func show()
 }
 
-@available(iOS 17, *)
 extension TipType {
 	public func add(next: ((any TipType) -> Void)?) -> [Tip.Action] {
 		if self.isLast { [] } else {
@@ -28,7 +27,6 @@ extension TipType {
 	}
 }
 
-@available(iOS 17, *)
 struct MMTipViewStyle: TipViewStyle {
 	func makeBody(configuration: Configuration) -> some View {
 		VStack(alignment: .leading, spacing: 20) {
@@ -75,13 +73,11 @@ struct MMTipViewStyle: TipViewStyle {
 }
 
 extension View {
-	@available(iOS 17, *)
 	public func style(theme: ThemeColor) -> some View {
 		self.modifier(CustomTipView(theme: theme))
 	}
 }
 
-@available(iOS 17, *)
 struct CustomTipView: ViewModifier {
 	private let theme: ThemeColor
 
