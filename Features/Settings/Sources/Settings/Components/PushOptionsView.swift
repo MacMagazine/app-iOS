@@ -14,7 +14,6 @@ public struct PushOptionsView: View {
 			.foregroundColor(theme.text.terciary.color)
             .padding(.vertical)) {
 				optionsView
-                    .padding(.leading)
 			}
 	}
 }
@@ -37,9 +36,11 @@ extension PushOptionsView {
 }
 
 #Preview {
-	List {
-		PushOptionsView()
-            .environment(\.theme, ThemeColor())
-            .environmentObject(SettingsViewModel())
-	}
+    VStack {
+        PushOptionsView()
+        Spacer()
+    }
+    .padding()
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel())
 }

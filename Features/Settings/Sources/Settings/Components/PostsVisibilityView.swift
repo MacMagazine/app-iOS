@@ -9,14 +9,14 @@ public struct PostsVisibilityView: View {
     public init() {}
     
     public var body: some View {
-        Section(content: {
+        VStack {
             Button(action: { viewModel.cache = .readAll },
                    label: {
                 Text("Marcar todos os posts como lidos".uppercased())
                     .roundedFullSize(fill: theme.button.primary.color ?? .blue)
             })
             .padding(.vertical)
-            
+
             Toggle("Identificar posts já lidos", isOn: $viewModel.postRead)
                 .tint(theme.button.primary.color)
             Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)
@@ -53,18 +53,15 @@ public struct PostsVisibilityView: View {
                                               stroke: theme.button.destructive.color ?? .blue)
                     })
                 }
-                .padding([.top, .leading])
-                .padding([.bottom, .trailing], 10)
-                
+                .padding()
+
             }, label: {
                 Text("Limpar cache do app")
             })
             .tint(theme.main.tint.color)
             
-        })
-        .padding(.leading)
-        .padding(.trailing, 10)
-        
+        }
+
         .onChange(of: viewModel.postRead) { _, value in
             viewModel.storage.update(postRead: value)
             if !value {
@@ -78,9 +75,11 @@ public struct PostsVisibilityView: View {
 }
 
 #Preview {
-    List {
+    VStack {
         PostsVisibilityView()
-            .environment(\.theme, ThemeColor())
-            .environmentObject(SettingsViewModel())
+        Spacer()
     }
+    .padding()
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel())
 }

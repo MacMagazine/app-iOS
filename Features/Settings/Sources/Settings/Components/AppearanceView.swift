@@ -20,8 +20,6 @@ public struct AppearanceView: View {
                     iconsView
                         .padding(.bottom, 10)
                 }
-                .padding(.leading)
-                .padding(.trailing, 10)
             }
             .task {
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(theme.text.primary.color ?? .primary)], for: .normal)
@@ -80,9 +78,11 @@ extension AppearanceView {
 }
 
 #Preview {
-    List {
+    VStack {
         AppearanceView()
-            .environment(\.theme, ThemeColor())
-            .environmentObject(SettingsViewModel())
+        Spacer()
     }
+    .padding()
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel())
 }

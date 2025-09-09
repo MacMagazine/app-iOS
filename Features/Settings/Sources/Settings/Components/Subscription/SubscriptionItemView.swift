@@ -49,7 +49,7 @@ struct SubscriptionItemView: View {
 
 #Preview {
     let identifier = UUID().uuidString
-    return List {
+    return VStack {
         SubscriptionItemView(product: SubscriptionItemView.Product(title: "Assinatura Mensal",
                                                                    duration: "1 mês",
                                                                    price: "R$ 99,90",
@@ -70,6 +70,7 @@ struct SubscriptionItemView: View {
                                                                    identifier: identifier,
                                                                    accessibility: ""),
                              selectedProduct: .constant(identifier))
-    }
-    .listStyle(.plain)
+
+        Spacer()
+    }.padding()
 }

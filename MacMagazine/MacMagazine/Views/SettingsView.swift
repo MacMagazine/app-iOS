@@ -3,11 +3,18 @@ import News
 import Settings
 import SwiftUI
 
+struct ScrollViewWidthPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
 struct Menu: Identifiable {
     let id = UUID()
     let view: AnyView
     let children: [Menu]?
-    
+
     init(view: AnyView,
          children: [Menu]? = nil) {
         self.view = view
@@ -18,7 +25,8 @@ struct Menu: Identifiable {
 struct SettingsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    
+    @State private var scrollViewWidth: CGFloat = 0
+
     let items: [Menu] = [
         Menu(view: AnyView(Text("Remover Propagandas".uppercased())),
              children: [Menu(view: AnyView(SubscriptionView()))]),
@@ -30,7 +38,7 @@ struct SettingsView: View {
                 Menu(view: AnyView(AppearanceView()))
              ])
     ]
-    
+
     var body: some View {
         ZStack {
             (theme.main.background.color ?? Color(uiColor: .systemGray6))
@@ -41,7 +49,7 @@ struct SettingsView: View {
                     .padding(.bottom)
 
                 ScrollView {
-                    VStack(spacing: 20) {
+                    VStack {
                         ForEach(items, id: \.id) { row in
                             VStack {
                                 if let children = row.children {
@@ -51,13 +59,12 @@ struct SettingsView: View {
 
                                     ForEach(children, id: \.id) { childrenRow in
                                         childrenRow.view
-                                            .frame(maxWidth: 540)
                                     }
 
                                 } else {
                                     row.view
                                 }
-                            }
+                            }.padding(.horizontal, 2)
                         }
                         Spacer()
                         AboutView()
@@ -73,24 +80,24 @@ struct SettingsView: View {
 
 struct LogoMenuView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    
+
     var body: some View {
-        HStack(spacing: 10) {
+        HStack {
             Spacer()
+
             Image("menu")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 36)
-            
+                .frame(height: 28)
+
             Image("MacMagazine")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 24)
                 .padding(.top, 10)
-            
+
             Spacer()
         }
-        .padding(.vertical, 10)
     }
 }
 
@@ -107,7 +114,6 @@ extension SettingsView {
                 Spacer()
             }
         }
-        .frame(height: 50)
     }
 }
 

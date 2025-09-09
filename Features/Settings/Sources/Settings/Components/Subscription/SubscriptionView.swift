@@ -54,8 +54,6 @@ public struct SubscriptionView: View {
                     sectionPatrao
                 }
             }
-            .padding(.leading)
-            .padding(.trailing, 10)
 
         }, footer: {
             HStack {
@@ -113,7 +111,6 @@ public struct SubscriptionView: View {
                                      selectedProduct: .constant(""))
             }
         }
-        .padding(.vertical)
     }
     
     @ViewBuilder
@@ -183,9 +180,11 @@ public struct SubscriptionView: View {
 }
 
 #Preview {
-    List {
+    VStack {
         SubscriptionView()
-            .environmentObject(SettingsViewModel())
-            .environment(\.theme, ThemeColor())
+        Spacer()
     }
+    .padding()
+    .environmentObject(SettingsViewModel())
+    .environment(\.theme, ThemeColor())
 }

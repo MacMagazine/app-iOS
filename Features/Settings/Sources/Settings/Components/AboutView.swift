@@ -47,9 +47,11 @@ extension AboutView {
 }
 
 #Preview {
-	List {
-		AboutView()
-            .environmentObject(SettingsViewModel())
-            .environment(\.theme, ThemeColor())
-	}
+    VStack {
+        AboutView()
+        Spacer()
+    }
+    .padding()
+    .environmentObject(SettingsViewModel())
+    .environment(\.theme, ThemeColor())
 }
