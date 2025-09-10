@@ -61,4 +61,3 @@ extension EnvironmentValues {
 		set { self[ThemeEnvironmentKey.self] = newValue }
 	}
 }
-

@@ -22,6 +22,6 @@ let package = Package(
                                .product(name: "CoreLibrary", package: "modules"),
                                .product(name: "UIComponentsLibrarySpecial", package: "modules")],
                 resources: [.process("Resources")]),
-        .testTarget(name: "SettingsTests", dependencies: ["Settings"]),
+        .testTarget(name: "SettingsTests", dependencies: ["Settings"])
     ]
 )

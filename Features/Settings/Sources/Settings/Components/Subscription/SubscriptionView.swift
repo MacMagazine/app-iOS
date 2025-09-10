@@ -6,10 +6,10 @@ import UIComponentsLibrarySpecial
 public struct SubscriptionView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: SettingsViewModel
-    @State private var selectedProduct: String? = nil
+    @State private var selectedProduct: String?
 
     public init() {}
-    
+
     public var body: some View {
         Section(content: {
             Group {
@@ -20,29 +20,29 @@ public struct SubscriptionView: View {
                             .roundedFullSize(fill: theme.button.primary.color ?? .blue)
                     })
                     .padding(.top)
-                    
+
                 } else if viewModel.subscriptionValid {
                     manageSubscription
                         .padding(.top)
-                    
+
                 } else {
                     switch viewModel.status {
                     case .done:
                         sectionSubscription
                         subscribe
                         subscriptionOptions
-                        
+
                     case .purchasable(let products):
                         sectionSubscription(products.count)
                         subscriptionOptions
-                        
+
                     case .loading:
                         HStack {
                             Spacer()
                             ProgressView()
                             Spacer()
                         }
-                        
+
                     case .error(let reason):
                         Group {
                             ErrorView(message: reason)
@@ -50,7 +50,7 @@ public struct SubscriptionView: View {
                         }
                         .padding(.top)
                     }
-                    
+
                     sectionPatrao
                 }
             }
@@ -81,24 +81,24 @@ public struct SubscriptionView: View {
                                                           isPatrao: $viewModel.isPatrao),
                     userScripts: WebviewController().userScripts)
         }
-        
+
         .sheet(isPresented: $viewModel.isPresentingTerms) {
             Webview(title: "Termos de Uso",
                     url: APIParams.termsUrl,
                     isPresenting: $viewModel.isPresentingTerms)
         }
-        
+
         .sheet(isPresented: $viewModel.isPresentingPrivacy) {
             Webview(title: "Política de Privacidade",
                     url: APIParams.privacyUrl,
                     isPresenting: $viewModel.isPresentingPrivacy)
         }
-        
+
         .onChange(of: viewModel.isPatrao) { _, value in
             viewModel.storage.update(patrao: value)
         }
     }
-    
+
     @ViewBuilder
     private func sectionSubscription(_ count: Int) -> some View {
         VStack {
@@ -112,7 +112,7 @@ public struct SubscriptionView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private var sectionSubscription: some View {
         VStack {
@@ -121,17 +121,23 @@ public struct SubscriptionView: View {
                                                                            duration: product.subscription ?? "...",
                                                                            price: product.price ?? "",
                                                                            identifier: product.identifier ?? UUID().uuidString,
-                                                                           accessibility: "Assine o App para remover propagandas por \(product.subscription ?? "tempo desconhecido") pagando \(product.price ?? "valor desconhecido")."),
+                                                                           accessibility: accessibilityLabel(subscription: product.subscription,
+                                                                                                             price: product.price)),
                                      selectedProduct: $selectedProduct)
             }
         }
         .padding(.vertical)
     }
-    
+
+    private func accessibilityLabel(subscription: String?,
+                                    price: String?) -> String {
+        "Assine o App para remover propagandas por \(subscription ?? "tempo desconhecido") pagando \(price ?? "valor desconhecido")."
+    }
+
     @ViewBuilder
     private var subscribe: some View {
         if let selectedProduct {
-            Button(action: {  viewModel.purchase(selectedProduct) },
+            Button(action: { viewModel.purchase(selectedProduct) },
                    label: {
                 Text("Assinar".uppercased())
                     .roundedFullSize(fill: theme.button.primary.color ?? .blue)
@@ -151,11 +157,11 @@ public struct SubscriptionView: View {
                                       stroke: theme.button.primary.color ?? .blue)
             })
             .accessibilityLabel("Recupere assinaturas previamente feitas.")
-            
+
             manageSubscription
         }
     }
-    
+
     @ViewBuilder
     private var manageSubscription: some View {
         Button(action: { viewModel.manageSubscriptions() },
@@ -166,7 +172,7 @@ public struct SubscriptionView: View {
         })
         .accessibilityLabel("Gerencia suas assinaturas do App.")
     }
-    
+
     @ViewBuilder
     private var sectionPatrao: some View {
         Button(action: { viewModel.isPresentingLoginPatrao.toggle() },

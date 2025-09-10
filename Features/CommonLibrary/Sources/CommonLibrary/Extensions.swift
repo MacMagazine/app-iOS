@@ -1,5 +1,6 @@
 import Foundation
 
+// swiftlint:disable force_unwrapping
 extension CaseIterable where Self: Equatable {
 	public var next: Self {
 		let all = Self.allCases
@@ -15,3 +16,4 @@ extension CaseIterable where Self: Equatable {
 		return next == all.endIndex
 	}
 }
+// swiftlint:enable force_unwrapping

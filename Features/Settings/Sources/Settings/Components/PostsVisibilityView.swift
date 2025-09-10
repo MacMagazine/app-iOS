@@ -5,9 +5,9 @@ import UIComponentsLibrary
 public struct PostsVisibilityView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: SettingsViewModel
-    
+
     public init() {}
-    
+
     public var body: some View {
         VStack {
             Button(action: { viewModel.cache = .readAll },
@@ -22,7 +22,7 @@ public struct PostsVisibilityView: View {
             Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)
                 .tint(theme.button.primary.color)
                 .disabled(!viewModel.postRead)
-            
+
             DisclosureGroup(content: {
                 VStack {
                     Button(action: { viewModel.cache = .keepFavoritesAndStatus },
@@ -59,7 +59,7 @@ public struct PostsVisibilityView: View {
                 Text("Limpar cache do app")
             })
             .tint(theme.main.tint.color)
-            
+
         }
 
         .onChange(of: viewModel.postRead) { _, value in

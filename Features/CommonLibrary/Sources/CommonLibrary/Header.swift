@@ -1,5 +1,5 @@
-import UIComponentsLibrary
 import SwiftUI
+import UIComponentsLibrary
 
 public enum HeaderButtonType {
     case text(String)

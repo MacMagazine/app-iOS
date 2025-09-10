@@ -25,8 +25,8 @@ public struct NavigationStack<Content: View>: View {
 	private let onDismiss: (() -> Void)?
 	private let share: ShareObject?
 	private let displayMode: NavigationBarItem.TitleDisplayMode
-	
-	@ViewBuilder
+
+    @ViewBuilder
 	private let content: Content
 
 	public init(theme: ThemeColor,
@@ -98,7 +98,6 @@ public struct NavigationStack<Content: View>: View {
 		.accentColor(theme.main.tint.color)
 	}
 }
-
 
 #Preview("No title") {
 	NavigationStack(theme: ThemeColor(), content: {

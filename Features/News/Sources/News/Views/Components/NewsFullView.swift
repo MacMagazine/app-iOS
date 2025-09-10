@@ -7,20 +7,20 @@ struct NewsFullView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: NewsViewModel
     @FetchRequest var news: FetchedResults<News>
-    
+
     private let filter: NewsViewModel.Category
     private let limit: Int?
-    
+
     init(filter: NewsViewModel.Category,
          limit: Int? = nil) {
         let request: NSFetchRequest<News> = News.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \News.pubDate, ascending: false)]
         _news = FetchRequest(fetchRequest: request)
-        
+
         self.filter = filter
         self.limit = limit
     }
-    
+
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 280),
                                      alignment: .top)]) {
@@ -89,7 +89,7 @@ struct NewsFullView: View {
             .environment(\.managedObjectContext, viewModel.mainContext)
             .environmentObject(viewModel)
             .environment(\.theme, ThemeColor())
-        
+
     }
     .task {
         try? await viewModel.getNews()
@@ -103,7 +103,7 @@ struct NewsFullView: View {
             .environment(\.managedObjectContext, viewModel.mainContext)
             .environmentObject(viewModel)
             .environment(\.theme, ThemeColor())
-        
+
     }
     .task {
         try? await viewModel.getNews()
@@ -117,7 +117,7 @@ struct NewsFullView: View {
             .environment(\.managedObjectContext, viewModel.mainContext)
             .environmentObject(viewModel)
             .environment(\.theme, ThemeColor())
-        
+
     }
     .task {
         try? await viewModel.getNews()

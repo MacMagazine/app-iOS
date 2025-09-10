@@ -44,7 +44,7 @@ extension CarrouselView {
 			viewModel.newsToShow = NewsToShow(title: object.title ?? "",
                                               url: object.shortURL ?? "",
                                               favorite: object.favorite,
-                                              action: {favorite in viewModel.storage.update(news: object, favorite: favorite)})
+                                              action: { favorite in viewModel.storage.update(news: object, favorite: favorite) })
 		}, label: {
 			CardView(object: CardData(style: filter.style,
 									  title: object.title,
@@ -65,7 +65,6 @@ extension CarrouselView {
             .environment(\.managedObjectContext, viewModel.mainContext)
             .environmentObject(viewModel)
             .environment(\.theme, ThemeColor())
-        
     }.padding(.horizontal)
     .task {
         try? await viewModel.getNews()

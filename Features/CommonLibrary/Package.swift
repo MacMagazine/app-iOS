@@ -7,7 +7,7 @@ let package = Package(
     name: "CommonLibrary",
 	platforms: [.iOS(.v17)],
     products: [
-        .library(name: "CommonLibrary", targets: ["CommonLibrary"]),
+        .library(name: "CommonLibrary", targets: ["CommonLibrary"])
     ],
 	dependencies: [
 		.package(url: "https://bitbucket.org/kasros/modules.git", branch: "master"),

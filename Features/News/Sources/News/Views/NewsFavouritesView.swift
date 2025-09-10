@@ -13,7 +13,7 @@ public struct NewsFavouritesView: View {
         request.sortDescriptors = [NSSortDescriptor(keyPath: \News.pubDate, ascending: false)]
         _news = FetchRequest(fetchRequest: request)
     }
-    
+
     public var body: some View {
         if news.filter({ $0.favorite }).isEmpty {
             ErrorView(message: "Nenhuma notícia favoritada.")
@@ -27,7 +27,7 @@ public struct NewsFavouritesView: View {
                         viewModel.newsToShow = NewsToShow(title: object.title ?? "",
                                                           url: object.shortURL ?? "",
                                                           favorite: object.favorite,
-                                                          action: {favorite in viewModel.storage.update(news: object, favorite: favorite)})
+                                                          action: { favorite in viewModel.storage.update(news: object, favorite: favorite) })
                     }, label: {
                         let filter: NewsViewModel.Category = viewModel.filter(source: object.allCategories)
                         if filter.style == .highlight {
@@ -66,6 +66,5 @@ public struct NewsFavouritesView: View {
             .environment(\.managedObjectContext, viewModel.mainContext)
             .environmentObject(viewModel)
             .environment(\.theme, ThemeColor())
-        
     }
 }

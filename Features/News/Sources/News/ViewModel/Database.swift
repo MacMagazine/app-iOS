@@ -18,11 +18,11 @@ extension Database {
             }
         }
     }
-    
+
     private func batchInsertRequest(with posts: [XMLPost]) -> NSBatchInsertRequest {
         var index = 0
         let total = posts.count
-        
+
         // Provide one dictionary at a time when the closure is called.
         let batchInsertRequest = NSBatchInsertRequest(entity: News.entity(), dictionaryHandler: { dictionary in
             guard index < total else { return true }
@@ -35,7 +35,7 @@ extension Database {
         batchInsertRequest.resultType = .objectIDs
         return batchInsertRequest
     }
-    
+
     func update(news: News?, favorite: Bool) {
         Task {
             guard let news, let postId = news.postId else { return }
@@ -44,30 +44,30 @@ extension Database {
                                                    from: "NewsStatus",
                                                    using: mainContext) as? [NewsStatus],
                   let item = status.first else {
-                
+
                 let item = NewsStatus(context: mainContext)
                 item.id = postId
                 item.favorite = favorite
-                
+
                 await MainActor.run {
                     try? self.save()
                     mainContext.refresh(news, mergeChanges: true)
                 }
-                
+
                 return
             }
-            
+
             item.favorite = favorite
-            
+
             await MainActor.run {
                 try? self.save()
                 mainContext.refresh(news, mergeChanges: true)
             }
         }
     }
-    
+
     func update(id: String, read: Bool) {
-        
+
     }
 }
 
@@ -76,22 +76,22 @@ extension News {
         let status = value(forKey: "newsStatus") as? [NewsStatus]
         return status?.first?.favorite ?? false
     }
-    
+
     var read: Bool {
         let status = value(forKey: "newsStatus") as? [NewsStatus]
         return status?.first?.read ?? false
     }
-    
+
     var allCategories: String? {
         categories?.joined(separator: "|")
     }
-    
+
     func pubDate(format: MMDateFormat) -> String {
         Date(timeIntervalSinceReferenceDate: pubDate).format(using: format.rawValue)
     }
 }
 
 enum MMDateFormat: String {
-	case mmDateOnly = "dd/MM"
-	case mmDateTime = "dd/MM/yy・HH:mm"
+    case mmDateOnly = "dd/MM"
+    case mmDateTime = "dd/MM/yy・HH:mm"
 }

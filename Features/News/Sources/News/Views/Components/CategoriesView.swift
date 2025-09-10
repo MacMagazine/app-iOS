@@ -56,7 +56,7 @@ private extension CategoriesView {
     }
 
     func stroke(category: NewsViewModel.Category) -> Color {
-        if isSelected (category: category) {
+        if isSelected(category: category) {
             theme.text.primary.color ?? .blue
         } else {
             theme.text.primary.color ?? .black

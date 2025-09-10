@@ -26,7 +26,7 @@ struct SubscriptionItemView: View {
                 .foregroundStyle(selectedProduct == product.identifier ? selectedColor : normalColor)
 
             Spacer()
-            
+
             Image(systemName: selectedProduct == product.identifier ? "checkmark.circle.fill" : "circle")
                 .foregroundColor(selectedProduct == product.identifier ? selectedColor : normalColor)
         }
