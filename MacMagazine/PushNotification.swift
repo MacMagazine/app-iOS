@@ -156,16 +156,21 @@ extension PushNotification: OSNotificationLifecycleListener {
 }
 
 extension PushNotification: OSNotificationClickListener {
-	func onClick(event: OSNotificationClickEvent) {
-		let notification: OSNotification = event.notification
+    func onClick(event: OSNotificationClickEvent) {
+        let notification: OSNotification = event.notification
         logD(notification)
-		guard let additionalData = notification.additionalData,
-			  let content = additionalData as? [String: String] else {
-			return
-		}
-		logD(content["url"])
+        guard let additionalData = notification.additionalData,
+              let content = additionalData as? [String: String] else {
+            return
+        }
+        logD(content["url"])
         Database().update { [weak self] in
             self?.newContentAvailable = content["url"]
         }
-	}
+    }
+
+    func handleBackground(for userInfo: [AnyHashable: Any]) {
+        logD(userInfo)
+        Database().update(onCompletion: nil)
+    }
 }

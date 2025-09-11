@@ -119,3 +119,21 @@ extension AppDelegate {
         return true
     }
 }
+
+// MARK: - Background Push Notifications -
+
+extension AppDelegate {
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        guard let aps = userInfo["aps"] as? [String: Any],
+              let contentAvailable = aps["content-available"] as? Int,
+              contentAvailable == 1 else {
+            completionHandler(.noData)
+            return
+        }
+
+        pushNotification?.handleBackground(for: userInfo)
+        completionHandler(.newData)
+    }
+}
