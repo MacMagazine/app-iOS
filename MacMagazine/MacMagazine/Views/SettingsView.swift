@@ -35,7 +35,8 @@ struct SettingsView: View {
         Menu(view: AnyView(Text("Opções".uppercased())),
              children: [
                 Menu(view: AnyView(PushOptionsView())),
-                Menu(view: AnyView(AppearanceView()))
+                Menu(view: AnyView(AppearanceView())),
+                Menu(view: AnyView(IconsView()))
              ])
     ]
 
@@ -46,33 +47,30 @@ struct SettingsView: View {
 
             VStack {
                 LogoMenuView()
-                    .padding(.bottom)
 
                 ScrollView {
-                    VStack {
+                    VStack(spacing: 20) {
                         ForEach(items, id: \.id) { row in
-                            VStack {
-                                if let children = row.children {
-                                    row.view
-                                        .font(.headline)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                            if let children = row.children {
+                                row.view
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity,
+                                           alignment: .leading)
 
-                                    ForEach(children, id: \.id) { childrenRow in
-                                        childrenRow.view
-                                    }
-
-                                } else {
-                                    row.view
+                                ForEach(children, id: \.id) { childrenRow in
+                                    childrenRow.view
                                 }
-                            }.padding(.horizontal, 2)
+                            } else {
+                                row.view
+                            }
                         }
                         Spacer()
                         AboutView()
                     }
+                    .padding()
                 }
                 .scrollBounceBehavior(.basedOnSize)
             }
-            .padding()
         }
         .navigationBarHidden(true)
     }
@@ -83,8 +81,6 @@ struct LogoMenuView: View {
 
     var body: some View {
         HStack {
-            Spacer()
-
             Image("menu")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -95,25 +91,8 @@ struct LogoMenuView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 24)
                 .padding(.top, 10)
-
-            Spacer()
         }
-    }
-}
-
-extension SettingsView {
-    @ViewBuilder
-    func row(isSelected: Bool,
-             title: String,
-             hideDivider: Bool = false,
-             action: @escaping () -> Void) -> some View {
-        Button { action() } label: {
-            HStack {
-                Text(title)
-                    .foregroundColor(isSelected ? .black : .gray)
-                Spacer()
-            }
-        }
+        .frame(maxWidth: .infinity)
     }
 }
 

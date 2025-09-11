@@ -9,16 +9,17 @@ public struct AboutView: View {
 	public init() {}
 
 	public var body: some View {
-		Section(content: {
-			Button(action: { viewModel.composeMessage() },
-				   label: {
-				Text("Relatar problema/bug no app".uppercased())
-					.borderedFullSize(color: theme.text.primary.color ?? .primary,
-									  stroke: theme.button.secondary.color ?? .blue)
-			})
-            .frame(maxWidth: 540)
+        VStack {
+            Section(content: {
+                Button(action: { viewModel.composeMessage() },
+                       label: {
+                    Text("Relatar problema/bug no app".uppercased())
+                        .borderedFullSize(color: theme.text.primary.color ?? .primary,
+                                          stroke: theme.button.secondary.color ?? .blue)
+                })
+                .frame(maxWidth: 540)
 
-		}, header: {
+            }, header: {
                 VStack(alignment: .leading) {
                     Text("SOBRE")
                         .font(.headline)
@@ -26,13 +27,14 @@ public struct AboutView: View {
                         .font(.footnote)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-			.foregroundColor(theme.text.terciary.color)
-			.accessibilityElement(children: .ignore)
-			.accessibilityLabel("A versão do app é \(Bundle.version ?? "desconhecida").")
-		}, footer: {
-			footerView
-                .frame(maxWidth: 540, alignment: .leading)
-		})
+                .foregroundColor(theme.text.terciary.color)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("A versão do app é \(Bundle.version ?? "desconhecida").")
+            }, footer: {
+                footerView
+                    .frame(maxWidth: 540, alignment: .leading)
+            })
+        }
 	}
 }
 

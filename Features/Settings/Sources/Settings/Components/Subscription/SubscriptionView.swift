@@ -11,67 +11,69 @@ public struct SubscriptionView: View {
     public init() {}
 
     public var body: some View {
-        Section(content: {
-            Group {
-                if viewModel.isPatrao {
-                    Button(action: { viewModel.isPatrao = false },
-                           label: {
-                        Text("Logoff de patrão".uppercased())
-                            .roundedFullSize(fill: theme.button.primary.color ?? .blue)
-                    })
-                    .padding(.top)
-
-                } else if viewModel.subscriptionValid {
-                    manageSubscription
+        VStack(spacing: 10) {
+            Section(content: {
+                Group {
+                    if viewModel.isPatrao {
+                        Button(action: { viewModel.isPatrao = false },
+                               label: {
+                            Text("Logoff de patrão".uppercased())
+                                .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+                        })
                         .padding(.top)
 
-                } else {
-                    switch viewModel.status {
-                    case .done:
-                        sectionSubscription
-                        subscribe
-                        subscriptionOptions
+                    } else if viewModel.subscriptionValid {
+                        manageSubscription
+                            .padding(.top)
 
-                    case .purchasable(let products):
-                        sectionSubscription(products.count)
-                        subscriptionOptions
-
-                    case .loading:
-                        HStack {
-                            Spacer()
-                            ProgressView()
-                            Spacer()
-                        }
-
-                    case .error(let reason):
-                        Group {
-                            ErrorView(message: reason)
+                    } else {
+                        switch viewModel.status {
+                        case .done:
+                            sectionSubscription
+                            subscribe
                             subscriptionOptions
+
+                        case .purchasable(let products):
+                            sectionSubscription(products.count)
+                            subscriptionOptions
+
+                        case .loading:
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
+                            }
+
+                        case .error(let reason):
+                            Group {
+                                ErrorView(message: reason)
+                                subscriptionOptions
+                            }
+                            .padding(.top)
                         }
-                        .padding(.top)
+
+                        sectionPatrao
                     }
-
-                    sectionPatrao
                 }
-            }
 
-        }, footer: {
-            HStack {
-                Spacer()
-                Button(action: { viewModel.isPresentingTerms.toggle() },
-                       label: {
-                    Text("Termos de Uso")
-                        .plain(color: theme.text.terciary.color ?? .primary)
-                })
-                Spacer(minLength: 0)
-                Button(action: { viewModel.isPresentingPrivacy.toggle() },
-                       label: {
-                    Text("Política de Privacidade")
-                        .plain(color: theme.text.terciary.color ?? .primary)
-                })
-                Spacer()
-            }
-        })
+            }, footer: {
+                HStack {
+                    Spacer()
+                    Button(action: { viewModel.isPresentingTerms.toggle() },
+                           label: {
+                        Text("Termos de Uso")
+                            .plain(color: theme.text.terciary.color ?? .primary)
+                    })
+                    Spacer(minLength: 0)
+                    Button(action: { viewModel.isPresentingPrivacy.toggle() },
+                           label: {
+                        Text("Política de Privacidade")
+                            .plain(color: theme.text.terciary.color ?? .primary)
+                    })
+                    Spacer()
+                }
+            })
+        }
 
         .sheet(isPresented: $viewModel.isPresentingLoginPatrao) {
             Webview(title: "Login para patrões",
@@ -126,7 +128,6 @@ public struct SubscriptionView: View {
                                      selectedProduct: $selectedProduct)
             }
         }
-        .padding(.vertical)
     }
 
     private func accessibilityLabel(subscription: String?,
@@ -143,7 +144,6 @@ public struct SubscriptionView: View {
                     .roundedFullSize(fill: theme.button.primary.color ?? .blue)
             })
             .accessibilityLabel("Assine o App para remover propagandas.")
-            .padding(.bottom, 4)
         }
     }
 
@@ -180,7 +180,6 @@ public struct SubscriptionView: View {
             Text("Sou patrão".uppercased())
                 .roundedFullSize(fill: theme.button.primary.color ?? .blue)
         })
-        .padding(.vertical, 4)
         .accessibilityLabel("Fazer login como patrão para remover propagandas.")
     }
 }

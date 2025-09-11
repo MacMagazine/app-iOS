@@ -9,13 +9,12 @@ public struct PostsVisibilityView: View {
     public init() {}
 
     public var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             Button(action: { viewModel.cache = .readAll },
                    label: {
                 Text("Marcar todos os posts como lidos".uppercased())
                     .roundedFullSize(fill: theme.button.primary.color ?? .blue)
             })
-            .padding(.vertical)
 
             Toggle("Identificar posts já lidos", isOn: $viewModel.postRead)
                 .tint(theme.button.primary.color)
