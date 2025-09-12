@@ -145,8 +145,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos posts..."
-		searchController?.hidesNavigationBarDuringPresentation = true
+		searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.searchBar.returnKeyType = .search
+        searchController?.obscuresBackgroundDuringPresentation = true
 
         tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -555,10 +556,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 	}
 
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-		posts = []
-		resultsTableController?.posts = posts
-		searchBar.resignFirstResponder()
-        navigationItem.searchController = nil
+        closeSearch()
     }
 }
 
@@ -876,7 +874,18 @@ extension PostsMasterViewController {
 
 extension PostsMasterViewController {
     @IBAction private func search(_ sender: Any) {
-        openSearch()
+        if navigationItem.searchController == nil {
+            openSearch()
+        } else {
+            closeSearch()
+        }
+    }
+
+    private func closeSearch() {
+        posts = []
+        resultsTableController?.posts = posts
+        navigationItem.searchController = nil
+        navigationItem.searchController?.searchBar.resignFirstResponder()
     }
 
     fileprivate func openSearch() {

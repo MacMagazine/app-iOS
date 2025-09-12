@@ -62,7 +62,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
         self.tableView?.sectionHeaderTopPadding = 0
-//        self.tableView?.backgroundColor = .systemGroupedBackground
     }
 
 	// MARK: - Scroll detection -
