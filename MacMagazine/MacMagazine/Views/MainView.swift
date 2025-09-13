@@ -2,7 +2,6 @@ import CommonLibrary
 import News
 import SwiftUI
 import UIComponentsLibrarySpecial
-import Videos
 
 struct MainView: View {
     @Environment(\.theme) private var theme: ThemeColor
@@ -20,8 +19,8 @@ struct MainView: View {
                     HomeView()
                 }
 
-                Tab("Videos", systemImage: "play.rectangle.fill", value: .videos) {
-                    VideosView()
+                Tab("Social", systemImage: "point.3.filled.connected.trianglepath.dotted", value: .videos) {
+                    SocialView()
                         .ignoresSafeArea(edges: .bottom)
                 }
 
@@ -33,6 +32,7 @@ struct MainView: View {
                     SearchView(searchText: $searchText)
                 }
             }
+            .tint(theme.tertiary.background.color)
         }
     }
 }

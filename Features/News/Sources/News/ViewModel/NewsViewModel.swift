@@ -47,15 +47,15 @@ public class NewsViewModel: ObservableObject {
     }
 
     public enum Category: String, CaseIterable {
-        case highlights = "Destaques"
-        case news = ""
-        case podcast = "MacMagazine no Ar"
-        case youtube = "Vídeos"
-        case appletv = "Apple TV+"
-        case reviews = "Reviews"
-        case tutoriais = "Tutoriais"
-        case rumors = "Rumores"
         case all = "Todas"
+        case news = "Últimas Notícias"
+        case highlights = "Destaques"
+        case appletv = "Novidades Apple TV+"
+        case reviews = "Reviews"
+        case rumors = "Rumores"
+        case tutoriais = "Tutoriais"
+        case youtube = "Vídeos"
+        case podcast = "MacMagazine no Ar"
 
         var query: (String, String)? {
             switch self {
@@ -81,34 +81,6 @@ public class NewsViewModel: ObservableObject {
             case .reviews: (source?.contains(NewsViewModel.Category.reviews.rawValue) ?? false)
             case .tutoriais: (source?.contains(NewsViewModel.Category.tutoriais.rawValue) ?? false)
             case .rumors: (source?.contains(NewsViewModel.Category.rumors.rawValue) ?? false)
-            }
-        }
-
-        var header: String {
-            switch self {
-            case .highlights: "Destaques"
-            case .news: "Últimas Notícias"
-            case .podcast: "MacMagazine no Ar"
-            case .youtube: "Vídeos"
-            case .appletv: "Novidades AppleTV+"
-            case .reviews: "Reviews"
-            case .tutoriais: "Tutoriais"
-            case .rumors: "Rumores"
-            case .all: ""
-            }
-        }
-
-        var title: String {
-            switch self {
-            case .highlights: "Destaques"
-            case .news: "Notícias"
-            case .podcast: "MacMagazine no Ar"
-            case .youtube: "Vídeos"
-            case .appletv: "Novidades AppleTV+"
-            case .reviews: "Reviews"
-            case .tutoriais: "Tutoriais"
-            case .rumors: "Rumores"
-            case .all: ""
             }
         }
 
