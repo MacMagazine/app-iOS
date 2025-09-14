@@ -25,7 +25,7 @@ extension Theme {
 
         // Ensure existing views render with new theme
         // https://developer.apple.com/documentation/uikit/uiappearance
-        (application.connectedScenes.first as? UIWindowScene)?.windows.last?.reload()
+        (application.connectedScenes.first as? UIWindowScene)?.windows.first?.reload()
     }
 
     // Optionally extend theme

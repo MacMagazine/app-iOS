@@ -114,6 +114,6 @@ extension SettingsHeaderCell {
         }
         let safari = SFSafariViewController(url: url)
         safari.setup()
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController?.present(safari, animated: true)
+        Settings.rootViewController?.present(safari, animated: true)
     }
 }

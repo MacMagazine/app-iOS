@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AppIcon-2</title>
+    <defs>
+        <path d="M0,0 L1024,0 L1024,1024 L0,1024 L0,0 Z" id="path-1"></path>
+        <linearGradient x1="87.6948036%" y1="3.83141937%" x2="12.6343424%" y2="96.9605718%" id="linearGradient-2">
+            <stop stop-color="#16DDD8" offset="0%"></stop>
+            <stop stop-color="#006DE2" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="AppIcon-2" stroke="none" fill="none" xlink:href="#path-1" fill-rule="evenodd">
+        <rect id="Rectangle" fill="url(#linearGradient-2)" x="0" y="0" width="1024" height="1024"></rect>
+        <g id="logo_dark" stroke-width="1" transform="translate(102, 177)"></g>
+    </g>
+</svg>

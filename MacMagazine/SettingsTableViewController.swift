@@ -124,6 +124,7 @@ class SettingsTableViewController: UITableViewController {
 							type: .version,
 							heightForFooter: UITableView.automaticDimension,
 							footer: "disclaimerFooter"))
+        header.append(Table(header: "", heightForRow: 10))
 		return header
 	}
 
@@ -305,8 +306,28 @@ extension SettingsTableViewController {
 
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 	@IBAction private func reportProblem(_ sender: Any) {
-		guard MFMailComposeViewController.canSendMail() else {
-			if let url = URL(string: "mailto:contato@macmagazine.com.br?subject=Relato de problema no app MacMagazine \(Settings().appVersion)"),
+        let recipient = "contato@macmagazine.com.br"
+        let subject = "Relato de problema no app MacMagazine \(Settings().appVersion)"
+        let body = """
+Olá MM, gostaria de reportar um problema no app.
+
+- O que aconteceu:
+
+
+- Passos para reproduzir o problema:
+
+
+- Resultado esperado:
+
+
+- Resultado atual:
+
+
+- Anexos:
+"""
+
+        guard MFMailComposeViewController.canSendMail() else {
+			if let url = URL(string: "mailto:\(recipient)?subject=\(subject)&body=\(body)"),
 			   UIApplication.shared.canOpenURL(url) {
 				UIApplication.shared.open(url, options: [:], completionHandler: nil)
 			}
@@ -316,8 +337,9 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 
 		let composeVC = MFMailComposeViewController()
 		composeVC.mailComposeDelegate = self
-		composeVC.setSubject("Relato de problema no app MacMagazine \(Settings().appVersion)")
-		composeVC.setToRecipients(["contato@macmagazine.com.br"])
+		composeVC.setSubject(subject)
+		composeVC.setToRecipients([recipient])
+        composeVC.setMessageBody(body, isHTML: false)
 
 		self.present(composeVC, animated: true, completion: nil)
 	}
@@ -435,12 +457,8 @@ extension SettingsTableViewController {
 	struct IconOptions {
 		static let option1 = "option_1"
 		static let option2 = "option_2"
-		static let option3 = "option_3"
-		static let option4 = "option_4"
-		static let icon1 = "AppIcon-1"
-		static let icon2 = "AppIcon-2"
-		static let icon3 = "AppIcon-3"
-		static let icon4 = "AppIcon-4"
+		static let icon1 = "mm_icon_normal"
+		static let icon2 = "mm_icon_inverted"
 
 		func getIcon(for option: String) -> String? {
 			var icon: String?
@@ -450,10 +468,6 @@ extension SettingsTableViewController {
 				icon = IconOptions.icon1
 			case IconOptions.option2:
 				icon = IconOptions.icon2
-			case IconOptions.option3:
-				icon = IconOptions.icon3
-			case IconOptions.option4:
-				icon = IconOptions.icon4
 			default:
 				break
 			}
@@ -484,14 +498,6 @@ extension SettingsTableViewController {
 		iconOption2Selected.image = iconName == IconOptions.option2 ? selectedImage : normal
 		iconOption2Selected.tintColor = iconName == IconOptions.option2 ? tintSelectedColor : tintColor
 		iconOption2Btn.accessibilityLabel = IconOptionAccessibilityLabel.blueBackground.accessibilityText(selected: iconName == IconOptions.option2)
-
-		iconOption3Selected.image = iconName == IconOptions.option3 ? selectedImage : normal
-		iconOption3Selected.tintColor = iconName == IconOptions.option3 ? tintSelectedColor : tintColor
-		iconOption3Btn.accessibilityLabel = IconOptionAccessibilityLabel.blueOverBlack.accessibilityText(selected: iconName == IconOptions.option3)
-
-		iconOption4Selected.image = iconName == IconOptions.option4 ? selectedImage : normal
-		iconOption4Selected.tintColor = iconName == IconOptions.option4 ? tintSelectedColor : tintColor
-		iconOption4Btn.accessibilityLabel = IconOptionAccessibilityLabel.whiteOverBlack.accessibilityText(selected: iconName == IconOptions.option4)
 	}
 
 	fileprivate func changeIcon(to iconName: String) {

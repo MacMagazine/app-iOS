@@ -6,7 +6,6 @@
 //  Copyright © 2019 MacMagazine. All rights reserved.
 //
 
-import CoreSpotlight
 import Kingfisher
 import StoreKit
 import UIKit
@@ -16,6 +15,7 @@ import UIKit
 extension Notification.Name {
 	static let shortcutActionLastPost = Notification.Name("shortcutActionLastPost")
 	static let shortcutActionRecentPost = Notification.Name("shortcutActionRecentPost")
+	static let showPostFromWidget = Notification.Name("showPostFromWidget")
     static let shortcutActionSearchPost = Notification.Name("shortcutActionSearchPost")
 	static let reloadWeb = Notification.Name("reloadWeb")
 	static let scrollToTop = Notification.Name("scrollToTop")
@@ -115,47 +115,25 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        widgetSpotlightPost = url.absoluteString
+        Settings.widgetSpotlightPost = url.absoluteString
         return true
     }
 }
 
-// MARK: - Shortcut -
+// MARK: - Background Push Notifications -
 
 extension AppDelegate {
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        if shortcutItem.type == "openLastSeenPost" ||
-            shortcutItem.type == "openMostRecentPost" ||
-            shortcutItem.type == "openSearchPost" {
-
-            let shortcutItem = ShortcutActions(rawValue: shortcutItem.type) ?? .none
-
-            guard let tabController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController as? UITabBarController else {
-                shortcutAction = shortcutItem.notificationName
-                return
-            }
-            tabController.selectedIndex = 0
-
-            guard let notificationName = shortcutItem.notificationName else { return }
-            NotificationCenter.default.post(name: notificationName, object: nil)
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        guard let aps = userInfo["aps"] as? [String: Any],
+              let contentAvailable = aps["content-available"] as? Int,
+              contentAvailable == 1 else {
+            completionHandler(.noData)
+            return
         }
+
+        pushNotification?.handleBackground(for: userInfo)
+        completionHandler(.newData)
     }
-}
-
-// MARK: - Spotlight search -
-
-extension AppDelegate {
-	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-		if userActivity.activityType == CSSearchableItemActionType {
-			if let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-                guard (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController as? UITabBarController != nil else {
-                    widgetSpotlightPost = identifier
-                    return true
-                }
-				showDetailController(with: identifier)
-				return true
-			}
-		}
-		return false
-	}
 }

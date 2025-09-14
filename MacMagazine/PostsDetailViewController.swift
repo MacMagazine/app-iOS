@@ -52,9 +52,11 @@ class PostsDetailViewController: UIPageViewController, UIPageViewControllerDataS
 		}
 		setViewControllers([controller], direction: .forward, animated: true, completion: nil)
 
-		if Settings().isPad &&
-			self.splitViewController != nil {
-			navigationItem.leftBarButtonItem = fullscreenMode
+		if #unavailable(iOS 26) {
+			if Settings().isPad &&
+				self.splitViewController != nil {
+				navigationItem.leftBarButtonItem = fullscreenMode
+			}
 		}
 	}
 

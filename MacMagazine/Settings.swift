@@ -19,14 +19,45 @@ enum Appearance: Int {
 
 struct Settings {
 
-	// MARK: - Device -
+    // MARK: - Scene Properties -
+
+    // Thread-safe queue for accessing scene properties
+    private static let sceneQueue = DispatchQueue(label: "com.macmagazine.settings.scene", qos: .userInitiated)
+
+    static var rootViewController: UIViewController? {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController
+    }
+
+    static var shortcutAction: Notification.Name? {
+        get {
+            ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate)?.shortcutAction
+        }
+        set {
+            sceneQueue.sync {
+                ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate)?.shortcutAction = newValue
+            }
+        }
+    }
+
+    static var widgetSpotlightPost: String? {
+        get {
+            ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate)?.widgetSpotlightPost
+        }
+        set {
+            sceneQueue.sync {
+                ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate)?.widgetSpotlightPost = newValue
+            }
+        }
+    }
+
+    // MARK: - Device -
 
 	var isPhone: Bool {
-        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController?.traitCollection.horizontalSizeClass == .compact
+        return Settings.rootViewController?.traitCollection.horizontalSizeClass == .compact
     }
 
 	var isPad: Bool {
-        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController?.traitCollection.horizontalSizeClass == .regular
+        return Settings.rootViewController?.traitCollection.horizontalSizeClass == .regular
     }
 
 	var orientations: UIInterfaceOrientationMask {
@@ -47,7 +78,7 @@ struct Settings {
 
     var isDarkMode: Bool {
         if appearance == .native {
-            return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController?.traitCollection.userInterfaceStyle == .dark
+            return Settings.rootViewController?.traitCollection.userInterfaceStyle == .dark
         }
         return appearance == .dark
     }
@@ -105,13 +136,18 @@ struct Settings {
 
     // MARK: - Patrão -
 
+    // Thread-safe queue for UserDefaults access
+    private static let userDefaultsQueue = DispatchQueue(label: "com.macmagazine.settings.userdefaults", qos: .userInitiated)
+
     var isPatrao: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: Definitions.mmPatrao)
+            UserDefaults.standard.bool(forKey: Definitions.mmPatrao)
         }
         set(value) {
-            UserDefaults.standard.set(value, forKey: Definitions.mmPatrao)
-            UserDefaults.standard.synchronize()
+            Settings.userDefaultsQueue.sync {
+                UserDefaults.standard.set(value, forKey: Definitions.mmPatrao)
+                UserDefaults.standard.synchronize()
+            }
         }
     }
 
@@ -123,11 +159,13 @@ struct Settings {
 
     var purchased: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: Definitions.purchased)
+            UserDefaults.standard.bool(forKey: Definitions.purchased)
         }
         set(value) {
-            UserDefaults.standard.set(value, forKey: Definitions.purchased)
-            UserDefaults.standard.synchronize()
+            Settings.userDefaultsQueue.sync {
+                UserDefaults.standard.set(value, forKey: Definitions.purchased)
+                UserDefaults.standard.synchronize()
+            }
         }
     }
 
@@ -211,7 +249,7 @@ extension Settings {
 
 	func applyLightTheme() {
 		if isDarkMode {
-            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.tintColor = LightTheme().tint
+            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.tintColor = LightTheme().tint
 		}
 	}
 }

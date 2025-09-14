@@ -119,6 +119,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionLastPost(_:)), name: .shortcutActionLastPost, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionRecentPost(_:)), name: .shortcutActionRecentPost, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onShowPostFromWidget(_:)), name: .showPostFromWidget, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onShortcutActionSearchPost(_:)), name: .shortcutActionSearchPost, object: nil)
 
 		if Settings().isPad {
@@ -127,7 +128,7 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 
         NotificationCenter.default.addObserver(self, selector: #selector(onReloadData(_:)), name: .reloadData, object: nil)
 
-		navigationItem.titleView = logoView
+        navigationItem.titleView = Settings().isPhone ? logoView : nil
 		navigationItem.title = nil
         navigationItem.preferredSearchBarPlacement = .stacked
 
@@ -144,8 +145,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
 		searchController?.searchBar.autocapitalizationType = .none
 		searchController?.searchBar.delegate = self
 		searchController?.searchBar.placeholder = "Buscar nos posts..."
-		searchController?.hidesNavigationBarDuringPresentation = true
+		searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.searchBar.returnKeyType = .search
+        searchController?.obscuresBackgroundDuringPresentation = true
 
         tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 133
@@ -358,7 +360,8 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                     // Reload Widgets
                     WidgetCenter.shared.reloadAllTimelines()
 
-                    if let post = (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost {
+                    if let post = Settings.widgetSpotlightPost {
+                        Settings.widgetSpotlightPost = nil
                         showDetailController(with: post)
                         return
                     }
@@ -382,9 +385,9 @@ class PostsMasterViewController: UITableViewController, FetchedResultsController
                                 self.processSelection()
                             }
                         }
-                        if let shortcutAction = (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction {
+                        if let shortcutAction = Settings.shortcutAction {
                             NotificationCenter.default.post(name: shortcutAction, object: nil)
-                            (UIApplication.shared.delegate as? AppDelegate)?.shortcutAction = nil
+                            Settings.shortcutAction = nil
                         }
                     }
 
@@ -509,7 +512,7 @@ extension PostsMasterViewController {
 
         // Pull to Refresh
         if offset.y < -150 &&
-            navigationItem.titleView == logoView &&
+            navigationItem.titleView == (Settings().isPhone ? logoView : nil) &&
             navigationItem.searchController == nil &&
 			fetchController?.fetchRequest.predicate == nil {
 			showSpin()
@@ -530,7 +533,7 @@ extension PostsMasterViewController {
     func hideSpin() {
 		DispatchQueue.main.async {
         	self.spin.stopAnimating()
-        	self.navigationItem.titleView = self.logoView
+            self.navigationItem.titleView = Settings().isPhone ? self.logoView : nil
 		}
     }
 }
@@ -553,10 +556,7 @@ extension PostsMasterViewController: UISearchBarDelegate {
 	}
 
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-		posts = []
-		resultsTableController?.posts = posts
-		searchBar.resignFirstResponder()
-        navigationItem.searchController = nil
+        closeSearch()
     }
 }
 
@@ -638,6 +638,13 @@ extension PostsMasterViewController {
 		processOption()
 	}
 
+    @objc func onShowPostFromWidget(_ notification: Notification) {
+		guard let link = notification.object as? String else {
+			return
+		}
+		showDetailController(with: link)
+	}
+
     @objc func onShortcutActionSearchPost(_ notification: Notification) {
         delay(0.01) { [weak self] in
             self?.openSearch()
@@ -666,7 +673,7 @@ func createWebViewController(post: PostData) -> WebViewController? {
 }
 
 func showDetailController(with link: String) {
-    guard let rootViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last?.rootViewController else {
+    guard let rootViewController = Settings.rootViewController else {
         return
     }
 
@@ -674,7 +681,7 @@ func showDetailController(with link: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
               let tabController = appDelegate.tabBarController else {
             logE("Failed to load tabBarController - saving link")
-            (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = link
+            Settings.widgetSpotlightPost = link
             return
         }
 
@@ -718,11 +725,11 @@ func showDetailController(with link: String) {
             open(link: link, mainController: tabController)
         }
 
-        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
+        Settings.widgetSpotlightPost = nil
     }
 
     func open(link: String, mainController: UIViewController?) {
-        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost = nil
+        Settings.widgetSpotlightPost = nil
 
         // Open single view
         let storyboard = UIStoryboard(name: "WebView", bundle: nil)
@@ -846,7 +853,7 @@ extension PostsMasterViewController {
     fileprivate func showAllPosts() {
         fetchController?.fetchRequest.predicate = nil
 
-        self.navigationItem.titleView = logoView
+        self.navigationItem.titleView = Settings().isPhone ? logoView : nil
         self.navigationItem.title = nil
 
         reloadController(.transitionFlipFromLeft)
@@ -867,7 +874,18 @@ extension PostsMasterViewController {
 
 extension PostsMasterViewController {
     @IBAction private func search(_ sender: Any) {
-        openSearch()
+        if navigationItem.searchController == nil {
+            openSearch()
+        } else {
+            closeSearch()
+        }
+    }
+
+    private func closeSearch() {
+        posts = []
+        resultsTableController?.posts = posts
+        navigationItem.searchController = nil
+        navigationItem.searchController?.searchBar.resignFirstResponder()
     }
 
     fileprivate func openSearch() {

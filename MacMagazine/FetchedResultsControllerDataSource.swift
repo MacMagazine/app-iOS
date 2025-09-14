@@ -36,9 +36,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<Post> in
 		// Initialize Fetched Results Controller
-		let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-
-		return controller
+        NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
 	}()
 
 	// MARK: - Initialization methods -
@@ -55,7 +53,6 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         self.groupedBy = group
         setup(tableView: tableView)
 
-        self.tableView?.register(UINib(nibName: "HeaderCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "headerCell")
         self.tableView?.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: "normalCell")
         self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
     }
@@ -100,20 +97,57 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
 		return numSections
 	}
 
+    private func getTitle(for section: Int) -> String? {
+        guard let sections = fetchedResultsController.sections else { return nil }
+        let currentSection = sections[section]
+        return currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate(with: "yyyyMMdd")
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		guard let sections = fetchedResultsController.sections,
-			let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as? HeaderCell
-			else {
-				return nil
-		}
-		let currentSection = sections[section]
+        tableView.tableHeaderView?.removeFromSuperview()
 
-        // Expected date format: "20190227"
-        header.setHeader(currentSection.name.isEmpty ? nil : currentSection.name.toHeaderDate(with: "yyyyMMdd"))
-		return header
-	}
+        guard let title = getTitle(for: section) else { return nil }
 
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor(named: "MMGray")
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.layer.cornerRadius = 16
+
+        let titleLabel = PaddingLabel()
+        titleLabel.topInset = 8.0
+        titleLabel.bottomInset = 8.0
+        titleLabel.leftInset = 10.0
+        titleLabel.rightInset = 10.0
+        titleLabel.text = title
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        titleLabel.textColor = .black
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textAlignment = .center
+
+        headerView.addSubview(backgroundView)
+        headerView.addSubview(titleLabel)
+
+        NSLayoutConstraint.activate([
+            backgroundView.widthAnchor.constraint(equalTo: titleLabel.widthAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: titleLabel.heightAnchor),
+            backgroundView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            backgroundView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+
+            titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+        ])
+
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        getTitle(for: section) != nil ? 44 : 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return rows(in: section)
 	}
 

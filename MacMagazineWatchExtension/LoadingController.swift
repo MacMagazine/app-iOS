@@ -61,7 +61,7 @@ class LoadingController: WKInterfaceController {
 
 		// Configure interface objects here.
 		// Schedule a background task to reload data for the Complication
-		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { _ in }
+        WKApplication.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { _ in }
 
 		loadingLabel.setHidden(false)
 		reloadGroup.setHidden(true)
@@ -83,7 +83,7 @@ class LoadingController: WKInterfaceController {
 	}
 
 	@IBAction private func load() {
-		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { _ in }
+        WKApplication.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { _ in }
 
 		loadingLabel.setHidden(false)
 		reloadGroup.setHidden(true)

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24123.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2jD-dP-dNC">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24062"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,11 +13,11 @@
         <!--Videos-->
         <scene sceneID="0BS-5v-H15">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jD-dP-dNC" sceneMemberID="viewController">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="2jD-dP-dNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Videos" image="play.rectangle.fill" catalog="system" id="4hU-Rq-N3T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="5ib-Dd-fKs">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <navigationBarAppearance key="standardAppearance">
@@ -40,9 +39,9 @@
         <!--Video Collection View Controller-->
         <scene sceneID="QE0-Oi-FuT">
             <objects>
-                <collectionViewController id="PeN-ph-XhJ" customClass="VideoCollectionViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController extendedLayoutIncludesOpaqueBars="YES" id="PeN-ph-XhJ" customClass="VideoCollectionViewController" customModule="MacMagazine" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MOJ-H3-Jtu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="804"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="746"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="7iI-GI-Urh">
@@ -265,7 +264,7 @@
                             <outlet property="delegate" destination="PeN-ph-XhJ" id="W73-WJ-QzV"/>
                         </connections>
                     </collectionView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="fVw-Ev-d1Z">
                         <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="EeU-sK-M4J">
                             <color key="tintColor" name="MMBlueWhite"/>
@@ -315,14 +314,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-2J-25J">
-                            <rect key="frame" x="4" y="4" width="72" height="18"/>
+                            <rect key="frame" x="4" y="0.0" width="72" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="lK5-pQ-fcJ"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="fHf-2J-25J" firstAttribute="top" secondItem="IzC-fW-mQ9" secondAttribute="top" constant="4" id="QL8-oX-Ska"/>
+                        <constraint firstItem="fHf-2J-25J" firstAttribute="top" secondItem="IzC-fW-mQ9" secondAttribute="top" id="QL8-oX-Ska"/>
                         <constraint firstItem="fHf-2J-25J" firstAttribute="leading" secondItem="IzC-fW-mQ9" secondAttribute="leading" constant="4" id="TlY-lp-IT6"/>
-                        <constraint firstAttribute="bottom" secondItem="fHf-2J-25J" secondAttribute="bottom" constant="4" id="iMq-6n-dFB"/>
+                        <constraint firstAttribute="bottom" secondItem="fHf-2J-25J" secondAttribute="bottom" id="iMq-6n-dFB"/>
                         <constraint firstAttribute="trailing" secondItem="fHf-2J-25J" secondAttribute="trailing" constant="4" id="zk8-21-CRF"/>
                     </constraints>
                 </view>
@@ -336,17 +338,12 @@
             <point key="canvasLocation" x="-204.34782608695653" y="-510.9375"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="hfJ-9k-bAJ">
-            <size key="intrinsicContentSize" width="34" height="14.5"/>
-        </designable>
-    </designables>
     <resources>
         <image name="chart.bar" catalog="system" width="128" height="89"/>
         <image name="hand.thumbsup" catalog="system" width="123" height="128"/>
-        <image name="logo" width="415" height="350"/>
+        <image name="logo" width="90" height="68.5"/>
         <image name="play.rectangle.fill" catalog="system" width="128" height="93"/>
-        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="MMBlack90">
@@ -359,10 +356,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

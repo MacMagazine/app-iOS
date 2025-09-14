@@ -44,7 +44,7 @@ class YouTubePlayer: WKWebView {
   var player;
   function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
-  playerVars: { 'playsinline': 1, 'controls': 1, 'fs': 1, 'enablejsapi': 1 },
+  playerVars: { 'playsinline': 1, 'controls': 1, 'fs': 1, 'enablejsapi': 1, 'hl': 'pt-BR' },
   height: '100%',
   width: '100%',
   videoId: '\(videoId ?? "")',

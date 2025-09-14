@@ -32,7 +32,7 @@ class SplashViewController: UIViewController {
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "main") as? UITabBarController,
                       let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                       let splitViewController = controller.viewControllers?[1] as? UISplitViewController,
-                      let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.last else {
+                      let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
                     return
                 }
 
@@ -53,7 +53,7 @@ class SplashViewController: UIViewController {
                 },
                                   completion: { finished in
                     if finished &&
-                        (UIApplication.shared.delegate as? AppDelegate)?.widgetSpotlightPost != nil {
+                        Settings.widgetSpotlightPost != nil {
                         TabBarController.shared.selectIndex(isLive ? 1 : 0)
                     }
                 })

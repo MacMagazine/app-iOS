@@ -10,7 +10,8 @@ import Foundation
 import UserNotifications
 import WatchKit
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+@main
+class ExtensionDelegate: NSObject, WKApplicationDelegate {
 
 	func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
 		// Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
@@ -47,7 +48,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 		reloadData()
 
 		let later = Date(timeIntervalSinceNow: 60 * 60)	// every hour
-		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: later, userInfo: nil) { _ in }
+        WKApplication.shared().scheduleBackgroundRefresh(withPreferredDate: later, userInfo: nil) { _ in }
 	}
 
 	func reloadData() {
@@ -62,7 +63,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 				guard success else { return }
 
 				await MainActor.run {
-					WKExtension.shared().registerForRemoteNotifications()
+                    WKApplication.shared().registerForRemoteNotifications()
 				}
 			} catch {
 				print(error.localizedDescription)

@@ -30,7 +30,11 @@ extension URL {
 		return isMMAddress() && self.absoluteString.contains("/post/")
 	}
 
-	func isMMAddress() -> Bool {
+    func isMMImage() -> Bool {
+        return isMMAddress() && self.absoluteString.contains("/wp-content/uploads/")
+    }
+
+    func isMMAddress() -> Bool {
 		return self.absoluteString.prefix(API.APIParams.mmURL.count) == API.APIParams.mmURL
 	}
 
