@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="21701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="24127" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4mM-Hh-YOV">
     <device id="watch38"/>
     <dependencies>
-        <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="21615"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="24017"/>
     </dependencies>
     <scenes>
         <!--MacMagazine-->
@@ -87,7 +86,7 @@
         <!--DetailController-->
         <scene sceneID="teU-G6-5aL">
             <objects>
-                <controller identifier="DetailController" id="rJa-a6-odw" customClass="DetailInterfaceController" customModule="MacMagazineWatchExtension">
+                <controller identifier="DetailController" id="rJa-a6-odw" customClass="DetailInterfaceController" customModule="MacMagazineWatch" customModuleProvider="target">
                     <items>
                         <group width="1" alignment="left" id="dFh-7q-EcZ">
                             <items>

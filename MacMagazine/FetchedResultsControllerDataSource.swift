@@ -104,6 +104,8 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        tableView.tableHeaderView?.removeFromSuperview()
+
         guard let title = getTitle(for: section) else { return nil }
 
         let headerView = UIView()

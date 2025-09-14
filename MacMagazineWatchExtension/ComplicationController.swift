@@ -94,25 +94,24 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		return entry
 	}
 
-	func createComplicationTemplate(for complication: CLKComplication, message: Complication) -> CLKComplicationTemplate? {
+    func createComplicationTemplate(for complication: CLKComplication, message: Complication) -> CLKComplicationTemplate? {
+        return switch complication.family {
+        case .modularLarge:
+            CLKComplicationTemplateModularLargeStandardBody(headerTextProvider: CLKSimpleTextProvider(text: message.header ?? ""),
+                                                            body1TextProvider: CLKSimpleTextProvider(text: message.line1 ?? ""),
+                                                            body2TextProvider: CLKSimpleTextProvider(text: message.line2 ?? ""))
 
-		if complication.family == .modularLarge {
-            return CLKComplicationTemplateModularLargeStandardBody(headerTextProvider: CLKSimpleTextProvider(text: message.header ?? ""),
-                                                                           body1TextProvider: CLKSimpleTextProvider(text: message.line1 ?? ""),
-                                                                           body2TextProvider: CLKSimpleTextProvider(text: message.line2 ?? ""))
+        case .utilitarianLarge:
+            CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: message.line1 ?? ""))
 
-		} else if complication.family == .utilitarianLarge {
-            return CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: message.line1 ?? ""))
+        case .graphicRectangular:
+            CLKComplicationTemplateGraphicRectangularStandardBody(headerTextProvider: CLKSimpleTextProvider(text: message.line1 ?? ""),
+                                                                  body1TextProvider: CLKSimpleTextProvider(text: message.line2 ?? ""),
+                                                                  body2TextProvider: CLKSimpleTextProvider(text: message.header ?? ""))
 
-		} else if complication.family == .graphicRectangular {
-            return CLKComplicationTemplateGraphicRectangularStandardBody(headerTextProvider: CLKSimpleTextProvider(text: message.line1 ?? ""),
-                                                                         body1TextProvider: CLKSimpleTextProvider(text: message.line2 ?? ""),
-                                                                         body2TextProvider: CLKSimpleTextProvider(text: message.header ?? ""))
-
-		} else {
-			return nil
-		}
-	}
+        default: nil
+        }
+    }
 
 	func createTimeLineEntry(for complication: CLKComplication, message: Complication, date: Date) -> CLKComplicationTimelineEntry? {
 		guard let template = createComplicationTemplate(for: complication, message: message) else {
