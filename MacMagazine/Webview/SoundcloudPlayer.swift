@@ -48,6 +48,8 @@ class SoundcloudPlayer: WKWebView {
 			}
 			iFrame = iFrame?.replacingOccurrences(of: "show_artwork=false", with: "show_artwork=false&download=false&sharing=false")
 
+            iFrame = iFrame?.replacingOccurrences(of: "show_teaser=true", with: "show_teaser=false")
+
 			DispatchQueue.main.async {
 				self.navigationDelegate = self
 				self.loadHTMLString(self.embedVideoHtml, baseURL: nil)
