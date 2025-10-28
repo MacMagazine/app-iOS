@@ -3,12 +3,12 @@ import SwiftData
 
 @Model
 final public class SettingsDB {
-    var mode: ColorScheme
-    var icon: IconType
-    var notification: String
-    var postRead: Bool
-    var countOnBadge: Bool
-    var subscription: Subscription
+    var mode = ColorScheme.system
+    var icon = IconType.normal
+    var notification: String = PushPreferences.all.rawValue
+    var postRead: Bool = true
+    var countOnBadge: Bool = false
+    var subscription: Subscription = Subscription(isPatrao: false, expirationDate: Date())
 
     init(mode: ColorScheme = .system,
          icon: IconType = .normal,
