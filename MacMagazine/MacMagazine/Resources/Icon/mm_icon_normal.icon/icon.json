@@ -4,6 +4,43 @@
   },
   "groups" : [
     {
+      "layers" : [
+        {
+          "image-name" : "beta 2.svg",
+          "name" : "beta 2",
+          "position-specializations" : [
+            {
+              "value" : {
+                "scale" : 1.2,
+                "translation-in-points" : [
+                  -97.5390625,
+                  100.7578125
+                ]
+              }
+            },
+            {
+              "idiom" : "watchOS",
+              "value" : {
+                "scale" : 1.5,
+                "translation-in-points" : [
+                  -184.5703125,
+                  213.9375
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
       "blur-material" : null,
       "hidden" : false,
       "layers" : [

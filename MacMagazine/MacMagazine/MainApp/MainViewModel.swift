@@ -1,80 +1,27 @@
 import Combine
-import CommonLibrary
-import CoreLibrary
-import News
+import MacMagazineLibrary
 import Settings
+import StorageLibrary
+import SwiftData
 import SwiftUI
-import Videos
 
 class MainViewModel: ObservableObject {
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @Published var colorSchema: SwiftUI.ColorScheme?
 
-	// MARK: - Definitions -
+    let storage: Database
+    let theme = ThemeColor()
+    var cancellables: Set<AnyCancellable> = []
 
-    enum Page {
-        case home
-        case news
-        case videos
-        case highlights
-        case podcast
-        case appletv
-        case reviews
-        case tutoriais
-        case rumors
-        case favourites
-        case settings
-        case search
+    init() {
+        self.storage = Database(models: [SettingsDB.self], inMemory: false)
+        self.settingsViewModel = SettingsViewModel(storage: self.storage)
+
+        settingsViewModel.$colorSchema
+            .receive(on: RunLoop.main)
+            .sink { [weak self] value in
+                self?.colorSchema = value
+            }
+            .store(in: &cancellables)
     }
-
-    enum Tabs {
-		case home
-        case favourites
-        case settings
-        case categories
-        case search
-	}
-
-	struct Section: Identifiable {
-		let id = UUID().uuidString
-		let title: String
-		let page: Page
-	}
-
-	// MARK: - Properties -
-
-	private var cancellables: Set<AnyCancellable> = []
-
-	@ObservedObject var videosViewModel = VideosViewModel()
-	@ObservedObject var settingsViewModel = SettingsViewModel()
-    @ObservedObject var newsViewModel = NewsViewModel()
-
-	let theme = ThemeColor()
-
-	@Published var isLoading: Bool = false
-
-	// MARK: - Init -
-
-	init() {
-		observe()
-	}
-}
-
-extension MainViewModel {
-	private func observe() {
-		settingsViewModel.$cache
-			.receive(on: RunLoop.main)
-			.compactMap { $0 }
-			.removeDuplicates()
-			.sink { value in
-				print("value: \(value)")
-			}
-			.store(in: &cancellables)
-
-        newsViewModel.$status
-			.receive(on: RunLoop.main)
-			.compactMap { $0 }
-			.sink { [weak self] value in
-				self?.isLoading = value == .loading
-			}
-			.store(in: &cancellables)
-	}
 }

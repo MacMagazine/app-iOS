@@ -1,70 +1,26 @@
-import AppTrackingTransparency
-import CommonLibrary
-import CoreLibrary
-import FirebaseAnalytics
-import FirebaseCore
-import Settings
+//
+//  MacMagazineApp.swift
+//  MacMagazine
+//
+//  Created by Cassio Rossi on 09/10/2025.
+//
+
+import StorageLibrary
 import SwiftUI
-import UIComponentsLibrary
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-	static let shared = AppDelegate()
-
-	var window: UIWindow?
-
-	func application(_ application: UIApplication,
-					 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-
-		FirebaseApp.configure()
-
-//		ATTrackingManager.requestTrackingAuthorization { status in
-//			Analytics.logEvent("ATTrackingManager", parameters: [:])
-//		}
-
-		return true
-	}
-}
+import SwiftData
 
 @main
 struct MacMagazineApp: App {
-	@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-	@Environment(\.scenePhase) var scenePhase
+    @ObservedObject var viewModel = MainViewModel()
 
-	@ObservedObject var viewModel = MainViewModel()
-
-	@State var colorScheme: SwiftUI.ColorScheme? = DefaultStorage.colorScheme {
-		didSet {
-			DefaultStorage.update(colorScheme)
-		}
-	}
-
-	var body: some Scene {
-		WindowGroup {
-			MainView()
-				.environmentObject(viewModel)
-				.environmentObject(viewModel.newsViewModel)
-				.environmentObject(viewModel.videosViewModel)
-				.environmentObject(viewModel.settingsViewModel)
-
-				.task {
-					try? await viewModel.settingsViewModel.getPurchasableProducts()
-					await viewModel.settingsViewModel.getSettings()
-					try? await viewModel.newsViewModel.getNews()
-				}
-
-				.onChange(of: scenePhase) { _, phase in
-					if phase == .active {
-						Task {
-							await viewModel.settingsViewModel.getSettings()
-						}
-					}
-				}
-
-				.onReceive(viewModel.settingsViewModel.$mode) { value in
-					colorScheme = value.colorScheme
-				}
-				.preferredColorScheme(colorScheme)
-		}
-		.environment(\.theme, viewModel.theme)
-	}
+    var body: some Scene {
+        WindowGroup {
+            MainView()
+                .modelContainer(viewModel.storage.sharedModelContainer)
+                .environmentObject(viewModel)
+                .environmentObject(viewModel.settingsViewModel)
+                .preferredColorScheme(viewModel.colorSchema)
+        }
+        .environment(\.theme, viewModel.theme)
+    }
 }

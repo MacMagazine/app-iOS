@@ -1,0 +1,145 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "87A9C027",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "A4781EC9",
+      "localizations" : [
+
+      ],
+      "name" : "SUBSCRIPTION",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.9",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "C0E9B10B",
+          "introductoryOffer" : {
+            "displayPrice" : "0.99",
+            "internalID" : "3B66A53D",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "payAsYouGo",
+            "subscriptionPeriod" : "P1Y"
+          },
+          "localizations" : [
+            {
+              "description" : "This is a 1 year subscription",
+              "displayName" : "Subscription 1 year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "MMASSINATURAANUAL",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "MMASSINATURAANUAL",
+          "subscriptionGroupID" : "A4781EC9",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "0.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "CB959EF5",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "This is a 1 month subscription",
+              "displayName" : "Subscription 1 month",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "MMASSINATURAMENSAL",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "MMASSINATURAMENSAL",
+          "subscriptionGroupID" : "A4781EC9",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}
