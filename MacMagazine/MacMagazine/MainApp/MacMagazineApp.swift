@@ -1,10 +1,3 @@
-//
-//  MacMagazineApp.swift
-//  MacMagazine
-//
-//  Created by Cassio Rossi on 09/10/2025.
-//
-
 import StorageLibrary
 import SwiftUI
 import SwiftData
