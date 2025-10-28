@@ -1,5 +1,4 @@
 import MacMagazineLibrary
-// import News
 import SwiftUI
 
 public struct SettingsView: View {
@@ -91,7 +90,7 @@ public struct SettingsView: View {
                 .background(
                     GeometryReader { geometry in
                         Color.clear
-                            .onChange(of: geometry.frame(in: .named("scroll")).minY) { oldValue, newValue in
+                            .onChange(of: geometry.frame(in: .named("scroll")).minY) { _, newValue in
                                 scrollOffset = max(0, -newValue)
                             }
                     }

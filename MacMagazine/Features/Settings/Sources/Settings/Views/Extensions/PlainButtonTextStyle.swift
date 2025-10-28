@@ -4,12 +4,6 @@ struct PlainButtonTextStyle: ViewModifier {
 	let color: Color
 	let font: Font
 
-	init(color: Color,
-         font: Font) {
-		self.color = color
-		self.font = font
-	}
-
 	func body(content: Content) -> some View {
 		content
 			.font(font.weight(.bold))

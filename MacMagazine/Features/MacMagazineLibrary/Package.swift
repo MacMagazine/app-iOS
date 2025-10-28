@@ -7,7 +7,7 @@ let package = Package(
     name: "MacMagazineLibrary",
     platforms: [.iOS(.v26)],
     products: [
-        .library(name: "MacMagazineLibrary", targets: ["MacMagazineLibrary"]),
+        .library(name: "MacMagazineLibrary", targets: ["MacMagazineLibrary"])
     ],
     dependencies: [
         .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main")
@@ -17,6 +17,6 @@ let package = Package(
                 dependencies: [
                     .product(name: "UIComponents", package: "Libraries")
                 ],
-                resources: [.process("Resources")]),
+                resources: [.process("Resources")])
     ]
 )

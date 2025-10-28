@@ -1,5 +1,5 @@
-import MacMagazineLibrary
 import InAppLibrary
+import MacMagazineLibrary
 import SwiftUI
 
 struct SubscriptionItemView: View {

@@ -29,4 +29,3 @@ extension PostsVisibilityViewModel {
         storage?.update(countOnBadge: countOnBadge)
     }
 }
-
