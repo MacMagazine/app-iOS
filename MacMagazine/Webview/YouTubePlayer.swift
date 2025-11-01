@@ -44,7 +44,9 @@ class YouTubePlayer: WKWebView {
   var player;
   function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
-  playerVars: { 'playsinline': 1, 'controls': 1, 'fs': 1, 'enablejsapi': 1, 'hl': 'pt-BR' },
+  playerVars: { 'playsinline': 1, 'controls': 1, 'fs': 0, 'enablejsapi': 1, 'hl': 'pt-BR',
+  'origin': 'https://com.brit.macmagazine',
+  'widget_referrer': 'https://com.brit.macmagazine' },
   height: '100%',
   width: '100%',
   videoId: '\(videoId ?? "")',
@@ -88,7 +90,7 @@ class YouTubePlayer: WKWebView {
 	func load(_ video: String) {
 		videoId = video
 		self.navigationDelegate = self
-		self.loadHTMLString(self.embedVideoHtml, baseURL: nil)
+        self.loadHTMLString(self.embedVideoHtml, baseURL: URL(string: "https://com.brit.macmagazine"))
 	}
 
 	func cue(_ video: String, time: Double = 0) {

@@ -130,6 +130,5 @@ extension SceneDelegate {
     private func handleNotificationResponse(_ notificationResponse: UNNotificationResponse) {
         // Handle notification responses
         logD(notificationResponse.notification.request.identifier)
-        // Implement your notification handling logic here
     }
 }

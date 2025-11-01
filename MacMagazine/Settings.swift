@@ -246,12 +246,6 @@ extension Settings {
 		theme.apply(for: UIApplication.shared)
         NotificationCenter.default.post(name: .reloadWeb, object: nil)
 	}
-
-	func applyLightTheme() {
-		if isDarkMode {
-            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.tintColor = LightTheme().tint
-		}
-	}
 }
 
 // MARK: - Push -

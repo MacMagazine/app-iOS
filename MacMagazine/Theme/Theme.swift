@@ -32,7 +32,7 @@ extension Theme {
     func extend(_ application: UIApplication) {
 
         // WINDOW
-        let window = (application.connectedScenes.first as? UIWindowScene)?.windows.last
+        let window = (application.connectedScenes.first as? UIWindowScene)?.windows.first
         window?.tintColor = tint
 
         let selectedMode: UIUserInterfaceStyle = Settings().isDarkMode ? .dark : .light
