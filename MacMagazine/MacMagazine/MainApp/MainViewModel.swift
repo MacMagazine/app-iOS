@@ -1,6 +1,6 @@
 import Combine
 import MacMagazineLibrary
-import Settings
+import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI

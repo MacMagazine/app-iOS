@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B9E9DE02E98709000255820 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 9B9E9DDF2E98709000255820 /* Settings */; };
+		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
 		9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B024FDA2EC2717200D66056 /* SettingsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SettingsLibrary; sourceTree = "<group>"; };
 		9B9E9DC42E986F8400255820 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B9E9DDD2E98706300255820 /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
 		9BCD94C42E997032007C44B6 /* MacMagazineLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MacMagazineLibrary; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B9E9DE02E98709000255820 /* Settings in Frameworks */,
+				9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */,
 				9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				9BCD94C42E997032007C44B6 /* MacMagazineLibrary */,
-				9B9E9DDD2E98706300255820 /* Settings */,
+				9B024FDA2EC2717200D66056 /* SettingsLibrary */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -105,8 +105,8 @@
 			);
 			name = MacMagazine;
 			packageProductDependencies = (
-				9B9E9DDF2E98709000255820 /* Settings */,
 				9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */,
+				9B024FDB2EC2719700D66056 /* SettingsLibrary */,
 			);
 			productName = MacMagazine;
 			productReference = 9B9E9DC42E986F8400255820 /* MacMagazine.app */;
@@ -386,9 +386,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9B9E9DDF2E98709000255820 /* Settings */ = {
+		9B024FDB2EC2719700D66056 /* SettingsLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Settings;
+			productName = SettingsLibrary;
 		};
 		9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

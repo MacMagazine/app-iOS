@@ -4,10 +4,10 @@
 import PackageDescription
 
 let package = Package(
-    name: "Settings",
+    name: "SettingsLibrary",
     platforms: [.iOS(.v26)],
     products: [
-        .library(name: "Settings", targets: ["Settings"])
+        .library(name: "SettingsLibrary", targets: ["SettingsLibrary"])
     ],
     dependencies: [
         .package(name: "MacMagazineLibrary", path: "../MacMagazineLibrary"),
@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/OneSignal/OneSignal-XCFramework", from: "5.2.1")
     ],
     targets: [
-        .target(name: "Settings",
+        .target(name: "SettingsLibrary",
                 dependencies: [
                     "MacMagazineLibrary",
                     .product(name: "OneSignalFramework", package: "OneSignal-XCFramework"),

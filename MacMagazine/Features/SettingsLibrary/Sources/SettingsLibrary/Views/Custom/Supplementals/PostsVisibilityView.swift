@@ -2,14 +2,84 @@ import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-public struct PostsVisibilityView: View {
-    @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject private var viewModel = PostsVisibilityViewModel()
+struct PostsVisibilityView: View {
+    @Environment(\.theme) var theme: ThemeColor
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var viewModel = PostsVisibilityViewModel()
 
-    public init() {}
+    let type: SettingsViewType
 
-    public var body: some View {
+    var body: some View {
+        content
+        .task {
+            viewModel.storage = settingsViewModel.storage
+            viewModel.get()
+        }
+
+        .onChange(of: viewModel.postRead) { _, value in
+            #if os(iOS)
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            #endif
+            Task { await
+                viewModel.change(postRead: value)
+                if !value {
+                    viewModel.countOnBadge = false
+                }
+            }
+        }
+        .onChange(of: viewModel.countOnBadge) { _, value in
+            #if os(iOS)
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            #endif
+            Task { await viewModel.change(countOnBadge: value) }
+        }
+    }
+}
+
+extension PostsVisibilityView {
+    private var disclosureContent: some View {
+        VStack {
+            Button(action: { viewModel.cache = .keepFavoritesAndStatus },
+                   label: {
+                Text("manter favoritos e status de leitura".uppercased())
+                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+            })
+            Button(action: { viewModel.cache = .keepStatus },
+                   label: {
+                Text("manter status de leitura".uppercased())
+                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+            })
+            Button(action: { viewModel.cache = .keepFavorites },
+                   label: {
+                Text("manter favoritos".uppercased())
+                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+            })
+            Button(action: { viewModel.cache = .cleanImages },
+                   label: {
+                Text("Apagar somente as imagens".uppercased())
+                    .borderedFullSize(color: theme.button.primary.color ?? .blue,
+                                      stroke: theme.button.primary.color ?? .blue)
+            })
+            Button(action: { viewModel.cache = .cleanAll },
+                   label: {
+                Text("Limpar tudo".uppercased())
+                    .borderedFullSize(color: theme.button.destructive.color ?? .blue,
+                                      stroke: theme.button.destructive.color ?? .blue)
+            })
+        }
+    }
+}
+
+private extension PostsVisibilityView {
+    @ViewBuilder
+    var content: some View {
+        switch type {
+        case .custom: customView
+        case .native: nativeView
+        }
+    }
+
+    var customView: some View {
         VStack(spacing: 20) {
             // Mark all as read button
             Button(action: {
@@ -81,63 +151,6 @@ public struct PostsVisibilityView: View {
                 }
             })
             .tint(theme.main.tint.color)
-        }
-
-        .task {
-            viewModel.storage = settingsViewModel.storage
-            viewModel.get()
-        }
-
-        .onChange(of: viewModel.postRead) { _, value in
-            #if os(iOS)
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            #endif
-            Task { await
-                viewModel.change(postRead: value)
-                if !value {
-                    viewModel.countOnBadge = false
-                }
-            }
-        }
-        .onChange(of: viewModel.countOnBadge) { _, value in
-            #if os(iOS)
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            #endif
-            Task { await viewModel.change(countOnBadge: value) }
-        }
-    }
-}
-
-extension PostsVisibilityView {
-    private var disclosureContent: some View {
-        VStack {
-            Button(action: { viewModel.cache = .keepFavoritesAndStatus },
-                   label: {
-                Text("manter favoritos e status de leitura".uppercased())
-                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .keepStatus },
-                   label: {
-                Text("manter status de leitura".uppercased())
-                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .keepFavorites },
-                   label: {
-                Text("manter favoritos".uppercased())
-                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .cleanImages },
-                   label: {
-                Text("Apagar somente as imagens".uppercased())
-                    .borderedFullSize(color: theme.button.primary.color ?? .blue,
-                                      stroke: theme.button.primary.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .cleanAll },
-                   label: {
-                Text("Limpar tudo".uppercased())
-                    .borderedFullSize(color: theme.button.destructive.color ?? .blue,
-                                      stroke: theme.button.destructive.color ?? .blue)
-            })
         }
     }
 }

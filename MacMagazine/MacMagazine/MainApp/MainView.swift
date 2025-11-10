@@ -1,5 +1,5 @@
 import MacMagazineLibrary
-import Settings
+import SettingsLibrary
 import SwiftUI
 import UIComponentsLibrary
 
@@ -25,7 +25,11 @@ struct MainView: View {
                 }
 
                 Tab("Ajustes", systemImage: "gearshape", value: .settings) {
-                    SettingsView()
+                    SettingsView(type: .custom)
+                }
+
+                Tab("Ajustes", systemImage: "gearshape.2", value: .settings) {
+                    SettingsView(type: .native)
                 }
 
                 Tab("Search", systemImage: "magnifyingglass", value: .search, role: .search) {

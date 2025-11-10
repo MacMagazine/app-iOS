@@ -2,32 +2,15 @@ import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-public struct PushOptionsView: View {
+struct PushOptionsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
     @ObservedObject private var viewModel = PushOptionsViewModel()
 
-    public init() {}
+    let type: SettingsViewType
 
-    public var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                Image(systemName: "bell.badge.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(theme.button.primary.color ?? .blue)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("NOTIFICAÇÕES")
-                        .font(.headline)
-                    Text("Escolha quais posts você deseja receber notificações")
-                        .font(.subheadline)
-                }
-            }
-            .foregroundColor(theme.text.terciary.color)
-
-            optionsView
-                .padding(.vertical, 8)
-        }
-
+    var body: some View {
+        content
         .task {
             viewModel.storage = settingsViewModel.storage
             viewModel.get()
@@ -35,9 +18,52 @@ public struct PushOptionsView: View {
     }
 }
 
-extension PushOptionsView {
+private extension PushOptionsView {
     @ViewBuilder
-    private var optionsView: some View {
+    var content: some View {
+        switch type {
+        case .custom: customView
+        case .native: nativeView
+        }
+    }
+
+    var customView: some View {
+        VStack(alignment: .leading) {
+            headerView(icon: true)
+                .padding(.bottom, 10)
+            optionsView
+                .padding(.vertical, 8)
+        }
+    }
+
+    var nativeView: some View {
+        Section {
+            optionsView
+        } header: {
+            headerView(icon: false)
+        }
+    }
+
+    func headerView(icon: Bool) -> some View {
+        HStack {
+            if icon {
+                Image(systemName: "bell.badge.fill")
+                    .font(.system(size: 20))
+                    .foregroundColor(theme.button.primary.color ?? .blue)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Notificações")
+                    .font(.headline)
+                Text("Escolha quais posts você deseja receber notificações")
+                    .font(.caption)
+            }
+        }
+        .foregroundColor(theme.text.terciary.color)
+    }
+
+    @ViewBuilder
+    var optionsView: some View {
         Picker("", selection: $viewModel.type) {
             Text("Todos os posts").tag(PushPreferences.all)
                 .accessibilityLabel(PushPreferences.all.accessibilityText(selected: viewModel.type == PushPreferences.all))

@@ -6,9 +6,9 @@ import UIKit
 
 struct SubscriptionView: View {
     @Environment(\.openURL) var openURL
-    @Environment(\.theme) private var theme: ThemeColor
+    @Environment(\.theme) var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject private var viewModel = SubscriptionViewModel()
+    @ObservedObject var viewModel = SubscriptionViewModel()
 
     @State private var selectedProduct: String?
     @State private var isPresentingPrivacy = false
@@ -17,31 +17,10 @@ struct SubscriptionView: View {
     @State private var isPresentingLoginPatrao = false
     @State private var urlToOpen: URL?
 
+    let type: SettingsViewType
+
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                Image(systemName: "menubar.dock.rectangle.badge.record")
-                    .font(.system(size: 20))
-                    .foregroundColor(theme.button.primary.color ?? .blue)
-                Text("REMOVER PROPAGANDAS")
-                    .font(.headline)
-            }
-            .foregroundColor(theme.text.terciary.color)
-
-            if viewModel.isPatrao {
-                logoffPatrao
-
-            } else if viewModel.isValidSubscription {
-                manageSubscription
-
-            } else {
-                purchaseOptions
-                loginPatrao
-            }
-
-            footer
-        }
-
+        content
         .task {
             viewModel.storage = settingsViewModel.storage
             viewModel.get()
@@ -59,14 +38,63 @@ struct SubscriptionView: View {
 
 extension SubscriptionView {
     @ViewBuilder
-    private var purchaseOptions: some View {
+    var content: some View {
+        switch type {
+        case .custom: customView
+        case .native: nativeView
+        }
+    }
+
+    var customView: some View {
+        VStack(alignment: .leading) {
+            headerContent(icon: true)
+
+            if viewModel.isPatrao {
+                logoffPatrao
+
+            } else if viewModel.isValidSubscription {
+                manageSubscription
+
+            } else {
+                purchaseOptions
+                loginPatrao
+            }
+
+            footer
+        }
+    }
+
+    func headerContent(icon: Bool) -> some View {
+        HStack(alignment: .top) {
+            if icon {
+                Image(systemName: "menubar.dock.rectangle.badge.record")
+                    .font(.system(size: 20))
+                    .foregroundColor(theme.button.primary.color ?? .blue)
+            }
+
+            Text("Remover Propagandas")
+                .font(.headline)
+        }
+        .foregroundColor(theme.text.terciary.color)
+    }
+}
+
+extension SubscriptionView {
+    @ViewBuilder
+    var purchaseOptions: some View {
         switch viewModel.status {
         case .idle:
             EmptyView()
 
         case .purchasable(let products):
             subscriptions(identifiers: products.compactMap(\.identifier))
-            subscriptionOptions.padding(.top)
+            switch type {
+            case .custom:
+                subscriptionOptions.padding(.top)
+
+            case .native:
+                subscriptionOptions
+            }
 
         case .loading:
             ProgressView()
@@ -93,7 +121,14 @@ extension SubscriptionView {
 
     @ViewBuilder
     private var subscriptionOptions: some View {
-        HStack {
+        switch type {
+        case .custom:
+            HStack {
+                restore
+                manageSubscription
+            }
+
+        case .native:
             restore
             manageSubscription
         }
@@ -105,23 +140,35 @@ extension SubscriptionView {
             Button(action: {
                 viewModel.restore()
             }, label: {
-                Text("Recuperar".uppercased())
-                    .borderedFullSize(color: theme.button.primary.color ?? .blue,
-                                      stroke: theme.button.primary.color ?? .blue)
+                switch type {
+                case .custom:
+                    Text("Recuperar".uppercased())
+                        .borderedFullSize(color: theme.button.primary.color ?? .blue,
+                                          stroke: theme.button.primary.color ?? .blue)
+
+                case .native:
+                    Text("Recuperar").foregroundStyle(theme.main.tint.color ?? .blue)
+                }
             })
             .accessibilityLabel("Recupere assinaturas previamente feitas.")
         }
     }
 
     @ViewBuilder
-    private var manageSubscription: some View {
+    var manageSubscription: some View {
         if let url = URL(string: URLs.subscriptions),
            UIApplication.shared.canOpenURL(url) {
             Button(action: { openURL(url) },
                    label: {
-                Text("Gerenciar".uppercased())
-                    .borderedFullSize(color: theme.button.primary.color ?? .blue,
-                                      stroke: theme.button.primary.color ?? .blue)
+                switch type {
+                case .custom:
+                    Text("Gerenciar".uppercased())
+                        .borderedFullSize(color: theme.button.primary.color ?? .blue,
+                                          stroke: theme.button.primary.color ?? .blue)
+
+                case .native:
+                    Text("Gerenciar").foregroundStyle(theme.main.tint.color ?? .blue)
+                }
             })
             .accessibilityLabel("Gerencia suas assinaturas do App.")
         }
@@ -132,15 +179,21 @@ extension SubscriptionView {
 
 extension SubscriptionView {
     @ViewBuilder
-    private var loginPatrao: some View {
+    var loginPatrao: some View {
         Button(action: {
-            #if os(iOS)
+#if os(iOS)
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            #endif
+#endif
             isPresentingLoginPatrao.toggle()
         }, label: {
-            Text("Sou patrão".uppercased())
-                .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+            switch type {
+            case .custom:
+                Text("Sou patrão".uppercased())
+                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+
+            case .native:
+                Text("Sou patrão").foregroundStyle(theme.main.tint.color ?? .blue)
+            }
         })
         .accessibilityLabel("Fazer login como patrão para remover propagandas.")
 
@@ -166,15 +219,21 @@ extension SubscriptionView {
     }
 
     @ViewBuilder
-    private var logoffPatrao: some View {
+    var logoffPatrao: some View {
         Button(action: {
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             #endif
             viewModel.isPatrao = false
         }, label: {
-            Text("Logoff de patrão".uppercased())
-                .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+            switch type {
+            case .custom:
+                Text("Logoff de patrão".uppercased())
+                    .roundedFullSize(fill: theme.button.primary.color ?? .blue)
+
+            case .native:
+                Text("Logoff de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
+            }
         })
     }
 }
@@ -183,7 +242,7 @@ extension SubscriptionView {
 
 extension SubscriptionView {
     @ViewBuilder
-    private var footer: some View {
+    var footer: some View {
         HStack {
             Spacer()
             Button(action: { isPresentingTerms.toggle() },
