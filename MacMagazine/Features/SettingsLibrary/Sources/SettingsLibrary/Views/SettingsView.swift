@@ -1,27 +1,34 @@
 import MacMagazineLibrary
 import SwiftUI
 
-public enum SettingsViewType {
-    case custom
-    case native
-}
-
 public struct SettingsView: View {
     @Environment(\.theme) var theme: ThemeColor
     @State var scrollOffset: CGFloat = 0
     @State var headerHeight: CGFloat = 60
 
-    let type: SettingsViewType
+    let items: [Menu] = [
+        Menu(view: AnyView(SubscriptionView())),
+        Menu(view: AnyView(PostsVisibilityView())),
+        Menu(view: AnyView(AppearanceView())),
+        Menu(view: AnyView(IconsView())),
+        Menu(view: AnyView(AboutView()))
+    ]
 
-    public init(type: SettingsViewType) {
-        self.type = type
-    }
+    public init() {}
 
     public var body: some View {
-        switch type {
-        case .custom: customView
-        case .native: nativeView
+        NavigationStack {
+            VStack(spacing: 0) {
+                logo
+
+                List {
+                    ForEach(items, id: \.id) { row in
+                        row.view
+                    }
+                }
+            }
         }
+
     }
 }
 

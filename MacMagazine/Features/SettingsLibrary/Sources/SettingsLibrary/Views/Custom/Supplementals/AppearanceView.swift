@@ -6,10 +6,13 @@ struct AppearanceView: View {
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
     @ObservedObject private var viewModel = AppearanceViewModel()
 
-    let type: SettingsViewType
-
     var body: some View {
-        content
+        Section {
+            optionsView
+        } header: {
+            headerView
+        }
+
         .task {
             viewModel.storage = settingsViewModel.storage
             viewModel.get()
@@ -22,39 +25,8 @@ struct AppearanceView: View {
 }
 
 private extension AppearanceView {
-    @ViewBuilder
-    var content: some View {
-        switch type {
-        case .custom: customView
-        case .native: nativeView
-        }
-    }
-
-    var customView: some View {
-        VStack(alignment: .leading) {
-            headerView(icon: true)
-                .padding(.bottom, 10)
-            optionsView
-                .padding(.vertical, 8)
-        }
-    }
-
-    var nativeView: some View {
-        Section {
-            optionsView
-        } header: {
-            headerView(icon: false)
-        }
-    }
-
-    func headerView(icon: Bool) -> some View {
+    var headerView: some View {
         HStack {
-            if icon {
-                Image(systemName: "paintbrush.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(theme.button.primary.color ?? .blue)
-            }
-
             VStack(alignment: .leading, spacing: 4) {
                 Text("Aparência")
                     .font(.headline)

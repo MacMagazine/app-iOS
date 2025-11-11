@@ -25,11 +25,7 @@ struct MainView: View {
                 }
 
                 Tab("Ajustes", systemImage: "gearshape", value: .settings) {
-                    SettingsView(type: .custom)
-                }
-
-                Tab("Ajustes", systemImage: "gearshape.2", value: .settings) {
-                    SettingsView(type: .native)
+                    SettingsView()
                 }
 
                 Tab("Search", systemImage: "magnifyingglass", value: .search, role: .search) {
