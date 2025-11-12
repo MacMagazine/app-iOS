@@ -18,25 +18,6 @@ struct SubscriptionView: View {
     @State private var urlToOpen: URL?
 
     var body: some View {
-        content
-        .task {
-            viewModel.storage = settingsViewModel.storage
-            viewModel.get()
-            try? await viewModel.getPurchasableProducts()
-            viewModel.restore()
-        }
-
-        .onChange(of: viewModel.isPatrao) { _, value in
-            Task { @MainActor in
-                await viewModel.change(isPatrao: value)
-            }
-        }
-    }
-}
-
-extension SubscriptionView {
-    @ViewBuilder
-    var content: some View {
         Section {
             if viewModel.isPatrao {
                 logoffPatrao
@@ -53,8 +34,23 @@ extension SubscriptionView {
         } footer: {
             footer
         }
-    }
 
+        .task {
+            viewModel.storage = settingsViewModel.storage
+            viewModel.get()
+            try? await viewModel.getPurchasableProducts()
+            viewModel.restore()
+        }
+
+        .onChange(of: viewModel.isPatrao) { _, value in
+            Task { @MainActor in
+                await viewModel.change(isPatrao: value)
+            }
+        }
+    }
+}
+
+extension SubscriptionView {
     var headerContent: some View {
         HStack(alignment: .top) {
             Text("Remover Propagandas")

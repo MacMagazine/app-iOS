@@ -73,3 +73,17 @@ private extension IconsView {
         .padding(.vertical, 8)
     }
 }
+
+#if DEBUG
+import StorageLibrary
+
+#Preview {
+    let storage = Database(models: [SettingsDB.self], inMemory: true)
+
+    List {
+        IconsView()
+    }
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel(storage: storage))
+}
+#endif

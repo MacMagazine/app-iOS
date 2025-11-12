@@ -51,3 +51,17 @@ private extension AppearanceView {
         .pickerStyle(.segmented)
     }
 }
+
+#if DEBUG
+import StorageLibrary
+
+#Preview {
+    let storage = Database(models: [SettingsDB.self], inMemory: true)
+
+    List {
+        AppearanceView()
+    }
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel(storage: storage))
+}
+#endif

@@ -53,10 +53,8 @@ private extension AboutView {
 }
 
 #Preview {
-    VStack {
+    List {
         AboutView()
-        Spacer()
     }
-    .padding()
     .environment(\.theme, ThemeColor())
 }

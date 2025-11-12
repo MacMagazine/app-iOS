@@ -6,9 +6,21 @@ struct PostsVisibilityView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
     @ObservedObject private var viewModel = PostsVisibilityViewModel()
+    @State private var isPresenting = false
 
     var body: some View {
-        content
+        NavigationLink {
+            List {
+                PushOptionsView()
+                readAll
+                identifyPosts
+                countPosts
+                cleanPosts
+            }
+        } label: {
+            Text("Posts")
+        }
+
         .task {
             viewModel.storage = settingsViewModel.storage
             viewModel.get()
@@ -30,23 +42,6 @@ struct PostsVisibilityView: View {
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             #endif
             Task { await viewModel.change(countOnBadge: value) }
-        }
-    }
-}
-
-private extension PostsVisibilityView {
-    @ViewBuilder
-    var content: some View {
-        NavigationLink {
-            List {
-                PushOptionsView()
-                readAll
-                identifyPosts
-                countPosts
-                cleanPosts
-            }
-        } label: {
-            Text("Posts")
         }
     }
 }
@@ -95,45 +90,58 @@ private extension PostsVisibilityView {
 
     var cleanPosts: some View {
         Section {
-            NavigationLink {
-                cleanCacheView
-            } label: {
+            Button(action: {
+                isPresenting.toggle()
+            }, label: {
                 Text("Limpar cache do app")
-            }
+                    .foregroundStyle(theme.main.tint.color ?? .blue)
+            })
         }
-        .navigationTitle("Posts")
-        .navigationBarHidden(false)
+        .confirmationDialog("Selecione uma opção",
+                            isPresented: $isPresenting,
+                            titleVisibility: .visible) {
+            cleanCacheView
+        }
     }
 
+    @ViewBuilder
     var cleanCacheView: some View {
-        List {
-            Button(action: { viewModel.cache = .keepFavoritesAndStatus },
-                   label: {
-                Text("Manter favoritos e status de leitura")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .keepStatus },
-                   label: {
-                Text("Manter status de leitura")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .keepFavorites },
-                   label: {
-                Text("Manter favoritos")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .cleanImages },
-                   label: {
-                Text("Apagar somente as imagens")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-            Button(action: { viewModel.cache = .cleanAll },
-                   label: {
-                Text("Limpar tudo")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-        }
-        .navigationTitle("Cache")
-        .navigationBarHidden(false)
+        Button(action: { viewModel.cache = .keepFavoritesAndStatus },
+               label: {
+            Text("Manter favoritos e status de leitura")
+        })
+        Button(action: { viewModel.cache = .keepStatus },
+               label: {
+            Text("Manter status de leitura")
+        })
+        Button(action: { viewModel.cache = .keepFavorites },
+               label: {
+            Text("Manter favoritos")
+        })
+        Button(action: { viewModel.cache = .cleanImages },
+               label: {
+            Text("Apagar somente as imagens")
+        })
+        Button(action: { viewModel.cache = .cleanAll },
+               label: {
+            Text("Limpar tudo")
+        })
     }
 }
+
+#if DEBUG
+import StorageLibrary
+
+#Preview {
+    let storage = Database(models: [SettingsDB.self], inMemory: true)
+
+    NavigationStack {
+        List {
+            PostsVisibilityView()
+        }
+        .navigationTitle("Posts")
+    }
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel(storage: storage))
+}
+#endif

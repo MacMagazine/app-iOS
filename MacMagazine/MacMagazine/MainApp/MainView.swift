@@ -37,6 +37,14 @@ struct MainView: View {
     }
 }
 
+#if DEBUG
+import StorageLibrary
+
 #Preview {
+    let storage = Database(models: [SettingsDB.self], inMemory: true)
+
     MainView()
+    .environment(\.theme, ThemeColor())
+    .environmentObject(SettingsViewModel(storage: storage))
 }
+#endif
