@@ -8,14 +8,13 @@ struct SubscriptionView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject var viewModel = SubscriptionViewModel()
+    @StateObject var viewModel = SubscriptionViewModel()
 
     @State private var selectedProduct: String?
-    @State private var isPresentingPrivacy = false
-    @State private var isPresentingTerms = false
 
-    @State private var isPresentingLoginPatrao = false
-    @State private var urlToOpen: URL?
+    @Binding var isPatrao: Bool
+    @Binding var isPresentingLoginPatrao: Bool
+    @Binding var urlToOpen: URL?
 
     var body: some View {
         Section {
@@ -31,19 +30,20 @@ struct SubscriptionView: View {
             }
         } header: {
             headerContent
-        } footer: {
-            footer
         }
 
         .task {
             viewModel.storage = settingsViewModel.storage
-            viewModel.get()
-            try? await viewModel.getPurchasableProducts()
-            viewModel.restore()
+            await viewModel.get()
+            if !viewModel.isPatrao {
+                try? await viewModel.getPurchasableProducts()
+                viewModel.restore()
+            }
         }
 
         .onChange(of: viewModel.isPatrao) { _, value in
             Task { @MainActor in
+                isPatrao = value
                 await viewModel.change(isPatrao: value)
             }
         }
@@ -52,10 +52,8 @@ struct SubscriptionView: View {
 
 extension SubscriptionView {
     var headerContent: some View {
-        HStack(alignment: .top) {
-            Text("Remover Propagandas")
-                .font(.headline)
-        }
+        Text("Remover Propagandas")
+        .font(.headline)
         .foregroundColor(theme.text.terciary.color)
     }
 }
@@ -140,17 +138,6 @@ extension SubscriptionView {
         })
         .accessibilityLabel("Fazer login como patrão para remover propagandas.")
 
-        .sheet(isPresented: $isPresentingLoginPatrao) {
-            let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
-                                                      isPatrao: $viewModel.isPatrao,
-                                                      openUrl: $urlToOpen)
-            Webview(title: "Login para patrões",
-                    url: URLs.login,
-                    isPresenting: $isPresentingLoginPatrao,
-                    navigationDelegate: webviewController,
-                    userScripts: webviewController.userScripts)
-        }
-
         if let url = urlToOpen {
             Divider().opacity(0)
                 .task {
@@ -171,40 +158,5 @@ extension SubscriptionView {
         }, label: {
             Text("Logoff de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
         })
-    }
-}
-
-// MARK: - FOOTER -
-
-extension SubscriptionView {
-    @ViewBuilder
-    var footer: some View {
-        HStack {
-            Spacer()
-            Button(action: { isPresentingTerms.toggle() },
-                   label: {
-                Text("Termos de Uso")
-                    .plain(color: theme.text.terciary.color ?? .primary)
-            })
-            Spacer(minLength: 0)
-            Button(action: { isPresentingPrivacy.toggle() },
-                   label: {
-                Text("Política de Privacidade")
-                    .plain(color: theme.text.terciary.color ?? .primary)
-            })
-            Spacer()
-        }
-
-        .sheet(isPresented: $isPresentingTerms) {
-            Webview(title: "Termos de Uso",
-                    url: URLs.terms,
-                    isPresenting: $isPresentingTerms)
-        }
-
-        .sheet(isPresented: $isPresentingPrivacy) {
-            Webview(title: "Política de Privacidade",
-                    url: URLs.privacy,
-                    isPresenting: $isPresentingPrivacy)
-        }
     }
 }

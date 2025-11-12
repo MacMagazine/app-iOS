@@ -21,8 +21,8 @@ final class SubscriptionViewModel: ObservableObject {
         }
     }
 
-    @Published var isPatrao = true
-    @Published var isValidSubscription = true
+    @Published var isPatrao = false
+    @Published var isValidSubscription = false
     @Published var status: Status = .idle
 
     var storage: Database?
@@ -38,7 +38,7 @@ final class SubscriptionViewModel: ObservableObject {
         Task {
             let statusPublisher = await inAppLibrary.$status
             statusPublisher
-                .receive(on: RunLoop.main)
+                .receive(on: DispatchQueue.main)
                 .sink { [weak self] status in
                     self?.process(purchased: status)
                 }
@@ -48,14 +48,12 @@ final class SubscriptionViewModel: ObservableObject {
 }
 
 extension SubscriptionViewModel {
-    func get() {
+    func get() async {
         isValidSubscription = storage?.get()?.subscription.isValidSubscription ?? false
         isPatrao = storage?.get()?.subscription.isPatrao ?? false
 
-        Task {
-            if !isValidSubscription {
-                await change(isPatrao: false)
-            }
+        if !isValidSubscription {
+            await change(isPatrao: false)
         }
     }
 

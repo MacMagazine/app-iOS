@@ -2,6 +2,28 @@ import Combine
 import MessageUI
 
 final public class AboutViewModel {
+    enum ButtonAction: Equatable {
+        case terms
+        case privacy
+        case none
+
+        var title: String {
+            switch self {
+            case .terms: "Termos de Uso"
+            case .privacy: "Política de Privacidade"
+            case .none: ""
+            }
+        }
+
+        var url: String {
+            switch self {
+            case .terms: URLs.terms
+            case .privacy: URLs.privacy
+            case .none: ""
+            }
+        }
+    }
+
     let delegate = MailDelegate()
 
     public init() {}

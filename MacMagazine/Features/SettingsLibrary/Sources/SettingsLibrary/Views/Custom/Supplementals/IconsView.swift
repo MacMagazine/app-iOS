@@ -4,7 +4,7 @@ import SwiftUI
 struct IconsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject private var viewModel = IconsViewModel()
+    @StateObject private var viewModel = IconsViewModel()
 
     var body: some View {
         Section {
@@ -22,13 +22,11 @@ struct IconsView: View {
 
 private extension IconsView {
     var headerView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Ícone do app")
-                    .font(.headline)
-                Text("Personalize o ícone do aplicativo")
-                    .font(.caption)
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Ícone do app")
+                .font(.headline)
+            Text("Personalize o ícone do aplicativo")
+                .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
     }

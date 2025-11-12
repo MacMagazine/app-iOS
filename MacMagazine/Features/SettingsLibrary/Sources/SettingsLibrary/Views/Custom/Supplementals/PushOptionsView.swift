@@ -5,7 +5,7 @@ import UIComponentsLibrary
 struct PushOptionsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject private var viewModel = PushOptionsViewModel()
+    @StateObject private var viewModel = PushOptionsViewModel()
 
     var body: some View {
         Section {
@@ -22,13 +22,11 @@ struct PushOptionsView: View {
 
 private extension PushOptionsView {
     var headerView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Notificações")
-                    .font(.headline)
-                Text("Escolha quais posts você deseja receber notificações")
-                    .font(.caption)
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Notificações")
+                .font(.headline)
+            Text("Escolha quais posts você deseja receber notificações")
+                .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
     }

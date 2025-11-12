@@ -4,7 +4,7 @@ import SwiftUI
 struct AppearanceView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject private var viewModel = AppearanceViewModel()
+    @StateObject private var viewModel = AppearanceViewModel()
 
     var body: some View {
         Section {
@@ -26,13 +26,11 @@ struct AppearanceView: View {
 
 private extension AppearanceView {
     var headerView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Aparência")
-                    .font(.headline)
-                Text("Escolha o tema do aplicativo")
-                    .font(.caption)
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Aparência")
+                .font(.headline)
+            Text("Escolha o tema do aplicativo")
+                .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
     }

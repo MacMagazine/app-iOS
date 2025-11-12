@@ -1,52 +1,54 @@
 import MacMagazineLibrary
 import SwiftUI
+import UIComponentsLibrary
 
 public struct SettingsView: View {
     @Environment(\.theme) var theme: ThemeColor
 
-    let items: [Menu] = [
-        Menu(view: AnyView(SubscriptionView())),
-        Menu(view: AnyView(PostsVisibilityView())),
-        Menu(view: AnyView(AppearanceView())),
-        Menu(view: AnyView(IconsView())),
-        Menu(view: AnyView(AboutView()))
-    ]
+    @State private var presentingContent = AboutViewModel.ButtonAction.none
+
+    @State var isPatrao = false
+    @State var urlToOpen: URL?
+    @State private var isPresentingLoginPatrao = false
 
     public init() {}
 
     public var body: some View {
         NavigationStack {
             List {
-                ForEach(items, id: \.id) { row in
-                    row.view
-                }
+
+                SubscriptionView(
+                    isPatrao: $isPatrao,
+                    isPresentingLoginPatrao: $isPresentingLoginPatrao,
+                    urlToOpen: $urlToOpen
+                )
+
+                PostsVisibilityView()
+                AppearanceView()
+                IconsView()
+                AboutView(presentingContent: $presentingContent)
             }
             .navigationTitle("MacMagazine")
-//            .toolbar {
-//                ToolbarItem(placement: .automatic) {
-//                    logo
-//                }
-//            }
         }
-    }
-}
 
-private extension SettingsView {
-    var logo: some View {
-        HStack {
-            Image("Logo", bundle: .module)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 28)
-
-            Image("MacMagazine", bundle: .module)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 24)
-                .padding(.top, 10)
+        .sheet(isPresented: Binding(get: { presentingContent != .none },
+                                    set: { _ in presentingContent = .none })) {
+            Webview(title: presentingContent.title,
+                    url: presentingContent.url,
+                    isPresenting: Binding(get: { presentingContent != .none },
+                                          set: { _ in presentingContent = .none }))
         }
-        .frame(maxWidth: .infinity)
-        .padding(.top)
+
+        .sheet(isPresented: $isPresentingLoginPatrao) {
+            let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
+                                                      isPatrao: $isPatrao,
+                                                      openUrl: $urlToOpen)
+            Webview(title: "Login para patrões",
+                    url: URLs.login,
+                    isPresenting: $isPresentingLoginPatrao,
+                    navigationDelegate: webviewController,
+                    userScripts: webviewController.userScripts)
+        }
     }
 }
 

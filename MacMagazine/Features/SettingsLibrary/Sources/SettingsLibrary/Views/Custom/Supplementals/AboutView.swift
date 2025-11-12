@@ -6,6 +6,8 @@ struct AboutView: View {
     @Environment(\.theme) private var theme: ThemeColor
     private let viewModel = AboutViewModel()
 
+    @Binding var presentingContent: AboutViewModel.ButtonAction
+
     var body: some View {
         Section {
             optionsView
@@ -24,29 +26,40 @@ private extension AboutView {
             .font(.caption)
             .foregroundColor(theme.text.terciary.color)
             .tint(theme.button.primary.color)
+            .padding(.bottom)
     }
 }
 
 private extension AboutView {
     var headerView: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Sobre")
-                    .font(.headline)
-                Text("Versão \(Bundle.version ?? "")")
-                    .font(.subheadline)
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Sobre")
+                .font(.headline)
+            Text("Versão \(Bundle.version ?? "")")
+                .font(.subheadline)
         }
         .foregroundColor(theme.text.terciary.color)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Sobre. A versão do app é \(Bundle.version ?? "desconhecida").")
     }
 
+    @ViewBuilder
     var optionsView: some View {
-        Button(action: {
-            viewModel.composeMessage()
-        }, label: {
+        Button(action: { viewModel.composeMessage() },
+               label: {
             Text("Relatar problema/bug no app")
+                .foregroundStyle(theme.main.tint.color ?? .blue)
+        })
+
+        Button(action: { presentingContent = .terms },
+               label: {
+            Text(AboutViewModel.ButtonAction.terms.title)
+                .foregroundStyle(theme.main.tint.color ?? .blue)
+        })
+
+        Button(action: { presentingContent = .privacy },
+               label: {
+            Text(AboutViewModel.ButtonAction.privacy.title)
                 .foregroundStyle(theme.main.tint.color ?? .blue)
         })
     }
@@ -54,7 +67,7 @@ private extension AboutView {
 
 #Preview {
     List {
-        AboutView()
+        AboutView(presentingContent: .constant(.privacy))
     }
     .environment(\.theme, ThemeColor())
 }

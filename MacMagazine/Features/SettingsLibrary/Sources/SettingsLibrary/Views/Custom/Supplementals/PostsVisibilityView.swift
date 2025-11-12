@@ -5,19 +5,23 @@ import UIComponentsLibrary
 struct PostsVisibilityView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @ObservedObject private var viewModel = PostsVisibilityViewModel()
+    @StateObject private var viewModel = PostsVisibilityViewModel()
     @State private var isPresenting = false
+    @State private var isPresentingMore = false
 
     var body: some View {
         NavigationLink {
             List {
                 PushOptionsView()
                 readAll
-                identifyPosts
                 countPosts
                 cleanPosts
             }
+            .navigationTitle("Posts")
+            .navigationBarTitleDisplayMode(.inline)
+
         } label: {
+            Image(systemName: "text.page")
             Text("Posts")
         }
 
@@ -55,19 +59,13 @@ private extension PostsVisibilityView {
                 Text("Marcar todos os posts como lidos")
                     .foregroundStyle(theme.main.tint.color ?? .blue)
             })
-            .accessibilityLabel("Marcar todos os posts como já lidos")
-        }
-    }
 
-    var identifyPosts: some View {
-        Section {
-            HStack {
-                Text("Identificar posts já lidos")
-                Spacer()
-                Toggle("", isOn: $viewModel.postRead)
-                    .labelsHidden()
-                    .tint(theme.button.primary.color)
-            }
+            Toggle("Identificar posts já lidos", isOn: $viewModel.postRead)
+                .tint(theme.button.primary.color)
+        } header: {
+            Text("Posts lidos")
+                .font(.headline)
+                .foregroundColor(theme.text.terciary.color)
         } footer: {
             Text("Marca visualmente os posts que você já leu")
         }
@@ -75,14 +73,13 @@ private extension PostsVisibilityView {
 
     var countPosts: some View {
         Section {
-            HStack {
-                Text("Contar posts não lidos no ícone do app")
-                Spacer()
-                Toggle("", isOn: $viewModel.countOnBadge)
-                    .labelsHidden()
-                    .tint(theme.button.primary.color)
-                    .disabled(!viewModel.postRead)
-            }
+            Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)
+                .tint(theme.button.primary.color)
+                .disabled(!viewModel.postRead)
+        } header: {
+            Text("Badge")
+                .font(.headline)
+                .foregroundColor(theme.text.terciary.color)
         } footer: {
             Text("Mostra um badge com o número de posts não lidos")
         }
@@ -90,9 +87,8 @@ private extension PostsVisibilityView {
 
     var cleanPosts: some View {
         Section {
-            Button(action: {
-                isPresenting.toggle()
-            }, label: {
+            Button(action: { isPresenting.toggle() },
+                   label: {
                 Text("Limpar cache do app")
                     .foregroundStyle(theme.main.tint.color ?? .blue)
             })
@@ -102,6 +98,11 @@ private extension PostsVisibilityView {
                             titleVisibility: .visible) {
             cleanCacheView
         }
+        .confirmationDialog("Selecione uma opção",
+                            isPresented: $isPresentingMore,
+                            titleVisibility: .visible) {
+            moreOptionsCleanCacheView
+        }
     }
 
     @ViewBuilder
@@ -110,6 +111,15 @@ private extension PostsVisibilityView {
                label: {
             Text("Manter favoritos e status de leitura")
         })
+        Button(action: { isPresentingMore.toggle() },
+               label: {
+            Text("Outras opções")
+        })
+        Button("Limpar tudo", role: .destructive) { viewModel.cache = .cleanAll }
+    }
+
+    @ViewBuilder
+    var moreOptionsCleanCacheView: some View {
         Button(action: { viewModel.cache = .keepStatus },
                label: {
             Text("Manter status de leitura")
@@ -121,10 +131,6 @@ private extension PostsVisibilityView {
         Button(action: { viewModel.cache = .cleanImages },
                label: {
             Text("Apagar somente as imagens")
-        })
-        Button(action: { viewModel.cache = .cleanAll },
-               label: {
-            Text("Limpar tudo")
         })
     }
 }
@@ -139,7 +145,6 @@ import StorageLibrary
         List {
             PostsVisibilityView()
         }
-        .navigationTitle("Posts")
     }
     .environment(\.theme, ThemeColor())
     .environmentObject(SettingsViewModel(storage: storage))
