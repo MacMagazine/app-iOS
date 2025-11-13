@@ -98,9 +98,9 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "MMASSINATURAANUAL",
+          "productID" : "MMASSINATURAANUAL_BETA",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "MMASSINATURAANUAL",
+          "referenceName" : "MMASSINATURAANUAL_BETA",
           "subscriptionGroupID" : "A4781EC9",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
@@ -126,9 +126,9 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "MMASSINATURAMENSAL",
+          "productID" : "MMASSINATURAMENSAL_BETA",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "MMASSINATURAMENSAL",
+          "referenceName" : "MMASSINATURAMENSAL_BETA",
           "subscriptionGroupID" : "A4781EC9",
           "type" : "RecurringSubscription",
           "winbackOffers" : [

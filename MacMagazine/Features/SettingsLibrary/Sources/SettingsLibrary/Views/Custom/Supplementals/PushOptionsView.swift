@@ -25,7 +25,7 @@ private extension PushOptionsView {
         VStack(alignment: .leading, spacing: 4) {
             Text("Notificações")
                 .font(.headline)
-            Text("Escolha quais posts você deseja receber notificações")
+            Text("Escolha de quais posts você deseja receber notificações")
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)

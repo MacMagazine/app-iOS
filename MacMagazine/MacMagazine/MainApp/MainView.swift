@@ -24,7 +24,7 @@ struct MainView: View {
                         .ignoresSafeArea(edges: .bottom)
                 }
 
-                Tab("Ajustes", systemImage: "gearshape", value: .settings) {
+                Tab("MacMagazine", systemImage: "gearshape", value: .settings) {
                     SettingsView()
                 }
 
