@@ -52,7 +52,7 @@ struct SubscriptionView: View {
 
 extension SubscriptionView {
     var headerContent: some View {
-        Text("Remover Propagandas")
+        Text("Remover propagandas")
         .font(.headline)
         .foregroundColor(theme.text.terciary.color)
     }
@@ -104,7 +104,7 @@ extension SubscriptionView {
             Button(action: {
                 viewModel.restore()
             }, label: {
-                Text("Recuperar").foregroundStyle(theme.main.tint.color ?? .blue)
+                Text("Recuperar compra").foregroundStyle(theme.main.tint.color ?? .blue)
             })
             .accessibilityLabel("Recupere assinaturas previamente feitas.")
         }
@@ -116,7 +116,7 @@ extension SubscriptionView {
            UIApplication.shared.canOpenURL(url) {
             Button(action: { openURL(url) },
                    label: {
-                Text("Gerenciar").foregroundStyle(theme.main.tint.color ?? .blue)
+                Text("Gerenciar assinatura").foregroundStyle(theme.main.tint.color ?? .blue)
             })
             .accessibilityLabel("Gerencia suas assinaturas do App.")
         }
@@ -134,7 +134,7 @@ extension SubscriptionView {
 #endif
             isPresentingLoginPatrao.toggle()
         }, label: {
-            Text("Sou patrão").foregroundStyle(theme.main.tint.color ?? .blue)
+            Text("Sou patrão via Patreon/Catarse").foregroundStyle(theme.main.tint.color ?? .blue)
         })
         .accessibilityLabel("Fazer login como patrão para remover propagandas.")
 

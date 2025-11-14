@@ -28,7 +28,7 @@ public struct SettingsView: View {
                 IconsView()
                 AboutView(presentingContent: $presentingContent)
             }
-            .navigationTitle("MacMagazine")
+            .navigationTitle("Ajustes")
         }
 
         .sheet(isPresented: Binding(get: { presentingContent != .none },

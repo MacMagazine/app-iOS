@@ -111,10 +111,10 @@ private extension PostsVisibilityView {
                label: {
             Text("Manter favoritos e status de leitura")
         })
-        Button(action: { isPresentingMore.toggle() },
-               label: {
-            Text("Outras opções")
-        })
+//        Button(action: { isPresentingMore.toggle() },
+//               label: {
+//            Text("Outras opções")
+//        })
         Button("Limpar tudo", role: .destructive) { viewModel.cache = .cleanAll }
     }
 
