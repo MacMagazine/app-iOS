@@ -93,8 +93,8 @@
           },
           "localizations" : [
             {
-              "description" : "This is a 1 year subscription",
-              "displayName" : "Subscription 1 year",
+              "description" : "Assinatura anual",
+              "displayName" : "Remover propagandas",
               "locale" : "en_US"
             }
           ],
@@ -121,8 +121,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "This is a 1 month subscription",
-              "displayName" : "Subscription 1 month",
+              "description" : "Assinatura mensal",
+              "displayName" : "Remover propagandas",
               "locale" : "en_US"
             }
           ],

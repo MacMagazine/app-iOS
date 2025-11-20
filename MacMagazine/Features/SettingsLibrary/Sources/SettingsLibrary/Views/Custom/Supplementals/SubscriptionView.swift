@@ -52,7 +52,7 @@ struct SubscriptionView: View {
 
 extension SubscriptionView {
     var headerContent: some View {
-        Text("Remover propagandas")
+        Text("Assinaturas")
         .font(.headline)
         .foregroundColor(theme.text.terciary.color)
     }
