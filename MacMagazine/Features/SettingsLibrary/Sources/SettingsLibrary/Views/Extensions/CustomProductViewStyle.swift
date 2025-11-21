@@ -50,8 +50,7 @@ extension CustomProductViewStyle {
     ) -> some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(title)
-                Text(description).font(.footnote)
+                Text(description)
             }
             Spacer()
             Text(price)

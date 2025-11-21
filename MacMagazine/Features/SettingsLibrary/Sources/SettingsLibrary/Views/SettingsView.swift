@@ -15,20 +15,22 @@ public struct SettingsView: View {
 
     public var body: some View {
         NavigationStack {
-            List {
+            ZStack {
+                (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+                List {
+                    SubscriptionView(
+                        isPatrao: $isPatrao,
+                        isPresentingLoginPatrao: $isPresentingLoginPatrao,
+                        urlToOpen: $urlToOpen
+                    )
 
-                SubscriptionView(
-                    isPatrao: $isPatrao,
-                    isPresentingLoginPatrao: $isPresentingLoginPatrao,
-                    urlToOpen: $urlToOpen
-                )
-
-                PostsVisibilityView()
-                AppearanceView()
-                IconsView()
-                AboutView(presentingContent: $presentingContent)
+                    PostsVisibilityView()
+                    AppearanceView()
+                    IconsView()
+                    AboutView(presentingContent: $presentingContent)
+                }
+                .navigationTitle("Ajustes")
             }
-            .navigationTitle("Ajustes")
         }
 
         .sheet(isPresented: Binding(get: { presentingContent != .none },

@@ -12,41 +12,56 @@ struct SocialView: View {
     }
 
     @Environment(\.theme) private var theme: ThemeColor
-    @State private var selected: Options = .videos
+    @State private var selected = Options.videos
+    @State private var favorite = false
     let storage: Database
 
     var body: some View {
-        ZStack {
-            (theme.main.background.color ?? Color(uiColor: .systemGray6))
-                .edgesIgnoringSafeArea(.all)
-
-            VStack {
-                menuView
-                selectionView
-                Spacer()
+        NavigationStack {
+            ZStack {
+                (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+                content
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    menuView
+                }
+                ToolbarItem(placement: .principal) {
+                    optionsView
+                }
             }
         }
-        .ignoresSafeArea(edges: .bottom)
     }
 }
 
-extension SocialView {
-    @ViewBuilder
-    private var menuView: some View {
-        MenuView(menu: Options.allCases,
-                 selected: $selected)
-        .padding(.horizontal)
+private extension SocialView {
+    var optionsView: some View {
+        Picker("", selection: $selected) {
+            ForEach(Options.allCases, id: \.self) { option in
+                Text(option.rawValue).tag(option)
+            }
+        }
+        .pickerStyle(.segmented)
     }
-}
 
-extension SocialView {
     @ViewBuilder
-    private var selectionView: some View {
+    var content: some View {
         switch selected {
-        case .videos: VideosView(storage: storage)
+        case .videos: VideosView(storage: storage, favorite: $favorite).transition(.opacity)
         case .podcast: Text("Podcast")
         case .instagram: Text("Instagram")
         }
+    }
+
+    var menuView: some View {
+        Button(action: {
+            withAnimation {
+                favorite.toggle()
+            }
+        }, label: {
+            Image(systemName: favorite ? "star.fill" : "star")
+        })
     }
 }
 

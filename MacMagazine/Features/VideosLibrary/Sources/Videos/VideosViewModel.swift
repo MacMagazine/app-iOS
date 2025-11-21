@@ -4,10 +4,10 @@ import NetworkLibrary
 import StorageLibrary
 import YouTubeLibrary
 
-public class VideosViewModel: ObservableObject {
-	@Published public var fullScreen: Bool = false
-	@Published public var options: Options = .home
-	@Published var status: Status = .loading
+@Observable
+class VideosViewModel {
+	var options: Options = .home
+	var status: Status = .loading
 
 	enum Status: Equatable {
 		case loading
@@ -22,15 +22,14 @@ public class VideosViewModel: ObservableObject {
 		}
 	}
 
-	public enum Options: Equatable {
-		case all
+	enum Options: Equatable {
 		case home
-		case favorite
 		case search(text: String)
 	}
 
     private let storage: Database
     private let mock: [NetworkMockData]?
+    let youtube: YouTubeAPI
 
     let credentials = YouTubeCredentials(salt: "AppDelegateNSObject",
 										 keys: [
@@ -40,13 +39,14 @@ public class VideosViewModel: ObservableObject {
 										 channelId: [20, 51, 70, 30, 44, 1, 41, 16, 8, 61, 4, 24, 1, 22, 43, 45, 28, 0, 5, 41, 69, 25, 8, 36])
 
     @MainActor
-    lazy var youtube = YouTubeAPI(credentials: credentials,
-                                  mock: mock,
-                                  storage: storage)
-
-    public init(storage: Database,
-                mock: [NetworkMockData]? = nil) {
+    init(storage: Database,
+         mock: [NetworkMockData]? = nil) {
         self.storage = storage
         self.mock = mock
-	}
+
+        self.youtube = YouTubeAPI(credentials: credentials,
+                                  mock: mock,
+                                  storage: storage,
+                                  language: "pt-BR")
+    }
 }
