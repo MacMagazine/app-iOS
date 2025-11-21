@@ -85,6 +85,15 @@ extension SubscriptionViewModel {
         }
     }
 
+    func purchase(using identifier: String) {
+        guard let product = status.product(using: identifier) else { return }
+        Task {
+            await inAppLibrary.purchase(product)
+        }
+    }
+}
+
+private extension SubscriptionViewModel {
     func process(purchased: InAppStatus) {
         if case .purchased(let identifier) = purchased,
            let expirationDate = status.product(using: identifier)?.expirationDate {

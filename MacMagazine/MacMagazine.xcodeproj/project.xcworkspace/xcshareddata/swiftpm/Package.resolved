@@ -1,5 +1,5 @@
 {
-  "originHash" : "b6e9d0bc5ff80331016d2fdb4860eb725098c691a0cb3be8c0a00f8a59f9b2cf",
+  "originHash" : "16bd44f60247ef354685cc146319d7451397fd1274a62dcb1ff3de7f899e2566",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -106,7 +106,7 @@
       "location" : "https://github.com/cassio-rossi/Libraries.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6942c7594ddf68a9f44cc43ac636ba28fc07b3c6"
+        "revision" : "53772f91881ca1f8f59c4d02ba1284999fe0b41d"
       }
     },
     {

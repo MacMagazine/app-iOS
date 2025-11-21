@@ -68,6 +68,7 @@ private extension PostsVisibilityView {
                 .foregroundColor(theme.text.terciary.color)
         } footer: {
             Text("Marca visualmente os posts que você já leu")
+                .accessibilityHidden(true)
         }
     }
 
@@ -82,6 +83,7 @@ private extension PostsVisibilityView {
                 .foregroundColor(theme.text.terciary.color)
         } footer: {
             Text("Mostra um badge com o número de posts não lidos")
+                .accessibilityHidden(true)
         }
     }
 

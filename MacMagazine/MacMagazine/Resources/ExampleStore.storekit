@@ -84,13 +84,7 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "C0E9B10B",
-          "introductoryOffer" : {
-            "displayPrice" : "0.99",
-            "internalID" : "3B66A53D",
-            "numberOfPeriods" : 1,
-            "paymentMode" : "payAsYouGo",
-            "subscriptionPeriod" : "P1Y"
-          },
+          "introductoryOffer" : null,
           "localizations" : [
             {
               "description" : "Assinatura anual",

@@ -29,6 +29,8 @@ private extension PushOptionsView {
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Escolha de quais posts você deseja receber notificações")
     }
 
     @ViewBuilder

@@ -33,6 +33,8 @@ private extension AppearanceView {
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Mude a aparência, escolhendo o tema do aplicativo")
     }
 
     var optionsView: some View {

@@ -87,14 +87,15 @@ extension SubscriptionView {
     private func subscriptions(identifiers: [String]) -> some View {
         ForEach(identifiers, id: \.self) { identifier in
             ProductView(id: identifier)
-                .productViewStyle(.compact)
-                .tint(theme.button.primary.color ?? .blue)
+                .productViewStyle(CustomProductViewStyle(theme: theme) {
+                    viewModel.purchase(using: identifier)
+                })
         }
     }
 
     @ViewBuilder
     private var subscriptionOptions: some View {
-        restore
+        // restore
         manageSubscription
     }
 

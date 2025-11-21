@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
+		9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B817DA12ED0E5F7005E58E5 /* VideosLibrary */; };
 		9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9B024FDA2EC2717200D66056 /* SettingsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SettingsLibrary; sourceTree = "<group>"; };
+		9B817D812ED0E381005E58E5 /* VideosLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = VideosLibrary; sourceTree = "<group>"; };
 		9B9E9DC42E986F8400255820 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCD94C42E997032007C44B6 /* MacMagazineLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MacMagazineLibrary; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */,
 				9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */,
 				9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */,
 			);
@@ -74,6 +77,7 @@
 			children = (
 				9BCD94C42E997032007C44B6 /* MacMagazineLibrary */,
 				9B024FDA2EC2717200D66056 /* SettingsLibrary */,
+				9B817D812ED0E381005E58E5 /* VideosLibrary */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -107,6 +111,7 @@
 			packageProductDependencies = (
 				9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */,
 				9B024FDB2EC2719700D66056 /* SettingsLibrary */,
+				9B817DA12ED0E5F7005E58E5 /* VideosLibrary */,
 			);
 			productName = MacMagazine;
 			productReference = 9B9E9DC42E986F8400255820 /* MacMagazine.app */;
@@ -389,6 +394,10 @@
 		9B024FDB2EC2719700D66056 /* SettingsLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SettingsLibrary;
+		};
+		9B817DA12ED0E5F7005E58E5 /* VideosLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VideosLibrary;
 		};
 		9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

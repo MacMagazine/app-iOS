@@ -29,6 +29,8 @@ private extension IconsView {
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Personalize o ícone do aplicativo")
     }
 
     @ViewBuilder

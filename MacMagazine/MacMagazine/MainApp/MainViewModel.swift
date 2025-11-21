@@ -4,6 +4,7 @@ import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
+import YouTubeLibrary
 
 class MainViewModel: ObservableObject {
     @ObservedObject var settingsViewModel: SettingsViewModel
@@ -14,7 +15,12 @@ class MainViewModel: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
 
     init() {
-        self.storage = Database(models: [SettingsDB.self], inMemory: false)
+        self.storage = Database(
+            models: [
+                VideoDB.self,
+                SettingsDB.self
+            ],
+            inMemory: false)
         self.settingsViewModel = SettingsViewModel(storage: self.storage)
 
         settingsViewModel.$colorSchema
