@@ -9,22 +9,27 @@ public struct VideosView: View {
     var viewModel: VideosViewModel
     @State private var search: String = ""
     @Binding private var favorite: Bool
+    @Binding var scrollPosition: ScrollPosition
 
     public init(
         storage: Database,
-        favorite: Binding<Bool>
+        favorite: Binding<Bool>,
+        scrollPosition: Binding<ScrollPosition>
     ) {
         self.viewModel = VideosViewModel(storage: storage)
         _favorite = favorite
+        _scrollPosition = scrollPosition
     }
 
     public var body: some View {
         YouTubeLibrary.VideosView(
             api: viewModel.youtube,
+            scrollPosition: $scrollPosition,
             favorite: favorite,
             search: search,
-            theme: theme,
-            type: .classic
+            type: .classic,
+            buttonColor: theme.button.primary.color ?? .blue,
+            errorColor: theme.text.error.color ?? .red
         )
 
         .task {
@@ -35,6 +40,6 @@ public struct VideosView: View {
 
 #Preview {
     let storage = Database(models: [VideoDB.self], inMemory: true)
-    VideosView(storage: storage, favorite: .constant(false))
+    VideosView(storage: storage, favorite: .constant(false), scrollPosition: .constant(.init()))
         .environment(\.theme, ThemeColor())
 }

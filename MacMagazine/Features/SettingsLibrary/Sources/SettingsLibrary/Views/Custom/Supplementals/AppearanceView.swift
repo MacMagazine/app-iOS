@@ -27,7 +27,7 @@ struct AppearanceView: View {
 private extension AppearanceView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Aparência")
+            Text("Tema")
                 .font(.headline)
             Text("Escolha o tema do aplicativo")
                 .font(.caption)

@@ -23,14 +23,14 @@ struct CustomNewsView: View {
 private extension CustomNewsView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Notícias")
+            Text(AppTabs.news.rawValue)
                 .font(.headline)
-            Text("Escolha a ordem das notícias no aplicativo")
+            Text("Defina a ordem das \(AppTabs.news.rawValue.lowercased()) do aplicativo")
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Customize o app, escolhendo a ordem das notícias.")
+        .accessibilityLabel("Customize o app, escolhendo a ordem das opções na aba \(AppTabs.news.rawValue.lowercased()).")
     }
 
     var optionsView: some View {

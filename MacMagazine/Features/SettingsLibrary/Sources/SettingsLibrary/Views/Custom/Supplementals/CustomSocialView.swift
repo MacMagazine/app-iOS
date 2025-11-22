@@ -23,14 +23,14 @@ struct CustomSocialView: View {
 private extension CustomSocialView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Social")
+            Text(AppTabs.social.rawValue)
                 .font(.headline)
-            Text("Escolha a ordem de Social no aplicativo")
+            Text("Defina a ordem das \(AppTabs.social.rawValue.lowercased()) do aplicativo")
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Customize o app, escolhendo a ordem das opções em Social.")
+        .accessibilityLabel("Customize o app, escolhendo a ordem das opções na aba \(AppTabs.social.rawValue.lowercased()).")
     }
 
     var optionsView: some View {

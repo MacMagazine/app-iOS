@@ -23,14 +23,14 @@ struct CustomTabView: View {
 private extension CustomTabView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Tabs")
+            Text("Abas")
                 .font(.headline)
-            Text("Escolha a ordem das tabs do aplicativo")
+            Text("Defina a ordem das abas do aplicativo")
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Customize o app, escolhendo a ordem das tabs na parte inferior.")
+        .accessibilityLabel("Customize o app, escolhendo a ordem das abas na parte inferior do aplicativo.")
     }
 
     var optionsView: some View {

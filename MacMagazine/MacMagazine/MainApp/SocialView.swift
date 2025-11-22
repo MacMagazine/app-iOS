@@ -9,14 +9,16 @@ struct SocialView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: MainViewModel
     @State private var favorite = false
+    @State private var scrollPosition = ScrollPosition()
     let storage: Database
 
     var body: some View {
         NavigationStack {
             ZStack {
                 (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-                content.padding(.top)
+                content
             }
+            .contentMargins(.top, 20, for: .scrollContent)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -25,6 +27,14 @@ struct SocialView: View {
                 ToolbarItem(placement: .principal) {
                     optionsView
                 }
+            }
+        }
+        .onChange(of: viewModel.scrollToTopTrigger) { _, newValue in
+            if newValue == .social {
+                withAnimation {
+                    scrollPosition.scrollTo(edge: .top)
+                }
+                viewModel.scrollToTopTrigger = nil
             }
         }
     }
@@ -43,7 +53,7 @@ private extension SocialView {
     @ViewBuilder
     var content: some View {
         switch viewModel.social {
-        case .videos: VideosView(storage: storage, favorite: $favorite).transition(.opacity)
+        case .videos: VideosView(storage: storage, favorite: $favorite, scrollPosition: $scrollPosition).transition(.opacity)
         case .podcast: Text("Podcast")
         case .instagram: Text("Instagram")
         }

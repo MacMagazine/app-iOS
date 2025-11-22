@@ -9,9 +9,19 @@ import YouTubeLibrary
 class MainViewModel: ObservableObject {
     @ObservedObject var settingsViewModel: SettingsViewModel
     @Published var colorSchema: SwiftUI.ColorScheme?
-    @Published var tab: AppTabs
+    @Published var tab: AppTabs {
+        didSet {
+            if oldValue == previousTab {
+                scrollToTopTrigger = tab
+            }
+            previousTab = tab
+        }
+    }
+    private var previousTab: AppTabs?
+
     @Published var social: Social
     @Published var news: News
+    @Published var scrollToTopTrigger: AppTabs?
 
     let storage: Database
     let theme = ThemeColor()
@@ -29,6 +39,7 @@ class MainViewModel: ObservableObject {
         let settingsViewModel = SettingsViewModel(storage: self.storage)
         self.settingsViewModel = settingsViewModel
         self.tab = settingsViewModel.tabs.first ?? .news
+        self.scrollToTopTrigger = settingsViewModel.tabs.first
         self.social = settingsViewModel.social.first ?? .videos
         self.news = settingsViewModel.news.first ?? .all
 

@@ -20,14 +20,13 @@ public struct SettingsView: View {
             ZStack {
                 (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
                 List {
+                    PostsVisibilityView()
+                    appearance
                     SubscriptionView(
                         isPatrao: $isPatrao,
                         isPresentingLoginPatrao: $isPresentingLoginPatrao,
                         urlToOpen: $urlToOpen
                     )
-
-                    PostsVisibilityView()
-                    appearance
                     AboutView(presentingContent: $presentingContent)
                 }
                 .navigationTitle(AppTabs.settings.rawValue)
@@ -65,13 +64,13 @@ private extension SettingsView {
                 CustomNewsView()
                 CustomSocialView()
             }
-            .navigationTitle("Customização do app")
+            .navigationTitle("Aparência")
             .navigationBarTitleDisplayMode(.inline)
             .environment(\.editMode, $editMode)
 
         } label: {
-            Image(systemName: "highlighter.badge.ellipsis")
-            Text("Customização do app")
+            Image(systemName: "highlighter.badge.ellipsis").frame(width: 20, alignment: .leading)
+            Text("Aparência")
         }
     }
 }

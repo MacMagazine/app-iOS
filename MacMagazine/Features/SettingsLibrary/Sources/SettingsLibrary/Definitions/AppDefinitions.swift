@@ -3,7 +3,7 @@ import Foundation
 public enum AppTabs: String, CaseIterable, Codable, Hashable {
     case live = "MM Live"
     case news = "Notícias"
-    case social = "Social"
+    case social = "Mídias"
     case settings = "Ajustes"
     case search = "Busca"
 
