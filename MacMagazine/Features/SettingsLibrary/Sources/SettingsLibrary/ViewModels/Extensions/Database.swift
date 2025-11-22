@@ -2,6 +2,8 @@ import Foundation
 import StorageLibrary
 import SwiftData
 
+// MARK: - User options -
+
 extension Database {
     @MainActor
     func get() -> SettingsDB? {
@@ -80,13 +82,37 @@ extension Database {
         }
         try? context.save()
     }
+}
 
+// MARK: - App options -
+
+extension Database {
     @MainActor
     func update(tabs: [AppTabs]) {
         if let item = get() {
             item.tabs = tabs
         } else {
             context.insert(SettingsDB(tabs: tabs))
+        }
+        try? context.save()
+    }
+
+    @MainActor
+    func update(social: [Social]) {
+        if let item = get() {
+            item.social = social
+        } else {
+            context.insert(SettingsDB(social: social))
+        }
+        try? context.save()
+    }
+
+    @MainActor
+    func update(news: [News]) {
+        if let item = get() {
+            item.news = news
+        } else {
+            context.insert(SettingsDB(news: news))
         }
         try? context.save()
     }

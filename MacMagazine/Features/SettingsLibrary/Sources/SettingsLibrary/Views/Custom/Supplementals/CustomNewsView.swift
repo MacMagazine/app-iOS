@@ -4,13 +4,18 @@ import SwiftUI
 struct CustomNewsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    private var viewModel = CustomizationViewModel()
+    @State private var viewModel = CustomizationViewModel()
 
     var body: some View {
         Section {
             optionsView
         } header: {
             headerView
+        }
+
+        .task {
+            viewModel.storage = settingsViewModel.storage
+            viewModel.get()
         }
     }
 }
@@ -29,6 +34,18 @@ private extension CustomNewsView {
     }
 
     var optionsView: some View {
-        EmptyView()
+        ForEach($viewModel.news, id: \.self) { $news in
+            Text(news.rawValue)
+        }
+        .onMove(perform: moveItems)
+    }
+}
+
+private extension CustomNewsView {
+    func moveItems(fromIndex: IndexSet, newIndex: Int) {
+        viewModel.news.move(fromOffsets: fromIndex, toOffset: newIndex)
+        Task {
+            await viewModel.change(viewModel.news)
+        }
     }
 }

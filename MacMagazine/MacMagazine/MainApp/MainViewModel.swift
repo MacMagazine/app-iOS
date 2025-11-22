@@ -9,6 +9,9 @@ import YouTubeLibrary
 class MainViewModel: ObservableObject {
     @ObservedObject var settingsViewModel: SettingsViewModel
     @Published var colorSchema: SwiftUI.ColorScheme?
+    @Published var tab: AppTabs
+    @Published var social: Social
+    @Published var news: News
 
     let storage: Database
     let theme = ThemeColor()
@@ -23,7 +26,11 @@ class MainViewModel: ObservableObject {
             inMemory: false
         )
 
-        self.settingsViewModel = SettingsViewModel(storage: self.storage)
+        let settingsViewModel = SettingsViewModel(storage: self.storage)
+        self.settingsViewModel = settingsViewModel
+        self.tab = settingsViewModel.tabs.first ?? .news
+        self.social = settingsViewModel.social.first ?? .videos
+        self.news = settingsViewModel.news.first ?? .all
 
         settingsViewModel.$colorSchema
             .receive(on: DispatchQueue.main)

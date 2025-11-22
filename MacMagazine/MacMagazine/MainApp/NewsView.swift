@@ -3,9 +3,8 @@ import SettingsLibrary
 import StorageLibrary
 import SwiftUI
 import UIComponentsLibrary
-import VideosLibrary
 
-struct SocialView: View {
+struct NewsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: MainViewModel
     @State private var favorite = false
@@ -30,23 +29,15 @@ struct SocialView: View {
     }
 }
 
-private extension SocialView {
+private extension NewsView {
     var optionsView: some View {
-        Picker("", selection: $viewModel.social) {
-            ForEach(viewModel.settingsViewModel.social, id: \.self) { option in
-                Text(option.rawValue).tag(option)
-            }
-        }
-        .pickerStyle(.segmented)
+        MenuView(menu: viewModel.settingsViewModel.news,
+                 selected: $viewModel.news)
     }
 
     @ViewBuilder
     var content: some View {
-        switch viewModel.social {
-        case .videos: VideosView(storage: storage, favorite: $favorite).transition(.opacity)
-        case .podcast: Text("Podcast")
-        case .instagram: Text("Instagram")
-        }
+        Text("News")
     }
 
     var menuView: some View {
@@ -62,6 +53,6 @@ private extension SocialView {
 
 #Preview {
     let storage = Database(models: [], inMemory: true)
-    SocialView(storage: storage)
+    NewsView(storage: storage)
         .environment(\.theme, ThemeColor())
 }

@@ -7,13 +7,16 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
 
     public var body: some View {
         ScrollView(.horizontal) {
-            HStack(alignment: .firstTextBaseline, spacing: 20) {
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
                 ForEach(menu, id: \.self) { option in
                     Button(action: { selected = option },
                            label: {
                         Text(option.rawValue)
-                            .font(selected == option ? .title : .subheadline)
-                            .foregroundColor(theme.text.terciary.color)
+                            .font(.headline)
+                            .rounded(
+                                color: theme.button.primary.color ?? .blue,
+                                fill: theme.button.terciary.color ?? .gray
+                            )
                     })
                 }
             }

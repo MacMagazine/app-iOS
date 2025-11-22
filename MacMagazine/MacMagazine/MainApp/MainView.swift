@@ -7,7 +7,6 @@ struct MainView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: MainViewModel
 
-    @State var selection = AppTabs.news
     @State private var searchText: String = ""
 
     var body: some View {
@@ -15,7 +14,7 @@ struct MainView: View {
             theme.main.background.color
                 .edgesIgnoringSafeArea(.all)
 
-            TabView(selection: $selection) {
+            TabView(selection: $viewModel.tab) {
                 ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
                     Tab(tab.rawValue, systemImage: tab.icon, value: tab, role: tab == .search ? .search : .none) {
                         AnyView(contentView(for: tab))
@@ -24,16 +23,13 @@ struct MainView: View {
             }
             .tint(theme.tertiary.background.color)
         }
-        .task {
-            selection = viewModel.settingsViewModel.tabs.first ?? .news
-        }
     }
 
     @ViewBuilder
     private func contentView(for tab: AppTabs) -> some View {
         switch tab {
         case .live: Text("MMLiveView()")
-        case .news: Text("HomeView()")
+        case .news: NewsView(storage: viewModel.storage)
         case .social: SocialView(storage: viewModel.storage)
         case .settings: SettingsView()
         case .search: Text("SearchView(searchText: $searchText)")
