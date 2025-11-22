@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 @Model
-final public class SettingsDB {
+public final class SettingsDB {
     var mode = ColorScheme.system
     var icon = IconType.normal
     var notification: String = PushPreferences.all.rawValue
@@ -10,8 +10,21 @@ final public class SettingsDB {
     var countOnBadge: Bool = false
     var subscription: Subscription = Subscription(isPatrao: false, expirationDate: Date())
     var tabs: [AppTabs] = AppTabs.allCases
-    var news: [News] = News.allCases
-    var social: [Social] = Social.allCases
+
+    // New fields - stored as optional for migration compatibility
+    // When nil, the computed properties return default values
+    private var _news: [News]?
+    private var _social: [Social]?
+
+    var news: [News] {
+        get { _news ?? News.allCases }
+        set { _news = newValue }
+    }
+
+    var social: [Social] {
+        get { _social ?? Social.allCases }
+        set { _social = newValue }
+    }
 
     init(mode: ColorScheme = .system,
          icon: IconType = .normal,
@@ -28,8 +41,8 @@ final public class SettingsDB {
         self.postRead = postRead
         self.countOnBadge = countOnBadge
         self.tabs = tabs
-        self.social = social
-        self.news = news
+        self._social = social
+        self._news = news
 
         let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
         self.subscription = subscription ?? Subscription(isPatrao: false, expirationDate: date)
