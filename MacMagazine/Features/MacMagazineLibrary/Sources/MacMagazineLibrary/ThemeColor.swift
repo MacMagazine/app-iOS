@@ -19,7 +19,7 @@ public struct ThemeColor: Themeable {
 
 	public let button = ButtonColor(primary: "MMBlue",
 									secondary: "MMBlueWhite",
-									terciary: "",
+									terciary: "MMGray6Gray3",
 									destructive: "TabascoDracula")
 
     public init() {}

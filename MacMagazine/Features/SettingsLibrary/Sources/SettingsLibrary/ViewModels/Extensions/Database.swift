@@ -80,4 +80,14 @@ extension Database {
         }
         try? context.save()
     }
+
+    @MainActor
+    func update(tabs: [AppTabs]) {
+        if let item = get() {
+            item.tabs = tabs
+        } else {
+            context.insert(SettingsDB(tabs: tabs))
+        }
+        try? context.save()
+    }
 }

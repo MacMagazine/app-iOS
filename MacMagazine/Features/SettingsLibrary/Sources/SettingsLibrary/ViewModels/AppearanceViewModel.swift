@@ -2,11 +2,9 @@ import Combine
 import Foundation
 import StorageLibrary
 
-final public class AppearanceViewModel: ObservableObject {
-    @Published public var mode: ColorScheme = .system
+final class AppearanceViewModel: ObservableObject {
+    @Published var mode: ColorScheme = .system
     var storage: Database?
-
-    public init() {}
 }
 
 extension AppearanceViewModel {

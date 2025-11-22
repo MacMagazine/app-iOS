@@ -2,14 +2,12 @@ import Combine
 import Foundation
 import StorageLibrary
 
-final public class PostsVisibilityViewModel: ObservableObject {
-    @Published public var cache: Cache?
+final class PostsVisibilityViewModel: ObservableObject {
+    @Published var cache: Cache?
     @Published var postRead = true
     @Published var countOnBadge = false
 
     var storage: Database?
-
-    public init() {}
 }
 
 extension PostsVisibilityViewModel {

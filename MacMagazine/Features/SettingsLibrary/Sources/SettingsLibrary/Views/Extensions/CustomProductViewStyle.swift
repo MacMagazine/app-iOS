@@ -1,3 +1,4 @@
+import MacMagazineLibrary
 import StoreKit
 import SwiftUI
 import UIComponentsLibrary
@@ -54,7 +55,10 @@ extension CustomProductViewStyle {
             }
             Spacer()
             Text(price)
-                .rounded(fill: theme.button.primary.color ?? .blue)
+                .rounded(
+                    color: theme.button.primary.color ?? .blue,
+                    fill: theme.button.terciary.color ?? .gray
+                )
                 .onTapGesture { action?() }
         }
         .frame(maxWidth: .infinity)

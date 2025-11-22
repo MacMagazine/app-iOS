@@ -20,11 +20,13 @@ class MainViewModel: ObservableObject {
                 VideoDB.self,
                 SettingsDB.self
             ],
-            inMemory: false)
+            inMemory: false
+        )
+
         self.settingsViewModel = SettingsViewModel(storage: self.storage)
 
         settingsViewModel.$colorSchema
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] value in
                 self?.colorSchema = value
             }

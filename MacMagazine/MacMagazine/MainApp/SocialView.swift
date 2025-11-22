@@ -1,18 +1,13 @@
 import MacMagazineLibrary
+import SettingsLibrary
 import StorageLibrary
 import SwiftUI
 import UIComponentsLibrary
 import VideosLibrary
 
 struct SocialView: View {
-    enum Options: String, CaseIterable {
-        case videos = "Videos"
-        case podcast = "Podcast"
-        case instagram = "Instagram"
-    }
-
     @Environment(\.theme) private var theme: ThemeColor
-    @State private var selected = Options.videos
+    @State private var selected = Social.videos
     @State private var favorite = false
     let storage: Database
 
@@ -20,7 +15,7 @@ struct SocialView: View {
         NavigationStack {
             ZStack {
                 (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-                content
+                content.padding(.top)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -38,7 +33,7 @@ struct SocialView: View {
 private extension SocialView {
     var optionsView: some View {
         Picker("", selection: $selected) {
-            ForEach(Options.allCases, id: \.self) { option in
+            ForEach(Social.allCases, id: \.self) { option in
                 Text(option.rawValue).tag(option)
             }
         }

@@ -23,7 +23,7 @@ struct IconsView: View {
 private extension IconsView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Ícone do app")
+            Text("Ícone")
                 .font(.headline)
             Text("Personalize o ícone do aplicativo")
                 .font(.caption)

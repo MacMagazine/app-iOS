@@ -7,7 +7,7 @@ struct MainView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: MainViewModel
 
-    @State var selection = Tabs.home
+    @State var selection = AppTabs.news
     @State private var searchText: String = ""
 
     var body: some View {
@@ -16,23 +16,27 @@ struct MainView: View {
                 .edgesIgnoringSafeArea(.all)
 
             TabView(selection: $selection) {
-                Tab("Home", systemImage: "house", value: .home) {
-                    Text("HomeView()")
-                }
-
-                Tab("Social", systemImage: "point.3.filled.connected.trianglepath.dotted", value: .social) {
-                    SocialView(storage: viewModel.storage)
-                }
-
-                Tab("Ajustes", systemImage: "gearshape", value: .settings) {
-                    SettingsView()
-                }
-
-                Tab("Search", systemImage: "magnifyingglass", value: .search, role: .search) {
-                    Text("SearchView(searchText: $searchText)")
+                ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
+                    Tab(tab.rawValue, systemImage: tab.icon, value: tab, role: tab == .search ? .search : .none) {
+                        AnyView(contentView(for: tab))
+                    }
                 }
             }
             .tint(theme.tertiary.background.color)
+        }
+        .task {
+            selection = viewModel.settingsViewModel.tabs.first ?? .news
+        }
+    }
+
+    @ViewBuilder
+    private func contentView(for tab: AppTabs) -> some View {
+        switch tab {
+        case .live: Text("MMLiveView()")
+        case .news: Text("HomeView()")
+        case .social: SocialView(storage: viewModel.storage)
+        case .settings: SettingsView()
+        case .search: Text("SearchView(searchText: $searchText)")
         }
     }
 }

@@ -1,7 +1,7 @@
 import Combine
 import MessageUI
 
-final public class AboutViewModel {
+final class AboutViewModel {
     enum ButtonAction: Equatable {
         case terms
         case privacy
@@ -25,8 +25,6 @@ final public class AboutViewModel {
     }
 
     let delegate = MailDelegate()
-
-    public init() {}
 }
 
 extension AboutViewModel {

@@ -11,6 +11,8 @@ public struct SettingsView: View {
     @State var urlToOpen: URL?
     @State private var isPresentingLoginPatrao = false
 
+    @State private var editMode = EditMode.active
+
     public init() {}
 
     public var body: some View {
@@ -25,11 +27,10 @@ public struct SettingsView: View {
                     )
 
                     PostsVisibilityView()
-                    AppearanceView()
-                    IconsView()
+                    appearance
                     AboutView(presentingContent: $presentingContent)
                 }
-                .navigationTitle("Ajustes")
+                .navigationTitle(AppTabs.settings.rawValue)
             }
         }
 
@@ -50,6 +51,27 @@ public struct SettingsView: View {
                     isPresenting: $isPresentingLoginPatrao,
                     navigationDelegate: webviewController,
                     userScripts: webviewController.userScripts)
+        }
+    }
+}
+
+private extension SettingsView {
+    var appearance: some View {
+        NavigationLink {
+            List {
+                AppearanceView()
+                IconsView()
+                CustomTabView()
+                CustomNewsView()
+                CustomSocialView()
+            }
+            .navigationTitle("Customização do app")
+            .navigationBarTitleDisplayMode(.inline)
+            .environment(\.editMode, $editMode)
+
+        } label: {
+            Image(systemName: "highlighter.badge.ellipsis")
+            Text("Customização do app")
         }
     }
 }

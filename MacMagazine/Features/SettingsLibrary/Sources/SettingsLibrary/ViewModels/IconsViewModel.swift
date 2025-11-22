@@ -5,8 +5,6 @@ import UIKit
 final class IconsViewModel: ObservableObject {
     @Published var icon: IconType = .normal
     var storage: Database?
-
-    init() {}
 }
 
 extension IconsViewModel {
