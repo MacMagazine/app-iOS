@@ -46,6 +46,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
         setup(tableView: tableView)
 
         self.tableView?.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: "podcastCell")
+        self.tableView?.register(UINib(nibName: "FeaturedCell", bundle: nil), forCellReuseIdentifier: "featuredCell")
     }
 
     init(post tableView: UITableView, group: String?) {
@@ -234,7 +235,7 @@ class FetchedResultsControllerDataSource: NSObject, UITableViewDataSource, UITab
             contentSize > .extraExtraExtraLarge {
 			identifier = "featuredCell"
 		}
-        if !(object.podcast?.isEmpty ?? true) &&
+        if !(object.duration?.isEmpty ?? true) &&
             (delegate as? PodcastMasterViewController) != nil {
             identifier = "podcastCell"
         }
