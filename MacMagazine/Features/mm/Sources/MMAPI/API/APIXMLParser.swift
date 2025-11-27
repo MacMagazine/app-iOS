@@ -1,0 +1,145 @@
+//
+//  APIXMLParser.swift
+//  MMAPI
+//
+//  Created by Luis Amorim on 27/11/25.
+//
+
+import Foundation
+
+class APIXMLParser: NSObject, XMLParserDelegate {
+    var onCompletion: ((XMLPost?) -> Void)?
+    var currentPost = XMLPost()
+    var processItem = false
+    var value = ""
+    var attributes: [String: String]?
+    var numberOfPosts = -1
+    var parsedPosts = 0
+    var isWatchPosts = false
+
+    init(onCompletion: ((XMLPost?) -> Void)?, numberOfPosts: Int) {
+        self.onCompletion = onCompletion
+        self.numberOfPosts = numberOfPosts
+    }
+
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
+        value = ""
+        if elementName == "item" {
+            processItem = true
+            currentPost = XMLPost()
+        }
+        if elementName == "media:content" {
+            attributes = attributeDict
+        }
+        if elementName == "enclosure" {
+            attributes = attributeDict
+        }
+    }
+
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if processItem {
+            value += string
+        }
+    }
+
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if processItem {
+            value = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+#if WIDGET
+            switch elementName {
+            case "title":
+                currentPost.title = value
+            case "link":
+                currentPost.link = value
+            case "media:content":
+                guard let url = attributes?["url"],
+                      attributes?["image_size"] != nil else {
+                    return
+                }
+                currentPost.artworkURL = url
+            case "item":
+                onCompletion?(currentPost)
+                parsedPosts += 1
+                processItem = false
+                if numberOfPosts > 0 &&
+                    parsedPosts >= numberOfPosts {
+                    parser.abortParsing()
+                }
+            default:
+                return
+            }
+#else
+            switch elementName {
+            case "post-id":
+                currentPost.postId = value
+            case "title":
+                currentPost.title = value
+            case "link":
+                currentPost.link = value
+            case "pubDate":
+                currentPost.pubDate = value
+            case "category":
+                if currentPost.categories.isEmpty {
+                    currentPost.categories = []
+                }
+                currentPost.categories.append(value)
+            case "description":
+                currentPost.excerpt = value
+            case "media:content":
+                guard let url = attributes?["url"] else {
+                    return
+                }
+                currentPost.artworkURL = url
+            case "enclosure":
+                guard let url = attributes?["url"] else {
+                    return
+                }
+                currentPost.podcastURL = url
+            case "itunes:subtitle":
+                currentPost.podcast = value
+            case "itunes:duration":
+                currentPost.duration = value
+            case "rawvoice:embed":
+                currentPost.podcastFrame = value
+            case "item":
+                onCompletion?(currentPost)
+                parsedPosts += 1
+                processItem = false
+                if numberOfPosts > 0 &&
+                    parsedPosts >= numberOfPosts {
+                    parser.abortParsing()
+                }
+            case "guid":
+                currentPost.shortURL = value
+            case "content:encoded":
+                currentPost.playable = value.contains("youtube.com/embed/")
+                if isWatchPosts {
+                    currentPost.fullContent = value.toHtmlDecoded()
+                        .replacingOccurrences(of: "\n\n", with: "\n")
+                        .replacingOccurrences(of: "\n\n", with: "\n")
+                        .replacingOccurrences(of: "\n\n", with: "\n")
+                        .replacingOccurrences(of: "\n\n", with: "\n")
+                        .replacingOccurrences(of: "\n\n", with: "\n")
+                }
+            default:
+                return
+            }
+#endif
+        }
+    }
+
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+        onCompletion?(nil)
+    }
+
+    func parserDidEndDocument(_ parser: XMLParser) {
+        onCompletion?(nil)
+    }
+}
+
+private extension String {
+    func toHtmlDecoded() -> String {
+        let helper = XMLPost()
+        return helper.decodedHTML(self)
+    }
+}
