@@ -22,14 +22,12 @@ public struct VideosView: View {
     }
 
     public var body: some View {
-        YouTubeLibrary.VideosView(
+        Videos(
+            style: ClassicStyle(buttonColor: theme.button.primary.color ?? .blue),
             api: viewModel.youtube,
             scrollPosition: $scrollPosition,
             favorite: favorite,
-            search: search,
-            type: .classic,
-            buttonColor: theme.button.primary.color ?? .blue,
-            errorColor: theme.text.error.color ?? .red
+            search: search
         )
 
         .task {

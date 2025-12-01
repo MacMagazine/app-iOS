@@ -15,7 +15,7 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                             .font(.headline)
                             .rounded(
                                 color: theme.button.primary.color ?? .blue,
-                                fill: theme.button.terciary.color ?? .gray
+                                fill: theme.button.secondary.color ?? .gray
                             )
                     })
                 }
