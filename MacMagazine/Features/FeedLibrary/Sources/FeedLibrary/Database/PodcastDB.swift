@@ -3,17 +3,17 @@ import SwiftData
 
 @Model
 public final class PodcastDB {
-    var postId: String = ""
-    var title: String = ""
-    var subtitle: String = ""
-    var pubDate: Date = Date()
-    var artworkURL: String = ""
-    var podcastURL: String = ""
-    var podcastSize: Double = 0
-    var duration: String = ""
-    var podcastFrame: String = ""
-    var favorite: Bool = false
-    var playable: Bool = false
+    public var postId: String = ""
+    public var title: String = ""
+    public var subtitle: String = ""
+    public var pubDate: Date = Date()
+    public var artworkURL: String = ""
+    public var podcastURL: String = ""
+    public var podcastSize: Double = 0
+    public var duration: String = ""
+    public var podcastFrame: String = ""
+    public var favorite: Bool = false
+    public var playable: Bool = false
 
     init(
         postId: String = "",

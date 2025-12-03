@@ -1,4 +1,5 @@
 import MacMagazineLibrary
+import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftUI
@@ -54,7 +55,7 @@ private extension SocialView {
     var content: some View {
         switch viewModel.social {
         case .videos: VideosView(storage: storage, favorite: $favorite, scrollPosition: $scrollPosition).transition(.opacity)
-        case .podcast: Text("Podcast")
+        case .podcast: PodcastView(storage: storage, favorite: $favorite, scrollPosition: $scrollPosition).transition(.opacity)
         case .instagram: Text("Instagram")
         }
     }
