@@ -23,7 +23,7 @@ public struct VideosView: View {
 
     public var body: some View {
         Videos(
-            style: ClassicStyle(buttonColor: theme.button.primary.color ?? .blue),
+            card: ClassicCard(buttonColor: theme.button.primary.color ?? .blue),
             api: viewModel.youtube,
             scrollPosition: $scrollPosition,
             favorite: favorite,
