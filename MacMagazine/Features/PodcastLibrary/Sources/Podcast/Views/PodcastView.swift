@@ -4,17 +4,21 @@ import StorageLibrary
 import SwiftData
 import SwiftUI
 import UIComponentsLibrary
-import YouTubeLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
     var viewModel: PodcastViewModel
-    @State private var search: String = ""
+
     @Binding private var favorite: Bool
     @Binding var scrollPosition: ScrollPosition
 
-    @Query(filter: #Predicate<PodcastDB> { !$0.favorite },
-           sort: \PodcastDB.pubDate, order: .reverse
+    @State private var search: String = ""
+    @State private var playerManager = PodcastPlayerManager()
+    @State private var showFullPlayer = false
+
+    @Query(
+        filter: #Predicate<PodcastDB> { !$0.favorite },
+        sort: \PodcastDB.pubDate, order: .reverse
     ) private var podcasts: [PodcastDB]
 
     public init(
@@ -28,10 +32,24 @@ public struct PodcastView: View {
     }
 
     public var body: some View {
-        content
-            .task {
-                try? await viewModel.getPodcasts()
+        ZStack(alignment: .bottom) {
+            content
+                .padding(.bottom, playerManager.currentPodcast != nil ? 80 : 0)
+
+            if playerManager.currentPodcast != nil {
+                MiniPlayerView(playerManager: playerManager) {
+                    showFullPlayer = true
+                }
             }
+        }
+        .task {
+            try? await viewModel.getPodcasts()
+        }
+
+        .sheet(isPresented: $showFullPlayer) {
+            PodcastPlayerView(playerManager: playerManager)
+                .presentationDragIndicator(.visible)
+        }
     }
 }
 
@@ -41,7 +59,9 @@ extension PodcastView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 240), spacing: 16, alignment: .top)],
                       spacing: 16) {
                 ForEach(podcasts) { podcast in
-                    Text(podcast.title)
+                    PodcastCardView(podcast: podcast) {
+                        playerManager.loadPodcast(podcast)
+                    }
                 }
             }.padding()
         }
