@@ -1,4 +1,5 @@
 import Combine
+import FeedLibrary
 import MacMagazineLibrary
 import SettingsLibrary
 import StorageLibrary
@@ -30,6 +31,7 @@ class MainViewModel: ObservableObject {
     init() {
         self.storage = Database(
             models: [
+                PodcastDB.self,
                 VideoDB.self,
                 SettingsDB.self
             ],

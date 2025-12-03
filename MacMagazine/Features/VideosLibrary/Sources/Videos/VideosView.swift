@@ -29,10 +29,6 @@ public struct VideosView: View {
             favorite: favorite,
             search: search
         )
-
-        .task {
-            try? await viewModel.youtube.getVideos()
-        }
     }
 }
 
