@@ -1,8 +1,8 @@
-import Testing
+@testable import FeedLibrary
 import Foundation
 import NetworkLibrary
 import StorageLibrary
-@testable import FeedLibrary
+import Testing
 
 @Suite("FeedViewModel Tests")
 @MainActor
@@ -113,7 +113,7 @@ struct FeedViewModelTests {
 
         // Then
         let savedPodcasts = storage.fetch(PodcastDB.self)
-        #expect(savedPodcasts.count > 0)
+        #expect(!savedPodcasts.isEmpty)
 
         let firstPodcast = try #require(savedPodcasts.first)
         #expect(!firstPodcast.postId.isEmpty)

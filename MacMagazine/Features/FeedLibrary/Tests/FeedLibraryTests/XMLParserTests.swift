@@ -1,6 +1,6 @@
-import Testing
-import Foundation
 @testable import FeedLibrary
+import Foundation
+import Testing
 
 @Suite("XMLParser Tests")
 struct XMLParserTests {
@@ -179,7 +179,7 @@ struct XMLParserTests {
     @Test("Parse invalid XML throws error")
     func parseInvalidXMLThrowsError() async throws {
         // Given
-        let invalidXML = "Not valid XML data".data(using: .utf8)!
+        let invalidXML = Data("Not valid XML data".utf8)
 
         // When/Then
         await #expect(throws: Error.self) {
@@ -200,7 +200,7 @@ struct XMLParserTests {
     @Test("Parse empty data returns empty array")
     func parseEmptyDataReturnsEmptyArray() async throws {
         // Given
-        let emptyXML = "<?xml version=\"1.0\"?><rss><channel></channel></rss>".data(using: .utf8)!
+        let emptyXML = Data("<?xml version=\"1.0\"?><rss><channel></channel></rss>".utf8)
 
         // When
         let posts = try await withCheckedThrowingContinuation { continuation in

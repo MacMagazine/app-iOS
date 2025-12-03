@@ -1,5 +1,5 @@
-import Testing
 @testable import FeedLibrary
+import Testing
 
 @Suite("Category Tests")
 struct CategoryTests {

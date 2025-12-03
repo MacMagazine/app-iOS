@@ -1,6 +1,6 @@
-import Testing
-import Foundation
 @testable import FeedLibrary
+import Foundation
+import Testing
 
 @Suite("XMLPost Tests")
 struct XMLPostTests {
@@ -13,22 +13,22 @@ struct XMLPostTests {
         let post = XMLPost()
 
         // Then
-        #expect(post.title == "")
-        #expect(post.link == "")
-        #expect(post.categories == [])
-        #expect(post.excerpt == "")
-        #expect(post.artworkURL == "")
-        #expect(post.podcastURL == "")
+        #expect(post.title.isEmpty)
+        #expect(post.link.isEmpty)
+        #expect(post.categories.isEmpty)
+        #expect(post.excerpt.isEmpty)
+        #expect(post.artworkURL.isEmpty)
+        #expect(post.podcastURL.isEmpty)
         #expect(post.podcastSize == 0)
-        #expect(post.podcast == "")
-        #expect(post.duration == "")
-        #expect(post.podcastFrame == "")
+        #expect(post.podcast.isEmpty)
+        #expect(post.duration.isEmpty)
+        #expect(post.podcastFrame.isEmpty)
         #expect(post.favorite == false)
-        #expect(post.postId == "")
-        #expect(post.shortURL == "")
+        #expect(post.postId.isEmpty)
+        #expect(post.shortURL.isEmpty)
         #expect(post.playable == false)
-        #expect(post.fullContent == "")
-        #expect(post.creator == "")
+        #expect(post.fullContent.isEmpty)
+        #expect(post.creator.isEmpty)
     }
 
     @Test("XMLPost is Codable")
@@ -116,7 +116,7 @@ struct XMLPostTests {
     }
 
     @Test("XMLPost to PodcastDB preserves dates")
-    func xmlPostToPodcastDBPreservesDates() {
+    func xmlPostToPodcastDBPreservesDates() throws {
         // Given
         var post = XMLPost()
         let testDate = Date()
@@ -125,7 +125,7 @@ struct XMLPostTests {
         post.title = "Test"
 
         // When
-        let podcastDB = [post].toPodcastDB.first!
+        let podcastDB = try #require([post].toPodcastDB.first)
 
         // Then
         #expect(podcastDB.pubDate == testDate)

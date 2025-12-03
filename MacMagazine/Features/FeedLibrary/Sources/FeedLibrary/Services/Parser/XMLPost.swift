@@ -30,7 +30,7 @@ extension Array where Element == XMLPost {
                 pubDate: $0.pubDate,
                 artworkURL: $0.artworkURL,
                 podcastURL: $0.podcastURL,
-                podcastSize:$0.podcastSize,
+                podcastSize: $0.podcastSize,
                 duration: $0.duration,
                 podcastFrame: $0.podcastFrame
             )
