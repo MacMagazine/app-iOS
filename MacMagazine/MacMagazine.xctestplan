@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "90C0B0EB-679D-42A3-B1D5-8056414266CC",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MacMagazine.xcodeproj",
+      "identifier" : "9B9E9DC32E986F8400255820",
+      "name" : "MacMagazine"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Features\/FeedLibrary",
+        "identifier" : "FeedLibraryTests",
+        "name" : "FeedLibraryTests"
+      }
+    }
+  ],
+  "version" : 1
+}

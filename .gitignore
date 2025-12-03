@@ -1,6 +1,12 @@
 Carthage/
 Docs/
-.DS_store
+.DS_Store
+.build
+.swiftpm
+*.resolved
+*.zip
+build
+.claude
 
 ## Xcode Patch
 *.xcodeproj/*

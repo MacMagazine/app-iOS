@@ -18,6 +18,7 @@
 		9B817D812ED0E381005E58E5 /* VideosLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = VideosLibrary; sourceTree = "<group>"; };
 		9B910BE92EE0994600E96B4D /* FeedLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeedLibrary; sourceTree = "<group>"; };
 		9B9E9DC42E986F8400255820 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB3888E2EE0B2E4007AC71C /* MacMagazine.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = MacMagazine.xctestplan; sourceTree = "<group>"; };
 		9BCD94C42E997032007C44B6 /* MacMagazineLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MacMagazineLibrary; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +61,7 @@
 		9B9E9DBB2E986F8400255820 = {
 			isa = PBXGroup;
 			children = (
+				9BB3888E2EE0B2E4007AC71C /* MacMagazine.xctestplan */,
 				9B9E9DDA2E98701C00255820 /* Features */,
 				9B9E9DC62E986F8400255820 /* MacMagazine */,
 				9B9E9DDE2E98709000255820 /* Frameworks */,

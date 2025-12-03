@@ -18,6 +18,8 @@ let package = Package(
                     .product(name: "Network", package: "Libraries"),
                     .product(name: "Storage", package: "Libraries")
                 ]),
-        .testTarget(name: "FeedLibraryTests", dependencies: ["FeedLibrary"])
+        .testTarget(name: "FeedLibraryTests",
+                    dependencies: ["FeedLibrary"],
+                    resources: [.process("Resources")])
     ]
 )
