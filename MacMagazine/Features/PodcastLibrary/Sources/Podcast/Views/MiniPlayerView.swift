@@ -1,37 +1,52 @@
 import FeedLibrary
 import SwiftUI
+import UIComponentsLibrary
 
 struct MiniPlayerView: View {
-    @Bindable var playerManager: PodcastPlayerManager
     @Environment(\.theme) private var theme
+
+    @State private var offset: CGSize = .zero
+    @Bindable var playerManager: PodcastPlayerManager
+
+    let currentPodcast: PodcastDB
     let onTap: () -> Void
 
     var body: some View {
-        if let podcast = playerManager.currentPodcast {
-            miniPlayerContent(podcast: podcast)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-        }
+        miniPlayerContent(podcast: currentPodcast)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+            .offset(y: offset.height)
+
+            .onTapGesture {
+                onTap()
+            }
+
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        offset = value.translation
+                    }
+                    .onEnded { value in
+                        if value.translation.height > 80 {
+                            playerManager.currentPodcast = nil
+                        } else {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                offset = .zero
+                            }
+                        }
+                    }
+            )
     }
+}
 
-    @ViewBuilder
-    private func miniPlayerContent(podcast: PodcastDB) -> some View {
-        VStack(spacing: 0) {
-            progressBar
+private extension MiniPlayerView {
+    func miniPlayerContent(podcast: PodcastDB) -> some View {
+        Group {
+            HStack {
+                artwork(podcast.artworkURL)
 
-            HStack(spacing: 12) {
-                artwork(podcast: podcast)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(podcast.title)
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .lineLimit(1)
-                        .foregroundColor(theme.text.primary.color ?? .primary)
-
-                    Text("MacMagazine")
-                        .font(.caption)
-                        .foregroundColor((theme.text.primary.color ?? .primary).opacity(0.7))
-                }
+                Ticker(text: podcast.title, speed: 30)
+                    .frame(height: 50)
+                    .id(podcast.id)
 
                 Spacer()
 
@@ -41,7 +56,6 @@ struct MiniPlayerView: View {
                     } label: {
                         Image(systemName: "gobackward.15")
                             .font(.system(size: 20))
-                            .foregroundColor(theme.button.primary.color ?? .blue)
                     }
 
                     Button {
@@ -49,7 +63,6 @@ struct MiniPlayerView: View {
                     } label: {
                         Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 24))
-                            .foregroundColor(theme.button.primary.color ?? .blue)
                     }
 
                     Button {
@@ -57,75 +70,28 @@ struct MiniPlayerView: View {
                     } label: {
                         Image(systemName: "goforward.15")
                             .font(.system(size: 20))
-                            .foregroundColor(theme.button.primary.color ?? .blue)
                     }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(theme.main.background.color ?? .white)
+            .foregroundColor(.primary)
+            .padding()
         }
-        .background(
-            (theme.main.background.color ?? .white)
-                .shadow(color: Color.black.opacity(0.1), radius: 10, y: -5)
-        )
-        .onTapGesture {
-            onTap()
+        .padding()
+        .background {
+            Capsule()
+                .glassEffect()
+                .padding()
         }
     }
 
     @ViewBuilder
-    private func artwork(podcast: PodcastDB) -> some View {
-        AsyncImage(url: URL(string: podcast.artworkURL)) { phase in
-            switch phase {
-            case .empty:
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(width: 50, height: 50)
-                    .overlay {
-                        ProgressView()
-                            .scaleEffect(0.6)
-                    }
-            case .success(let image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(8)
-            case .failure:
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(width: 50, height: 50)
-                    .overlay {
-                        Image(systemName: "music.note")
-                            .font(.system(size: 20))
-                            .foregroundColor(.gray)
-                    }
-            @unknown default:
-                EmptyView()
-            }
+    func artwork(_ artworkURL: String) -> some View {
+        if let url = URL(string: artworkURL) {
+            CachedAsyncImage(image: url)
+                .scaledToFill()
+                .clipShape(Circle())
+                .frame(width: 50, height: 50)
         }
-        .frame(width: 50, height: 50)
     }
 
-    @ViewBuilder
-    private var progressBar: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 3)
-
-                Rectangle()
-                    .fill(theme.button.primary.color ?? .blue)
-                    .frame(
-                        width: playerManager.duration > 0
-                            ? geometry.size.width * CGFloat(playerManager.currentTime / playerManager.duration)
-                            : 0,
-                        height: 3
-                    )
-            }
-        }
-        .frame(height: 3)
-    }
 }

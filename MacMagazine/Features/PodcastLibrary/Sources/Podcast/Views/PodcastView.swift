@@ -32,16 +32,8 @@ public struct PodcastView: View {
     }
 
     public var body: some View {
-        ZStack(alignment: .bottom) {
-            content
-                .padding(.bottom, playerManager.currentPodcast != nil ? 80 : 0)
+        content.overlay { miniPlayer }
 
-            if playerManager.currentPodcast != nil {
-                MiniPlayerView(playerManager: playerManager) {
-                    showFullPlayer = true
-                }
-            }
-        }
         .task {
             try? await viewModel.getPodcasts()
         }
@@ -64,6 +56,21 @@ extension PodcastView {
                     }
                 }
             }.padding()
+        }
+    }
+
+    @ViewBuilder
+    var miniPlayer: some View {
+        if let currentPodcast = playerManager.currentPodcast {
+            VStack {
+                Spacer()
+                MiniPlayerView(
+                    playerManager: playerManager,
+                    currentPodcast: currentPodcast
+                ) {
+                    showFullPlayer = true
+                }
+            }
         }
     }
 }
