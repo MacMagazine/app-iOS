@@ -6,7 +6,6 @@
 	<array>
 		<string>remote-notification</string>
 		<string>audio</string>
-		<string>processing</string>
 		<string>fetch</string>
 	</array>
 </dict>
