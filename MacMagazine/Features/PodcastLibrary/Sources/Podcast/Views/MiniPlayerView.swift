@@ -13,7 +13,6 @@ struct MiniPlayerView: View {
 
     var body: some View {
         miniPlayerContent(podcast: currentPodcast)
-            .transition(.move(edge: .bottom).combined(with: .opacity))
             .offset(y: offset.height)
 
             .onTapGesture {
@@ -48,7 +47,7 @@ private extension MiniPlayerView {
                 artwork(podcast.artworkURL)
 
                 Ticker(text: podcast.title, speed: 30)
-                    .frame(height: 50)
+                    .frame(height: 30)
                     .id(podcast.id)
 
                 Spacer()
@@ -77,12 +76,13 @@ private extension MiniPlayerView {
                 }
             }
             .foregroundColor(.primary)
-            .padding()
+            .padding(8)
         }
         .padding()
         .background {
             Capsule()
-                .glassEffect()
+                .fill(.bar)
+                .glassEffect(.clear)
                 .padding()
         }
     }
@@ -93,7 +93,7 @@ private extension MiniPlayerView {
             CachedAsyncImage(image: url)
                 .scaledToFill()
                 .clipShape(Circle())
-                .frame(width: 50, height: 50)
+                .frame(width: 30, height: 30)
         }
     }
 

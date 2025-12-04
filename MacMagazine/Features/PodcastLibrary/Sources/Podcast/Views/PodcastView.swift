@@ -32,7 +32,10 @@ public struct PodcastView: View {
     }
 
     public var body: some View {
-        content.overlay { miniPlayer }
+        content.overlay {
+            miniPlayer
+                .animation(.spring(response: 0.4, dampingFraction: 0.8), value: playerManager.currentPodcast?.id)
+        }
 
         .task {
             try? await viewModel.getPodcasts()
@@ -71,6 +74,7 @@ extension PodcastView {
                     showFullPlayer = true
                 }
             }
+            .transition(.move(edge: .bottom))
         }
     }
 }
