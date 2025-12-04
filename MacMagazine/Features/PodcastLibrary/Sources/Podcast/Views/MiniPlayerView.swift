@@ -27,6 +27,9 @@ struct MiniPlayerView: View {
                     }
                     .onEnded { value in
                         if value.translation.height > 80 {
+                            if playerManager.isPlaying {
+                                playerManager.pause()
+                            }
                             playerManager.currentPodcast = nil
                         } else {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
