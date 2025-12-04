@@ -1,0 +1,146 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - 'release/**'
+
+jobs:
+  validate-pr:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Check if branch is up-to-date
+      - name: Check if branch is up-to-date
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          MERGE_BASE=$(git merge-base HEAD origin/${{ github.base_ref }})
+          BASE_HEAD=$(git rev-parse origin/${{ github.base_ref }})
+
+          if [ "$MERGE_BASE" != "$BASE_HEAD" ]; then
+            echo "❌ Branch is not up-to-date with ${{ github.base_ref }}"
+            echo "Please rebase or merge the latest changes from ${{ github.base_ref }}"
+            exit 1
+          else
+            echo "✅ Branch is up-to-date with ${{ github.base_ref }}"
+          fi
+
+      # Validate PR title follows Conventional Commits
+      - name: Validate PR title
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+
+          # Check if title starts with valid prefix
+          if ! echo "$PR_TITLE" | grep -qE "^(feat|fix|docs|style|refactor|perf|test|chore|build|ci|revert)(\(.+\))?!?: .+"; then
+            echo "❌ PR title does not follow Conventional Commits format"
+            echo "Expected format: <type>[optional scope]: <description>"
+            echo "Valid types: feat, fix, docs, style, refactor, perf, test, chore, build, ci, revert"
+            echo "Example: feat: add dark mode toggle"
+            echo "Example: fix(#123): resolve authentication bug"
+            exit 1
+          fi
+
+          # If title starts with 'fix', check for issue number
+          if echo "$PR_TITLE" | grep -qE "^fix"; then
+            if ! echo "$PR_TITLE" | grep -qE "\(#[0-9]+\)"; then
+              echo "❌ PR title starts with 'fix' but does not contain issue number"
+              echo "Expected format: fix(#123): description"
+              echo "Example: fix(#456): resolve login timeout issue"
+              exit 1
+            fi
+          fi
+
+          echo "✅ PR title is valid: $PR_TITLE"
+
+      # Install SwiftLint
+      - name: Install SwiftLint
+        run: |
+          brew install swiftlint
+
+      # Run SwiftLint
+      - name: Run SwiftLint
+        run: |
+          swiftlint lint --config ./.swiftlint.yml --strict
+
+      # List available Xcode versions
+      - name: List available Xcode versions
+        run: |
+          echo "Available Xcode versions:"
+          ls /Applications | grep Xcode
+
+      # Select latest Xcode
+      - name: Select Xcode version
+        run: |
+          LATEST_XCODE=$(ls /Applications | grep "Xcode" | grep -v "beta" | sort -V | tail -n 1)
+          echo "Selected Xcode: $LATEST_XCODE"
+          sudo xcode-select -s /Applications/$LATEST_XCODE/Contents/Developer
+          xcodebuild -version
+
+      # Detect available simulators
+      - name: Detect available simulators
+        id: detect-simulator
+        run: |
+          echo "Detecting available iOS simulators..."
+
+          # Get list of available iOS simulators
+          SIMULATORS=$(xcrun simctl list devices available -j | jq -r '.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.isAvailable == true) | "\(.name)|\(.udid)|\(.key)"')
+
+          echo "Available simulators:"
+          echo "$SIMULATORS"
+
+          # Prefer iPhone 15 Pro, then iPhone 15, then iPhone 14 Pro, then any available iPhone
+          SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone 15 Pro" | head -n 1)
+          if [ -z "$SIMULATOR" ]; then
+            SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone 15" | head -n 1)
+          fi
+          if [ -z "$SIMULATOR" ]; then
+            SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone 14 Pro" | head -n 1)
+          fi
+          if [ -z "$SIMULATOR" ]; then
+            SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone" | head -n 1)
+          fi
+
+          if [ -z "$SIMULATOR" ]; then
+            echo "❌ No available iOS simulators found"
+            exit 1
+          fi
+
+          SIMULATOR_NAME=$(echo "$SIMULATOR" | cut -d'|' -f1)
+          SIMULATOR_OS=$(echo "$SIMULATOR" | cut -d'|' -f3 | sed 's/.*iOS //')
+
+          echo "Selected simulator: $SIMULATOR_NAME (iOS $SIMULATOR_OS)"
+          echo "simulator_name=$SIMULATOR_NAME" >> $GITHUB_OUTPUT
+          echo "simulator_os=$SIMULATOR_OS" >> $GITHUB_OUTPUT
+
+      # Run tests
+      - name: Run tests
+        run: |
+          echo "Running tests on ${{ steps.detect-simulator.outputs.simulator_name }} (iOS ${{ steps.detect-simulator.outputs.simulator_os }})"
+
+          xcodebuild test \
+            -scheme MacMagazine \
+            -destination "platform=iOS Simulator,name=${{ steps.detect-simulator.outputs.simulator_name }},OS=${{ steps.detect-simulator.outputs.simulator_os }}" \
+            -resultBundlePath TestResults \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      # Upload test results
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
+
+      # Final status
+      - name: All checks passed
+        run: |
+          echo "✅ All validation checks passed!"
+          echo "- Branch is up-to-date"
+          echo "- PR title follows Conventional Commits"
+          echo "- SwiftLint passed"
+          echo "- All tests passed on ${{ steps.detect-simulator.outputs.simulator_name }}"
