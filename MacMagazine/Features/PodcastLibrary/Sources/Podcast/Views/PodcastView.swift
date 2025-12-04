@@ -34,7 +34,10 @@ public struct PodcastView: View {
     public var body: some View {
         content.overlay {
             miniPlayer
-                .animation(.spring(response: 0.4, dampingFraction: 0.8), value: playerManager.currentPodcast?.id)
+                .animation(.spring(response: 0.4,
+                                   dampingFraction: 0.8),
+                           value: playerManager.currentPodcast?.id)
+                .frame(maxWidth: 420)
         }
 
         .task {
@@ -51,8 +54,8 @@ public struct PodcastView: View {
 extension PodcastView {
     var content: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 240), spacing: 16, alignment: .top)],
-                      spacing: 16) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20, alignment: .top)],
+                      spacing: 20) {
                 ForEach(podcasts) { podcast in
                     PodcastCardView(podcast: podcast) {
                         playerManager.loadPodcast(podcast)
@@ -77,10 +80,4 @@ extension PodcastView {
             .transition(.move(edge: .bottom))
         }
     }
-}
-
-#Preview {
-    let storage = Database(models: [PodcastDB.self], inMemory: true)
-    PodcastView(storage: storage, favorite: .constant(false), scrollPosition: .constant(.init()))
-        .environment(\.theme, ThemeColor())
 }

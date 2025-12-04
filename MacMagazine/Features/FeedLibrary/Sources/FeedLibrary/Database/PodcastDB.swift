@@ -15,7 +15,7 @@ public final class PodcastDB {
     public var favorite: Bool = false
     public var playable: Bool = false
 
-    init(
+    public init(
         postId: String = "",
         title: String = "",
         subtitle: String = "",
