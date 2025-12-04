@@ -3,8 +3,10 @@
 import Foundation
 import SafariServices
 import UIKit
+import SwiftUI
 
 public class Utils {
+
     @MainActor
 	static public func openInSafari(_ url: URL) {
 		if url.scheme?.lowercased().contains("http") ?? false {

@@ -23,7 +23,7 @@ public struct VideosView: View {
 
     public var body: some View {
         Videos(
-            card: ClassicCard(buttonColor: theme.button.primary.color ?? .blue),
+            card: GlassCard(buttonColor: .white),
             api: viewModel.youtube,
             scrollPosition: $scrollPosition,
             favorite: favorite,
@@ -34,6 +34,10 @@ public struct VideosView: View {
 
 #Preview {
     let storage = Database(models: [VideoDB.self], inMemory: true)
-    VideosView(storage: storage, favorite: .constant(false), scrollPosition: .constant(.init()))
-        .environment(\.theme, ThemeColor())
+    VideosView(
+        storage: storage,
+        favorite: .constant(false),
+        scrollPosition: .constant(.init())
+    )
+    .environment(\.theme, ThemeColor())
 }
