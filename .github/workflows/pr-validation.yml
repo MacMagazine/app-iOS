@@ -123,6 +123,7 @@ jobs:
           echo "Running tests on ${{ steps.detect-simulator.outputs.simulator_name }} (iOS ${{ steps.detect-simulator.outputs.simulator_os }})"
 
           xcodebuild test \
+            -project MacMagazine/MacMagazine.xcodeproj \
             -scheme MacMagazine \
             -testPlan MacMagazine \
             -destination "platform=iOS Simulator,name=${{ steps.detect-simulator.outputs.simulator_name }},OS=${{ steps.detect-simulator.outputs.simulator_os }}" \
