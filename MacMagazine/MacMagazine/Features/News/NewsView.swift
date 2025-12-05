@@ -8,7 +8,6 @@ struct NewsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: MainViewModel
     @State private var favorite = false
-    let storage: Database
 
     var body: some View {
         NavigationStack {
@@ -52,7 +51,7 @@ private extension NewsView {
 }
 
 #Preview {
-    let storage = Database(models: [], inMemory: true)
-    NewsView(storage: storage)
+    NewsView()
         .environment(\.theme, ThemeColor())
+        .environmentObject(MainViewModel(inMemory: true))
 }

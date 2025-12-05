@@ -7,11 +7,11 @@ import UIComponentsLibrary
 import VideosLibrary
 
 struct SocialView: View {
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
     @EnvironmentObject private var viewModel: MainViewModel
     @State private var favorite = false
     @State private var scrollPosition = ScrollPosition()
-    let storage: Database
 
     var body: some View {
         NavigationStack {
@@ -20,13 +20,15 @@ struct SocialView: View {
                 content
             }
             .contentMargins(.top, 20, for: .scrollContent)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigation(shouldUseSidebar: shouldUseSidebar, title: viewModel.social.rawValue)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     menuView
                 }
                 ToolbarItem(placement: .principal) {
-                    optionsView
+                    if !shouldUseSidebar {
+                        optionsView
+                    }
                 }
             }
         }
@@ -54,9 +56,20 @@ private extension SocialView {
     @ViewBuilder
     var content: some View {
         switch viewModel.social {
-        case .videos: VideosView(storage: storage, favorite: $favorite, scrollPosition: $scrollPosition).transition(.opacity)
-        case .podcast: PodcastView(storage: storage, favorite: $favorite, scrollPosition: $scrollPosition).transition(.opacity)
-        case .instagram: Text("Instagram")
+        case .videos:
+            VideosView(
+                storage: viewModel.storage,
+                favorite: $favorite,
+                scrollPosition: $scrollPosition
+            ).transition(.opacity)
+        case .podcast:
+            PodcastView(
+                storage: viewModel.storage,
+                favorite: $favorite,
+                scrollPosition: $scrollPosition
+            ).transition(.opacity)
+        case .instagram:
+            Text("Instagram")
         }
     }
 
@@ -72,7 +85,7 @@ private extension SocialView {
 }
 
 #Preview {
-    let storage = Database(models: [], inMemory: true)
-    SocialView(storage: storage)
+    SocialView()
         .environment(\.theme, ThemeColor())
+        .environmentObject(MainViewModel(inMemory: true))
 }

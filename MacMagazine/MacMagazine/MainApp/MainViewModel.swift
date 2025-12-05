@@ -28,14 +28,14 @@ class MainViewModel: ObservableObject {
     let theme = ThemeColor()
     var cancellables: Set<AnyCancellable> = []
 
-    init() {
+    init(inMemory: Bool = false) {
         self.storage = Database(
             models: [
                 PodcastDB.self,
                 VideoDB.self,
                 SettingsDB.self
             ],
-            inMemory: false
+            inMemory: inMemory
         )
 
         let settingsViewModel = SettingsViewModel(storage: self.storage)
