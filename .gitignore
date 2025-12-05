@@ -20,3 +20,4 @@ build
 Package.resolved
 !*.xcodeproj/**/Package.resolved
 MacMagazine/MacMagazine.xcodeproj/project.xcworkspace/xcuserdata
+MacMagazine/MacMagazine.xcodeproj/xcuserdata
