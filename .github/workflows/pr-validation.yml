@@ -93,14 +93,8 @@ jobs:
           echo "Available simulators:"
           echo "$SIMULATORS"
 
-          # Prefer iPhone 15 Pro, then iPhone 15, then iPhone 14 Pro, then any available iPhone
-          SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone 15 Pro" | head -n 1)
-          if [ -z "$SIMULATOR" ]; then
-            SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone 15" | head -n 1)
-          fi
-          if [ -z "$SIMULATOR" ]; then
-            SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone 14 Pro" | head -n 1)
-          fi
+          # Prefer latest iPhone Pro models, then any available iPhone
+          SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone.*Pro" | head -n 1)
           if [ -z "$SIMULATOR" ]; then
             SIMULATOR=$(echo "$SIMULATORS" | grep -i "iPhone" | head -n 1)
           fi
@@ -123,9 +117,12 @@ jobs:
           echo "Running tests on ${{ steps.detect-simulator.outputs.simulator_name }} (iOS ${{ steps.detect-simulator.outputs.simulator_os }})"
 
           xcodebuild test \
+            -project MacMagazine/MacMagazine.xcodeproj \
             -scheme MacMagazine \
             -testPlan MacMagazine \
-            -destination "platform=iOS Simulator,name=${{ steps.detect-simulator.outputs.simulator_name }},OS=${{ steps.detect-simulator.outputs.simulator_os }}" \
+            -destination "platform=iOS Simulator,name=${{ steps.detect-simulator.outputs.simulator_name }}" \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
             -resultBundlePath TestResults \
             | xcpretty && exit ${PIPESTATUS[0]}
 

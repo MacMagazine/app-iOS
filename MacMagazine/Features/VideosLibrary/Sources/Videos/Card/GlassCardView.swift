@@ -1,22 +1,63 @@
 import MacMagazineLibrary
 import StorageLibrary
 import SwiftUI
-import UIKit
 import UtilityLibrary
 import YouTubeLibrary
+
+@MainActor
+public struct AdaptiveVideoCard: VideoCard {
+    public var accessibilityLabels: [CardLabel]?
+    public var accessibilityButtons: [CardButton]?
+
+    public init() {}
+
+    public func makeBody(data: VideoDB) -> some View {
+        AdaptiveBody(data: data)
+    }
+
+    private struct AdaptiveBody: View {
+        @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+        let data: VideoDB
+
+        var body: some View {
+            Group {
+                if shouldUseGlass {
+                    GlassCard()
+                    .makeBody(data: data)
+                } else {
+                    ClassicCard()
+                    .makeBody(data: data)
+                }
+            }
+        }
+
+        private var shouldUseGlass: Bool {
+            switch dynamicTypeSize {
+            case .xSmall,
+                 .small,
+                 .medium,
+                 .large,
+                 .xLarge,
+                 .xxLarge,
+                 .xxxLarge:
+                return true
+            default:
+                return false
+            }
+        }
+    }
+}
+
+// MARK: - GlassCard
 
 @MainActor
 public struct GlassCard: VideoCard {
     public var accessibilityLabels: [CardLabel]?
     public var accessibilityButtons: [CardButton]?
-    public let buttonColor: Color?
-
-    public init(buttonColor: Color? = nil) {
-        self.buttonColor = buttonColor
-    }
 
     public func makeBody(data: VideoDB) -> some View {
-        GlassCardView(data: data, buttonColor: buttonColor)
+        GlassCardView(data: data)
     }
 }
 
@@ -26,7 +67,6 @@ struct GlassCardView: View {
     @Environment(\.sizeCategory) private var sizeCategory
 
     let data: VideoDB
-    let buttonColor: Color?
 
     @State private var cardWidth: CGFloat = 0
     @State private var thumbnailSize: CGSize = .zero
@@ -122,7 +162,6 @@ struct GlassCardView: View {
                         .frame(width: 35, height: 35)
                         .glassEffect()
                         .tint(.primary)
-
                 }
                 .glassEffectUnion(id: 1, namespace: namespace)
             }
@@ -138,7 +177,6 @@ struct GlassCardView: View {
             if density != .spacious {
                 dateRow
                     .font(.caption2)
-                    .dynamicTypeSize(.xSmall ... .xxLarge)
                     .foregroundStyle(.white.opacity(0.9))
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
@@ -153,37 +191,30 @@ struct GlassCardView: View {
                 .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
 
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-
                 if density == .spacious {
                     dateRow
                         .foregroundStyle(.white.opacity(0.9))
                         .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
                 }
 
-                Group {
-                    if isAccessibilityCategory {
-                        VStack(alignment: .leading, spacing: 4) {
-                            statsRowViews
-                            statsRowLikes
-                        }
-                    } else {
-                        HStack(spacing: 8) {
-                            statsRowViews
-                            statsRowLikes
-                        }
-                    }
+                HStack(spacing: 8) {
+                    statsRowViews
+                    statsRowLikes
                 }
                 .foregroundStyle(.white.opacity(0.9))
                 .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .layoutPriority(1)
 
-                Spacer(minLength: 1)
+                Spacer(minLength: 4)
 
                 duration
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .layoutPriority(0)
             }
             .font(.caption2)
-            .dynamicTypeSize(.xSmall ... .xxLarge)
-            .lineLimit(1)
-            .minimumScaleFactor(0.8)
             .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
         }
         .padding(.horizontal, 12)
@@ -232,7 +263,6 @@ struct GlassCardView: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .foregroundColor(.white)
-            .dynamicTypeSize(.xSmall ... .xxLarge)
             .lineLimit(1)
             .minimumScaleFactor(0.8)
             .glassEffect(.clear, in: .rect(cornerRadius: 6))
@@ -260,17 +290,8 @@ struct MMVideoDBPreview {
         Color.brown.ignoresSafeArea()
         VStack(spacing: 30) {
             GlassCardView(
-                data: MMVideoDBPreview.sample,
-                buttonColor: nil
+                data: MMVideoDBPreview.sample
             )
-            .frame(width: 320)
-            .padding()
-
-            GlassCardView(
-                data: MMVideoDBPreview.sample,
-                buttonColor: nil
-            )
-            .frame(width: 240)
             .padding()
         }
     }
