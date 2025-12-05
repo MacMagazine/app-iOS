@@ -5,7 +5,6 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct VideosView: View {
-    @Environment(\.theme) private var theme: ThemeColor
     var viewModel: VideosViewModel
     @State private var search: String = ""
     @Binding private var favorite: Bool

@@ -5,63 +5,6 @@ import UtilityLibrary
 import YouTubeLibrary
 
 @MainActor
-public struct AdaptiveVideoCard: VideoCard {
-    public var accessibilityLabels: [CardLabel]?
-    public var accessibilityButtons: [CardButton]?
-
-    public init() {}
-
-    public func makeBody(data: VideoDB) -> some View {
-        AdaptiveBody(data: data)
-    }
-
-    private struct AdaptiveBody: View {
-        @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-
-        let data: VideoDB
-
-        var body: some View {
-            Group {
-                if shouldUseGlass {
-                    GlassCard()
-                    .makeBody(data: data)
-                } else {
-                    ClassicCard()
-                    .makeBody(data: data)
-                }
-            }
-        }
-
-        private var shouldUseGlass: Bool {
-            switch dynamicTypeSize {
-            case .xSmall,
-                 .small,
-                 .medium,
-                 .large,
-                 .xLarge,
-                 .xxLarge,
-                 .xxxLarge:
-                return true
-            default:
-                return false
-            }
-        }
-    }
-}
-
-// MARK: - GlassCard
-
-@MainActor
-public struct GlassCard: VideoCard {
-    public var accessibilityLabels: [CardLabel]?
-    public var accessibilityButtons: [CardButton]?
-
-    public func makeBody(data: VideoDB) -> some View {
-        GlassCardView(data: data)
-    }
-}
-
-@MainActor
 struct GlassCardView: View {
     @Namespace var namespace
     @Environment(\.sizeCategory) private var sizeCategory
@@ -71,7 +14,7 @@ struct GlassCardView: View {
     @State private var cardWidth: CGFloat = 0
     @State private var thumbnailSize: CGSize = .zero
 
-    var isAccessibilityCategory: Bool {
+    private var isAccessibilityCategory: Bool {
         sizeCategory.isAccessibilityCategory
     }
 
@@ -95,10 +38,12 @@ struct GlassCardView: View {
             }
         )
     }
+}
 
-    // MARK: - Card base (thumbnail + bottom content)
+// MARK: - Card base (thumbnail + bottom content) -
 
-    private var cardBase: some View {
+private extension GlassCardView {
+    var cardBase: some View {
         Group {
             if let imageUrl = data.url {
                 ZStack(alignment: .bottom) {
@@ -123,9 +68,9 @@ struct GlassCardView: View {
         )
     }
 
-    // MARK: - Thumbnail
+    // MARK: - Thumbnail -
 
-    private func thumbnail(_ imageUrl: URL) -> some View {
+    func thumbnail(_ imageUrl: URL) -> some View {
         Thumbnail(
             imageUrl: imageUrl,
             duration: "",
@@ -143,35 +88,18 @@ struct GlassCardView: View {
         )
     }
 
-    // MARK: - Top buttons
+    // MARK: - Top buttons -
 
-    private var topButtons: some View {
-        VStack {
-            GlassEffectContainer {
-                HStack(spacing: 10) {
-                    FavoriteButton(content: data)
-                        .buttonStyle(.plain)
-                        .font(.system(size: 16))
-                        .frame(width: 35, height: 35)
-                        .glassEffect()
-                        .tint(.primary)
-
-                    ShareButton(content: data)
-                        .buttonStyle(.plain)
-                        .font(.system(size: 16))
-                        .frame(width: 35, height: 35)
-                        .glassEffect()
-                        .tint(.primary)
-                }
-                .glassEffectUnion(id: 1, namespace: namespace)
-            }
-        }
-        .padding(10)
+    var topButtons: some View {
+        FavoriteShareContainer(
+            favoriteView: FavoriteButton(content: data),
+            shareView: ShareButton(content: data)
+        )
     }
 
-    // MARK: - Bottom content block
+    // MARK: - Bottom content block -
 
-    private var content: some View {
+    var content: some View {
         VStack(alignment: .leading, spacing: 6) {
 
             if density != .spacious {
@@ -236,28 +164,28 @@ struct GlassCardView: View {
         )
     }
 
-    private var dateRow: some View {
+    var dateRow: some View {
         HStack(spacing: 4) {
             Image(systemName: "calendar")
             Text(data.pubDate.formattedDate(using: "dd/MM/yy"))
         }
     }
 
-    private var statsRowViews: some View {
+    var statsRowViews: some View {
         HStack(spacing: 4) {
             Image(systemName: "chart.bar")
             Text(data.views.formattedBigNumber)
         }
     }
 
-    private var statsRowLikes: some View {
+    var statsRowLikes: some View {
         HStack(spacing: 4) {
             Image(systemName: "hand.thumbsup")
             Text(data.likes.formattedBigNumber)
         }
     }
 
-    private var duration: some View {
+    var duration: some View {
         Text(data.duration.formattedYTDuration)
             .font(.caption)
             .padding(.horizontal, 8)
@@ -270,23 +198,23 @@ struct GlassCardView: View {
 }
 
 #if DEBUG
-@MainActor
-struct MMVideoDBPreview {
-    static let sample = VideoDB(
-        artworkURL: "https://i.ytimg.com/vi/bq02LMjcCns/maxresdefault.jpg",
-        current: 42.0,
-        duration: "PT4M46S".formattedYTDuration,
-        favorite: true,
-        likes: "782",
-        pubDate: "2021-02-17T20:45:21Z",
-        title: "Como Usar WhatsApp No iPad",
-        videoId: "VVVBel9Fc3prM1lqcVZMdzZvWGJTS1FBLmJxMDJMTWpjQ25z",
-        views: "5663"
-    )
-}
-
 #Preview {
-    ZStack {
+    @MainActor
+    struct MMVideoDBPreview {
+        static let sample = VideoDB(
+            artworkURL: "https://i.ytimg.com/vi/bq02LMjcCns/maxresdefault.jpg",
+            current: 42.0,
+            duration: "PT4M46S".formattedYTDuration,
+            favorite: true,
+            likes: "782",
+            pubDate: "2021-02-17T20:45:21Z",
+            title: "Como Usar WhatsApp No iPad",
+            videoId: "VVVBel9Fc3prM1lqcVZMdzZvWGJTS1FBLmJxMDJMTWpjQ25z",
+            views: "5663"
+        )
+    }
+
+    return ZStack {
         Color.brown.ignoresSafeArea()
         VStack(spacing: 30) {
             GlassCardView(

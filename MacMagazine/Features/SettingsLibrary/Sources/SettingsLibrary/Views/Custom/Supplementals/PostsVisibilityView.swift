@@ -21,7 +21,7 @@ struct PostsVisibilityView: View {
             .navigationBarTitleDisplayMode(.inline)
 
         } label: {
-            Image(systemName: "text.page").frame(width: 19, alignment: .leading)
+            Image(systemName: "text.page")
             Text("Posts")
         }
 

@@ -2,17 +2,11 @@ import Foundation
 
 public enum AppTabs: String, CaseIterable, Codable, Hashable {
 
-    // MARK: - iPhone Tabs -
-
     case live = "MM Live"
     case news = "Notícias"
     case social = "Mídias"
     case settings = "Ajustes"
     case search = "Busca"
-
-    // MARK: - iPad Sidebar -
-
-    // MARK: - Common properties -
 
     public var icon: String {
         switch self {
@@ -33,10 +27,29 @@ public enum News: String, CaseIterable, Codable, Hashable {
     case reviews = "Reviews"
     case rumors = "Rumores"
     case tutoriais = "Tutoriais"
+
+    public var icon: String {
+        switch self {
+        case .all, .news: "antenna.radiowaves.left.and.right"
+        case .highlights: "point.3.filled.connected.trianglepath.dotted"
+        case .appletv: "gearshape"
+        case .reviews: "magnifyingglass"
+        case .rumors: "magnifyingglass"
+        case .tutoriais: "magnifyingglass"
+        }
+    }
 }
 
 public enum Social: String, CaseIterable, Codable, Hashable {
     case videos = "Videos"
     case podcast = "MM no Ar"
     case instagram = "Instagram"
+
+    public var icon: String {
+        switch self {
+        case .videos: "antenna.radiowaves.left.and.right"
+        case .podcast: "newspaper"
+        case .instagram: "point.3.filled.connected.trianglepath.dotted"
+        }
+    }
 }
