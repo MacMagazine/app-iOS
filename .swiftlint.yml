@@ -26,9 +26,6 @@ opt_in_rules: # rules enabled
   - redundant_nil_coalescing
   #nil coalescing operator is only evaluated if the lhs is nil, coalescing operator with nil as rhs is redundant
 
-  - redundant_optional_initialization
-  #Initializing an optional variable with nil is redundant.
-
   - redundant_void_return
   #Returning Void in a function declaration is redundant.
 
