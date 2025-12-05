@@ -1,24 +1,24 @@
-import SwiftUI
+import MacMagazineLibrary
 import StorageLibrary
+import SwiftUI
+import UIKit
 import UtilityLibrary
 import YouTubeLibrary
-import UIKit
-import MacMagazineLibrary
-
 
 @MainActor
 public struct GlassCard: VideoCard {
+    public var accessibilityLabels: [CardLabel]?
+    public var accessibilityButtons: [CardButton]?
     public let buttonColor: Color?
-    
+
     public init(buttonColor: Color? = nil) {
         self.buttonColor = buttonColor
     }
-    
+
     public func makeBody(data: VideoDB) -> some View {
         GlassCardView(data: data, buttonColor: buttonColor)
     }
 }
-
 
 @MainActor
 struct GlassCardView: View {
@@ -27,7 +27,7 @@ struct GlassCardView: View {
 
     let data: VideoDB
     let buttonColor: Color?
-    
+
     @State private var cardWidth: CGFloat = 0
     @State private var thumbnailSize: CGSize = .zero
 
@@ -36,10 +36,9 @@ struct GlassCardView: View {
     }
 
     private var density: CardDensity { .from(width: cardWidth) }
-   
-    
+
     // MARK: - Body
-    
+
     var body: some View {
         ZStack(alignment: .topTrailing) {
             cardBase
@@ -56,10 +55,9 @@ struct GlassCardView: View {
             }
         )
     }
-    
-    
+
     // MARK: - Card base (thumbnail + bottom content)
-    
+
     private var cardBase: some View {
         Group {
             if let imageUrl = data.url {
@@ -73,7 +71,7 @@ struct GlassCardView: View {
             }
         }
     }
-    
+
     var fallbackBackground: LinearGradient {
         LinearGradient(
             gradient: Gradient(stops: [
@@ -84,10 +82,9 @@ struct GlassCardView: View {
             endPoint: .bottom
         )
     }
-    
-    
+
     // MARK: - Thumbnail
-    
+
     private func thumbnail(_ imageUrl: URL) -> some View {
         Thumbnail(
             imageUrl: imageUrl,
@@ -96,19 +93,18 @@ struct GlassCardView: View {
             corners: [.allCorners]
         )
         .background(
-            GeometryReader { g in
+            GeometryReader { geo in
                 Color.clear
-                    .onAppear { thumbnailSize = g.size }
-                    .onChange(of: g.size) { _, newSize in
+                    .onAppear { thumbnailSize = geo.size }
+                    .onChange(of: geo.size) { _, newSize in
                         thumbnailSize = newSize
                     }
             }
         )
     }
-    
-    
+
     // MARK: - Top buttons
-    
+
     private var topButtons: some View {
         VStack {
             GlassEffectContainer {
@@ -119,7 +115,7 @@ struct GlassCardView: View {
                         .frame(width: 35, height: 35)
                         .glassEffect()
                         .tint(.primary)
-                    
+
                     ShareButton(content: data)
                         .buttonStyle(.plain)
                         .font(.system(size: 16))
@@ -133,13 +129,12 @@ struct GlassCardView: View {
         }
         .padding(10)
     }
-    
-    
+
     // MARK: - Bottom content block
-    
+
     private var content: some View {
         VStack(alignment: .leading, spacing: 6) {
-            
+
             if density != .spacious {
                 dateRow
                     .font(.caption2)
@@ -149,7 +144,7 @@ struct GlassCardView: View {
                     .minimumScaleFactor(0.8)
                     .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
             }
-            
+
             Text(data.title)
                 .font(density.titleFont)
                 .multilineTextAlignment(.leading)
@@ -197,7 +192,7 @@ struct GlassCardView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(gradientOverlay)
     }
-    
+
     var gradientOverlay: LinearGradient {
         LinearGradient(
             gradient: Gradient(stops: [
@@ -209,14 +204,14 @@ struct GlassCardView: View {
             endPoint: .bottom
         )
     }
-    
+
     private var dateRow: some View {
         HStack(spacing: 4) {
             Image(systemName: "calendar")
             Text(data.pubDate.formattedDate(using: "dd/MM/yy"))
         }
     }
-    
+
     private var statsRowViews: some View {
         HStack(spacing: 4) {
             Image(systemName: "chart.bar")
@@ -230,7 +225,7 @@ struct GlassCardView: View {
             Text(data.likes.formattedBigNumber)
         }
     }
-    
+
     private var duration: some View {
         Text(data.duration.formattedYTDuration)
             .font(.caption)
@@ -243,7 +238,6 @@ struct GlassCardView: View {
             .glassEffect(.clear, in: .rect(cornerRadius: 6))
     }
 }
-
 
 #if DEBUG
 @MainActor
@@ -271,7 +265,7 @@ struct MMVideoDBPreview {
             )
             .frame(width: 320)
             .padding()
-            
+
             GlassCardView(
                 data: MMVideoDBPreview.sample,
                 buttonColor: nil
@@ -282,4 +276,3 @@ struct MMVideoDBPreview {
     }
 }
 #endif
-
