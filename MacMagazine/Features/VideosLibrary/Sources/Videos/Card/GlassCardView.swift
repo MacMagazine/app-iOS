@@ -22,28 +22,13 @@ public struct AdaptiveVideoCard: VideoCard {
 
         var body: some View {
             Group {
-                if shouldUseGlass {
+                if dynamicTypeSize.usesPrimaryCardLayout {
                     GlassCard()
                     .makeBody(data: data)
                 } else {
                     ClassicCard()
                     .makeBody(data: data)
                 }
-            }
-        }
-
-        private var shouldUseGlass: Bool {
-            switch dynamicTypeSize {
-            case .xSmall,
-                 .small,
-                 .medium,
-                 .large,
-                 .xLarge,
-                 .xxLarge,
-                 .xxxLarge:
-                return true
-            default:
-                return false
             }
         }
     }
@@ -64,16 +49,11 @@ public struct GlassCard: VideoCard {
 @MainActor
 struct GlassCardView: View {
     @Namespace var namespace
-    @Environment(\.sizeCategory) private var sizeCategory
 
     let data: VideoDB
 
     @State private var cardWidth: CGFloat = 0
     @State private var thumbnailSize: CGSize = .zero
-
-    var isAccessibilityCategory: Bool {
-        sizeCategory.isAccessibilityCategory
-    }
 
     private var density: CardDensity { .from(width: cardWidth) }
 
