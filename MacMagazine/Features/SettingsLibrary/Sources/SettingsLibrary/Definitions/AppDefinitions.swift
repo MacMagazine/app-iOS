@@ -1,11 +1,18 @@
 import Foundation
 
 public enum AppTabs: String, CaseIterable, Codable, Hashable {
+
+    // MARK: - iPhone Tabs -
+
     case live = "MM Live"
     case news = "Notícias"
     case social = "Mídias"
     case settings = "Ajustes"
     case search = "Busca"
+
+    // MARK: - iPad Sidebar -
+
+    // MARK: - Common properties -
 
     public var icon: String {
         switch self {
