@@ -23,7 +23,7 @@ public struct VideosView: View {
 
     public var body: some View {
         Videos(
-            card: GlassCard(buttonColor: .white),
+            card: AdaptiveVideoCard(),
             api: viewModel.youtube,
             scrollPosition: $scrollPosition,
             favorite: favorite,
