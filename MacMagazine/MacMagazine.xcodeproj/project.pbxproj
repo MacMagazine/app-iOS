@@ -83,9 +83,9 @@
 		9B9E9DDA2E98701C00255820 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				9B1A43012EE0C04D00E56784 /* PodcastLibrary */,
 				9B910BE92EE0994600E96B4D /* FeedLibrary */,
 				9BCD94C42E997032007C44B6 /* MacMagazineLibrary */,
+				9B1A43012EE0C04D00E56784 /* PodcastLibrary */,
 				9B024FDA2EC2717200D66056 /* SettingsLibrary */,
 				9B817D812ED0E381005E58E5 /* VideosLibrary */,
 			);
@@ -106,6 +106,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B9E9DD22E986F8500255820 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
 			buildPhases = (
+				9B86C2D82EE32BA30024CE08 /* Run Swiftlint Script */,
 				9B9E9DC02E986F8400255820 /* Sources */,
 				9B9E9DC12E986F8400255820 /* Frameworks */,
 				9B9E9DC22E986F8400255820 /* Resources */,
@@ -175,6 +176,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9B86C2D82EE32BA30024CE08 /* Run Swiftlint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftlint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Skipping SwiftLint for previews\"\n  exit 0\nfi\n\nexport PATH=\"/opt/homebrew/bin:$PATH\"\n\nif which swiftlint > /dev/null; then\n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9B9E9DC02E986F8400255820 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -197,6 +220,7 @@
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacMagazine/Resources/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
@@ -233,6 +257,7 @@
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacMagazine/Resources/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
