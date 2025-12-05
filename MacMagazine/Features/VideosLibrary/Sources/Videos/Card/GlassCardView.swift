@@ -5,6 +5,21 @@ import YouTubeLibrary
 import UIKit
 import MacMagazineLibrary
 
+
+@MainActor
+public struct GlassCard: VideoCard {
+    public let buttonColor: Color?
+    
+    public init(buttonColor: Color? = nil) {
+        self.buttonColor = buttonColor
+    }
+    
+    public func makeBody(data: VideoDB) -> some View {
+        GlassCardView(data: data, buttonColor: buttonColor)
+    }
+}
+
+
 @MainActor
 struct GlassCardView: View {
     @Namespace var namespace
@@ -15,7 +30,6 @@ struct GlassCardView: View {
     
     @State private var cardWidth: CGFloat = 0
     @State private var thumbnailSize: CGSize = .zero
-
 
     var isAccessibilityCategory: Bool {
         sizeCategory.isAccessibilityCategory
@@ -29,10 +43,6 @@ struct GlassCardView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             cardBase
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(Text(accessibilityLabelText))
-                .accessibilityAddTraits(.isButton)
-            
             topButtons
         }
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
@@ -48,7 +58,7 @@ struct GlassCardView: View {
     }
     
     
-    // MARK: - Card base (thumbnail + conteúdo inferior)
+    // MARK: - Card base (thumbnail + bottom content)
     
     private var cardBase: some View {
         Group {
@@ -62,6 +72,17 @@ struct GlassCardView: View {
                     .background(fallbackBackground)
             }
         }
+    }
+    
+    var fallbackBackground: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                .init(color: .black.opacity(0.40), location: 0.0),
+                .init(color: .black.opacity(0.85), location: 1.0)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
     }
     
     
@@ -86,39 +107,35 @@ struct GlassCardView: View {
     }
     
     
-    // MARK: - Botões de topo
+    // MARK: - Top buttons
     
     private var topButtons: some View {
         VStack {
             GlassEffectContainer {
                 HStack(spacing: 10) {
-                    GlassFavoriteButton(content: data, tint: .primary)
-                        .accessibilityLabel(
-                            Text(data.favorite
-                                 ? "Remover \(data.title) dos favoritos"
-                                 : "Adicionar \(data.title) aos favoritos")
-                        )
-                        .accessibilityAddTraits(.isButton)
+                    FavoriteButton(content: data)
+                        .buttonStyle(.plain)
+                        .font(.system(size: 16))
+                        .frame(width: 35, height: 35)
+                        .glassEffect()
+                        .tint(.primary)
+                    
+                    ShareButton(content: data)
+                        .buttonStyle(.plain)
+                        .font(.system(size: 16))
+                        .frame(width: 35, height: 35)
+                        .glassEffect()
+                        .tint(.primary)
 
-                    GlassShareButton(content: data, tint: .primary)
-                        .accessibilityLabel(Text("Compartilhar vídeo \(data.title)"))
-                        .accessibilityAddTraits(.isButton)
                 }
                 .glassEffectUnion(id: 1, namespace: namespace)
             }
         }
         .padding(10)
-        // Importante: NÃO agrupar isso com o card base
-        .accessibilityElement(children: .contain)
     }
     
     
-    // MARK: - Fundo fallback (sem imagem)
-    
-    private var fallbackBackground: LinearGradient { .fallbackBackground }
-    
-    
-    // MARK: - Bloco de conteúdo inferior
+    // MARK: - Bottom content block
     
     private var content: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -166,7 +183,7 @@ struct GlassCardView: View {
 
                 Spacer(minLength: 8)
 
-                durationBadge
+                duration
             }
             .font(.caption2)
             .dynamicTypeSize(.xSmall ... .xxLarge)
@@ -181,7 +198,17 @@ struct GlassCardView: View {
         .background(gradientOverlay)
     }
     
-    private var gradientOverlay: LinearGradient { .gradientOverlay }
+    var gradientOverlay: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                .init(color: .black.opacity(0.0), location: 0.0),
+                .init(color: .black.opacity(0.60), location: 0.4),
+                .init(color: .black.opacity(0.95), location: 1.0)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
     
     private var dateRow: some View {
         HStack(spacing: 4) {
@@ -204,7 +231,7 @@ struct GlassCardView: View {
         }
     }
     
-    private var durationBadge: some View {
+    private var duration: some View {
         Text(data.duration.formattedYTDuration)
             .font(.caption)
             .padding(.horizontal, 8)
@@ -214,42 +241,6 @@ struct GlassCardView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.8)
             .glassEffect(.clear, in: .rect(cornerRadius: 6))
-    }
-}
-
-
-// MARK: - Acessibilidade (texto falado do card)
-
-private extension GlassCardView {
-    var formattedDate: String { data.formattedDateShort }
-
-    var viewsText: String { data.viewsText }
-    var likesText: String { data.likesText }
-
-    var durationText: String {
-        "Duração de \(AccessibilityUtils.spokenDuration(from: data.duration.formattedYTDuration))"
-    }
-
-    var progressText: String? {
-        guard data.current > 0 else { return nil }
-        return "Vídeo em andamento"
-    }
-
-    var favoriteText: String? {
-        guard data.favorite else { return nil }
-        return "Marcado como favorito"
-    }
-
-    var accessibilityLabelText: String {
-        AccessibilityUtils.join([
-            data.title,
-            "Publicado em \(formattedDate)",
-            viewsText,
-            likesText,
-            durationText,
-            progressText,
-            favoriteText
-        ])
     }
 }
 
