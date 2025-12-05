@@ -1,25 +1,100 @@
-Carthage/
-Docs/
-.DS_Store
-.build
-.swiftpm
-*.resolved
-*.zip
-build
-.claude
+## ---------------------------------------------
+## Xcode / Swift / Apple Platforms – Recommended
+## ---------------------------------------------
 
-## Xcode Patch
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-!*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-!*.xcodeproj/project.xcworkspace/xcshareddata
+# Build output
+build/
+DerivedData/
+DerivedSources/
 
-## User-specific Xcode files
-*.xcodeproj/project.xcworkspace/xcuserdata/
-*.xcodeproj/xcuserdata/
-**/xcuserdata/
-
+# SwiftPM
+.swiftpm/
+.build/
 Package.resolved
-!*.xcodeproj/**/Package.resolved
+
+# Xcode workspace settings (local-only)
+xcuserdata/
+*.xccheckout
+*.xcuserstate
+*.moved-aside
+
+# User-specific settings
+*.xcconfig.dynamic
+*.xcsettings
+*.swp
+*.swo
+
+# Logs and debugging
+*.log
+*.diag
+*.crash
+*.dsym
+*.dSYM/
+*.dSYM.zip
+
+# Index / metadata
+.index/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# iOS device support (from debugging)
+DeviceSupport/
+DeviceLogs/
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager artifacts
+.swiftpm/xcode/package.xcworkspace
+.swiftpm/indices
+.swiftpm/manifest-db
+
+# Bundler / Ruby artifacts (Fastlane, CocoaPods, etc.)
+.bundle/
+vendor/
+
+# General macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Docs/
+#*.xcscmblueprint
+#*.hmap
+#*.ipa
+
+# macOS resource forks
+._*
+*.resolved
+.claude
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# macOS temporary files
+*.swp
+*.tmp
+*.temp
+*~.nib
+
+# Archives
+*.xcarchive
+*.zip
+
+# Code coverage
+*.profdata
+*.gcda
+*.gcno
+
+# Swift testing artifacts
+*.xctestrun
+.xcresult/
+
+# Firebase / Google services (dependendo do fluxo)
+# Descomente se o GoogleService-Info.plist é gerado via script CI:
+# GoogleService-Info.plist
+
+# Env files (se você usa)
+.env
+.env.*
+
