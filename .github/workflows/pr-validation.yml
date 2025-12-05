@@ -124,6 +124,7 @@ jobs:
 
           xcodebuild test \
             -scheme MacMagazine \
+            -testPlan MacMagazine \
             -destination "platform=iOS Simulator,name=${{ steps.detect-simulator.outputs.simulator_name }},OS=${{ steps.detect-simulator.outputs.simulator_os }}" \
             -resultBundlePath TestResults \
             | xcpretty && exit ${PIPESTATUS[0]}
