@@ -57,7 +57,7 @@ extension PodcastView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20, alignment: .top)],
                       spacing: 20) {
                 ForEach(podcasts) { podcast in
-                    PodcastCardView(podcast: podcast) {
+                    PodcastCardView_old(podcast: podcast) {
                         playerManager.loadPodcast(podcast)
                     }
                 }

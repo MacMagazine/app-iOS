@@ -176,7 +176,7 @@ struct GlassCardView: View {
                 .foregroundStyle(.white.opacity(0.9))
                 .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
 
-                Spacer(minLength: 8)
+                Spacer(minLength: 1)
 
                 duration
             }

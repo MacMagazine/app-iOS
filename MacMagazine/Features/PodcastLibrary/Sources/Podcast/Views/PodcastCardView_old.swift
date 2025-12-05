@@ -1,15 +1,8 @@
-//
-//  PodcastCardView.swift
-//  PodcastLibrary
-//
-//  Created by Renato Ferraz Castelo Branco Ferreira on 05/12/25.
-//
-
 import FeedLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-struct PodcastCardView: View {
+struct PodcastCardView_old: View {
     let podcast: PodcastDB
     let onPlay: () -> Void
     @Environment(\.theme) private var theme
@@ -25,7 +18,7 @@ struct PodcastCardView: View {
     }
 }
 
-private extension PodcastCardView {
+private extension PodcastCardView_old {
     @ViewBuilder
     var thumbnail: some View {
         if let url = URL(string: podcast.artworkURL) {
@@ -49,7 +42,7 @@ private extension PodcastCardView {
     }
 }
 
-private extension PodcastCardView {
+private extension PodcastCardView_old {
     var metadata: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
