@@ -15,9 +15,11 @@ build
 !*.xcworkspace/contents.xcworkspacedata
 !*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 !*.xcodeproj/project.xcworkspace/xcshareddata
-!*.xcodeproj/project.xcworkspace/xcuserdata
+
+## User-specific Xcode files
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+**/xcuserdata/
 
 Package.resolved
 !*.xcodeproj/**/Package.resolved
-MacMagazine/MacMagazine.xcodeproj/project.xcworkspace/xcuserdata
-MacMagazine/MacMagazine.xcodeproj/xcuserdata
