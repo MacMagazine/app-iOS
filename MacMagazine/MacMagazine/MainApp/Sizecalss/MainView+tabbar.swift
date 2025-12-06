@@ -1,3 +1,4 @@
+import MMLiveLibrary
 import SettingsLibrary
 import SwiftUI
 
@@ -18,6 +19,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
+        case .live: MMLiveWebView()
         default:
             ContentUnavailableView(
                 "Página em construção",

@@ -1,6 +1,7 @@
 import MacMagazineLibrary
 import StorageLibrary
 import SwiftUI
+import UIComponentsLibrary
 import UtilityLibrary
 import YouTubeLibrary
 
@@ -11,7 +12,7 @@ struct GlassCardView: View {
 
     let data: VideoDB
 
-    @State private var cardWidth: CGFloat = 0
+    @State private var cardWidth: CGFloat = .zero
     @State private var thumbnailSize: CGSize = .zero
 
     private var isAccessibilityCategory: Bool {
@@ -28,15 +29,9 @@ struct GlassCardView: View {
             topButtons
         }
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .background(
-            GeometryReader { geo in
-                Color.clear
-                    .onAppear { cardWidth = geo.size.width }
-                    .onChange(of: geo.size) { _, newValue in
-                        cardWidth = newValue.width
-                    }
-            }
-        )
+        .cardSize { value in
+            cardWidth = value
+        }
     }
 }
 

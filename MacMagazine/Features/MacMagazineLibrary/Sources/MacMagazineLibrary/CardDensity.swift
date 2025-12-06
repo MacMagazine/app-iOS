@@ -1,24 +1,11 @@
 import SwiftUI
+import UIComponentsLibrary
 
-public enum CardDensity {
-    case compact
-    case regular
-    case spacious
-
-    public static func from(width: CGFloat) -> CardDensity {
-        switch width {
-        case ..<260:  return .compact
-        case ..<340:  return .regular
-        default:      return .spacious
-        }
-    }
-
+extension CardDensity {
     public var titleFont: Font {
         switch self {
-        case .compact:
-            return .subheadline
-        case .regular, .spacious:
-            return .headline
+        case .compact: .subheadline
+        case .regular, .spacious: .headline
         }
     }
 
@@ -28,10 +15,16 @@ public enum CardDensity {
 
     public var titleLineLimit: Int {
         switch self {
-        case .compact, .regular:
-            return 1
-        case .spacious:
-            return 2
+        case .compact, .regular: 1
+        case .spacious: 2
+        }
+    }
+
+    public static func from(width: CGFloat) -> CardDensity {
+        switch width {
+        case ..<260: .compact
+        case ..<340: .regular
+        default: .spacious
         }
     }
 }

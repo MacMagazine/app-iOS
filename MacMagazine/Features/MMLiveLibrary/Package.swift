@@ -16,7 +16,8 @@ let package = Package(
         .target(name: "MMLiveLibrary",
 				dependencies: [
                     .product(name: "Network", package: "Libraries"),
-                    .product(name: "Storage", package: "Libraries")
+                    .product(name: "Storage", package: "Libraries"),
+                    .product(name: "UIComponents", package: "Libraries")
                 ]),
         .testTarget(name: "MMLiveLibraryTests",
                     dependencies: ["MMLiveLibrary"],

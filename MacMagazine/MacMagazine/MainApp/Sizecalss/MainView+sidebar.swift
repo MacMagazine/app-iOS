@@ -1,3 +1,4 @@
+import MMLiveLibrary
 import SettingsLibrary
 import SwiftUI
 
@@ -96,6 +97,7 @@ private extension MainView {
         case AppTabs.news: NewsView()
         case AppTabs.social: SocialView()
         case AppTabs.settings: SettingsView()
+        case AppTabs.live: MMLiveWebView()
         case Social.videos: SocialView()
         case Social.podcast: SocialView()
         case Social.instagram: SocialView()

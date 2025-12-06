@@ -16,6 +16,15 @@ public struct PodcastView: View {
     @State private var playerManager = PodcastPlayerManager()
     @State private var showFullPlayer = false
 
+    @State private var cardWidth = CGFloat.zero
+    private var density: CardDensity { .density(using: cardWidth) }
+
+    private let grid = GridItem(
+        .adaptive(minimum: 280),
+        spacing: 20,
+        alignment: .top
+    )
+
     @Query(
         filter: #Predicate<PodcastDB> { !$0.favorite },
         sort: \PodcastDB.pubDate, order: .reverse
@@ -54,7 +63,7 @@ public struct PodcastView: View {
 extension PodcastView {
     var content: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20, alignment: .top)],
+            LazyVGrid(columns: Array(repeating: grid, count: density.columns),
                       spacing: 20) {
                 ForEach(podcasts) { podcast in
                     PodcastCardView(podcast: podcast) {
@@ -62,6 +71,9 @@ extension PodcastView {
                     }
                 }
             }.padding()
+        }
+        .cardSize { value in
+            cardWidth = value
         }
     }
 
