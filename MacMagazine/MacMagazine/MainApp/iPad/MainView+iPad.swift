@@ -39,10 +39,7 @@ private extension MainView {
                 show(destination: option, title: option.rawValue, icon: option.icon)
             }
         } header: {
-            HStack {
-                Image(systemName: tab.icon)
-                Text(tab.rawValue)
-            }
+            Text(tab.rawValue)
         }
     }
 }
@@ -54,10 +51,7 @@ private extension MainView {
                 show(destination: option, title: option.rawValue, icon: option.icon)
             }
         } header: {
-            HStack {
-                Image(systemName: tab.icon)
-                Text(tab.rawValue)
-            }
+            Text(tab.rawValue)
         }
     }
 }

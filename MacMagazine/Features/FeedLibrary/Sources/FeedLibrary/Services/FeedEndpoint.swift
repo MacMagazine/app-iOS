@@ -16,8 +16,6 @@ enum APIDefinitions {
     static let cat = "cat"
     static let tag = "tag"
     static let search = "s"
-
-    static let mmlive = "mmlive.json"
 }
 
 extension Endpoint {

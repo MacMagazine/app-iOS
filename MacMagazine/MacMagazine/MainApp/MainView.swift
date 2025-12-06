@@ -32,6 +32,9 @@ struct MainView: View {
             sideBarContentView
         } else {
             tabContentView
+                .onAppear {
+                    viewModel.settingsViewModel.updateTabs()
+                }
         }
     }
 }

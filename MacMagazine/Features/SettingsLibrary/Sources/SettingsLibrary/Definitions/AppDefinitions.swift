@@ -41,7 +41,7 @@ public enum News: String, CaseIterable, Codable, Equatable {
 }
 
 public enum Social: String, CaseIterable, Codable, Equatable {
-    case videos = "Videos"
+    case videos = "Vídeos"
     case podcast = "MM no Ar"
     case instagram = "Instagram"
 
