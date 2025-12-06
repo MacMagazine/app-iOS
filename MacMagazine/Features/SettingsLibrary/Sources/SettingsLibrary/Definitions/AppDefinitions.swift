@@ -42,7 +42,7 @@ public enum News: String, CaseIterable, Codable, Equatable {
 
 public enum Social: String, CaseIterable, Codable, Equatable {
     case videos = "Vídeos"
-    case podcast = "MM no Ar"
+    case podcast = "Podcast"
     case instagram = "Instagram"
 
     public var icon: String {

@@ -13,16 +13,15 @@ class NavigationState {
     func navigate(
         from old: UserInterfaceSizeClass?,
         to new: UserInterfaceSizeClass?,
-        social: Social,
-        news: News
+        viewModel: MainViewModel
     ) {
         switch new {
         case .regular: // tabbar -> sidebar
             switch selectedItem {
             case AppTabs.social:
-                selectedItem = social
+                selectedItem = viewModel.social
             case AppTabs.news:
-                selectedItem = news
+                selectedItem = viewModel.news
             default: break
             }
 
@@ -30,9 +29,16 @@ class NavigationState {
             switch selectedItem {
             case is Social:
                 selectedItem = AppTabs.social
+                viewModel.tab = .social
+
             case is News:
                 selectedItem = AppTabs.news
-            default: break
+                viewModel.tab = .news
+
+            default:
+                if let tab = selectedItem as? AppTabs {
+                    viewModel.tab = tab
+                }
             }
 
         default: break

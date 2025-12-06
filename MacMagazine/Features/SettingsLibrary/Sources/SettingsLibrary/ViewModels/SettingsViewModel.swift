@@ -7,17 +7,25 @@ import SwiftUI
 @MainActor
 final public class SettingsViewModel: ObservableObject {
     @Published public var colorSchema: SwiftUI.ColorScheme?
-    @Published public var tabs: [AppTabs] = AppTabs.allCases
     @Published public var social: [Social] = Social.allCases
     @Published public var news: [News] = News.allCases
-    @Published var isLive = false
+    @Published public var isLive = false
+
+    private var storedTabs: [AppTabs] = AppTabs.allCases
+
+    public var tabs: [AppTabs] {
+        if !isLive {
+            return storedTabs.filter { $0 != .live }
+        }
+        return storedTabs
+    }
 
     let storage: Database
     let mmLive = MMLiveViewModel()
 
     public init(storage: Database) {
         self.storage = storage
-        self.tabs = self.storage.get()?.tabs ?? AppTabs.allCases
+        self.storedTabs = self.storage.get()?.tabs ?? AppTabs.allCases
         self.social = self.storage.get()?.social ?? Social.allCases
         self.news = self.storage.get()?.news ?? News.allCases
 
@@ -28,20 +36,26 @@ final public class SettingsViewModel: ObservableObject {
         ) { [weak self] _ in
             Task { @MainActor in
                 self?.updateSchema()
-                self?.tabs = self?.storage.get()?.tabs ?? AppTabs.allCases
+                self?.storedTabs = self?.storage.get()?.tabs ?? AppTabs.allCases
                 self?.social = self?.storage.get()?.social ?? Social.allCases
                 self?.news = self?.storage.get()?.news ?? News.allCases
             }
         }
     }
 
-    public func updateTabs() {
+    public func updateTabs(currentTab: Binding<AppTabs>? = nil) {
         Task { @MainActor in
+            let wasLive = isLive
             isLive = await mmLive.isLive()
-            print("==> \(isLive)")
-            if !isLive {
-                tabs.removeAll(where: { $0 == .live })
-                print("==> \(tabs)")
+
+            // If .live tab is being removed and it's currently selected, switch to first available tab
+            if !isLive, let binding = currentTab, binding.wrappedValue == .live {
+                binding.wrappedValue = tabs.first ?? .news
+            }
+
+            // Manually trigger update if isLive changed
+            if wasLive != isLive {
+                objectWillChange.send()
             }
         }
     }

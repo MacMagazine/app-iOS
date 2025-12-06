@@ -51,5 +51,11 @@ class MainViewModel: ObservableObject {
                 self?.colorSchema = value
             }
             .store(in: &cancellables)
+
+        settingsViewModel.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
     }
 }

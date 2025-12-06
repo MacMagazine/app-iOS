@@ -20,15 +20,23 @@ extension MainView {
                 switch tab {
                 case .news: news(tab: tab)
                 case .social: social(tab: tab)
-                case .search: EmptyView()
-                default:
-                    show(destination: tab, title: tab.rawValue, icon: tab.icon)
+                default: EmptyView()
                 }
             }
         }
-        .listStyle(.sidebar)
         .navigationTitle("MacMagazine")
         .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                HStack {
+                    if viewModel.settingsViewModel.isLive {
+                        show(destination: AppTabs.live, title: AppTabs.live.rawValue, icon: AppTabs.live.icon)
+                    }
+                    show(destination: AppTabs.settings, title: AppTabs.settings.rawValue, icon: AppTabs.settings.icon)
+                    Spacer()
+                }
+            }
+        }
     }
 }
 
@@ -37,6 +45,7 @@ private extension MainView {
         Section {
             ForEach(viewModel.settingsViewModel.social, id: \.self) { option in
                 show(destination: option, title: option.rawValue, icon: option.icon)
+                .padding(.leading)
             }
         } header: {
             Text(tab.rawValue)
@@ -49,6 +58,7 @@ private extension MainView {
         Section {
             ForEach(viewModel.settingsViewModel.news, id: \.self) { option in
                 show(destination: option, title: option.rawValue, icon: option.icon)
+                    .padding(.leading)
             }
         } header: {
             Text(tab.rawValue)
@@ -57,7 +67,11 @@ private extension MainView {
 }
 
 private extension MainView {
-    func show(destination: any CaseIterable & Equatable, title: String, icon: String) -> some View {
+    func show(
+        destination: any CaseIterable & Equatable,
+        title: String,
+        icon: String
+    ) -> some View {
         Button {
             process(destination)
         } label: {

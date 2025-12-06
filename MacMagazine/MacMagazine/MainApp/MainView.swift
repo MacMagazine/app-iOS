@@ -20,21 +20,30 @@ struct MainView: View {
             content
                 .tint(theme.tertiary.background.color)
         }
-        .animation(.easeInOut(duration: 0.3), value: shouldUseSidebar)
         .onChange(of: horizontalSizeClass) { old, new in
-            navigationState.navigate(from: old, to: new, social: viewModel.social, news: viewModel.news)
+            navigationState.navigate(
+                from: old,
+                to: new,
+                viewModel: viewModel
+            )
+        }
+        .onAppear {
+            viewModel.settingsViewModel.updateTabs(currentTab: $viewModel.tab)
         }
     }
 
     @ViewBuilder
     var content: some View {
-        if shouldUseSidebar {
-            sideBarContentView
-        } else {
-            tabContentView
-                .onAppear {
-                    viewModel.settingsViewModel.updateTabs()
-                }
+        Group {
+            if shouldUseSidebar {
+                sideBarContentView
+            } else {
+                tabContentView
+            }
+        }
+        .id(shouldUseSidebar ? "sidebar" : "tabbar")
+        .transaction { transaction in
+            transaction.disablesAnimations = true
         }
     }
 }
