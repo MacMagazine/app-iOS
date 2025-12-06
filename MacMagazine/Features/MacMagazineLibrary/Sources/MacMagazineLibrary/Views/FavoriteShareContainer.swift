@@ -13,7 +13,7 @@ public struct FavoriteShareContainer<FavoriteView: View, ShareView: View>: View 
     }
 
     public var body: some View {
-        HStack {
+        HStack(spacing: 10) {
             favoriteView.buttonWithGlassEffect()
             shareView.buttonWithGlassEffect()
         }
@@ -31,8 +31,10 @@ extension View {
 private struct ButtonWithGlassEffect: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .buttonStyle(.glass)
+            .buttonStyle(.plain)
+            .frame(width: 34, height: 34)
             .tint(.primary)
             .font(.system(size: 16))
+            .glassEffect(.regular.interactive(), in: .circle)
     }
 }
