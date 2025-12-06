@@ -85,7 +85,6 @@ private extension MainView {
     @ViewBuilder
     func contentView(for item: any CaseIterable & Equatable) -> some View {
         switch item {
-        case AppTabs.live: Text("MMLiveView()")
         case AppTabs.news: NewsView()
         case AppTabs.social: SocialView()
         case AppTabs.settings: SettingsView()

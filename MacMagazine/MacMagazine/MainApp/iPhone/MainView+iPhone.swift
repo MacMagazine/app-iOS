@@ -15,11 +15,15 @@ extension MainView {
     @ViewBuilder
     func contentView(for tab: AppTabs) -> some View {
         switch tab {
-        case .live: Text("MMLiveView()")
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .search: Text("SearchView(searchText: $searchText)")
+        default:
+            ContentUnavailableView(
+                "Página em construção",
+                systemImage: "square.and.arrow.down.badge.xmark",
+                description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
+            )
         }
     }
 }

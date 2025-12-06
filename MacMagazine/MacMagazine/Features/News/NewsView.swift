@@ -36,7 +36,11 @@ private extension NewsView {
 
     @ViewBuilder
     var content: some View {
-        Text("News")
+        ContentUnavailableView(
+            "Página em construção",
+            systemImage: "square.and.arrow.down.badge.xmark",
+            description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
+        )
     }
 
     var menuView: some View {

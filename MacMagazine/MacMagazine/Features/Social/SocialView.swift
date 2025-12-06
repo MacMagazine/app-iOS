@@ -69,7 +69,11 @@ private extension SocialView {
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
         case .instagram:
-            Text("Instagram")
+            ContentUnavailableView(
+                "Página em construção",
+                systemImage: "square.and.arrow.down.badge.xmark",
+                description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
+            )
         }
     }
 
