@@ -4,36 +4,6 @@ import SwiftUI
 import UtilityLibrary
 import YouTubeLibrary
 
-@MainActor
-public struct AdaptiveVideoCard: VideoCard {
-    public var accessibilityLabels: [CardLabel]?
-    public var accessibilityButtons: [CardButton]?
-
-    public init() {}
-
-    public func makeBody(data: VideoDB) -> some View {
-        AdaptiveBody(data: data)
-    }
-
-    private struct AdaptiveBody: View {
-        @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-
-        let data: VideoDB
-
-        var body: some View {
-            Group {
-                if dynamicTypeSize.usesPrimaryCardLayout {
-                    GlassCard()
-                    .makeBody(data: data)
-                } else {
-                    ClassicCard()
-                    .makeBody(data: data)
-                }
-            }
-        }
-    }
-}
-
 // MARK: - GlassCard
 
 @MainActor

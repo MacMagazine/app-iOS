@@ -2,6 +2,8 @@ import FeedLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
+import UtilityLibrary
+import YouTubeLibrary
 
 struct AdaptivePodcastCardView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -41,9 +43,10 @@ private struct GlassPodcastCardView: View {
     var body: some View {
         Button(action: onPlay) {
 
-            ZStack(alignment: .bottom) {
+            ZStack(alignment: .topTrailing) {
                 cardBase
-                //                topButtons
+                topButtons
+                    .padding(10)
             }
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .background(
@@ -55,8 +58,6 @@ private struct GlassPodcastCardView: View {
                         }
                 }
             )
-
-
         }
         .buttonStyle(.plain)
     }
@@ -95,15 +96,6 @@ private struct GlassPodcastCardView: View {
     private var content: some View {
         VStack(alignment: .leading, spacing: 6) {
 
-            if density != .spacious {
-                dateRow
-                    .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.9))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                    .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
-            }
-
             Text(podcast.title)
                 .font(density.titleFont)
                 .multilineTextAlignment(.leading)
@@ -112,11 +104,9 @@ private struct GlassPodcastCardView: View {
                 .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
 
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                if density == .spacious {
-                    dateRow
-                        .foregroundStyle(.white.opacity(0.9))
-                        .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
-                }
+                dateRow
+                    .foregroundStyle(.white.opacity(0.9))
+                    .shadow(color: .white.opacity(0.6), radius: 2, x: 0, y: 1)
 
                 Spacer(minLength: 4)
 
@@ -145,6 +135,27 @@ private struct GlassPodcastCardView: View {
             startPoint: .top,
             endPoint: .bottom
         )
+    }
+
+    @ViewBuilder var topButtons: some View {
+//        FavoriteShareContainer(
+//            favoriteView: FavoriteButton(content: data),
+//            shareView: ShareButton(content: data)
+//        )
+
+        if let urlPodCast = URL(string: podcast.podcastURL) {
+            UtilityLibrary.ShareButton(title: podcast.title,
+                                       url: urlPodCast)
+            .buttonStyle(.plain)
+            .tint(.primary)
+            .font(.system(size: 16))
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .padding(.bottom, 2)
+            .glassEffect()
+        } else {
+            EmptyView()
+        }
     }
 
     private var dateRow: some View {
@@ -283,3 +294,4 @@ private struct PodcastCardView: View {
 
 }
 #endif
+
