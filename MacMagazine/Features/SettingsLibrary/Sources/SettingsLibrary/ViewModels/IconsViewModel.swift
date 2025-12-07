@@ -10,7 +10,7 @@ final class IconsViewModel: ObservableObject {
 extension IconsViewModel {
     @MainActor
     func get() {
-        icon = storage?.get()?.icon ?? .normal
+        icon = storage?.settings?.icon ?? .normal
     }
 
     @MainActor

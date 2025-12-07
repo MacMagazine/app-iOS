@@ -13,8 +13,8 @@ final class PostsVisibilityViewModel: ObservableObject {
 extension PostsVisibilityViewModel {
     @MainActor
     func get() {
-        postRead = storage?.get()?.postRead ?? true
-        countOnBadge = storage?.get()?.countOnBadge ?? false
+        postRead = storage?.settings?.postRead ?? true
+        countOnBadge = storage?.settings?.countOnBadge ?? false
     }
 
     @MainActor

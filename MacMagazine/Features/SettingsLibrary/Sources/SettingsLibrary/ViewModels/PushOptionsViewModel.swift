@@ -11,7 +11,7 @@ final class PushOptionsViewModel: ObservableObject {
 extension PushOptionsViewModel {
     @MainActor
     func get() {
-        type = PushPreferences(rawValue: storage?.get()?.notification ?? "") ?? .all
+        type = PushPreferences(rawValue: storage?.settings?.notification ?? "") ?? .all
     }
 
     @MainActor

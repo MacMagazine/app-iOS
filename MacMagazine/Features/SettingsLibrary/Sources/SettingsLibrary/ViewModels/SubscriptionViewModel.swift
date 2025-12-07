@@ -49,8 +49,8 @@ final class SubscriptionViewModel: ObservableObject {
 
 extension SubscriptionViewModel {
     func get() async {
-        isValidSubscription = storage?.get()?.subscription.isValidSubscription ?? false
-        isPatrao = storage?.get()?.subscription.isPatrao ?? false
+        isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
+        isPatrao = storage?.settings?.subscription.isPatrao ?? false
 
         if !isValidSubscription {
             await change(isPatrao: false)
@@ -99,7 +99,7 @@ private extension SubscriptionViewModel {
            let expirationDate = status.product(using: identifier)?.expirationDate {
             Task {
                 await change(expirationDate: expirationDate)
-                isValidSubscription = storage?.get()?.subscription.isValidSubscription ?? false
+                isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
             }
         }
     }

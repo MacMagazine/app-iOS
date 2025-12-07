@@ -23,7 +23,7 @@ public enum News: String, CaseIterable, Codable, Equatable {
     case all = "Todas"
     case news = "Últimas Notícias"
     case highlights = "Destaques"
-    case appletv = "Novidades Apple TV"
+    case appletv = "Apple TV"
     case reviews = "Reviews"
     case rumors = "Rumores"
     case tutoriais = "Tutoriais"

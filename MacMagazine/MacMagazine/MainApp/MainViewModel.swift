@@ -33,7 +33,8 @@ class MainViewModel: ObservableObject {
             models: [
                 PodcastDB.self,
                 VideoDB.self,
-                SettingsDB.self
+                SettingsDB.self,
+                CustomizationDB.self
             ],
             inMemory: inMemory
         )

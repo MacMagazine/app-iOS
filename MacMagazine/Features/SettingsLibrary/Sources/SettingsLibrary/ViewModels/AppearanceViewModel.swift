@@ -10,7 +10,7 @@ final class AppearanceViewModel: ObservableObject {
 extension AppearanceViewModel {
     @MainActor
     func get() {
-        mode = storage?.get()?.mode ?? .system
+        mode = storage?.settings?.mode ?? .system
     }
 
     @MainActor

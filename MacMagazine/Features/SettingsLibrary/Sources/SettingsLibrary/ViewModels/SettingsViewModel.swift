@@ -25,9 +25,9 @@ final public class SettingsViewModel: ObservableObject {
 
     public init(storage: Database) {
         self.storage = storage
-        self.storedTabs = self.storage.get()?.tabs ?? AppTabs.allCases
-        self.social = self.storage.get()?.social ?? Social.allCases
-        self.news = self.storage.get()?.news ?? News.allCases
+        self.storedTabs = self.storage.customization?.tabs ?? AppTabs.allCases
+        self.social = self.storage.customization?.social ?? Social.allCases
+        self.news = self.storage.customization?.news ?? News.allCases
 
         NotificationCenter.default.addObserver(
             forName: ModelContext.didSave,
@@ -36,9 +36,9 @@ final public class SettingsViewModel: ObservableObject {
         ) { [weak self] _ in
             Task { @MainActor in
                 self?.updateSchema()
-                self?.storedTabs = self?.storage.get()?.tabs ?? AppTabs.allCases
-                self?.social = self?.storage.get()?.social ?? Social.allCases
-                self?.news = self?.storage.get()?.news ?? News.allCases
+                self?.storedTabs = self?.storage.customization?.tabs ?? AppTabs.allCases
+                self?.social = self?.storage.customization?.social ?? Social.allCases
+                self?.news = self?.storage.customization?.news ?? News.allCases
             }
         }
     }
@@ -63,7 +63,7 @@ final public class SettingsViewModel: ObservableObject {
 
 extension SettingsViewModel {
     private func updateSchema() {
-        guard let mode = storage.get()?.mode else {
+        guard let mode = storage.settings?.mode else {
             colorSchema = nil
             return
         }
