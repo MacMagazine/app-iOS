@@ -8,7 +8,8 @@ extension MainView {
             sidebar
                 .searchable(text: $searchText, prompt: "Search items")
         } detail: {
-            NavigationStack {
+            NavigationStack(path: Binding(get: { NavigationPath() },
+                                          set: { _ in })) {
                 contentView(for: navigationState.selectedItem)
             }
         }
@@ -16,11 +17,12 @@ extension MainView {
     }
 
     var sidebar: some View {
-        List {
+        List(selection: Binding(get: { id(for: navigationState.selectedItem) },
+                                set: { _ in })) {
             ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
                 switch tab {
-                case .news: news(tab: tab)
-                case .social: social(tab: tab)
+                case .news: news(tab: tab).id(id(for: tab))
+                case .social: social(tab: tab).id(id(for: tab))
                 default: EmptyView()
                 }
             }
@@ -143,5 +145,14 @@ private extension MainView {
         default: break
         }
         navigationState.navigate(to: destination)
+    }
+
+    func id(for destination: any CaseIterable & Equatable) -> String {
+        switch destination {
+        case is Social: (destination as? Social)?.rawValue ?? UUID().uuidString
+        case is News: (destination as? Social)?.rawValue ?? UUID().uuidString
+        case is AppTabs: (destination as? Social)?.rawValue ?? UUID().uuidString
+        default: UUID().uuidString
+        }
     }
 }

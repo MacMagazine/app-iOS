@@ -15,37 +15,31 @@ struct MainView: View {
     var body: some View {
         @Bindable var bindableViewModel = viewModel
 
-        ZStack {
-            theme.main.background.color
-                .edgesIgnoringSafeArea(.all)
+        content
+            .tint(theme.tertiary.background.color)
+            .id(shouldUseSidebar ? "sidebar" : "tabbar")
+            .transaction { transaction in
+                transaction.disablesAnimations = true
+            }
 
-            content
-                .tint(theme.tertiary.background.color)
-        }
-        .onChange(of: horizontalSizeClass) { old, new in
-            navigationState.navigate(
-                from: old,
-                to: new,
-                viewModel: viewModel
-            )
-        }
-        .onAppear {
-            viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
-        }
+            .onChange(of: horizontalSizeClass) { old, new in
+                navigationState.navigate(
+                    from: old,
+                    to: new,
+                    viewModel: viewModel
+                )
+            }
+            .onAppear {
+                viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
+            }
     }
 
     @ViewBuilder
     var content: some View {
-        Group {
-            if shouldUseSidebar {
-                sideBarContentView
-            } else {
-                tabContentView
-            }
-        }
-        .id(shouldUseSidebar ? "sidebar" : "tabbar")
-        .transaction { transaction in
-            transaction.disablesAnimations = true
+        if shouldUseSidebar {
+            sideBarContentView
+        } else {
+            tabContentView
         }
     }
 }
@@ -53,7 +47,7 @@ struct MainView: View {
 #if DEBUG
 #Preview {
     MainView()
-    .environment(\.theme, ThemeColor())
-    .environment(MainViewModel(inMemory: true))
+        .environment(\.theme, ThemeColor())
+        .environment(MainViewModel(inMemory: true))
 }
 #endif
