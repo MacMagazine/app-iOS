@@ -69,10 +69,7 @@ private extension SettingsView {
             .environment(\.editMode, $editMode)
 
         } label: {
-            HStack {
-                Image(systemName: "highlighter.badge.ellipsis")
-                Text("Aparência")
-            }
+            Label("Aparência", systemImage: "highlighter.badge.ellipsis")
         }
     }
 }

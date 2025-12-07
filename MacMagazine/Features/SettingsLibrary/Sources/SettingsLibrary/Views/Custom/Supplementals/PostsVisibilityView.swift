@@ -21,8 +21,7 @@ struct PostsVisibilityView: View {
             .navigationBarTitleDisplayMode(.inline)
 
         } label: {
-            Image(systemName: "text.page")
-            Text("Posts")
+            Label("Posts", systemImage: "text.page")
         }
 
         .task {

@@ -31,9 +31,27 @@ extension MainView {
             ToolbarItem(placement: .bottomBar) {
                 HStack {
                     if viewModel.settingsViewModel.isLive {
-                        show(destination: AppTabs.live, title: AppTabs.live.rawValue, icon: AppTabs.live.icon)
+                        Button(action: {
+                            process(AppTabs.live)
+                        },
+                               label: {
+                            HStack {
+                                Image(systemName: AppTabs.live.icon)
+                                Text(AppTabs.live.rawValue)
+                            }
+                        })
                     }
-                    show(destination: AppTabs.settings, title: AppTabs.settings.rawValue, icon: AppTabs.settings.icon)
+
+                    Button(action: {
+                        process(AppTabs.settings)
+                    },
+                           label: {
+                        HStack {
+                            Image(systemName: AppTabs.settings.icon)
+                            Text(AppTabs.settings.rawValue)
+                        }
+                    })
+
                     Spacer()
                 }
             }
@@ -73,13 +91,8 @@ private extension MainView {
         title: String,
         icon: String
     ) -> some View {
-        Button {
+        Button(title, systemImage: icon) {
             process(destination)
-        } label: {
-            HStack {
-                Image(systemName: icon)
-                Text(title)
-            }
         }
         .listRowBackground(
             RoundedRectangle(cornerRadius: 18)
