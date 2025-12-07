@@ -1,4 +1,5 @@
 import Foundation
+import MacMagazineLibrary
 import StorageLibrary
 import SwiftData
 
@@ -42,14 +43,26 @@ extension PostsVisibilityViewModel {
     @MainActor
     func flush(cache: Cache) {
         switch cache {
-        case .cleanAll:
-            models.forEach {
-                try? storage?.sharedModelContainer.mainContext.delete(model: $0.self)
-            }
-
-        case .keepFavoritesAndStatus: break
-
+        case .cleanAll: cleanAll()
+        case .keepFavoritesAndStatus: keepFavoritesAndStatus()
         default: break
+        }
+    }
+}
+
+private extension PostsVisibilityViewModel {
+    @MainActor
+    func cleanAll() {
+        models.forEach {
+            try? storage?.sharedModelContainer.mainContext.delete(model: $0.self)
+        }
+    }
+
+    @MainActor
+    func keepFavoritesAndStatus() {
+        models.forEach {
+            ($0 as? any ModelFavoritable.Type)?.deleteNonFavorites(using: storage?.sharedModelContainer.mainContext)
+            ($0 as? any ModelReadable.Type)?.deleteNonRead(using: storage?.sharedModelContainer.mainContext)
         }
     }
 }
