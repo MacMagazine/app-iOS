@@ -3,24 +3,12 @@ import FeedLibrary
 import Foundation
 import NetworkLibrary
 import StorageLibrary
+import UIComponentsLibrary
 
 @Observable
 class PodcastViewModel {
     var options: Options = .home
-    var status: Status = .loading
-
-    enum Status: Equatable {
-        case loading
-        case done
-        case error(reason: String)
-
-        var reason: String? {
-            switch self {
-            case .error(let reason): reason
-            default: nil
-            }
-        }
-    }
+    var status: APIStatus = .idle
 
     enum Options: Equatable {
         case home
@@ -40,6 +28,12 @@ class PodcastViewModel {
 
     @MainActor
     func getPodcasts() async throws {
-        try await feedService.getPodcast()
+        do {
+            status = .loading
+            try await feedService.getPodcast()
+            status = .done
+        } catch {
+            status = .error(reason: error.localizedDescription)
+        }
     }
 }
