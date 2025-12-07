@@ -10,7 +10,9 @@ extension MainView {
         TabView(selection: $bindableViewModel.tab) {
             ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
                 Tab(tab.rawValue, systemImage: tab.icon, value: tab, role: tab == .search ? .search : .none) {
-                    AnyView(contentView(for: tab))
+                    NavigationStack {
+                        AnyView(contentView(for: tab))
+                    }
                 }
             }
         }

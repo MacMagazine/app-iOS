@@ -1,3 +1,4 @@
+import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
@@ -12,7 +13,7 @@ struct MacMagazineApp: App {
                 .modelContainer(viewModel.storage.sharedModelContainer)
                 .environment(viewModel)
                 .environment(viewModel.settingsViewModel)
-                .preferredColorScheme(viewModel.colorSchema)
+                .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
         }
         .environment(\.theme, viewModel.theme)
     }

@@ -31,9 +31,7 @@ extension MainView {
             ToolbarItem(placement: .bottomBar) {
                 HStack {
                     if viewModel.settingsViewModel.isLive {
-                        Button(action: {
-                            process(AppTabs.live)
-                        },
+                        Button(action: { process(AppTabs.live) },
                                label: {
                             HStack {
                                 Image(systemName: AppTabs.live.icon)
@@ -42,9 +40,7 @@ extension MainView {
                         })
                     }
 
-                    Button(action: {
-                        process(AppTabs.settings)
-                    },
+                    Button(action: { process(AppTabs.settings) },
                            label: {
                         HStack {
                             Image(systemName: AppTabs.settings.icon)

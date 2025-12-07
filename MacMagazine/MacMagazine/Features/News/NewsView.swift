@@ -13,19 +13,17 @@ struct NewsView: View {
     var body: some View {
         @Bindable var bindableViewModel = viewModel
 
-        NavigationStack {
-            ZStack {
-                (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-                content.padding(.top)
+        ZStack {
+            (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+            content.padding(.top)
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                menuView
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    menuView
-                }
-                ToolbarItem(placement: .principal) {
-                    optionsView
-                }
+            ToolbarItem(placement: .principal) {
+                optionsView
             }
         }
     }

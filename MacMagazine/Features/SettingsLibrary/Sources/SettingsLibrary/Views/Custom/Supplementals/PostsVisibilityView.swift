@@ -99,11 +99,6 @@ private extension PostsVisibilityView {
                             titleVisibility: .visible) {
             cleanCacheView
         }
-        .confirmationDialog("Selecione uma opção",
-                            isPresented: $isPresentingMore,
-                            titleVisibility: .visible) {
-            moreOptionsCleanCacheView
-        }
     }
 
     @ViewBuilder
@@ -112,27 +107,7 @@ private extension PostsVisibilityView {
                label: {
             Text("Manter favoritos e status de leitura")
         })
-//        Button(action: { isPresentingMore.toggle() },
-//               label: {
-//            Text("Outras opções")
-//        })
         Button("Limpar tudo", role: .destructive) { viewModel.cache = .cleanAll }
-    }
-
-    @ViewBuilder
-    var moreOptionsCleanCacheView: some View {
-        Button(action: { viewModel.cache = .keepStatus },
-               label: {
-            Text("Manter status de leitura")
-        })
-        Button(action: { viewModel.cache = .keepFavorites },
-               label: {
-            Text("Manter favoritos")
-        })
-        Button(action: { viewModel.cache = .cleanImages },
-               label: {
-            Text("Apagar somente as imagens")
-        })
     }
 }
 

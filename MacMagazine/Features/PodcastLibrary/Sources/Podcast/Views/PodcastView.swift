@@ -70,7 +70,7 @@ extension PodcastView {
                         playerManager.loadPodcast(podcast)
                     }
                 }
-            }.padding()
+            }.padding(.horizontal)
         }
         .cardSize { value in
             cardWidth = value

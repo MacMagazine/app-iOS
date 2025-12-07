@@ -4,6 +4,7 @@ import UIKit
 @Observable
 final class IconsViewModel {
     var icon: IconType = .normal
+    var error = false
     var storage: Database?
 }
 
@@ -19,8 +20,13 @@ extension IconsViewModel {
             return
         }
 
-        try? await UIApplication.shared.setAlternateIconName(icon.appIcon)
-        storage?.update(appIcon: icon)
-        self.icon = icon
+        do {
+            error = false
+            try await UIApplication.shared.setAlternateIconName(icon.appIcon)
+            storage?.update(appIcon: icon)
+            self.icon = icon
+        } catch {
+            self.error = true
+        }
     }
 }

@@ -9,7 +9,6 @@ import YouTubeLibrary
 @Observable
 class MainViewModel {
     var settingsViewModel: SettingsViewModel
-    var colorSchema: SwiftUI.ColorScheme?
     var tab: AppTabs {
         didSet {
             if oldValue == previousTab {
@@ -44,6 +43,5 @@ class MainViewModel {
         self.scrollToTopTrigger = settingsViewModel.tabs.first
         self.social = settingsViewModel.social.first ?? .videos
         self.news = settingsViewModel.news.first ?? .all
-        self.colorSchema = settingsViewModel.colorSchema
     }
 }

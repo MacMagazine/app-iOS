@@ -7,15 +7,23 @@ struct IconsView: View {
     @State private var viewModel = IconsViewModel()
 
     var body: some View {
-        Section {
-            optionsView
-        } header: {
-            headerView
-        }
+        if UIApplication.shared.supportsAlternateIcons {
+            Section {
+                optionsView
+            } header: {
+                headerView
+            }
 
-        .task {
-            viewModel.storage = settingsViewModel.storage
-            viewModel.get()
+            .alert("Não foi possível trocar o ícone.",
+                   isPresented: Binding(get: { viewModel.error },
+                                        set: { value in viewModel.error = value })) {
+                Button("Ok", role: .cancel) {}
+            }
+
+                                        .task {
+                                            viewModel.storage = settingsViewModel.storage
+                                            viewModel.get()
+                                        }
         }
     }
 }

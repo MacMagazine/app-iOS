@@ -15,30 +15,32 @@ struct SocialView: View {
     @State private var scrollPosition = ScrollPosition()
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-                content
-            }
-            .contentMargins(.top, 20, for: .scrollContent)
-            .navigation(shouldUseSidebar: shouldUseSidebar, title: viewModel.social.rawValue)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    menuView
-                }
-                ToolbarItem(placement: .principal) {
-                    if !shouldUseSidebar {
-                        optionsView
-                    }
-                }
-            }
-        }
+        socialContent
         .onChange(of: viewModel.scrollToTopTrigger) { _, newValue in
             if newValue == .social {
                 withAnimation {
                     scrollPosition.scrollTo(edge: .top)
                 }
                 viewModel.scrollToTopTrigger = nil
+            }
+        }
+    }
+
+    var socialContent: some View {
+        ZStack {
+            (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+            content
+        }
+        .contentMargins(.top, 20, for: .scrollContent)
+        .navigation(shouldUseSidebar: shouldUseSidebar, title: viewModel.social.rawValue)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                menuView
+            }
+            ToolbarItem(placement: .principal) {
+                if !shouldUseSidebar {
+                    optionsView
+                }
             }
         }
     }

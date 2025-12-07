@@ -6,55 +6,55 @@ public struct SettingsView: View {
     @Environment(\.theme) var theme: ThemeColor
 
     @State private var presentingContent = AboutViewModel.ButtonAction.none
-
+    @State private var isPresentingLoginPatrao = false
+    @State private var editMode = EditMode.active
     @State var isPatrao = false
     @State var urlToOpen: URL?
-    @State private var isPresentingLoginPatrao = false
-
-    @State private var editMode = EditMode.active
 
     public init() {}
 
     public var body: some View {
-        NavigationStack {
-            ZStack {
-                (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-                List {
-                    PostsVisibilityView()
-                    appearance
-                    SubscriptionView(
-                        isPatrao: $isPatrao,
-                        isPresentingLoginPatrao: $isPresentingLoginPatrao,
-                        urlToOpen: $urlToOpen
-                    )
-                    AboutView(presentingContent: $presentingContent)
-                }
-                .navigationTitle(AppTabs.settings.rawValue)
+        settingsContent
+            .sheet(isPresented: Binding(get: { presentingContent != .none },
+                                        set: { _ in presentingContent = .none })) {
+                Webview(title: presentingContent.title,
+                        url: presentingContent.url,
+                        isPresenting: Binding(get: { presentingContent != .none },
+                                              set: { _ in presentingContent = .none }))
             }
-        }
 
-        .sheet(isPresented: Binding(get: { presentingContent != .none },
-                                    set: { _ in presentingContent = .none })) {
-            Webview(title: presentingContent.title,
-                    url: presentingContent.url,
-                    isPresenting: Binding(get: { presentingContent != .none },
-                                          set: { _ in presentingContent = .none }))
-        }
-
-        .sheet(isPresented: $isPresentingLoginPatrao) {
-            let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
-                                                      isPatrao: $isPatrao,
-                                                      openUrl: $urlToOpen)
-            Webview(title: "Login para patrões",
-                    url: URLs.login,
-                    isPresenting: $isPresentingLoginPatrao,
-                    navigationDelegate: webviewController,
-                    userScripts: webviewController.userScripts)
-        }
+                                        .sheet(isPresented: $isPresentingLoginPatrao) {
+                                            let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
+                                                                                      isPatrao: $isPatrao,
+                                                                                      openUrl: $urlToOpen)
+                                            Webview(title: "Login para patrões",
+                                                    url: URLs.login,
+                                                    isPresenting: $isPresentingLoginPatrao,
+                                                    navigationDelegate: webviewController,
+                                                    userScripts: webviewController.userScripts)
+                                        }
     }
 }
 
 private extension SettingsView {
+    var settingsContent: some View {
+        ZStack {
+            (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+            List {
+                PostsVisibilityView()
+                appearance
+                SubscriptionView(
+                    isPatrao: $isPatrao,
+                    isPresentingLoginPatrao: $isPresentingLoginPatrao,
+                    urlToOpen: $urlToOpen
+                )
+                AboutView(presentingContent: $presentingContent)
+            }
+            .navigationTitle(AppTabs.settings.rawValue)
+        }
+        .contentMargins(.top, 20, for: .scrollContent)
+    }
+
     var appearance: some View {
         NavigationLink {
             List {
@@ -80,8 +80,10 @@ import StorageLibrary
 #Preview {
     let storage = Database(models: [SettingsDB.self], inMemory: true)
 
-    SettingsView()
-    .environment(\.theme, ThemeColor())
-    .environment(SettingsViewModel(storage: storage))
+    NavigationStack {
+        SettingsView()
+    }
+        .environment(\.theme, ThemeColor())
+        .environment(SettingsViewModel(storage: storage))
 }
 #endif
