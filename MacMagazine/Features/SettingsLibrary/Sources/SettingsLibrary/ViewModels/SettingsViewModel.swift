@@ -1,15 +1,15 @@
-import Combine
 import MMLiveLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
 
 @MainActor
-final public class SettingsViewModel: ObservableObject {
-    @Published public var colorSchema: SwiftUI.ColorScheme?
-    @Published public var social: [Social] = Social.allCases
-    @Published public var news: [News] = News.allCases
-    @Published public var isLive = false
+@Observable
+final public class SettingsViewModel {
+    public var colorSchema: SwiftUI.ColorScheme?
+    public var social: [Social] = Social.allCases
+    public var news: [News] = News.allCases
+    public var isLive = false
 
     private var storedTabs: [AppTabs] = AppTabs.allCases
 
@@ -45,17 +45,11 @@ final public class SettingsViewModel: ObservableObject {
 
     public func updateTabs(currentTab: Binding<AppTabs>? = nil) {
         Task { @MainActor in
-            let wasLive = isLive
             isLive = await mmLive.isLive()
 
             // If .live tab is being removed and it's currently selected, switch to first available tab
             if !isLive, let binding = currentTab, binding.wrappedValue == .live {
                 binding.wrappedValue = tabs.first ?? .news
-            }
-
-            // Manually trigger update if isLive changed
-            if wasLive != isLive {
-                objectWillChange.send()
             }
         }
     }

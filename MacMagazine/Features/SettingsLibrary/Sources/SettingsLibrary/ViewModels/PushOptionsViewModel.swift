@@ -1,10 +1,10 @@
-import Combine
 import Foundation
 import OneSignalFramework
 import StorageLibrary
 
-final class PushOptionsViewModel: ObservableObject {
-    @Published var type: PushPreferences = .all
+@Observable
+final class PushOptionsViewModel {
+    var type: PushPreferences = .all
     var storage: Database?
 }
 

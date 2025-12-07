@@ -8,11 +8,13 @@ struct MainView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject var viewModel: MainViewModel
+    @Environment(MainViewModel.self) var viewModel
 
     @State var searchText: String = ""
 
     var body: some View {
+        @Bindable var bindableViewModel = viewModel
+
         ZStack {
             theme.main.background.color
                 .edgesIgnoringSafeArea(.all)
@@ -28,7 +30,7 @@ struct MainView: View {
             )
         }
         .onAppear {
-            viewModel.settingsViewModel.updateTabs(currentTab: $viewModel.tab)
+            viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
         }
     }
 
@@ -52,6 +54,6 @@ struct MainView: View {
 #Preview {
     MainView()
     .environment(\.theme, ThemeColor())
-    .environmentObject(MainViewModel(inMemory: true))
+    .environment(MainViewModel(inMemory: true))
 }
 #endif

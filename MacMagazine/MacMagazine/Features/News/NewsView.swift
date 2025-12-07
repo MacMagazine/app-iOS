@@ -6,10 +6,13 @@ import UIComponentsLibrary
 
 struct NewsView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var viewModel: MainViewModel
+    @Environment(MainViewModel.self) private var viewModel
+
     @State private var favorite = false
 
     var body: some View {
+        @Bindable var bindableViewModel = viewModel
+
         NavigationStack {
             ZStack {
                 (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
@@ -29,9 +32,12 @@ struct NewsView: View {
 }
 
 private extension NewsView {
+    @ViewBuilder
     var optionsView: some View {
+        @Bindable var bindableViewModel = viewModel
+
         MenuView(menu: viewModel.settingsViewModel.news,
-                 selected: $viewModel.news)
+                 selected: $bindableViewModel.news)
     }
 
     @ViewBuilder
@@ -57,5 +63,5 @@ private extension NewsView {
 #Preview {
     NewsView()
         .environment(\.theme, ThemeColor())
-        .environmentObject(MainViewModel(inMemory: true))
+        .environment(MainViewModel(inMemory: true))
 }

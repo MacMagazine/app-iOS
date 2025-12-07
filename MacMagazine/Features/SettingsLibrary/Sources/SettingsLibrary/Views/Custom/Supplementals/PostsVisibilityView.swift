@@ -4,8 +4,8 @@ import UIComponentsLibrary
 
 struct PostsVisibilityView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject private var viewModel = PostsVisibilityViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State private var viewModel = PostsVisibilityViewModel()
     @State private var isPresenting = false
     @State private var isPresentingMore = false
 
@@ -148,6 +148,6 @@ import StorageLibrary
         }
     }
     .environment(\.theme, ThemeColor())
-    .environmentObject(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage))
 }
 #endif

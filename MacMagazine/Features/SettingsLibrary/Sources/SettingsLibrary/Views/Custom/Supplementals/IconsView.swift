@@ -3,8 +3,8 @@ import SwiftUI
 
 struct IconsView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject private var viewModel = IconsViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State private var viewModel = IconsViewModel()
 
     var body: some View {
         Section {
@@ -84,6 +84,6 @@ import StorageLibrary
         IconsView()
     }
     .environment(\.theme, ThemeColor())
-    .environmentObject(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage))
 }
 #endif

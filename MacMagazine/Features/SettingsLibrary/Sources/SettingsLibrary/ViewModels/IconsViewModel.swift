@@ -1,9 +1,9 @@
-import Combine
 import StorageLibrary
 import UIKit
 
-final class IconsViewModel: ObservableObject {
-    @Published var icon: IconType = .normal
+@Observable
+final class IconsViewModel {
+    var icon: IconType = .normal
     var storage: Database?
 }
 

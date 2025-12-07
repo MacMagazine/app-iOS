@@ -82,6 +82,6 @@ import StorageLibrary
 
     SettingsView()
     .environment(\.theme, ThemeColor())
-    .environmentObject(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage))
 }
 #endif

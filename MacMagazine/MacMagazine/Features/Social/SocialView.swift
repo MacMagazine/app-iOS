@@ -9,7 +9,8 @@ import VideosLibrary
 struct SocialView: View {
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var viewModel: MainViewModel
+    @Environment(MainViewModel.self) private var viewModel
+
     @State private var favorite = false
     @State private var scrollPosition = ScrollPosition()
 
@@ -44,8 +45,11 @@ struct SocialView: View {
 }
 
 private extension SocialView {
+    @ViewBuilder
     var optionsView: some View {
-        Picker("", selection: $viewModel.social) {
+        @Bindable var bindableViewModel = viewModel
+
+        Picker("", selection: $bindableViewModel.social) {
             ForEach(viewModel.settingsViewModel.social, id: \.self) { option in
                 Text(option.rawValue).tag(option)
             }
@@ -91,5 +95,5 @@ private extension SocialView {
 #Preview {
     SocialView()
         .environment(\.theme, ThemeColor())
-        .environmentObject(MainViewModel(inMemory: true))
+        .environment(MainViewModel(inMemory: true))
 }

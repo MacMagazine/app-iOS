@@ -4,8 +4,8 @@ import UIComponentsLibrary
 
 struct PushOptionsView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject private var viewModel = PushOptionsViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State private var viewModel = PushOptionsViewModel()
 
     var body: some View {
         Section {

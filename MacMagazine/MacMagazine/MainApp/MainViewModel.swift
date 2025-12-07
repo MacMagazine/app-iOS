@@ -1,4 +1,3 @@
-import Combine
 import FeedLibrary
 import MacMagazineLibrary
 import SettingsLibrary
@@ -7,10 +6,11 @@ import SwiftData
 import SwiftUI
 import YouTubeLibrary
 
-class MainViewModel: ObservableObject {
-    @ObservedObject var settingsViewModel: SettingsViewModel
-    @Published var colorSchema: SwiftUI.ColorScheme?
-    @Published var tab: AppTabs {
+@Observable
+class MainViewModel {
+    var settingsViewModel: SettingsViewModel
+    var colorSchema: SwiftUI.ColorScheme?
+    var tab: AppTabs {
         didSet {
             if oldValue == previousTab {
                 scrollToTopTrigger = tab
@@ -20,13 +20,12 @@ class MainViewModel: ObservableObject {
     }
     private var previousTab: AppTabs?
 
-    @Published var social: Social
-    @Published var news: News
-    @Published var scrollToTopTrigger: AppTabs?
+    var social: Social
+    var news: News
+    var scrollToTopTrigger: AppTabs?
 
     let storage: Database
     let theme = ThemeColor()
-    var cancellables: Set<AnyCancellable> = []
 
     init(inMemory: Bool = false) {
         self.storage = Database(
@@ -45,18 +44,6 @@ class MainViewModel: ObservableObject {
         self.scrollToTopTrigger = settingsViewModel.tabs.first
         self.social = settingsViewModel.social.first ?? .videos
         self.news = settingsViewModel.news.first ?? .all
-
-        settingsViewModel.$colorSchema
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
-                self?.colorSchema = value
-            }
-            .store(in: &cancellables)
-
-        settingsViewModel.objectWillChange
-            .sink { [weak self] _ in
-                self?.objectWillChange.send()
-            }
-            .store(in: &cancellables)
+        self.colorSchema = settingsViewModel.colorSchema
     }
 }
