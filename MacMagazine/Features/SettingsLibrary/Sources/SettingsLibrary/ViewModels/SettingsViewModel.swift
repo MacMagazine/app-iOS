@@ -21,13 +21,21 @@ final public class SettingsViewModel {
     }
 
     let storage: Database
+    let models: [any PersistentModel.Type]
+
     let mmLive = MMLiveViewModel()
 
-    public init(storage: Database) {
+    public init(
+        storage: Database,
+        models: [any PersistentModel.Type]
+    ) {
         self.storage = storage
+        self.models = models
         self.storedTabs = self.storage.customization?.tabs ?? AppTabs.allCases
         self.social = self.storage.customization?.social ?? Social.allCases
         self.news = self.storage.customization?.news ?? News.allCases
+
+        updateSchema()
 
         NotificationCenter.default.addObserver(
             forName: ModelContext.didSave,

@@ -25,7 +25,10 @@ struct PostsVisibilityView: View {
         }
 
         .task {
-            viewModel.storage = settingsViewModel.storage
+            viewModel.set(
+                storage: settingsViewModel.storage,
+                models: settingsViewModel.models
+                )
             viewModel.get()
         }
 
@@ -103,11 +106,11 @@ private extension PostsVisibilityView {
 
     @ViewBuilder
     var cleanCacheView: some View {
-        Button(action: { viewModel.cache = .keepFavoritesAndStatus },
+        Button(action: { viewModel.flush(cache: .keepFavoritesAndStatus) },
                label: {
             Text("Manter favoritos e status de leitura")
         })
-        Button("Limpar tudo", role: .destructive) { viewModel.cache = .cleanAll }
+        Button("Limpar tudo", role: .destructive) { viewModel.flush(cache: .cleanAll) }
     }
 }
 
@@ -123,6 +126,6 @@ import StorageLibrary
         }
     }
     .environment(\.theme, ThemeColor())
-    .environment(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage, models: []))
 }
 #endif

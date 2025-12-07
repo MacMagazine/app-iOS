@@ -27,17 +27,22 @@ class MainViewModel {
     let theme = ThemeColor()
 
     init(inMemory: Bool = false) {
+        let modelsAllowedToClean: [any PersistentModel.Type] = [
+            PodcastDB.self,
+            VideoDB.self
+        ]
+
+        let models: [any PersistentModel.Type] = [
+            SettingsDB.self,
+            CustomizationDB.self
+        ]
+
         self.storage = Database(
-            models: [
-                PodcastDB.self,
-                VideoDB.self,
-                SettingsDB.self,
-                CustomizationDB.self
-            ],
+            models: models + modelsAllowedToClean,
             inMemory: inMemory
         )
 
-        let settingsViewModel = SettingsViewModel(storage: self.storage)
+        let settingsViewModel = SettingsViewModel(storage: self.storage, models: modelsAllowedToClean)
         self.settingsViewModel = settingsViewModel
         self.tab = settingsViewModel.tabs.first ?? .news
         self.scrollToTopTrigger = settingsViewModel.tabs.first
