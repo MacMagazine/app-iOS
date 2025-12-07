@@ -3,17 +3,12 @@ import SettingsLibrary
 import SwiftUI
 
 extension MainView {
-    @ViewBuilder
     var sideBarContentView: some View {
-        @Bindable var bindableNavigationState = navigationState
-
         NavigationSplitView {
             sidebar
                 .searchable(text: $searchText, prompt: "Search items")
         } detail: {
-            NavigationStack(path: $bindableNavigationState.navigationPath) {
-                contentView(for: navigationState.selectedItem)
-            }
+            animateContentStackView(for: navigationState.selectedItem)
         }
         .navigationSplitViewStyle(.balanced)
     }
@@ -104,6 +99,15 @@ private extension MainView {
 }
 
 private extension MainView {
+    func animateContentStackView(for item: any CaseIterable & Equatable) -> some View {
+        NavigationStack(path: Binding(
+            get: { navigationState.navigationPath },
+            set: { navigationState.navigationPath = $0 }
+        )) {
+            contentView(for: navigationState.selectedItem)
+        }
+    }
+
     @ViewBuilder
     func contentView(for item: any CaseIterable & Equatable) -> some View {
         switch item {
@@ -133,27 +137,29 @@ private extension MainView {
 
 private extension MainView {
     func process(_ destination: any CaseIterable & Equatable) {
-        switch destination {
-        case Social.videos: viewModel.social = .videos
-        case Social.podcast: viewModel.social = .podcast
-        case Social.instagram: viewModel.social = .instagram
-        case News.all: viewModel.news = .all
-        case News.news: viewModel.news = .news
-        case News.highlights: viewModel.news = .highlights
-        case News.appletv: viewModel.news = .appletv
-        case News.reviews: viewModel.news = .reviews
-        case News.rumors: viewModel.news = .rumors
-        case News.tutoriais: viewModel.news = .tutoriais
-        default: break
+        withAnimation(.easeInOut(duration: 0.4)) {
+            switch destination {
+            case Social.videos: viewModel.social = .videos
+            case Social.podcast: viewModel.social = .podcast
+            case Social.instagram: viewModel.social = .instagram
+            case News.all: viewModel.news = .all
+            case News.news: viewModel.news = .news
+            case News.highlights: viewModel.news = .highlights
+            case News.appletv: viewModel.news = .appletv
+            case News.reviews: viewModel.news = .reviews
+            case News.rumors: viewModel.news = .rumors
+            case News.tutoriais: viewModel.news = .tutoriais
+            default: break
+            }
+            navigationState.navigate(to: destination)
         }
-        navigationState.navigate(to: destination)
     }
 
     func id(for destination: any CaseIterable & Equatable) -> String {
         switch destination {
         case is Social: (destination as? Social)?.rawValue ?? UUID().uuidString
-        case is News: (destination as? Social)?.rawValue ?? UUID().uuidString
-        case is AppTabs: (destination as? Social)?.rawValue ?? UUID().uuidString
+        case is News: (destination as? News)?.rawValue ?? UUID().uuidString
+        case is AppTabs: (destination as? AppTabs)?.rawValue ?? UUID().uuidString
         default: UUID().uuidString
         }
     }
