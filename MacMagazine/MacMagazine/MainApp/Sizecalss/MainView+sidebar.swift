@@ -3,13 +3,15 @@ import SettingsLibrary
 import SwiftUI
 
 extension MainView {
+    @ViewBuilder
     var sideBarContentView: some View {
+        @Bindable var bindableNavigationState = navigationState
+
         NavigationSplitView {
             sidebar
                 .searchable(text: $searchText, prompt: "Search items")
         } detail: {
-            NavigationStack(path: Binding(get: { NavigationPath() },
-                                          set: { _ in })) {
+            NavigationStack(path: $bindableNavigationState.navigationPath) {
                 contentView(for: navigationState.selectedItem)
             }
         }

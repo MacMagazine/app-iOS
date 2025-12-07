@@ -5,9 +5,11 @@ import SwiftUI
 @Observable
 class NavigationState {
     var selectedItem: any CaseIterable & Equatable = AppTabs.news
+    var navigationPath = NavigationPath()
 
     func navigate(to item: any CaseIterable & Equatable) {
         selectedItem = item
+        navigationPath = NavigationPath()
     }
 
     func navigate(
@@ -18,10 +20,8 @@ class NavigationState {
         switch new {
         case .regular: // tabbar -> sidebar
             switch selectedItem {
-            case AppTabs.social:
-                selectedItem = viewModel.social
-            case AppTabs.news:
-                selectedItem = viewModel.news
+            case AppTabs.social: selectedItem = viewModel.social
+            case AppTabs.news: selectedItem = viewModel.news
             default: break
             }
 
