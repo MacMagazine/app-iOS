@@ -1,18 +1,19 @@
+import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
 
 @main
 struct MacMagazineApp: App {
-    @ObservedObject var viewModel = MainViewModel()
+    @State var viewModel = MainViewModel()
 
     var body: some Scene {
         WindowGroup {
             MainView()
                 .modelContainer(viewModel.storage.sharedModelContainer)
-                .environmentObject(viewModel)
-                .environmentObject(viewModel.settingsViewModel)
-                .preferredColorScheme(viewModel.colorSchema)
+                .environment(viewModel)
+                .environment(viewModel.settingsViewModel)
+                .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
         }
         .environment(\.theme, viewModel.theme)
     }

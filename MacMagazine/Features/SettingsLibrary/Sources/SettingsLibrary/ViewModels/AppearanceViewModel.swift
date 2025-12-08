@@ -1,16 +1,16 @@
-import Combine
 import Foundation
 import StorageLibrary
 
-final class AppearanceViewModel: ObservableObject {
-    @Published var mode: ColorScheme = .system
+@Observable
+final class AppearanceViewModel {
+    var mode: ColorScheme = .system
     var storage: Database?
 }
 
 extension AppearanceViewModel {
     @MainActor
     func get() {
-        mode = storage?.get()?.mode ?? .system
+        mode = storage?.settings?.mode ?? .system
     }
 
     @MainActor

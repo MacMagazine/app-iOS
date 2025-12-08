@@ -20,6 +20,13 @@
   "testTargets" : [
     {
       "target" : {
+        "containerPath" : "container:Features\/MMLiveLibrary",
+        "identifier" : "MMLiveLibraryTests",
+        "name" : "MMLiveLibraryTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:Features\/FeedLibrary",
         "identifier" : "FeedLibraryTests",
         "name" : "FeedLibraryTests"

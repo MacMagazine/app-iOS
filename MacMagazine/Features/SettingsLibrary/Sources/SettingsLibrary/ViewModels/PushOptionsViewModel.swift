@@ -1,17 +1,17 @@
-import Combine
 import Foundation
 import OneSignalFramework
 import StorageLibrary
 
-final class PushOptionsViewModel: ObservableObject {
-    @Published var type: PushPreferences = .all
+@Observable
+final class PushOptionsViewModel {
+    var type: PushPreferences = .all
     var storage: Database?
 }
 
 extension PushOptionsViewModel {
     @MainActor
     func get() {
-        type = PushPreferences(rawValue: storage?.get()?.notification ?? "") ?? .all
+        type = PushPreferences(rawValue: storage?.settings?.notification ?? "") ?? .all
     }
 
     @MainActor

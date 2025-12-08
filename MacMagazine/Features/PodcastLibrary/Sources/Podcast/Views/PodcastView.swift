@@ -16,10 +16,7 @@ public struct PodcastView: View {
     @State private var playerManager = PodcastPlayerManager()
     @State private var showFullPlayer = false
 
-    @Query(
-        filter: #Predicate<PodcastDB> { !$0.favorite },
-        sort: \PodcastDB.pubDate, order: .reverse
-    ) private var podcasts: [PodcastDB]
+    @Query private var podcasts: [PodcastDB]
 
     public init(
         storage: Database,
@@ -29,6 +26,15 @@ public struct PodcastView: View {
         self.viewModel = PodcastViewModel(storage: storage)
         _favorite = favorite
         _scrollPosition = scrollPosition
+
+        let favorite = favorite.wrappedValue
+        let predicate = #Predicate<PodcastDB> {
+            $0.favorite == favorite
+        }
+        _podcasts = Query(filter: favorite ? predicate : nil,
+                          sort: \PodcastDB.pubDate,
+                          order: .reverse,
+                          animation: .smooth)
     }
 
     public var body: some View {
@@ -41,7 +47,9 @@ public struct PodcastView: View {
         }
 
         .task {
-            try? await viewModel.getPodcasts()
+            if viewModel.status == .idle {
+                try? await viewModel.getPodcasts()
+            }
         }
 
         .sheet(isPresented: $showFullPlayer) {
@@ -52,17 +60,30 @@ public struct PodcastView: View {
 }
 
 extension PodcastView {
+    @ViewBuilder
     var content: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20, alignment: .top)],
-                      spacing: 20) {
+        let retryAction: () -> Void = {
+            Task {
+                try? await viewModel.getPodcasts()
+            }
+        }
+
+        CollectionView(
+            title: "Podcast",
+            status: viewModel.status,
+            usesDensity: true,
+            scrollPosition: $scrollPosition,
+            favorite: favorite,
+            isSearching: !search.isEmpty,
+            quantity: search.isEmpty ? podcasts.count : 0,
+            content: {
                 ForEach(podcasts) { podcast in
                     AdaptivePodcastCardView(podcast: podcast) {
                         playerManager.loadPodcast(podcast)
                     }
                 }
-            }.padding()
-        }
+            },
+            retryAction: favorite ? nil : retryAction)
     }
 
     @ViewBuilder

@@ -1,11 +1,11 @@
-@preconcurrency import Combine
 import Foundation
 import InAppLibrary
 import StorageLibrary
 import UIKit
 
 @MainActor
-final class SubscriptionViewModel: ObservableObject {
+@Observable
+final class SubscriptionViewModel {
     enum Status {
         case idle
         case loading
@@ -21,36 +21,41 @@ final class SubscriptionViewModel: ObservableObject {
         }
     }
 
-    @Published var isPatrao = false
-    @Published var isValidSubscription = false
-    @Published var status: Status = .idle
-
+    var isPatrao = false
+    var isValidSubscription = false
+    var status: Status = .idle
     var storage: Database?
 
     let inAppLibrary = InAppManager()
-    var cancellables: Set<AnyCancellable> = []
+    private var observationTask: Task<Void, Never>?
 
     init() {
         setupListeners()
     }
 
     func setupListeners() {
-        Task {
-            let statusPublisher = await inAppLibrary.$status
-            statusPublisher
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] status in
-                    self?.process(purchased: status)
+        observationTask = Task { @MainActor [weak self] in
+            guard let self else { return }
+            while !Task.isCancelled {
+                let currentStatus = withObservationTracking {
+                    self.inAppLibrary.status
+                } onChange: {
+                    // This closure is called when status changes
                 }
-                .store(in: &cancellables)
+
+                self.process(purchased: currentStatus)
+
+                // Small delay to prevent tight loop
+                try? await Task.sleep(for: .milliseconds(100))
+            }
         }
     }
 }
 
 extension SubscriptionViewModel {
     func get() async {
-        isValidSubscription = storage?.get()?.subscription.isValidSubscription ?? false
-        isPatrao = storage?.get()?.subscription.isPatrao ?? false
+        isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
+        isPatrao = storage?.settings?.subscription.isPatrao ?? false
 
         if !isValidSubscription {
             await change(isPatrao: false)
@@ -68,7 +73,7 @@ extension SubscriptionViewModel {
 
 extension SubscriptionViewModel {
     func getPurchasableProducts() async throws {
-        if await inAppLibrary.canPurchase {
+        if inAppLibrary.canPurchase {
             do {
                 status = .loading
                 let products = try await inAppLibrary.getProducts(for: ["MMASSINATURAMENSAL_BETA", "MMASSINATURAANUAL_BETA"])
@@ -99,7 +104,7 @@ private extension SubscriptionViewModel {
            let expirationDate = status.product(using: identifier)?.expirationDate {
             Task {
                 await change(expirationDate: expirationDate)
-                isValidSubscription = storage?.get()?.subscription.isValidSubscription ?? false
+                isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
             }
         }
     }

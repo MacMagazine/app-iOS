@@ -1,6 +1,7 @@
 import MacMagazineLibrary
 import StorageLibrary
 import SwiftUI
+import UIComponentsLibrary
 import UtilityLibrary
 import YouTubeLibrary
 
@@ -22,7 +23,7 @@ struct GlassCardView: View {
 
     let data: VideoDB
 
-    @State private var cardWidth: CGFloat = 0
+    @State private var cardWidth: CGFloat = .zero
     @State private var thumbnailSize: CGSize = .zero
 
     private var density: CardDensity { .from(width: cardWidth) }
@@ -35,15 +36,9 @@ struct GlassCardView: View {
             topButtons
         }
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .background(
-            GeometryReader { geo in
-                Color.clear
-                    .onAppear { cardWidth = geo.size.width }
-                    .onChange(of: geo.size) { _, newValue in
-                        cardWidth = newValue.width
-                    }
-            }
-        )
+        .cardSize { value in
+            cardWidth = value
+        }
     }
 }
 
@@ -172,35 +167,28 @@ private extension GlassCardView {
     }
 
     var dateRow: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "calendar")
-            Text(data.pubDate.formattedDate(using: "dd/MM/yy"))
-        }
+        MetadataContent(
+            image: "calendar",
+            text: data.pubDate.formattedDate(using: "dd/MM/yy")
+        )
     }
 
     var statsRowViews: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "chart.bar")
-            Text(data.views.formattedBigNumber)
-        }
+        MetadataContent(
+            image: "chart.bar",
+            text: data.views.formattedBigNumber
+        )
     }
 
     var statsRowLikes: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "hand.thumbsup")
-            Text(data.likes.formattedBigNumber)
-        }
+        MetadataContent(
+            image: "hand.thumbsup",
+            text: data.likes.formattedBigNumber
+        )
     }
 
     var duration: some View {
-        Text(data.duration.formattedYTDuration)
-            .font(.caption)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .foregroundColor(.white)
-            .lineLimit(1)
-            .minimumScaleFactor(0.8)
-            .glassEffect(.clear, in: .rect(cornerRadius: 6))
+        MetadataDuration(text: data.duration.formattedYTDuration)
     }
 }
 

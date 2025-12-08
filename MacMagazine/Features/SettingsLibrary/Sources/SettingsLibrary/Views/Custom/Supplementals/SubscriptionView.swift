@@ -7,8 +7,8 @@ import UIKit
 struct SubscriptionView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject var viewModel = SubscriptionViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State var viewModel = SubscriptionViewModel()
 
     @State private var selectedProduct: String?
 

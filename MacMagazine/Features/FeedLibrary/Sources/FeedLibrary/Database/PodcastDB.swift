@@ -1,4 +1,5 @@
 import Foundation
+import MacMagazineLibrary
 import SwiftData
 
 @Model
@@ -39,5 +40,15 @@ public final class PodcastDB {
         self.podcastFrame = podcastFrame
         self.favorite = favorite
         self.playable = playable
+    }
+}
+
+extension PodcastDB: ModelFavoritable {
+    public static func deleteNonFavorites(using context: ModelContext?) {
+        let descriptor = FetchDescriptor(predicate: #Predicate<PodcastDB> { !$0.favorite })
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+        data.forEach { context.delete($0) }
+        try? context.save()
     }
 }

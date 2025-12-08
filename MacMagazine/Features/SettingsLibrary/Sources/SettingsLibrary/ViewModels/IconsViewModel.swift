@@ -1,16 +1,17 @@
-import Combine
 import StorageLibrary
 import UIKit
 
-final class IconsViewModel: ObservableObject {
-    @Published var icon: IconType = .normal
+@Observable
+final class IconsViewModel {
+    var icon: IconType = .normal
+    var error = false
     var storage: Database?
 }
 
 extension IconsViewModel {
     @MainActor
     func get() {
-        icon = storage?.get()?.icon ?? .normal
+        icon = storage?.settings?.icon ?? .normal
     }
 
     @MainActor
@@ -19,8 +20,13 @@ extension IconsViewModel {
             return
         }
 
-        try? await UIApplication.shared.setAlternateIconName(icon.appIcon)
-        storage?.update(appIcon: icon)
-        self.icon = icon
+        do {
+            error = false
+            try await UIApplication.shared.setAlternateIconName(icon.appIcon)
+            storage?.update(appIcon: icon)
+            self.icon = icon
+        } catch {
+            self.error = true
+        }
     }
 }

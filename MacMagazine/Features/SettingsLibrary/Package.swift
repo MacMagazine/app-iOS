@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "MacMagazineLibrary", path: "../MacMagazineLibrary"),
+        .package(name: "MMLiveLibrary", path: "../MMLiveLibrary"),
         .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main"),
         .package(url: "https://github.com/OneSignal/OneSignal-XCFramework", from: "5.2.1")
     ],
@@ -18,6 +19,7 @@ let package = Package(
         .target(name: "SettingsLibrary",
                 dependencies: [
                     "MacMagazineLibrary",
+                    "MMLiveLibrary",
                     .product(name: "OneSignalFramework", package: "OneSignal-XCFramework"),
                     .product(name: "InApp", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries"),

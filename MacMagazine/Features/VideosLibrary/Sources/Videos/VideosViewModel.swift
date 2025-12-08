@@ -2,25 +2,13 @@ import Combine
 import Foundation
 import NetworkLibrary
 import StorageLibrary
+import UIComponentsLibrary
 import YouTubeLibrary
 
 @Observable
 class VideosViewModel {
 	var options: Options = .home
-	var status: Status = .loading
-
-	enum Status: Equatable {
-		case loading
-		case done
-		case error(reason: String)
-
-		var reason: String? {
-			switch self {
-			case .error(let reason): reason
-			default: nil
-			}
-		}
-	}
+	var status: APIStatus = .loading
 
 	enum Options: Equatable {
 		case home

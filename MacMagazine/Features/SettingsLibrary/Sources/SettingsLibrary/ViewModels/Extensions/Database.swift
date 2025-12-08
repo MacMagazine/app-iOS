@@ -6,13 +6,13 @@ import SwiftData
 
 extension Database {
     @MainActor
-    func get() -> SettingsDB? {
+    var settings: SettingsDB? {
         fetch(SettingsDB.self).first
     }
 
     @MainActor
     func update(mode: ColorScheme) {
-        if let item = get() {
+        if let item = settings {
             item.mode = mode
         } else {
             context.insert(SettingsDB(mode: mode))
@@ -22,7 +22,7 @@ extension Database {
 
     @MainActor
     func update(appIcon: IconType) {
-        if let item = get() {
+        if let item = settings {
             item.icon = appIcon
         } else {
             context.insert(SettingsDB(icon: appIcon))
@@ -32,7 +32,7 @@ extension Database {
 
     @MainActor
     func update(notification: String) {
-        if let item = get() {
+        if let item = settings {
             item.notification = notification
         } else {
             context.insert(SettingsDB(notification: notification))
@@ -42,7 +42,7 @@ extension Database {
 
     @MainActor
     func update(postRead: Bool) {
-        if let item = get() {
+        if let item = settings {
             item.postRead = postRead
         } else {
             context.insert(SettingsDB(postRead: postRead))
@@ -52,7 +52,7 @@ extension Database {
 
     @MainActor
     func update(countOnBadge: Bool) {
-        if let item = get() {
+        if let item = settings {
             item.countOnBadge = countOnBadge
         } else {
             context.insert(SettingsDB(countOnBadge: countOnBadge))
@@ -63,7 +63,7 @@ extension Database {
     @MainActor
     func update(isPatrao: Bool) {
         let date = Calendar.current.date(byAdding: .day, value: isPatrao ? +30 : -1, to: Date()) ?? Date()
-        if let item = get() {
+        if let item = settings {
             item.subscription = Subscription(isPatrao: isPatrao, expirationDate: date)
         } else {
             let subscription = Subscription(isPatrao: isPatrao, expirationDate: date)
@@ -74,7 +74,7 @@ extension Database {
 
     @MainActor
     func update(expirationDate: Date) {
-        if let item = get() {
+        if let item = settings {
             item.subscription = Subscription(isPatrao: false, expirationDate: expirationDate)
         } else {
             let subscription = Subscription(isPatrao: false, expirationDate: expirationDate)
@@ -88,31 +88,36 @@ extension Database {
 
 extension Database {
     @MainActor
+    var customization: CustomizationDB? {
+        fetch(CustomizationDB.self).first
+    }
+
+    @MainActor
     func update(tabs: [AppTabs]) {
-        if let item = get() {
+        if let item = customization {
             item.tabs = tabs
         } else {
-            context.insert(SettingsDB(tabs: tabs))
+            context.insert(CustomizationDB(tabs: tabs))
         }
         try? context.save()
     }
 
     @MainActor
     func update(social: [Social]) {
-        if let item = get() {
+        if let item = customization {
             item.social = social
         } else {
-            context.insert(SettingsDB(social: social))
+            context.insert(CustomizationDB(social: social))
         }
         try? context.save()
     }
 
     @MainActor
     func update(news: [News]) {
-        if let item = get() {
+        if let item = customization {
             item.news = news
         } else {
-            context.insert(SettingsDB(news: news))
+            context.insert(CustomizationDB(news: news))
         }
         try? context.save()
     }

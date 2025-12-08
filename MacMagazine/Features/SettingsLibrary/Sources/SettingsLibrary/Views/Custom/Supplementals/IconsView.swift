@@ -3,19 +3,27 @@ import SwiftUI
 
 struct IconsView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject private var viewModel = IconsViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State private var viewModel = IconsViewModel()
 
     var body: some View {
-        Section {
-            optionsView
-        } header: {
-            headerView
-        }
+        if UIApplication.shared.supportsAlternateIcons {
+            Section {
+                optionsView
+            } header: {
+                headerView
+            }
 
-        .task {
-            viewModel.storage = settingsViewModel.storage
-            viewModel.get()
+            .alert("Não foi possível trocar o ícone.",
+                   isPresented: Binding(get: { viewModel.error },
+                                        set: { value in viewModel.error = value })) {
+                Button("Ok", role: .cancel) {}
+            }
+
+                                        .task {
+                                            viewModel.storage = settingsViewModel.storage
+                                            viewModel.get()
+                                        }
         }
     }
 }
@@ -84,6 +92,6 @@ import StorageLibrary
         IconsView()
     }
     .environment(\.theme, ThemeColor())
-    .environmentObject(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage, models: []))
 }
 #endif

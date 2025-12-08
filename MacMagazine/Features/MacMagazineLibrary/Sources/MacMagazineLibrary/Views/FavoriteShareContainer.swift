@@ -1,8 +1,6 @@
 import SwiftUI
 
 public struct FavoriteShareContainer<FavoriteView: View, ShareView: View>: View {
-    @Namespace var namespace
-
     let favoriteView: FavoriteView
     let shareView: ShareView
 
@@ -15,16 +13,12 @@ public struct FavoriteShareContainer<FavoriteView: View, ShareView: View>: View 
     }
 
     public var body: some View {
-        VStack {
-            GlassEffectContainer {
-                HStack(spacing: 0) {
-                    favoriteView.buttonWithGlassEffect()
-                    shareView.buttonWithGlassEffect()
-                }
-                .glassEffectUnion(id: 1, namespace: namespace)
-            }
+        HStack(spacing: 10) {
+            favoriteView.buttonWithGlassEffect()
+            shareView.buttonWithGlassEffect()
         }
-        .padding(10)
+        .padding(.top, 10)
+        .padding(.trailing, 10)
     }
 }
 
@@ -38,11 +32,9 @@ private struct ButtonWithGlassEffect: ViewModifier {
     func body(content: Content) -> some View {
         content
             .buttonStyle(.plain)
+            .frame(width: 34, height: 34)
             .tint(.primary)
             .font(.system(size: 16))
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .padding(.bottom, 2)
-            .glassEffect()
+            .glassEffect(.regular.interactive(), in: .circle)
     }
 }

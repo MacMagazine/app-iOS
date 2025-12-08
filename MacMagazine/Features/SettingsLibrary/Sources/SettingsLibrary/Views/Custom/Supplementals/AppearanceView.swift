@@ -3,8 +3,8 @@ import SwiftUI
 
 struct AppearanceView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject private var viewModel = AppearanceViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State private var viewModel = AppearanceViewModel()
 
     var body: some View {
         Section {
@@ -62,6 +62,6 @@ import StorageLibrary
         AppearanceView()
     }
     .environment(\.theme, ThemeColor())
-    .environmentObject(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage, models: []))
 }
 #endif

@@ -14,9 +14,9 @@ final class CustomizationViewModel {
 extension CustomizationViewModel {
     @MainActor
     func get() {
-        tabs = storage?.get()?.tabs ?? AppTabs.allCases
-        social = storage?.get()?.social ?? Social.allCases
-        news = storage?.get()?.news ?? News.allCases
+        tabs = storage?.customization?.tabs ?? AppTabs.allCases
+        social = storage?.customization?.social ?? Social.allCases
+        news = storage?.customization?.news ?? News.allCases
     }
 
     @MainActor

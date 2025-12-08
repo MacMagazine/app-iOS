@@ -3,7 +3,7 @@ import SwiftUI
 
 struct CustomSocialView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
+    @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = CustomizationViewModel()
 
     var body: some View {

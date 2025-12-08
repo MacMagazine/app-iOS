@@ -4,8 +4,8 @@ import UIComponentsLibrary
 
 struct PostsVisibilityView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @EnvironmentObject private var settingsViewModel: SettingsViewModel
-    @StateObject private var viewModel = PostsVisibilityViewModel()
+    @Environment(SettingsViewModel.self) private var settingsViewModel
+    @State private var viewModel = PostsVisibilityViewModel()
     @State private var isPresenting = false
     @State private var isPresentingMore = false
 
@@ -21,12 +21,14 @@ struct PostsVisibilityView: View {
             .navigationBarTitleDisplayMode(.inline)
 
         } label: {
-            Image(systemName: "text.page")
-            Text("Posts")
+            Label("Posts", systemImage: "text.page")
         }
 
         .task {
-            viewModel.storage = settingsViewModel.storage
+            viewModel.set(
+                storage: settingsViewModel.storage,
+                models: settingsViewModel.models
+                )
             viewModel.get()
         }
 
@@ -100,40 +102,15 @@ private extension PostsVisibilityView {
                             titleVisibility: .visible) {
             cleanCacheView
         }
-        .confirmationDialog("Selecione uma opção",
-                            isPresented: $isPresentingMore,
-                            titleVisibility: .visible) {
-            moreOptionsCleanCacheView
-        }
     }
 
     @ViewBuilder
     var cleanCacheView: some View {
-        Button(action: { viewModel.cache = .keepFavoritesAndStatus },
+        Button(action: { viewModel.flush(cache: .keepFavoritesAndStatus) },
                label: {
             Text("Manter favoritos e status de leitura")
         })
-//        Button(action: { isPresentingMore.toggle() },
-//               label: {
-//            Text("Outras opções")
-//        })
-        Button("Limpar tudo", role: .destructive) { viewModel.cache = .cleanAll }
-    }
-
-    @ViewBuilder
-    var moreOptionsCleanCacheView: some View {
-        Button(action: { viewModel.cache = .keepStatus },
-               label: {
-            Text("Manter status de leitura")
-        })
-        Button(action: { viewModel.cache = .keepFavorites },
-               label: {
-            Text("Manter favoritos")
-        })
-        Button(action: { viewModel.cache = .cleanImages },
-               label: {
-            Text("Apagar somente as imagens")
-        })
+        Button("Limpar tudo", role: .destructive) { viewModel.flush(cache: .cleanAll) }
     }
 }
 
@@ -149,6 +126,6 @@ import StorageLibrary
         }
     }
     .environment(\.theme, ThemeColor())
-    .environmentObject(SettingsViewModel(storage: storage))
+    .environment(SettingsViewModel(storage: storage, models: []))
 }
 #endif
