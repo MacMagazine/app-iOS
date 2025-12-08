@@ -1,5 +1,5 @@
 import SwiftUI
-import UIComponentsLibrary
+ import UIComponentsLibrary
 
 public struct MMLiveWebView: View {
     public init() {}
@@ -10,5 +10,6 @@ public struct MMLiveWebView: View {
             isPresenting: .constant(false),
             standAlone: true
         )
+        .ignoresSafeArea(.container, edges: .bottom)
     }
 }
