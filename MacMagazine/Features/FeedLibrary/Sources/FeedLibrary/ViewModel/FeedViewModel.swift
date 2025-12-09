@@ -2,6 +2,7 @@ import Combine
 import Foundation
 import NetworkLibrary
 import StorageLibrary
+import SwiftData
 
 @MainActor @Observable
 public class FeedViewModel {
@@ -24,6 +25,8 @@ public class FeedViewModel {
 
     let storage: Database
     let networkService: NetworkService
+
+    public var context: ModelContext { storage.context }
 
     public init(
         network: Network? = nil,

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct FavoriteShareContainer<FavoriteView: View, ShareView: View>: View {
+public struct FavoriteShareGlassContainer<FavoriteView: View, ShareView: View>: View {
     let favoriteView: FavoriteView
     let shareView: ShareView
 
