@@ -6,11 +6,12 @@ extension Database {
     @MainActor
     func save(podcast: [PodcastDB]) {
         podcast.forEach {
-            _ = save(podcast: $0)
+            save(podcast: $0)
         }
     }
 
     @MainActor
+    @discardableResult
     func save(podcast: PodcastDB) -> PodcastDB {
         let postId = podcast.postId
         let predicate = #Predicate<PodcastDB> { $0.postId == postId }

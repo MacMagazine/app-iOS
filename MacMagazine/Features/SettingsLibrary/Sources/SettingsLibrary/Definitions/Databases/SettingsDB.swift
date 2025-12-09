@@ -3,6 +3,7 @@ import SwiftData
 
 @Model
 public final class SettingsDB {
+    public var id: UUID = UUID()
     var mode = ColorScheme.system
     var icon = IconType.normal
     var notification: String = PushPreferences.all.rawValue
@@ -11,6 +12,7 @@ public final class SettingsDB {
     var subscription: Subscription = Subscription(isPatrao: false, expirationDate: Date())
 
     init(
+        id: UUID = UUID(),
         mode: ColorScheme = .system,
         icon: IconType = .normal,
         notification: String = PushPreferences.all.rawValue,
@@ -18,6 +20,7 @@ public final class SettingsDB {
         countOnBadge: Bool = false,
         subscription: Subscription? = nil
     ) {
+        self.id = id
         self.mode = mode
         self.icon = icon
         self.notification = notification

@@ -83,7 +83,8 @@ extension PodcastView {
                     }
                 }
             },
-            retryAction: favorite ? nil : retryAction)
+            retryAction: favorite ? nil : retryAction
+        )
     }
 
     @ViewBuilder

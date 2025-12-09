@@ -7,7 +7,13 @@ import SwiftData
 extension Database {
     @MainActor
     var settings: SettingsDB? {
-        fetch(SettingsDB.self).first
+        let settings = fetch(SettingsDB.self)
+        if settings.count > 1 {
+            for index in 1..<settings.count {
+                context.delete(settings[index])
+            }
+        }
+        return settings.first
     }
 
     @MainActor
@@ -89,7 +95,13 @@ extension Database {
 extension Database {
     @MainActor
     var customization: CustomizationDB? {
-        fetch(CustomizationDB.self).first
+        let customization = fetch(CustomizationDB.self)
+        if customization.count > 1 {
+            for index in 1..<customization.count {
+                context.delete(customization[index])
+            }
+        }
+        return customization.first
     }
 
     @MainActor
