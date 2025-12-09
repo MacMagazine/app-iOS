@@ -4,7 +4,7 @@ import MacMagazineUILibrary
 import SwiftData
 
 extension PodcastDB {
-    func toCardContent(using context: ModelContext) -> CardContent {
+    func toCardContent(using context: ModelContext?) -> CardContent {
         CardContent(
             type: .podcast(duration: self.duration),
             title: self.title,
@@ -13,7 +13,7 @@ extension PodcastDB {
             urlToShare: self.podcastURL,
             favorite: self.favorite,
             favoriteAction: { [weak self] in
-                guard let self else { return }
+                guard let self, let context else { return }
                 self.favorite.toggle()
                 try? context.save()
             }

@@ -15,8 +15,9 @@ public extension CardDensity {
 
     var titleLineLimit: Int {
         switch self {
-        case .compact, .regular: 1
-        case .spacious: 2
+        case .compact: 1
+        case .regular: 2
+        case .spacious: 3
         }
     }
 

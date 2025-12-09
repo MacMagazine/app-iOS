@@ -4,7 +4,7 @@ public enum CardContentType {
     case video(views: String, likes: String, duration: String)
     case podcast(duration: String)
 
-    var duration: String {
+    public var duration: String {
         switch self {
         case let .video(_, _, duration): duration
         case let .podcast(duration): duration
@@ -25,7 +25,7 @@ public enum CardContentType {
         }
     }
 
-    var accessibilityName: String {
+    public var accessibilityName: String {
         switch self {
         case .video: "Vídeo"
         case .podcast: "Podcast"
@@ -34,13 +34,13 @@ public enum CardContentType {
 }
 
 public struct CardContent {
-    let type: CardContentType
-    let title: String
-    let pubDate: Date
-    let artworkUrl: String
-    let urlToShare: String
-    let favorite: Bool
-    let favoriteAction: () -> Void
+    public let type: CardContentType
+    public let title: String
+    public let pubDate: Date
+    public let artworkUrl: String
+    public let urlToShare: String
+    public let favorite: Bool
+    public let favoriteAction: () -> Void
 
     public init(
         type: CardContentType,

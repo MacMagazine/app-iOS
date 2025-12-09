@@ -4,6 +4,7 @@ import UtilityLibrary
 
 @MainActor
 public struct GlassCardView: View {
+    @Environment(\.dynamicTypeSize) private var typeSize
     @Namespace var namespace
 
     let data: CardContent
@@ -129,10 +130,55 @@ private extension GlassCardView {
             .shadowed()
     }
 
+    @ViewBuilder
     var detailsRow: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
+        if data.type.views == nil ||
+           data.type.likes == nil {
+            dateDurationRow
+        } else {
+            dateStatsDurationRow
+        }
+    }
+
+    @ViewBuilder
+    var dateDurationRow: some View {
+        let layout: AnyLayout = switch typeSize {
+        case .accessibility3...:
+            AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+        default:
+            AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 8))
+        }
+
+        layout {
             dateRow
-            statistics
+            Spacer(minLength: 0)
+            duration
+        }
+        .font(.caption2)
+        .shadowed()
+    }
+
+    @ViewBuilder
+    var dateStatsDurationRow: some View {
+        let layout: AnyLayout = switch typeSize {
+        case .xLarge...:
+            AnyLayout(HStackLayout(alignment: .bottom, spacing: 8))
+        default:
+            AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 8))
+        }
+
+        let innerLayout: AnyLayout = switch typeSize {
+        case .xLarge...:
+            AnyLayout(VStackLayout(spacing: 8))
+        default:
+            AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 8))
+        }
+
+        layout {
+            innerLayout {
+                dateRow
+                statistics
+            }
             Spacer(minLength: 4)
             duration
         }
@@ -152,7 +198,6 @@ private extension GlassCardView {
     var duration: some View {
         MetadataDuration(text: data.type.duration)
             .lineLimit(1)
-            .minimumScaleFactor(0.8)
             .layoutPriority(0)
     }
 }
@@ -171,7 +216,6 @@ private extension GlassCardView {
             .foregroundStyle(.white.opacity(0.9))
             .shadowed()
             .lineLimit(1)
-            .minimumScaleFactor(0.8)
             .layoutPriority(1)
         }
     }

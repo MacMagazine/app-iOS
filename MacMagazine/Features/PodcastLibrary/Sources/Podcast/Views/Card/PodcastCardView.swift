@@ -1,14 +1,15 @@
 import FeedLibrary
 import MacMagazineLibrary
+import MacMagazineUILibrary
 import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary
 
 struct PodcastCardView: View {
-    let podcast: PodcastDB
-    let onPlay: () -> Void
-
     @Environment(\.theme) private var theme
+
+    let podcast: CardContent
+    let onPlay: () -> Void
 
     var body: some View {
         Button(action: onPlay) {
@@ -18,35 +19,27 @@ struct PodcastCardView: View {
             }
         }
         .cornerRadius(12)
+        .buttonStyle(.plain)
     }
 
     @ViewBuilder
     var thumbnail: some View {
-        if let url = URL(string: podcast.artworkURL) {
+        if let url = URL(string: podcast.artworkUrl) {
             CachedAsyncImage(image: url)
                 .overlay {
-                    ZStack {
-                        VStack {
-                            HStack {
-                                Text(podcast.duration)
-                                    .font(.caption)
-                                    .padding(6)
-                                    .foregroundColor(.white)
-                                    .background(
-                                        Color(
-                                            red: 0.0,
-                                            green: 0.0,
-                                            blue: 0.0,
-                                            opacity: 0.80
-                                        )
-                                    )
-                                    .cornerRadius(6)
-                                Spacer()
-                            }
+                    VStack {
+                        HStack {
+                            Text(podcast.type.duration)
+                                .font(.caption)
+                                .padding(6)
+                                .foregroundColor(.white)
+                                .background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.80))
+                                .cornerRadius(6)
                             Spacer()
                         }
-                        .padding([.top, .leading, .trailing], 10)
+                        Spacer()
                     }
+                    .padding([.top, .leading, .trailing], 10)
                 }
         }
     }
@@ -69,21 +62,35 @@ struct PodcastCardView: View {
                 Spacer()
             }
             .foregroundColor(.primary)
-            .padding(.bottom, 8)
+
+            buttons
         }
-        .padding(.horizontal)
         .padding(.vertical, 10)
-        .padding(.bottom, 2)
+        .padding(.horizontal)
         .background(.background)
+    }
+
+    var buttons: some View {
+        HStack(spacing: 20) {
+            FavoriteButton(
+                name: podcast.title,
+                favorite: podcast.favorite,
+                action: podcast.favoriteAction
+            )
+            ShareButton(
+                title: podcast.title,
+                url: podcast.urlToShare
+            )
+        }
+        .tint(theme.button.primary.color ?? .primary)
     }
 }
 
 #if DEBUG
 #Preview {
     @Previewable @State var playing = false
-    @Previewable @Environment(\.theme) var theme
 
-    let mockPodcast = PodcastDB(
+    let podcast = PodcastDB(
         postId: "1",
         title: "MacMagazine no Ar #123: Especial WWDC 2024",
         subtitle: "Neste episódio especial, discutimos todas as novidades anunciadas na WWDC 2024",
@@ -98,16 +105,14 @@ struct PodcastCardView: View {
     )
 
     ZStack {
-        theme.main.background.color
-            .edgesIgnoringSafeArea(.all)
+        Color.brown.ignoresSafeArea()
 
         PodcastCardView(
-            podcast: mockPodcast,
+            podcast: podcast.toCardContent(using: nil),
             onPlay: { playing.toggle() }
         )
         .padding()
     }
     .environment(\.theme, ThemeColor())
-
 }
 #endif
