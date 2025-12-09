@@ -138,11 +138,14 @@ private struct GlassPodcastCardView: View {
     }
 
     @ViewBuilder var topButtons: some View {
+
+        //TODO: Uncomment this code when the Podcast Favorite Button functionality is ready.
 //        FavoriteShareContainer(
-//            favoriteView: FavoriteButton(content: data),
+//            favoriteView: PodcastFavoriteButton(content: data),
 //            shareView: ShareButton(content: data)
 //        )
 
+        //TODO: Remove this code when the Podcast Favorite Button functionality is ready.
         if let urlPodCast = URL(string: podcast.podcastURL) {
             UtilityLibrary.ShareButton(title: podcast.title,
                                        url: urlPodCast)
