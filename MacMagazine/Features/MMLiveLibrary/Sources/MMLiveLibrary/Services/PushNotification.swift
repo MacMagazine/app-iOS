@@ -2,7 +2,12 @@ import Foundation
 import StorageLibrary
 import UserNotifications
 
-final class PushNotification: NSObject {
+protocol PushNotificationProtocol {
+    @MainActor
+    func setLocalNotification(for event: MMLive)
+}
+
+final class PushNotification: NSObject, PushNotificationProtocol {
     @MainActor
     func setLocalNotification(for event: MMLive) {
         let center = UNUserNotificationCenter.current()

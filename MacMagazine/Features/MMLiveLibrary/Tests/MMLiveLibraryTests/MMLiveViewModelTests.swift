@@ -18,6 +18,7 @@ struct MMLiveViewModelTests {
         let mockNetwork = NetworkFactory.make(mapper: mockData)
         let storage = DefaultStorage("MMLiveTest")
         let sut = MMLiveViewModel(network: mockNetwork, storage: storage)
+        sut.set(pushNotification: MockPushNotification())
 
         // When
         let isLive = await sut.isLive()
@@ -31,4 +32,9 @@ struct MMLiveViewModelTests {
         let isSaved = storage.get()
         #expect(isSaved?.inicio != nil, "MMLive should be saved to UserDefaults and parsed")
     }
+}
+
+struct MockPushNotification: PushNotificationProtocol {
+    @MainActor
+    func setLocalNotification(for event: MMLive) {}
 }
