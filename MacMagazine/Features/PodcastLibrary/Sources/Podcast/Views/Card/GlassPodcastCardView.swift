@@ -3,33 +3,8 @@ import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary
-import YouTubeLibrary
 
-struct AdaptivePodcastCardView: View {
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    let podcast: PodcastDB
-    let onPlay: () -> Void
-
-    var body: some View {
-        Group {
-            if dynamicTypeSize.usesPrimaryCardLayout {
-                GlassPodcastCardView(
-                    podcast: podcast,
-                    onPlay: onPlay
-                )
-            } else {
-                PodcastCardView(
-                    podcast: podcast,
-                    onPlay: onPlay
-                )
-            }
-        }
-    }
-}
-
-// MARK: - New Card
-
-private struct GlassPodcastCardView: View {
+struct GlassPodcastCardView: View {
     let podcast: PodcastDB
     let onPlay: () -> Void
 
@@ -138,24 +113,17 @@ private struct GlassPodcastCardView: View {
     }
 
     @ViewBuilder var topButtons: some View {
+        FavoriteShareContainer(
+            favoriteView: FavoriteButton(content: podcast),
+            shareView: shareButton
+        )
+    }
 
-//        FavoriteShareContainer(
-//            favoriteView: PodcastFavoriteButton(content: data),
-//            shareView: ShareButton(content: data)
-//        )
-
+    @ViewBuilder
+    private var shareButton: some View {
         if let urlPodCast = URL(string: podcast.podcastURL) {
             UtilityLibrary.ShareButton(title: podcast.title,
                                        url: urlPodCast)
-            .buttonStyle(.plain)
-            .tint(.primary)
-            .font(.system(size: 16))
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .padding(.bottom, 2)
-            .glassEffect()
-        } else {
-            EmptyView()
         }
     }
 
@@ -175,82 +143,6 @@ private struct GlassPodcastCardView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.8)
             .glassEffect(.clear, in: .rect(cornerRadius: 6))
-    }
-}
-
-// MARK: - Old Card
-
-private struct PodcastCardView: View {
-    let podcast: PodcastDB
-    let onPlay: () -> Void
-
-    @Environment(\.theme) private var theme
-
-    var body: some View {
-        Button(action: onPlay) {
-            VStack(alignment: .leading, spacing: 0) {
-                thumbnail
-                metadata
-            }
-        }
-        .cornerRadius(12)
-    }
-
-    @ViewBuilder
-    var thumbnail: some View {
-        if let url = URL(string: podcast.artworkURL) {
-            CachedAsyncImage(image: url)
-                .overlay {
-                    ZStack {
-                        VStack {
-                            HStack {
-                                Text(podcast.duration)
-                                    .font(.caption)
-                                    .padding(6)
-                                    .foregroundColor(.white)
-                                    .background(
-                                        Color(
-                                            red: 0.0,
-                                            green: 0.0,
-                                            blue: 0.0,
-                                            opacity: 0.80
-                                        )
-                                    )
-                                    .cornerRadius(6)
-                                Spacer()
-                            }
-                            Spacer()
-                        }
-                        .padding([.top, .leading, .trailing], 10)
-                    }
-                }
-        }
-    }
-
-    var metadata: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text(podcast.pubDate.format(using: .dateOnly))
-                Spacer()
-            }
-            .font(.caption)
-            .foregroundColor(.primary)
-            .padding(.bottom, 4)
-
-            HStack {
-                Text(podcast.title)
-                    .font(.headline)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(3, reservesSpace: true)
-                Spacer()
-            }
-            .foregroundColor(.primary)
-            .padding(.bottom, 8)
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 10)
-        .padding(.bottom, 2)
-        .background(.background)
     }
 }
 
@@ -277,19 +169,11 @@ private struct PodcastCardView: View {
         theme.main.background.color
             .edgesIgnoringSafeArea(.all)
 
-        VStack {
-            PodcastCardView(
-                podcast: mockPodcast,
-                onPlay: { playing.toggle() }
-            )
-            .padding()
-
-            GlassPodcastCardView(
-                podcast: mockPodcast,
-                onPlay: { playing.toggle() }
-            )
-            .padding()
-        }
+        GlassPodcastCardView(
+            podcast: mockPodcast,
+            onPlay: { playing.toggle() }
+        )
+        .padding()
     }
     .environment(\.theme, ThemeColor())
 
