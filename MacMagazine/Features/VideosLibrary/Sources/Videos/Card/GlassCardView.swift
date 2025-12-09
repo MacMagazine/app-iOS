@@ -5,19 +5,26 @@ import UIComponentsLibrary
 import UtilityLibrary
 import YouTubeLibrary
 
+// MARK: - GlassCard
+
+@MainActor
+public struct GlassCard: VideoCard {
+    public var accessibilityLabels: [CardLabel]?
+    public var accessibilityButtons: [CardButton]?
+
+    public func makeBody(data: VideoDB) -> some View {
+        GlassCardView(data: data)
+    }
+}
+
 @MainActor
 struct GlassCardView: View {
     @Namespace var namespace
-    @Environment(\.sizeCategory) private var sizeCategory
 
     let data: VideoDB
 
     @State private var cardWidth: CGFloat = .zero
     @State private var thumbnailSize: CGSize = .zero
-
-    private var isAccessibilityCategory: Bool {
-        sizeCategory.isAccessibilityCategory
-    }
 
     private var density: CardDensity { .from(width: cardWidth) }
 
