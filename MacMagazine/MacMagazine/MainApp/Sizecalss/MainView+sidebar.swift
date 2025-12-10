@@ -114,7 +114,7 @@ private extension MainView {
         case AppTabs.news: NewsView()
         case AppTabs.social: SocialView()
         case AppTabs.settings: SettingsView()
-        case AppTabs.live: MMLiveWebView()
+        case AppTabs.live: MMLiveWebView(colorSchema: viewModel.settingsViewModel.colorSchema)
         case Social.videos: SocialView()
         case Social.podcast: SocialView()
         case Social.instagram: SocialView()

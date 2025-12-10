@@ -24,7 +24,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .live: MMLiveWebView()
+        case .live: MMLiveWebView(colorSchema: viewModel.settingsViewModel.colorSchema)
         default:
             ContentUnavailableView(
                 "Página em construção",
