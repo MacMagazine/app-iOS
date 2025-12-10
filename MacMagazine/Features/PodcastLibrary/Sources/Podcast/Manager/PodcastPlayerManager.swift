@@ -3,16 +3,17 @@ import Combine
 import FeedLibrary
 import Foundation
 import MediaPlayer
+import Observation
 import UIKit
 
 @MainActor
 @Observable
-class PodcastPlayerManager {
-    var currentPodcast: PodcastDB?
-    var isPlaying: Bool = false
-    var currentTime: TimeInterval = 0
-    var duration: TimeInterval = 0
-    var playbackRate: Float = 1.0
+public class PodcastPlayerManager {
+    public var currentPodcast: PodcastDB?
+    public var isPlaying: Bool = false
+    public var currentTime: TimeInterval = 0
+    public var duration: TimeInterval = 0
+    public var playbackRate: Float = 1.0
 
     private var player: AVPlayer?
     private var timeObserver: Any?
@@ -20,8 +21,7 @@ class PodcastPlayerManager {
     private var isAudioSessionSetup = false
     private var isRemoteControlsSetup = false
 
-    init() {
-    }
+    public init() {}
 
     private func setupAudioSession() {
         guard !isAudioSessionSetup else { return }
@@ -156,13 +156,13 @@ class PodcastPlayerManager {
         updateNowPlayingInfo()
     }
 
-    func pause() {
+    public func pause() {
         player?.pause()
         isPlaying = false
         updateNowPlayingInfo()
     }
 
-    func togglePlayPause() {
+    public func togglePlayPause() {
         if isPlaying {
             pause()
         } else {

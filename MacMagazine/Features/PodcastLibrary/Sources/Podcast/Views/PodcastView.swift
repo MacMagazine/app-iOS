@@ -53,7 +53,8 @@ public struct PodcastView: View {
         }
 
         .sheet(isPresented: $showFullPlayer) {
-            PodcastPlayerView(playerManager: playerManager)
+            PodcastPlayerView(playerManager: playerManager,
+                              backgroundGradientStyle: .fourTone)
                 .presentationDragIndicator(.visible)
         }
     }
