@@ -1,8 +1,8 @@
 import FeedLibrary
 import MacMagazineLibrary
+import MacMagazineUILibrary
 import SwiftUI
 import UIComponentsLibrary
-import UIKit
 import UtilityLibrary
 
 // MARK: - Estilo de degradê de fundo
@@ -112,6 +112,7 @@ public struct PodcastPlayerView: View {
             .padding(.horizontal, horizontalPadding)
             .padding(.bottom, 30)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
@@ -195,35 +196,8 @@ private extension PodcastPlayerView {
                 .lineLimit(3)
                 .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-
-            if let podcast = playerManager.currentPodcast {
-                topButtons(podcast: podcast)
-            }
         }
         .padding(.bottom, 8)
-    }
-
-    @ViewBuilder
-    func topButtons(podcast: PodcastDB) -> some View {
-        HStack(spacing: 12) {
-
-// FavoriteShareContainer(
-//     favoriteView: PodcastFavoriteButton(content: data),
-//     shareView: ShareButton(content: data)
-// )
-
-            if let urlPodCast = URL(string: podcast.podcastURL) {
-                UtilityLibrary.ShareButton(
-                    title: podcast.title,
-                    url: urlPodCast
-                )
-                .padding(8)
-                .glassEffect(.clear, in: Circle())
-                .clipShape(Circle())
-                .tint(.primary)
-            }
-
-        }
     }
 
     @ViewBuilder
