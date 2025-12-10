@@ -52,6 +52,16 @@ public class FeedViewModel {
         }
     }
 
+    public func getWidgetData() async throws -> [WidgetData] {
+        do {
+            let data = try await fetch(category: .all)
+            return data.toWidgetData
+        } catch {
+            status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
+            return []
+        }
+    }
+
     public func getPodcast() async throws {
         do {
             status = .loading

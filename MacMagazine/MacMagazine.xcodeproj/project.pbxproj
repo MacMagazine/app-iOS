@@ -9,11 +9,39 @@
 /* Begin PBXBuildFile section */
 		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
 		9B1A43032EE0C14E00E56784 /* PodcastLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1A43022EE0C14E00E56784 /* PodcastLibrary */; };
+		9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B4F666E2EE9F223008ACACB /* FeedLibrary */; };
 		9B543D342EE8A116001730C4 /* MacMagazineUILibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B543D332EE8A116001730C4 /* MacMagazineUILibrary */; };
 		9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B817DA12ED0E5F7005E58E5 /* VideosLibrary */; };
 		9B910BEB2EE09D1B00E96B4D /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B910BEA2EE09D1B00E96B4D /* FeedLibrary */; };
 		9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */; };
+		9BDD424F2EE9E82F00A9BD85 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */; };
+		9BDD42512EE9E82F00A9BD85 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD42502EE9E82F00A9BD85 /* SwiftUI.framework */; };
+		9BDD42602EE9E83100A9BD85 /* WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9BDD424D2EE9E82F00A9BD85 /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9BDD425E2EE9E83100A9BD85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B9E9DBC2E986F8400255820 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BDD424C2EE9E82F00A9BD85;
+			remoteInfo = WidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9BDD42612EE9E83100A9BD85 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9BDD42602EE9E83100A9BD85 /* WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9B024FDA2EC2717200D66056 /* SettingsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SettingsLibrary; sourceTree = "<group>"; };
@@ -25,6 +53,9 @@
 		9B9E9DC42E986F8400255820 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB3888E2EE0B2E4007AC71C /* MacMagazine.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MacMagazine.xctestplan; sourceTree = "<group>"; };
 		9BCD94C42E997032007C44B6 /* MacMagazineLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MacMagazineLibrary; sourceTree = "<group>"; };
+		9BDD424D2EE9E82F00A9BD85 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		9BDD42502EE9E82F00A9BD85 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -35,6 +66,13 @@
 			);
 			target = 9B9E9DC32E986F8400255820 /* MacMagazine */;
 		};
+		9BDD42652EE9E83100A9BD85 /* Exceptions for "Widget" folder in "WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9BDD424C2EE9E82F00A9BD85 /* WidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +82,14 @@
 				9B9E9DD12E986F8500255820 /* Exceptions for "MacMagazine" folder in "MacMagazine" target */,
 			);
 			path = MacMagazine;
+			sourceTree = "<group>";
+		};
+		9BDD42522EE9E82F00A9BD85 /* Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9BDD42652EE9E83100A9BD85 /* Exceptions for "Widget" folder in "WidgetExtension" target */,
+			);
+			path = Widget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -62,6 +108,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BDD424A2EE9E82F00A9BD85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */,
+				9BDD42512EE9E82F00A9BD85 /* SwiftUI.framework in Frameworks */,
+				9BDD424F2EE9E82F00A9BD85 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +127,7 @@
 				9BB3888E2EE0B2E4007AC71C /* MacMagazine.xctestplan */,
 				9B9E9DDA2E98701C00255820 /* Features */,
 				9B9E9DC62E986F8400255820 /* MacMagazine */,
+				9BDD42522EE9E82F00A9BD85 /* Widget */,
 				9B9E9DDE2E98709000255820 /* Frameworks */,
 				9B9E9DC52E986F8400255820 /* Products */,
 			);
@@ -80,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				9B9E9DC42E986F8400255820 /* MacMagazine.app */,
+				9BDD424D2EE9E82F00A9BD85 /* WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,6 +159,8 @@
 		9B9E9DDE2E98709000255820 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */,
+				9BDD42502EE9E82F00A9BD85 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,10 +176,12 @@
 				9B9E9DC02E986F8400255820 /* Sources */,
 				9B9E9DC12E986F8400255820 /* Frameworks */,
 				9B9E9DC22E986F8400255820 /* Resources */,
+				9BDD42612EE9E83100A9BD85 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9BDD425F2EE9E83100A9BD85 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				9B9E9DC62E986F8400255820 /* MacMagazine */,
@@ -137,6 +199,29 @@
 			productReference = 9B9E9DC42E986F8400255820 /* MacMagazine.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9BDD424C2EE9E82F00A9BD85 /* WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BDD42642EE9E83100A9BD85 /* Build configuration list for PBXNativeTarget "WidgetExtension" */;
+			buildPhases = (
+				9BDD42492EE9E82F00A9BD85 /* Sources */,
+				9BDD424A2EE9E82F00A9BD85 /* Frameworks */,
+				9BDD424B2EE9E82F00A9BD85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9BDD42522EE9E82F00A9BD85 /* Widget */,
+			);
+			name = WidgetExtension;
+			packageProductDependencies = (
+				9B4F666E2EE9F223008ACACB /* FeedLibrary */,
+			);
+			productName = WidgetExtension;
+			productReference = 9BDD424D2EE9E82F00A9BD85 /* WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -144,11 +229,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					9B9E9DC32E986F8400255820 = {
 						CreatedOnToolsVersion = 26.0.1;
+					};
+					9BDD424C2EE9E82F00A9BD85 = {
+						CreatedOnToolsVersion = 26.1.1;
 					};
 				};
 			};
@@ -169,12 +257,20 @@
 			projectRoot = "";
 			targets = (
 				9B9E9DC32E986F8400255820 /* MacMagazine */,
+				9BDD424C2EE9E82F00A9BD85 /* WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9B9E9DC22E986F8400255820 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BDD424B2EE9E82F00A9BD85 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -213,7 +309,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BDD42492EE9E82F00A9BD85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9BDD425F2EE9E83100A9BD85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BDD424C2EE9E82F00A9BD85 /* WidgetExtension */;
+			targetProxy = 9BDD425E2EE9E83100A9BD85 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9B9E9DD32E986F8500255820 /* Debug */ = {
@@ -413,6 +524,68 @@
 			};
 			name = Release;
 		};
+		9BDD42622EE9E83100A9BD85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5.1.0;
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 5.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.beta.macmagazine.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9BDD42632EE9E83100A9BD85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5.1.0;
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 5.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.beta.macmagazine.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -434,6 +607,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9BDD42642EE9E83100A9BD85 /* Build configuration list for PBXNativeTarget "WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BDD42622EE9E83100A9BD85 /* Debug */,
+				9BDD42632EE9E83100A9BD85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -444,6 +626,10 @@
 		9B1A43022EE0C14E00E56784 /* PodcastLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PodcastLibrary;
+		};
+		9B4F666E2EE9F223008ACACB /* FeedLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedLibrary;
 		};
 		9B543D332EE8A116001730C4 /* MacMagazineUILibrary */ = {
 			isa = XCSwiftPackageProductDependency;
