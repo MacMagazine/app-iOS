@@ -8,6 +8,7 @@ import UIComponentsLibrary
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.modelContext) private var modelContext
+    @Environment(SessionState.self) private var sessionState
     var viewModel: PodcastViewModel
 
     @Binding private var favorite: Bool
@@ -48,8 +49,10 @@ public struct PodcastView: View {
         }
 
         .task {
-            if viewModel.status == .idle {
+            // Only fetch if not yet fetched this session
+            if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
                 try? await viewModel.getPodcasts()
+                sessionState.hasFetchedPodcasts = true
             }
         }
 

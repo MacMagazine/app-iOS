@@ -5,6 +5,7 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct VideosView: View {
+    @Environment(SessionState.self) private var sessionState
     var viewModel: VideosViewModel
     @State private var search: String = ""
     @Binding private var favorite: Bool
@@ -28,6 +29,13 @@ public struct VideosView: View {
             favorite: favorite,
             search: search
         )
+        .onAppear {
+            // Update the binding when view appears (before fetch happens)
+            viewModel.youtube.update(hasFetchedVideos: Binding(
+                get: { sessionState.hasFetchedVideos },
+                set: { value in sessionState.hasFetchedVideos = value }
+            ))
+        }
     }
 }
 

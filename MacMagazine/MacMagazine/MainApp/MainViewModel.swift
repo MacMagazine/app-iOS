@@ -23,6 +23,7 @@ class MainViewModel {
     var news: News
     var scrollToTopTrigger: AppTabs?
 
+    let sessionState = SessionState()
     let storage: Database
     let theme = ThemeColor()
 

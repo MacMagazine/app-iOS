@@ -15,6 +15,7 @@ struct MacMagazineApp: App {
                 .modelContainer(viewModel.storage.sharedModelContainer)
                 .environment(viewModel)
                 .environment(viewModel.settingsViewModel)
+                .environment(viewModel.sessionState)
                 .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
                 .task {
                     UIApplication.shared.registerForRemoteNotifications()
