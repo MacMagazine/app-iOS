@@ -26,7 +26,7 @@ extension Database {
             existing.podcastSize = podcast.podcastSize
             existing.duration = podcast.duration
             existing.podcastFrame = podcast.podcastFrame
-            existing.favorite = podcast.favorite
+            // Note: existing.favorite is preserved (user-controlled, not from API)
             existing.playable = podcast.playable
 
         } else {

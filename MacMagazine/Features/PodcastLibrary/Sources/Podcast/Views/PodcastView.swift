@@ -7,6 +7,7 @@ import UIComponentsLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(\.modelContext) private var modelContext
     var viewModel: PodcastViewModel
 
     @Binding private var favorite: Bool
@@ -79,7 +80,7 @@ extension PodcastView {
             quantity: search.isEmpty ? podcasts.count : 0,
             content: {
                 ForEach(podcasts) { podcast in
-                    AdaptivePodcastCardView(podcast: podcast.toCardContent(using: viewModel.context)) {
+                    AdaptivePodcastCardView(podcast: podcast.toCardContent(using: modelContext)) {
                         playerManager.loadPodcast(podcast)
                     }
                 }

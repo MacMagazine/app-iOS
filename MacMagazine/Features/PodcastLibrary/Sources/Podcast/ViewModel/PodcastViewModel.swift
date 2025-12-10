@@ -19,9 +19,6 @@ class PodcastViewModel {
     private let feedService: FeedViewModel
 
     @MainActor
-    var context: ModelContext { feedService.context }
-
-    @MainActor
     init(storage: Database,
          mapper: [NetworkMockData]? = nil) {
         self.feedService = .init(
