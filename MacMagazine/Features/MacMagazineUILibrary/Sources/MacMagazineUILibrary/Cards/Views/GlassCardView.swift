@@ -127,7 +127,6 @@ private extension GlassCardView {
             .multilineTextAlignment(.leading)
             .lineLimit(density.titleLineLimit)
             .foregroundStyle(.white)
-            .shadowed()
     }
 
     @ViewBuilder
@@ -155,7 +154,6 @@ private extension GlassCardView {
             duration
         }
         .font(.caption2)
-        .shadowed()
     }
 
     @ViewBuilder
@@ -183,7 +181,6 @@ private extension GlassCardView {
             duration
         }
         .font(.caption2)
-        .shadowed()
     }
 
     var dateRow: some View {
@@ -192,7 +189,6 @@ private extension GlassCardView {
             text: data.pubDate.format(using: .dateOnly)
         )
         .foregroundStyle(.white.opacity(0.9))
-        .shadowed()
     }
 
     var duration: some View {
@@ -214,7 +210,6 @@ private extension GlassCardView {
                 MetadataContent(image: "hand.thumbsup", text: likes)
             }
             .foregroundStyle(.white.opacity(0.9))
-            .shadowed()
             .lineLimit(1)
             .layoutPriority(1)
         }
