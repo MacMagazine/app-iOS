@@ -79,7 +79,7 @@ extension PodcastView {
             quantity: search.isEmpty ? podcasts.count : 0,
             content: {
                 ForEach(podcasts) { podcast in
-                    AdaptivePodcastCardView(podcast: podcast) {
+                    AdaptivePodcastCardView(podcast: podcast.toCardContent(using: viewModel.context)) {
                         playerManager.loadPodcast(podcast)
                     }
                 }

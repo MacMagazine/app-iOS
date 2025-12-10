@@ -3,6 +3,7 @@ import FeedLibrary
 import Foundation
 import NetworkLibrary
 import StorageLibrary
+import SwiftData
 import UIComponentsLibrary
 
 @Observable
@@ -16,6 +17,9 @@ class PodcastViewModel {
     }
 
     private let feedService: FeedViewModel
+
+    @MainActor
+    var context: ModelContext { feedService.context }
 
     @MainActor
     init(storage: Database,

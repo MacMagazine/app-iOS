@@ -8,14 +8,16 @@ public class MMLiveViewModel {
     let storage: Storage
     let networkService: NetworkService
     let hours24: TimeInterval = 86400 // 24 hours
-    let pushNotification = PushNotification()
+
+    var pushNotification: PushNotificationProtocol?
 
     public init(
         network: Network? = nil,
-        storage: Storage? = nil
+        storage: Storage? = nil,
     ) {
         self.storage = storage ?? DefaultStorage("MMLive")
         self.networkService = NetworkService(network: network)
+        self.pushNotification = PushNotification()
     }
 
     public func isLive() async -> Bool {
@@ -23,12 +25,15 @@ public class MMLiveViewModel {
               let lastChecked = event.lastChecked,
               Date() > lastChecked.addingTimeInterval(hours24) else {
             guard let event = try? await fetch() else { return false }
-            pushNotification.setLocalNotification(for: event)
+            pushNotification?.setLocalNotification(for: event)
             return isLive(event: event)
         }
         return isLive(event: event)
     }
 
+    func set(pushNotification: PushNotificationProtocol) {
+        self.pushNotification = pushNotification
+    }
 }
 
 private extension MMLiveViewModel {
@@ -36,7 +41,7 @@ private extension MMLiveViewModel {
         var event = event
         event.lastChecked = Date()
         storage.save(event: event)
-        return true // Date() > event.inicio && Date() < event.fim
+        return Date() > event.inicio && Date() < event.fim
     }
 }
 
