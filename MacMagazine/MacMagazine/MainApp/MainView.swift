@@ -14,6 +14,15 @@ struct MainView: View {
 
     @State var searchText: String = ""
 
+    var isSidebarActive: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad &&
+        horizontalSizeClass == .regular
+    }
+
+    var isTabBarActive: Bool {
+        !isSidebarActive
+    }
+
     var body: some View {
         @Bindable var bindableViewModel = viewModel
 
@@ -59,6 +68,13 @@ struct MainView: View {
     @ViewBuilder
     var content: some View {
         tabContentView
+            .onAppear() {
+                if isSidebarActive {
+                    print("sidebar")
+                } else {
+                    print("tabbar")
+                }
+            }
     }
 }
 
