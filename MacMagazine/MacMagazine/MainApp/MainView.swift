@@ -14,15 +14,6 @@ struct MainView: View {
 
     @State var searchText: String = ""
 
-    var isSidebarActive: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad &&
-        horizontalSizeClass == .regular
-    }
-
-    var isTabBarActive: Bool {
-        !isSidebarActive
-    }
-
     var body: some View {
         @Bindable var bindableViewModel = viewModel
 
@@ -31,14 +22,6 @@ struct MainView: View {
             .id(shouldUseSidebar ? "sidebar" : "tabbar")
             .transaction { transaction in
                 transaction.disablesAnimations = true
-            }
-
-            .podcastMiniPlayer {
-                if viewModel.tab == .social {
-                    return viewModel.social == .podcast
-                } else {
-                    return true
-                }
             }
 
             .onChange(of: horizontalSizeClass) { old, new in
@@ -54,8 +37,16 @@ struct MainView: View {
             }
 
             .onChange(of: viewModel.social) { _, newValue in
-                if viewModel.tab == .social,
+                let isInSocialContext: Bool
+                if shouldUseSidebar {
+                    isInSocialContext = navigationState.selectedItem is Social
+                } else {
+                    isInSocialContext = (viewModel.tab == .social)
+                }
+
+                if isInSocialContext,
                    newValue == .videos || newValue == .instagram {
+
                     if podcastManager.isPlaying {
                         podcastManager.pause()
                     }
@@ -67,21 +58,29 @@ struct MainView: View {
 
     @ViewBuilder
     var content: some View {
-        tabContentView
-            .onAppear() {
-                if isSidebarActive {
-                    print("sidebar")
-                } else {
-                    print("tabbar")
+        if shouldUseSidebar {
+            sideBarContentView
+        } else {
+            tabContentView
+                .podcastMiniPlayer {
+                    if viewModel.tab == .social {
+                        return viewModel.social == .podcast
+                    } else {
+                        return true
+                    }
                 }
-            }
+        }
     }
 }
 
 #if DEBUG
 #Preview {
+    let viewModel = MainViewModel(inMemory: true)
+    let podcastManager = PodcastPlayerManager()
+
     MainView()
         .environment(\.theme, ThemeColor())
-        .environment(MainViewModel(inMemory: true))
+        .environment(viewModel)
+        .environment(podcastManager)
 }
 #endif

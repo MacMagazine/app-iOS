@@ -4,9 +4,8 @@ import UIComponentsLibrary
 
 public struct PodcastMiniPlayerModifier: ViewModifier {
     @Environment(PodcastPlayerManager.self) private var manager
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Namespace private var animation
-
-    @State private var showFullPlayer = false
 
     private let isAllowedToShow: () -> Bool
 
@@ -21,46 +20,37 @@ public struct PodcastMiniPlayerModifier: ViewModifier {
         let canShowInContext = isAllowedToShow()
         let shouldShowMini   = hasPodcast && canShowInContext
 
-        let base = content
-            .fullScreenCover(isPresented: $showFullPlayer) {
-                PodcastFullScreenView(
-                    manager: manager,
-                    animation: animation,
-                    onDismiss: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
-                            showFullPlayer = false
-                        }
-                    }
-                )
-            }
-            .onChange(of: manager.currentPodcast?.id) { _, newID in
-                if newID == nil {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
-                        showFullPlayer = false
-                    }
-                }
-            }
-
         return Group {
             if shouldShowMini {
-                base
-                    .tabBarMinimizeBehavior(.onScrollDown)
-                    .tabViewBottomAccessory {
-                        if let current = manager.currentPodcast {
-                            MiniPlayerView(
-                                playerManager: manager,
-                                currentPodcast: current
-                            ) {
-                                withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
-                                    showFullPlayer = true
-                                }
+                if shouldUseSidebar {
+                    content
+                        .safeAreaInset(edge: .bottom, spacing: 16) {
+                            if let current = manager.currentPodcast {
+                                MediumPlayerView(
+                                    playerManager: manager,
+                                    currentPodcast: current
+                                )
+                                .frame(maxWidth: 550)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.horizontal, 20)
                             }
-                            .matchedTransitionSource(id: "MINIPLAYER", in: animation)
-                            .padding(.horizontal, 8)
                         }
-                    }
+                } else {
+                    content
+                        .tabBarMinimizeBehavior(.onScrollDown)
+                        .tabViewBottomAccessory {
+                            if let current = manager.currentPodcast {
+                                MiniPlayerView(
+                                    playerManager: manager,
+                                    currentPodcast: current
+                                )
+                                .matchedTransitionSource(id: "MINIPLAYER", in: animation)
+                                .padding(.horizontal, 8)
+                            }
+                        }
+                }
             } else {
-                base   // sem accessory, sem espaço sobrando
+                content
             }
         }
     }

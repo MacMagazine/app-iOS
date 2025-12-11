@@ -38,9 +38,9 @@ struct SocialView: View {
                 menuView
             }
             ToolbarItem(placement: .principal) {
-//                if !shouldUseSidebar {
+                if !shouldUseSidebar {
                     optionsView
-//                }
+                }
             }
         }
     }

@@ -9,20 +9,18 @@ public enum PodcastMiniPlayerLayout {
 
 public struct MiniPlayerView: View {
     @Environment(\.theme) private var theme
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
 
     @Bindable var playerManager: PodcastPlayerManager
 
     let currentPodcast: PodcastDB
-    let onTap: () -> Void
 
     public init(
         playerManager: PodcastPlayerManager,
-        currentPodcast: PodcastDB,
-        onTap: @escaping () -> Void
+        currentPodcast: PodcastDB
     ) {
         self.playerManager = playerManager
         self.currentPodcast = currentPodcast
-        self.onTap = onTap
     }
 
     public var body: some View {
@@ -57,20 +55,31 @@ private extension MiniPlayerView {
                 Ticker(text: podcast.title, speed: 30)
                     .frame(height: 30)
                     .id(podcast.id)
+
+                HStack(spacing: 20) {
+                    Button {
+                        playerManager.skip(by: -15)
+                    } label: {
+                        Image(systemName: "gobackward.15")
+                            .font(.system(size: 20))
+                    }
+
+                    Button {
+                        playerManager.togglePlayPause()
+                    } label: {
+                        Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
+                            .font(.system(size: 24))
+                    }
+
+                    Button {
+                        playerManager.skip(by: 15)
+                    } label: {
+                        Image(systemName: "goforward.15")
+                            .font(.system(size: 20))
+                    }
+                }
             }
             .contentShape(Rectangle())
-            .onTapGesture {
-                onTap()
-            }
-
-            Spacer()
-
-            Button {
-                playerManager.togglePlayPause()
-            } label: {
-                Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
-                    .font(.system(size: 24))
-            }
         }
         .foregroundColor(.black)
     }
