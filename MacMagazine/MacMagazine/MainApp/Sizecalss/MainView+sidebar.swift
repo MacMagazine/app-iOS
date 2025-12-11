@@ -1,4 +1,5 @@
 import MMLiveLibrary
+import PodcastLibrary
 import SettingsLibrary
 import SwiftUI
 
@@ -9,13 +10,22 @@ extension MainView {
                 .searchable(text: $searchText, prompt: "Search items")
         } detail: {
             animateContentStackView(for: navigationState.selectedItem)
+                .podcastMiniPlayer {
+                    if let social = navigationState.selectedItem as? Social {
+                        return social == .podcast
+                    } else {
+                        return true
+                    }
+                }
         }
         .navigationSplitViewStyle(.balanced)
     }
 
     var sidebar: some View {
-        List(selection: Binding(get: { id(for: navigationState.selectedItem) },
-                                set: { _ in })) {
+        List(selection: Binding(
+            get: { id(for: navigationState.selectedItem) },
+            set: { _ in }
+        )) {
             ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
                 switch tab {
                 case .news: news(tab: tab).id(id(for: tab))
@@ -59,7 +69,7 @@ private extension MainView {
         Section {
             ForEach(viewModel.settingsViewModel.social, id: \.self) { option in
                 show(destination: option, title: option.rawValue, icon: option.icon)
-                .padding(.leading)
+                    .padding(.leading)
             }
         } header: {
             Text(tab.rawValue)

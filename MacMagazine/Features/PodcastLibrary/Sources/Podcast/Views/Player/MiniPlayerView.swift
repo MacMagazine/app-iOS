@@ -2,55 +2,59 @@ import FeedLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-struct MiniPlayerView: View {
-    @Environment(\.theme) private var theme
+public enum PodcastMiniPlayerLayout {
+    case tabBar
+    case sidebar
+}
 
-    @State private var offset: CGSize = .zero
+public struct MiniPlayerView: View {
+    @Environment(\.theme) private var theme
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+
     @Bindable var playerManager: PodcastPlayerManager
 
     let currentPodcast: PodcastDB
-    let onTap: () -> Void
 
-    var body: some View {
+    public init(
+        playerManager: PodcastPlayerManager,
+        currentPodcast: PodcastDB
+    ) {
+        self.playerManager = playerManager
+        self.currentPodcast = currentPodcast
+    }
+
+    public var body: some View {
         miniPlayerContent(podcast: currentPodcast)
-            .offset(y: offset.height)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
+            .gesture(dragToDismiss)
+    }
 
-            .onTapGesture {
-                onTap()
+    private var dragToDismiss: some Gesture {
+        DragGesture(minimumDistance: 20)
+            .onEnded { value in
+                let vertical = value.translation.height
+
+                if vertical > 100 {
+                    if playerManager.isPlaying {
+                        playerManager.pause()
+                    }
+                    playerManager.currentPodcast = nil
+                }
             }
-
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        offset = value.translation
-                    }
-                    .onEnded { value in
-                        if value.translation.height > 80 {
-                            if playerManager.isPlaying {
-                                playerManager.pause()
-                            }
-                            playerManager.currentPodcast = nil
-                        } else {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                offset = .zero
-                            }
-                        }
-                    }
-            )
     }
 }
 
 private extension MiniPlayerView {
     func miniPlayerContent(podcast: PodcastDB) -> some View {
-        Group {
-            HStack {
+        HStack {
+            HStack(spacing: 8) {
                 artwork(podcast.artworkURL)
 
                 Ticker(text: podcast.title, speed: 30)
                     .frame(height: 30)
                     .id(podcast.id)
-
-                Spacer()
 
                 HStack(spacing: 20) {
                     Button {
@@ -75,16 +79,9 @@ private extension MiniPlayerView {
                     }
                 }
             }
-            .foregroundColor(.primary)
-            .padding(8)
+            .contentShape(Rectangle())
         }
-        .padding()
-        .background {
-            Capsule()
-                .fill(.bar)
-                .glassEffect(.clear)
-                .padding()
-        }
+        .foregroundColor(.black)
     }
 
     @ViewBuilder
@@ -96,5 +93,4 @@ private extension MiniPlayerView {
                 .frame(width: 30, height: 30)
         }
     }
-
 }

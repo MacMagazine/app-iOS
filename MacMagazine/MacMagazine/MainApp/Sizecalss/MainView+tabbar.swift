@@ -3,13 +3,19 @@ import SettingsLibrary
 import SwiftUI
 
 extension MainView {
+
     @ViewBuilder
     var tabContentView: some View {
         @Bindable var bindableViewModel = viewModel
 
         TabView(selection: $bindableViewModel.tab) {
             ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
-                Tab(tab.rawValue, systemImage: tab.icon, value: tab, role: tab == .search ? .search : .none) {
+                Tab(
+                    tab.rawValue,
+                    systemImage: tab.icon,
+                    value: tab,
+                    role: tab == .search ? .search : .none
+                ) {
                     NavigationStack {
                         AnyView(contentView(for: tab))
                     }
