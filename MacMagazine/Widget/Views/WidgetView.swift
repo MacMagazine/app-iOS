@@ -15,20 +15,16 @@ struct WidgetView: View {
     @ViewBuilder
     var body: some View {
         switch widgetFamily {
-        case .systemSmall: smallWidget
+        case .systemSmall: smallWidget.widgetURL(post.url)
         case .accessoryInline: accessoryInlineWidget
         case .accessoryCircular: accessoryCircularWidget
         case .accessoryRectangular: accessoryRectangularWidget
-        default: Link(destination: post.url) { content(image: image) }
+        default: Link(destination: post.url) { content }
         }
     }
 }
 
 private extension WidgetView {
-    var smallWidget: some View {
-        content(image: nil).widgetURL(post.url)
-    }
-
     var accessoryInlineWidget: some View {
         Text("MM \(post.title)").widgetURL(post.url)
     }
@@ -38,7 +34,7 @@ private extension WidgetView {
             Circle()
                 .stroke(lineWidth: 10)
             VStack(spacing: 0) {
-                Image("logo")
+                Image("logo_white")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 18, height: 18)
@@ -67,42 +63,63 @@ private extension WidgetView {
 }
 
 private extension WidgetView {
-    func content(image: KFImage?) -> some View {
-        HStack(spacing: 6) {
-            VStack(spacing: 4) {
-                HStack {
-                    Text(post.pubDate.format(using: .dateTime))
-                        .font(.caption)
-                        .lineLimit(1)
-                    Spacer(minLength: 0)
-                }
-                HStack {
-                    Text(post.title)
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(3)
-                    Spacer(minLength: 0)
-                }
+    var dateAndTitle: some View {
+        VStack(spacing: 4) {
+            HStack {
+                Text(post.pubDate.format(using: .dateTime))
+                    .font(.caption2)
+                    .lineLimit(1)
+                Spacer(minLength: 0)
             }
+            HStack {
+                Text(post.title)
+                    .font(.callout)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(3)
+                Spacer(minLength: 0)
+            }
+        }
+    }
 
-            if let image, renderingMode != .accented {
-                image
-                    .resizable()
-                    .scaledToFill()
+    var image: KFImage {
+        KFImage(URL(string: redactionReasons == .placeholder ? "" : post.thumbnail))
+            .placeholder { Image("logo_white") }
+    }
+
+    @ViewBuilder
+    private var imageForRenderingMode: some View {
+        if renderingMode == .accented {
+            Color.clear
+        } else {
+            image.resizable().scaledToFill()
+        }
+    }
+
+    @ViewBuilder
+    var smallWidget: some View {
+        VStack {
+            Spacer(minLength: 0)
+            dateAndTitle.padding(.horizontal, 10)
+        }
+        .overlayHeader()
+        .padding(.bottom)
+        .smallWidgetStyle(image: image)
+    }
+
+    var content: some View {
+        HStack(spacing: 6) {
+            dateAndTitle
+            if renderingMode != .accented {
+                imageForRenderingMode
                     .frame(width: imageSize, height: imageSize)
                     .cornerRadius(8)
             }
         }
         .widgetAccentable() // This will be in the accent group in tinted mode
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .edgesIgnoringSafeArea(.all)
+        .ignoresSafeArea()
         .containerBackground(Color.clear, for: .widget)
         .clipped()
-    }
-
-    var image: KFImage {
-        KFImage(URL(string: redactionReasons == .placeholder ? "" : post.thumbnail))
-            .placeholder { Image("logo") }
     }
 }
 

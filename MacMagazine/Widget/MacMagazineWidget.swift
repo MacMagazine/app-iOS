@@ -26,6 +26,7 @@ struct MacMagazineWidget: Widget {
         .configurationDisplayName("MacMagazine")
         .description("Confira nossos últimos posts!")
         .supportedFamilies(supportedFamilies)
+        .contentMarginsDisabled()
     }
 }
 

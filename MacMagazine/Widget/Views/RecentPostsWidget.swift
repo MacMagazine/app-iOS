@@ -38,30 +38,3 @@ struct RecentPostsWidget: View {
         }.header(title: "Últimas notícias")
     }
 }
-
-extension View {
-    func header(title: String) -> some View {
-        modifier(HeaderWidgetModifier(title: title))
-    }
-}
-
-private struct HeaderWidgetModifier: ViewModifier {
-    let title: String
-
-    func body(content: Content) -> some View {
-        VStack(spacing: 6) {
-            HStack {
-                Image("logo_color")
-                    .resizable()
-                    .widgetAccentedRenderingMode(.fullColor)
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-
-                Text(title)
-
-                Spacer()
-            }
-            content
-        }
-    }
-}
