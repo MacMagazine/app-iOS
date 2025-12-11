@@ -2,11 +2,11 @@ import Foundation
 
 public enum AppTabs: String, CaseIterable, Codable, Equatable {
 
-    case search = "Busca"
     case live = "MM Live"
     case news = "Notícias"
     case social = "Mídias"
     case settings = "Ajustes"
+    case search = "Busca"
 
     public var icon: String {
         switch self {
