@@ -11,7 +11,7 @@ struct Ticker: View {
         TimelineView(.animation) { timeline in
             GeometryReader { geometry in
                 Text(text)
-                    .font(.headline)
+                    .font(.system(size: 16))
                     .lineLimit(1)
                     .fixedSize()
                     .frame(height: geometry.size.height)

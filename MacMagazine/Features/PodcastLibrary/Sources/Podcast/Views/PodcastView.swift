@@ -7,6 +7,7 @@ import UIComponentsLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
     @Environment(SessionState.self) private var sessionState
     var viewModel: PodcastViewModel
@@ -15,8 +16,6 @@ public struct PodcastView: View {
     @Binding var scrollPosition: ScrollPosition
 
     @State private var search: String = ""
-    @State private var playerManager = PodcastPlayerManager()
-    @State private var showFullPlayer = false
 
     @Query private var podcasts: [PodcastDB]
 
@@ -33,37 +32,24 @@ public struct PodcastView: View {
         let predicate = #Predicate<PodcastDB> {
             $0.favorite == favorite
         }
-        _podcasts = Query(filter: favorite ? predicate : nil,
-                          sort: \PodcastDB.pubDate,
-                          order: .reverse,
-                          animation: .smooth)
+        _podcasts = Query(
+            filter: favorite ? predicate : nil,
+            sort: \PodcastDB.pubDate,
+            order: .reverse,
+            animation: .smooth
+        )
     }
 
     public var body: some View {
-        content.overlay {
-            miniPlayer
-                .animation(.spring(response: 0.4,
-                                   dampingFraction: 0.8),
-                           value: playerManager.currentPodcast?.id)
-                .frame(maxWidth: 420)
-        }
-
-        .task {
-            // Only fetch if not yet fetched this session
-            if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
-                try? await viewModel.getPodcasts()
-                sessionState.hasFetchedPodcasts = true
+        content
+            .task {
+                if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
+                    try? await viewModel.getPodcasts()
+                    sessionState.hasFetchedPodcasts = true
+                }
             }
-        }
-
-        .sheet(isPresented: $showFullPlayer) {
-            PodcastPlayerView(playerManager: playerManager,
-                              backgroundGradientStyle: .fourTone)
-                .presentationDragIndicator(.visible)
-        }
     }
 }
-
 extension PodcastView {
     @ViewBuilder
     var content: some View {
@@ -84,27 +70,11 @@ extension PodcastView {
             content: {
                 ForEach(podcasts) { podcast in
                     AdaptivePodcastCardView(podcast: podcast.toCardContent(using: modelContext)) {
-                        playerManager.loadPodcast(podcast)
+                        podcastPlayerManager.loadPodcast(podcast)
                     }
                 }
             },
             retryAction: favorite ? nil : retryAction
         )
-    }
-
-    @ViewBuilder
-    var miniPlayer: some View {
-        if let currentPodcast = playerManager.currentPodcast {
-            VStack {
-                Spacer()
-                MiniPlayerView(
-                    playerManager: playerManager,
-                    currentPodcast: currentPodcast
-                ) {
-                    showFullPlayer = true
-                }
-            }
-            .transition(.move(edge: .bottom))
-        }
     }
 }

@@ -1,3 +1,4 @@
+import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
@@ -7,6 +8,7 @@ import UIKit
 @main
 struct MacMagazineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var viewModel = MainViewModel()
 
     var body: some Scene {
@@ -15,6 +17,7 @@ struct MacMagazineApp: App {
                 .modelContainer(viewModel.storage.sharedModelContainer)
                 .environment(viewModel)
                 .environment(viewModel.settingsViewModel)
+                .environment(podcastPlayerManager)
                 .environment(viewModel.sessionState)
                 .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
                 .task {

@@ -131,12 +131,6 @@ private extension PodcastPlayerView {
 
             CachedAsyncImage(image: artworkURL)
                 .cornerRadius(24)
-                .overlay(
-                    ShimmerHighlight(
-                        cornerRadius: 24,
-                        isActive: isPlaying
-                    )
-                )
                 .frame(maxWidth: maxSize, maxHeight: maxSize)
                 .scaleEffect(isPlaying ? 1.05 : 0.8)
                 .shadow(
@@ -556,62 +550,6 @@ private extension PodcastPlayerView {
         let isDark = averageBrightness < 0.6
 
         return (swiftUIColors, isDark)
-    }
-}
-
-struct ShimmerHighlight: View {
-    let cornerRadius: CGFloat
-    let isActive: Bool
-
-    @State private var phase: CGFloat = -1.0
-
-    var body: some View {
-        GeometryReader { geo in
-            let width = geo.size.width
-
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.0),
-                            Color.white.opacity(0.7),
-                            Color.white.opacity(0.0)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .scaleEffect(x: 0.45, y: 1.0, anchor: .center)
-                .rotationEffect(.degrees(22))
-                .offset(x: phase * width)
-                .mask(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                )
-                .opacity(isActive ? 1 : 0)
-                .onAppear {
-                    guard isActive else { return }
-                    startAnimation(width: width)
-                }
-                .onChange(of: isActive) { _, newValue in
-                    if newValue {
-                        startAnimation(width: width)
-                    } else {
-                        withAnimation(.linear(duration: 0.2)) {
-                            phase = -1.0
-                        }
-                    }
-                }
-        }
-    }
-
-    private func startAnimation(width: CGFloat) {
-        phase = -1.0
-        withAnimation(
-            .linear(duration: 1.8)
-            .repeatForever(autoreverses: false)
-        ) {
-            phase = 1.4
-        }
     }
 }
 
