@@ -23,7 +23,7 @@ struct FeedViewModelTests {
         let sut = FeedViewModel(network: mockNetwork, storage: storage)
 
         // When
-        try await sut.getNews()
+        try await sut.getFeed()
 
         // Then
         #expect(sut.status == .done)
@@ -38,7 +38,7 @@ struct FeedViewModelTests {
         let sut = FeedViewModel(network: failedNetwork, storage: storage)
 
         // When
-        try await sut.getNews()
+        try await sut.getFeed()
 
         // Then
         #expect(sut.status != .done)
@@ -65,7 +65,7 @@ struct FeedViewModelTests {
         #expect(sut.status == .loading)
 
         // When
-        try await sut.getNews()
+        try await sut.getFeed()
 
         // Then - should transition to done
         #expect(sut.status == .done)

@@ -29,6 +29,7 @@ class MainViewModel {
 
     init(inMemory: Bool = false) {
         let modelsAllowedToClean: [any PersistentModel.Type] = [
+            FeedDB.self,
             PodcastDB.self,
             VideoDB.self
         ]

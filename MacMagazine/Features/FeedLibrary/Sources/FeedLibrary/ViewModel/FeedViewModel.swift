@@ -36,7 +36,7 @@ public class FeedViewModel {
         self.networkService = NetworkService(network: network)
     }
 
-    public func getNews() async throws {
+    public func getFeed() async throws {
         do {
             status = .loading
             async let highlights = fetch(category: .highlights)
@@ -45,7 +45,8 @@ public class FeedViewModel {
             async let tutoriais = fetch(category: .tutoriais)
             async let rumors = fetch(category: .rumors)
             async let posts = fetch(category: .news)
-            _ = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
+            let feed = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
+            storage.save(feed: Array(feed.joined()).toFeedDB)
             status = .done
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
@@ -55,7 +56,7 @@ public class FeedViewModel {
     public func getWidgetData() async throws -> [WidgetData] {
         do {
             let data = try await fetch(category: .all)
-            return data.toWidgetData
+            return Array(data.prefix(3)).toWidgetData
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
             return []
@@ -70,6 +71,21 @@ public class FeedViewModel {
             status = .done
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
+        }
+    }
+
+    @discardableResult
+    public func getWatchFeed() async throws -> [FeedDB] {
+        do {
+            status = .loading
+            let feed = try await fetch(category: .news)
+            let watchData = Array(feed.prefix(10)).toFeedDB
+            storage.save(feed: watchData)
+            status = .done
+            return watchData
+        } catch {
+            status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
+            return []
         }
     }
 }

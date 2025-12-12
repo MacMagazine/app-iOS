@@ -2,6 +2,45 @@ import Foundation
 import StorageLibrary
 import SwiftData
 
+// MARK: - Feed -
+
+extension Database {
+    @MainActor
+    func save(feed: [FeedDB]) {
+        feed.forEach {
+            save(feed: $0)
+        }
+    }
+
+    @MainActor
+    @discardableResult
+    func save(feed: FeedDB) -> FeedDB {
+        let postId = feed.postId
+        let predicate = #Predicate<FeedDB> { $0.postId == postId }
+
+        if let existing = self.fetch(FeedDB.self, predicate: predicate).first {
+            // Update existing
+            existing.title = feed.title
+            existing.subtitle = feed.subtitle
+            existing.pubDate = feed.pubDate
+            existing.artworkURL = feed.artworkURL
+            existing.link = feed.link
+            existing.categories = feed.categories
+            existing.excerpt = feed.excerpt
+            existing.fullContent = feed.fullContent
+
+        } else {
+            // Insert new
+            context.insert(feed)
+        }
+
+        try? context.save()
+        return feed
+    }
+}
+
+// MARK: - Podcast -
+
 extension Database {
     @MainActor
     func save(podcast: [PodcastDB]) {
@@ -26,7 +65,6 @@ extension Database {
             existing.podcastSize = podcast.podcastSize
             existing.duration = podcast.duration
             existing.podcastFrame = podcast.podcastFrame
-            // Note: existing.favorite is preserved (user-controlled, not from API)
             existing.playable = podcast.playable
 
         } else {

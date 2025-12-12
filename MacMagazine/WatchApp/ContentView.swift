@@ -1,13 +1,12 @@
-//
-//  ContentView.swift
-//  WatchkApp Watch App
-//
-//  Created by Cassio Rossi on 12/12/2025.
-//
-
+import FeedLibrary
+import StorageLibrary
 import SwiftUI
 
 struct ContentView: View {
+    let viewModel = FeedViewModel(
+        storage: Database(models: [FeedDB.self], inMemory: true)
+    )
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,6 +15,10 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .task {
+            let feed = try? await viewModel.getWatchFeed()
+            print(feed?.map {$0.title } ?? "")
+        }
     }
 }
 

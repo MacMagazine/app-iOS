@@ -21,6 +21,22 @@ struct XMLPost: Codable {
 }
 
 extension Array where Element == XMLPost {
+    var toFeedDB: [FeedDB] {
+        self.map {
+            FeedDB(
+                postId: $0.postId,
+                title: $0.title,
+                subtitle: "",
+                pubDate: $0.pubDate,
+                artworkURL: $0.artworkURL,
+                link: $0.link,
+                categories: [],
+                excerpt: $0.excerpt,
+                fullContent: $0.fullContent
+            )
+        }
+    }
+
     var toPodcastDB: [PodcastDB] {
         self.map {
             PodcastDB(
@@ -38,7 +54,7 @@ extension Array where Element == XMLPost {
     }
 
     var toWidgetData: [WidgetData] {
-        self.prefix(3).map {
+        self.map {
             WidgetData(
                 postId: $0.postId,
                 title: $0.title,
