@@ -18,9 +18,6 @@ struct MainView: View {
         content
             .tint(theme.tertiary.background.color)
             .id(shouldUseSidebar ? "sidebar" : "tabbar")
-            .transaction { transaction in
-                transaction.disablesAnimations = true
-            }
 
             .onChange(of: horizontalSizeClass) { old, new in
                 navigationState.navigate(
