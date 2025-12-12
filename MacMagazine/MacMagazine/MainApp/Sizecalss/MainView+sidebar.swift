@@ -10,13 +10,7 @@ extension MainView {
                 .searchable(text: $searchText, prompt: "Search items")
         } detail: {
             animateContentStackView(for: navigationState.selectedItem)
-                .podcastMiniPlayer {
-                    if let social = navigationState.selectedItem as? Social {
-                        return social == .podcast
-                    } else {
-                        return true
-                    }
-                }
+                .podcastMiniPlayer()
         }
         .navigationSplitViewStyle(.balanced)
     }

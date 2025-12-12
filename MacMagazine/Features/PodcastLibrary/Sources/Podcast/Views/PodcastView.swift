@@ -7,6 +7,7 @@ import UIComponentsLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
     @Environment(SessionState.self) private var sessionState
@@ -47,6 +48,16 @@ public struct PodcastView: View {
                     try? await viewModel.getPodcasts()
                     sessionState.hasFetchedPodcasts = true
                 }
+            }
+
+            .sheet(isPresented: Binding(get: { podcastPlayerManager.isFullscreen },
+                                        set: { value in podcastPlayerManager.isFullscreen = value })) {
+                FullPlayerView(
+                    playerManager: podcastPlayerManager,
+                    backgroundGradientStyle: .fourTone
+                )
+                .presentationDragIndicator(.visible)
+                .presentationDetents(shouldUseSidebar ? [.large] : [.medium])
             }
     }
 }

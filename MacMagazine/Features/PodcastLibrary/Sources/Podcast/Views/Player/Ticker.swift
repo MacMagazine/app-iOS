@@ -11,7 +11,7 @@ struct Ticker: View {
         TimelineView(.animation) { timeline in
             GeometryReader { geometry in
                 Text(text)
-                    .font(.system(size: 16))
+                    .font(.body)
                     .lineLimit(1)
                     .fixedSize()
                     .frame(height: geometry.size.height)
@@ -20,13 +20,25 @@ struct Ticker: View {
                     .onChange(of: text) { _, _ in update() }
             }
             .clipped()
+            .mask {
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .black, location: 0.05),
+                        .init(color: .black, location: 0.95),
+                        .init(color: .clear, location: 1)
+                    ]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            }
         }
     }
 }
 
 private extension Ticker {
     func update() {
-        textWidth = text.size(withAttributes: [.font: UIFont.preferredFont(forTextStyle: .headline)]).width
+        textWidth = text.size(withAttributes: [.font: UIFont.preferredFont(forTextStyle: .body)]).width
         startTime = .now
     }
 

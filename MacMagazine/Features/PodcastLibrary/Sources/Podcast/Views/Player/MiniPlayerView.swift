@@ -2,20 +2,21 @@ import FeedLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-public enum PodcastMiniPlayerLayout {
+enum PodcastMiniPlayerLayout {
     case tabBar
     case sidebar
 }
 
-public struct MiniPlayerView: View {
+struct MiniPlayerView: View {
     @Environment(\.theme) private var theme
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+    @Namespace private var animation
 
     @Bindable var playerManager: PodcastPlayerManager
 
     let currentPodcast: PodcastDB
 
-    public init(
+    init(
         playerManager: PodcastPlayerManager,
         currentPodcast: PodcastDB
     ) {
@@ -23,25 +24,30 @@ public struct MiniPlayerView: View {
         self.currentPodcast = currentPodcast
     }
 
-    public var body: some View {
+    var body: some View {
         miniPlayerContent(podcast: currentPodcast)
             .padding(.horizontal, 6)
             .padding(.vertical, 4)
             .contentShape(Rectangle())
-            .gesture(dragToDismiss)
+            .gesture(tapToOpen)
+            .gesture(tapToDismiss)
+            .matchedTransitionSource(id: "MINIPLAYER", in: animation)
     }
 
-    private var dragToDismiss: some Gesture {
-        DragGesture(minimumDistance: 20)
-            .onEnded { value in
-                let vertical = value.translation.height
+    private var tapToOpen: some Gesture {
+        TapGesture()
+            .onEnded { _ in
+                playerManager.isFullscreen.toggle()
+            }
+    }
 
-                if vertical > 100 {
-                    if playerManager.isPlaying {
-                        playerManager.pause()
-                    }
-                    playerManager.currentPodcast = nil
+    private var tapToDismiss: some Gesture {
+        TapGesture(count: 2)
+            .onEnded { _ in
+                if playerManager.isPlaying {
+                    playerManager.pause()
                 }
+                playerManager.currentPodcast = nil
             }
     }
 }
