@@ -17,6 +17,7 @@ enum PodcastBackgroundGradientStyle {
 
 struct FullPlayerView: View {
     @Environment(\.theme) private var theme
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Bindable private var playerManager: PodcastPlayerManager
 
     private let backgroundGradientStyle: PodcastBackgroundGradientStyle
@@ -78,7 +79,8 @@ struct FullPlayerView: View {
         size: CGFloat
     ) -> some View {
         if let podcast {
-            if size > 440 {
+            if verticalSizeClass == .compact {
+                // Layout B - Horizontal (iPhone landscape fullscreen)
                 HStack {
                     artworkView(artworkURL: URL(string: podcast.artworkURL))
                     VStack(spacing: 20) {
@@ -95,6 +97,7 @@ struct FullPlayerView: View {
                 .padding(.horizontal)
 
             } else {
+                // Layout A - Vertical (iPhone portrait medium + iPad centered)
                 VStack(spacing: 20) {
                     Spacer(minLength: 40)
 

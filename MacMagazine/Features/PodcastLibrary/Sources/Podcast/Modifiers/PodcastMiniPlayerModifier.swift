@@ -24,7 +24,7 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                             playerManager: manager,
                             currentPodcast: current
                         )
-                        .frame(maxWidth: 500, alignment: .center)
+                        .frame(maxWidth: 480, alignment: .center)
                         .frame(height: 60)
                         .padding(.horizontal, 20)
                         .glassEffect(.regular)
