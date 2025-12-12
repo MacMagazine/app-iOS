@@ -5,7 +5,14 @@
         "platform" : "ios",
         "reference" : "systemGray6Color"
       },
-      "idiom" : "universal"
+      "idiom" : "iphone"
+    },
+    {
+      "color" : {
+        "platform" : "ios",
+        "reference" : "systemGray6Color"
+      },
+      "idiom" : "ipad"
     }
   ],
   "info" : {

@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "FeedLibrary",
-    platforms: [.iOS(.v26)],
+    platforms: [.iOS(.v26), .watchOS(.v26)],
     products: [
         .library(name: "FeedLibrary", targets: ["FeedLibrary"])
     ],

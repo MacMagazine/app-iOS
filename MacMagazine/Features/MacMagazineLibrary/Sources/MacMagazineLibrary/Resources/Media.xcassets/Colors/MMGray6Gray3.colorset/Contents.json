@@ -5,7 +5,7 @@
         "platform" : "ios",
         "reference" : "systemGray6Color"
       },
-      "idiom" : "universal"
+      "idiom" : "iphone"
     },
     {
       "appearances" : [
@@ -18,7 +18,27 @@
         "platform" : "ios",
         "reference" : "systemGray3Color"
       },
-      "idiom" : "universal"
+      "idiom" : "iphone"
+    },
+    {
+      "color" : {
+        "platform" : "ios",
+        "reference" : "systemGray6Color"
+      },
+      "idiom" : "ipad"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "color" : {
+        "platform" : "ios",
+        "reference" : "systemGray3Color"
+      },
+      "idiom" : "ipad"
     }
   ],
   "info" : {
