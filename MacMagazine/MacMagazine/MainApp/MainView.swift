@@ -32,6 +32,18 @@ struct MainView: View {
 
             .onAppear {
                 viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
+
+                // Initialize navigation state for sidebar mode
+                if shouldUseSidebar {
+                    switch viewModel.tab {
+                    case .social:
+                        navigationState.selectedItem = viewModel.social
+                    case .news:
+                        navigationState.selectedItem = viewModel.news
+                    default:
+                        navigationState.selectedItem = viewModel.tab
+                    }
+                }
             }
     }
 
