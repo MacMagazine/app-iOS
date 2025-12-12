@@ -20,7 +20,7 @@ struct MacMagazineWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: MacMagazineTimelineProvider()) { entry in
-            RecentPostsWidget(entry: entry)
+            WidgetView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("MacMagazine")
@@ -30,44 +30,37 @@ struct MacMagazineWidget: Widget {
     }
 }
 
-#Preview("Large", as: .systemLarge) {
+#Preview("Medium", as: .systemMedium) {
     MacMagazineWidget()
 } timeline: {
-    RecentPostsEntry(date: Date(),
+    WidgetEntry(date: Date(),
                      posts: [.placeholder, .placeholder, .placeholder])
+}
+
+#Preview("large", as: .systemLarge) {
+    MacMagazineWidget()
+} timeline: {
+    WidgetEntry(date: Date(),
+                posts: [.placeholder, .placeholder, .placeholder])
 }
 
 #Preview("Rectangular", as: .accessoryRectangular) {
     MacMagazineWidget()
 } timeline: {
-    RecentPostsEntry(date: Date(),
+    WidgetEntry(date: Date(),
                      posts: [.placeholder])
 }
 
 #Preview("Inline", as: .accessoryInline) {
     MacMagazineWidget()
 } timeline: {
-    RecentPostsEntry(date: Date(),
+    WidgetEntry(date: Date(),
                      posts: [.placeholder])
 }
 
 #Preview("Circular", as: .accessoryCircular) {
     MacMagazineWidget()
 } timeline: {
-    RecentPostsEntry(date: Date(),
+    WidgetEntry(date: Date(),
                      posts: [.placeholder])
-}
-
-#Preview("Small", as: .systemSmall) {
-    MacMagazineWidget()
-} timeline: {
-    RecentPostsEntry(date: Date(),
-                     posts: [.placeholder])
-}
-
-#Preview("Medium", as: .systemMedium) {
-    MacMagazineWidget()
-} timeline: {
-    RecentPostsEntry(date: Date(),
-                     posts: [.placeholder, .placeholder])
 }

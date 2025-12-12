@@ -10,21 +10,21 @@ struct MacMagazineTimelineProvider: TimelineProvider {
         storage: Database(models: [WidgetDataDB.self], inMemory: true)
     )
 
-    func placeholder(in context: Context) -> RecentPostsEntry {
-        RecentPostsEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
+    func placeholder(in context: Context) -> WidgetEntry {
+        WidgetEntry(date: Date(), posts: [.placeholder, .placeholder, .placeholder])
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (RecentPostsEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> Void) {
         Task {
             let posts = await getWidgetContent()
-            completion(RecentPostsEntry(date: Date(), posts: posts))
+            completion(WidgetEntry(date: Date(), posts: posts))
         }
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<RecentPostsEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<WidgetEntry>) -> Void) {
         Task {
             let posts = await getWidgetContent()
-            let timeline = Timeline(entries: [RecentPostsEntry(date: Date(), posts: posts)], policy: .atEnd)
+            let timeline = Timeline(entries: [WidgetEntry(date: Date(), posts: posts)], policy: .atEnd)
             completion(timeline)
         }
     }
