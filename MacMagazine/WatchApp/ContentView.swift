@@ -17,7 +17,7 @@ struct ContentView: View {
         .padding()
         .task {
             let feed = try? await viewModel.getWatchFeed()
-            print(feed?.map {$0.title } ?? "")
+            print(feed?.map { $0.title } ?? "")
         }
     }
 }
