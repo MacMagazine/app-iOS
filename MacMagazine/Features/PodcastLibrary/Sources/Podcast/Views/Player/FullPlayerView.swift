@@ -1,11 +1,9 @@
 import FeedLibrary
-import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftUI
 import UIComponentsLibrary
-import UtilityLibrary
 
-// MARK: - Estilo de degradê de fundo -
+// MARK: - Gradient background styles -
 
 enum PodcastBackgroundGradientStyle {
     case twoTone
@@ -17,7 +15,6 @@ enum PodcastBackgroundGradientStyle {
 
 struct FullPlayerView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.theme) private var theme
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Bindable private var playerManager: PodcastPlayerManager
 
@@ -49,42 +46,14 @@ struct FullPlayerView: View {
     // MARK: - Body
 
     var body: some View {
-        Group {
-            if isShowingChapterDialog {
-                chaptersController
-                    .transition(.asymmetric(
-                        insertion: .flipFromRight,
-                        removal: .flipFromLeft
-                    ))
-            } else {
-                player
-                    .transition(.asymmetric(
-                        insertion: .flipFromLeft,
-                        removal: .flipFromRight
-                    ))
+        player
+            .sheet(isPresented: $isShowingChapterDialog) {
+                ChaptersView(
+                    playerManager: playerManager,
+                    isShowingChapterDialog: $isShowingChapterDialog
+                )
+                .presentationDragIndicator(.visible)
             }
-        }
-        .animation(.spring(response: 0.8, dampingFraction: 0.8), value: isShowingChapterDialog)
-    }
-
-    var chaptersController: some View {
-        NavigationStack {
-            chapters
-                .navigationTitle(playerManager.currentPodcast?.title ?? "")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button(action: {
-                            isShowingChapterDialog.toggle()
-                        }, label: {
-                            Image(systemName: "xmark.circle")
-                        })
-                        .buttonStyle(.plain)
-                        .font(.system(size: 18))
-                        .tint(.primary)
-                    }
-                }
-        }
     }
 
     var player: some View {
@@ -97,16 +66,6 @@ struct FullPlayerView: View {
             .ignoresSafeArea()
 
             fullPlayerContent(podcast: playerManager.currentPodcast)
-
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    Spacer()
-                    actions
-                }
-                Spacer()
-            }
-            .padding(.top, 40)
-            .padding(.trailing)
         }
         .preferredColorScheme(isDarkBackground ? .dark : .light)
         .onAppear {
@@ -128,9 +87,15 @@ struct FullPlayerView: View {
         if let podcast {
             if verticalSizeClass == .compact {
                 // Layout B - Horizontal (iPhone landscape fullscreen)
-                HStack {
+                HStack(spacing: 40) {
                     artworkView
+
                     VStack(spacing: 20) {
+                        HStack(spacing: 0) {
+                            Spacer()
+                            actions
+                        }
+
                         Spacer()
 
                         podcastTitle(podcast.title)
@@ -140,14 +105,20 @@ struct FullPlayerView: View {
 
                         playbackControls
                     }
+                    .padding(.vertical, 40)
                 }
                 .padding(.horizontal)
-                .animation(.easeInOut(duration: 0.3), value: currentChapter?.id)
 
             } else {
                 // Layout A - Vertical (iPhone portrait medium + iPad centered)
                 VStack(spacing: 20) {
-                    artworkView.padding(.top, 60)
+                    HStack(spacing: 0) {
+                        Spacer()
+                        actions
+                    }
+                    .padding(.top, 30)
+
+                    artworkView
                     podcastTitle(podcast.title)
                     progressSlider
 
@@ -157,7 +128,6 @@ struct FullPlayerView: View {
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 40)
-                .animation(.easeInOut(duration: 0.3), value: currentChapter?.id)
             }
         }
     }
@@ -334,37 +304,9 @@ private extension FullPlayerView {
     }
 }
 
+// MARK: - Chapter button -
+
 private extension FullPlayerView {
-    @ViewBuilder
-    var chapters: some View {
-        List(playerManager.chapters, id: \.id) { chapter in
-            Button(action: {
-                playerManager.seek(to: chapter.start.seconds)
-                isShowingChapterDialog.toggle()
-            }, label: {
-                HStack {
-                    if let artworkData = chapter.artworkData,
-                       let uiImage = UIImage(data: artworkData) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 45, height: 45)
-                            .cornerRadius(8)
-                    }
-
-                    VStack(alignment: .leading) {
-                        Text(chapter.title).bold().font(.body)
-                        Text("Duração: \(chapter.durationString)").font(.footnote)
-                    }
-                    Spacer()
-                    Text(chapter.startString).font(.body)
-                }
-            })
-            .listRowBackground(chapter.backgroundColor(at: playerManager.currentTime))
-            .accessibilityLabel("\(chapter.title), começando em \(chapter.startString) com duração de \(chapter.durationString).")
-        }
-    }
-
     @ViewBuilder
     var chaptersButton: some View {
         if playerManager.chapters.isEmpty {
@@ -384,7 +326,6 @@ private extension FullPlayerView {
 // MARK: - Speed button + popup -
 
 private extension FullPlayerView {
-
     @ViewBuilder
     var speedButton: some View {
         let currentSpeed = Double(playerManager.playbackRate)
@@ -535,7 +476,6 @@ private extension FullPlayerView {
 // MARK: - Helpers (tempo, velocidade, haptic, degradê) -
 
 private extension FullPlayerView {
-
     func formatTime(_ time: TimeInterval) -> String {
         guard time.isFinite, !time.isNaN else { return "0:00" }
 
@@ -666,7 +606,6 @@ private extension FullPlayerView {
         playerManager: playerManager,
         backgroundGradientStyle: .fourTone
     )
-    .environment(\.theme, ThemeColor())
     .onAppear {
         playerManager.currentPodcast = mockPodcast
         playerManager.duration = 2_730

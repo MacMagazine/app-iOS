@@ -93,7 +93,7 @@ private extension WidgetElementView {
         if renderingMode == .accented {
             Color.clear
         } else {
-            image.resizable().scaledToFit()
+            image.resizable().scaledToFill()
         }
     }
 
@@ -112,7 +112,7 @@ private extension WidgetElementView {
             dateAndTitle
             if renderingMode != .accented {
                 imageForRenderingMode
-                    .frame(height: imageSize)
+                    .frame(width: imageSize, height: imageSize)
                     .cornerRadius(8)
             }
         }
