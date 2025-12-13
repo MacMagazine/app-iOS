@@ -243,22 +243,30 @@ extension PodcastPlayerManager {
 
             for chapter in chapters {
                 let timeRange = chapter.timeRange
-                // Fetch the first title metadata item
+
+                // Fetch the title
                 let titleItem = AVMetadataItem.metadataItems(
                     from: chapter.items,
                     withKey: AVMetadataKey.commonKeyTitle,
                     keySpace: .common
                 ).first
-
                 let title: String = (try? await titleItem?.load(.stringValue)) ?? ""
 
-                // Use timeRange.start and title
+                // Fetch the artwork
+                let artworkItem = AVMetadataItem.metadataItems(
+                    from: chapter.items,
+                    withKey: AVMetadataKey.commonKeyArtwork,
+                    keySpace: .common
+                ).first
+                let artworkData = try? await artworkItem?.load(.dataValue)
+
                 response.append(
                     PodcastChapter(
                         title: title,
                         start: timeRange.start,
                         end: timeRange.end,
-                        duration: timeRange.duration
+                        duration: timeRange.duration,
+                        artworkData: artworkData
                     )
                 )
             }

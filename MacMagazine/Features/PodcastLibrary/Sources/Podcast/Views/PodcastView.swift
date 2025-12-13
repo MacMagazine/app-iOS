@@ -62,7 +62,6 @@ public struct PodcastView: View {
                     backgroundGradientStyle: .fourTone
                 )
                 .presentationDragIndicator(.visible)
-                .presentationDetents(shouldUseSidebar ? [.large] : [.medium])
             }
     }
 }

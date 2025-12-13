@@ -8,6 +8,7 @@ struct PodcastChapter: Hashable {
     let start: CMTime
     let end: CMTime
     let duration: CMTime
+    let artworkData: Data?
 
     var startString: String {
         timeString(using: start.seconds)

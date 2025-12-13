@@ -129,7 +129,7 @@ struct FullPlayerView: View {
             if verticalSizeClass == .compact {
                 // Layout B - Horizontal (iPhone landscape fullscreen)
                 HStack {
-                    artworkView(artworkURL: URL(string: podcast.artworkURL))
+                    artworkView
                     VStack(spacing: 20) {
                         Spacer()
 
@@ -142,13 +142,12 @@ struct FullPlayerView: View {
                     }
                 }
                 .padding(.horizontal)
+                .animation(.easeInOut(duration: 0.3), value: currentChapter?.id)
 
             } else {
                 // Layout A - Vertical (iPhone portrait medium + iPad centered)
                 VStack(spacing: 20) {
-                    Spacer(minLength: 40)
-
-                    artworkView(artworkURL: URL(string: podcast.artworkURL))
+                    artworkView.padding(.top, 60)
                     podcastTitle(podcast.title)
                     progressSlider
 
@@ -158,12 +157,21 @@ struct FullPlayerView: View {
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 40)
+                .animation(.easeInOut(duration: 0.3), value: currentChapter?.id)
             }
         }
     }
 }
 
 private extension FullPlayerView {
+    /// Returns the currently playing chapter based on currentTime
+    var currentChapter: PodcastChapter? {
+        playerManager.chapters.first { chapter in
+            playerManager.currentTime >= chapter.start.seconds &&
+            playerManager.currentTime < chapter.end.seconds
+        }
+    }
+
     @ViewBuilder
     var actions: some View {
         if let podcast = playerManager.currentPodcast?.toCardContent(using: modelContext) {
@@ -192,21 +200,32 @@ private extension FullPlayerView {
 
 private extension FullPlayerView {
     @ViewBuilder
-    func artworkView(artworkURL: URL?) -> some View {
-        if let artworkURL {
-            CachedAsyncImage(image: artworkURL)
-                .cornerRadius(24)
-                .frame(maxWidth: 540, maxHeight: 540)
-                .shadow(
-                    color: Color.black.opacity(0.3),
-                    radius: 28,
-                    x: 0,
-                    y: 16
-                )
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal)
-                .accessibilityHidden(true)
+    var artworkView: some View {
+        Group {
+            // Prioritize current chapter artwork, fallback to podcast artwork
+            if let chapterArtwork = currentChapter?.artworkData,
+               let uiImage = UIImage(data: chapterArtwork) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+            } else if let podcastArtwork = playerManager.currentPodcast?.artworkURL,
+                      let artworkURL = URL(string: podcastArtwork) {
+                CachedAsyncImage(image: artworkURL)
+            }
         }
+        .cornerRadius(24)
+        .frame(maxWidth: 540, maxHeight: 540)
+        .shadow(
+            color: Color.black.opacity(0.3),
+            radius: 28,
+            x: 0,
+            y: 16
+        )
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(.horizontal)
+        .accessibilityHidden(true)
+        .id(currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
+        .transition(.opacity)
     }
 
     @ViewBuilder
@@ -324,12 +343,21 @@ private extension FullPlayerView {
                 isShowingChapterDialog.toggle()
             }, label: {
                 HStack {
+                    if let artworkData = chapter.artworkData,
+                       let uiImage = UIImage(data: artworkData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 45, height: 45)
+                            .cornerRadius(8)
+                    }
+
                     VStack(alignment: .leading) {
-                        Text(chapter.title).bold()
-                        Text("Duração: \(chapter.durationString)")
+                        Text(chapter.title).bold().font(.body)
+                        Text("Duração: \(chapter.durationString)").font(.footnote)
                     }
                     Spacer()
-                    Text(chapter.startString)
+                    Text(chapter.startString).font(.body)
                 }
             })
             .listRowBackground(chapter.backgroundColor(at: playerManager.currentTime))
