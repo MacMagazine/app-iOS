@@ -273,24 +273,6 @@ extension PodcastPlayerManager {
         }
         return response.sorted
     }
-
-    func getCaption(using url: URL) async -> String? {
-        var response: String?
-
-//        do {
-//            let asset = AVURLAsset(url: url)
-//            let tracks = try await asset.load(.tracks)
-//            for track in tracks {
-//                let mediaType = try await track.load(.mediaType)
-//                if mediaType == .text || mediaType == .subtitle {
-//                    // Found embedded captions!
-//                }
-//            }
-            return response
-//        } catch {
-//            return nil
-//        }
-    }
 }
 
 extension Array where Element == PodcastChapter {
