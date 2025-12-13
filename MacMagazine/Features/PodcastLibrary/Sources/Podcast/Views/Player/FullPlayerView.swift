@@ -50,6 +50,8 @@ struct FullPlayerView: View {
             .sheet(isPresented: $isShowingChapterDialog) {
                 ChaptersView(
                     playerManager: playerManager,
+                    backgroundGradientColors: backgroundGradientColors,
+                    isDarkBackground: isDarkBackground,
                     isShowingChapterDialog: $isShowingChapterDialog
                 )
                 .presentationDragIndicator(.visible)
@@ -582,7 +584,7 @@ private extension FullPlayerView {
     }
 }
 
-// MARK: - Preview
+// MARK: - Preview -
 
 #Preview {
     @Previewable @State var playerManager = PodcastPlayerManager()
