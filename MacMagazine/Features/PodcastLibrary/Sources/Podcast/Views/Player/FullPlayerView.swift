@@ -178,8 +178,7 @@ private extension FullPlayerView {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-            } else if let podcastArtwork = playerManager.currentPodcast?.artworkURL,
-                      let artworkURL = URL(string: podcastArtwork) {
+            } else if let artworkURL = URL(string: "https://macmagazine.com.br/wp-content/uploads/powerpress/capa.png") {
                 CachedAsyncImage(image: artworkURL)
             }
         }

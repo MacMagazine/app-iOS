@@ -1,5 +1,3 @@
-// https://macmagazine.com.br/wp-content/uploads/powerpress/capa.png
-
 import MacMagazineLibrary
 import SwiftUI
 
