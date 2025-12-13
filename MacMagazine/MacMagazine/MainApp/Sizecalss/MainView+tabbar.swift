@@ -1,4 +1,5 @@
 import MMLiveLibrary
+import PodcastLibrary
 import SettingsLibrary
 import SwiftUI
 
@@ -22,6 +23,7 @@ extension MainView {
                 }
             }
         }
+        .podcastMiniPlayer()
     }
 
     @ViewBuilder

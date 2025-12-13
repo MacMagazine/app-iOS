@@ -30,6 +30,13 @@ struct MacMagazineWidget: Widget {
     }
 }
 
+#Preview("Small", as: .systemSmall) {
+    MacMagazineWidget()
+} timeline: {
+    WidgetEntry(date: Date(),
+                posts: [.placeholder, .placeholder, .placeholder])
+}
+
 #Preview("Medium", as: .systemMedium) {
     MacMagazineWidget()
 } timeline: {

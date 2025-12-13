@@ -14,13 +14,7 @@ extension MainView {
         } detail: {
             animateContentStackView(for: navigationState.selectedItem)
                 .environment(\.isSidebarVisible, isSidebarVisible)
-                .podcastMiniPlayer {
-                    if let social = navigationState.selectedItem as? Social {
-                        return social == .podcast
-                    } else {
-                        return true
-                    }
-                }
+                .podcastMiniPlayer()
         }
         .navigationSplitViewStyle(.balanced)
     }

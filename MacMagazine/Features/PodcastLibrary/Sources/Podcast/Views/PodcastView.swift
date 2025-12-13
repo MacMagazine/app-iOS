@@ -7,6 +7,7 @@ import UIComponentsLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
     @Environment(SessionState.self) private var sessionState
@@ -48,6 +49,21 @@ public struct PodcastView: View {
                     sessionState.hasFetchedPodcasts = true
                 }
             }
+            .refreshable {
+                if search.isEmpty {
+                    try? await viewModel.getPodcasts()
+                }
+            }
+
+            .sheet(isPresented: Binding(get: { podcastPlayerManager.isFullscreen },
+                                        set: { value in podcastPlayerManager.isFullscreen = value })) {
+                FullPlayerView(
+                    playerManager: podcastPlayerManager,
+                    backgroundGradientStyle: .fourTone
+                )
+                .presentationDragIndicator(.visible)
+                .presentationDetents(shouldUseSidebar ? [.large] : [.medium])
+            }
     }
 }
 extension PodcastView {
@@ -71,6 +87,7 @@ extension PodcastView {
                 ForEach(podcasts) { podcast in
                     AdaptivePodcastCardView(podcast: podcast.toCardContent(using: modelContext)) {
                         podcastPlayerManager.loadPodcast(podcast)
+                        podcastPlayerManager.seek(to: podcast.current)
                     }
                 }
             },

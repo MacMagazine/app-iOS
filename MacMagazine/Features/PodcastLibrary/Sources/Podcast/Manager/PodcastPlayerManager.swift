@@ -9,11 +9,12 @@ import UIKit
 @MainActor
 @Observable
 public class PodcastPlayerManager {
-    public var currentPodcast: PodcastDB?
-    public var isPlaying: Bool = false
-    public var currentTime: TimeInterval = 0
-    public var duration: TimeInterval = 0
-    public var playbackRate: Float = 1.0
+    var currentPodcast: PodcastDB?
+    var isPlaying = false
+    var isFullscreen = false
+    var currentTime: TimeInterval = 0
+    var duration: TimeInterval = 0
+    var playbackRate: Float = 1.0
 
     private var player: AVPlayer?
     private var timeObserver: Any?
@@ -89,8 +90,13 @@ public class PodcastPlayerManager {
 
         setupAudioSession()
         setupRemoteTransportControls()
-        currentPodcast = podcast
 
+        if currentPodcast == podcast {
+            togglePlayPause()
+            return
+        }
+
+        currentPodcast = podcast
         let playerItem = AVPlayerItem(url: url)
 
         if player == nil {
@@ -156,13 +162,13 @@ public class PodcastPlayerManager {
         updateNowPlayingInfo()
     }
 
-    public func pause() {
+    func pause() {
         player?.pause()
         isPlaying = false
         updateNowPlayingInfo()
     }
 
-    public func togglePlayPause() {
+    func togglePlayPause() {
         if isPlaying {
             pause()
         } else {
@@ -202,7 +208,6 @@ public class PodcastPlayerManager {
         let currentTimeValue = currentTime
         let durationValue = duration.isFinite && !duration.isNaN ? duration : 0
         let rateValue = isPlaying ? playbackRate : 0.0
-        let artworkURLString = podcast.artworkURL
 
         Task.detached {
             var nowPlayingInfo = [String: Any]()
@@ -214,22 +219,6 @@ public class PodcastPlayerManager {
 
             await MainActor.run {
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-            }
-
-            if let artworkURL = URL(string: artworkURLString), !artworkURLString.isEmpty {
-                do {
-                    let (data, _) = try await URLSession.shared.data(from: artworkURL)
-                    if let image = UIImage(data: data) {
-                        let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
-                        await MainActor.run {
-                            var updatedInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
-                            updatedInfo[MPMediaItemPropertyArtwork] = artwork
-                            MPNowPlayingInfoCenter.default().nowPlayingInfo = updatedInfo
-                        }
-                    }
-                } catch {
-                    // Silently fail if artwork can't be loaded
-                }
             }
         }
     }

@@ -2,20 +2,17 @@ import FeedLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-public enum PodcastMiniPlayerLayout {
-    case tabBar
-    case sidebar
-}
-
-public struct MiniPlayerView: View {
+struct MiniPlayerView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.theme) private var theme
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+    @Namespace private var animation
 
     @Bindable var playerManager: PodcastPlayerManager
 
     let currentPodcast: PodcastDB
 
-    public init(
+    init(
         playerManager: PodcastPlayerManager,
         currentPodcast: PodcastDB
     ) {
@@ -23,38 +20,45 @@ public struct MiniPlayerView: View {
         self.currentPodcast = currentPodcast
     }
 
-    public var body: some View {
-        miniPlayerContent(podcast: currentPodcast)
+    var body: some View {
+        content
             .padding(.horizontal, 6)
             .padding(.vertical, 4)
             .contentShape(Rectangle())
-            .gesture(dragToDismiss)
+            .gesture(tapToOpen)
+            .gesture(tapToDismiss)
+            .matchedTransitionSource(id: "MINIPLAYER", in: animation)
     }
 
-    private var dragToDismiss: some Gesture {
-        DragGesture(minimumDistance: 20)
-            .onEnded { value in
-                let vertical = value.translation.height
+    private var tapToOpen: some Gesture {
+        TapGesture()
+            .onEnded { _ in
+                playerManager.isFullscreen.toggle()
+            }
+    }
 
-                if vertical > 100 {
-                    if playerManager.isPlaying {
-                        playerManager.pause()
-                    }
-                    playerManager.currentPodcast = nil
+    private var tapToDismiss: some Gesture {
+        TapGesture(count: 2)
+            .onEnded { _ in
+                if playerManager.isPlaying {
+                    playerManager.pause()
+                    currentPodcast.save(current: playerManager.currentTime, using: modelContext)
                 }
+                playerManager.currentPodcast = nil
             }
     }
 }
 
 private extension MiniPlayerView {
-    func miniPlayerContent(podcast: PodcastDB) -> some View {
+    var content: some View {
         HStack {
             HStack(spacing: 8) {
-                artwork(podcast.artworkURL)
+                artwork(currentPodcast.artworkURL)
+                    .accessibilityHidden(true)
 
-                Ticker(text: podcast.title, speed: 30)
+                Ticker(text: currentPodcast.title, speed: 30)
                     .frame(height: 30)
-                    .id(podcast.id)
+                    .id(currentPodcast.id)
 
                 HStack(spacing: 20) {
                     Button {
@@ -66,6 +70,7 @@ private extension MiniPlayerView {
 
                     Button {
                         playerManager.togglePlayPause()
+                        currentPodcast.save(current: playerManager.currentTime, using: modelContext)
                     } label: {
                         Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 24))
@@ -81,7 +86,7 @@ private extension MiniPlayerView {
             }
             .contentShape(Rectangle())
         }
-        .foregroundColor(.black)
+        .foregroundColor(.primary)
     }
 
     @ViewBuilder

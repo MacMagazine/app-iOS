@@ -1,5 +1,4 @@
 import MacMagazineLibrary
-import PodcastLibrary
 import SettingsLibrary
 import SwiftUI
 import UIComponentsLibrary
@@ -10,7 +9,6 @@ struct MainView: View {
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(MainViewModel.self) var viewModel
-    @Environment(PodcastPlayerManager.self) private var podcastManager
 
     @State var searchText: String = ""
     @State var splitViewVisibility: NavigationSplitViewVisibility = .all
@@ -21,9 +19,6 @@ struct MainView: View {
         content
             .tint(theme.tertiary.background.color)
             .id(shouldUseSidebar ? "sidebar" : "tabbar")
-            .transaction { transaction in
-                transaction.disablesAnimations = true
-            }
 
             .onChange(of: horizontalSizeClass) { old, new in
                 navigationState.navigate(
@@ -35,21 +30,16 @@ struct MainView: View {
 
             .onAppear {
                 viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
-            }
 
-            .onChange(of: viewModel.social) { _, newValue in
-                let isInSocialContext: Bool
+                // Initialize navigation state for sidebar mode
                 if shouldUseSidebar {
-                    isInSocialContext = navigationState.selectedItem is Social
-                } else {
-                    isInSocialContext = (viewModel.tab == .social)
-                }
-
-                if isInSocialContext,
-                   newValue == .videos || newValue == .instagram {
-
-                    if podcastManager.isPlaying {
-                        podcastManager.pause()
+                    switch viewModel.tab {
+                    case .social:
+                        navigationState.selectedItem = viewModel.social
+                    case .news:
+                        navigationState.selectedItem = viewModel.news
+                    default:
+                        navigationState.selectedItem = viewModel.tab
                     }
                 }
             }
@@ -63,13 +53,6 @@ struct MainView: View {
             sideBarContentView
         } else {
             tabContentView
-                .podcastMiniPlayer {
-                    if viewModel.tab == .social {
-                        return viewModel.social == .podcast
-                    } else {
-                        return true
-                    }
-                }
         }
     }
 }
@@ -77,11 +60,9 @@ struct MainView: View {
 #if DEBUG
 #Preview {
     let viewModel = MainViewModel(inMemory: true)
-    let podcastManager = PodcastPlayerManager()
 
     MainView()
         .environment(\.theme, ThemeColor())
         .environment(viewModel)
-        .environment(podcastManager)
 }
 #endif
