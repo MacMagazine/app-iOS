@@ -18,9 +18,10 @@ struct MacMagazineApp: App {
                 .environment(viewModel)
                 .environment(viewModel.settingsViewModel)
                 .environment(podcastPlayerManager)
-                .environment(viewModel.sessionState)
+                .environmentObject(viewModel.sessionState)
                 .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
                 .task {
+                    podcastPlayerManager.observeSessionState(viewModel.sessionState)
                     UIApplication.shared.registerForRemoteNotifications()
                 }
         }

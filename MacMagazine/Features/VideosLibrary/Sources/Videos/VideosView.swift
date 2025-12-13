@@ -5,7 +5,7 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct VideosView: View {
-    @Environment(SessionState.self) private var sessionState
+    @EnvironmentObject private var sessionState: SessionState
     var viewModel: VideosViewModel
     @State private var search: String = ""
     @Binding private var favorite: Bool
@@ -35,6 +35,20 @@ public struct VideosView: View {
                 get: { sessionState.hasFetchedVideos },
                 set: { value in sessionState.hasFetchedVideos = value }
             ))
+
+            // Check if a podcast started playing while this view was not visible
+            if sessionState.isPlayingPodcasts {
+                viewModel.youtube.selectedVideo = nil
+                sessionState.isPlayingPodcasts = false
+            }
+        }
+        .onChange(of: viewModel.youtube.selectedVideo) { _, value in
+            sessionState.isPlayingVideos = (value != nil)
+        }
+        .onReceive(sessionState.$isPlayingPodcasts) { value in
+            if value {
+                viewModel.youtube.selectedVideo = nil
+            }
         }
     }
 }

@@ -1,19 +1,25 @@
 import Foundation
+import Combine
 
-@Observable
-public class SessionState {
+public class SessionState: ObservableObject {
     // Social content
-    public var hasFetchedPodcasts = false
-    public var hasFetchedVideos = false
+    @Published public var hasFetchedPodcasts = false
+    @Published public var hasFetchedVideos = false
+
+    @Published public var isPlayingPodcasts = false
+    @Published public var isPlayingVideos = false
 
     // Feed content
-    public var hasFetchedFeed = false
+    @Published public var hasFetchedFeed = false
 
     public init() {}
 
     public func reset() {
         hasFetchedPodcasts = false
         hasFetchedVideos = false
+        isPlayingPodcasts = false
+        isPlayingVideos = false
+
         hasFetchedFeed = false
     }
 }

@@ -2,6 +2,7 @@ import AVFoundation
 import Combine
 import FeedLibrary
 import Foundation
+import MacMagazineLibrary
 import MediaPlayer
 import Observation
 import UIKit
@@ -24,6 +25,15 @@ public class PodcastPlayerManager {
     private var isRemoteControlsSetup = false
 
     public init() {}
+
+    public func observeSessionState(_ sessionState: SessionState) {
+        sessionState.$isPlayingVideos
+            .sink { [weak self] isPlaying in
+                guard let self, isPlaying else { return }
+                self.pause()
+            }
+            .store(in: &cancellables)
+    }
 
     private func setupAudioSession() {
         guard !isAudioSessionSetup else { return }

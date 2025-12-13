@@ -10,7 +10,7 @@ public struct PodcastView: View {
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
-    @Environment(SessionState.self) private var sessionState
+    @EnvironmentObject private var sessionState: SessionState
     var viewModel: PodcastViewModel
 
     @Binding private var favorite: Bool
@@ -43,18 +43,20 @@ public struct PodcastView: View {
 
     public var body: some View {
         content
+            .refreshable {
+                if search.isEmpty {
+                    try? await viewModel.getPodcasts()
+                }
+            }
             .task {
                 if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
                     try? await viewModel.getPodcasts(status: .loading)
                     sessionState.hasFetchedPodcasts = true
                 }
             }
-            .refreshable {
-                if search.isEmpty {
-                    try? await viewModel.getPodcasts()
-                }
+            .onChange(of: podcastPlayerManager.isPlaying) { _, value in
+                sessionState.isPlayingPodcasts = value
             }
-
             .sheet(isPresented: Binding(get: { podcastPlayerManager.isFullscreen },
                                         set: { value in podcastPlayerManager.isFullscreen = value })) {
                 FullPlayerView(
