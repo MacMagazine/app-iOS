@@ -45,7 +45,7 @@ public struct PodcastView: View {
         content
             .task {
                 if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
-                    try? await viewModel.getPodcasts()
+                    try? await viewModel.getPodcasts(status: .loading)
                     sessionState.hasFetchedPodcasts = true
                 }
             }

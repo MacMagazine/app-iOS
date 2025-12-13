@@ -15,6 +15,7 @@ public class PodcastPlayerManager {
     var currentTime: TimeInterval = 0
     var duration: TimeInterval = 0
     var playbackRate: Float = 1.0
+    var chapters = [PodcastChapter]()
 
     private var player: AVPlayer?
     private var timeObserver: Any?
@@ -103,6 +104,10 @@ public class PodcastPlayerManager {
             player = AVPlayer(playerItem: playerItem)
         } else {
             player?.replaceCurrentItem(with: playerItem)
+        }
+
+        Task {
+            chapters = await getChapter(using: url)
         }
 
         setupTimeObserver()
@@ -221,5 +226,49 @@ public class PodcastPlayerManager {
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
             }
         }
+    }
+}
+
+extension PodcastPlayerManager {
+    func getChapter(using url: URL) async -> [PodcastChapter] {
+        var response = [PodcastChapter]()
+        let asset = AVURLAsset(url: url)
+        let locales = (try? await asset.load(.availableChapterLocales)) ?? []
+
+        for locale in locales {
+            let chapters = (try? await asset.loadChapterMetadataGroups(
+                withTitleLocale: locale,
+                containingItemsWithCommonKeys: [AVMetadataKey.commonKeyArtwork]
+            )) ?? []
+
+            for chapter in chapters {
+                let timeRange = chapter.timeRange
+                // Fetch the first title metadata item
+                let titleItem = AVMetadataItem.metadataItems(
+                    from: chapter.items,
+                    withKey: AVMetadataKey.commonKeyTitle,
+                    keySpace: .common
+                ).first
+
+                let title: String = (try? await titleItem?.load(.stringValue)) ?? ""
+
+                // Use timeRange.start and title
+                response.append(
+                    PodcastChapter(
+                        title: title,
+                        start: timeRange.start,
+                        end: timeRange.end,
+                        duration: timeRange.duration
+                    )
+                )
+            }
+        }
+        return response.sorted
+    }
+}
+
+extension Array where Element == PodcastChapter {
+    var sorted: Self {
+        self.sorted(by: { $0.start.seconds < $1.start.seconds })
     }
 }

@@ -28,13 +28,15 @@ class PodcastViewModel {
     }
 
     @MainActor
-    func getPodcasts() async throws {
+    func getPodcasts(status: APIStatus? = nil) async throws {
         do {
-            status = .loading
+            if let status {
+                self.status = status
+            }
             try await feedService.getPodcast()
-            status = .done
+            self.status = .done
         } catch {
-            status = .error(reason: error.localizedDescription)
+            self.status = .error(reason: error.localizedDescription)
         }
     }
 }
