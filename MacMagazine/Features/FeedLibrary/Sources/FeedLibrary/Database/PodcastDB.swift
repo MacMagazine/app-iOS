@@ -15,6 +15,7 @@ public final class PodcastDB {
     public var podcastFrame: String = ""
     public var favorite: Bool = false
     public var playable: Bool = false
+    public var current: Double = 0.0
 
     public init(
         postId: String = "",
@@ -27,7 +28,8 @@ public final class PodcastDB {
         duration: String = "",
         podcastFrame: String = "",
         favorite: Bool = false,
-        playable: Bool = false
+        playable: Bool = false,
+        current: Double = 0.0
     ) {
         self.postId = postId
         self.title = title
@@ -40,6 +42,7 @@ public final class PodcastDB {
         self.podcastFrame = podcastFrame
         self.favorite = favorite
         self.playable = playable
+        self.current = current
     }
 }
 

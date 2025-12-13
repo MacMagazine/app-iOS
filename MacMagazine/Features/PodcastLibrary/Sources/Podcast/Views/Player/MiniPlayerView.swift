@@ -2,12 +2,8 @@ import FeedLibrary
 import SwiftUI
 import UIComponentsLibrary
 
-enum PodcastMiniPlayerLayout {
-    case tabBar
-    case sidebar
-}
-
 struct MiniPlayerView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.theme) private var theme
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Namespace private var animation
@@ -25,7 +21,7 @@ struct MiniPlayerView: View {
     }
 
     var body: some View {
-        miniPlayerContent(podcast: currentPodcast)
+        content
             .padding(.horizontal, 6)
             .padding(.vertical, 4)
             .contentShape(Rectangle())
@@ -46,6 +42,7 @@ struct MiniPlayerView: View {
             .onEnded { _ in
                 if playerManager.isPlaying {
                     playerManager.pause()
+                    currentPodcast.save(current: playerManager.currentTime, using: modelContext)
                 }
                 playerManager.currentPodcast = nil
             }
@@ -53,14 +50,15 @@ struct MiniPlayerView: View {
 }
 
 private extension MiniPlayerView {
-    func miniPlayerContent(podcast: PodcastDB) -> some View {
+    var content: some View {
         HStack {
             HStack(spacing: 8) {
-                artwork(podcast.artworkURL)
+                artwork(currentPodcast.artworkURL)
+                    .accessibilityHidden(true)
 
-                Ticker(text: podcast.title, speed: 30)
+                Ticker(text: currentPodcast.title, speed: 30)
                     .frame(height: 30)
-                    .id(podcast.id)
+                    .id(currentPodcast.id)
 
                 HStack(spacing: 20) {
                     Button {
@@ -72,6 +70,7 @@ private extension MiniPlayerView {
 
                     Button {
                         playerManager.togglePlayPause()
+                        currentPodcast.save(current: playerManager.currentTime, using: modelContext)
                     } label: {
                         Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 24))
@@ -87,7 +86,7 @@ private extension MiniPlayerView {
             }
             .contentShape(Rectangle())
         }
-        .foregroundColor(.black)
+        .foregroundColor(.primary)
     }
 
     @ViewBuilder

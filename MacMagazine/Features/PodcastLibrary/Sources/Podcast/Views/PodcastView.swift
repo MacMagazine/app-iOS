@@ -49,6 +49,11 @@ public struct PodcastView: View {
                     sessionState.hasFetchedPodcasts = true
                 }
             }
+            .refreshable {
+                if search.isEmpty {
+                    try? await viewModel.getPodcasts()
+                }
+            }
 
             .sheet(isPresented: Binding(get: { podcastPlayerManager.isFullscreen },
                                         set: { value in podcastPlayerManager.isFullscreen = value })) {
@@ -82,6 +87,7 @@ extension PodcastView {
                 ForEach(podcasts) { podcast in
                     AdaptivePodcastCardView(podcast: podcast.toCardContent(using: modelContext)) {
                         podcastPlayerManager.loadPodcast(podcast)
+                        podcastPlayerManager.seek(to: podcast.current)
                     }
                 }
             },

@@ -16,6 +16,7 @@ enum PodcastBackgroundGradientStyle {
 // MARK: - PodcastPlayerView -
 
 struct FullPlayerView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.theme) private var theme
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Bindable private var playerManager: PodcastPlayerManager
@@ -32,7 +33,9 @@ struct FullPlayerView: View {
     @State private var isDarkBackground = false
     @State private var hasAppeared = false
 
-    // MARK: - Init
+    private var speedOptions: [Double] {
+        [0.75, 1.0, 1.25, 1.5, 2.0]
+    }
 
     init(
         playerManager: PodcastPlayerManager,
@@ -64,6 +67,9 @@ struct FullPlayerView: View {
             .onAppear {
                 updateBackgroundGradient()
                 hasAppeared = true
+            }
+            .onDisappear {
+                playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
             }
             .onChange(of: playerManager.currentPodcast?.artworkURL) { _, _ in
                 updateBackgroundGradient()
@@ -134,6 +140,7 @@ private extension FullPlayerView {
                 )
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
+                .accessibilityHidden(true)
         }
     }
 
@@ -211,6 +218,7 @@ private extension FullPlayerView {
             }
             .font(.caption)
             .foregroundColor(.primary.opacity(0.6))
+            .accessibilityHidden(true)
         }
     }
 
@@ -218,6 +226,7 @@ private extension FullPlayerView {
     var playPauseButton: some View {
         Button {
             playerManager.togglePlayPause()
+            playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
         } label: {
             Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
         }
@@ -242,36 +251,36 @@ private extension FullPlayerView {
         let currentSpeed = Double(playerManager.playbackRate)
         let isBoosted = abs(currentSpeed - 1.0) > 0.001
 
-        let currentLabel = formattedSpeedForButton(currentSpeed)
-
-        let widestLabel: String = {
-            let candidateSpeeds: [Double] = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0]
-            let labels = candidateSpeeds.map { formattedSpeedForButton($0) }
-            return labels.max(by: { $0.count < $1.count }) ?? currentLabel
-        }()
+        let currentLabel = formattedSpeedForButton(currentSpeed, isSelected: true)
 
         Button {
             isUsingAdvancedSpeedControl = false
             isShowingSpeedDialog = true
         } label: {
-            ZStack {
-                Text(widestLabel)
-                    .opacity(0)
-
-                Text(currentLabel)
-                    .opacity(0.6)
-            }
-            .font(.system(size: 15))
-            .padding(.horizontal, 4)
-            .shadow(
-                color: isBoosted ? Color.primary.opacity(0.6) : .clear,
-                radius: isBoosted ? 2 : 0,
-                x: 0,
-                y: 0
-            )
+            Text(currentLabel)
+                .opacity(0.6)
+                .font(.system(size: 15))
+                .padding(.horizontal, 4)
+                .shadow(
+                    color: isBoosted ? Color.primary.opacity(0.6) : .clear,
+                    radius: isBoosted ? 2 : 0,
+                    x: 0,
+                    y: 0
+                )
         }
-        .transaction { transaction in
-            transaction.animation = nil
+        .accessibilityLabel("Velocidade de reprodução")
+        .accessibilityValue("\(currentSpeed)")
+        .accessibilityAddTraits(.allowsDirectInteraction)
+        .accessibilityAdjustableAction { direction in
+            let currentSpeed = Double(playerManager.playbackRate)
+            switch direction {
+            case .increment:
+                playerManager.setPlaybackRate(Float(currentSpeed + 0.5))
+            case .decrement:
+                playerManager.setPlaybackRate(Float(currentSpeed - 0.5))
+            @unknown default:
+                break
+            }
         }
         .popover(
             isPresented: $isShowingSpeedDialog,
@@ -281,34 +290,28 @@ private extension FullPlayerView {
                 Text("Velocidade de reprodução")
                     .font(.system(size: 17, weight: .semibold))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 18)
-
-                Divider()
+                    .padding(.top)
+                    .padding(.bottom, 8)
 
                 speedPopoverContent
                     .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.top, 4)
-                    .padding(.bottom, 2)
                     .presentationCompactAdaptation(.popover)
 
                 Text(
                     isUsingAdvancedSpeedControl
                     ? "Ajuste a velocidade de reprodução"
-                    : "Deslize para ver mais velocidades"
+                    : "Deslize para mais velocidades"
                 )
                 .font(.system(size: 11, weight: .regular))
                 .foregroundColor(.secondary)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 4)
-                .padding(.bottom, 10)   // 🔽 bem menor que 18
+                .padding(.bottom)
+                .accessibilityHidden(true)
             }
             .padding(.horizontal, 20)
             .dynamicTypeSize(.medium)
         }
-    }
-
-    var speedOptions: [Double] {
-        [0.75, 1.0, 1.25, 1.5, 2.0]
     }
 
     @ViewBuilder
@@ -333,6 +336,7 @@ private extension FullPlayerView {
                 Button {
                     playerManager.setPlaybackRate(Float(speed))
                     hapticTick()
+                    isShowingSpeedDialog.toggle()
                 } label: {
                     let isSelected = abs(speed - Double(playerManager.playbackRate)) < 0.001
 
@@ -345,7 +349,7 @@ private extension FullPlayerView {
                             )
                             .frame(width: 36, height: 36)
 
-                        Text(formattedSpeedForButton(speed))
+                        Text(formattedSpeedForButton(speed, isSelected: isSelected))
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(
                                 isSelected
@@ -358,7 +362,6 @@ private extension FullPlayerView {
             }
         }
         .frame(width: 200)
-        .padding(.vertical, 8)
     }
 
     @ViewBuilder
@@ -408,14 +411,14 @@ private extension FullPlayerView {
         }
     }
 
-    func formattedSpeedForButton(_ value: Double) -> String {
+    func formattedSpeedForButton(_ value: Double, isSelected: Bool) -> String {
         let formatter = NumberFormatter()
         formatter.locale = .current
-        formatter.minimumFractionDigits = value == 1.0 ? 0 : 1
+        formatter.minimumFractionDigits = value.truncatingRemainder(dividingBy: 1) == 0.0 ? 0 : 1
         formatter.maximumFractionDigits = 1
 
         let base = formatter.string(from: NSNumber(value: value)) ?? String(value)
-        return base + "x"
+        return base + (isSelected ? "x" : "")
     }
 
     func hapticTick() {
@@ -492,8 +495,8 @@ private extension FullPlayerView {
         let brightnessValues = uiGradientColors.map { $0.perceivedBrightness }
         let totalBrightness = brightnessValues.reduce(0, +)
         let averageBrightness = brightnessValues.isEmpty
-            ? CGFloat(0.5)
-            : totalBrightness / CGFloat(brightnessValues.count)
+        ? CGFloat(0.5)
+        : totalBrightness / CGFloat(brightnessValues.count)
 
         let isDark = averageBrightness < 0.6
 

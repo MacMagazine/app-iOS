@@ -19,4 +19,10 @@ extension PodcastDB {
             }
         )
     }
+
+    func save(current: Double, using context: ModelContext?) {
+        guard let context else { return }
+        self.current = current
+        try? context.save()
+    }
 }
