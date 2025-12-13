@@ -18,11 +18,11 @@ struct PodcastChapter: Hashable {
         timeString(using: duration.seconds)
     }
 
-    func backgroundColor(at position: Double) -> Color {
+    func backgroundColor(at position: Double, using color: [Color]) -> Color {
         if position >= start.seconds && position < end.seconds {
-            .gray.opacity(0.7)
+            (color.last ?? .gray).opacity(0.4)
         } else {
-            .clear
+            (color.first ?? .primary).opacity(0.4)
         }
     }
 

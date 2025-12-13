@@ -73,7 +73,7 @@ private extension ChaptersView {
                     }
                 }
             })
-            .listRowBackground(chapter.backgroundColor(at: playerManager.currentTime))
+            .listRowBackground(chapter.backgroundColor(at: playerManager.currentTime, using: backgroundGradientColors))
             .accessibilityLabel("\(chapter.title), começando em \(chapter.startString) com duração de \(chapter.durationString).")
         }
         .scrollContentBackground(.hidden)
