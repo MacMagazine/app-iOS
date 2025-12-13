@@ -13,6 +13,7 @@ struct MainView: View {
     @Environment(PodcastPlayerManager.self) private var podcastManager
 
     @State var searchText: String = ""
+    @State var splitViewVisibility: NavigationSplitViewVisibility = .all
 
     var body: some View {
         @Bindable var bindableViewModel = viewModel
