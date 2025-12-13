@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "macmagazine.png",
+      "filename" : "logoMM clear.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "macmagazine@2x.png",
+      "filename" : "logoMM clear@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "macmagazine@3x.png",
+      "filename" : "logoMM clear@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
