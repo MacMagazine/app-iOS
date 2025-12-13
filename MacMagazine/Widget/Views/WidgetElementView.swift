@@ -65,7 +65,7 @@ private extension WidgetElementView {
 private extension WidgetElementView {
     var dateAndTitle: some View {
         VStack(spacing: 4) {
-            if widgetFamily == .systemLarge {
+            if widgetFamily == .systemLarge || widgetFamily == .systemSmall {
                 HStack {
                     Text(post.pubDate.format(using: .dateTime))
                         .font(.caption2)
