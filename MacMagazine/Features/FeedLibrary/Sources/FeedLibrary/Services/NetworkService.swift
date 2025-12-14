@@ -10,9 +10,9 @@ final class NetworkService: Sendable {
 }
 
 extension NetworkService {
-    func fetch(category: Category) async throws -> Data {
+    func fetch(category: Category, page: Int) async throws -> Data {
         do {
-            let endpoint = Endpoint.posts(paged: 0, query: category.query)
+            let endpoint = Endpoint.posts(paged: page, query: category.query)
             return try await network.get(url: endpoint.url, headers: [:])
         } catch {
             throw error

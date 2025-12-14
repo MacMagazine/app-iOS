@@ -36,15 +36,15 @@ public class FeedViewModel {
         self.networkService = NetworkService(network: network)
     }
 
-    public func getFeed() async throws {
+    public func getFeed(page: Int = 0) async throws {
         do {
             status = .loading
-            async let highlights = fetch(category: .highlights)
-            async let appletv = fetch(category: .appletv)
-            async let reviews = fetch(category: .reviews)
-            async let tutoriais = fetch(category: .tutoriais)
-            async let rumors = fetch(category: .rumors)
-            async let posts = fetch(category: .news)
+            async let highlights = fetch(category: .highlights, page: page)
+            async let appletv = fetch(category: .appletv, page: page)
+            async let reviews = fetch(category: .reviews, page: page)
+            async let tutoriais = fetch(category: .tutoriais, page: page)
+            async let rumors = fetch(category: .rumors, page: page)
+            async let posts = fetch(category: .news, page: page)
             let feed = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
             storage.save(feed: Array(feed.joined()).toFeedDB)
             status = .done
@@ -55,7 +55,7 @@ public class FeedViewModel {
 
     public func getWidgetData() async throws -> [WidgetData] {
         do {
-            let data = try await fetch(category: .all)
+            let data = try await fetch(category: .all, page: 0)
             return Array(data.prefix(3)).toWidgetData
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
@@ -63,10 +63,10 @@ public class FeedViewModel {
         }
     }
 
-    public func getPodcast() async throws {
+    public func getPodcast(page: Int = 1) async throws {
         do {
             status = .loading
-            let podcasts = try await fetch(category: .podcast)
+            let podcasts = try await fetch(category: .podcast, page: page)
             storage.save(podcast: podcasts.toPodcastDB)
             status = .done
         } catch {
@@ -78,7 +78,7 @@ public class FeedViewModel {
     public func getWatchFeed() async throws -> [FeedDB] {
         do {
             status = .loading
-            let feed = try await fetch(category: .news)
+            let feed = try await fetch(category: .news, page: 0)
             let watchData = Array(feed.prefix(10)).toFeedDB
             storage.save(feed: watchData)
             status = .done
@@ -91,9 +91,9 @@ public class FeedViewModel {
 }
 
 extension FeedViewModel {
-    private func fetch(category: Category) async throws -> [XMLPost] {
+    private func fetch(category: Category, page: Int) async throws -> [XMLPost] {
         do {
-            let data = try await networkService.fetch(category: category)
+            let data = try await networkService.fetch(category: category, page: page)
             return try await withCheckedThrowingContinuation { continuation in
                 Self.parse(
                     data,

@@ -84,10 +84,15 @@ extension PodcastView {
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? podcasts.count : 0,
             content: {
-                ForEach(podcasts) { podcast in
-                    AdaptivePodcastCardView(podcast: podcast.toCardContent(using: modelContext)) {
-                        podcastPlayerManager.loadPodcast(podcast)
-                        podcastPlayerManager.seek(to: podcast.current)
+                ForEach(0..<podcasts.count, id: \.self) { index in
+                    AdaptivePodcastCardView(podcast: podcasts[index].toCardContent(using: modelContext)) {
+                        podcastPlayerManager.loadPodcast(podcasts[index])
+                        podcastPlayerManager.seek(to: podcasts[index].current)
+                    }
+                    .onAppear {
+                        if !favorite && search.isEmpty {
+                            viewModel.loadMoreIfNeeded(index: index)
+                        }
                     }
                 }
             },
