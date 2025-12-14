@@ -56,7 +56,8 @@ private extension ChaptersView {
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                         } else if let url = URL(string: Constants.coverURL) {
-                            CachedAsyncImage(image: url)
+                            CachedAsyncImage(image: url, contentMode: .fill)
+                                .aspectRatio(contentMode: .fill)
                         } else {
                             Rectangle().fill(.clear)
                         }
