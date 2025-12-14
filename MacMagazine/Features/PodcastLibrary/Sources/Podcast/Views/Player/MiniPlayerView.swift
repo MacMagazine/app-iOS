@@ -5,7 +5,6 @@ import UIComponentsLibrary
 struct MiniPlayerView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.theme) private var theme
-    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Namespace private var animation
 
     @Bindable var playerManager: PodcastPlayerManager

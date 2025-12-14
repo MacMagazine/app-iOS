@@ -118,7 +118,7 @@ struct FullPlayerView: View {
                         Spacer()
                         actions
                     }
-                    .padding(.top, 30)
+                    .padding(.top, 20)
 
                     artworkView
                     podcastTitle(podcast.title)
@@ -186,6 +186,7 @@ private extension FullPlayerView {
         }
         .cornerRadius(24)
         .frame(maxWidth: 540, maxHeight: 540)
+        .scaleEffect(playerManager.isPlaying ? 0.95 : 0.85)
         .shadow(
             color: Color.black.opacity(0.3),
             radius: 28,
@@ -197,6 +198,10 @@ private extension FullPlayerView {
         .accessibilityHidden(true)
         .id(currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
         .transition(.opacity)
+        .animation(
+            .easeInOut(duration: 0.35),
+            value: playerManager.isPlaying
+        )
     }
 
     @ViewBuilder

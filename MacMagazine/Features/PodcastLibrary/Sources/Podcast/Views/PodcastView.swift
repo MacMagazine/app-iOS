@@ -7,7 +7,6 @@ import UIComponentsLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var sessionState: SessionState

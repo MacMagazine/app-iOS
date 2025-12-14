@@ -1,5 +1,5 @@
-import Foundation
 import Combine
+import Foundation
 
 public class SessionState: ObservableObject {
     // Social content
@@ -8,6 +8,8 @@ public class SessionState: ObservableObject {
 
     @Published public var isPlayingPodcasts = false
     @Published public var isPlayingVideos = false
+
+    public var notPlaying: Bool { !isPlayingPodcasts && !isPlayingVideos }
 
     // Feed content
     @Published public var hasFetchedFeed = false
