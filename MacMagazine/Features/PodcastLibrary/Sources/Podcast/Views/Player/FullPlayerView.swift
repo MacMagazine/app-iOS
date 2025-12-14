@@ -5,6 +5,12 @@ import UIComponentsLibrary
 
 // MARK: - Gradient background styles -
 
+enum Constants {
+    static let coverURL = "https://macmagazine.com.br/wp-content/uploads/powerpress/capa.png"
+}
+
+// MARK: - Gradient background styles -
+
 enum PodcastBackgroundGradientStyle {
     case twoTone
     case threeTone
@@ -23,11 +29,7 @@ struct FullPlayerView: View {
     @State private var isShowingSpeedDialog = false
     @State private var isShowingChapterDialog = false
     @State private var isUsingAdvancedSpeedControl = false
-    @State private var backgroundGradientColors: [Color] = [
-        .black,
-        .black
-    ]
-
+    @State private var backgroundGradientColors: [Color] = [.black, .black]
     @State private var isDarkBackground = false
     @State private var hasAppeared = false
 
@@ -50,8 +52,7 @@ struct FullPlayerView: View {
             .sheet(isPresented: $isShowingChapterDialog) {
                 ChaptersView(
                     playerManager: playerManager,
-                    backgroundGradientColors: backgroundGradientColors,
-                    isDarkBackground: isDarkBackground,
+                    backgroundGradientStyle: backgroundGradientStyle,
                     isShowingChapterDialog: $isShowingChapterDialog
                 )
                 .presentationDragIndicator(.visible)
@@ -77,8 +78,11 @@ struct FullPlayerView: View {
         .onDisappear {
             playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
         }
-        .onChange(of: playerManager.currentPodcast?.artworkURL) { _, _ in
-            updateBackgroundGradient()
+        .onChange(of: playerManager.currentPodcast?.artworkURL) { _, value in
+            updateBackgroundGradient(url: value)
+        }
+        .onChange(of: playerManager.currentChapter?.artworkData) { _, value in
+            updateBackgroundGradient(data: value)
         }
     }
 
@@ -136,14 +140,6 @@ struct FullPlayerView: View {
 }
 
 private extension FullPlayerView {
-    /// Returns the currently playing chapter based on currentTime
-    var currentChapter: PodcastChapter? {
-        playerManager.chapters.first { chapter in
-            playerManager.currentTime >= chapter.start.seconds &&
-            playerManager.currentTime < chapter.end.seconds
-        }
-    }
-
     @ViewBuilder
     var actions: some View {
         if let podcast = playerManager.currentPodcast?.toCardContent(using: modelContext) {
@@ -175,12 +171,12 @@ private extension FullPlayerView {
     var artworkView: some View {
         Group {
             // Prioritize current chapter artwork, fallback to podcast artwork
-            if let chapterArtwork = currentChapter?.artworkData,
+            if let chapterArtwork = playerManager.currentChapter?.artworkData,
                let uiImage = UIImage(data: chapterArtwork) {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-            } else if let artworkURL = URL(string: "https://macmagazine.com.br/wp-content/uploads/powerpress/capa.png") {
+            } else if let artworkURL = URL(string: Constants.coverURL) {
                 CachedAsyncImage(image: artworkURL)
             }
         }
@@ -196,7 +192,7 @@ private extension FullPlayerView {
         .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal)
         .accessibilityHidden(true)
-        .id(currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
+        .id(playerManager.currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
         .transition(.opacity)
         .animation(
             .easeInOut(duration: 0.35),
@@ -511,81 +507,42 @@ private extension FullPlayerView {
         generator.impactOccurred()
     }
 
-    func updateBackgroundGradient() {
-        guard let artworkURLString = playerManager.currentPodcast?.artworkURL,
-              let artworkURL = URL(string: artworkURLString) else {
-            backgroundGradientColors = [.black, .black]
-            isDarkBackground = false
-            return
-        }
-
-        let selectedStyle = backgroundGradientStyle
-
+    func updateBackgroundGradient(
+        url: String? = nil,
+        data: Data? = nil
+    ) {
         Task(priority: .background) {
-            let result = await processArtworkColors(
-                from: artworkURL,
-                style: selectedStyle
-            )
-
-            await MainActor.run {
-                backgroundGradientColors = result.colors
-                isDarkBackground = result.isDark
+            if url == nil && data == nil {
+                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                    artworkURL: playerManager.currentPodcast?.artworkURL,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors = gradient.colors
+                    isDarkBackground = gradient.isDark
+                }
+            }
+            if let data {
+                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                    data: data,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors = gradient.colors
+                    isDarkBackground = gradient.isDark
+                }
+            }
+            if let url {
+                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                    artworkURL: url,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors = gradient.colors
+                    isDarkBackground = gradient.isDark
+                }
             }
         }
-    }
-
-    func processArtworkColors(
-        from artworkURL: URL,
-        style: PodcastBackgroundGradientStyle
-    ) async -> (colors: [Color], isDark: Bool) {
-        let request = URLRequest(
-            url: artworkURL,
-            cachePolicy: .returnCacheDataElseLoad
-        )
-
-        guard
-            let (imageData, _) = try? await URLSession.shared.data(for: request),
-            let artworkImage = UIImage(data: imageData)
-        else {
-            return ([.black, .black], false)
-        }
-
-        var uiGradientColors: [UIColor] = [UIColor.black, UIColor.black]
-
-        switch style {
-        case .fourTone:
-            if let fourToneColors = artworkImage.fourToneGradientColors() {
-                uiGradientColors = fourToneColors
-            } else if let threeToneColors = artworkImage.threeToneGradientColors() {
-                uiGradientColors = threeToneColors
-            } else if let twoToneTuple = artworkImage.twoToneGradientColors() {
-                uiGradientColors = [twoToneTuple.0, twoToneTuple.1]
-            }
-
-        case .threeTone:
-            if let threeToneColors = artworkImage.threeToneGradientColors() {
-                uiGradientColors = threeToneColors
-            } else if let twoToneTuple = artworkImage.twoToneGradientColors() {
-                uiGradientColors = [twoToneTuple.0, twoToneTuple.1]
-            }
-
-        case .twoTone:
-            if let twoToneTuple = artworkImage.twoToneGradientColors() {
-                uiGradientColors = [twoToneTuple.0, twoToneTuple.1]
-            }
-        }
-
-        let swiftUIColors = uiGradientColors.map { Color(uiColor: $0) }
-
-        let brightnessValues = uiGradientColors.map { $0.perceivedBrightness }
-        let totalBrightness = brightnessValues.reduce(0, +)
-        let averageBrightness = brightnessValues.isEmpty
-        ? CGFloat(0.5)
-        : totalBrightness / CGFloat(brightnessValues.count)
-
-        let isDark = averageBrightness < 0.6
-
-        return (swiftUIColors, isDark)
     }
 }
 

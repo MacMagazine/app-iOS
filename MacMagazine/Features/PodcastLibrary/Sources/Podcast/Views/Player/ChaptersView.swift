@@ -1,21 +1,22 @@
 import SwiftUI
+import UIComponentsLibrary
 
 struct ChaptersView: View {
     @Bindable private var playerManager: PodcastPlayerManager
     @Binding private var isShowingChapterDialog: Bool
 
-    let backgroundGradientColors: [Color]
-    let isDarkBackground: Bool
+    @State var backgroundGradientColors: [Color] = [.black, .black]
+    @State var isDarkBackground: Bool = false
+
+    private let backgroundGradientStyle: PodcastBackgroundGradientStyle
 
     init(
         playerManager: PodcastPlayerManager,
-        backgroundGradientColors: [Color],
-        isDarkBackground: Bool,
+        backgroundGradientStyle: PodcastBackgroundGradientStyle,
         isShowingChapterDialog: Binding<Bool>
     ) {
         self.playerManager = playerManager
-        self.backgroundGradientColors = backgroundGradientColors
-        self.isDarkBackground = isDarkBackground
+        self.backgroundGradientStyle = backgroundGradientStyle
         _isShowingChapterDialog = isShowingChapterDialog
     }
 
@@ -31,6 +32,12 @@ struct ChaptersView: View {
             chapters
         }
         .preferredColorScheme(isDarkBackground ? .dark : .light)
+        .onAppear {
+            updateBackgroundGradient(data: playerManager.currentChapter?.artworkData)
+        }
+        .onChange(of: playerManager.currentChapter?.artworkData) { _, value in
+            updateBackgroundGradient(data: value)
+        }
     }
 }
 
@@ -48,6 +55,8 @@ private extension ChaptersView {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
+                        } else if let url = URL(string: Constants.coverURL) {
+                            CachedAsyncImage(image: url)
                         } else {
                             Rectangle().fill(.clear)
                         }
@@ -77,5 +86,33 @@ private extension ChaptersView {
             .accessibilityLabel("\(chapter.title), começando em \(chapter.startString) com duração de \(chapter.durationString).")
         }
         .scrollContentBackground(.hidden)
+    }
+}
+
+private extension ChaptersView {
+    func updateBackgroundGradient(
+        data: Data? = nil
+    ) {
+        Task(priority: .background) {
+            if let data {
+                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                    data: data,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors = gradient.colors
+                    isDarkBackground = gradient.isDark
+                }
+            } else {
+                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                    artworkURL: Constants.coverURL,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors = gradient.colors
+                    isDarkBackground = gradient.isDark
+                }
+            }
+        }
     }
 }

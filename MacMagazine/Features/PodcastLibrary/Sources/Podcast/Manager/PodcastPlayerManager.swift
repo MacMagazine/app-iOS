@@ -18,6 +18,14 @@ public class PodcastPlayerManager {
     var playbackRate: Float = 1.0
     var chapters = [PodcastChapter]()
 
+    /// Returns the currently playing chapter based on currentTime
+    var currentChapter: PodcastChapter? {
+        chapters.first { chapter in
+            currentTime >= chapter.start.seconds &&
+            currentTime < chapter.end.seconds
+        }
+    }
+
     private var player: AVPlayer?
     private var timeObserver: Any?
     private var cancellables = Set<AnyCancellable>()
@@ -34,8 +42,95 @@ public class PodcastPlayerManager {
             }
             .store(in: &cancellables)
     }
+}
 
-    private func setupAudioSession() {
+// MARK: - Internal methods -
+
+extension PodcastPlayerManager {
+    func loadPodcast(_ podcast: PodcastDB) {
+        guard let url = URL(string: podcast.podcastURL) else { return }
+
+        setupAudioSession()
+        setupRemoteTransportControls()
+
+        if currentPodcast == podcast {
+            togglePlayPause()
+            return
+        }
+
+        currentPodcast = podcast
+        let playerItem = AVPlayerItem(url: url)
+
+        if player == nil {
+            player = AVPlayer(playerItem: playerItem)
+        } else {
+            player?.replaceCurrentItem(with: playerItem)
+        }
+
+        Task {
+            chapters = await getChapter(using: url)
+        }
+
+        setupTimeObserver()
+        setupItemObservers(playerItem)
+
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: playerItem,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                self?.handlePlaybackEnd()
+            }
+        }
+
+        play()
+    }
+
+    func play() {
+        player?.play()
+        player?.rate = playbackRate
+        isPlaying = true
+        updateNowPlayingInfo()
+    }
+
+    func pause() {
+        player?.pause()
+        isPlaying = false
+        updateNowPlayingInfo()
+    }
+
+    func togglePlayPause() {
+        if isPlaying {
+            pause()
+        } else {
+            play()
+        }
+    }
+
+    func seek(to time: TimeInterval) {
+        let cmTime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        player?.seek(to: cmTime)
+        updateNowPlayingInfo()
+    }
+
+    func skip(by seconds: Double) {
+        let newTime = currentTime + seconds
+        seek(to: max(0, min(newTime, duration)))
+    }
+
+    func setPlaybackRate(_ rate: Float) {
+        playbackRate = rate
+        if isPlaying {
+            player?.rate = rate
+        }
+    }
+}
+
+// MARK: - Private methods -
+
+private extension PodcastPlayerManager {
+    func setupAudioSession() {
         guard !isAudioSessionSetup else { return }
         isAudioSessionSetup = true
 
@@ -49,7 +144,7 @@ public class PodcastPlayerManager {
         }
     }
 
-    private func setupRemoteTransportControls() {
+    func setupRemoteTransportControls() {
         guard !isRemoteControlsSetup else { return }
         isRemoteControlsSetup = true
 
@@ -96,47 +191,7 @@ public class PodcastPlayerManager {
         }
     }
 
-    func loadPodcast(_ podcast: PodcastDB) {
-        guard let url = URL(string: podcast.podcastURL) else { return }
-
-        setupAudioSession()
-        setupRemoteTransportControls()
-
-        if currentPodcast == podcast {
-            togglePlayPause()
-            return
-        }
-
-        currentPodcast = podcast
-        let playerItem = AVPlayerItem(url: url)
-
-        if player == nil {
-            player = AVPlayer(playerItem: playerItem)
-        } else {
-            player?.replaceCurrentItem(with: playerItem)
-        }
-
-        Task {
-            chapters = await getChapter(using: url)
-        }
-
-        setupTimeObserver()
-        setupItemObservers(playerItem)
-
-        NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: playerItem,
-            queue: .main
-        ) { [weak self] _ in
-            Task { @MainActor in
-                self?.handlePlaybackEnd()
-            }
-        }
-
-        play()
-    }
-
-    private func setupTimeObserver() {
+    func setupTimeObserver() {
         guard let player = player else { return }
 
         if let timeObserver = timeObserver {
@@ -152,7 +207,7 @@ public class PodcastPlayerManager {
         }
     }
 
-    private func setupItemObservers(_ item: AVPlayerItem) {
+    func setupItemObservers(_ item: AVPlayerItem) {
         item.publisher(for: \.duration)
             .sink { [weak self] duration in
                 self?.duration = duration.seconds
@@ -170,53 +225,14 @@ public class PodcastPlayerManager {
             .store(in: &cancellables)
     }
 
-    func play() {
-        player?.play()
-        player?.rate = playbackRate
-        isPlaying = true
-        updateNowPlayingInfo()
-    }
-
-    func pause() {
-        player?.pause()
-        isPlaying = false
-        updateNowPlayingInfo()
-    }
-
-    func togglePlayPause() {
-        if isPlaying {
-            pause()
-        } else {
-            play()
-        }
-    }
-
-    func seek(to time: TimeInterval) {
-        let cmTime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        player?.seek(to: cmTime)
-        updateNowPlayingInfo()
-    }
-
-    func skip(by seconds: Double) {
-        let newTime = currentTime + seconds
-        seek(to: max(0, min(newTime, duration)))
-    }
-
-    func setPlaybackRate(_ rate: Float) {
-        playbackRate = rate
-        if isPlaying {
-            player?.rate = rate
-        }
-    }
-
-    private func handlePlaybackEnd() {
+    func handlePlaybackEnd() {
         isPlaying = false
         currentTime = 0
         player?.seek(to: .zero)
         updateNowPlayingInfo()
     }
 
-    private func updateNowPlayingInfo() {
+    func updateNowPlayingInfo() {
         guard let podcast = currentPodcast else { return }
 
         let title = podcast.title
@@ -238,6 +254,8 @@ public class PodcastPlayerManager {
         }
     }
 }
+
+// MARK: - Chapter methods -
 
 extension PodcastPlayerManager {
     func getChapter(using url: URL) async -> [PodcastChapter] {
@@ -284,6 +302,8 @@ extension PodcastPlayerManager {
         return response.sorted
     }
 }
+
+// MARK: - Array Extension -
 
 extension Array where Element == PodcastChapter {
     var sorted: Self {
