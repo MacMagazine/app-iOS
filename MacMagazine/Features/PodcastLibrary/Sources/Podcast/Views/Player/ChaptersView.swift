@@ -83,26 +83,12 @@ private extension ChaptersView {
     func updateBackgroundGradient(
         data: Data? = nil
     ) {
-        Task(priority: .background) {
-            if let data {
-                let gradient = await BackgroundViewModel.updateBackgroundGradient(
-                    data: data,
-                    backgroundGradientStyle: backgroundGradientStyle
-                )
-                await MainActor.run {
-                    backgroundGradientColors = gradient.colors
-                    isDarkBackground = gradient.isDark
-                }
-            } else {
-                let gradient = await BackgroundViewModel.updateBackgroundGradient(
-                    artworkURL: Constants.coverURL,
-                    backgroundGradientStyle: backgroundGradientStyle
-                )
-                await MainActor.run {
-                    backgroundGradientColors = gradient.colors
-                    isDarkBackground = gradient.isDark
-                }
-            }
-        }
+        BackgroundViewModel.backgroundGradient(
+            data: data,
+            artworkURL: Constants.coverURL,
+            backgroundGradientStyle: backgroundGradientStyle,
+            backgroundGradientColors: $backgroundGradientColors,
+            isDarkBackground: $isDarkBackground
+        )
     }
 }

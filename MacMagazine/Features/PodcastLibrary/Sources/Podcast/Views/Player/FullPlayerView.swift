@@ -502,38 +502,13 @@ private extension FullPlayerView {
         url: String? = nil,
         data: Data? = nil
     ) {
-        Task(priority: .background) {
-            if url == nil && data == nil {
-                let gradient = await BackgroundViewModel.updateBackgroundGradient(
-                    artworkURL: playerManager.currentPodcast?.artworkURL,
-                    backgroundGradientStyle: backgroundGradientStyle
-                )
-                await MainActor.run {
-                    backgroundGradientColors = gradient.colors
-                    isDarkBackground = gradient.isDark
-                }
-            }
-            if let data {
-                let gradient = await BackgroundViewModel.updateBackgroundGradient(
-                    data: data,
-                    backgroundGradientStyle: backgroundGradientStyle
-                )
-                await MainActor.run {
-                    backgroundGradientColors = gradient.colors
-                    isDarkBackground = gradient.isDark
-                }
-            }
-            if let url {
-                let gradient = await BackgroundViewModel.updateBackgroundGradient(
-                    artworkURL: url,
-                    backgroundGradientStyle: backgroundGradientStyle
-                )
-                await MainActor.run {
-                    backgroundGradientColors = gradient.colors
-                    isDarkBackground = gradient.isDark
-                }
-            }
-        }
+        BackgroundViewModel.backgroundGradient(
+            data: data,
+            artworkURL: url ?? playerManager.currentPodcast?.artworkURL,
+            backgroundGradientStyle: backgroundGradientStyle,
+            backgroundGradientColors: $backgroundGradientColors,
+            isDarkBackground: $isDarkBackground
+        )
     }
 }
 

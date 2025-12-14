@@ -8,6 +8,36 @@ struct BackgroundGradientStatus {
 }
 
 final class BackgroundViewModel {
+    static func backgroundGradient(
+        data: Data?,
+        artworkURL: String?,
+        backgroundGradientStyle: PodcastBackgroundGradientStyle,
+        backgroundGradientColors: Binding<[Color]>,
+        isDarkBackground: Binding<Bool>
+    ) {
+        Task(priority: .background) {
+            if let data {
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
+                    data: data,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors.wrappedValue = gradient.colors
+                    isDarkBackground.wrappedValue = gradient.isDark
+                }
+            } else if let artworkURL {
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
+                    artworkURL: artworkURL,
+                    backgroundGradientStyle: backgroundGradientStyle
+                )
+                await MainActor.run {
+                    backgroundGradientColors.wrappedValue = gradient.colors
+                    isDarkBackground.wrappedValue = gradient.isDark
+                }
+            }
+        }
+    }
+
     static func updateBackgroundGradient(
         data: Data?,
         backgroundGradientStyle: PodcastBackgroundGradientStyle
