@@ -61,13 +61,11 @@ struct FullPlayerView: View {
 
     var player: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: backgroundGradientColors),
-                startPoint: .top,
-                endPoint: .bottom
+            BackgroundView(
+                chapter: playerManager.currentChapter,
+                backgroundGradientColors: backgroundGradientColors,
+                usesGradient: false
             )
-            .ignoresSafeArea()
-
             fullPlayerContent(podcast: playerManager.currentPodcast)
         }
         .preferredColorScheme(isDarkBackground ? .dark : .light)
@@ -169,17 +167,10 @@ private extension FullPlayerView {
 private extension FullPlayerView {
     @ViewBuilder
     var artworkView: some View {
-        Group {
-            // Prioritize current chapter artwork, fallback to podcast artwork
-            if let chapterArtwork = playerManager.currentChapter?.artworkData,
-               let uiImage = UIImage(data: chapterArtwork) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-            } else if let artworkURL = URL(string: Constants.coverURL) {
-                CachedAsyncImage(image: artworkURL)
-            }
-        }
+        PodcastImageView(
+            artworkData: playerManager.currentChapter?.artworkData,
+            location: .player,
+            fallback: { EmptyView() })
         .cornerRadius(24)
         .frame(maxWidth: 540, maxHeight: 540)
         .scaleEffect(playerManager.isPlaying ? 0.95 : 0.85)
@@ -513,7 +504,7 @@ private extension FullPlayerView {
     ) {
         Task(priority: .background) {
             if url == nil && data == nil {
-                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
                     artworkURL: playerManager.currentPodcast?.artworkURL,
                     backgroundGradientStyle: backgroundGradientStyle
                 )
@@ -523,7 +514,7 @@ private extension FullPlayerView {
                 }
             }
             if let data {
-                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
                     data: data,
                     backgroundGradientStyle: backgroundGradientStyle
                 )
@@ -533,7 +524,7 @@ private extension FullPlayerView {
                 }
             }
             if let url {
-                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
                     artworkURL: url,
                     backgroundGradientStyle: backgroundGradientStyle
                 )

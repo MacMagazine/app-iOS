@@ -7,7 +7,7 @@ struct BackgroundGradientStatus {
     let isDark: Bool
 }
 
-final class BackgroundGradient {
+final class BackgroundViewModel {
     static func updateBackgroundGradient(
         data: Data?,
         backgroundGradientStyle: PodcastBackgroundGradientStyle

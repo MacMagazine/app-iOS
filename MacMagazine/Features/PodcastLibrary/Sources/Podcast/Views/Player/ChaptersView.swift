@@ -22,13 +22,11 @@ struct ChaptersView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: backgroundGradientColors),
-                startPoint: .top,
-                endPoint: .bottom
+            BackgroundView(
+                chapter: playerManager.currentChapter,
+                backgroundGradientColors: backgroundGradientColors,
+                usesGradient: false
             )
-            .ignoresSafeArea()
-
             chapters
         }
         .preferredColorScheme(isDarkBackground ? .dark : .light)
@@ -49,19 +47,10 @@ private extension ChaptersView {
                 isShowingChapterDialog.toggle()
             }, label: {
                 HStack(spacing: 20) {
-                    Group {
-                        if let artworkData = chapter.artworkData,
-                           let uiImage = UIImage(data: artworkData) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        } else if let url = URL(string: Constants.coverURL) {
-                            CachedAsyncImage(image: url, contentMode: .fill)
-                                .aspectRatio(contentMode: .fill)
-                        } else {
-                            Rectangle().fill(.clear)
-                        }
-                    }
+                    PodcastImageView(
+                        artworkData: chapter.artworkData,
+                        location: .chapter,
+                        fallback: { Rectangle().fill(.clear) })
                     .frame(width: 45, height: 45)
                     .cornerRadius(8)
 
@@ -96,7 +85,7 @@ private extension ChaptersView {
     ) {
         Task(priority: .background) {
             if let data {
-                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
                     data: data,
                     backgroundGradientStyle: backgroundGradientStyle
                 )
@@ -105,7 +94,7 @@ private extension ChaptersView {
                     isDarkBackground = gradient.isDark
                 }
             } else {
-                let gradient = await BackgroundGradient.updateBackgroundGradient(
+                let gradient = await BackgroundViewModel.updateBackgroundGradient(
                     artworkURL: Constants.coverURL,
                     backgroundGradientStyle: backgroundGradientStyle
                 )
