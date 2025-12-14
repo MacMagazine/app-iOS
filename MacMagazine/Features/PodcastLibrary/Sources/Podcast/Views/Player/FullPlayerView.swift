@@ -17,6 +17,25 @@ enum PodcastBackgroundGradientStyle {
     case fourTone
 }
 
+// MARK: - Accessibility Sort Priority -
+
+enum PlayerAccessibilityPriority {
+    static let favoriteButton: Double = 14
+    static let shareButton: Double = 13
+    static let podcastTitle: Double = 12
+    static let previousChapter: Double = 11
+    static let progressSlider: Double = 10
+    static let nextChapter: Double = 9
+    static let volumeDown: Double = 8
+    static let volumeSlider: Double = 7
+    static let volumeUp: Double = 6
+    static let speedButton: Double = 5
+    static let skipBackwardButton: Double = 4
+    static let playPauseButton: Double = 3
+    static let skipForwardButton: Double = 2
+    static let chaptersButton: Double = 1
+}
+
 // MARK: - PodcastPlayerView -
 
 struct FullPlayerView: View {
@@ -32,6 +51,8 @@ struct FullPlayerView: View {
     @State private var backgroundGradientColors: [Color] = [.black, .black]
     @State private var isDarkBackground = false
     @State private var hasAppeared = false
+
+    @State private var volumeController = SystemVolumeController()
 
     private var speedOptions: [Double] {
         [0.75, 1.0, 1.25, 1.5, 2.0]
@@ -61,6 +82,9 @@ struct FullPlayerView: View {
 
     var player: some View {
         ZStack {
+            // Hidden volume view (required)
+            SystemVolumeView().frame(width: 0, height: 0).opacity(0)
+
             BackgroundView(
                 chapter: playerManager.currentChapter,
                 backgroundGradientColors: backgroundGradientColors,
@@ -103,10 +127,11 @@ struct FullPlayerView: View {
                         Spacer()
 
                         podcastTitle(podcast.title)
-                        progressSlider
 
                         Spacer()
 
+                        progressSlider
+                        volumeSlider
                         playbackControls
                     }
                     .padding(.vertical, 40)
@@ -124,10 +149,11 @@ struct FullPlayerView: View {
 
                     artworkView
                     podcastTitle(podcast.title)
-                    progressSlider
 
                     Spacer()
 
+                    progressSlider
+                    volumeSlider
                     playbackControls
                 }
                 .padding(.horizontal)
@@ -146,13 +172,13 @@ private extension FullPlayerView {
                 favorite: podcast.favorite,
                 action: podcast.favoriteAction
             )
-            .accessibilitySortPriority(9)
+            .accessibilitySortPriority(PlayerAccessibilityPriority.favoriteButton)
 
             let shareButton = ShareButton(
                 title: podcast.title,
                 url: podcast.urlToShare
             )
-            .accessibilitySortPriority(8)
+            .accessibilitySortPriority(PlayerAccessibilityPriority.shareButton)
 
             FavoriteShareGlassContainer(
                 favoriteView: favoriteButton,
@@ -196,7 +222,7 @@ private extension FullPlayerView {
         Ticker(text: title, speed: 30)
             .bold()
             .frame(height: 40)
-            .accessibilitySortPriority(7)
+            .accessibilitySortPriority(PlayerAccessibilityPriority.podcastTitle)
     }
 
     @ViewBuilder
@@ -204,10 +230,10 @@ private extension FullPlayerView {
         ZStack {
             HStack {
                 speedButton
-                    .accessibilitySortPriority(5)
+                    .accessibilitySortPriority(PlayerAccessibilityPriority.speedButton)
                 Spacer()
                 chaptersButton
-                    .accessibilitySortPriority(1)
+                    .accessibilitySortPriority(PlayerAccessibilityPriority.chaptersButton)
             }
 
             HStack(spacing: 40) {
@@ -215,16 +241,16 @@ private extension FullPlayerView {
                     systemName: "gobackward.15",
                     action: { playerManager.skip(by: -15) }
                 )
-                .accessibilitySortPriority(4)
+                .accessibilitySortPriority(PlayerAccessibilityPriority.skipBackwardButton)
 
                 playPauseButton
-                    .accessibilitySortPriority(3)
+                    .accessibilitySortPriority(PlayerAccessibilityPriority.playPauseButton)
 
                 skipButton(
                     systemName: "goforward.15",
                     action: { playerManager.skip(by: 15) }
                 )
-                .accessibilitySortPriority(2)
+                .accessibilitySortPriority(PlayerAccessibilityPriority.skipForwardButton)
             }
         }
         .tint(.primary)
@@ -253,17 +279,38 @@ private extension FullPlayerView {
         let remainingTime: TimeInterval = max(0, safeDuration - elapsedTime)
 
         VStack(spacing: 0) {
-            Slider(
-                value: Binding(
-                    get: { elapsedTime },
-                    set: { newValue in
-                        playerManager.seek(to: newValue)
-                    }
-                ),
-                in: 0...safeDuration
-            )
-            .sliderThumbVisibility(.hidden)
-            .tint(.primary)
+            HStack(spacing: 20) {
+                Button(action: {
+                    playerManager.toPreviousChapter()
+                },
+                       label: {
+                    Image(systemName: "backward.end")
+                })
+                .font(.system(size: 20))
+                .accessibilitySortPriority(PlayerAccessibilityPriority.previousChapter)
+
+                Slider(
+                    value: Binding(
+                        get: { elapsedTime },
+                        set: { newValue in
+                            playerManager.seek(to: newValue)
+                        }
+                    ),
+                    in: 0...safeDuration
+                )
+                .sliderThumbVisibility(.hidden)
+                .tint(.primary)
+                .accessibilitySortPriority(PlayerAccessibilityPriority.progressSlider)
+
+                Button(action: {
+                    playerManager.toNextChapter()
+                },
+                       label: {
+                    Image(systemName: "forward.end")
+                })
+                .font(.system(size: 20))
+                .accessibilitySortPriority(PlayerAccessibilityPriority.nextChapter)
+            }
 
             HStack {
                 Text(formatTime(elapsedTime))
@@ -272,9 +319,36 @@ private extension FullPlayerView {
             }
             .font(.caption)
             .foregroundColor(.primary.opacity(0.6))
+            .padding(.horizontal, 40)
             .accessibilityHidden(true)
         }
-        .accessibilitySortPriority(6)
+    }
+
+    // MARK: - Volume slider
+
+    var volumeSlider: some View {
+        HStack(spacing: 20) {
+            Image(systemName: "speaker.wave.1")
+                .foregroundColor(.secondary)
+                .font(.system(size: 20))
+                .accessibilitySortPriority(PlayerAccessibilityPriority.volumeDown)
+
+            Slider(
+                value: Binding(
+                    get: { Double(volumeController.currentVolume) },
+                    set: { volumeController.setVolume(Float($0)) }
+                ),
+                in: 0...1
+            )
+            .tint(.primary)
+            .sliderThumbVisibility(.hidden)
+            .accessibilitySortPriority(PlayerAccessibilityPriority.volumeSlider)
+
+            Image(systemName: "speaker.wave.3")
+                .foregroundColor(.secondary)
+                .font(.system(size: 20))
+                .accessibilitySortPriority(PlayerAccessibilityPriority.volumeUp)
+        }
     }
 
     @ViewBuilder

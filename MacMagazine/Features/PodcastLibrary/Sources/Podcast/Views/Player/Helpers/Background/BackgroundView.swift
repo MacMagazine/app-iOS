@@ -27,12 +27,11 @@ private extension BackgroundView {
 
     @ViewBuilder
     private var imageBackground: some View {
-        GeometryReader { geo in
+        GeometryReader { _ in
             PodcastImageView(
                 artworkData: chapter?.artworkData,
                 location: .background,
                 fallback: { gradientBackground })
-            .frame(width: geo.size.width)
             .ignoresSafeArea()
             .accessibilityHidden(true)
             .id(chapter?.id ?? UUID()) // Triggers animation when chapter changes

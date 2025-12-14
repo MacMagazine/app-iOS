@@ -125,6 +125,22 @@ extension PodcastPlayerManager {
             player?.rate = rate
         }
     }
+
+    func toPreviousChapter() {
+        if let currentChapter,
+           let index = chapters.firstIndex(of: currentChapter),
+           index > 0 {
+            seek(to: chapters[index - 1].start.seconds)
+        }
+    }
+
+    func toNextChapter() {
+        if let currentChapter,
+           let index = chapters.firstIndex(of: currentChapter),
+           index < chapters.count {
+            seek(to: chapters[index + 1].start.seconds)
+        }
+    }
 }
 
 // MARK: - Private methods -
