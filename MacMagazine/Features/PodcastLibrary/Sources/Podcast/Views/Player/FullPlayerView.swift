@@ -20,15 +20,13 @@ enum PodcastBackgroundGradientStyle {
 // MARK: - Accessibility Sort Priority -
 
 enum PlayerAccessibilityPriority {
-    static let favoriteButton: Double = 14
-    static let shareButton: Double = 13
-    static let podcastTitle: Double = 12
-    static let previousChapter: Double = 11
-    static let progressSlider: Double = 10
-    static let nextChapter: Double = 9
-    static let volumeDown: Double = 8
-    static let volumeSlider: Double = 7
-    static let volumeUp: Double = 6
+    static let favoriteButton: Double = 12
+    static let shareButton: Double = 11
+    static let podcastTitle: Double = 10
+    static let previousChapter: Double = 9
+    static let progressSlider: Double = 8
+    static let nextChapter: Double = 7
+    static let volumeSlider: Double = 6
     static let speedButton: Double = 5
     static let skipBackwardButton: Double = 4
     static let playPauseButton: Double = 3
@@ -331,7 +329,7 @@ private extension FullPlayerView {
             Image(systemName: "speaker.wave.1")
                 .foregroundColor(.secondary)
                 .font(.system(size: 20))
-                .accessibilitySortPriority(PlayerAccessibilityPriority.volumeDown)
+                .accessibilityHidden(true)
 
             Slider(
                 value: Binding(
@@ -347,7 +345,7 @@ private extension FullPlayerView {
             Image(systemName: "speaker.wave.3")
                 .foregroundColor(.secondary)
                 .font(.system(size: 20))
-                .accessibilitySortPriority(PlayerAccessibilityPriority.volumeUp)
+                .accessibilityHidden(true)
         }
     }
 
