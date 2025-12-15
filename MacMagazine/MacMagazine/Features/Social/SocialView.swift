@@ -32,7 +32,8 @@ struct SocialView: View {
             content
         }
         .contentMargins(.top, 20, for: .scrollContent)
-        .navigation(shouldUseSidebar: shouldUseSidebar, title: viewModel.social.rawValue)
+        .navigation(shouldUseSidebar: shouldUseSidebar,
+                    title: viewModel.social.rawValue)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 menuView
@@ -75,11 +76,24 @@ private extension SocialView {
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
         case .instagram:
-            ContentUnavailableView(
-                "Página em construção",
-                systemImage: "square.and.arrow.down.badge.xmark",
-                description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
-            )
+            if let url = URL(string: "https://macmagazine.com.br/posts-instagram-app/") {
+                InstagramPostsWebView(
+                    colorSchema: viewModel.settingsViewModel.colorSchema,
+                    url: url,
+                    userAgent: "MacMagazine",
+                    shouldUseSidebar: shouldUseSidebar
+                )
+                .transition(.opacity)
+            } else {
+                ContentUnavailableView(
+                    "Estamos com um problema",
+                    systemImage: "square.and.arrow.down.badge.xmark",
+                    description: Text(
+                        "No momento estamos com um problema técnico. Tente novamente mais tarde."
+                    )
+                )
+                .transition(.opacity)
+            }
         }
     }
 

@@ -5,11 +5,15 @@ import SwiftUI
 
 extension MainView {
     var sideBarContentView: some View {
-        NavigationSplitView {
+        let isSidebarVisible =
+        splitViewVisibility == .all || splitViewVisibility == .doubleColumn
+
+        return NavigationSplitView(columnVisibility: $splitViewVisibility) {
             sidebar
                 .searchable(text: $searchText, prompt: "Search items")
         } detail: {
             animateContentStackView(for: navigationState.selectedItem)
+                .environment(\.isSidebarVisible, isSidebarVisible)
                 .podcastMiniPlayer()
         }
         .navigationSplitViewStyle(.balanced)
