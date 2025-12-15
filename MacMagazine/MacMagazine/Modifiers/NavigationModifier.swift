@@ -17,7 +17,7 @@ private struct NavigationModifier: ViewModifier {
     let title: String?
 
     @Environment(\.isSidebarVisible) private var isSidebarVisible
-    
+
     func body(content: Content) -> some View {
         if shouldUseSidebar {
             if let title {

@@ -77,7 +77,7 @@ private extension SocialView {
             ).transition(.opacity)
         case .instagram:
             if let url = URL(string: "https://macmagazine.com.br/posts-instagram-app/") {
-                InstagramContainerView(
+                InstagramPostsWebView(
                     url: url,
                     userAgent: "MacMagazine",
                     shouldUseSidebar: shouldUseSidebar
