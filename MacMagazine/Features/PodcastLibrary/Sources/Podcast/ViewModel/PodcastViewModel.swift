@@ -17,6 +17,8 @@ class PodcastViewModel {
     }
 
     private let feedService: FeedViewModel
+    private let threshold = 16
+    private var lastIndex = 0
 
     @MainActor
     init(storage: Database,
@@ -28,13 +30,28 @@ class PodcastViewModel {
     }
 
     @MainActor
-    func getPodcasts() async throws {
+    func getPodcasts(status: APIStatus? = nil, page: Int = 1) async throws {
         do {
-            status = .loading
-            try await feedService.getPodcast()
-            status = .done
+            if let status {
+                self.status = status
+            }
+            try await feedService.getPodcast(page: page)
+            self.status = .done
         } catch {
-            status = .error(reason: error.localizedDescription)
+            self.status = .error(reason: error.localizedDescription)
+        }
+    }
+
+    @MainActor
+    func loadMoreIfNeeded(index: Int) {
+        if index > 0,
+           lastIndex <= index,
+           index % threshold == 0 {
+            lastIndex = index
+            let page = Int(index / threshold) + 1
+            Task {
+                try await getPodcasts(status: nil, page: page)
+            }
         }
     }
 }

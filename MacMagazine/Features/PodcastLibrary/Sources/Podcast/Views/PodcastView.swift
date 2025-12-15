@@ -7,10 +7,9 @@ import UIComponentsLibrary
 
 public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
-    @Environment(SessionState.self) private var sessionState
+    @EnvironmentObject private var sessionState: SessionState
     var viewModel: PodcastViewModel
 
     @Binding private var favorite: Bool
@@ -43,18 +42,20 @@ public struct PodcastView: View {
 
     public var body: some View {
         content
-            .task {
-                if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
-                    try? await viewModel.getPodcasts()
-                    sessionState.hasFetchedPodcasts = true
-                }
-            }
             .refreshable {
                 if search.isEmpty {
                     try? await viewModel.getPodcasts()
                 }
             }
-
+            .task {
+                if viewModel.status == .idle && !sessionState.hasFetchedPodcasts {
+                    try? await viewModel.getPodcasts(status: .loading)
+                    sessionState.hasFetchedPodcasts = true
+                }
+            }
+            .onChange(of: podcastPlayerManager.isPlaying) { _, value in
+                sessionState.isPlayingPodcasts = value
+            }
             .sheet(isPresented: Binding(get: { podcastPlayerManager.isFullscreen },
                                         set: { value in podcastPlayerManager.isFullscreen = value })) {
                 FullPlayerView(
@@ -62,7 +63,6 @@ public struct PodcastView: View {
                     backgroundGradientStyle: .fourTone
                 )
                 .presentationDragIndicator(.visible)
-                .presentationDetents(shouldUseSidebar ? [.large] : [.medium])
             }
     }
 }
@@ -84,10 +84,15 @@ extension PodcastView {
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? podcasts.count : 0,
             content: {
-                ForEach(podcasts) { podcast in
-                    AdaptivePodcastCardView(podcast: podcast.toCardContent(using: modelContext)) {
-                        podcastPlayerManager.loadPodcast(podcast)
-                        podcastPlayerManager.seek(to: podcast.current)
+                ForEach(0..<podcasts.count, id: \.self) { index in
+                    AdaptivePodcastCardView(podcast: podcasts[index].toCardContent(using: modelContext)) {
+                        podcastPlayerManager.loadPodcast(podcasts[index])
+                        podcastPlayerManager.seek(to: podcasts[index].current)
+                    }
+                    .onAppear {
+                        if !favorite && search.isEmpty {
+                            viewModel.loadMoreIfNeeded(index: index)
+                        }
                     }
                 }
             },

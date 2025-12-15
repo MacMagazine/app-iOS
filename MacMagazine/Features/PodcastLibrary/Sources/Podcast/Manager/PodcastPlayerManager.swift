@@ -2,6 +2,7 @@ import AVFoundation
 import Combine
 import FeedLibrary
 import Foundation
+import MacMagazineLibrary
 import MediaPlayer
 import Observation
 import UIKit
@@ -15,6 +16,15 @@ public class PodcastPlayerManager {
     var currentTime: TimeInterval = 0
     var duration: TimeInterval = 0
     var playbackRate: Float = 1.0
+    var chapters = [PodcastChapter]()
+
+    /// Returns the currently playing chapter based on currentTime
+    var currentChapter: PodcastChapter? {
+        chapters.first { chapter in
+            currentTime >= chapter.start.seconds &&
+            currentTime < chapter.end.seconds
+        }
+    }
 
     private var player: AVPlayer?
     private var timeObserver: Any?
@@ -24,7 +34,119 @@ public class PodcastPlayerManager {
 
     public init() {}
 
-    private func setupAudioSession() {
+    public func observeSessionState(_ sessionState: SessionState) {
+        sessionState.$isPlayingVideos
+            .sink { [weak self] isPlaying in
+                guard let self, isPlaying else { return }
+                self.pause()
+            }
+            .store(in: &cancellables)
+    }
+}
+
+// MARK: - Internal methods -
+
+extension PodcastPlayerManager {
+    func loadPodcast(_ podcast: PodcastDB) {
+        guard let url = URL(string: podcast.podcastURL) else { return }
+
+        setupAudioSession()
+        setupRemoteTransportControls()
+
+        if currentPodcast == podcast {
+            togglePlayPause()
+            return
+        }
+
+        currentPodcast = podcast
+        let playerItem = AVPlayerItem(url: url)
+
+        if player == nil {
+            player = AVPlayer(playerItem: playerItem)
+        } else {
+            player?.replaceCurrentItem(with: playerItem)
+        }
+
+        Task {
+            chapters = await getChapter(using: url)
+        }
+
+        setupTimeObserver()
+        setupItemObservers(playerItem)
+
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: playerItem,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                self?.handlePlaybackEnd()
+            }
+        }
+
+        play()
+    }
+
+    func play() {
+        player?.play()
+        player?.rate = playbackRate
+        isPlaying = true
+        updateNowPlayingInfo()
+    }
+
+    func pause() {
+        player?.pause()
+        isPlaying = false
+        updateNowPlayingInfo()
+    }
+
+    func togglePlayPause() {
+        if isPlaying {
+            pause()
+        } else {
+            play()
+        }
+    }
+
+    func seek(to time: TimeInterval) {
+        let cmTime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        player?.seek(to: cmTime)
+        updateNowPlayingInfo()
+    }
+
+    func skip(by seconds: Double) {
+        let newTime = currentTime + seconds
+        seek(to: max(0, min(newTime, duration)))
+    }
+
+    func setPlaybackRate(_ rate: Float) {
+        playbackRate = rate
+        if isPlaying {
+            player?.rate = rate
+        }
+    }
+
+    func toPreviousChapter() {
+        if let currentChapter,
+           let index = chapters.firstIndex(of: currentChapter),
+           index > 0 {
+            seek(to: chapters[index - 1].start.seconds)
+        }
+    }
+
+    func toNextChapter() {
+        if let currentChapter,
+           let index = chapters.firstIndex(of: currentChapter),
+           index < chapters.count {
+            seek(to: chapters[index + 1].start.seconds)
+        }
+    }
+}
+
+// MARK: - Private methods -
+
+private extension PodcastPlayerManager {
+    func setupAudioSession() {
         guard !isAudioSessionSetup else { return }
         isAudioSessionSetup = true
 
@@ -38,7 +160,7 @@ public class PodcastPlayerManager {
         }
     }
 
-    private func setupRemoteTransportControls() {
+    func setupRemoteTransportControls() {
         guard !isRemoteControlsSetup else { return }
         isRemoteControlsSetup = true
 
@@ -85,43 +207,7 @@ public class PodcastPlayerManager {
         }
     }
 
-    func loadPodcast(_ podcast: PodcastDB) {
-        guard let url = URL(string: podcast.podcastURL) else { return }
-
-        setupAudioSession()
-        setupRemoteTransportControls()
-
-        if currentPodcast == podcast {
-            togglePlayPause()
-            return
-        }
-
-        currentPodcast = podcast
-        let playerItem = AVPlayerItem(url: url)
-
-        if player == nil {
-            player = AVPlayer(playerItem: playerItem)
-        } else {
-            player?.replaceCurrentItem(with: playerItem)
-        }
-
-        setupTimeObserver()
-        setupItemObservers(playerItem)
-
-        NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: playerItem,
-            queue: .main
-        ) { [weak self] _ in
-            Task { @MainActor in
-                self?.handlePlaybackEnd()
-            }
-        }
-
-        play()
-    }
-
-    private func setupTimeObserver() {
+    func setupTimeObserver() {
         guard let player = player else { return }
 
         if let timeObserver = timeObserver {
@@ -137,7 +223,7 @@ public class PodcastPlayerManager {
         }
     }
 
-    private func setupItemObservers(_ item: AVPlayerItem) {
+    func setupItemObservers(_ item: AVPlayerItem) {
         item.publisher(for: \.duration)
             .sink { [weak self] duration in
                 self?.duration = duration.seconds
@@ -155,53 +241,14 @@ public class PodcastPlayerManager {
             .store(in: &cancellables)
     }
 
-    func play() {
-        player?.play()
-        player?.rate = playbackRate
-        isPlaying = true
-        updateNowPlayingInfo()
-    }
-
-    func pause() {
-        player?.pause()
-        isPlaying = false
-        updateNowPlayingInfo()
-    }
-
-    func togglePlayPause() {
-        if isPlaying {
-            pause()
-        } else {
-            play()
-        }
-    }
-
-    func seek(to time: TimeInterval) {
-        let cmTime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        player?.seek(to: cmTime)
-        updateNowPlayingInfo()
-    }
-
-    func skip(by seconds: Double) {
-        let newTime = currentTime + seconds
-        seek(to: max(0, min(newTime, duration)))
-    }
-
-    func setPlaybackRate(_ rate: Float) {
-        playbackRate = rate
-        if isPlaying {
-            player?.rate = rate
-        }
-    }
-
-    private func handlePlaybackEnd() {
+    func handlePlaybackEnd() {
         isPlaying = false
         currentTime = 0
         player?.seek(to: .zero)
         updateNowPlayingInfo()
     }
 
-    private func updateNowPlayingInfo() {
+    func updateNowPlayingInfo() {
         guard let podcast = currentPodcast else { return }
 
         let title = podcast.title
@@ -221,5 +268,61 @@ public class PodcastPlayerManager {
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
             }
         }
+    }
+}
+
+// MARK: - Chapter methods -
+
+extension PodcastPlayerManager {
+    func getChapter(using url: URL) async -> [PodcastChapter] {
+        var response = [PodcastChapter]()
+        let asset = AVURLAsset(url: url)
+        let locales = (try? await asset.load(.availableChapterLocales)) ?? []
+
+        for locale in locales {
+            let chapters = (try? await asset.loadChapterMetadataGroups(
+                withTitleLocale: locale,
+                containingItemsWithCommonKeys: [AVMetadataKey.commonKeyArtwork]
+            )) ?? []
+
+            for chapter in chapters {
+                let timeRange = chapter.timeRange
+
+                // Fetch the title
+                let titleItem = AVMetadataItem.metadataItems(
+                    from: chapter.items,
+                    withKey: AVMetadataKey.commonKeyTitle,
+                    keySpace: .common
+                ).first
+                let title: String = (try? await titleItem?.load(.stringValue)) ?? ""
+
+                // Fetch the artwork
+                let artworkItem = AVMetadataItem.metadataItems(
+                    from: chapter.items,
+                    withKey: AVMetadataKey.commonKeyArtwork,
+                    keySpace: .common
+                ).first
+                let artworkData = try? await artworkItem?.load(.dataValue)
+
+                response.append(
+                    PodcastChapter(
+                        title: title,
+                        start: timeRange.start,
+                        end: timeRange.end,
+                        duration: timeRange.duration,
+                        artworkData: artworkData
+                    )
+                )
+            }
+        }
+        return response.sorted
+    }
+}
+
+// MARK: - Array Extension -
+
+extension Array where Element == PodcastChapter {
+    var sorted: Self {
+        self.sorted(by: { $0.start.seconds < $1.start.seconds })
     }
 }

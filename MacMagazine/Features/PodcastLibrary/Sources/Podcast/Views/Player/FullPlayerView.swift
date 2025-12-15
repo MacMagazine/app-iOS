@@ -1,11 +1,15 @@
 import FeedLibrary
-import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftUI
 import UIComponentsLibrary
-import UtilityLibrary
 
-// MARK: - Estilo de degradê de fundo -
+// MARK: - Gradient background styles -
+
+enum Constants {
+    static let coverURL = "https://macmagazine.com.br/wp-content/uploads/powerpress/capa.png"
+}
+
+// MARK: - Gradient background styles -
 
 enum PodcastBackgroundGradientStyle {
     case twoTone
@@ -13,23 +17,36 @@ enum PodcastBackgroundGradientStyle {
     case fourTone
 }
 
+// MARK: - Accessibility Sort Priority -
+
+enum PlayerAccessibilityPriority {
+    static let favoriteButton: Double = 12
+    static let shareButton: Double = 11
+    static let podcastTitle: Double = 10
+    static let previousChapter: Double = 9
+    static let progressSlider: Double = 8
+    static let nextChapter: Double = 7
+    static let volumeSlider: Double = 6
+    static let speedButton: Double = 5
+    static let skipBackwardButton: Double = 4
+    static let playPauseButton: Double = 3
+    static let skipForwardButton: Double = 2
+    static let chaptersButton: Double = 1
+}
+
 // MARK: - PodcastPlayerView -
 
 struct FullPlayerView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.theme) private var theme
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Bindable private var playerManager: PodcastPlayerManager
 
     private let backgroundGradientStyle: PodcastBackgroundGradientStyle
 
     @State private var isShowingSpeedDialog = false
+    @State private var isShowingChapterDialog = false
     @State private var isUsingAdvancedSpeedControl = false
-    @State private var backgroundGradientColors: [Color] = [
-        .black,
-        .black
-    ]
-
+    @State private var backgroundGradientColors: [Color] = [.black, .black]
     @State private var isDarkBackground = false
     @State private var hasAppeared = false
 
@@ -48,71 +65,88 @@ struct FullPlayerView: View {
     // MARK: - Body
 
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: backgroundGradientColors),
-                    startPoint: .top,
-                    endPoint: .bottom
+        player
+            .sheet(isPresented: $isShowingChapterDialog) {
+                ChaptersView(
+                    playerManager: playerManager,
+                    backgroundGradientStyle: backgroundGradientStyle,
+                    isShowingChapterDialog: $isShowingChapterDialog
                 )
-                .ignoresSafeArea()
+                .presentationDragIndicator(.visible)
+            }
+    }
 
-                fullPlayerContent(
-                    podcast: playerManager.currentPodcast,
-                    size: proxy.size.width
-                )
-            }
-            .frame(width: proxy.size.width, height: proxy.size.height)
-            .preferredColorScheme(isDarkBackground ? .dark : .light)
-            .onAppear {
-                updateBackgroundGradient()
-                hasAppeared = true
-            }
-            .onDisappear {
-                playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
-            }
-            .onChange(of: playerManager.currentPodcast?.artworkURL) { _, _ in
-                updateBackgroundGradient()
-            }
+    var player: some View {
+        ZStack {
+            BackgroundView(
+                chapter: playerManager.currentChapter,
+                backgroundGradientColors: backgroundGradientColors,
+                usesGradient: false
+            )
+            fullPlayerContent(podcast: playerManager.currentPodcast)
+        }
+        .preferredColorScheme(isDarkBackground ? .dark : .light)
+        .onAppear {
+            updateBackgroundGradient()
+            hasAppeared = true
+        }
+        .onDisappear {
+            playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
+        }
+        .onChange(of: playerManager.currentPodcast?.artworkURL) { _, value in
+            updateBackgroundGradient(url: value)
+        }
+        .onChange(of: playerManager.currentChapter?.artworkData) { _, value in
+            updateBackgroundGradient(data: value)
         }
     }
 
     // MARK: - Layout principal
 
     @ViewBuilder
-    private func fullPlayerContent(
-        podcast: PodcastDB?,
-        size: CGFloat
-    ) -> some View {
+    private func fullPlayerContent(podcast: PodcastDB?) -> some View {
         if let podcast {
             if verticalSizeClass == .compact {
                 // Layout B - Horizontal (iPhone landscape fullscreen)
-                HStack {
-                    artworkView(artworkURL: URL(string: podcast.artworkURL))
+                HStack(spacing: 40) {
+                    artworkView
+
                     VStack(spacing: 20) {
+                        HStack(spacing: 0) {
+                            Spacer()
+                            actions
+                        }
+
                         Spacer()
 
                         podcastTitle(podcast.title)
-                        progressSlider
 
                         Spacer()
 
+                        progressSlider
+                        volumeSlider
                         playbackControls
                     }
+                    .padding(.vertical, 40)
                 }
                 .padding(.horizontal)
 
             } else {
                 // Layout A - Vertical (iPhone portrait medium + iPad centered)
                 VStack(spacing: 20) {
-                    Spacer(minLength: 40)
+                    HStack(spacing: 0) {
+                        Spacer()
+                        actions
+                    }
+                    .padding(.top, 20)
 
-                    artworkView(artworkURL: URL(string: podcast.artworkURL))
+                    artworkView
                     podcastTitle(podcast.title)
-                    progressSlider
 
                     Spacer()
 
+                    progressSlider
+                    volumeSlider
                     playbackControls
                 }
                 .padding(.horizontal)
@@ -122,26 +156,58 @@ struct FullPlayerView: View {
     }
 }
 
+private extension FullPlayerView {
+    @ViewBuilder
+    var actions: some View {
+        if let podcast = playerManager.currentPodcast?.toCardContent(using: modelContext) {
+            let favoriteButton = FavoriteButton(
+                name: podcast.title,
+                favorite: podcast.favorite,
+                action: podcast.favoriteAction
+            )
+            .accessibilitySortPriority(PlayerAccessibilityPriority.favoriteButton)
+
+            let shareButton = ShareButton(
+                title: podcast.title,
+                url: podcast.urlToShare
+            )
+            .accessibilitySortPriority(PlayerAccessibilityPriority.shareButton)
+
+            FavoriteShareGlassContainer(
+                favoriteView: favoriteButton,
+                shareView: shareButton
+            )
+        }
+    }
+}
+
 // MARK: - Controles de volume / AirPlay -
 
 private extension FullPlayerView {
-
     @ViewBuilder
-    func artworkView(artworkURL: URL?) -> some View {
-        if let artworkURL {
-            CachedAsyncImage(image: artworkURL)
-                .cornerRadius(24)
-                .frame(maxWidth: 640, maxHeight: 640)
-                .shadow(
-                    color: Color.black.opacity(0.3),
-                    radius: 28,
-                    x: 0,
-                    y: 16
-                )
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal)
-                .accessibilityHidden(true)
-        }
+    var artworkView: some View {
+        PodcastImageView(
+            artworkData: playerManager.currentChapter?.artworkData,
+            location: .player,
+            fallback: { EmptyView() })
+        .cornerRadius(24)
+        .frame(maxWidth: 540, maxHeight: 540)
+        .scaleEffect(playerManager.isPlaying ? 0.95 : 0.85)
+        .shadow(
+            color: Color.black.opacity(0.3),
+            radius: 28,
+            x: 0,
+            y: 16
+        )
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(.horizontal)
+        .accessibilityHidden(true)
+        .id(playerManager.currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
+        .transition(.opacity)
+        .animation(
+            .easeInOut(duration: 0.35),
+            value: playerManager.isPlaying
+        )
     }
 
     @ViewBuilder
@@ -149,6 +215,7 @@ private extension FullPlayerView {
         Ticker(text: title, speed: 30)
             .bold()
             .frame(height: 40)
+            .accessibilitySortPriority(PlayerAccessibilityPriority.podcastTitle)
     }
 
     @ViewBuilder
@@ -156,7 +223,10 @@ private extension FullPlayerView {
         ZStack {
             HStack {
                 speedButton
+                    .accessibilitySortPriority(PlayerAccessibilityPriority.speedButton)
                 Spacer()
+                chaptersButton
+                    .accessibilitySortPriority(PlayerAccessibilityPriority.chaptersButton)
             }
 
             HStack(spacing: 40) {
@@ -164,13 +234,16 @@ private extension FullPlayerView {
                     systemName: "gobackward.15",
                     action: { playerManager.skip(by: -15) }
                 )
+                .accessibilitySortPriority(PlayerAccessibilityPriority.skipBackwardButton)
 
                 playPauseButton
+                    .accessibilitySortPriority(PlayerAccessibilityPriority.playPauseButton)
 
                 skipButton(
                     systemName: "goforward.15",
                     action: { playerManager.skip(by: 15) }
                 )
+                .accessibilitySortPriority(PlayerAccessibilityPriority.skipForwardButton)
             }
         }
         .tint(.primary)
@@ -179,7 +252,7 @@ private extension FullPlayerView {
     // MARK: - Progress slider (com tempo restante correto)
 
     @ViewBuilder
-    private var progressSlider: some View {
+    var progressSlider: some View {
         let rawDuration = playerManager.duration
         let safeDuration: Double = {
             guard rawDuration.isFinite,
@@ -199,17 +272,38 @@ private extension FullPlayerView {
         let remainingTime: TimeInterval = max(0, safeDuration - elapsedTime)
 
         VStack(spacing: 0) {
-            Slider(
-                value: Binding(
-                    get: { elapsedTime },
-                    set: { newValue in
-                        playerManager.seek(to: newValue)
-                    }
-                ),
-                in: 0...safeDuration
-            )
-            .sliderThumbVisibility(.hidden)
-            .tint(.primary)
+            HStack(spacing: 20) {
+                Button(action: {
+                    playerManager.toPreviousChapter()
+                },
+                       label: {
+                    Image(systemName: "backward.end")
+                })
+                .font(.system(size: 20))
+                .accessibilitySortPriority(PlayerAccessibilityPriority.previousChapter)
+
+                Slider(
+                    value: Binding(
+                        get: { elapsedTime },
+                        set: { newValue in
+                            playerManager.seek(to: newValue)
+                        }
+                    ),
+                    in: 0...safeDuration
+                )
+                .sliderThumbVisibility(.hidden)
+                .tint(.primary)
+                .accessibilitySortPriority(PlayerAccessibilityPriority.progressSlider)
+
+                Button(action: {
+                    playerManager.toNextChapter()
+                },
+                       label: {
+                    Image(systemName: "forward.end")
+                })
+                .font(.system(size: 20))
+                .accessibilitySortPriority(PlayerAccessibilityPriority.nextChapter)
+            }
 
             HStack {
                 Text(formatTime(elapsedTime))
@@ -218,7 +312,29 @@ private extension FullPlayerView {
             }
             .font(.caption)
             .foregroundColor(.primary.opacity(0.6))
+            .padding(.horizontal, 40)
             .accessibilityHidden(true)
+        }
+    }
+
+    // MARK: - Volume slider
+
+    var volumeSlider: some View {
+        HStack(spacing: 20) {
+            Image(systemName: "speaker.wave.1")
+                .foregroundColor(.secondary)
+                .font(.system(size: 20))
+                .accessibilityHidden(true)
+
+            SystemVolumeView()
+            .tint(.primary)
+            .frame(height: 18)
+            .accessibilitySortPriority(PlayerAccessibilityPriority.volumeSlider)
+
+            Image(systemName: "speaker.wave.3")
+                .foregroundColor(.secondary)
+                .font(.system(size: 20))
+                .accessibilityHidden(true)
         }
     }
 
@@ -242,10 +358,28 @@ private extension FullPlayerView {
     }
 }
 
+// MARK: - Chapter button -
+
+private extension FullPlayerView {
+    @ViewBuilder
+    var chaptersButton: some View {
+        if playerManager.chapters.isEmpty {
+            EmptyView()
+        } else {
+            Button(action: {
+                isShowingChapterDialog.toggle()
+            }, label: {
+                Image(systemName: "music.note.list")
+            })
+            .font(.system(size: 24))
+            .accessibilityLabel("Lista de capítulos")
+        }
+    }
+}
+
 // MARK: - Speed button + popup -
 
 private extension FullPlayerView {
-
     @ViewBuilder
     var speedButton: some View {
         let currentSpeed = Double(playerManager.playbackRate)
@@ -396,7 +530,6 @@ private extension FullPlayerView {
 // MARK: - Helpers (tempo, velocidade, haptic, degradê) -
 
 private extension FullPlayerView {
-
     func formatTime(_ time: TimeInterval) -> String {
         guard time.isFinite, !time.isNaN else { return "0:00" }
 
@@ -426,141 +559,21 @@ private extension FullPlayerView {
         generator.impactOccurred()
     }
 
-    func updateBackgroundGradient() {
-        guard let artworkURLString = playerManager.currentPodcast?.artworkURL,
-              let artworkURL = URL(string: artworkURLString) else {
-            backgroundGradientColors = [.black, .black]
-            isDarkBackground = false
-            return
-        }
-
-        let selectedStyle = backgroundGradientStyle
-
-        Task(priority: .background) {
-            let result = await processArtworkColors(
-                from: artworkURL,
-                style: selectedStyle
-            )
-
-            await MainActor.run {
-                backgroundGradientColors = result.colors
-                isDarkBackground = result.isDark
-            }
-        }
-    }
-
-    func processArtworkColors(
-        from artworkURL: URL,
-        style: PodcastBackgroundGradientStyle
-    ) async -> (colors: [Color], isDark: Bool) {
-        let request = URLRequest(
-            url: artworkURL,
-            cachePolicy: .returnCacheDataElseLoad
+    func updateBackgroundGradient(
+        url: String? = nil,
+        data: Data? = nil
+    ) {
+        BackgroundViewModel.backgroundGradient(
+            data: data,
+            artworkURL: url ?? playerManager.currentPodcast?.artworkURL,
+            backgroundGradientStyle: backgroundGradientStyle,
+            backgroundGradientColors: $backgroundGradientColors,
+            isDarkBackground: $isDarkBackground
         )
-
-        guard
-            let (imageData, _) = try? await URLSession.shared.data(for: request),
-            let artworkImage = UIImage(data: imageData)
-        else {
-            return ([.black, .black], false)
-        }
-
-        var uiGradientColors: [UIColor] = [UIColor.black, UIColor.black]
-
-        switch style {
-        case .fourTone:
-            if let fourToneColors = artworkImage.fourToneGradientColors() {
-                uiGradientColors = fourToneColors
-            } else if let threeToneColors = artworkImage.threeToneGradientColors() {
-                uiGradientColors = threeToneColors
-            } else if let twoToneTuple = artworkImage.twoToneGradientColors() {
-                uiGradientColors = [twoToneTuple.0, twoToneTuple.1]
-            }
-
-        case .threeTone:
-            if let threeToneColors = artworkImage.threeToneGradientColors() {
-                uiGradientColors = threeToneColors
-            } else if let twoToneTuple = artworkImage.twoToneGradientColors() {
-                uiGradientColors = [twoToneTuple.0, twoToneTuple.1]
-            }
-
-        case .twoTone:
-            if let twoToneTuple = artworkImage.twoToneGradientColors() {
-                uiGradientColors = [twoToneTuple.0, twoToneTuple.1]
-            }
-        }
-
-        let swiftUIColors = uiGradientColors.map { Color(uiColor: $0) }
-
-        let brightnessValues = uiGradientColors.map { $0.perceivedBrightness }
-        let totalBrightness = brightnessValues.reduce(0, +)
-        let averageBrightness = brightnessValues.isEmpty
-        ? CGFloat(0.5)
-        : totalBrightness / CGFloat(brightnessValues.count)
-
-        let isDark = averageBrightness < 0.6
-
-        return (swiftUIColors, isDark)
     }
 }
 
-struct ShimmerHighlight: View {
-    let cornerRadius: CGFloat
-    let isActive: Bool
-
-    @State private var phase: CGFloat = -1.0
-
-    var body: some View {
-        GeometryReader { geo in
-            let width = geo.size.width
-
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.0),
-                            Color.white.opacity(0.7),
-                            Color.white.opacity(0.0)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .scaleEffect(x: 0.45, y: 1.0, anchor: .center)
-                .rotationEffect(.degrees(22))
-                .offset(x: phase * width)
-                .mask(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                )
-                .opacity(isActive ? 1 : 0)
-                .onAppear {
-                    guard isActive else { return }
-                    startAnimation(width: width)
-                }
-                .onChange(of: isActive) { _, newValue in
-                    if newValue {
-                        startAnimation(width: width)
-                    } else {
-                        withAnimation(.linear(duration: 0.2)) {
-                            phase = -1.0
-                        }
-                    }
-                }
-        }
-    }
-
-    private func startAnimation(width: CGFloat) {
-        phase = -1.0
-        withAnimation(
-            .linear(duration: 1.8)
-            .repeatForever(autoreverses: false)
-        ) {
-            phase = 1.4
-        }
-    }
-}
-
-// MARK: - Preview
+// MARK: - Preview -
 
 #Preview {
     @Previewable @State var playerManager = PodcastPlayerManager()
@@ -583,7 +596,6 @@ struct ShimmerHighlight: View {
         playerManager: playerManager,
         backgroundGradientStyle: .fourTone
     )
-    .environment(\.theme, ThemeColor())
     .onAppear {
         playerManager.currentPodcast = mockPodcast
         playerManager.duration = 2_730

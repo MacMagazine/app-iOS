@@ -92,7 +92,7 @@ Docs/
 
 # Firebase / Google services (dependendo do fluxo)
 # Descomente se o GoogleService-Info.plist é gerado via script CI:
-# GoogleService-Info.plist
+GoogleService-Info.plist
 
 # Env files (se você usa)
 .env
