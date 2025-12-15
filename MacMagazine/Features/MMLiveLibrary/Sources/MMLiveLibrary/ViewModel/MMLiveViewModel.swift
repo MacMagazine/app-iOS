@@ -41,7 +41,7 @@ private extension MMLiveViewModel {
         var event = event
         event.lastChecked = Date()
         storage.save(event: event)
-        return true // Date() > event.inicio && Date() < event.fim
+        return Date() > event.inicio && Date() < event.fim
     }
 }
 
