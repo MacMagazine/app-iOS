@@ -1,8 +1,8 @@
 import SwiftUI
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     @MainActor
-    public var shouldUseSidebar: Bool {
+    var shouldUseSidebar: Bool {
 #if os(watchOS)
         false
 #else
@@ -11,11 +11,14 @@ extension EnvironmentValues {
     }
 
     @MainActor
-    public var iPad: Bool {
+    var iPad: Bool {
 #if os(watchOS)
         false
 #else
         UIDevice.current.userInterfaceIdiom == .pad
 #endif
     }
+
+    @MainActor @Entry
+    var isSidebarVisible: Bool = false
 }

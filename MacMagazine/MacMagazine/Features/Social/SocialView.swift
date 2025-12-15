@@ -36,7 +36,9 @@ struct SocialView: View {
                     title: viewModel.social.rawValue)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                menuView
+                if viewModel.social != .instagram {
+                    menuView
+                }
             }
             ToolbarItem(placement: .principal) {
                 if !shouldUseSidebar {
@@ -76,24 +78,7 @@ private extension SocialView {
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
         case .instagram:
-            if let url = URL(string: "https://macmagazine.com.br/posts-instagram-app/") {
-                InstagramPostsWebView(
-                    colorSchema: viewModel.settingsViewModel.colorSchema,
-                    url: url,
-                    userAgent: "MacMagazine",
-                    shouldUseSidebar: shouldUseSidebar
-                )
-                .transition(.opacity)
-            } else {
-                ContentUnavailableView(
-                    "Estamos com um problema",
-                    systemImage: "square.and.arrow.down.badge.xmark",
-                    description: Text(
-                        "No momento estamos com um problema técnico. Tente novamente mais tarde."
-                    )
-                )
-                .transition(.opacity)
-            }
+            InstagramWebView(colorSchema: viewModel.settingsViewModel.colorSchema)
         }
     }
 

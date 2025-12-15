@@ -2,40 +2,21 @@ import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 import WebKit
-#if canImport(UIKit)
-import UIKit
-#endif
 
-struct InstagramPostsWebView: View {
-    let url: URL
-    let userAgent: String
-    let shouldUseSidebar: Bool
-
-    private let darkMode: Bool
-
+struct InstagramWebView: View {
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
 
     @State private var isPresenting = true
     @State private var isLoading = true
     @State private var loadError: String?
 
+    private let instagram = "https://macmagazine.com.br/posts-instagram-app/"
     private let navigationDelegate = InstagramNavigationDelegate()
+    private let darkMode: Bool
 
-    init(
-        colorSchema: ColorScheme?,
-        url: URL,
-        userAgent: String,
-        shouldUseSidebar: Bool
-    ) {
-        self.url = url
-        self.userAgent = userAgent
-        self.shouldUseSidebar = shouldUseSidebar
-
-        self.darkMode = if colorSchema == nil {
-            Self.isDarkMode()
-        } else {
-            colorSchema == .dark
-        }
+    init(colorSchema: ColorScheme?) {
+        self.darkMode = Utils.isDarkMode(for: colorSchema)
     }
 
     private var userScripts: [WKUserScript] {
@@ -63,19 +44,8 @@ struct InstagramPostsWebView: View {
             (theme.main.background.color ?? Color.secondary)
                 .ignoresSafeArea()
 
-            Webview(
-                title: nil,
-                url: url.absoluteString,
-                isPresenting: $isPresenting,
-                standAlone: true,
-                navigationDelegate: navigationDelegate,
-                userScripts: userScripts,
-                cookies: makeCookies(),
-                userAgent: userAgent
-            )
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
-            .opacity(isLoading ? 0 : 1)
-            .animation(.easeInOut(duration: 0.25), value: isLoading)
+            content
+                .transition(.opacity)
 
             if isLoading {
                 ProgressView()
@@ -91,7 +61,10 @@ struct InstagramPostsWebView: View {
             }
         }
         .onAppear {
-            navigationDelegate.onStart = { isLoading = true; loadError = nil }
+            navigationDelegate.onStart = {
+                isLoading = true
+                loadError = nil
+            }
             navigationDelegate.onFinish = {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     isLoading = false
@@ -105,29 +78,35 @@ struct InstagramPostsWebView: View {
     }
 }
 
-private extension InstagramPostsWebView {
-    func makeCookies() -> [HTTPCookie]? {
-        var cookies = [HTTPCookie]()
-        if let darkMode = Cookies.createDarkMode(darkMode ? "true" : "false") {
-            cookies.append(darkMode)
+private extension InstagramWebView {
+    @ViewBuilder
+    var content: some View {
+        if URL(string: instagram) != nil {
+            webview
+        } else {
+            ContentUnavailableView(
+                "Estamos com um problema",
+                systemImage: "square.and.arrow.down.badge.xmark",
+                description: Text(
+                    "No momento estamos com um problema técnico. Tente novamente mais tarde."
+                )
+            )
         }
-        return cookies
     }
-}
 
-#if canImport(UIKit)
-private extension InstagramPostsWebView {
-    static func isDarkMode() -> Bool {
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
-            .windows.first?
-            .rootViewController?
-            .traitCollection.userInterfaceStyle == .dark
+    var webview: some View {
+        Webview(
+            title: nil,
+            url: instagram,
+            isPresenting: $isPresenting,
+            standAlone: true,
+            navigationDelegate: navigationDelegate,
+            userScripts: userScripts,
+            cookies: Cookies.makeCookies(darkMode: darkMode),
+            userAgent: Utils.userAgent
+        )
+        .ignoresSafeArea(.container, edges: [.top, .bottom])
+        .opacity(isLoading ? 0 : 1)
+        .animation(.easeInOut(duration: 0.25), value: isLoading)
     }
 }
-#else
-private extension InstagramPostsWebView {
-    static func isDarkMode() -> Bool {
-        false
-    }
-}
-#endif

@@ -70,3 +70,14 @@ public struct Cookies {
         ])
     }
 }
+
+public extension Cookies {
+    static func makeCookies(darkMode: Bool?) -> [HTTPCookie] {
+        var cookies = [HTTPCookie]()
+        if let darkMode,
+           let darkModeCookie = Cookies.createDarkMode(darkMode ? "true" : "false") {
+            cookies.append(darkModeCookie)
+        }
+        return cookies
+    }
+}
