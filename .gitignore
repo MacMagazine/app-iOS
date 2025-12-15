@@ -90,8 +90,8 @@ Docs/
 *.xctestrun
 .xcresult/
 
-# Firebase / Google services (dependendo do fluxo)
-# Descomente se o GoogleService-Info.plist é gerado via script CI:
+# Firebase / Google services
+# Template is in Support/Scripts/, ignore the real config file in Resources/
 GoogleService-Info.plist
 
 # Env files (se você usa)

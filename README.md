@@ -36,6 +36,9 @@ Tenha sempre seu Xcode e Swift atualizado na última versão e a versão de iOS 
 
 Antes de iniciar seu desenvolvimento, o código-fonte está disponível aqui mesmo neste repositório, na branch `release/v5`.
 
+### Configuração do Firebase
+Para configurar o Firebase Analytics localmente ou no CI/CD, consulte a documentação completa em [Support/Scripts/README.md](Support/Scripts/README.md).
+
 Instale o utitlitário [swiftlint](https://github.com/realm/SwiftLint) e observe o [code style](https://github.com/raywenderlich/swift-style-guide) para manter o padrão no desenvolvimento.
 
 Para cada bug/nova funcionalidade que for desenvolver, crie uma nova branch, no formato `hotfix/[descricao]` (no título, mencione o número do issue, usando hashtag (ex: branch: `hotfix/Fix_91_TableView_bug` e título: `Correção #91 TableView bug`)) ou `feature/[descricao]` para nova funcionalidade e utilize [Pull Requests](https://github.com/MacMagazine/app-iOS/pulls) para enviar o código para aprovação do nosso time de revisores.
