@@ -78,6 +78,7 @@ private extension SocialView {
         case .instagram:
             if let url = URL(string: "https://macmagazine.com.br/posts-instagram-app/") {
                 InstagramPostsWebView(
+                    colorSchema: viewModel.settingsViewModel.colorSchema,
                     url: url,
                     userAgent: "MacMagazine",
                     shouldUseSidebar: shouldUseSidebar

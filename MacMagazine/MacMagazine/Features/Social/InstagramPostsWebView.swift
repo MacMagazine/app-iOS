@@ -2,11 +2,16 @@ import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 import WebKit
+#if canImport(UIKit)
+import UIKit
+#endif
 
 struct InstagramPostsWebView: View {
     let url: URL
     let userAgent: String
     let shouldUseSidebar: Bool
+
+    private let darkMode: Bool
 
     @Environment(\.theme) private var theme: ThemeColor
 
@@ -15,6 +20,23 @@ struct InstagramPostsWebView: View {
     @State private var loadError: String?
 
     private let navigationDelegate = InstagramNavigationDelegate()
+
+    init(
+        colorSchema: ColorScheme?,
+        url: URL,
+        userAgent: String,
+        shouldUseSidebar: Bool
+    ) {
+        self.url = url
+        self.userAgent = userAgent
+        self.shouldUseSidebar = shouldUseSidebar
+
+        self.darkMode = if colorSchema == nil {
+            Self.isDarkMode()
+        } else {
+            colorSchema == .dark
+        }
+    }
 
     private var userScripts: [WKUserScript] {
         [
@@ -25,15 +47,6 @@ struct InstagramPostsWebView: View {
                   style.innerHTML = `
                     html, body {
                       padding-top: 50px !important;
-                      background-color: transparent !important;
-                    }
-                
-                    @media (prefers-color-scheme: dark) {
-                      html, body { background-color: #1C1B1D !important; }
-                    }
-                
-                    @media (prefers-color-scheme: light) {
-                      html, body { background-color: #F2F2F7 !important; }
                     }
                   `;
                   document.head.appendChild(style);
@@ -57,6 +70,7 @@ struct InstagramPostsWebView: View {
                 standAlone: true,
                 navigationDelegate: navigationDelegate,
                 userScripts: userScripts,
+                cookies: makeCookies(),
                 userAgent: userAgent
             )
             .ignoresSafeArea(.container, edges: [.top, .bottom])
@@ -91,60 +105,29 @@ struct InstagramPostsWebView: View {
     }
 }
 
-final class InstagramNavigationDelegate: NSObject, WKNavigationDelegate {
-    var onStart: (() -> Void)?
-    var onFinish: (() -> Void)?
-    var onFail: ((Error) -> Void)?
-
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation?) {
-        onStart?()
-    }
-
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
-        onFinish?()
-    }
-
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
-        onFail?(error)
-    }
-
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation?, withError error: Error) {
-        onFail?(error)
-    }
-
-    func webView(
-        _ webView: WKWebView,
-        decidePolicyFor navigationAction: WKNavigationAction,
-        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
-    ) {
-        guard let url = navigationAction.request.url else {
-            decisionHandler(.cancel)
-            return
+private extension InstagramPostsWebView {
+    func makeCookies() -> [HTTPCookie]? {
+        var cookies = [HTTPCookie]()
+        if let darkMode = Cookies.createDarkMode(darkMode ? "true" : "false") {
+            cookies.append(darkMode)
         }
-
-        guard navigationAction.navigationType == .linkActivated else {
-            decisionHandler(.allow)
-            return
-        }
-
-        if url.host?.lowercased().contains("instagram.com") == true {
-            if let appURL = makeInstagramAppURL(from: url),
-               UIApplication.shared.canOpenURL(appURL) {
-                UIApplication.shared.open(appURL)
-            } else {
-                UIApplication.shared.open(url)
-            }
-            decisionHandler(.cancel)
-            return
-        }
-
-        decisionHandler(.allow)
-    }
-
-    private func makeInstagramAppURL(from webURL: URL) -> URL? {
-        var components = URLComponents(url: webURL, resolvingAgainstBaseURL: false)
-        components?.scheme = "instagram"
-        components?.host = nil
-        return components?.url
+        return cookies
     }
 }
+
+#if canImport(UIKit)
+private extension InstagramPostsWebView {
+    static func isDarkMode() -> Bool {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+            .windows.first?
+            .rootViewController?
+            .traitCollection.userInterfaceStyle == .dark
+    }
+}
+#else
+private extension InstagramPostsWebView {
+    static func isDarkMode() -> Bool {
+        false
+    }
+}
+#endif
