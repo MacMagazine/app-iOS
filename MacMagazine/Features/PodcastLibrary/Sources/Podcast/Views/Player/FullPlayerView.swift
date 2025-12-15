@@ -50,8 +50,6 @@ struct FullPlayerView: View {
     @State private var isDarkBackground = false
     @State private var hasAppeared = false
 
-    @State private var volumeController = SystemVolumeController()
-
     private var speedOptions: [Double] {
         [0.75, 1.0, 1.25, 1.5, 2.0]
     }
@@ -80,9 +78,6 @@ struct FullPlayerView: View {
 
     var player: some View {
         ZStack {
-            // Hidden volume view (required)
-            SystemVolumeView().frame(width: 0, height: 0).opacity(0)
-
             BackgroundView(
                 chapter: playerManager.currentChapter,
                 backgroundGradientColors: backgroundGradientColors,
@@ -331,15 +326,9 @@ private extension FullPlayerView {
                 .font(.system(size: 20))
                 .accessibilityHidden(true)
 
-            Slider(
-                value: Binding(
-                    get: { Double(volumeController.currentVolume) },
-                    set: { volumeController.setVolume(Float($0)) }
-                ),
-                in: 0...1
-            )
+            SystemVolumeView()
             .tint(.primary)
-            .sliderThumbVisibility(.hidden)
+            .frame(height: 18)
             .accessibilitySortPriority(PlayerAccessibilityPriority.volumeSlider)
 
             Image(systemName: "speaker.wave.3")
