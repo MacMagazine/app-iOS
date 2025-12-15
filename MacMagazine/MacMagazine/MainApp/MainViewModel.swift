@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import SettingsLibrary
@@ -23,6 +24,7 @@ class MainViewModel {
     var news: News
     var scrollToTopTrigger: AppTabs?
 
+    let analytics = AnalyticsManager()
     let sessionState = SessionState()
     let storage: Database
     let theme = ThemeColor()

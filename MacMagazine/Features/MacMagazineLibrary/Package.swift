@@ -15,6 +15,7 @@ let package = Package(
     targets: [
         .target(name: "MacMagazineLibrary",
                 dependencies: [
+                    .product(name: "Analytics", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries")
                 ],
                 resources: [.process("Resources")])

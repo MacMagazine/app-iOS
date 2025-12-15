@@ -55,6 +55,12 @@
             ReferencedContainer = "container:MacMagazine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRAnalyticsDebugEnabled"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <StoreKitConfigurationFileReference
          identifier = "../../MacMagazine/Resources/ExampleStore.storekit">
       </StoreKitConfigurationFileReference>

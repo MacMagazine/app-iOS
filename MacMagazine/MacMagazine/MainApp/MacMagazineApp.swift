@@ -1,3 +1,4 @@
+import FirebaseCore
 import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
@@ -19,6 +20,7 @@ struct MacMagazineApp: App {
                 .environment(viewModel.settingsViewModel)
                 .environment(podcastPlayerManager)
                 .environmentObject(viewModel.sessionState)
+                .environmentObject(viewModel.analytics)
                 .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
                 .task {
                     podcastPlayerManager.observeSessionState(viewModel.sessionState)
@@ -30,6 +32,12 @@ struct MacMagazineApp: App {
 }
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
+
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {}
 
