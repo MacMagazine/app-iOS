@@ -26,6 +26,17 @@ public struct Cookies {
         }
     }
 
+    public static func createColorSchema(_ value: String) -> HTTPCookie? {
+        return HTTPCookie(properties: [
+            .domain: mmDomain,
+            .path: "/",
+            .name: "_color_schema",
+            .value: value,
+            .secure: "true",
+            .expires: NSDate(timeIntervalSinceNow: 60)
+        ])
+    }
+
     public static func createDarkMode(_ value: String) -> HTTPCookie? {
         return HTTPCookie(properties: [
             .domain: mmDomain,
@@ -72,12 +83,64 @@ public struct Cookies {
 }
 
 public extension Cookies {
-    static func makeCookies(darkMode: Bool?) -> [HTTPCookie] {
+    @MainActor
+    static func makeCookies(
+        darkMode: Bool = true,
+        font: String? = nil,
+        removeAds: Bool? = false
+    ) -> [HTTPCookie] {
         var cookies = [HTTPCookie]()
-        if let darkMode,
-           let darkModeCookie = Cookies.createDarkMode(darkMode ? "true" : "false") {
+
+        if let darkModeCookie = Cookies.createDarkMode(darkMode ? "true" : "false") {
             cookies.append(darkModeCookie)
         }
+        if let colorSchemaCookie = Cookies.createColorSchema(darkMode ? "dark" : "light") {
+            cookies.append(colorSchemaCookie)
+        }
+
+        if let fontCookie = Cookies.createFont(font ?? Self.fontSizeUserAgent) {
+            cookies.append(fontCookie)
+        }
+
+        if let removeAdsCookie = Cookies.createPurchased(removeAds == true ? "true" : "false") {
+            cookies.append(removeAdsCookie)
+        }
+
         return cookies
+    }
+}
+
+#if os(iOS) || os(visionOS)
+import UIKit
+
+private extension Cookies {
+    @MainActor
+    static var fontSizeUserAgent: String {
+        let contentSize: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+        if contentSize == .unspecified {
+            return "large"
+        }
+        let size = contentSize.rawValue.replacingOccurrences(of: "UICTContentSizeCategory", with: "")
+            .replacingOccurrences(of: "X", with: "Extra")
+            .replacingOccurrences(of: "L", with: "Large")
+            .replacingOccurrences(of: "S", with: "Small")
+            .replacingOccurrences(of: "M", with: "Medium")
+            .llamaCase()
+
+        return size
+    }
+}
+#else
+private extension Cookies {
+    @MainActor
+    static var fontSizeUserAgent: String {
+        "large"
+    }
+}
+#endif
+
+extension String {
+    func llamaCase() -> String {
+        return "\(self.first?.lowercased() ?? "")\(self.dropFirst())"
     }
 }

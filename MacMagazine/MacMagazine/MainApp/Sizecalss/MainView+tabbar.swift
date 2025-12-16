@@ -1,4 +1,4 @@
-import MMLiveLibrary
+import MacMagazineUILibrary
 import PodcastLibrary
 import SettingsLibrary
 import SwiftUI
@@ -32,7 +32,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .live: MMLiveWebView(colorSchema: viewModel.settingsViewModel.colorSchema)
+        case .live: MMWebView(url: "https://macmagazine.com.br/live")
         default:
             ContentUnavailableView(
                 "Página em construção",

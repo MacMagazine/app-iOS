@@ -19,6 +19,7 @@ struct MacMagazineApp: App {
                 .environment(viewModel)
                 .environment(viewModel.settingsViewModel)
                 .environment(podcastPlayerManager)
+                .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
                 .environmentObject(viewModel.sessionState)
                 .environmentObject(viewModel.analytics)
                 .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
