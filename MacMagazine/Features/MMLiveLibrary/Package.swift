@@ -11,11 +11,12 @@ let package = Package(
     ],
 	dependencies: [
         .package(name: "MacMagazineLibrary", path: "../MacMagazineLibrary"),
+        .package(name: "MacMagazineUILibrary", path: "../MacMagazineUILibrary"),
         .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main")
 	],
     targets: [
         .target(name: "MMLiveLibrary",
-				dependencies: ["MacMagazineLibrary",
+				dependencies: ["MacMagazineLibrary", "MacMagazineUILibrary",
                     .product(name: "Network", package: "Libraries"),
                     .product(name: "Storage", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries")

@@ -1,4 +1,5 @@
 import MacMagazineLibrary
+import MacMagazineUILibrary
 import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
@@ -78,7 +79,7 @@ private extension SocialView {
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
         case .instagram:
-            InstagramWebView(colorSchema: viewModel.settingsViewModel.colorSchema)
+            MMWebView(url: "https://macmagazine.com.br/posts-instagram-app/")
         }
     }
 
