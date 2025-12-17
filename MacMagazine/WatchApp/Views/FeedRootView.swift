@@ -58,18 +58,18 @@ struct FeedRootView: View {
     @ViewBuilder
     private var rootContent: some View {
         switch viewModel.status {
-            case .loading:
-                ProgressView("Carregando…")
+        case .loading:
+            ProgressView("Carregando…")
 
-            case .error(let reason):
-                errorView(reason: reason)
+        case .error(let reason):
+            errorView(reason: reason)
 
-            case .done:
-                if items.isEmpty {
-                    emptyView
-                } else {
-                    carouselRowScreen(items: items)
-                }
+        case .done:
+            if items.isEmpty {
+                emptyView
+            } else {
+                carouselRowScreen(items: items)
+            }
         }
     }
 
