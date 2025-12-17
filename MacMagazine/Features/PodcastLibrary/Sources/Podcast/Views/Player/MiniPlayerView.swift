@@ -10,13 +10,27 @@ struct MiniPlayerView: View {
     @Bindable var playerManager: PodcastPlayerManager
 
     let currentPodcast: PodcastDB
+    let appColorScheme: ColorScheme
+
+    private var controlsColor: Color {
+        switch appColorScheme {
+        case .dark:
+            return .white
+        case .light:
+            return .black
+        @unknown default:
+            return .primary
+        }
+    }
 
     init(
         playerManager: PodcastPlayerManager,
-        currentPodcast: PodcastDB
+        currentPodcast: PodcastDB,
+        appColorScheme: ColorScheme
     ) {
         self.playerManager = playerManager
         self.currentPodcast = currentPodcast
+        self.appColorScheme = appColorScheme
     }
 
     var body: some View {
@@ -87,6 +101,7 @@ private extension MiniPlayerView {
 
                 }
             }
+            .foregroundStyle(controlsColor)
             .contentShape(Rectangle())
         }
     }
