@@ -1,7 +1,7 @@
 import FeedLibrary
 import StorageLibrary
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct WatchApp: App {
@@ -13,6 +13,7 @@ struct WatchApp: App {
             FeedRootView(
                 viewModel: FeedRootViewModel(
                     feedViewModel: FeedViewModel(
+                        network: nil,
                         storage: database
                     )
                 )

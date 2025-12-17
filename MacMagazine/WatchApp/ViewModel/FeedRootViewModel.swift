@@ -106,7 +106,6 @@ final class FeedRootViewModel: ObservableObject {
     }
 }
 
-
 // MARK: - Preview Support
 
 #if DEBUG

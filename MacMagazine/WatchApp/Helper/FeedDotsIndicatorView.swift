@@ -34,7 +34,6 @@ public struct FeedDotsIndicatorView: View {
     }
 }
 
-
 #if DEBUG
 #Preview {
     ZStack {
