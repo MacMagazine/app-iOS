@@ -21,4 +21,7 @@ public extension EnvironmentValues {
 
     @MainActor @Entry
     var isSidebarVisible: Bool = false
+
+    @MainActor @Entry
+    var removeAds: Bool = false
 }

@@ -1,4 +1,4 @@
-import MMLiveLibrary
+import MacMagazineUILibrary
 import PodcastLibrary
 import SettingsLibrary
 import SwiftUI
@@ -122,7 +122,7 @@ private extension MainView {
         case AppTabs.news: NewsView()
         case AppTabs.social: SocialView()
         case AppTabs.settings: SettingsView()
-        case AppTabs.live: MMLiveWebView(colorSchema: viewModel.settingsViewModel.colorSchema)
+        case AppTabs.live: MMWebView(url: "https://macmagazine.com.br/live")
         case Social.videos: SocialView()
         case Social.podcast: SocialView()
         case Social.instagram: SocialView()
