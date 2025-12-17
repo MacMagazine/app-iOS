@@ -78,7 +78,7 @@ public class FeedViewModel {
     public func getWatchFeed() async throws -> [FeedDB] {
         do {
             status = .loading
-            let feed = try await fetch(category: .news, page: 0)
+            let feed = try await fetch(category: .news, page: 0, parseFullContent: true)
             let watchData = Array(feed.prefix(10)).toFeedDB
             storage.save(feed: watchData)
             status = .done
@@ -91,7 +91,11 @@ public class FeedViewModel {
 }
 
 extension FeedViewModel {
-    private func fetch(category: Category, page: Int) async throws -> [XMLPost] {
+    private func fetch(
+        category: Category,
+        page: Int,
+        parseFullContent: Bool = false
+    ) async throws -> [XMLPost] {
         do {
             let data = try await networkService.fetch(category: category, page: page)
             return try await withCheckedThrowingContinuation { continuation in
@@ -99,7 +103,7 @@ extension FeedViewModel {
                     data,
                     category: category.rawValue,
                     numberOfPosts: -1,
-                    parseFullContent: false,
+                    parseFullContent: parseFullContent,
                     continuation: continuation)
             }
 
