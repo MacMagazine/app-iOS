@@ -158,7 +158,7 @@ struct FeedRootView: View {
 
     private func currentPost(items: [FeedDB]) -> FeedDB? {
         guard !items.isEmpty else { return nil }
-        let index = viewModel.clampIndex(viewModel.selectedIndex, count: items.count)
+        let index = viewModel.clampIndex(viewModel.selectedIndex, quantity: items.count)
         return items[index]
     }
 

@@ -39,12 +39,12 @@ struct FeedDetailView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(post.title)
-                .font(.system(size: 14))
+                .font(.headline)
                 .bold()
                 .lineLimit(3)
 
             Text(post.dateText)
-                .font(.system(size: 11))
+                .font(.footnote)
                 .foregroundStyle(.secondary)
         }
     }
@@ -60,7 +60,7 @@ struct FeedDetailView: View {
                 verticalSpacing: 6
             ) { tag in
                 Text(tag)
-                    .font(.system(size: 8, weight: .semibold))
+                    .font(.caption2)
                     .foregroundStyle(.primary)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -80,7 +80,7 @@ struct FeedDetailView: View {
                 .padding(.vertical, 4)
 
             Text(content)
-                .font(.system(size: 12))
+                .font(.body)
                 .multilineTextAlignment(.leading)
         }
     }

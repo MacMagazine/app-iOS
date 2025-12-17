@@ -100,9 +100,9 @@ final class FeedRootViewModel: ObservableObject {
         return bestIndex
     }
 
-    func clampIndex(_ index: Int, count: Int) -> Int {
-        guard count > 0 else { return 0 }
-        return min(max(index, 0), count - 1)
+    func clampIndex(_ index: Int, quantity: Int) -> Int {
+        guard quantity > 0 else { return 0 }
+        return min(max(index, 0), quantity - 1)
     }
 }
 
