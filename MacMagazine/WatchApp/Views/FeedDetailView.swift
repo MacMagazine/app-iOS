@@ -103,7 +103,8 @@ struct FeedDetailView: View {
 }
 
 // MARK: - Preview
-
+#if DEBUG
 #Preview {
     FeedDetailView(viewModel: .preview(), post: .previewItem)
 }
+#endif

@@ -31,6 +31,10 @@ extension FeedDB {
         guard !artworkURL.isEmpty else { return nil }
         return URL(string: artworkURL)
     }
+}
+
+#if DEBUG
+extension FeedDB {
 
     static var previewItem: FeedDB {
         FeedDB(
@@ -64,3 +68,4 @@ extension FeedDB {
         }
     }
 }
+#endif

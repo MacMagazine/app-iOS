@@ -1,8 +1,16 @@
 import FeedLibrary
+import SwiftData
 import SwiftUI
 import WatchKit
 
 struct FeedRootView: View {
+
+    // MARK: - SwiftData
+
+    @Environment(\.modelContext) private var modelContext
+
+    @Query(sort: \FeedDB.pubDate, order: .reverse)
+    private var items: [FeedDB]
 
     // MARK: - State
 
@@ -21,12 +29,12 @@ struct FeedRootView: View {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle {
-                    if viewModel.items.isEmpty {
+                    if items.isEmpty {
                         Text("MacMagazine")
                             .font(.system(size: 12))
                     }
 
-                    Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(viewModel.items.count)")
+                    Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
                         .font(.system(size: 12))
                         .frame(alignment: .trailing)
                         .multilineTextAlignment(.trailing)
@@ -37,9 +45,7 @@ struct FeedRootView: View {
                     await viewModel.refresh()
                 }
                 .task {
-                    if viewModel.items.isEmpty {
-                        await viewModel.loadInitial()
-                    }
+                    await viewModel.loadInitial(hasItems: !items.isEmpty)
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
                     FeedDetailView(viewModel: viewModel, post: payload.post)
@@ -52,24 +58,24 @@ struct FeedRootView: View {
     @ViewBuilder
     private var rootContent: some View {
         switch viewModel.status {
-        case .loading:
-            ProgressView("Carregando…")
+            case .loading:
+                ProgressView("Carregando…")
 
-        case .error(let reason):
-            errorView(reason: reason)
+            case .error(let reason):
+                errorView(reason: reason)
 
-        case .done:
-            if viewModel.items.isEmpty {
-                emptyView
-            } else {
-                carouselFullScreen(items: viewModel.items)
-            }
+            case .done:
+                if items.isEmpty {
+                    emptyView
+                } else {
+                    carouselRowScreen(items: items)
+                }
         }
     }
 
     // MARK: - Full Screen Carousel
 
-    private func carouselFullScreen(items: [FeedDB]) -> some View {
+    private func carouselRowScreen(items: [FeedDB]) -> some View {
         GeometryReader { geometry in
             let size = geometry.size
 
@@ -77,7 +83,7 @@ struct FeedRootView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(Array(items.enumerated()), id: \.element.postId) { index, post in
-                            FeedFullScreenRowView(post: post)
+                            FeedRowView(post: post)
                                 .frame(width: size.width, height: size.height)
                                 .id(index)
                                 .reportFeedRowPosition(postId: post.postId)
@@ -109,7 +115,6 @@ struct FeedRootView: View {
                 }
 
                 FeedDotsIndicatorView(
-                    axis: .vertical,
                     count: items.count,
                     selectedIndex: viewModel.selectedIndex
                 )
@@ -179,19 +184,51 @@ struct FeedRootView: View {
     }
 
     private var emptyView: some View {
-        VStack(spacing: 8) {
-            Text("Sem itens")
-                .font(.headline)
+        ScrollView {
+            VStack(spacing: 8) {
+                Text("Sem itens")
+                    .font(.headline)
 
-            Text("Puxe para atualizar.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+                Text("Puxe para atualizar.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, minHeight: WKInterfaceDevice.current().screenBounds.height * 0.8)
         }
     }
 }
 
 // MARK: - Preview
 
-#Preview("Carousel Full Screen") {
-    FeedRootView(viewModel: .preview())
+#if DEBUG
+private struct FeedRootPreviewHost: View {
+
+    let container: ModelContainer
+
+    init() {
+        let schema = Schema([FeedDB.self])
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+
+        do {
+            container = try ModelContainer(for: schema, configurations: [config])
+
+            FeedDB.previewItems.forEach { item in
+                container.mainContext.insert(item)
+            }
+
+            try container.mainContext.save()
+        } catch {
+            fatalError("Failed to create preview container: \(error)")
+        }
+    }
+
+    var body: some View {
+        FeedRootView(viewModel: .preview())
+            .modelContainer(container)
+    }
 }
+
+#Preview("Carousel Full Screen") {
+    FeedRootPreviewHost()
+}
+#endif

@@ -1,30 +1,14 @@
 import SwiftUI
 
-enum IndicatorAxis {
-    case horizontal
-    case vertical
-}
-
 // MARK: - Dots Indicator
 
 public struct FeedDotsIndicatorView: View {
-    let axis: IndicatorAxis
     let count: Int
     let selectedIndex: Int
 
     public var body: some View {
-        Group {
-            switch axis {
-            case .vertical:
-                VStack(spacing: 5) {
-                    dots
-                }
-
-            case .horizontal:
-                HStack(spacing: 6) {
-                    dots
-                }
-            }
+        VStack(spacing: 5) {
+            dots
         }
         .padding(6)
         .glassEffect(.clear)
@@ -50,16 +34,12 @@ public struct FeedDotsIndicatorView: View {
     }
 }
 
-#Preview("Vertical") {
-    ZStack {
-        Color.gray
-        FeedDotsIndicatorView(axis: .vertical, count: 10, selectedIndex: 3)
-    }
-}
 
-#Preview("Horizontal") {
+#if DEBUG
+#Preview {
     ZStack {
         Color.gray
-        FeedDotsIndicatorView(axis: .horizontal, count: 5, selectedIndex: 2)
+        FeedDotsIndicatorView(count: 10, selectedIndex: 3)
     }
 }
+#endif
