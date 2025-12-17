@@ -37,7 +37,7 @@ public struct MMWebView: View {
                 )
             }
         }
-        .onAppear {
+        .task {
             controller.onStart = {
                 isLoading = true
                 loadError = nil

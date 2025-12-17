@@ -124,8 +124,8 @@ struct FullPlayerView: View {
                         Spacer()
 
                         progressSlider
-                        volumeSlider
                         playbackControls
+                        volumeSlider
                     }
                     .padding(.vertical, 40)
                 }
@@ -146,8 +146,8 @@ struct FullPlayerView: View {
                     Spacer()
 
                     progressSlider
-                    volumeSlider
                     playbackControls
+                    volumeSlider
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 40)

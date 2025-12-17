@@ -11,6 +11,7 @@ public extension View {
 private struct PodcastMiniPlayerModifier: ViewModifier {
     @Environment(PodcastPlayerManager.self) private var manager
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+    @Environment(\.colorScheme) private var colorScheme
     @Namespace private var animation
 
     public init() {}
@@ -22,7 +23,8 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                     .safeAreaInset(edge: .bottom, spacing: 16) {
                         MiniPlayerView(
                             playerManager: manager,
-                            currentPodcast: current
+                            currentPodcast: current,
+                            colorScheme: colorScheme
                         )
                         .frame(maxWidth: 480, alignment: .center)
                         .frame(height: 60)
@@ -35,7 +37,8 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                     .tabViewBottomAccessory {
                         MiniPlayerView(
                             playerManager: manager,
-                            currentPodcast: current
+                            currentPodcast: current,
+                            colorScheme: colorScheme
                         )
                         .matchedTransitionSource(id: "MINIPLAYER", in: animation)
                         .padding(.horizontal, 8)
