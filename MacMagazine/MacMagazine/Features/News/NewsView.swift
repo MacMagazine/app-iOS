@@ -1,10 +1,12 @@
 import MacMagazineLibrary
+import MacMagazineUILibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 struct NewsView: View {
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(MainViewModel.self) private var viewModel
 
@@ -17,15 +19,7 @@ struct NewsView: View {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content.padding(.top)
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                menuView
-            }
-            ToolbarItem(placement: .principal) {
-                optionsView
-            }
-        }
+        .toolbar(show: !shouldUseSidebar, menu: menuView, options: optionsView)
     }
 }
 

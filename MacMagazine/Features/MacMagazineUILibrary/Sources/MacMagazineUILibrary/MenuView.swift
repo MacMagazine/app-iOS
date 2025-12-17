@@ -1,3 +1,4 @@
+import MacMagazineLibrary
 import SwiftUI
 
 public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue: StringProtocol {
@@ -7,20 +8,30 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
 
     public var body: some View {
         ScrollView(.horizontal) {
-            HStack(alignment: .firstTextBaseline, spacing: 2) {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
                 ForEach(menu, id: \.self) { option in
                     Button(action: { selected = option },
                            label: {
                         Text(option.rawValue)
                             .font(.headline)
-                            .rounded(
-                                color: theme.button.primary.color ?? .blue,
-                                fill: theme.button.secondary.color ?? .gray
-                            )
                     })
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .glassEffect(.clear, in: .rect(cornerRadius: 24))
                 }
             }
-            .padding(.vertical)
+        }
+        .mask {
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: .clear, location: 0),
+                    .init(color: .black, location: 0.05),
+                    .init(color: .black, location: 0.95),
+                    .init(color: .clear, location: 1)
+                ]),
+                startPoint: .leading,
+                endPoint: .trailing
+            )
         }
     }
 

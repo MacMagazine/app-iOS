@@ -10,13 +10,27 @@ struct MiniPlayerView: View {
     @Bindable var playerManager: PodcastPlayerManager
 
     let currentPodcast: PodcastDB
+    let colorScheme: ColorScheme
+
+    private var controlsColor: Color {
+        switch colorScheme {
+        case .dark:
+            return .white
+        case .light:
+            return .black
+        @unknown default:
+            return .primary
+        }
+    }
 
     init(
         playerManager: PodcastPlayerManager,
-        currentPodcast: PodcastDB
+        currentPodcast: PodcastDB,
+        colorScheme: ColorScheme
     ) {
         self.playerManager = playerManager
         self.currentPodcast = currentPodcast
+        self.colorScheme = colorScheme
     }
 
     var body: some View {
@@ -66,6 +80,7 @@ private extension MiniPlayerView {
                         Image(systemName: "gobackward.15")
                             .font(.system(size: 20))
                     }
+                    .buttonStyle(.plain)
 
                     Button {
                         playerManager.togglePlayPause()
@@ -74,6 +89,7 @@ private extension MiniPlayerView {
                         Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 24))
                     }
+                    .buttonStyle(.plain)
 
                     Button {
                         playerManager.skip(by: 15)
@@ -81,11 +97,12 @@ private extension MiniPlayerView {
                         Image(systemName: "goforward.15")
                             .font(.system(size: 20))
                     }
+                    .buttonStyle(.plain)
                 }
             }
+            .foregroundStyle(controlsColor)
             .contentShape(Rectangle())
         }
-        .foregroundColor(.primary)
     }
 
     @ViewBuilder
