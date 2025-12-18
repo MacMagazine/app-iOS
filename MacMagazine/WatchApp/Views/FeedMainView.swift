@@ -46,7 +46,7 @@ struct FeedMainView: View {
                     )
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
-                    FeedDetailView(viewModel: viewModel, post: payload.post)
+                    FeedDetailView(viewModel: viewModel, post: payload)
                 }
         }
     }
@@ -192,7 +192,7 @@ struct FeedMainView: View {
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
                             .onTapGesture {
-                                viewModel.selectedPostForDetail = SelectedPost(post: post)
+                                viewModel.selectedPostForDetail = post
                             }
                             .onLongPressGesture {
                                 viewModel.showContextMenu = true

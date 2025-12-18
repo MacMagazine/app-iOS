@@ -14,7 +14,7 @@ final class FeedMainViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     @Published var showActions: Bool = false
     @Published var showContextMenu: Bool = false
-    @Published var selectedPostForDetail: SelectedPost?
+    @Published var selectedPostForDetail: FeedDB?
     @Published private(set) var isRefreshing: Bool = false
 
     // MARK: - Private
