@@ -50,7 +50,7 @@ private extension CustomTabView {
         viewModel.tabs.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
             await viewModel.change(viewModel.tabs)
-            analytics.track(.generic(name: "tab_order", item: viewModel.tabs))
+            analytics.track(.generic(name: AnalyticsConstants.GenericEvent.tabOrder.name, item: viewModel.tabs))
         }
     }
 

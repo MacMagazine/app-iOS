@@ -49,7 +49,10 @@ private extension AboutView {
     var optionsView: some View {
         Button(action: {
             viewModel.composeMessage()
-            analytics.track(.buttonTap(buttonId: "report_problem", screen: "Ajustes"))
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.reportProblem.id,
+                screen: AnalyticsConstants.Screen.settings.name
+            ))
         },
                label: {
             Text("Relatar problema/bug no app")
@@ -58,7 +61,10 @@ private extension AboutView {
 
         Button(action: {
             presentingContent = .terms
-            analytics.track(.buttonTap(buttonId: "terms_conditions", screen: "Ajustes"))
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.termsConditions.id,
+                screen: AnalyticsConstants.Screen.settings.name
+            ))
         },
                label: {
             Text(AboutViewModel.ButtonAction.terms.title)
@@ -67,7 +73,10 @@ private extension AboutView {
 
         Button(action: {
             presentingContent = .privacy
-            analytics.track(.buttonTap(buttonId: "privacy_policy", screen: "Ajustes"))
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.privacyPolicy.id,
+                screen: AnalyticsConstants.Screen.settings.name
+            ))
         },
                label: {
             Text(AboutViewModel.ButtonAction.privacy.title)

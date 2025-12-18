@@ -46,7 +46,10 @@ private extension PushOptionsView {
         }
         .pickerStyle(.segmented)
         .onChange(of: viewModel.type) { _, value in
-            analytics.track(.buttonTap(buttonId: "push_notifications \(value)", screen: "Ajustes > Posts"))
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.pushNotifications("\(value)").id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             #endif

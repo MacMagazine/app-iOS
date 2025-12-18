@@ -46,7 +46,7 @@ private extension GlassCardView {
             title: data.title,
             url: data.urlToShare,
             action: {
-                analytics.track(.buttonTap(buttonId: "share", screen: data.type.screenName))
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.share.id, screen: data.type.screenName))
             }
         )
 

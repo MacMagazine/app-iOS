@@ -37,7 +37,7 @@ extension MainView {
         case .live:
             MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
                 .trackScreen(
-                    tab.rawValue,
+                    tab.analyticsScreen?.name ?? tab.rawValue,
                     previous: nil,
                     analytics: viewModel.analytics
                 )

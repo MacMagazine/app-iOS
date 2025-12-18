@@ -21,7 +21,10 @@ struct AppearanceView: View {
         }
 
         .onChange(of: viewModel.mode) { _, value in
-            analytics.track(.buttonTap(buttonId: "tema \(value)", screen: "Ajustes > Aparência"))
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.theme("\(value)").id,
+                screen: AnalyticsConstants.Screen.settingsAppearance.name
+            ))
             Task { await viewModel.change(value) }
         }
     }

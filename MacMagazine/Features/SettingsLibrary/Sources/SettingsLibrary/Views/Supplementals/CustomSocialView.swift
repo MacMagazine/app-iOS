@@ -48,7 +48,7 @@ private extension CustomSocialView {
         viewModel.social.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
             await viewModel.change(viewModel.social)
-            analytics.track(.generic(name: "social_order", item: viewModel.social))
+            analytics.track(.generic(name: AnalyticsConstants.GenericEvent.socialOrder.name, item: viewModel.social))
         }
     }
 }

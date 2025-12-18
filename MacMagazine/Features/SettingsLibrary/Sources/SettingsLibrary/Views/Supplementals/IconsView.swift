@@ -21,7 +21,7 @@ struct IconsView: View {
                                         set: { value in viewModel.error = value })) {
                 Button("Ok", role: .cancel) {
                     analytics.track(
-                        .error(code: "", message: "failed changing icon", screen: "Ajustes > Aparência")
+                        .error(code: "", message: "failed changing icon", screen: AnalyticsConstants.Screen.settingsAppearance.name)
                     )
                 }
             }
@@ -54,7 +54,10 @@ private extension IconsView {
 
             ForEach(IconType.allCases, id: \.self) { type in
                 Button(action: {
-                    analytics.track(.buttonTap(buttonId: "icone \(type)", screen: "Ajustes > Aparência"))
+                    analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.icon(type.rawValue).id,
+                        screen: AnalyticsConstants.Screen.settingsAppearance.name
+                    ))
                     Task { await viewModel.change(type) }
                 }, label: {
                     VStack(spacing: 8) {

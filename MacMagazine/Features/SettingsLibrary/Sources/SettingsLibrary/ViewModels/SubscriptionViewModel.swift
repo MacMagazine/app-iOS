@@ -130,7 +130,7 @@ private extension SubscriptionViewModel {
 
         case let .error(reason):
             analytics?.track(
-                .error(code: "", message: reason.localizedDescription, screen: "Ajustes")
+                .error(code: "", message: reason.localizedDescription, screen: AnalyticsConstants.Screen.settings.name)
             )
         case .pending:
             analytics?.track(.purchasePending)

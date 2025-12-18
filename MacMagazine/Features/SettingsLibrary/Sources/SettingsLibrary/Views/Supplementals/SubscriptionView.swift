@@ -106,7 +106,7 @@ extension SubscriptionView {
         if case .purchasable(let products) = viewModel.status, !products.isEmpty {
             Button(action: {
                 viewModel.restore()
-                analytics.track(.buttonTap(buttonId: "restore_purchase", screen: "Ajustes"))
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.restorePurchase.id, screen: AnalyticsConstants.Screen.settings.name))
             }, label: {
                 Text("Recuperar compra").foregroundStyle(theme.main.tint.color ?? .blue)
             })
@@ -120,7 +120,7 @@ extension SubscriptionView {
            UIApplication.shared.canOpenURL(url) {
             Button(action: {
                 openURL(url)
-                analytics.track(.buttonTap(buttonId: "manage_subscription", screen: "Ajustes"))
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.manageSubscription.id, screen: AnalyticsConstants.Screen.settings.name))
             },
                    label: {
                 Text("Gerenciar assinatura").foregroundStyle(theme.main.tint.color ?? .blue)
@@ -140,7 +140,7 @@ extension SubscriptionView {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 #endif
             isPresentingLoginPatrao.toggle()
-            analytics.track(.buttonTap(buttonId: "login_patrao", screen: "Ajustes"))
+            analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.loginPatrao.id, screen: AnalyticsConstants.Screen.settings.name))
         }, label: {
             Text("Sou patrão via Patreon/Catarse").foregroundStyle(theme.main.tint.color ?? .blue)
         })
@@ -163,7 +163,7 @@ extension SubscriptionView {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             #endif
             viewModel.isPatrao = false
-            analytics.track(.buttonTap(buttonId: "logoff_patrao", screen: "Ajustes"))
+            analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.logoffPatrao.id, screen: AnalyticsConstants.Screen.settings.name))
         }, label: {
             Text("Logoff de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
         })
