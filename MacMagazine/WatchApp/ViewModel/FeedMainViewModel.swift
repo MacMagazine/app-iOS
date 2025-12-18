@@ -20,7 +20,6 @@ final class FeedMainViewModel {
     // MARK: - Private
 
     private let feedViewModel: FeedViewModel
-    private var didLoadInitial: Bool = false
 
     // MARK: - Init
     init(feedViewModel: FeedViewModel) {
@@ -29,18 +28,6 @@ final class FeedMainViewModel {
     }
 
     // MARK: - Public API
-
-    func loadInitialIfNeeded(hasItems: Bool, modelContext: ModelContext) async {
-        guard !didLoadInitial else { return }
-        didLoadInitial = true
-
-        if hasItems {
-            status = .done
-            return
-        }
-
-        await refresh(modelContext: modelContext)
-    }
 
     func refresh(modelContext: ModelContext) async {
         guard !isRefreshing else { return }

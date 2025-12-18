@@ -38,12 +38,9 @@ struct FeedMainView: View {
         NavigationStack {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
-                .task(id: items.count) {
+                .task {
                     guard !isRunningForPreviews else { return }
-                    await viewModel.loadInitialIfNeeded(
-                        hasItems: !items.isEmpty,
-                        modelContext: modelContext
-                    )
+                    await viewModel.refresh(modelContext: modelContext)
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
                     FeedDetailView(viewModel: viewModel, post: payload)
