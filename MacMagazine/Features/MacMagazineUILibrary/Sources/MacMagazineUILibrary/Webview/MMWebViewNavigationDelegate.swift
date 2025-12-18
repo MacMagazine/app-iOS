@@ -2,7 +2,7 @@ import SwiftUI
 import WebKit
 
 @MainActor
-public class MMWebViewController: NSObject {
+class MMWebViewController: NSObject {
     var onStart: (() -> Void)?
     var onFinish: (() -> Void)?
     var onFail: ((Error) -> Void)?
