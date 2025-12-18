@@ -56,23 +56,23 @@ struct FeedMainView: View {
     @ViewBuilder
     private var rootContent: some View {
         switch viewModel.status {
-        case .loading:
-            loadingView
-                .navigationTitle { navigationTitle("MacMagazine") }
+            case .loading:
+                loadingView
+                    .navigationTitle { navigationTitle("MacMagazine") }
 
-        case .error(let reason):
-            errorScreen(reason: reason)
+            case .error(let reason):
+                errorScreen(reason: reason)
 
-        case .done:
-            if items.isEmpty {
-                emptyScreen
-            } else {
-                carouselRowScreen(items: items)
-                    .navigationTitle {
-                        navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
-                            .offset(y: 14)
-                    }
-            }
+            case .done:
+                if items.isEmpty {
+                    emptyScreen
+                } else {
+                    carouselRowScreen(items: items)
+                        .navigationTitle {
+                            navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
+                                .offset(y: 14)
+                        }
+                }
         }
     }
 
@@ -230,21 +230,17 @@ struct FeedMainView: View {
     // MARK: - Context Menu Sheet
 
     private func contextMenuSheet(items: [FeedDB]) -> some View {
-        return ScrollView {
-            VStack(spacing: 12) {
-                Button {
-                    viewModel.showContextMenu = false
-                    Task {
-                        await viewModel.refresh(modelContext: modelContext)
-                    }
-                } label: {
-                    Label("Atualizar posts", systemImage: "arrow.clockwise")
-                        .frame(maxWidth: .infinity, alignment: .leading)
+        VStack(alignment: .center, spacing: 12) {
+            Button {
+                viewModel.showContextMenu = false
+                Task {
+                    await viewModel.refresh(modelContext: modelContext)
                 }
-                .glassEffect(.clear)
+            } label: {
+                Label("Atualizar posts", systemImage: "arrow.clockwise")
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+            .glassEffect(.clear)
         }
     }
 
