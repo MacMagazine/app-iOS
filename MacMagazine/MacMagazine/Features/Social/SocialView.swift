@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import PodcastLibrary
@@ -72,14 +73,29 @@ private extension SocialView {
                 favorite: $favorite,
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
+                .trackScreen(
+                    viewModel.social.rawValue,
+                    previous: nil,
+                    analytics: viewModel.analytics
+                )
         case .podcast:
             PodcastView(
                 storage: viewModel.storage,
                 favorite: $favorite,
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
+                .trackScreen(
+                    viewModel.social.rawValue,
+                    previous: nil,
+                    analytics: viewModel.analytics
+                )
         case .instagram:
             MMWebView(url: "https://macmagazine.com.br/posts-instagram-app/", cacheKey: "macmagazine_instagram")
+                .trackScreen(
+                    viewModel.social.rawValue,
+                    previous: nil,
+                    analytics: viewModel.analytics
+                )
         }
     }
 
@@ -87,6 +103,10 @@ private extension SocialView {
         Button(action: {
             withAnimation {
                 favorite.toggle()
+                viewModel.analytics.track(
+                    .buttonTap(buttonId: "favorite_button", screen: viewModel.social.rawValue),
+                    providers: [.firebase]
+                )
             }
         }, label: {
             Image(systemName: favorite ? "star.fill" : "star")

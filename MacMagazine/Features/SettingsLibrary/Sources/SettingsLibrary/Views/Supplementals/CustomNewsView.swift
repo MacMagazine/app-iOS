@@ -1,7 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
 struct CustomNewsView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = CustomizationViewModel()
@@ -46,6 +48,7 @@ private extension CustomNewsView {
         viewModel.news.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
             await viewModel.change(viewModel.news)
+            analytics.track(.buttonTap(buttonId: "failed changing icon", screen: "Ajustes > Aparência"), providers: [.firebase])
         }
     }
 }

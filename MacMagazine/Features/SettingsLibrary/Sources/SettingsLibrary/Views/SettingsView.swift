@@ -1,8 +1,10 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 public struct SettingsView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) var theme: ThemeColor
 
     @State private var presentingContent = AboutViewModel.ButtonAction.none
@@ -21,18 +23,28 @@ public struct SettingsView: View {
                         url: presentingContent.url,
                         isPresenting: Binding(get: { presentingContent != .none },
                                               set: { _ in presentingContent = .none }))
+                .trackScreen(
+                    presentingContent.title,
+                    previous: nil,
+                    analytics: analytics
+                )
             }
 
-                                        .sheet(isPresented: $isPresentingLoginPatrao) {
-                                            let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
-                                                                                      isPatrao: $isPatrao,
-                                                                                      openUrl: $urlToOpen)
-                                            Webview(title: "Login para patrões",
-                                                    url: URLs.login,
-                                                    isPresenting: $isPresentingLoginPatrao,
-                                                    navigationDelegate: webviewController,
-                                                    userScripts: webviewController.userScripts)
-                                        }
+            .sheet(isPresented: $isPresentingLoginPatrao) {
+                let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
+                                                          isPatrao: $isPatrao,
+                                                          openUrl: $urlToOpen)
+                Webview(title: "Login para patrões",
+                        url: URLs.login,
+                        isPresenting: $isPresentingLoginPatrao,
+                        navigationDelegate: webviewController,
+                        userScripts: webviewController.userScripts)
+                .trackScreen(
+                    "Login para patrões",
+                    previous: nil,
+                    analytics: analytics
+                )
+            }
     }
 }
 
@@ -53,6 +65,11 @@ private extension SettingsView {
             .navigationTitle(AppTabs.settings.rawValue)
         }
         .contentMargins(.top, 20, for: .scrollContent)
+        .trackScreen(
+            "Ajustes",
+            previous: nil,
+            analytics: analytics
+        )
     }
 
     var appearance: some View {
@@ -67,6 +84,11 @@ private extension SettingsView {
             .navigationTitle("Aparência")
             .navigationBarTitleDisplayMode(.inline)
             .environment(\.editMode, $editMode)
+            .trackScreen(
+                "Ajustes > Aparência",
+                previous: nil,
+                analytics: analytics
+            )
 
         } label: {
             Label("Aparência", systemImage: "highlighter.badge.ellipsis")

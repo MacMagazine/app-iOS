@@ -1,8 +1,10 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 struct PushOptionsView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = PushOptionsViewModel()
@@ -44,6 +46,7 @@ private extension PushOptionsView {
         }
         .pickerStyle(.segmented)
         .onChange(of: viewModel.type) { _, value in
+            analytics.track(.buttonTap(buttonId: "push_notifications \(value)", screen: "Ajustes > Posts"), providers: [.firebase])
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             #endif

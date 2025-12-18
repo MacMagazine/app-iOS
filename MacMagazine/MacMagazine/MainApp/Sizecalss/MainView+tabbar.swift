@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineUILibrary
 import PodcastLibrary
 import SettingsLibrary
@@ -32,7 +33,14 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .live: MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
+
+        case .live:
+            MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
+                .trackScreen(
+                    tab.rawValue,
+                    previous: nil,
+                    analytics: viewModel.analytics
+                )
         default:
             ContentUnavailableView(
                 "Página em construção",

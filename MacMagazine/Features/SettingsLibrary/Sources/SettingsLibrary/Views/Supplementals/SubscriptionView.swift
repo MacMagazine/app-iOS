@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import StoreKit
 import SwiftUI
@@ -5,6 +6,7 @@ import UIComponentsLibrary
 import UIKit
 
 struct SubscriptionView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.openURL) var openURL
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
@@ -104,6 +106,7 @@ extension SubscriptionView {
         if case .purchasable(let products) = viewModel.status, !products.isEmpty {
             Button(action: {
                 viewModel.restore()
+                analytics.track(.buttonTap(buttonId: "restore_purchase", screen: "Ajustes"), providers: [.firebase])
             }, label: {
                 Text("Recuperar compra").foregroundStyle(theme.main.tint.color ?? .blue)
             })
@@ -115,7 +118,10 @@ extension SubscriptionView {
     var manageSubscription: some View {
         if let url = URL(string: URLs.subscriptions),
            UIApplication.shared.canOpenURL(url) {
-            Button(action: { openURL(url) },
+            Button(action: {
+                openURL(url)
+                analytics.track(.buttonTap(buttonId: "manage_subscription", screen: "Ajustes"), providers: [.firebase])
+            },
                    label: {
                 Text("Gerenciar assinatura").foregroundStyle(theme.main.tint.color ?? .blue)
             })
@@ -134,6 +140,7 @@ extension SubscriptionView {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 #endif
             isPresentingLoginPatrao.toggle()
+            analytics.track(.buttonTap(buttonId: "login_patrao", screen: "Ajustes"), providers: [.firebase])
         }, label: {
             Text("Sou patrão via Patreon/Catarse").foregroundStyle(theme.main.tint.color ?? .blue)
         })
@@ -156,6 +163,7 @@ extension SubscriptionView {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             #endif
             viewModel.isPatrao = false
+            analytics.track(.buttonTap(buttonId: "logoff_patrao", screen: "Ajustes"), providers: [.firebase])
         }, label: {
             Text("Logoff de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
         })

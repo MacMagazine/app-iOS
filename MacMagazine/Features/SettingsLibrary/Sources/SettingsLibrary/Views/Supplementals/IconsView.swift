@@ -1,7 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
 struct IconsView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = IconsViewModel()
@@ -17,13 +19,18 @@ struct IconsView: View {
             .alert("Não foi possível trocar o ícone.",
                    isPresented: Binding(get: { viewModel.error },
                                         set: { value in viewModel.error = value })) {
-                Button("Ok", role: .cancel) {}
+                Button("Ok", role: .cancel) {
+                    analytics.track(
+                        .error(code: "", message: "failed changing icon", screen: "Ajustes > Aparência"),
+                        providers: [.firebase]
+                    )
+                }
             }
 
-                                        .task {
-                                            viewModel.storage = settingsViewModel.storage
-                                            viewModel.get()
-                                        }
+            .task {
+                viewModel.storage = settingsViewModel.storage
+                viewModel.get()
+            }
         }
     }
 }
@@ -48,6 +55,7 @@ private extension IconsView {
 
             ForEach(IconType.allCases, id: \.self) { type in
                 Button(action: {
+                    analytics.track(.buttonTap(buttonId: "icone \(type)", screen: "Ajustes > Aparência"), providers: [.firebase])
                     Task { await viewModel.change(type) }
                 }, label: {
                     VStack(spacing: 8) {

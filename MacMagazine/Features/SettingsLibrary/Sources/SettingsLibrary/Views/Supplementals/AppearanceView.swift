@@ -1,7 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
 struct AppearanceView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = AppearanceViewModel()
@@ -19,6 +21,7 @@ struct AppearanceView: View {
         }
 
         .onChange(of: viewModel.mode) { _, value in
+            analytics.track(.buttonTap(buttonId: "tema \(value)", screen: "Ajustes > Aparência"), providers: [.firebase])
             Task { await viewModel.change(value) }
         }
     }
