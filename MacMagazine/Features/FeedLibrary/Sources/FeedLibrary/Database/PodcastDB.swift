@@ -9,6 +9,7 @@ public final class PodcastDB {
     public var subtitle: String = ""
     public var pubDate: Date = Date()
     public var artworkURL: String = ""
+    public var link: String = ""
     public var podcastURL: String = ""
     public var podcastSize: Double = 0
     public var duration: String = ""
@@ -23,6 +24,7 @@ public final class PodcastDB {
         subtitle: String = "",
         pubDate: Date = Date(),
         artworkURL: String = "",
+        link: String = "",
         podcastURL: String = "",
         podcastSize: Double = 0,
         duration: String = "",
@@ -36,6 +38,7 @@ public final class PodcastDB {
         self.subtitle = subtitle
         self.pubDate = pubDate
         self.artworkURL = artworkURL
+        self.link = link
         self.podcastURL = podcastURL
         self.podcastSize = podcastSize
         self.duration = duration

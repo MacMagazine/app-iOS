@@ -17,7 +17,7 @@ extension PodcastDB {
             title: self.title,
             pubDate: self.pubDate,
             artworkUrl: self.artworkURL,
-            urlToShare: self.podcastURL,
+            urlToShare: self.link,
             favorite: self.favorite,
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
