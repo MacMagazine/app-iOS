@@ -56,23 +56,23 @@ struct FeedMainView: View {
     @ViewBuilder
     private var rootContent: some View {
         switch viewModel.status {
-            case .loading:
-                loadingView
-                    .navigationTitle { navigationTitle("MacMagazine") }
+        case .loading:
+            loadingView
+                .navigationTitle { navigationTitle("MacMagazine") }
 
-            case .error(let reason):
-                errorScreen(reason: reason)
+        case .error(let reason):
+            errorScreen(reason: reason)
 
-            case .done:
-                if items.isEmpty {
-                    emptyScreen
-                } else {
-                    carouselRowScreen(items: items)
-                        .navigationTitle {
-                            navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
-                                .offset(y: 14)
-                        }
-                }
+        case .done:
+            if items.isEmpty {
+                emptyScreen
+            } else {
+                carouselRowScreen(items: items)
+                    .navigationTitle {
+                        navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
+                            .offset(y: 14)
+                    }
+            }
         }
     }
 
