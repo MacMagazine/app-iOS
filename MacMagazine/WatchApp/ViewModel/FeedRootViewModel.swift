@@ -13,7 +13,9 @@ final class FeedRootViewModel: ObservableObject {
     @Published private(set) var status: FeedViewModel.Status = .loading
     @Published var selectedIndex: Int = 0
     @Published var showActions: Bool = false
+    @Published var showContextMenu: Bool = false
     @Published var selectedPostForDetail: SelectedPost?
+    @Published private(set) var isRefreshing: Bool = false
 
     // MARK: - Private
 
@@ -28,27 +30,33 @@ final class FeedRootViewModel: ObservableObject {
 
     // MARK: - Public API
 
-    func refresh() async {
+    func loadInitial(hasItems: Bool, modelContext: ModelContext) async {
+        if hasItems {
+            status = .done
+            return
+        }
+
+        await refresh(modelContext: modelContext)
+    }
+
+    func refresh(modelContext: ModelContext) async {
+        isRefreshing = true
+
+        defer {
+            isRefreshing = false
+        }
+
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
     }
 
-    func toggleActions() {
-        showActions.toggle()
-    }
-
-    func hideActions() {
-        showActions = false
-    }
-
-    func toggleFavorite(post: FeedDB) {
-        let context = feedViewModel.context
+    func toggleFavorite(post: FeedDB, modelContext: ModelContext) {
         post.favorite.toggle()
-        try? context.save()
+        try? modelContext.save()
         showActions = true
     }
 
-    // MARK: - Index Calculation
+    // MARK: - Index / Helpers
 
     func computeSelectedIndexByMidY(items: [FeedDB], positions: [String: CGPoint]) -> Int {
         guard !items.isEmpty else { return 0 }
@@ -71,45 +79,13 @@ final class FeedRootViewModel: ObservableObject {
         return bestIndex
     }
 
-    func computeSelectedIndexByMidX(items: [FeedDB], positions: [String: CGPoint]) -> Int {
-        guard !items.isEmpty else { return 0 }
-
-        let screenMidX = WKInterfaceDevice.current().screenBounds.midX
-
-        var bestIndex = 0
-        var bestDistance = CGFloat.greatestFiniteMagnitude
-
-        for (index, item) in items.enumerated() {
-            guard let point = positions[item.postId] else { continue }
-            let distance = abs(point.x - screenMidX)
-
-            if distance < bestDistance {
-                bestDistance = distance
-                bestIndex = index
-            }
-        }
-
-        return bestIndex
-    }
-
     func clampIndex(_ index: Int, quantity: Int) -> Int {
         guard quantity > 0 else { return 0 }
         return min(max(index, 0), quantity - 1)
     }
-}
 
-// MARK: - Preview Support
-
-#if DEBUG
-extension FeedRootViewModel {
-    static func preview() -> FeedRootViewModel {
-        let database = Database(models: [FeedDB.self], inMemory: true)
-        let feedVM = FeedViewModel(storage: database)
-        let viewModel = FeedRootViewModel(feedViewModel: feedVM)
-
-        viewModel.status = .done
-
-        return viewModel
+    @MainActor
+    func setStatusForPreview(_ status: FeedViewModel.Status) {
+        self.status = status
     }
 }
-#endif

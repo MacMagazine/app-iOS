@@ -3,6 +3,8 @@ import SwiftUI
 
 struct FeedDetailView: View {
 
+    @Environment(\.modelContext) private var modelContext
+
     // MARK: - Properties
 
     let post: FeedDB
@@ -22,7 +24,6 @@ struct FeedDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 header
-                categories
                 bodyText
                 footer
             }
@@ -49,28 +50,6 @@ struct FeedDetailView: View {
         }
     }
 
-    // MARK: - Categories (Flow Tags)
-
-    @ViewBuilder
-    private var categories: some View {
-        if !post.categories.isEmpty {
-            FlowTagsView(
-                tags: post.categories.map { $0.uppercased() },
-                horizontalSpacing: 6,
-                verticalSpacing: 6
-            ) { tag in
-                Text(tag)
-                    .font(.caption2)
-                    .foregroundStyle(.primary)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(.secondary.opacity(0.4))
-                    .clipShape(Capsule())
-            }
-            .allowsHitTesting(false)
-        }
-    }
-
     // MARK: - Body
 
     @ViewBuilder
@@ -93,7 +72,7 @@ struct FeedDetailView: View {
                 .padding(.top, 4)
 
             Button {
-                viewModel.toggleFavorite(post: post)
+                viewModel.toggleFavorite(post: post, modelContext: modelContext)
             } label: {
                 Image(systemName: post.favorite ? "star.fill" : "star")
             }
@@ -105,6 +84,7 @@ struct FeedDetailView: View {
 // MARK: - Preview
 #if DEBUG
 #Preview {
-    FeedDetailView(viewModel: .preview(), post: .previewItem)
+    FeedDetailView(viewModel: .preview(status: .done),
+                   post: .previewItem)
 }
 #endif

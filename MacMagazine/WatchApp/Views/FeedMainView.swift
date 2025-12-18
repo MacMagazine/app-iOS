@@ -1,4 +1,5 @@
 import FeedLibrary
+import StorageLibrary
 import SwiftData
 import SwiftUI
 import WatchKit
@@ -11,6 +12,12 @@ struct FeedMainView: View {
 
     @Query(sort: \FeedDB.pubDate, order: .reverse)
     private var items: [FeedDB]
+
+    // MARK: - Preview Guard
+
+    private var isRunningForPreviews: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
 
     // MARK: - State
 
@@ -28,21 +35,12 @@ struct FeedMainView: View {
         NavigationStack {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle {
-                    if items.isEmpty {
-                        Text("MacMagazine")
-                            .font(.system(size: 12))
-                    }
-
-                    Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(min(items.count, 10))")
-                        .font(.system(size: 12))
-                        .frame(alignment: .trailing)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(2)
-                        .offset(y: 14)
-                }
-                .task {
-                    await viewModel.refresh()
+                .task(id: items.count) {
+                    guard !isRunningForPreviews else { return }
+                    await viewModel.loadInitial(
+                        hasItems: !items.isEmpty,
+                        modelContext: modelContext
+                    )
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
                     FeedDetailView(viewModel: viewModel, post: payload.post)
@@ -56,18 +54,125 @@ struct FeedMainView: View {
     private var rootContent: some View {
         switch viewModel.status {
         case .loading:
-            ProgressView("Carregando…")
+            loadingView
+                .navigationTitle { navigationTitle() }
 
         case .error(let reason):
-            errorView(reason: reason)
+            errorScreen(reason: reason)
 
         case .done:
             if items.isEmpty {
-                emptyView
+                emptyScreen
             } else {
-                carouselRowScreen(items: Array(items.prefix(10)))
+                carouselRowScreen(items: items)
+                    .navigationTitle {
+                        Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
+                            .font(.caption)
+                            .frame(alignment: .trailing)
+                            .multilineTextAlignment(.trailing)
+                            .lineLimit(2)
+                            .offset(y: 14)
+                            .opacity(viewModel.isRefreshing ? 0 : 1)
+                    }
             }
         }
+    }
+
+    // MARK: - Navigation Title
+
+    @ViewBuilder
+    private func navigationTitle() -> some View {
+        Text("MacMagazine")
+            .font(.caption)
+            .opacity(viewModel.isRefreshing ? 0 : 1)
+    }
+
+    // MARK: - Loading
+
+    private var loadingView: some View {
+        VStack(spacing: 10) {
+            Spacer()
+
+            ProgressView()
+            Text("Carregando…")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+
+            Spacer()
+        }
+        .padding()
+    }
+
+    // MARK: - Error / Empty Screens
+
+    private func errorScreen(reason: String) -> some View {
+        statusScreen(
+            imageSystemName: "exclamationmark.triangle.fill",
+            title: "Algo deu errado",
+            message: reason,
+            buttonTitle: "Tentar novamente",
+            buttonAction: {
+                Task {
+                    await viewModel.refresh(modelContext: modelContext)
+                }
+            }
+        )
+    }
+
+    private var emptyScreen: some View {
+        statusScreen(
+            imageSystemName: "tray.fill",
+            title: "Sem itens",
+            message: "Toque abaixo para tentar carregar novamente.",
+            buttonTitle: "Atualizar",
+            buttonAction: {
+                Task {
+                    await viewModel.refresh(modelContext: modelContext)
+                }
+            }
+        )
+    }
+
+    private func statusScreen(
+        imageSystemName: String,
+        title: String,
+        message: String,
+        buttonTitle: String,
+        buttonAction: @escaping () -> Void
+    ) -> some View {
+        ZStack {
+            VStack(spacing: 10) {
+                Spacer()
+                Image(systemName: imageSystemName)
+                    .font(.system(size: 28, weight: .semibold))
+                    .symbolRenderingMode(.hierarchical)
+
+                Text(title)
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+
+                Text(message)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 16)
+            .frame(maxHeight: .infinity, alignment: .center)
+        }
+        .safeAreaInset(edge: .bottom) {
+            Spacer()
+            Button(buttonTitle, action: buttonAction)
+                .buttonStyle(.glass)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 16)
+                .padding(.top, 20)
+        }
+        .padding(.top, 8)
+        .ignoresSafeArea()
     }
 
     // MARK: - Full Screen Carousel
@@ -76,39 +181,44 @@ struct FeedMainView: View {
         GeometryReader { geometry in
             let size = geometry.size
 
-            ZStack(alignment: .leading) {
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(Array(items.enumerated()), id: \.element.postId) { index, post in
-                            FeedRowView(post: post)
-                                .frame(width: size.width, height: size.height)
-                                .id(index)
-                                .reportFeedRowPosition(postId: post.postId)
-                        }
+            ZStack(alignment: .trailing) {
+                List {
+                    ForEach(Array(items.enumerated()), id: \.element.postId) { index, post in
+                        FeedRowView(post: post)
+                            .frame(width: size.width, height: size.height)
+                            .id(index)
+                            .reportFeedRowPosition(postId: post.postId)
+                            .listRowInsets(EdgeInsets())
+                            .listRowBackground(Color.clear)
+                            .onTapGesture {
+                                viewModel.selectedPostForDetail = SelectedPost(post: post)
+                            }
+                            .onLongPressGesture {
+                                viewModel.showContextMenu = true
+                            }
                     }
-                    .scrollTargetLayout()
                 }
-                .scrollTargetBehavior(.paging)
+                .listStyle(.carousel)
                 .scrollIndicators(.hidden)
-                .contentShape(Rectangle())
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        viewModel.toggleActions()
-                    }
-                )
                 .onPreferenceChange(FeedScrollPositionKey.self) { positions in
-                    let newIndex = viewModel.computeSelectedIndexByMidY(
-                        items: items,
-                        positions: positions
-                    )
-
+                    let newIndex = viewModel.computeSelectedIndexByMidY(items: items, positions: positions)
                     if newIndex != viewModel.selectedIndex {
                         viewModel.selectedIndex = newIndex
-                        viewModel.hideActions()
                     }
                 }
-                .overlay(alignment: .bottom) {
-                    actionsOverlay(items: items)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            Task {
+                                await viewModel.refresh(modelContext: modelContext)
+                            }
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                        .glassEffect(.clear)
+                        .opacity(viewModel.isRefreshing ? 0.5 : 1.0)
+                        .disabled(viewModel.isRefreshing)
+                    }
                 }
                 .refreshable {
                     await viewModel.refresh()
@@ -118,40 +228,92 @@ struct FeedMainView: View {
                     count: items.count,
                     selectedIndex: viewModel.selectedIndex
                 )
-                .frame(maxHeight: .infinity, alignment: .center)
-                .padding(.leading, 6)
-                .offset(x: -6)
+                .frame(maxHeight: .infinity, alignment: .trailing)
+                .opacity(viewModel.isRefreshing ? 0 : 1)
+            }
+            .overlay {
+                if viewModel.isRefreshing {
+                    refreshOverlay
+                }
+            }
+            .sheet(isPresented: $viewModel.showContextMenu) {
+                contextMenuSheet(items: items)
             }
         }
         .ignoresSafeArea()
     }
 
-    // MARK: - Actions Overlay
+    // MARK: - Context Menu Sheet
 
-    private func actionsOverlay(items: [FeedDB]) -> some View {
-        Group {
-            if viewModel.showActions, let post = currentPost(items: items) {
-                HStack(spacing: 10) {
-                    Button {
-                        viewModel.toggleFavorite(post: post)
-                    } label: {
-                        Image(systemName: post.favorite ? "star.fill" : "star")
-                    }
-                    .buttonStyle(.glass)
+    private func contextMenuSheet(items: [FeedDB]) -> some View {
+        let post = currentPost(items: items)
 
-                    Button("Ver mais") {
-                        viewModel.selectedPostForDetail = SelectedPost(post: post)
+        return ScrollView {
+            VStack(spacing: 12) {
+                // Atualizar posts
+                Button {
+                    viewModel.showContextMenu = false
+                    Task {
+                        await viewModel.refresh(modelContext: modelContext)
                     }
-                    .buttonStyle(.glass)
+                } label: {
+                    Label("Atualizar posts", systemImage: "arrow.clockwise")
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 8)
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                .padding(.bottom, 10)
-                .transition(.opacity)
+                .buttonStyle(.plain)
+
+                if let post = post {
+                    Divider()
+
+                    // Favoritar post
+                    Button {
+                        viewModel.showContextMenu = false
+                        viewModel.toggleFavorite(post: post, modelContext: modelContext)
+                    } label: {
+                        Label(
+                            post.favorite ? "Remover favorito" : "Favoritar post",
+                            systemImage: post.favorite ? "star.slash" : "star"
+                        )
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+
+                    Divider()
+
+                    // Ler post
+                    Button {
+                        viewModel.showContextMenu = false
+                        viewModel.selectedPostForDetail = SelectedPost(post: post)
+                    } label: {
+                        Label("Ler post", systemImage: "doc.text")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
         }
-        .animation(.easeInOut(duration: 0.15), value: viewModel.showActions)
+    }
+
+    // MARK: - Refresh Overlay
+
+    private var refreshOverlay: some View {
+        ZStack {
+            VStack(spacing: 8) {
+                ProgressView()
+                Text("Atualizando…")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(.black.opacity(0.75))
+            )
+        }
+        .transition(.opacity)
     }
 
     // MARK: - Helpers
@@ -161,74 +323,74 @@ struct FeedMainView: View {
         let index = viewModel.clampIndex(viewModel.selectedIndex, quantity: items.count)
         return items[index]
     }
-
-    // MARK: - Shared Views
-
-    private func errorView(reason: String) -> some View {
-        VStack(spacing: 10) {
-            Text("Não foi possível carregar.")
-                .font(.headline)
-
-            Text(reason)
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            Button("Tentar novamente") {
-                Task {
-                    await viewModel.refresh()
-                }
-            }
-        }
-        .padding()
-    }
-
-    private var emptyView: some View {
-        ScrollView {
-            VStack(spacing: 8) {
-                Text("Sem itens")
-                    .font(.headline)
-
-                Text("Puxe para atualizar.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-            .frame(maxWidth: .infinity, minHeight: WKInterfaceDevice.current().screenBounds.height * 0.8)
-        }
-    }
 }
 
-// MARK: - Preview
+// MARK: - Preview Support
+
+#if DEBUG
+extension FeedRootViewModel {
+    static func preview(status: FeedViewModel.Status) -> FeedRootViewModel {
+        let database = Database(models: [FeedDB.self], inMemory: true)
+        let feedVM = FeedViewModel(storage: database)
+        let viewModel = FeedRootViewModel(feedViewModel: feedVM)
+
+        viewModel.setStatusForPreview(status)
+
+        return viewModel
+    }
+}
+#endif
 
 #if DEBUG
 private struct FeedRootPreviewHost: View {
-
     let container: ModelContainer
+    let viewModel: FeedRootViewModel
 
-    init() {
+    init(
+        status: FeedViewModel.Status,
+        seedItems: Bool
+    ) {
         let schema = Schema([FeedDB.self])
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
 
         do {
-            container = try ModelContainer(for: schema, configurations: [config])
+            let tmpContainer = try ModelContainer(for: schema, configurations: [config])
 
-            FeedDB.previewItems.forEach { item in
-                container.mainContext.insert(item)
+            if seedItems {
+                for item in FeedDB.previewItems {
+                    tmpContainer.mainContext.insert(item)
+                }
+                try tmpContainer.mainContext.save()
             }
 
-            try container.mainContext.save()
+            self.container = tmpContainer
+            self.viewModel = .preview(status: status)
         } catch {
             fatalError("Failed to create preview container: \(error)")
         }
     }
 
     var body: some View {
-        FeedMainView(viewModel: .preview())
+        FeedRootView(viewModel: viewModel)
             .modelContainer(container)
     }
 }
+#endif
 
-#Preview("Carousel Full Screen") {
-    FeedRootPreviewHost()
+#if DEBUG
+#Preview("Feed • Loading") {
+    FeedRootPreviewHost(status: .loading, seedItems: false)
+}
+
+#Preview("Feed • Error") {
+    FeedRootPreviewHost(status: .error(reason: "Sem conexão com a internet."), seedItems: false)
+}
+
+#Preview("Feed • Done (sem registros)") {
+    FeedRootPreviewHost(status: .done, seedItems: false)
+}
+
+#Preview("Feed • Done (com registros)") {
+    FeedRootPreviewHost(status: .done, seedItems: true)
 }
 #endif

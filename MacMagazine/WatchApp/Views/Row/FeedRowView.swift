@@ -1,5 +1,7 @@
 import FeedLibrary
 import SwiftUI
+import UIComponentsLibrary
+import UtilityLibrary
 
 struct FeedRowView: View {
     let post: FeedDB
@@ -21,30 +23,15 @@ struct FeedRowView: View {
             Color.black
 
             if let url = post.artworkRemoteURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: size.width, height: size.height)
-                            .clipped()
-
-                    case .failure:
-                        Color.black.opacity(0.25)
-
-                    case .empty:
-                        ProgressView()
-
-                    @unknown default:
-                        Color.black.opacity(0.25)
-                    }
-                }
+                CachedAsyncImage(image: url, contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .clipped()
             } else {
                 Color.black.opacity(0.25)
             }
         }
         .frame(width: size.width, height: size.height)
+        .clipped()
     }
 
     private var overlayGradient: some View {
@@ -59,23 +46,30 @@ struct FeedRowView: View {
     }
 
     private var content: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 6) {
             Text(post.title)
-                .font(.system(size: 14))
+                .font(.headline)
                 .fontWeight(.bold)
-                .foregroundStyle(.white)
+                .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(3)
-                .padding(.leading, 20)
+                .padding(.trailing, 12)
 
             Text(post.dateText)
-                .font(.system(size: 10))
-                .foregroundStyle(.white.opacity(0.85))
+                .font(.caption2)
+                .foregroundStyle(.primary.opacity(0.85))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .lineLimit(1)
+
+            Text("Ler mais")
+                .font(.caption2)
+                .foregroundStyle(.primary.opacity(0.50))
+                .frame(maxWidth: .infinity, alignment: .center)
+                .lineLimit(1)
+                .padding(.top, 6)
+                .padding(.bottom, 12)
         }
         .padding(.horizontal, 8)
-        .padding(.bottom, 8)
     }
 }
 
