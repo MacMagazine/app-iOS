@@ -111,7 +111,6 @@ extension SubscriptionViewModel {
 
 private extension SubscriptionViewModel {
     func process(purchased: InAppStatus) {
-        print("==> Status changed to: \(inAppLibrary.status)")
         switch purchased {
         case let .purchased(identifier):
             if let transaction = status.product(using: identifier) {

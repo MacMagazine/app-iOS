@@ -31,13 +31,12 @@ struct FeedMainView: View {
     var body: some View {
         NavigationStack {
             rootContent
-                .navigationBarTitleDisplayMode(.inline)
-                .task {
-                    await viewModel.refresh(modelContext: modelContext)
-                }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
                     FeedDetailView(viewModel: viewModel, post: payload)
                 }
+        }
+        .task {
+            await viewModel.refresh(modelContext: modelContext)
         }
     }
 
@@ -58,10 +57,6 @@ struct FeedMainView: View {
                 emptyScreen
             } else {
                 carouselRowScreen(items: items)
-                    .navigationTitle {
-                        navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
-                            .offset(y: 14)
-                    }
             }
         }
     }
@@ -81,18 +76,12 @@ struct FeedMainView: View {
     // MARK: - Loading
 
     private var loadingView: some View {
-        VStack(spacing: 10) {
-            Spacer()
-
+        VStack {
             ProgressView()
             Text("Carregando…")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            Spacer()
         }
-        .padding()
     }
 
     // MARK: - Error / Empty Screens
@@ -220,32 +209,23 @@ struct FeedMainView: View {
     // MARK: - Context Menu Sheet
 
     private func contextMenuSheet(items: [FeedDB]) -> some View {
-        VStack(alignment: .center, spacing: 12) {
-            Button {
-                viewModel.showContextMenu = false
-                Task {
-                    await viewModel.refresh(modelContext: modelContext)
-                }
-            } label: {
-                Label("Atualizar posts", systemImage: "arrow.clockwise")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+        Button {
+            viewModel.showContextMenu = false
+            Task {
+                await viewModel.refresh(modelContext: modelContext)
             }
-            .glassEffect(.clear)
+        } label: {
+            Label("Atualizar posts", systemImage: "arrow.clockwise")
+                .frame(maxWidth: .infinity)
         }
+        .glassEffect(.clear)
     }
 
     // MARK: - Refresh Overlay
 
     private var refreshOverlay: some View {
         ZStack {
-            VStack(spacing: 8) {
-                ProgressView()
-                Text("Atualizando…")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
+            loadingView
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .fill(.black.opacity(0.75))

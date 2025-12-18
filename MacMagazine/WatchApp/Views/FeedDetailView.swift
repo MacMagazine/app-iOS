@@ -27,9 +27,7 @@ struct FeedDetailView: View {
                 bodyText
                 footer
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .contentShape(Rectangle())
+            .padding(.top, 8)
         }
         .navigationTitle("Notícia")
         .navigationBarTitleDisplayMode(.inline)
@@ -58,9 +56,13 @@ struct FeedDetailView: View {
             Divider()
                 .padding(.vertical, 4)
 
-            Text(content)
-                .font(.body)
-                .multilineTextAlignment(.leading)
+            VStack(spacing: 20) {
+                ForEach(content.split(separator: "\n"), id: \.self) { paragraph in
+                    Text(paragraph)
+                        .font(.body)
+                        .multilineTextAlignment(.leading)
+                }
+            }
         }
     }
 
@@ -69,7 +71,7 @@ struct FeedDetailView: View {
     private var footer: some View {
         VStack(spacing: 8) {
             Divider()
-                .padding(.top, 4)
+                .padding(.vertical, 4)
 
             Button {
                 viewModel.toggleFavorite(post: post, modelContext: modelContext)

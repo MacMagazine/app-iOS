@@ -11,6 +11,7 @@ public struct FeedDotsIndicatorView: View {
             dots
         }
         .padding(6)
+        .glassEffect(.clear)
         .allowsHitTesting(false)
     }
 
