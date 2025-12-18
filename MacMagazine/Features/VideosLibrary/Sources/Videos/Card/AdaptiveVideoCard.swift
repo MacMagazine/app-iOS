@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftData
@@ -10,15 +11,20 @@ public struct AdaptiveVideoCard: VideoCard {
     public var accessibilityButtons: [CardButton]?
 
     var context: ModelContext?
+    var analytics: AnalyticsManager?
 
     public init() {}
 
-    init(context: ModelContext) {
+    init(
+        context: ModelContext,
+        analytics: AnalyticsManager?
+    ) {
         self.context = context
+        self.analytics = analytics
     }
 
     public func makeBody(data: VideoDB) -> some View {
-        AdaptiveBody(data: data, context: context)
+        AdaptiveBody(data: data, context: context, analytics: analytics)
     }
 
     private struct AdaptiveBody: View {
@@ -27,10 +33,14 @@ public struct AdaptiveVideoCard: VideoCard {
 
         let data: VideoDB
         let context: ModelContext?
+        let analytics: AnalyticsManager?
 
         var body: some View {
             if dynamicTypeSize.usesPrimaryCardLayout {
-                GlassCardView(data: data.toCardContent(using: context))
+                GlassCardView(data: data.toCardContent(
+                    using: context,
+                    analytics: analytics
+                ))
             } else {
                 ClassicCard(buttonColor: theme.text.primary.color).makeBody(data: data)
             }

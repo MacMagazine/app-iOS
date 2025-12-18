@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import Foundation
 
 public enum CardContentType {
@@ -25,6 +26,13 @@ public enum CardContentType {
         }
     }
 
+    public var screenName: String {
+        switch self {
+        case .video: "Vídeo"
+        case .podcast: "Podcast"
+        }
+    }
+
     public var accessibilityName: String {
         switch self {
         case .video: "Vídeo"
@@ -35,6 +43,7 @@ public enum CardContentType {
 
 public struct CardContent {
     public let type: CardContentType
+    public let analytics: AnalyticsManager?
     public let title: String
     public let pubDate: Date
     public let artworkUrl: String
@@ -44,6 +53,7 @@ public struct CardContent {
 
     public init(
         type: CardContentType,
+        analytics: AnalyticsManager? = nil,
         title: String,
         pubDate: Date,
         artworkUrl: String,
@@ -53,6 +63,7 @@ public struct CardContent {
     ) {
         self.type = type
         self.title = title
+        self.analytics = analytics
         self.pubDate = pubDate
         self.urlToShare = urlToShare
         self.artworkUrl = artworkUrl

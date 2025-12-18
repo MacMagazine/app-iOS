@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineUILibrary
 import SwiftUI
@@ -37,6 +38,7 @@ enum PlayerAccessibilityPriority {
 // MARK: - PodcastPlayerView -
 
 struct FullPlayerView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.modelContext) private var modelContext
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Bindable private var playerManager: PodcastPlayerManager
@@ -66,6 +68,7 @@ struct FullPlayerView: View {
 
     var body: some View {
         player
+            .trackScreen("Podcast Full-player", analytics: analytics)
             .sheet(isPresented: $isShowingChapterDialog) {
                 ChaptersView(
                     playerManager: playerManager,
@@ -92,6 +95,7 @@ struct FullPlayerView: View {
         }
         .onDisappear {
             playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
+            analytics.track(.buttonTap(buttonId: "close_fullplayer", screen: "Podcast Full-player"))
         }
         .onChange(of: playerManager.currentPodcast?.artworkURL) { _, value in
             updateBackgroundGradient(url: value)
@@ -159,7 +163,11 @@ struct FullPlayerView: View {
 private extension FullPlayerView {
     @ViewBuilder
     var actions: some View {
-        if let podcast = playerManager.currentPodcast?.toCardContent(using: modelContext) {
+        if let podcast = playerManager.currentPodcast?.toCardContent(
+            using: modelContext,
+            analytics: analytics,
+            screen: "Podcast Full-player"
+        ) {
             let favoriteButton = FavoriteButton(
                 name: podcast.title,
                 favorite: podcast.favorite,
@@ -169,7 +177,10 @@ private extension FullPlayerView {
 
             let shareButton = ShareButton(
                 title: podcast.title,
-                url: podcast.urlToShare
+                url: podcast.urlToShare,
+                action: {
+                    analytics.track(.buttonTap(buttonId: "share", screen: "Podcast Full-player"))
+                }
             )
             .accessibilitySortPriority(PlayerAccessibilityPriority.shareButton)
 
@@ -232,7 +243,10 @@ private extension FullPlayerView {
             HStack(spacing: 40) {
                 skipButton(
                     systemName: "gobackward.15",
-                    action: { playerManager.skip(by: -15) }
+                    action: {
+                        playerManager.skip(by: -15)
+                        analytics.track(.buttonTap(buttonId: "skip_minus_15", screen: "Podcast Full-player"))
+                    }
                 )
                 .accessibilitySortPriority(PlayerAccessibilityPriority.skipBackwardButton)
 
@@ -241,7 +255,10 @@ private extension FullPlayerView {
 
                 skipButton(
                     systemName: "goforward.15",
-                    action: { playerManager.skip(by: 15) }
+                    action: {
+                        playerManager.skip(by: 15)
+                        analytics.track(.buttonTap(buttonId: "skip_plus_15", screen: "Podcast Full-player"))
+                    }
                 )
                 .accessibilitySortPriority(PlayerAccessibilityPriority.skipForwardButton)
             }
@@ -275,6 +292,7 @@ private extension FullPlayerView {
             HStack(spacing: 20) {
                 Button(action: {
                     playerManager.toPreviousChapter()
+                    analytics.track(.buttonTap(buttonId: "previous_chapter", screen: "Podcast Full-player"))
                 },
                        label: {
                     Image(systemName: "backward.end")
@@ -297,6 +315,7 @@ private extension FullPlayerView {
 
                 Button(action: {
                     playerManager.toNextChapter()
+                    analytics.track(.buttonTap(buttonId: "next_chapter", screen: "Podcast Full-player"))
                 },
                        label: {
                     Image(systemName: "forward.end")
@@ -343,6 +362,7 @@ private extension FullPlayerView {
         Button {
             playerManager.togglePlayPause()
             playerManager.currentPodcast?.save(current: playerManager.currentTime, using: modelContext)
+            analytics.track(.buttonTap(buttonId: "toggle_play_pause", screen: "Podcast Full-player"))
         } label: {
             Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
         }
@@ -368,6 +388,7 @@ private extension FullPlayerView {
         } else {
             Button(action: {
                 isShowingChapterDialog.toggle()
+                analytics.track(.buttonTap(buttonId: "show_chapters", screen: "Podcast Full-player"))
             }, label: {
                 Image(systemName: "music.note.list")
             })
@@ -390,6 +411,7 @@ private extension FullPlayerView {
         Button {
             isUsingAdvancedSpeedControl = false
             isShowingSpeedDialog = true
+            analytics.track(.buttonTap(buttonId: "speed_button", screen: "Podcast Full-player"))
         } label: {
             Text(currentLabel)
                 .opacity(0.6)
@@ -471,6 +493,8 @@ private extension FullPlayerView {
                     playerManager.setPlaybackRate(Float(speed))
                     hapticTick()
                     isShowingSpeedDialog.toggle()
+                    analytics.track(.buttonTap(buttonId: "speed_\(speed)", screen: "Podcast Full-player"))
+
                 } label: {
                     let isSelected = abs(speed - Double(playerManager.playbackRate)) < 0.001
 
@@ -506,6 +530,7 @@ private extension FullPlayerView {
                 set: { newValue in
                     playerManager.setPlaybackRate(Float(newValue))
                     hapticTick()
+                    analytics.track(.buttonTap(buttonId: "speed_advanced_\(newValue)", screen: "Podcast Full-player"))
                 }
             ),
             minValue: 0.5,

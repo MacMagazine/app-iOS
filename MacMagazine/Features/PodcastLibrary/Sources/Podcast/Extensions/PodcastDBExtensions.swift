@@ -1,12 +1,19 @@
+import AnalyticsLibrary
 import FeedLibrary
 import Foundation
 import MacMagazineUILibrary
 import SwiftData
 
 extension PodcastDB {
-    func toCardContent(using context: ModelContext?) -> CardContent {
-        CardContent(
-            type: .podcast(duration: self.duration),
+    func toCardContent(
+        using context: ModelContext?,
+        analytics: AnalyticsManager?,
+        screen: String?
+    ) -> CardContent {
+        let type = CardContentType.podcast(duration: self.duration)
+        return CardContent(
+            type: type,
+            analytics: analytics,
             title: self.title,
             pubDate: self.pubDate,
             artworkUrl: self.artworkURL,
@@ -16,6 +23,7 @@ extension PodcastDB {
                 guard let self, let context else { return }
                 self.favorite.toggle()
                 try? context.save()
+                analytics?.track(.buttonTap(buttonId: "favorite_podcast", screen: screen ?? type.screenName))
             }
         )
     }

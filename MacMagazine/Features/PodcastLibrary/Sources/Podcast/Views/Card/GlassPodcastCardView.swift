@@ -38,7 +38,11 @@ import StorageLibrary
     let storage = Database(models: [PodcastDB.self], inMemory: true)
 
     GlassPodcastCardView(
-        podcast: mockPodcast.toCardContent(using: storage.sharedModelContainer.mainContext),
+        podcast: mockPodcast.toCardContent(
+            using: storage.sharedModelContainer.mainContext,
+            analytics: nil,
+            screen: nil
+        ),
         onPlay: { playing.toggle() }
     )
     .padding()

@@ -108,7 +108,7 @@ struct PodcastCardView: View {
         Color.brown.ignoresSafeArea()
 
         PodcastCardView(
-            podcast: podcast.toCardContent(using: nil),
+            podcast: podcast.toCardContent(using: nil, analytics: nil, screen: nil),
             onPlay: { playing.toggle() }
         )
         .padding()

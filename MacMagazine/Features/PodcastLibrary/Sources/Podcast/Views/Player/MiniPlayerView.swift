@@ -1,8 +1,10 @@
+import AnalyticsLibrary
 import FeedLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 struct MiniPlayerView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.modelContext) private var modelContext
     @Environment(\.theme) private var theme
     @Namespace private var animation
@@ -47,6 +49,7 @@ struct MiniPlayerView: View {
         TapGesture()
             .onEnded { _ in
                 playerManager.isFullscreen.toggle()
+                analytics.track(.buttonTap(buttonId: "open_fullplayer", screen: "Podcast Mini-player"))
             }
     }
 
@@ -58,6 +61,7 @@ struct MiniPlayerView: View {
                     currentPodcast.save(current: playerManager.currentTime, using: modelContext)
                 }
                 playerManager.currentPodcast = nil
+                analytics.track(.buttonTap(buttonId: "close_miniplayer", screen: "Podcast Mini-player"))
             }
     }
 }
@@ -76,6 +80,7 @@ private extension MiniPlayerView {
                 HStack(spacing: 20) {
                     Button {
                         playerManager.skip(by: -15)
+                        analytics.track(.buttonTap(buttonId: "skip_minus_15", screen: "Podcast Mini-player"))
                     } label: {
                         Image(systemName: "gobackward.15")
                             .font(.system(size: 20))
@@ -85,6 +90,7 @@ private extension MiniPlayerView {
                     Button {
                         playerManager.togglePlayPause()
                         currentPodcast.save(current: playerManager.currentTime, using: modelContext)
+                        analytics.track(.buttonTap(buttonId: "toggle_play_pause", screen: "Podcast Mini-player"))
                     } label: {
                         Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 24))
@@ -93,6 +99,7 @@ private extension MiniPlayerView {
 
                     Button {
                         playerManager.skip(by: 15)
+                        analytics.track(.buttonTap(buttonId: "skip_plus_15", screen: "Podcast Mini-player"))
                     } label: {
                         Image(systemName: "goforward.15")
                             .font(.system(size: 20))
@@ -103,6 +110,7 @@ private extension MiniPlayerView {
             .foregroundStyle(controlsColor)
             .contentShape(Rectangle())
         }
+        .trackScreen("Podcast Mini-player", analytics: analytics)
     }
 
     @ViewBuilder

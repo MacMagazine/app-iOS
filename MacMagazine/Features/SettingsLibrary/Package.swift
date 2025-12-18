@@ -24,7 +24,7 @@ let package = Package(
                     .product(name: "InApp", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries"),
                     .product(name: "Storage", package: "Libraries"),
-                    .product(name: "Analytics", package: "Libraries"),
+                    .product(name: "Analytics", package: "Libraries")
                 ],
                 resources: [.process("Resources")])
     ]
