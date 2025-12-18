@@ -16,12 +16,6 @@ struct FeedMainView: View {
 
     @State private var viewModel: FeedMainViewModel
 
-    // MARK: - Preview Guard
-
-    private var isRunningForPreviews: Bool {
-        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    }
-
     init(viewModel: FeedMainViewModel) {
         _viewModel = State(wrappedValue: viewModel)
 
@@ -39,7 +33,6 @@ struct FeedMainView: View {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
                 .task {
-                    guard !isRunningForPreviews else { return }
                     await viewModel.refresh(modelContext: modelContext)
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
@@ -285,7 +278,7 @@ extension FeedMainViewModel {
     }
 }
 
-struct FeedRootPreviewHost: View {
+struct FeedPreviewHost: View {
     let container: ModelContainer
     let viewModel: FeedMainViewModel
 
@@ -320,18 +313,18 @@ struct FeedRootPreviewHost: View {
 }
 
 #Preview("Feed • Loading") {
-    FeedRootPreviewHost(status: .loading, seedItems: false)
+    FeedPreviewHost(status: .loading, seedItems: false)
 }
 
 #Preview("Feed • Error") {
-    FeedRootPreviewHost(status: .error(reason: "Sem conexão com a internet."), seedItems: false)
+    FeedPreviewHost(status: .error(reason: "Sem conexão com a internet."), seedItems: false)
 }
 
 #Preview("Feed • Done (sem registros)") {
-    FeedRootPreviewHost(status: .done, seedItems: false)
+    FeedPreviewHost(status: .done, seedItems: false)
 }
 
 #Preview("Feed • Done (com registros)") {
-    FeedRootPreviewHost(status: .done, seedItems: true)
+    FeedPreviewHost(status: .done, seedItems: true)
 }
 #endif

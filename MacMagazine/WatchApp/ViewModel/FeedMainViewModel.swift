@@ -74,9 +74,13 @@ final class FeedMainViewModel {
         guard quantity > 0 else { return 0 }
         return min(max(index, 0), quantity - 1)
     }
+}
 
+#if DEBUG
+extension FeedMainViewModel {
     @MainActor
     func setStatusForPreview(_ status: FeedViewModel.Status) {
         self.status = status
     }
 }
+#endif

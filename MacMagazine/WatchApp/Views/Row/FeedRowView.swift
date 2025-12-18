@@ -79,6 +79,6 @@ struct FeedRowView: View {
 }
 
 #Preview("Feed • Done (com registros)") {
-    FeedRootPreviewHost(status: .done, seedItems: true)
+    FeedPreviewHost(status: .done, seedItems: true)
 }
 #endif
