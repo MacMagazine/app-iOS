@@ -19,9 +19,14 @@ public struct MMWebView: View {
 
     private let controller = MMWebViewController()
     private let url: String?
+    private let cacheKey: String?
 
-    public init(url: String?) {
+    public init(
+        url: String?,
+        cacheKey: String? = nil
+    ) {
         self.url = url
+        self.cacheKey = cacheKey
     }
 
     public var body: some View {
@@ -71,7 +76,8 @@ private extension MMWebView {
                 navigationDelegate: controller,
                 userScripts: [MMWebViewUserScripts.topPadding],
                 cookies: makeCookies(using: colorScheme),
-                userAgent: Utils.userAgent
+                userAgent: Utils.userAgent,
+                cacheKey: cacheKey
             )
             .id(colorScheme)
             .ignoresSafeArea(.container, edges: [.top, .bottom])

@@ -32,7 +32,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .live: MMWebView(url: "https://macmagazine.com.br/live")
+        case .live: MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
         default:
             ContentUnavailableView(
                 "Página em construção",

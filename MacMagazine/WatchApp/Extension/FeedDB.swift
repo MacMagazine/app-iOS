@@ -21,10 +21,8 @@ extension FeedDB {
 
     var displayBody: String? {
         let full = fullContent.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !full.isEmpty { return full }
-
         let excerpt = excerpt.trimmingCharacters(in: .whitespacesAndNewlines)
-        return excerpt.isEmpty ? nil : excerpt
+        return !full.isEmpty ? full : excerpt
     }
 
     var artworkRemoteURL: URL? {

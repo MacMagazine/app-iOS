@@ -79,7 +79,7 @@ private extension SocialView {
                 scrollPosition: $scrollPosition
             ).transition(.opacity)
         case .instagram:
-            MMWebView(url: "https://macmagazine.com.br/posts-instagram-app/")
+            MMWebView(url: "https://macmagazine.com.br/posts-instagram-app/", cacheKey: "macmagazine_instagram")
         }
     }
 
