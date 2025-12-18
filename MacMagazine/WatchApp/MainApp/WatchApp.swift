@@ -6,16 +6,13 @@ import SwiftUI
 @main
 struct WatchApp: App {
 
-    private let database = Database(models: [FeedDB.self], inMemory: true)
+    private let database = Database(models: [FeedDB.self], inMemory: false)
 
     var body: some Scene {
         WindowGroup {
-            FeedRootView(
+            FeedMainView(
                 viewModel: FeedRootViewModel(
-                    feedViewModel: FeedViewModel(
-                        network: nil,
-                        storage: database
-                    )
+                    feedViewModel: FeedViewModel(storage: database)
                 )
             )
             .modelContainer(database.sharedModelContainer)

@@ -79,6 +79,8 @@ struct FeedRowView: View {
     }
 }
 
+#if DEBUG
 #Preview("FeedRowView") {
     FeedRowView(post: .previewItem)
 }
+#endif

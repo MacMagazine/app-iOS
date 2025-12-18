@@ -4,12 +4,18 @@ import SwiftUI
 import UIComponentsLibrary
 
 public struct MMWebView: View {
+    enum WebViewStatus: Equatable {
+        case idle
+        case loading
+        case error(String)
+        case done
+    }
+
     @Environment(\.removeAds) private var removeAds
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.theme) private var theme: ThemeColor
 
-    @State private var isLoading = false
-    @State private var loadError: String?
+    @State private var viewStatus = WebViewStatus.idle
 
     private let controller = MMWebViewController()
     private let url: String?
@@ -20,36 +26,20 @@ public struct MMWebView: View {
 
     public var body: some View {
         ZStack {
-            (theme.main.background.color ?? Color.secondary)
-                .ignoresSafeArea()
-
-            content.transition(.opacity)
-
-            if isLoading {
-                ProgressView().transition(.opacity)
-            }
-
-            if loadError != nil {
-                ContentUnavailableView(
-                    "Estamos com um problema",
-                    systemImage: "square.and.arrow.down.badge.xmark",
-                    description: Text("No momento estamos com um problema técnico. Tente novamente mais tarde.")
-                )
-            }
+            webview(url: url).transition(.opacity)
+            statusView
         }
         .task {
             controller.onStart = {
-                isLoading = true
-                loadError = nil
+                viewStatus = viewStatus == .idle ? .loading : viewStatus
             }
             controller.onFinish = {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    isLoading = false
+                    viewStatus = .done
                 }
             }
             controller.onFail = { error in
-                isLoading = false
-                loadError = error.localizedDescription
+                viewStatus = .error(error.localizedDescription)
             }
         }
     }
@@ -57,34 +47,36 @@ public struct MMWebView: View {
 
 private extension MMWebView {
     @ViewBuilder
-    var content: some View {
-        if let url {
-            webview(url: url)
-        } else {
+    var statusView: some View {
+        switch viewStatus {
+        case .loading:
+            ProgressView()
+        case let .error(error):
             ContentUnavailableView(
                 "Estamos com um problema",
-                systemImage: "square.and.arrow.down.badge.xmark",
-                description: Text(
-                    "No momento estamos com um problema técnico. Tente novamente mais tarde."
-                )
+                systemImage: "wifi.exclamationmark",
+                description: Text(error)
             )
+        default: EmptyView()
         }
     }
 
-    func webview(url: String) -> some View {
-        Webview(
-            url: url,
-            isPresenting: .constant(true),
-            standAlone: true,
-            navigationDelegate: controller,
-            userScripts: [MMWebViewUserScripts.topPadding],
-            cookies: makeCookies(using: colorScheme),
-            userAgent: Utils.userAgent
-        )
-        .id(colorScheme)
-        .ignoresSafeArea(.container, edges: [.top, .bottom])
-        .opacity(isLoading ? 0 : 1)
-        .animation(.easeInOut(duration: 0.25), value: isLoading)
+    @ViewBuilder
+    func webview(url: String?) -> some View {
+        if let url {
+            Webview(
+                url: url,
+                isPresenting: .constant(true),
+                standAlone: true,
+                navigationDelegate: controller,
+                userScripts: [MMWebViewUserScripts.topPadding],
+                cookies: makeCookies(using: colorScheme),
+                userAgent: Utils.userAgent
+            )
+            .id(colorScheme)
+            .ignoresSafeArea(.container, edges: [.top, .bottom])
+            .opacity(viewStatus == .done ? 1 : 0)
+        }
     }
 }
 
