@@ -45,24 +45,30 @@ extension MMWebViewController: WKNavigationDelegate {
         preferences: WKWebpagePreferences,
         decisionHandler: @escaping @MainActor @Sendable (WKNavigationActionPolicy, WKWebpagePreferences) -> Void
     ) {
+        var actionPolicy = WKNavigationActionPolicy.allow
         guard let url = navigationAction.request.url else {
-            decisionHandler(.cancel, preferences)
+            decisionHandler(actionPolicy, preferences)
             return
         }
 
-        guard navigationAction.navigationType == .linkActivated else {
-            decisionHandler(.allow, preferences)
-            return
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            if url.host?.lowercased().contains("instagram.com") ?? false {
+                open(url)
+            }
+            actionPolicy = .cancel
+
+        default: break
         }
 
-        if url.host?.lowercased().contains("instagram.com") ?? false {
+        decisionHandler(actionPolicy, preferences)
+    }
+}
+
+private extension MMWebViewController {
+    func open(_ url: URL) {
 #if canImport(UIKit)
-            UIApplication.shared.open(url)
+        UIApplication.shared.open(url)
 #endif
-            decisionHandler(.cancel, preferences)
-            return
-        }
-
-        decisionHandler(.allow, preferences)
     }
 }

@@ -3,7 +3,7 @@ import SwiftData
 import SwiftUI
 import WatchKit
 
-struct FeedRootView: View {
+struct FeedMainView: View {
 
     // MARK: - SwiftData
 
@@ -34,18 +34,15 @@ struct FeedRootView: View {
                             .font(.system(size: 12))
                     }
 
-                    Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
+                    Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(min(items.count, 10))")
                         .font(.system(size: 12))
                         .frame(alignment: .trailing)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
                         .offset(y: 14)
                 }
-                .refreshable {
-                    await viewModel.refresh()
-                }
                 .task {
-                    await viewModel.loadInitial(hasItems: !items.isEmpty)
+                    await viewModel.refresh()
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
                     FeedDetailView(viewModel: viewModel, post: payload.post)
@@ -68,7 +65,7 @@ struct FeedRootView: View {
             if items.isEmpty {
                 emptyView
             } else {
-                carouselRowScreen(items: items)
+                carouselRowScreen(items: Array(items.prefix(10)))
             }
         }
     }
@@ -112,6 +109,9 @@ struct FeedRootView: View {
                 }
                 .overlay(alignment: .bottom) {
                     actionsOverlay(items: items)
+                }
+                .refreshable {
+                    await viewModel.refresh()
                 }
 
                 FeedDotsIndicatorView(
@@ -223,7 +223,7 @@ private struct FeedRootPreviewHost: View {
     }
 
     var body: some View {
-        FeedRootView(viewModel: .preview())
+        FeedMainView(viewModel: .preview())
             .modelContainer(container)
     }
 }

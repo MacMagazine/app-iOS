@@ -28,14 +28,6 @@ final class FeedRootViewModel: ObservableObject {
 
     // MARK: - Public API
 
-    func loadInitial(hasItems: Bool) async {
-        if !hasItems {
-            await refresh()
-        } else {
-            status = feedViewModel.status
-        }
-    }
-
     func refresh() async {
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
