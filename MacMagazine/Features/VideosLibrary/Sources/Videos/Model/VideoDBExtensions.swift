@@ -31,7 +31,10 @@ extension VideoDB {
                 guard let self, let context else { return }
                 self.favorite.toggle()
                 try? context.save()
-                analytics?.track(.buttonTap(buttonId: "favorite_video", screen: type.screenName))
+                analytics?.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.videoFavorite.id,
+                    screen: type.screenName
+                ))
             }
         )
     }

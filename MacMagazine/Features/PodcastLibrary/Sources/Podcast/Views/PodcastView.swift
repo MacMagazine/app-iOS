@@ -93,7 +93,10 @@ extension PodcastView {
                         analytics: analytics,
                         screen: nil
                     )) {
-                        analytics.track(.buttonTap(buttonId: "podcast_\(podcasts[index].postId)_started", screen: "Podcast"))
+                        analytics.track(.buttonTap(
+                            buttonId: AnalyticsConstants.ButtonID.podcastStarted(postId: Int(podcasts[index].postId) ?? 0).id,
+                            screen: AnalyticsConstants.Screen.podcast.name
+                        ))
 
                         podcastPlayerManager.loadPodcast(podcasts[index])
                         podcastPlayerManager.seek(to: podcasts[index].current)

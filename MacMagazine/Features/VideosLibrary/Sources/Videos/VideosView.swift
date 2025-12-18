@@ -50,9 +50,15 @@ public struct VideosView: View {
         .onChange(of: viewModel.youtube.selectedVideo) { _, value in
             sessionState.isPlayingVideos = (value != nil)
             if let value {
-                analytics.track(.buttonTap(buttonId: "video_\(value)_started", screen: "Vídeos"))
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.videoStarted(id: value).id,
+                    screen: AnalyticsConstants.Screen.videos.name
+                ))
             } else {
-                analytics.track(.buttonTap(buttonId: "video_stopped", screen: "Vídeos"))
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.videoStopped.id,
+                    screen: AnalyticsConstants.Screen.videos.name
+                ))
             }
         }
         .onReceive(sessionState.$isPlayingPodcasts) { value in

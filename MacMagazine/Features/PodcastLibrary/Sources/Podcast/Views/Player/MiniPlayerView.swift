@@ -1,5 +1,6 @@
 import AnalyticsLibrary
 import FeedLibrary
+import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
@@ -49,7 +50,10 @@ struct MiniPlayerView: View {
         TapGesture()
             .onEnded { _ in
                 playerManager.isFullscreen.toggle()
-                analytics.track(.buttonTap(buttonId: "open_fullplayer", screen: "Podcast Mini-player"))
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.podcastOpenFullPlayer.id,
+                    screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
+                ))
             }
     }
 
@@ -61,7 +65,10 @@ struct MiniPlayerView: View {
                     currentPodcast.save(current: playerManager.currentTime, using: modelContext)
                 }
                 playerManager.currentPodcast = nil
-                analytics.track(.buttonTap(buttonId: "close_miniplayer", screen: "Podcast Mini-player"))
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.podcastCloseMiniPlayer.id,
+                    screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
+                ))
             }
     }
 }
@@ -80,7 +87,10 @@ private extension MiniPlayerView {
                 HStack(spacing: 20) {
                     Button {
                         playerManager.skip(by: -15)
-                        analytics.track(.buttonTap(buttonId: "skip_minus_15", screen: "Podcast Mini-player"))
+                        analytics.track(.buttonTap(
+                            buttonId: AnalyticsConstants.ButtonID.podcastSkipMinus15.id,
+                            screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
+                        ))
                     } label: {
                         Image(systemName: "gobackward.15")
                             .font(.system(size: 20))
@@ -90,7 +100,10 @@ private extension MiniPlayerView {
                     Button {
                         playerManager.togglePlayPause()
                         currentPodcast.save(current: playerManager.currentTime, using: modelContext)
-                        analytics.track(.buttonTap(buttonId: "toggle_play_pause", screen: "Podcast Mini-player"))
+                        analytics.track(.buttonTap(
+                            buttonId: AnalyticsConstants.ButtonID.podcastTogglePlayPause.id,
+                            screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
+                        ))
                     } label: {
                         Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 24))
@@ -99,7 +112,10 @@ private extension MiniPlayerView {
 
                     Button {
                         playerManager.skip(by: 15)
-                        analytics.track(.buttonTap(buttonId: "skip_plus_15", screen: "Podcast Mini-player"))
+                        analytics.track(.buttonTap(
+                            buttonId: AnalyticsConstants.ButtonID.podcastSkipPlus15.id,
+                            screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
+                        ))
                     } label: {
                         Image(systemName: "goforward.15")
                             .font(.system(size: 20))
@@ -110,7 +126,7 @@ private extension MiniPlayerView {
             .foregroundStyle(controlsColor)
             .contentShape(Rectangle())
         }
-        .trackScreen("Podcast Mini-player", analytics: analytics)
+        .trackScreen(AnalyticsConstants.Screen.podcastMiniPlayer.name, analytics: analytics)
     }
 
     @ViewBuilder

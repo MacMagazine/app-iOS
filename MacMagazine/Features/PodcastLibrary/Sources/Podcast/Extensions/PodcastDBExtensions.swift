@@ -1,6 +1,7 @@
 import AnalyticsLibrary
 import FeedLibrary
 import Foundation
+import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftData
 
@@ -23,7 +24,10 @@ extension PodcastDB {
                 guard let self, let context else { return }
                 self.favorite.toggle()
                 try? context.save()
-                analytics?.track(.buttonTap(buttonId: "favorite_podcast", screen: screen ?? type.screenName))
+                analytics?.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.podcastFavorite.id,
+                    screen: screen ?? type.screenName
+                ))
             }
         )
     }
