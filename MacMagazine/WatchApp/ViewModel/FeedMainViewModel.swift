@@ -1,4 +1,3 @@
-import Combine
 import FeedLibrary
 import Foundation
 import StorageLibrary
@@ -6,16 +5,17 @@ import SwiftData
 import WatchKit
 
 @MainActor
-final class FeedMainViewModel: ObservableObject {
+@Observable
+final class FeedMainViewModel {
 
     // MARK: - Published
 
-    @Published private(set) var status: FeedViewModel.Status = .loading
-    @Published var selectedIndex: Int = 0
-    @Published var showActions: Bool = false
-    @Published var showContextMenu: Bool = false
-    @Published var selectedPostForDetail: FeedDB?
-    @Published private(set) var isRefreshing: Bool = false
+    private(set) var status: FeedViewModel.Status = .loading
+    var selectedIndex: Int = 0
+    var showActions: Bool = false
+    var showContextMenu: Bool = false
+    var selectedPostForDetail: FeedDB?
+    private(set) var isRefreshing: Bool = false
 
     // MARK: - Private
 

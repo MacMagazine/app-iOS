@@ -12,15 +12,9 @@ struct FeedMainView: View {
 
     @Query private var items: [FeedDB]
 
-    init(viewModel: FeedMainViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    // MARK: - State
 
-        var descriptor = FetchDescriptor<FeedDB>(
-            sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)]
-        )
-        descriptor.fetchLimit = 10
-        _items = Query(descriptor)
-    }
+    @State private var viewModel: FeedMainViewModel
 
     // MARK: - Preview Guard
 
@@ -28,9 +22,15 @@ struct FeedMainView: View {
         ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 
-    // MARK: - State
+    init(viewModel: FeedMainViewModel) {
+        _viewModel = State(wrappedValue: viewModel)
 
-    @StateObject private var viewModel: FeedMainViewModel
+        var descriptor = FetchDescriptor<FeedDB>(
+            sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)]
+        )
+        descriptor.fetchLimit = 10
+        _items = Query(descriptor)
+    }
 
     // MARK: - Body
 
@@ -287,9 +287,7 @@ extension FeedMainViewModel {
         return viewModel
     }
 }
-#endif
 
-#if DEBUG
 struct FeedRootPreviewHost: View {
     let container: ModelContainer
     let viewModel: FeedMainViewModel
@@ -323,9 +321,7 @@ struct FeedRootPreviewHost: View {
             .modelContainer(container)
     }
 }
-#endif
 
-#if DEBUG
 #Preview("Feed • Loading") {
     FeedRootPreviewHost(status: .loading, seedItems: false)
 }

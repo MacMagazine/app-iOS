@@ -9,13 +9,13 @@ struct FeedDetailView: View {
 
     let post: FeedDB
 
-    @StateObject private var viewModel: FeedMainViewModel
+    @State private var viewModel: FeedMainViewModel
 
     // MARK: - Init
 
     init(viewModel: FeedMainViewModel, post: FeedDB) {
         self.post = post
-        _viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = State(wrappedValue: viewModel)
     }
 
     // MARK: - Body
