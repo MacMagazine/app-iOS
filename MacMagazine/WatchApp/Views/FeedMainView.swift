@@ -10,8 +10,17 @@ struct FeedMainView: View {
 
     @Environment(\.modelContext) private var modelContext
 
-    @Query(sort: \FeedDB.pubDate, order: .reverse)
-    private var items: [FeedDB]
+    @Query private var items: [FeedDB]
+
+    init(viewModel: FeedMainViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+
+        var descriptor = FetchDescriptor<FeedDB>(
+            sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)]
+        )
+        descriptor.fetchLimit = 10
+        _items = Query(descriptor)
+    }
 
     // MARK: - Preview Guard
 
@@ -21,13 +30,7 @@ struct FeedMainView: View {
 
     // MARK: - State
 
-    @StateObject private var viewModel: FeedRootViewModel
-
-    // MARK: - Init
-
-    init(viewModel: FeedRootViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject private var viewModel: FeedMainViewModel
 
     // MARK: - Body
 
@@ -37,7 +40,7 @@ struct FeedMainView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .task(id: items.count) {
                     guard !isRunningForPreviews else { return }
-                    await viewModel.loadInitial(
+                    await viewModel.loadInitialIfNeeded(
                         hasItems: !items.isEmpty,
                         modelContext: modelContext
                     )
@@ -55,7 +58,7 @@ struct FeedMainView: View {
         switch viewModel.status {
         case .loading:
             loadingView
-                .navigationTitle { navigationTitle() }
+                .navigationTitle { navigationTitle("MacMagazine") }
 
         case .error(let reason):
             errorScreen(reason: reason)
@@ -66,13 +69,8 @@ struct FeedMainView: View {
             } else {
                 carouselRowScreen(items: items)
                     .navigationTitle {
-                        Text("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
-                            .font(.caption)
-                            .frame(alignment: .trailing)
-                            .multilineTextAlignment(.trailing)
-                            .lineLimit(2)
+                        navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
                             .offset(y: 14)
-                            .opacity(viewModel.isRefreshing ? 0 : 1)
                     }
             }
         }
@@ -81,10 +79,13 @@ struct FeedMainView: View {
     // MARK: - Navigation Title
 
     @ViewBuilder
-    private func navigationTitle() -> some View {
-        Text("MacMagazine")
+    private func navigationTitle(_ title: String) -> some View {
+        Text(title)
             .font(.caption)
             .opacity(viewModel.isRefreshing ? 0 : 1)
+            .frame(alignment: .trailing)
+            .multilineTextAlignment(.trailing)
+            .lineLimit(2)
     }
 
     // MARK: - Loading
@@ -206,23 +207,6 @@ struct FeedMainView: View {
                         viewModel.selectedIndex = newIndex
                     }
                 }
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            Task {
-                                await viewModel.refresh(modelContext: modelContext)
-                            }
-                        } label: {
-                            Image(systemName: "arrow.clockwise")
-                        }
-                        .glassEffect(.clear)
-                        .opacity(viewModel.isRefreshing ? 0.5 : 1.0)
-                        .disabled(viewModel.isRefreshing)
-                    }
-                }
-                .refreshable {
-                    await viewModel.refresh()
-                }
 
                 FeedDotsIndicatorView(
                     count: items.count,
@@ -246,11 +230,8 @@ struct FeedMainView: View {
     // MARK: - Context Menu Sheet
 
     private func contextMenuSheet(items: [FeedDB]) -> some View {
-        let post = currentPost(items: items)
-
         return ScrollView {
             VStack(spacing: 12) {
-                // Atualizar posts
                 Button {
                     viewModel.showContextMenu = false
                     Task {
@@ -260,36 +241,7 @@ struct FeedMainView: View {
                     Label("Atualizar posts", systemImage: "arrow.clockwise")
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .buttonStyle(.plain)
-
-                if let post = post {
-                    Divider()
-
-                    // Favoritar post
-                    Button {
-                        viewModel.showContextMenu = false
-                        viewModel.toggleFavorite(post: post, modelContext: modelContext)
-                    } label: {
-                        Label(
-                            post.favorite ? "Remover favorito" : "Favoritar post",
-                            systemImage: post.favorite ? "star.slash" : "star"
-                        )
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .buttonStyle(.plain)
-
-                    Divider()
-
-                    // Ler post
-                    Button {
-                        viewModel.showContextMenu = false
-                        viewModel.selectedPostForDetail = SelectedPost(post: post)
-                    } label: {
-                        Label("Ler post", systemImage: "doc.text")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .buttonStyle(.plain)
-                }
+                .glassEffect(.clear)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -328,11 +280,11 @@ struct FeedMainView: View {
 // MARK: - Preview Support
 
 #if DEBUG
-extension FeedRootViewModel {
-    static func preview(status: FeedViewModel.Status) -> FeedRootViewModel {
+extension FeedMainViewModel {
+    static func preview(status: FeedViewModel.Status) -> FeedMainViewModel {
         let database = Database(models: [FeedDB.self], inMemory: true)
         let feedVM = FeedViewModel(storage: database)
-        let viewModel = FeedRootViewModel(feedViewModel: feedVM)
+        let viewModel = FeedMainViewModel(feedViewModel: feedVM)
 
         viewModel.setStatusForPreview(status)
 
@@ -342,9 +294,9 @@ extension FeedRootViewModel {
 #endif
 
 #if DEBUG
-private struct FeedRootPreviewHost: View {
+struct FeedRootPreviewHost: View {
     let container: ModelContainer
-    let viewModel: FeedRootViewModel
+    let viewModel: FeedMainViewModel
 
     init(
         status: FeedViewModel.Status,
@@ -371,7 +323,7 @@ private struct FeedRootPreviewHost: View {
     }
 
     var body: some View {
-        FeedRootView(viewModel: viewModel)
+        FeedMainView(viewModel: viewModel)
             .modelContainer(container)
     }
 }

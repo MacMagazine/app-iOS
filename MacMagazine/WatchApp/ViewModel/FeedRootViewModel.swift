@@ -6,7 +6,7 @@ import SwiftData
 import WatchKit
 
 @MainActor
-final class FeedRootViewModel: ObservableObject {
+final class FeedMainViewModel: ObservableObject {
 
     // MARK: - Published
 
@@ -20,9 +20,9 @@ final class FeedRootViewModel: ObservableObject {
     // MARK: - Private
 
     private let feedViewModel: FeedViewModel
+    private var didLoadInitial: Bool = false
 
     // MARK: - Init
-
     init(feedViewModel: FeedViewModel) {
         self.feedViewModel = feedViewModel
         status = feedViewModel.status
@@ -30,7 +30,10 @@ final class FeedRootViewModel: ObservableObject {
 
     // MARK: - Public API
 
-    func loadInitial(hasItems: Bool, modelContext: ModelContext) async {
+    func loadInitialIfNeeded(hasItems: Bool, modelContext: ModelContext) async {
+        guard !didLoadInitial else { return }
+        didLoadInitial = true
+
         if hasItems {
             status = .done
             return
@@ -40,6 +43,7 @@ final class FeedRootViewModel: ObservableObject {
     }
 
     func refresh(modelContext: ModelContext) async {
+        guard !isRefreshing else { return }
         isRefreshing = true
 
         defer {

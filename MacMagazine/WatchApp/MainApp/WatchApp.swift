@@ -11,7 +11,7 @@ struct WatchApp: App {
     var body: some Scene {
         WindowGroup {
             FeedMainView(
-                viewModel: FeedRootViewModel(
+                viewModel: FeedMainViewModel(
                     feedViewModel: FeedViewModel(storage: database)
                 )
             )
