@@ -1,7 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
 struct CustomSocialView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = CustomizationViewModel()
@@ -46,6 +48,7 @@ private extension CustomSocialView {
         viewModel.social.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
             await viewModel.change(viewModel.social)
+            analytics.track(.generic(name: "social_order", item: viewModel.social))
         }
     }
 }

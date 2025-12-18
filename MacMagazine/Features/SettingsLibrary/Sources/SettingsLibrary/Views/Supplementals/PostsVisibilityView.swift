@@ -40,7 +40,7 @@ struct PostsVisibilityView: View {
         }
 
         .onChange(of: viewModel.postRead) { _, value in
-            analytics.track(.buttonTap(buttonId: "identify_posts_read \(value)", screen: "Ajustes > Posts"), providers: [.firebase])
+            analytics.track(.buttonTap(buttonId: "identify_posts_read \(value)", screen: "Ajustes > Posts"))
 
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -53,7 +53,7 @@ struct PostsVisibilityView: View {
             }
         }
         .onChange(of: viewModel.countOnBadge) { _, value in
-            analytics.track(.buttonTap(buttonId: "count_posts_on_badge \(value)", screen: "Ajustes > Posts"), providers: [.firebase])
+            analytics.track(.buttonTap(buttonId: "count_posts_on_badge \(value)", screen: "Ajustes > Posts"))
 
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -68,7 +68,7 @@ private extension PostsVisibilityView {
         Section {
             Button(action: {
                 viewModel.cache = .readAll
-                analytics.track(.buttonTap(buttonId: "all_posts_read", screen: "Ajustes > Posts"), providers: [.firebase])
+                analytics.track(.buttonTap(buttonId: "all_posts_read", screen: "Ajustes > Posts"))
             }, label: {
                 Text("Marcar todos os posts como lidos")
                     .foregroundStyle(theme.main.tint.color ?? .blue)
@@ -105,7 +105,7 @@ private extension PostsVisibilityView {
         Section {
             Button(action: {
                 isPresenting.toggle()
-                analytics.track(.buttonTap(buttonId: "clean_posts_options", screen: "Ajustes > Posts"), providers: [.firebase])
+                analytics.track(.buttonTap(buttonId: "clean_posts_options", screen: "Ajustes > Posts"))
             },
                    label: {
                 Text("Limpar cache do app")
@@ -123,14 +123,14 @@ private extension PostsVisibilityView {
     var cleanCacheView: some View {
         Button(action: {
             viewModel.flush(cache: .keepFavoritesAndStatus)
-            analytics.track(.buttonTap(buttonId: "clean_posts", screen: "Ajustes > Posts"), providers: [.firebase])
+            analytics.track(.buttonTap(buttonId: "clean_posts", screen: "Ajustes > Posts"))
         },
                label: {
             Text("Manter favoritos e status de leitura")
         })
         Button("Limpar tudo", role: .destructive) {
             viewModel.flush(cache: .cleanAll)
-            analytics.track(.buttonTap(buttonId: "clean_all_posts", screen: "Ajustes > Posts"), providers: [.firebase])
+            analytics.track(.buttonTap(buttonId: "clean_all_posts", screen: "Ajustes > Posts"))
         }
     }
 }

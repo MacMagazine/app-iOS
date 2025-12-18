@@ -104,8 +104,7 @@ private extension SocialView {
             withAnimation {
                 favorite.toggle()
                 viewModel.analytics.track(
-                    .buttonTap(buttonId: "favorite_button", screen: viewModel.social.rawValue),
-                    providers: [.firebase]
+                    .buttonTap(buttonId: "favorite_button", screen: viewModel.social.rawValue)
                 )
             }
         }, label: {

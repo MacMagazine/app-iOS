@@ -1,7 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
 struct CustomTabView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
@@ -48,6 +50,7 @@ private extension CustomTabView {
         viewModel.tabs.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
             await viewModel.change(viewModel.tabs)
+            analytics.track(.generic(name: "tab_order", item: viewModel.tabs))
         }
     }
 

@@ -48,7 +48,7 @@ private extension CustomNewsView {
         viewModel.news.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
             await viewModel.change(viewModel.news)
-            analytics.track(.buttonTap(buttonId: "failed changing icon", screen: "Ajustes > Aparência"), providers: [.firebase])
+            analytics.track(.generic(name: "news_order", item: viewModel.news))
         }
     }
 }

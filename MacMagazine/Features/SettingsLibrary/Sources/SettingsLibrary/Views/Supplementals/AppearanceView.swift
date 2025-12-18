@@ -21,7 +21,7 @@ struct AppearanceView: View {
         }
 
         .onChange(of: viewModel.mode) { _, value in
-            analytics.track(.buttonTap(buttonId: "tema \(value)", screen: "Ajustes > Aparência"), providers: [.firebase])
+            analytics.track(.buttonTap(buttonId: "tema \(value)", screen: "Ajustes > Aparência"))
             Task { await viewModel.change(value) }
         }
     }
