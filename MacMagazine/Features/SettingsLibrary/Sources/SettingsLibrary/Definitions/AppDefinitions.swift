@@ -1,6 +1,6 @@
 import AnalyticsLibrary
-import MacMagazineLibrary
 import Foundation
+import MacMagazineLibrary
 
 public enum AppTabs: String, CaseIterable, Codable, Equatable {
 

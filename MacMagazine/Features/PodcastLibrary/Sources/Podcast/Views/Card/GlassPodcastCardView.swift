@@ -1,6 +1,6 @@
 import AnalyticsLibrary
-import MacMagazineLibrary
 import FeedLibrary
+import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftData
 import SwiftUI
@@ -17,9 +17,9 @@ struct GlassPodcastCardView: View {
                 buttonId: AnalyticsConstants.ButtonID.podcastTogglePlayPause.id,
                 screen: AnalyticsConstants.Screen.podcast.name
             ))
-        }) {
+        }, label: {
             GlassCardView(data: podcast)
-        }
+        })
         .buttonStyle(.plain)
     }
 }
