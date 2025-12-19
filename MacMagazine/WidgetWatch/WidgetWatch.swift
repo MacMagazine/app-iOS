@@ -286,7 +286,7 @@ struct WidgetWatch: Widget {
     )
 }
 
-#Preview("Rectangular",as: .accessoryRectangular) {
+#Preview("Rectangular", as: .accessoryRectangular) {
     WidgetWatch()
 } timeline: {
     SimpleEntry(
