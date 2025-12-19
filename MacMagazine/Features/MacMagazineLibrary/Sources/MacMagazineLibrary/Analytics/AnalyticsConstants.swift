@@ -52,6 +52,9 @@ public enum AnalyticsConstants {
         // Other
         case loginPatroes
 
+        // Widget
+        case widget(String)
+
         public var name: String {
             switch self {
             // Podcast
@@ -77,6 +80,9 @@ public enum AnalyticsConstants {
 
             // Other
             case .loginPatroes: return "Login para patrões"
+
+            // Widget
+            case let .widget(type): return "Widget \(type)"
             }
         }
     }

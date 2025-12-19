@@ -1,8 +1,10 @@
+import AnalyticsLibrary
 import SwiftUI
 import WidgetKit
 
 struct MacMagazineWidget: Widget {
     let kind: String = "MacMagazineRecentPostsWidget"
+    let analytics = AnalyticsManager()
 
     private var supportedFamilies: [WidgetFamily] {
 #if os(iOS)
@@ -22,6 +24,7 @@ struct MacMagazineWidget: Widget {
         StaticConfiguration(kind: kind, provider: MacMagazineTimelineProvider()) { entry in
             WidgetView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
+                .environmentObject(analytics)
         }
         .configurationDisplayName("MacMagazine")
         .description("Confira nossos últimos posts!")

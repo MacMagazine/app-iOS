@@ -10,6 +10,7 @@
 		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
 		9B1A43032EE0C14E00E56784 /* PodcastLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1A43022EE0C14E00E56784 /* PodcastLibrary */; };
 		9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B4F666E2EE9F223008ACACB /* FeedLibrary */; };
+		9B5143C52EF4CE9800ED4F39 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5143C42EF4CE9800ED4F39 /* MacMagazineLibrary */; };
 		9B543D342EE8A116001730C4 /* MacMagazineUILibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B543D332EE8A116001730C4 /* MacMagazineUILibrary */; };
 		9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B817DA12ED0E5F7005E58E5 /* VideosLibrary */; };
 		9B910BEB2EE09D1B00E96B4D /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B910BEA2EE09D1B00E96B4D /* FeedLibrary */; };
@@ -154,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5143C52EF4CE9800ED4F39 /* MacMagazineLibrary in Frameworks */,
 				9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */,
 				9BDD42512EE9E82F00A9BD85 /* SwiftUI.framework in Frameworks */,
 				9BDD424F2EE9E82F00A9BD85 /* WidgetKit.framework in Frameworks */,
@@ -286,6 +288,7 @@
 			name = WidgetExtension;
 			packageProductDependencies = (
 				9B4F666E2EE9F223008ACACB /* FeedLibrary */,
+				9B5143C42EF4CE9800ED4F39 /* MacMagazineLibrary */,
 			);
 			productName = WidgetExtension;
 			productReference = 9BDD424D2EE9E82F00A9BD85 /* WidgetExtension.appex */;
@@ -801,6 +804,10 @@
 		9B4F666E2EE9F223008ACACB /* FeedLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FeedLibrary;
+		};
+		9B5143C42EF4CE9800ED4F39 /* MacMagazineLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MacMagazineLibrary;
 		};
 		9B543D332EE8A116001730C4 /* MacMagazineUILibrary */ = {
 			isa = XCSwiftPackageProductDependency;
