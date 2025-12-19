@@ -38,18 +38,14 @@ final class FeedMainViewModel: ObservableObject {
         guard !didLoadInitial else { return }
         didLoadInitial = true
 
-        // Sempre tenta refletir o estado local imediatamente
         if hasItems {
             status = .done
             persistLatestPostSnapshot(from: modelContext)
         }
 
-        // Regra de auto-refresh:
-        // - Se não tem itens -> atualiza
-        // - Se tem itens, atualiza somente se estiver "stale"
         let shouldAutoRefresh: Bool = {
             if !hasItems { return true }
-            guard let last = lastRefreshAt else { return true } // nunca atualizou nesta sessão
+            guard let last = lastRefreshAt else { return true }
             return Date().timeIntervalSince(last) > staleInterval
         }()
 
@@ -67,10 +63,8 @@ final class FeedMainViewModel: ObservableObject {
         status = feedViewModel.status
         lastRefreshAt = Date()
 
-        // Persiste snapshot do banco (fonte de verdade)
         persistLatestPostSnapshot(from: modelContext)
 
-        // Atualiza a complication
         WidgetCenter.shared.reloadTimelines(ofKind: "WidgetWatch")
     }
 
