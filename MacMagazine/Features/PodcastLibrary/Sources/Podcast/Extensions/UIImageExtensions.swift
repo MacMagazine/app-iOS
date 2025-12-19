@@ -1,8 +1,8 @@
 import UIKit
 
-public extension UIImage {
+extension UIImage {
 
-    func averageColor() -> UIColor? {
+    private func averageColor() -> UIColor? {
         guard let cgImage = cgImage else { return nil }
 
         let targetSize = CGSize(width: 1, height: 1)
