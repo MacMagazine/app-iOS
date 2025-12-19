@@ -4,6 +4,7 @@ import Foundation
 import StorageLibrary
 import SwiftData
 import WatchKit
+import WidgetKit
 
 @MainActor
 final class FeedMainViewModel: ObservableObject {
@@ -21,8 +22,11 @@ final class FeedMainViewModel: ObservableObject {
 
     private let feedViewModel: FeedViewModel
     private var didLoadInitial: Bool = false
+    private var lastRefreshAt: Date?
+    private let staleInterval: TimeInterval = 30 * 60
 
     // MARK: - Init
+
     init(feedViewModel: FeedViewModel) {
         self.feedViewModel = feedViewModel
         status = feedViewModel.status
@@ -34,30 +38,65 @@ final class FeedMainViewModel: ObservableObject {
         guard !didLoadInitial else { return }
         didLoadInitial = true
 
+        // Sempre tenta refletir o estado local imediatamente
         if hasItems {
             status = .done
-            return
+            persistLatestPostSnapshot(from: modelContext)
         }
 
-        await refresh(modelContext: modelContext)
+        // Regra de auto-refresh:
+        // - Se não tem itens -> atualiza
+        // - Se tem itens, atualiza somente se estiver "stale"
+        let shouldAutoRefresh: Bool = {
+            if !hasItems { return true }
+            guard let last = lastRefreshAt else { return true } // nunca atualizou nesta sessão
+            return Date().timeIntervalSince(last) > staleInterval
+        }()
+
+        if shouldAutoRefresh {
+            await refresh(modelContext: modelContext)
+        }
     }
 
     func refresh(modelContext: ModelContext) async {
         guard !isRefreshing else { return }
         isRefreshing = true
-
-        defer {
-            isRefreshing = false
-        }
+        defer { isRefreshing = false }
 
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
+        lastRefreshAt = Date()
+
+        // Persiste snapshot do banco (fonte de verdade)
+        persistLatestPostSnapshot(from: modelContext)
+
+        // Atualiza a complication
+        WidgetCenter.shared.reloadTimelines(ofKind: "WidgetWatch")
     }
 
     func toggleFavorite(post: FeedDB, modelContext: ModelContext) {
         post.favorite.toggle()
         try? modelContext.save()
         showActions = true
+    }
+
+    // MARK: - Snapshot para Widget
+
+    private func persistLatestPostSnapshot(from modelContext: ModelContext) {
+        var descriptor = FetchDescriptor<FeedDB>(
+            sortBy: [SortDescriptor(\.pubDate, order: .reverse)]
+        )
+        descriptor.fetchLimit = 1
+
+        guard let last = try? modelContext.fetch(descriptor).first else { return }
+
+        MacMagazineWidgetSharedStore.write(
+            snapshot: .init(
+                postId: last.postId,
+                title: last.title,
+                date: last.pubDate
+            )
+        )
     }
 
     // MARK: - Index / Helpers
@@ -88,8 +127,16 @@ final class FeedMainViewModel: ObservableObject {
         return min(max(index, 0), quantity - 1)
     }
 
-    @MainActor
     func setStatusForPreview(_ status: FeedViewModel.Status) {
         self.status = status
+    }
+
+    func openPost(withId postId: String, modelContext: ModelContext) {
+        let predicate = #Predicate<FeedDB> { $0.postId == postId }
+        let descriptor = FetchDescriptor<FeedDB>(predicate: predicate)
+
+        if let post = try? modelContext.fetch(descriptor).first {
+            selectedPostForDetail = SelectedPost(post: post)
+        }
     }
 }

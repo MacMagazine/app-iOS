@@ -38,7 +38,7 @@ struct FeedMainView: View {
         NavigationStack {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
-                .task(id: items.count) {
+                .task {
                     guard !isRunningForPreviews else { return }
                     await viewModel.loadInitialIfNeeded(
                         hasItems: !items.isEmpty,
@@ -47,6 +47,16 @@ struct FeedMainView: View {
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
                     FeedDetailView(viewModel: viewModel, post: payload.post)
+                }
+                .onOpenURL { url in
+                    guard url.scheme == "macmagazine" else { return }
+                    guard url.host == "news" else { return }
+
+                    let parts = url.pathComponents.filter { $0 != "/" }
+                    if parts.count >= 2, parts[0] == "post" {
+                        let postId = parts[1]
+                        viewModel.openPost(withId: postId, modelContext: modelContext)
+                    }
                 }
         }
     }
