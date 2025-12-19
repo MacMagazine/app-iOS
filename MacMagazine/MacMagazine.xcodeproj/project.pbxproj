@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88C8B2E72EF476E100044DE9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */; };
+		88C8B2E82EF476E100044DE9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD42502EE9E82F00A9BD85 /* SwiftUI.framework */; };
+		88C8B2F72EF476E200044DE9 /* WidgetWatchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 88C8B2E62EF476E100044DE9 /* WidgetWatchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		88C8B2FE2EF48DC500044DE9 /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 88C8B2FD2EF48DC500044DE9 /* FeedLibrary */; };
 		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
 		9B1A43032EE0C14E00E56784 /* PodcastLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1A43022EE0C14E00E56784 /* PodcastLibrary */; };
 		9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B4F666E2EE9F223008ACACB /* FeedLibrary */; };
@@ -23,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		88C8B2F52EF476E200044DE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B9E9DBC2E986F8400255820 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88C8B2E52EF476E100044DE9;
+			remoteInfo = WidgetWatchExtension;
+		};
 		9BA828AA2EEC7AAB00F26FCB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B9E9DBC2E986F8400255820 /* Project object */;
@@ -40,6 +51,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		88C8B2FC2EF476E200044DE9 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				88C8B2F72EF476E200044DE9 /* WidgetWatchExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BA828AD2EEC7AAB00F26FCB /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,6 +87,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		88C8B2E62EF476E100044DE9 /* WidgetWatchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetWatchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		88C8B3012EF4AE7400044DE9 /* WidgetWatchExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetWatchExtension.entitlements; sourceTree = "<group>"; };
 		9B024FDA2EC2717200D66056 /* SettingsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SettingsLibrary; sourceTree = "<group>"; };
 		9B1A43012EE0C04D00E56784 /* PodcastLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PodcastLibrary; sourceTree = "<group>"; };
 		9B334E912EE43FE4009F4947 /* MMLiveLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MMLiveLibrary; sourceTree = "<group>"; };
@@ -81,6 +105,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		88C8B2FB2EF476E200044DE9 /* Exceptions for "WidgetWatch" folder in "WidgetWatchExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 88C8B2E52EF476E100044DE9 /* WidgetWatchExtension */;
+		};
+		88C8B3052EF577EE00044DE9 /* Exceptions for "WatchApp" folder in "WidgetWatchExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WatchWidgetShared.swift,
+			);
+			target = 88C8B2E52EF476E100044DE9 /* WidgetWatchExtension */;
+		};
 		9B9E9DD12E986F8500255820 /* Exceptions for "MacMagazine" folder in "MacMagazine" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -105,6 +143,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		88C8B2E92EF476E100044DE9 /* WidgetWatch */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				88C8B2FB2EF476E200044DE9 /* Exceptions for "WidgetWatch" folder in "WidgetWatchExtension" target */,
+			);
+			path = WidgetWatch;
+			sourceTree = "<group>";
+		};
 		9B9E9DC62E986F8400255820 /* MacMagazine */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -116,6 +162,9 @@
 		};
 		9BA8288D2EEC7AAA00F26FCB /* WatchApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				88C8B3052EF577EE00044DE9 /* Exceptions for "WatchApp" folder in "WidgetWatchExtension" target */,
+			);
 			path = WatchApp;
 			sourceTree = "<group>";
 		};
@@ -130,6 +179,16 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		88C8B2E32EF476E100044DE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88C8B2FE2EF48DC500044DE9 /* FeedLibrary in Frameworks */,
+				88C8B2E82EF476E100044DE9 /* SwiftUI.framework in Frameworks */,
+				88C8B2E72EF476E100044DE9 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9E9DC12E986F8400255820 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,11 +227,13 @@
 		9B9E9DBB2E986F8400255820 = {
 			isa = PBXGroup;
 			children = (
+				88C8B3012EF4AE7400044DE9 /* WidgetWatchExtension.entitlements */,
 				9BB3888E2EE0B2E4007AC71C /* MacMagazine.xctestplan */,
 				9B9E9DDA2E98701C00255820 /* Features */,
 				9B9E9DC62E986F8400255820 /* MacMagazine */,
 				9BDD42522EE9E82F00A9BD85 /* Widget */,
 				9BA8288D2EEC7AAA00F26FCB /* WatchApp */,
+				88C8B2E92EF476E100044DE9 /* WidgetWatch */,
 				9B9E9DDE2E98709000255820 /* Frameworks */,
 				9B9E9DC52E986F8400255820 /* Products */,
 			);
@@ -184,6 +245,7 @@
 				9B9E9DC42E986F8400255820 /* MacMagazine.app */,
 				9BDD424D2EE9E82F00A9BD85 /* WidgetExtension.appex */,
 				9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */,
+				88C8B2E62EF476E100044DE9 /* WidgetWatchExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +276,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		88C8B2E52EF476E100044DE9 /* WidgetWatchExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88C8B2F82EF476E200044DE9 /* Build configuration list for PBXNativeTarget "WidgetWatchExtension" */;
+			buildPhases = (
+				88C8B2E22EF476E100044DE9 /* Sources */,
+				88C8B2E32EF476E100044DE9 /* Frameworks */,
+				88C8B2E42EF476E100044DE9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				88C8B2E92EF476E100044DE9 /* WidgetWatch */,
+			);
+			name = WidgetWatchExtension;
+			packageProductDependencies = (
+				88C8B2FD2EF48DC500044DE9 /* FeedLibrary */,
+			);
+			productName = WidgetWatchExtension;
+			productReference = 88C8B2E62EF476E100044DE9 /* WidgetWatchExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9B9E9DC32E986F8400255820 /* MacMagazine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B9E9DD22E986F8500255820 /* Build configuration list for PBXNativeTarget "MacMagazine" */;
@@ -254,10 +339,12 @@
 				9BA828882EEC7AAA00F26FCB /* Sources */,
 				9BA828892EEC7AAA00F26FCB /* Frameworks */,
 				9BA8288A2EEC7AAA00F26FCB /* Resources */,
+				88C8B2FC2EF476E200044DE9 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				88C8B2F62EF476E200044DE9 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				9BA8288D2EEC7AAA00F26FCB /* WatchApp */,
@@ -301,9 +388,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2610;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					88C8B2E52EF476E100044DE9 = {
+						CreatedOnToolsVersion = 26.2;
+					};
 					9B9E9DC32E986F8400255820 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
@@ -334,11 +424,19 @@
 				9B9E9DC32E986F8400255820 /* MacMagazine */,
 				9BDD424C2EE9E82F00A9BD85 /* WidgetExtension */,
 				9BA8288B2EEC7AAA00F26FCB /* WatchApp */,
+				88C8B2E52EF476E100044DE9 /* WidgetWatchExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		88C8B2E42EF476E100044DE9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9E9DC22E986F8400255820 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -385,6 +483,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		88C8B2E22EF476E100044DE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B9E9DC02E986F8400255820 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -409,6 +514,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		88C8B2F62EF476E200044DE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88C8B2E52EF476E100044DE9 /* WidgetWatchExtension */;
+			targetProxy = 88C8B2F52EF476E200044DE9 /* PBXContainerItemProxy */;
+		};
 		9BA828AB2EEC7AAB00F26FCB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BA8288B2EEC7AAA00F26FCB /* WatchApp */;
@@ -422,6 +532,74 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		88C8B2F92EF476E200044DE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WidgetWatchExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5.1.0;
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 5.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.beta.macmagazine.watchkitapp.WidgetWatch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		88C8B2FA2EF476E200044DE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WidgetWatchExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5.1.0;
+				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 5.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.beta.macmagazine.watchkitapp.WidgetWatch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 		9B9E9DD32E986F8500255820 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -650,7 +828,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.1;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
@@ -685,7 +863,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.1;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -754,6 +932,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		88C8B2F82EF476E200044DE9 /* Build configuration list for PBXNativeTarget "WidgetWatchExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88C8B2F92EF476E200044DE9 /* Debug */,
+				88C8B2FA2EF476E200044DE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9B9E9DBF2E986F8400255820 /* Build configuration list for PBXProject "MacMagazine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -793,6 +980,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		88C8B2FD2EF48DC500044DE9 /* FeedLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeedLibrary;
+		};
 		9B024FDB2EC2719700D66056 /* SettingsLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SettingsLibrary;
