@@ -72,7 +72,7 @@ struct Provider: AppIntentTimelineProvider {
 
 // MARK: - Entry View
 
-struct WidgetWatchEntryView: View {
+struct WatchWidgetEntryView: View {
 
     let entry: SimpleEntry
     @Environment(\.widgetFamily) private var family
@@ -102,7 +102,7 @@ struct WidgetWatchEntryView: View {
 
 // MARK: - Layouts
 
-private extension WidgetWatchEntryView {
+private extension WatchWidgetEntryView {
 
     // ACCESSORY CIRCULAR
     var circular: some View {
@@ -225,7 +225,7 @@ private extension WidgetWatchEntryView {
 
 // MARK: - Widget
 
-struct WidgetWatch: Widget {
+struct WatchWidget: Widget {
 
     let kind: String = "WidgetWatch"
 
@@ -235,7 +235,7 @@ struct WidgetWatch: Widget {
             intent: ConfigurationAppIntent.self,
             provider: Provider()
         ) { entry in
-            WidgetWatchEntryView(entry: entry)
+            WatchWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("MacMagazine")
         .description("Acesso rápido às notícias do MacMagazine.")
@@ -251,7 +251,7 @@ struct WidgetWatch: Widget {
 #if DEBUG
 
 #Preview("Circular", as: .accessoryCircular) {
-    WidgetWatch()
+    WatchWidget()
 } timeline: {
     SimpleEntry(
         date: .now,
@@ -263,7 +263,7 @@ struct WidgetWatch: Widget {
 }
 
 #Preview("Corner", as: .accessoryCorner) {
-    WidgetWatch()
+    WatchWidget()
 } timeline: {
     SimpleEntry(
         date: .now,
@@ -275,7 +275,7 @@ struct WidgetWatch: Widget {
 }
 
 #Preview("Inline", as: .accessoryInline) {
-    WidgetWatch()
+    WatchWidget()
 } timeline: {
     SimpleEntry(
         date: .now,
@@ -287,7 +287,7 @@ struct WidgetWatch: Widget {
 }
 
 #Preview("Rectangular", as: .accessoryRectangular) {
-    WidgetWatch()
+    WatchWidget()
 } timeline: {
     SimpleEntry(
         date: .now,
@@ -297,5 +297,4 @@ struct WidgetWatch: Widget {
         lastPostDate: .now.addingTimeInterval(-60 * 90)
     )
 }
-
 #endif

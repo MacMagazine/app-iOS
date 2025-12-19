@@ -2,8 +2,8 @@ import SwiftUI
 import WidgetKit
 
 @main
-struct WidgetWatchBundle: WidgetBundle {
+struct WatchWidgetBundle: WidgetBundle {
     var body: some Widget {
-        WidgetWatch()
+        WatchWidget()
     }
 }
