@@ -35,7 +35,9 @@ private extension MacMagazineTimelineProvider {
         do {
             let posts = try await viewModel.getWidgetData()
             let urls = posts.compactMap { $0.thumbnail }.compactMap { URL(string: $0) }
-            ImagePrefetcher(urls: urls, completionHandler: { _, _, _ in }).start()
+            for url in urls {
+                _ = try? await ImageDownloader.default.downloadImage(with: url)
+            }
             return posts
         } catch {
             return []

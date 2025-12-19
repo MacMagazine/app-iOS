@@ -9,7 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false,
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
       "containerPath" : "container:MacMagazine.xcodeproj",
@@ -20,16 +19,23 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Features\/MMLiveLibrary",
-        "identifier" : "MMLiveLibraryTests",
-        "name" : "MMLiveLibraryTests"
+        "containerPath" : "container:Features\/FeedLibrary",
+        "identifier" : "FeedLibraryTests",
+        "name" : "FeedLibraryTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/FeedLibrary",
-        "identifier" : "FeedLibraryTests",
-        "name" : "FeedLibraryTests"
+        "containerPath" : "container:Features\/PodcastLibrary",
+        "identifier" : "PodcastTests",
+        "name" : "PodcastTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/MMLiveLibrary",
+        "identifier" : "MMLiveLibraryTests",
+        "name" : "MMLiveLibraryTests"
       }
     }
   ],

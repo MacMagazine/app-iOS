@@ -22,6 +22,9 @@ let package = Package(
                                .product(name: "Network", package: "Libraries"),
 							   .product(name: "YouTube", package: "Libraries"),
                                .product(name: "Analytics", package: "Libraries"),
-							   .product(name: "UIComponents", package: "Libraries")])
+							   .product(name: "UIComponents", package: "Libraries")]),
+		.testTarget(name: "PodcastTests",
+                    dependencies: ["PodcastLibrary"],
+                    resources: [.process("Resources")])
     ]
 )
