@@ -1,7 +1,10 @@
+import AnalyticsLibrary
+import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 struct ChaptersView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Bindable private var playerManager: PodcastPlayerManager
     @Binding private var isShowingChapterDialog: Bool
 
@@ -29,6 +32,11 @@ struct ChaptersView: View {
             )
             chapters
         }
+        .trackScreen(
+            AnalyticsConstants.Screen.podcastChapters.name,
+            previous: nil,
+            analytics: analytics
+        )
         .preferredColorScheme(isDarkBackground ? .dark : .light)
         .onAppear {
             updateBackgroundGradient(data: playerManager.currentChapter?.artworkData)

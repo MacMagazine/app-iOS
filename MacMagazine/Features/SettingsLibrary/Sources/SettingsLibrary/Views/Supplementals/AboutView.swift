@@ -1,8 +1,10 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 struct AboutView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     private let viewModel = AboutViewModel()
 
@@ -45,19 +47,37 @@ private extension AboutView {
 
     @ViewBuilder
     var optionsView: some View {
-        Button(action: { viewModel.composeMessage() },
+        Button(action: {
+            viewModel.composeMessage()
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.reportProblem.id,
+                screen: AnalyticsConstants.Screen.settings.name
+            ))
+        },
                label: {
             Text("Relatar problema/bug no app")
                 .foregroundStyle(theme.main.tint.color ?? .blue)
         })
 
-        Button(action: { presentingContent = .terms },
+        Button(action: {
+            presentingContent = .terms
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.termsConditions.id,
+                screen: AnalyticsConstants.Screen.settings.name
+            ))
+        },
                label: {
             Text(AboutViewModel.ButtonAction.terms.title)
                 .foregroundStyle(theme.main.tint.color ?? .blue)
         })
 
-        Button(action: { presentingContent = .privacy },
+        Button(action: {
+            presentingContent = .privacy
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.privacyPolicy.id,
+                screen: AnalyticsConstants.Screen.settings.name
+            ))
+        },
                label: {
             Text(AboutViewModel.ButtonAction.privacy.title)
                 .foregroundStyle(theme.main.tint.color ?? .blue)

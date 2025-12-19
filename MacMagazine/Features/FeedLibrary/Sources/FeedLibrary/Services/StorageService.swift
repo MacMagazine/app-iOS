@@ -61,6 +61,7 @@ extension Database {
             existing.subtitle = podcast.subtitle
             existing.pubDate = podcast.pubDate
             existing.artworkURL = podcast.artworkURL
+            existing.link = podcast.link
             existing.podcastURL = podcast.podcastURL
             existing.podcastSize = podcast.podcastSize
             existing.duration = podcast.duration

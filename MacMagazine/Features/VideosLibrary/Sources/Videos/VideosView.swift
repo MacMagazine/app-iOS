@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import StorageLibrary
 import SwiftUI
@@ -6,6 +7,7 @@ import YouTubeLibrary
 
 public struct VideosView: View {
     @EnvironmentObject private var sessionState: SessionState
+    @EnvironmentObject private var analytics: AnalyticsManager
     var viewModel: VideosViewModel
     @State private var search: String = ""
     @Binding private var favorite: Bool
@@ -23,7 +25,10 @@ public struct VideosView: View {
 
     public var body: some View {
         Videos(
-            card: AdaptiveVideoCard(context: viewModel.context),
+            card: AdaptiveVideoCard(
+                context: viewModel.context,
+                analytics: analytics
+            ),
             api: viewModel.youtube,
             scrollPosition: $scrollPosition,
             favorite: favorite,
@@ -44,6 +49,17 @@ public struct VideosView: View {
         }
         .onChange(of: viewModel.youtube.selectedVideo) { _, value in
             sessionState.isPlayingVideos = (value != nil)
+            if let value {
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.videoStarted(id: value.videoId).id,
+                    screen: AnalyticsConstants.Screen.videos.name
+                ))
+            } else {
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.videoStopped.id,
+                    screen: AnalyticsConstants.Screen.videos.name
+                ))
+            }
         }
         .onReceive(sessionState.$isPlayingPodcasts) { value in
             if value {

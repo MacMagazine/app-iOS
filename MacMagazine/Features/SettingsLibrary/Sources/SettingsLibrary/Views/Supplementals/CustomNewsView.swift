@@ -1,8 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
-struct CustomTabView: View {
-    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+struct CustomNewsView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = CustomizationViewModel()
@@ -21,41 +22,33 @@ struct CustomTabView: View {
     }
 }
 
-private extension CustomTabView {
+private extension CustomNewsView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Abas")
+            Text(AppTabs.news.rawValue)
                 .font(.headline)
-            Text("Defina a ordem das abas do aplicativo")
+            Text("Defina a ordem das \(AppTabs.news.rawValue.lowercased()) do aplicativo")
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Customize o app, escolhendo a ordem das abas na parte inferior do aplicativo.")
+        .accessibilityLabel("Customize o app, escolhendo a ordem das opções na aba \(AppTabs.news.rawValue.lowercased()).")
     }
 
     var optionsView: some View {
-        ForEach($viewModel.tabs, id: \.self) { $tab in
-            Label(tab.rawValue, systemImage: tab.icon)
-                .moveDisabled(shouldDisableMove(tab))
+        ForEach($viewModel.news, id: \.self) { $news in
+            Text(news.rawValue)
         }
         .onMove(perform: moveItems)
     }
 }
 
-private extension CustomTabView {
+private extension CustomNewsView {
     func moveItems(fromIndex: IndexSet, newIndex: Int) {
-        viewModel.tabs.move(fromOffsets: fromIndex, toOffset: newIndex)
+        viewModel.news.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
-            await viewModel.change(viewModel.tabs)
-        }
-    }
-
-    func shouldDisableMove(_ tab: AppTabs) -> Bool {
-        switch tab {
-        case .live, .settings: shouldUseSidebar
-        case .search: true
-        default: false
+            await viewModel.change(viewModel.news)
+            analytics.track(.generic(name: AnalyticsConstants.GenericEvent.newsOrder.name, item: viewModel.news))
         }
     }
 }

@@ -20,6 +20,7 @@ let package = Package(
                                .product(name: "Storage", package: "Libraries"),
                                .product(name: "Network", package: "Libraries"),
 							   .product(name: "YouTube", package: "Libraries"),
+                               .product(name: "Analytics", package: "Libraries"),
 							   .product(name: "UIComponents", package: "Libraries")])
     ]
 )

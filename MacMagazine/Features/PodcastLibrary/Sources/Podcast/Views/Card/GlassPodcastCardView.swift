@@ -1,16 +1,25 @@
+import AnalyticsLibrary
 import FeedLibrary
+import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftData
 import SwiftUI
 
 struct GlassPodcastCardView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     let podcast: CardContent
     let onPlay: () -> Void
 
     var body: some View {
-        Button(action: onPlay) {
+        Button(action: {
+            onPlay()
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.podcastTogglePlayPause.id,
+                screen: AnalyticsConstants.Screen.podcast.name
+            ))
+        }, label: {
             GlassCardView(data: podcast)
-        }
+        })
         .buttonStyle(.plain)
     }
 }
@@ -38,7 +47,11 @@ import StorageLibrary
     let storage = Database(models: [PodcastDB.self], inMemory: true)
 
     GlassPodcastCardView(
-        podcast: mockPodcast.toCardContent(using: storage.sharedModelContainer.mainContext),
+        podcast: mockPodcast.toCardContent(
+            using: storage.sharedModelContainer.mainContext,
+            analytics: nil,
+            screen: nil
+        ),
         onPlay: { playing.toggle() }
     )
     .padding()

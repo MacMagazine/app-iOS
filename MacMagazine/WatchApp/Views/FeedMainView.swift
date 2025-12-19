@@ -12,8 +12,12 @@ struct FeedMainView: View {
 
     @Query private var items: [FeedDB]
 
+    // MARK: - State
+
+    @State private var viewModel: FeedMainViewModel
+
     init(viewModel: FeedMainViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = State(wrappedValue: viewModel)
 
         var descriptor = FetchDescriptor<FeedDB>(
             sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)]
@@ -21,16 +25,6 @@ struct FeedMainView: View {
         descriptor.fetchLimit = 10
         _items = Query(descriptor)
     }
-
-    // MARK: - Preview Guard
-
-    private var isRunningForPreviews: Bool {
-        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    }
-
-    // MARK: - State
-
-    @StateObject private var viewModel: FeedMainViewModel
 
     // MARK: - Body
 
@@ -46,7 +40,7 @@ struct FeedMainView: View {
                     )
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
-                    FeedDetailView(viewModel: viewModel, post: payload.post)
+                    FeedDetailView(viewModel: viewModel, post: payload)
                 }
                 .onOpenURL { url in
                     guard url.scheme == "macmagazine" else { return }
@@ -58,6 +52,9 @@ struct FeedMainView: View {
                         viewModel.openPost(withId: postId, modelContext: modelContext)
                     }
                 }
+        }
+        .task {
+            await viewModel.refresh(modelContext: modelContext)
         }
     }
 
@@ -78,10 +75,6 @@ struct FeedMainView: View {
                 emptyScreen
             } else {
                 carouselRowScreen(items: items)
-                    .navigationTitle {
-                        navigationTitle("MacMagazine\n\(viewModel.selectedIndex + 1) de \(items.count)")
-                            .offset(y: 14)
-                    }
             }
         }
     }
@@ -101,18 +94,12 @@ struct FeedMainView: View {
     // MARK: - Loading
 
     private var loadingView: some View {
-        VStack(spacing: 10) {
-            Spacer()
-
+        VStack {
             ProgressView()
             Text("Carregando…")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            Spacer()
         }
-        .padding()
     }
 
     // MARK: - Error / Empty Screens
@@ -202,7 +189,7 @@ struct FeedMainView: View {
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
                             .onTapGesture {
-                                viewModel.selectedPostForDetail = SelectedPost(post: post)
+                                viewModel.selectedPostForDetail = post
                             }
                             .onLongPressGesture {
                                 viewModel.showContextMenu = true
@@ -240,32 +227,23 @@ struct FeedMainView: View {
     // MARK: - Context Menu Sheet
 
     private func contextMenuSheet(items: [FeedDB]) -> some View {
-        VStack(alignment: .center, spacing: 12) {
-            Button {
-                viewModel.showContextMenu = false
-                Task {
-                    await viewModel.refresh(modelContext: modelContext)
-                }
-            } label: {
-                Label("Atualizar posts", systemImage: "arrow.clockwise")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+        Button {
+            viewModel.showContextMenu = false
+            Task {
+                await viewModel.refresh(modelContext: modelContext)
             }
-            .glassEffect(.clear)
+        } label: {
+            Label("Atualizar posts", systemImage: "arrow.clockwise")
+                .frame(maxWidth: .infinity)
         }
+        .glassEffect(.clear)
     }
 
     // MARK: - Refresh Overlay
 
     private var refreshOverlay: some View {
         ZStack {
-            VStack(spacing: 8) {
-                ProgressView()
-                Text("Atualizando…")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
+            loadingView
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .fill(.black.opacity(0.75))
@@ -297,10 +275,8 @@ extension FeedMainViewModel {
         return viewModel
     }
 }
-#endif
 
-#if DEBUG
-struct FeedRootPreviewHost: View {
+struct FeedPreviewHost: View {
     let container: ModelContainer
     let viewModel: FeedMainViewModel
 
@@ -333,22 +309,20 @@ struct FeedRootPreviewHost: View {
             .modelContainer(container)
     }
 }
-#endif
 
-#if DEBUG
 #Preview("Feed • Loading") {
-    FeedRootPreviewHost(status: .loading, seedItems: false)
+    FeedPreviewHost(status: .loading, seedItems: false)
 }
 
 #Preview("Feed • Error") {
-    FeedRootPreviewHost(status: .error(reason: "Sem conexão com a internet."), seedItems: false)
+    FeedPreviewHost(status: .error(reason: "Sem conexão com a internet."), seedItems: false)
 }
 
 #Preview("Feed • Done (sem registros)") {
-    FeedRootPreviewHost(status: .done, seedItems: false)
+    FeedPreviewHost(status: .done, seedItems: false)
 }
 
 #Preview("Feed • Done (com registros)") {
-    FeedRootPreviewHost(status: .done, seedItems: true)
+    FeedPreviewHost(status: .done, seedItems: true)
 }
 #endif

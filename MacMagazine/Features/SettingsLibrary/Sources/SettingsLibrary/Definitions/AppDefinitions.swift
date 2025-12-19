@@ -1,4 +1,6 @@
+import AnalyticsLibrary
 import Foundation
+import MacMagazineLibrary
 
 public enum AppTabs: String, CaseIterable, Codable, Equatable {
 
@@ -15,6 +17,14 @@ public enum AppTabs: String, CaseIterable, Codable, Equatable {
         case .social: "point.3.filled.connected.trianglepath.dotted"
         case .settings: "gearshape"
         case .search: "magnifyingglass"
+        }
+    }
+
+    public var analyticsScreen: AnalyticsConstants.Screen? {
+        switch self {
+        case .settings: return .settings
+        case .live: return .live
+        case .news, .social, .search: return nil
         }
     }
 }
@@ -50,6 +60,14 @@ public enum Social: String, CaseIterable, Codable, Equatable {
         case .videos: "play.tv"
         case .podcast: "play.rectangle"
         case .instagram: "photo.stack"
+        }
+    }
+
+    public var analyticsScreen: AnalyticsConstants.Screen {
+        switch self {
+        case .videos: return .socialVideos
+        case .podcast: return .socialPodcast
+        case .instagram: return .socialInstagram
         }
     }
 }

@@ -23,7 +23,8 @@ let package = Package(
                     .product(name: "OneSignalFramework", package: "OneSignal-XCFramework"),
                     .product(name: "InApp", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries"),
-                    .product(name: "Storage", package: "Libraries")
+                    .product(name: "Storage", package: "Libraries"),
+                    .product(name: "Analytics", package: "Libraries")
                 ],
                 resources: [.process("Resources")])
     ]

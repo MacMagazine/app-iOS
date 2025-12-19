@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import StoreKit
 import SwiftUI
@@ -5,6 +6,7 @@ import UIComponentsLibrary
 import UIKit
 
 struct SubscriptionView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.openURL) var openURL
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
@@ -88,7 +90,7 @@ extension SubscriptionView {
         ForEach(identifiers, id: \.self) { identifier in
             ProductView(id: identifier)
                 .productViewStyle(CustomProductViewStyle(theme: theme) {
-                    viewModel.purchase(using: identifier)
+                    viewModel.purchase(using: identifier, analytics: analytics)
                 })
         }
     }
@@ -104,6 +106,7 @@ extension SubscriptionView {
         if case .purchasable(let products) = viewModel.status, !products.isEmpty {
             Button(action: {
                 viewModel.restore()
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.restorePurchase.id, screen: AnalyticsConstants.Screen.settings.name))
             }, label: {
                 Text("Recuperar compra").foregroundStyle(theme.main.tint.color ?? .blue)
             })
@@ -115,7 +118,10 @@ extension SubscriptionView {
     var manageSubscription: some View {
         if let url = URL(string: URLs.subscriptions),
            UIApplication.shared.canOpenURL(url) {
-            Button(action: { openURL(url) },
+            Button(action: {
+                openURL(url)
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.manageSubscription.id, screen: AnalyticsConstants.Screen.settings.name))
+            },
                    label: {
                 Text("Gerenciar assinatura").foregroundStyle(theme.main.tint.color ?? .blue)
             })
@@ -134,6 +140,7 @@ extension SubscriptionView {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 #endif
             isPresentingLoginPatrao.toggle()
+            analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.loginPatrao.id, screen: AnalyticsConstants.Screen.settings.name))
         }, label: {
             Text("Sou patrão via Patreon/Catarse").foregroundStyle(theme.main.tint.color ?? .blue)
         })
@@ -156,6 +163,7 @@ extension SubscriptionView {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             #endif
             viewModel.isPatrao = false
+            analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.logoffPatrao.id, screen: AnalyticsConstants.Screen.settings.name))
         }, label: {
             Text("Logoff de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
         })

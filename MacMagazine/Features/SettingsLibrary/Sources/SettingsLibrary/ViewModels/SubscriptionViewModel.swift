@@ -1,5 +1,7 @@
+import AnalyticsLibrary
 import Foundation
 import InAppLibrary
+import MacMagazineLibrary
 import StorageLibrary
 import UIKit
 
@@ -25,6 +27,7 @@ final class SubscriptionViewModel {
     var isValidSubscription = false
     var status: Status = .idle
     var storage: Database?
+    var analytics: AnalyticsManager?
 
     let inAppLibrary = InAppManager()
     private var observationTask: Task<Void, Never>?
@@ -90,22 +93,51 @@ extension SubscriptionViewModel {
         }
     }
 
-    func purchase(using identifier: String) {
+    func purchase(
+        using identifier: String,
+        analytics: AnalyticsManager
+    ) {
         guard let product = status.product(using: identifier) else { return }
+        self.analytics = analytics
+
         Task {
             await inAppLibrary.purchase(product)
+
+            analytics.track(
+                .purchaseInitiated(productId: identifier, price: product.price)
+            )
         }
     }
 }
 
 private extension SubscriptionViewModel {
     func process(purchased: InAppStatus) {
-        if case .purchased(let identifier) = purchased,
-           let expirationDate = status.product(using: identifier)?.expirationDate {
-            Task {
-                await change(expirationDate: expirationDate)
-                isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
+        switch purchased {
+        case let .purchased(identifier):
+            if let transaction = status.product(using: identifier) {
+                Task {
+                    analytics?.track(
+                        .purchaseCompleted(productId: identifier,
+                                           revenue: transaction.price)
+                    )
+
+                    await change(expirationDate: transaction.expirationDate)
+                    isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
+                }
             }
+
+        case .cancelled:
+            analytics?.track(.purchaseCancelled)
+
+        case let .error(reason):
+            analytics?.track(
+                .error(code: "", message: reason.localizedDescription, screen: AnalyticsConstants.Screen.settings.name)
+            )
+        case .pending:
+            analytics?.track(.purchasePending)
+
+        default: break
         }
+        inAppLibrary.status = .unknown
     }
 }

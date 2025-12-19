@@ -1,7 +1,9 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
-struct CustomNewsView: View {
+struct CustomSocialView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = CustomizationViewModel()
@@ -20,32 +22,33 @@ struct CustomNewsView: View {
     }
 }
 
-private extension CustomNewsView {
+private extension CustomSocialView {
     var headerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(AppTabs.news.rawValue)
+            Text(AppTabs.social.rawValue)
                 .font(.headline)
-            Text("Defina a ordem das \(AppTabs.news.rawValue.lowercased()) do aplicativo")
+            Text("Defina a ordem das \(AppTabs.social.rawValue.lowercased()) do aplicativo")
                 .font(.caption)
         }
         .foregroundColor(theme.text.terciary.color)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Customize o app, escolhendo a ordem das opções na aba \(AppTabs.news.rawValue.lowercased()).")
+        .accessibilityLabel("Customize o app, escolhendo a ordem das opções na aba \(AppTabs.social.rawValue.lowercased()).")
     }
 
     var optionsView: some View {
-        ForEach($viewModel.news, id: \.self) { $news in
-            Text(news.rawValue)
+        ForEach($viewModel.social, id: \.self) { $social in
+            Text(social.rawValue)
         }
         .onMove(perform: moveItems)
     }
 }
 
-private extension CustomNewsView {
+private extension CustomSocialView {
     func moveItems(fromIndex: IndexSet, newIndex: Int) {
-        viewModel.news.move(fromOffsets: fromIndex, toOffset: newIndex)
+        viewModel.social.move(fromOffsets: fromIndex, toOffset: newIndex)
         Task {
-            await viewModel.change(viewModel.news)
+            await viewModel.change(viewModel.social)
+            analytics.track(.generic(name: AnalyticsConstants.GenericEvent.socialOrder.name, item: viewModel.social))
         }
     }
 }

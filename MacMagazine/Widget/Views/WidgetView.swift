@@ -1,8 +1,11 @@
+import AnalyticsLibrary
 import FeedLibrary
+import MacMagazineLibrary
 import SwiftUI
 import WidgetKit
 
 struct WidgetView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.widgetFamily) var widgetFamily
     var entry: WidgetEntry
     var content: [WidgetData] { entry.posts }
@@ -19,7 +22,9 @@ struct WidgetView: View {
                 case .systemSmall,
                         .accessoryRectangular,
                         .accessoryInline,
-                        .accessoryCircular: WidgetElementView(post: content[0])
+                        .accessoryCircular:
+                    WidgetElementView(post: content[0])
+                        .trackScreen(AnalyticsConstants.Screen.widget(widgetFamily.description).name, analytics: analytics)
 
                 case .systemExtraLarge:
                     Text("Tamanho incompatível.")
@@ -36,5 +41,6 @@ struct WidgetView: View {
                 id: \.self) { index in
             WidgetElementView(post: content[index])
         }.header(title: "Últimas notícias")
+        .trackScreen(AnalyticsConstants.Screen.widget(widgetFamily.description).name, analytics: analytics)
     }
 }

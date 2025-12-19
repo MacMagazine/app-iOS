@@ -1,4 +1,3 @@
-import Combine
 import FeedLibrary
 import Foundation
 import StorageLibrary
@@ -7,16 +6,17 @@ import WatchKit
 import WidgetKit
 
 @MainActor
-final class FeedMainViewModel: ObservableObject {
+@Observable
+final class FeedMainViewModel {
 
     // MARK: - Published
 
-    @Published private(set) var status: FeedViewModel.Status = .loading
-    @Published var selectedIndex: Int = 0
-    @Published var showActions: Bool = false
-    @Published var showContextMenu: Bool = false
-    @Published var selectedPostForDetail: SelectedPost?
-    @Published private(set) var isRefreshing: Bool = false
+    private(set) var status: FeedViewModel.Status = .loading
+    var selectedIndex: Int = 0
+    var showActions: Bool = false
+    var showContextMenu: Bool = false
+    var selectedPostForDetail: FeedDB?
+    private(set) var isRefreshing: Bool = false
 
     // MARK: - Private
 
@@ -121,11 +121,7 @@ final class FeedMainViewModel: ObservableObject {
         return min(max(index, 0), quantity - 1)
     }
 
-    func setStatusForPreview(_ status: FeedViewModel.Status) {
-        self.status = status
-    }
-
-    func openPost(withId postId: String, modelContext: ModelContext) {
+     func openPost(withId postId: String, modelContext: ModelContext) {
         let predicate = #Predicate<FeedDB> { $0.postId == postId }
         let descriptor = FetchDescriptor<FeedDB>(predicate: predicate)
 
@@ -134,3 +130,12 @@ final class FeedMainViewModel: ObservableObject {
         }
     }
 }
+
+#if DEBUG
+extension FeedMainViewModel {
+    @MainActor
+    func setStatusForPreview(_ status: FeedViewModel.Status) {
+        self.status = status
+    }
+}
+#endif

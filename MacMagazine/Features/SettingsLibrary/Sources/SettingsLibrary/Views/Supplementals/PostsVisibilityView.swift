@@ -1,8 +1,10 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 struct PostsVisibilityView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = PostsVisibilityViewModel()
@@ -19,6 +21,11 @@ struct PostsVisibilityView: View {
             }
             .navigationTitle("Posts")
             .navigationBarTitleDisplayMode(.inline)
+            .trackScreen(
+                AnalyticsConstants.Screen.settingsPosts.name,
+                previous: nil,
+                analytics: analytics
+            )
 
         } label: {
             Label("Posts", systemImage: "text.page")
@@ -33,6 +40,11 @@ struct PostsVisibilityView: View {
         }
 
         .onChange(of: viewModel.postRead) { _, value in
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.identifyPostsRead(value).id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             #endif
@@ -44,6 +56,11 @@ struct PostsVisibilityView: View {
             }
         }
         .onChange(of: viewModel.countOnBadge) { _, value in
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.countPostsOnBadge(value).id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             #endif
@@ -57,6 +74,10 @@ private extension PostsVisibilityView {
         Section {
             Button(action: {
                 viewModel.cache = .readAll
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.allPostsRead.id,
+                    screen: AnalyticsConstants.Screen.settingsPosts.name
+                ))
             }, label: {
                 Text("Marcar todos os posts como lidos")
                     .foregroundStyle(theme.main.tint.color ?? .blue)
@@ -91,7 +112,13 @@ private extension PostsVisibilityView {
 
     var cleanPosts: some View {
         Section {
-            Button(action: { isPresenting.toggle() },
+            Button(action: {
+                isPresenting.toggle()
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.cleanPostsOptions.id,
+                    screen: AnalyticsConstants.Screen.settingsPosts.name
+                ))
+            },
                    label: {
                 Text("Limpar cache do app")
                     .foregroundStyle(theme.main.tint.color ?? .blue)
@@ -106,11 +133,23 @@ private extension PostsVisibilityView {
 
     @ViewBuilder
     var cleanCacheView: some View {
-        Button(action: { viewModel.flush(cache: .keepFavoritesAndStatus) },
+        Button(action: {
+            viewModel.flush(cache: .keepFavoritesAndStatus)
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.cleanPosts.id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+        },
                label: {
             Text("Manter favoritos e status de leitura")
         })
-        Button("Limpar tudo", role: .destructive) { viewModel.flush(cache: .cleanAll) }
+        Button("Limpar tudo", role: .destructive) {
+            viewModel.flush(cache: .cleanAll)
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.cleanAllPosts.id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+        }
     }
 }
 

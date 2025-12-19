@@ -47,6 +47,15 @@ struct FeedRowView: View {
 
     private var content: some View {
         VStack(spacing: 6) {
+            HStack {
+                Image("logo_color")
+                    .resizable()
+                    .scaledToFit()
+                Spacer()
+            }
+            .frame(height: 20)
+            .padding(.bottom, 6)
+
             Text(post.title)
                 .font(.headline)
                 .fontWeight(.bold)
@@ -58,18 +67,18 @@ struct FeedRowView: View {
             Text(post.dateText)
                 .font(.caption2)
                 .foregroundStyle(.primary.opacity(0.85))
-                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(1)
 
             Text("Ler mais")
                 .font(.caption2)
-                .foregroundStyle(.primary.opacity(0.50))
+                .foregroundStyle(.primary.opacity(0.80))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .lineLimit(1)
                 .padding(.top, 6)
                 .padding(.bottom, 12)
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, 4)
     }
 }
 
@@ -79,6 +88,6 @@ struct FeedRowView: View {
 }
 
 #Preview("Feed • Done (com registros)") {
-    FeedRootPreviewHost(status: .done, seedItems: true)
+    FeedPreviewHost(status: .done, seedItems: true)
 }
 #endif

@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import StorageLibrary
@@ -10,6 +11,8 @@ public struct PodcastView: View {
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var sessionState: SessionState
+    @EnvironmentObject private var analytics: AnalyticsManager
+
     var viewModel: PodcastViewModel
 
     @Binding private var favorite: Bool
@@ -85,7 +88,16 @@ extension PodcastView {
             quantity: search.isEmpty ? podcasts.count : 0,
             content: {
                 ForEach(0..<podcasts.count, id: \.self) { index in
-                    AdaptivePodcastCardView(podcast: podcasts[index].toCardContent(using: modelContext)) {
+                    AdaptivePodcastCardView(podcast: podcasts[index].toCardContent(
+                        using: modelContext,
+                        analytics: analytics,
+                        screen: nil
+                    )) {
+                        analytics.track(.buttonTap(
+                            buttonId: AnalyticsConstants.ButtonID.podcastStarted(postId: Int(podcasts[index].postId) ?? 0).id,
+                            screen: AnalyticsConstants.Screen.podcast.name
+                        ))
+
                         podcastPlayerManager.loadPodcast(podcasts[index])
                         podcastPlayerManager.seek(to: podcasts[index].current)
                     }
