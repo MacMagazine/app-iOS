@@ -51,7 +51,7 @@ public struct VideosView: View {
             sessionState.isPlayingVideos = (value != nil)
             if let value {
                 analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.videoStarted(id: value).id,
+                    buttonId: AnalyticsConstants.ButtonID.videoStarted(id: value.videoId).id,
                     screen: AnalyticsConstants.Screen.videos.name
                 ))
             } else {

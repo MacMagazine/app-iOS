@@ -1,4 +1,5 @@
 import AnalyticsLibrary
+import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary

@@ -1,6 +1,7 @@
 import AnalyticsLibrary
 import Foundation
 import InAppLibrary
+import MacMagazineLibrary
 import StorageLibrary
 import UIKit
 
