@@ -210,6 +210,7 @@ struct FeedMainView: View {
                 )
                 .frame(maxHeight: .infinity, alignment: .trailing)
                 .opacity(viewModel.isRefreshing ? 0 : 1)
+                .padding(.trailing, 4)
             }
             .overlay {
                 if viewModel.isRefreshing {
