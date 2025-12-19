@@ -1,7 +1,7 @@
 import FeedLibrary
-import Kingfisher
 import SwiftUI
 import UIComponentsLibrary
+import UIKit
 import UtilityLibrary
 import WidgetKit
 
@@ -83,9 +83,14 @@ private extension WidgetElementView {
         }
     }
 
-    var image: KFImage {
-        KFImage(URL(string: redactionReasons == .placeholder ? "" : post.thumbnail))
-            .placeholder { Image("logo_white") }
+    var image: Image {
+        guard let imageData = post.imageData,
+              let uiImage = UIImage(data: imageData) else {
+            return Image("logo_white")
+        }
+        return Image(uiImage: uiImage)
+//        KFImage(URL(string: redactionReasons == .placeholder ? "" : post.thumbnail))
+//            .placeholder { Image("logo_white") }
     }
 
     @ViewBuilder

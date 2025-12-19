@@ -19,6 +19,20 @@
   "testTargets" : [
     {
       "target" : {
+        "containerPath" : "container:Features\/MMLiveLibrary",
+        "identifier" : "MMLiveLibraryTests",
+        "name" : "MMLiveLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/MacMagazineUILibrary",
+        "identifier" : "MacMagazineUILibraryTests",
+        "name" : "MacMagazineUILibraryTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:Features\/FeedLibrary",
         "identifier" : "FeedLibraryTests",
         "name" : "FeedLibraryTests"
@@ -33,9 +47,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/MMLiveLibrary",
-        "identifier" : "MMLiveLibraryTests",
-        "name" : "MMLiveLibraryTests"
+        "containerPath" : "container:Features\/SettingsLibrary",
+        "identifier" : "SettingsLibraryTests",
+        "name" : "SettingsLibraryTests"
       }
     }
   ],

@@ -61,7 +61,8 @@ extension Array where Element == XMLPost {
                 title: $0.title,
                 thumbnail: $0.artworkURL,
                 pubDate: $0.pubDate,
-                link: $0.link
+                link: $0.link,
+                imageData: nil
             )
         }
     }

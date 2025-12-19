@@ -26,6 +26,8 @@ let package = Package(
                     .product(name: "Storage", package: "Libraries"),
                     .product(name: "Analytics", package: "Libraries")
                 ],
-                resources: [.process("Resources")])
+                resources: [.process("Resources")]),
+        .testTarget(name: "SettingsLibraryTests",
+                    dependencies: ["SettingsLibrary"])
     ]
 )
