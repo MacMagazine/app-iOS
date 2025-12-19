@@ -125,9 +125,9 @@ final class FeedMainViewModel {
         let predicate = #Predicate<FeedDB> { $0.postId == postId }
         let descriptor = FetchDescriptor<FeedDB>(predicate: predicate)
 
-        if let post = try? modelContext.fetch(descriptor).first {
-            selectedPostForDetail = SelectedPost(post: post)
-        }
+         if let post = try? modelContext.fetch(descriptor).first {
+             selectedPostForDetail = post
+         }
     }
 }
 

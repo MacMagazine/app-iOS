@@ -33,14 +33,13 @@ struct FeedMainView: View {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
                 .task {
-                    guard !isRunningForPreviews else { return }
                     await viewModel.loadInitialIfNeeded(
                         hasItems: !items.isEmpty,
                         modelContext: modelContext
                     )
                 }
-                .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
-                    FeedDetailView(viewModel: viewModel, post: payload)
+                .navigationDestination(item: $viewModel.selectedPostForDetail) { post in
+                    FeedDetailView(viewModel: viewModel, post: post)
                 }
                 .onOpenURL { url in
                     guard url.scheme == "macmagazine" else { return }
