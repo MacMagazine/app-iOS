@@ -1,5 +1,4 @@
 import FeedLibrary
-import Kingfisher
 import StorageLibrary
 import SwiftUI
 import WidgetKit
@@ -7,7 +6,7 @@ import WidgetKit
 @MainActor
 struct MacMagazineTimelineProvider: TimelineProvider {
     let viewModel = FeedViewModel(
-        storage: Database(models: [WidgetDataDB.self], inMemory: true)
+        storage: Database(models: [], inMemory: true)
     )
 
     func placeholder(in context: Context) -> WidgetEntry {
@@ -33,10 +32,26 @@ struct MacMagazineTimelineProvider: TimelineProvider {
 private extension MacMagazineTimelineProvider {
     func getWidgetContent() async -> [WidgetData] {
         do {
-            let posts = try await viewModel.getWidgetData()
-            let urls = posts.compactMap { $0.thumbnail }.compactMap { URL(string: $0) }
-            for url in urls {
-                _ = try? await ImageDownloader.default.downloadImage(with: url)
+            var posts = [WidgetData]()
+
+            let fetchedData = try await viewModel.getWidgetData()
+            for data in fetchedData {
+                var imageData: Data?
+                do {
+                    if let thumbnailUrl = URL(string: data.thumbnail) {
+                        let request = URLRequest(url: thumbnailUrl)
+                        let (image, _) = try await URLSession.shared.data(for: request)
+                        imageData = image
+                    }
+                } catch {}
+                posts.append(WidgetData(
+                    postId: data.postId,
+                    title: data.title,
+                    thumbnail: data.thumbnail,
+                    pubDate: data.pubDate,
+                    link: data.link,
+                    imageData: imageData
+                ))
             }
             return posts
         } catch {

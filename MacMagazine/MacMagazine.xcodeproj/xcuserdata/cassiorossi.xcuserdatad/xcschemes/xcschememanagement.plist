@@ -14,15 +14,15 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>WatchApp (Notification).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
 		<key>WatchApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>WatchWidget.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>WatchkApp Watch App (Notification).xcscheme_^#shared#^_</key>
 		<dict>
@@ -39,10 +39,10 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>WidgetExtension.xcscheme_^#shared#^_</key>
+		<key>Widget.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>1</integer>
 		</dict>
 		<key>WidgetWatchExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -53,6 +53,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>9B9E9DC32E986F8400255820</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BA8288B2EEC7AAA00F26FCB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

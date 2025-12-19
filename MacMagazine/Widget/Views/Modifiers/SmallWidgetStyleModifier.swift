@@ -1,16 +1,15 @@
-import Kingfisher
 import SwiftUI
 import WidgetKit
 
 extension View {
-    func smallWidgetStyle(image: KFImage) -> some View {
+    func smallWidgetStyle(image: Image) -> some View {
         modifier(SmallWidgetStyleModifier(image: image))
     }
 }
 
 private struct SmallWidgetStyleModifier: ViewModifier {
     @Environment(\.widgetRenderingMode) var renderingMode
-    let image: KFImage
+    let image: Image
 
     func body(content: Content) -> some View {
         if renderingMode == .accented {
