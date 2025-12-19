@@ -32,6 +32,7 @@ public enum AnalyticsConstants {
         case podcastFullPlayer
         case podcastMiniPlayer
         case podcast
+        case podcastChapters
 
         // Videos
         case videos
@@ -58,31 +59,32 @@ public enum AnalyticsConstants {
         public var name: String {
             switch self {
             // Podcast
-            case .podcastFullPlayer: return "Podcast Full-player"
-            case .podcastMiniPlayer: return "Podcast Mini-player"
-            case .podcast: return "Podcast"
+            case .podcastFullPlayer: "Podcast Full-player"
+            case .podcastMiniPlayer: "Podcast Mini-player"
+            case .podcast: "Podcast"
+            case .podcastChapters: "Podcast Chapters"
 
             // Videos
-            case .videos: return "Vídeos"
+            case .videos: "Vídeos"
 
             // Settings
-            case .settings: return "Ajustes"
-            case .settingsAppearance: return "Ajustes > Aparência"
-            case .settingsPosts: return "Ajustes > Posts"
+            case .settings: "Ajustes"
+            case .settingsAppearance: "Ajustes > Aparência"
+            case .settingsPosts: "Ajustes > Posts"
 
             // Social
-            case .socialVideos: return "Vídeos"
-            case .socialPodcast: return "Podcast"
-            case .socialInstagram: return "Instagram"
+            case .socialVideos: "Vídeos"
+            case .socialPodcast: "Podcast"
+            case .socialInstagram: "Instagram"
 
             // Live
-            case .live: return "Live"
+            case .live: "Live"
 
             // Other
-            case .loginPatroes: return "Login para patrões"
+            case .loginPatroes: "Login para patrões"
 
             // Widget
-            case let .widget(type): return "Widget \(type)"
+            case let .widget(type): "Widget \(type)"
             }
         }
     }

@@ -1,14 +1,23 @@
+import AnalyticsLibrary
+import MacMagazineLibrary
 import FeedLibrary
 import MacMagazineUILibrary
 import SwiftData
 import SwiftUI
 
 struct GlassPodcastCardView: View {
+    @EnvironmentObject private var analytics: AnalyticsManager
     let podcast: CardContent
     let onPlay: () -> Void
 
     var body: some View {
-        Button(action: onPlay) {
+        Button(action: {
+            onPlay()
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.podcastTogglePlayPause.id,
+                screen: AnalyticsConstants.Screen.podcast.name
+            ))
+        }) {
             GlassCardView(data: podcast)
         }
         .buttonStyle(.plain)
