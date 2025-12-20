@@ -6,7 +6,7 @@ struct WatchWidgetModel: TimelineEntry {
     let date: Date
     let configuration: AppIntent
 
-    let lastPostId: String?
-    let lastPostTitle: String
-    let lastPostDate: Date?
+    let postId: String?
+    let postTitle: String
+    let postDate: Date?
 }

@@ -31,10 +31,6 @@ struct FeedMainView: View {
     var body: some View {
         NavigationStack {
             rootContent
-                .navigationBarTitleDisplayMode(.inline)
-                .task {
-                    await viewModel.refresh(modelContext: modelContext)
-                }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { post in
                     FeedDetailView(viewModel: viewModel, post: post)
                 }
@@ -47,6 +43,9 @@ struct FeedMainView: View {
                         viewModel.openPost(withId: postId, modelContext: modelContext)
                     }
                 }
+        }
+        .task {
+            await viewModel.refresh(modelContext: modelContext)
         }
     }
 

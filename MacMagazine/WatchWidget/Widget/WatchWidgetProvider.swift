@@ -17,9 +17,9 @@ struct WatchWidgetProvider: AppIntentTimelineProvider {
         WatchWidgetModel(
             date: .now,
             configuration: AppIntent(),
-            lastPostId: UUID().uuidString,
-            lastPostTitle: "Apple lança atualização do watchOS",
-            lastPostDate: .now.addingTimeInterval(-60 * 25)
+            postId: UUID().uuidString,
+            postTitle: "Apple lança atualização do watchOS",
+            postDate: .now.addingTimeInterval(-60 * 25)
         )
     }
 
@@ -34,10 +34,8 @@ struct WatchWidgetProvider: AppIntentTimelineProvider {
         for configuration: AppIntent,
         in context: Context
     ) async -> Timeline<WatchWidgetModel> {
-
         let entry = makeEntry(configuration: configuration)
-
-        let nextUpdate = Date().addingTimeInterval(5 * 60)
+        let nextUpdate = Date().addingTimeInterval(60 * 60)
         return Timeline(entries: [entry], policy: .after(nextUpdate))
     }
 
@@ -47,9 +45,9 @@ struct WatchWidgetProvider: AppIntentTimelineProvider {
         return WatchWidgetModel(
             date: .now,
             configuration: configuration,
-            lastPostId: snap?.id,
-            lastPostTitle: snap?.title ?? "MacMagazine",
-            lastPostDate: snap?.date
+            postId: snap?.id,
+            postTitle: snap?.title ?? "MacMagazine",
+            postDate: snap?.date
         )
     }
 }

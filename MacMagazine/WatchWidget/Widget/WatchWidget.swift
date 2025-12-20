@@ -33,9 +33,9 @@ struct WatchWidget: Widget {
     WatchWidgetModel(
         date: .now,
         configuration: AppIntent(),
-        lastPostId: UUID().uuidString,
-        lastPostTitle: "Apple lança atualização do watchOS",
-        lastPostDate: .now.addingTimeInterval(-60 * 25)
+        postId: UUID().uuidString,
+        postTitle: "Apple lança atualização do watchOS",
+        postDate: .now.addingTimeInterval(-60 * 25)
     )
 }
 
@@ -45,9 +45,9 @@ struct WatchWidget: Widget {
     WatchWidgetModel(
         date: .now,
         configuration: AppIntent(),
-        lastPostId: UUID().uuidString,
-        lastPostTitle: "Apple lança atualização do watchOS",
-        lastPostDate: .now.addingTimeInterval(-60 * 25)
+        postId: UUID().uuidString,
+        postTitle: "Apple lança atualização do watchOS",
+        postDate: .now.addingTimeInterval(-60 * 25)
     )
 }
 
@@ -57,9 +57,9 @@ struct WatchWidget: Widget {
     WatchWidgetModel(
         date: .now,
         configuration: AppIntent(),
-        lastPostId: UUID().uuidString,
-        lastPostTitle: "Apple lança atualização do watchOS",
-        lastPostDate: .now.addingTimeInterval(-60 * 25)
+        postId: UUID().uuidString,
+        postTitle: "Apple lança atualização do watchOS",
+        postDate: .now.addingTimeInterval(-60 * 25)
     )
 }
 
@@ -69,9 +69,9 @@ struct WatchWidget: Widget {
     WatchWidgetModel(
         date: .now,
         configuration: AppIntent(),
-        lastPostId: UUID().uuidString,
-        lastPostTitle: "O melhor pedaço da maçã da internet, clique para ver mais!",
-        lastPostDate: .now.addingTimeInterval(-60 * 90)
+        postId: UUID().uuidString,
+        postTitle: "O melhor pedaço da maçã da internet, clique para ver mais!",
+        postDate: .now.addingTimeInterval(-60 * 90)
     )
 }
 #endif

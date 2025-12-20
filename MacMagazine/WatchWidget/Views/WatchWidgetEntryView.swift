@@ -58,22 +58,22 @@ private extension WatchWidgetEntryView {
             .frame(width: 35, height: 35)
             .foregroundStyle(.primary)
             .widgetLabel {
-                Text(entry.lastPostTitle)
+                Text(entry.postTitle)
                     .lineLimit(1)
             }
             .macMagazineWidgetAccessibility(
                 url: widgetPostURL(),
-                lastPostTitle: entry.lastPostTitle,
+                lastPostTitle: entry.postTitle,
                 children: .ignore
             )
     }
 
     // ACCESSORY INLINE
     var inline: some View {
-        Text(entry.lastPostTitle)
+        Text(entry.postTitle)
             .macMagazineWidgetAccessibility(
                 url: widgetPostURL(),
-                lastPostTitle: entry.lastPostTitle
+                lastPostTitle: entry.postTitle
             )
     }
 
@@ -88,7 +88,7 @@ private extension WatchWidgetEntryView {
                     .frame(width: 18, height: 18)
                     .foregroundStyle(.primary)
 
-                Text(relativePostTimeText(entry.lastPostDate))
+                Text(relativePostTimeText(entry.date))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -96,7 +96,7 @@ private extension WatchWidgetEntryView {
                 Spacer(minLength: 0)
             }
 
-            Text(entry.lastPostTitle)
+            Text(entry.postTitle)
                 .font(.callout)
                 .lineLimit(2)
         }
@@ -109,7 +109,7 @@ private extension WatchWidgetEntryView {
     }
 
     func widgetPostURL() -> URL? {
-        if let postId = entry.lastPostId, !postId.isEmpty {
+        if let postId = entry.postId, !postId.isEmpty {
             return URL(string: "macmagazine://news/post/\(postId)")
         }
 
@@ -134,7 +134,7 @@ private extension WatchWidgetEntryView {
     }
 
     func accessibilityValueForRectangular() -> String {
-        let whenText = relativePostTimeText(entry.lastPostDate)
-        return "\(whenText), \(entry.lastPostTitle)"
+        let whenText = relativePostTimeText(entry.date)
+        return "\(whenText), \(entry.postTitle)"
     }
 }
