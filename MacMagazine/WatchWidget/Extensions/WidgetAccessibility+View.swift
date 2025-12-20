@@ -10,7 +10,7 @@ private enum WidgetAccessibility {
 
 extension View {
 
-    func macMagazineWidgetAccessibility(
+    func widgetAccessibility(
         url: URL?,
         lastPostTitle: String,
         children: AccessibilityChildBehavior? = nil
@@ -34,7 +34,7 @@ extension View {
 
     // MARK: - Circular
 
-    func macMagazineCircular(
+    func widgetCircularAccessibility(
         url: URL?
     ) -> some View {
         self
@@ -47,7 +47,7 @@ extension View {
 
     // MARK: - Rectangular
 
-    func macMagazineRectangular(
+    func widgetRectangularAccessibility(
         url: URL?,
         accessibilityValue: String
     ) -> some View {

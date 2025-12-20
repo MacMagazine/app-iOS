@@ -89,8 +89,6 @@ private extension WidgetElementView {
             return Image("logo_white")
         }
         return Image(uiImage: uiImage)
-//        KFImage(URL(string: redactionReasons == .placeholder ? "" : post.thumbnail))
-//            .placeholder { Image("logo_white") }
     }
 
     @ViewBuilder
@@ -102,13 +100,34 @@ private extension WidgetElementView {
         }
     }
 
-    @ViewBuilder
     var smallWidget: some View {
-        VStack {
-            Spacer(minLength: 0)
-            dateAndTitle
+        VStack(alignment: .leading, spacing: 6) {
+            Spacer()
+
+            HStack {
+                Image(renderingMode == .accented ? "logo_white" : "logo_color")
+                    .resizable()
+                    .widgetAccentedRenderingMode(.fullColor)
+                    .scaledToFit()
+                Spacer()
+            }
+            .frame(height: 20)
+            .padding(.bottom, 6)
+
+            Text(post.title)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundStyle(.primary)
+                .lineLimit(3)
+
+            Text(post.pubDate.format(using: .dateTime))
+                .font(.caption2)
+                .foregroundStyle(.primary)
+                .lineLimit(1)
         }
-        .overlayHeader()
+        .padding(.horizontal, 10)
+        .padding(.bottom)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .smallWidgetStyle(image: image)
     }
 

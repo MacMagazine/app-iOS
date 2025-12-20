@@ -1,5 +1,6 @@
 import FeedLibrary
 import Foundation
+import UtilityLibrary
 
 extension FeedDB {
     var linkURL: URL? {
@@ -8,10 +9,7 @@ extension FeedDB {
     }
 
     var dateText: String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "pt_BR")
-        formatter.dateFormat = "dd/MM/yyyy 'às' HH:mm"
-        return formatter.string(from: pubDate)
+        pubDate.format(using: .dateTime)
     }
 
     var displaySubtitle: String? {

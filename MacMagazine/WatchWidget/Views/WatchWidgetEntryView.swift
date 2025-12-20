@@ -1,5 +1,6 @@
 import AppIntents
 import SwiftUI
+import UtilityLibrary
 import WidgetKit
 
 struct WatchWidgetEntryView: View {
@@ -44,7 +45,7 @@ private extension WatchWidgetEntryView {
                 .scaledToFit()
                 .frame(width: 30, height: 30)
         }
-        .macMagazineCircular(
+        .widgetCircularAccessibility(
             url: URL(string: "macmagazine://news")
         )
     }
@@ -61,7 +62,7 @@ private extension WatchWidgetEntryView {
                 Text(entry.postTitle)
                     .lineLimit(1)
             }
-            .macMagazineWidgetAccessibility(
+            .widgetAccessibility(
                 url: widgetPostURL(),
                 lastPostTitle: entry.postTitle,
                 children: .ignore
@@ -71,7 +72,7 @@ private extension WatchWidgetEntryView {
     // ACCESSORY INLINE
     var inline: some View {
         Text(entry.postTitle)
-            .macMagazineWidgetAccessibility(
+            .widgetAccessibility(
                 url: widgetPostURL(),
                 lastPostTitle: entry.postTitle
             )
@@ -102,7 +103,7 @@ private extension WatchWidgetEntryView {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .containerBackground(for: .widget) { AccessoryWidgetBackground() }
-        .macMagazineRectangular(
+        .widgetRectangularAccessibility(
             url: widgetPostURL(),
             accessibilityValue: accessibilityValueForRectangular()
         )
@@ -119,7 +120,7 @@ private extension WatchWidgetEntryView {
     func relativePostTimeText(_ date: Date?) -> String {
         guard let date else { return "Atualizado recentemente" }
 
-        let time = DateFormatter.watchWidgetTime.string(from: date)
+        let time = date.format(using: .hourOnly)
         let calendar = Calendar.current
 
         if calendar.isDateInToday(date) {
@@ -130,7 +131,7 @@ private extension WatchWidgetEntryView {
             return "Ontem às \(time)"
         }
 
-        return "\(DateFormatter.watchWidgetDay.string(from: date)) às \(time)"
+        return "\(date.format(using: "dd/MM")) às \(time)"
     }
 
     func accessibilityValueForRectangular() -> String {
