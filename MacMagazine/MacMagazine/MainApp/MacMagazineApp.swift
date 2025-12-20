@@ -1,4 +1,5 @@
 import FirebaseCore
+import OnboardingLibrary
 import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
@@ -14,19 +15,28 @@ struct MacMagazineApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .modelContainer(viewModel.storage.sharedModelContainer)
-                .environment(viewModel)
-                .environment(viewModel.settingsViewModel)
-                .environment(podcastPlayerManager)
-                .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
-                .environmentObject(viewModel.sessionState)
-                .environmentObject(viewModel.analytics)
-                .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
-                .task {
-                    podcastPlayerManager.observeSessionState(viewModel.sessionState)
-                    UIApplication.shared.registerForRemoteNotifications()
+            Group {
+                if viewModel.showOnboarding, let coordinator = viewModel.onboardingCoordinator {
+                    OnboardingContainerView(coordinator: coordinator)
+                        .environment(\.theme, viewModel.theme)
+                        .transition(.opacity)
+                } else {
+                    MainView()
+                        .modelContainer(viewModel.storage.sharedModelContainer)
+                        .environment(viewModel)
+                        .environment(viewModel.settingsViewModel)
+                        .environment(podcastPlayerManager)
+                        .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
+                        .environmentObject(viewModel.sessionState)
+                        .environmentObject(viewModel.analytics)
+                        .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
                 }
+            }
+            .task {
+                podcastPlayerManager.observeSessionState(viewModel.sessionState)
+                // UIApplication.shared.registerForRemoteNotifications()
+                await viewModel.initializeOnboarding()
+            }
         }
         .environment(\.theme, viewModel.theme)
     }

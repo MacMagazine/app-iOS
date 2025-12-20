@@ -8,5 +8,7 @@
 		<string>audio</string>
 		<string>fetch</string>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We use tracking to measure app performance and improve your user experience with anonymous analytics data.</string>
 </dict>
 </plist>
