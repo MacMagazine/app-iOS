@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "2620"
-   wasCreatedForAppExtension = "YES"
-   version = "2.0">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -16,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BDD424C2EE9E82F00A9BD85"
-               BuildableName = "WidgetExtension.appex"
-               BlueprintName = "WidgetExtension"
+               BlueprintIdentifier = "9BA8288B2EEC7AAA00F26FCB"
+               BuildableName = "WatchApp.app"
+               BlueprintName = "WatchApp"
                ReferencedContainer = "container:MacMagazine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,59 +46,38 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      launchAutomaticallySubstyle = "2">
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9B9E9DC32E986F8400255820"
-            BuildableName = "MacMagazine.app"
-            BlueprintName = "MacMagazine"
+            BlueprintIdentifier = "9BA8288B2EEC7AAA00F26FCB"
+            BuildableName = "WatchApp.app"
+            BlueprintName = "WatchApp"
             ReferencedContainer = "container:MacMagazine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCWidgetKind"
-            value = ""
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetDefaultView"
-            value = "timeline"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetFamily"
-            value = "systemMedium"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES"
-      askForAppToLaunch = "Yes"
-      launchAutomaticallySubstyle = "2">
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9B9E9DC32E986F8400255820"
-            BuildableName = "MacMagazine.app"
-            BlueprintName = "MacMagazine"
+            BlueprintIdentifier = "9BA8288B2EEC7AAA00F26FCB"
+            BuildableName = "WatchApp.app"
+            BlueprintName = "WatchApp"
             ReferencedContainer = "container:MacMagazine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -31,8 +31,17 @@ struct FeedMainView: View {
     var body: some View {
         NavigationStack {
             rootContent
-                .navigationDestination(item: $viewModel.selectedPostForDetail) { payload in
-                    FeedDetailView(viewModel: viewModel, post: payload)
+                .navigationDestination(item: $viewModel.selectedPostForDetail) { post in
+                    FeedDetailView(viewModel: viewModel, post: post)
+                }
+                .onOpenURL { url in
+                    guard url.scheme == "macmagazine", url.host == "news" else { return }
+
+                    let parts = url.pathComponents.filter { $0 != "/" }
+                    if parts.count >= 2, parts[0] == "post" {
+                        let postId = parts[1]
+                        viewModel.openPost(withId: postId, modelContext: modelContext)
+                    }
                 }
         }
         .task {
@@ -193,6 +202,7 @@ struct FeedMainView: View {
                 )
                 .frame(maxHeight: .infinity, alignment: .trailing)
                 .opacity(viewModel.isRefreshing ? 0 : 1)
+                .padding(.trailing, 4)
             }
             .overlay {
                 if viewModel.isRefreshing {

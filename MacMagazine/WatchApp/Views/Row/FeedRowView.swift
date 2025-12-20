@@ -62,7 +62,7 @@ struct FeedRowView: View {
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(3)
-                .padding(.trailing, 12)
+                .padding(.trailing, 22)
 
             Text(post.dateText)
                 .font(.caption2)
