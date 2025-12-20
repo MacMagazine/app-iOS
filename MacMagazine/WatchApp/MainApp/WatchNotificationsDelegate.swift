@@ -42,14 +42,14 @@ final class WatchNotificationsDelegate: NSObject,
         }()
 
         MacMagazineWidgetSharedStore.write(
-            snapshot: .init(
-                postId: postId,
+            post: .init(
+                id: postId,
                 title: title,
                 date: date
             )
         )
 
         // Atualiza as complicações
-        WidgetCenter.shared.reloadTimelines(ofKind: "WidgetWatch")
+        WidgetCenter.shared.reloadTimelines(ofKind: "WatchWidget")
     }
 }

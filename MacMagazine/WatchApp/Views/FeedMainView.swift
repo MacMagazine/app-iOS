@@ -33,17 +33,13 @@ struct FeedMainView: View {
             rootContent
                 .navigationBarTitleDisplayMode(.inline)
                 .task {
-                    await viewModel.loadInitialIfNeeded(
-                        hasItems: !items.isEmpty,
-                        modelContext: modelContext
-                    )
+                    await viewModel.refresh(modelContext: modelContext)
                 }
                 .navigationDestination(item: $viewModel.selectedPostForDetail) { post in
                     FeedDetailView(viewModel: viewModel, post: post)
                 }
                 .onOpenURL { url in
-                    guard url.scheme == "macmagazine" else { return }
-                    guard url.host == "news" else { return }
+                    guard url.scheme == "macmagazine", url.host == "news" else { return }
 
                     let parts = url.pathComponents.filter { $0 != "/" }
                     if parts.count >= 2, parts[0] == "post" {
@@ -51,9 +47,6 @@ struct FeedMainView: View {
                         viewModel.openPost(withId: postId, modelContext: modelContext)
                     }
                 }
-        }
-        .task {
-            await viewModel.refresh(modelContext: modelContext)
         }
     }
 
