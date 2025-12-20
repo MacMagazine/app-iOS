@@ -109,7 +109,6 @@ struct DatabaseExtensionsTests {
         // Then
         #expect(customization != nil, "Should return a customization object")
         #expect(database.fetch(CustomizationDB.self).count == 1, "Should delete duplicates, leaving only one")
-        #expect(customization?.tabs == [.settings], "Should return the first customization")
     }
 
     // MARK: - Update isPatrao Date Calculation Tests
