@@ -13,7 +13,6 @@ final class FeedMainViewModel {
 
     private(set) var status: FeedViewModel.Status = .loading
     var selectedIndex: Int = 0
-    var showActions: Bool = false
     var showContextMenu: Bool = false
     var selectedPostForDetail: FeedDB?
     private(set) var isRefreshing: Bool = false
@@ -21,9 +20,6 @@ final class FeedMainViewModel {
     // MARK: - Private
 
     private let feedViewModel: FeedViewModel
-    private var didLoadInitial: Bool = false
-    private var lastRefreshAt: Date?
-    private let staleInterval: TimeInterval = 30 * 60
 
     // MARK: - Init
 
@@ -34,26 +30,6 @@ final class FeedMainViewModel {
 
     // MARK: - Public API
 
-    func loadInitialIfNeeded(hasItems: Bool, modelContext: ModelContext) async {
-        guard !didLoadInitial else { return }
-        didLoadInitial = true
-
-        if hasItems {
-            status = .done
-            persistLatestPostSnapshot(from: modelContext)
-        }
-
-        let shouldAutoRefresh: Bool = {
-            if !hasItems { return true }
-            guard let last = lastRefreshAt else { return true }
-            return Date().timeIntervalSince(last) > staleInterval
-        }()
-
-        if shouldAutoRefresh {
-            await refresh(modelContext: modelContext)
-        }
-    }
-
     func refresh(modelContext: ModelContext) async {
         guard !isRefreshing else { return }
         isRefreshing = true
@@ -61,17 +37,15 @@ final class FeedMainViewModel {
 
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
-        lastRefreshAt = Date()
 
         persistLatestPostSnapshot(from: modelContext)
 
-        WidgetCenter.shared.reloadTimelines(ofKind: "WidgetWatch")
+        WidgetCenter.shared.reloadTimelines(ofKind: "WatchWidget")
     }
 
     func toggleFavorite(post: FeedDB, modelContext: ModelContext) {
         post.favorite.toggle()
         try? modelContext.save()
-        showActions = true
     }
 
     // MARK: - Snapshot para Widget
@@ -85,8 +59,8 @@ final class FeedMainViewModel {
         guard let last = try? modelContext.fetch(descriptor).first else { return }
 
         MacMagazineWidgetSharedStore.write(
-            snapshot: .init(
-                postId: last.postId,
+            post: .init(
+                id: last.postId,
                 title: last.title,
                 date: last.pubDate
             )
