@@ -89,7 +89,7 @@ private extension WatchWidgetEntryView {
                     .frame(width: 18, height: 18)
                     .foregroundStyle(.primary)
 
-                Text(relativePostTimeText(entry.date))
+                Text(relativePostTimeText(entry.postDate))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
