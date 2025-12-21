@@ -37,7 +37,7 @@ struct FeedRowView: View {
     private var overlayGradient: some View {
         LinearGradient(
             colors: [
-                .black.opacity(0.05),
+                .clear,
                 .black.opacity(0.80)
             ],
             startPoint: .top,
