@@ -113,13 +113,6 @@
 			);
 			target = 88C8B2E52EF476E100044DE9 /* WatchWidget */;
 		};
-		88C8B3052EF577EE00044DE9 /* Exceptions for "WatchApp" folder in "WatchWidget" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				WatchWidgetShared.swift,
-			);
-			target = 88C8B2E52EF476E100044DE9 /* WatchWidget */;
-		};
 		9B9E9DD12E986F8500255820 /* Exceptions for "MacMagazine" folder in "MacMagazine" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -163,9 +156,6 @@
 		};
 		9BA8288D2EEC7AAA00F26FCB /* WatchApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				88C8B3052EF577EE00044DE9 /* Exceptions for "WatchApp" folder in "WatchWidget" target */,
-			);
 			path = WatchApp;
 			sourceTree = "<group>";
 		};

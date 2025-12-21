@@ -21,34 +21,6 @@ final class WatchNotificationsDelegate: NSObject,
     // MARK: - Push handling
 
     private func handlePush(userInfo: [AnyHashable: Any]) {
-        guard
-            let postId = userInfo["postId"] as? String,
-            let title = userInfo["title"] as? String,
-            !postId.isEmpty,
-            !title.isEmpty
-        else {
-            return
-        }
-
-        let date: Date = {
-            if let time = userInfo["date"] as? TimeInterval {
-                return Date(timeIntervalSince1970: time)
-            }
-            if let iso = userInfo["date"] as? String,
-               let date = ISO8601DateFormatter().date(from: iso) {
-                return date
-            }
-            return Date()
-        }()
-
-        MacMagazineWidgetSharedStore.write(
-            post: .init(
-                id: postId,
-                title: title,
-                date: date
-            )
-        )
-
         // Atualiza as complicações
         WidgetCenter.shared.reloadTimelines(ofKind: "WatchWidget")
     }

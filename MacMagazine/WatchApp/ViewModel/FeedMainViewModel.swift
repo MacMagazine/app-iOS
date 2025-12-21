@@ -38,33 +38,12 @@ final class FeedMainViewModel {
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
 
-        persistLatestPostSnapshot(from: modelContext)
-
         WidgetCenter.shared.reloadTimelines(ofKind: "WatchWidget")
     }
 
     func toggleFavorite(post: FeedDB, modelContext: ModelContext) {
         post.favorite.toggle()
         try? modelContext.save()
-    }
-
-    // MARK: - Snapshot para Widget
-
-    private func persistLatestPostSnapshot(from modelContext: ModelContext) {
-        var descriptor = FetchDescriptor<FeedDB>(
-            sortBy: [SortDescriptor(\.pubDate, order: .reverse)]
-        )
-        descriptor.fetchLimit = 1
-
-        guard let last = try? modelContext.fetch(descriptor).first else { return }
-
-        MacMagazineWidgetSharedStore.write(
-            post: .init(
-                id: last.postId,
-                title: last.title,
-                date: last.pubDate
-            )
-        )
     }
 
     // MARK: - Index / Helpers
