@@ -3,17 +3,30 @@ import MacMagazineLibrary
 import SwiftUI
 
 struct WelcomeView: View {
+    @Environment(\.theme) private var theme: ThemeColor
     let coordinator: OnboardingCoordinator
 
     var body: some View {
-        VStack(spacing: 40) {
-            Spacer()
-            logo
-            message
-            Spacer()
-            actions
+        NavigationStack {
+            VStack(spacing: 40) {
+                Spacer()
+                logo
+                message
+                Spacer()
+                actions
+            }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        coordinator.skipToPermissions()
+                    }, label: {
+                        Image(systemName: "xmark")
+                    })
+                    .glassEffect(.identity, in: .circle)
+                }
+            }
+            .background(OnboardingBackground())
         }
-        .background(OnboardingBackground())
         .trackScreen(AnalyticsConstants.Screen.onboardingWelcome.name, analytics: coordinator.analytics)
     }
 }
@@ -47,21 +60,15 @@ private extension WelcomeView {
 
 private extension WelcomeView {
     var actions: some View {
-        VStack(spacing: 16) {
-            OnboardingButton(title: "Continuar", style: .primary) {
-                coordinator.analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeContinue.id,
-                    screen: AnalyticsConstants.Screen.onboardingWelcome.name
-                ))
-                coordinator.navigate(to: .features)
-            }
-
-            OnboardingButton(title: "Pular", style: .skip) {
-                coordinator.skipToPermissions()
-            }
+        OnboardingButton(title: "Continuar", style: .primary) {
+            coordinator.analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeContinue.id,
+                screen: AnalyticsConstants.Screen.onboardingWelcome.name
+            ))
+            coordinator.navigate(to: .features)
         }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 40)
+        .padding(.horizontal, 20)
+        .padding(.bottom)
     }
 }
 
@@ -74,4 +81,5 @@ private extension WelcomeView {
             analytics: AnalyticsManager()
         )
     )
+    .environment(\.theme, ThemeColor())
 }

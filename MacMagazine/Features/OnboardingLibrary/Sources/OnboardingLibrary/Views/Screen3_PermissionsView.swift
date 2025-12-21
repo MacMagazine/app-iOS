@@ -34,10 +34,7 @@ struct PermissionsView: View {
                             let granted = await coordinator.permissionManager.requestPushPermission()
                             await handlePushResponse(granted: granted)
                         },
-                        onSkip: {
-                            coordinator.permissionManager.skipPushPermission()
-                            handlePushSkip()
-                        }
+                        onSkip: nil
                     )
                     .padding(.horizontal, 24)
                 }

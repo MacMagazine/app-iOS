@@ -1,7 +1,10 @@
+import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 
 public struct OnboardingButton: View {
+    @Environment(\.theme) private var theme: ThemeColor
+
     let title: String
     let style: ButtonStyle
     let action: () -> Void
@@ -25,94 +28,43 @@ public struct OnboardingButton: View {
     public var body: some View {
         switch style {
         case .primary:
-            Button(action: action) {
-                Text(title)
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 24)
-            }
-            .buttonStyle(PrimaryButtonStyle())
+            PrimaryButton(
+                title,
+                style: ButtonStyleConfiguration(color: .white,
+                                                stroke: theme.button.primary.color ?? .blue,
+                                                fill: theme.button.primary.color ?? .blue),
+                action: action
+            )
 
         case .secondary:
-            Button(action: action) {
-                Text(title)
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 24)
-            }
-            .buttonStyle(SecondaryButtonStyle())
+            SecondaryButton(title, action: action)
 
         case .skip:
-            Button(action: action) {
-                Text(title)
-                    .font(.subheadline)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 16)
-            }
-            .buttonStyle(SkipButtonStyle())
+            TertiaryButton(title, action: action)
         }
-    }
-}
-
-// MARK: - Button Styles
-
-private struct PrimaryButtonStyle: PrimitiveButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundStyle(.white)
-            .background(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(.blue.gradient)
-            )
-            .glassEffect(.regular, in: .rect(cornerRadius: 16))
-            .onTapGesture {
-                configuration.trigger()
-            }
-    }
-}
-
-private struct SecondaryButtonStyle: PrimitiveButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundStyle(.primary)
-            .background(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .strokeBorder(.primary.opacity(0.2), lineWidth: 1)
-            )
-            .glassEffect(.clear, in: .rect(cornerRadius: 16))
-            .onTapGesture {
-                configuration.trigger()
-            }
-    }
-}
-
-private struct SkipButtonStyle: PrimitiveButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundStyle(.secondary)
-            .onTapGesture {
-                configuration.trigger()
-            }
     }
 }
 
 // MARK: - Preview
 
 #Preview("Button Styles") {
-    VStack(spacing: 20) {
-        OnboardingButton(title: "Primary Button", style: .primary) {
-            print("Primary tapped")
-        }
+    ZStack {
+        Color.brown.ignoresSafeArea()
 
-        OnboardingButton(title: "Secondary Button", style: .secondary) {
-            print("Secondary tapped")
-        }
+        VStack(spacing: 20) {
+            OnboardingButton(title: "Primary Button", style: .primary) {
+                print("Primary tapped")
+            }
 
-        OnboardingButton(title: "Skip", style: .skip) {
-            print("Skip tapped")
+            OnboardingButton(title: "Secondary Button", style: .secondary) {
+                print("Secondary tapped")
+            }
+
+            OnboardingButton(title: "Skip", style: .skip) {
+                print("Skip tapped")
+            }
         }
+        .padding()
+        .environment(\.theme, ThemeColor())
     }
-    .padding()
 }

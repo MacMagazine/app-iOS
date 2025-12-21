@@ -30,7 +30,7 @@ public struct PermissionSection: View {
             HStack(spacing: 12) {
                 Image(systemName: icon)
                     .font(.title2)
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(.primary)
                     .accessibilityHidden(true)
 
                 Text(title)
@@ -48,12 +48,12 @@ public struct PermissionSection: View {
             // Action buttons
             HStack(spacing: 12) {
                 if let onSkip = onSkip {
-                    OnboardingButton(title: "Skip", style: .secondary) {
+                    OnboardingButton(title: "Pular", style: .secondary) {
                         onSkip()
                     }
                 }
 
-                OnboardingButton(title: "Continue", style: .primary) {
+                OnboardingButton(title: "Continuar", style: .primary) {
                     isProcessing = true
                     Task {
                         await onContinue()
