@@ -75,8 +75,6 @@ private extension ChaptersView {
     }
 
     func chapterRow(_ chapter: PodcastChapter) -> some View {
-        let active = isActive(chapter)
-
         return Button {
             playerManager.seek(to: chapter.start.seconds)
             isShowingChapterDialog.toggle()
@@ -92,7 +90,7 @@ private extension ChaptersView {
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(chapter.title)
-                        .font(active ? .body.weight(.bold) : .body.weight(.semibold))
+                        .font(isActive(for: chapter) ? .body.weight(.bold) : .body.weight(.semibold))
                         .foregroundStyle(.primary)
                         .multilineTextAlignment(.leading)
 
@@ -114,7 +112,7 @@ private extension ChaptersView {
                     .font(.callout)
                     .foregroundStyle(.secondary)
 
-                    if active {
+                    if isActive(for: chapter) {
                         TimelineView(.animation) { _ in
                             progressBar(for: chapter)
                         }
@@ -133,8 +131,8 @@ private extension ChaptersView {
         .background {
             cardBackground(for: chapter)
         }
-        .scaleEffect(active ? 1.015 : 1.0)
-        .animation(.spring(response: 0.35, dampingFraction: 0.85), value: active)
+        .scaleEffect(isActive(for: chapter) ? 1.015 : 1.0)
+        .animation(.spring(response: 0.35, dampingFraction: 0.85), value: isActive(for: chapter))
     }
 }
 
@@ -142,15 +140,12 @@ private extension ChaptersView {
 
 private extension ChaptersView {
     func cardBackground(for chapter: PodcastChapter) -> some View {
-        let active = isActive(chapter)
-
         return RoundedRectangle(cornerRadius: 16, style: .continuous)
             .fill(.ultraThinMaterial)
             .overlay {
-                // Tint base (fica mais forte quando ativo)
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .fill(chapterTintColor(for: chapter))
-                    .opacity(active ? 0.38 : 0.18)
+                    .opacity(playerManager.currentChapter == chapter ? 0.38 : 0.18)
             }
             .overlay {
                 // Highlight que “acompanha o tempo”: uma faixa luminosa posicionada pelo progress
@@ -176,7 +171,7 @@ private extension ChaptersView {
                             .frame(width: bandWidth)
                             .offset(x: xOffset)
                             .blur(radius: 10)
-                            .opacity(active ? 1.0 : 0.0)
+                            .opacity(isActive(for: chapter) ? 1.0 : 0.0)
                             .animation(.linear(duration: 0.12), value: xOffset)
                     }
                 }
@@ -189,9 +184,9 @@ private extension ChaptersView {
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .strokeBorder(
                         .white.opacity(
-                            active ? 0.35 : (isDarkBackground ? 0.10 : 0.18)
+                            isActive(for: chapter) ? 0.35 : (isDarkBackground ? 0.10 : 0.18)
                         ),
-                        lineWidth: active ? 1.2 : 0.5
+                        lineWidth: isActive(for: chapter) ? 1.2 : 0.5
                     )
             }
     }
@@ -205,36 +200,27 @@ private extension ChaptersView {
 
 private extension ChaptersView {
     func progressBar(for chapter: PodcastChapter) -> some View {
-        let progress = progress(for: chapter)
+        let progress = Double(progress(for: chapter))
 
-        return GeometryReader { proxy in
-            let proxyW = proxy.size.width
-            let fillW = max(0, min(1, progress)) * proxyW
-
-            ZStack(alignment: .leading) {
-                Capsule(style: .continuous)
-                    .fill(.white.opacity(isDarkBackground ? 0.12 : 0.16))
-
-                Capsule(style: .continuous)
-                    .fill(.white.opacity(isDarkBackground ? 0.75 : 0.65))
-                    .frame(width: max(2, fillW))
-                    .animation(.linear(duration: 0.12), value: fillW)
-            }
-        }
+        return Slider(
+            value: .constant(progress),
+            in: 0...1
+        )
+        .tint(.white.opacity(isDarkBackground ? 0.75 : 0.65))
+        .sliderThumbVisibility(.hidden)
         .frame(height: 3)
         .padding(.top, 2)
         .accessibilityHidden(true)
+        .allowsHitTesting(false)
     }
 }
 
 // MARK: - Active/progress helpers
 
 private extension ChaptersView {
-    func isActive(_ chapter: PodcastChapter) -> Bool {
-        let time = playerManager.currentTime
-        let start = chapter.start.seconds
-        let end = chapter.end.seconds
-        return time >= start && time < end
+    @MainActor
+    func isActive(for chapter: PodcastChapter) -> Bool {
+        playerManager.currentChapter == chapter
     }
 
     func progress(for chapter: PodcastChapter) -> CGFloat {

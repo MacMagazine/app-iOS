@@ -69,9 +69,6 @@ struct FullPlayerView: View {
 
     var body: some View {
         player
-            .overlay(alignment: .top) {
-                capsuleTop
-            }
             .trackScreen(AnalyticsConstants.Screen.podcastFullPlayer.name, analytics: analytics)
             .sheet(isPresented: $isShowingChapterDialog) {
                 ChaptersView(
@@ -635,25 +632,6 @@ private extension FullPlayerView {
             backgroundGradientColors: $backgroundGradientColors,
             isDarkBackground: $isDarkBackground
         )
-    }
-}
-
-private extension FullPlayerView {
-    var windowSafeTop: CGFloat {
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
-            .keyWindow?
-            .safeAreaInsets.top ?? 0
-    }
-
-    var capsuleTop: some View {
-        Capsule()
-            .fill(.white.opacity(0.55))
-            .frame(width: 44, height: 5)
-            .padding(.top, verticalSizeClass == .compact ? 30 : 8)
-            .padding(.bottom, 10)
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
-            .zIndex(999)
     }
 }
 

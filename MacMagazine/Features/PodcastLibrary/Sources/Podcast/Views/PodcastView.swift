@@ -65,7 +65,7 @@ public struct PodcastView: View {
                     playerManager: podcastPlayerManager,
                     backgroundGradientStyle: .fourTone
                 )
-                .presentationDragIndicator(.hidden)
+                .presentationDragIndicator(.visible)
             }
     }
 }
