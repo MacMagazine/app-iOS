@@ -1,4 +1,3 @@
-import FirebaseCore
 import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
@@ -30,35 +29,4 @@ struct MacMagazineApp: App {
         }
         .environment(\.theme, viewModel.theme)
     }
-}
-
-final class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configureFirebaseIfAvailable()
-        return true
-    }
-
-    private func configureFirebaseIfAvailable() {
-        // Check if GoogleService-Info.plist exists in the bundle
-        guard let plistPath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
-              FileManager.default.fileExists(atPath: plistPath) else {
-            return
-        }
-
-        // Verify it's not the template file by checking for placeholder values
-        if let plistDict = NSDictionary(contentsOfFile: plistPath),
-           let apiKey = plistDict["API_KEY"] as? String,
-           apiKey.contains("YOUR_API_KEY_HERE") {
-            return
-        }
-
-        FirebaseApp.configure()
-    }
-
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {}
-
-    func application(_ application: UIApplication,
-                     didFailToRegisterForRemoteNotificationsWithError error: Error) {}
 }

@@ -1,5 +1,5 @@
 import Foundation
-import OneSignalFramework
+import MacMagazineLibrary
 import StorageLibrary
 
 @Observable
@@ -17,6 +17,6 @@ extension PushOptionsViewModel {
     @MainActor
     func change(_ type: PushPreferences) async {
         storage?.update(notification: type.rawValue)
-        OneSignal.User.addTag(key: "notification_preferences", value: type.rawValue)
+        PushNotification.tag(with: type.rawValue)
     }
 }

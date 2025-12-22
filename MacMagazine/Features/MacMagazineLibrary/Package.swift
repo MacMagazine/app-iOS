@@ -10,13 +10,18 @@ let package = Package(
         .library(name: "MacMagazineLibrary", targets: ["MacMagazineLibrary"])
     ],
     dependencies: [
-        .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main")
+        .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main"),
+        .package(url: "https://github.com/OneSignal/OneSignal-XCFramework", from: "5.2.1")
     ],
     targets: [
         .target(name: "MacMagazineLibrary",
                 dependencies: [
                     .product(name: "Analytics", package: "Libraries"),
-                    .product(name: "UIComponents", package: "Libraries")
+                    .product(name: "Utilities", package: "Libraries"),
+                    .product(name: "UIComponents", package: "Libraries"),
+                    .product(name: "OneSignalFramework",
+                             package: "OneSignal-XCFramework",
+                             condition: .when(platforms: [.iOS, .macOS, .visionOS]))
                 ],
                 resources: [.process("Resources")])
     ]

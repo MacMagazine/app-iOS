@@ -1,4 +1,5 @@
 import Foundation
+import MacMagazineLibrary
 import UserNotifications
 import WatchKit
 import WidgetKit
@@ -20,8 +21,8 @@ final class WatchNotificationsDelegate: NSObject, WKApplicationDelegate {
 
 extension WatchNotificationsDelegate: UNUserNotificationCenterDelegate {
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
-        _ = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
-        // OneSignalPushNotification.addDevice(token: token)
+        let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
+        PushNotification.addDevice(with: token)
     }
 
     func userNotificationCenter(
@@ -31,10 +32,7 @@ extension WatchNotificationsDelegate: UNUserNotificationCenterDelegate {
         handlePush(userInfo: response.notification.request.content.userInfo)
     }
 
-    // MARK: - Push handling
-
     private func handlePush(userInfo: [AnyHashable: Any]) {
-        // Atualiza as complicações
         WidgetCenter.shared.reloadTimelines(ofKind: "WatchWidget")
     }
 }
