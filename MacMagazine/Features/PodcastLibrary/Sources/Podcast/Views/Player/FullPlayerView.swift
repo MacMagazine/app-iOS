@@ -76,6 +76,7 @@ struct FullPlayerView: View {
                     backgroundGradientStyle: backgroundGradientStyle,
                     isShowingChapterDialog: $isShowingChapterDialog
                 )
+                .presentationDragIndicator(.visible)
             }
     }
 

@@ -39,14 +39,6 @@ struct ChaptersView: View {
             previous: nil,
             analytics: analytics
         )
-        .safeAreaInset(edge: .top) {
-            Capsule()
-                .fill(.white.opacity(isDarkBackground ? 0.35 : 0.45))
-                .frame(width: 44, height: 5)
-                .padding(.top, 8)
-                .padding(.bottom, 6)
-                .accessibilityHidden(true)
-        }
         .preferredColorScheme(isDarkBackground ? .dark : .light)
         .onAppear {
             updateBackgroundGradient(data: playerManager.currentChapter?.artworkData)
@@ -131,7 +123,7 @@ private extension ChaptersView {
         .background {
             cardBackground(for: chapter)
         }
-        .scaleEffect(isActive(for: chapter) ? 1.015 : 1.0)
+        .scaleEffect(isActive(for: chapter) ? 1.035 : 1.0)
         .animation(.spring(response: 0.35, dampingFraction: 0.85), value: isActive(for: chapter))
     }
 }
