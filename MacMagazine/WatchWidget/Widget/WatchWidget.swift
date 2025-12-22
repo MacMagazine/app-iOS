@@ -1,15 +1,12 @@
-import AppIntents
 import SwiftUI
 import WidgetKit
 
 struct WatchWidget: Widget {
-
     let kind: String = "WatchWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(
+        StaticConfiguration(
             kind: kind,
-            intent: AppIntent.self,
             provider: WatchWidgetProvider()
         ) { entry in
             WatchWidgetEntryView(entry: entry)
@@ -32,7 +29,6 @@ struct WatchWidget: Widget {
 } timeline: {
     WatchWidgetModel(
         date: .now,
-        configuration: AppIntent(),
         postId: UUID().uuidString,
         postTitle: "Apple lança atualização do watchOS",
         postDate: .now.addingTimeInterval(-60 * 25)
@@ -44,7 +40,6 @@ struct WatchWidget: Widget {
 } timeline: {
     WatchWidgetModel(
         date: .now,
-        configuration: AppIntent(),
         postId: UUID().uuidString,
         postTitle: "Apple lança atualização do watchOS",
         postDate: .now.addingTimeInterval(-60 * 25)
@@ -56,7 +51,6 @@ struct WatchWidget: Widget {
 } timeline: {
     WatchWidgetModel(
         date: .now,
-        configuration: AppIntent(),
         postId: UUID().uuidString,
         postTitle: "Apple lança atualização do watchOS",
         postDate: .now.addingTimeInterval(-60 * 25)
@@ -68,7 +62,6 @@ struct WatchWidget: Widget {
 } timeline: {
     WatchWidgetModel(
         date: .now,
-        configuration: AppIntent(),
         postId: UUID().uuidString,
         postTitle: "O melhor pedaço da maçã da internet, clique para ver mais!",
         postDate: .now.addingTimeInterval(-60 * 90)

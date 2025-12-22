@@ -1,13 +1,12 @@
-import AppIntents
 import SwiftUI
 import UtilityLibrary
 import WidgetKit
 
 struct WatchWidgetEntryView: View {
-
-    let entry: WatchWidgetModel
     @Environment(\.widgetFamily) private var family
     @Environment(\.widgetRenderingMode) private var renderingMode
+
+    let entry: WatchWidgetModel
 
     var body: some View {
         content
