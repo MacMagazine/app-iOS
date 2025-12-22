@@ -69,6 +69,9 @@ struct FullPlayerView: View {
 
     var body: some View {
         player
+            .overlay(alignment: .top) {
+                capsuleTop
+            }
             .trackScreen(AnalyticsConstants.Screen.podcastFullPlayer.name, analytics: analytics)
             .sheet(isPresented: $isShowingChapterDialog) {
                 ChaptersView(
@@ -76,7 +79,6 @@ struct FullPlayerView: View {
                     backgroundGradientStyle: backgroundGradientStyle,
                     isShowingChapterDialog: $isShowingChapterDialog
                 )
-                .presentationDragIndicator(.visible)
             }
     }
 
@@ -146,7 +148,7 @@ struct FullPlayerView: View {
                         Spacer()
                         actions
                     }
-                    .padding(.top, 20)
+                    .padding(.top, 5)
 
                     artworkView
                     podcastTitle(podcast.title)
@@ -154,7 +156,9 @@ struct FullPlayerView: View {
                     Spacer()
 
                     progressSlider
+                        .padding(.bottom, 20)
                     playbackControls
+                        .padding(.bottom, 20)
                     volumeSlider
                 }
                 .padding(.horizontal)
@@ -416,6 +420,8 @@ private extension FullPlayerView {
                 ))
             }, label: {
                 Image(systemName: "music.note.list")
+                    .opacity(0.6)
+                    .font(.system(size: 15))
             })
             .font(.system(size: 24))
             .accessibilityLabel("Lista de capítulos")
@@ -632,10 +638,31 @@ private extension FullPlayerView {
     }
 }
 
+private extension FullPlayerView {
+    var windowSafeTop: CGFloat {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+            .keyWindow?
+            .safeAreaInsets.top ?? 0
+    }
+
+    var capsuleTop: some View {
+        Capsule()
+            .fill(.white.opacity(0.55))
+            .frame(width: 44, height: 5)
+            .padding(.top, verticalSizeClass == .compact ? 30 : 8)
+            .padding(.bottom, 10)
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+            .zIndex(999)
+    }
+}
+
 // MARK: - Preview -
 
 #Preview {
     @Previewable @State var playerManager = PodcastPlayerManager()
+
+    let analytics = AnalyticsManager()
 
     let mockPodcast = PodcastDB(
         postId: "1",
@@ -660,4 +687,6 @@ private extension FullPlayerView {
         playerManager.duration = 2_730
         playerManager.currentTime = 450
     }
+    .environmentObject(analytics)
+
 }

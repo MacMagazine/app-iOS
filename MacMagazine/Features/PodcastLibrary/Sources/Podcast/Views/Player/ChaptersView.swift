@@ -8,8 +8,8 @@ struct ChaptersView: View {
     @Bindable private var playerManager: PodcastPlayerManager
     @Binding private var isShowingChapterDialog: Bool
 
-    @State var backgroundGradientColors: [Color] = [.black, .black]
-    @State var isDarkBackground: Bool = false
+    @State private var backgroundGradientColors: [Color] = [.black, .black]
+    @State private var isDarkBackground = false
 
     private let backgroundGradientStyle: PodcastBackgroundGradientStyle
 
@@ -30,13 +30,23 @@ struct ChaptersView: View {
                 backgroundGradientColors: backgroundGradientColors,
                 usesGradient: false
             )
-            chapters
+            .ignoresSafeArea()
+
+            content
         }
         .trackScreen(
             AnalyticsConstants.Screen.podcastChapters.name,
             previous: nil,
             analytics: analytics
         )
+        .safeAreaInset(edge: .top) {
+            Capsule()
+                .fill(.white.opacity(isDarkBackground ? 0.35 : 0.45))
+                .frame(width: 44, height: 5)
+                .padding(.top, 8)
+                .padding(.bottom, 6)
+                .accessibilityHidden(true)
+        }
         .preferredColorScheme(isDarkBackground ? .dark : .light)
         .onAppear {
             updateBackgroundGradient(data: playerManager.currentChapter?.artworkData)
@@ -47,50 +57,199 @@ struct ChaptersView: View {
     }
 }
 
+// MARK: - UI
+
 private extension ChaptersView {
-    var chapters: some View {
-        List(playerManager.chapters, id: \.id) { chapter in
-            Button(action: {
-                playerManager.seek(to: chapter.start.seconds)
-                isShowingChapterDialog.toggle()
-            }, label: {
-                HStack(spacing: 20) {
-                    PodcastImageView(
-                        artworkData: chapter.artworkData,
-                        location: .chapter,
-                        fallback: { Rectangle().fill(.clear) })
-                    .frame(width: 45, height: 45)
-                    .cornerRadius(8)
+    var content: some View {
+        ScrollView {
+            LazyVStack(spacing: 10) {
+                ForEach(playerManager.chapters, id: \.id) { chapter in
+                    chapterRow(chapter)
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 24)
+        }
+        .scrollIndicators(.hidden)
+    }
 
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(chapter.title).bold().font(.body)
+    func chapterRow(_ chapter: PodcastChapter) -> some View {
+        let active = isActive(chapter)
 
-                        HStack(spacing: 10) {
-                            HStack(spacing: 4) {
-                                Image(systemName: "clock").font(.system(size: 14))
-                                Text(chapter.startString)
-                            }
-                            HStack(spacing: 4) {
-                                Image(systemName: "microphone").font(.system(size: 14))
-                                Text(chapter.durationString)
-                            }
-                            Spacer()
+        return Button {
+            playerManager.seek(to: chapter.start.seconds)
+            isShowingChapterDialog.toggle()
+        } label: {
+            HStack(spacing: 12) {
+                PodcastImageView(
+                    artworkData: chapter.artworkData,
+                    location: .chapter,
+                    fallback: { Rectangle().fill(.clear) }
+                )
+                .frame(width: 44, height: 44)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(chapter.title)
+                        .font(active ? .body.weight(.bold) : .body.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .multilineTextAlignment(.leading)
+
+                    HStack(spacing: 12) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "clock")
+                                .font(.system(size: 14))
+                            Text(chapter.startString)
                         }
-                        .font(.callout)
+
+                        Spacer()
+
+                        HStack(spacing: 6) {
+                            Text(chapter.durationString)
+                            Image(systemName: "microphone")
+                                .font(.system(size: 14))
+                        }
+                    }
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+
+                    if active {
+                        TimelineView(.animation) { _ in
+                            progressBar(for: chapter)
+                        }
+                        .transition(.opacity)
                     }
                 }
-            })
-            .listRowBackground(chapter.backgroundColor(at: playerManager.currentTime, using: backgroundGradientColors))
-            .accessibilityLabel("\(chapter.title), começando em \(chapter.startString) com duração de \(chapter.durationString).")
+
+                Spacer(minLength: 0)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 12)
+            .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
-        .scrollContentBackground(.hidden)
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(chapter.title), começando em \(chapter.startString) com duração de \(chapter.durationString).")
+        .background {
+            cardBackground(for: chapter)
+        }
+        .scaleEffect(active ? 1.015 : 1.0)
+        .animation(.spring(response: 0.35, dampingFraction: 0.85), value: active)
     }
 }
 
+// MARK: - Card background (glass + highlight + “band” que acompanha o tempo)
+
 private extension ChaptersView {
-    func updateBackgroundGradient(
-        data: Data? = nil
-    ) {
+    func cardBackground(for chapter: PodcastChapter) -> some View {
+        let active = isActive(chapter)
+
+        return RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .fill(.ultraThinMaterial)
+            .overlay {
+                // Tint base (fica mais forte quando ativo)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(chapterTintColor(for: chapter))
+                    .opacity(active ? 0.38 : 0.18)
+            }
+            .overlay {
+                // Highlight que “acompanha o tempo”: uma faixa luminosa posicionada pelo progress
+                GeometryReader { proxy in
+                    TimelineView(.animation) { _ in
+                        let progress = progress(for: chapter)
+                        let width = proxy.size.width
+                        let bandWidth = min(140, width * 0.38)
+                        let xOffset = max(0, min(1, progress)) * max(0, width - bandWidth)
+
+                        Rectangle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [
+                                        .clear,
+                                        .white.opacity(isDarkBackground ? 0.32 : 0.25),
+                                        .clear
+                                    ],
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
+                            .frame(width: bandWidth)
+                            .offset(x: xOffset)
+                            .blur(radius: 10)
+                            .opacity(active ? 1.0 : 0.0)
+                            .animation(.linear(duration: 0.12), value: xOffset)
+                    }
+                }
+                .mask(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                )
+                .allowsHitTesting(false)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .strokeBorder(
+                        .white.opacity(
+                            active ? 0.35 : (isDarkBackground ? 0.10 : 0.18)
+                        ),
+                        lineWidth: active ? 1.2 : 0.5
+                    )
+            }
+    }
+
+    func chapterTintColor(for chapter: PodcastChapter) -> Color {
+        chapter.backgroundColor(at: playerManager.currentTime, using: backgroundGradientColors)
+    }
+}
+
+// MARK: - Progress bar
+
+private extension ChaptersView {
+    func progressBar(for chapter: PodcastChapter) -> some View {
+        let progress = progress(for: chapter)
+
+        return GeometryReader { proxy in
+            let proxyW = proxy.size.width
+            let fillW = max(0, min(1, progress)) * proxyW
+
+            ZStack(alignment: .leading) {
+                Capsule(style: .continuous)
+                    .fill(.white.opacity(isDarkBackground ? 0.12 : 0.16))
+
+                Capsule(style: .continuous)
+                    .fill(.white.opacity(isDarkBackground ? 0.75 : 0.65))
+                    .frame(width: max(2, fillW))
+                    .animation(.linear(duration: 0.12), value: fillW)
+            }
+        }
+        .frame(height: 3)
+        .padding(.top, 2)
+        .accessibilityHidden(true)
+    }
+}
+
+// MARK: - Active/progress helpers
+
+private extension ChaptersView {
+    func isActive(_ chapter: PodcastChapter) -> Bool {
+        let time = playerManager.currentTime
+        let start = chapter.start.seconds
+        let end = chapter.end.seconds
+        return time >= start && time < end
+    }
+
+    func progress(for chapter: PodcastChapter) -> CGFloat {
+        let time = playerManager.currentTime
+        let start = chapter.start.seconds
+        let end = chapter.end.seconds
+        let denom = max(0.001, end - start)
+        return CGFloat((time - start) / denom)
+    }
+}
+
+// MARK: - Background
+
+private extension ChaptersView {
+    func updateBackgroundGradient(data: Data? = nil) {
         BackgroundViewModel.backgroundGradient(
             data: data,
             artworkURL: Constants.coverURL,
