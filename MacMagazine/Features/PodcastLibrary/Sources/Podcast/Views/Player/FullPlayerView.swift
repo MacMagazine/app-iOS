@@ -146,7 +146,7 @@ struct FullPlayerView: View {
                         Spacer()
                         actions
                     }
-                    .padding(.top, 20)
+                    .padding(.top, 5)
 
                     artworkView
                     podcastTitle(podcast.title)
@@ -154,7 +154,9 @@ struct FullPlayerView: View {
                     Spacer()
 
                     progressSlider
+                        .padding(.bottom, 20)
                     playbackControls
+                        .padding(.bottom, 20)
                     volumeSlider
                 }
                 .padding(.horizontal)
@@ -416,6 +418,8 @@ private extension FullPlayerView {
                 ))
             }, label: {
                 Image(systemName: "music.note.list")
+                    .opacity(0.6)
+                    .font(.system(size: 15))
             })
             .font(.system(size: 24))
             .accessibilityLabel("Lista de capítulos")
@@ -637,6 +641,8 @@ private extension FullPlayerView {
 #Preview {
     @Previewable @State var playerManager = PodcastPlayerManager()
 
+    let analytics = AnalyticsManager()
+
     let mockPodcast = PodcastDB(
         postId: "1",
         title: "MacMagazine no Ar #123: Especial WWDC 2024",
@@ -660,4 +666,6 @@ private extension FullPlayerView {
         playerManager.duration = 2_730
         playerManager.currentTime = 450
     }
+    .environmentObject(analytics)
+
 }
