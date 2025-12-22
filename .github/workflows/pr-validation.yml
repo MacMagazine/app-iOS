@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - 'release/**'
-      - 'develop/**'
+      - develop
 
 jobs:
   validate-pr:
