@@ -29,13 +29,11 @@ struct WatchApp: App {
 
     @MainActor
     private func handleDeepLink(_ url: URL) {
-        guard url.scheme == "macmagazine" else { return }
+        guard url.scheme == "macmagazine",
+              url.host == "news"
+        else { return }
 
-        let host = url.host ?? ""
         let pathComponents = url.pathComponents.filter { $0 != "/" }
-
-        guard host == "news" else { return }
-
         if pathComponents.count >= 2, pathComponents[0] == "post" {
             _ = pathComponents[1]
         }

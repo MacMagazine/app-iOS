@@ -102,8 +102,6 @@ private extension WidgetElementView {
 
     var smallWidget: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Spacer()
-
             HStack {
                 Image(renderingMode == .accented ? "logo_white" : "logo_color")
                     .resizable()
@@ -112,7 +110,9 @@ private extension WidgetElementView {
                 Spacer()
             }
             .frame(height: 20)
-            .padding(.bottom, 6)
+            .padding(.top)
+
+            Spacer()
 
             Text(post.title)
                 .font(.headline)

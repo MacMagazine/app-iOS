@@ -1,53 +1,50 @@
-import AppIntents
+import FeedLibrary
+import StorageLibrary
 import SwiftUI
 import WidgetKit
 
-struct WatchWidgetProvider: AppIntentTimelineProvider {
-
-    func recommendations() -> [AppIntentRecommendation<AppIntent>] {
-        [
-            AppIntentRecommendation(
-                intent: AppIntent(),
-                description: "MacMagazine"
-            )
-        ]
-    }
+@MainActor
+struct WatchWidgetProvider: TimelineProvider {
+    private let database = Database(models: [FeedDB.self], inMemory: true)
 
     func placeholder(in context: Context) -> WatchWidgetModel {
         WatchWidgetModel(
             date: .now,
-            configuration: AppIntent(),
             postId: UUID().uuidString,
             postTitle: "Apple lança atualização do watchOS",
             postDate: .now.addingTimeInterval(-60 * 25)
         )
     }
 
-    func snapshot(
-        for configuration: AppIntent,
-        in context: Context
-    ) async -> WatchWidgetModel {
-        makeEntry(configuration: configuration)
+    func getSnapshot(in context: Context, completion: @escaping @Sendable (WatchWidgetModel) -> Void) {
+        Task {
+            let entry = await makeEntry(for: .now)
+            completion(entry)
+        }
     }
 
-    func timeline(
-        for configuration: AppIntent,
-        in context: Context
-    ) async -> Timeline<WatchWidgetModel> {
-        let entry = makeEntry(configuration: configuration)
-        let nextUpdate = Date().addingTimeInterval(60 * 60)
-        return Timeline(entries: [entry], policy: .after(nextUpdate))
+    func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<WatchWidgetModel>) -> Void) {
+        Task {
+            let entry = await makeEntry(for: .now)
+            guard let nextUpdate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) else {
+                completion(Timeline(entries: [entry], policy: .atEnd))
+                return
+            }
+            completion(Timeline(entries: [entry], policy: .after(nextUpdate)))
+        }
     }
+}
 
-    private func makeEntry(configuration: AppIntent) -> WatchWidgetModel {
-        let snap = MacMagazineWidgetSharedStore.readPost()
+private extension WatchWidgetProvider {
+    func makeEntry(for date: Date) async -> WatchWidgetModel {
+        let viewModel = FeedViewModel(storage: database)
+        let post = try? await viewModel.getWatchFeed(limit: 1).first
 
         return WatchWidgetModel(
-            date: .now,
-            configuration: configuration,
-            postId: snap?.id,
-            postTitle: snap?.title ?? "MacMagazine",
-            postDate: snap?.date
+            date: date,
+            postId: post?.postId,
+            postTitle: post?.title ?? "MacMagazine",
+            postDate: post?.pubDate
         )
     }
 }

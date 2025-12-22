@@ -75,11 +75,11 @@ public class FeedViewModel {
     }
 
     @discardableResult
-    public func getWatchFeed() async throws -> [FeedDB] {
+    public func getWatchFeed(limit: Int = 10) async throws -> [FeedDB] {
         do {
             status = .loading
             let feed = try await fetch(category: .news, page: 0, parseFullContent: true)
-            let watchData = Array(feed.prefix(10)).toFeedDB
+            let watchData = Array(feed.prefix(limit)).toFeedDB
             storage.save(feed: watchData)
             status = .done
             return watchData
