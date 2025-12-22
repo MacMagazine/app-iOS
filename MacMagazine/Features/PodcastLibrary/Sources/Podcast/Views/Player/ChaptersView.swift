@@ -144,44 +144,6 @@ private extension ChaptersView {
             .fill(.ultraThinMaterial)
             .overlay {
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(chapterTintColor(for: chapter))
-                    .opacity(playerManager.currentChapter == chapter ? 0.38 : 0.18)
-            }
-            .overlay {
-                // Highlight que “acompanha o tempo”: uma faixa luminosa posicionada pelo progress
-                GeometryReader { proxy in
-                    TimelineView(.animation) { _ in
-                        let progress = progress(for: chapter)
-                        let width = proxy.size.width
-                        let bandWidth = min(140, width * 0.38)
-                        let xOffset = max(0, min(1, progress)) * max(0, width - bandWidth)
-
-                        Rectangle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [
-                                        .clear,
-                                        .white.opacity(isDarkBackground ? 0.32 : 0.25),
-                                        .clear
-                                    ],
-                                    startPoint: .top,
-                                    endPoint: .bottom
-                                )
-                            )
-                            .frame(width: bandWidth)
-                            .offset(x: xOffset)
-                            .blur(radius: 10)
-                            .opacity(isActive(for: chapter) ? 1.0 : 0.0)
-                            .animation(.linear(duration: 0.12), value: xOffset)
-                    }
-                }
-                .mask(
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                )
-                .allowsHitTesting(false)
-            }
-            .overlay {
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .strokeBorder(
                         .white.opacity(
                             isActive(for: chapter) ? 0.35 : (isDarkBackground ? 0.10 : 0.18)
