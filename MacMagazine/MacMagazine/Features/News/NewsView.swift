@@ -11,43 +11,62 @@ struct NewsView: View {
     @Environment(MainViewModel.self) private var viewModel
 
     @State private var favorite = false
+    @State private var category = false
 
     var body: some View {
-        @Bindable var bindableViewModel = viewModel
-
         ZStack {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-            content.padding(.top)
+            VStack {
+                categoryView
+                content
+            }
         }
-        .toolbar(show: !shouldUseSidebar, menu: menuView, options: optionsView)
+        .navigationTitle("Notícias")
+        .toolbar(show: !shouldUseSidebar, menu: favoriteButton, options: categoriesButton)
+        .onChange(of: viewModel.news) { _, value in
+            withAnimation(.easeInOut(duration: 0.4)) {
+                category.toggle()
+            }
+        }
     }
 }
 
 private extension NewsView {
-    @ViewBuilder
-    var optionsView: some View {
-        @Bindable var bindableViewModel = viewModel
+    var favoriteButton: some View {
+        Button(action: {
+            withAnimation {
+                favorite.toggle()
+            }
+        }, label: {
+            Image(systemName: "star\(favorite ? ".fill" : "")")
+        })
+    }
 
-        MenuView(menu: viewModel.settingsViewModel.news,
-                 selected: $bindableViewModel.news)
+    var categoriesButton: some View {
+        Button(action: {
+            withAnimation(.easeInOut(duration: 0.4)) {
+                category.toggle()
+            }
+        }, label: {
+            Image(systemName: "rectangle.grid.2x2\(category ? ".fill" : "")")
+        })
     }
 
     @ViewBuilder
+    var categoryView: some View {
+        if category {
+            @Bindable var bindableViewModel = viewModel
+            ChipView(options: viewModel.settingsViewModel.news,
+                     selected: $bindableViewModel.news)
+            .transition(.move(edge: .top).combined(with: .opacity))
+        }
+    }
+
     var content: some View {
         ContentUnavailableView(
             "Página em construção",
             systemImage: "square.and.arrow.down.badge.xmark",
             description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
         )
-    }
-
-    var menuView: some View {
-        Button(action: {
-            withAnimation {
-                favorite.toggle()
-            }
-        }, label: {
-            Image(systemName: favorite ? "star.fill" : "star")
-        })
     }
 }

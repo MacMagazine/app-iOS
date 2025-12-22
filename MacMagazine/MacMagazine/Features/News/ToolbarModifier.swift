@@ -27,7 +27,7 @@ private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }
-                    ToolbarItem(placement: .principal) {
+                    ToolbarItem(placement: .navigation) {
                         options
                     }
                 }
