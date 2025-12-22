@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		88C8B2E72EF476E100044DE9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */; };
 		88C8B2E82EF476E100044DE9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD42502EE9E82F00A9BD85 /* SwiftUI.framework */; };
-		88C8B2F72EF476E200044DE9 /* WatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 88C8B2E62EF476E100044DE9 /* WatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		88C8B2FE2EF48DC500044DE9 /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 88C8B2FD2EF48DC500044DE9 /* FeedLibrary */; };
 		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
 		9B0283C42EF61A08002611AB /* OnboardingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B0283C32EF61A08002611AB /* OnboardingLibrary */; };
@@ -21,6 +20,7 @@
 		9B910BEB2EE09D1B00E96B4D /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B910BEA2EE09D1B00E96B4D /* FeedLibrary */; };
 		9BA828AC2EEC7AAB00F26FCB /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BA828B82EEC7AE500F26FCB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA828B72EEC7AE500F26FCB /* FeedLibrary */; };
+		9BC1BCAC2EF965A400C19D1D /* WatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 88C8B2E62EF476E100044DE9 /* WatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */; };
 		9BDD424F2EE9E82F00A9BD85 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */; };
 		9BDD42512EE9E82F00A9BD85 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD42502EE9E82F00A9BD85 /* SwiftUI.framework */; };
@@ -28,19 +28,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		88C8B2F52EF476E200044DE9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9B9E9DBC2E986F8400255820 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88C8B2E52EF476E100044DE9;
-			remoteInfo = WidgetWatchExtension;
-		};
 		9BA828AA2EEC7AAB00F26FCB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B9E9DBC2E986F8400255820 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9BA8288B2EEC7AAA00F26FCB;
 			remoteInfo = "WatchkApp Watch App";
+		};
+		9BC1BCAD2EF965A400C19D1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B9E9DBC2E986F8400255820 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88C8B2E52EF476E100044DE9;
+			remoteInfo = WatchWidget;
 		};
 		9BDD425E2EE9E83100A9BD85 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,17 +52,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		88C8B2FC2EF476E200044DE9 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				88C8B2F72EF476E200044DE9 /* WatchWidget.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9BA828AD2EEC7AAB00F26FCB /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -72,6 +61,17 @@
 				9BA828AC2EEC7AAB00F26FCB /* WatchApp.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BC1BCAF2EF965A400C19D1D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9BC1BCAC2EF965A400C19D1D /* WatchWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BDD42612EE9E83100A9BD85 /* Embed Foundation Extensions */ = {
@@ -332,12 +332,12 @@
 				9BA828882EEC7AAA00F26FCB /* Sources */,
 				9BA828892EEC7AAA00F26FCB /* Frameworks */,
 				9BA8288A2EEC7AAA00F26FCB /* Resources */,
-				88C8B2FC2EF476E200044DE9 /* Embed Foundation Extensions */,
+				9BC1BCAF2EF965A400C19D1D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				88C8B2F62EF476E200044DE9 /* PBXTargetDependency */,
+				9BC1BCAE2EF965A400C19D1D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				9BA8288D2EEC7AAA00F26FCB /* WatchApp */,
@@ -507,15 +507,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		88C8B2F62EF476E200044DE9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 88C8B2E52EF476E100044DE9 /* WatchWidget */;
-			targetProxy = 88C8B2F52EF476E200044DE9 /* PBXContainerItemProxy */;
-		};
 		9BA828AB2EEC7AAB00F26FCB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BA8288B2EEC7AAA00F26FCB /* WatchApp */;
 			targetProxy = 9BA828AA2EEC7AAB00F26FCB /* PBXContainerItemProxy */;
+		};
+		9BC1BCAE2EF965A400C19D1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88C8B2E52EF476E100044DE9 /* WatchWidget */;
+			targetProxy = 9BC1BCAD2EF965A400C19D1D /* PBXContainerItemProxy */;
 		};
 		9BDD425F2EE9E83100A9BD85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
