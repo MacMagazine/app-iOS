@@ -24,7 +24,6 @@ struct MacMagazineApp: App {
                 .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
                 .task {
                     podcastPlayerManager.observeSessionState(viewModel.sessionState)
-                    UIApplication.shared.registerForRemoteNotifications()
                 }
         }
         .environment(\.theme, viewModel.theme)

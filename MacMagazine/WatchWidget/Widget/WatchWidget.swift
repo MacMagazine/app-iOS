@@ -1,3 +1,4 @@
+import FeedLibrary
 import SwiftUI
 import WidgetKit
 
@@ -27,44 +28,52 @@ struct WatchWidget: Widget {
 #Preview("Circular", as: .accessoryCircular) {
     WatchWidget()
 } timeline: {
-    WatchWidgetModel(
+    WidgetEntry(
         date: .now,
-        postId: UUID().uuidString,
-        postTitle: "Apple lança atualização do watchOS",
-        postDate: .now.addingTimeInterval(-60 * 25)
+        post: WidgetData(
+            postId: UUID().uuidString,
+            title: "Apple lança atualização do watchOS",
+            pubDate: .now.addingTimeInterval(-60 * 25)
+        )
     )
 }
 
 #Preview("Corner", as: .accessoryCorner) {
     WatchWidget()
 } timeline: {
-    WatchWidgetModel(
+    WidgetEntry(
         date: .now,
-        postId: UUID().uuidString,
-        postTitle: "Apple lança atualização do watchOS",
-        postDate: .now.addingTimeInterval(-60 * 25)
+        post: WidgetData(
+            postId: UUID().uuidString,
+            title: "Apple lança atualização do watchOS",
+            pubDate: .now.addingTimeInterval(-60 * 25)
+        )
     )
 }
 
 #Preview("Inline", as: .accessoryInline) {
     WatchWidget()
 } timeline: {
-    WatchWidgetModel(
+    WidgetEntry(
         date: .now,
-        postId: UUID().uuidString,
-        postTitle: "Apple lança atualização do watchOS",
-        postDate: .now.addingTimeInterval(-60 * 25)
+        post: WidgetData(
+            postId: UUID().uuidString,
+            title: "Apple lança atualização do watchOS",
+            pubDate: .now.addingTimeInterval(-60 * 25)
+        )
     )
 }
 
 #Preview("Rectangular", as: .accessoryRectangular) {
     WatchWidget()
 } timeline: {
-    WatchWidgetModel(
+    WidgetEntry(
         date: .now,
-        postId: UUID().uuidString,
-        postTitle: "O melhor pedaço da maçã da internet, clique para ver mais!",
-        postDate: .now.addingTimeInterval(-60 * 90)
+        post: WidgetData(
+            postId: UUID().uuidString,
+            title: "Apple lança atualização do watchOS",
+            pubDate: .now.addingTimeInterval(-60 * 25)
+        )
     )
 }
 #endif

@@ -53,10 +53,10 @@ public class FeedViewModel {
         }
     }
 
-    public func getWidgetData() async throws -> [WidgetData] {
+    public func getWidgetData(limit: Int = 3) async throws -> [WidgetData] {
         do {
             let data = try await fetch(category: .all, page: 0)
-            return Array(data.prefix(3)).toWidgetData
+            return Array(data.prefix(limit)).toWidgetData
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
             return []
@@ -75,11 +75,11 @@ public class FeedViewModel {
     }
 
     @discardableResult
-    public func getWatchFeed(limit: Int = 10) async throws -> [FeedDB] {
+    public func getWatchFeed() async throws -> [FeedDB] {
         do {
             status = .loading
-            let feed = try await fetch(category: .news, page: 0, parseFullContent: true)
-            let watchData = Array(feed.prefix(limit)).toFeedDB
+            let feed = try await fetch(category: .all, page: 0, parseFullContent: true)
+            let watchData = Array(feed.prefix(10)).toFeedDB
             storage.save(feed: watchData)
             status = .done
             return watchData

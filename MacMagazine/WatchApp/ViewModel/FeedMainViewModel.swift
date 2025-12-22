@@ -38,7 +38,7 @@ final class FeedMainViewModel {
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
 
-        WidgetCenter.shared.reloadTimelines(ofKind: "WatchWidget")
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func toggleFavorite(post: FeedDB, modelContext: ModelContext) {

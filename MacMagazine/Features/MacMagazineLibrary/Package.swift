@@ -17,6 +17,7 @@ let package = Package(
         .target(name: "MacMagazineLibrary",
                 dependencies: [
                     .product(name: "Analytics", package: "Libraries"),
+                    .product(name: "Logger", package: "Libraries"),
                     .product(name: "Utilities", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries"),
                     .product(name: "OneSignalFramework",

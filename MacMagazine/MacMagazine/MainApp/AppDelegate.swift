@@ -1,11 +1,18 @@
 import FirebaseCore
+import LoggerLibrary
 import MacMagazineLibrary
 import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    private var logger: LoggerProtocol?
+
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureFirebaseIfAvailable()
+
+        logger = Logger(category: "MacMagazineV5")
+        PushNotification().setup(options: launchOptions)
+
         return true
     }
 }
@@ -35,14 +42,19 @@ private extension AppDelegate {
 
 extension AppDelegate {
     func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {}
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        logger?.debug(deviceToken)
+    }
 
     func application(_ application: UIApplication,
-                     didFailToRegisterForRemoteNotificationsWithError error: Error) {}
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        logger?.error(error.localizedDescription)
+    }
 
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        logger?.debug(userInfo["aps"] ?? "")
         guard let aps = userInfo["aps"] as? [String: Any],
               let contentAvailable = aps["content-available"] as? Int,
               contentAvailable == 1 else {

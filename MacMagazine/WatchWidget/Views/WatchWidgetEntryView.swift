@@ -1,3 +1,4 @@
+import FeedLibrary
 import SwiftUI
 import UtilityLibrary
 import WidgetKit
@@ -6,7 +7,7 @@ struct WatchWidgetEntryView: View {
     @Environment(\.widgetFamily) private var family
     @Environment(\.widgetRenderingMode) private var renderingMode
 
-    let entry: WatchWidgetModel
+    let entry: WidgetEntry
 
     var body: some View {
         content
@@ -58,22 +59,22 @@ private extension WatchWidgetEntryView {
             .frame(width: 35, height: 35)
             .foregroundStyle(.primary)
             .widgetLabel {
-                Text(entry.postTitle)
+                Text(entry.post.title)
                     .lineLimit(1)
             }
             .widgetAccessibility(
                 url: widgetPostURL(),
-                lastPostTitle: entry.postTitle,
+                lastPostTitle: entry.post.title,
                 children: .ignore
             )
     }
 
     // ACCESSORY INLINE
     var inline: some View {
-        Text(entry.postTitle)
+        Text(entry.post.title)
             .widgetAccessibility(
                 url: widgetPostURL(),
-                lastPostTitle: entry.postTitle
+                lastPostTitle: entry.post.title
             )
     }
 
@@ -88,7 +89,7 @@ private extension WatchWidgetEntryView {
                     .frame(width: 18, height: 18)
                     .foregroundStyle(.primary)
 
-                Text(relativePostTimeText(entry.postDate))
+                Text(relativePostTimeText(entry.post.pubDate))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -96,7 +97,7 @@ private extension WatchWidgetEntryView {
                 Spacer(minLength: 0)
             }
 
-            Text(entry.postTitle)
+            Text(entry.post.title)
                 .font(.callout)
                 .lineLimit(2)
         }
@@ -109,10 +110,10 @@ private extension WatchWidgetEntryView {
     }
 
     func widgetPostURL() -> URL? {
-        if let postId = entry.postId, !postId.isEmpty {
+        let postId = entry.post.postId
+        if !postId.isEmpty {
             return URL(string: "macmagazine://news/post/\(postId)")
         }
-
         return URL(string: "macmagazine://news")
     }
 
@@ -134,7 +135,7 @@ private extension WatchWidgetEntryView {
     }
 
     func accessibilityValueForRectangular() -> String {
-        let whenText = relativePostTimeText(entry.date)
-        return "\(whenText), \(entry.postTitle)"
+        let whenText = relativePostTimeText(entry.post.pubDate)
+        return "\(whenText), \(entry.post.title)"
     }
 }

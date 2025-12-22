@@ -1,10 +1,16 @@
 import Foundation
+import LoggerLibrary
 import Observation
 import UtilityLibrary
 
 @Observable
 public class PushNotification: NSObject {
     public var newContentAvailable: String?
+    private let logger: LoggerProtocol
+
+    public override init() {
+        self.logger = Logger(category: "MacMagazineV5")
+    }
 }
 
 private extension PushNotification {
@@ -17,23 +23,46 @@ private extension PushNotification {
 
 public extension PushNotification {
     static func addDevice(with token: String) {
-        guard let url = URL(string: "https://onesignal.com/api/v1/players") else { return }
+        guard let url = URL(string: "https://api.onesignal.com/apps/\(Self.oneSignalKey)/users") else { return }
         let headers = ["accept": "application/json",
                        "Content-Type": "application/json"]
 
-        let parameters: [String: Any] = ["app_id": Self.oneSignalKey,
-                                         "device_type": 0,
-                                         "identifier": token]
+        let payload = UserModel(
+            properties: UserProperties(
+                language: Locale.preferredLanguages.first,
+                timezoneId: TimeZone.current.identifier,
+                country: Locale.preferredLocales.first?.identifier
+            ),
+            identity: UserIdentity(
+                externalId: token
+            ),
+            subscriptions: [UserSubscriptions(
+                type: .ios,
+                token: token,
+                notificationTypes: 1,
+                appVersion: Bundle.build
+            )]
+        )
 
-        guard let postData = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        guard let postData = try? encoder.encode(payload) else { return }
+
+        let logger = Logger(category: "MacMagazineV5")
+        logger.debug(String(data: postData, encoding: .utf8) ?? "")
 
         Task {
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.allHTTPHeaderFields = headers
-            request.httpBody = postData
+            do {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.allHTTPHeaderFields = headers
+                request.httpBody = postData
 
-            _ = try? await URLSession.shared.data(for: request)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                logger.debug(String(data: data, encoding: .utf8) ?? "")
+            } catch {
+                logger.error(error.localizedDescription)
+            }
         }
     }
 }
