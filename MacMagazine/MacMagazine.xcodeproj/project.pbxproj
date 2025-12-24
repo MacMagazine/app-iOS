@@ -17,6 +17,7 @@
 		9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B4F666E2EE9F223008ACACB /* FeedLibrary */; };
 		9B5143C52EF4CE9800ED4F39 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5143C42EF4CE9800ED4F39 /* MacMagazineLibrary */; };
 		9B543D342EE8A116001730C4 /* MacMagazineUILibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B543D332EE8A116001730C4 /* MacMagazineUILibrary */; };
+		9B740C742EFC2AC80058B514 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B740C732EFC2AC80058B514 /* MacMagazineLibrary */; };
 		9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B817DA12ED0E5F7005E58E5 /* VideosLibrary */; };
 		9B910BEB2EE09D1B00E96B4D /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B910BEA2EE09D1B00E96B4D /* FeedLibrary */; };
 		9BA828AC2EEC7AAB00F26FCB /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -175,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B740C742EFC2AC80058B514 /* MacMagazineLibrary in Frameworks */,
 				88C8B2FE2EF48DC500044DE9 /* FeedLibrary in Frameworks */,
 				88C8B2E82EF476E100044DE9 /* SwiftUI.framework in Frameworks */,
 				88C8B2E72EF476E100044DE9 /* WidgetKit.framework in Frameworks */,
@@ -288,6 +290,7 @@
 			name = WatchWidget;
 			packageProductDependencies = (
 				88C8B2FD2EF48DC500044DE9 /* FeedLibrary */,
+				9B740C732EFC2AC80058B514 /* MacMagazineLibrary */,
 			);
 			productName = WidgetWatchExtension;
 			productReference = 88C8B2E62EF476E100044DE9 /* WatchWidget.appex */;
@@ -1007,6 +1010,10 @@
 		9B543D332EE8A116001730C4 /* MacMagazineUILibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MacMagazineUILibrary;
+		};
+		9B740C732EFC2AC80058B514 /* MacMagazineLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MacMagazineLibrary;
 		};
 		9B817DA12ED0E5F7005E58E5 /* VideosLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

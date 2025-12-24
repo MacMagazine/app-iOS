@@ -1,14 +1,16 @@
 import Combine
 import Foundation
+import MacMagazineLibrary
 import NetworkLibrary
 import StorageLibrary
 import SwiftData
 
 @MainActor @Observable
 public class FeedViewModel {
-    public var status: Status = .loading
+    public var status: Status = .idle
 
     public enum Status: Equatable {
+        case idle
         case loading
         case done
         case error(reason: String)
@@ -42,7 +44,7 @@ public class FeedViewModel {
             async let highlights = fetch(category: .highlights, page: page)
             async let appletv = fetch(category: .appletv, page: page)
             async let reviews = fetch(category: .reviews, page: page)
-            async let tutoriais = fetch(category: .tutoriais, page: page)
+            async let tutoriais = fetch(category: .tutorials, page: page)
             async let rumors = fetch(category: .rumors, page: page)
             async let posts = fetch(category: .news, page: page)
             let feed = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
@@ -92,7 +94,7 @@ public class FeedViewModel {
 
 extension FeedViewModel {
     private func fetch(
-        category: Category,
+        category: NewsCategory,
         page: Int,
         parseFullContent: Bool = false
     ) async throws -> [XMLPost] {
@@ -101,7 +103,7 @@ extension FeedViewModel {
             return try await withCheckedThrowingContinuation { continuation in
                 Self.parse(
                     data,
-                    category: category.rawValue,
+                    category: category.filterKey,
                     numberOfPosts: -1,
                     parseFullContent: parseFullContent,
                     continuation: continuation)

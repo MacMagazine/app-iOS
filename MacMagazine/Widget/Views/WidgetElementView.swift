@@ -1,4 +1,5 @@
 import FeedLibrary
+import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
 import UIKit
@@ -67,7 +68,7 @@ private extension WidgetElementView {
         VStack(spacing: 4) {
             if widgetFamily == .systemLarge || widgetFamily == .systemSmall {
                 HStack {
-                    Text(post.pubDate.format(using: .dateTime))
+                    Text(post.pubDate.toTimeAgoDisplay(showTime: true))
                         .font(.caption2)
                         .lineLimit(1)
                     Spacer(minLength: 0)
@@ -120,7 +121,7 @@ private extension WidgetElementView {
                 .foregroundStyle(.primary)
                 .lineLimit(3)
 
-            Text(post.pubDate.format(using: .dateTime))
+            Text(post.pubDate.toTimeAgoDisplay(showTime: true))
                 .font(.caption2)
                 .foregroundStyle(.primary)
                 .lineLimit(1)

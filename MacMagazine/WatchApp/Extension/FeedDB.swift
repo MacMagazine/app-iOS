@@ -1,5 +1,6 @@
 import FeedLibrary
 import Foundation
+import MacMagazineLibrary
 import UtilityLibrary
 
 extension FeedDB {
@@ -9,7 +10,7 @@ extension FeedDB {
     }
 
     var dateText: String {
-        pubDate.format(using: .dateTime)
+        pubDate.toTimeAgoDisplay(showTime: true)
     }
 
     var displaySubtitle: String? {

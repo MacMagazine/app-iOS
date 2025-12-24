@@ -1,4 +1,5 @@
 import FeedLibrary
+import MacMagazineLibrary
 import SwiftUI
 import UtilityLibrary
 import WidgetKit
@@ -89,7 +90,7 @@ private extension WatchWidgetEntryView {
                     .frame(width: 18, height: 18)
                     .foregroundStyle(.primary)
 
-                Text(relativePostTimeText(entry.post.pubDate))
+                Text(entry.post.pubDate.toTimeAgoDisplay(showTime: true))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -117,25 +118,8 @@ private extension WatchWidgetEntryView {
         return URL(string: "macmagazine://news")
     }
 
-    func relativePostTimeText(_ date: Date?) -> String {
-        guard let date else { return "Atualizado recentemente" }
-
-        let time = date.format(using: .hourOnly)
-        let calendar = Calendar.current
-
-        if calendar.isDateInToday(date) {
-            return "Hoje às \(time)"
-        }
-
-        if calendar.isDateInYesterday(date) {
-            return "Ontem às \(time)"
-        }
-
-        return "\(date.format(using: "dd/MM")) às \(time)"
-    }
-
     func accessibilityValueForRectangular() -> String {
-        let whenText = relativePostTimeText(entry.post.pubDate)
+        let whenText = entry.post.pubDate.toTimeAgoDisplay(showTime: true)
         return "\(whenText), \(entry.post.title)"
     }
 }

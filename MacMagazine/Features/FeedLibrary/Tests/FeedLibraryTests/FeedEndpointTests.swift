@@ -174,7 +174,7 @@ struct FeedEndpointTests {
 
     @Test("posts should create valid endpoint for highlights category")
     func postsForHighlightsCategory() {
-        // Given - From Category.highlights
+        // Given - From NewsCategory.highlights
         let highlightsQuery = ("cat", "674")
 
         // When
@@ -188,7 +188,7 @@ struct FeedEndpointTests {
 
     @Test("posts should create valid endpoint for podcast category")
     func postsForPodcastCategory() {
-        // Given - From Category.podcast
+        // Given - From NewsCategory.podcast
         let podcastQuery = ("cat", "101")
 
         // When
@@ -200,7 +200,7 @@ struct FeedEndpointTests {
 
     @Test("posts should create valid endpoint for YouTube category")
     func postsForYouTubeCategory() {
-        // Given - From Category.youtube
+        // Given - From NewsCategory.youtube
         let youtubeQuery = ("cat", "18")
 
         // When
@@ -212,7 +212,7 @@ struct FeedEndpointTests {
 
     @Test("posts should create valid endpoint for Apple TV tag")
     func postsForAppleTVTag() {
-        // Given - From Category.appletv
+        // Given - From NewsCategory.appletv
         let appleTVQuery = ("tag", "apple-tv-plus")
 
         // When

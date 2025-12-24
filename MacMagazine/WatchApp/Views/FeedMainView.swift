@@ -54,6 +54,8 @@ struct FeedMainView: View {
     @ViewBuilder
     private var rootContent: some View {
         switch viewModel.status {
+        case .idle: EmptyView()
+
         case .loading:
             loadingView
                 .navigationTitle { navigationTitle("MacMagazine") }

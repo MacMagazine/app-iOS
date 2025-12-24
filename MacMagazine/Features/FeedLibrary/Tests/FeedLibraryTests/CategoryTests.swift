@@ -1,4 +1,5 @@
 @testable import FeedLibrary
+import MacMagazineLibrary
 import Testing
 
 @Suite("Category Tests")
@@ -9,7 +10,7 @@ struct CategoryTests {
     @Test("Highlights category has correct query")
     func highlightsCategoryQuery() {
         // Given
-        let category = Category.highlights
+        let category = NewsCategory.highlights
 
         // When
         let query = category.query
@@ -23,7 +24,7 @@ struct CategoryTests {
     @Test("News category has nil query")
     func newsCategoryQuery() {
         // Given
-        let category = Category.news
+        let category = NewsCategory.news
 
         // When
         let query = category.query
@@ -35,7 +36,7 @@ struct CategoryTests {
     @Test("All category has nil query")
     func allCategoryQuery() {
         // Given
-        let category = Category.all
+        let category = NewsCategory.all
 
         // When
         let query = category.query
@@ -47,7 +48,7 @@ struct CategoryTests {
     @Test("Podcast category has correct query")
     func podcastCategoryQuery() {
         // Given
-        let category = Category.podcast
+        let category = NewsCategory.podcast
 
         // When
         let query = category.query
@@ -61,7 +62,7 @@ struct CategoryTests {
     @Test("YouTube category has correct query")
     func youTubeCategoryQuery() {
         // Given
-        let category = Category.youtube
+        let category = NewsCategory.youtube
 
         // When
         let query = category.query
@@ -75,7 +76,7 @@ struct CategoryTests {
     @Test("AppleTV category has correct query")
     func appleTVCategoryQuery() {
         // Given
-        let category = Category.appletv
+        let category = NewsCategory.appletv
 
         // When
         let query = category.query
@@ -89,7 +90,7 @@ struct CategoryTests {
     @Test("Reviews category has correct query")
     func reviewsCategoryQuery() {
         // Given
-        let category = Category.reviews
+        let category = NewsCategory.reviews
 
         // When
         let query = category.query
@@ -103,7 +104,7 @@ struct CategoryTests {
     @Test("Tutoriais category has correct query")
     func tutoriaisCategoryQuery() {
         // Given
-        let category = Category.tutoriais
+        let category = NewsCategory.tutoriais
 
         // When
         let query = category.query
@@ -117,7 +118,7 @@ struct CategoryTests {
     @Test("Rumors category has correct query")
     func rumorsCategoryQuery() {
         // Given
-        let category = Category.rumors
+        let category = NewsCategory.rumors
 
         // When
         let query = category.query
@@ -132,22 +133,22 @@ struct CategoryTests {
 
     @Test("Category raw values are correct")
     func categoryRawValues() {
-        #expect(Category.all.rawValue == "Todas")
-        #expect(Category.news.rawValue == "Últimas Notícias")
-        #expect(Category.highlights.rawValue == "Destaques")
-        #expect(Category.appletv.rawValue == "Novidades Apple TV+")
-        #expect(Category.reviews.rawValue == "Reviews")
-        #expect(Category.rumors.rawValue == "Rumores")
-        #expect(Category.tutoriais.rawValue == "Tutoriais")
-        #expect(Category.youtube.rawValue == "Vídeos")
-        #expect(Category.podcast.rawValue == "MacMagazine no Ar")
+        #expect(NewsCategory.all.rawValue == "Todas")
+        #expect(NewsCategory.news.rawValue == "Últimas Notícias")
+        #expect(NewsCategory.highlights.rawValue == "Destaques")
+        #expect(NewsCategory.appletv.rawValue == "Novidades Apple TV+")
+        #expect(NewsCategory.reviews.rawValue == "Reviews")
+        #expect(NewsCategory.rumors.rawValue == "Rumores")
+        #expect(NewsCategory.tutoriais.rawValue == "Tutoriais")
+        #expect(NewsCategory.youtube.rawValue == "Vídeos")
+        #expect(NewsCategory.podcast.rawValue == "MacMagazine no Ar")
     }
 
     // MARK: - Category CaseIterable Tests
 
     @Test("All category cases are present")
     func categoryAllCases() {
-        let allCases = Category.allCases
+        let allCases = NewsCategory.allCases
         #expect(allCases.count == 9)
         #expect(allCases.contains(.all))
         #expect(allCases.contains(.news))
@@ -165,9 +166,9 @@ struct CategoryTests {
     @Test("Category is Sendable across concurrency boundaries")
     func categoryIsSendable() async {
         // This test verifies that Category can be sent across concurrency boundaries
-        let category = Category.highlights
+        let category = NewsCategory.highlights
         await sendCategory(category)
     }
 
-    private func sendCategory(_ category: Category) async {}
+    private func sendCategory(_ category: NewsCategory) async {}
 }

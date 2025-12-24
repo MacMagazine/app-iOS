@@ -192,7 +192,7 @@ private extension GlassCardView {
     var dateRow: some View {
         MetadataContent(
             image: "calendar",
-            text: data.pubDate.format(using: .dateOnly)
+            text: data.pubDate.toTimeAgoDisplay(showTime: false)
         )
         .foregroundStyle(.white.opacity(0.9))
     }
@@ -224,40 +224,13 @@ private extension GlassCardView {
 
 #if DEBUG
 #Preview {
-    @MainActor
-    struct MMVideoDBPreview {
-        static let sampleVideo = CardContent(
-            type: .video(views: "5,6K", likes: "782", duration: "4:46"),
-            title: "Apresento-lhes o… iPhone Pocket?!",
-            pubDate: Date(),
-            artworkUrl: "https://i.ytimg.com/vi/5rKJeiG-Rug/sddefault.jpg",
-            urlToShare: "",
-            favorite: true,
-            favoriteAction: {}
-        )
-
-        static let samplePodcast = CardContent(
-            type: .podcast(duration: "45:30"),
-            title: "MacMagazine no Ar #123: Especial WWDC 2024",
-            pubDate: Date(),
-            artworkUrl: "https://macmagazine.com.br/wp-content/uploads/2025/11/28-podcast-1260x709.jpg",
-            urlToShare: "",
-            favorite: true,
-            favoriteAction: {}
-        )
-    }
-
-    return ZStack {
+    ZStack {
         Color.brown.ignoresSafeArea()
         VStack(spacing: 30) {
-            GlassCardView(
-                data: MMVideoDBPreview.sampleVideo
-            )
+            GlassCardView(data: ContentPreview.video)
             .padding()
 
-            GlassCardView(
-                data: MMVideoDBPreview.samplePodcast
-            )
+            GlassCardView(data: ContentPreview.podcast)
             .padding()
         }
     }

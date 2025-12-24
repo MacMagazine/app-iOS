@@ -8,8 +8,9 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 	let category: String
 	var parseFullContent: Bool
 	let continuation: CheckedContinuation<[XMLPost], Error>?
+    let dateParser = DateParser()
 
-	var posts = [XMLPost]()
+    var posts = [XMLPost]()
 
 	var currentPost = XMLPost()
 	var processItem = false
@@ -68,8 +69,7 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 			case "link":
 				currentPost.link = value
 			case "pubDate":
-				currentPost.pubDate = value.toDate(timeZone: TimeZone(abbreviation: "UTC"),
-												   locale: "en_US")
+                currentPost.pubDate = dateParser.parse(value)
 			case "category":
 				if currentPost.categories.isEmpty {
 					currentPost.categories = []

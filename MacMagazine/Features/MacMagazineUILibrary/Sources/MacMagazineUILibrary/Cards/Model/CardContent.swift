@@ -1,28 +1,39 @@
 import AnalyticsLibrary
 import Foundation
+import MacMagazineLibrary
 
 public enum CardContentType {
     case video(views: String, likes: String, duration: String)
     case podcast(duration: String)
+    case news(category: NewsCategory)
 
     public var duration: String {
         switch self {
         case let .video(_, _, duration): duration
         case let .podcast(duration): duration
+        case .news: ""
+        }
+    }
+
+    var category: NewsCategory {
+        switch self {
+        case let .news(category): category
+        case .podcast: .podcast
+        case .video: .youtube
         }
     }
 
     var views: String? {
         switch self {
         case let .video(views, _, _): views
-        case .podcast: nil
+        case .podcast, .news: nil
         }
     }
 
     var likes: String? {
         switch self {
         case let .video(_, likes, _): likes
-        case .podcast: nil
+        case .podcast, .news: nil
         }
     }
 
@@ -30,6 +41,7 @@ public enum CardContentType {
         switch self {
         case .video: "Vídeo"
         case .podcast: "Podcast"
+        case .news: "Notícias"
         }
     }
 
@@ -37,6 +49,7 @@ public enum CardContentType {
         switch self {
         case .video: "Vídeo"
         case .podcast: "Podcast"
+        case .news: "Notícias"
         }
     }
 }
