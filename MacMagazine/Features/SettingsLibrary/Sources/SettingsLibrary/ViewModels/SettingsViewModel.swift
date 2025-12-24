@@ -1,3 +1,4 @@
+import MacMagazineLibrary
 import MMLiveLibrary
 import StorageLibrary
 import SwiftData

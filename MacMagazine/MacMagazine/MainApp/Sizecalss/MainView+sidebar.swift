@@ -1,3 +1,4 @@
+import MacMagazineLibrary
 import MacMagazineUILibrary
 import PodcastLibrary
 import SettingsLibrary

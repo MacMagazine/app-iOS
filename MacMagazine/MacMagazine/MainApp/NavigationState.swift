@@ -1,4 +1,5 @@
 import Combine
+import MacMagazineLibrary
 import SettingsLibrary
 import SwiftUI
 

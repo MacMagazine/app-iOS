@@ -22,7 +22,7 @@ public struct ChipView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                         ForEach(rowWrapper.row, id: \.self) { item in
                             Button(action: { selected = item },
                                    label: {
-                                Text(item.rawValue)
+                                Label(item.rawValue, systemImage: (item as? News)?.icon ?? News.all.icon)
                                     .font(.body)
                                     .lineLimit(1)
                             })
@@ -78,6 +78,6 @@ private extension ChipView {
             .font: UIFont.systemFont(ofSize: UIFont.systemFontSize)
         ]
         let size = (text as NSString).size(withAttributes: attributes)
-        return size.width + 50
+        return size.width + 50 + 50
     }
 }

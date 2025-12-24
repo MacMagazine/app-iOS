@@ -17,19 +17,21 @@ struct NewsView: View {
     @State private var newsCategory = NewsCategory.all
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-            VStack {
-                categoryView
-                content
-            }
+            content
         }
         .navigationTitle("Notícias")
         .toolbar(show: !shouldUseSidebar, menu: favoriteButton, options: categoriesButton)
-        .onChange(of: viewModel.news) { _, value in
-            newsCategory = value.toNewsCategory
+        .sheet(isPresented: $category) {
+            categories
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.fraction(1/3)])
+        }
+        .task(id: viewModel.news) {
             withAnimation(.easeInOut(duration: 0.4)) {
-                category.toggle()
+                newsCategory = viewModel.news.toNewsCategory
+                category = false
             }
         }
     }
@@ -49,7 +51,7 @@ private extension NewsView {
     var categoriesButton: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.4)) {
-                category.toggle()
+                category = true
             }
         }, label: {
             Image(systemName: "rectangle.grid.2x2\(category ? ".fill" : "")")
@@ -57,12 +59,26 @@ private extension NewsView {
     }
 
     @ViewBuilder
-    var categoryView: some View {
+    var categories: some View {
         if category {
             @Bindable var bindableViewModel = viewModel
-            ChipView(options: viewModel.settingsViewModel.news,
-                     selected: $bindableViewModel.news)
-            .transition(.move(edge: .top).combined(with: .opacity))
+
+            NavigationStack {
+                ChipView(options: viewModel.settingsViewModel.news,
+                         selected: $bindableViewModel.news)
+                .padding(.vertical, 10)
+                .background(theme.main.background.color ?? Color.secondary)
+                .navigationTitle("Categorias")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarSpacer(.flexible, placement: .topBarLeading)
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(role: .close) {
+                            category = false
+                        }
+                    }
+                }
+            }
         }
     }
 

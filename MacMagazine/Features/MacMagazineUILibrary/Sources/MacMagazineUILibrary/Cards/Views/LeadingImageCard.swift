@@ -4,7 +4,7 @@ import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary
 
-struct LeadingImageView: View {
+struct LeadingImageCard: View {
     @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.dynamicTypeSize) private var typeSize
     @Namespace var namespace
@@ -31,7 +31,7 @@ struct LeadingImageView: View {
 
 // MARK: - Card -
 
-private extension LeadingImageView {
+private extension LeadingImageCard {
     @ViewBuilder
     var content: some View {
         HStack {
@@ -48,7 +48,7 @@ private extension LeadingImageView {
 
 // MARK: - Thumbnail -
 
-private extension LeadingImageView {
+private extension LeadingImageCard {
     @ViewBuilder
     func thumbnail(_ imageUrl: URL) -> some View {
         CachedAsyncImage(image: imageUrl, contentMode: .fill)
@@ -59,7 +59,7 @@ private extension LeadingImageView {
 
 // MARK: - Content block -
 
-private extension LeadingImageView {
+private extension LeadingImageCard {
     var metadataContent: some View {
         VStack(alignment: .leading, spacing: 6) {
             titleRow

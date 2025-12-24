@@ -1,7 +1,7 @@
 import MacMagazineLibrary
 import SwiftUI
 
-public struct NewsCardView: View {
+public struct NewsCard: View {
     let data: CardContent
     let onSelect: () -> Void
 
@@ -20,15 +20,15 @@ public struct NewsCardView: View {
     }
 }
 
-private extension NewsCardView {
+private extension NewsCard {
     @ViewBuilder
     var content: some View {
         switch data.type.category.style {
-        case .leadingImage: LeadingImageView(data: data)
-        case .topImage: EmptyView()
-        case .bottomImage: EmptyView()
-        case .highlight: EmptyView()
-        case .simple: EmptyView()
+        case .leadingImage: LeadingImageCard(data: data)
+        case .topImage: SimpleCard(data: data)
+        case .bottomImage: SimpleCard(data: data)
+        case .highlight: SimpleCard(data: data)
+        case .simple: SimpleCard(data: data)
         case .glass: GlassCardView(data: data)
         }
     }
@@ -39,13 +39,13 @@ private extension NewsCardView {
     ZStack {
         Color.brown.ignoresSafeArea()
         VStack {
-            NewsCardView(data: ContentPreview.appletv) {}
+            NewsCard(data: ContentPreview.appletv) {}
                 .padding(.horizontal)
 
-            NewsCardView(data: ContentPreview.video) {}
+            NewsCard(data: ContentPreview.video) {}
                 .padding(.horizontal)
 
-            NewsCardView(data: ContentPreview.podcast) {}
+            NewsCard(data: ContentPreview.podcast) {}
                 .padding(.horizontal)
         }
     }

@@ -89,7 +89,7 @@ extension NewsView {
                     0..<news.count,
                     id: \.self
                 ) { index in
-                    NewsCardView(data: news[index].toCardContent(
+                    NewsCard(data: news[index].toCardContent(
                         using: modelContext,
                         analytics: analytics,
                         screen: nil
