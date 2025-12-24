@@ -51,11 +51,18 @@ private extension SimpleCard {
     }
 
     var titleRow: some View {
-        Text(data.title)
-            .font(density.titleFont)
-            .multilineTextAlignment(.leading)
-            .lineLimit(density.titleLineLimit)
-            .foregroundStyle(.primary)
+        HStack(alignment: .top, spacing: 4) {
+            Text(data.title)
+                .font(density.titleFont)
+                .multilineTextAlignment(.leading)
+                .lineLimit(density.titleLineLimit)
+                .foregroundStyle(.primary)
+
+            Spacer()
+
+            Image(systemName: "star\(data.favorite ? ".fill" : "")")
+                .font(.system(size: 12))
+        }
     }
 
     var dateRow: some View {
