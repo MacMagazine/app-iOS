@@ -1,5 +1,6 @@
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import NewsLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftUI
@@ -12,6 +13,8 @@ struct NewsView: View {
 
     @State private var favorite = false
     @State private var category = false
+    @State private var scrollPosition = ScrollPosition()
+    @State private var newsCategory = NewsCategory.all
 
     var body: some View {
         ZStack {
@@ -24,6 +27,7 @@ struct NewsView: View {
         .navigationTitle("Notícias")
         .toolbar(show: !shouldUseSidebar, menu: favoriteButton, options: categoriesButton)
         .onChange(of: viewModel.news) { _, value in
+            newsCategory = value.toNewsCategory
             withAnimation(.easeInOut(duration: 0.4)) {
                 category.toggle()
             }
@@ -63,10 +67,11 @@ private extension NewsView {
     }
 
     var content: some View {
-        ContentUnavailableView(
-            "Página em construção",
-            systemImage: "square.and.arrow.down.badge.xmark",
-            description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
+        NewsLibrary.NewsView(
+            storage: viewModel.storage,
+            favorite: $favorite,
+            category: $newsCategory,
+            scrollPosition: $scrollPosition
         )
     }
 }

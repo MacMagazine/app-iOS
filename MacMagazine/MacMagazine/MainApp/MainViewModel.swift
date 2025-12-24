@@ -54,3 +54,17 @@ class MainViewModel {
         self.news = settingsViewModel.news.first ?? .all
     }
 }
+
+extension News {
+    var toNewsCategory: NewsCategory {
+        switch self {
+        case .all: .all
+        case .news: .news
+        case .highlights: .highlights
+        case .appletv: .appletv
+        case .reviews: .reviews
+        case .rumors: .rumors
+        case .tutoriais: .tutorials
+        }
+    }
+}

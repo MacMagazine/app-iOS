@@ -28,6 +28,9 @@ public enum AnalyticsConstants {
 
     /// Screen names for analytics tracking
     public enum Screen {
+        // News
+        case news
+
         // Podcast
         case podcastFullPlayer
         case podcastMiniPlayer
@@ -58,6 +61,9 @@ public enum AnalyticsConstants {
 
         public var name: String {
             switch self {
+            // News
+            case .news: "Notíciss"
+
             // Podcast
             case .podcastFullPlayer: "Podcast Full-player"
             case .podcastMiniPlayer: "Podcast Mini-player"
@@ -94,6 +100,11 @@ public enum AnalyticsConstants {
     /// Button identifiers for analytics tracking
     /// Organized by feature/screen for easy discovery
     public enum ButtonID {
+
+        // MARK: News - Content
+        case newsStarted(postId: Int)
+        case newsFavorite
+        case news(filter: NewsCategory)
 
         // MARK: Podcast Player - Full Player
         case podcastCloseFullPlayer
@@ -156,64 +167,69 @@ public enum AnalyticsConstants {
 
         public var id: String {
             switch self {
+            // Podcast - Content
+            case let .newsStarted(postId): "news_\(postId)_started"
+            case .newsFavorite: "favorite_news"
+            case let .news(filter): "news_\(filter)"
+
             // Podcast Player - Full Player
-            case .podcastCloseFullPlayer: return "close_fullplayer"
-            case .podcastShowChapters: return "show_chapters"
-            case .podcastPreviousChapter: return "previous_chapter"
-            case .podcastNextChapter: return "next_chapter"
+            case .podcastCloseFullPlayer: "close_fullplayer"
+            case .podcastShowChapters: "show_chapters"
+            case .podcastPreviousChapter: "previous_chapter"
+            case .podcastNextChapter: "next_chapter"
 
             // Podcast Player - Mini Player
-            case .podcastCloseMiniPlayer: return "close_miniplayer"
-            case .podcastOpenFullPlayer: return "open_fullplayer"
+            case .podcastCloseMiniPlayer: "close_miniplayer"
+            case .podcastOpenFullPlayer: "open_fullplayer"
 
             // Podcast Player - Playback Controls
-            case .podcastTogglePlayPause: return "toggle_play_pause"
-            case .podcastSkipMinus15: return "skip_minus_15"
-            case .podcastSkipPlus15: return "skip_plus_15"
+            case .podcastTogglePlayPause: "toggle_play_pause"
+            case .podcastSkipMinus15: "skip_minus_15"
+            case .podcastSkipPlus15: "skip_plus_15"
 
             // Podcast Player - Speed Controls
-            case .podcastSpeedButton: return "speed_button"
-            case .podcastSpeed(let speed): return "speed_\(speed)"
-            case .podcastSpeedAdvanced(let value): return "speed_advanced_\(value)"
+            case .podcastSpeedButton: "speed_button"
+            case let .podcastSpeed(speed): "speed_\(speed)"
+            case let .podcastSpeedAdvanced(value): "speed_advanced_\(value)"
 
             // Podcast - Content
-            case .podcastStarted(let postId): return "podcast_\(postId)_started"
-            case .podcastFavorite: return "favorite_podcast"
+            case let .podcastStarted(postId): "podcast_\(postId)_started"
+            case .podcastFavorite: "favorite_podcast"
 
             // Videos
-            case .videoStarted(let id): return "video_\(id)_started"
-            case .videoStopped: return "video_stopped"
-            case .videoFavorite: return "favorite_video"
+            case let .videoStarted(id): "video_\(id)_started"
+            case .videoStopped: "video_stopped"
+            case .videoFavorite: "favorite_video"
 
             // Share & Favorite
-            case .share: return "share"
-            case .favoriteButton: return "favorite_button"
+            case .share: "share"
+            case .favoriteButton: "favorite_button"
 
             // Settings - Appearance
-            case .theme(let scheme): return "tema \(scheme)"
-            case .icon(let type): return "icone \(type)"
+            case let .theme(scheme): "tema \(scheme)"
+            case let .icon(type): "icone \(type)"
 
             // Settings - Posts Visibility
-            case .identifyPostsRead(let value): return "identify_posts_read \(value)"
-            case .countPostsOnBadge(let value): return "count_posts_on_badge \(value)"
-            case .allPostsRead: return "all_posts_read"
-            case .cleanPostsOptions: return "clean_posts_options"
-            case .cleanPosts: return "clean_posts"
-            case .cleanAllPosts: return "clean_all_posts"
+            case let .identifyPostsRead(value): "identify_posts_read \(value)"
+            case let .countPostsOnBadge(value): "count_posts_on_badge \(value)"
+            case .allPostsRead: "all_posts_read"
+            case .cleanPostsOptions: "clean_posts_options"
+            case .cleanPosts: "clean_posts"
+            case .cleanAllPosts: "clean_all_posts"
 
             // Settings - Push Notifications
-            case .pushNotifications(let value): return "push_notifications \(value)"
+            case .pushNotifications(let value): "push_notifications \(value)"
 
             // Settings - Subscription
-            case .restorePurchase: return "restore_purchase"
-            case .manageSubscription: return "manage_subscription"
-            case .loginPatrao: return "login_patrao"
-            case .logoffPatrao: return "logoff_patrao"
+            case .restorePurchase: "restore_purchase"
+            case .manageSubscription: "manage_subscription"
+            case .loginPatrao: "login_patrao"
+            case .logoffPatrao: "logoff_patrao"
 
             // Settings - About
-            case .reportProblem: return "report_problem"
-            case .termsConditions: return "terms_conditions"
-            case .privacyPolicy: return "privacy_policy"
+            case .reportProblem: "report_problem"
+            case .termsConditions: "terms_conditions"
+            case .privacyPolicy: "privacy_policy"
             }
         }
     }
@@ -228,9 +244,9 @@ public enum AnalyticsConstants {
 
         public var name: String {
             switch self {
-            case .newsOrder: return "news_order"
-            case .tabOrder: return "tab_order"
-            case .socialOrder: return "social_order"
+            case .newsOrder: "news_order"
+            case .tabOrder: "tab_order"
+            case .socialOrder: "social_order"
             }
         }
     }

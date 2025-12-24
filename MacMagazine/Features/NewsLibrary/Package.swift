@@ -4,10 +4,10 @@
 import PackageDescription
 
 let package = Package(
-    name: "PodcastLibrary",
+    name: "NewsLibrary",
 	platforms: [.iOS(.v26)],
     products: [
-        .library(name: "PodcastLibrary", targets: ["PodcastLibrary"])
+        .library(name: "NewsLibrary", targets: ["NewsLibrary"])
     ],
 	dependencies: [
 		.package(name: "FeedLibrary", path: "../FeedLibrary"),
@@ -16,14 +16,14 @@ let package = Package(
         .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main")
 	],
     targets: [
-		.target(name: "PodcastLibrary",
+		.target(name: "NewsLibrary",
 				dependencies: ["FeedLibrary", "MacMagazineLibrary", "MacMagazineUILibrary",
                                .product(name: "Storage", package: "Libraries"),
                                .product(name: "Network", package: "Libraries"),
                                .product(name: "Analytics", package: "Libraries"),
 							   .product(name: "UIComponents", package: "Libraries")]),
-		.testTarget(name: "PodcastTests",
-                    dependencies: ["PodcastLibrary"],
+		.testTarget(name: "NewsLibraryTests",
+                    dependencies: ["NewsLibrary"],
                     resources: [.process("Resources")])
     ]
 )

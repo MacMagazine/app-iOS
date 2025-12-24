@@ -47,7 +47,7 @@ struct PodcastCardView: View {
     var metadata: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                Text(podcast.pubDate.format(using: .dateOnly))
+                Text(podcast.pubDate.toTimeAgoDisplay(showTime: false))
                 Spacer()
             }
             .font(.caption)

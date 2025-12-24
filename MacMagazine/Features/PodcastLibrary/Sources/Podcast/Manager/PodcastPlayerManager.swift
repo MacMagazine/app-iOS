@@ -151,12 +151,8 @@ private extension PodcastPlayerManager {
         isAudioSessionSetup = true
 
         Task.detached {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
-                try AVAudioSession.sharedInstance().setActive(true)
-            } catch {
-                print("Failed to setup audio session: \(error)")
-            }
+            try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+            try? AVAudioSession.sharedInstance().setActive(true)
         }
     }
 

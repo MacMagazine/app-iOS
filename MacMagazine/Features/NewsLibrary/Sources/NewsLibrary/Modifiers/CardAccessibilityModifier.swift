@@ -6,7 +6,6 @@ import UtilityLibrary
 enum CardLabel {
     case title
     case date
-    case duration
 }
 
 private extension Array where Element == CardLabel {
@@ -15,8 +14,7 @@ private extension Array where Element == CardLabel {
         self.forEach {
             switch $0 {
             case .title: text.append(data.title)
-            case .date: text.append("publicado em \(data.pubDate.toTimeAgoDisplay(showTime: false))")
-            case .duration: text.append("com duração de \(data.type.duration.accessibilityTime)")
+            case .date: text.append("publicado \(data.pubDate.toTimeAgoDisplay(showTime: true))")
             }
         }
         return "Podcast " + text.joined(separator: ", ") + "."
@@ -50,7 +48,7 @@ extension View {
     ) -> some View {
         modifier(CardAccessibilityModifier(
             data: data,
-            labels: labels ?? [.title, .date, .duration],
+            labels: labels ?? [.title, .date],
             buttons: buttons ?? [.favorite, .share])
         )
     }
@@ -67,7 +65,7 @@ private struct CardAccessibilityModifier: ViewModifier {
             .accessibilityChildren {
                 Text(labels.makeText(using: data))
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityHint("Duplo toque para reproduzir o podcast.")
+                    .accessibilityHint("Duplo toque para abrir a notícia.")
                 buttons.makeButtons(using: data)
             }
     }
