@@ -1,4 +1,5 @@
 import Foundation
+import MacMagazineLibrary
 import StorageLibrary
 import SwiftData
 
@@ -25,10 +26,9 @@ extension Database {
             existing.pubDate = feed.pubDate
             existing.artworkURL = feed.artworkURL
             existing.link = feed.link
-            existing.categories = feed.categories
+            existing.categories = Array(Set(existing.categories + feed.categories))
             existing.excerpt = feed.excerpt
             existing.fullContent = feed.fullContent
-
         } else {
             // Insert new
             context.insert(feed)

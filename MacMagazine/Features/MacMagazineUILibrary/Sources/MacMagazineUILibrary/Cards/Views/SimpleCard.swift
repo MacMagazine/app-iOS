@@ -67,7 +67,7 @@ private extension SimpleCard {
 
             Spacer()
 
-            Text(data.type.category.rawValue)
+            Text(data.type.categories.mostRelevant.rawValue)
         }
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)

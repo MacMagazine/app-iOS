@@ -9,9 +9,12 @@ extension FeedDB {
     func toCardContent(
         using context: ModelContext?,
         analytics: AnalyticsManager?,
-        screen: String?
+        screen: String?,
+        style: CardStyle?
     ) -> CardContent {
-        let type = CardContentType.news(category: self.categories.toNewsCategory)
+        let type = CardContentType.news(
+            categories: self.categories.toNewsCategory,
+            style: style)
         return CardContent(
             type: type,
             analytics: analytics,

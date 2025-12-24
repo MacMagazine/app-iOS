@@ -26,7 +26,7 @@ struct ContentPreview {
 
     @MainActor
     static let appletv = CardContent(
-        type: .news(category: .appletv),
+        type: .news(categories: [.appletv], style: .leadingImage),
         title: "Apple TV anuncia série de culinária com Awkwafina, vencedora do Emmy e Globo de Ouro",
         pubDate: Date(),
         artworkUrl: "https://macmagazine.com.br/wp-content/uploads/2025/11/112025_Apple-TV_announces_The_Unlikely_Cook_with_Awkwafina_Big_Image_02-600x400.jpg",

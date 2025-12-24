@@ -2,22 +2,14 @@ import Foundation
 import MacMagazineLibrary
 
 extension Array where Element == String {
-    var toNewsCategory: NewsCategory {
-        let categories = [
-            ("NewsCategoryAll", NewsCategory.all),
-            ("NewsCategoryNews", NewsCategory.news),
-            ("NewsCategoryHighlights", NewsCategory.highlights),
-            ("NewsCategoryAppleTV", NewsCategory.appletv),
-            ("NewsCategoryReviews", NewsCategory.reviews),
-            ("NewsCategoryRumors", NewsCategory.rumors),
-            ("NewsCategoryTutorials", NewsCategory.tutorials),
-            ("NewsCategoryMMTV", NewsCategory.youtube),
-            ("NewsCategoryPodcast", NewsCategory.podcast)
-        ]
-        var response = NewsCategory.all
-        for category in categories where self.contains(category.0) {
-            response = category.1
+    var toNewsCategory: [NewsCategory] {
+        var categories = [String]()
+        var categoriesDict = [String: NewsCategory]()
+        for category in NewsCategory.allCases {
+            categories.append(category.filterKey)
+            categoriesDict[category.filterKey] = category
         }
-        return response
+        let intersect = Array(Set(self).intersection(Set(categories)))
+        return intersect.compactMap { categoriesDict[$0] }
     }
 }

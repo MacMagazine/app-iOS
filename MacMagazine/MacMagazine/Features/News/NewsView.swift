@@ -26,7 +26,7 @@ struct NewsView: View {
         .sheet(isPresented: $category) {
             categories
                 .presentationDragIndicator(.visible)
-                .presentationDetents([.fraction(1/3)])
+                .presentationDetents([.fraction(0.33)])
         }
         .task(id: viewModel.news) {
             withAnimation(.easeInOut(duration: 0.4)) {

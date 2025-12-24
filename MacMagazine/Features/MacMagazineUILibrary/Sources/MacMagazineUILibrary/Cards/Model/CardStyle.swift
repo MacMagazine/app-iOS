@@ -1,7 +1,7 @@
 import Foundation
 import MacMagazineLibrary
 
-enum CardStyle {
+public enum CardStyle {
     case leadingImage
     case topImage
     case bottomImage
@@ -11,10 +11,10 @@ enum CardStyle {
 }
 
 extension NewsCategory {
-    var style: CardStyle {
+    public var style: CardStyle? {
         switch self {
         case .highlights: .highlight
-        case .news, .all: .bottomImage
+        case .news, .all: nil
         case .podcast: .glass
         case .youtube: .glass
         case .appletv: .leadingImage

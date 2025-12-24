@@ -5,7 +5,7 @@ import MacMagazineLibrary
 public enum CardContentType {
     case video(views: String, likes: String, duration: String)
     case podcast(duration: String)
-    case news(category: NewsCategory)
+    case news(categories: [NewsCategory], style: CardStyle?)
 
     public var duration: String {
         switch self {
@@ -15,11 +15,19 @@ public enum CardContentType {
         }
     }
 
-    var category: NewsCategory {
+    var categories: [NewsCategory] {
         switch self {
-        case let .news(category): category
-        case .podcast: .podcast
-        case .video: .youtube
+        case let .news(category, _): category
+        case .podcast: [.podcast]
+        case .video: [.youtube]
+        }
+    }
+
+    var style: CardStyle? {
+        switch self {
+        case let .news(_, style): style
+        case .podcast: .glass
+        case .video: .glass
         }
     }
 

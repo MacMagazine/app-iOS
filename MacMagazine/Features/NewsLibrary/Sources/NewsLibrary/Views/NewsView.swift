@@ -92,7 +92,8 @@ extension NewsView {
                     NewsCard(data: news[index].toCardContent(
                         using: modelContext,
                         analytics: analytics,
-                        screen: nil
+                        screen: nil,
+                        style: category.style
                     )) {
                         analytics.track(.buttonTap(
                             buttonId: AnalyticsConstants.ButtonID.newsStarted(postId: Int(news[index].postId) ?? 0).id,
