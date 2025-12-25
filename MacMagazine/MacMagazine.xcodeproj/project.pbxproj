@@ -113,7 +113,7 @@
 		88C8B2FB2EF476E200044DE9 /* Exceptions for "WatchWidget" folder in "WatchWidget" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 88C8B2E52EF476E100044DE9 /* WatchWidget */;
 		};
@@ -134,9 +134,16 @@
 		9BDD42652EE9E83100A9BD85 /* Exceptions for "Widget" folder in "Widget" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 9BDD424C2EE9E82F00A9BD85 /* Widget */;
+		};
+		9BE9630C2EFD887000113E7D /* Exceptions for "WatchApp" folder in "WatchApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = 9BA8288B2EEC7AAA00F26FCB /* WatchApp */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -160,6 +167,9 @@
 		};
 		9BA8288D2EEC7AAA00F26FCB /* WatchApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9BE9630C2EFD887000113E7D /* Exceptions for "WatchApp" folder in "WatchApp" target */,
+			);
 			path = WatchApp;
 			sourceTree = "<group>";
 		};
@@ -541,12 +551,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WatchWidget/WatchWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchWidget/Resources/WatchWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WatchWidget/Info.plist;
+				INFOPLIST_FILE = WatchWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -575,12 +585,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WatchWidget/WatchWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchWidget/Resources/WatchWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WatchWidget/Info.plist;
+				INFOPLIST_FILE = WatchWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -807,12 +817,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/Resources/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WatchApp/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.brit.beta.macmagazine;
@@ -842,12 +853,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/Resources/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WatchApp/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.brit.beta.macmagazine;
@@ -880,7 +892,7 @@
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_FILE = Widget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
@@ -911,7 +923,7 @@
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_FILE = Widget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
