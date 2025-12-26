@@ -1,85 +1,194 @@
 import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
+import UIComponentsLibrary
 
 struct WelcomeView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     let coordinator: OnboardingCoordinator
+    var logoNamespace: Namespace.ID
+
+    @State private var animateIn = false
+
+    private var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 40) {
-                Spacer()
-                logo
-                message
-                Spacer()
-                actions
+        Group {
+            if isLandscape {
+                landscapeLayout
+            } else {
+                portraitLayout
             }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        coordinator.skipToPermissions()
-                    }, label: {
-                        Image(systemName: "xmark")
-                    })
-                    .glassEffect(.identity, in: .circle)
-                }
-            }
-            .background(OnboardingBackground())
         }
-        .trackScreen(AnalyticsConstants.Screen.onboardingWelcome.name, analytics: coordinator.analytics)
+        .containerRelativeFrame([.horizontal, .vertical])
+        .overlay(alignment: .topTrailing) {
+            OnboardingSkipButton(
+                label: "Pular introdução",
+                hint: "Vai direto para a tela de permissões"
+            ) {
+                coordinator.skipToPermissions()
+            }
+            .padding(.top, 16)
+            .padding(.trailing, 20)
+        }
+        .background(OnboardingBackground())
+        .onAppear { animateIn = true }
+        .onDisappear { animateIn = false }
+        .trackScreen(
+            AnalyticsConstants.Screen.onboardingWelcome.name,
+            analytics: coordinator.analytics
+        )
     }
-}
 
-private extension WelcomeView {
-    var logo: some View {
-        Image("normal", bundle: .module)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 160)
-            .cornerRadius(20)
-            .shadow(
-                color: Color.black.opacity(0.2),
-                radius: 24,
-                x: 0,
-                y: 8
-            )
+    // MARK: - Portrait Layout
+
+    private var portraitLayout: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            logoView(width: 152, height: 152)
+                .padding(.bottom, 48)
+
+            messageView
+                .onboardingFade(animateIn, delay: 0.25, duration: 0.60)
+
+            Spacer()
+
+            ctaButton
+                .padding(.horizontal, 20)
+                .padding(.vertical, 16)
+                .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
+        }
+    }
+
+    // MARK: - Landscape Layout
+
+    private var landscapeLayout: some View {
+        HStack(spacing: 32) {
+            VStack {
+                Spacer()
+                logoView(width: 152, height: 152)
+                    .padding(.top, -80)
+                    .padding(.leading, -50)
+                Spacer()
+            }
+            .frame(maxWidth: 200)
+
+            VStack(spacing: 20) {
+                Spacer()
+
+                messageView
+                    .onboardingFade(animateIn, delay: 0.25, duration: 0.60)
+
+                Spacer()
+
+                OnboardingCTAButton("Continuar") {
+                    trackAndNavigate()
+                }
+                .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
+                .accessibilityLabel("Continuar")
+                .accessibilityHint("Avança para ver as novidades do app")
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 16)
+    }
+
+    // MARK: - Componentes Compartilhados
+
+    private func logoView(width: CGFloat, height: CGFloat) -> some View {
+        OnboardingLogoView(width: width, height: height)
+            .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
+            .onboardingFade(animateIn, delay: 0.00, duration: reduceMotion ? 0 : 0.70)
+            .scaleEffect(animateIn ? 1 : (reduceMotion ? 1 : 0.90))
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.70), value: animateIn)
             .accessibilityHidden(true)
     }
-}
 
-private extension WelcomeView {
-    var message: some View {
-        Text("Welcome to the all new and greatest ever, MacMagazine App")
-            .font(.title.bold())
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 32)
-            .accessibilityAddTraits(.isHeader)
+    private var messageView: some View {
+        VStack(spacing: 10) {
+            Text("Bem-vindo ao novo MacMagazine")
+                .font(isLandscape ? .title2.weight(.bold) : .largeTitle.weight(.bold))
+                .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+
+            Text("Notícias, reviews e podcasts em um visual totalmente renovado.")
+                .font(isLandscape ? .body : .title3)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.horizontal, isLandscape ? 16 : 28)
+        .accessibilityElement(children: .combine)
     }
-}
 
-private extension WelcomeView {
-    var actions: some View {
-        OnboardingButton(title: "Continuar", style: .primary) {
-            coordinator.analytics.track(.buttonTap(
-                buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeContinue.id,
-                screen: AnalyticsConstants.Screen.onboardingWelcome.name
-            ))
+    private var ctaButton: some View {
+        PrimaryButton(
+            "Continuar",
+            size: 340,
+            style: ButtonStyleConfiguration(
+                color: .white,
+                stroke: theme.button.primary.color ?? .blue,
+                fill: theme.button.primary.color ?? .blue
+            )
+        ) {
+            trackAndNavigate()
+        }
+        .frame(maxWidth: .infinity)
+        .accessibilityLabel("Continuar")
+        .accessibilityHint("Avança para ver as novidades do app")
+    }
+
+    // MARK: - Actions
+
+    private func trackAndNavigate() {
+        coordinator.analytics.track(.buttonTap(
+            buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeContinue.id,
+            screen: AnalyticsConstants.Screen.onboardingWelcome.name
+        ))
+        withAnimation(reduceMotion ? nil : .spring(response: 0.6, dampingFraction: 0.8)) {
             coordinator.navigate(to: .features)
         }
-        .padding(.horizontal, 20)
-        .padding(.bottom)
     }
 }
 
 // MARK: - Preview
 
-#Preview {
-    WelcomeView(
-        coordinator: OnboardingCoordinator(
-            permissionManager: PermissionManager(analytics: AnalyticsManager()),
-            analytics: AnalyticsManager()
+#if DEBUG
+#Preview("Welcome — Portrait") {
+    @Previewable @Namespace var namespace
+
+    NavigationStack {
+        WelcomeView(
+            coordinator: OnboardingCoordinator(
+                permissionManager: PermissionManager(analytics: AnalyticsManager()),
+                analytics: AnalyticsManager()
+            ),
+            logoNamespace: namespace
         )
-    )
-    .environment(\.theme, ThemeColor())
+    }
 }
+
+#Preview("Welcome — Landscape", traits: .landscapeLeft) {
+    @Previewable @Namespace var namespace
+
+    NavigationStack {
+        WelcomeView(
+            coordinator: OnboardingCoordinator(
+                permissionManager: PermissionManager(analytics: AnalyticsManager()),
+                analytics: AnalyticsManager()
+            ),
+            logoNamespace: namespace
+        )
+    }
+}
+#endif

@@ -3,27 +3,44 @@ import SwiftUI
 
 public struct OnboardingBackground: View {
     @Environment(\.theme) private var theme: ThemeColor
-
-    public init() {}
+    @Environment(\.colorScheme) private var colorScheme
 
     public var body: some View {
         ZStack {
-            // Base background color
-            (theme.main.background.color ?? Color(.systemBackground))
+            (theme.main.background.color ?? Color.secondary)
                 .ignoresSafeArea()
 
-            // Subtle gradient overlay for depth
+            Image("normal_sem_fundo", bundle: .module)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 520)
+                .rotationEffect(.degrees(-12))
+                .offset(x: 170, y: -140)
+                .opacity(0.14)
+                .blur(radius: 5)
+                .accessibilityHidden(true)
+
+            Image("alternativa_sem_fundo", bundle: .module)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 360)
+                .rotationEffect(.degrees(18))
+                .offset(x: -170, y: 220)
+                .opacity(colorScheme == .dark ? 0.4 : 0.9)
+                .blur(radius: 5)
+                .accessibilityHidden(true)
+
             LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: .blue.opacity(0.1), location: 0.0),
-                    .init(color: .purple.opacity(0.05), location: 0.5),
-                    .init(color: .clear, location: 1.0)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+                colors: [
+                    .black.opacity(0.25),
+                    .clear,
+                    .black.opacity(0.35)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
             )
+            .blendMode(.overlay)
             .ignoresSafeArea()
-            .blendMode(.softLight)
         }
     }
 }
