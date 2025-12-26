@@ -1,11 +1,9 @@
-import FirebaseCore
 import OnboardingLibrary
 import PodcastLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
-import UIKit
 
 @main
 struct MacMagazineApp: App {
