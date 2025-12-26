@@ -137,12 +137,12 @@ public enum OnboardingScreen: Hashable {
 
     var analyticsName: String {
         switch self {
-            case .welcome:
-                return AnalyticsConstants.Screen.onboardingWelcome.name
-            case .features:
-                return AnalyticsConstants.Screen.onboardingFeatures.name
-            case .permissions:
-                return AnalyticsConstants.Screen.onboardingPermissions.name
+        case .welcome:
+            return AnalyticsConstants.Screen.onboardingWelcome.name
+        case .features:
+            return AnalyticsConstants.Screen.onboardingFeatures.name
+        case .permissions:
+            return AnalyticsConstants.Screen.onboardingPermissions.name
         }
     }
 }

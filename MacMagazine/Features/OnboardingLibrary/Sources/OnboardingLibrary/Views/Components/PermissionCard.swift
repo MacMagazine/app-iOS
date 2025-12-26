@@ -62,63 +62,63 @@ public struct PermissionCard: View {
     @ViewBuilder
     private var statusView: some View {
         switch status {
-            case .notDetermined:
-                Button {
-                    isProcessing = true
-                    Task {
-                        await onRequest()
-                        isProcessing = false
-                    }
-                } label: {
-                    HStack(spacing: 6) {
-                        if isProcessing {
-                            ProgressView()
-                                .scaleEffect(0.8)
-                                .tint(.white)
-                        } else {
-                            Text("Permitir")
-                                .font(.subheadline.weight(.semibold))
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.blue)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
+        case .notDetermined:
+            Button {
+                isProcessing = true
+                Task {
+                    await onRequest()
+                    isProcessing = false
                 }
-                .buttonStyle(.plain)
-                .disabled(isProcessing)
-                .accessibilityLabel("Permitir \(title)")
-                .accessibilityHint("Toque para autorizar esta permissão")
-
-            case .granted:
+            } label: {
                 HStack(spacing: 6) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.subheadline)
-                    Text("Autorizado")
-                        .font(.subheadline.weight(.semibold))
+                    if isProcessing {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                            .tint(.white)
+                    } else {
+                        Text("Permitir")
+                            .font(.subheadline.weight(.semibold))
+                    }
                 }
-                .foregroundStyle(.white)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(Color.green)
-                .clipShape(Capsule())
-                .accessibilityLabel("\(title) autorizado")
-
-            case .denied:
-                HStack(spacing: 6) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.subheadline)
-                    Text("Negado")
-                        .font(.subheadline.weight(.semibold))
-                }
+                .background(Color.blue)
                 .foregroundStyle(.white)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(Color.gray)
                 .clipShape(Capsule())
-                .accessibilityLabel("\(title) negado")
-                .accessibilityHint("Você pode alterar nas Configurações do dispositivo")
+            }
+            .buttonStyle(.plain)
+            .disabled(isProcessing)
+            .accessibilityLabel("Permitir \(title)")
+            .accessibilityHint("Toque para autorizar esta permissão")
+
+        case .granted:
+            HStack(spacing: 6) {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.subheadline)
+                Text("Autorizado")
+                    .font(.subheadline.weight(.semibold))
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(Color.green)
+            .clipShape(Capsule())
+            .accessibilityLabel("\(title) autorizado")
+
+        case .denied:
+            HStack(spacing: 6) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.subheadline)
+                Text("Negado")
+                    .font(.subheadline.weight(.semibold))
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(Color.gray)
+            .clipShape(Capsule())
+            .accessibilityLabel("\(title) negado")
+            .accessibilityHint("Você pode alterar nas Configurações do dispositivo")
         }
     }
 }
