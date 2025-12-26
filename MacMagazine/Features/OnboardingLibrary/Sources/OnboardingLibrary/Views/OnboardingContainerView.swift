@@ -5,26 +5,31 @@ import SwiftUI
 public struct OnboardingContainerView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @State private var coordinator: OnboardingCoordinator
+    @Namespace private var logoAnimation
 
     public init(coordinator: OnboardingCoordinator) {
         _coordinator = State(initialValue: coordinator)
     }
 
     public var body: some View {
-        ZStack {
-            OnboardingBackground()
+        NavigationStack {
+            ZStack {
+                OnboardingBackground()
 
-            Group {
-                switch coordinator.currentScreen {
-                case .welcome:
-                    WelcomeView(coordinator: coordinator)
-                case .features:
-                    FeaturesView(coordinator: coordinator)
-                case .permissions:
-                    PermissionsView(coordinator: coordinator)
+                Group {
+                    switch coordinator.currentScreen {
+                    case .welcome:
+                        WelcomeView(coordinator: coordinator, logoNamespace: logoAnimation)
+                    case .features:
+                        FeaturesView(coordinator: coordinator, logoNamespace: logoAnimation)
+                    case .permissions:
+                        PermissionsView(coordinator: coordinator, logoNamespace: logoAnimation)
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .transition(.opacity)
             }
-            .transition(.opacity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .environment(\.theme, theme)
     }
@@ -32,11 +37,35 @@ public struct OnboardingContainerView: View {
 
 // MARK: - Preview
 
-#Preview("Onboarding Container") {
-    OnboardingContainerView(
-        coordinator: OnboardingCoordinator(
-            permissionManager: PermissionManager(analytics: AnalyticsManager()),
-            analytics: AnalyticsManager()
-        )
-    )
+#if DEBUG
+#Preview("Sheet") {
+    OnboardingSheetPreviewHost()
 }
+
+private struct OnboardingSheetPreviewHost: View {
+    @State private var isPresented = true
+    @State private var coordinator = OnboardingCoordinator(
+        permissionManager: PermissionManager(analytics: AnalyticsManager()),
+        analytics: AnalyticsManager()
+    )
+
+    var body: some View {
+        ZStack {
+            Color.gray.opacity(0.12)
+                .ignoresSafeArea()
+
+            Text("MainView (simulação)")
+                .font(.headline)
+        }
+        .sheet(isPresented: $isPresented) {
+            OnboardingContainerView(coordinator: coordinator)
+                .environment(\.theme, ThemeColor())
+                .presentationDetents([.large])
+                .interactiveDismissDisabled(true)
+        }
+        .onAppear {
+            isPresented = true
+        }
+    }
+}
+#endif
