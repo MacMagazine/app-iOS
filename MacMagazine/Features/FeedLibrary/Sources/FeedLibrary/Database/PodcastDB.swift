@@ -58,3 +58,8 @@ extension PodcastDB: ModelFavoritable {
         try? context.save()
     }
 }
+
+extension PodcastDB: ModelDuplicable {
+    public static func deduplicate(using context: ModelContext?) {
+    }
+}

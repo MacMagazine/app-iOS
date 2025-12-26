@@ -29,29 +29,61 @@ class MainViewModel {
     let storage: Database
     let theme = ThemeColor()
 
+    let models: [any PersistentModel.Type]
+
     init(inMemory: Bool = false) {
-        let modelsAllowedToClean: [any PersistentModel.Type] = [
+        self.models = [
             FeedDB.self,
             PodcastDB.self,
-            VideoDB.self
-        ]
-
-        let models: [any PersistentModel.Type] = [
+            VideoDB.self,
             SettingsDB.self,
             CustomizationDB.self
         ]
 
         self.storage = Database(
-            models: models + modelsAllowedToClean,
+            models: models,
             inMemory: inMemory
         )
 
-        let settingsViewModel = SettingsViewModel(storage: self.storage, models: modelsAllowedToClean)
+        let settingsViewModel = SettingsViewModel(storage: self.storage, models: models)
         self.settingsViewModel = settingsViewModel
         self.tab = settingsViewModel.tabs.first ?? .news
         self.scrollToTopTrigger = settingsViewModel.tabs.first
         self.social = settingsViewModel.social.first ?? .videos
         self.news = settingsViewModel.news.first ?? .all
+
+        // Observe storage status changes
+        observeStorageStatus()
+    }
+}
+
+extension MainViewModel {
+    private func observeStorageStatus() {
+        func track() {
+            withObservationTracking {
+                _ = storage.status
+            } onChange: {
+                Task { @MainActor in
+                    switch self.storage.status {
+                    case let .done(type):
+                        // Sync from iCloud to device
+                        if type == .imported {
+                            self.deduplicate()
+                        }
+                    default: break
+                    }
+                    track()
+                }
+            }
+        }
+        track()
+    }
+
+    @MainActor
+    func deduplicate() {
+        models.forEach {
+            ($0 as? any ModelDuplicable.Type)?.deduplicate(using: storage.sharedModelContainer.mainContext)
+        }
     }
 }
 

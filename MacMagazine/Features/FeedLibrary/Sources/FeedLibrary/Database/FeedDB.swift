@@ -49,3 +49,9 @@ extension FeedDB: ModelFavoritable {
         try? context.save()
     }
 }
+
+extension FeedDB: ModelDuplicable {
+    public static func deduplicate(using context: ModelContext?) {
+        print("==> need to deduplicate")
+    }
+}
