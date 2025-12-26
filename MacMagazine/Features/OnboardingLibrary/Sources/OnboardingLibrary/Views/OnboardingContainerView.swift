@@ -19,7 +19,7 @@ public struct OnboardingContainerView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                OnboardingBackground()
+//                OnboardingBackground()
 
                 Group {
                     switch coordinator.currentScreen {
@@ -48,7 +48,7 @@ public struct OnboardingContainerView: View {
     OnboardingSheetPreviewHost()
 }
 
-#Preview("Sheet - iPad", traits: .landscapeLeft) {
+#Preview("Sheet - Landscape", traits: .landscapeLeft) {
     OnboardingSheetPreviewHost()
 }
 

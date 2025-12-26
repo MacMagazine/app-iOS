@@ -46,10 +46,6 @@ struct FeaturesView: View {
         currentPage >= max(0, pages.count - 1)
     }
 
-    private var isFirstPage: Bool {
-        currentPage == 0
-    }
-
     // MARK: - Body
 
     var body: some View {
@@ -60,10 +56,7 @@ struct FeaturesView: View {
                 portraitLayout
             }
         }
-        .padding(.horizontal, 20)
         .containerRelativeFrame([.horizontal, .vertical])
-        .contentShape(Rectangle())
-        .gesture(pageSwipeGesture)
         .overlay(alignment: .topTrailing) {
             if !isLastPage {
                 OnboardingSkipButton(
@@ -85,59 +78,49 @@ struct FeaturesView: View {
         .trackScreen(AnalyticsConstants.Screen.onboardingFeatures.name, analytics: coordinator.analytics)
     }
 
-    // MARK: - Gestures
-
-    private var pageSwipeGesture: some Gesture {
-        DragGesture(minimumDistance: 50)
-            .onEnded { value in
-                let horizontal = value.translation.width
-
-                if horizontal > 0 && !isFirstPage {
-                    withAnimation(.smooth) {
-                        currentPage -= 1
-                    }
-                } else if horizontal < 0 && !isLastPage {
-                    withAnimation(.smooth) {
-                        currentPage += 1
-                    }
-                }
-            }
-    }
-
     // MARK: - Portrait Layout
 
     private var portraitLayout: some View {
         VStack(spacing: 16) {
             OnboardingLogoView(width: 80, height: 80)
+                .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
                 .padding(.top, 80)
+                .accessibilityHidden(true)
 
             OnboardingTitleView("Novidades no App MacMagazine", animateIn: animateIn)
 
-            Spacer()
+            Spacer(minLength: 16)
 
-            cardsGrid
+            paginatedCardsView
 
-            Spacer()
+            pageIndicator
+                .padding(.top, 8)
+
+            Spacer(minLength: 16)
 
             footerSection
+                .padding(.bottom, 20)
         }
+        .padding(.horizontal, 20)
     }
 
     // MARK: - Landscape Layout
 
     private var landscapeLayout: some View {
         HStack(spacing: 24) {
-            // Lado esquerdo: Logo e título (centralizado verticalmente)
             VStack(spacing: 12) {
                 Spacer()
 
                 OnboardingLogoView(width: 80, height: 80)
+                    .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
+                    .accessibilityHidden(true)
 
                 Text("Novidades no App")
                     .font(.headline)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .opacity(animateIn ? 1 : 0)
+                    .accessibilityAddTraits(.isHeader)
 
                 Spacer()
 
@@ -146,43 +129,91 @@ struct FeaturesView: View {
             .frame(maxWidth: 180)
             .padding(.leading, -40)
 
-            // Lado direito: Cards e navegação
             VStack(spacing: 12) {
                 Spacer()
 
-                cardsGrid
+                paginatedCardsView
+
+                pageIndicator
 
                 Spacer()
 
                 HStack {
-                    if pages.count > 1 {
-                        pageIndicator
-                    }
-
                     Spacer()
-
                     continueButton
+                        .opacity(isLastPage ? 1 : 0)
+                        .offset(y: isLastPage ? 0 : 20)
+                        .animation(.easeInOut(duration: 0.4), value: isLastPage)
                 }
             }
             .padding(.top, 40)
         }
+        .padding(.horizontal, 20)
         .padding(.vertical, 16)
     }
 
-    // MARK: - Componentes Compartilhados
+    // MARK: - Paginated Cards with Native TabView
 
-    private var cardsGrid: some View {
-        LazyVGrid(columns: gridColumns, spacing: 16) {
-            let pageCards = pages.count > 1 ? pages[currentPage] : features
-
-            ForEach(Array(pageCards.enumerated()), id: \.offset) { index, card in
-                cardView(card: card, index: index)
+    private var paginatedCardsView: some View {
+        TabView(selection: $currentPage) {
+            ForEach(Array(pages.enumerated()), id: \.offset) { pageIndex, pageCards in
+                pageView(cards: pageCards)
+                    .tag(pageIndex)
             }
         }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .frame(height: tabViewHeight)
+        .onboardingAnimateIn(animateIn, delay: 0.2, reduceMotion: reduceMotion)
         .accessibilityLabel("Lista de novidades, página \(currentPage + 1) de \(pages.count)")
     }
 
-    private func cardView(card: OnBoardingFeature, index: Int) -> some View {
+    private var tabViewHeight: CGFloat {
+        if isLandscape {
+            return 200
+        }
+        if horizontalSizeClass == .regular {
+            return 280
+        }
+        return 320
+    }
+
+    // MARK: - Custom Page Indicator
+
+    private var pageIndicator: some View {
+        HStack(spacing: 8) {
+            ForEach(0..<pages.count, id: \.self) { index in
+                Circle()
+                    .fill(index == currentPage ? Color.primary : Color.primary.opacity(0.3))
+                    .frame(width: 8, height: 8)
+                    .overlay(
+                        Circle()
+                            .stroke(Color.black.opacity(0.2), lineWidth: 0.5)
+                    )
+                    .shadow(color: .black.opacity(0.15), radius: 1, x: 0, y: 1)
+            }
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
+        .background(
+            Capsule()
+                .fill(.ultraThinMaterial)
+                .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        )
+        .animation(.easeInOut(duration: 0.2), value: currentPage)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Página \(currentPage + 1) de \(pages.count)")
+    }
+
+    private func pageView(cards: [OnBoardingFeature]) -> some View {
+        LazyVGrid(columns: gridColumns, spacing: 16) {
+            ForEach(cards) { card in
+                cardView(card: card)
+            }
+        }
+        .padding(.horizontal, 8)
+    }
+
+    private func cardView(card: OnBoardingFeature) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: card.symbol)
                 .font(.title2)
@@ -206,31 +237,13 @@ struct FeaturesView: View {
             Spacer(minLength: 0)
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .onboardingAnimateIn(animateIn, delay: 0.2 + Double(index) * 0.1, reduceMotion: reduceMotion)
         .accessibilityElement(children: .combine)
     }
 
-    private var pageIndicator: some View {
-        HStack(spacing: 6) {
-            ForEach(0..<pages.count, id: \.self) { index in
-                Circle()
-                    .frame(width: 6, height: 6)
-                    .foregroundStyle(.primary)
-                    .opacity(index == currentPage ? 1 : 0.25)
-                    .animation(.smooth, value: currentPage)
-            }
-        }
-        .onboardingAnimateIn(animateIn, delay: 0.6, reduceMotion: reduceMotion)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Página \(currentPage + 1) de \(pages.count)")
-    }
+    // MARK: - Footer Section
 
     private var footerSection: some View {
         VStack(spacing: 12) {
-            if pages.count > 1 {
-                pageIndicator
-            }
-
             VStack(alignment: .leading, spacing: 6) {
                 Image(systemName: "person.3.fill")
                     .foregroundStyle(.primary)
@@ -243,11 +256,13 @@ struct FeaturesView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .onboardingAnimateIn(animateIn, delay: 0.7, reduceMotion: reduceMotion)
 
             continueButton
-                .padding(.bottom, 16)
         }
+        .frame(minHeight: 100)
+        .opacity(isLastPage ? 1 : 0)
+        .offset(y: isLastPage ? 0 : 30)
+        .animation(.easeInOut(duration: 0.4), value: isLastPage)
     }
 
     private var compactFooterSection: some View {
@@ -263,31 +278,24 @@ struct FeaturesView: View {
                 .lineLimit(2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .opacity(animateIn ? 1 : 0)
+        .opacity(isLastPage ? 1 : 0)
+        .offset(y: isLastPage ? 0 : 20)
+        .animation(.easeInOut(duration: 0.4), value: isLastPage)
     }
 
     private var continueButton: some View {
-        OnboardingCTAButton(
-            isLastPage ? "Continuar" : "Avançar",
-            showChevron: !isLastPage
-        ) {
+        OnboardingCTAButton("Continuar") {
             handleContinue()
         }
         .onboardingAnimateIn(animateIn, delay: 0.8, reduceMotion: reduceMotion)
-        .accessibilityLabel(isLastPage ? "Continuar para permissões" : "Avançar para próxima página")
-        .accessibilityHint(isLastPage ? "Vai para a tela de permissões" : "Mostra mais novidades")
+        .accessibilityLabel("Continuar para permissões")
+        .accessibilityHint("Vai para a tela de permissões")
     }
 
     // MARK: - Actions
 
     private func handleContinue() {
-        if currentPage < pages.count - 1 {
-            withAnimation(reduceMotion ? nil : .smooth) {
-                currentPage += 1
-            }
-        } else {
-            coordinator.navigate(to: .permissions)
-        }
+        coordinator.navigate(to: .permissions)
     }
 }
 

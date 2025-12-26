@@ -6,7 +6,9 @@ import SwiftUI
 
 @MainActor
 @Observable
-public final class OnboardingCoordinator {
+public final class OnboardingCoordinator: @MainActor Identifiable {
+    public var id: String { "onboarding" }
+
     // Current screen state
     public var currentScreen: OnboardingScreen = .welcome
 
@@ -17,8 +19,9 @@ public final class OnboardingCoordinator {
     public let permissionManager: PermissionManager
     public let analytics: AnalyticsManager
 
-    // UserDefaults key
+    // UserDefaults keys
     private static let hasCompletedOnboardingKey = "hasCompletedOnboarding"
+    private static let hasSeenFeaturesKey = "hasSeenOnboardingFeatures"
 
     public init(
         permissionManager: PermissionManager,
@@ -34,6 +37,10 @@ public final class OnboardingCoordinator {
         withAnimation(.easeInOut(duration: 0.3)) {
             currentScreen = screen
         }
+
+        if screen == .permissions {
+            markFeaturesAsSeen()
+        }
     }
 
     func skipToPermissions() {
@@ -41,6 +48,8 @@ public final class OnboardingCoordinator {
             buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeSkip.id,
             screen: currentScreen.analyticsName
         ))
+
+        markFeaturesAsSeen()
 
         withAnimation(.easeInOut(duration: 0.3)) {
             currentScreen = .permissions
@@ -61,6 +70,16 @@ public final class OnboardingCoordinator {
         onComplete?()
     }
 
+    // MARK: - Features Seen State
+
+    private func markFeaturesAsSeen() {
+        UserDefaults.standard.set(true, forKey: Self.hasSeenFeaturesKey)
+    }
+
+    private static var hasSeenFeatures: Bool {
+        UserDefaults.standard.bool(forKey: hasSeenFeaturesKey)
+    }
+
     // MARK: - Onboarding State Management
 
     /// Create coordinator if onboarding is needed, returns nil if not needed
@@ -71,12 +90,19 @@ public final class OnboardingCoordinator {
         // Check if onboarding was completed
         let hasCompleted = UserDefaults.standard.bool(forKey: hasCompletedOnboardingKey)
 
-        // If never completed, create coordinator starting at welcome
+        // If never completed, create coordinator
         if !hasCompleted {
             let coordinator = OnboardingCoordinator(
                 permissionManager: permissionManager,
                 analytics: analytics
             )
+
+            // If user already saw features, go directly to permissions
+            if hasSeenFeatures {
+                coordinator.currentScreen = .permissions
+            }
+            // Otherwise, start from welcome
+
             return coordinator
         }
 
@@ -86,7 +112,7 @@ public final class OnboardingCoordinator {
                 permissionManager: permissionManager,
                 analytics: analytics
             )
-            // Start at permissions screen
+            // Start at permissions screen (already completed before, no need to see features again)
             coordinator.currentScreen = .permissions
             return coordinator
         }
@@ -98,6 +124,7 @@ public final class OnboardingCoordinator {
     /// Reset onboarding state (for debug/testing)
     public static func resetOnboarding() {
         UserDefaults.standard.removeObject(forKey: hasCompletedOnboardingKey)
+        UserDefaults.standard.removeObject(forKey: hasSeenFeaturesKey)
     }
 }
 
@@ -110,12 +137,12 @@ public enum OnboardingScreen: Hashable {
 
     var analyticsName: String {
         switch self {
-        case .welcome:
-            return AnalyticsConstants.Screen.onboardingWelcome.name
-        case .features:
-            return AnalyticsConstants.Screen.onboardingFeatures.name
-        case .permissions:
-            return AnalyticsConstants.Screen.onboardingPermissions.name
+            case .welcome:
+                return AnalyticsConstants.Screen.onboardingWelcome.name
+            case .features:
+                return AnalyticsConstants.Screen.onboardingFeatures.name
+            case .permissions:
+                return AnalyticsConstants.Screen.onboardingPermissions.name
         }
     }
 }
