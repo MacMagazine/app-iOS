@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "alternativa_sem_fundo.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

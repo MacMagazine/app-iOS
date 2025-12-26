@@ -53,6 +53,11 @@ public enum AnalyticsConstants {
         // Other
         case loginPatroes
 
+        // Onboarding
+        case onboardingWelcome
+        case onboardingFeatures
+        case onboardingPermissions
+
         // Widget
         case widget(String)
 
@@ -82,6 +87,11 @@ public enum AnalyticsConstants {
 
             // Other
             case .loginPatroes: "Login para patrões"
+
+            // Onboarding
+            case .onboardingWelcome: "Onboarding > Welcome"
+            case .onboardingFeatures: "Onboarding > Features"
+            case .onboardingPermissions: "Onboarding > Permissions"
 
             // Widget
             case let .widget(type): "Widget \(type)"
@@ -154,6 +164,21 @@ public enum AnalyticsConstants {
         case termsConditions
         case privacyPolicy
 
+        // MARK: Onboarding
+        case onboardingWelcomeSkip
+        case onboardingWelcomeContinue
+        case onboardingFeaturesSkip
+        case onboardingFeaturesContinue
+        case onboardingFeaturePage(Int)
+        case onboardingPushSkip
+        case onboardingPushContinue
+        case onboardingPushAccepted
+        case onboardingPushDenied
+        case onboardingATTContinue
+        case onboardingATTAccepted
+        case onboardingATTDenied
+        case onboardingComplete
+
         public var id: String {
             switch self {
             // Podcast Player - Full Player
@@ -214,6 +239,21 @@ public enum AnalyticsConstants {
             case .reportProblem: return "report_problem"
             case .termsConditions: return "terms_conditions"
             case .privacyPolicy: return "privacy_policy"
+
+            // Onboarding
+            case .onboardingWelcomeSkip: return "onboarding_welcome_skip"
+            case .onboardingWelcomeContinue: return "onboarding_welcome_continue"
+            case .onboardingFeaturesSkip: return "onboarding_features_skip"
+            case .onboardingFeaturesContinue: return "onboarding_features_continue"
+            case .onboardingFeaturePage(let page): return "onboarding_feature_page_\(page)"
+            case .onboardingPushSkip: return "onboarding_push_skip"
+            case .onboardingPushContinue: return "onboarding_push_continue"
+            case .onboardingPushAccepted: return "onboarding_push_accepted"
+            case .onboardingPushDenied: return "onboarding_push_denied"
+            case .onboardingATTContinue: return "onboarding_att_continue"
+            case .onboardingATTAccepted: return "onboarding_att_accepted"
+            case .onboardingATTDenied: return "onboarding_att_denied"
+            case .onboardingComplete: return "onboarding_complete"
             }
         }
     }

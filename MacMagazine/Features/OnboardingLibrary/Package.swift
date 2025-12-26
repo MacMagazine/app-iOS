@@ -11,13 +11,18 @@ let package = Package(
     ],
 	dependencies: [
         .package(name: "MacMagazineLibrary", path: "../MacMagazineLibrary"),
+        .package(name: "MacMagazineUILibrary", path: "../MacMagazineUILibrary"),
         .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main")
 	],
     targets: [
         .target(name: "OnboardingLibrary",
 				dependencies: [
                     "MacMagazineLibrary",
-                    .product(name: "Storage", package: "Libraries")
-                ])
+                    "MacMagazineUILibrary",
+                    .product(name: "Storage", package: "Libraries"),
+                    .product(name: "Analytics", package: "Libraries"),
+                    .product(name: "UIComponents", package: "Libraries")
+                ],
+                resources: [.process("Resources")])
     ]
 )

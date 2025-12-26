@@ -1,6 +1,7 @@
 import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
+import OnboardingLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
@@ -23,6 +24,9 @@ class MainViewModel {
     var social: Social
     var news: News
     var scrollToTopTrigger: AppTabs?
+
+    // Onboarding
+    var onboardingCoordinator: OnboardingCoordinator?
 
     let analytics = AnalyticsManager()
     let sessionState = SessionState()
@@ -53,4 +57,31 @@ class MainViewModel {
         self.social = settingsViewModel.social.first ?? .videos
         self.news = settingsViewModel.news.first ?? .all
     }
+
+    // MARK: - Onboarding
+
+    @MainActor
+    func initializeOnboarding() async {
+        // Create coordinator only if needed
+        guard let coordinator = await OnboardingCoordinator.createIfNeeded(analytics: analytics) else {
+            // Onboarding not needed
+            onboardingCoordinator = nil
+            return
+        }
+
+        // Set completion handler to dismiss onboarding
+        coordinator.onComplete = { [weak self] in
+            self?.onboardingCoordinator = nil
+        }
+
+        onboardingCoordinator = coordinator
+    }
+
+    var showOnboarding: Bool {
+        onboardingCoordinator != nil
+    }
+}
+
+extension OnboardingCoordinator: @MainActor @retroactive Identifiable {
+    public var id: String { "onboarding" }
 }
