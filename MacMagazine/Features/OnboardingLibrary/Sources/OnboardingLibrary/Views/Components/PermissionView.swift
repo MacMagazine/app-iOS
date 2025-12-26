@@ -86,7 +86,6 @@ public struct PermissionCard: View {
             .disabled(isProcessing)
 
         case .granted:
-            // Tag verde "Acesso concedido"
             HStack(spacing: 6) {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.caption)

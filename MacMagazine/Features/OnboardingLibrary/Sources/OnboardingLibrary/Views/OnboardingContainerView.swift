@@ -23,12 +23,12 @@ public struct OnboardingContainerView: View {
 
                 Group {
                     switch coordinator.currentScreen {
-                        case .welcome:
-                            WelcomeView(coordinator: coordinator, logoNamespace: logoAnimation)
-                        case .features:
-                            FeaturesView(coordinator: coordinator, logoNamespace: logoAnimation)
-                        case .permissions:
-                            PermissionsView(coordinator: coordinator, logoNamespace: logoAnimation)
+                    case .welcome:
+                        WelcomeView(coordinator: coordinator, logoNamespace: logoAnimation)
+                    case .features:
+                        FeaturesView(coordinator: coordinator, logoNamespace: logoAnimation)
+                    case .permissions:
+                        PermissionsView(coordinator: coordinator, logoNamespace: logoAnimation)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

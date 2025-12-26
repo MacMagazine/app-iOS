@@ -27,9 +27,14 @@ struct WelcomeView: View {
         }
         .containerRelativeFrame([.horizontal, .vertical])
         .overlay(alignment: .topTrailing) {
-            skipButton
-                .padding(.top, 16)
-                .padding(.trailing, 20)
+            OnboardingSkipButton(
+                label: "Pular introdução",
+                hint: "Vai direto para a tela de permissões"
+            ) {
+                coordinator.skipToPermissions()
+            }
+            .padding(.top, 16)
+            .padding(.trailing, 20)
         }
         .background(OnboardingBackground())
         .onAppear { animateIn = true }
@@ -65,7 +70,6 @@ struct WelcomeView: View {
 
     private var landscapeLayout: some View {
         HStack(spacing: 32) {
-            // Lado esquerdo: Logo
             VStack {
                 Spacer()
                 logoView(width: 152, height: 152)
@@ -75,7 +79,6 @@ struct WelcomeView: View {
             }
             .frame(maxWidth: 200)
 
-            // Lado direito: Mensagem e botão
             VStack(spacing: 20) {
                 Spacer()
 
@@ -84,8 +87,12 @@ struct WelcomeView: View {
 
                 Spacer()
 
-                landscapeCtaButton
-                    .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
+                OnboardingCTAButton("Continuar") {
+                    trackAndNavigate()
+                }
+                .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
+                .accessibilityLabel("Continuar")
+                .accessibilityHint("Avança para ver as novidades do app")
             }
             .frame(maxWidth: .infinity)
         }
@@ -124,22 +131,6 @@ struct WelcomeView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private var skipButton: some View {
-        Button { coordinator.skipToPermissions() } label: {
-            HStack(spacing: 6) {
-                Text("Pular")
-                Image(systemName: "chevron.right")
-                    .symbolRenderingMode(.hierarchical)
-            }
-            .font(.body)
-            .foregroundColor(.primary)
-            .padding()
-            .glassEffect(.clear.interactive())
-        }
-        .accessibilityLabel("Pular introdução")
-        .accessibilityHint("Vai direto para a tela de permissões")
-    }
-
     private var ctaButton: some View {
         PrimaryButton(
             "Continuar",
@@ -153,25 +144,6 @@ struct WelcomeView: View {
             trackAndNavigate()
         }
         .frame(maxWidth: .infinity)
-        .accessibilityLabel("Continuar")
-        .accessibilityHint("Avança para ver as novidades do app")
-    }
-
-    private var landscapeCtaButton: some View {
-        Button {
-            trackAndNavigate()
-        } label: {
-            Text("Continuar")
-                .textCase(.uppercase)
-                .fontWeight(.semibold)
-                .font(.subheadline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(theme.button.primary.color ?? .blue)
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
-        }
-        .buttonStyle(.plain)
         .accessibilityLabel("Continuar")
         .accessibilityHint("Avança para ver as novidades do app")
     }

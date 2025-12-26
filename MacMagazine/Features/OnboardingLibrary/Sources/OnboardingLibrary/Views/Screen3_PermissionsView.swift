@@ -89,7 +89,7 @@ struct PermissionsView: View {
                 .padding(.top, 80)
                 .accessibilityHidden(true)
 
-            titleView
+            OnboardingTitleView("Ative as permissões necessárias", animateIn: animateIn)
 
             Spacer()
 
@@ -142,17 +142,6 @@ struct PermissionsView: View {
 
     // MARK: - Componentes Compartilhados
 
-    private var titleView: some View {
-        Text("Ative as permissões necessárias")
-            .font(.title2)
-            .fontWeight(.bold)
-            .multilineTextAlignment(.leading)
-            .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.1), value: animateIn)
-            .accessibilityAddTraits(.isHeader)
-    }
-
     private var permissionCards: some View {
         VStack(spacing: isLandscape ? 12 : 16) {
             PermissionCard(
@@ -166,9 +155,7 @@ struct PermissionsView: View {
                     await requestPushPermission()
                 }
             )
-            .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.2), value: animateIn)
+            .onboardingAnimateIn(animateIn, delay: 0.2, reduceMotion: reduceMotion)
 
             PermissionCard(
                 title: "App Analytics",
@@ -181,9 +168,7 @@ struct PermissionsView: View {
                     await requestATTPermission()
                 }
             )
-            .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.3), value: animateIn)
+            .onboardingAnimateIn(animateIn, delay: 0.3, reduceMotion: reduceMotion)
         }
     }
 
@@ -193,8 +178,7 @@ struct PermissionsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-                .opacity(animateIn ? 1 : 0)
-                .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.4), value: animateIn)
+                .onboardingAnimateIn(animateIn, delay: 0.4, reduceMotion: reduceMotion)
 
             continueButton
                 .padding(.bottom, 16)
@@ -210,23 +194,14 @@ struct PermissionsView: View {
     }
 
     private var continueButton: some View {
-        Button {
+        OnboardingCTAButton(
+            "Continuar",
+            isEnabled: hasInteractedWithPermissions
+        ) {
             coordinator.completeOnboarding()
-        } label: {
-            Text("Continuar")
-                .textCase(.uppercase)
-                .fontWeight(.semibold)
-                .font(isLandscape ? .subheadline : .body)
-                .frame(maxWidth: isLandscape ? 200 : .infinity)
-                .padding(.vertical, isLandscape ? 12 : 16)
-                .background(hasInteractedWithPermissions ? (theme.button.primary.color ?? .blue) : Color.gray.opacity(0.5))
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
         }
-        .buttonStyle(.plain)
-        .disabled(!hasInteractedWithPermissions)
-        .opacity(animateIn ? 1 : 0)
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.5), value: animateIn)
+        .frame(maxWidth: isLandscape ? 200 : .infinity)
+        .onboardingAnimateIn(animateIn, delay: 0.5, reduceMotion: reduceMotion)
         .accessibilityLabel("Continuar")
         .accessibilityHint(hasInteractedWithPermissions ? "Finaliza a configuração e abre o app" : "Responda às permissões primeiro")
     }

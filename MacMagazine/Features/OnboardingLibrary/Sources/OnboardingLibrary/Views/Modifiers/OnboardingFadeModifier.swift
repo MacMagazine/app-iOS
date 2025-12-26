@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct OnboardingFade: ViewModifier {
+struct OnboardingFadeModifier: ViewModifier {
     let isVisible: Bool
     let delay: Double
     let duration: Double
@@ -12,15 +12,5 @@ struct OnboardingFade: ViewModifier {
                 .easeInOut(duration: duration).delay(delay),
                 value: isVisible
             )
-    }
-}
-
-extension View {
-    func onboardingFade(
-        _ isVisible: Bool,
-        delay: Double = 0,
-        duration: Double = 0.6
-    ) -> some View {
-        modifier(OnboardingFade(isVisible: isVisible, delay: delay, duration: duration))
     }
 }

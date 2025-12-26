@@ -63,27 +63,17 @@ struct FeaturesView: View {
         .padding(.horizontal, 20)
         .containerRelativeFrame([.horizontal, .vertical])
         .contentShape(Rectangle())
-        .gesture(
-            DragGesture(minimumDistance: 50)
-                .onEnded { value in
-                    let horizontal = value.translation.width
-
-                    if horizontal > 0 && !isFirstPage {
-                        withAnimation(.smooth) {
-                            currentPage -= 1
-                        }
-                    } else if horizontal < 0 && !isLastPage {
-                        withAnimation(.smooth) {
-                            currentPage += 1
-                        }
-                    }
-                }
-        )
+        .gesture(pageSwipeGesture)
         .overlay(alignment: .topTrailing) {
             if !isLastPage {
-                skipButton
-                    .padding(.top, 16)
-                    .padding(.trailing, 20)
+                OnboardingSkipButton(
+                    label: "Pular novidades",
+                    hint: "Vai direto para a tela de permissões"
+                ) {
+                    coordinator.skipToPermissions()
+                }
+                .padding(.top, 16)
+                .padding(.trailing, 20)
             }
         }
         .onAppear {
@@ -95,6 +85,25 @@ struct FeaturesView: View {
         .trackScreen(AnalyticsConstants.Screen.onboardingFeatures.name, analytics: coordinator.analytics)
     }
 
+    // MARK: - Gestures
+
+    private var pageSwipeGesture: some Gesture {
+        DragGesture(minimumDistance: 50)
+            .onEnded { value in
+                let horizontal = value.translation.width
+
+                if horizontal > 0 && !isFirstPage {
+                    withAnimation(.smooth) {
+                        currentPage -= 1
+                    }
+                } else if horizontal < 0 && !isLastPage {
+                    withAnimation(.smooth) {
+                        currentPage += 1
+                    }
+                }
+            }
+    }
+
     // MARK: - Portrait Layout
 
     private var portraitLayout: some View {
@@ -102,7 +111,7 @@ struct FeaturesView: View {
             OnboardingLogoView(width: 80, height: 80)
                 .padding(.top, 80)
 
-            titleView
+            OnboardingTitleView("Novidades no App MacMagazine", animateIn: animateIn)
 
             Spacer()
 
@@ -152,7 +161,7 @@ struct FeaturesView: View {
 
                     Spacer()
 
-                    buttonsRow
+                    continueButton
                 }
             }
             .padding(.top, 40)
@@ -161,33 +170,6 @@ struct FeaturesView: View {
     }
 
     // MARK: - Componentes Compartilhados
-
-    private var skipButton: some View {
-        Button { coordinator.skipToPermissions() } label: {
-            HStack(spacing: 6) {
-                Text("Pular")
-                Image(systemName: "chevron.right")
-                    .symbolRenderingMode(.hierarchical)
-            }
-            .font(.body)
-            .foregroundColor(.primary)
-            .padding()
-            .glassEffect(.clear.interactive())
-        }
-        .accessibilityLabel("Pular novidades")
-        .accessibilityHint("Vai direto para a tela de permissões")
-    }
-
-    private var titleView: some View {
-        Text("Novidades no App MacMagazine")
-            .font(.title2)
-            .fontWeight(.bold)
-            .multilineTextAlignment(.center)
-            .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.1), value: animateIn)
-            .accessibilityAddTraits(.isHeader)
-    }
 
     private var cardsGrid: some View {
         LazyVGrid(columns: gridColumns, spacing: 16) {
@@ -224,9 +206,7 @@ struct FeaturesView: View {
             Spacer(minLength: 0)
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .opacity(animateIn ? 1 : 0)
-        .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.2 + Double(index) * 0.1), value: animateIn)
+        .onboardingAnimateIn(animateIn, delay: 0.2 + Double(index) * 0.1, reduceMotion: reduceMotion)
         .accessibilityElement(children: .combine)
     }
 
@@ -240,8 +220,7 @@ struct FeaturesView: View {
                     .animation(.smooth, value: currentPage)
             }
         }
-        .opacity(animateIn ? 1 : 0)
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.6), value: animateIn)
+        .onboardingAnimateIn(animateIn, delay: 0.6, reduceMotion: reduceMotion)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Página \(currentPage + 1) de \(pages.count)")
     }
@@ -264,10 +243,9 @@ struct FeaturesView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .opacity(animateIn ? 1 : 0)
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.7), value: animateIn)
+            .onboardingAnimateIn(animateIn, delay: 0.7, reduceMotion: reduceMotion)
 
-            buttonsRow
+            continueButton
                 .padding(.bottom, 16)
         }
     }
@@ -288,30 +266,14 @@ struct FeaturesView: View {
         .opacity(animateIn ? 1 : 0)
     }
 
-    private var buttonsRow: some View {
-        Button {
+    private var continueButton: some View {
+        OnboardingCTAButton(
+            isLastPage ? "Continuar" : "Avançar",
+            showChevron: !isLastPage
+        ) {
             handleContinue()
-        } label: {
-            HStack(spacing: 8) {
-                Text(isLastPage ? "Continuar" : "Avançar")
-                    .textCase(.uppercase)
-                    .fontWeight(.semibold)
-                    .font(isLandscape ? .subheadline : .body)
-
-                if !isLastPage {
-                    Image(systemName: "chevron.right")
-                        .font(.subheadline.weight(.semibold))
-                }
-            }
-            .frame(maxWidth: isLandscape ? 160 : .infinity)
-            .padding(.vertical, isLandscape ? 12 : 16)
-            .background(theme.button.primary.color ?? .blue)
-            .foregroundStyle(.white)
-            .clipShape(Capsule())
         }
-        .buttonStyle(.plain)
-        .opacity(animateIn ? 1 : 0)
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.8), value: animateIn)
+        .onboardingAnimateIn(animateIn, delay: 0.8, reduceMotion: reduceMotion)
         .accessibilityLabel(isLastPage ? "Continuar para permissões" : "Avançar para próxima página")
         .accessibilityHint(isLastPage ? "Vai para a tela de permissões" : "Mostra mais novidades")
     }
