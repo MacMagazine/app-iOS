@@ -23,6 +23,7 @@ extension PodcastDB {
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
                 self.favorite.toggle()
+                self.modifiedAt = Date()
                 try? context.save()
                 analytics?.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.podcastFavorite.id,
@@ -35,6 +36,7 @@ extension PodcastDB {
     func save(current: Double, using context: ModelContext?) {
         guard let context else { return }
         self.current = current
+        self.modifiedAt = Date()
         try? context.save()
     }
 }

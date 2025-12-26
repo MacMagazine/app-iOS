@@ -30,6 +30,7 @@ extension VideoDB {
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
                 self.favorite.toggle()
+                self.modifiedAt = Date()
                 try? context.save()
                 analytics?.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.videoFavorite.id,
@@ -46,6 +47,21 @@ extension VideoDB: @retroactive ModelFavoritable {
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
         data.forEach { context.delete($0) }
+        try? context.save()
+    }
+}
+
+extension VideoDB: @retroactive ModelDuplicable {
+    public static func deduplicate(using context: ModelContext?) {
+        let descriptor = FetchDescriptor<VideoDB>()
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+
+        let recordsToDelete = Dictionary(grouping: data, by: \.videoId)
+            .values
+            .flatMap { $0.sorted { $0.modifiedAt > $1.modifiedAt }.dropFirst() }
+
+        recordsToDelete.forEach { context.delete($0) }
         try? context.save()
     }
 }

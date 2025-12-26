@@ -26,6 +26,7 @@ extension FeedDB {
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
                 self.favorite.toggle()
+                self.modifiedAt = Date()
                 try? context.save()
                 analytics?.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.newsFavorite.id,

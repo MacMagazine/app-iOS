@@ -17,6 +17,7 @@ public final class PodcastDB {
     public var favorite: Bool = false
     public var playable: Bool = false
     public var current: Double = 0.0
+    public var modifiedAt: Date = Date()
 
     public init(
         postId: String = "",
@@ -31,7 +32,8 @@ public final class PodcastDB {
         podcastFrame: String = "",
         favorite: Bool = false,
         playable: Bool = false,
-        current: Double = 0.0
+        current: Double = 0.0,
+        modifiedAt: Date = Date()
     ) {
         self.postId = postId
         self.title = title
@@ -46,6 +48,7 @@ public final class PodcastDB {
         self.favorite = favorite
         self.playable = playable
         self.current = current
+        self.modifiedAt = modifiedAt
     }
 }
 
@@ -61,5 +64,15 @@ extension PodcastDB: ModelFavoritable {
 
 extension PodcastDB: ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
+        let descriptor = FetchDescriptor<PodcastDB>()
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+
+        let recordsToDelete = Dictionary(grouping: data, by: \.pubDate)
+            .values
+            .flatMap { $0.sorted { $0.modifiedAt > $1.modifiedAt }.dropFirst() }
+
+        recordsToDelete.forEach { context.delete($0) }
+        try? context.save()
     }
 }

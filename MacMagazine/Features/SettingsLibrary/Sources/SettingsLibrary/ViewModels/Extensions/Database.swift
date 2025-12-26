@@ -21,6 +21,7 @@ extension Database {
     func update(mode: ColorScheme) {
         if let item = settings {
             item.mode = mode
+            item.modifiedAt = Date()
         } else {
             context.insert(SettingsDB(mode: mode))
         }
@@ -31,6 +32,7 @@ extension Database {
     func update(appIcon: IconType) {
         if let item = settings {
             item.icon = appIcon
+            item.modifiedAt = Date()
         } else {
             context.insert(SettingsDB(icon: appIcon))
         }
@@ -41,6 +43,7 @@ extension Database {
     func update(notification: String) {
         if let item = settings {
             item.notification = notification
+            item.modifiedAt = Date()
         } else {
             context.insert(SettingsDB(notification: notification))
         }
@@ -51,6 +54,7 @@ extension Database {
     func update(postRead: Bool) {
         if let item = settings {
             item.postRead = postRead
+            item.modifiedAt = Date()
         } else {
             context.insert(SettingsDB(postRead: postRead))
         }
@@ -61,6 +65,7 @@ extension Database {
     func update(countOnBadge: Bool) {
         if let item = settings {
             item.countOnBadge = countOnBadge
+            item.modifiedAt = Date()
         } else {
             context.insert(SettingsDB(countOnBadge: countOnBadge))
         }
@@ -72,6 +77,7 @@ extension Database {
         let date = Calendar.current.date(byAdding: .day, value: isPatrao ? +30 : -1, to: Date()) ?? Date()
         if let item = settings {
             item.subscription = Subscription(isPatrao: isPatrao, expirationDate: date)
+            item.modifiedAt = Date()
         } else {
             let subscription = Subscription(isPatrao: isPatrao, expirationDate: date)
             context.insert(SettingsDB(subscription: subscription))
@@ -83,6 +89,7 @@ extension Database {
     func update(expirationDate: Date) {
         if let item = settings {
             item.subscription = Subscription(isPatrao: false, expirationDate: expirationDate)
+            item.modifiedAt = Date()
         } else {
             let subscription = Subscription(isPatrao: false, expirationDate: expirationDate)
             context.insert(SettingsDB(subscription: subscription))
@@ -109,6 +116,7 @@ extension Database {
     func update(tabs: [AppTabs]) {
         if let item = customization {
             item.tabs = tabs
+            item.modifiedAt = Date()
         } else {
             context.insert(CustomizationDB(tabs: tabs))
         }
@@ -119,6 +127,7 @@ extension Database {
     func update(social: [Social]) {
         if let item = customization {
             item.social = social
+            item.modifiedAt = Date()
         } else {
             context.insert(CustomizationDB(social: social))
         }
@@ -129,6 +138,7 @@ extension Database {
     func update(news: [News]) {
         if let item = customization {
             item.news = news
+            item.modifiedAt = Date()
         } else {
             context.insert(CustomizationDB(news: news))
         }

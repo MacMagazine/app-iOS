@@ -173,7 +173,7 @@ private extension GlassCardView {
 
         let innerLayout: AnyLayout = switch typeSize {
         case .xLarge...:
-            AnyLayout(VStackLayout(spacing: 8))
+            AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
         default:
             AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 8))
         }

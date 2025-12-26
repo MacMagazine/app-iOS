@@ -14,6 +14,7 @@ public final class FeedDB {
     public var excerpt: String = ""
     public var fullContent: String = ""
     public var favorite: Bool = false
+    public var modifiedAt: Date = Date()
 
     public init(
         postId: String = "",
@@ -25,7 +26,8 @@ public final class FeedDB {
         categories: [String] = [],
         excerpt: String = "",
         fullContent: String = "",
-        favorite: Bool = false
+        favorite: Bool = false,
+        modifiedAt: Date = Date()
     ) {
         self.postId = postId
         self.title = title
@@ -37,6 +39,7 @@ public final class FeedDB {
         self.excerpt = excerpt
         self.fullContent = fullContent
         self.favorite = favorite
+        self.modifiedAt = modifiedAt
     }
 }
 
@@ -52,6 +55,15 @@ extension FeedDB: ModelFavoritable {
 
 extension FeedDB: ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
-        print("==> need to deduplicate")
+        let descriptor = FetchDescriptor<FeedDB>(sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)])
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+
+        let recordsToDelete = Dictionary(grouping: data, by: \.postId)
+            .values
+            .flatMap { $0.sorted { $0.modifiedAt > $1.modifiedAt }.dropFirst() }
+
+        recordsToDelete.forEach { context.delete($0) }
+        try? context.save()
     }
 }
