@@ -25,6 +25,7 @@ public struct PermissionCard: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            // Header com ícone e título
             HStack(spacing: 12) {
                 Image(systemName: icon)
                     .font(.title2)
@@ -37,15 +38,17 @@ public struct PermissionCard: View {
                     .foregroundStyle(.primary)
 
                 Spacer()
-
-                statusView
             }
-            .accessibilityElement(children: .combine)
 
+            // Descrição
             Text(description)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+
+            // Botão de status
+            statusView
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -53,6 +56,7 @@ public struct PermissionCard: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(.ultraThinMaterial)
         )
+        .accessibilityElement(children: .combine)
     }
 
     @ViewBuilder
@@ -84,32 +88,37 @@ public struct PermissionCard: View {
             }
             .buttonStyle(.plain)
             .disabled(isProcessing)
+            .accessibilityLabel("Permitir \(title)")
+            .accessibilityHint("Toque para autorizar esta permissão")
 
         case .granted:
             HStack(spacing: 6) {
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.caption)
+                    .font(.subheadline)
                 Text("Autorizado")
-                    .font(.caption.weight(.medium))
+                    .font(.subheadline.weight(.semibold))
             }
             .foregroundStyle(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
             .background(Color.green)
             .clipShape(Capsule())
+            .accessibilityLabel("\(title) autorizado")
 
         case .denied:
             HStack(spacing: 6) {
                 Image(systemName: "xmark.circle.fill")
-                    .font(.caption)
+                    .font(.subheadline)
                 Text("Negado")
-                    .font(.caption.weight(.medium))
+                    .font(.subheadline.weight(.semibold))
             }
             .foregroundStyle(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
             .background(Color.gray)
             .clipShape(Capsule())
+            .accessibilityLabel("\(title) negado")
+            .accessibilityHint("Você pode alterar nas Configurações do dispositivo")
         }
     }
 }
@@ -124,7 +133,7 @@ public enum PermissionCardStatus {
 
 // MARK: - Preview
 
-#Preview("Permission Card - Not Determined") {
+#Preview("Permission Card - All States") {
     VStack(spacing: 16) {
         PermissionCard(
             title: "Notificações",

@@ -81,7 +81,3 @@ class MainViewModel {
         onboardingCoordinator != nil
     }
 }
-
-extension OnboardingCoordinator: @MainActor @retroactive Identifiable {
-    public var id: String { "onboarding" }
-}

@@ -36,7 +36,7 @@ struct WelcomeView: View {
             .padding(.top, 16)
             .padding(.trailing, 20)
         }
-        .background(OnboardingBackground())
+//        .background(OnboardingBackground())
         .onAppear { animateIn = true }
         .onDisappear { animateIn = false }
         .trackScreen(

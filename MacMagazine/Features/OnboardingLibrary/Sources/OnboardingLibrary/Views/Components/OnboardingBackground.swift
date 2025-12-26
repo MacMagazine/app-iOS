@@ -10,7 +10,7 @@ public struct OnboardingBackground: View {
             (theme.main.background.color ?? Color.secondary)
                 .ignoresSafeArea()
 
-            Image("normal_sem_fundo", bundle: .module)
+            Image("normal_without_background", bundle: .module)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 520)
@@ -20,13 +20,13 @@ public struct OnboardingBackground: View {
                 .blur(radius: 5)
                 .accessibilityHidden(true)
 
-            Image("alternativa_sem_fundo", bundle: .module)
+            Image("alternativa_without_background", bundle: .module)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 360)
                 .rotationEffect(.degrees(18))
                 .offset(x: -170, y: 220)
-                .opacity(colorScheme == .dark ? 0.4 : 0.9)
+                .opacity(colorScheme == .dark ? 0.14 : 0.14)
                 .blur(radius: 5)
                 .accessibilityHidden(true)
 

@@ -69,7 +69,7 @@ struct PermissionsView: View {
                 portraitLayout
             }
         }
-        .background(OnboardingBackground())
+//        .background(OnboardingBackground())
         .onAppear {
             withAnimation {
                 animateIn = true
