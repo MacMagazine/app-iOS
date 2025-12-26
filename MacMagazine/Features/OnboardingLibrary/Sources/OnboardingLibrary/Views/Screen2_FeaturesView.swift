@@ -7,6 +7,7 @@ struct FeaturesView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let coordinator: OnboardingCoordinator
     var logoNamespace: Namespace.ID
@@ -61,9 +62,28 @@ struct FeaturesView: View {
         }
         .padding(.horizontal, 20)
         .containerRelativeFrame([.horizontal, .vertical])
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+        .contentShape(Rectangle())
+        .gesture(
+            DragGesture(minimumDistance: 50)
+                .onEnded { value in
+                    let horizontal = value.translation.width
+
+                    if horizontal > 0 && !isFirstPage {
+                        withAnimation(.smooth) {
+                            currentPage -= 1
+                        }
+                    } else if horizontal < 0 && !isLastPage {
+                        withAnimation(.smooth) {
+                            currentPage += 1
+                        }
+                    }
+                }
+        )
+        .overlay(alignment: .topTrailing) {
+            if !isLastPage {
                 skipButton
+                    .padding(.top, 16)
+                    .padding(.trailing, 20)
             }
         }
         .onAppear {
@@ -80,8 +100,7 @@ struct FeaturesView: View {
     private var portraitLayout: some View {
         VStack(spacing: 16) {
             OnboardingLogoView(width: 80, height: 80)
-                .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
-                .padding(.top, 8)
+                .padding(.top, 80)
 
             titleView
 
@@ -99,9 +118,11 @@ struct FeaturesView: View {
 
     private var landscapeLayout: some View {
         HStack(spacing: 24) {
+            // Lado esquerdo: Logo e título (centralizado verticalmente)
             VStack(spacing: 12) {
+                Spacer()
+
                 OnboardingLogoView(width: 80, height: 80)
-                    .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
 
                 Text("Novidades no App")
                     .font(.headline)
@@ -114,14 +135,15 @@ struct FeaturesView: View {
                 compactFooterSection
             }
             .frame(maxWidth: 180)
-            .padding(.top, 20)
-            .padding(.leading, -50)
+            .padding(.leading, -40)
 
-
+            // Lado direito: Cards e navegação
             VStack(spacing: 12) {
-                ScrollView(.vertical, showsIndicators: false) {
-                    cardsGrid
-                }
+                Spacer()
+
+                cardsGrid
+
+                Spacer()
 
                 HStack {
                     if pages.count > 1 {
@@ -133,6 +155,7 @@ struct FeaturesView: View {
                     buttonsRow
                 }
             }
+            .padding(.top, 40)
         }
         .padding(.vertical, 16)
     }
@@ -147,7 +170,12 @@ struct FeaturesView: View {
                     .symbolRenderingMode(.hierarchical)
             }
             .font(.body)
+            .foregroundColor(.primary)
+            .padding()
+            .glassEffect(.clear.interactive())
         }
+        .accessibilityLabel("Pular novidades")
+        .accessibilityHint("Vai direto para a tela de permissões")
     }
 
     private var titleView: some View {
@@ -156,8 +184,9 @@ struct FeaturesView: View {
             .fontWeight(.bold)
             .multilineTextAlignment(.center)
             .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : 20)
-            .animation(.easeOut(duration: 0.5).delay(0.1), value: animateIn)
+            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.1), value: animateIn)
+            .accessibilityAddTraits(.isHeader)
     }
 
     private var cardsGrid: some View {
@@ -168,6 +197,7 @@ struct FeaturesView: View {
                 cardView(card: card, index: index)
             }
         }
+        .accessibilityLabel("Lista de novidades, página \(currentPage + 1) de \(pages.count)")
     }
 
     private func cardView(card: OnBoardingFeature, index: Int) -> some View {
@@ -177,6 +207,7 @@ struct FeaturesView: View {
                 .foregroundStyle(.primary)
                 .symbolVariant(.fill)
                 .frame(width: 32)
+                .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(card.title)
@@ -192,9 +223,11 @@ struct FeaturesView: View {
 
             Spacer(minLength: 0)
         }
+        .frame(maxHeight: .infinity, alignment: .top)
         .opacity(animateIn ? 1 : 0)
-        .offset(y: animateIn ? 0 : 20)
-        .animation(.easeOut(duration: 0.5).delay(0.2 + Double(index) * 0.1), value: animateIn)
+        .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.2 + Double(index) * 0.1), value: animateIn)
+        .accessibilityElement(children: .combine)
     }
 
     private var pageIndicator: some View {
@@ -208,7 +241,9 @@ struct FeaturesView: View {
             }
         }
         .opacity(animateIn ? 1 : 0)
-        .animation(.easeOut(duration: 0.5).delay(0.6), value: animateIn)
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.6), value: animateIn)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Página \(currentPage + 1) de \(pages.count)")
     }
 
     private var footerSection: some View {
@@ -220,6 +255,7 @@ struct FeaturesView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Image(systemName: "person.3.fill")
                     .foregroundStyle(.primary)
+                    .accessibilityHidden(true)
 
                 Text("Aqui podemos colocar qualquer texto como a Apple faz.")
                     .font(.caption2)
@@ -229,7 +265,7 @@ struct FeaturesView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .opacity(animateIn ? 1 : 0)
-            .animation(.easeOut(duration: 0.5).delay(0.7), value: animateIn)
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.7), value: animateIn)
 
             buttonsRow
                 .padding(.bottom, 16)
@@ -241,6 +277,7 @@ struct FeaturesView: View {
             Image(systemName: "person.3.fill")
                 .font(.caption)
                 .foregroundStyle(.primary)
+                .accessibilityHidden(true)
 
             Text("Aqui podemos colocar qualquer texto como a Apple faz.")
                 .font(.caption2)
@@ -252,54 +289,38 @@ struct FeaturesView: View {
     }
 
     private var buttonsRow: some View {
-        HStack(spacing: 12) {
-            if !isFirstPage {
-                Button {
-                    withAnimation(.smooth) {
-                        currentPage -= 1
-                    }
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.headline.weight(.semibold))
-                        .frame(width: isLandscape ? 44 : 52, height: isLandscape ? 44 : 52)
-                }
-                .buttonStyle(.plain)
-                .foregroundStyle(.primary)
-                .background(.ultraThinMaterial, in: Circle())
-                .transition(.scale.combined(with: .opacity))
-            }
+        Button {
+            handleContinue()
+        } label: {
+            HStack(spacing: 8) {
+                Text(isLastPage ? "Continuar" : "Avançar")
+                    .textCase(.uppercase)
+                    .fontWeight(.semibold)
+                    .font(isLandscape ? .subheadline : .body)
 
-            Button {
-                handleContinue()
-            } label: {
-                HStack(spacing: 8) {
-                    Text(isLastPage ? "Continuar" : "Avançar")
-                        .textCase(.uppercase)
-                        .fontWeight(.semibold)
-                        .font(isLandscape ? .subheadline : .body)
-
-                    if !isLastPage {
-                        Image(systemName: "chevron.right")
-                            .font(.subheadline.weight(.semibold))
-                    }
+                if !isLastPage {
+                    Image(systemName: "chevron.right")
+                        .font(.subheadline.weight(.semibold))
                 }
-                .frame(maxWidth: isLandscape ? 160 : .infinity)
-                .padding(.vertical, isLandscape ? 12 : 16)
-                .background(theme.button.primary.color ?? .blue)
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
             }
-            .buttonStyle(.plain)
+            .frame(maxWidth: isLandscape ? 160 : .infinity)
+            .padding(.vertical, isLandscape ? 12 : 16)
+            .background(theme.button.primary.color ?? .blue)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
         .opacity(animateIn ? 1 : 0)
-        .animation(.easeOut(duration: 0.5).delay(0.8), value: animateIn)
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.8), value: animateIn)
+        .accessibilityLabel(isLastPage ? "Continuar para permissões" : "Avançar para próxima página")
+        .accessibilityHint(isLastPage ? "Vai para a tela de permissões" : "Mostra mais novidades")
     }
 
     // MARK: - Actions
 
     private func handleContinue() {
         if currentPage < pages.count - 1 {
-            withAnimation(.smooth) {
+            withAnimation(reduceMotion ? nil : .smooth) {
                 currentPage += 1
             }
         } else {

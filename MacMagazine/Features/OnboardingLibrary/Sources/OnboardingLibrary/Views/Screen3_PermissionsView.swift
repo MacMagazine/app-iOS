@@ -6,6 +6,7 @@ import UIComponentsLibrary
 struct PermissionsView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let coordinator: OnboardingCoordinator
     var logoNamespace: Namespace.ID
@@ -20,23 +21,23 @@ struct PermissionsView: View {
 
     private var pushStatus: PermissionCardStatus {
         switch coordinator.permissionManager.currentPushStatus {
-            case .notDetermined:
-                return .notDetermined
-            case .authorized:
-                return .granted
-            case .denied:
-                return .denied
+        case .notDetermined:
+            return .notDetermined
+        case .authorized:
+            return .granted
+        case .denied:
+            return .denied
         }
     }
 
     private var attStatus: PermissionCardStatus {
         switch coordinator.permissionManager.currentATTStatus {
-            case .notDetermined:
-                return .notDetermined
-            case .authorized:
-                return .granted
-            case .denied, .restricted:
-                return .denied
+        case .notDetermined:
+            return .notDetermined
+        case .authorized:
+            return .granted
+        case .denied, .restricted:
+            return .denied
         }
     }
 
@@ -85,7 +86,8 @@ struct PermissionsView: View {
     private var portraitLayout: some View {
         VStack(spacing: 16) {
             OnboardingLogoView(width: 80, height: 80)
-                .padding(.top, 40)
+                .padding(.top, 80)
+                .accessibilityHidden(true)
 
             titleView
 
@@ -107,12 +109,14 @@ struct PermissionsView: View {
         HStack(spacing: 24) {
             VStack(spacing: 12) {
                 OnboardingLogoView(width: 80, height: 80)
+                    .accessibilityHidden(true)
 
                 Text("Ative as permissões")
                     .font(.headline)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .opacity(animateIn ? 1 : 0)
+                    .accessibilityAddTraits(.isHeader)
             }
             .frame(maxWidth: 180, maxHeight: .infinity)
             .padding(.leading, -40)
@@ -144,8 +148,9 @@ struct PermissionsView: View {
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
             .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : 20)
-            .animation(.easeOut(duration: 0.5).delay(0.1), value: animateIn)
+            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.1), value: animateIn)
+            .accessibilityAddTraits(.isHeader)
     }
 
     private var permissionCards: some View {
@@ -162,8 +167,8 @@ struct PermissionsView: View {
                 }
             )
             .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : 20)
-            .animation(.easeOut(duration: 0.5).delay(0.2), value: animateIn)
+            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.2), value: animateIn)
 
             PermissionCard(
                 title: "App Analytics",
@@ -177,8 +182,8 @@ struct PermissionsView: View {
                 }
             )
             .opacity(animateIn ? 1 : 0)
-            .offset(y: animateIn ? 0 : 20)
-            .animation(.easeOut(duration: 0.5).delay(0.3), value: animateIn)
+            .offset(y: animateIn ? 0 : (reduceMotion ? 0 : 20))
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.3), value: animateIn)
         }
     }
 
@@ -189,7 +194,7 @@ struct PermissionsView: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .opacity(animateIn ? 1 : 0)
-                .animation(.easeOut(duration: 0.5).delay(0.4), value: animateIn)
+                .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.4), value: animateIn)
 
             continueButton
                 .padding(.bottom, 16)
@@ -221,7 +226,9 @@ struct PermissionsView: View {
         .buttonStyle(.plain)
         .disabled(!hasInteractedWithPermissions)
         .opacity(animateIn ? 1 : 0)
-        .animation(.easeOut(duration: 0.5).delay(0.5), value: animateIn)
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.5).delay(0.5), value: animateIn)
+        .accessibilityLabel("Continuar")
+        .accessibilityHint(hasInteractedWithPermissions ? "Finaliza a configuração e abre o app" : "Responda às permissões primeiro")
     }
 
     // MARK: - Actions

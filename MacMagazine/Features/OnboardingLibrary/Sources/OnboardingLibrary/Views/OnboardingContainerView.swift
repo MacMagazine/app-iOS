@@ -4,8 +4,13 @@ import SwiftUI
 
 public struct OnboardingContainerView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var coordinator: OnboardingCoordinator
     @Namespace private var logoAnimation
+
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
 
     public init(coordinator: OnboardingCoordinator) {
         _coordinator = State(initialValue: coordinator)
@@ -18,12 +23,12 @@ public struct OnboardingContainerView: View {
 
                 Group {
                     switch coordinator.currentScreen {
-                    case .welcome:
-                        WelcomeView(coordinator: coordinator, logoNamespace: logoAnimation)
-                    case .features:
-                        FeaturesView(coordinator: coordinator, logoNamespace: logoAnimation)
-                    case .permissions:
-                        PermissionsView(coordinator: coordinator, logoNamespace: logoAnimation)
+                        case .welcome:
+                            WelcomeView(coordinator: coordinator, logoNamespace: logoAnimation)
+                        case .features:
+                            FeaturesView(coordinator: coordinator, logoNamespace: logoAnimation)
+                        case .permissions:
+                            PermissionsView(coordinator: coordinator, logoNamespace: logoAnimation)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -32,13 +37,18 @@ public struct OnboardingContainerView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .environment(\.theme, theme)
+        .shadow(color: .black.opacity(isIPad ? 0.3 : 0), radius: 30, x: 0, y: 10)
     }
 }
 
 // MARK: - Preview
 
 #if DEBUG
-#Preview("Sheet") {
+#Preview("Sheet - iPhone") {
+    OnboardingSheetPreviewHost()
+}
+
+#Preview("Sheet - iPad", traits: .landscapeLeft) {
     OnboardingSheetPreviewHost()
 }
 

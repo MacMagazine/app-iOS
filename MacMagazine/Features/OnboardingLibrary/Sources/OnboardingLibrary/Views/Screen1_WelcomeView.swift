@@ -6,6 +6,7 @@ import UIComponentsLibrary
 struct WelcomeView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let coordinator: OnboardingCoordinator
     var logoNamespace: Namespace.ID
@@ -24,11 +25,11 @@ struct WelcomeView: View {
                 portraitLayout
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                skipButton
-            }
+        .containerRelativeFrame([.horizontal, .vertical])
+        .overlay(alignment: .topTrailing) {
+            skipButton
+                .padding(.top, 16)
+                .padding(.trailing, 20)
         }
         .background(OnboardingBackground())
         .onAppear { animateIn = true }
@@ -52,9 +53,7 @@ struct WelcomeView: View {
                 .onboardingFade(animateIn, delay: 0.25, duration: 0.60)
 
             Spacer()
-        }
-        .frame(maxWidth: .infinity)
-        .safeAreaInset(edge: .bottom, spacing: 0) {
+
             ctaButton
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
@@ -99,9 +98,10 @@ struct WelcomeView: View {
     private func logoView(width: CGFloat, height: CGFloat) -> some View {
         OnboardingLogoView(width: width, height: height)
             .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
-            .onboardingFade(animateIn, delay: 0.00, duration: 0.70)
-            .scaleEffect(animateIn ? 1 : 0.90)
-            .animation(.easeOut(duration: 0.70), value: animateIn)
+            .onboardingFade(animateIn, delay: 0.00, duration: reduceMotion ? 0 : 0.70)
+            .scaleEffect(animateIn ? 1 : (reduceMotion ? 1 : 0.90))
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.70), value: animateIn)
+            .accessibilityHidden(true)
     }
 
     private var messageView: some View {
@@ -121,6 +121,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.horizontal, isLandscape ? 16 : 28)
+        .accessibilityElement(children: .combine)
     }
 
     private var skipButton: some View {
@@ -131,8 +132,12 @@ struct WelcomeView: View {
                     .symbolRenderingMode(.hierarchical)
             }
             .font(.body)
+            .foregroundColor(.primary)
+            .padding()
+            .glassEffect(.clear.interactive())
         }
-        .accessibilityLabel("Pular onboarding")
+        .accessibilityLabel("Pular introdução")
+        .accessibilityHint("Vai direto para a tela de permissões")
     }
 
     private var ctaButton: some View {
@@ -149,6 +154,7 @@ struct WelcomeView: View {
         }
         .frame(maxWidth: .infinity)
         .accessibilityLabel("Continuar")
+        .accessibilityHint("Avança para ver as novidades do app")
     }
 
     private var landscapeCtaButton: some View {
@@ -167,6 +173,7 @@ struct WelcomeView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Continuar")
+        .accessibilityHint("Avança para ver as novidades do app")
     }
 
     // MARK: - Actions
@@ -176,7 +183,7 @@ struct WelcomeView: View {
             buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeContinue.id,
             screen: AnalyticsConstants.Screen.onboardingWelcome.name
         ))
-        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+        withAnimation(reduceMotion ? nil : .spring(response: 0.6, dampingFraction: 0.8)) {
             coordinator.navigate(to: .features)
         }
     }
