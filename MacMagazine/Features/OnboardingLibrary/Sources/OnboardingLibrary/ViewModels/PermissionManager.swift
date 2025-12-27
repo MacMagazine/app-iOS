@@ -90,22 +90,26 @@ public final class PermissionManager {
 
     /// Check current ATT permission status from system
     func checkATTPermissionStatus() {
-        if #available(iOS 14.5, *) {
-            let status: ATTPermissionStatus = switch ATTrackingManager.trackingAuthorizationStatus {
-            case .notDetermined:
-                .notDetermined
-            case .authorized:
-                .authorized
-            case .denied:
-                .denied
-            case .restricted:
-                .restricted
-            @unknown default:
-                .notDetermined
-            }
-
-            currentATTStatus = status
+        if ProcessInfo.processInfo.isiOSAppOnMac {
+            // ATT doesn't work on macOS even for iPad apps - automatically mark as authorized
+            currentATTStatus = .authorized
+            return
         }
+
+        let status: ATTPermissionStatus = switch ATTrackingManager.trackingAuthorizationStatus {
+        case .notDetermined:
+            .notDetermined
+        case .authorized:
+            .authorized
+        case .denied:
+            .denied
+        case .restricted:
+            .restricted
+        @unknown default:
+            .notDetermined
+        }
+
+        currentATTStatus = status
     }
 
     /// Request ATT permission and track analytics
@@ -116,41 +120,37 @@ public final class PermissionManager {
             screen: AnalyticsConstants.Screen.onboardingPermissions.name
         ))
 
-        if #available(iOS 14.5, *) {
-            let status = await ATTrackingManager.requestTrackingAuthorization()
+        let status = await ATTrackingManager.requestTrackingAuthorization()
 
-            let permissionStatus: ATTPermissionStatus = switch status {
-            case .authorized:
-                .authorized
-            case .denied:
-                .denied
-            case .restricted:
-                .restricted
-            case .notDetermined:
-                .notDetermined
-            @unknown default:
-                .notDetermined
-            }
-
-            currentATTStatus = permissionStatus
-
-            // Track the result
-            if status == .authorized {
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.onboardingATTAccepted.id,
-                    screen: AnalyticsConstants.Screen.onboardingPermissions.name
-                ))
-            } else {
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.onboardingATTDenied.id,
-                    screen: AnalyticsConstants.Screen.onboardingPermissions.name
-                ))
-            }
-
-            return status == .authorized
+        let permissionStatus: ATTPermissionStatus = switch status {
+        case .authorized:
+            .authorized
+        case .denied:
+            .denied
+        case .restricted:
+            .restricted
+        case .notDetermined:
+            .notDetermined
+        @unknown default:
+            .notDetermined
         }
 
-        return false
+        currentATTStatus = permissionStatus
+
+        // Track the result
+        if status == .authorized {
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.onboardingATTAccepted.id,
+                screen: AnalyticsConstants.Screen.onboardingPermissions.name
+            ))
+        } else {
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.onboardingATTDenied.id,
+                screen: AnalyticsConstants.Screen.onboardingPermissions.name
+            ))
+        }
+
+        return status == .authorized
     }
 
     /// Determine if we should show the ATT section
