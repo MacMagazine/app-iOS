@@ -65,6 +65,13 @@
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "DISABLE_PACKAGE_PLUGIN_VALIDATION"
+            value = "yes"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <StoreKitConfigurationFileReference
          identifier = "../../MacMagazine/Resources/ExampleStore.storekit">
       </StoreKitConfigurationFileReference>

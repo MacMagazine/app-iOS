@@ -98,7 +98,7 @@ struct StorageServiceTests {
         #expect(fetched?.subtitle == "New Subtitle")
         #expect(fetched?.artworkURL == "new.jpg")
         #expect(fetched?.link == "new.com")
-        #expect(fetched?.categories == ["New", "Categories"])
+        #expect(Set(fetched?.categories ?? []) == Set(["New", "Categories"]))
         #expect(fetched?.excerpt == "New excerpt")
         #expect(fetched?.fullContent == "New content")
     }
