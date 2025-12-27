@@ -1,6 +1,7 @@
 import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
+import OnboardingLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
@@ -23,6 +24,7 @@ class MainViewModel {
     var social: Social
     var news: News
     var scrollToTopTrigger: AppTabs?
+    var onboardingCoordinator: OnboardingCoordinator?
 
     let analytics = AnalyticsManager()
     let sessionState = SessionState()
@@ -54,6 +56,26 @@ class MainViewModel {
 
         // Observe storage status changes
         observeStorageStatus()
+    }
+}
+
+// MARK: - Onboarding
+
+extension MainViewModel {
+    var showOnboarding: Bool { onboardingCoordinator != nil }
+
+    @MainActor
+    func initializeOnboarding() async {
+        guard let coordinator = await OnboardingCoordinator.createIfNeeded(analytics: analytics) else {
+            onboardingCoordinator = nil
+            return
+        }
+
+        coordinator.onComplete = { [weak self] in
+            self?.onboardingCoordinator = nil
+        }
+
+        onboardingCoordinator = coordinator
     }
 }
 

@@ -12,7 +12,6 @@
 		88C8B2FE2EF48DC500044DE9 /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 88C8B2FD2EF48DC500044DE9 /* FeedLibrary */; };
 		9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B024FDB2EC2719700D66056 /* SettingsLibrary */; };
 		9B0283C42EF61A08002611AB /* OnboardingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B0283C32EF61A08002611AB /* OnboardingLibrary */; };
-		9B104FDD2EF9B04E001FBAEB /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B104FDC2EF9B04E001FBAEB /* MacMagazineLibrary */; };
 		9B1A43032EE0C14E00E56784 /* PodcastLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1A43022EE0C14E00E56784 /* PodcastLibrary */; };
 		9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B4F666E2EE9F223008ACACB /* FeedLibrary */; };
 		9B5143C52EF4CE9800ED4F39 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5143C42EF4CE9800ED4F39 /* MacMagazineLibrary */; };
@@ -214,7 +213,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B104FDD2EF9B04E001FBAEB /* MacMagazineLibrary in Frameworks */,
 				9BA828B82EEC7AE500F26FCB /* FeedLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,7 +363,6 @@
 			name = WatchApp;
 			packageProductDependencies = (
 				9BA828B72EEC7AE500F26FCB /* FeedLibrary */,
-				9B104FDC2EF9B04E001FBAEB /* MacMagazineLibrary */,
 			);
 			productName = "WatchkApp Watch App";
 			productReference = 9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */;
@@ -629,9 +626,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacMagazine/Resources/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "O MacMagazine gostaria da sua permissão para coletar dados a fim de apresentar publicidade mais adequada aos seus interesses.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -666,9 +663,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacMagazine/Resources/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "O MacMagazine gostaria da sua permissão para coletar dados a fim de apresentar publicidade mais adequada aos seus interesses.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1007,10 +1004,6 @@
 		9B0283C32EF61A08002611AB /* OnboardingLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OnboardingLibrary;
-		};
-		9B104FDC2EF9B04E001FBAEB /* MacMagazineLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MacMagazineLibrary;
 		};
 		9B1A43022EE0C14E00E56784 /* PodcastLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

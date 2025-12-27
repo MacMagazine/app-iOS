@@ -104,7 +104,7 @@ struct CategoryTests {
     @Test("Tutoriais category has correct query")
     func tutoriaisCategoryQuery() {
         // Given
-        let category = NewsCategory.tutoriais
+        let category = NewsCategory.tutorials
 
         // When
         let query = category.query
@@ -139,7 +139,7 @@ struct CategoryTests {
         #expect(NewsCategory.appletv.rawValue == "Novidades Apple TV+")
         #expect(NewsCategory.reviews.rawValue == "Reviews")
         #expect(NewsCategory.rumors.rawValue == "Rumores")
-        #expect(NewsCategory.tutoriais.rawValue == "Tutoriais")
+        #expect(NewsCategory.tutorials.rawValue == "Tutoriais")
         #expect(NewsCategory.youtube.rawValue == "Vídeos")
         #expect(NewsCategory.podcast.rawValue == "MacMagazine no Ar")
     }
@@ -156,7 +156,7 @@ struct CategoryTests {
         #expect(allCases.contains(.appletv))
         #expect(allCases.contains(.reviews))
         #expect(allCases.contains(.rumors))
-        #expect(allCases.contains(.tutoriais))
+        #expect(allCases.contains(.tutorials))
         #expect(allCases.contains(.youtube))
         #expect(allCases.contains(.podcast))
     }

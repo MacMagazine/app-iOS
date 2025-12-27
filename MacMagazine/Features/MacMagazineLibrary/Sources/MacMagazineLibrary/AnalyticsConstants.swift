@@ -56,6 +56,11 @@ public enum AnalyticsConstants {
         // Other
         case loginPatroes
 
+        // Onboarding
+        case onboardingWelcome
+        case onboardingFeatures
+        case onboardingPermissions
+
         // Widget
         case widget(String)
 
@@ -88,6 +93,11 @@ public enum AnalyticsConstants {
 
             // Other
             case .loginPatroes: "Login para patrões"
+
+            // Onboarding
+            case .onboardingWelcome: "Onboarding > Welcome"
+            case .onboardingFeatures: "Onboarding > Features"
+            case .onboardingPermissions: "Onboarding > Permissions"
 
             // Widget
             case let .widget(type): "Widget \(type)"
@@ -150,6 +160,7 @@ public enum AnalyticsConstants {
         case cleanPostsOptions
         case cleanPosts
         case cleanAllPosts
+        case cleanOnboarding
 
         // MARK: Settings - Push Notifications
         case pushNotifications(String)
@@ -164,6 +175,21 @@ public enum AnalyticsConstants {
         case reportProblem
         case termsConditions
         case privacyPolicy
+
+        // MARK: Onboarding
+        case onboardingWelcomeSkip
+        case onboardingWelcomeContinue
+        case onboardingFeaturesSkip
+        case onboardingFeaturesContinue
+        case onboardingFeaturePage(Int)
+        case onboardingPushSkip
+        case onboardingPushContinue
+        case onboardingPushAccepted
+        case onboardingPushDenied
+        case onboardingATTContinue
+        case onboardingATTAccepted
+        case onboardingATTDenied
+        case onboardingComplete
 
         public var id: String {
             switch self {
@@ -216,6 +242,7 @@ public enum AnalyticsConstants {
             case .cleanPostsOptions: "clean_posts_options"
             case .cleanPosts: "clean_posts"
             case .cleanAllPosts: "clean_all_posts"
+            case .cleanOnboarding: "clean_onboarding"
 
             // Settings - Push Notifications
             case .pushNotifications(let value): "push_notifications \(value)"
@@ -230,6 +257,21 @@ public enum AnalyticsConstants {
             case .reportProblem: "report_problem"
             case .termsConditions: "terms_conditions"
             case .privacyPolicy: "privacy_policy"
+
+            // Onboarding
+            case .onboardingWelcomeSkip: "onboarding_welcome_skip"
+            case .onboardingWelcomeContinue: "onboarding_welcome_continue"
+            case .onboardingFeaturesSkip: "onboarding_features_skip"
+            case .onboardingFeaturesContinue: "onboarding_features_continue"
+            case .onboardingFeaturePage(let page): "onboarding_feature_page_\(page)"
+            case .onboardingPushSkip: "onboarding_push_skip"
+            case .onboardingPushContinue: "onboarding_push_continue"
+            case .onboardingPushAccepted: "onboarding_push_accepted"
+            case .onboardingPushDenied: "onboarding_push_denied"
+            case .onboardingATTContinue: "onboarding_att_continue"
+            case .onboardingATTAccepted: "onboarding_att_accepted"
+            case .onboardingATTDenied: "onboarding_att_denied"
+            case .onboardingComplete: "onboarding_complete"
             }
         }
     }

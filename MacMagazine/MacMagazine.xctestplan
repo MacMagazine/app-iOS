@@ -26,9 +26,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/MacMagazineUILibrary",
-        "identifier" : "MacMagazineUILibraryTests",
-        "name" : "MacMagazineUILibraryTests"
+        "containerPath" : "container:Features\/NewsLibrary",
+        "identifier" : "NewsLibraryTests",
+        "name" : "NewsLibraryTests"
       }
     },
     {
@@ -40,9 +40,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/PodcastLibrary",
-        "identifier" : "PodcastTests",
-        "name" : "PodcastTests"
+        "containerPath" : "container:Features\/MacMagazineUILibrary",
+        "identifier" : "MacMagazineUILibraryTests",
+        "name" : "MacMagazineUILibraryTests"
       }
     },
     {
@@ -50,6 +50,13 @@
         "containerPath" : "container:Features\/SettingsLibrary",
         "identifier" : "SettingsLibraryTests",
         "name" : "SettingsLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/PodcastLibrary",
+        "identifier" : "PodcastTests",
+        "name" : "PodcastTests"
       }
     }
   ],

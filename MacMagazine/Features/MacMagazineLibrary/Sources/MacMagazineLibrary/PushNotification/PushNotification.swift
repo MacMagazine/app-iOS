@@ -1,7 +1,14 @@
 import Foundation
 import LoggerLibrary
 import Observation
+import UserNotifications
 import UtilityLibrary
+
+public enum PushPermissionStatus: Equatable {
+    case notDetermined
+    case authorized
+    case denied
+}
 
 @Observable
 public class PushNotification: NSObject {
@@ -18,6 +25,22 @@ private extension PushNotification {
         let salt = "\(String(describing: "AppDelegate"))\(String(describing: NSObject.self))"
         let key: [UInt8] = [37, 68, 65, 114, 92, 85, 93, 84, 76, 70, 82, 120, 100, 98, 86, 91, 80, 83, 89, 121, 69, 66, 38, 72, 91, 92, 86, 88, 18, 7, 127, 106, 120, 91, 14, 83]
         return Obfuscator(with: salt).reveal(key: key)
+    }
+}
+
+public extension PushNotification {
+    @MainActor
+    static var authorizationStatus: PushPermissionStatus {
+        get async {
+            switch await UNUserNotificationCenter.current().notificationSettings().authorizationStatus {
+            case .notDetermined: .notDetermined
+            case .denied: .denied
+            case .authorized,
+                    .provisional,
+                    .ephemeral: .authorized
+            @unknown default: .notDetermined
+            }
+        }
     }
 }
 
@@ -79,12 +102,23 @@ public extension PushNotification {
 #if canImport(UIKit)
 import UIKit
 
+@MainActor
+public enum PushNotificationDefinition {
+    public static var options: [UIApplication.LaunchOptionsKey: Any]? = nil
+}
+
 public extension PushNotification {
-    func setup(options: [UIApplication.LaunchOptionsKey: Any]?) {
+    @MainActor
+    func setup(options: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
         OneSignal.initialize(Self.oneSignalKey, withLaunchOptions: options)
         OneSignal.Notifications.addForegroundLifecycleListener(self)
         OneSignal.Notifications.addClickListener(self)
-        OneSignal.Notifications.requestPermission({ _ in }, fallbackToSettings: false)
+
+        return await withCheckedContinuation { continuation in
+            OneSignal.Notifications.requestPermission({ accepted in
+                continuation.resume(returning: accepted)
+            }, fallbackToSettings: false)
+        }
     }
 }
 
