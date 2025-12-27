@@ -4,6 +4,7 @@ import NetworkLibrary
 @testable import PodcastLibrary
 import StorageLibrary
 import Testing
+import UIComponentsLibrary
 
 @Suite("PodcastViewModel Tests")
 @MainActor
@@ -51,12 +52,17 @@ struct PodcastViewModelTests {
         // When
         sut.loadMoreIfNeeded(index: 16)
 
-        // Allow async task to start
-        try await Task.sleep(for: .milliseconds(100))
+        // Wait up to 2s for status to change from idle to any other state to avoid timing flakiness on CI
+        let changed = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
 
         // Then - Page 2 should be requested (16 / 16 + 1 = 2)
         // Status will transition to .done or .error depending on mock
-        #expect(sut.status != .idle, "Should trigger load at threshold index 16")
+        #expect(changed, "Should trigger load at threshold index 16")
     }
 
     @Test("Should load page 3 when reaching second threshold (index 32)")
@@ -68,10 +74,20 @@ struct PodcastViewModelTests {
 
         // When - Simulate scrolling past first threshold
         sut.loadMoreIfNeeded(index: 16) // First threshold, loads page 2
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
 
         sut.loadMoreIfNeeded(index: 32) // Second threshold, should load page 3
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
 
         // Then
         #expect(sut.status != .idle, "Should trigger load at second threshold index 32")
@@ -92,7 +108,12 @@ struct PodcastViewModelTests {
         #expect(sut.status == .idle)
 
         sut.loadMoreIfNeeded(index: 16) // Exact multiple
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
 
         // Then
         #expect(sut.status != .idle, "Should only load at exact multiples of 16")
@@ -135,17 +156,32 @@ struct PodcastViewModelTests {
 
         // When/Then - Index 16 → Page 2
         sut.loadMoreIfNeeded(index: 16)
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
         #expect(sut.status != .idle)
 
         // When/Then - Index 32 → Page 3
         sut.loadMoreIfNeeded(index: 32)
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
         #expect(sut.status != .idle)
 
         // When/Then - Index 48 → Page 4
         sut.loadMoreIfNeeded(index: 48)
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
         #expect(sut.status != .idle)
     }
 
@@ -158,7 +194,12 @@ struct PodcastViewModelTests {
 
         // When - Load at index 16
         sut.loadMoreIfNeeded(index: 16)
-        try await Task.sleep(for: .milliseconds(100))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
 
         // Try loading at same index again
         sut.loadMoreIfNeeded(index: 16)
@@ -185,7 +226,12 @@ struct PodcastViewModelTests {
         sut.loadMoreIfNeeded(index: 32) // Page 3
         sut.loadMoreIfNeeded(index: 48) // Page 4
 
-        try await Task.sleep(for: .milliseconds(200))
+        _ = await waitForStatusChange(
+            from: .idle,
+            of: sut,
+            timeout: .seconds(2),
+            poll: .milliseconds(20)
+        )
 
         // Then - Should handle all loads without crashes
         #expect(sut.status != .idle, "Should handle rapid scrolling")
@@ -283,6 +329,22 @@ struct PodcastViewModelTests {
     }
 }
 
+extension PodcastViewModelTests {
+    private func waitForStatusChange(
+        from initial: APIStatus,
+        of sut: PodcastViewModel,
+        timeout: Duration = .seconds(2),
+        poll: Duration = .milliseconds(20)
+    ) async -> Bool {
+        let deadline = ContinuousClock.now.advanced(by: timeout)
+        while ContinuousClock.now < deadline {
+            if sut.status != initial { return true }
+            try? await Task.sleep(for: poll)
+        }
+        return false
+    }
+}
+
 // MARK: - Test Helpers
 
 private func createMockNetwork() -> [NetworkMockData] {
@@ -296,3 +358,4 @@ private func createMockNetwork() -> [NetworkMockData] {
         )
     ]
 }
+
