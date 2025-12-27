@@ -31,7 +31,6 @@ public struct OnboardingContainerView: View {
                         PermissionsView(coordinator: coordinator, logoNamespace: logoAnimation)
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .transition(.opacity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -44,7 +43,7 @@ public struct OnboardingContainerView: View {
 // MARK: - Preview
 
 #if DEBUG
-#Preview("Sheet - iPhone") {
+#Preview("Sheet - Portrait") {
     OnboardingSheetPreviewHost()
 }
 

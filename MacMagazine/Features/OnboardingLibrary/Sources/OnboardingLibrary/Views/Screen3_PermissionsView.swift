@@ -17,7 +17,7 @@ struct PermissionsView: View {
         verticalSizeClass == .compact
     }
 
-    // MARK: - Status das permissões
+    // MARK: - Permission Status
 
     private var pushStatus: PermissionCardStatus {
         switch coordinator.permissionManager.currentPushStatus {
@@ -69,7 +69,7 @@ struct PermissionsView: View {
                 portraitLayout
             }
         }
-//        .background(OnboardingBackground())
+        //        .background(OnboardingBackground())
         .onAppear {
             withAnimation {
                 animateIn = true
@@ -84,12 +84,18 @@ struct PermissionsView: View {
     // MARK: - Portrait Layout
 
     private var portraitLayout: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
+            // Logo fixed at top - same position as other screens
             OnboardingLogoView(width: 80, height: 80)
-                .padding(.top, 80)
+                .padding(.top, 70)
                 .accessibilityHidden(true)
 
-            OnboardingTitleView("Ative as permissões necessárias", animateIn: animateIn)
+            Text("Ative as permissões necessárias")
+                .font(.title2)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.leading)
+                .accessibilityAddTraits(.isHeader)
+                .padding(.top, 24)
 
             Spacer()
 
@@ -132,6 +138,7 @@ struct PermissionsView: View {
                     compactFooterText
                         .frame(maxWidth: .infinity, alignment: .leading)
                     continueButton
+                        .frame(maxWidth: 200)
                 }
             }
             .frame(maxHeight: .infinity)
@@ -140,7 +147,7 @@ struct PermissionsView: View {
         .padding(.vertical, 16)
     }
 
-    // MARK: - Componentes Compartilhados
+    // MARK: - Shared Components
 
     private var permissionCards: some View {
         VStack(spacing: isLandscape ? 12 : 16) {
@@ -178,6 +185,8 @@ struct PermissionsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(width: 340)
                 .onboardingAnimateIn(animateIn, delay: 0.4, reduceMotion: reduceMotion)
 
             continueButton
@@ -200,7 +209,6 @@ struct PermissionsView: View {
         ) {
             coordinator.completeOnboarding()
         }
-        .frame(maxWidth: isLandscape ? 200 : .infinity)
         .onboardingAnimateIn(animateIn, delay: 0.5, reduceMotion: reduceMotion)
         .accessibilityLabel("Continuar")
         .accessibilityHint(hasInteractedWithPermissions ? "Finaliza a configuração e abre o app" : "Responda às permissões primeiro")
@@ -223,30 +231,39 @@ struct PermissionsView: View {
 
 #if DEBUG
 #Preview("Permissions — Portrait") {
-    @Previewable @Namespace var namespace
-
-    NavigationStack {
-        PermissionsView(
-            coordinator: OnboardingCoordinator(
-                permissionManager: PermissionManager(analytics: AnalyticsManager()),
-                analytics: AnalyticsManager()
-            ),
-            logoNamespace: namespace
-        )
-    }
+    PermissionViewSheetPreviewHost()
 }
 
 #Preview("Permissions — Landscape", traits: .landscapeLeft) {
-    @Previewable @Namespace var namespace
+    PermissionViewSheetPreviewHost()
+}
 
-    NavigationStack {
-        PermissionsView(
-            coordinator: OnboardingCoordinator(
-                permissionManager: PermissionManager(analytics: AnalyticsManager()),
-                analytics: AnalyticsManager()
-            ),
-            logoNamespace: namespace
-        )
+private struct PermissionViewSheetPreviewHost: View {
+    @Namespace private var namespace
+
+    @State private var isPresented = true
+    @State private var coordinator = OnboardingCoordinator(
+        permissionManager: PermissionManager(analytics: AnalyticsManager()),
+        analytics: AnalyticsManager()
+    )
+
+    var body: some View {
+        ZStack {
+            Color.gray.opacity(0.12)
+                .ignoresSafeArea()
+
+            Text("MainView (simulação)")
+                .font(.headline)
+        }
+        .sheet(isPresented: $isPresented) {
+            OnboardingContainerView(coordinator: coordinator)
+                .environment(\.theme, ThemeColor())
+                .presentationDetents([.large])
+                .interactiveDismissDisabled(true)
+        }
+        .onAppear {
+            isPresented = true
+        }
     }
 }
 #endif
