@@ -1,0 +1,5 @@
+// CI Build Settings
+// This file is used by Xcode Cloud to configure builds
+
+// Skip package plugin validation for SwiftLint
+DISABLE_PACKAGE_PLUGIN_VALIDATION = YES

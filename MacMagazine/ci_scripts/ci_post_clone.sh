@@ -1,17 +1,19 @@
 #!/bin/bash
 
 # ci_post_clone.sh
-# This script runs after Xcode Cloud clones the repository
-# It configures the environment for the build
+# Runs after Xcode Cloud clones the repository
 
 set -e
 
-echo "=== Running post-clone script ==="
+echo "=== Post-clone: Resolving packages with plugin validation disabled ==="
 
-# Trust SwiftLint plugin from SwiftLintPlugins package
-# This is required because Xcode Cloud doesn't automatically trust SPM plugins
-echo "Configuring package plugin trust..."
+cd "$CI_PRIMARY_REPOSITORY_PATH/MacMagazine"
 
-defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+# Resolve package dependencies while skipping plugin validation
+xcodebuild -resolvePackageDependencies \
+    -project MacMagazine.xcodeproj \
+    -scheme MacMagazine \
+    -skipPackagePluginValidation \
+    -skipMacroValidation
 
-echo "=== Post-clone script completed ==="
+echo "=== Package resolution completed ==="
