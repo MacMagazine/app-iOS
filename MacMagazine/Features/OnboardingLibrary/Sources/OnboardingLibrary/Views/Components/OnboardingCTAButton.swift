@@ -34,7 +34,7 @@ public struct OnboardingCTAButton: View {
             HStack(spacing: 8) {
                 Text(title)
                     .textCase(.uppercase)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .font(isLandscape ? .subheadline : .body)
 
                 if showChevron {

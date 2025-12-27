@@ -48,17 +48,22 @@ struct WelcomeView: View {
     // MARK: - Portrait Layout
 
     private var portraitLayout: some View {
-        VStack(spacing: 24) {
-            Spacer()
-
+        VStack(spacing: 0) {
+            // Logo fixed at top
             logoView(width: 152, height: 152)
-                .padding(.bottom, 48)
+                .padding(.top, 70)
+                .onboardingFade(animateIn, delay: 0.00, duration: reduceMotion ? 0 : 0.70)
+                .scaleEffect(animateIn ? 1 : (reduceMotion ? 1 : 0.90))
+                .animation(reduceMotion ? nil : .easeOut(duration: 0.70), value: animateIn)
+
+            Spacer()
 
             messageView
                 .onboardingFade(animateIn, delay: 0.25, duration: 0.60)
 
             Spacer()
-
+        }
+        .safeAreaInset(edge: .bottom) {
             ctaButton
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
@@ -100,27 +105,23 @@ struct WelcomeView: View {
         .padding(.vertical, 16)
     }
 
-    // MARK: - Componentes Compartilhados
+    // MARK: - Shared Components
 
     private func logoView(width: CGFloat, height: CGFloat) -> some View {
         OnboardingLogoView(width: width, height: height)
-            .matchedGeometryEffect(id: "onboarding_logo", in: logoNamespace)
-            .onboardingFade(animateIn, delay: 0.00, duration: reduceMotion ? 0 : 0.70)
-            .scaleEffect(animateIn ? 1 : (reduceMotion ? 1 : 0.90))
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.70), value: animateIn)
             .accessibilityHidden(true)
     }
 
     private var messageView: some View {
         VStack(spacing: 10) {
-            Text("Bem-vindo ao novo MacMagazine")
+            Text("Bem-vindo ao novo app do MacMagazine")
                 .font(isLandscape ? .title2.weight(.bold) : .largeTitle.weight(.bold))
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
 
-            Text("Notícias, reviews e podcasts em um visual totalmente renovado.")
+            Text("Notícias, reviews, vídeos e podcasts em um visual totalmente renovado.")
                 .font(isLandscape ? .body : .title3)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -132,18 +133,9 @@ struct WelcomeView: View {
     }
 
     private var ctaButton: some View {
-        PrimaryButton(
-            "Continuar",
-            size: 340,
-            style: ButtonStyleConfiguration(
-                color: .white,
-                stroke: theme.button.primary.color ?? .blue,
-                fill: theme.button.primary.color ?? .blue
-            )
-        ) {
+        OnboardingCTAButton("Continuar") {
             trackAndNavigate()
         }
-        .frame(maxWidth: .infinity)
         .accessibilityLabel("Continuar")
         .accessibilityHint("Avança para ver as novidades do app")
     }
@@ -155,7 +147,7 @@ struct WelcomeView: View {
             buttonId: AnalyticsConstants.ButtonID.onboardingWelcomeContinue.id,
             screen: AnalyticsConstants.Screen.onboardingWelcome.name
         ))
-        withAnimation(reduceMotion ? nil : .spring(response: 0.6, dampingFraction: 0.8)) {
+        withAnimation(reduceMotion ? nil : .spring(response: 0.7, dampingFraction: 0.85)) {
             coordinator.navigate(to: .features)
         }
     }
@@ -166,29 +158,38 @@ struct WelcomeView: View {
 #if DEBUG
 #Preview("Welcome — Portrait") {
     @Previewable @Namespace var namespace
-
-    NavigationStack {
-        WelcomeView(
-            coordinator: OnboardingCoordinator(
-                permissionManager: PermissionManager(analytics: AnalyticsManager()),
-                analytics: AnalyticsManager()
-            ),
-            logoNamespace: namespace
-        )
-    }
+    WelcomeSheetPreviewHost()
 }
 
 #Preview("Welcome — Landscape", traits: .landscapeLeft) {
     @Previewable @Namespace var namespace
+    WelcomeSheetPreviewHost()
+}
 
-    NavigationStack {
-        WelcomeView(
-            coordinator: OnboardingCoordinator(
-                permissionManager: PermissionManager(analytics: AnalyticsManager()),
-                analytics: AnalyticsManager()
-            ),
-            logoNamespace: namespace
-        )
+private struct WelcomeSheetPreviewHost: View {
+    @State private var isPresented = true
+    @State private var coordinator = OnboardingCoordinator(
+        permissionManager: PermissionManager(analytics: AnalyticsManager()),
+        analytics: AnalyticsManager()
+    )
+
+    var body: some View {
+        ZStack {
+            Color.gray.opacity(0.12)
+                .ignoresSafeArea()
+
+            Text("MainView (simulação)")
+                .font(.headline)
+        }
+        .sheet(isPresented: $isPresented) {
+            OnboardingContainerView(coordinator: coordinator)
+                .environment(\.theme, ThemeColor())
+                .presentationDetents([.large])
+                .interactiveDismissDisabled(true)
+        }
+        .onAppear {
+            isPresented = true
+        }
     }
 }
 #endif

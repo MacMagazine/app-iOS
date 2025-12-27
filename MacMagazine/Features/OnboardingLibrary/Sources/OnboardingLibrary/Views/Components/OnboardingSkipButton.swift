@@ -29,7 +29,7 @@ public struct OnboardingSkipButton: View {
             .font(.body)
             .foregroundColor(.primary)
             .padding()
-            .glassEffect(.clear.interactive())
+            .glassEffect()
         }
         .accessibilityLabel(label)
         .accessibilityHint(hint)
