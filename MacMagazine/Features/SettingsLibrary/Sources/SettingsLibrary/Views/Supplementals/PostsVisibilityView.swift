@@ -150,6 +150,17 @@ private extension PostsVisibilityView {
                 screen: AnalyticsConstants.Screen.settingsPosts.name
             ))
         }
+        Button(action: {
+            UserDefaults.standard.removeObject(forKey: "hasCompletedOnboarding")
+            UserDefaults.standard.removeObject(forKey: "hasSeenOnboardingFeatures")
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.cleanOnboarding.id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+        },
+               label: {
+            Text("Rever Onboarding")
+        })
     }
 }
 

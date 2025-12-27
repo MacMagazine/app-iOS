@@ -149,6 +149,7 @@ public enum AnalyticsConstants {
         case cleanPostsOptions
         case cleanPosts
         case cleanAllPosts
+        case cleanOnboarding
 
         // MARK: Settings - Push Notifications
         case pushNotifications(String)
@@ -182,78 +183,79 @@ public enum AnalyticsConstants {
         public var id: String {
             switch self {
             // Podcast Player - Full Player
-            case .podcastCloseFullPlayer: return "close_fullplayer"
-            case .podcastShowChapters: return "show_chapters"
-            case .podcastPreviousChapter: return "previous_chapter"
-            case .podcastNextChapter: return "next_chapter"
+            case .podcastCloseFullPlayer: "close_fullplayer"
+            case .podcastShowChapters: "show_chapters"
+            case .podcastPreviousChapter: "previous_chapter"
+            case .podcastNextChapter: "next_chapter"
 
             // Podcast Player - Mini Player
-            case .podcastCloseMiniPlayer: return "close_miniplayer"
-            case .podcastOpenFullPlayer: return "open_fullplayer"
+            case .podcastCloseMiniPlayer: "close_miniplayer"
+            case .podcastOpenFullPlayer: "open_fullplayer"
 
             // Podcast Player - Playback Controls
-            case .podcastTogglePlayPause: return "toggle_play_pause"
-            case .podcastSkipMinus15: return "skip_minus_15"
-            case .podcastSkipPlus15: return "skip_plus_15"
+            case .podcastTogglePlayPause: "toggle_play_pause"
+            case .podcastSkipMinus15: "skip_minus_15"
+            case .podcastSkipPlus15: "skip_plus_15"
 
             // Podcast Player - Speed Controls
-            case .podcastSpeedButton: return "speed_button"
-            case .podcastSpeed(let speed): return "speed_\(speed)"
-            case .podcastSpeedAdvanced(let value): return "speed_advanced_\(value)"
+            case .podcastSpeedButton: "speed_button"
+            case .podcastSpeed(let speed): "speed_\(speed)"
+            case .podcastSpeedAdvanced(let value): "speed_advanced_\(value)"
 
             // Podcast - Content
-            case .podcastStarted(let postId): return "podcast_\(postId)_started"
-            case .podcastFavorite: return "favorite_podcast"
+            case .podcastStarted(let postId): "podcast_\(postId)_started"
+            case .podcastFavorite: "favorite_podcast"
 
             // Videos
-            case .videoStarted(let id): return "video_\(id)_started"
-            case .videoStopped: return "video_stopped"
-            case .videoFavorite: return "favorite_video"
+            case .videoStarted(let id): "video_\(id)_started"
+            case .videoStopped: "video_stopped"
+            case .videoFavorite: "favorite_video"
 
             // Share & Favorite
-            case .share: return "share"
-            case .favoriteButton: return "favorite_button"
+            case .share: "share"
+            case .favoriteButton: "favorite_button"
 
             // Settings - Appearance
-            case .theme(let scheme): return "tema \(scheme)"
-            case .icon(let type): return "icone \(type)"
+            case .theme(let scheme): "tema \(scheme)"
+            case .icon(let type): "icone \(type)"
 
             // Settings - Posts Visibility
-            case .identifyPostsRead(let value): return "identify_posts_read \(value)"
-            case .countPostsOnBadge(let value): return "count_posts_on_badge \(value)"
-            case .allPostsRead: return "all_posts_read"
-            case .cleanPostsOptions: return "clean_posts_options"
-            case .cleanPosts: return "clean_posts"
-            case .cleanAllPosts: return "clean_all_posts"
+            case .identifyPostsRead(let value): "identify_posts_read \(value)"
+            case .countPostsOnBadge(let value): "count_posts_on_badge \(value)"
+            case .allPostsRead: "all_posts_read"
+            case .cleanPostsOptions: "clean_posts_options"
+            case .cleanPosts: "clean_posts"
+            case .cleanAllPosts: "clean_all_posts"
+            case .cleanOnboarding: "clean_onboarding"
 
             // Settings - Push Notifications
-            case .pushNotifications(let value): return "push_notifications \(value)"
+            case .pushNotifications(let value): "push_notifications \(value)"
 
             // Settings - Subscription
-            case .restorePurchase: return "restore_purchase"
-            case .manageSubscription: return "manage_subscription"
-            case .loginPatrao: return "login_patrao"
-            case .logoffPatrao: return "logoff_patrao"
+            case .restorePurchase: "restore_purchase"
+            case .manageSubscription: "manage_subscription"
+            case .loginPatrao: "login_patrao"
+            case .logoffPatrao: "logoff_patrao"
 
             // Settings - About
-            case .reportProblem: return "report_problem"
-            case .termsConditions: return "terms_conditions"
-            case .privacyPolicy: return "privacy_policy"
+            case .reportProblem: "report_problem"
+            case .termsConditions: "terms_conditions"
+            case .privacyPolicy: "privacy_policy"
 
             // Onboarding
-            case .onboardingWelcomeSkip: return "onboarding_welcome_skip"
-            case .onboardingWelcomeContinue: return "onboarding_welcome_continue"
-            case .onboardingFeaturesSkip: return "onboarding_features_skip"
-            case .onboardingFeaturesContinue: return "onboarding_features_continue"
-            case .onboardingFeaturePage(let page): return "onboarding_feature_page_\(page)"
-            case .onboardingPushSkip: return "onboarding_push_skip"
-            case .onboardingPushContinue: return "onboarding_push_continue"
-            case .onboardingPushAccepted: return "onboarding_push_accepted"
-            case .onboardingPushDenied: return "onboarding_push_denied"
-            case .onboardingATTContinue: return "onboarding_att_continue"
-            case .onboardingATTAccepted: return "onboarding_att_accepted"
-            case .onboardingATTDenied: return "onboarding_att_denied"
-            case .onboardingComplete: return "onboarding_complete"
+            case .onboardingWelcomeSkip: "onboarding_welcome_skip"
+            case .onboardingWelcomeContinue: "onboarding_welcome_continue"
+            case .onboardingFeaturesSkip: "onboarding_features_skip"
+            case .onboardingFeaturesContinue: "onboarding_features_continue"
+            case .onboardingFeaturePage(let page): "onboarding_feature_page_\(page)"
+            case .onboardingPushSkip: "onboarding_push_skip"
+            case .onboardingPushContinue: "onboarding_push_continue"
+            case .onboardingPushAccepted: "onboarding_push_accepted"
+            case .onboardingPushDenied: "onboarding_push_denied"
+            case .onboardingATTContinue: "onboarding_att_continue"
+            case .onboardingATTAccepted: "onboarding_att_accepted"
+            case .onboardingATTDenied: "onboarding_att_denied"
+            case .onboardingComplete: "onboarding_complete"
             }
         }
     }
@@ -268,9 +270,9 @@ public enum AnalyticsConstants {
 
         public var name: String {
             switch self {
-            case .newsOrder: return "news_order"
-            case .tabOrder: return "tab_order"
-            case .socialOrder: return "social_order"
+            case .newsOrder: "news_order"
+            case .tabOrder: "tab_order"
+            case .socialOrder: "social_order"
             }
         }
     }

@@ -40,7 +40,6 @@ struct MainView: View {
             }
 
             .onAppear {
-                print("==> \(clearOnboarding)")
                 currentlayout = shouldUseSidebar ? .sidebar : .tabbar
                 viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
 
