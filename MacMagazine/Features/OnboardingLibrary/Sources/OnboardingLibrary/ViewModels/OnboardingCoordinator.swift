@@ -38,9 +38,9 @@ public final class OnboardingCoordinator: @MainActor Identifiable {
             currentScreen = screen
         }
 
-//        if screen == .permissions {
-//            markFeaturesAsSeen()
-//        }
+        if screen == .permissions {
+            markFeaturesAsSeen()
+        }
     }
 
     func skipToPermissions() {
@@ -49,7 +49,7 @@ public final class OnboardingCoordinator: @MainActor Identifiable {
             screen: currentScreen.analyticsName
         ))
 
-//        markFeaturesAsSeen()
+        markFeaturesAsSeen()
 
         withAnimation(.easeInOut(duration: 0.3)) {
             currentScreen = .permissions
@@ -98,9 +98,9 @@ public final class OnboardingCoordinator: @MainActor Identifiable {
             )
 
             // If user already saw features, go directly to permissions
-//            if hasSeenFeatures {
-//                coordinator.currentScreen = .permissions
-//            }
+            if hasSeenFeatures {
+                coordinator.currentScreen = .permissions
+            }
             // Otherwise, start from welcome
 
             return coordinator
