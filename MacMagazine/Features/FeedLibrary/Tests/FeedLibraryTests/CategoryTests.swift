@@ -70,7 +70,7 @@ struct CategoryTests {
         // Then
         #expect(query != nil)
         #expect(query?.0 == "cat")
-        #expect(query?.1 == "18")
+        #expect(query?.1 == "9898")
     }
 
     @Test("AppleTV category has correct query")
@@ -84,7 +84,7 @@ struct CategoryTests {
         // Then
         #expect(query != nil)
         #expect(query?.0 == "tag")
-        #expect(query?.1 == "apple-tv-plus")
+        #expect(query?.1 == "apple-tv")
     }
 
     @Test("Reviews category has correct query")
@@ -136,7 +136,7 @@ struct CategoryTests {
         #expect(NewsCategory.all.rawValue == "Todas")
         #expect(NewsCategory.news.rawValue == "Últimas Notícias")
         #expect(NewsCategory.highlights.rawValue == "Destaques")
-        #expect(NewsCategory.appletv.rawValue == "Novidades Apple TV+")
+        #expect(NewsCategory.appletv.rawValue == "Apple TV")
         #expect(NewsCategory.reviews.rawValue == "Reviews")
         #expect(NewsCategory.rumors.rawValue == "Rumores")
         #expect(NewsCategory.tutorials.rawValue == "Tutoriais")

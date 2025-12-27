@@ -49,7 +49,7 @@ struct FeedViewModelTests {
         }
     }
 
-    @Test("getNews should transition from loading to done")
+    @Test("getNews should transition from idle to done")
     func getNewsStatusTransitions() async throws {
         // Given
         let mockData = [
@@ -61,8 +61,8 @@ struct FeedViewModelTests {
         let storage = Database(models: [PodcastDB.self], inMemory: true)
         let sut = FeedViewModel(network: mockNetwork, storage: storage)
 
-        // Initial status should be loading
-        #expect(sut.status == .loading)
+        // Initial status should be idle
+        #expect(sut.status == .idle)
 
         // When
         try await sut.getFeed()

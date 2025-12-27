@@ -24,6 +24,8 @@ let package = Package(
                              package: "OneSignal-XCFramework",
                              condition: .when(platforms: [.iOS, .macOS, .visionOS]))
                 ],
-                resources: [.process("Resources")])
+                resources: [.process("Resources")]),
+        .testTarget(name: "MacMagazineLibraryTests",
+                    dependencies: ["MacMagazineLibrary"])
     ]
 )

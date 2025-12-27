@@ -23,6 +23,8 @@ let package = Package(
                     .product(name: "Analytics", package: "Libraries"),
                     .product(name: "UIComponents", package: "Libraries")
                 ],
-                resources: [.process("Resources")])
+                resources: [.process("Resources")]),
+        .testTarget(name: "OnboardingLibraryTests",
+                    dependencies: ["OnboardingLibrary"])
     ]
 )

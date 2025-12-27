@@ -19,23 +19,23 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Features\/MMLiveLibrary",
-        "identifier" : "MMLiveLibraryTests",
-        "name" : "MMLiveLibraryTests"
+        "containerPath" : "container:Features\/MacMagazineLibrary",
+        "identifier" : "MacMagazineLibraryTests",
+        "name" : "MacMagazineLibraryTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/NewsLibrary",
-        "identifier" : "NewsLibraryTests",
-        "name" : "NewsLibraryTests"
+        "containerPath" : "container:Features\/OnboardingLibrary",
+        "identifier" : "OnboardingLibraryTests",
+        "name" : "OnboardingLibraryTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/FeedLibrary",
-        "identifier" : "FeedLibraryTests",
-        "name" : "FeedLibraryTests"
+        "containerPath" : "container:Features\/SettingsLibrary",
+        "identifier" : "SettingsLibraryTests",
+        "name" : "SettingsLibraryTests"
       }
     },
     {
@@ -47,9 +47,30 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Features\/SettingsLibrary",
-        "identifier" : "SettingsLibraryTests",
-        "name" : "SettingsLibraryTests"
+        "containerPath" : "container:Features\/FeedLibrary",
+        "identifier" : "FeedLibraryTests",
+        "name" : "FeedLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/NewsLibrary",
+        "identifier" : "NewsLibraryTests",
+        "name" : "NewsLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/MMLiveLibrary",
+        "identifier" : "MMLiveLibraryTests",
+        "name" : "MMLiveLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/VideosLibrary",
+        "identifier" : "VideosLibraryTests",
+        "name" : "VideosLibraryTests"
       }
     },
     {
