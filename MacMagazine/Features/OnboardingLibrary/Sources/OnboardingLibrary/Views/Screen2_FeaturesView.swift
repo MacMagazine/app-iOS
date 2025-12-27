@@ -62,7 +62,7 @@ struct FeaturesView: View {
             // Skip button - acts like a toolbar
             OnboardingSkipButton(
                 label: "Pular novidades",
-                hint: "Vai direto para a tela de permissões"
+                hint: "Vá direto para a tela de permissões"
             ) {
                 coordinator.skipToPermissions()
             }
@@ -86,7 +86,7 @@ struct FeaturesView: View {
             logoView
                 .padding(.top, 70)
 
-            Text("Novidades no App MacMagazine")
+            Text("Novidades no app")
                 .font(.title2)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
@@ -114,7 +114,7 @@ struct FeaturesView: View {
             // Left side - Logo and title
             VStack(spacing: 8) {
                 logoView
-                Text("Novidades no App")
+                Text("Novidades no app")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -142,7 +142,7 @@ struct FeaturesView: View {
                             handleContinue()
                         }
                         .accessibilityLabel("Continuar para permissões")
-                        .accessibilityHint("Vai para a tela de permissões")
+                        .accessibilityHint("Vá para a tela de permissões")
                     } else {
                         Spacer()
                         pageIndicator

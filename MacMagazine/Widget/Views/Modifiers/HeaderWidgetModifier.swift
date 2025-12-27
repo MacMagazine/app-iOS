@@ -6,14 +6,15 @@ extension View {
         modifier(OverlayHeaderWidgetModifier())
     }
 
-    func header(title: String) -> some View {
-        modifier(HeaderWidgetModifier(title: title))
+    func header(title: String, spacing: CGFloat) -> some View {
+        modifier(HeaderWidgetModifier(title: title, spacing: spacing))
     }
 }
 
 private struct HeaderWidgetModifier: ViewModifier {
     @Environment(\.widgetRenderingMode) var renderingMode
     let title: String
+    let spacing: CGFloat
 
     var logo: String {
         if renderingMode == .accented {
@@ -24,7 +25,7 @@ private struct HeaderWidgetModifier: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: spacing) {
             HStack(spacing: 0) {
                 Image(logo)
                     .resizable()

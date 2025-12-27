@@ -181,7 +181,7 @@ struct PermissionsView: View {
 
     private var footerSection: some View {
         VStack(spacing: 12) {
-            Text("Você pode alterar essas permissões a qualquer momento nas Configurações do seu dispositivo.")
+            Text("Você pode alterar essas permissões a qualquer momento nos Ajustes do seu dispositivo.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -195,7 +195,7 @@ struct PermissionsView: View {
     }
 
     private var compactFooterText: some View {
-        Text("Altere nas Configurações a qualquer momento.")
+        Text("Altere nos Ajustes a qualquer momento.")
             .font(.caption2)
             .foregroundStyle(.secondary)
             .multilineTextAlignment(.center)

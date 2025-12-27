@@ -29,7 +29,7 @@ struct WelcomeView: View {
         .overlay(alignment: .topTrailing) {
             OnboardingSkipButton(
                 label: "Pular introdução",
-                hint: "Vai direto para a tela de permissões"
+                hint: "Vá direto para a tela de permissões"
             ) {
                 coordinator.skipToPermissions()
             }
@@ -67,7 +67,6 @@ struct WelcomeView: View {
             ctaButton
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
-                .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
         }
     }
 
@@ -92,12 +91,7 @@ struct WelcomeView: View {
 
                 Spacer()
 
-                OnboardingCTAButton("Continuar") {
-                    trackAndNavigate()
-                }
-                .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
-                .accessibilityLabel("Continuar")
-                .accessibilityHint("Avança para ver as novidades do app")
+                ctaButton
             }
             .frame(maxWidth: .infinity)
         }
@@ -137,7 +131,8 @@ struct WelcomeView: View {
             trackAndNavigate()
         }
         .accessibilityLabel("Continuar")
-        .accessibilityHint("Avança para ver as novidades do app")
+        .accessibilityHint("Avançe para ver as novidades do app")
+        .onboardingFade(animateIn, delay: 0.95, duration: 0.45)
     }
 
     // MARK: - Actions

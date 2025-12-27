@@ -30,7 +30,7 @@ public struct OnboardingLogoView: View {
             .background {
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .fill(.regularMaterial)
-                    .shadow(radius: 18, y: 10)
+                    .shadow(radius: 8, y: 8)
             }
             .accessibilityHidden(true)
     }

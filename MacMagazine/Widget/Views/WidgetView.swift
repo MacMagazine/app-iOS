@@ -40,7 +40,17 @@ struct WidgetView: View {
         ForEach(0 ..< min(quantity, content.count),
                 id: \.self) { index in
             WidgetElementView(post: content[index])
-        }.header(title: "Últimas notícias")
+        }.header(title: "Últimas notícias", spacing: widgetFamily.spacing)
         .trackScreen(AnalyticsConstants.Screen.widget(widgetFamily.description).name, analytics: analytics)
+    }
+}
+
+extension WidgetFamily {
+    var spacing: CGFloat {
+        switch self {
+        case .systemMedium: 8
+        case .systemLarge: 4
+        default: 0
+        }
     }
 }

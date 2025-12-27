@@ -109,7 +109,7 @@
 		88C8B2FB2EF476E200044DE9 /* Exceptions for "WatchWidget" folder in "WatchWidget" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 88C8B2E52EF476E100044DE9 /* WatchWidget */;
 		};
@@ -130,7 +130,7 @@
 		9BDD42652EE9E83100A9BD85 /* Exceptions for "Widget" folder in "Widget" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 9BDD424C2EE9E82F00A9BD85 /* Widget */;
 		};
@@ -530,12 +530,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WatchWidget/WatchWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchWidget/Resources/WatchWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WatchWidget/Info.plist;
+				INFOPLIST_FILE = WatchWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -564,12 +564,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WatchWidget/WatchWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchWidget/Resources/WatchWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WatchWidget/Info.plist;
+				INFOPLIST_FILE = WatchWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -798,7 +798,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/Resources/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
@@ -833,7 +833,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/Resources/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
@@ -871,7 +871,7 @@
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_FILE = Widget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
@@ -902,7 +902,7 @@
 				CURRENT_PROJECT_VERSION = 5.1.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_FILE = Widget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;

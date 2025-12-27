@@ -17,8 +17,8 @@ public extension OnBoardingFeature {
         ),
         OnBoardingFeature(
             symbol: "ipad.and.iphone",
-            title: "Dispositivos suportados",
-            subTitle: "iPhone, iPad, Mac e Apple Watch"
+            title: "iPhone, iPad, Mac e Apple Watch",
+            subTitle: "Experiências diferentes, pensadas para cada dispositivo."
         ),
         OnBoardingFeature(
             symbol: "apple.podcasts.pages",
@@ -45,11 +45,11 @@ public extension OnBoardingFeature {
             title: "Sincronização com iCloud",
             subTitle: "Preferências sincronizadas em todos os seus dispositivos."
         ),
-        OnBoardingFeature(
-            symbol: "applewatch",
-            title: "Novo app para Apple Watch",
-            subTitle: "Fique informado diretamente no pulso."
-        ),
+//        OnBoardingFeature(
+//            symbol: "applewatch",
+//            title: "Novo app para Apple Watch",
+//            subTitle: "Fique informado diretamente no pulso."
+//        ),
         OnBoardingFeature(
             symbol: "square.grid.2x2.fill",
             title: "Widgets lindos…",
