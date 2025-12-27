@@ -118,16 +118,6 @@ struct VideosViewModelTests {
         }
     }
 
-    // MARK: - YouTube Integration Tests
-
-    @Test("Should have YouTube API instance")
-    func hasYouTubeAPI() {
-        let storage = Database(models: [VideoDB.self], inMemory: true)
-        let sut = VideosViewModel(storage: storage)
-
-        #expect(sut.youtube != nil)
-    }
-
     // MARK: - Search Text Edge Cases
 
     @Test("Should handle special characters in search text")

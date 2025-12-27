@@ -489,7 +489,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Skipping SwiftLint for previews\"\n  exit 0\nfi\n\nexport PATH=\"/opt/homebrew/bin:$PATH\"\n\nif which swiftlint > /dev/null; then\n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  exit 0\nfi\n\nexport PATH=\"/opt/homebrew/bin:$PATH\"\n\nif which swiftlint > /dev/null; then\n  swiftlint --config ../.swiftlint.yml\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
