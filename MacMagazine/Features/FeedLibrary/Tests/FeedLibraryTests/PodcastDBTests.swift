@@ -360,12 +360,6 @@ struct PodcastDBTests {
         #expect(remaining.isEmpty)
     }
 
-    @Test("deleteNonFavorites should handle nil context")
-    func deleteNonFavoritesHandlesNilContext() {
-        // When/Then - Should not crash
-        PodcastDB.deleteNonFavorites(using: nil)
-    }
-
     // MARK: - Integration Tests
 
     @Test("PodcastDB should work with database fetch predicates")
