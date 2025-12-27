@@ -53,7 +53,7 @@ O projeto usa Firebase para analytics. Execute o script de configuração:
 
 Isso cria um arquivo de configuração local com valores de placeholder. O app funciona normalmente sem credenciais reais do Firebase.
 
-Para mais detalhes, consulte [Support/Scripts/README.md](Support/Scripts/README.md).
+Para mais detalhes, consulte [Support/FIREBASE.md](Support/FIREBASE.md).
 
 ### 3. Abra o projeto no Xcode
 
