@@ -104,7 +104,7 @@ import UIKit
 
 @MainActor
 public enum PushNotificationDefinition {
-    public static var options: [UIApplication.LaunchOptionsKey: Any]? = nil
+    public static var options: [UIApplication.LaunchOptionsKey: Any]?
 }
 
 public extension PushNotification {
