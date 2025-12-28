@@ -111,7 +111,7 @@ private extension WidgetElementView {
                 Spacer()
             }
             .frame(height: 20)
-            .padding(.top)
+            .padding(.top, 14)
 
             Spacer()
 
