@@ -15,11 +15,13 @@ struct NewsView: View {
     @State private var category = false
     @State private var scrollPosition = ScrollPosition()
     @State private var newsCategory = NewsCategory.all
+    @State private var isTransitioning = false
 
     var body: some View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
+                .opacity(isTransitioning ? 0 : 1)
         }
         .navigationTitle("Notícias")
         .toolbar(show: !shouldUseSidebar, menu: favoriteButton, options: categoriesButton)
@@ -28,11 +30,25 @@ struct NewsView: View {
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.33)])
         }
-        .task(id: viewModel.news) {
-            withAnimation(.easeInOut(duration: 0.4)) {
-                newsCategory = viewModel.news.toNewsCategory
-                category = false
+        .onChange(of: viewModel.news) { _, newValue in
+            let newCategory = newValue.toNewsCategory
+            guard newsCategory != newCategory else { return }
+
+            withAnimation(.easeOut(duration: 0.15)) {
+                isTransitioning = true
             }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                newsCategory = newCategory
+                category = false
+
+                withAnimation(.easeIn(duration: 0.2)) {
+                    isTransitioning = false
+                }
+            }
+        }
+        .onAppear {
+            newsCategory = viewModel.news.toNewsCategory
         }
     }
 }
