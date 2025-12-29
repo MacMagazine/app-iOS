@@ -32,7 +32,7 @@ struct FeaturesView: View {
     }
 
     private var cardsPerPage: Int {
-        isLandscape ? 6 : 4
+        4
     }
 
     private var gridColumns: [GridItem] {
