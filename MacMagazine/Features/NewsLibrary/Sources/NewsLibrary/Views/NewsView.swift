@@ -21,7 +21,29 @@ public struct NewsView: View {
 
     @State private var search: String = ""
 
-    @Query private var news: [FeedDB]
+    @Query(sort: \FeedDB.pubDate, order: .reverse)
+    private var allNews: [FeedDB]
+
+    /// Filtered highlights from allNews
+    private var highlights: [FeedDB] {
+        allNews.filter { $0.categories.contains("Destaques") }
+    }
+
+    /// Filtered news based on favorite and category
+    private var news: [FeedDB] {
+        var filtered = favorite ? allNews.filter { $0.favorite } : allNews
+
+        if category != .all {
+            filtered = filtered.filter { $0.categories.contains(category.filterKey) }
+        }
+
+        return filtered
+    }
+
+    /// Show highlights only when not filtering and category is "all"
+    private var shouldShowHighlights: Bool {
+        !favorite && category == .all && !highlights.isEmpty
+    }
 
     public init(
         storage: Database,
@@ -33,17 +55,6 @@ public struct NewsView: View {
         _favorite = favorite
         _category = category
         _scrollPosition = scrollPosition
-
-        let favorite = favorite.wrappedValue
-        let predicate = #Predicate<FeedDB> {
-            $0.favorite == favorite
-        }
-        _news = Query(
-            filter: favorite ? predicate : nil,
-            sort: \FeedDB.pubDate,
-            order: .reverse,
-            animation: .smooth
-        )
     }
 
     public var body: some View {
@@ -61,6 +72,7 @@ public struct NewsView: View {
             }
     }
 }
+
 extension NewsView {
     @ViewBuilder
     var content: some View {
@@ -70,13 +82,7 @@ extension NewsView {
             }
         }
 
-        let news = if category == .all {
-            news
-        } else {
-            news.filter { $0.categories.contains(category.filterKey) }
-        }
-
-        CollectionView(
+        CollectionViewWithHeader(
             title: "Notícias",
             status: viewModel.status,
             usesDensity: true,
@@ -84,6 +90,14 @@ extension NewsView {
             favorite: favorite,
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? news.count : 0,
+            header: {
+                if shouldShowHighlights {
+                    FeedHighlightsCarouselView(
+                        highlights: Array(highlights.prefix(10)),
+                        onTap: { _ in }
+                    )
+                }
+            },
             content: {
                 ForEach(
                     0..<news.count,
@@ -111,3 +125,37 @@ extension NewsView {
         )
     }
 }
+
+// MARK: - Preview
+
+#if DEBUG
+#Preview {
+    NewsViewPreview()
+}
+
+private struct NewsViewPreview: View {
+    @State private var favorite = false
+    @State private var category: NewsCategory = .all
+    @State private var scrollPosition = ScrollPosition()
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 0) {
+                FeedHighlightsCarouselView(
+                    highlights: PreviewData.sampleHighlights,
+                    onTap: { _ in }
+                )
+                .padding(.bottom, 16)
+
+                Spacer()
+
+                Text("CollectionView apareceria aqui")
+                    .foregroundStyle(.secondary)
+
+                Spacer()
+            }
+            .navigationTitle("Notícias")
+        }
+    }
+}
+#endif
