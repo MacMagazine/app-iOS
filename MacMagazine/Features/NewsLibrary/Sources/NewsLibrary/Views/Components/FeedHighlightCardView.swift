@@ -89,7 +89,7 @@ public struct FeedHighlightCardView: View {
     private var dateLabel: some View {
         HStack(spacing: 6) {
             Image(systemName: "calendar")
-            Text(post.pubDate.feedDateTimeDisplay)
+            Text(post.pubDate.toTimeAgoDisplay(showTime: true))
         }
         .font(.subheadline)
         .foregroundStyle(.white.opacity(0.85))
@@ -102,7 +102,7 @@ public struct FeedHighlightCardView: View {
         if post.favorite {
             label += ", favoritado"
         }
-        label += ", publicado em \(post.pubDate.formatted(as: "dd 'de' MMMM 'de' yyyy 'às' HH:mm"))"
+        label += ", publicado em \(post.pubDate.toTimeAgoDisplay(showTime: true))"
         return label
     }
 
