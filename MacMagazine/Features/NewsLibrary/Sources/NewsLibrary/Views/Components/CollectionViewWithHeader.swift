@@ -1,4 +1,3 @@
-// TODO: Migrate to the CollectionView component located in Libraries
 import SwiftUI
 import UIComponentsLibrary
 
