@@ -230,9 +230,7 @@ extension NewsView {
 
     // MARK: - Actions
 
-    private func handleHighlightTap(_ post: FeedDB) {
-        // TODO: Implement highlight tap navigation
-    }
+    private func handleHighlightTap(_ post: FeedDB) {}
 }
 
 // MARK: - Preview
