@@ -14,7 +14,8 @@ struct FeedHighlightsVerticalView: View {
     let isAutoScrollEnabled: Bool
     let onTap: (FeedDB) -> Void
 
-    @State private var currentIndex: Int = 0
+    @Binding var currentIndex: Int
+
     @State private var dragOffset: CGFloat = 0
     @State private var timer: Timer?
     @State private var lastInteractionDate = Date()
@@ -38,12 +39,16 @@ struct FeedHighlightsVerticalView: View {
 
     // MARK: - Initialization
 
+    // MARK: - Initialization
+
     init(
         highlights: [FeedDB],
+        currentIndex: Binding<Int>,
         isAutoScrollEnabled: Bool = false,
         onTap: @escaping (FeedDB) -> Void
     ) {
         self.highlights = highlights
+        self._currentIndex = currentIndex
         self.isAutoScrollEnabled = isAutoScrollEnabled
         self.onTap = onTap
     }
@@ -264,6 +269,7 @@ struct FeedHighlightsVerticalView: View {
 #Preview("Vertical Highlights") {
     FeedHighlightsVerticalView(
         highlights: PreviewData.sampleHighlights,
+        currentIndex: .constant(0),
         isAutoScrollEnabled: false,
         onTap: { _ in }
     )
@@ -274,6 +280,7 @@ struct FeedHighlightsVerticalView: View {
     HStack(spacing: 0) {
         FeedHighlightsVerticalView(
             highlights: PreviewData.sampleHighlights,
+            currentIndex: .constant(0),
             isAutoScrollEnabled: false,
             onTap: { _ in }
         )

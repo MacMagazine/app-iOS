@@ -36,6 +36,7 @@ public struct NewsView: View {
     @Binding var scrollPosition: ScrollPosition
 
     @State private var search: String = ""
+    @State private var highlightIndex: Int = 0
 
     @Query(sort: \FeedDB.pubDate, order: .reverse)
     private var allNews: [FeedDB]
@@ -145,6 +146,7 @@ extension NewsView {
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: Array(highlights.prefix(highlightsLimit)),
+                        currentIndex: $highlightIndex,
                         isAutoScrollEnabled: isAutoScrollEnabled,
                         onTap: { post in
                             handleHighlightTap(post)
@@ -173,6 +175,7 @@ extension NewsView {
             // Left column: Highlights (vertical scroll)
             FeedHighlightsVerticalView(
                 highlights: Array(highlights.prefix(highlightsLimit)),
+                currentIndex: $highlightIndex,
                 isAutoScrollEnabled: isAutoScrollEnabled,
                 onTap: { post in
                     handleHighlightTap(post)
@@ -230,7 +233,7 @@ extension NewsView {
 
     // MARK: - Actions
 
-    private func handleHighlightTap(_ post: FeedDB) {}
+    private func handleHighlightTap(_ post: FeedDB) { }
 }
 
 // MARK: - Preview
@@ -268,6 +271,8 @@ private struct NewsViewPreviewContent: View {
     @Binding var category: NewsCategory
     @Binding var scrollPosition: ScrollPosition
 
+    @State private var highlightIndex: Int = 0
+
     private var isLandscape: Bool {
         verticalSizeClass == .compact
     }
@@ -277,6 +282,7 @@ private struct NewsViewPreviewContent: View {
             HStack(spacing: 0) {
                 FeedHighlightsVerticalView(
                     highlights: PreviewData.sampleHighlights,
+                    currentIndex: $highlightIndex,
                     onTap: { _ in }
                 )
                 .frame(maxWidth: .infinity)
@@ -300,6 +306,7 @@ private struct NewsViewPreviewContent: View {
             VStack(spacing: 0) {
                 FeedHighlightsCarouselView(
                     highlights: PreviewData.sampleHighlights,
+                    currentIndex: $highlightIndex,
                     onTap: { _ in }
                 )
                 .padding(.bottom, 16)

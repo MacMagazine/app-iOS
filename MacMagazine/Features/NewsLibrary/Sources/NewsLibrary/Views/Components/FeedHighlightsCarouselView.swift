@@ -14,11 +14,12 @@ public struct FeedHighlightsCarouselView: View {
     let isAutoScrollEnabled: Bool
     let onTap: (FeedDB) -> Void
 
+    @Binding var currentIndex: Int
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.isSidebarVisible) private var isSidebarVisible
 
-    @State private var currentIndex: Int = 0
     @State private var dragOffset: CGFloat = 0
     @State private var timer: Timer?
     @State private var lastInteractionDate = Date()
@@ -101,10 +102,12 @@ public struct FeedHighlightsCarouselView: View {
 
     public init(
         highlights: [FeedDB],
+        currentIndex: Binding<Int>,
         isAutoScrollEnabled: Bool = false,
         onTap: @escaping (FeedDB) -> Void
     ) {
         self.highlights = highlights
+        self._currentIndex = currentIndex
         self.isAutoScrollEnabled = isAutoScrollEnabled
         self.onTap = onTap
     }
@@ -361,6 +364,7 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
+                currentIndex: .constant(0),
                 isAutoScrollEnabled: false,
                 onTap: { _ in }
             )
@@ -377,6 +381,7 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
+                currentIndex: .constant(0),
                 isAutoScrollEnabled: false,
                 onTap: { _ in }
             )
@@ -393,6 +398,7 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
+                currentIndex: .constant(0),
                 isAutoScrollEnabled: false,
                 onTap: { _ in }
             )
