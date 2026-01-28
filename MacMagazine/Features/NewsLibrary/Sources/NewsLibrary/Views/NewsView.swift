@@ -20,6 +20,7 @@ public struct NewsView: View {
     @Binding var scrollPosition: ScrollPosition
 
     @State private var search: String = ""
+    @State private var readingNews = false
 
     @Query private var news: [FeedDB]
 
@@ -59,6 +60,9 @@ public struct NewsView: View {
                     sessionState.hasFetchedFeed = true
                 }
             }
+            .navigationDestination(isPresented: $readingNews) {
+                MMWebView(url: viewModel.selectedNews?.link)
+            }
     }
 }
 extension NewsView {
@@ -95,6 +99,9 @@ extension NewsView {
                         screen: nil,
                         style: category.style
                     )) {
+                        viewModel.selectedNews = news[index]
+                        readingNews.toggle()
+
                         analytics.track(.buttonTap(
                             buttonId: AnalyticsConstants.ButtonID.newsStarted(postId: Int(news[index].postId) ?? 0).id,
                             screen: AnalyticsConstants.Screen.news.name

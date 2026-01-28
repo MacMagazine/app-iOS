@@ -10,6 +10,7 @@ import UIComponentsLibrary
 class NewsViewModel {
     var options: Options = .home
     var status: APIStatus = .idle
+    var selectedNews: FeedDB? = nil
 
     enum Options: Equatable {
         case home
