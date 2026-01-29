@@ -61,7 +61,7 @@ public struct NewsView: View {
                 }
             }
             .navigationDestination(isPresented: $readingNews) {
-                MMWebView(url: viewModel.selectedNews?.link)
+                newsDetailView
             }
     }
 }
@@ -116,5 +116,22 @@ extension NewsView {
             },
             retryAction: favorite ? nil : retryAction
         )
+    }
+}
+
+extension NewsView {
+    @ViewBuilder
+    var newsDetailView: some View {
+        MMWebView(url: viewModel.selectedNews?.link)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    if let urlString = viewModel.selectedNews?.link,
+                    let url = URL(string: urlString) {
+                        ShareLink(item: url) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    }
+                }
+            }
     }
 }
