@@ -358,4 +358,3 @@ private func createMockNetwork() -> [NetworkMockData] {
         )
     ]
 }
-
