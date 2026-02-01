@@ -14,13 +14,14 @@ extension NewsCategory {
     public var style: CardStyle? {
         switch self {
         case .highlights: .highlight
-        case .news, .all: nil
+        case .news: .leadingImage
         case .podcast: .glass
         case .youtube: .glass
         case .appletv: .leadingImage
         case .reviews: .highlight
-        case .tutorials: .simple
+        case .tutorials: .leadingImage
         case .rumors: .simple
+        case .all: nil
         }
     }
 }
