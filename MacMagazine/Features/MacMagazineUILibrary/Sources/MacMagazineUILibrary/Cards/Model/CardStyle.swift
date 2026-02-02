@@ -20,7 +20,7 @@ extension NewsCategory {
         case .appletv: .leadingImage
         case .reviews: .highlight
         case .tutorials: .leadingImage
-        case .rumors: .simple
+        case .rumors: .leadingImage
         case .all: nil
         }
     }
