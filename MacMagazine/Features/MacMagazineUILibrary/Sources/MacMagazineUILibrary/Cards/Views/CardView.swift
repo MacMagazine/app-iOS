@@ -146,6 +146,10 @@ private extension CardView {
                 image: "calendar",
                 text: data.pubDate.toTimeAgoDisplay(showTime: true)
             )
+            
+            Spacer()
+            
+            Text(data.type.categories.mostRelevant.rawValue)
         }
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)
