@@ -36,48 +36,12 @@ public struct NewsView: View {
     @Binding var scrollPosition: ScrollPosition
 
     @State private var search: String = ""
+    @State private var readingNews = false
+
     @State private var highlightIndex: Int = 0
 
     @Query(sort: \FeedDB.pubDate, order: .reverse)
     private var allNews: [FeedDB]
-
-    // MARK: - Computed Properties
-
-    /// Check if device is iPad
-    private var isIPad: Bool {
-        horizontalSizeClass == .regular && verticalSizeClass == .regular
-    }
-
-    /// Check if device is in landscape mode (iPhone only)
-    private var isLandscape: Bool {
-        verticalSizeClass == .compact
-    }
-
-    /// Number of highlights to show (30 for iPad, 10 for iPhone)
-    private var highlightsLimit: Int {
-        isIPad ? 30 : 10
-    }
-
-    /// Filtered highlights from allNews
-    private var highlights: [FeedDB] {
-        allNews.filter { $0.categories.contains("Destaques") }
-    }
-
-    /// Filtered news based on favorite and category
-    private var news: [FeedDB] {
-        var filtered = favorite ? allNews.filter { $0.favorite } : allNews
-
-        if category != .all {
-            filtered = filtered.filter { $0.categories.contains(category.filterKey) }
-        }
-
-        return filtered
-    }
-
-    /// Show highlights only when not filtering and category is "all"
-    private var shouldShowHighlights: Bool {
-        !favorite && category == .all && !highlights.isEmpty
-    }
 
     // MARK: - Initialization
 
@@ -108,13 +72,15 @@ public struct NewsView: View {
                     sessionState.hasFetchedFeed = true
                 }
             }
+            .navigationDestination(isPresented: $readingNews) {
+                newsDetailView
+            }
     }
 }
 
 // MARK: - Content
 
 extension NewsView {
-
     @ViewBuilder
     var content: some View {
         if isLandscape && shouldShowHighlights {
@@ -208,20 +174,16 @@ extension NewsView {
     @ViewBuilder
     private var newsCards: some View {
         ForEach(0..<news.count, id: \.self) { index in
-            NewsCard(
-                data: news[index].toCardContent(
-                    using: modelContext,
-                    analytics: analytics,
-                    screen: nil,
-                    style: category.style
-                )
-            ) {
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.newsStarted(
-                        postId: Int(news[index].postId) ?? 0
-                    ).id,
-                    screen: AnalyticsConstants.Screen.news.name
-                ))
+            NewsCard(data: news[index].toCardContent(using: modelContext,
+                                                     analytics: analytics,
+                                                     screen: nil,
+                                                     style: category.style)) {
+                viewModel.selectedNews = news[index]
+                readingNews.toggle()
+
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.newsStarted(
+                    postId: Int(news[index].postId) ?? 0).id,
+                                           screen: AnalyticsConstants.Screen.news.name))
             }
             .onAppear {
                 if !favorite && search.isEmpty {
@@ -230,10 +192,72 @@ extension NewsView {
             }
         }
     }
+}
 
-    // MARK: - Actions
+// MARK: - Actions
 
+extension NewsView {
     private func handleHighlightTap(_ post: FeedDB) { }
+}
+
+// MARK: - Details
+
+extension NewsView {
+    @ViewBuilder
+    var newsDetailView: some View {
+        MMWebView(url: viewModel.selectedNews?.link)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    if let urlString = viewModel.selectedNews?.link,
+                       let url = URL(string: urlString) {
+                        ShareLink(item: url) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    }
+                }
+            }
+    }
+}
+
+// MARK: - Computed Properties
+
+extension NewsView {
+
+    /// Check if device is iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular && verticalSizeClass == .regular
+    }
+
+    /// Check if device is in landscape mode (iPhone only)
+    private var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
+
+    /// Number of highlights to show (30 for iPad, 10 for iPhone)
+    private var highlightsLimit: Int {
+        isIPad ? 30 : 10
+    }
+
+    /// Filtered highlights from allNews
+    private var highlights: [FeedDB] {
+        allNews.filter { $0.categories.contains("Destaques") }
+    }
+
+    /// Filtered news based on favorite and category
+    private var news: [FeedDB] {
+        var filtered = favorite ? allNews.filter { $0.favorite } : allNews
+
+        if category != .all {
+            filtered = filtered.filter { $0.categories.contains(category.filterKey) }
+        }
+
+        return filtered
+    }
+
+    /// Show highlights only when not filtering and category is "all"
+    private var shouldShowHighlights: Bool {
+        !favorite && category == .all && !highlights.isEmpty
+    }
 }
 
 // MARK: - Preview
