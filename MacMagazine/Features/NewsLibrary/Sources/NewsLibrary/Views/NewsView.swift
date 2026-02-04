@@ -7,11 +7,27 @@ import SwiftData
 import SwiftUI
 import UIComponentsLibrary
 
+// MARK: - News View
+
 public struct NewsView: View {
+
+    // MARK: - Feature Flags
+
+    /// Enable or disable auto-scroll for highlights carousel.
+    /// Set to `true` to enable automatic advancement of cards.
+    private let isAutoScrollEnabled = false
+
+    // MARK: - Environment
+
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+
     @EnvironmentObject private var sessionState: SessionState
     @EnvironmentObject private var analytics: AnalyticsManager
+
+    // MARK: - Properties
 
     var viewModel: NewsViewModel
 
@@ -22,7 +38,12 @@ public struct NewsView: View {
     @State private var search: String = ""
     @State private var readingNews = false
 
-    @Query private var news: [FeedDB]
+    @State private var highlightIndex: Int = 0
+
+    @Query(sort: \FeedDB.pubDate, order: .reverse)
+    private var allNews: [FeedDB]
+
+    // MARK: - Initialization
 
     public init(
         storage: Database,
@@ -34,18 +55,9 @@ public struct NewsView: View {
         _favorite = favorite
         _category = category
         _scrollPosition = scrollPosition
-
-        let favorite = favorite.wrappedValue
-        let predicate = #Predicate<FeedDB> {
-            $0.favorite == favorite
-        }
-        _news = Query(
-            filter: favorite ? predicate : nil,
-            sort: \FeedDB.pubDate,
-            order: .reverse,
-            animation: .smooth
-        )
     }
+
+    // MARK: - Body
 
     public var body: some View {
         content
@@ -65,22 +77,30 @@ public struct NewsView: View {
             }
     }
 }
+
+// MARK: - Content
+
 extension NewsView {
     @ViewBuilder
     var content: some View {
+        if isLandscape && shouldShowHighlights {
+            landscapeContent
+        } else {
+            portraitContent
+        }
+    }
+
+    // MARK: - Portrait Layout
+
+    @ViewBuilder
+    private var portraitContent: some View {
         let retryAction: () -> Void = {
             Task {
                 try? await viewModel.getNews()
             }
         }
 
-        let news = if category == .all {
-            news
-        } else {
-            news.filter { $0.categories.contains(category.filterKey) }
-        }
-
-        CollectionView(
+        CollectionViewWithHeader(
             title: "Notícias",
             status: viewModel.status,
             usesDensity: true,
@@ -88,36 +108,99 @@ extension NewsView {
             favorite: favorite,
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? news.count : 0,
-            content: {
-                ForEach(
-                    0..<news.count,
-                    id: \.self
-                ) { index in
-                    NewsCard(data: news[index].toCardContent(
-                        using: modelContext,
-                        analytics: analytics,
-                        screen: nil,
-                        style: category.style
-                    )) {
-                        viewModel.selectedNews = news[index]
-                        readingNews.toggle()
-
-                        analytics.track(.buttonTap(
-                            buttonId: AnalyticsConstants.ButtonID.newsStarted(postId: Int(news[index].postId) ?? 0).id,
-                            screen: AnalyticsConstants.Screen.news.name
-                        ))
-                    }
-                    .onAppear {
-                        if !favorite && search.isEmpty {
-                            viewModel.loadMoreIfNeeded(index: index)
+            header: {
+                if shouldShowHighlights {
+                    FeedHighlightsCarouselView(
+                        highlights: Array(highlights.prefix(highlightsLimit)),
+                        currentIndex: $highlightIndex,
+                        isAutoScrollEnabled: isAutoScrollEnabled,
+                        onTap: { post in
+                            handleHighlightTap(post)
                         }
-                    }
+                    )
                 }
+            },
+            content: {
+                newsCards
             },
             retryAction: favorite ? nil : retryAction
         )
     }
+
+    // MARK: - Landscape Layout
+
+    @ViewBuilder
+    private var landscapeContent: some View {
+        let retryAction: () -> Void = {
+            Task {
+                try? await viewModel.getNews()
+            }
+        }
+
+        HStack(spacing: 0) {
+            // Left column: Highlights (vertical scroll)
+            FeedHighlightsVerticalView(
+                highlights: Array(highlights.prefix(highlightsLimit)),
+                currentIndex: $highlightIndex,
+                isAutoScrollEnabled: isAutoScrollEnabled,
+                onTap: { post in
+                    handleHighlightTap(post)
+                }
+            )
+            .frame(maxWidth: .infinity)
+
+            Divider()
+
+            // Right column: Feed
+            CollectionViewWithHeader(
+                title: "Notícias",
+                status: viewModel.status,
+                usesDensity: true,
+                scrollPosition: $scrollPosition,
+                favorite: favorite,
+                isSearching: !search.isEmpty,
+                quantity: search.isEmpty ? news.count : 0,
+                content: {
+                    newsCards
+                },
+                retryAction: favorite ? nil : retryAction
+            )
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    // MARK: - News Cards
+
+    @ViewBuilder
+    private var newsCards: some View {
+        ForEach(0..<news.count, id: \.self) { index in
+            NewsCard(data: news[index].toCardContent(using: modelContext,
+                                                     analytics: analytics,
+                                                     screen: nil,
+                                                     style: category.style)) {
+                viewModel.selectedNews = news[index]
+                readingNews.toggle()
+
+                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.newsStarted(
+                    postId: Int(news[index].postId) ?? 0).id,
+                                           screen: AnalyticsConstants.Screen.news.name))
+            }
+            .onAppear {
+                if !favorite && search.isEmpty {
+                    viewModel.loadMoreIfNeeded(index: index)
+                }
+            }
+        }
+    }
 }
+
+// MARK: - Actions
+
+extension NewsView {
+    private func handleHighlightTap(_ post: FeedDB) { }
+}
+
+// MARK: - Details
 
 extension NewsView {
     @ViewBuilder
@@ -126,7 +209,7 @@ extension NewsView {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     if let urlString = viewModel.selectedNews?.link,
-                    let url = URL(string: urlString) {
+                       let url = URL(string: urlString) {
                         ShareLink(item: url) {
                             Image(systemName: "square.and.arrow.up")
                         }
@@ -135,3 +218,131 @@ extension NewsView {
             }
     }
 }
+
+// MARK: - Computed Properties
+
+extension NewsView {
+
+    /// Check if device is iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular && verticalSizeClass == .regular
+    }
+
+    /// Check if device is in landscape mode (iPhone only)
+    private var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
+
+    /// Number of highlights to show (30 for iPad, 10 for iPhone)
+    private var highlightsLimit: Int {
+        isIPad ? 30 : 10
+    }
+
+    /// Filtered highlights from allNews
+    private var highlights: [FeedDB] {
+        allNews.filter { $0.categories.contains("Destaques") }
+    }
+
+    /// Filtered news based on favorite and category
+    private var news: [FeedDB] {
+        var filtered = favorite ? allNews.filter { $0.favorite } : allNews
+
+        if category != .all {
+            filtered = filtered.filter { $0.categories.contains(category.filterKey) }
+        }
+
+        return filtered
+    }
+
+    /// Show highlights only when not filtering and category is "all"
+    private var shouldShowHighlights: Bool {
+        !favorite && category == .all && !highlights.isEmpty
+    }
+}
+
+// MARK: - Preview
+
+#if DEBUG
+#Preview("Portrait") {
+    NewsViewPreview()
+}
+
+#Preview("Landscape", traits: .landscapeLeft) {
+    NewsViewPreview()
+}
+
+private struct NewsViewPreview: View {
+    @State private var favorite = false
+    @State private var category: NewsCategory = .all
+    @State private var scrollPosition = ScrollPosition()
+
+    var body: some View {
+        NavigationStack {
+            NewsViewPreviewContent(
+                favorite: $favorite,
+                category: $category,
+                scrollPosition: $scrollPosition
+            )
+            .navigationTitle("Notícias")
+        }
+    }
+}
+
+private struct NewsViewPreviewContent: View {
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+
+    @Binding var favorite: Bool
+    @Binding var category: NewsCategory
+    @Binding var scrollPosition: ScrollPosition
+
+    @State private var highlightIndex: Int = 0
+
+    private var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
+
+    var body: some View {
+        if isLandscape {
+            HStack(spacing: 0) {
+                FeedHighlightsVerticalView(
+                    highlights: PreviewData.sampleHighlights,
+                    currentIndex: $highlightIndex,
+                    onTap: { _ in }
+                )
+                .frame(maxWidth: .infinity)
+
+                Divider()
+
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(0..<10, id: \.self) { index in
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(height: 100)
+                                .overlay(Text("Card \(index)"))
+                        }
+                    }
+                    .padding()
+                }
+                .frame(maxWidth: .infinity)
+            }
+        } else {
+            VStack(spacing: 0) {
+                FeedHighlightsCarouselView(
+                    highlights: PreviewData.sampleHighlights,
+                    currentIndex: $highlightIndex,
+                    onTap: { _ in }
+                )
+                .padding(.bottom, 16)
+
+                Spacer()
+
+                Text("Feed apareceria aqui")
+                    .foregroundStyle(.secondary)
+
+                Spacer()
+            }
+        }
+    }
+}
+#endif
