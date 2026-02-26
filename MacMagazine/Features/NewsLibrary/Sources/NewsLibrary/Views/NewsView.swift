@@ -174,11 +174,19 @@ extension NewsView {
     @ViewBuilder
     private var newsCards: some View {
         ForEach(0..<news.count, id: \.self) { index in
-            NewsCard(data: news[index].toCardContent(using: modelContext,
-                                                     analytics: analytics,
-                                                     screen: nil,
-                                                     style: category.style)) {
-                handleTap(news[index])
+            Group {
+                if !shouldShowHighlights,
+                   news[index].categories.contains("NewsCategoryHighlights") {
+                    FeedHighlightCardView(post: news[index])
+                        .frame(height: 240)
+                } else {
+                    NewsCard(data: news[index].toCardContent(using: modelContext,
+                                                             analytics: analytics,
+                                                             screen: nil,
+                                                             style: category.style)) {
+                        handleTap(news[index])
+                    }
+                }
             }
             .onAppear {
                 if !favorite && search.isEmpty {
@@ -274,7 +282,7 @@ extension NewsView {
 
     /// Filtered highlights from allNews
     private var highlights: [FeedDB] {
-        allNews.filter { $0.categories.contains("Destaques") }
+        allNews.filter { $0.categories.contains("NewsCategoryHighlights") }
     }
 
     /// Filtered news based on favorite and category
