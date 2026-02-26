@@ -26,7 +26,7 @@ public struct GlassCardView: View {
             buttons
         }
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .cardSize { value in
+        .contentWidth { value in
             cardWidth = value
         }
     }
@@ -104,12 +104,19 @@ private extension GlassCardView {
 private extension GlassCardView {
     @ViewBuilder
     func thumbnail(_ imageUrl: URL) -> some View {
-        GeometryReader { geo in
-            CachedAsyncImage(image: imageUrl, contentMode: .fill)
-                .frame(height: geo.size.width * 9 / 16)
-                .cornerRadius(12)
+        if let ratio = data.aspectRatio {
+            GeometryReader { geo in
+                CachedAsyncImage(image: imageUrl, contentMode: .fill)
+                    .frame(height: geo.size.width / ratio)
+                    .cornerRadius(12)
+            }
+            .aspectRatio(ratio, contentMode: .fit)
+        } else {
+            GeometryReader { geo in
+                CachedAsyncImage(image: imageUrl, contentMode: .fill)
+                    .frame(width: geo.size.width, height: geo.size.height)
+            }
         }
-        .aspectRatio(16 / 9, contentMode: .fit)
     }
 }
 
@@ -197,10 +204,13 @@ private extension GlassCardView {
         .foregroundStyle(.white.opacity(0.9))
     }
 
+    @ViewBuilder
     var duration: some View {
-        MetadataDuration(text: data.type.duration)
-            .lineLimit(1)
-            .layoutPriority(0)
+        if !data.type.duration.isEmpty {
+            MetadataDuration(text: data.type.duration)
+                .lineLimit(1)
+                .layoutPriority(0)
+        }
     }
 }
 

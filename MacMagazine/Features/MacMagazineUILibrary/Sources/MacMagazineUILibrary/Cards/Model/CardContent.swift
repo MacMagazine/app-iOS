@@ -72,6 +72,10 @@ public struct CardContent {
     public let favorite: Bool
     public let favoriteAction: () -> Void
 
+    /// The aspect ratio for the card thumbnail.
+    /// When `nil`, the thumbnail fills its parent frame (useful for externally-sized cards like carousels).
+    public let aspectRatio: CGFloat?
+
     public init(
         type: CardContentType,
         analytics: AnalyticsManager? = nil,
@@ -80,6 +84,7 @@ public struct CardContent {
         artworkUrl: String,
         urlToShare: String,
         favorite: Bool,
+        aspectRatio: CGFloat? = 16 / 9,
         favoriteAction: @escaping () -> Void
     ) {
         self.type = type
@@ -89,6 +94,7 @@ public struct CardContent {
         self.urlToShare = urlToShare
         self.artworkUrl = artworkUrl
         self.favorite = favorite
+        self.aspectRatio = aspectRatio
         self.favoriteAction = favoriteAction
     }
 }

@@ -23,7 +23,7 @@ struct SimpleCard: View {
         content
             .background(.background)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            .cardSize { value in
+            .contentWidth { value in
                 cardWidth = value
             }
     }

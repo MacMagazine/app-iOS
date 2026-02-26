@@ -10,7 +10,8 @@ extension FeedDB {
         using context: ModelContext?,
         analytics: AnalyticsManager?,
         screen: String?,
-        style: CardStyle?
+        style: CardStyle?,
+        aspectRatio: CGFloat? = 16 / 9
     ) -> CardContent {
         let type = CardContentType.news(
             categories: self.categories.toNewsCategory,
@@ -23,6 +24,7 @@ extension FeedDB {
             artworkUrl: self.artworkURL,
             urlToShare: self.link,
             favorite: self.favorite,
+            aspectRatio: aspectRatio,
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
                 self.favorite.toggle()

@@ -38,7 +38,7 @@ public struct NewsView: View {
     @State private var search: String = ""
     @State private var readingNews = false
 
-    @State private var highlightIndex: Int = 0
+    @State private var scrolledHighlightID: String?
 
     @Query(sort: \FeedDB.pubDate, order: .reverse)
     private var allNews: [FeedDB]
@@ -112,10 +112,10 @@ extension NewsView {
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: Array(highlights.prefix(highlightsLimit)),
-                        currentIndex: $highlightIndex,
+                        scrolledID: $scrolledHighlightID,
                         isAutoScrollEnabled: isAutoScrollEnabled,
                         onTap: { post in
-                            handleHighlightTap(post)
+                            handleTap(post)
                         }
                     )
                 }
@@ -141,10 +141,10 @@ extension NewsView {
             // Left column: Highlights (vertical scroll)
             FeedHighlightsVerticalView(
                 highlights: Array(highlights.prefix(highlightsLimit)),
-                currentIndex: $highlightIndex,
+                scrolledID: $scrolledHighlightID,
                 isAutoScrollEnabled: isAutoScrollEnabled,
                 onTap: { post in
-                    handleHighlightTap(post)
+                    handleTap(post)
                 }
             )
             .frame(maxWidth: .infinity)
@@ -178,12 +178,7 @@ extension NewsView {
                                                      analytics: analytics,
                                                      screen: nil,
                                                      style: category.style)) {
-                viewModel.selectedNews = news[index]
-                readingNews.toggle()
-
-                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.newsStarted(
-                    postId: Int(news[index].postId) ?? 0).id,
-                                           screen: AnalyticsConstants.Screen.news.name))
+                handleTap(news[index])
             }
             .onAppear {
                 if !favorite && search.isEmpty {
@@ -197,7 +192,15 @@ extension NewsView {
 // MARK: - Actions
 
 extension NewsView {
-    private func handleHighlightTap(_ post: FeedDB) { }
+    private func handleTap(_ post: FeedDB) {
+        viewModel.selectedNews = post
+        readingNews.toggle()
+
+        analytics.track(.buttonTap(
+            buttonId: AnalyticsConstants.ButtonID.newsStarted(postId: Int(post.postId) ?? 0).id,
+            screen: AnalyticsConstants.Screen.news.name)
+        )
+    }
 }
 
 // MARK: - Details
@@ -208,14 +211,45 @@ extension NewsView {
         MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    if let urlString = viewModel.selectedNews?.link,
-                       let url = URL(string: urlString) {
-                        ShareLink(item: url) {
-                            Image(systemName: "square.and.arrow.up")
-                        }
-                    }
+                    HStack(spacing: 20) {
+                        favoriteView
+                        shareView
+                    }.padding(.horizontal)
                 }
             }
+    }
+
+    @ViewBuilder
+    var favoriteView: some View {
+        if let data = viewModel.selectedNews?.toCardContent(using: modelContext,
+                                                            analytics: analytics,
+                                                            screen: nil,
+                                                            style: category.style) {
+            FavoriteButton(
+                name: data.title,
+                favorite: data.favorite,
+                action: data.favoriteAction
+            )
+        }
+    }
+
+    @ViewBuilder
+    var shareView: some View {
+        if let title = viewModel.selectedNews?.title,
+           let url = viewModel.selectedNews?.link {
+            ShareButton(
+                title: title,
+                url: url,
+                action: {
+                    analytics.track(
+                        .buttonTap(
+                            buttonId: AnalyticsConstants.ButtonID.share.id,
+                            screen: AnalyticsConstants.Screen.news.name
+                        )
+                    )
+                }
+            )
+        }
     }
 }
 
@@ -295,7 +329,7 @@ private struct NewsViewPreviewContent: View {
     @Binding var category: NewsCategory
     @Binding var scrollPosition: ScrollPosition
 
-    @State private var highlightIndex: Int = 0
+    @State private var scrolledHighlightID: String?
 
     private var isLandscape: Bool {
         verticalSizeClass == .compact
@@ -306,7 +340,7 @@ private struct NewsViewPreviewContent: View {
             HStack(spacing: 0) {
                 FeedHighlightsVerticalView(
                     highlights: PreviewData.sampleHighlights,
-                    currentIndex: $highlightIndex,
+                    scrolledID: $scrolledHighlightID,
                     onTap: { _ in }
                 )
                 .frame(maxWidth: .infinity)
@@ -330,7 +364,7 @@ private struct NewsViewPreviewContent: View {
             VStack(spacing: 0) {
                 FeedHighlightsCarouselView(
                     highlights: PreviewData.sampleHighlights,
-                    currentIndex: $highlightIndex,
+                    scrolledID: $scrolledHighlightID,
                     onTap: { _ in }
                 )
                 .padding(.bottom, 16)

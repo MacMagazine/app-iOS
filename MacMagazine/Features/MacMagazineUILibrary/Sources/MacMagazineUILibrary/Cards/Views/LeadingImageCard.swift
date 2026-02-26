@@ -23,7 +23,7 @@ struct LeadingImageCard: View {
         content
             .background(.background)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            .cardSize { value in
+            .contentWidth { value in
                 cardWidth = value
             }
     }
@@ -34,7 +34,7 @@ struct LeadingImageCard: View {
 private extension LeadingImageCard {
     @ViewBuilder
     var content: some View {
-        HStack {
+        HStack(spacing: 12) {
             if let artworkUrl = URL(string: data.artworkUrl) {
                 thumbnail(artworkUrl)
                 metadataContent
@@ -77,11 +77,17 @@ private extension LeadingImageCard {
     }
 
     var dateRow: some View {
-        MetadataContent(
-            image: "calendar",
-            text: data.pubDate.toTimeAgoDisplay(showTime: true)
-        )
-        .foregroundStyle(.primary.opacity(0.9))
-        .font(.caption2)
+        HStack(alignment: .center, spacing: 0) {
+            MetadataContent(
+                image: "calendar",
+                text: data.pubDate.toTimeAgoDisplay(showTime: true)
+            )
+            .foregroundStyle(.primary.opacity(0.9))
+            .font(.caption2)
+
+            Spacer(minLength: 4)
+
+            MenuButton(data: data)
+        }
     }
 }
