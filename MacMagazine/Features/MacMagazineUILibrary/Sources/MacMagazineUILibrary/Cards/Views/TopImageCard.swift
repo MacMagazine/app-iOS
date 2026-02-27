@@ -4,7 +4,7 @@ import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary
 
-struct LeadingImageCard: View {
+struct TopImageCard: View {
     @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.dynamicTypeSize) private var typeSize
     @Namespace var namespace
@@ -31,38 +31,23 @@ struct LeadingImageCard: View {
 
 // MARK: - Card -
 
-private extension LeadingImageCard {
+private extension TopImageCard {
     @ViewBuilder
     var content: some View {
-        HStack(alignment: .top, spacing: 12) {
-            thumbnail
-            metadataContent
-        }
-        .padding(10)
-    }
-}
-
-// MARK: - Thumbnail -
-
-private extension LeadingImageCard {
-    @ViewBuilder
-    var thumbnail: some View {
-        if let artworkUrl = URL(string: data.artworkUrl) {
-            CachedAsyncImage(image: artworkUrl, contentMode: .fill)
-                .frame(width: 100, height: 100)
-                .cornerRadius(12)
-        }
+        metadataContent
+            .padding(10)
     }
 }
 
 // MARK: - Content block -
 
-private extension LeadingImageCard {
+private extension TopImageCard {
     var metadataContent: some View {
         VStack(alignment: .leading, spacing: 6) {
+            thumbnail
             titleRow
             dateRow
-            Spacer(minLength: 0)
+            Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -87,5 +72,22 @@ private extension LeadingImageCard {
         )
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)
+    }
+}
+
+// MARK: - Thumbnail -
+
+private extension TopImageCard {
+    @ViewBuilder
+    var thumbnail: some View {
+        if let artworkUrl = URL(string: data.artworkUrl) {
+            Rectangle().fill(Color(.gray))
+                .frame(height: 120)
+                .overlay {
+                    CachedAsyncImage(image: artworkUrl, contentMode: .fill)
+                }
+                .cornerRadius(12)
+                .clipped()
+        }
     }
 }

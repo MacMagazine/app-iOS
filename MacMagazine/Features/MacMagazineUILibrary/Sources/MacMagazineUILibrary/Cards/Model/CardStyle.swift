@@ -13,14 +13,11 @@ public enum CardStyle {
 extension NewsCategory {
     public var style: CardStyle? {
         switch self {
-        case .highlights: .highlight
-        case .news, .all: nil
-        case .podcast: .glass
-        case .youtube: .glass
+        case .highlights, .reviews: .highlight
+        case .news, .all: .bottomImage
+        case .podcast, .youtube: .glass
         case .appletv: .leadingImage
-        case .reviews: .highlight
-        case .tutorials: .simple
-        case .rumors: .simple
+        case .tutorials, .rumors: .topImage
         }
     }
 }

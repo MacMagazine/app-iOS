@@ -23,22 +23,19 @@ public struct NewsCard: View {
 private extension NewsCard {
     @ViewBuilder
     var content: some View {
-        switch data.type.style {
+        switch data.type.categories.mostRelevant.style {
         case .leadingImage: LeadingImageCard(data: data)
-        case .topImage: SimpleCard(data: data)
-        case .bottomImage: SimpleCard(data: data)
-        case .highlight: SimpleCard(data: data)
+        case .topImage: TopImageCard(data: data)
+        case .bottomImage: BottomImageCard(data: data)
+        case .highlight, .glass: GlassCardView(data: data)
         case .simple: SimpleCard(data: data)
-        case .glass: GlassCardView(data: data)
         case .none:
-            switch data.type.categories.mostRelevant.style {
+            switch data.type.style {
             case .leadingImage: LeadingImageCard(data: data)
-            case .topImage: SimpleCard(data: data)
-            case .bottomImage: SimpleCard(data: data)
-            case .highlight: SimpleCard(data: data)
-            case .simple: SimpleCard(data: data)
-            case .glass: GlassCardView(data: data)
-            case .none: SimpleCard(data: data)
+            case .topImage: TopImageCard(data: data)
+            case .bottomImage: BottomImageCard(data: data)
+            case .highlight, .glass: GlassCardView(data: data)
+            case .simple, .none: SimpleCard(data: data)
             }
         }
     }
