@@ -46,9 +46,10 @@ public class FeedViewModel {
             async let reviews = fetch(category: .reviews, page: page)
             async let tutoriais = fetch(category: .tutorials, page: page)
             async let rumors = fetch(category: .rumors, page: page)
-            async let posts = fetch(category: .news, page: page)
-            let feed = try await [highlights, appletv, reviews, tutoriais, rumors, posts]
+            let feed = try await [highlights, appletv, reviews, tutoriais, rumors]
             storage.save(feed: Array(feed.joined()).toFeedDB)
+            let posts = try await fetch(category: .news, page: page)
+            storage.save(feed: posts.toFeedDB)
             status = .done
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
