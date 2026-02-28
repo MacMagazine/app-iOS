@@ -40,8 +40,7 @@ public struct NewsView: View {
 
     @State private var scrolledHighlightID: String?
 
-    @Query(sort: \FeedDB.pubDate, order: .reverse)
-    private var allNews: [FeedDB]
+    @Query private var allNews: [FeedDB]
 
     // MARK: - Initialization
 
@@ -55,6 +54,23 @@ public struct NewsView: View {
         _favorite = favorite
         _category = category
         _scrollPosition = scrollPosition
+
+        let isFavorite = favorite.wrappedValue
+
+        // Use @Query predicate for the favorite filter (simple Bool field, SwiftData-safe)
+        if isFavorite {
+            let predicate = #Predicate<FeedDB> { $0.favorite == true }
+            _allNews = Query(
+                filter: predicate,
+                sort: \FeedDB.pubDate,
+                order: .reverse
+            )
+        } else {
+            _allNews = Query(
+                sort: \FeedDB.pubDate,
+                order: .reverse
+            )
+        }
     }
 
     // MARK: - Body
@@ -217,22 +233,21 @@ extension NewsView {
         isIPad ? 30 : 10
     }
 
+    private var highlightsKey: String { NewsCategory.highlights.filterKey }
+
     /// Filtered highlights from allNews
     private var highlights: [FeedDB] {
-        allNews.filter { $0.categories.contains("NewsCategoryHighlights") }
+        allNews.filter { $0.categories.contains(highlightsKey) }
     }
 
-    /// Filtered news based on favorite and category
+    /// Filtered news based on category
     private var news: [FeedDB] {
-        var filtered = favorite ? allNews.filter { $0.favorite } : allNews
-
         if category != .all {
-            filtered = filtered.filter { $0.categories.contains(category.filterKey) }
+            return allNews.filter { $0.categories.contains(category.filterKey) }
         } else if shouldShowHighlights {
-            filtered = filtered.filter { !$0.categories.contains("NewsCategoryHighlights") }
+            return allNews.filter { !$0.categories.contains(highlightsKey) }
         }
-
-        return filtered
+        return allNews
     }
 
     /// Show highlights only when not filtering and category is "all"

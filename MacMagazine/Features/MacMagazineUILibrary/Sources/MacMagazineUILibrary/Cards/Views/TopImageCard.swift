@@ -92,6 +92,7 @@ private extension TopImageCard {
             MenuButton(data: data)
                 .padding(.top, 10)
                 .padding(.trailing, 10)
+                .highPriorityGesture(TapGesture())
         }
     }
 }

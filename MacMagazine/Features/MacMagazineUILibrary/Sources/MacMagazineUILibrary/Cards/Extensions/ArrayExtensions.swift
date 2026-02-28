@@ -1,21 +1,19 @@
 import Foundation
 import MacMagazineLibrary
 
+private let categoryPriority: [NewsCategory: Int] = [
+    .highlights: 0,
+    .appletv: 1,
+    .reviews: 2,
+    .rumors: 3,
+    .tutorials: 4,
+    .news: 5
+]
+
 extension Array where Element == NewsCategory {
     var mostRelevant: NewsCategory {
-        let categories = [
-            NewsCategory.highlights: 0,
-            NewsCategory.appletv: 1,
-            NewsCategory.reviews: 2,
-            NewsCategory.rumors: 3,
-            NewsCategory.tutorials: 4,
-            NewsCategory.news: 5
-        ]
-
-        let response = self.min(by: {
-            (categories[$0] ?? Int.max) < (categories[$1] ?? Int.max)
+        self.min(by: {
+            (categoryPriority[$0] ?? Int.max) < (categoryPriority[$1] ?? Int.max)
         }) ?? .all
-
-        return response
     }
 }
