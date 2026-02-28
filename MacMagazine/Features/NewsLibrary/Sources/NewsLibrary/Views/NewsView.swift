@@ -118,7 +118,7 @@ extension NewsView {
             header: {
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
-                        highlights: Array(highlights.prefix(highlightsLimit)),
+                        highlights: highlights,
                         scrolledID: $scrolledHighlightID,
                         isAutoScrollEnabled: isAutoScrollEnabled,
                         onTap: { post in
@@ -222,22 +222,15 @@ extension NewsView {
 // MARK: - Computed Properties
 
 extension NewsView {
-
-    /// Check if device is iPad
-    private var isIPad: Bool {
-        horizontalSizeClass == .regular && verticalSizeClass == .regular
-    }
-
     /// Number of highlights to show (30 for iPad, 10 for iPhone)
     private var highlightsLimit: Int {
-        isIPad ? 30 : 10
+        10
     }
-
-    private var highlightsKey: String { NewsCategory.highlights.filterKey }
 
     /// Filtered highlights from allNews
     private var highlights: [FeedDB] {
-        allNews.filter { $0.categories.contains(highlightsKey) }
+        let highlights = allNews.filter { $0.categories.contains(NewsCategory.highlights.filterKey) }
+        return Array(highlights.prefix(highlightsLimit))
     }
 
     /// Filtered news based on category
@@ -245,7 +238,8 @@ extension NewsView {
         if category != .all {
             return allNews.filter { $0.categories.contains(category.filterKey) }
         } else if shouldShowHighlights {
-            return allNews.filter { !$0.categories.contains(highlightsKey) }
+            let highlightIDs = Set(highlights.map(\.postId))
+            return allNews.filter { !highlightIDs.contains($0.postId) }
         }
         return allNews
     }
@@ -258,8 +252,8 @@ extension NewsView {
     /// Aspect ratio of the image based on the category selected
     private var aspectRatio: CGFloat? {
         switch category {
-        case .reviews, .highlights: 16 / 9
-        default: nil
+        case .highlights: 16 / 9
+        default: 2
         }
     }
 }

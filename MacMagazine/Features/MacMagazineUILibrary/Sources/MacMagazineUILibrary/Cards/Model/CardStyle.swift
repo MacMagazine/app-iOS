@@ -15,7 +15,7 @@ extension NewsCategory {
         switch self {
         case .highlights: .highlight
         case .podcast, .youtube: .glass
-        default: .topImage
+        default: .leadingImage
         }
     }
 }

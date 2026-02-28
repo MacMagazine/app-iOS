@@ -72,11 +72,13 @@ private extension LeadingImageCard {
             Text(data.title)
                 .font(density.titleFont)
                 .multilineTextAlignment(.leading)
+                .lineLimit(3, reservesSpace: true)
                 .foregroundStyle(.primary)
 
             Spacer(minLength: 4)
 
             MenuButton(data: data)
+                .highPriorityGesture(TapGesture())
         }
     }
 
