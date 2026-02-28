@@ -72,7 +72,6 @@ public struct CollectionViewWithHeader<Header: View, Content: View>: View {
 
             ScrollView {
                 VStack(spacing: 20) {
-                    // Header (full width, outside grid)
                     if let header {
                         header()
                     }

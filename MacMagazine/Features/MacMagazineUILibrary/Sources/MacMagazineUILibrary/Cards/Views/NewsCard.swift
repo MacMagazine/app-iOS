@@ -17,7 +17,7 @@ public struct NewsCard: View {
         Button(action: { onSelect() },
                label: { content })
         .buttonStyle(.plain)
-    }
+        }
 }
 
 private extension NewsCard {

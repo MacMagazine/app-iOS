@@ -35,7 +35,6 @@ private extension TopImageCard {
     @ViewBuilder
     var content: some View {
         metadataContent
-            .padding(10)
     }
 }
 
@@ -43,33 +42,36 @@ private extension TopImageCard {
 
 private extension TopImageCard {
     var metadataContent: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 0) {
             thumbnail
-            titleRow
-            dateRow
-            Spacer()
+            VStack(alignment: .leading, spacing: 10) {
+                titleRow
+                dateRow
+            }
+                .padding(10)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var titleRow: some View {
-        HStack(alignment: .top, spacing: 0) {
-            Text(data.title)
-                .font(density.titleFont)
-                .multilineTextAlignment(.leading)
-                .foregroundStyle(.primary)
-
-            Spacer(minLength: 4)
-
-            MenuButton(data: data)
-        }
+        Text(data.title)
+            .font(density.titleFont)
+            .multilineTextAlignment(.leading)
+            .lineLimit(3, reservesSpace: true)
+            .foregroundStyle(.primary)
     }
 
     var dateRow: some View {
-        MetadataContent(
-            image: "calendar",
-            text: data.pubDate.toTimeAgoDisplay(showTime: true)
-        )
+        HStack {
+            MetadataContent(
+                image: "calendar",
+                text: data.pubDate.toTimeAgoDisplay(showTime: true)
+            )
+            Spacer()
+            Label(data.type.categories.mostRelevant.rawValue,
+                  systemImage: data.type.categories.mostRelevant.icon)
+                .lineLimit(1)
+        }
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)
     }
@@ -80,14 +82,16 @@ private extension TopImageCard {
 private extension TopImageCard {
     @ViewBuilder
     var thumbnail: some View {
-        if let artworkUrl = URL(string: data.artworkUrl) {
-            Rectangle().fill(Color(.gray))
-                .frame(height: 120)
-                .overlay {
-                    CachedAsyncImage(image: artworkUrl, contentMode: .fill)
-                }
-                .cornerRadius(12)
-                .clipped()
+        ZStack(alignment: .topTrailing) {
+            if let artworkUrl = URL(string: data.artworkUrl) {
+                CachedAsyncImage(image: artworkUrl, contentMode: .fill)
+                    .frame(height: 120)
+                    .cornerRadius(12)
+                    .clipped()
+            }
+            MenuButton(data: data)
+                .padding(.top, 10)
+                .padding(.trailing, 10)
         }
     }
 }

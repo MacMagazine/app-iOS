@@ -19,8 +19,8 @@ public struct MenuButton: View {
                 }
             }
         }, label: {
-            Image(systemName: "ellipsis")
-        }).buttonWithGlassEffect()
+            Image(systemName: "ellipsis").buttonWithGlassEffect()
+        })
         .accessibilityLabel("Abrir menu de opções.")
     }
 }
