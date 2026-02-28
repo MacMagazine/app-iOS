@@ -74,8 +74,20 @@ private extension MMWebView {
                 isPresenting: .constant(true),
                 standAlone: true,
                 navigationDelegate: controller,
-                userScripts: [MMWebViewUserScripts.topPadding],
+                userScripts: [
+                    MMWebViewUserScripts.topPadding,
+                    MMWebViewUserScripts.tapToZoom,
+                    MMWebViewUserScripts.disableGallery,
+                    MMWebViewUserScripts.disableNewGallery,
+                    MMWebViewUserScripts.disableNewGallery,
+                    MMWebViewUserScripts.comments,
+                    MMWebViewUserScripts.removeBackToBlog
+                ],
                 cookies: makeCookies(using: colorScheme),
+                scriptMessageHandlers: [
+                    (controller, "imageTappedHandler"),
+                    (controller, "gotCommentURLHandler")
+                ],
                 userAgent: Utils.userAgent,
                 cacheKey: cacheKey
             )

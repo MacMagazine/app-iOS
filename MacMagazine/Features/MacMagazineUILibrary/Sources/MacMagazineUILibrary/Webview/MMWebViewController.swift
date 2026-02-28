@@ -55,6 +55,13 @@ extension MMWebViewController: WKNavigationDelegate {
         case .linkActivated:
             if url.host?.lowercased().contains("instagram.com") ?? false {
                 open(url)
+            } else if navigationAction.request.url?.absoluteString.contains("comments://") ?? false {
+                if let URL = navigationAction.request.url?.absoluteString.replacingOccurrences(of: "comments://", with: "") {
+                    let commentsURL = URL.replacingOccurrences(of: "%20", with: " ")
+                    print("==> \(commentsURL)")
+                }
+            } else if navigationAction.request.url?.absoluteString.contains("#disqus_thread") ?? false {
+                print("==> disqus_thread")
             }
             actionPolicy = .cancel
 
@@ -70,5 +77,12 @@ private extension MMWebViewController {
 #if canImport(UIKit)
         UIApplication.shared.open(url)
 #endif
+    }
+}
+
+extension MMWebViewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController,
+                               didReceive message: WKScriptMessage) {
+        print("==> \(message.name)")
     }
 }
