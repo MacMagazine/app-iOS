@@ -39,6 +39,10 @@ class VideosViewModel {
         self.youtube = YouTubeAPI(credentials: credentials,
                                   mock: mock,
                                   storage: storage,
-                                  language: "pt-BR")
+                                  language: "pt-BR",
+                                  filter: Filter(
+                                    title: ["corte", "macmagazine", "no ar"],
+                                    duration: "03:00"
+                                  ))
     }
 }

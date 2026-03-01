@@ -224,7 +224,7 @@ extension NewsView {
 extension NewsView {
     /// Number of highlights to show (30 for iPad, 10 for iPhone)
     private var highlightsLimit: Int {
-        10
+        5
     }
 
     /// Filtered highlights from allNews
