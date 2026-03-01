@@ -11,6 +11,7 @@ extension Database {
         feed.forEach {
             save(feed: $0)
         }
+        FeedDB.deduplicate(using: context)
     }
 
     @MainActor
@@ -47,6 +48,7 @@ extension Database {
         podcast.forEach {
             save(podcast: $0)
         }
+        PodcastDB.deduplicate(using: context)
     }
 
     @MainActor

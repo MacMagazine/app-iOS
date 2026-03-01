@@ -39,6 +39,7 @@ public class FeedViewModel {
     }
 
     public func getFeed(page: Int = 0) async throws {
+        guard status != .loading else { return }
         do {
             status = .loading
             async let highlights = fetch(category: .highlights, page: page)
@@ -67,6 +68,7 @@ public class FeedViewModel {
     }
 
     public func getPodcast(page: Int = 1) async throws {
+        guard status != .loading else { return }
         do {
             status = .loading
             let podcasts = try await fetch(category: .podcast, page: page)
