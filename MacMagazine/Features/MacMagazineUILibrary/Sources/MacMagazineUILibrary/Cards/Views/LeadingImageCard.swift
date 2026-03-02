@@ -62,6 +62,7 @@ private extension LeadingImageCard {
         VStack(alignment: .leading, spacing: 6) {
             titleRow
             dateAndCreatorRow
+            Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -80,22 +81,30 @@ private extension LeadingImageCard {
                 .highPriorityGesture(TapGesture())
         }
     }
-
+    
     var dateAndCreatorRow: some View {
-        VStack {
-            HStack(spacing: 4) {
-                MetadataContent(
-                    image: "calendar",
-                    text: data.pubDate.toTimeAgoDisplay(showTime: true)
-                )
-                if let creator = data.creator, !creator.isEmpty {
-                    Text("•")
-                    Text(creator)
-                }
+        HStack(spacing: 4) {
+            MetadataContent(
+                image: "calendar",
+                text: data.pubDate.toTimeAgoDisplay(showTime: true)
+            )
+            if let creator = data.creator, !creator.isEmpty {
+                Text("•")
+                Text(creator)
             }
-            .foregroundStyle(.primary.opacity(0.9))
-            .font(.caption2)
         }
-        .frame(maxHeight: .infinity, alignment: .center)
+        .foregroundStyle(.primary.opacity(0.9))
+        .font(.caption2)
+        .lineLimit(1)
+        .truncationMode(.tail)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel({
+            let dateText = data.pubDate.toTimeAgoDisplay(showTime: true)
+            if let creator = data.creator, !creator.isEmpty {
+                return "Publicado \(dateText) por \(creator)"
+            } else {
+                return "Publicado \(dateText)"
+            }
+        }())
     }
 }
