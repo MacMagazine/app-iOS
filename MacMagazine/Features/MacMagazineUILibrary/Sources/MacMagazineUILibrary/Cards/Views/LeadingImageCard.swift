@@ -81,7 +81,7 @@ private extension LeadingImageCard {
                 .highPriorityGesture(TapGesture())
         }
     }
-    
+
     var dateAndCreatorRow: some View {
         HStack(spacing: 4) {
             MetadataContent(

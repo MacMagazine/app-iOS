@@ -195,7 +195,7 @@ private extension GlassCardView {
         }
         .font(.caption2)
     }
-    
+
     var dateAndCreatorRow: some View {
         HStack(spacing: 4) {
             MetadataContent(
