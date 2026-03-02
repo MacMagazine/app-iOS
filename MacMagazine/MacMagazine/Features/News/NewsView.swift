@@ -21,25 +21,22 @@ struct NewsView: View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
-                .contentMargins(.top, showCategoryFilter ? 10 : 20, for: .scrollContent)
+                .contentMargins(.top, 20, for: .scrollContent)
                 .opacity(isTransitioning ? 0 : 1)
         }
         .toolbar(type: toolbarType,
                  menu: favoriteButton,
                  options: categoriesButton)
+
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }
 
-            withAnimation(.easeOut(duration: 0.15)) {
-                isTransitioning = true
-                showCategoryFilter = false
-            }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 newsCategory = newCategory
 
                 withAnimation(.easeIn(duration: 0.2)) {
+                    showCategoryFilter = false
                     isTransitioning = false
                 }
             }
