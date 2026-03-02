@@ -12,6 +12,7 @@ struct NewsView: View {
     @Environment(MainViewModel.self) private var viewModel
 
     @State private var favorite = false
+    @State private var showCategoryFilter = false
     @State private var scrollPosition = ScrollPosition()
     @State private var newsCategory = NewsCategory.all
     @State private var isTransitioning = false
@@ -19,19 +20,21 @@ struct NewsView: View {
     var body: some View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-            VStack {
-                categories.padding(.horizontal)
-                content.opacity(isTransitioning ? 0 : 1)
-            }
+            content.opacity(isTransitioning ? 0 : 1)
+                .contentMargins(.top, 20, for: .scrollContent)
         }
         .navigationTitle("Notícias")
-        .toolbar(show: !shouldUseSidebar, menu: favoriteButton, options: EmptyView())
+        .toolbar(show: !shouldUseSidebar,
+                 menu: favoriteButton,
+                 options: categoriesButton,
+                 filter: categories)
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }
 
             withAnimation(.easeOut(duration: 0.15)) {
                 isTransitioning = true
+                showCategoryFilter = false
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -49,6 +52,16 @@ struct NewsView: View {
 }
 
 private extension NewsView {
+    var categoriesButton: some View {
+        Button(action: {
+            withAnimation(.easeInOut(duration: 0.4)) {
+                showCategoryFilter.toggle()
+            }
+        }, label: {
+            Image(systemName: "rectangle.grid.2x2\(showCategoryFilter ? ".fill" : "")")
+        })
+    }
+
     var favoriteButton: some View {
         Button(action: {
             withAnimation {
@@ -61,12 +74,12 @@ private extension NewsView {
 
     @ViewBuilder
     var categories: some View {
-        if !shouldUseSidebar {
+        if showCategoryFilter {
             @Bindable var bindableViewModel = viewModel
             MenuView(
                 menu: viewModel.settingsViewModel.news,
                 selected: $bindableViewModel.news
-            )
+            ).padding(.top, 6)
         }
     }
 

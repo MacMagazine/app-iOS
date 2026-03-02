@@ -40,7 +40,7 @@ public enum News: String, CaseIterable, Codable, Equatable {
     public var icon: String {
         switch self {
         case .news: "newspaper"
-        case .highlights: "point.3.filled.connected.trianglepath.dotted"
+        case .highlights: "medal.star.fill"
         case .appletv: "appletv"
         case .reviews: "checklist"
         case .rumors: "person.fill.questionmark"

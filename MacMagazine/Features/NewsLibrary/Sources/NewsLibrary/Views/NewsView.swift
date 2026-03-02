@@ -77,7 +77,6 @@ public struct NewsView: View {
 
     public var body: some View {
         content
-            .padding(.top, 6)
             .refreshable {
                 if search.isEmpty {
                     try? await viewModel.getNews()

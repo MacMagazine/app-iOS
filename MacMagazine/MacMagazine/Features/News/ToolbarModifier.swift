@@ -1,23 +1,26 @@
 import SwiftUI
 
 extension View {
-    func toolbar<Menu: View, Options: View>(
+    func toolbar<Menu: View, Options: View, Filter: View>(
         show: Bool,
         menu: Menu,
-        options: Options
+        options: Options,
+        filter: Filter
     ) -> some View {
         modifier(ToolbarModifier(
             show: show,
             menu: menu,
-            options: options
+            options: options,
+            filter: filter
         ))
     }
 }
 
-private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
+private struct ToolbarModifier<Menu: View, Options: View, Filter: View>: ViewModifier {
     let show: Bool
     let menu: Menu
     let options: Options
+    let filter: Filter
 
     func body(content: Content) -> some View {
         if show {
@@ -27,6 +30,9 @@ private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }
+                    ToolbarItem(placement: .principal) {
+                        filter
+                    }
                     ToolbarItem(placement: .navigation) {
                         options
                     }
@@ -34,6 +40,11 @@ private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
         } else {
             content
                 .navigationBarTitleDisplayMode(.large)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        menu
+                    }
+                }
         }
     }
 }
