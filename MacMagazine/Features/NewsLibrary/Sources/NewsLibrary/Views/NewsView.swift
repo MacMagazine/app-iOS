@@ -9,7 +9,7 @@ import UIComponentsLibrary
 
 // MARK: - News View
 
-public struct NewsView: View {
+public struct NewsView<Filter: View>: View {
 
     // MARK: - Feature Flags
 
@@ -34,13 +34,13 @@ public struct NewsView: View {
     @Binding private var favorite: Bool
     @Binding private var category: NewsCategory
     @Binding var scrollPosition: ScrollPosition
-
     @State private var search: String = ""
     @State private var readingNews = false
-
     @State private var scrolledHighlightID: String?
 
     @Query private var allNews: [FeedDB]
+
+    private let filters: Filter
 
     // MARK: - Initialization
 
@@ -48,9 +48,11 @@ public struct NewsView: View {
         storage: Database,
         favorite: Binding<Bool>,
         category: Binding<NewsCategory>,
+        filters: Filter,
         scrollPosition: Binding<ScrollPosition>
     ) {
         self.viewModel = NewsViewModel(storage: storage)
+        self.filters = filters
         _favorite = favorite
         _category = category
         _scrollPosition = scrollPosition
@@ -114,6 +116,7 @@ extension NewsView {
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? news.count : 0,
             header: {
+                filters
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: highlights,

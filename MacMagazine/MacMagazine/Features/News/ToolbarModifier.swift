@@ -1,46 +1,60 @@
 import SwiftUI
 
+enum ToolbarType: Equatable {
+    case compact
+    case normal
+    case minimal
+}
+
 extension View {
-    func toolbar<Menu: View, Options: View, Filter: View>(
-        show: Bool,
+    func toolbar<Menu: View, Options: View>(
+        type: ToolbarType,
         menu: Menu,
-        options: Options,
-        filter: Filter
+        options: Options
     ) -> some View {
         modifier(ToolbarModifier(
-            show: show,
+            type: type,
             menu: menu,
-            options: options,
-            filter: filter
+            options: options
         ))
     }
 }
 
-private struct ToolbarModifier<Menu: View, Options: View, Filter: View>: ViewModifier {
-    let show: Bool
+private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
+    let type: ToolbarType
     let menu: Menu
     let options: Options
-    let filter: Filter
 
     func body(content: Content) -> some View {
-        if show {
+        switch type {
+        case .minimal:
             content
+                .navigationTitle("Notícias")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }
-                    ToolbarItem(placement: .principal) {
-                        filter
+                }
+
+        case .compact:
+            content
+                .navigationTitle("Notícias")
+                .navigationBarTitleDisplayMode(.large)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        menu
                     }
+                }
+
+        case .normal:
+            content
+                .navigationTitle("Notícias")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
                     ToolbarItem(placement: .navigation) {
                         options
                     }
-                }
-        } else {
-            content
-                .navigationBarTitleDisplayMode(.large)
-                .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }

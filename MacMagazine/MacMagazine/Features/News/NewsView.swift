@@ -21,13 +21,10 @@ struct NewsView: View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content.opacity(isTransitioning ? 0 : 1)
-                .contentMargins(.top, 20, for: .scrollContent)
         }
-        .navigationTitle("Notícias")
-        .toolbar(show: !shouldUseSidebar,
+        .toolbar(type: toolbarType,
                  menu: favoriteButton,
-                 options: categoriesButton,
-                 filter: categories)
+                 options: categoriesButton)
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }
@@ -74,12 +71,12 @@ private extension NewsView {
 
     @ViewBuilder
     var categories: some View {
-        if showCategoryFilter {
+        if !shouldUseSidebar {
             @Bindable var bindableViewModel = viewModel
             MenuView(
                 menu: viewModel.settingsViewModel.news,
                 selected: $bindableViewModel.news
-            ).padding(.top, 6)
+            ).padding(.horizontal)
         }
     }
 
@@ -88,7 +85,14 @@ private extension NewsView {
             storage: viewModel.storage,
             favorite: $favorite,
             category: $newsCategory,
+            filters: categories,
             scrollPosition: $scrollPosition
         )
+    }
+}
+
+private extension NewsView {
+    var toolbarType: ToolbarType {
+        shouldUseSidebar ? .compact : .minimal
     }
 }
