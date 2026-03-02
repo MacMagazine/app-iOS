@@ -8,31 +8,27 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
 
     public var body: some View {
         ScrollView(.horizontal) {
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
                 ForEach(menu, id: \.self) { option in
                     Button(action: { selected = option },
                            label: {
-                        Text(option.rawValue)
-                            .font(.headline)
+                        Group {
+                            if let icon = (option as? News)?.icon, !icon.isEmpty {
+                                Label(option.rawValue, systemImage: icon)
+                            } else {
+                                Text(option.rawValue)
+                            }
+                        }
+                        .font(.headline)
+                        .lineLimit(1)
                     })
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .glassEffect(.clear, in: .rect(cornerRadius: 24))
+                    .glassEffect(selected == option ? .clear.tint(Color.gray.opacity(0.2)) : .clear, in: .rect(cornerRadius: 24))
                 }
             }
         }
-        .mask {
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0),
-                    .init(color: .black, location: 0.05),
-                    .init(color: .black, location: 0.95),
-                    .init(color: .clear, location: 1)
-                ]),
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-        }
+        .scrollIndicators(.hidden)
     }
 
     public init(menu: [T],

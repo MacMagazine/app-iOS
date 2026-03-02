@@ -76,7 +76,8 @@ public struct NewsView: View {
     // MARK: - Body
 
     public var body: some View {
-        portraitContent
+        content
+            .padding(.top, 6)
             .refreshable {
                 if search.isEmpty {
                     try? await viewModel.getNews()
@@ -97,10 +98,8 @@ public struct NewsView: View {
 // MARK: - Content
 
 extension NewsView {
-    // MARK: - Portrait Layout
-
     @ViewBuilder
-    private var portraitContent: some View {
+    private var content: some View {
         let retryAction: () -> Void = {
             Task {
                 try? await viewModel.getNews()

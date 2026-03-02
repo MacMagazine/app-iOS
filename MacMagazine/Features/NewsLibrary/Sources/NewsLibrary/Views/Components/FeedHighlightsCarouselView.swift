@@ -114,6 +114,7 @@ public struct FeedHighlightsCarouselView: View {
             }
             .scrollTargetLayout()
         }
+        .scrollIndicators(.hidden)
         .scrollTargetBehavior(.viewAligned)
         .scrollPosition(id: $scrolledID)
         .safeAreaPadding(.horizontal, peekWidth)

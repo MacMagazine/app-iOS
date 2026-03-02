@@ -22,9 +22,15 @@ public struct ChipView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                         ForEach(rowWrapper.row, id: \.self) { item in
                             Button(action: { selected = item },
                                    label: {
-                                Label(item.rawValue, systemImage: (item as? News)?.icon ?? News.all.icon)
-                                    .font(.body)
-                                    .lineLimit(1)
+                                Group {
+                                    if let icon = (item as? News)?.icon {
+                                        Label(item.rawValue, systemImage: icon)
+                                    } else {
+                                        Text(item.rawValue)
+                                    }
+                                }
+                                .font(.body)
+                                .lineLimit(1)
                             })
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
