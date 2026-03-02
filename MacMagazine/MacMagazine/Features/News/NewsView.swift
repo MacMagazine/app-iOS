@@ -28,7 +28,7 @@ struct NewsView: View {
         .sheet(isPresented: $category) {
             categories
                 .presentationDragIndicator(.visible)
-                .presentationDetents([.fraction(0.33)])
+                .presentationDetents([.fraction(0.33), .medium])
         }
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
