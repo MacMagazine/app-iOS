@@ -20,7 +20,9 @@ struct NewsView: View {
     var body: some View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
-            content.opacity(isTransitioning ? 0 : 1)
+            content
+                .contentMargins(.top, showCategoryFilter ? 10 : 20, for: .scrollContent)
+                .opacity(isTransitioning ? 0 : 1)
         }
         .toolbar(type: toolbarType,
                  menu: favoriteButton,
@@ -71,7 +73,7 @@ private extension NewsView {
 
     @ViewBuilder
     var categories: some View {
-        if !shouldUseSidebar {
+        if !shouldUseSidebar, showCategoryFilter {
             @Bindable var bindableViewModel = viewModel
             MenuView(
                 menu: viewModel.settingsViewModel.news,
@@ -93,6 +95,6 @@ private extension NewsView {
 
 private extension NewsView {
     var toolbarType: ToolbarType {
-        shouldUseSidebar ? .compact : .minimal
+        shouldUseSidebar ? .compact : .normal
     }
 }

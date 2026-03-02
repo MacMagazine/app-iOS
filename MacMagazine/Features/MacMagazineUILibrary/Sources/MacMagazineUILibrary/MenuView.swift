@@ -24,7 +24,8 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                     })
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .glassEffect(selected == option ? .clear.tint(Color.gray.opacity(0.2)) : .clear, in: .rect(cornerRadius: 24))
+                    .glassEffect(selected == option ? .clear : .clear.tint(Color.gray.opacity(0.3)),
+                                 in: .rect(cornerRadius: 24))
                 }
             }
         }
