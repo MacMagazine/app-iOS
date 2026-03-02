@@ -61,8 +61,7 @@ private extension LeadingImageCard {
     var metadataContent: some View {
         VStack(alignment: .leading, spacing: 6) {
             titleRow
-            dateRow
-            Spacer(minLength: 0)
+            dateAndCreatorRow
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -82,12 +81,21 @@ private extension LeadingImageCard {
         }
     }
 
-    var dateRow: some View {
-        MetadataContent(
-            image: "calendar",
-            text: data.pubDate.toTimeAgoDisplay(showTime: true)
-        )
-        .foregroundStyle(.primary.opacity(0.9))
-        .font(.caption2)
+    var dateAndCreatorRow: some View {
+        VStack {
+            HStack(spacing: 4) {
+                MetadataContent(
+                    image: "calendar",
+                    text: data.pubDate.toTimeAgoDisplay(showTime: true)
+                )
+                if let creator = data.creator, !creator.isEmpty {
+                    Text("•")
+                    Text(creator)
+                }
+            }
+            .foregroundStyle(.primary.opacity(0.9))
+            .font(.caption2)
+        }
+        .frame(maxHeight: .infinity, alignment: .center)
     }
 }
