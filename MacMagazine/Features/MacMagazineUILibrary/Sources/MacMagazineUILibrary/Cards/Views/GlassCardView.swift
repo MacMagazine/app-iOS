@@ -162,7 +162,7 @@ private extension GlassCardView {
         }
 
         layout {
-            dateRow
+            dateAndCreatorRow
             Spacer(minLength: 0)
             duration
         }
@@ -187,7 +187,7 @@ private extension GlassCardView {
 
         layout {
             innerLayout {
-                dateRow
+                dateAndCreatorRow
                 statistics
             }
             Spacer(minLength: 4)
@@ -195,13 +195,30 @@ private extension GlassCardView {
         }
         .font(.caption2)
     }
-
-    var dateRow: some View {
-        MetadataContent(
-            image: "calendar",
-            text: data.pubDate.toTimeAgoDisplay(showTime: false)
-        )
+    
+    var dateAndCreatorRow: some View {
+        HStack(spacing: 4) {
+            MetadataContent(
+                image: "calendar",
+                text: data.pubDate.toTimeAgoDisplay(showTime: false)
+            )
+            if let creator = data.creator, !creator.isEmpty {
+                Text("•")
+                Text(creator)
+            }
+        }
         .foregroundStyle(.white.opacity(0.9))
+        .lineLimit(1)
+        .truncationMode(.tail)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel({
+            let dateText = data.pubDate.toTimeAgoDisplay(showTime: true)
+            if let creator = data.creator, !creator.isEmpty {
+                return "Publicado \(dateText) por \(creator)"
+            } else {
+                return "Publicado \(dateText)"
+            }
+        }())
     }
 
     @ViewBuilder
