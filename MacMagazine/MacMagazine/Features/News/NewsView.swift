@@ -12,7 +12,7 @@ struct NewsView: View {
     @Environment(MainViewModel.self) private var viewModel
 
     @State private var favorite = false
-    @State private var category = false
+    @State private var showCategoryFilter = false
     @State private var scrollPosition = ScrollPosition()
     @State private var newsCategory = NewsCategory.all
     @State private var isTransitioning = false
@@ -21,28 +21,21 @@ struct NewsView: View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
+                .contentMargins(.top, 20, for: .scrollContent)
                 .opacity(isTransitioning ? 0 : 1)
         }
-        .navigationTitle("Notícias")
-        .toolbar(show: !shouldUseSidebar, menu: favoriteButton, options: categoriesButton)
-        .sheet(isPresented: $category) {
-            categories
-                .presentationDragIndicator(.visible)
-                .presentationDetents([.fraction(0.33), .medium])
-        }
+        .toolbar(type: toolbarType,
+                 menu: favoriteButton,
+                 options: categoriesButton)
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }
 
-            withAnimation(.easeOut(duration: 0.15)) {
-                isTransitioning = true
-            }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 newsCategory = newCategory
-                category = false
 
                 withAnimation(.easeIn(duration: 0.2)) {
+                    showCategoryFilter = false
                     isTransitioning = false
                 }
             }
@@ -54,6 +47,16 @@ struct NewsView: View {
 }
 
 private extension NewsView {
+    var categoriesButton: some View {
+        Button(action: {
+            withAnimation(.easeInOut(duration: 0.4)) {
+                showCategoryFilter.toggle()
+            }
+        }, label: {
+            Image(systemName: "rectangle.grid.2x2\(showCategoryFilter ? ".fill" : "")")
+        })
+    }
+
     var favoriteButton: some View {
         Button(action: {
             withAnimation {
@@ -64,37 +67,14 @@ private extension NewsView {
         })
     }
 
-    var categoriesButton: some View {
-        Button(action: {
-            withAnimation(.easeInOut(duration: 0.4)) {
-                category = true
-            }
-        }, label: {
-            Image(systemName: "rectangle.grid.2x2\(category ? ".fill" : "")")
-        })
-    }
-
     @ViewBuilder
     var categories: some View {
-        if category {
+        if !shouldUseSidebar, showCategoryFilter {
             @Bindable var bindableViewModel = viewModel
-
-            NavigationStack {
-                ChipView(options: viewModel.settingsViewModel.news,
-                         selected: $bindableViewModel.news)
-                .padding(.vertical, 10)
-                .background(theme.main.background.color ?? Color.secondary)
-                .navigationTitle("Categorias")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarSpacer(.flexible, placement: .topBarLeading)
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(role: .close) {
-                            category = false
-                        }
-                    }
-                }
-            }
+            MenuView(
+                menu: viewModel.settingsViewModel.news,
+                selected: $bindableViewModel.news
+            ).padding(.horizontal)
         }
     }
 
@@ -103,7 +83,14 @@ private extension NewsView {
             storage: viewModel.storage,
             favorite: $favorite,
             category: $newsCategory,
+            filters: categories,
             scrollPosition: $scrollPosition
         )
+    }
+}
+
+private extension NewsView {
+    var toolbarType: ToolbarType {
+        shouldUseSidebar ? .compact : .normal
     }
 }

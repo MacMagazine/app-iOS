@@ -9,7 +9,7 @@ import UIComponentsLibrary
 
 // MARK: - News View
 
-public struct NewsView: View {
+public struct NewsView<Filter: View>: View {
 
     // MARK: - Feature Flags
 
@@ -34,13 +34,13 @@ public struct NewsView: View {
     @Binding private var favorite: Bool
     @Binding private var category: NewsCategory
     @Binding var scrollPosition: ScrollPosition
-
     @State private var search: String = ""
     @State private var readingNews = false
-
     @State private var scrolledHighlightID: String?
 
     @Query private var allNews: [FeedDB]
+
+    private let filters: Filter
 
     // MARK: - Initialization
 
@@ -48,9 +48,11 @@ public struct NewsView: View {
         storage: Database,
         favorite: Binding<Bool>,
         category: Binding<NewsCategory>,
+        filters: Filter,
         scrollPosition: Binding<ScrollPosition>
     ) {
         self.viewModel = NewsViewModel(storage: storage)
+        self.filters = filters
         _favorite = favorite
         _category = category
         _scrollPosition = scrollPosition
@@ -76,7 +78,7 @@ public struct NewsView: View {
     // MARK: - Body
 
     public var body: some View {
-        portraitContent
+        content
             .refreshable {
                 if search.isEmpty {
                     try? await viewModel.getNews()
@@ -97,10 +99,8 @@ public struct NewsView: View {
 // MARK: - Content
 
 extension NewsView {
-    // MARK: - Portrait Layout
-
     @ViewBuilder
-    private var portraitContent: some View {
+    private var content: some View {
         let retryAction: () -> Void = {
             Task {
                 try? await viewModel.getNews()
@@ -116,6 +116,7 @@ extension NewsView {
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? news.count : 0,
             header: {
+                filters
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: highlights,

@@ -73,7 +73,7 @@ public struct CollectionViewWithHeader<Header: View, Content: View>: View {
             ScrollView {
                 VStack(spacing: 20) {
                     if let header {
-                        header().padding(.top)
+                        header()
                     }
 
                     // Grid content

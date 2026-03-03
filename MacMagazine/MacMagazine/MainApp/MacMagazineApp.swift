@@ -11,25 +11,11 @@ struct MacMagazineApp: App {
     @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var viewModel = MainViewModel()
 
-    @State private var isBackgroundDimming = true
-
     var body: some Scene {
         WindowGroup {
-            ZStack {
-                content
-                overlay
-            }
-            .animation(.easeInOut(duration: 0.45), value: isBackgroundDimming)
+            content
             .sheet(
                 item: $viewModel.onboardingCoordinator,
-                onDismiss: {
-                    Task { @MainActor in
-                        try? await Task.sleep(nanoseconds: 20_000_000)
-                        withAnimation(.easeInOut(duration: 0.45)) {
-                            isBackgroundDimming = false
-                        }
-                    }
-                },
                 content: { coordinator in
                     OnboardingContainerView(coordinator: coordinator)
                         .environment(\.theme, viewModel.theme)
@@ -39,13 +25,7 @@ struct MacMagazineApp: App {
             )
             .task {
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
-                isBackgroundDimming = true
                 await viewModel.initializeOnboarding()
-                if viewModel.onboardingCoordinator == nil {
-                    withAnimation(.easeInOut(duration: 0.45)) {
-                        isBackgroundDimming = false
-                    }
-                }
             }
         }
         .environment(\.theme, viewModel.theme)
@@ -63,17 +43,5 @@ private extension MacMagazineApp {
             .environmentObject(viewModel.sessionState)
             .environmentObject(viewModel.analytics)
             .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
-            .blur(radius: isBackgroundDimming ? 18 : 0)
-            .animation(.easeInOut(duration: 0.45), value: isBackgroundDimming)
-    }
-
-    var overlay: some View {
-        Rectangle()
-            .fill(.regularMaterial)
-            .overlay { Color.black.opacity(0.18) }
-            .ignoresSafeArea()
-            .opacity(isBackgroundDimming ? 1 : 0)
-            .animation(.easeInOut(duration: 0.35), value: isBackgroundDimming)
-            .allowsHitTesting(false)
     }
 }

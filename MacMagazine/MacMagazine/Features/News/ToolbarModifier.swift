@@ -1,13 +1,19 @@
 import SwiftUI
 
+enum ToolbarType: Equatable {
+    case compact
+    case normal
+    case minimal
+}
+
 extension View {
     func toolbar<Menu: View, Options: View>(
-        show: Bool,
+        type: ToolbarType,
         menu: Menu,
         options: Options
     ) -> some View {
         modifier(ToolbarModifier(
-            show: show,
+            type: type,
             menu: menu,
             options: options
         ))
@@ -15,25 +21,44 @@ extension View {
 }
 
 private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
-    let show: Bool
+    let type: ToolbarType
     let menu: Menu
     let options: Options
 
     func body(content: Content) -> some View {
-        if show {
+        switch type {
+        case .minimal:
             content
+                .navigationTitle("Notícias")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }
+                }
+
+        case .compact:
+            content
+                .navigationTitle("Notícias")
+                .navigationBarTitleDisplayMode(.large)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        menu
+                    }
+                }
+
+        case .normal:
+            content
+                .navigationTitle("Notícias")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
                     ToolbarItem(placement: .navigation) {
                         options
                     }
+                    ToolbarItem(placement: .primaryAction) {
+                        menu
+                    }
                 }
-        } else {
-            content
-                .navigationBarTitleDisplayMode(.large)
         }
     }
 }
