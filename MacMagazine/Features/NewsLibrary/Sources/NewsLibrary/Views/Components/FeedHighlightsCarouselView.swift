@@ -102,9 +102,7 @@ public struct FeedHighlightsCarouselView: View {
                                 count: visibleCardCount,
                                 spacing: Layout.spacing
                             )
-                            .frame(height: cardHeight)
                     }
-                    .buttonStyle(.plain)
                     .scrollTransition(.interactive) { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1.0 : 0.95)

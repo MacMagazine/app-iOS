@@ -20,7 +20,6 @@ struct GlassPodcastCardView: View {
         }, label: {
             GlassCardView(data: podcast)
         })
-        .buttonStyle(.plain)
     }
 }
 
