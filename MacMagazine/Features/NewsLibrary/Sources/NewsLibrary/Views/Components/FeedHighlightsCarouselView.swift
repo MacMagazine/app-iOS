@@ -11,7 +11,6 @@ public struct FeedHighlightsCarouselView: View {
     // MARK: - Properties
 
     let highlights: [FeedDB]
-    let isAutoScrollEnabled: Bool
     let onTap: (FeedDB) -> Void
 
     @Binding var scrolledID: String?
@@ -20,27 +19,18 @@ public struct FeedHighlightsCarouselView: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.isSidebarVisible) private var isSidebarVisible
 
-    @State private var timer: Timer?
-    @State private var lastInteractionDate = Date()
-    @State private var isAutoScrollPaused = false
-
     // MARK: - Layout Constants
 
     private enum Layout {
         // Card heights
         static let phonePortraitHeight: CGFloat = 280
         static let phoneLandscapeHeight: CGFloat = 180
-        static let padPortraitHeight: CGFloat = 320
-        static let padLandscapeHeight: CGFloat = 240
+        static let padHeight: CGFloat = 320
 
         // Spacing and peek
         static let spacing: CGFloat = 12
         static let phonePeek: CGFloat = 40
         static let padPeek: CGFloat = 60
-
-        // Auto-scroll timing
-        static let autoScrollInterval: TimeInterval = 8.0
-        static let pauseDuration: TimeInterval = 30.0
     }
 
     // MARK: - Computed Properties
@@ -56,7 +46,7 @@ public struct FeedHighlightsCarouselView: View {
     private var cardHeight: CGFloat {
         let height: CGFloat
         if isIPad {
-            height = Layout.padPortraitHeight
+            height = Layout.padHeight
         } else {
             height = isLandscape ? Layout.phoneLandscapeHeight : Layout.phonePortraitHeight
         }
@@ -78,12 +68,10 @@ public struct FeedHighlightsCarouselView: View {
     public init(
         highlights: [FeedDB],
         scrolledID: Binding<String?>,
-        isAutoScrollEnabled: Bool = false,
         onTap: @escaping (FeedDB) -> Void
     ) {
         self.highlights = highlights
         self._scrolledID = scrolledID
-        self.isAutoScrollEnabled = isAutoScrollEnabled
         self.onTap = onTap
     }
 
@@ -117,69 +105,6 @@ public struct FeedHighlightsCarouselView: View {
         .scrollPosition(id: $scrolledID)
         .safeAreaPadding(.horizontal, peekWidth)
         .frame(height: cardHeight)
-        .onScrollPhaseChange { _, newPhase in
-            if newPhase == .interacting {
-                pauseAutoScroll()
-            }
-        }
-        .onAppear { startAutoScrollIfEnabled() }
-        .onDisappear { stopAutoScroll() }
-    }
-
-    // MARK: - Auto Scroll
-
-    private func startAutoScrollIfEnabled() {
-        guard isAutoScrollEnabled else { return }
-        startAutoScroll()
-    }
-
-    private func startAutoScroll() {
-        stopAutoScroll()
-
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            Task { @MainActor in
-                checkAndAdvance()
-            }
-        }
-    }
-
-    private func stopAutoScroll() {
-        timer?.invalidate()
-        timer = nil
-    }
-
-    private func pauseAutoScroll() {
-        guard isAutoScrollEnabled else { return }
-        lastInteractionDate = Date()
-        isAutoScrollPaused = true
-    }
-
-    private func checkAndAdvance() {
-        let timeSinceInteraction = Date().timeIntervalSince(lastInteractionDate)
-
-        if isAutoScrollPaused {
-            if timeSinceInteraction >= Layout.pauseDuration {
-                isAutoScrollPaused = false
-                lastInteractionDate = Date()
-            }
-            return
-        }
-
-        if timeSinceInteraction >= Layout.autoScrollInterval {
-            advanceToNextSlide()
-            lastInteractionDate = Date()
-        }
-    }
-
-    private func advanceToNextSlide() {
-        guard !highlights.isEmpty else { return }
-
-        let currentIdx = highlights.firstIndex(where: { $0.postId == scrolledID }) ?? 0
-        let nextIdx = currentIdx + 1 < highlights.count ? currentIdx + 1 : 0
-
-        withAnimation(.easeInOut(duration: 0.5)) {
-            scrolledID = highlights[nextIdx].postId
-        }
     }
 }
 
@@ -194,7 +119,6 @@ public struct FeedHighlightsCarouselView: View {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
                 scrolledID: .constant(nil),
-                isAutoScrollEnabled: false,
                 onTap: { _ in }
             )
 
@@ -211,7 +135,6 @@ public struct FeedHighlightsCarouselView: View {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
                 scrolledID: .constant(nil),
-                isAutoScrollEnabled: false,
                 onTap: { _ in }
             )
 
@@ -228,7 +151,6 @@ public struct FeedHighlightsCarouselView: View {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
                 scrolledID: .constant(nil),
-                isAutoScrollEnabled: false,
                 onTap: { _ in }
             )
 

@@ -11,12 +11,6 @@ import UIComponentsLibrary
 
 public struct NewsView<Filter: View>: View {
 
-    // MARK: - Feature Flags
-
-    /// Enable or disable auto-scroll for highlights carousel.
-    /// Set to `true` to enable automatic advancement of cards.
-    private let isAutoScrollEnabled = false
-
     // MARK: - Environment
 
     @Environment(\.theme) private var theme: ThemeColor
@@ -121,7 +115,6 @@ extension NewsView {
                     FeedHighlightsCarouselView(
                         highlights: highlights,
                         scrolledID: $scrolledHighlightID,
-                        isAutoScrollEnabled: isAutoScrollEnabled,
                         onTap: { post in
                             handleTap(post)
                         }

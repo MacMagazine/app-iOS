@@ -31,7 +31,6 @@ public struct FeedHighlightCardView: View {
             )
         )
         .compositingGroup()
-        .shadow(color: .gray, radius: 2)
     }
 
     // MARK: - Init
