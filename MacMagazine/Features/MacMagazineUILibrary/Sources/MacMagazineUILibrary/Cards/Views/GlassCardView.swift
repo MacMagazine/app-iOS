@@ -163,6 +163,7 @@ private extension GlassCardView {
 
         layout {
             dateRow
+            authorRow
             Spacer(minLength: 0)
             duration
         }
@@ -188,7 +189,6 @@ private extension GlassCardView {
         layout {
             innerLayout {
                 dateRow
-                authorRow
                 statistics
             }
             Spacer(minLength: 4)

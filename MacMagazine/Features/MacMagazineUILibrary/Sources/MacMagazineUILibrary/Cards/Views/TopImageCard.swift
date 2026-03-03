@@ -42,13 +42,11 @@ private extension TopImageCard {
 
 private extension TopImageCard {
     var metadataContent: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 10) {
             thumbnail
-            VStack(alignment: .leading, spacing: 10) {
-                titleRow
-                dateRow
-            }
-                .padding(10)
+            titleRow
+            dateRow
+            authorRow
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -62,18 +60,26 @@ private extension TopImageCard {
     }
 
     var dateRow: some View {
-        HStack {
-            MetadataContent(
-                image: "calendar",
-                text: data.pubDate.toTimeAgoDisplay(showTime: true)
-            )
-            Spacer()
-            Label(data.type.categories.mostRelevant.rawValue,
-                  systemImage: data.type.categories.mostRelevant.icon)
-                .lineLimit(1)
-        }
+        MetadataContent(
+            image: "calendar",
+            text: data.pubDate.toTimeAgoDisplay(showTime: true)
+        )
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)
+    }
+
+    @ViewBuilder
+    var authorRow: some View {
+        if let authorName = data.author, !authorName.isEmpty {
+            MetadataContent(
+                image: "person.fill",
+                text: authorName
+            )
+            .foregroundStyle(.primary.opacity(0.9))
+            .font(.caption2)
+        } else {
+            EmptyView()
+        }
     }
 }
 

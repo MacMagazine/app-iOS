@@ -61,8 +61,10 @@ private extension LeadingImageCard {
     var metadataContent: some View {
         VStack(alignment: .leading, spacing: 6) {
             titleRow
-            authorRow
-            dateRow
+            HStack(spacing: 8) {
+                dateRow
+                authorRow
+            }
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
