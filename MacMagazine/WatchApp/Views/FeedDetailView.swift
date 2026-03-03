@@ -79,7 +79,7 @@ struct FeedDetailView: View {
                 Image(systemName: post.favorite ? "star.fill" : "star")
             }
             .buttonStyle(.glass)
-            .accessibilityLabel(favorite ? "Mostrar tudo" : "Mostrar Favoritos")
+            .accessibilityLabel(post.favorite ? "Mostrar tudo" : "Mostrar Favoritos")
         }
     }
 }
