@@ -61,7 +61,8 @@ private extension LeadingImageCard {
     var metadataContent: some View {
         VStack(alignment: .leading, spacing: 6) {
             titleRow
-            dateAndCreatorRow
+            dateRow
+            authorRow
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,29 +83,26 @@ private extension LeadingImageCard {
         }
     }
 
-    var dateAndCreatorRow: some View {
-        HStack(spacing: 4) {
-            MetadataContent(
-                image: "calendar",
-                text: data.pubDate.toTimeAgoDisplay(showTime: true)
-            )
-            if let creator = data.creator, !creator.isEmpty {
-                Text("•")
-                Text(creator)
-            }
-        }
+    var dateRow: some View {
+        MetadataContent(
+            image: "calendar",
+            text: data.pubDate.toTimeAgoDisplay(showTime: true)
+        )
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)
-        .lineLimit(1)
-        .truncationMode(.tail)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel({
-            let dateText = data.pubDate.toTimeAgoDisplay(showTime: true)
-            if let creator = data.creator, !creator.isEmpty {
-                return "Publicado \(dateText) por \(creator)"
-            } else {
-                return "Publicado \(dateText)"
-            }
-        }())
+    }
+
+    @ViewBuilder
+    var authorRow: some View {
+        if let authorName = data.author, !authorName.isEmpty {
+            MetadataContent(
+                image: "person.fill",
+                text: authorName
+            )
+            .foregroundStyle(.primary.opacity(0.9))
+            .font(.caption2)
+        } else {
+            EmptyView()
+        }
     }
 }

@@ -20,7 +20,7 @@ enum PreviewData {
             title: title,
             subtitle: "Subtítulo da notícia",
             pubDate: Date().addingTimeInterval(-3600),
-            creator: "MacMagazine",
+            author: "MacMagazine",
             artworkURL: "https://picsum.photos/id/\(Int.random(in: 100...500))/800/450",
             link: "https://www.macmagazine.com/",
             categories: categories,

@@ -25,7 +25,7 @@ extension Database {
             existing.title = feed.title
             existing.subtitle = feed.subtitle
             existing.pubDate = feed.pubDate
-            existing.creator = feed.creator
+            existing.author = feed.author
             existing.artworkURL = feed.artworkURL
             existing.link = feed.link
             existing.categories = Array(Set(existing.categories + feed.categories))
