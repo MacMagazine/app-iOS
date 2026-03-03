@@ -200,7 +200,7 @@ private extension GlassCardView {
     var dateRow: some View {
         MetadataContent(
             image: "calendar",
-            text: data.pubDate.toTimeAgoDisplay(showTime: true)
+            text: data.pubDate.toTimeAgoDisplay(showTime: false)
         )
         .foregroundStyle(.white.opacity(0.9))
     }
