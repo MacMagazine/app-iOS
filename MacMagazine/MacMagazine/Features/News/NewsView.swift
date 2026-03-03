@@ -15,14 +15,12 @@ struct NewsView: View {
     @State private var showCategoryFilter = false
     @State private var scrollPosition = ScrollPosition()
     @State private var newsCategory = NewsCategory.all
-    @State private var isTransitioning = false
 
     var body: some View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
                 .contentMargins(.top, 20, for: .scrollContent)
-                .opacity(isTransitioning ? 0 : 1)
         }
         .toolbar(type: toolbarType,
                  menu: favoriteButton,
@@ -31,15 +29,7 @@ struct NewsView: View {
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                newsCategory = newCategory
-
-                withAnimation(.easeIn(duration: 0.2)) {
-                    showCategoryFilter = false
-                    isTransitioning = false
-                }
-            }
+            newsCategory = newCategory
         }
         .onAppear {
             newsCategory = viewModel.news.toNewsCategory
