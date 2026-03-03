@@ -125,9 +125,7 @@ public extension PushNotification {
 extension PushNotification: OSNotificationLifecycleListener {
     public func onWillDisplay(event: OSNotificationWillDisplayEvent) {
         event.preventDefault()
-        // Database().update {
-            event.notification.display()
-        // }
+        event.notification.display()
     }
 }
 
@@ -138,13 +136,10 @@ extension PushNotification: OSNotificationClickListener {
               let content = additionalData as? [String: String] else {
             return
         }
-        // Database().update { [weak self] in
-            newContentAvailable = content["url"]
-        // }
+        newContentAvailable = content["url"]
     }
 
     public static func handleBackground(for userInfo: [AnyHashable: Any]) {
-        // Database().update(onCompletion: nil)
     }
 }
 #endif

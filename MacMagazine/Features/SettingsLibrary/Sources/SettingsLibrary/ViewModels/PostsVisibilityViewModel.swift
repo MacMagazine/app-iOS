@@ -62,7 +62,6 @@ private extension PostsVisibilityViewModel {
     func keepFavoritesAndStatus() {
         models.forEach {
             ($0 as? any ModelFavoritable.Type)?.deleteNonFavorites(using: storage?.sharedModelContainer.mainContext)
-            ($0 as? any ModelReadable.Type)?.deleteNonRead(using: storage?.sharedModelContainer.mainContext)
         }
     }
 }

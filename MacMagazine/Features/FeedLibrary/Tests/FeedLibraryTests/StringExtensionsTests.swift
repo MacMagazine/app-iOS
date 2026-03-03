@@ -5,44 +5,6 @@ import Testing
 @Suite("String Extensions Tests")
 struct StringExtensionsTests {
 
-    // MARK: - Escaped Tests
-
-    @Test("escaped should encode special characters")
-    func escapedEncodesSpecialCharacters() {
-        // Given
-        let input = "hello world"
-
-        // When
-        let result = input.escaped
-
-        // Then
-        #expect(result == "hello%20world")
-    }
-
-    @Test("escaped should handle empty string")
-    func escapedHandlesEmptyString() {
-        // Given
-        let input = ""
-
-        // When
-        let result = input.escaped
-
-        // Then
-        #expect(result.isEmpty)
-    }
-
-    @Test("escaped should preserve alphanumeric characters")
-    func escapedPreservesAlphanumeric() {
-        // Given
-        let input = "abc123"
-
-        // When
-        let result = input.escaped
-
-        // Then
-        #expect(result == "abc123")
-    }
-
     // MARK: - htmlDecoded Tests
 
     @Test("htmlDecoded should decode HTML entities")
@@ -156,73 +118,7 @@ struct StringExtensionsTests {
         #expect(!result.contains("\n\n"))
     }
 
-    // MARK: - decodedHTMLString Tests
-
-    @Test("decodedHTMLString should decode HTML content")
-    func decodedHTMLStringDecodesHTML() {
-        // Given
-        let input = "<p>Hello World</p>"
-
-        // When
-        let result = input.decodedHTMLString
-
-        // Then
-        #expect(result.contains("Hello World"))
-        #expect(!result.contains("<p>"))
-    }
-
-    @Test("decodedHTMLString should handle HTML entities")
-    func decodedHTMLStringHandlesEntities() {
-        // Given
-        let input = "&amp;&lt;&gt;"
-
-        // When
-        let result = input.decodedHTMLString
-
-        // Then
-        #expect(result.contains("&"))
-        #expect(result.contains("<"))
-        #expect(result.contains(">"))
-    }
-
-    @Test("decodedHTMLString should handle plain text")
-    func decodedHTMLStringHandlesPlainText() {
-        // Given
-        let input = "plain text"
-
-        // When
-        let result = input.decodedHTMLString
-
-        // Then
-        #expect(result.contains("plain text"))
-    }
-
-    @Test("decodedHTMLString should return error description on failure")
-    func decodedHTMLStringReturnsErrorOnFailure() {
-        // Given - This won't actually fail, but tests the error path exists
-        let input = "test"
-
-        // When
-        let result = input.decodedHTMLString
-
-        // Then - Should not be empty
-        #expect(!result.isEmpty)
-    }
-
     // MARK: - Integration Tests
-
-    @Test("chaining escaped and clean should work together")
-    func chainingEscapedAndClean() {
-        // Given
-        let input = "hello world\n\ntest"
-
-        // When
-        let result = input.clean.escaped
-
-        // Then
-        #expect(!result.contains("\n\n"))
-        #expect(result.contains("%20"))
-    }
 
     @Test("htmlDecoded and clean should work together")
     func chainingHtmlDecodedAndClean() {

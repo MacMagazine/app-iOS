@@ -30,11 +30,6 @@ public extension OnBoardingFeature {
             title: "Instagram",
             subTitle: "Nova aba dedicada à rede social."
         ),
-//        OnBoardingFeature(
-//            symbol: "folder.fill",
-//            title: "Categorias de posts",
-//            subTitle: "Explore conteúdos organizados por categorias."
-//        ),
         OnBoardingFeature(
             symbol: "slider.horizontal.3",
             title: "App personalizável",
@@ -45,25 +40,10 @@ public extension OnBoardingFeature {
             title: "Sincronização com iCloud",
             subTitle: "Preferências sincronizadas em todos os seus dispositivos."
         ),
-//        OnBoardingFeature(
-//            symbol: "applewatch",
-//            title: "Novo app para Apple Watch",
-//            subTitle: "Fique informado diretamente no pulso."
-//        ),
         OnBoardingFeature(
             symbol: "square.grid.2x2.fill",
             title: "Widgets lindos…",
             subTitle: "Três tamanhos de widgets para você escolher."
         )
-//        OnBoardingFeature(
-//            symbol: "gift.fill",
-//            title: "Mais uma novidade",
-//            subTitle: "Descubra recursos escondidos por todo o app."
-//        ),
-//        OnBoardingFeature(
-//            symbol: "desktopcomputer",
-//            title: "App para macOS",
-//            subTitle: "Aplicativo completo para Mac, pensado para o desktop."
-//        )
     ]
 }

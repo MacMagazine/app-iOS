@@ -79,7 +79,6 @@ private extension MMWebView {
                     MMWebViewUserScripts.tapToZoom,
                     MMWebViewUserScripts.disableGallery,
                     MMWebViewUserScripts.disableNewGallery,
-                    MMWebViewUserScripts.disableNewGallery,
                     MMWebViewUserScripts.comments,
                     MMWebViewUserScripts.removeBackToBlog
                 ],

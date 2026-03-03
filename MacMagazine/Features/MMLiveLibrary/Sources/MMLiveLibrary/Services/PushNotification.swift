@@ -17,10 +17,6 @@ final class PushNotification: NSObject, PushNotificationProtocol {
             let settings = await center.notificationSettings()
             if settings.authorizationStatus == .authorized {
                 process(event: event)
-            } else {
-//                guard let granted = try? await center.requestAuthorization(options: [.alert, .sound, .badge]),
-//                granted else { return }
-//                process(event: event)
             }
         }
     }
