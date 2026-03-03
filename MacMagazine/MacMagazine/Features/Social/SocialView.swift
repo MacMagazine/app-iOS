@@ -113,6 +113,7 @@ private extension SocialView {
         }, label: {
             Image(systemName: favorite ? "star.fill" : "star")
         })
+        .accessibilityLabel(favorite ? "Mostrar tudo" : "Mostrar Favoritos")
     }
 }
 

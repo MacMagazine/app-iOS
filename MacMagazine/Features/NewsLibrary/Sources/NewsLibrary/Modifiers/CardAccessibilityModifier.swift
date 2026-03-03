@@ -6,18 +6,23 @@ import UtilityLibrary
 enum CardLabel {
     case title
     case date
+    case author
 }
 
 private extension Array where Element == CardLabel {
-    func makeText(using data: CardContent) -> String {
+    func makeText(_ title: String = "Podcast", using data: CardContent) -> String {
         var text = [String]()
         self.forEach {
             switch $0 {
             case .title: text.append(data.title)
             case .date: text.append("publicado \(data.pubDate.toTimeAgoDisplay(showTime: true))")
+            case .author:
+                if let author = data.author {
+                    text.append("por \(author)")
+                }
             }
         }
-        return "Podcast " + text.joined(separator: ", ") + "."
+        return title + text.joined(separator: ", ") + "."
     }
 }
 

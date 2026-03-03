@@ -45,6 +45,7 @@ private extension NewsView {
         }, label: {
             Image(systemName: "rectangle.grid.2x2\(showCategoryFilter ? ".fill" : "")")
         })
+        .accessibilityLabel(showCategoryFilter ? "Ocultar filtro por categorias" : "Mostrar filtro por categorias")
     }
 
     var favoriteButton: some View {
@@ -55,6 +56,7 @@ private extension NewsView {
         }, label: {
             Image(systemName: "star\(favorite ? ".fill" : "")")
         })
+        .accessibilityLabel(favorite ? "Mostrar tudo" : "Mostrar Favoritos")
     }
 
     @ViewBuilder

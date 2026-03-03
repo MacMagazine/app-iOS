@@ -140,13 +140,20 @@ extension NewsView {
     @ViewBuilder
     private var newsCards: some View {
         ForEach(0..<news.count, id: \.self) { index in
-            NewsCard(data: news[index].toCardContent(using: modelContext,
-                                                     analytics: analytics,
-                                                     screen: nil,
-                                                     style: category.style,
-                                                     aspectRatio: aspectRatio)) {
+            let data = news[index].toCardContent(using: modelContext,
+                                                 analytics: analytics,
+                                                 screen: nil,
+                                                 style: category.style,
+                                                 aspectRatio: aspectRatio)
+
+            NewsCard(data: data) {
                 handleTap(news[index])
             }
+                                                     .cardAccessibility(
+                                                        data: data,
+                                                        labels: [.title, .date, .author],
+                                                        buttons: [.favorite, .share]
+                                                     )
             .onAppear {
                 if !favorite && search.isEmpty {
                     viewModel.loadMoreIfNeeded(index: index)
