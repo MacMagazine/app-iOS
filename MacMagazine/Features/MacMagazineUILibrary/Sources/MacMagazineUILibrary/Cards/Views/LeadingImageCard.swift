@@ -62,6 +62,7 @@ private extension LeadingImageCard {
         VStack(alignment: .leading, spacing: 6) {
             titleRow
             dateRow
+            authorRow
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -89,5 +90,19 @@ private extension LeadingImageCard {
         )
         .foregroundStyle(.primary.opacity(0.9))
         .font(.caption2)
+    }
+
+    @ViewBuilder
+    var authorRow: some View {
+        if let authorName = data.author, !authorName.isEmpty {
+            MetadataContent(
+                image: "person.fill",
+                text: authorName
+            )
+            .foregroundStyle(.primary.opacity(0.9))
+            .font(.caption2)
+        } else {
+            EmptyView()
+        }
     }
 }

@@ -67,6 +67,7 @@ public struct CardContent {
     public let analytics: AnalyticsManager?
     public let title: String
     public let pubDate: Date
+    public let author: String?
     public let artworkUrl: String
     public let urlToShare: String
     public let favorite: Bool
@@ -81,6 +82,7 @@ public struct CardContent {
         analytics: AnalyticsManager? = nil,
         title: String,
         pubDate: Date,
+        author: String? = nil,
         artworkUrl: String,
         urlToShare: String,
         favorite: Bool,
@@ -91,6 +93,7 @@ public struct CardContent {
         self.title = title
         self.analytics = analytics
         self.pubDate = pubDate
+        self.author = author
         self.urlToShare = urlToShare
         self.artworkUrl = artworkUrl
         self.favorite = favorite

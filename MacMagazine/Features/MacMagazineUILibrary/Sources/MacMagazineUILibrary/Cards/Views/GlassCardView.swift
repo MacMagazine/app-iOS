@@ -188,6 +188,7 @@ private extension GlassCardView {
         layout {
             innerLayout {
                 dateRow
+                authorRow
                 statistics
             }
             Spacer(minLength: 4)
@@ -199,9 +200,22 @@ private extension GlassCardView {
     var dateRow: some View {
         MetadataContent(
             image: "calendar",
-            text: data.pubDate.toTimeAgoDisplay(showTime: false)
+            text: data.pubDate.toTimeAgoDisplay(showTime: true)
         )
         .foregroundStyle(.white.opacity(0.9))
+    }
+
+    @ViewBuilder
+    var authorRow: some View {
+        if let authorName = data.author, !authorName.isEmpty {
+            MetadataContent(
+                image: "person.fill",
+                text: authorName
+            )
+            .foregroundStyle(.white.opacity(0.9))
+        } else {
+            EmptyView()
+        }
     }
 
     @ViewBuilder

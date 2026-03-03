@@ -28,6 +28,7 @@ extension Array where Element == XMLPost {
                 title: $0.title,
                 subtitle: "",
                 pubDate: $0.pubDate,
+                author: $0.creator,
                 artworkURL: $0.artworkURL,
                 link: $0.link,
                 categories: $0.categories,

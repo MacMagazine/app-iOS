@@ -25,7 +25,6 @@ struct NewsView: View {
         .toolbar(type: toolbarType,
                  menu: favoriteButton,
                  options: categoriesButton)
-
         .onChange(of: viewModel.news) { _, newValue in
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }

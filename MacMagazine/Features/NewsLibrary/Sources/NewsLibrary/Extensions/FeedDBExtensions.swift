@@ -21,6 +21,7 @@ extension FeedDB {
             analytics: analytics,
             title: self.title,
             pubDate: self.pubDate,
+            author: self.author,
             artworkUrl: self.artworkURL,
             urlToShare: self.link,
             favorite: self.favorite,

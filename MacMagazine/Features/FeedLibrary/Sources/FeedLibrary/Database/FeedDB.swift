@@ -8,6 +8,7 @@ public final class FeedDB {
     public var title: String = ""
     public var subtitle: String = ""
     public var pubDate: Date = Date()
+    public var author: String?
     public var artworkURL: String = ""
     public var link: String = ""
     public var categories: [String] = []
@@ -21,6 +22,7 @@ public final class FeedDB {
         title: String = "",
         subtitle: String = "",
         pubDate: Date = Date(),
+        author: String? = nil,
         artworkURL: String = "",
         link: String = "",
         categories: [String] = [],
@@ -33,6 +35,7 @@ public final class FeedDB {
         self.title = title
         self.subtitle = subtitle
         self.pubDate = pubDate
+        self.author = author
         self.artworkURL = artworkURL
         self.link = link
         self.categories = categories
