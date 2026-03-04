@@ -25,6 +25,7 @@ class MainViewModel {
     var news: News
     var scrollToTopTrigger: AppTabs?
     var onboardingCoordinator: OnboardingCoordinator?
+    var deepLinkPostURL: String?
 
     let analytics = AnalyticsManager()
     let sessionState = SessionState()

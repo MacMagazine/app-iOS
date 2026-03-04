@@ -1,3 +1,4 @@
+import MacMagazineLibrary
 import OnboardingLibrary
 import PodcastLibrary
 import SettingsLibrary
@@ -14,6 +15,21 @@ struct MacMagazineApp: App {
     var body: some Scene {
         WindowGroup {
             content
+            .onOpenURL { url in
+                viewModel.deepLinkPostURL = url.absoluteString
+            }
+            .fullScreenCover(isPresented: Binding(
+                get: { viewModel.deepLinkPostURL != nil },
+                set: { if !$0 { viewModel.deepLinkPostURL = nil } }
+            )) {
+                if let url = viewModel.deepLinkPostURL {
+                    DeepLinkNewsDetailView(url: url) {
+                        viewModel.deepLinkPostURL = nil
+                    }
+                    .modelContainer(viewModel.storage.sharedModelContainer)
+                    .environmentObject(viewModel.analytics)
+                }
+            }
             .sheet(
                 item: $viewModel.onboardingCoordinator,
                 content: { coordinator in
