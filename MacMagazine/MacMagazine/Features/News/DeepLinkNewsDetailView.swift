@@ -16,7 +16,6 @@ struct DeepLinkNewsDetailView: View {
 
     private var post: FeedDB? {
         let link = url.removingPercentEncoding ?? url
-        print("==> \(allNews.count) \(link)")
         return allNews.first(where: { $0.link == link })
     }
 
