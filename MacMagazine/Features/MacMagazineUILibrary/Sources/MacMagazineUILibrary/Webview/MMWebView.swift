@@ -4,18 +4,12 @@ import SwiftUI
 import UIComponentsLibrary
 
 public struct MMWebView: View {
-    enum WebViewStatus: Equatable {
-        case idle
-        case loading
-        case error(String)
-        case done
-    }
-
     @Environment(\.removeAds) private var removeAds
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.theme) private var theme: ThemeColor
 
     @State private var viewStatus = WebViewStatus.idle
+    @State private var commentsURL = ""
 
     private let controller = MMWebViewController()
     private let url: String?
@@ -32,7 +26,7 @@ public struct MMWebView: View {
     public var body: some View {
         ZStack {
             webview(url: url).transition(.opacity)
-            statusView
+            WebViewStatusOverlay(status: viewStatus)
         }
         .task {
             controller.onStart = {
@@ -46,26 +40,21 @@ public struct MMWebView: View {
             controller.onFail = { error in
                 viewStatus = .error(error.localizedDescription)
             }
+            controller.onOpenComments = { url in
+                commentsURL = url
+            }
+        }
+
+        .sheet(isPresented: Binding(get: { !commentsURL.isEmpty },
+                                    set: { _ in commentsURL = "" })) {
+            DisqusSheet(commentsURL: commentsURL) {
+                commentsURL = ""
+            }
         }
     }
 }
 
 private extension MMWebView {
-    @ViewBuilder
-    var statusView: some View {
-        switch viewStatus {
-        case .loading:
-            ProgressView()
-        case let .error(error):
-            ContentUnavailableView(
-                "Estamos com um problema",
-                systemImage: "wifi.exclamationmark",
-                description: Text(error)
-            )
-        default: EmptyView()
-        }
-    }
-
     @ViewBuilder
     func webview(url: String?) -> some View {
         if let url {
@@ -79,13 +68,11 @@ private extension MMWebView {
                     MMWebViewUserScripts.tapToZoom,
                     MMWebViewUserScripts.disableGallery,
                     MMWebViewUserScripts.disableNewGallery,
-                    MMWebViewUserScripts.comments,
                     MMWebViewUserScripts.removeBackToBlog
                 ],
                 cookies: makeCookies(using: colorScheme),
                 scriptMessageHandlers: [
-                    (controller, "imageTappedHandler"),
-                    (controller, "gotCommentURLHandler")
+                    (controller, "imageTappedHandler")
                 ],
                 userAgent: Utils.userAgent,
                 cacheKey: cacheKey
@@ -105,3 +92,28 @@ private extension MMWebView {
         )
     }
 }
+// MARK: - Disqus Sheet
+
+private struct DisqusSheet: View {
+    let commentsURL: String
+    let onDismiss: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            DisqusWebView(commentsURL: commentsURL)
+                .navigationTitle("Comentários")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button(action: { onDismiss() },
+                               label: { Text("Fechar") })
+                        .buttonStyle(.plain)
+                        .tint(.primary)
+                        .glassEffect(.regular.interactive(), in: .capsule)
+                    }
+                }
+        }
+        .presentationDragIndicator(.visible)
+    }
+}
+

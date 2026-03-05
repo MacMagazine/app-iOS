@@ -6,6 +6,7 @@ class MMWebViewController: NSObject {
     var onStart: (() -> Void)?
     var onFinish: (() -> Void)?
     var onFail: ((Error) -> Void)?
+    var onOpenComments: ((String) -> Void)?
 }
 
 extension MMWebViewController: WKNavigationDelegate {
@@ -58,7 +59,7 @@ extension MMWebViewController: WKNavigationDelegate {
             } else if navigationAction.request.url?.absoluteString.contains("comments://") ?? false {
                 if let URL = navigationAction.request.url?.absoluteString.replacingOccurrences(of: "comments://", with: "") {
                     let commentsURL = URL.replacingOccurrences(of: "%20", with: " ")
-                    print("==> \(commentsURL)")
+                    onOpenComments?(commentsURL)
                 }
             } else if navigationAction.request.url?.absoluteString.contains("#disqus_thread") ?? false {
                 print("==> disqus_thread")

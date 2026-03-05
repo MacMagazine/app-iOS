@@ -66,18 +66,6 @@ enum MMWebViewUserScripts {
     }
 
     @MainActor
-    static var comments: WKUserScript {
-        WKUserScript(
-            source: """
-            var comments = document.querySelectorAll('[data-disqus-identifier]');
-            window.webkit.messageHandlers.gotCommentURLHandler.postMessage(comments[0].dataset.disqusIdentifier);
-            """,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: true
-        )
-    }
-
-    @MainActor
     static var removeBackToBlog: WKUserScript {
         WKUserScript(
             source: """
@@ -85,6 +73,32 @@ enum MMWebViewUserScripts {
             """,
             injectionTime: .atDocumentEnd,
             forMainFrameOnly: true
+        )
+    }
+
+    @MainActor
+    static var interceptNewWindows: WKUserScript {
+        WKUserScript(
+            source: """
+                (function() {
+                    window.open = function(url, target, features) {
+                        if (url && url.length > 0) {
+                            window.webkit.messageHandlers.newWindowHandler.postMessage(url);
+                        }
+                        return null;
+                    };
+                    document.addEventListener('click', function(e) {
+                        var anchor = e.target.closest('a[target="_blank"]');
+                        if (anchor && anchor.href) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.webkit.messageHandlers.newWindowHandler.postMessage(anchor.href);
+                        }
+                    }, true);
+                })();
+                """,
+            injectionTime: .atDocumentStart,
+            forMainFrameOnly: false
         )
     }
 }

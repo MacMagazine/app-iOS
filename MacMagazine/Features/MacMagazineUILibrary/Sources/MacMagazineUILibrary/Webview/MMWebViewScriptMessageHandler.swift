@@ -16,15 +16,3 @@ final class ImageTappedHandler: NSObject, WKScriptMessageHandler {
 //        }
     }
 }
-
-final class GotCommentURLHandler: NSObject, WKScriptMessageHandler {
-    func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage) {
-        print("==> \(message.name)")
-        guard let body = message.body as? String else {
-            return
-        }
-        print("==> \(body)")
-        // commentsURL = body
-    }
-}
