@@ -32,7 +32,10 @@ struct DisqusWebView: View {
         )) {
             if let loginURL {
                 NavigationStack {
-                    DisqusLoginWebView(url: loginURL)
+                    DisqusLoginWebView(url: loginURL, onLoginSuccess: {
+                        self.loginURL = nil
+                        reloadPage()
+                    })
                         .navigationTitle("Login")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
@@ -56,11 +59,17 @@ private struct DisqusLoginWebView: View {
     @State private var loginPage = WebPage()
 
     let url: URL
+    let onLoginSuccess: @MainActor () -> Void
 
     var body: some View {
         WebView(loginPage)
             .task {
                 loginPage.load(URLRequest(url: url))
+            }
+            .onChange(of: loginPage.url) { _, newURL in
+                if let path = newURL?.path, path.contains("/next/login-success") {
+                    onLoginSuccess()
+                }
             }
     }
 }
@@ -90,6 +99,12 @@ private extension DisqusWebView {
         contentController.addUserScript(MMWebViewUserScripts.interceptNewWindows)
         contentController.add(newWindowHandler, name: "newWindowHandler")
         return WebPage(configuration: configuration)
+    }
+
+    func reloadPage() {
+        Task {
+            await loadContent()
+        }
     }
 
     func loadContent() async {
