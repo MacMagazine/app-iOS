@@ -1,7 +1,7 @@
 import AnalyticsLibrary
 import MacMagazineLibrary
+import MacMagazineUILibrary
 import SwiftUI
-import UIComponentsLibrary
 
 public struct SettingsView: View {
     @EnvironmentObject private var analytics: AnalyticsManager
@@ -19,10 +19,20 @@ public struct SettingsView: View {
         settingsContent
             .sheet(isPresented: Binding(get: { presentingContent != .none },
                                         set: { _ in presentingContent = .none })) {
-                Webview(title: presentingContent.title,
-                        url: presentingContent.url,
-                        isPresenting: Binding(get: { presentingContent != .none },
-                                              set: { _ in presentingContent = .none }))
+                NavigationStack {
+                    SimpleWebView(url: presentingContent.url)
+                        .navigationTitle(presentingContent.title)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button(action: { presentingContent = .none },
+                                       label: { Text("Fechar") })
+                                .buttonStyle(.plain)
+                                .tint(.primary)
+                                .glassEffect(.regular.interactive(), in: .capsule)
+                            }
+                        }
+                }
                 .trackScreen(
                     presentingContent.title,
                     previous: nil,
@@ -31,14 +41,29 @@ public struct SettingsView: View {
             }
 
             .sheet(isPresented: $isPresentingLoginPatrao) {
-                let webviewController = WebviewController(isPresenting: $isPresentingLoginPatrao,
-                                                          isPatrao: $isPatrao,
-                                                          openUrl: $urlToOpen)
-                Webview(title: "Login para patrões",
+                NavigationStack {
+                    SimpleWebView(
                         url: URLs.login,
-                        isPresenting: $isPresentingLoginPatrao,
-                        navigationDelegate: webviewController,
-                        userScripts: webviewController.userScripts)
+                        userScripts: [MMWebViewUserScripts.removeBackToBlog],
+                        onNavigationCommitted: { url in
+                            if url.absoluteString.hasPrefix(URLs.success) {
+                                isPatrao = true
+                                isPresentingLoginPatrao = false
+                            }
+                        }
+                    )
+                    .navigationTitle("Login para patrões")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button(action: { isPresentingLoginPatrao = false },
+                                   label: { Text("Fechar") })
+                            .buttonStyle(.plain)
+                            .tint(.primary)
+                            .glassEffect(.regular.interactive(), in: .capsule)
+                        }
+                    }
+                }
                 .trackScreen(
                     "Login para patrões",
                     previous: nil,

@@ -49,6 +49,11 @@ struct SubscriptionView: View {
                 await viewModel.change(isPatrao: value)
             }
         }
+        .onChange(of: isPatrao) { _, value in
+            if viewModel.isPatrao != value {
+                viewModel.isPatrao = value
+            }
+        }
     }
 }
 

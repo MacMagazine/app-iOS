@@ -16,7 +16,7 @@ final public class SettingsViewModel {
     private var storedTabs: [AppTabs] = AppTabs.allCases
 
     public var tabs: [AppTabs] {
-        if !isLive {
+        if isLive {
             return storedTabs.filter { $0 != .live }
         }
         return storedTabs

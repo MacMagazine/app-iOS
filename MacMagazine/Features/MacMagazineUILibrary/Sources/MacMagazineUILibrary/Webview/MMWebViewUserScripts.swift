@@ -1,7 +1,7 @@
 import Foundation
 import WebKit
 
-enum MMWebViewUserScripts {
+public enum MMWebViewUserScripts {
     @MainActor
     static var topPadding: WKUserScript {
         WKUserScript(
@@ -66,7 +66,7 @@ enum MMWebViewUserScripts {
     }
 
     @MainActor
-    static var removeBackToBlog: WKUserScript {
+    public static var removeBackToBlog: WKUserScript {
         WKUserScript(
             source: """
             document.getElementById('backtoblog').outerHTML = '';

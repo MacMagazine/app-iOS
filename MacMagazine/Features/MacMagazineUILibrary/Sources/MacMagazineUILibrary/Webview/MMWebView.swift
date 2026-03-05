@@ -1,7 +1,7 @@
 import Foundation
 import MacMagazineLibrary
 import SwiftUI
-import UIComponentsLibrary
+@preconcurrency import WebKit
 
 public struct MMWebView: View {
     @Environment(\.removeAds) private var removeAds
@@ -10,8 +10,10 @@ public struct MMWebView: View {
 
     @State private var viewStatus = WebViewStatus.idle
     @State private var commentsURL = ""
+    @State private var page: WebPage?
+    @State private var navigationDecider = MMNavigationDecider()
+    @State private var imageTappedHandler = ImageTappedHandler()
 
-    private let controller = MMWebViewController()
     private let url: String?
     private let cacheKey: String?
 
@@ -25,26 +27,15 @@ public struct MMWebView: View {
 
     public var body: some View {
         ZStack {
-            webview(url: url).transition(.opacity)
+            webview.transition(.opacity)
             WebViewStatusOverlay(status: viewStatus)
         }
         .task {
-            controller.onStart = {
-                viewStatus = viewStatus == .idle ? .loading : viewStatus
-            }
-            controller.onFinish = {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    viewStatus = .done
-                }
-            }
-            controller.onFail = { error in
-                viewStatus = .error(error.localizedDescription)
-            }
-            controller.onOpenComments = { url in
+            navigationDecider.onOpenComments = { url in
                 commentsURL = url
             }
+            await setupAndLoad()
         }
-
         .sheet(isPresented: Binding(get: { !commentsURL.isEmpty },
                                     set: { _ in commentsURL = "" })) {
             DisqusSheet(commentsURL: commentsURL) {
@@ -54,37 +45,100 @@ public struct MMWebView: View {
     }
 }
 
+// MARK: - WebView
+
 private extension MMWebView {
     @ViewBuilder
-    func webview(url: String?) -> some View {
-        if let url {
-            Webview(
-                url: url,
-                isPresenting: .constant(true),
-                standAlone: true,
-                navigationDelegate: controller,
-                userScripts: [
-                    MMWebViewUserScripts.topPadding,
-                    MMWebViewUserScripts.tapToZoom,
-                    MMWebViewUserScripts.disableGallery,
-                    MMWebViewUserScripts.disableNewGallery,
-                    MMWebViewUserScripts.removeBackToBlog
-                ],
-                cookies: makeCookies(using: colorScheme),
-                scriptMessageHandlers: [
-                    (controller, "imageTappedHandler")
-                ],
-                userAgent: Utils.userAgent,
-                cacheKey: cacheKey
-            )
-            .id(colorScheme)
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
-            .opacity(viewStatus == .done ? 1 : 0)
+    var webview: some View {
+        if let page {
+            WebView(page)
+                .webViewBackForwardNavigationGestures(.disabled)
+                .id(colorScheme)
+                .ignoresSafeArea(.container, edges: [.top, .bottom])
+                .opacity(viewStatus == .done ? 1 : 0)
         }
     }
 }
 
+// MARK: - Setup
+
 private extension MMWebView {
+    func setupAndLoad() async {
+        guard let url, let requestURL = URL(string: url) else { return }
+
+        // If we already have a cached page loaded, just show it
+        if let cacheKey, WebPageCache.shared.hasPage(for: cacheKey) {
+            let page = WebPageCache.shared.page(
+                for: cacheKey,
+                configurationProvider: { makeConfiguration() },
+                navigationDecider: navigationDecider
+            )
+            self.page = page
+            viewStatus = .done
+            return
+        }
+
+        let configuration = makeConfiguration()
+        let page: WebPage
+
+        if let cacheKey {
+            page = WebPageCache.shared.page(
+                for: cacheKey,
+                configurationProvider: { configuration },
+                navigationDecider: navigationDecider
+            )
+        } else {
+            page = WebPage(
+                configuration: configuration,
+                navigationDecider: navigationDecider
+            )
+        }
+
+        page.customUserAgent = Utils.userAgent
+        self.page = page
+
+        let cookies = makeCookies(using: colorScheme)
+        let cookieStore = configuration.websiteDataStore.httpCookieStore
+        for cookie in cookies {
+            await cookieStore.setCookie(cookie)
+        }
+
+        viewStatus = .loading
+
+        do {
+            for try await event in page.load(URLRequest(url: requestURL)) {
+                switch event {
+                case .startedProvisionalNavigation, .receivedServerRedirect, .committed:
+                    break
+                case .finished:
+                    try? await Task.sleep(for: .milliseconds(50))
+                    viewStatus = .done
+                @unknown default:
+                    break
+                }
+            }
+        } catch is CancellationError {
+            // Task cancelled (view disappeared, app backgrounded) — not an error
+        } catch {
+            viewStatus = .error(error.localizedDescription)
+        }
+    }
+
+    func makeConfiguration() -> WebPage.Configuration {
+        let configuration = WebPage.Configuration()
+        let contentController = configuration.userContentController
+
+        contentController.addUserScript(MMWebViewUserScripts.topPadding)
+        contentController.addUserScript(MMWebViewUserScripts.tapToZoom)
+        contentController.addUserScript(MMWebViewUserScripts.disableGallery)
+        contentController.addUserScript(MMWebViewUserScripts.disableNewGallery)
+        contentController.addUserScript(MMWebViewUserScripts.removeBackToBlog)
+
+        contentController.add(imageTappedHandler, name: "imageTappedHandler")
+
+        return configuration
+    }
+
     func makeCookies(using colorScheme: ColorScheme) -> [HTTPCookie] {
         Cookies.makeCookies(
             darkMode: Utils.isDarkMode(for: colorScheme),
