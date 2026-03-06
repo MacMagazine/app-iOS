@@ -132,6 +132,17 @@ private extension MMWebView {
         )
     }
 }
+// MARK: - Disqus Data Store
+
+/// Shared persistent data store for all Disqus webviews so cookies are
+/// preserved between the comments page and the login page.
+@MainActor
+private enum DisqusDataStore {
+    static let shared: WKWebsiteDataStore = {
+        WKWebsiteDataStore(forIdentifier: UUID(uuidString: "D15QU5C0-0K1E-5700-BE00-MACMAGAZINE0")!)
+    }()
+}
+
 // MARK: - Disqus Sheet
 
 private struct DisqusSheet: View {
@@ -152,7 +163,7 @@ private struct DisqusSheet: View {
                     backForwardGesturesDisabled: true,
                     reloadsOnColorSchemeChange: true
                 ),
-                pageProvider: { makePageAndConfigure() },
+                pageProvider: { await makePageAndConfigure() },
                 loadAction: { page in
                     let html = DisqusHTMLBuilder.makeHTML(
                         commentsURL: commentsURL,
@@ -184,10 +195,19 @@ private struct DisqusSheet: View {
         )) {
             if let loginURL {
                 NavigationStack {
-                    DisqusLoginWebView(url: loginURL, onLoginSuccess: {
-                        self.loginURL = nil
-                        reloadToken = UUID()
-                    })
+                    DisqusLoginWebView(
+                        url: loginURL,
+                        dataStore: DisqusDataStore.shared,
+                        onLoginSuccess: {
+                            Task {
+                                await Cookies.saveDisqusCookies(
+                                    from: DisqusDataStore.shared.httpCookieStore
+                                )
+                            }
+                            self.loginURL = nil
+                            reloadToken = UUID()
+                        }
+                    )
                     .navigationTitle("Login")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
@@ -204,11 +224,18 @@ private struct DisqusSheet: View {
         }
     }
 
-    private func makePageAndConfigure() -> WebPage {
+    private func makePageAndConfigure() async -> WebPage {
         newWindowHandler.onNewWindow = { url in
             loginURL = url
         }
         let configuration = WebPage.Configuration()
+        configuration.websiteDataStore = DisqusDataStore.shared
+
+        // Restore previously saved Disqus login cookies
+        await Cookies.restoreDisqusCookies(
+            to: DisqusDataStore.shared.httpCookieStore
+        )
+
         let contentController = configuration.userContentController
         contentController.addUserScript(MMWebViewUserScripts.interceptNewWindows)
         contentController.add(newWindowHandler, name: "newWindowHandler")
@@ -220,25 +247,30 @@ private struct DisqusSheet: View {
 private struct DisqusLoginWebView: View {
     @Environment(\.scenePhase) private var scenePhase
 
-    @State private var loginPage = WebPage()
+    @State private var loginPage: WebPage?
     @State private var isActive = true
 
     let url: URL
+    let dataStore: WKWebsiteDataStore
     let onLoginSuccess: @MainActor () -> Void
 
     var body: some View {
         Group {
-            if isActive {
+            if isActive, let loginPage {
                 WebView(loginPage)
             }
         }
         .task {
-            loginPage.load(URLRequest(url: url))
+            let configuration = WebPage.Configuration()
+            configuration.websiteDataStore = dataStore
+            let page = WebPage(configuration: configuration)
+            loginPage = page
+            page.load(URLRequest(url: url))
         }
         .onChange(of: scenePhase) { _, newPhase in
             isActive = newPhase == .active
         }
-        .onChange(of: loginPage.url) { _, newURL in
+        .onChange(of: loginPage?.url) { _, newURL in
             if let path = newURL?.path, path.contains("/next/login-success") {
                 onLoginSuccess()
             }

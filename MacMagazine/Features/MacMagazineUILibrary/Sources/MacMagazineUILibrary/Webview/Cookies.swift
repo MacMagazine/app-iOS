@@ -1,9 +1,12 @@
 import Foundation
+@preconcurrency import WebKit
 
 public struct Cookies {
 
     static let disqus = "disqus.com"
     static let mmDomain = "macmagazine.com.br"
+
+    private static let disqusCookiesKey = "disqus_saved_cookies"
 
     public static func get(_ domain: String? = nil) -> [HTTPCookie]? {
         let cookies = HTTPCookieStorage.shared.cookies
@@ -22,6 +25,43 @@ public struct Cookies {
             if !cookie.domain.contains(disqus) &&
                 !cookie.domain.contains(mmDomain) {
                 HTTPCookieStorage.shared.deleteCookie(cookie)
+            }
+        }
+    }
+
+    // MARK: - Disqus Cookie Persistence
+
+    /// Saves Disqus-related cookies from a WKHTTPCookieStore to UserDefaults.
+    @MainActor
+    public static func saveDisqusCookies(from cookieStore: WKHTTPCookieStore) async {
+        let allCookies = await cookieStore.allCookies()
+        let disqusCookies = allCookies.filter { $0.domain.contains(disqus) }
+
+        guard !disqusCookies.isEmpty else { return }
+
+        let cookieProperties = disqusCookies.compactMap { $0.properties }
+        let data = try? NSKeyedArchiver.archivedData(
+            withRootObject: cookieProperties,
+            requiringSecureCoding: false
+        )
+        UserDefaults.standard.set(data, forKey: disqusCookiesKey)
+    }
+
+    /// Restores previously saved Disqus cookies into a WKHTTPCookieStore.
+    @MainActor
+    public static func restoreDisqusCookies(to cookieStore: WKHTTPCookieStore) async {
+        guard let data = UserDefaults.standard.data(forKey: disqusCookiesKey),
+              let cookieProperties = try? NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [NSArray.self, NSDictionary.self, NSString.self,
+                            NSNumber.self, NSDate.self, NSURL.self],
+                from: data
+              ) as? [[HTTPCookiePropertyKey: Any]] else {
+            return
+        }
+
+        for properties in cookieProperties {
+            if let cookie = HTTPCookie(properties: properties) {
+                await cookieStore.setCookie(cookie)
             }
         }
     }
