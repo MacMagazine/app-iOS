@@ -140,3 +140,11 @@ force_unwrapping: warning
 shorthand_operator: warning
 line_length:
   warning: 200
+
+# Custom Rules
+custom_rules:
+  prefer_let_before_case:
+    name: "Prefer let/var Before Case"
+    message: "Place let/var before the case pattern. Use 'case let .custom(x):' instead of 'case .custom(let x):'"
+    regex: 'case\s+\.\w+\s*\(\s*(let|var)\s+'
+    severity: error
