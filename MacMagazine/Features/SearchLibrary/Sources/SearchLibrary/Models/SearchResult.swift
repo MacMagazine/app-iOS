@@ -20,22 +20,11 @@ struct SearchResult: Identifiable {
     let categories: [String]
     let favorite: Bool
     let duration: String?
-    let relevanceScore: Double
+    var relevanceScore: Double
 
-    // Source references for navigation
     let feedDB: FeedDB?
     let podcastDB: PodcastDB?
     let videoDB: VideoDB?
-
-    func withRelevanceScore(_ score: Double) -> SearchResult {
-        SearchResult(
-            id: id, type: type, title: title, excerpt: excerpt,
-            artworkURL: artworkURL, pubDate: pubDate, author: author,
-            link: link, categories: categories, favorite: favorite,
-            duration: duration, relevanceScore: score,
-            feedDB: feedDB, podcastDB: podcastDB, videoDB: videoDB
-        )
-    }
 }
 
 extension FeedDB {

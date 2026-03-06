@@ -1,3 +1,4 @@
+import FeedLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIComponentsLibrary
@@ -31,6 +32,7 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                         .padding(.horizontal, 20)
                         .glassEffect(.regular)
                     }
+                    .fullPlayerSheet(manager: manager)
             } else {
                 content
                     .tabBarMinimizeBehavior(.onScrollDown)
@@ -43,9 +45,28 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                         .matchedTransitionSource(id: "MINIPLAYER", in: animation)
                         .padding(.horizontal, 8)
                     }
+                    .fullPlayerSheet(manager: manager)
             }
         } else {
             content
+                .fullPlayerSheet(manager: manager)
+        }
+    }
+}
+
+private extension View {
+    func fullPlayerSheet(manager: PodcastPlayerManager) -> some View {
+        self.sheet(
+            isPresented: Binding(
+                get: { manager.isFullscreen },
+                set: { manager.isFullscreen = $0 }
+            )
+        ) {
+            FullPlayerView(
+                playerManager: manager,
+                backgroundGradientStyle: .fourTone
+            )
+            .presentationDragIndicator(.visible)
         }
     }
 }

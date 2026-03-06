@@ -44,9 +44,9 @@ public class PodcastPlayerManager {
     }
 }
 
-// MARK: - Internal methods -
+// MARK: - Public methods -
 
-extension PodcastPlayerManager {
+public extension PodcastPlayerManager {
     func loadPodcast(_ podcast: PodcastDB) {
         guard let url = URL(string: podcast.podcastURL) else { return }
 

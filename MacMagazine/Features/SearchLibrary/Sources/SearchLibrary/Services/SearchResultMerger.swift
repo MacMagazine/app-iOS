@@ -1,6 +1,10 @@
 import Foundation
 
-struct SearchResultMerger {
+protocol SearchResultMergerProtocol {
+    func merge(existing: [SearchResult], incoming: [SearchResult], intent: QueryIntent) -> [SearchResult]
+}
+
+struct SearchResultMerger: SearchResultMergerProtocol {
     private let scorer = RelevanceScorer()
 
     func merge(
@@ -24,23 +28,16 @@ struct SearchResultMerger {
             resultMap[key] = result
         }
 
-        let scored = Array(resultMap.values)
-            .map { $0.withRelevanceScore(scorer.score(result: $0, intent: intent)) }
+        var scored = Array(resultMap.values)
+        for index in scored.indices {
+            scored[index].relevanceScore = scorer.score(result: scored[index], intent: intent)
+        }
 
-        return sorted(scored, by: intent.sortPreference)
-    }
-}
-
-// MARK: - Sorting
-
-private extension SearchResultMerger {
-
-    func sorted(_ results: [SearchResult], by preference: SortPreference) -> [SearchResult] {
-        switch preference {
+        switch intent.sortPreference {
         case .recent:
-            results.sorted { $0.pubDate > $1.pubDate }
+            return scored.sorted { $0.pubDate > $1.pubDate }
         case .relevance:
-            results.sorted { $0.relevanceScore > $1.relevanceScore }
+            return scored.sorted { $0.relevanceScore > $1.relevanceScore }
         }
     }
 }

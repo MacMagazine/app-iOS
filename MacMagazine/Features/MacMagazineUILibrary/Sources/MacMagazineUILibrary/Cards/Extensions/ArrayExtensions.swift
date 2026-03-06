@@ -10,7 +10,7 @@ private let categoryPriority: [NewsCategory: Int] = [
     .news: 5
 ]
 
-extension Array where Element == NewsCategory {
+public extension Array where Element == NewsCategory {
     var mostRelevant: NewsCategory {
         self.min(by: {
             (categoryPriority[$0] ?? Int.max) < (categoryPriority[$1] ?? Int.max)

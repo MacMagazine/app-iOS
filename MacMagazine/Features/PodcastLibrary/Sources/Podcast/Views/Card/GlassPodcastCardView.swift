@@ -5,12 +5,17 @@ import MacMagazineUILibrary
 import SwiftData
 import SwiftUI
 
-struct GlassPodcastCardView: View {
+public struct GlassPodcastCardView: View {
     @EnvironmentObject private var analytics: AnalyticsManager
-    let podcast: CardContent
-    let onPlay: () -> Void
+    public let podcast: CardContent
+    public let onPlay: () -> Void
 
-    var body: some View {
+    public init(podcast: CardContent, onPlay: @escaping () -> Void) {
+        self.podcast = podcast
+        self.onPlay = onPlay
+    }
+
+    public var body: some View {
         Button(action: {
             onPlay()
             analytics.track(.buttonTap(

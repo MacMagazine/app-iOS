@@ -1,23 +1,88 @@
 import Foundation
 @testable import SearchLibrary
 import StorageLibrary
+import SwiftData
 import Testing
+
+@MainActor
+private struct MockLocalSearchService: LocalSearchServiceProtocol {
+    var resultsToReturn: [SearchResult] = []
+
+    func search(intent: QueryIntent, context: ModelContext) -> [SearchResult] {
+        resultsToReturn
+    }
+}
+
+private struct MockRemoteSearchService: RemoteSearchServiceProtocol {
+    var resultsToReturn: [SearchResult] = []
+    var errorToThrow: Error?
+
+    @MainActor
+    func search(term: String, page: Int) async throws -> [SearchResult] {
+        if let error = errorToThrow { throw error }
+        return resultsToReturn
+    }
+}
+
+private struct MockMerger: SearchResultMergerProtocol {
+    func merge(existing: [SearchResult], incoming: [SearchResult], intent: QueryIntent) -> [SearchResult] {
+        existing + incoming
+    }
+}
+
+private func makeResult(
+    id: String = "test_1",
+    type: SearchResultType = .news,
+    title: String = "Test Result",
+    pubDate: Date = Date()
+) -> SearchResult {
+    SearchResult(
+        id: id,
+        type: type,
+        title: title,
+        excerpt: "",
+        artworkURL: "",
+        pubDate: pubDate,
+        author: nil,
+        link: "https://example.com",
+        categories: [],
+        favorite: false,
+        duration: nil,
+        relevanceScore: 0,
+        feedDB: nil,
+        podcastDB: nil,
+        videoDB: nil
+    )
+}
 
 @Suite("SearchViewModel Tests")
 @MainActor
 struct SearchViewModelTests {
 
-    func makeViewModel() -> SearchViewModel {
+    private func makeViewModel(
+        localResults: [SearchResult] = [],
+        remoteResults: [SearchResult] = [],
+        remoteError: Error? = nil
+    ) -> SearchViewModel {
         let storage = Database(
             models: [RecentSearchDB.self],
             inMemory: true
         )
-        return SearchViewModel(storage: storage)
+        let localSearch = MockLocalSearchService(resultsToReturn: localResults)
+        let remoteSearch = MockRemoteSearchService(
+            resultsToReturn: remoteResults,
+            errorToThrow: remoteError
+        )
+        return SearchViewModel(
+            storage: storage,
+            localSearch: localSearch,
+            remoteSearch: remoteSearch,
+            merger: MockMerger()
+        )
     }
 
-    /// Waits for the search task to finish (debounce + remote).
-    private func waitForSearch() async throws {
-        try await Task.sleep(for: .seconds(3))
+    private func waitForDebounce() async throws {
+        try await Task.sleep(for: .milliseconds(400))
     }
 
     // MARK: - Search State
@@ -49,6 +114,53 @@ struct SearchViewModelTests {
         #expect(viewModel.status == .idle)
     }
 
+    @Test("Search with local results shows localResults then done")
+    func searchShowsLocalThenDone() async throws {
+        let localResults = [makeResult(title: "iPhone 17")]
+        let viewModel = makeViewModel(localResults: localResults)
+
+        viewModel.searchText = "iPhone"
+        viewModel.performSearch()
+
+        try await waitForDebounce()
+
+        #expect(viewModel.status == .done)
+        #expect(!viewModel.results.isEmpty)
+    }
+
+    @Test("Search with remote error sets error status")
+    func searchWithRemoteError() async throws {
+        let viewModel = makeViewModel(
+            remoteError: URLError(.notConnectedToInternet)
+        )
+
+        viewModel.searchText = "iPhone"
+        viewModel.performSearch()
+
+        try await waitForDebounce()
+
+        if case .error = viewModel.status {
+            // expected
+        } else {
+            Issue.record("Expected .error status, got \(viewModel.status)")
+        }
+    }
+
+    @Test("Search merges local and remote results")
+    func searchMergesResults() async throws {
+        let local = [makeResult(id: "local_1", title: "Local Result")]
+        let remote = [makeResult(id: "remote_1", title: "Remote Result")]
+        let viewModel = makeViewModel(localResults: local, remoteResults: remote)
+
+        viewModel.searchText = "test"
+        viewModel.performSearch()
+
+        try await waitForDebounce()
+
+        #expect(viewModel.results.count == 2)
+        #expect(viewModel.status == .done)
+    }
+
     // MARK: - Recent Searches
 
     @Test("Recent searches initially empty")
@@ -63,7 +175,7 @@ struct SearchViewModelTests {
         viewModel.searchText = "iPhone test"
         viewModel.performSearch()
 
-        try await waitForSearch()
+        try await waitForDebounce()
 
         #expect(!viewModel.recentSearches.isEmpty)
         #expect(viewModel.recentSearches.first?.query == "iPhone test")
@@ -75,7 +187,7 @@ struct SearchViewModelTests {
 
         viewModel.searchText = "test query"
         viewModel.performSearch()
-        try await waitForSearch()
+        try await waitForDebounce()
         #expect(!viewModel.recentSearches.isEmpty)
 
         viewModel.clearRecentSearches()
@@ -88,11 +200,11 @@ struct SearchViewModelTests {
 
         viewModel.searchText = "first query"
         viewModel.performSearch()
-        try await waitForSearch()
+        try await waitForDebounce()
 
         viewModel.searchText = "second query"
         viewModel.performSearch()
-        try await waitForSearch()
+        try await waitForDebounce()
 
         let countBefore = viewModel.recentSearches.count
         #expect(countBefore >= 2)
@@ -114,13 +226,11 @@ struct SearchViewModelTests {
         viewModel.searchText = "first"
         viewModel.performSearch()
 
-        // Immediately start another search before debounce finishes
         viewModel.searchText = "second"
         viewModel.performSearch()
 
-        try await waitForSearch()
+        try await waitForDebounce()
 
-        // Only the second search should have completed
         #expect(viewModel.recentSearches.contains { $0.query == "second" })
         #expect(!viewModel.recentSearches.contains { $0.query == "first" })
     }
@@ -131,9 +241,8 @@ struct SearchViewModelTests {
         viewModel.searchText = "test"
         viewModel.performSearch()
 
-        try await waitForSearch()
+        try await waitForDebounce()
 
-        // Should be done or error (error expected with no real API)
         switch viewModel.status {
         case .done, .error:
             break

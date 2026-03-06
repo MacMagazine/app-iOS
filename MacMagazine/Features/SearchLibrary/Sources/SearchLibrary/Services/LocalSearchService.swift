@@ -3,7 +3,12 @@ import Foundation
 import SwiftData
 import YouTubeLibrary
 
-struct LocalSearchService {
+@MainActor
+protocol LocalSearchServiceProtocol {
+    func search(intent: QueryIntent, context: ModelContext) -> [SearchResult]
+}
+
+struct LocalSearchService: LocalSearchServiceProtocol {
     private let scorer = RelevanceScorer()
 
     @MainActor
@@ -27,8 +32,10 @@ struct LocalSearchService {
             results += searchVideos(intent: intent, context: context)
         }
 
-        let scored = results
-            .map { $0.withRelevanceScore(scorer.score(result: $0, intent: intent)) }
+        var scored = results
+        for index in scored.indices {
+            scored[index].relevanceScore = scorer.score(result: scored[index], intent: intent)
+        }
 
         switch intent.sortPreference {
         case .recent:

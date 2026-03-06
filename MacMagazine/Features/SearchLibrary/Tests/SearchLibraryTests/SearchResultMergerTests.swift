@@ -76,15 +76,16 @@ struct SearchResultMergerTests {
         #expect(merged.last?.id == "news_1")
     }
 
-    @Test("Relevance sort: higher scoring results first")
-    func sortedByRelevance() {
+    @Test("Relevance sort: higher-scoring result first when no recency keyword")
+    func relevanceSortPrioritizesScore() {
         let intent = processor.process("iPhone")
-        let lowRelevance = makeResult(id: "news_1", title: "Something else", pubDate: Date())
-        let highRelevance = makeResult(id: "news_2", title: "iPhone 17 review", pubDate: Date(timeIntervalSinceNow: -86_400))
-
-        let merged = merger.merge(existing: [lowRelevance], incoming: [highRelevance], intent: intent)
         #expect(intent.sortPreference == .relevance)
-        #expect(merged.first?.id == "news_2")
+
+        let highMatch = makeResult(id: "news_1", title: "iPhone 17 review", pubDate: Date(timeIntervalSinceNow: -86_400))
+        let lowMatch = makeResult(id: "news_2", title: "Something else", pubDate: Date())
+
+        let merged = merger.merge(existing: [lowMatch], incoming: [highMatch], intent: intent)
+        #expect(merged.first?.id == "news_1")
     }
 
     @Test("Empty merge returns empty")

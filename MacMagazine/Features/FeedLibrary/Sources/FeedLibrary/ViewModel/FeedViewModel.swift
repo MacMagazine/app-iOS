@@ -110,6 +110,22 @@ extension FeedViewModel {
         }
         return posts.toFeedDB
     }
+
+    public func searchAll(term: String, page: Int = 0) async throws -> (feed: [FeedDB], podcasts: [PodcastDB]) {
+        let data = try await networkService.search(term: term, page: page)
+        let posts: [XMLPost] = try await withCheckedThrowingContinuation { continuation in
+            Self.parse(
+                data,
+                category: "",
+                numberOfPosts: -1,
+                parseFullContent: false,
+                continuation: continuation
+            )
+        }
+        let podcastPosts = posts.filter { !$0.podcastURL.isEmpty }
+        let feedPosts = posts.filter { $0.podcastURL.isEmpty }
+        return (feed: feedPosts.toFeedDB, podcasts: podcastPosts.toPodcastDB)
+    }
 }
 
 extension FeedViewModel {

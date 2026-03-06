@@ -5,13 +5,18 @@ import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary
 
-struct PodcastCardView: View {
+public struct PodcastCardView: View {
     @Environment(\.theme) private var theme
 
-    let podcast: CardContent
-    let onPlay: () -> Void
+    public let podcast: CardContent
+    public let onPlay: () -> Void
 
-    var body: some View {
+    public init(podcast: CardContent, onPlay: @escaping () -> Void) {
+        self.podcast = podcast
+        self.onPlay = onPlay
+    }
+
+    public var body: some View {
         Button(action: onPlay) {
             VStack(alignment: .leading, spacing: 0) {
                 thumbnail

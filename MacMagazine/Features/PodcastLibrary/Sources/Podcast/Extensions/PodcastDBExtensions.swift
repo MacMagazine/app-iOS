@@ -5,7 +5,7 @@ import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftData
 
-extension PodcastDB {
+public extension PodcastDB {
     func toCardContent(
         using context: ModelContext?,
         analytics: AnalyticsManager?,

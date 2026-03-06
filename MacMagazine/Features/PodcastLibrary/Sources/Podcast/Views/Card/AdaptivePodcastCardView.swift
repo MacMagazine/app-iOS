@@ -5,12 +5,17 @@ import SwiftUI
 import UIComponentsLibrary
 import UtilityLibrary
 
-struct AdaptivePodcastCardView: View {
+public struct AdaptivePodcastCardView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    let podcast: CardContent
-    let onPlay: () -> Void
+    public let podcast: CardContent
+    public let onPlay: () -> Void
 
-    var body: some View {
+    public init(podcast: CardContent, onPlay: @escaping () -> Void) {
+        self.podcast = podcast
+        self.onPlay = onPlay
+    }
+
+    public var body: some View {
         content
             .cardAccessibility(
                 data: podcast,

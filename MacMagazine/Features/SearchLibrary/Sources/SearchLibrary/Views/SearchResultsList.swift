@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import PodcastLibrary
 import SwiftData
 import SwiftUI
 import YouTubeLibrary
@@ -17,37 +18,15 @@ struct SearchResultsList: View {
     let onSelectLink: (String) -> Void
 
     var body: some View {
-        let grouped = Dictionary(grouping: results, by: \.type)
-
-        if let newsResults = grouped[.news] {
-            section(title: "Notícias", results: newsResults)
-        }
-        if let podcastResults = grouped[.podcast] {
-            section(title: "Podcasts", results: podcastResults)
-        }
-        if let videoResults = grouped[.video] {
-            section(title: "Vídeos", results: videoResults)
+        ForEach(results) { result in
+            resultCard(for: result)
         }
     }
 }
 
-// MARK: - Sections
+// MARK: - Cards
 
 private extension SearchResultsList {
-
-    @ViewBuilder
-    func section(title: String, results: [SearchResult]) -> some View {
-        Section {
-            ForEach(results) { result in
-                resultCard(for: result)
-            }
-        } header: {
-            Text(title)
-                .font(.title3.bold())
-                .padding(.horizontal)
-                .padding(.top, 8)
-        }
-    }
 
     @ViewBuilder
     func resultCard(for result: SearchResult) -> some View {
@@ -69,12 +48,13 @@ private extension SearchResultsList {
     @ViewBuilder
     func newsCard(for result: SearchResult) -> some View {
         let feedDB = result.feedDB
+        let categories = result.categories.compactMap { categoryName in
+            NewsCategory.allCases.first { $0.filterKey == categoryName }
+        }
         let cardContent = CardContent(
             type: .news(
-                categories: result.categories.compactMap { categoryName in
-                    NewsCategory.allCases.first { $0.filterKey == categoryName }
-                },
-                style: .glass
+                categories: categories,
+                style: categories.mostRelevant.style
             ),
             analytics: analytics,
             title: result.title,
@@ -91,47 +71,51 @@ private extension SearchResultsList {
             }
         )
 
-        Button {
+        NewsCard(data: cardContent) {
             if let feedDB {
                 onSelectNews(feedDB)
             } else {
                 onSelectLink(result.link)
             }
-        } label: {
-            GlassCardView(data: cardContent)
         }
         .padding(.horizontal)
     }
 
     @ViewBuilder
     func podcastCard(for result: SearchResult) -> some View {
-        let podcastDB = result.podcastDB
-        let cardContent = CardContent(
-            type: .podcast(duration: result.duration ?? ""),
-            analytics: analytics,
-            title: result.title,
-            pubDate: result.pubDate,
-            artworkUrl: result.artworkURL,
-            urlToShare: result.link,
-            favorite: result.favorite,
-            favoriteAction: {
-                guard let podcastDB else { return }
-                podcastDB.favorite.toggle()
-                podcastDB.modifiedAt = Date()
-                try? modelContext.save()
-            }
-        )
-
-        Button {
-            if let podcastDB {
+        if let podcastDB = result.podcastDB {
+            AdaptivePodcastCardView(
+                podcast: podcastDB.toCardContent(
+                    using: modelContext,
+                    analytics: analytics,
+                    screen: nil
+                )
+            ) {
                 onSelectPodcast(podcastDB)
-            } else {
-                onSelectLink(result.link)
             }
-        } label: {
-            GlassCardView(data: cardContent)
+            .padding(.horizontal)
+        } else {
+            // Remote podcast without local data — fall back to web
+            let cardContent = CardContent(
+                type: .podcast(duration: result.duration ?? ""),
+                analytics: analytics,
+                title: result.title,
+                pubDate: result.pubDate,
+                artworkUrl: result.artworkURL,
+                urlToShare: result.link,
+                favorite: false,
+                favoriteAction: {}
+            )
+
+            Button {
+                onSelectLink(result.link)
+            } label: {
+                GlassCardView(data: cardContent)
+            }
+            .accessibilityLabel("Podcast: \(result.title)")
+            .accessibilityHint("Duplo toque para abrir no navegador.")
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 
     @ViewBuilder
@@ -166,6 +150,8 @@ private extension SearchResultsList {
         } label: {
             GlassCardView(data: cardContent)
         }
+        .accessibilityLabel("Video: \(result.title)")
+        .accessibilityHint("Duplo toque para assistir.")
         .padding(.horizontal)
     }
 }

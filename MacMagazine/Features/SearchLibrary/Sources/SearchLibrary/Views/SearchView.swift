@@ -1,34 +1,33 @@
 import FeedLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import PodcastLibrary
 import StorageLibrary
 import SwiftUI
 import YouTubeLibrary
 
 public struct SearchView: View {
     @Environment(\.theme) private var theme: ThemeColor
+    @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
+    @Environment(SearchViewModel.self) private var viewModel
 
-    @State private var viewModel: SearchViewModel
     @State private var selectedLink: String?
     @State private var showingWebView = false
 
-    public init(storage: Database) {
-        _viewModel = State(initialValue: SearchViewModel(storage: storage))
-    }
+    public init() {}
 
     public var body: some View {
+        @Bindable var bindableViewModel = viewModel
+
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
         }
         .navigationTitle("Busca")
         .searchable(
-            text: $viewModel.searchText,
+            text: $bindableViewModel.searchText,
             prompt: "Buscar notícias, podcasts e vídeos"
         )
-        .onSubmit(of: .search) {
-            viewModel.performSearch()
-        }
         .onChange(of: viewModel.searchText) {
             viewModel.performSearch()
         }
@@ -131,8 +130,8 @@ private extension SearchView {
     }
 
     func handlePodcastSelection(_ podcast: PodcastDB) {
-        selectedLink = podcast.link
-        showingWebView = true
+        podcastPlayerManager.loadPodcast(podcast)
+        podcastPlayerManager.seek(to: podcast.current)
     }
 
     func handleVideoSelection(_ video: VideoDB) {

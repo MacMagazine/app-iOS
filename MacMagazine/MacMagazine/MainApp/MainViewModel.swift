@@ -33,6 +33,10 @@ class MainViewModel {
     let storage: Database
     let theme = ThemeColor()
 
+    @ObservationIgnored
+    private lazy var _searchViewModel = SearchViewModel(storage: storage)
+    var searchViewModel: SearchViewModel { _searchViewModel }
+
     let models: [any PersistentModel.Type]
 
     init(inMemory: Bool = false) {

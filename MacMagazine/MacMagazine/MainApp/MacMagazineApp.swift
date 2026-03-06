@@ -1,6 +1,7 @@
 import MacMagazineLibrary
 import OnboardingLibrary
 import PodcastLibrary
+import SearchLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
@@ -54,6 +55,7 @@ private extension MacMagazineApp {
             .modelContainer(viewModel.storage.sharedModelContainer)
             .environment(viewModel)
             .environment(viewModel.settingsViewModel)
+            .environment(viewModel.searchViewModel)
             .environment(podcastPlayerManager)
             .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
             .environmentObject(viewModel.sessionState)

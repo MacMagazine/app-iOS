@@ -2,7 +2,7 @@ import Foundation
 import StorageLibrary
 import SwiftData
 
-enum SearchStatus: Equatable {
+public enum SearchStatus: Equatable {
     case idle
     case searching
     case localResults
@@ -11,34 +11,44 @@ enum SearchStatus: Equatable {
 }
 
 @MainActor @Observable
-class SearchViewModel {
-    var searchText: String = ""
-    var status: SearchStatus = .idle
+public final class SearchViewModel {
+    public var searchText: String = ""
+    public var status: SearchStatus = .idle
     var results: [SearchResult] = []
     var recentSearches: [RecentSearchDB] = []
 
     private let queryProcessor: QueryProcessor
-    private let localSearch: LocalSearchService
-    private let merger: SearchResultMerger
+    private let localSearch: any LocalSearchServiceProtocol
+    private let merger: any SearchResultMergerProtocol
     private let storage: Database
-    private var remoteFeedSearch: RemoteFeedSearchService?
+    private var remoteSearch: (any RemoteSearchServiceProtocol)?
+    private static let maxRecentSearches = 20
     private var searchTask: Task<Void, Never>?
 
-    init(
-        storage: Database,
-        queryProcessor: QueryProcessor = QueryProcessor(),
-        localSearch: LocalSearchService = LocalSearchService(),
-        merger: SearchResultMerger = SearchResultMerger()
-    ) {
+    public init(storage: Database) {
         self.storage = storage
-        self.queryProcessor = queryProcessor
-        self.localSearch = localSearch
-        self.merger = merger
-        self.remoteFeedSearch = RemoteFeedSearchService(storage: storage)
+        self.queryProcessor = QueryProcessor()
+        self.localSearch = LocalSearchService()
+        self.merger = SearchResultMerger()
+        self.remoteSearch = RemoteFeedSearchService(storage: storage)
         loadRecentSearches()
     }
 
-    func performSearch() {
+    init(
+        storage: Database,
+        localSearch: some LocalSearchServiceProtocol,
+        remoteSearch: (some RemoteSearchServiceProtocol)?,
+        merger: some SearchResultMergerProtocol
+    ) {
+        self.storage = storage
+        self.queryProcessor = QueryProcessor()
+        self.localSearch = localSearch
+        self.merger = merger
+        self.remoteSearch = remoteSearch
+        loadRecentSearches()
+    }
+
+    public func performSearch() {
         searchTask?.cancel()
 
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -73,28 +83,27 @@ class SearchViewModel {
             await searchRemote(intent: intent)
 
             guard !Task.isCancelled else { return }
-            if case .error = status {} else {
-                status = .done
-            }
+            if case .error = status { return }
+            status = .done
 
             // Save to recent searches
             saveRecentSearch(query)
         }
     }
 
-    func clearSearch() {
+    public func clearSearch() {
         searchText = ""
         results = []
         status = .idle
         searchTask?.cancel()
     }
 
-    func selectRecentSearch(_ search: RecentSearchDB) {
+    public func selectRecentSearch(_ search: RecentSearchDB) {
         searchText = search.query
         performSearch()
     }
 
-    func clearRecentSearches() {
+    public func clearRecentSearches() {
         let context = storage.sharedModelContainer.mainContext
         for search in recentSearches {
             context.delete(search)
@@ -103,7 +112,7 @@ class SearchViewModel {
         recentSearches = []
     }
 
-    func removeRecentSearch(_ search: RecentSearchDB) {
+    public func removeRecentSearch(_ search: RecentSearchDB) {
         let context = storage.sharedModelContainer.mainContext
         context.delete(search)
         try? context.save()
@@ -119,7 +128,7 @@ private extension SearchViewModel {
         guard !intent.remoteSearchTerm.isEmpty else { return }
 
         do {
-            if let feedResults = try await remoteFeedSearch?.search(term: intent.remoteSearchTerm) {
+            if let feedResults = try await remoteSearch?.search(term: intent.remoteSearchTerm, page: 0) {
                 guard !Task.isCancelled else { return }
                 results = merger.merge(existing: results, incoming: feedResults, intent: intent)
             }
@@ -156,9 +165,8 @@ private extension SearchViewModel {
 
         // Reload fresh data, then trim excess
         loadRecentSearches()
-        let maxRecent = 20
-        if recentSearches.count > maxRecent {
-            for item in recentSearches.dropFirst(maxRecent) {
+        if recentSearches.count > Self.maxRecentSearches {
+            for item in recentSearches.dropFirst(Self.maxRecentSearches) {
                 context.delete(item)
             }
             try? context.save()

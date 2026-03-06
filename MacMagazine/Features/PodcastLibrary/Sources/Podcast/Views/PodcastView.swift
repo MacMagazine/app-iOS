@@ -60,14 +60,6 @@ public struct PodcastView: View {
             .onChange(of: podcastPlayerManager.isPlaying) { _, value in
                 sessionState.isPlayingPodcasts = value
             }
-            .sheet(isPresented: Binding(get: { podcastPlayerManager.isFullscreen },
-                                        set: { value in podcastPlayerManager.isFullscreen = value })) {
-                FullPlayerView(
-                    playerManager: podcastPlayerManager,
-                    backgroundGradientStyle: .fourTone
-                )
-                .presentationDragIndicator(.visible)
-            }
     }
 }
 extension PodcastView {
