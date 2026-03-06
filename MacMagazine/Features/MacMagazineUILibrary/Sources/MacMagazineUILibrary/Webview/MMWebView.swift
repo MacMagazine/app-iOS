@@ -8,6 +8,7 @@ public struct MMWebView: View {
     @Environment(\.colorScheme) var colorScheme
 
     @State private var commentsURL = ""
+    @State private var internalLinkURL: URL?
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
     @State private var imageTappedHandler = ImageTappedHandler()
@@ -38,6 +39,12 @@ public struct MMWebView: View {
             navigationDecider.onOpenComments = { url in
                 commentsURL = url
             }
+            navigationDecider.onOpenInternalLink = { url in
+                internalLinkURL = url
+            }
+        }
+        .navigationDestination(item: $internalLinkURL) { url in
+            MMWebView(url: url.absoluteString)
         }
         .sheet(isPresented: Binding(get: { !commentsURL.isEmpty },
                                     set: { _ in commentsURL = "" })) {

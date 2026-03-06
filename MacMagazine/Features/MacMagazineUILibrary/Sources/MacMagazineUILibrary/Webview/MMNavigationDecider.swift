@@ -1,9 +1,11 @@
+import MacMagazineLibrary
 import SwiftUI
 import WebKit
 
 @MainActor
 struct MMNavigationDecider: WebPage.NavigationDeciding {
     var onOpenComments: ((String) -> Void)?
+    var onOpenInternalLink: ((URL) -> Void)?
 
     mutating func decidePolicy(
         for action: WebPage.NavigationAction,
@@ -15,13 +17,17 @@ struct MMNavigationDecider: WebPage.NavigationDeciding {
 
         switch action.navigationType {
         case .linkActivated:
-            if url.host?.lowercased().contains("instagram.com") ?? false {
+            switch URLClassifier.classify(url) {
+            case let .comments(slug):
+                onOpenComments?(slug)
+            case .macmagazinePost:
+                if let handler = onOpenInternalLink {
+                    handler(url)
+                } else {
+                    open(url)
+                }
+            case .appStore, .youTube, .instagram, .external:
                 open(url)
-            } else if url.absoluteString.contains("comments://") {
-                let commentsURL = url.absoluteString
-                    .replacingOccurrences(of: "comments://", with: "")
-                    .replacingOccurrences(of: "%20", with: " ")
-                onOpenComments?(commentsURL)
             }
             return .cancel
 
