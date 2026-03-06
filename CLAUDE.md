@@ -9,9 +9,26 @@ MacMagazine is a Brazilian Apple news aggregator — iOS, watchOS, widgets — d
 - **Minimum targets:** iOS 26+, watchOS 26+
 - **No availability guards** — all 2026+ APIs are available unconditionally
 
-## Skills Reference
+## Agents & Skills Reference
 
-Available skills in the `.claude/skills/` directory:
+### Agent
+
+| Agent | When to Use |
+|-------|-------------|
+| `ios-principal-engineer` | ANY code task: features, bug fixes, reviews, refactoring, architecture |
+
+### Project Skills (`.claude/skills/`)
+
+| Skill | When to Use |
+|-------|-------------|
+| `ios-start` | Pre-flight checklist before writing code |
+| `ios-implement` | Complete feature implementation with pattern matching |
+| `ios-fix` | Bug fixes, refactoring, root cause analysis |
+| `ios-dod` | Definition of Done before marking task complete |
+| `ios-design-guidelines` | Theme system, card system, typography, accessibility |
+| `ios-sanity-check` | Codebase health audit (read-only) |
+
+### Built-in Skills
 
 | Skill | When to Use |
 |-------|-------------|
