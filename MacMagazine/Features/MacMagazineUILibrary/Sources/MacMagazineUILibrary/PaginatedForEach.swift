@@ -1,15 +1,6 @@
 import SwiftUI
 
-/// A paginated `ForEach` that renders items in batches, loading more as the user scrolls.
-///
-/// Use the `.id()` modifier to reset pagination when filters change:
-/// ```swift
-/// PaginatedForEach(items) { index, item in
-///     CardView(item)
-/// }
-/// .id(filterValue)
-/// ```
-public struct PaginatedForEach<Element, Content: View>: View {
+public struct PaginatedForEach<Element: Identifiable, Content: View>: View {
 
     private let data: [Element]
     private let pageSize: Int
@@ -31,8 +22,8 @@ public struct PaginatedForEach<Element, Content: View>: View {
         _displayLimit = State(initialValue: pageSize)
     }
 
-    private var displayedCount: Int {
-        min(displayLimit, data.count)
+    private var visibleData: [(offset: Int, element: Element)] {
+        Array(data.prefix(displayLimit).enumerated())
     }
 
     private var hasMore: Bool {
@@ -40,10 +31,10 @@ public struct PaginatedForEach<Element, Content: View>: View {
     }
 
     public var body: some View {
-        ForEach(0..<displayedCount, id: \.self) { index in
-            content(index, data[index])
+        ForEach(visibleData, id: \.element.id) { index, item in
+            content(index, item)
                 .onAppear {
-                    let triggerIndex = max(displayedCount - threshold, 0)
+                    let triggerIndex = max(visibleData.count - threshold, 0)
                     if index == triggerIndex {
                         loadMore()
                     }

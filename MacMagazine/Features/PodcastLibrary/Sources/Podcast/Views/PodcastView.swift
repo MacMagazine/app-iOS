@@ -100,7 +100,6 @@ extension PodcastView {
                         }
                     }
                 }
-                .id(favorite)
             },
             retryAction: favorite ? nil : retryAction
         )

@@ -153,7 +153,6 @@ extension NewsView {
                 }
             }
         }
-        .id("\(category)\(favorite)")
     }
 }
 
