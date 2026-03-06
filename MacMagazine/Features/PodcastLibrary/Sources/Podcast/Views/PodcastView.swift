@@ -1,6 +1,7 @@
 import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
+import MacMagazineUILibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
@@ -87,19 +88,19 @@ extension PodcastView {
             isSearching: !search.isEmpty,
             quantity: search.isEmpty ? podcasts.count : 0,
             content: {
-                ForEach(0..<podcasts.count, id: \.self) { index in
-                    AdaptivePodcastCardView(podcast: podcasts[index].toCardContent(
+                PaginatedForEach(podcasts) { index, item in
+                    AdaptivePodcastCardView(podcast: item.toCardContent(
                         using: modelContext,
                         analytics: analytics,
                         screen: nil
                     )) {
                         analytics.track(.buttonTap(
-                            buttonId: AnalyticsConstants.ButtonID.podcastStarted(postId: Int(podcasts[index].postId) ?? 0).id,
+                            buttonId: AnalyticsConstants.ButtonID.podcastStarted(postId: Int(item.postId) ?? 0).id,
                             screen: AnalyticsConstants.Screen.podcast.name
                         ))
 
-                        podcastPlayerManager.loadPodcast(podcasts[index])
-                        podcastPlayerManager.seek(to: podcasts[index].current)
+                        podcastPlayerManager.loadPodcast(item)
+                        podcastPlayerManager.seek(to: item.current)
                     }
                     .onAppear {
                         if !favorite && search.isEmpty {
@@ -107,6 +108,7 @@ extension PodcastView {
                         }
                     }
                 }
+                .id(favorite)
             },
             retryAction: favorite ? nil : retryAction
         )
