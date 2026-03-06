@@ -245,7 +245,7 @@ public enum AnalyticsConstants {
             case .cleanOnboarding: "clean_onboarding"
 
             // Settings - Push Notifications
-            case .pushNotifications(let value): "push_notifications \(value)"
+            case let .pushNotifications(value): "push_notifications \(value)"
 
             // Settings - Subscription
             case .restorePurchase: "restore_purchase"
@@ -263,7 +263,7 @@ public enum AnalyticsConstants {
             case .onboardingWelcomeContinue: "onboarding_welcome_continue"
             case .onboardingFeaturesSkip: "onboarding_features_skip"
             case .onboardingFeaturesContinue: "onboarding_features_continue"
-            case .onboardingFeaturePage(let page): "onboarding_feature_page_\(page)"
+            case let .onboardingFeaturePage(page): "onboarding_feature_page_\(page)"
             case .onboardingPushSkip: "onboarding_push_skip"
             case .onboardingPushContinue: "onboarding_push_continue"
             case .onboardingPushAccepted: "onboarding_push_accepted"

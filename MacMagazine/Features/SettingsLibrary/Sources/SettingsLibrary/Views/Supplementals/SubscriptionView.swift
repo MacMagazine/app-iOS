@@ -72,7 +72,7 @@ extension SubscriptionView {
         case .idle:
             EmptyView()
 
-        case .purchasable(let products):
+        case let .purchasable(products):
             subscriptions(identifiers: products.compactMap(\.identifier))
             subscriptionOptions
 
@@ -80,7 +80,7 @@ extension SubscriptionView {
             ProgressView()
                 .frame(maxWidth: .infinity, alignment: .center)
 
-        case .error(let reason):
+        case let .error(reason):
             ErrorView(message: reason)
             subscriptionOptions
         }
@@ -108,7 +108,7 @@ extension SubscriptionView {
 
     @ViewBuilder
     private var restore: some View {
-        if case .purchasable(let products) = viewModel.status, !products.isEmpty {
+        if case let .purchasable(products) = viewModel.status, !products.isEmpty {
             Button(action: {
                 viewModel.restore()
                 analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.restorePurchase.id, screen: AnalyticsConstants.Screen.settings.name))

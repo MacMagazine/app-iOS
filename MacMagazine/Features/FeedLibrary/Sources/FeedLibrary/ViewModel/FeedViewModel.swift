@@ -16,7 +16,7 @@ public class FeedViewModel {
 
         var reason: String? {
             switch self {
-            case .error(let reason):
+            case let .error(reason):
                 return reason
             default:
                 return nil

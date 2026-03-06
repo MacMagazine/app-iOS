@@ -16,7 +16,7 @@ final class SubscriptionViewModel {
 
         func product(using identifier: String) -> InAppProduct? {
             switch self {
-            case .purchasable(let products):
+            case let .purchasable(products):
                 products.first(where: { $0.identifier == identifier })
             default: nil
             }

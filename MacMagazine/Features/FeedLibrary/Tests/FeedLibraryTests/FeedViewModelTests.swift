@@ -42,7 +42,7 @@ struct FeedViewModelTests {
 
         // Then
         #expect(sut.status != .done)
-        if case .error(let reason) = sut.status {
+        if case let .error(reason) = sut.status {
             #expect(!reason.isEmpty)
         } else {
             Issue.record("Expected error status")
@@ -215,7 +215,7 @@ struct FeedViewModelTests {
 
         // Then
         #expect(widgetData.isEmpty, "Should return empty array on failure")
-        if case .error(let reason) = sut.status {
+        if case let .error(reason) = sut.status {
             #expect(!reason.isEmpty, "Status should contain error reason")
         }
     }
@@ -324,7 +324,7 @@ struct FeedViewModelTests {
 
         // Then
         #expect(watchData.isEmpty, "Should return empty array on failure")
-        if case .error(let reason) = sut.status {
+        if case let .error(reason) = sut.status {
             #expect(!reason.isEmpty, "Status should contain error reason")
         }
     }

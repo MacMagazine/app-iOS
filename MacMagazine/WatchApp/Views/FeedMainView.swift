@@ -60,7 +60,7 @@ struct FeedMainView: View {
             loadingView
                 .navigationTitle { navigationTitle("MacMagazine") }
 
-        case .error(let reason):
+        case let .error(reason):
             errorScreen(reason: reason)
 
         case .done:

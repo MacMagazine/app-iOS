@@ -11,7 +11,7 @@ struct CustomProductViewStyle: ProductViewStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         switch configuration.state {
-        case .success(let product):
+        case let .success(product):
             content(
                 title: product.displayName,
                 description: product.description,

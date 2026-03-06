@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftUI
+@preconcurrency import WebKit
 
 public struct SettingsView: View {
     @EnvironmentObject private var analytics: AnalyticsManager
@@ -19,54 +20,21 @@ public struct SettingsView: View {
         settingsContent
             .sheet(isPresented: Binding(get: { presentingContent != .none },
                                         set: { _ in presentingContent = .none })) {
-                NavigationStack {
-                    SimpleWebView(url: presentingContent.url)
-                        .navigationTitle(presentingContent.title)
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button(action: { presentingContent = .none },
-                                       label: { Text("Fechar") })
-                                .buttonStyle(.plain)
-                                .tint(.primary)
-                                .glassEffect(.regular.interactive(), in: .capsule)
-                            }
-                        }
-                }
-                .trackScreen(
-                    presentingContent.title,
-                    previous: nil,
+                ContentSheet(
+                    url: presentingContent.url,
+                    title: presentingContent.title,
+                    onDismiss: { presentingContent = .none },
                     analytics: analytics
                 )
             }
 
             .sheet(isPresented: $isPresentingLoginPatrao) {
-                NavigationStack {
-                    SimpleWebView(
-                        url: URLs.login,
-                        userScripts: [MMWebViewUserScripts.removeBackToBlog],
-                        onNavigationCommitted: { url in
-                            if url.absoluteString.hasPrefix(URLs.success) {
-                                isPatrao = true
-                                isPresentingLoginPatrao = false
-                            }
-                        }
-                    )
-                    .navigationTitle("Login para patrões")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button(action: { isPresentingLoginPatrao = false },
-                                   label: { Text("Fechar") })
-                            .buttonStyle(.plain)
-                            .tint(.primary)
-                            .glassEffect(.regular.interactive(), in: .capsule)
-                        }
-                    }
-                }
-                .trackScreen(
-                    "Login para patrões",
-                    previous: nil,
+                PatronLoginSheet(
+                    onLoginSuccess: {
+                        isPatrao = true
+                        isPresentingLoginPatrao = false
+                    },
+                    onDismiss: { isPresentingLoginPatrao = false },
                     analytics: analytics
                 )
             }
@@ -118,6 +86,104 @@ private extension SettingsView {
         } label: {
             Label("Aparência", systemImage: "highlighter.badge.ellipsis")
         }
+    }
+}
+
+// MARK: - Content Sheet (Terms / Privacy)
+
+private struct ContentSheet: View {
+    @State private var page: WebPage?
+
+    let url: String
+    let title: String
+    let onDismiss: () -> Void
+    let analytics: AnalyticsManager
+
+    var body: some View {
+        NavigationStack {
+            ManagedWebView(
+                style: .init(ignoredSafeAreaEdges: .bottom),
+                pageProvider: { WebPage() },
+                loadAction: { page in
+                    guard let requestURL = URL(string: url) else { return }
+                    for try await event in page.load(URLRequest(url: requestURL)) {
+                        if case .finished = event { return }
+                    }
+                },
+                page: $page
+            )
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: onDismiss,
+                           label: { Image(systemName: "xmark.circle") })
+                    .buttonStyle(.plain)
+                    .tint(.primary)
+                    .glassEffect(.regular.interactive(), in: .capsule)
+                }
+            }
+        }
+        .trackScreen(title, previous: nil, analytics: analytics)
+    }
+}
+
+// MARK: - Patron Login Sheet
+
+private struct PatronLoginSheet: View {
+    @State private var page: WebPage?
+
+    let onLoginSuccess: () -> Void
+    let onDismiss: () -> Void
+    let analytics: AnalyticsManager
+
+    var body: some View {
+        NavigationStack {
+            ManagedWebView(
+                style: .init(ignoredSafeAreaEdges: .bottom),
+                pageProvider: { makeLoginPage() },
+                loadAction: { page in
+                    guard let requestURL = URL(string: URLs.login) else { return }
+                    for try await event in page.load(URLRequest(url: requestURL)) {
+                        if case .finished = event { return }
+                    }
+                },
+                postLoadAction: { page in
+                    do {
+                        for try await event in page.navigations {
+                            if case .committed = event, let url = page.url {
+                                if url.absoluteString.hasPrefix(URLs.success) {
+                                    onLoginSuccess()
+                                }
+                            }
+                        }
+                    } catch {
+                        // Navigation observation ended
+                    }
+                },
+                page: $page
+            )
+            .navigationTitle("Login para patrões")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: onDismiss,
+                           label: { Image(systemName: "xmark.circle") })
+                    .buttonStyle(.plain)
+                    .tint(.primary)
+                    .glassEffect(.regular.interactive(), in: .capsule)
+                }
+            }
+        }
+        .trackScreen("Login para patrões", previous: nil, analytics: analytics)
+    }
+
+    private func makeLoginPage() -> WebPage {
+        let configuration = WebPage.Configuration()
+        configuration.userContentController.addUserScript(
+            MMWebViewUserScripts.removeBackToBlog
+        )
+        return WebPage(configuration: configuration)
     }
 }
 

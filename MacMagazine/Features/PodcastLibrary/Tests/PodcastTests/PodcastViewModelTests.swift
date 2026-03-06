@@ -321,7 +321,7 @@ struct PodcastViewModelTests {
         sut.options = .search(text: "test query")
 
         // Then
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "test query")
         } else {
             Issue.record("Expected search option")

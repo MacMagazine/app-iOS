@@ -35,7 +35,7 @@ struct VideosViewModelTests {
 
         sut.options = .search(text: "Apple Event")
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "Apple Event")
         } else {
             Issue.record("Expected search option")
@@ -49,7 +49,7 @@ struct VideosViewModelTests {
 
         sut.options = .search(text: "")
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text.isEmpty)
         } else {
             Issue.record("Expected search option")
@@ -64,7 +64,7 @@ struct VideosViewModelTests {
         #expect(sut.options == .home)
 
         sut.options = .search(text: "iPhone")
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "iPhone")
         } else {
             Issue.record("Expected search option")
@@ -111,7 +111,7 @@ struct VideosViewModelTests {
 
         sut.status = .error(reason: "Network error")
 
-        if case .error(let reason) = sut.status {
+        if case let .error(reason) = sut.status {
             #expect(reason == "Network error")
         } else {
             Issue.record("Expected error status")
@@ -127,7 +127,7 @@ struct VideosViewModelTests {
 
         sut.options = .search(text: "iPhone 16 Pro & Apple Watch")
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "iPhone 16 Pro & Apple Watch")
         } else {
             Issue.record("Expected search option")
@@ -141,7 +141,7 @@ struct VideosViewModelTests {
 
         sut.options = .search(text: "Notícias Apple 🍎")
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "Notícias Apple 🍎")
         } else {
             Issue.record("Expected search option")
@@ -156,7 +156,7 @@ struct VideosViewModelTests {
         let longText = String(repeating: "a", count: 1000)
         sut.options = .search(text: longText)
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text.count == 1000)
         } else {
             Issue.record("Expected search option")

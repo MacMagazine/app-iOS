@@ -6,9 +6,7 @@ import SwiftUI
 public struct MMWebView: View {
     @Environment(\.removeAds) private var removeAds
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.theme) private var theme: ThemeColor
 
-    @State private var viewStatus = WebViewStatus.idle
     @State private var commentsURL = ""
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
@@ -26,15 +24,20 @@ public struct MMWebView: View {
     }
 
     public var body: some View {
-        ZStack {
-            webview.transition(.opacity)
-            WebViewStatusOverlay(status: viewStatus)
-        }
-        .task {
+        ManagedWebView(
+            style: .init(
+                ignoredSafeAreaEdges: [.top, .bottom],
+                backForwardGesturesDisabled: true,
+                reloadsOnColorSchemeChange: true
+            ),
+            pageProvider: { await makePage() },
+            loadAction: makeLoadAction(),
+            page: $page
+        )
+        .onAppear {
             navigationDecider.onOpenComments = { url in
                 commentsURL = url
             }
-            await setupAndLoad()
         }
         .sheet(isPresented: Binding(get: { !commentsURL.isEmpty },
                                     set: { _ in commentsURL = "" })) {
@@ -45,37 +48,39 @@ public struct MMWebView: View {
     }
 }
 
-// MARK: - WebView
-
-private extension MMWebView {
-    @ViewBuilder
-    var webview: some View {
-        if let page {
-            WebView(page)
-                .webViewBackForwardNavigationGestures(.disabled)
-                .id(colorScheme)
-                .ignoresSafeArea(.container, edges: [.top, .bottom])
-                .opacity(viewStatus == .done ? 1 : 0)
-        }
-    }
-}
-
 // MARK: - Setup
 
 private extension MMWebView {
-    func setupAndLoad() async {
-        guard let url, let requestURL = URL(string: url) else { return }
+    func makeLoadAction() -> (@MainActor (WebPage) async throws -> Void)? {
+        guard let cacheKey else { return urlLoadAction() }
+        if WebPageCache.shared.hasPage(for: cacheKey) {
+            return nil
+        }
+        return urlLoadAction()
+    }
 
-        // If we already have a cached page loaded, just show it
+    func urlLoadAction() -> @MainActor (WebPage) async throws -> Void {
+        return { page in
+            guard let url = self.url, let requestURL = URL(string: url) else { return }
+            for try await event in page.load(URLRequest(url: requestURL)) {
+                if case .finished = event {
+                    try? await Task.sleep(for: .milliseconds(50))
+                    return
+                }
+            }
+        }
+    }
+
+    func makePage() async -> WebPage? {
+        guard let url, URL(string: url) != nil else { return nil }
+
+        // Return cached page if available
         if let cacheKey, WebPageCache.shared.hasPage(for: cacheKey) {
-            let page = WebPageCache.shared.page(
+            return WebPageCache.shared.page(
                 for: cacheKey,
                 configurationProvider: { makeConfiguration() },
                 navigationDecider: navigationDecider
             )
-            self.page = page
-            viewStatus = .done
-            return
         }
 
         let configuration = makeConfiguration()
@@ -95,7 +100,6 @@ private extension MMWebView {
         }
 
         page.customUserAgent = Utils.userAgent
-        self.page = page
 
         let cookies = makeCookies(using: colorScheme)
         let cookieStore = configuration.websiteDataStore.httpCookieStore
@@ -103,25 +107,7 @@ private extension MMWebView {
             await cookieStore.setCookie(cookie)
         }
 
-        viewStatus = .loading
-
-        do {
-            for try await event in page.load(URLRequest(url: requestURL)) {
-                switch event {
-                case .startedProvisionalNavigation, .receivedServerRedirect, .committed:
-                    break
-                case .finished:
-                    try? await Task.sleep(for: .milliseconds(50))
-                    viewStatus = .done
-                @unknown default:
-                    break
-                }
-            }
-        } catch is CancellationError {
-            // Task cancelled (view disappeared, app backgrounded) — not an error
-        } catch {
-            viewStatus = .error(error.localizedDescription)
-        }
+        return page
     }
 
     func makeConfiguration() -> WebPage.Configuration {
@@ -149,25 +135,114 @@ private extension MMWebView {
 // MARK: - Disqus Sheet
 
 private struct DisqusSheet: View {
+    @Environment(\.colorScheme) private var colorScheme
+
+    @State private var page: WebPage?
+    @State private var loginURL: URL?
+    @State private var reloadToken = UUID()
+    @State private var newWindowHandler = DisqusNewWindowHandler()
+
     let commentsURL: String
     let onDismiss: () -> Void
 
     var body: some View {
         NavigationStack {
-            DisqusWebView(commentsURL: commentsURL)
-                .navigationTitle("Comentários")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button(action: { onDismiss() },
-                               label: { Text("Fechar") })
-                        .buttonStyle(.plain)
-                        .tint(.primary)
-                        .glassEffect(.regular.interactive(), in: .capsule)
+            ManagedWebView(
+                style: .init(
+                    backForwardGesturesDisabled: true,
+                    reloadsOnColorSchemeChange: true
+                ),
+                pageProvider: { makePageAndConfigure() },
+                loadAction: { page in
+                    let html = DisqusHTMLBuilder.makeHTML(
+                        commentsURL: commentsURL,
+                        colorScheme: colorScheme
+                    )
+                    for try await event in page.load(html: html) {
+                        if case .finished = event { return }
                     }
+                },
+                page: $page,
+                reloadTrigger: reloadToken
+            )
+            .navigationTitle("Comentários")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: { onDismiss() },
+                           label: { Image(systemName: "xmark.circle") })
+                    .buttonStyle(.plain)
+                    .tint(.primary)
+                    .glassEffect(.regular.interactive(), in: .circle)
                 }
+            }
         }
         .presentationDragIndicator(.visible)
+        .sheet(isPresented: Binding(
+            get: { loginURL != nil },
+            set: { if !$0 { loginURL = nil } }
+        )) {
+            if let loginURL {
+                NavigationStack {
+                    DisqusLoginWebView(url: loginURL, onLoginSuccess: {
+                        self.loginURL = nil
+                        reloadToken = UUID()
+                    })
+                    .navigationTitle("Login")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button(action: { self.loginURL = nil },
+                                   label: { Image(systemName: "xmark.circle") })
+                            .buttonStyle(.plain)
+                            .tint(.primary)
+                            .glassEffect(.regular.interactive(), in: .circle)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func makePageAndConfigure() -> WebPage {
+        newWindowHandler.onNewWindow = { url in
+            loginURL = url
+        }
+        let configuration = WebPage.Configuration()
+        let contentController = configuration.userContentController
+        contentController.addUserScript(MMWebViewUserScripts.interceptNewWindows)
+        contentController.add(newWindowHandler, name: "newWindowHandler")
+        return WebPage(configuration: configuration)
+    }
+}
+
+// MARK: - Disqus Login WebView
+private struct DisqusLoginWebView: View {
+    @Environment(\.scenePhase) private var scenePhase
+
+    @State private var loginPage = WebPage()
+    @State private var isActive = true
+
+    let url: URL
+    let onLoginSuccess: @MainActor () -> Void
+
+    var body: some View {
+        Group {
+            if isActive {
+                WebView(loginPage)
+            }
+        }
+        .task {
+            loginPage.load(URLRequest(url: url))
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            isActive = newPhase == .active
+        }
+        .onChange(of: loginPage.url) { _, newURL in
+            if let path = newURL?.path, path.contains("/next/login-success") {
+                onLoginSuccess()
+            }
+        }
     }
 }
 

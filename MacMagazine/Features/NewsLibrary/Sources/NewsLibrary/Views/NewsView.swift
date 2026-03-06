@@ -118,7 +118,7 @@ extension NewsView {
                         onTap: { post in
                             handleTap(post)
                         }
-                    )
+                    ).padding(.bottom, 8)
                 }
             },
             content: {

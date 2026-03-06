@@ -36,7 +36,7 @@ struct NewsViewModelTests {
 
         sut.options = .search(text: "iPhone 16")
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "iPhone 16")
         } else {
             Issue.record("Expected search option")
@@ -50,7 +50,7 @@ struct NewsViewModelTests {
 
         sut.options = .search(text: "")
 
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text.isEmpty)
         } else {
             Issue.record("Expected search option")
@@ -65,7 +65,7 @@ struct NewsViewModelTests {
         #expect(sut.options == .home)
 
         sut.options = .search(text: "MacBook")
-        if case .search(let text) = sut.options {
+        if case let .search(text) = sut.options {
             #expect(text == "MacBook")
         } else {
             Issue.record("Expected search option")
@@ -201,7 +201,7 @@ struct NewsViewModelTests {
 
         if case .done = sut.status {
             #expect(storage.count(FeedDB.self) == 0)
-        } else if case .error(let reason) = sut.status {
+        } else if case let .error(reason) = sut.status {
             #expect(!reason.isEmpty)
         }
     }
