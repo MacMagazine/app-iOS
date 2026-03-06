@@ -177,11 +177,12 @@ extension NewsView {
     var newsDetailView: some View {
         MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack(spacing: 20) {
-                        favoriteView
-                        shareView
-                    }.padding(.horizontal)
+                ToolbarItem(placement: .automatic) {
+                    favoriteView
+                }
+                ToolbarSpacer(.fixed)
+                ToolbarItem(placement: .automatic) {
+                    shareView
                 }
             }
     }
