@@ -18,7 +18,7 @@ public struct NewsView<Filter: View>: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
 
-    @EnvironmentObject private var sessionState: SessionState
+    @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
 
     // MARK: - Properties

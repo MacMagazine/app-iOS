@@ -58,7 +58,7 @@ private extension MacMagazineApp {
             .environment(viewModel.searchViewModel)
             .environment(podcastPlayerManager)
             .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
-            .environmentObject(viewModel.sessionState)
+            .environment(viewModel.sessionState)
             .environmentObject(viewModel.analytics)
             .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
     }

@@ -11,7 +11,7 @@ public struct PodcastView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject private var sessionState: SessionState
+    @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
 
     var viewModel: PodcastViewModel

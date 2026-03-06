@@ -35,12 +35,19 @@ public class PodcastPlayerManager {
     public init() {}
 
     public func observeSessionState(_ sessionState: SessionState) {
-        sessionState.$isPlayingVideos
-            .sink { [weak self] isPlaying in
-                guard let self, isPlaying else { return }
-                self.pause()
+        Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                let isPlaying = withObservationTracking {
+                    sessionState.isPlayingVideos
+                } onChange: {}
+
+                if isPlaying {
+                    self?.pause()
+                }
+
+                try? await Task.sleep(for: .milliseconds(100))
             }
-            .store(in: &cancellables)
+        }
     }
 }
 

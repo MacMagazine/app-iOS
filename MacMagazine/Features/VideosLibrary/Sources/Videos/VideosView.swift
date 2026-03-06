@@ -6,7 +6,7 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct VideosView: View {
-    @EnvironmentObject private var sessionState: SessionState
+    @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
     var viewModel: VideosViewModel
     @State private var search: String = ""
@@ -59,7 +59,7 @@ public struct VideosView: View {
                 ))
             }
         }
-        .onReceive(sessionState.$isPlayingPodcasts) { value in
+        .onChange(of: sessionState.isPlayingPodcasts) { _, value in
             if value {
                 viewModel.youtube.selectedVideo = nil
             }
