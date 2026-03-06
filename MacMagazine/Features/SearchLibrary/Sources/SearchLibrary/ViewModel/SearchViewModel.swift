@@ -59,7 +59,6 @@ public final class SearchViewModel {
         }
 
         searchTask = Task {
-            // Debounce 300ms
             try? await Task.sleep(for: .milliseconds(300))
             guard !Task.isCancelled else { return }
 
@@ -67,7 +66,6 @@ public final class SearchViewModel {
 
             let intent = queryProcessor.process(query)
 
-            // Phase 1: Local search (instant)
             let localResults = localSearch.search(
                 intent: intent,
                 context: storage.sharedModelContainer.mainContext
@@ -79,14 +77,12 @@ public final class SearchViewModel {
                 status = .localResults
             }
 
-            // Phase 2: Remote search
             await searchRemote(intent: intent)
 
             guard !Task.isCancelled else { return }
             if case .error = status { return }
             status = .done
 
-            // Save to recent searches
             saveRecentSearch(query)
         }
     }
@@ -155,7 +151,6 @@ private extension SearchViewModel {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
 
-        // Remove duplicate if exists
         if let existing = recentSearches.first(where: { $0.query == trimmed }) {
             context.delete(existing)
         }
@@ -163,7 +158,6 @@ private extension SearchViewModel {
         context.insert(RecentSearchDB(query: trimmed))
         try? context.save()
 
-        // Reload fresh data, then trim excess
         loadRecentSearches()
         if recentSearches.count > Self.maxRecentSearches {
             for item in recentSearches.dropFirst(Self.maxRecentSearches) {

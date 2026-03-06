@@ -18,13 +18,11 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 private extension AppDelegate {
     func configureFirebaseIfAvailable() {
-        // Check if GoogleService-Info.plist exists in the bundle
         guard let plistPath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
               FileManager.default.fileExists(atPath: plistPath) else {
             return
         }
 
-        // Verify it's not the template file by checking for placeholder values
         if let plistDict = NSDictionary(contentsOfFile: plistPath),
            let apiKey = plistDict["API_KEY"] as? String,
            apiKey.contains("YOUR_API_KEY_HERE") {

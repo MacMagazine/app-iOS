@@ -57,16 +57,12 @@ public final class OnboardingCoordinator: @MainActor Identifiable {
     }
 
     func completeOnboarding() {
-        // Track completion
         analytics.track(.buttonTap(
             buttonId: AnalyticsConstants.ButtonID.onboardingComplete.id,
             screen: AnalyticsConstants.Screen.onboardingPermissions.name
         ))
 
-        // Mark as completed in UserDefaults
         UserDefaults.standard.set(true, forKey: Self.hasCompletedOnboardingKey)
-
-        // Call completion handler
         onComplete?()
     }
 
@@ -87,37 +83,30 @@ public final class OnboardingCoordinator: @MainActor Identifiable {
         let permissionManager = PermissionManager(analytics: analytics)
         await permissionManager.refreshAllPermissionStatuses()
 
-        // Check if onboarding was completed
         let hasCompleted = UserDefaults.standard.bool(forKey: hasCompletedOnboardingKey)
 
-        // If never completed, create coordinator
         if !hasCompleted {
             let coordinator = OnboardingCoordinator(
                 permissionManager: permissionManager,
                 analytics: analytics
             )
 
-            // If user already saw features, go directly to permissions
             if hasSeenFeatures {
                 coordinator.currentScreen = .permissions
             }
-            // Otherwise, start from welcome
 
             return coordinator
         }
 
-        // If completed, check if push permission still needs to be handled
         if permissionManager.currentPushStatus == .notDetermined {
             let coordinator = OnboardingCoordinator(
                 permissionManager: permissionManager,
                 analytics: analytics
             )
-            // Start at permissions screen (already completed before, no need to see features again)
             coordinator.currentScreen = .permissions
             return coordinator
         }
 
-        // Onboarding not needed
         return nil
     }
 

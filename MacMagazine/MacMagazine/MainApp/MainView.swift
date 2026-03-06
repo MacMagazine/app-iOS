@@ -43,7 +43,6 @@ struct MainView: View {
                 currentlayout = shouldUseSidebar ? .sidebar : .tabbar
                 viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
 
-                // Initialize navigation state for sidebar mode
                 if currentlayout == .sidebar {
                     switch viewModel.tab {
                     case .social:

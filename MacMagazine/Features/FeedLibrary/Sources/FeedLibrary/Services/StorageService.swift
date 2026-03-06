@@ -21,7 +21,6 @@ extension Database {
         let predicate = #Predicate<FeedDB> { $0.postId == postId }
 
         if let existing = self.fetch(FeedDB.self, predicate: predicate).first {
-            // Update existing
             existing.title = feed.title
             existing.subtitle = feed.subtitle
             existing.pubDate = feed.pubDate
@@ -32,7 +31,6 @@ extension Database {
             existing.excerpt = feed.excerpt
             existing.fullContent = feed.fullContent
         } else {
-            // Insert new
             context.insert(feed)
         }
 
@@ -59,7 +57,6 @@ extension Database {
         let predicate = #Predicate<PodcastDB> { $0.postId == postId }
 
         if let existing = self.fetch(PodcastDB.self, predicate: predicate).first {
-            // Update existing
             existing.title = podcast.title
             existing.subtitle = podcast.subtitle
             existing.pubDate = podcast.pubDate
@@ -72,7 +69,6 @@ extension Database {
             existing.playable = podcast.playable
 
         } else {
-            // Insert new
             context.insert(podcast)
         }
 

@@ -35,13 +35,11 @@ public struct VideosView: View {
             search: search
         )
         .onAppear {
-            // Update the binding when view appears (before fetch happens)
             viewModel.youtube.update(hasFetchedVideos: Binding(
                 get: { sessionState.hasFetchedVideos },
                 set: { value in sessionState.hasFetchedVideos = value }
             ))
 
-            // Check if a podcast started playing while this view was not visible
             if sessionState.isPlayingPodcasts {
                 viewModel.youtube.selectedVideo = nil
                 sessionState.isPlayingPodcasts = false

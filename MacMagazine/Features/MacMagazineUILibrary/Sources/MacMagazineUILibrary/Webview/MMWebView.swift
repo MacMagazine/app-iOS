@@ -81,7 +81,6 @@ private extension MMWebView {
     func makePage() async -> WebPage? {
         guard let url, URL(string: url) != nil else { return nil }
 
-        // Return cached page if available
         if let cacheKey, WebPageCache.shared.hasPage(for: cacheKey) {
             return WebPageCache.shared.page(
                 for: cacheKey,
