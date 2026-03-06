@@ -103,7 +103,13 @@ private struct ContentSheet: View {
         NavigationStack {
             ManagedWebView(
                 style: .init(ignoredSafeAreaEdges: .bottom),
-                pageProvider: { WebPage() },
+                pageProvider: {
+                    let configuration = WebPage.Configuration()
+                    configuration.userContentController.addUserScript(
+                        MMWebViewUserScripts.hideSiteHeader
+                    )
+                    return WebPage(configuration: configuration)
+                },
                 loadAction: { page in
                     guard let requestURL = URL(string: url) else { return }
                     for try await event in page.load(URLRequest(url: requestURL)) {

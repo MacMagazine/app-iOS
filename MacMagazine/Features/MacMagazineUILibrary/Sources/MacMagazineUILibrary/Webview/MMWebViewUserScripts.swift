@@ -66,6 +66,29 @@ public enum MMWebViewUserScripts {
     }
 
     @MainActor
+    public static var hideSiteHeader: WKUserScript {
+        WKUserScript(
+            source: """
+                (function() {
+                  var style = document.createElement('style');
+                  style.innerHTML = `
+                    header, .pk-navbar, .pk-header {
+                      display: none !important;
+                    }
+                    body {
+                      margin-top: 0 !important;
+                      padding-top: 0 !important;
+                    }
+                  `;
+                  document.head.appendChild(style);
+                })();
+                """,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        )
+    }
+
+    @MainActor
     public static var removeBackToBlog: WKUserScript {
         WKUserScript(
             source: """
