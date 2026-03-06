@@ -30,7 +30,7 @@ struct DisqusSheet: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: { onDismiss() },
-                           label: { Image(systemName: "xmark.circle") })
+                           label: { Image(systemName: "xmark") })
                     .buttonStyle(.plain)
                     .tint(.primary)
                     .glassEffect(.regular.interactive(), in: .circle)
@@ -67,7 +67,7 @@ struct DisqusSheet: View {
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button(action: { self.loginURL = nil },
-                                   label: { Image(systemName: "xmark.circle") })
+                                   label: { Image(systemName: "xmark") })
                             .buttonStyle(.plain)
                             .tint(.primary)
                             .glassEffect(.regular.interactive(), in: .circle)
