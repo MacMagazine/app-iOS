@@ -29,10 +29,11 @@ final class SubscriptionViewModel {
     var storage: Database?
     var analytics: AnalyticsManager?
 
-    let inAppLibrary = InAppManager()
+    let inAppLibrary: InAppManager
     private var observationTask: Task<Void, Never>?
 
-    init() {
+    init(inAppLibrary: InAppManager = InAppManager()) {
+        self.inAppLibrary = inAppLibrary
         setupListeners()
     }
 

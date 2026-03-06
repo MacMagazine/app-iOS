@@ -11,8 +11,13 @@ struct RemoteFeedSearchService: RemoteSearchServiceProtocol {
     private let feedViewModel: FeedViewModel
 
     @MainActor
+    init(feedViewModel: FeedViewModel) {
+        self.feedViewModel = feedViewModel
+    }
+
+    @MainActor
     init(storage: Database) {
-        self.feedViewModel = FeedViewModel(storage: storage)
+        self.init(feedViewModel: FeedViewModel(storage: storage))
     }
 
     @MainActor

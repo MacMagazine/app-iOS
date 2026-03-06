@@ -25,14 +25,16 @@ final public class SettingsViewModel {
     let storage: Database
     let models: [any PersistentModel.Type]
 
-    let mmLive = MMLiveViewModel()
+    let mmLive: MMLiveViewModel
 
     public init(
         storage: Database,
-        models: [any PersistentModel.Type]
+        models: [any PersistentModel.Type],
+        mmLive: MMLiveViewModel = MMLiveViewModel()
     ) {
         self.storage = storage
         self.models = models
+        self.mmLive = mmLive
         self.storedTabs = self.storage.customization?.tabs ?? AppTabs.allCases
         self.social = self.storage.customization?.social ?? Social.allCases
         self.news = self.storage.customization?.news ?? News.allCases
