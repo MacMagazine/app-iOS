@@ -10,7 +10,9 @@ struct ContentPreview {
         artworkUrl: "https://i.ytimg.com/vi/5rKJeiG-Rug/sddefault.jpg",
         urlToShare: "",
         favorite: true,
-        favoriteAction: {}
+        read: false,
+        favoriteAction: {},
+        readAction: {}
     )
 
     @MainActor
@@ -21,7 +23,9 @@ struct ContentPreview {
         artworkUrl: "https://macmagazine.com.br/wp-content/uploads/2025/11/28-podcast-1260x709.jpg",
         urlToShare: "",
         favorite: true,
-        favoriteAction: {}
+        read: false,
+        favoriteAction: {},
+        readAction: {}
     )
 
     @MainActor
@@ -32,7 +36,9 @@ struct ContentPreview {
         artworkUrl: "https://macmagazine.com.br/wp-content/uploads/2025/11/112025_Apple-TV_announces_The_Unlikely_Cook_with_Awkwafina_Big_Image_02-600x400.jpg",
         urlToShare: "",
         favorite: true,
-        favoriteAction: {}
+        read: false,
+        favoriteAction: {},
+        readAction: {}
     )
 }
 #endif

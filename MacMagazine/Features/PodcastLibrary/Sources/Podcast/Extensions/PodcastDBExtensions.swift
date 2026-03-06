@@ -20,6 +20,7 @@ public extension PodcastDB {
             artworkUrl: self.artworkURL,
             urlToShare: self.link,
             favorite: self.favorite,
+            read: false,
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
                 self.favorite.toggle()
@@ -29,7 +30,8 @@ public extension PodcastDB {
                     buttonId: AnalyticsConstants.ButtonID.podcastFavorite.id,
                     screen: screen ?? type.screenName
                 ))
-            }
+            },
+            readAction: {}
         )
     }
 

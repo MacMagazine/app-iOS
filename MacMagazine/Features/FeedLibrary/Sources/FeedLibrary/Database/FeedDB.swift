@@ -15,6 +15,7 @@ public final class FeedDB {
     public var excerpt: String = ""
     public var fullContent: String = ""
     public var favorite: Bool = false
+    public var read: Bool = false
     public var modifiedAt: Date = Date()
 
     public init(
@@ -29,6 +30,7 @@ public final class FeedDB {
         excerpt: String = "",
         fullContent: String = "",
         favorite: Bool = false,
+        ead: Bool = false,
         modifiedAt: Date = Date()
     ) {
         self.postId = postId
@@ -42,7 +44,25 @@ public final class FeedDB {
         self.excerpt = excerpt
         self.fullContent = fullContent
         self.favorite = favorite
+        self.read = read
         self.modifiedAt = modifiedAt
+    }
+}
+
+extension FeedDB {
+    public static func lastSeen(using context: ModelContext?) -> FeedDB? {
+        let descriptor = FetchDescriptor<FeedDB>(predicate: #Predicate<FeedDB> { $0.read },
+                                                 sortBy: [SortDescriptor(\FeedDB.modifiedAt, order: .reverse)])
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return nil }
+        return data.first
+    }
+
+    public static func mostRecent(using context: ModelContext?) -> FeedDB? {
+        let descriptor = FetchDescriptor<FeedDB>(sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)])
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return nil }
+        return data.first
     }
 }
 

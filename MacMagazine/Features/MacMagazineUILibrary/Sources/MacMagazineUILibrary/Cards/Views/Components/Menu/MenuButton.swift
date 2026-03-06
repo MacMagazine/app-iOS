@@ -18,6 +18,10 @@ public struct MenuButton: View {
                     Label("Compartilhar", systemImage: "square.and.arrow.up")
                 }
             }
+
+            Button("Lido", systemImage: readImage) {
+                data.readAction()
+            }
         }, label: {
             Image(systemName: "ellipsis").buttonWithGlassEffect()
         })
@@ -28,5 +32,9 @@ public struct MenuButton: View {
 private extension MenuButton {
     var favoriteImage: String {
         data.favorite ? "star.fill" : "star"
+    }
+
+    var readImage: String {
+        data.read ? "circle.fill" : "circle"
     }
 }

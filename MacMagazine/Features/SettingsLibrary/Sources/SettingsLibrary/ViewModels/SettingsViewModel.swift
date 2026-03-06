@@ -12,6 +12,7 @@ final public class SettingsViewModel {
     public var news: [News] = News.allCases
     public var isLive = false
     public var removeAds = false
+    public var highlightPostRead = false
 
     private var storedTabs: [AppTabs] = AppTabs.allCases
 
@@ -39,6 +40,7 @@ final public class SettingsViewModel {
         self.social = self.storage.customization?.social ?? Social.allCases
         self.news = self.storage.customization?.news ?? News.allCases
         self.removeAds = self.storage.settings?.subscription.removeAds ?? false
+        self.highlightPostRead = self.storage.settings?.postRead ?? false
 
         updateSchema()
 
@@ -53,6 +55,7 @@ final public class SettingsViewModel {
                 self?.social = self?.storage.customization?.social ?? Social.allCases
                 self?.news = self?.storage.customization?.news ?? News.allCases
                 self?.removeAds = self?.storage.settings?.subscription.removeAds ?? false
+                self?.highlightPostRead = self?.storage.settings?.postRead ?? false
             }
         }
     }

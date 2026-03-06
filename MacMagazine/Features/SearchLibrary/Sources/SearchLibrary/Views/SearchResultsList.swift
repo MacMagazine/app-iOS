@@ -63,12 +63,14 @@ private extension SearchResultsList {
             artworkUrl: result.artworkURL,
             urlToShare: result.link,
             favorite: result.favorite,
+            read: false,
             favoriteAction: {
                 guard let feedDB else { return }
                 feedDB.favorite.toggle()
                 feedDB.modifiedAt = Date()
                 try? modelContext.save()
-            }
+            },
+            readAction: {}
         )
 
         NewsCard(data: cardContent) {
@@ -103,7 +105,9 @@ private extension SearchResultsList {
                 artworkUrl: result.artworkURL,
                 urlToShare: result.link,
                 favorite: false,
-                favoriteAction: {}
+                read: false,
+                favoriteAction: {},
+                readAction: {}
             )
 
             AdaptivePodcastCardView(podcast: cardContent) {
@@ -128,12 +132,14 @@ private extension SearchResultsList {
             artworkUrl: result.artworkURL,
             urlToShare: result.link,
             favorite: result.favorite,
+            read: false,
             favoriteAction: {
                 guard let videoDB else { return }
                 videoDB.favorite.toggle()
                 videoDB.modifiedAt = Date()
                 try? modelContext.save()
-            }
+            },
+            readAction: {}
         )
 
         Button {

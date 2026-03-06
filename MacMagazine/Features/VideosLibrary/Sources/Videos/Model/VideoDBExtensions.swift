@@ -27,6 +27,7 @@ extension VideoDB {
             artworkUrl: self.artworkURL,
             urlToShare: self.urlToShare,
             favorite: self.favorite,
+            read: false,
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
                 self.favorite.toggle()
@@ -36,7 +37,8 @@ extension VideoDB {
                     buttonId: AnalyticsConstants.ButtonID.videoFavorite.id,
                     screen: type.screenName
                 ))
-            }
+            },
+            readAction: {}
         )
     }
 }

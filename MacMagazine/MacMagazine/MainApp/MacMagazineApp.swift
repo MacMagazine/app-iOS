@@ -12,6 +12,7 @@ struct MacMagazineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var viewModel = MainViewModel()
+    @State var shortcutManager = ShortcutManager.shared
 
     var body: some Scene {
         WindowGroup {
@@ -40,7 +41,13 @@ struct MacMagazineApp: App {
                         .interactiveDismissDisabled(true)
                 }
             )
+            .onChange(of: shortcutManager.url) { _, value in
+                if let value {
+                    viewModel.deepLinkPostURL = value
+                }
+            }
             .task {
+                shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
                 await viewModel.initializeOnboarding()
             }

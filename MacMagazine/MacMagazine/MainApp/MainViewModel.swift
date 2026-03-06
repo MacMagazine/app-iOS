@@ -66,6 +66,12 @@ class MainViewModel {
     }
 }
 
+// MARK: - Settings
+
+extension MainViewModel {
+    var highlightPostRead: Bool { settingsViewModel.highlightPostRead }
+}
+
 // MARK: - Onboarding
 
 extension MainViewModel {
