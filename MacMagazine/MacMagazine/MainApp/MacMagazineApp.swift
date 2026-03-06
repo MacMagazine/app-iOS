@@ -46,6 +46,11 @@ struct MacMagazineApp: App {
                     viewModel.deepLinkPostURL = value
                 }
             }
+            .onChange(of: shortcutManager.tab) { _, value in
+                if let value {
+                    viewModel.tab = value
+                }
+            }
             .task {
                 shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)

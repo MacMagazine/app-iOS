@@ -1,4 +1,5 @@
 import FeedLibrary
+import MacMagazineLibrary
 import SwiftData
 import SwiftUI
 
@@ -6,8 +7,9 @@ import SwiftUI
 final class ShortcutManager {
     static let shared = ShortcutManager()
 
-    var url: String?
     var context: ModelContext?
+    var url: String?
+    var tab: AppTabs?
 
     func process(shortcut: UIApplicationShortcutItem) {
         switch ShortcutActions(rawValue: shortcut.type) {
@@ -24,7 +26,8 @@ final class ShortcutManager {
             }
 
         case .openSearchPost:
-            break
+            tab = .search
+
         default:
             break
         }
