@@ -95,7 +95,6 @@ private extension SearchResultsList {
             }
             .padding(.horizontal)
         } else {
-            // Remote podcast without local data — fall back to web
             let cardContent = CardContent(
                 type: .podcast(duration: result.duration ?? ""),
                 analytics: analytics,
@@ -107,13 +106,9 @@ private extension SearchResultsList {
                 favoriteAction: {}
             )
 
-            Button {
+            AdaptivePodcastCardView(podcast: cardContent) {
                 onSelectLink(result.link)
-            } label: {
-                GlassCardView(data: cardContent)
             }
-            .accessibilityLabel("Podcast: \(result.title)")
-            .accessibilityHint("Duplo toque para abrir no navegador.")
             .padding(.horizontal)
         }
     }
