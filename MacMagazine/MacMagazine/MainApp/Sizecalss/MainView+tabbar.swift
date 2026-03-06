@@ -35,19 +35,15 @@ extension MainView {
         case .social: SocialView()
         case .settings: SettingsView()
         case .search: SearchView()
-
         case .live:
-            MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
-                .trackScreen(
-                    tab.analyticsScreen?.name ?? tab.rawValue,
-                    previous: nil,
-                    analytics: viewModel.analytics
-                )
-        default:
-            ContentUnavailableView(
-                "Página em construção",
-                systemImage: "square.and.arrow.down.badge.xmark",
-                description: Text("Conteúdo ainda em desenvolvimento e estará disponível em breve.")
+            MMWebView(
+                url: "https://macmagazine.com.br/live",
+                cacheKey: "macmagazine_live"
+            )
+            .trackScreen(
+                tab.analyticsScreen?.name ?? tab.rawValue,
+                previous: nil,
+                analytics: viewModel.analytics
             )
         }
     }
