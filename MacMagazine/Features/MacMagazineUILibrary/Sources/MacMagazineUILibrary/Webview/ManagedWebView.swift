@@ -88,6 +88,7 @@ private extension ManagedWebView {
                 .webViewBackForwardNavigationGestures(
                     style.backForwardGesturesDisabled ? .disabled : .enabled
                 )
+                .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
                 .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
                 .opacity(viewStatus == .done ? 1 : 0)
                 .conditionalColorSchemeID(
