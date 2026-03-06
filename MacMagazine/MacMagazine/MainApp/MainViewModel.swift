@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
+import SearchLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
@@ -40,7 +41,8 @@ class MainViewModel {
             PodcastDB.self,
             VideoDB.self,
             SettingsDB.self,
-            CustomizationDB.self
+            CustomizationDB.self,
+            RecentSearchDB.self
         ]
 
         self.storage = Database(

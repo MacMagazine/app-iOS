@@ -123,6 +123,7 @@ private extension MainView {
         case AppTabs.news: NewsView()
         case AppTabs.social: SocialView()
         case AppTabs.settings: SettingsView()
+        case AppTabs.search: SearchView()
         case AppTabs.live: MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
         case Social.videos: SocialView()
         case Social.podcast: SocialView()

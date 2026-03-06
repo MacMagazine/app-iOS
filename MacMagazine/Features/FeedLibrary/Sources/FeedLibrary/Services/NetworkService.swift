@@ -19,4 +19,13 @@ extension NetworkService {
             throw error
         }
     }
+
+    func search(term: String, page: Int) async throws -> Data {
+        do {
+            let endpoint = Endpoint.posts(paged: page, query: (APIDefinitions.search, term))
+            return try await network.get(url: endpoint.url, headers: [:])
+        } catch {
+            throw error
+        }
+    }
 }

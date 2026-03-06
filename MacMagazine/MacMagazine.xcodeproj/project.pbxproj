@@ -18,6 +18,7 @@
 		9B543D342EE8A116001730C4 /* MacMagazineUILibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B543D332EE8A116001730C4 /* MacMagazineUILibrary */; };
 		9B740C742EFC2AC80058B514 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B740C732EFC2AC80058B514 /* MacMagazineLibrary */; };
 		9B740C772EFC36EE0058B514 /* NewsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B740C762EFC36EE0058B514 /* NewsLibrary */; };
+		9BA00001300000010000A001 /* SearchLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA00002300000020000A002 /* SearchLibrary */; };
 		9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B817DA12ED0E5F7005E58E5 /* VideosLibrary */; };
 		9B910BEB2EE09D1B00E96B4D /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B910BEA2EE09D1B00E96B4D /* FeedLibrary */; };
 		9BA828AC2EEC7AAB00F26FCB /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -97,6 +98,7 @@
 		9B334E912EE43FE4009F4947 /* MMLiveLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MMLiveLibrary; sourceTree = "<group>"; };
 		9B543D322EE8A00F001730C4 /* MacMagazineUILibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MacMagazineUILibrary; sourceTree = "<group>"; };
 		9B740C752EFC2DA70058B514 /* NewsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NewsLibrary; sourceTree = "<group>"; };
+		9BA00003300000030000A003 /* SearchLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SearchLibrary; sourceTree = "<group>"; };
 		9B817D812ED0E381005E58E5 /* VideosLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = VideosLibrary; sourceTree = "<group>"; };
 		9B910BE92EE0994600E96B4D /* FeedLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeedLibrary; sourceTree = "<group>"; };
 		9B9E9DC42E986F8400255820 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,6 +206,7 @@
 				9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */,
 				9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */,
 				9B740C772EFC36EE0058B514 /* NewsLibrary in Frameworks */,
+				9BA00001300000010000A001 /* SearchLibrary in Frameworks */,
 				9B1A43032EE0C14E00E56784 /* PodcastLibrary in Frameworks */,
 				9B0283C42EF61A08002611AB /* OnboardingLibrary in Frameworks */,
 			);
@@ -266,6 +269,7 @@
 				9B740C752EFC2DA70058B514 /* NewsLibrary */,
 				9B0283C22EF619D0002611AB /* OnboardingLibrary */,
 				9B1A43012EE0C04D00E56784 /* PodcastLibrary */,
+				9BA00003300000030000A003 /* SearchLibrary */,
 				9B024FDA2EC2717200D66056 /* SettingsLibrary */,
 				9B817D812ED0E381005E58E5 /* VideosLibrary */,
 			);
@@ -338,6 +342,7 @@
 				9B543D332EE8A116001730C4 /* MacMagazineUILibrary */,
 				9B0283C32EF61A08002611AB /* OnboardingLibrary */,
 				9B740C762EFC36EE0058B514 /* NewsLibrary */,
+				9BA00002300000020000A002 /* SearchLibrary */,
 			);
 			productName = MacMagazine;
 			productReference = 9B9E9DC42E986F8400255820 /* MacMagazine.app */;
@@ -1040,6 +1045,10 @@
 		9BA828B72EEC7AE500F26FCB /* FeedLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FeedLibrary;
+		};
+		9BA00002300000020000A002 /* SearchLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SearchLibrary;
 		};
 		9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

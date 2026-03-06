@@ -79,6 +79,13 @@
         "identifier" : "PodcastTests",
         "name" : "PodcastTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/SearchLibrary",
+        "identifier" : "SearchLibraryTests",
+        "name" : "SearchLibraryTests"
+      }
     }
   ],
   "version" : 1
