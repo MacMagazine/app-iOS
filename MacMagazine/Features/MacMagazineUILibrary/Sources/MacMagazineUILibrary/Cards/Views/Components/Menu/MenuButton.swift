@@ -35,7 +35,7 @@ public struct MenuContent: View {
             }
         }
 
-        Button("Lido", systemImage: readImage) {
+        Button(readText, systemImage: readImage) {
             data.readAction()
         }
     }
@@ -44,6 +44,10 @@ public struct MenuContent: View {
 private extension MenuContent {
     var favoriteImage: String {
         data.favorite ? "star.fill" : "star"
+    }
+
+    var readText: String {
+        data.read ? "Marcar como não-lido" : "Marcar como lido"
     }
 
     var readImage: String {

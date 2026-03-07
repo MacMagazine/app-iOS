@@ -28,12 +28,10 @@ struct DisqusSheet: View {
             .navigationTitle("Comentários")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .primaryAction) {
                     Button(action: { onDismiss() },
                            label: { Image(systemName: "xmark") })
-                    .buttonStyle(.plain)
                     .tint(.primary)
-                    .glassEffect(.clear.interactive(), in: .circle)
                 }
             }
         }
@@ -68,9 +66,7 @@ struct DisqusSheet: View {
                         ToolbarItem(placement: .confirmationAction) {
                             Button(action: { self.loginURL = nil },
                                    label: { Image(systemName: "xmark") })
-                            .buttonStyle(.plain)
                             .tint(.primary)
-                            .glassEffect(.clear.interactive(), in: .circle)
                         }
                     }
                 }

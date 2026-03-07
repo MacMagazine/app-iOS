@@ -124,9 +124,7 @@ private struct ContentSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onDismiss,
                            label: { Image(systemName: "xmark") })
-                    .buttonStyle(.plain)
                     .tint(.primary)
-                    .glassEffect(.clear.interactive(), in: .capsule)
                 }
             }
         }
@@ -175,9 +173,7 @@ private struct PatronLoginSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onDismiss,
                            label: { Image(systemName: "xmark") })
-                    .buttonStyle(.plain)
                     .tint(.primary)
-                    .glassEffect(.clear.interactive(), in: .capsule)
                 }
             }
         }
