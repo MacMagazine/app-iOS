@@ -9,7 +9,7 @@ import YouTubeLibrary
 
 public struct SearchView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+    @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
 
@@ -26,7 +26,7 @@ public struct SearchView: View {
             .modifier(
                 SearchFieldModifier(
                     searchText: $bindableViewModel.searchText,
-                    showSearchField: !shouldUseSidebar
+                    showSearchField: !isSidebarVisible
                 )
             )
             .onChange(of: viewModel.searchText) {
