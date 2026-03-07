@@ -8,6 +8,7 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct SearchView: View {
+    @Environment(\.dismissSearch) private var dismissSearch
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
@@ -71,7 +72,10 @@ private extension SearchView {
                 RecentSearchesView(
                     searches: viewModel.recentSearches,
                     onSelect: { viewModel.selectRecentSearch($0) },
-                    onClear: { viewModel.clearRecentSearches() },
+                    onClear: {
+                        viewModel.clearRecentSearches()
+                        dismissSearch()
+                    },
                     onRemove: { viewModel.removeRecentSearch($0) }
                 )
             }
