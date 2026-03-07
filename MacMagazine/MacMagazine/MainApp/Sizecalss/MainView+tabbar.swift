@@ -11,7 +11,6 @@ extension MainView {
     @ViewBuilder
     var tabContentView: some View {
         @Bindable var bindableViewModel = viewModel
-        @Bindable var searchViewModel = viewModel.searchViewModel
 
         TabView(selection: $bindableViewModel.tab) {
             ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
@@ -21,16 +20,23 @@ extension MainView {
                     value: tab,
                     role: tab == .search ? .search : .none
                 ) {
-                    NavigationStack {
-                        AnyView(contentView(for: tab))
+                    if tab == .search {
+                        @Bindable var searchViewModel = viewModel.searchViewModel
+                        NavigationStack {
+                            SearchView()
+                        }
+                        .searchable(
+                            text: $searchViewModel.searchText,
+                            prompt: "Buscar notícias, podcasts e vídeos"
+                        )
+                    } else {
+                        NavigationStack {
+                            AnyView(contentView(for: tab))
+                        }
                     }
                 }
             }
         }
-        .searchable(
-            text: $searchViewModel.searchText,
-            prompt: "Buscar notícias, podcasts e vídeos"
-        )
         .podcastMiniPlayer()
     }
 
