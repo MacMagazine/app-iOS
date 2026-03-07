@@ -60,7 +60,6 @@ private extension SearchResultsList {
             NewsCard(data: cardContent) {
                 onSelectNews(feedDB)
             }
-            .padding(.horizontal)
         }
     }
 
@@ -76,7 +75,6 @@ private extension SearchResultsList {
             ) {
                 onSelectPodcast(podcastDB)
             }
-            .padding(.horizontal)
         }
     }
 
@@ -95,7 +93,6 @@ private extension SearchResultsList {
             }
             .accessibilityLabel("Video: \(videoDB.title)")
             .accessibilityHint("Duplo toque para assistir.")
-            .padding(.horizontal)
         }
     }
 }

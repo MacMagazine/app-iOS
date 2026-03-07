@@ -4,6 +4,7 @@ import MacMagazineUILibrary
 import PodcastLibrary
 import StorageLibrary
 import SwiftUI
+import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct SearchView: View {
@@ -12,6 +13,7 @@ public struct SearchView: View {
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
 
+    @State private var cardWidth = CGFloat.zero
     @State private var selectedLink: String?
     @State private var showingWebView = false
 
@@ -100,22 +102,38 @@ private extension SearchView {
 
     var resultsList: some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
+            VStack(spacing: 20) {
                 if viewModel.status == .localResults {
                     ProgressView()
                         .padding(.top, 8)
                 }
 
-                SearchResultsList(
-                    results: viewModel.results,
-                    onSelectNews: { handleNewsSelection($0) },
-                    onSelectPodcast: { handlePodcastSelection($0) },
-                    onSelectVideo: { handleVideoSelection($0) },
-                    onSelectLink: { handleLinkSelection($0) }
-                )
+                LazyVGrid(
+                    columns: Array(repeating: grid, count: density.columns),
+                    spacing: 20
+                ) {
+                    SearchResultsList(
+                        results: viewModel.results,
+                        onSelectNews: { handleNewsSelection($0) },
+                        onSelectPodcast: { handlePodcastSelection($0) },
+                        onSelectVideo: { handleVideoSelection($0) },
+                        onSelectLink: { handleLinkSelection($0) }
+                    )
+                }
+                .padding(.horizontal)
             }
-            .padding(.vertical)
         }
+        .contentWidth { value in
+            cardWidth = value
+        }
+    }
+
+    private var grid: GridItem {
+        GridItem(.adaptive(minimum: 280), spacing: 20, alignment: .top)
+    }
+
+    private var density: CardDensity {
+        .density(using: cardWidth)
     }
 
     func errorContent(reason: String) -> some View {

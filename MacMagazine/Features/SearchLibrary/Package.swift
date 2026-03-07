@@ -24,6 +24,7 @@ let package = Package(
                                "PodcastLibrary", "NewsLibrary", "VideosLibrary",
                                .product(name: "Analytics", package: "Libraries"),
                                .product(name: "Storage", package: "Libraries"),
+                               .product(name: "UIComponents", package: "Libraries"),
                                .product(name: "YouTube", package: "Libraries")]),
         .testTarget(name: "SearchLibraryTests",
                     dependencies: ["SearchLibrary"])
