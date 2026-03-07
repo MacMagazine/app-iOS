@@ -9,7 +9,6 @@ import YouTubeLibrary
 
 public struct SearchView: View {
     @Environment(\.theme) private var theme: ThemeColor
-    @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
 
@@ -20,31 +19,19 @@ public struct SearchView: View {
     public init() {}
 
     public var body: some View {
-        @Bindable var bindableViewModel = viewModel
-
-        mainContent
-            .modifier(
-                SearchFieldModifier(
-                    searchText: $bindableViewModel.searchText,
-                    showSearchField: !isSidebarVisible
-                )
-            )
-            .onChange(of: viewModel.searchText) {
-                viewModel.performSearch()
-            }
-            .navigationDestination(isPresented: $showingWebView) {
-                if let link = selectedLink {
-                    MMWebView(url: link)
-                }
-            }
-    }
-
-    private var mainContent: some View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
         }
         .navigationTitle("Busca")
+        .onChange(of: viewModel.searchText) {
+            viewModel.performSearch()
+        }
+        .navigationDestination(isPresented: $showingWebView) {
+            if let link = selectedLink {
+                MMWebView(url: link)
+            }
+        }
     }
 }
 
@@ -168,23 +155,5 @@ private extension SearchView {
     func handleLinkSelection(_ link: String) {
         selectedLink = link
         showingWebView = true
-    }
-}
-
-// MARK: - Search Field Modifier
-
-private struct SearchFieldModifier: ViewModifier {
-    @Binding var searchText: String
-    let showSearchField: Bool
-
-    func body(content: Content) -> some View {
-        if showSearchField {
-            content.searchable(
-                text: $searchText,
-                prompt: "Buscar notícias, podcasts e vídeos"
-            )
-        } else {
-            content
-        }
     }
 }

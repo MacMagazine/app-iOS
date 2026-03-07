@@ -11,6 +11,7 @@ extension MainView {
     @ViewBuilder
     var tabContentView: some View {
         @Bindable var bindableViewModel = viewModel
+        @Bindable var searchViewModel = viewModel.searchViewModel
 
         TabView(selection: $bindableViewModel.tab) {
             ForEach(viewModel.settingsViewModel.tabs, id: \.self) { tab in
@@ -26,6 +27,10 @@ extension MainView {
                 }
             }
         }
+        .searchable(
+            text: $searchViewModel.searchText,
+            prompt: "Buscar notícias, podcasts e vídeos"
+        )
         .podcastMiniPlayer()
     }
 

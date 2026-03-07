@@ -1,3 +1,4 @@
+import FeedLibrary
 import Foundation
 @testable import SearchLibrary
 import Testing
@@ -7,20 +8,29 @@ struct RelevanceScorerTests {
     let scorer = RelevanceScorer()
     let processor = QueryProcessor()
 
+    private let fixedDate = Date()
+
     func makeResult(
         title: String = "",
         excerpt: String = "",
         categories: [String] = [],
-        pubDate: Date = Date()
+        pubDate: Date? = nil
     ) -> SearchResult {
-        SearchResult(
-            id: "test_1",
+        let feed = FeedDB(
+            postId: "test_\(title.hashValue)",
+            title: title,
+            pubDate: pubDate ?? fixedDate,
+            artworkURL: "",
+            link: "",
+            categories: categories,
+            excerpt: excerpt
+        )
+        return SearchResult(
+            id: feed.postId,
             type: .news,
-            pubDate: pubDate,
+            pubDate: feed.pubDate,
             relevanceScore: 0,
-            feedDB: nil,
-            podcastDB: nil,
-            videoDB: nil
+            feedDB: feed
         )
     }
 
@@ -28,7 +38,7 @@ struct RelevanceScorerTests {
     func titleHigherThanExcerpt() {
         let intent = processor.process("iPhone")
         let titleMatch = makeResult(title: "iPhone 17 review")
-        let excerptMatch = makeResult(excerpt: "The new iPhone is here")
+        let excerptMatch = makeResult(title: "A review", excerpt: "The new iPhone is here")
 
         let titleScore = scorer.score(result: titleMatch, intent: intent)
         let excerptScore = scorer.score(result: excerptMatch, intent: intent)
@@ -54,7 +64,6 @@ struct RelevanceScorerTests {
         let result = makeResult(title: "Something unrelated", pubDate: Date())
 
         let score = scorer.score(result: result, intent: intent)
-        // Should only have recency boost (~0.3 for today)
         #expect(score < 0.5)
         #expect(score > 0)
     }
