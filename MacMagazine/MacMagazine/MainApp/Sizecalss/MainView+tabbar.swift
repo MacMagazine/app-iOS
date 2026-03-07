@@ -22,14 +22,7 @@ extension MainView {
                     role: tab == .search ? .search : .none
                 ) {
                     if tab == .search {
-                        @Bindable var searchViewModel = viewModel.searchViewModel
-                        NavigationStack {
-                            SearchView(api: viewModel.videosViewModel.youtube)
-                                .searchable(
-                                    text: $searchViewModel.searchText,
-                                    prompt: "Buscar notícias, podcasts e vídeos"
-                                )
-                        }
+                        SearchView(api: viewModel.videosViewModel.youtube)
                     } else {
                         NavigationStack {
                             AnyView(contentView(for: tab))
@@ -47,7 +40,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .search: SearchView(api: viewModel.videosViewModel.youtube)
+        case .search: SearchView(api: viewModel.videosViewModel.youtube, embedded: true)
         case .live:
             MMWebView(
                 url: "https://macmagazine.com.br/live",

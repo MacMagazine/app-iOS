@@ -8,7 +8,6 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 public struct SearchView: View {
-    @Environment(\.dismissSearch) private var dismissSearch
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
@@ -20,20 +19,29 @@ public struct SearchView: View {
     @State private var selectedVideo: VideoDB?
 
     private let api: YouTubeAPI
+    private let embedded: Bool
 
     public init(
-        api: YouTubeAPI
+        api: YouTubeAPI,
+        embedded: Bool = false
     ) {
         self.api = api
+        self.embedded = embedded
     }
 
     public var body: some View {
-        ZStack(alignment: .top) {
+        @Bindable var viewModel = viewModel
+
+        let inner = ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
         }
         .player(api: api, action: $action)
         .navigationTitle("Busca")
+        .searchable(
+            text: $viewModel.searchText,
+            prompt: "Buscar notícias, podcasts e vídeos"
+        )
         .onChange(of: viewModel.searchText) {
             viewModel.performSearch()
         }
@@ -44,6 +52,12 @@ public struct SearchView: View {
         }
         .onChange(of: selectedVideo) { _, value in
             api.selectedVideo = value
+        }
+
+        if embedded {
+            inner
+        } else {
+            NavigationStack { inner }
         }
     }
 }
@@ -72,10 +86,7 @@ private extension SearchView {
                 RecentSearchesView(
                     searches: viewModel.recentSearches,
                     onSelect: { viewModel.selectRecentSearch($0) },
-                    onClear: {
-                        viewModel.clearRecentSearches()
-                        dismissSearch()
-                    },
+                    onClear: { viewModel.clearRecentSearches() },
                     onRemove: { viewModel.removeRecentSearch($0) }
                 )
             }
