@@ -125,12 +125,17 @@ private extension MainView {
 }
 
 private extension MainView {
+    @ViewBuilder
     func animateContentStackView(for item: any CaseIterable & Equatable) -> some View {
-        NavigationStack(path: Binding(
-            get: { navigationState.navigationPath },
-            set: { navigationState.navigationPath = $0 }
-        )) {
-            contentView(for: navigationState.selectedItem)
+        if areEqual(item, AppTabs.search) {
+            SearchView(api: viewModel.videosViewModel.youtube)
+        } else {
+            NavigationStack(path: Binding(
+                get: { navigationState.navigationPath },
+                set: { navigationState.navigationPath = $0 }
+            )) {
+                contentView(for: navigationState.selectedItem)
+            }
         }
     }
 
@@ -140,7 +145,7 @@ private extension MainView {
         case AppTabs.news: NewsView()
         case AppTabs.social: SocialView()
         case AppTabs.settings: SettingsView()
-        case AppTabs.search: SearchView(api: viewModel.videosViewModel.youtube, embedded: true)
+        case AppTabs.search: SearchView(api: viewModel.videosViewModel.youtube)
         case AppTabs.live: MMWebView(url: "https://macmagazine.com.br/live", cacheKey: "macmagazine_live")
         case Social.videos: SocialView()
         case Social.podcast: SocialView()

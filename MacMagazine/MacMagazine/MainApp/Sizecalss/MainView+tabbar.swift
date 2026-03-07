@@ -40,7 +40,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .search: SearchView(api: viewModel.videosViewModel.youtube, embedded: true)
+        case .search: SearchView(api: viewModel.videosViewModel.youtube)
         case .live:
             MMWebView(
                 url: "https://macmagazine.com.br/live",

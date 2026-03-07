@@ -19,45 +19,38 @@ public struct SearchView: View {
     @State private var selectedVideo: VideoDB?
 
     private let api: YouTubeAPI
-    private let embedded: Bool
 
     public init(
-        api: YouTubeAPI,
-        embedded: Bool = false
+        api: YouTubeAPI
     ) {
         self.api = api
-        self.embedded = embedded
     }
 
     public var body: some View {
         @Bindable var viewModel = viewModel
 
-        let inner = ZStack(alignment: .top) {
-            (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+        NavigationStack {
             content
-        }
-        .player(api: api, action: $action)
-        .navigationTitle("Busca")
-        .searchable(
-            text: $viewModel.searchText,
-            prompt: "Buscar notícias, podcasts e vídeos"
-        )
-        .onChange(of: viewModel.searchText) {
-            viewModel.performSearch()
-        }
-        .navigationDestination(isPresented: $showingWebView) {
-            if let link = selectedLink {
-                MMWebView(url: link)
-            }
-        }
-        .onChange(of: selectedVideo) { _, value in
-            api.selectedVideo = value
-        }
-
-        if embedded {
-            inner
-        } else {
-            NavigationStack { inner }
+                .background {
+                    (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
+                }
+                .navigationTitle("Busca")
+                .searchable(
+                    text: $viewModel.searchText,
+                    prompt: "Buscar notícias, podcasts e vídeos"
+                )
+                .onChange(of: viewModel.searchText) {
+                    viewModel.performSearch()
+                }
+                .navigationDestination(isPresented: $showingWebView) {
+                    if let link = selectedLink {
+                        MMWebView(url: link)
+                    }
+                }
+                .onChange(of: selectedVideo) { _, value in
+                    api.selectedVideo = value
+                }
+                .player(api: api, action: $action)
         }
     }
 }
@@ -80,17 +73,26 @@ private extension SearchView {
         }
     }
 
+    @ViewBuilder
     var idleContent: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                RecentSearchesView(
-                    searches: viewModel.recentSearches,
-                    onSelect: { viewModel.selectRecentSearch($0) },
-                    onClear: { viewModel.clearRecentSearches() },
-                    onRemove: { viewModel.removeRecentSearch($0) }
-                )
+        if viewModel.recentSearches.isEmpty {
+            ContentUnavailableView(
+                "Busca",
+                systemImage: "magnifyingglass",
+                description: Text("Buscar notícias, podcasts e vídeos")
+            )
+        } else {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    RecentSearchesView(
+                        searches: viewModel.recentSearches,
+                        onSelect: { viewModel.selectRecentSearch($0) },
+                        onClear: { viewModel.clearRecentSearches() },
+                        onRemove: { viewModel.removeRecentSearch($0) }
+                    )
+                }
+                .padding(.top)
             }
-            .padding(.top)
         }
     }
 
