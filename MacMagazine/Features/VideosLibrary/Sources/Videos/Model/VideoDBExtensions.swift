@@ -15,8 +15,8 @@ public extension VideoDB {
         analytics: AnalyticsManager?
     ) -> CardContent {
         let type = CardContentType.video(
-            views: self.views.formattedBigNumber,
-            likes: self.likes.formattedBigNumber,
+            views: (Int(self.views) ?? 0).formatted(.number),
+            likes: (Int(self.likes) ?? 0).formatted(.number),
             duration: self.duration.formattedYTDuration
         )
         return CardContent(
