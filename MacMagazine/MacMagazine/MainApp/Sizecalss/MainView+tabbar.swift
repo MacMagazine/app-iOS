@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import PodcastLibrary
+import SearchLibrary
 import SettingsLibrary
 import SwiftUI
 

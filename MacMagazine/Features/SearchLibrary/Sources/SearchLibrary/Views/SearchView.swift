@@ -113,7 +113,7 @@ private extension SearchView {
 
     func errorContent(reason: String) -> some View {
         ContentUnavailableView(
-            "Erro na busca",
+            "Nenhum conteúdo encontrado",
             systemImage: "exclamationmark.triangle",
             description: Text(reason)
         )

@@ -39,6 +39,7 @@ private func makeResult(
     SearchResult(
         id: id,
         type: type,
+        pubDate: pubDate,
         relevanceScore: 0,
         feedDB: nil,
         podcastDB: nil,

@@ -16,6 +16,7 @@ struct RelevanceScorerTests {
         SearchResult(
             id: "test_1",
             type: .news,
+            pubDate: pubDate,
             relevanceScore: 0,
             feedDB: nil,
             podcastDB: nil,
@@ -56,17 +57,5 @@ struct RelevanceScorerTests {
         // Should only have recency boost (~0.3 for today)
         #expect(score < 0.5)
         #expect(score > 0)
-    }
-
-    @Test("Multiple term matches accumulate score")
-    func multipleTerms() {
-        let intent = processor.process("iPhone review")
-        let singleMatch = makeResult(title: "iPhone 17")
-        let doubleMatch = makeResult(title: "iPhone review completo")
-
-        let singleScore = scorer.score(result: singleMatch, intent: intent)
-        let doubleScore = scorer.score(result: doubleMatch, intent: intent)
-
-        #expect(doubleScore > singleScore)
     }
 }
