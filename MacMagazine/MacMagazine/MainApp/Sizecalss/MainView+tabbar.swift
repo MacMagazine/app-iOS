@@ -25,11 +25,11 @@ extension MainView {
                         @Bindable var searchViewModel = viewModel.searchViewModel
                         NavigationStack {
                             SearchView(api: viewModel.videosViewModel.youtube)
+                                .searchable(
+                                    text: $searchViewModel.searchText,
+                                    prompt: "Buscar notícias, podcasts e vídeos"
+                                )
                         }
-                        .searchable(
-                            text: $searchViewModel.searchText,
-                            prompt: "Buscar notícias, podcasts e vídeos"
-                        )
                     } else {
                         NavigationStack {
                             AnyView(contentView(for: tab))
