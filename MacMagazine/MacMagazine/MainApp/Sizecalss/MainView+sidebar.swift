@@ -7,12 +7,27 @@ import SwiftUI
 
 extension MainView {
     var sideBarContentView: some View {
+        @Bindable var searchViewModel = viewModel.searchViewModel
+
         let isSidebarVisible =
         splitViewVisibility == .all || splitViewVisibility == .doubleColumn
 
         return NavigationSplitView(columnVisibility: $splitViewVisibility) {
             sidebar
-                .searchable(text: $searchText, prompt: "Search items")
+                .searchable(
+                    text: $searchViewModel.searchText,
+                    prompt: "Buscar notícias, podcasts e vídeos"
+                )
+                .onSubmit(of: .search) {
+                    viewModel.searchViewModel.performSearch()
+                }
+                .onChange(of: viewModel.searchViewModel.searchText) { _, newValue in
+                    if newValue.isEmpty {
+                        navigateBackFromSearch()
+                    } else {
+                        navigateToSearch()
+                    }
+                }
         } detail: {
             animateContentStackView(for: navigationState.selectedItem)
                 .environment(\.isSidebarVisible, isSidebarVisible)
@@ -147,6 +162,19 @@ private extension MainView {
 }
 
 private extension MainView {
+    func navigateToSearch() {
+        guard !areEqual(navigationState.selectedItem, AppTabs.search) else { return }
+        navigationState.previousItemBeforeSearch = navigationState.selectedItem
+        navigationState.navigate(to: AppTabs.search)
+    }
+
+    func navigateBackFromSearch() {
+        guard areEqual(navigationState.selectedItem, AppTabs.search),
+              let previous = navigationState.previousItemBeforeSearch else { return }
+        navigationState.navigate(to: previous)
+        navigationState.previousItemBeforeSearch = nil
+    }
+
     func process(_ destination: any CaseIterable & Equatable) {
         withAnimation(.easeInOut(duration: 0.4)) {
             switch destination {

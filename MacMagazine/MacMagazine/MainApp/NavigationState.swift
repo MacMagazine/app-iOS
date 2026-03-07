@@ -6,6 +6,7 @@ import SwiftUI
 class NavigationState {
     var selectedItem: any CaseIterable & Equatable = AppTabs.news
     var navigationPath = NavigationPath()
+    var previousItemBeforeSearch: (any CaseIterable & Equatable)?
 
     func navigate(to item: any CaseIterable & Equatable) {
         selectedItem = item

@@ -16,7 +16,6 @@ struct MainView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(MainViewModel.self) var viewModel
 
-    @State var searchText: String = ""
     @State var splitViewVisibility: NavigationSplitViewVisibility = .all
 
     @State private var currentlayout: LayoutType = .tabbar
