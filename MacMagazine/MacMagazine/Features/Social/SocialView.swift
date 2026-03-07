@@ -69,7 +69,7 @@ private extension SocialView {
         switch viewModel.social {
         case .videos:
             VideosView(
-                storage: viewModel.storage,
+                viewModel: viewModel.videosViewModel,
                 favorite: $favorite,
                 scrollPosition: $scrollPosition
             ).transition(.opacity)

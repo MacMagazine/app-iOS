@@ -23,6 +23,16 @@ public struct VideosView: View {
         _scrollPosition = scrollPosition
     }
 
+    public init(
+        viewModel: VideosViewModel,
+        favorite: Binding<Bool>,
+        scrollPosition: Binding<ScrollPosition>
+    ) {
+        self.viewModel = viewModel
+        _favorite = favorite
+        _scrollPosition = scrollPosition
+    }
+
     public var body: some View {
         Videos(
             card: AdaptiveVideoCard(

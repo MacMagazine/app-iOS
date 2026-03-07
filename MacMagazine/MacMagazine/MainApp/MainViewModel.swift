@@ -7,10 +7,12 @@ import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
+import VideosLibrary
 import YouTubeLibrary
 
 @Observable
 class MainViewModel {
+    var videosViewModel: VideosViewModel
     var settingsViewModel: SettingsViewModel
     var tab: AppTabs {
         didSet {
@@ -56,6 +58,10 @@ class MainViewModel {
 
         let settingsViewModel = SettingsViewModel(storage: self.storage, models: models)
         self.settingsViewModel = settingsViewModel
+
+        let videosViewModel = VideosViewModel(storage: self.storage)
+        self.videosViewModel = videosViewModel
+
         self.tab = settingsViewModel.tabs.first ?? .news
         self.scrollToTopTrigger = settingsViewModel.tabs.first
         self.social = settingsViewModel.social.first ?? .videos

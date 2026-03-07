@@ -16,7 +16,7 @@ struct SearchResultsList: View {
     let results: [SearchResult]
     let onSelectNews: (FeedDB) -> Void
     let onSelectPodcast: (PodcastDB) -> Void
-    let onSelectVideo: (VideoDB) -> Void
+    @Binding var selectedVideo: VideoDB?
     let onSelectLink: (String) -> Void
 
     var body: some View {
@@ -81,18 +81,19 @@ private extension SearchResultsList {
     @ViewBuilder
     func videoCard(for result: SearchResult) -> some View {
         if let videoDB = result.videoDB {
-            let cardContent = videoDB.toCardContent(
-                using: modelContext,
+            let card = AdaptiveVideoCard(
+                context: modelContext,
                 analytics: analytics
             )
 
-            Button {
-                onSelectVideo(videoDB)
-            } label: {
-                GlassCardView(data: cardContent)
-            }
-            .accessibilityLabel("Video: \(videoDB.title)")
-            .accessibilityHint("Duplo toque para assistir.")
+            VideoItemView(card: card,
+                          video: videoDB,
+                          selectedVideo: $selectedVideo)
+            .cardAccessibility(
+                data: videoDB,
+                labels: card.accessibilityLabels,
+                buttons: card.accessibilityButtons
+            )
         }
     }
 }

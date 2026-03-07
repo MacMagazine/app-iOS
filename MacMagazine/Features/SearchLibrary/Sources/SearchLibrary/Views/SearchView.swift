@@ -15,14 +15,23 @@ public struct SearchView: View {
     @State private var cardWidth = CGFloat.zero
     @State private var selectedLink: String?
     @State private var showingWebView = false
+    @State private var action: YouTubePlayerAction = .idle
+    @State private var selectedVideo: VideoDB?
 
-    public init() {}
+    private let api: YouTubeAPI
+
+    public init(
+        api: YouTubeAPI
+    ) {
+        self.api = api
+    }
 
     public var body: some View {
         ZStack(alignment: .top) {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             content
         }
+        .player(api: api, action: $action)
         .navigationTitle("Busca")
         .onChange(of: viewModel.searchText) {
             viewModel.performSearch()
@@ -31,6 +40,9 @@ public struct SearchView: View {
             if let link = selectedLink {
                 MMWebView(url: link)
             }
+        }
+        .onChange(of: selectedVideo) { _, value in
+            api.selectedVideo = value
         }
     }
 }
@@ -103,7 +115,7 @@ private extension SearchView {
                         results: viewModel.results,
                         onSelectNews: { handleNewsSelection($0) },
                         onSelectPodcast: { handlePodcastSelection($0) },
-                        onSelectVideo: { handleVideoSelection($0) },
+                        selectedVideo: $selectedVideo,
                         onSelectLink: { handleLinkSelection($0) }
                     )
                 }
@@ -135,7 +147,6 @@ private extension SearchView {
 // MARK: - Navigation
 
 private extension SearchView {
-
     func handleNewsSelection(_ feed: FeedDB) {
         selectedLink = feed.link
         showingWebView = true
@@ -144,12 +155,6 @@ private extension SearchView {
     func handlePodcastSelection(_ podcast: PodcastDB) {
         podcastPlayerManager.loadPodcast(podcast)
         podcastPlayerManager.seek(to: podcast.current)
-    }
-
-    func handleVideoSelection(_ video: VideoDB) {
-        let url = "https://www.youtube.com/watch?v=\(video.videoId)"
-        selectedLink = url
-        showingWebView = true
     }
 
     func handleLinkSelection(_ link: String) {

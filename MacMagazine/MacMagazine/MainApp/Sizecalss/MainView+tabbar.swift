@@ -5,6 +5,7 @@ import PodcastLibrary
 import SearchLibrary
 import SettingsLibrary
 import SwiftUI
+import VideosLibrary
 
 extension MainView {
 
@@ -23,7 +24,7 @@ extension MainView {
                     if tab == .search {
                         @Bindable var searchViewModel = viewModel.searchViewModel
                         NavigationStack {
-                            SearchView()
+                            SearchView(api: viewModel.videosViewModel.youtube)
                         }
                         .searchable(
                             text: $searchViewModel.searchText,
@@ -46,7 +47,7 @@ extension MainView {
         case .news: NewsView()
         case .social: SocialView()
         case .settings: SettingsView()
-        case .search: SearchView()
+        case .search: SearchView(api: viewModel.videosViewModel.youtube)
         case .live:
             MMWebView(
                 url: "https://macmagazine.com.br/live",

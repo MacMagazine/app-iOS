@@ -6,7 +6,7 @@ import UIComponentsLibrary
 import YouTubeLibrary
 
 @Observable
-class VideosViewModel {
+public class VideosViewModel {
     var options: Options = .home
     var status: APIStatus = .loading
 
@@ -17,7 +17,8 @@ class VideosViewModel {
 
     private let storage: Database
     private let mock: [NetworkMockData]?
-    let youtube: YouTubeAPI
+
+    public let youtube: YouTubeAPI
 
     let credentials = YouTubeCredentials(salt: "AppDelegateNSObject",
                                          keys: [
@@ -30,8 +31,8 @@ class VideosViewModel {
     var context: ModelContext { youtube.context }
 
     @MainActor
-    init(storage: Database,
-         mock: [NetworkMockData]? = nil) {
+    public init(storage: Database,
+                mock: [NetworkMockData]? = nil) {
         self.storage = storage
         self.mock = mock
 

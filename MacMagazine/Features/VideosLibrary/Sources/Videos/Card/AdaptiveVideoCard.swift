@@ -15,7 +15,7 @@ public struct AdaptiveVideoCard: VideoCard {
 
     public init() {}
 
-    init(
+    public init(
         context: ModelContext,
         analytics: AnalyticsManager?
     ) {
