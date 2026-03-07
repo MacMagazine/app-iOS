@@ -11,6 +11,8 @@ public struct SearchView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     @State private var cardWidth = CGFloat.zero
     @State private var selectedLink: String?
@@ -35,10 +37,6 @@ public struct SearchView: View {
                     (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
                 }
                 .navigationTitle("Busca")
-                .searchable(
-                    text: $viewModel.searchText,
-                    prompt: "Buscar notícias, podcasts e vídeos"
-                )
                 .onChange(of: viewModel.searchText) {
                     viewModel.performSearch()
                 }
@@ -51,6 +49,12 @@ public struct SearchView: View {
                     api.selectedVideo = value
                 }
                 .player(api: api, action: $action)
+                .if(!isIPad) { view in
+                    view.searchable(
+                        text: $viewModel.searchText,
+                        prompt: "Buscar notícias, podcasts e vídeos"
+                    )
+                }
         }
     }
 }
@@ -181,5 +185,13 @@ private extension SearchView {
     func handleLinkSelection(_ link: String) {
         selectedLink = link
         showingWebView = true
+    }
+}
+
+// MARK: - Navigation
+
+private extension SearchView {
+    var isIPad: Bool {
+        horizontalSizeClass == .regular && verticalSizeClass == .regular
     }
 }

@@ -56,6 +56,9 @@ public struct MMWebView: View {
                 commentsURL = ""
             }
         }
+        .onChange(of: colorScheme) {
+            page?.reload()
+        }
     }
 }
 

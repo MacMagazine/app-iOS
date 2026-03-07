@@ -92,6 +92,7 @@ private extension SettingsView {
 // MARK: - Content Sheet (Terms / Privacy)
 
 private struct ContentSheet: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State private var page: WebPage?
 
     let url: String
@@ -126,6 +127,9 @@ private struct ContentSheet: View {
                            label: { Image(systemName: "xmark") })
                     .tint(.primary)
                 }
+            }
+            .onChange(of: colorScheme) {
+                page?.reload()
             }
         }
         .trackScreen(title, previous: nil, analytics: analytics)
