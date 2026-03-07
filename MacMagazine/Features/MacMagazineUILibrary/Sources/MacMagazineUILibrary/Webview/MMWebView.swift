@@ -12,6 +12,7 @@ public struct MMWebView: View {
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
     @State private var imageTappedHandler = ImageTappedHandler()
+    @State private var reloadID = UUID()
 
     private let url: String?
     private let cacheKey: String?
@@ -28,12 +29,15 @@ public struct MMWebView: View {
         ManagedWebView(
             style: .init(
                 ignoredSafeAreaEdges: [.top, .bottom],
-                backForwardGesturesDisabled: true,
-                reloadsOnColorSchemeChange: true
+                backForwardGesturesDisabled: true
             ),
             pageProvider: { await makePage() },
             loadAction: makeLoadAction(),
-            page: $page
+            onColorSchemeChange: { _, newScheme in
+                await updateCookies(for: newScheme)
+            },
+            page: $page,
+            reloadTrigger: reloadID
         )
         .onAppear {
             navigationDecider.onOpenComments = { url in
@@ -136,5 +140,13 @@ private extension MMWebView {
             darkMode: Utils.isDarkMode(for: colorScheme),
             removeAds: removeAds
         )
+    }
+
+    func updateCookies(for colorScheme: ColorScheme) async {
+        let cookies = makeCookies(using: colorScheme)
+        let cookieStore = WKWebsiteDataStore.default().httpCookieStore
+        for cookie in cookies {
+            await cookieStore.setCookie(cookie)
+        }
     }
 }

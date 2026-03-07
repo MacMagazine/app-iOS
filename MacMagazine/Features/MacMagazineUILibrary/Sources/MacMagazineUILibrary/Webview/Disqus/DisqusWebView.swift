@@ -20,7 +20,6 @@ struct DisqusSheet: View {
                 if let page {
                     WebView(page)
                         .webViewBackForwardNavigationGestures(.disabled)
-                        .id(colorScheme)
                         .opacity(viewStatus == .done ? 1 : 0)
                 }
                 WebViewStatusOverlay(status: viewStatus)
@@ -40,6 +39,9 @@ struct DisqusSheet: View {
             configureNewWindowHandler()
             await setupPage()
             await loadContent()
+        }
+        .onChange(of: colorScheme) {
+            reloadPage()
         }
         .sheet(isPresented: Binding(
             get: { loginURL != nil },

@@ -5,16 +5,13 @@ import SwiftUI
 public struct ManagedWebViewStyle {
     public var ignoredSafeAreaEdges: Edge.Set = []
     public var backForwardGesturesDisabled: Bool = false
-    public var reloadsOnColorSchemeChange: Bool = false
 
     public init(
         ignoredSafeAreaEdges: Edge.Set = [],
-        backForwardGesturesDisabled: Bool = false,
-        reloadsOnColorSchemeChange: Bool = false
+        backForwardGesturesDisabled: Bool = false
     ) {
         self.ignoredSafeAreaEdges = ignoredSafeAreaEdges
         self.backForwardGesturesDisabled = backForwardGesturesDisabled
-        self.reloadsOnColorSchemeChange = reloadsOnColorSchemeChange
     }
 }
 
@@ -25,6 +22,7 @@ public struct ManagedWebViewStyle {
 /// - A `pageProvider` closure that creates/returns the WebPage.
 /// - A `loadAction` closure that iterates `page.load(...)` and returns on `.finished`.
 /// - An optional `postLoadAction` for work after `.done` (e.g., navigation observation).
+/// - An optional `onColorSchemeChange` callback for cookie updates on theme change.
 /// - A `style` controlling visual presentation.
 public struct ManagedWebView: View {
     @Environment(\.scenePhase) private var scenePhase
@@ -37,14 +35,16 @@ public struct ManagedWebView: View {
     let pageProvider: @MainActor () async -> WebPage?
     var loadAction: (@MainActor (WebPage) async throws -> Void)?
     var postLoadAction: (@MainActor (WebPage) async -> Void)?
+    var onColorSchemeChange: (@MainActor (WebPage, ColorScheme) async -> Void)?
     @Binding var page: WebPage?
-    var reloadTrigger: UUID = UUID()
+    var reloadTrigger: UUID
 
     public init(
         style: ManagedWebViewStyle = .init(),
         pageProvider: @escaping @MainActor () async -> WebPage?,
         loadAction: (@MainActor (WebPage) async throws -> Void)? = nil,
         postLoadAction: (@MainActor (WebPage) async -> Void)? = nil,
+        onColorSchemeChange: (@MainActor (WebPage, ColorScheme) async -> Void)? = nil,
         page: Binding<WebPage?>,
         reloadTrigger: UUID = UUID()
     ) {
@@ -52,6 +52,7 @@ public struct ManagedWebView: View {
         self.pageProvider = pageProvider
         self.loadAction = loadAction
         self.postLoadAction = postLoadAction
+        self.onColorSchemeChange = onColorSchemeChange
         self._page = page
         self.reloadTrigger = reloadTrigger
     }
@@ -75,6 +76,14 @@ public struct ManagedWebView: View {
         .onChange(of: scenePhase) { _, newPhase in
             isActive = newPhase == .active
         }
+        .onChange(of: colorScheme) { _, newScheme in
+            guard let onColorSchemeChange, let page else { return }
+            Task {
+                viewStatus = .loading
+                await onColorSchemeChange(page, newScheme)
+                await performLoad(on: page)
+            }
+        }
     }
 }
 
@@ -91,17 +100,12 @@ private extension ManagedWebView {
                 .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
                 .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
                 .opacity(viewStatus == .done ? 1 : 0)
-                .conditionalColorSchemeID(
-                    enabled: style.reloadsOnColorSchemeChange,
-                    colorScheme: colorScheme
-                )
                 .transition(.opacity)
         }
     }
 
     func performLoad(on page: WebPage) async {
         guard let loadAction else {
-            // Page is preloaded (e.g. from cache) — skip loading
             viewStatus = .done
             return
         }
@@ -118,7 +122,6 @@ private extension ManagedWebView {
         } catch let error as WebPage.NavigationError {
             switch error {
             case .webContentProcessTerminated:
-                // iOS terminated the web content process (e.g. app backgrounded)
                 break
             default:
                 if !Task.isCancelled {
@@ -129,19 +132,6 @@ private extension ManagedWebView {
             if !Task.isCancelled {
                 viewStatus = .error(error.localizedDescription)
             }
-        }
-    }
-}
-
-// MARK: - Conditional Color Scheme ID Modifier
-
-private extension View {
-    @ViewBuilder
-    func conditionalColorSchemeID(enabled: Bool, colorScheme: ColorScheme) -> some View {
-        if enabled {
-            self.id(colorScheme)
-        } else {
-            self
         }
     }
 }
