@@ -11,40 +11,39 @@ enum SearchResultType: Sendable {
 struct SearchResult: Identifiable {
     let id: String
     let type: SearchResultType
-    let title: String
-    let excerpt: String
-    let artworkURL: String
     let pubDate: Date
-    let author: String?
-    let link: String
-    let categories: [String]
-    let favorite: Bool
-    let duration: String?
     var relevanceScore: Double
-
     let feedDB: FeedDB?
     let podcastDB: PodcastDB?
     let videoDB: VideoDB?
+
+    init(
+        id: String,
+        type: SearchResultType,
+        pubDate: Date,
+        relevanceScore: Double,
+        feedDB: FeedDB? = nil,
+        podcastDB: PodcastDB? = nil,
+        videoDB: VideoDB? = nil
+    ) {
+        self.id = id
+        self.type = type
+        self.pubDate = pubDate
+        self.relevanceScore = relevanceScore
+        self.feedDB = feedDB
+        self.podcastDB = podcastDB
+        self.videoDB = videoDB
+    }
 }
 
 extension FeedDB {
     func toSearchResult(relevanceScore: Double = 0) -> SearchResult {
         SearchResult(
-            id: "news_\(postId)",
+            id: postId,
             type: .news,
-            title: title,
-            excerpt: excerpt,
-            artworkURL: artworkURL,
             pubDate: pubDate,
-            author: author,
-            link: link,
-            categories: categories,
-            favorite: favorite,
-            duration: nil,
             relevanceScore: relevanceScore,
-            feedDB: self,
-            podcastDB: nil,
-            videoDB: nil
+            feedDB: self
         )
     }
 }
@@ -52,21 +51,11 @@ extension FeedDB {
 extension PodcastDB {
     func toSearchResult(relevanceScore: Double = 0) -> SearchResult {
         SearchResult(
-            id: "podcast_\(postId)",
+            id: postId,
             type: .podcast,
-            title: title,
-            excerpt: subtitle,
-            artworkURL: artworkURL,
             pubDate: pubDate,
-            author: nil,
-            link: link,
-            categories: [],
-            favorite: favorite,
-            duration: duration,
             relevanceScore: relevanceScore,
-            feedDB: nil,
-            podcastDB: self,
-            videoDB: nil
+            podcastDB: self
         )
     }
 }
@@ -74,20 +63,10 @@ extension PodcastDB {
 extension VideoDB {
     func toSearchResult(relevanceScore: Double = 0) -> SearchResult {
         SearchResult(
-            id: "video_\(videoId)",
+            id: videoId,
             type: .video,
-            title: title,
-            excerpt: "",
-            artworkURL: artworkURL,
             pubDate: pubDate.toDate(),
-            author: nil,
-            link: "https://www.youtube.com/watch?v=\(videoId)",
-            categories: [],
-            favorite: favorite,
-            duration: duration.formattedYTDuration,
             relevanceScore: relevanceScore,
-            feedDB: nil,
-            podcastDB: nil,
             videoDB: self
         )
     }

@@ -9,7 +9,7 @@ private let filterKeyToCategory: [String: NewsCategory] = {
     return map
 }()
 
-extension Array where Element == String {
+public extension Array where Element == String {
     var toNewsCategory: [NewsCategory] {
         compactMap { filterKeyToCategory[$0] }
     }

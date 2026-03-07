@@ -2,9 +2,11 @@ import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import NewsLibrary
 import PodcastLibrary
 import SwiftData
 import SwiftUI
+import VideosLibrary
 import YouTubeLibrary
 
 struct SearchResultsList: View {
@@ -47,40 +49,19 @@ private extension SearchResultsList {
 
     @ViewBuilder
     func newsCard(for result: SearchResult) -> some View {
-        let feedDB = result.feedDB
-        let categories = result.categories.compactMap { categoryName in
-            NewsCategory.allCases.first { $0.filterKey == categoryName }
-        }
-        let cardContent = CardContent(
-            type: .news(
-                categories: categories,
-                style: categories.mostRelevant.style
-            ),
-            analytics: analytics,
-            title: result.title,
-            pubDate: result.pubDate,
-            author: result.author,
-            artworkUrl: result.artworkURL,
-            urlToShare: result.link,
-            favorite: result.favorite,
-            read: false,
-            favoriteAction: {
-                guard let feedDB else { return }
-                feedDB.favorite.toggle()
-                feedDB.modifiedAt = Date()
-                try? modelContext.save()
-            },
-            readAction: {}
-        )
+        if let feedDB = result.feedDB {
+            let cardContent = feedDB.toCardContent(
+                using: modelContext,
+                analytics: analytics,
+                screen: nil,
+                style: feedDB.categories.toNewsCategory.mostRelevant.style
+            )
 
-        NewsCard(data: cardContent) {
-            if let feedDB {
+            NewsCard(data: cardContent) {
                 onSelectNews(feedDB)
-            } else {
-                onSelectLink(result.link)
             }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 
     @ViewBuilder
@@ -96,63 +77,25 @@ private extension SearchResultsList {
                 onSelectPodcast(podcastDB)
             }
             .padding(.horizontal)
-        } else {
-            let cardContent = CardContent(
-                type: .podcast(duration: result.duration ?? ""),
-                analytics: analytics,
-                title: result.title,
-                pubDate: result.pubDate,
-                artworkUrl: result.artworkURL,
-                urlToShare: result.link,
-                favorite: false,
-                read: false,
-                favoriteAction: {},
-                readAction: {}
-            )
-
-            AdaptivePodcastCardView(podcast: cardContent) {
-                onSelectLink(result.link)
-            }
-            .padding(.horizontal)
         }
     }
 
     @ViewBuilder
     func videoCard(for result: SearchResult) -> some View {
-        let videoDB = result.videoDB
-        let cardContent = CardContent(
-            type: .video(
-                views: "",
-                likes: "",
-                duration: result.duration ?? ""
-            ),
-            analytics: analytics,
-            title: result.title,
-            pubDate: result.pubDate,
-            artworkUrl: result.artworkURL,
-            urlToShare: result.link,
-            favorite: result.favorite,
-            read: false,
-            favoriteAction: {
-                guard let videoDB else { return }
-                videoDB.favorite.toggle()
-                videoDB.modifiedAt = Date()
-                try? modelContext.save()
-            },
-            readAction: {}
-        )
+        if let videoDB = result.videoDB {
+            let cardContent = videoDB.toCardContent(
+                using: modelContext,
+                analytics: analytics
+            )
 
-        Button {
-            if let videoDB {
+            Button {
                 onSelectVideo(videoDB)
-            } else {
-                onSelectLink(result.link)
+            } label: {
+                GlassCardView(data: cardContent)
             }
-        } label: {
-            GlassCardView(data: cardContent)
+            .accessibilityLabel("Video: \(videoDB.title)")
+            .accessibilityHint("Duplo toque para assistir.")
+            .padding(.horizontal)
         }
-        .accessibilityLabel("Video: \(result.title)")
-        .accessibilityHint("Duplo toque para assistir.")
-        .padding(.horizontal)
     }
 }

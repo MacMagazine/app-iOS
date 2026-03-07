@@ -5,7 +5,7 @@ import MacMagazineUILibrary
 import SwiftData
 import YouTubeLibrary
 
-extension VideoDB {
+public extension VideoDB {
     private var urlToShare: String {
         "https://www.youtube.com/watch?v=\(videoId)"
     }

@@ -5,7 +5,7 @@ import MacMagazineLibrary
 import MacMagazineUILibrary
 import SwiftData
 
-extension FeedDB {
+public extension FeedDB {
     func toCardContent(
         using context: ModelContext?,
         analytics: AnalyticsManager?,

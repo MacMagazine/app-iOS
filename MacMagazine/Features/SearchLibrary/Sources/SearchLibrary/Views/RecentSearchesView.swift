@@ -24,16 +24,12 @@ struct RecentSearchesView: View {
                             Button {
                                 onSelect(search)
                             } label: {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "clock.arrow.trianglehead.counterclockwise.rotate.90")
-                                        .font(.caption2)
-                                    Text(search.query)
-                                        .lineLimit(1)
-                                }
-                                .font(.subheadline)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 8)
+                                Text(search.query)
+                                .lineLimit(1)
+                                .font(.headline)
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
                             .glassEffect(.clear, in: .capsule)
                             .contextMenu {
                                 Button(role: .destructive) {

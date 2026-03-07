@@ -1,7 +1,6 @@
 import Foundation
 
 struct RelevanceScorer {
-
     func score(result: SearchResult, intent: QueryIntent) -> Double {
         var score = 0.0
 
@@ -25,5 +24,19 @@ struct RelevanceScorer {
         }
 
         return score
+    }
+}
+
+private extension SearchResult {
+    var title: String {
+        self.feedDB?.title ?? self.podcastDB?.title ?? self.videoDB?.title ?? ""
+    }
+
+    var excerpt: String {
+        self.feedDB?.excerpt ?? self.podcastDB?.subtitle ?? ""
+    }
+
+    var categories: [String] {
+        self.feedDB?.categories ?? []
     }
 }
