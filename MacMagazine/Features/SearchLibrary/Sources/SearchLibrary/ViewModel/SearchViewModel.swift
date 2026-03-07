@@ -23,6 +23,7 @@ public final class SearchViewModel {
     private let storage: Database
     private var remoteSearch: (any RemoteSearchServiceProtocol)?
     private static let maxRecentSearches = 20
+    private static let debounceDuration: Duration = .milliseconds(500)
     private var searchTask: Task<Void, Never>?
 
     public init(storage: Database) {
@@ -48,7 +49,7 @@ public final class SearchViewModel {
         loadRecentSearches()
     }
 
-    public func performSearch() {
+    public func performSearch(debounce: Bool = true) {
         searchTask?.cancel()
 
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -59,8 +60,10 @@ public final class SearchViewModel {
         }
 
         searchTask = Task {
-            try? await Task.sleep(for: .milliseconds(300))
-            guard !Task.isCancelled else { return }
+            if debounce {
+                try? await Task.sleep(for: Self.debounceDuration)
+                guard !Task.isCancelled else { return }
+            }
 
             status = .searching
 
@@ -96,7 +99,7 @@ public final class SearchViewModel {
 
     public func selectRecentSearch(_ search: RecentSearchDB) {
         searchText = search.query
-        performSearch()
+        performSearch(debounce: false)
     }
 
     public func clearRecentSearches() {
