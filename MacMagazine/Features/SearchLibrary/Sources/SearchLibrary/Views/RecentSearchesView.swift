@@ -10,7 +10,7 @@ struct RecentSearchesView: View {
         if !searches.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("Buscas recentes")
+                    Text("Recentes")
                         .font(.headline)
                     Spacer()
                     Button("Limpar") { onClear() }

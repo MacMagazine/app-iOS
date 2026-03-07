@@ -24,11 +24,11 @@ struct DeepLinkNewsDetailView: View {
             MMWebView(url: url)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            onDismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                        }
+                        Button(action: onDismiss,
+                               label: { Image(systemName: "xmark") })
+                        .buttonStyle(.plain)
+                        .tint(.primary)
+                        .glassEffect(.clear.interactive(), in: .capsule)
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack(spacing: 20) {

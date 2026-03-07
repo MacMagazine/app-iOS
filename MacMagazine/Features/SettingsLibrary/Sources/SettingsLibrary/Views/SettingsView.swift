@@ -126,7 +126,7 @@ private struct ContentSheet: View {
                            label: { Image(systemName: "xmark") })
                     .buttonStyle(.plain)
                     .tint(.primary)
-                    .glassEffect(.regular.interactive(), in: .capsule)
+                    .glassEffect(.clear.interactive(), in: .capsule)
                 }
             }
         }
@@ -177,7 +177,7 @@ private struct PatronLoginSheet: View {
                            label: { Image(systemName: "xmark") })
                     .buttonStyle(.plain)
                     .tint(.primary)
-                    .glassEffect(.regular.interactive(), in: .capsule)
+                    .glassEffect(.clear.interactive(), in: .capsule)
                 }
             }
         }

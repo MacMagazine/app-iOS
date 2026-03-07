@@ -151,6 +151,9 @@ extension NewsView {
                 labels: [.title, .date, .author],
                 buttons: [.favorite, .share]
             )
+            .contextMenu {
+                MenuContent(data: data)
+            }
             .opacity(data.read && highlightPostRead ? 0.75 : 1)
             .onAppear {
                 if !favorite && search.isEmpty {

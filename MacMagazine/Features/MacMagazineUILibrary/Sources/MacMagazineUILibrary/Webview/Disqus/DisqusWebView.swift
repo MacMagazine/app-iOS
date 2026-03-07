@@ -33,7 +33,7 @@ struct DisqusSheet: View {
                            label: { Image(systemName: "xmark") })
                     .buttonStyle(.plain)
                     .tint(.primary)
-                    .glassEffect(.regular.interactive(), in: .circle)
+                    .glassEffect(.clear.interactive(), in: .circle)
                 }
             }
         }
@@ -70,7 +70,7 @@ struct DisqusSheet: View {
                                    label: { Image(systemName: "xmark") })
                             .buttonStyle(.plain)
                             .tint(.primary)
-                            .glassEffect(.regular.interactive(), in: .circle)
+                            .glassEffect(.clear.interactive(), in: .circle)
                         }
                     }
                 }

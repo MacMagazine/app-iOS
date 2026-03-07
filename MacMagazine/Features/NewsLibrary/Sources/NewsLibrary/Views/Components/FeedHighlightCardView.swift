@@ -21,16 +21,18 @@ public struct FeedHighlightCardView: View {
     // MARK: - Body
 
     public var body: some View {
-        GlassCardView(
-            data: post.toCardContent(
-                using: modelContext,
-                analytics: analytics,
-                screen: AnalyticsConstants.Screen.news.name,
-                style: .glass,
-                aspectRatio: nil
-            )
+        let data = post.toCardContent(
+            using: modelContext,
+            analytics: analytics,
+            screen: AnalyticsConstants.Screen.news.name,
+            style: .glass,
+            aspectRatio: nil
         )
+        GlassCardView(data: data)
         .compositingGroup()
+        .contextMenu {
+            MenuContent(data: data)
+        }
     }
 
     // MARK: - Init

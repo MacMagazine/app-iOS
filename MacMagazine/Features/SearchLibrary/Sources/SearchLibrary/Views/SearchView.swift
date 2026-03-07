@@ -93,7 +93,11 @@ private extension SearchView {
     @ViewBuilder
     var resultsContent: some View {
         if viewModel.results.isEmpty {
-            ContentUnavailableView.search(text: viewModel.searchText)
+            ContentUnavailableView(
+                "Sem resultados para \"\(viewModel.searchText)\".",
+                systemImage: "magnifyingglass",
+                description: Text("Tente uma nova busca, por favor.")
+            )
         } else {
             resultsList
         }
