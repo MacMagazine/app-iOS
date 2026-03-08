@@ -24,13 +24,7 @@ extension PostsVisibilityViewModel {
 
     @MainActor
     func get() {
-        postRead = storage?.settings?.postRead ?? true
         countOnBadge = storage?.settings?.countOnBadge ?? false
-    }
-
-    @MainActor
-    func change(postRead: Bool) async {
-        storage?.update(postRead: postRead)
     }
 
     @MainActor

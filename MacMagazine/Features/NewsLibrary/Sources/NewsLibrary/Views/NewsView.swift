@@ -35,7 +35,6 @@ public struct NewsView<Filter: View>: View {
     @Query private var allNews: [FeedDB]
 
     private let filters: Filter
-    private let highlightPostRead: Bool
 
     // MARK: - Initialization
 
@@ -44,12 +43,10 @@ public struct NewsView<Filter: View>: View {
         favorite: Binding<Bool>,
         category: Binding<NewsCategory>,
         filters: Filter,
-        scrollPosition: Binding<ScrollPosition>,
-        highlightPostRead: Bool
+        scrollPosition: Binding<ScrollPosition>
     ) {
         self.viewModel = NewsViewModel(storage: storage)
         self.filters = filters
-        self.highlightPostRead = highlightPostRead
         _favorite = favorite
         _category = category
         _scrollPosition = scrollPosition
@@ -117,7 +114,6 @@ extension NewsView {
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: highlights,
-                        highlightPostRead: highlightPostRead,
                         scrolledID: $scrolledHighlightID,
                         onTap: { post in
                             handleTap(post)
@@ -154,7 +150,6 @@ extension NewsView {
             .contextMenu {
                 MenuContent(data: data)
             }
-            .opacity(data.read && highlightPostRead ? 0.75 : 1)
             .onAppear {
                 if !favorite && search.isEmpty {
                     viewModel.loadMoreIfNeeded(index: index)

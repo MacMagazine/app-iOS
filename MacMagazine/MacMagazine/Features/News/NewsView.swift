@@ -76,8 +76,7 @@ private extension NewsView {
             favorite: $favorite,
             category: $newsCategory,
             filters: categories,
-            scrollPosition: $scrollPosition,
-            highlightPostRead: viewModel.highlightPostRead
+            scrollPosition: $scrollPosition
         )
     }
 }

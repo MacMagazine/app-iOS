@@ -15,7 +15,6 @@ struct PostsVisibilityView: View {
         NavigationLink {
             List {
                 PushOptionsView()
-                readAll
                 countPosts
                 cleanPosts
             }
@@ -48,11 +47,8 @@ struct PostsVisibilityView: View {
             #if os(iOS)
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             #endif
-            Task { await
-                viewModel.change(postRead: value)
-                if !value {
-                    viewModel.countOnBadge = false
-                }
+            if !value {
+                viewModel.countOnBadge = false
             }
         }
         .onChange(of: viewModel.countOnBadge) { _, value in
@@ -70,31 +66,6 @@ struct PostsVisibilityView: View {
 }
 
 private extension PostsVisibilityView {
-    var readAll: some View {
-        Section {
-            Button(action: {
-                viewModel.cache = .readAll
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.allPostsRead.id,
-                    screen: AnalyticsConstants.Screen.settingsPosts.name
-                ))
-            }, label: {
-                Text("Marcar todos os posts como lidos")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-
-            Toggle("Identificar posts já lidos", isOn: $viewModel.postRead)
-                .tint(theme.button.primary.color)
-        } header: {
-            Text("Posts lidos")
-                .font(.headline)
-                .foregroundColor(theme.text.terciary.color)
-        } footer: {
-            Text("Marca visualmente os posts que você já leu")
-                .accessibilityHidden(true)
-        }
-    }
-
     var countPosts: some View {
         Section {
             Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)

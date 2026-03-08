@@ -51,17 +51,6 @@ extension Database {
     }
 
     @MainActor
-    func update(postRead: Bool) {
-        if let item = settings {
-            item.postRead = postRead
-            item.modifiedAt = Date()
-        } else {
-            context.insert(SettingsDB(postRead: postRead))
-        }
-        try? context.save()
-    }
-
-    @MainActor
     func update(countOnBadge: Bool) {
         if let item = settings {
             item.countOnBadge = countOnBadge

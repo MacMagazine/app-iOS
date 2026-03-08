@@ -19,6 +19,7 @@ struct DisqusSheet: View {
             ZStack {
                 if let page {
                     WebView(page)
+                        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
                         .webViewBackForwardNavigationGestures(.disabled)
                         .opacity(viewStatus == .done ? 1 : 0)
                 }
@@ -138,6 +139,7 @@ private struct DisqusLoginWebView: View {
 
     var body: some View {
         WebView(loginPage)
+            .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
             .task {
                 var configuration = WebPage.Configuration()
                 configuration.websiteDataStore = dataStore

@@ -8,7 +8,6 @@ public final class SettingsDB: Equatable {
     var mode = ColorScheme.system
     var icon = IconType.normal
     var notification: String = PushPreferences.all.rawValue
-    var postRead: Bool = true
     var countOnBadge: Bool = false
     var subscription: Subscription = Subscription(isPatrao: false, expirationDate: Date())
     var modifiedAt: Date = Date()
@@ -18,7 +17,6 @@ public final class SettingsDB: Equatable {
         mode: ColorScheme = .system,
         icon: IconType = .normal,
         notification: String = PushPreferences.all.rawValue,
-        postRead: Bool = true,
         countOnBadge: Bool = false,
         subscription: Subscription? = nil,
         modifiedAt: Date = Date()
@@ -27,7 +25,6 @@ public final class SettingsDB: Equatable {
         self.mode = mode
         self.icon = icon
         self.notification = notification
-        self.postRead = postRead
         self.countOnBadge = countOnBadge
         self.modifiedAt = modifiedAt
 

@@ -11,7 +11,6 @@ public struct FeedHighlightsCarouselView: View {
     // MARK: - Properties
 
     let highlights: [FeedDB]
-    let highlightPostRead: Bool
     let onTap: (FeedDB) -> Void
 
     @Binding var scrolledID: String?
@@ -68,12 +67,10 @@ public struct FeedHighlightsCarouselView: View {
 
     public init(
         highlights: [FeedDB],
-        highlightPostRead: Bool,
         scrolledID: Binding<String?>,
         onTap: @escaping (FeedDB) -> Void
     ) {
         self.highlights = highlights
-        self.highlightPostRead = highlightPostRead
         self._scrolledID = scrolledID
         self.onTap = onTap
     }
@@ -94,7 +91,6 @@ public struct FeedHighlightsCarouselView: View {
                                 spacing: Layout.spacing
                             )
                     }
-                    .opacity(post.read && highlightPostRead ? 0.75 : 1)
                     .scrollTransition(.interactive) { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1.0 : 0.95)
@@ -122,7 +118,6 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
-                highlightPostRead: false,
                 scrolledID: .constant(nil),
                 onTap: { _ in }
             )
@@ -139,7 +134,6 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
-                highlightPostRead: false,
                 scrolledID: .constant(nil),
                 onTap: { _ in }
             )
@@ -156,7 +150,6 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
-                highlightPostRead: false,
                 scrolledID: .constant(nil),
                 onTap: { _ in }
             )

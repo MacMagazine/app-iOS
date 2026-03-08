@@ -71,7 +71,7 @@ private extension SettingsView {
                 AppearanceView()
                 IconsView()
                 CustomTabView()
-                CustomNewsView()
+                // CustomNewsView()
                 CustomSocialView()
             }
             .navigationTitle("Aparência")
@@ -166,7 +166,6 @@ private struct PatronLoginSheet: View {
                             }
                         }
                     } catch {
-                        // Navigation observation ended
                     }
                 },
                 page: $page

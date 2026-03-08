@@ -277,19 +277,6 @@ struct DatabaseExtensionsTests {
         #expect(settings?.notification == "test_notification", "Should update notification")
     }
 
-    @Test("Should update postRead flag correctly")
-    func updatePostRead() {
-        // Given
-        let database = Database(models: [SettingsDB.self], inMemory: true)
-
-        // When
-        database.update(postRead: false)
-
-        // Then
-        let settings = database.settings
-        #expect(settings?.postRead == false, "Should update postRead")
-    }
-
     @Test("Should update countOnBadge flag correctly")
     func updateCountOnBadge() {
         // Given
@@ -372,14 +359,12 @@ struct DatabaseExtensionsTests {
 
         // When - Rapid fire updates
         database.update(mode: .light)
-        database.update(postRead: true)
         database.update(countOnBadge: false)
         database.update(appIcon: .alternative)
 
         // Then
         let settings = database.settings
         #expect(settings?.mode == .light, "Should have latest mode")
-        #expect(settings?.postRead == true, "Should have latest postRead")
         #expect(settings?.countOnBadge == false, "Should have latest countOnBadge")
         #expect(settings?.icon == .alternative, "Should have latest icon")
         #expect(database.fetch(SettingsDB.self).count == 1, "Should still have only one settings object")
@@ -390,7 +375,6 @@ struct DatabaseExtensionsTests {
         // Given
         let database = Database(models: [SettingsDB.self], inMemory: true)
         database.update(mode: .dark)
-        database.update(postRead: false)
 
         // When
         database.update(appIcon: .normal)
@@ -398,7 +382,6 @@ struct DatabaseExtensionsTests {
         // Then
         let settings = database.settings
         #expect(settings?.mode == .dark, "Should preserve mode")
-        #expect(settings?.postRead == false, "Should preserve postRead")
         #expect(settings?.icon == .normal, "Should update icon")
     }
 }

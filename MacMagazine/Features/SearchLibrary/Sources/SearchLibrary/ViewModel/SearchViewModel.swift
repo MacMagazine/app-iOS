@@ -23,7 +23,7 @@ public final class SearchViewModel {
     private let storage: Database
     private var remoteSearch: (any RemoteSearchServiceProtocol)?
     private static let maxRecentSearches = 20
-    private static let debounceDuration: Duration = .milliseconds(500)
+    private static let debounceDuration: Duration = .milliseconds(2000)
     private var searchTask: Task<Void, Never>?
 
     public init(storage: Database) {
