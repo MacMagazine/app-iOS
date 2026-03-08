@@ -34,23 +34,11 @@ public struct MenuContent: View {
                 Label("Compartilhar", systemImage: "square.and.arrow.up")
             }
         }
-
-        Button(readText, systemImage: readImage) {
-            data.readAction()
-        }
     }
 }
 
 private extension MenuContent {
     var favoriteImage: String {
         data.favorite ? "star.fill" : "star"
-    }
-
-    var readText: String {
-        data.read ? "Marcar como não-lido" : "Marcar como lido"
-    }
-
-    var readImage: String {
-        data.read ? "circle.fill" : "circle"
     }
 }
