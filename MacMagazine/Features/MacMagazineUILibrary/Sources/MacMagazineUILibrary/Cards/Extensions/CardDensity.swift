@@ -9,10 +9,6 @@ public extension CardDensity {
         }
     }
 
-    var isVisible: Bool {
-        self != .compact
-    }
-
     var titleLineLimit: Int {
         switch self {
         case .compact: 1

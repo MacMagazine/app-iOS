@@ -8,27 +8,6 @@ public struct Cookies {
 
     private static let disqusCookiesKey = "disqus_saved_cookies"
 
-    public static func get(_ domain: String? = nil) -> [HTTPCookie]? {
-        let cookies = HTTPCookieStorage.shared.cookies
-
-        guard let domain = domain else {
-            return cookies
-        }
-
-        return cookies?.filter {
-            return $0.domain.contains(domain)
-        }
-    }
-
-    public static func clean() {
-        for cookie in Self.get() ?? [] {
-            if !cookie.domain.contains(disqus) &&
-                !cookie.domain.contains(mmDomain) {
-                HTTPCookieStorage.shared.deleteCookie(cookie)
-            }
-        }
-    }
-
     // MARK: - Disqus Cookie Persistence
 
     /// Saves Disqus-related cookies from a WKHTTPCookieStore to UserDefaults.

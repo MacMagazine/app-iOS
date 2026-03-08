@@ -37,11 +37,4 @@ final class WebPageCache {
         cache[key] != nil
     }
 
-    func clearPage(for key: String) {
-        cache.removeValue(forKey: key)
-    }
-
-    func clearAll() {
-        cache.removeAll()
-    }
 }

@@ -28,19 +28,6 @@ public extension View {
 #endif
     }
 
-    /// Helper para acessar isLandscape dentro de uma View
-    func readIsLandscape(_ binding: Binding<Bool>) -> some View {
-        self.modifier(LandscapeReaderModifier(isLandscape: binding))
-    }
-
-    var isMac: Bool {
-#if os(macOS)
-        return true
-#else
-        return false
-#endif
-    }
-
     /// Aplica animação de entrada padrão do onboarding
     /// - Parameters:
     ///   - animateIn: Estado de animação

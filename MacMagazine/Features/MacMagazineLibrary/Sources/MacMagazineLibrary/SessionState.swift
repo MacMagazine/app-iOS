@@ -15,13 +15,4 @@ public class SessionState {
     public var hasFetchedFeed = false
 
     public init() {}
-
-    public func reset() {
-        hasFetchedPodcasts = false
-        hasFetchedVideos = false
-        isPlayingPodcasts = false
-        isPlayingVideos = false
-
-        hasFetchedFeed = false
-    }
 }

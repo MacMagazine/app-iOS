@@ -25,15 +25,4 @@ public enum NewsCategory: String, CaseIterable, Sendable {
         }
     }
 
-    public var icon: String {
-        switch self {
-        case .all, .news: "newspaper"
-        case .highlights: "point.3.filled.connected.trianglepath.dotted"
-        case .appletv: "appletv"
-        case .reviews: "checklist"
-        case .rumors: "person.fill.questionmark"
-        case .tutorials: "long.text.page.and.pencil"
-        case .youtube, .podcast: ""
-        }
-    }
 }

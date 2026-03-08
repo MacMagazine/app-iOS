@@ -3,7 +3,6 @@ import SwiftUI
 enum ToolbarType: Equatable {
     case compact
     case normal
-    case minimal
 }
 
 extension View {
@@ -27,16 +26,6 @@ private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
 
     func body(content: Content) -> some View {
         switch type {
-        case .minimal:
-            content
-                .navigationTitle("Notícias")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        menu
-                    }
-                }
-
         case .compact:
             content
                 .navigationTitle("Notícias")
