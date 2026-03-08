@@ -154,9 +154,7 @@ public enum AnalyticsConstants {
         case icon(String)
 
         // MARK: Settings - Posts Visibility
-        case identifyPostsRead(Bool)
         case countPostsOnBadge(Bool)
-        case allPostsRead
         case cleanPostsOptions
         case cleanPosts
         case cleanAllPosts
@@ -236,9 +234,7 @@ public enum AnalyticsConstants {
             case let .icon(type): "icone \(type)"
 
             // Settings - Posts Visibility
-            case let .identifyPostsRead(value): "identify_posts_read \(value)"
             case let .countPostsOnBadge(value): "count_posts_on_badge \(value)"
-            case .allPostsRead: "all_posts_read"
             case .cleanPostsOptions: "clean_posts_options"
             case .cleanPosts: "clean_posts"
             case .cleanAllPosts: "clean_all_posts"

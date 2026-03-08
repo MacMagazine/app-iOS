@@ -9,7 +9,6 @@ struct PostsVisibilityView: View {
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = PostsVisibilityViewModel()
     @State private var isPresenting = false
-    @State private var isPresentingMore = false
 
     var body: some View {
         NavigationLink {
@@ -38,19 +37,6 @@ struct PostsVisibilityView: View {
             viewModel.get()
         }
 
-        .onChange(of: viewModel.postRead) { _, value in
-            analytics.track(.buttonTap(
-                buttonId: AnalyticsConstants.ButtonID.identifyPostsRead(value).id,
-                screen: AnalyticsConstants.Screen.settingsPosts.name
-            ))
-
-            #if os(iOS)
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            #endif
-            if !value {
-                viewModel.countOnBadge = false
-            }
-        }
         .onChange(of: viewModel.countOnBadge) { _, value in
             analytics.track(.buttonTap(
                 buttonId: AnalyticsConstants.ButtonID.countPostsOnBadge(value).id,
@@ -70,7 +56,6 @@ private extension PostsVisibilityView {
         Section {
             Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)
                 .tint(theme.button.primary.color)
-                .disabled(!viewModel.postRead)
         } header: {
             Text("Badge")
                 .font(.headline)

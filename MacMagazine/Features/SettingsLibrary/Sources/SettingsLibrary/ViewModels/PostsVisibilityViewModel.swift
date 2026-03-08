@@ -6,7 +6,6 @@ import SwiftData
 @Observable
 final class PostsVisibilityViewModel {
     var cache: Cache?
-    var postRead = true
     var countOnBadge = false
 
     var storage: Database?
@@ -39,7 +38,6 @@ extension PostsVisibilityViewModel {
         switch cache {
         case .cleanAll: cleanAll()
         case .keepFavoritesAndStatus: keepFavoritesAndStatus()
-        default: break
         }
     }
 }

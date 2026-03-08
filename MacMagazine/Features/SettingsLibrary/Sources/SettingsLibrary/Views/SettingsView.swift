@@ -71,7 +71,6 @@ private extension SettingsView {
                 AppearanceView()
                 IconsView()
                 CustomTabView()
-                // CustomNewsView()
                 CustomSocialView()
             }
             .navigationTitle("Aparência")
