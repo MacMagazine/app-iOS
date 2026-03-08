@@ -74,7 +74,7 @@ struct SearchViewModelTests {
     }
 
     private func waitForDebounce() async throws {
-        try await Task.sleep(for: .milliseconds(600))
+        try await Task.sleep(for: .milliseconds(2100))
     }
 
     // MARK: - Search State
