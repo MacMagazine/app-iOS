@@ -13,7 +13,7 @@ public struct FeedHighlightsCarouselView: View {
     let highlights: [FeedDB]
     let onTap: (FeedDB) -> Void
 
-    @Binding var scrolledID: String?
+    @Binding var scrollPosition: ScrollPosition
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -67,11 +67,11 @@ public struct FeedHighlightsCarouselView: View {
 
     public init(
         highlights: [FeedDB],
-        scrolledID: Binding<String?>,
+        scrollPosition: Binding<ScrollPosition>,
         onTap: @escaping (FeedDB) -> Void
     ) {
         self.highlights = highlights
-        self._scrolledID = scrolledID
+        self._scrollPosition = scrollPosition
         self.onTap = onTap
     }
 
@@ -102,7 +102,7 @@ public struct FeedHighlightsCarouselView: View {
         }
         .scrollIndicators(.hidden)
         .scrollTargetBehavior(.viewAligned)
-        .scrollPosition(id: $scrolledID)
+        .scrollPosition($scrollPosition)
         .safeAreaPadding(.horizontal, peekWidth)
         .frame(height: cardHeight)
     }
@@ -118,7 +118,7 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
-                scrolledID: .constant(nil),
+                scrollPosition: .constant(ScrollPosition()),
                 onTap: { _ in }
             )
 
@@ -134,7 +134,7 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
-                scrolledID: .constant(nil),
+                scrollPosition: .constant(ScrollPosition()),
                 onTap: { _ in }
             )
 
@@ -150,7 +150,7 @@ public struct FeedHighlightsCarouselView: View {
         VStack {
             FeedHighlightsCarouselView(
                 highlights: PreviewData.sampleHighlights,
-                scrolledID: .constant(nil),
+                scrollPosition: .constant(ScrollPosition()),
                 onTap: { _ in }
             )
 

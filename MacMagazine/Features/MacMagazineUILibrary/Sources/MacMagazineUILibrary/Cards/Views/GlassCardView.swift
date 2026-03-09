@@ -136,9 +136,10 @@ private extension GlassCardView {
 
     var titleRow: some View {
         Text(data.title)
-            .font(density.titleFont)
+            .font(density.titleFont(style: data.type.style))
+            .fontWeight(data.type.style == .highlight ? .bold : .regular)
             .multilineTextAlignment(.leading)
-            .lineLimit(density.titleLineLimit)
+            .lineLimit(density.titleLineLimit(style: data.type.style))
             .foregroundStyle(.white)
     }
 

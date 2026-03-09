@@ -30,7 +30,6 @@ public struct NewsView<Filter: View>: View {
     @Binding var scrollPosition: ScrollPosition
     @State private var search: String = ""
     @State private var readingNews = false
-    @State private var scrolledHighlightID: String?
 
     @Query private var allNews: [FeedDB]
 
@@ -114,7 +113,7 @@ extension NewsView {
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: highlights,
-                        scrolledID: $scrolledHighlightID,
+                        scrollPosition: $scrollPosition,
                         onTap: { post in
                             handleTap(post)
                         }
