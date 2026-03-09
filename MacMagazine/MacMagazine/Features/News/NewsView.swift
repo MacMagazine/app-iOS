@@ -41,6 +41,7 @@ private extension NewsView {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.4)) {
                 showCategoryFilter.toggle()
+                scrollPosition.scrollTo(edge: .top)
             }
         }, label: {
             Image(systemName: "rectangle.grid.2x2\(showCategoryFilter ? ".fill" : "")")
