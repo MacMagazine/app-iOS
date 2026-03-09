@@ -101,6 +101,7 @@ private extension ManagedWebView {
                 .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
                 .opacity(viewStatus == .done ? 1 : 0)
                 .transition(.opacity)
+                .safeAreaInset(edge: .leading) {}
         }
     }
 
