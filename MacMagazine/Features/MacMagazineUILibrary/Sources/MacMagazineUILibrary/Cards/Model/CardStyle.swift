@@ -3,10 +3,7 @@ import MacMagazineLibrary
 
 public enum CardStyle {
     case leadingImage
-    case topImage
-    case bottomImage
     case highlight
-    case simple
     case glass
 }
 

@@ -10,9 +10,6 @@ public struct MetadataContent: View {
     }
 
     public var body: some View {
-        HStack(spacing: 4) {
-            Image(systemName: image)
-            Text(text)
-        }
+        Label(text, systemImage: image)
     }
 }

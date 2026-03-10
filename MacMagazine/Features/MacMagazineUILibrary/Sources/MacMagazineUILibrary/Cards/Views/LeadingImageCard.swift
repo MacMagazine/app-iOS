@@ -61,7 +61,7 @@ private extension LeadingImageCard {
     var metadataContent: some View {
         VStack(alignment: .leading, spacing: 6) {
             titleRow
-            HStack(spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 dateRow
                 authorRow
             }

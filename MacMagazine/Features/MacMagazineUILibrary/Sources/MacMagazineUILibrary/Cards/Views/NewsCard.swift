@@ -27,21 +27,15 @@ private extension NewsCard {
         if dynamicTypeSize.usesPrimaryCardLayout {
             switch data.type.categories.mostRelevant.style {
             case .leadingImage: LeadingImageCard(data: data)
-            case .topImage: TopImageCard(data: data)
-            case .bottomImage: BottomImageCard(data: data)
             case .highlight, .glass: GlassCardView(data: data)
-            case .simple: SimpleCard(data: data)
             case .none:
                 switch data.type.style {
-                case .leadingImage: LeadingImageCard(data: data)
-                case .topImage: TopImageCard(data: data)
-                case .bottomImage: BottomImageCard(data: data)
+                case .leadingImage, .none: LeadingImageCard(data: data)
                 case .highlight, .glass: GlassCardView(data: data)
-                case .simple, .none: SimpleCard(data: data)
                 }
             }
         } else {
-            TopImageCard(data: data)
+            LeadingImageCard(data: data)
         }
     }
 }
