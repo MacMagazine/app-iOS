@@ -80,7 +80,7 @@ extension SubscriptionViewModel {
         if inAppLibrary.canPurchase {
             do {
                 status = .loading
-                let products = try await inAppLibrary.getProducts(for: ["MMASSINATURAMENSAL_BETA", "MMASSINATURAANUAL_BETA"])
+                let products = try await inAppLibrary.getProducts(for: ["MMASSINATURAMENSAL", "MMASSINATURAANUAL"])
                 status = .purchasable(products: products)
             } catch {
                 status = .error(reason: error.localizedDescription)
