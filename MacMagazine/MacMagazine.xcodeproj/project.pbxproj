@@ -554,6 +554,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WatchWidget/Resources/WatchWidget.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
@@ -568,8 +569,9 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchapp.WidgetWatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.WidgetWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -588,9 +590,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WatchWidget/Resources/WatchWidget.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5.0.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=watchos*]" = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WatchWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MacMagazine;
@@ -602,8 +607,10 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchapp.WidgetWatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp.WidgetWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "Watch Extension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -623,6 +630,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
@@ -644,6 +652,7 @@
 				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -661,9 +670,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5.0.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -682,6 +693,8 @@
 				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = MacMagazine;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -822,6 +835,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/Resources/WatchApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5.0.0;
 				DEVELOPMENT_TEAM = A5VW9QUF9L;
@@ -837,8 +851,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -859,9 +874,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/Resources/WatchApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5.0.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=watchos*]" = A5VW9QUF9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WatchApp/Resources/Info.plist;
@@ -874,8 +892,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "MacMagazine Wildcard";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -908,7 +928,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.Widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -939,7 +959,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 5.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.Widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
