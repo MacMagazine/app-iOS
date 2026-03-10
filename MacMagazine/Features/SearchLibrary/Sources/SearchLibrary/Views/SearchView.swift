@@ -15,6 +15,7 @@ public struct SearchView: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     @State private var cardWidth = CGFloat.zero
+    @State private var selectedTitle: String?
     @State private var selectedLink: String?
     @State private var showingWebView = false
     @State private var action: YouTubePlayerAction = .idle
@@ -41,9 +42,7 @@ public struct SearchView: View {
                     viewModel.performSearch()
                 }
                 .navigationDestination(isPresented: $showingWebView) {
-                    if let link = selectedLink {
-                        MMWebView(url: link)
-                    }
+                    details
                 }
                 .onChange(of: selectedVideo) { _, value in
                     api.selectedVideo = value
@@ -152,14 +151,6 @@ private extension SearchView {
         }
     }
 
-    private var grid: GridItem {
-        GridItem(.adaptive(minimum: 280), spacing: 20, alignment: .top)
-    }
-
-    private var density: CardDensity {
-        .density(using: cardWidth)
-    }
-
     func errorContent(reason: String) -> some View {
         ContentUnavailableView(
             "Nenhum conteúdo encontrado",
@@ -169,10 +160,23 @@ private extension SearchView {
     }
 }
 
+// MARK: - Properties
+
+private extension SearchView {
+    var grid: GridItem {
+        GridItem(.adaptive(minimum: 280), spacing: 20, alignment: .top)
+    }
+
+    var density: CardDensity {
+        .density(using: cardWidth)
+    }
+}
+
 // MARK: - Navigation
 
 private extension SearchView {
     func handleNewsSelection(_ feed: FeedDB) {
+        selectedTitle = feed.title
         selectedLink = feed.link
         showingWebView = true
     }
@@ -193,5 +197,32 @@ private extension SearchView {
 private extension SearchView {
     var isIPad: Bool {
         horizontalSizeClass == .regular && verticalSizeClass == .regular
+    }
+}
+
+// MARK: - Details
+
+private extension SearchView {
+    @ViewBuilder
+    var details: some View {
+        if let selectedLink {
+            MMWebView(url: selectedLink)
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        shareView
+                    }
+                }
+        }
+    }
+
+    @ViewBuilder
+    var shareView: some View {
+        if let selectedTitle,
+           let selectedLink {
+            ShareButton(
+                title: selectedTitle,
+                url: selectedLink
+            )
+        }
     }
 }

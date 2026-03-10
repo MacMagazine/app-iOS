@@ -41,11 +41,6 @@ final class FeedMainViewModel {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    func toggleFavorite(post: FeedDB, modelContext: ModelContext) {
-        post.favorite.toggle()
-        try? modelContext.save()
-    }
-
     // MARK: - Index / Helpers
 
     func computeSelectedIndexByMidY(items: [FeedDB], positions: [String: CGPoint]) -> Int {

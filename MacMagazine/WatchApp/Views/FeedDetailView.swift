@@ -25,7 +25,6 @@ struct FeedDetailView: View {
             VStack(alignment: .leading, spacing: 12) {
                 header
                 bodyText
-                footer
             }
             .padding(.top, 8)
         }
@@ -63,22 +62,6 @@ struct FeedDetailView: View {
                         .multilineTextAlignment(.leading)
                 }
             }
-        }
-    }
-
-    // MARK: - Footer
-
-    private var footer: some View {
-        VStack(spacing: 8) {
-            Divider()
-                .padding(.vertical, 4)
-
-            Button {
-                viewModel.toggleFavorite(post: post, modelContext: modelContext)
-            } label: {
-                Image(systemName: post.favorite ? "star.fill" : "star")
-            }
-            .buttonStyle(.glass)
         }
     }
 }

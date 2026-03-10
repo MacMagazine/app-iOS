@@ -945,9 +945,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5.0.0;
-				DEVELOPMENT_TEAM = A5VW9QUF9L;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A5VW9QUF9L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widget;
@@ -961,6 +963,8 @@
 				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brit.macmagazine.MacMagazineWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "MacMagazine Widget";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
