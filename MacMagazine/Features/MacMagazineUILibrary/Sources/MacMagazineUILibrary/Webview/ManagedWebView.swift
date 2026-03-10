@@ -93,15 +93,17 @@ private extension ManagedWebView {
     @ViewBuilder
     var webview: some View {
         if let page, isActive {
-            WebView(page)
-                .webViewBackForwardNavigationGestures(
-                    style.backForwardGesturesDisabled ? .disabled : .enabled
-                )
-                .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
-                .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
-                .opacity(viewStatus == .done ? 1 : 0)
-                .transition(.opacity)
-                .safeAreaInset(edge: .leading) {}
+            Color.clear.opacity(0)
+                .safeAreaInset(edge: .trailing) {
+                    WebView(page)
+                        .webViewBackForwardNavigationGestures(
+                            style.backForwardGesturesDisabled ? .disabled : .enabled
+                        )
+                        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
+                        .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
+                        .opacity(viewStatus == .done ? 1 : 0)
+                        .transition(.opacity)
+                }
         }
     }
 

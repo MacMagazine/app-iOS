@@ -25,7 +25,7 @@ public struct CollectionViewWithHeader<Header: View, Content: View>: View {
     private let content: () -> Content
 
     private let grid = GridItem(
-        .adaptive(minimum: 280),
+        .flexible(minimum: 200),
         spacing: 20,
         alignment: .top
     )

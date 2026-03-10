@@ -17,7 +17,8 @@ public struct FeedHighlightsCarouselView: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
-    @Environment(\.isSidebarVisible) private var isSidebarVisible
+
+    @State private var width: CGFloat = 300
 
     // MARK: - Layout Constants
 
@@ -60,7 +61,7 @@ public struct FeedHighlightsCarouselView: View {
     /// Number of visible cards based on device and sidebar visibility
     private var visibleCardCount: Int {
         guard isIPad else { return 1 }
-        return isSidebarVisible ? 1 : 2
+        return min(Int((width / 600.0).rounded()), 3)
     }
 
     // MARK: - Initialization
@@ -105,6 +106,9 @@ public struct FeedHighlightsCarouselView: View {
         .scrollPosition($scrollPosition)
         .safeAreaPadding(.horizontal, peekWidth)
         .frame(height: cardHeight)
+        .contentWidth { value in
+            width = value
+        }
     }
 }
 

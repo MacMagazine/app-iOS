@@ -39,13 +39,13 @@ public enum News: String, CaseIterable, Codable, Equatable {
 
     public var icon: String {
         switch self {
-        case .news: "newspaper"
+        case .news: "megaphone"
         case .highlights: "medal.star.fill"
         case .appletv: "appletv"
         case .reviews: "checklist"
         case .rumors: "person.fill.questionmark"
         case .tutoriais: "long.text.page.and.pencil"
-        case .all: ""
+        case .all: "newspaper"
         }
     }
 }
