@@ -73,8 +73,8 @@ struct SearchViewModelTests {
         )
     }
 
-    private func waitForDebounce() async throws {
-        try await Task.sleep(for: .milliseconds(2100))
+    private func waitForTask() async throws {
+        try await Task.sleep(for: .milliseconds(200))
     }
 
     // MARK: - Search State
@@ -112,9 +112,9 @@ struct SearchViewModelTests {
         let viewModel = makeViewModel(localResults: localResults)
 
         viewModel.searchText = "iPhone"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
-        try await waitForDebounce()
+        try await waitForTask()
 
         #expect(viewModel.status == .done)
         #expect(!viewModel.results.isEmpty)
@@ -127,9 +127,9 @@ struct SearchViewModelTests {
         )
 
         viewModel.searchText = "iPhone"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
-        try await waitForDebounce()
+        try await waitForTask()
 
         if case .error = viewModel.status {
             // expected
@@ -145,9 +145,9 @@ struct SearchViewModelTests {
         let viewModel = makeViewModel(localResults: local, remoteResults: remote)
 
         viewModel.searchText = "test"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
-        try await waitForDebounce()
+        try await waitForTask()
 
         #expect(viewModel.results.count == 2)
         #expect(viewModel.status == .done)
@@ -165,9 +165,9 @@ struct SearchViewModelTests {
     func searchSavesToRecent() async throws {
         let viewModel = makeViewModel()
         viewModel.searchText = "iPhone test"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
-        try await waitForDebounce()
+        try await waitForTask()
 
         #expect(!viewModel.recentSearches.isEmpty)
         #expect(viewModel.recentSearches.first?.query == "iPhone test")
@@ -178,8 +178,8 @@ struct SearchViewModelTests {
         let viewModel = makeViewModel()
 
         viewModel.searchText = "test query"
-        viewModel.performSearch()
-        try await waitForDebounce()
+        viewModel.performSearch(debounce: false)
+        try await waitForTask()
         #expect(!viewModel.recentSearches.isEmpty)
 
         viewModel.clearRecentSearches()
@@ -192,11 +192,11 @@ struct SearchViewModelTests {
 
         viewModel.searchText = "first query"
         viewModel.performSearch(debounce: false)
-        try await Task.sleep(for: .milliseconds(200))
+        try await waitForTask()
 
         viewModel.searchText = "second query"
         viewModel.performSearch(debounce: false)
-        try await Task.sleep(for: .milliseconds(200))
+        try await waitForTask()
 
         let countBefore = viewModel.recentSearches.count
         #expect(countBefore >= 2)
@@ -216,12 +216,12 @@ struct SearchViewModelTests {
         let viewModel = makeViewModel()
 
         viewModel.searchText = "first"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
         viewModel.searchText = "second"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
-        try await waitForDebounce()
+        try await waitForTask()
 
         #expect(viewModel.recentSearches.contains { $0.query == "second" })
         #expect(!viewModel.recentSearches.contains { $0.query == "first" })
@@ -231,9 +231,9 @@ struct SearchViewModelTests {
     func searchTransitionsToTerminalStatus() async throws {
         let viewModel = makeViewModel()
         viewModel.searchText = "test"
-        viewModel.performSearch()
+        viewModel.performSearch(debounce: false)
 
-        try await waitForDebounce()
+        try await waitForTask()
 
         switch viewModel.status {
         case .done, .error:
