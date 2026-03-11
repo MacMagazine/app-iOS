@@ -38,6 +38,7 @@ extension PostsVisibilityViewModel {
         switch cache {
         case .cleanAll: cleanAll()
         case .keepFavoritesAndStatus: keepFavoritesAndStatus()
+        case .allRead: markAllPostAsRead()
         }
     }
 }
@@ -54,6 +55,13 @@ private extension PostsVisibilityViewModel {
     func keepFavoritesAndStatus() {
         models.forEach {
             ($0 as? any ModelFavoritable.Type)?.deleteNonFavorites(using: storage?.sharedModelContainer.mainContext)
+        }
+    }
+
+    @MainActor
+    func markAllPostAsRead() {
+        models.forEach {
+            ($0 as? any ModelReadable.Type)?.maskAsRead(using: storage?.sharedModelContainer.mainContext)
         }
     }
 }

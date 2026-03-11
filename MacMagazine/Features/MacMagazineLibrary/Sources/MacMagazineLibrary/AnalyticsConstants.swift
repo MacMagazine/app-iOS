@@ -171,6 +171,7 @@ public enum AnalyticsConstants {
         case cleanPosts
         case cleanAllPosts
         case cleanOnboarding
+        case allPostsRead
 
         // MARK: Settings - Push Notifications
         case pushNotifications(String)
@@ -270,6 +271,7 @@ public enum AnalyticsConstants {
             case .cleanPosts: "clean_posts"
             case .cleanAllPosts: "clean_all_posts"
             case .cleanOnboarding: "clean_onboarding"
+            case .allPostsRead: "all_posts_read"
 
             // Settings - Push Notifications
             case let .pushNotifications(value): "push_notifications \(value)"

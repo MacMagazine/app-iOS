@@ -2,6 +2,7 @@ import MacMagazineLibrary
 import SwiftUI
 
 public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue: StringProtocol {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.theme) private var theme: ThemeColor
     @Binding private var selected: T
     private var menu: [T]
@@ -24,8 +25,7 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                     })
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .glassEffect(selected == option ? .clear : .clear.tint(Color.gray.opacity(0.3)),
-                                 in: .capsule)
+                    .glassEffect(color(selected: selected == option), in: .capsule)
                 }
             }
         }
@@ -36,5 +36,16 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                 selected: Binding<T>) {
         self.menu = menu
         _selected = selected
+    }
+}
+
+private extension MenuView {
+    func color(selected: Bool) -> Glass {
+        return switch colorScheme {
+        case .dark:
+            selected ? .clear.tint(Color.gray.opacity(0.3)) : .clear
+        default:
+            selected ? .clear : .clear.tint(Color.gray.opacity(0.3))
+        }
     }
 }

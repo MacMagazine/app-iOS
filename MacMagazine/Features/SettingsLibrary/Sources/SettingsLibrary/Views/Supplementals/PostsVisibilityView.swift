@@ -56,6 +56,17 @@ private extension PostsVisibilityView {
         Section {
             Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)
                 .tint(theme.button.primary.color)
+
+            Button(action: {
+                viewModel.cache = .allRead
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.allPostsRead.id,
+                    screen: AnalyticsConstants.Screen.settingsPosts.name
+                ))
+            }, label: {
+                Text("Marcar todos os posts como lidos")
+                    .foregroundStyle(theme.main.tint.color ?? .blue)
+            })
         } header: {
             Text("Badge")
                 .font(.headline)
@@ -90,6 +101,17 @@ private extension PostsVisibilityView {
     @ViewBuilder
     var cleanCacheView: some View {
         Button(action: {
+            UserDefaults.standard.removeObject(forKey: "hasCompletedOnboarding")
+            UserDefaults.standard.removeObject(forKey: "hasSeenOnboardingFeatures")
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.cleanOnboarding.id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+        },
+               label: {
+            Text("Rever Onboarding")
+        })
+        Button(action: {
             viewModel.flush(cache: .keepFavoritesAndStatus)
             analytics.track(.buttonTap(
                 buttonId: AnalyticsConstants.ButtonID.cleanPosts.id,
@@ -106,17 +128,6 @@ private extension PostsVisibilityView {
                 screen: AnalyticsConstants.Screen.settingsPosts.name
             ))
         }
-        Button(action: {
-            UserDefaults.standard.removeObject(forKey: "hasCompletedOnboarding")
-            UserDefaults.standard.removeObject(forKey: "hasSeenOnboardingFeatures")
-            analytics.track(.buttonTap(
-                buttonId: AnalyticsConstants.ButtonID.cleanOnboarding.id,
-                screen: AnalyticsConstants.Screen.settingsPosts.name
-            ))
-        },
-               label: {
-            Text("Rever Onboarding")
-        })
     }
 }
 

@@ -90,3 +90,13 @@ extension FeedDB: ModelDuplicable {
         try? context.save()
     }
 }
+
+extension FeedDB: ModelReadable {
+    public static func maskAsRead(using context: ModelContext?) {
+        let descriptor = FetchDescriptor(predicate: #Predicate<FeedDB> { !$0.read })
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+        data.forEach { $0.read = true }
+        try? context.save()
+    }
+}
