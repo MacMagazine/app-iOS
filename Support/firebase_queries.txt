@@ -1,0 +1,124 @@
+ ---
+ Firebase BigQuery Queries
+
+ 1. Most Visited Screens (User Journey)
+
+ SELECT
+   (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'firebase_screen') AS screen,
+   COUNT(*) AS views,
+   COUNT(DISTINCT user_pseudo_id) AS unique_users
+ FROM `project.analytics_XXXXXX.events_*`
+ WHERE event_name = 'screen_view'
+   AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                          AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ GROUP BY screen
+ ORDER BY views DESC
+
+ 2. Feature Usage Ranking (Tab/Feature Popularity)
+
+ SELECT
+   (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'button_id') AS feature,
+   COUNT(*) AS taps,
+   COUNT(DISTINCT user_pseudo_id) AS unique_users
+ FROM `project.analytics_XXXXXX.events_*`
+ WHERE event_name = 'button_tap'
+   AND (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'button_id')
+       LIKE 'tab_%'
+   AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                          AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ GROUP BY feature
+ ORDER BY taps DESC
+
+ 3. Content Engagement (Articles, Podcasts, Videos)
+
+ SELECT
+   CASE
+     WHEN button_id LIKE 'news_%_started' THEN 'News'
+     WHEN button_id LIKE 'podcast_%_started' THEN 'Podcast'
+     WHEN button_id LIKE 'video_%_started' THEN 'Video'
+     WHEN button_id LIKE 'highlight_%_tapped' THEN 'Highlight'
+   END AS content_type,
+   COUNT(*) AS engagements,
+   COUNT(DISTINCT user_pseudo_id) AS unique_users
+ FROM (
+   SELECT
+     (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'button_id') AS button_id,
+     user_pseudo_id
+   FROM `project.analytics_XXXXXX.events_*`
+   WHERE event_name = 'button_tap'
+     AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                            AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ )
+ WHERE button_id LIKE '%_started' OR button_id LIKE 'highlight_%'
+ GROUP BY content_type
+ ORDER BY engagements DESC
+
+ 4. Search Behavior
+
+ -- Top search queries
+ SELECT
+   (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'search_term') AS query,
+   COUNT(*) AS search_count,
+   AVG((SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'results_count')) AS avg_results
+ FROM `project.analytics_XXXXXX.events_*`
+ WHERE event_name = 'search'
+   AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                          AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ GROUP BY query
+ ORDER BY search_count DESC
+ LIMIT 50;
+
+ -- Search-to-selection conversion
+ WITH searches AS (
+   SELECT user_pseudo_id, event_timestamp
+   FROM `project.analytics_XXXXXX.events_*`
+   WHERE event_name = 'search'
+     AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                            AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ ),
+ selections AS (
+   SELECT user_pseudo_id, event_timestamp
+   FROM `project.analytics_XXXXXX.events_*`
+   WHERE event_name = 'select_content'
+     AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                            AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ )
+ SELECT
+   COUNT(DISTINCT s.user_pseudo_id) AS searchers,
+   COUNT(DISTINCT sel.user_pseudo_id) AS selectors,
+   ROUND(COUNT(DISTINCT sel.user_pseudo_id) * 100.0 /
+         NULLIF(COUNT(DISTINCT s.user_pseudo_id), 0), 1) AS conversion_pct
+ FROM searches s
+ LEFT JOIN selections sel
+   ON s.user_pseudo_id = sel.user_pseudo_id
+   AND sel.event_timestamp BETWEEN s.event_timestamp AND s.event_timestamp + 300000000
+
+ 5. Daily Active Users & Session Duration
+
+ SELECT
+   event_date,
+   COUNT(DISTINCT user_pseudo_id) AS dau,
+   AVG((SELECT value.double_value FROM UNNEST(event_params) WHERE key = 'duration_seconds')) AS avg_session_sec
+ FROM `project.analytics_XXXXXX.events_*`
+ WHERE event_name IN ('session_start', 'session_end')
+   AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                          AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ GROUP BY event_date
+ ORDER BY event_date
+
+ 6. Deep Link / Push / Widget Attribution
+
+ SELECT
+   (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'button_id') AS source,
+   COUNT(*) AS opens,
+   COUNT(DISTINCT user_pseudo_id) AS unique_users
+ FROM `project.analytics_XXXXXX.events_*`
+ WHERE event_name = 'button_tap'
+   AND (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'button_id')
+       LIKE 'deep_link_%'
+   AND _TABLE_SUFFIX BETWEEN FORMAT_DATE('%Y%m%d', DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
+                          AND FORMAT_DATE('%Y%m%d', CURRENT_DATE())
+ GROUP BY source
+ ORDER BY opens DESC
+
+ ---
