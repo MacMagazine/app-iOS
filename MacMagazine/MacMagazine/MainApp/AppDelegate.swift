@@ -3,7 +3,7 @@ import LoggerLibrary
 import MacMagazineLibrary
 import UIKit
 
-final class AppDelegate: NSObject, UIApplicationDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
     private var logger: LoggerProtocol = Logger(category: "MacMagazineV5")
 
     func application(_ application: UIApplication,
@@ -13,12 +13,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession,
-                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        let config = UISceneConfiguration(name: nil,
-                                          sessionRole: connectingSceneSession.role)
-        config.delegateClass = SceneDelegate.self
-        return config
+    // MARK: - Shortcuts
+
+    func windowScene(_ windowScene: UIWindowScene,
+                     performActionFor shortcutItem: UIApplicationShortcutItem) async -> Bool {
+        ShortcutManager.shared.process(shortcut: shortcutItem)
+        return true
     }
 }
 

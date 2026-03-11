@@ -10,6 +10,7 @@ import SwiftUI
 import VideosLibrary
 import YouTubeLibrary
 
+@MainActor
 @Observable
 class MainViewModel {
     var videosViewModel: VideosViewModel
@@ -79,7 +80,6 @@ class MainViewModel {
 extension MainViewModel {
     var showOnboarding: Bool { onboardingCoordinator != nil }
 
-    @MainActor
     func initializeOnboarding() async {
         guard let coordinator = await OnboardingCoordinator.createIfNeeded(analytics: analytics, pushNotification: pushNotification) else {
             onboardingCoordinator = nil
@@ -103,7 +103,6 @@ extension MainViewModel {
                 Task { @MainActor in
                     switch self.storage.status {
                     case let .done(type):
-                        // Sync from iCloud to device
                         if type == .imported {
                             self.deduplicate()
                         }
@@ -116,7 +115,6 @@ extension MainViewModel {
         track()
     }
 
-    @MainActor
     func deduplicate() {
         models.forEach {
             ($0 as? any ModelDuplicable.Type)?.deduplicate(using: storage.sharedModelContainer.mainContext)
