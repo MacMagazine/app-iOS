@@ -58,14 +58,6 @@ extension AppDelegate {
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         logger.debug(userInfo["aps"] ?? "")
-        guard let aps = userInfo["aps"] as? [String: Any],
-              let contentAvailable = aps["content-available"] as? Int,
-              contentAvailable == 1 else {
-            completionHandler(.noData)
-            return
-        }
-
-        PushNotification.handleBackground(for: userInfo)
-        completionHandler(.newData)
+        completionHandler(.noData)
     }
 }

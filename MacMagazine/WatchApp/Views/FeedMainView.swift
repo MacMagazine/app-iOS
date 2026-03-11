@@ -12,6 +12,8 @@ struct FeedMainView: View {
 
     @Query private var items: [FeedDB]
 
+    @Environment(\.scenePhase) private var scenePhase
+
     // MARK: - State
 
     @State private var viewModel: FeedMainViewModel
@@ -47,9 +49,17 @@ struct FeedMainView: View {
         .task {
             await viewModel.refresh(modelContext: modelContext)
         }
-        .onChange(of: viewModel.pendingPushLink) { _, link in
-            guard let link else { return }
-            viewModel.openPost(withLink: link, modelContext: modelContext)
+        .onChange(of: scenePhase) {
+            guard scenePhase == .active, viewModel.status == .done else { return }
+            Task {
+                await viewModel.refresh(modelContext: modelContext)
+            }
+        }
+        .onChange(of: viewModel.pendingPushLink) {
+            guard viewModel.pendingPushLink != nil else { return }
+            Task {
+                await viewModel.refresh(modelContext: modelContext)
+            }
         }
     }
 
