@@ -12,6 +12,7 @@ extension Database {
             save(feed: $0)
         }
         FeedDB.deduplicate(using: context)
+        FeedDB.notRead(using: context)
     }
 
     @MainActor
