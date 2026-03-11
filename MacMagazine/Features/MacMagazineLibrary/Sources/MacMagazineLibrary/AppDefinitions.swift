@@ -23,7 +23,8 @@ public enum AppTabs: String, CaseIterable, Codable, Equatable {
         switch self {
         case .settings: return .settings
         case .live: return .live
-        case .news, .social, .search: return nil
+        case .search: return .search
+        case .news, .social: return nil
         }
     }
 }

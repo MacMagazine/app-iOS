@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
 import PodcastLibrary
@@ -19,6 +20,10 @@ struct MacMagazineApp: App {
             content
             .onOpenURL { url in
                 viewModel.deepLinkPostURL = url.absoluteString
+                viewModel.analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("widget").id,
+                    screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                ))
             }
             .fullScreenCover(isPresented: Binding(
                 get: { viewModel.deepLinkPostURL != nil },
@@ -45,11 +50,19 @@ struct MacMagazineApp: App {
                 if let url {
                     viewModel.deepLinkPostURL = url
                     viewModel.pushNotification.newContentAvailable = nil
+                    viewModel.analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("push").id,
+                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                    ))
                 }
             }
             .onChange(of: shortcutManager.url) { _, value in
                 if let value {
                     viewModel.deepLinkPostURL = value
+                    viewModel.analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("shortcut").id,
+                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                    ))
                 }
             }
             .onChange(of: shortcutManager.tab) { _, value in
@@ -60,6 +73,11 @@ struct MacMagazineApp: App {
             .task {
                 shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
+                viewModel.analytics.track(.app(.open))
+                viewModel.analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.appLaunched.id,
+                    screen: AnalyticsConstants.Screen.news.name
+                ))
                 await viewModel.initializeOnboarding()
             }
         }

@@ -22,6 +22,11 @@ struct DeepLinkNewsDetailView: View {
     var body: some View {
         NavigationStack {
             MMWebView(url: url)
+                .trackScreen(
+                    AnalyticsConstants.Screen.deepLinkDetail.name,
+                    previous: nil,
+                    analytics: analytics
+                )
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: onDismiss,

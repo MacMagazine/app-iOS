@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
@@ -13,6 +14,7 @@ public struct SearchView: View {
     @Environment(SearchViewModel.self) private var viewModel
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @EnvironmentObject private var analytics: AnalyticsManager
 
     @State private var cardWidth = CGFloat.zero
     @State private var selectedTitle: String?
@@ -38,8 +40,16 @@ public struct SearchView: View {
                     (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
                 }
                 .navigationTitle("Busca")
+                .trackScreen(
+                    AnalyticsConstants.Screen.search.name,
+                    previous: nil,
+                    analytics: analytics
+                )
                 .onChange(of: viewModel.searchText) {
                     viewModel.performSearch()
+                }
+                .onChange(of: viewModel.status) { _, newStatus in
+                    trackSearchCompletion(newStatus)
                 }
                 .navigationDestination(isPresented: $showingWebView) {
                     details
@@ -89,9 +99,27 @@ private extension SearchView {
                 VStack(alignment: .leading, spacing: 20) {
                     RecentSearchesView(
                         searches: viewModel.recentSearches,
-                        onSelect: { viewModel.selectRecentSearch($0) },
-                        onClear: { viewModel.clearRecentSearches() },
-                        onRemove: { viewModel.removeRecentSearch($0) }
+                        onSelect: {
+                            analytics.track(.buttonTap(
+                                buttonId: AnalyticsConstants.ButtonID.recentSearchTapped.id,
+                                screen: AnalyticsConstants.Screen.search.name
+                            ))
+                            viewModel.selectRecentSearch($0)
+                        },
+                        onClear: {
+                            analytics.track(.buttonTap(
+                                buttonId: AnalyticsConstants.ButtonID.recentSearchCleared.id,
+                                screen: AnalyticsConstants.Screen.search.name
+                            ))
+                            viewModel.clearRecentSearches()
+                        },
+                        onRemove: {
+                            analytics.track(.buttonTap(
+                                buttonId: AnalyticsConstants.ButtonID.recentSearchRemoved.id,
+                                screen: AnalyticsConstants.Screen.search.name
+                            ))
+                            viewModel.removeRecentSearch($0)
+                        }
                     )
                 }
                 .padding(.top)
@@ -176,23 +204,53 @@ private extension SearchView {
 
 private extension SearchView {
     func handleNewsSelection(_ feed: FeedDB) {
+        analytics.track(.itemSelected(
+            itemId: feed.postId,
+            itemType: "news",
+            position: viewModel.results.firstIndex(where: { $0.id == feed.postId }) ?? 0
+        ))
         selectedTitle = feed.title
         selectedLink = feed.link
         showingWebView = true
     }
 
     func handlePodcastSelection(_ podcast: PodcastDB) {
+        analytics.track(.itemSelected(
+            itemId: podcast.postId,
+            itemType: "podcast",
+            position: viewModel.results.firstIndex(where: { $0.id == podcast.postId }) ?? 0
+        ))
         podcastPlayerManager.loadPodcast(podcast)
         podcastPlayerManager.seek(to: podcast.current)
     }
 
     func handleLinkSelection(_ link: String) {
+        analytics.track(.buttonTap(
+            buttonId: AnalyticsConstants.ButtonID.searchResultSelected(type: "link", id: link).id,
+            screen: AnalyticsConstants.Screen.search.name
+        ))
         selectedLink = link
         showingWebView = true
     }
 }
 
-// MARK: - Navigation
+// MARK: - Analytics
+
+private extension SearchView {
+    func trackSearchCompletion(_ status: SearchStatus) {
+        switch status {
+        case .localResults, .done:
+            analytics.track(.searchPerformed(
+                query: viewModel.searchText,
+                resultsCount: viewModel.results.count
+            ))
+        case .idle, .searching, .error:
+            break
+        }
+    }
+}
+
+// MARK: - Layout
 
 private extension SearchView {
     var isIPad: Bool {

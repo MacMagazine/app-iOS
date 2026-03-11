@@ -48,6 +48,10 @@ public struct PodcastView: View {
         content
             .refreshable {
                 if search.isEmpty {
+                    analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.pullToRefresh("podcast").id,
+                        screen: AnalyticsConstants.Screen.podcast.name
+                    ))
                     try? await viewModel.getPodcasts()
                 }
             }

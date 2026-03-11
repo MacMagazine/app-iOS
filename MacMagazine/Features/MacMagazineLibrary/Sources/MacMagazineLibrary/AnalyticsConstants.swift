@@ -53,6 +53,12 @@ public enum AnalyticsConstants {
         // Live
         case live
 
+        // Search
+        case search
+
+        // Deep Link
+        case deepLinkDetail
+
         // Other
         case loginPatroes
 
@@ -67,7 +73,7 @@ public enum AnalyticsConstants {
         public var name: String {
             switch self {
             // News
-            case .news: "Notíciss"
+            case .news: "Notícias"
 
             // Podcast
             case .podcastFullPlayer: "Podcast Full-player"
@@ -90,6 +96,12 @@ public enum AnalyticsConstants {
 
             // Live
             case .live: "Live"
+
+            // Search
+            case .search: "Busca"
+
+            // Deep Link
+            case .deepLinkDetail: "Deep Link"
 
             // Other
             case .loginPatroes: "Login para patrões"
@@ -174,6 +186,25 @@ public enum AnalyticsConstants {
         case termsConditions
         case privacyPolicy
 
+        // MARK: Navigation
+        case tabSelected(String)
+        case sidebarItemSelected(String)
+        case categoryFilterChanged(String)
+        case deepLinkOpened(String)
+
+        // MARK: Search
+        case searchResultSelected(type: String, id: String)
+        case recentSearchTapped
+        case recentSearchCleared
+        case recentSearchRemoved
+
+        // MARK: Content Interactions
+        case highlightCardTapped(String)
+        case pullToRefresh(String)
+
+        // MARK: Lifecycle
+        case appLaunched
+
         // MARK: Onboarding
         case onboardingWelcomeSkip
         case onboardingWelcomeContinue
@@ -253,6 +284,25 @@ public enum AnalyticsConstants {
             case .reportProblem: "report_problem"
             case .termsConditions: "terms_conditions"
             case .privacyPolicy: "privacy_policy"
+
+            // Navigation
+            case let .tabSelected(tab): "tab_\(tab)"
+            case let .sidebarItemSelected(item): "sidebar_\(item)"
+            case let .categoryFilterChanged(category): "category_\(category)"
+            case let .deepLinkOpened(source): "deep_link_\(source)"
+
+            // Search
+            case let .searchResultSelected(type, id): "search_result_\(type)_\(id)"
+            case .recentSearchTapped: "recent_search_tapped"
+            case .recentSearchCleared: "recent_search_cleared"
+            case .recentSearchRemoved: "recent_search_removed"
+
+            // Content Interactions
+            case let .highlightCardTapped(postId): "highlight_\(postId)_tapped"
+            case let .pullToRefresh(screen): "pull_to_refresh_\(screen)"
+
+            // Lifecycle
+            case .appLaunched: "app_launched"
 
             // Onboarding
             case .onboardingWelcomeSkip: "onboarding_welcome_skip"

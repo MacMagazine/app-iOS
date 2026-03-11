@@ -74,6 +74,10 @@ public struct NewsView<Filter: View>: View {
         content
             .refreshable {
                 if search.isEmpty {
+                    analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.pullToRefresh("news").id,
+                        screen: AnalyticsConstants.Screen.news.name
+                    ))
                     try? await viewModel.getNews()
                 }
             }
@@ -115,6 +119,10 @@ extension NewsView {
                         highlights: highlights,
                         scrollPosition: $scrollPosition,
                         onTap: { post in
+                            analytics.track(.buttonTap(
+                                buttonId: AnalyticsConstants.ButtonID.highlightCardTapped(post.postId).id,
+                                screen: AnalyticsConstants.Screen.news.name
+                            ))
                             handleTap(post)
                         }
                     ).padding(.bottom, 8)

@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import PodcastLibrary
@@ -182,6 +183,10 @@ private extension MainView {
     }
 
     func process(_ destination: any CaseIterable & Equatable) {
+        viewModel.analytics.track(.buttonTap(
+            buttonId: AnalyticsConstants.ButtonID.sidebarItemSelected(id(for: destination)).id,
+            screen: AnalyticsConstants.Screen.news.name
+        ))
         withAnimation(.easeInOut(duration: 0.4)) {
             switch destination {
             case Social.videos: viewModel.social = .videos

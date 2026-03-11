@@ -32,6 +32,12 @@ extension MainView {
             }
         }
         .podcastMiniPlayer()
+        .onChange(of: viewModel.tab) { _, newTab in
+            viewModel.analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.tabSelected(newTab.rawValue).id,
+                screen: AnalyticsConstants.Screen.news.name
+            ))
+        }
     }
 
     @ViewBuilder

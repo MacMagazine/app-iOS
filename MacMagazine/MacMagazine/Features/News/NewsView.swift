@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import NewsLibrary
@@ -29,7 +30,16 @@ struct NewsView: View {
             let newCategory = newValue.toNewsCategory
             guard newsCategory != newCategory else { return }
             newsCategory = newCategory
+            viewModel.analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.categoryFilterChanged(newValue.rawValue).id,
+                screen: AnalyticsConstants.Screen.news.name
+            ))
         }
+        .trackScreen(
+            AnalyticsConstants.Screen.news.name,
+            previous: nil,
+            analytics: viewModel.analytics
+        )
         .onAppear {
             newsCategory = viewModel.news.toNewsCategory
         }
