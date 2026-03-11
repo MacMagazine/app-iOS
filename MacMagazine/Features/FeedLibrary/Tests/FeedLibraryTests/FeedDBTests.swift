@@ -323,6 +323,73 @@ struct FeedDBTests {
 
     // MARK: - Integration Tests
 
+    // MARK: - ModelDuplicable Tests
+
+    @Test("deduplicate removes duplicate postIds keeping most recently modified")
+    func deduplicateKeepsMostRecentlyModified() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let older = FeedDB(postId: "dup-1", title: "Older", modifiedAt: Date(timeIntervalSince1970: 1000))
+        let newer = FeedDB(postId: "dup-1", title: "Newer", modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(older)
+        storage.context.insert(newer)
+        try? storage.context.save()
+
+        FeedDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(FeedDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.title == "Newer")
+    }
+
+    @Test("deduplicate preserves distinct postIds")
+    func deduplicatePreservesDistinctPostIds() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        storage.context.insert(FeedDB(postId: "a", title: "Post A"))
+        storage.context.insert(FeedDB(postId: "b", title: "Post B"))
+        storage.context.insert(FeedDB(postId: "c", title: "Post C"))
+        try? storage.context.save()
+
+        FeedDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(FeedDB.self)
+        #expect(remaining.count == 3)
+    }
+
+    @Test("deduplicate handles multiple groups of duplicates")
+    func deduplicateHandlesMultipleGroups() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let now = Date()
+
+        storage.context.insert(FeedDB(postId: "x", title: "X-old", modifiedAt: now.addingTimeInterval(-100)))
+        storage.context.insert(FeedDB(postId: "x", title: "X-new", modifiedAt: now))
+        storage.context.insert(FeedDB(postId: "y", title: "Y-old", modifiedAt: now.addingTimeInterval(-200)))
+        storage.context.insert(FeedDB(postId: "y", title: "Y-mid", modifiedAt: now.addingTimeInterval(-50)))
+        storage.context.insert(FeedDB(postId: "y", title: "Y-new", modifiedAt: now))
+        try? storage.context.save()
+
+        FeedDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(FeedDB.self)
+        #expect(remaining.count == 2)
+        #expect(remaining.contains { $0.title == "X-new" })
+        #expect(remaining.contains { $0.title == "Y-new" })
+    }
+
+    @Test("deduplicate is safe on empty database")
+    func deduplicateSafeOnEmpty() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        FeedDB.deduplicate(using: storage.context)
+        #expect(storage.fetch(FeedDB.self).isEmpty)
+    }
+
+    @Test("deduplicate with nil context does not crash")
+    func deduplicateNilContext() {
+        FeedDB.deduplicate(using: nil)
+    }
+
+    // MARK: - Integration Tests
+
     @Test("FeedDB should work with database fetch predicates")
     func worksWithFetchPredicates() {
         // Given

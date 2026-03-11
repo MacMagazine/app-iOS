@@ -331,39 +331,79 @@ struct StorageServiceTests {
 
     @Test("save should preserve favorite status on update for feed")
     func savePreservesFavoriteStatusForFeed() {
-        // Given
         let storage = Database(models: [FeedDB.self], inMemory: true)
         let original = FeedDB(postId: "123", title: "Original", favorite: true)
         storage.save(feed: original)
 
         let updated = FeedDB(postId: "123", title: "Updated", favorite: false)
-
-        // When
         storage.save(feed: updated)
 
-        // Then
         let fetched = storage.fetch(FeedDB.self).first
-        // Note: favorite is NOT updated in the save method, so it should remain as is
-        // The save method doesn't update favorite field
         #expect(fetched?.title == "Updated")
+        #expect(fetched?.favorite == true)
+    }
+
+    @Test("save should preserve read status on update for feed")
+    func savePreservesReadStatusForFeed() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let original = FeedDB(postId: "123", title: "Original")
+        storage.save(feed: original)
+
+        let postId = "123"
+        let predicate = #Predicate<FeedDB> { $0.postId == postId }
+        let persisted = storage.fetch(FeedDB.self, predicate: predicate).first
+        persisted?.read = true
+        try? storage.context.save()
+
+        let updated = FeedDB(postId: "123", title: "Updated")
+        storage.save(feed: updated)
+
+        let fetched = storage.fetch(FeedDB.self).first
+        #expect(fetched?.title == "Updated")
+        #expect(fetched?.read == true)
+    }
+
+    @Test("save should merge categories instead of replacing for feed")
+    func saveMergesCategoriesForFeed() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let original = FeedDB(postId: "123", title: "Post", categories: ["Tech", "News"])
+        storage.save(feed: original)
+
+        let updated = FeedDB(postId: "123", title: "Post", categories: ["Reviews", "News"])
+        storage.save(feed: updated)
+
+        let fetched = storage.fetch(FeedDB.self).first
+        let cats = Set(fetched?.categories ?? [])
+        #expect(cats.contains("Tech"))
+        #expect(cats.contains("News"))
+        #expect(cats.contains("Reviews"))
     }
 
     @Test("save should preserve favorite status on update for podcast")
     func savePreservesFavoriteStatusForPodcast() {
-        // Given
         let storage = Database(models: [PodcastDB.self], inMemory: true)
         let original = PodcastDB(postId: "123", title: "Original", favorite: true)
         storage.save(podcast: original)
 
         let updated = PodcastDB(postId: "123", title: "Updated", favorite: false)
-
-        // When
         storage.save(podcast: updated)
 
-        // Then
         let fetched = storage.fetch(PodcastDB.self).first
-        // Note: favorite is NOT updated in the save method, so it should remain as is
-        // The save method doesn't update favorite field
         #expect(fetched?.title == "Updated")
+        #expect(fetched?.favorite == true)
+    }
+
+    @Test("save should preserve playback position on update for podcast")
+    func savePreservesPlaybackPositionForPodcast() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let original = PodcastDB(postId: "123", title: "Original", current: 345.67)
+        storage.save(podcast: original)
+
+        let updated = PodcastDB(postId: "123", title: "Updated", current: 0.0)
+        storage.save(podcast: updated)
+
+        let fetched = storage.fetch(PodcastDB.self).first
+        #expect(fetched?.title == "Updated")
+        #expect(fetched?.current == 345.67)
     }
 }
