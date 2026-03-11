@@ -191,12 +191,12 @@ struct SearchViewModelTests {
         let viewModel = makeViewModel()
 
         viewModel.searchText = "first query"
-        viewModel.performSearch()
-        try await waitForDebounce()
+        viewModel.performSearch(debounce: false)
+        try await Task.sleep(for: .milliseconds(200))
 
         viewModel.searchText = "second query"
-        viewModel.performSearch()
-        try await waitForDebounce()
+        viewModel.performSearch(debounce: false)
+        try await Task.sleep(for: .milliseconds(200))
 
         let countBefore = viewModel.recentSearches.count
         #expect(countBefore >= 2)
