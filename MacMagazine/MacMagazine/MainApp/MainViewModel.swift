@@ -31,6 +31,7 @@ class MainViewModel {
     var deepLinkPostURL: String?
 
     let analytics = AnalyticsManager()
+    let pushNotification = PushNotification()
     let sessionState = SessionState()
     let storage: Database
     let theme = ThemeColor()
@@ -79,7 +80,7 @@ extension MainViewModel {
 
     @MainActor
     func initializeOnboarding() async {
-        guard let coordinator = await OnboardingCoordinator.createIfNeeded(analytics: analytics) else {
+        guard let coordinator = await OnboardingCoordinator.createIfNeeded(analytics: analytics, pushNotification: pushNotification) else {
             onboardingCoordinator = nil
             return
         }

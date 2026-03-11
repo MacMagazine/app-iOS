@@ -79,8 +79,8 @@ public final class OnboardingCoordinator: @MainActor Identifiable {
     // MARK: - Onboarding State Management
 
     /// Create coordinator if onboarding is needed, returns nil if not needed
-    public static func createIfNeeded(analytics: AnalyticsManager) async -> OnboardingCoordinator? {
-        let permissionManager = PermissionManager(analytics: analytics)
+    public static func createIfNeeded(analytics: AnalyticsManager, pushNotification: PushNotification) async -> OnboardingCoordinator? {
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: pushNotification)
         await permissionManager.refreshAllPermissionStatuses()
 
         let hasCompleted = UserDefaults.standard.bool(forKey: hasCompletedOnboardingKey)

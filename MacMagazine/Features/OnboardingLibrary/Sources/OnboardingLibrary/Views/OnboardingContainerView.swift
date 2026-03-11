@@ -54,7 +54,7 @@ public struct OnboardingContainerView: View {
 private struct OnboardingSheetPreviewHost: View {
     @State private var isPresented = true
     @State private var coordinator = OnboardingCoordinator(
-        permissionManager: PermissionManager(analytics: AnalyticsManager()),
+        permissionManager: PermissionManager(analytics: AnalyticsManager(), pushNotification: PushNotification()),
         analytics: AnalyticsManager()
     )
 

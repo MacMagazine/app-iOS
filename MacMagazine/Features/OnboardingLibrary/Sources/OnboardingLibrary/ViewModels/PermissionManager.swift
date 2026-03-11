@@ -12,9 +12,11 @@ public final class PermissionManager {
     var currentATTStatus: ATTPermissionStatus = .notDetermined
 
     private let analytics: AnalyticsManager
+    private let pushNotification: PushNotification
 
-    public init(analytics: AnalyticsManager) {
+    public init(analytics: AnalyticsManager, pushNotification: PushNotification) {
         self.analytics = analytics
+        self.pushNotification = pushNotification
     }
 
     // MARK: - Push Notifications
@@ -33,7 +35,7 @@ public final class PermissionManager {
             screen: AnalyticsConstants.Screen.onboardingPermissions.name
         ))
 
-        let granted = await PushNotification().setup(options: PushNotificationDefinition.options)
+        let granted = await pushNotification.setup(options: PushNotificationDefinition.options)
         // Track the result
         if granted {
             analytics.track(.buttonTap(

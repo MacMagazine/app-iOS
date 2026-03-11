@@ -41,6 +41,12 @@ struct MacMagazineApp: App {
                         .interactiveDismissDisabled(true)
                 }
             )
+            .onChange(of: viewModel.pushNotification.newContentAvailable) { _, url in
+                if let url {
+                    viewModel.deepLinkPostURL = url
+                    viewModel.pushNotification.newContentAvailable = nil
+                }
+            }
             .onChange(of: shortcutManager.url) { _, value in
                 if let value {
                     viewModel.deepLinkPostURL = value

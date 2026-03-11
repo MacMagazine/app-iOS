@@ -1,5 +1,6 @@
 import AnalyticsLibrary
 import Foundation
+import MacMagazineLibrary
 @testable import OnboardingLibrary
 import Testing
 
@@ -18,7 +19,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should start with welcome screen")
     func initialScreenIsWelcome() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         #expect(sut.currentScreen == .welcome)
@@ -27,7 +28,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should have stable identifier")
     func hasStableIdentifier() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         #expect(sut.id == "onboarding")
@@ -36,7 +37,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should start with nil completion handler")
     func initialCompletionIsNil() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         #expect(sut.onComplete == nil)
@@ -47,7 +48,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should navigate to features screen")
     func navigateToFeatures() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.navigate(to: .features)
@@ -58,7 +59,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should navigate to permissions screen")
     func navigateToPermissions() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.navigate(to: .permissions)
@@ -69,7 +70,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should navigate back to welcome screen")
     func navigateBackToWelcome() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.navigate(to: .features)
@@ -81,7 +82,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should skip directly to permissions from welcome")
     func skipToPermissions() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.skipToPermissions()
@@ -92,7 +93,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should skip directly to permissions from features")
     func skipToPermissionsFromFeatures() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.navigate(to: .features)
@@ -106,7 +107,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should call completion handler when completing onboarding")
     func completionHandlerCalled() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         var completionCalled = false
@@ -120,7 +121,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should not crash when completing with nil handler")
     func completionWithNilHandler() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.completeOnboarding()
@@ -133,7 +134,7 @@ struct OnboardingCoordinatorTests {
         OnboardingCoordinator.resetOnboarding()
 
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.completeOnboarding()
@@ -147,7 +148,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should reset onboarding state")
     func resetOnboardingState() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         sut.completeOnboarding()
@@ -163,7 +164,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should follow typical welcome -> features -> permissions flow")
     func typicalNavigationFlow() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         #expect(sut.currentScreen == .welcome)
@@ -178,7 +179,7 @@ struct OnboardingCoordinatorTests {
     @Test("Should follow skip flow: welcome -> permissions")
     func skipNavigationFlow() {
         let analytics = AnalyticsManager()
-        let permissionManager = PermissionManager(analytics: analytics)
+        let permissionManager = PermissionManager(analytics: analytics, pushNotification: PushNotification())
         let sut = OnboardingCoordinator(permissionManager: permissionManager, analytics: analytics)
 
         #expect(sut.currentScreen == .welcome)
