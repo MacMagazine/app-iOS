@@ -5,7 +5,6 @@ import SwiftData
 
 @Observable
 final class PostsVisibilityViewModel {
-    var cache: Cache?
     var countOnBadge = false
 
     var storage: Database?

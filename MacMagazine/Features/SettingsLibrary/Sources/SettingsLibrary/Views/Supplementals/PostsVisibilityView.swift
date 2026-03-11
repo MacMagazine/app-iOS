@@ -58,7 +58,7 @@ private extension PostsVisibilityView {
                 .tint(theme.button.primary.color)
 
             Button(action: {
-                viewModel.cache = .allRead
+                viewModel.flush(cache: .allRead)
                 analytics.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.allPostsRead.id,
                     screen: AnalyticsConstants.Screen.settingsPosts.name
