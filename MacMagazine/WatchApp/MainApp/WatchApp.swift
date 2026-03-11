@@ -2,40 +2,32 @@ import FeedLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
-import UserNotifications
 import WatchKit
 
 @main
 struct WatchApp: App {
 
-    private let database = Database(models: [FeedDB.self], inMemory: false)
+    private let database: Database
+    @State private var viewModel: FeedMainViewModel
 
     @WKApplicationDelegateAdaptor(WatchNotificationsDelegate.self)
-    private var notifDelegate
+    private var pushDelegate
+
+    init() {
+        let database = Database(models: [FeedDB.self], inMemory: false)
+        self.database = database
+        _viewModel = State(wrappedValue: FeedMainViewModel(
+            feedViewModel: FeedViewModel(storage: database)
+        ))
+    }
 
     var body: some Scene {
         WindowGroup {
-            FeedMainView(
-                viewModel: FeedMainViewModel(
-                    feedViewModel: FeedViewModel(storage: database)
-                )
-            )
-            .modelContainer(database.sharedModelContainer)
-            .onOpenURL { url in
-                handleDeepLink(url)
-            }
-        }
-    }
-
-    @MainActor
-    private func handleDeepLink(_ url: URL) {
-        guard url.scheme == "macmagazine",
-              url.host == "news"
-        else { return }
-
-        let pathComponents = url.pathComponents.filter { $0 != "/" }
-        if pathComponents.count >= 2, pathComponents[0] == "post" {
-            _ = pathComponents[1]
+            FeedMainView(viewModel: viewModel)
+                .modelContainer(database.sharedModelContainer)
+                .onAppear {
+                    pushDelegate.viewModel = viewModel
+                }
         }
     }
 }

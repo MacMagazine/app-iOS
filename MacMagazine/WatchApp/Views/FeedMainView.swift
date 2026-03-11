@@ -47,6 +47,10 @@ struct FeedMainView: View {
         .task {
             await viewModel.refresh(modelContext: modelContext)
         }
+        .onChange(of: viewModel.pendingPushLink) { _, link in
+            guard let link else { return }
+            viewModel.openPost(withLink: link, modelContext: modelContext)
+        }
     }
 
     // MARK: - Root Content

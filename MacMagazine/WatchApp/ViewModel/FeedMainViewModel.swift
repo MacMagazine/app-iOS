@@ -20,6 +20,8 @@ final class FeedMainViewModel {
     // MARK: - Private
 
     private let feedViewModel: FeedViewModel
+    private var pendingPostId: String?
+    var pendingPushLink: String?
 
     // MARK: - Init
 
@@ -37,6 +39,8 @@ final class FeedMainViewModel {
 
         _ = try? await feedViewModel.getWatchFeed()
         status = feedViewModel.status
+
+        resolvePendingDeepLinks(modelContext: modelContext)
 
         WidgetCenter.shared.reloadAllTimelines()
     }
@@ -69,13 +73,39 @@ final class FeedMainViewModel {
         return min(max(index, 0), quantity - 1)
     }
 
-     func openPost(withId postId: String, modelContext: ModelContext) {
+    func openPost(withId postId: String, modelContext: ModelContext) {
         let predicate = #Predicate<FeedDB> { $0.postId == postId }
         let descriptor = FetchDescriptor<FeedDB>(predicate: predicate)
 
-         if let post = try? modelContext.fetch(descriptor).first {
-             selectedPostForDetail = post
-         }
+        if let post = try? modelContext.fetch(descriptor).first {
+            selectedPostForDetail = post
+            pendingPostId = nil
+        } else {
+            pendingPostId = postId
+        }
+    }
+
+    func openPost(withLink link: String, modelContext: ModelContext) {
+        let predicate = #Predicate<FeedDB> { $0.link == link }
+        let descriptor = FetchDescriptor<FeedDB>(predicate: predicate)
+
+        if let post = try? modelContext.fetch(descriptor).first {
+            selectedPostForDetail = post
+            pendingPushLink = nil
+        } else {
+            pendingPushLink = link
+        }
+    }
+
+    // MARK: - Deep Link Resolution
+
+    private func resolvePendingDeepLinks(modelContext: ModelContext) {
+        if let postId = pendingPostId {
+            openPost(withId: postId, modelContext: modelContext)
+        }
+        if let link = pendingPushLink {
+            openPost(withLink: link, modelContext: modelContext)
+        }
     }
 }
 

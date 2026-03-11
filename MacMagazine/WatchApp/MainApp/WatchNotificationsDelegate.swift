@@ -7,6 +7,7 @@ import WidgetKit
 
 final class WatchNotificationsDelegate: NSObject, WKApplicationDelegate {
     let logger = Logger(category: "MacMagazineV5")
+    var viewModel: FeedMainViewModel?
 
     func applicationDidFinishLaunching() {
         Task {
@@ -40,5 +41,14 @@ extension WatchNotificationsDelegate: UNUserNotificationCenterDelegate {
     private func handlePush(userInfo: [AnyHashable: Any]) {
         logger.debug(userInfo)
         WidgetCenter.shared.reloadAllTimelines()
+
+        guard let custom = userInfo["custom"] as? [String: Any],
+              let additionalData = custom["a"] as? [String: Any],
+              let url = additionalData["url"] as? String, !url.isEmpty
+        else { return }
+
+        Task { @MainActor in
+            viewModel?.pendingPushLink = url
+        }
     }
 }
