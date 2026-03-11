@@ -6,8 +6,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
 
         if let shortcutItem = connectionOptions.shortcutItem {
-            print("==> open from shortcut: \(shortcutItem)")
-            // ... handle the shortcut
+            ShortcutManager.shared.process(shortcut: shortcutItem)
         }
     }
 

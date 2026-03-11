@@ -16,9 +16,10 @@ struct WatchApp: App {
     init() {
         let database = Database(models: [FeedDB.self], inMemory: false)
         self.database = database
-        _viewModel = State(wrappedValue: FeedMainViewModel(
+        let feedMainViewModel = FeedMainViewModel(
             feedViewModel: FeedViewModel(storage: database)
-        ))
+        )
+        _viewModel = State(wrappedValue: feedMainViewModel)
     }
 
     var body: some Scene {

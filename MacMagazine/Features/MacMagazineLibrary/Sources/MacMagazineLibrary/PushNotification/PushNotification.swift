@@ -109,10 +109,15 @@ public enum PushNotificationDefinition {
 
 public extension PushNotification {
     @MainActor
-    func setup(options: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
+    func initialize(options: [UIApplication.LaunchOptionsKey: Any]?) {
         OneSignal.initialize(Self.oneSignalKey, withLaunchOptions: options)
         OneSignal.Notifications.addForegroundLifecycleListener(self)
         OneSignal.Notifications.addClickListener(self)
+    }
+
+    @MainActor
+    func setup(options: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
+        initialize(options: options)
 
         return await withCheckedContinuation { continuation in
             OneSignal.Notifications.requestPermission({ accepted in
@@ -133,13 +138,10 @@ extension PushNotification: OSNotificationClickListener {
     public func onClick(event: OSNotificationClickEvent) {
         let notification: OSNotification = event.notification
         guard let additionalData = notification.additionalData,
-              let content = additionalData as? [String: String] else {
+              let url = additionalData["url"] as? String, !url.isEmpty else {
             return
         }
-        newContentAvailable = content["url"]
-    }
-
-    public static func handleBackground(for userInfo: [AnyHashable: Any]) {
+        newContentAvailable = url
     }
 }
 #endif

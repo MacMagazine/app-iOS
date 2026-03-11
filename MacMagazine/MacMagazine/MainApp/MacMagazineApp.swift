@@ -73,6 +73,7 @@ struct MacMagazineApp: App {
             .task {
                 shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
+                viewModel.pushNotification.initialize(options: PushNotificationDefinition.options)
                 viewModel.analytics.track(.app(.open))
                 viewModel.analytics.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.appLaunched.id,
