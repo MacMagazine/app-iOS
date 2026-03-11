@@ -360,6 +360,70 @@ struct PodcastDBTests {
         #expect(remaining.isEmpty)
     }
 
+    // MARK: - ModelDuplicable Tests
+
+    @Test("deduplicate removes duplicates grouped by pubDate keeping most recently modified")
+    func deduplicateKeepsMostRecentlyModified() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let sharedPubDate = Date(timeIntervalSince1970: 5000)
+        let older = PodcastDB(postId: "p1", pubDate: sharedPubDate, modifiedAt: Date(timeIntervalSince1970: 1000))
+        let newer = PodcastDB(postId: "p2", pubDate: sharedPubDate, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(older)
+        storage.context.insert(newer)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.postId == "p2")
+    }
+
+    @Test("deduplicate preserves podcasts with distinct pubDates")
+    func deduplicatePreservesDistinctPubDates() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        storage.context.insert(PodcastDB(postId: "1", pubDate: Date(timeIntervalSince1970: 1000)))
+        storage.context.insert(PodcastDB(postId: "2", pubDate: Date(timeIntervalSince1970: 2000)))
+        storage.context.insert(PodcastDB(postId: "3", pubDate: Date(timeIntervalSince1970: 3000)))
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 3)
+    }
+
+    @Test("deduplicate handles triple duplicates for same pubDate")
+    func deduplicateHandlesTripleDuplicates() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let sharedDate = Date(timeIntervalSince1970: 9000)
+        let now = Date()
+
+        storage.context.insert(PodcastDB(postId: "a", pubDate: sharedDate, modifiedAt: now.addingTimeInterval(-200)))
+        storage.context.insert(PodcastDB(postId: "b", pubDate: sharedDate, modifiedAt: now.addingTimeInterval(-100)))
+        storage.context.insert(PodcastDB(postId: "c", title: "Winner", pubDate: sharedDate, modifiedAt: now))
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.title == "Winner")
+    }
+
+    @Test("deduplicate is safe on empty database")
+    func deduplicateSafeOnEmpty() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        PodcastDB.deduplicate(using: storage.context)
+        #expect(storage.fetch(PodcastDB.self).isEmpty)
+    }
+
+    @Test("deduplicate with nil context does not crash")
+    func deduplicateNilContext() {
+        PodcastDB.deduplicate(using: nil)
+    }
+
     // MARK: - Integration Tests
 
     @Test("PodcastDB should work with database fetch predicates")
