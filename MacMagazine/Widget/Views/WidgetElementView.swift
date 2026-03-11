@@ -33,13 +33,13 @@ private extension WidgetElementView {
     var accessoryCircularWidget: some View {
         ZStack {
             Circle()
-                .stroke(lineWidth: 10)
+                .stroke(lineWidth: 5)
             VStack(spacing: 0) {
                 Image("logo_white")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 18, height: 18)
-                Text("\(0)").widgetURL(post.url) // Helper().badgeCount
+                Text("\(FeedDB.notRead())").widgetURL(post.url)
             }
         }
         .containerBackground(Color.clear, for: .widget)

@@ -15,6 +15,7 @@
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.com.brit.macmagazine.onesignal.push</string>
+		<string>group.com.brit.macmagazine.data</string>
 	</array>
 </dict>
 </plist>

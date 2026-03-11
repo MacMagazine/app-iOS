@@ -41,6 +41,12 @@ struct DeepLinkNewsDetailView: View {
                         shareView
                     }
                 }
+                .onAppear {
+                    post?.read = true
+                    post?.modifiedAt = Date()
+                    try? modelContext.save()
+                    FeedDB.notRead(using: modelContext)
+                }
         }
     }
 

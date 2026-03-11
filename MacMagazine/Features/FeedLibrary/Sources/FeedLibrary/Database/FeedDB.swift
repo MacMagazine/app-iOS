@@ -1,6 +1,7 @@
 import Foundation
 import MacMagazineLibrary
 import SwiftData
+import WidgetKit
 
 @Model
 public final class FeedDB {
@@ -66,6 +67,24 @@ extension FeedDB {
     }
 }
 
+extension FeedDB {
+    public static func notRead() -> Int {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.brit.macmagazine.data")
+        return sharedDefaults?.integer(forKey: "unreadCount") ?? 0
+    }
+
+    public static func notRead(using context: ModelContext?) {
+        let descriptor = FetchDescriptor(predicate: #Predicate<FeedDB> { !$0.read })
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+
+        let sharedDefaults = UserDefaults(suiteName: "group.com.brit.macmagazine.data")
+        sharedDefaults?.set(data.count, forKey: "unreadCount")
+
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+}
+
 extension FeedDB: ModelFavoritable {
     public static func deleteNonFavorites(using context: ModelContext?) {
         let descriptor = FetchDescriptor(predicate: #Predicate<FeedDB> { !$0.favorite })
@@ -98,5 +117,6 @@ extension FeedDB: ModelReadable {
               let data = try? context.fetch(descriptor) else { return }
         data.forEach { $0.read = true }
         try? context.save()
+        notRead(using: context)
     }
 }

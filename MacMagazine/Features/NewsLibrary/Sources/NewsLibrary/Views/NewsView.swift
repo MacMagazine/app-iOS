@@ -199,6 +199,7 @@ extension NewsView {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()
                 try? modelContext.save()
+                FeedDB.notRead(using: modelContext)
             }
     }
 
