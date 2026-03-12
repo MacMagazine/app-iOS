@@ -10,8 +10,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func windowScene(_ windowScene: UIWindowScene,
-                     performActionFor shortcutItem: UIApplicationShortcutItem) async -> Bool {
+                     performActionFor shortcutItem: UIApplicationShortcutItem,
+                     completionHandler: @escaping (Bool) -> Void) {
         ShortcutManager.shared.process(shortcut: shortcutItem)
-        return true
+        completionHandler(true)
     }
 }
