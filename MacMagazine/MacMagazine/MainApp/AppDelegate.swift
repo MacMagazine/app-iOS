@@ -10,21 +10,17 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureFirebaseIfAvailable()
         PushNotificationDefinition.options = launchOptions
-
-        if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
-            ShortcutManager.shared.pendingShortcut = shortcutItem
-            return false
-        }
-
         return true
     }
 
-    // MARK: - Shortcuts
+    // MARK: - Scene Configuration
 
-    func application(_ application: UIApplication,
-                     performActionFor shortcutItem: UIApplicationShortcutItem) async -> Bool {
-        ShortcutManager.shared.process(shortcut: shortcutItem)
-        return true
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let config = UISceneConfiguration(name: nil,
+                                          sessionRole: connectingSceneSession.role)
+        config.delegateClass = SceneDelegate.self
+        return config
     }
 }
 
