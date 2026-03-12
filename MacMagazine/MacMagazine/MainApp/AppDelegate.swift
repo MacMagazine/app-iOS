@@ -3,19 +3,25 @@ import LoggerLibrary
 import MacMagazineLibrary
 import UIKit
 
-final class AppDelegate: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate {
     private var logger: LoggerProtocol = Logger(category: "MacMagazineV5")
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureFirebaseIfAvailable()
         PushNotificationDefinition.options = launchOptions
+
+        if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+            ShortcutManager.shared.pendingShortcut = shortcutItem
+            return false
+        }
+
         return true
     }
 
     // MARK: - Shortcuts
 
-    func windowScene(_ windowScene: UIWindowScene,
+    func application(_ application: UIApplication,
                      performActionFor shortcutItem: UIApplicationShortcutItem) async -> Bool {
         ShortcutManager.shared.process(shortcut: shortcutItem)
         return true

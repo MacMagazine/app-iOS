@@ -7,9 +7,12 @@ import SwiftUI
 final class ShortcutManager {
     static let shared = ShortcutManager()
 
-    var context: ModelContext?
+    var context: ModelContext? {
+        didSet { processPendingShortcut() }
+    }
     var url: String?
     var tab: AppTabs?
+    var pendingShortcut: UIApplicationShortcutItem?
 
     func process(shortcut: UIApplicationShortcutItem) {
         switch ShortcutActions(rawValue: shortcut.type) {
@@ -31,5 +34,11 @@ final class ShortcutManager {
         default:
             break
         }
+    }
+
+    private func processPendingShortcut() {
+        guard let pendingShortcut else { return }
+        self.pendingShortcut = nil
+        process(shortcut: pendingShortcut)
     }
 }
