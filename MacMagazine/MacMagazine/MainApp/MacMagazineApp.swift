@@ -13,7 +13,6 @@ struct MacMagazineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var viewModel = MainViewModel()
-    @State var shortcutManager = ShortcutManager.shared
 
     var body: some Scene {
         WindowGroup {
@@ -56,22 +55,7 @@ struct MacMagazineApp: App {
                     ))
                 }
             }
-            .onChange(of: shortcutManager.url) { _, value in
-                if let value {
-                    viewModel.deepLinkPostURL = value
-                    viewModel.analytics.track(.buttonTap(
-                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("shortcut").id,
-                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
-                    ))
-                }
-            }
-            .onChange(of: shortcutManager.tab) { _, value in
-                if let value {
-                    viewModel.tab = value
-                }
-            }
             .task {
-                shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
                 viewModel.pushNotification.initialize(options: PushNotificationDefinition.options)
                 viewModel.analytics.track(.app(.open))

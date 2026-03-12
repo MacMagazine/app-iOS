@@ -4,33 +4,6 @@
 <dict>
 	<key>OneSignal_app_groups_key</key>
 	<string>group.com.brit.macmagazine.onesignal.push</string>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>arrowshape.turn.up.left</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Voltar ao último post visualizado</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>openLastSeenPost</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>doc.plaintext</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Abrir o último post publicado</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>openMostRecentPost</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>magnifyingglass</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Buscar nos posts</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>openSearchPost</string>
-		</dict>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
