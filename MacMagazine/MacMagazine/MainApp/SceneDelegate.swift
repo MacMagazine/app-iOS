@@ -1,3 +1,4 @@
+import LoggerLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIKit
@@ -24,7 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         if let notificationResponse = connectionOptions.notificationResponse {
-            print(notificationResponse.notification.request.identifier)
+            let logger: LoggerProtocol = Logger(category: "MacMagazineV5")
+            let additionalData = notificationResponse.notification.request.content.userInfo
+            logger.debug(additionalData)
+            if let url = additionalData["url"] as? String,
+               !url.isEmpty {
+                pushNotification.newContentAvailable = url
+            }
         }
     }
 

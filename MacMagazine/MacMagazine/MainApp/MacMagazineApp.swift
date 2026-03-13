@@ -13,7 +13,9 @@ struct MacMagazineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
-        WindowGroup { EmptyView() }
+        WindowGroup {
+            SceneView()
+        }
     }
 }
 
@@ -22,8 +24,15 @@ struct SceneView: View {
     @State var shortcutManager = ShortcutManager.shared
     @Bindable var viewModel: MainViewModel
 
-    init(viewModel: MainViewModel) {
-        self.viewModel = viewModel
+    init(viewModel: MainViewModel? = nil) {
+        if let viewModel {
+            self.viewModel = viewModel
+        } else {
+            let pushNotification = PushNotification()
+            pushNotification.initialize(options: PushNotificationDefinition.options)
+
+            self.viewModel = MainViewModel(pushNotification: pushNotification)
+        }
     }
 
     var body: some View {
@@ -83,7 +92,6 @@ struct SceneView: View {
             .task {
                 shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
-                viewModel.pushNotification.initialize(options: PushNotificationDefinition.options)
                 viewModel.analytics.track(.app(.open))
                 viewModel.analytics.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.appLaunched.id,
