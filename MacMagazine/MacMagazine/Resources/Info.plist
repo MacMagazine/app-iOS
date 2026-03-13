@@ -4,6 +4,8 @@
 <dict>
 	<key>OneSignal_app_groups_key</key>
 	<string>group.com.brit.macmagazine.onesignal.push</string>
+	<key>OneSignal_disable_badge_clearing</key>
+	<true/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -54,6 +56,8 @@
 		<string>audio</string>
 		<string>fetch</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>

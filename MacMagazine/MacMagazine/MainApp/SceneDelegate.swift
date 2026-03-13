@@ -24,10 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ShortcutManager.shared.pendingShortcut = shortcutItem
         }
 
+        let logger: LoggerProtocol = Logger(category: "MacMagazineV5")
+        logger.debug(connectionOptions.notificationResponse?.notification.debugDescription ?? "No notificationResponse")
+
         if let notificationResponse = connectionOptions.notificationResponse {
-            let logger: LoggerProtocol = Logger(category: "MacMagazineV5")
             let additionalData = notificationResponse.notification.request.content.userInfo
-            logger.debug(additionalData)
             if let url = additionalData["url"] as? String,
                !url.isEmpty {
                 pushNotification.newContentAvailable = url

@@ -132,12 +132,14 @@ extension PushNotification: OSNotificationLifecycleListener {
     public func onWillDisplay(event: OSNotificationWillDisplayEvent) {
         event.preventDefault()
         event.notification.display()
+        logger.debug(event.notification.additionalData?.debugString ?? "No additionalData")
     }
 }
 
 extension PushNotification: OSNotificationClickListener {
     public func onClick(event: OSNotificationClickEvent) {
         let notification: OSNotification = event.notification
+        logger.debug(event.notification.additionalData?.debugString ?? "No additionalData")
         guard let additionalData = notification.additionalData,
               let url = additionalData["url"] as? String, !url.isEmpty else {
             return
