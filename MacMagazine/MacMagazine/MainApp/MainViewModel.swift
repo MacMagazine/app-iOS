@@ -32,7 +32,7 @@ class MainViewModel {
     var deepLinkPostURL: String?
 
     let analytics = AnalyticsManager()
-    let pushNotification = PushNotification()
+    let pushNotification: PushNotification
     let sessionState = SessionState()
     let storage: Database
     let theme = ThemeColor()
@@ -43,7 +43,12 @@ class MainViewModel {
 
     let models: [any PersistentModel.Type]
 
-    init(inMemory: Bool = false) {
+    init(
+        pushNotification: PushNotification,
+        inMemory: Bool = false
+    ) {
+        self.pushNotification = pushNotification
+
         self.models = [
             FeedDB.self,
             PodcastDB.self,

@@ -69,7 +69,10 @@ struct MainView: View {
 
 #if DEBUG
 #Preview {
-    let viewModel = MainViewModel(inMemory: true)
+    let viewModel = MainViewModel(
+        pushNotification: PushNotification(),
+        inMemory: true
+    )
 
     MainView()
         .environment(\.theme, ThemeColor())

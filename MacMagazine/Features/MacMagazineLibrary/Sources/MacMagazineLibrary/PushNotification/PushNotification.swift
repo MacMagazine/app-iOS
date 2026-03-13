@@ -110,6 +110,7 @@ public enum PushNotificationDefinition {
 public extension PushNotification {
     @MainActor
     func initialize(options: [UIApplication.LaunchOptionsKey: Any]?) {
+        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
         OneSignal.initialize(Self.oneSignalKey, withLaunchOptions: options)
         OneSignal.Notifications.addForegroundLifecycleListener(self)
         OneSignal.Notifications.addClickListener(self)

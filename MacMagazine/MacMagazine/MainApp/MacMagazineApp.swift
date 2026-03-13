@@ -11,12 +11,23 @@ import SwiftUI
 @main
 struct MacMagazineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @State private var podcastPlayerManager = PodcastPlayerManager()
-    @State var viewModel = MainViewModel()
 
     var body: some Scene {
-        WindowGroup {
-            content
+        WindowGroup { EmptyView() }
+    }
+}
+
+struct SceneView: View {
+    @State private var podcastPlayerManager = PodcastPlayerManager()
+    @State var shortcutManager = ShortcutManager.shared
+    @Bindable var viewModel: MainViewModel
+
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+    }
+
+    var body: some View {
+        content
             .onOpenURL { url in
                 viewModel.deepLinkPostURL = url.absoluteString
                 viewModel.analytics.track(.buttonTap(
@@ -55,7 +66,22 @@ struct MacMagazineApp: App {
                     ))
                 }
             }
+            .onChange(of: shortcutManager.url) { _, value in
+                if let value {
+                    viewModel.deepLinkPostURL = value
+                    viewModel.analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("shortcut").id,
+                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                    ))
+                }
+            }
+            .onChange(of: shortcutManager.tab) { _, value in
+                if let value {
+                    viewModel.tab = value
+                }
+            }
             .task {
+                shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
                 viewModel.pushNotification.initialize(options: PushNotificationDefinition.options)
                 viewModel.analytics.track(.app(.open))
@@ -65,12 +91,11 @@ struct MacMagazineApp: App {
                 ))
                 await viewModel.initializeOnboarding()
             }
-        }
-        .environment(\.theme, viewModel.theme)
+            .environment(\.theme, viewModel.theme)
     }
 }
 
-private extension MacMagazineApp {
+private extension SceneView {
     var content: some View {
         MainView()
             .modelContainer(viewModel.storage.sharedModelContainer)

@@ -120,5 +120,8 @@ private extension SocialView {
 #Preview {
     SocialView()
         .environment(\.theme, ThemeColor())
-        .environment(MainViewModel(inMemory: true))
+        .environment(MainViewModel(
+            pushNotification: PushNotification(),
+            inMemory: true
+        ))
 }
