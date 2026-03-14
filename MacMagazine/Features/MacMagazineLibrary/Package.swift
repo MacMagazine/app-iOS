@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/cassio-rossi/Libraries.git", branch: "main"),
-        .package(url: "https://github.com/OneSignal/OneSignal-XCFramework", from: "5.2.1")
+        .package(url: "https://github.com/OneSignal/OneSignal-XCFramework", from: "5.5.0")
     ],
     targets: [
         .target(name: "MacMagazineLibrary",
