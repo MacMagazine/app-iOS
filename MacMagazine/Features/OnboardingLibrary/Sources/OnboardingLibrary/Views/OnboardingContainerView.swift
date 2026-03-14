@@ -19,8 +19,6 @@ public struct OnboardingContainerView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-//                OnboardingBackground()
-
                 Group {
                     switch coordinator.currentScreen {
                     case .welcome:

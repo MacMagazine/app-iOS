@@ -105,7 +105,6 @@ import UIKit
 @MainActor
 public enum PushNotificationDefinition {
     public static var options: [UIApplication.LaunchOptionsKey: Any]?
-    public static var newContentAvailable: String?
 }
 
 public extension PushNotification {
@@ -140,11 +139,12 @@ extension PushNotification: OSNotificationLifecycleListener {
 extension PushNotification: OSNotificationClickListener {
     public func onClick(event: OSNotificationClickEvent) {
         let notification: OSNotification = event.notification
-        logger.debug(event.notification.additionalData?.debugString ?? "No additionalData")
         guard let additionalData = notification.additionalData,
-              let url = additionalData["url"] as? String, !url.isEmpty else {
+              let url = additionalData["url"] as? String,
+                !url.isEmpty else {
             return
         }
+        logger.debug(url)
         newContentAvailable = url
     }
 }

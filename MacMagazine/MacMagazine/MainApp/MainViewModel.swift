@@ -1,5 +1,6 @@
 import AnalyticsLibrary
 import FeedLibrary
+import LoggerLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
 import SearchLibrary
@@ -36,6 +37,7 @@ class MainViewModel {
     let sessionState = SessionState()
     let storage: Database
     let theme = ThemeColor()
+    let logger: LoggerProtocol?
 
     @ObservationIgnored
     private lazy var _searchViewModel = SearchViewModel(storage: storage)
@@ -45,9 +47,11 @@ class MainViewModel {
 
     init(
         pushNotification: PushNotification,
+        logger: LoggerProtocol? = nil,
         inMemory: Bool = false
     ) {
         self.pushNotification = pushNotification
+        self.logger = logger ?? Logger(category: "MacMagazineV5")
 
         self.models = [
             FeedDB.self,
@@ -86,7 +90,10 @@ extension MainViewModel {
     var showOnboarding: Bool { onboardingCoordinator != nil }
 
     func initializeOnboarding() async {
-        guard let coordinator = await OnboardingCoordinator.createIfNeeded(analytics: analytics, pushNotification: pushNotification) else {
+        guard let coordinator = await OnboardingCoordinator.createIfNeeded(
+            analytics: analytics,
+            pushNotification: pushNotification
+        ) else {
             onboardingCoordinator = nil
             return
         }

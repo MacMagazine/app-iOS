@@ -10,9 +10,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureFirebaseIfAvailable()
         PushNotificationDefinition.options = launchOptions
-
-        logger.debug(launchOptions?.debugDescription ?? "No launchOptions")
-
         return true
     }
 }
@@ -52,21 +49,12 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        logger.debug(userInfo["aps"] ?? "No userInfo.aps")
-        logger.debug(userInfo["custom"] ?? "No userInfo.custom")
         guard let aps = userInfo["aps"] as? [String: Any],
               let contentAvailable = aps["content-available"] as? Int,
               contentAvailable == 1 else {
             completionHandler(.noData)
             return
         }
-
-        if let custom = userInfo["custom"] as? [String: Any],
-           let contentAvailable = custom["a"] as? [String: Any],
-           let url = contentAvailable["url"] as? String {
-            PushNotificationDefinition.newContentAvailable = url
-        }
-
         completionHandler(.newData)
     }
 }

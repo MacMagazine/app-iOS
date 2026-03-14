@@ -1,4 +1,5 @@
 import AnalyticsLibrary
+import LoggerLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
 import PodcastLibrary
@@ -67,7 +68,6 @@ struct SceneView: View {
             )
             .onChange(of: viewModel.pushNotification.newContentAvailable) { _, url in
                 if let url {
-                    PushNotificationDefinition.newContentAvailable = nil
                     viewModel.deepLinkPostURL = url
                     viewModel.pushNotification.newContentAvailable = nil
                     viewModel.analytics.track(.buttonTap(
@@ -91,7 +91,15 @@ struct SceneView: View {
                 }
             }
             .task {
-                viewModel.pushNotification.newContentAvailable = PushNotificationDefinition.newContentAvailable
+                viewModel.logger?.debug(viewModel.pushNotification.newContentAvailable ?? "No newContentAvailable")
+                if let url = viewModel.pushNotification.newContentAvailable {
+                    viewModel.pushNotification.newContentAvailable = nil
+                    viewModel.deepLinkPostURL = url
+                    viewModel.analytics.track(.buttonTap(
+                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("push").id,
+                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                    ))
+                }
                 shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
                 viewModel.analytics.track(.app(.open))

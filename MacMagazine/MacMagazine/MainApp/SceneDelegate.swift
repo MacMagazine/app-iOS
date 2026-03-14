@@ -1,4 +1,3 @@
-import LoggerLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIKit
@@ -22,17 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let shortcutItem = connectionOptions.shortcutItem {
             ShortcutManager.shared.pendingShortcut = shortcutItem
-        }
-
-        let logger: LoggerProtocol = Logger(category: "MacMagazineV5")
-        logger.debug(connectionOptions.notificationResponse?.notification.debugDescription ?? "No notificationResponse")
-
-        if let notificationResponse = connectionOptions.notificationResponse {
-            let additionalData = notificationResponse.notification.request.content.userInfo
-            if let url = additionalData["url"] as? String,
-               !url.isEmpty {
-                pushNotification.newContentAvailable = url
-            }
         }
     }
 
