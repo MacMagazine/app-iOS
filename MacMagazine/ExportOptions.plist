@@ -19,7 +19,7 @@
 		<key>com.brit.macmagazine.watchkitapp.WidgetWatch</key>
 		<string>Watch Extension</string>
 		<key>com.brit.macmagazine.MacMagazinePushNotificationServiceExtension</key>
-		<string>MacMagazine Notification Extension</string>
+		<string>MacMagazine Notification Service</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Distribution</string>
