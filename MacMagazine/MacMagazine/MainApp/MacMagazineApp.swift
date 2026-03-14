@@ -67,6 +67,7 @@ struct SceneView: View {
             )
             .onChange(of: viewModel.pushNotification.newContentAvailable) { _, url in
                 if let url {
+                    PushNotificationDefinition.newContentAvailable = nil
                     viewModel.deepLinkPostURL = url
                     viewModel.pushNotification.newContentAvailable = nil
                     viewModel.analytics.track(.buttonTap(
@@ -90,6 +91,7 @@ struct SceneView: View {
                 }
             }
             .task {
+                viewModel.pushNotification.newContentAvailable = PushNotificationDefinition.newContentAvailable
                 shortcutManager.context = viewModel.storage.context
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
                 viewModel.analytics.track(.app(.open))
