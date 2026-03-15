@@ -56,8 +56,8 @@ private extension CustomTabView {
 
     func shouldDisableMove(_ tab: AppTabs) -> Bool {
         switch tab {
-        case .live, .settings: shouldUseSidebar
-        case .search: true
+        case .settings: shouldUseSidebar
+        case .live, .search: true
         default: false
         }
     }

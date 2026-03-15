@@ -38,9 +38,7 @@ struct SocialView: View {
                     title: viewModel.social.rawValue)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                if viewModel.social != .instagram {
-                    menuView
-                }
+                menuView
             }
             ToolbarItem(placement: .principal) {
                 if !shouldUseSidebar {
@@ -114,6 +112,7 @@ private extension SocialView {
             Image(systemName: favorite ? "star.fill" : "star")
         })
         .accessibilityLabel(favorite ? "Mostrar tudo" : "Mostrar Favoritos")
+        .disabled(viewModel.social == .instagram)
     }
 }
 

@@ -27,6 +27,7 @@ public struct ManagedWebViewStyle {
 public struct ManagedWebView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
 
     @State private var viewStatus = WebViewStatus.idle
     @State private var isActive = true
@@ -94,7 +95,7 @@ private extension ManagedWebView {
     var webview: some View {
         if let page, isActive {
             Color.clear.opacity(0)
-                .safeAreaInset(edge: .trailing) {
+                .safeAreaInset(edge: .trailing, spacing: shouldUseSidebar ? nil : 0) {
                     WebView(page)
                         .webViewBackForwardNavigationGestures(
                             style.backForwardGesturesDisabled ? .disabled : .enabled

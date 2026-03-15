@@ -89,6 +89,7 @@ public struct NewsView<Filter: View>: View {
             }
             .navigationDestination(isPresented: $readingNews) {
                 newsDetailView
+                    .navigationBarBackButtonHidden(true)
             }
     }
 }
@@ -187,6 +188,11 @@ extension NewsView {
     var newsDetailView: some View {
         MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: { readingNews = false },
+                           label: { Image(systemName: "chevron.backward") })
+                    .tint(.primary)
+                }
                 ToolbarItem(placement: .automatic) {
                     favoriteView
                 }
