@@ -78,7 +78,13 @@ public struct NewsView<Filter: View>: View {
                         buttonId: AnalyticsConstants.ButtonID.pullToRefresh("news").id,
                         screen: AnalyticsConstants.Screen.news.name
                     ))
+                    let oldHighlights = highlights
                     try? await viewModel.getNews()
+                    if oldHighlights != highlights {
+                        withAnimation {
+                            scrollPosition.scrollTo(edge: .top)
+                        }
+                    }
                 }
             }
             .task {
