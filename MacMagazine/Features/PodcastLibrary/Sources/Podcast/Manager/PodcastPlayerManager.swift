@@ -16,6 +16,7 @@ public class PodcastPlayerManager {
     var currentTime: TimeInterval = 0
     var duration: TimeInterval = 0
     var playbackRate: Float = 1.0
+    var isScrubbing = false
     var chapters = [PodcastChapter]()
 
     /// Returns the currently playing chapter based on currentTime
@@ -221,6 +222,7 @@ private extension PodcastPlayerManager {
         timeObserver = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             guard let self = self else { return }
             Task { @MainActor in
+                guard !self.isScrubbing else { return }
                 self.currentTime = time.seconds
             }
         }

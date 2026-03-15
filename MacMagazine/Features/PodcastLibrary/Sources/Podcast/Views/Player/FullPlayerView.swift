@@ -52,6 +52,7 @@ struct FullPlayerView: View {
     @State private var backgroundGradientColors: [Color] = [.black, .black]
     @State private var isDarkBackground = false
     @State private var hasAppeared = false
+    @State private var scrubbingTime: TimeInterval = 0
 
     private var speedOptions: [Double] {
         [0.75, 1.0, 1.25, 1.5, 2.0]
@@ -295,13 +296,13 @@ private extension FullPlayerView {
             return rawDuration
         }()
 
-        let elapsedTime: TimeInterval = {
-            let currentTime = playerManager.currentTime
-            guard currentTime.isFinite, !currentTime.isNaN else { return 0 }
-            return min(max(0, currentTime), safeDuration)
+        let displayTime: TimeInterval = {
+            let time = playerManager.isScrubbing ? scrubbingTime : playerManager.currentTime
+            guard time.isFinite, !time.isNaN else { return 0 }
+            return min(max(0, time), safeDuration)
         }()
 
-        let remainingTime: TimeInterval = max(0, safeDuration - elapsedTime)
+        let remainingTime: TimeInterval = max(0, safeDuration - displayTime)
 
         VStack(spacing: 0) {
             HStack(spacing: 20) {
@@ -320,12 +321,21 @@ private extension FullPlayerView {
 
                 Slider(
                     value: Binding(
-                        get: { elapsedTime },
+                        get: { displayTime },
                         set: { newValue in
-                            playerManager.seek(to: newValue)
+                            scrubbingTime = newValue
+                            if !playerManager.isScrubbing {
+                                playerManager.isScrubbing = true
+                            }
                         }
                     ),
-                    in: 0...safeDuration
+                    in: 0...safeDuration,
+                    onEditingChanged: { editing in
+                        if !editing {
+                            playerManager.seek(to: scrubbingTime)
+                            playerManager.isScrubbing = false
+                        }
+                    }
                 )
                 .sliderThumbVisibility(.hidden)
                 .tint(.primary)
@@ -346,7 +356,7 @@ private extension FullPlayerView {
             }
 
             HStack {
-                Text(formatTime(elapsedTime))
+                Text(formatTime(displayTime))
                 Spacer()
                 Text("-" + formatTime(remainingTime))
             }
