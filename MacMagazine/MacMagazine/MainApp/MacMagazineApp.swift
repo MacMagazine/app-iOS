@@ -100,7 +100,7 @@ struct SceneView: View {
                         screen: AnalyticsConstants.Screen.deepLinkDetail.name
                     ))
                 }
-                shortcutManager.context = viewModel.storage.context
+                shortcutManager.context = viewModel.storage.sharedModelContainer.mainContext
                 podcastPlayerManager.observeSessionState(viewModel.sessionState)
                 viewModel.analytics.track(.app(.open))
                 viewModel.analytics.track(.buttonTap(
@@ -117,7 +117,6 @@ private extension SceneView {
     var content: some View {
         MainView()
             .modelContainer(viewModel.storage.sharedModelContainer)
-            .environment(\.modelContext, viewModel.storage.context)
             .environment(viewModel)
             .environment(viewModel.settingsViewModel)
             .environment(viewModel.searchViewModel)

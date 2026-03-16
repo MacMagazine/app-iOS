@@ -8,20 +8,27 @@ import SwiftData
 extension Database {
     @MainActor
     func save(feed: [FeedDB]) {
+        let ctx = sharedModelContainer.mainContext
         feed.forEach {
-            save(feed: $0)
+            save(feed: $0, in: ctx)
         }
-        FeedDB.deduplicate(using: context)
-        FeedDB.notRead(using: context)
+        FeedDB.deduplicate(using: ctx)
+        FeedDB.notRead(using: ctx)
     }
 
     @MainActor
     @discardableResult
     func save(feed: FeedDB) -> FeedDB {
+        save(feed: feed, in: sharedModelContainer.mainContext)
+    }
+
+    @MainActor
+    private func save(feed: FeedDB, in ctx: ModelContext) -> FeedDB {
         let postId = feed.postId
         let predicate = #Predicate<FeedDB> { $0.postId == postId }
+        let descriptor = FetchDescriptor(predicate: predicate)
 
-        if let existing = self.fetch(FeedDB.self, predicate: predicate).first {
+        if let existing = (try? ctx.fetch(descriptor))?.first {
             existing.title = feed.title
             existing.subtitle = feed.subtitle
             existing.pubDate = feed.pubDate
@@ -32,10 +39,10 @@ extension Database {
             existing.excerpt = feed.excerpt
             existing.fullContent = feed.fullContent
         } else {
-            context.insert(feed)
+            ctx.insert(feed)
         }
 
-        try? context.save()
+        try? ctx.save()
         return feed
     }
 }
@@ -45,19 +52,26 @@ extension Database {
 extension Database {
     @MainActor
     func save(podcast: [PodcastDB]) {
+        let ctx = sharedModelContainer.mainContext
         podcast.forEach {
-            save(podcast: $0)
+            save(podcast: $0, in: ctx)
         }
-        PodcastDB.deduplicate(using: context)
+        PodcastDB.deduplicate(using: ctx)
     }
 
     @MainActor
     @discardableResult
     func save(podcast: PodcastDB) -> PodcastDB {
+        save(podcast: podcast, in: sharedModelContainer.mainContext)
+    }
+
+    @MainActor
+    private func save(podcast: PodcastDB, in ctx: ModelContext) -> PodcastDB {
         let postId = podcast.postId
         let predicate = #Predicate<PodcastDB> { $0.postId == postId }
+        let descriptor = FetchDescriptor(predicate: predicate)
 
-        if let existing = self.fetch(PodcastDB.self, predicate: predicate).first {
+        if let existing = (try? ctx.fetch(descriptor))?.first {
             existing.title = podcast.title
             existing.subtitle = podcast.subtitle
             existing.pubDate = podcast.pubDate
@@ -68,12 +82,11 @@ extension Database {
             existing.duration = podcast.duration
             existing.podcastFrame = podcast.podcastFrame
             existing.playable = podcast.playable
-
         } else {
-            context.insert(podcast)
+            ctx.insert(podcast)
         }
 
-        try? context.save()
+        try? ctx.save()
         return podcast
     }
 }
