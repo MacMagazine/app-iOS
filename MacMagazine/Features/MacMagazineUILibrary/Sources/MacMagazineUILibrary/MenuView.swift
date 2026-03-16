@@ -25,7 +25,7 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                     })
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .glassEffect(color(selected: selected == option), in: .capsule)
+                    .glassEffect(effect(selected: selected == option), in: .capsule)
                 }
             }
         }
@@ -40,10 +40,10 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
 }
 
 private extension MenuView {
-    func color(selected: Bool) -> Glass {
+    func effect(selected: Bool) -> Glass {
         return switch colorScheme {
         case .dark:
-            selected ? .clear.tint(Color.gray.opacity(0.3)) : .clear
+            selected ? .clear.tint(Color.white.opacity(0.3)) : .clear
         default:
             selected ? .clear : .clear.tint(Color.gray.opacity(0.3))
         }

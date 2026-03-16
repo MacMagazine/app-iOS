@@ -51,17 +51,6 @@ extension Database {
     }
 
     @MainActor
-    func update(countOnBadge: Bool) {
-        if let item = settings {
-            item.countOnBadge = countOnBadge
-            item.modifiedAt = Date()
-        } else {
-            context.insert(SettingsDB(countOnBadge: countOnBadge))
-        }
-        try? context.save()
-    }
-
-    @MainActor
     func update(isPatrao: Bool) {
         let date = Calendar.current.date(byAdding: .day, value: isPatrao ? +30 : -1, to: Date()) ?? Date()
         if let item = settings {

@@ -14,7 +14,6 @@ struct PostsVisibilityView: View {
         NavigationLink {
             List {
                 PushOptionsView()
-                countPosts
                 cleanPosts
             }
             .navigationTitle("Posts")
@@ -34,49 +33,11 @@ struct PostsVisibilityView: View {
                 storage: settingsViewModel.storage,
                 models: settingsViewModel.models
                 )
-            viewModel.get()
-        }
-
-        .onChange(of: viewModel.countOnBadge) { _, value in
-            analytics.track(.buttonTap(
-                buttonId: AnalyticsConstants.ButtonID.countPostsOnBadge(value).id,
-                screen: AnalyticsConstants.Screen.settingsPosts.name
-            ))
-
-            #if os(iOS)
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            #endif
-            Task { await viewModel.change(countOnBadge: value) }
         }
     }
 }
 
 private extension PostsVisibilityView {
-    var countPosts: some View {
-        Section {
-            Toggle("Contar posts não lidos no ícone do app", isOn: $viewModel.countOnBadge)
-                .tint(theme.button.primary.color)
-
-            Button(action: {
-                viewModel.flush(cache: .allRead)
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.allPostsRead.id,
-                    screen: AnalyticsConstants.Screen.settingsPosts.name
-                ))
-            }, label: {
-                Text("Marcar todos os posts como lidos")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-        } header: {
-            Text("Badge")
-                .font(.headline)
-                .foregroundColor(theme.text.terciary.color)
-        } footer: {
-            Text("Mostra um badge com o número de posts não lidos")
-                .accessibilityHidden(true)
-        }
-    }
-
     var cleanPosts: some View {
         Section {
             Button(action: {

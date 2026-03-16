@@ -80,7 +80,6 @@ class MainViewModel {
 
         // Observe storage status changes
         observeStorageStatus()
-        observeStorageDidSave()
     }
 }
 
@@ -145,36 +144,5 @@ extension News {
         case .rumors: .rumors
         case .tutoriais: .tutorials
         }
-    }
-}
-
-extension MainViewModel {
-    private func observeStorageDidSave() {
-        NotificationCenter.default.addObserver(
-            forName: ModelContext.didSave,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self else { return }
-            Task { @MainActor in
-                self.showBadge()
-            }
-        }
-    }
-
-    func showBadge() {
-        if settingsViewModel.countOnBadge {
-            let badgeCount = FeedDB.notRead()
-            UNUserNotificationCenter.current().setBadgeCount(badgeCount)
-            updateOneSignal(counter: badgeCount)
-        } else {
-            // Icon badge should be set to -1 to disappear but keep history of notifications
-            UNUserNotificationCenter.current().setBadgeCount(0)
-            updateOneSignal(counter: 0)
-        }
-    }
-
-    private func updateOneSignal(counter: Int) {
-        // OneSignalExtensionBadgeHandler.updateCachedBadgeValue(counter)
     }
 }

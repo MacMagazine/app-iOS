@@ -277,19 +277,6 @@ struct DatabaseExtensionsTests {
         #expect(settings?.notification == "test_notification", "Should update notification")
     }
 
-    @Test("Should update countOnBadge flag correctly")
-    func updateCountOnBadge() {
-        // Given
-        let database = Database(models: [SettingsDB.self], inMemory: true)
-
-        // When
-        database.update(countOnBadge: true)
-
-        // Then
-        let settings = database.settings
-        #expect(settings?.countOnBadge == true, "Should update countOnBadge")
-    }
-
     @Test("Should update expiration date correctly")
     func updateExpirationDate() {
         // Given
@@ -359,13 +346,11 @@ struct DatabaseExtensionsTests {
 
         // When - Rapid fire updates
         database.update(mode: .light)
-        database.update(countOnBadge: false)
         database.update(appIcon: .alternative)
 
         // Then
         let settings = database.settings
         #expect(settings?.mode == .light, "Should have latest mode")
-        #expect(settings?.countOnBadge == false, "Should have latest countOnBadge")
         #expect(settings?.icon == .alternative, "Should have latest icon")
         #expect(database.fetch(SettingsDB.self).count == 1, "Should still have only one settings object")
     }

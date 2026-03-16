@@ -5,8 +5,6 @@ import SwiftData
 
 @Observable
 final class PostsVisibilityViewModel {
-    var countOnBadge = false
-
     var storage: Database?
     var models: [any PersistentModel.Type] = []
 }
@@ -19,16 +17,6 @@ extension PostsVisibilityViewModel {
         self.storage = storage
         self.models = models
     }
-
-    @MainActor
-    func get() {
-        countOnBadge = storage?.settings?.countOnBadge ?? false
-    }
-
-    @MainActor
-    func change(countOnBadge: Bool) async {
-        storage?.update(countOnBadge: countOnBadge)
-    }
 }
 
 extension PostsVisibilityViewModel {
@@ -37,7 +25,6 @@ extension PostsVisibilityViewModel {
         switch cache {
         case .cleanAll: cleanAll()
         case .keepFavoritesAndStatus: keepFavoritesAndStatus()
-        case .allRead: markAllPostAsRead()
         }
     }
 }
@@ -54,13 +41,6 @@ private extension PostsVisibilityViewModel {
     func keepFavoritesAndStatus() {
         models.forEach {
             ($0 as? any ModelFavoritable.Type)?.deleteNonFavorites(using: storage?.sharedModelContainer.mainContext)
-        }
-    }
-
-    @MainActor
-    func markAllPostAsRead() {
-        models.forEach {
-            ($0 as? any ModelReadable.Type)?.maskAsRead(using: storage?.sharedModelContainer.mainContext)
         }
     }
 }

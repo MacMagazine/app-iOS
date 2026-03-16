@@ -8,7 +8,3 @@ public protocol ModelFavoritable: AnyObject, PersistentModel {
 public protocol ModelDuplicable: AnyObject, PersistentModel {
     static func deduplicate(using context: ModelContext?)
 }
-
-public protocol ModelReadable: AnyObject, PersistentModel {
-    static func maskAsRead(using context: ModelContext?)
-}
