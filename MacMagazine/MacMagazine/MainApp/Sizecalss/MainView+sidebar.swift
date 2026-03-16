@@ -187,22 +187,20 @@ private extension MainView {
             buttonId: AnalyticsConstants.ButtonID.sidebarItemSelected(id(for: destination)).id,
             screen: AnalyticsConstants.Screen.news.name
         ))
-        withAnimation(.easeInOut(duration: 0.4)) {
-            switch destination {
-            case Social.videos: viewModel.social = .videos
-            case Social.podcast: viewModel.social = .podcast
-            case Social.instagram: viewModel.social = .instagram
-            case News.all: viewModel.news = .all
-            case News.news: viewModel.news = .news
-            case News.highlights: viewModel.news = .highlights
-            case News.appletv: viewModel.news = .appletv
-            case News.reviews: viewModel.news = .reviews
-            case News.rumors: viewModel.news = .rumors
-            case News.tutoriais: viewModel.news = .tutoriais
-            default: break
-            }
-            navigationState.navigate(to: destination)
+        switch destination {
+        case Social.videos: viewModel.social = .videos
+        case Social.podcast: viewModel.social = .podcast
+        case Social.instagram: viewModel.social = .instagram
+        case News.all: viewModel.news = .all
+        case News.news: viewModel.news = .news
+        case News.highlights: viewModel.news = .highlights
+        case News.appletv: viewModel.news = .appletv
+        case News.reviews: viewModel.news = .reviews
+        case News.rumors: viewModel.news = .rumors
+        case News.tutoriais: viewModel.news = .tutoriais
+        default: break
         }
+        navigationState.navigate(to: destination)
     }
 
     func id(for destination: any CaseIterable & Equatable) -> String {
