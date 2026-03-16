@@ -14,7 +14,7 @@ public struct PodcastView: View {
     @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
 
-    var viewModel: PodcastViewModel
+    @State var viewModel: PodcastViewModel
 
     @Binding private var favorite: Bool
     @Binding var scrollPosition: ScrollPosition

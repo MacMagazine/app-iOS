@@ -23,7 +23,7 @@ public struct NewsView<Filter: View>: View {
 
     // MARK: - Properties
 
-    var viewModel: NewsViewModel
+    @State var viewModel: NewsViewModel
 
     @Binding private var favorite: Bool
     @Binding private var category: NewsCategory
@@ -211,7 +211,6 @@ extension NewsView {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()
                 try? modelContext.save()
-                FeedDB.notRead(using: modelContext)
             }
     }
 

@@ -8,7 +8,7 @@ import YouTubeLibrary
 public struct VideosView: View {
     @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
-    var viewModel: VideosViewModel
+    @State var viewModel: VideosViewModel
     @State private var search: String = ""
     @Binding private var favorite: Bool
     @Binding var scrollPosition: ScrollPosition

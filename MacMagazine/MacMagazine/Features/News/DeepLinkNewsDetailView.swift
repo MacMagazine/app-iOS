@@ -45,7 +45,6 @@ struct DeepLinkNewsDetailView: View {
                     post?.read = true
                     post?.modifiedAt = Date()
                     try? modelContext.save()
-                    FeedDB.notRead(using: modelContext)
                 }
         }
     }

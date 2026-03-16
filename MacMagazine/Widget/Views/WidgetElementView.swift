@@ -18,7 +18,6 @@ struct WidgetElementView: View {
         switch widgetFamily {
         case .systemSmall: smallWidget.widgetURL(post.url)
         case .accessoryInline: accessoryInlineWidget
-        case .accessoryCircular: accessoryCircularWidget
         case .accessoryRectangular: accessoryRectangularWidget
         default: Link(destination: post.url) { content }
         }
@@ -28,21 +27,6 @@ struct WidgetElementView: View {
 private extension WidgetElementView {
     var accessoryInlineWidget: some View {
         Text("MM \(post.title)").widgetURL(post.url)
-    }
-
-    var accessoryCircularWidget: some View {
-        ZStack {
-            Circle()
-                .stroke(lineWidth: 5)
-            VStack(spacing: 0) {
-                Image("logo_white")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 18, height: 18)
-                Text("\(FeedDB.notRead())").widgetURL(post.url)
-            }
-        }
-        .containerBackground(Color.clear, for: .widget)
     }
 
     var accessoryRectangularWidget: some View {

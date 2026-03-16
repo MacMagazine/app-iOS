@@ -10,10 +10,9 @@ extension Database {
     func save(feed: [FeedDB]) {
         let ctx = sharedModelContainer.mainContext
         feed.forEach {
-            save(feed: $0, in: ctx)
+            _ = save(feed: $0, in: ctx)
         }
         FeedDB.deduplicate(using: ctx)
-        FeedDB.notRead(using: ctx)
     }
 
     @MainActor
@@ -54,7 +53,7 @@ extension Database {
     func save(podcast: [PodcastDB]) {
         let ctx = sharedModelContainer.mainContext
         podcast.forEach {
-            save(podcast: $0, in: ctx)
+            _ = save(podcast: $0, in: ctx)
         }
         PodcastDB.deduplicate(using: ctx)
     }

@@ -21,12 +21,11 @@ struct WidgetView: View {
                 case .systemLarge: content(quantity: 3)
                 case .systemSmall,
                         .accessoryRectangular,
-                        .accessoryInline,
-                        .accessoryCircular:
+                        .accessoryInline:
                     WidgetElementView(post: content[0])
                         .trackScreen(AnalyticsConstants.Screen.widget(widgetFamily.description).name, analytics: analytics)
 
-                case .systemExtraLarge:
+                case .systemExtraLarge, .accessoryCircular:
                     Text("Tamanho incompatível.")
 
                 @unknown default:
