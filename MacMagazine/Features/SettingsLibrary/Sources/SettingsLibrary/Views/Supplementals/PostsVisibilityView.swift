@@ -11,23 +11,7 @@ struct PostsVisibilityView: View {
     @State private var isPresenting = false
 
     var body: some View {
-        NavigationLink {
-            List {
-                PushOptionsView()
-                cleanPosts
-            }
-            .navigationTitle("Posts")
-            .navigationBarTitleDisplayMode(.inline)
-            .trackScreen(
-                AnalyticsConstants.Screen.settingsPosts.name,
-                previous: nil,
-                analytics: analytics
-            )
-
-        } label: {
-            Label("Posts", systemImage: "text.page")
-        }
-
+        cleanPosts
         .task {
             viewModel.set(
                 storage: settingsViewModel.storage,

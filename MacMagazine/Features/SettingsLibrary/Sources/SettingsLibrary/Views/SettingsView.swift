@@ -46,13 +46,13 @@ private extension SettingsView {
         ZStack {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             List {
-                PostsVisibilityView()
                 appearance
                 SubscriptionView(
                     isPatrao: $isPatrao,
                     isPresentingLoginPatrao: $isPresentingLoginPatrao,
                     urlToOpen: $urlToOpen
                 )
+                PushOptionsView()
                 AboutView(presentingContent: $presentingContent)
             }
             .navigationTitle(AppTabs.settings.rawValue)
