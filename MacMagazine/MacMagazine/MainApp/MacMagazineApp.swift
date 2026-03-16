@@ -117,6 +117,7 @@ private extension SceneView {
     var content: some View {
         MainView()
             .modelContainer(viewModel.storage.sharedModelContainer)
+            .environment(\.modelContext, viewModel.storage.context)
             .environment(viewModel)
             .environment(viewModel.settingsViewModel)
             .environment(viewModel.searchViewModel)
