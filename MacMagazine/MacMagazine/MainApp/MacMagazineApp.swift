@@ -8,6 +8,7 @@ import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 @main
 struct MacMagazineApp: App {
@@ -21,6 +22,7 @@ struct MacMagazineApp: App {
 }
 
 struct SceneView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var shortcutManager = ShortcutManager.shared
     @Bindable var viewModel: MainViewModel
@@ -88,6 +90,11 @@ struct SceneView: View {
             .onChange(of: shortcutManager.tab) { _, value in
                 if let value {
                     viewModel.tab = value
+                }
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active {
+                    UNUserNotificationCenter.current().setBadgeCount(0)
                 }
             }
             .task {
