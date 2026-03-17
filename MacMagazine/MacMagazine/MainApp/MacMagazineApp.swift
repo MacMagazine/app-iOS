@@ -2,14 +2,12 @@ import AnalyticsLibrary
 import LoggerLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
-import OneSignalFramework
 import PodcastLibrary
 import SearchLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
-import UserNotifications
 
 @main
 struct MacMagazineApp: App {
@@ -99,8 +97,7 @@ struct SceneView: View {
             }
             .onChange(of: scenePhase) {
                 if scenePhase == .active {
-                    UNUserNotificationCenter.current().setBadgeCount(0)
-                    OneSignal.Notifications.setBadgeCount(0)
+                    viewModel.pushNotification.resetBadge()
                 }
             }
             .task {

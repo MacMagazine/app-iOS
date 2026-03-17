@@ -112,6 +112,17 @@ public enum PushNotificationDefinition {
 }
 
 public extension PushNotification {
+    private static let badgeAppGroup = "group.com.brit.macmagazine.onesignal.push"
+    private static let badgeCacheKey = "onesignalBadgeCount"
+    private static let previousBadgeCacheKey = "previousOnesignalBadgeCount"
+
+    func resetBadge() {
+        OneSignal.Notifications.setBadgeCount(0)
+        let shared = UserDefaults(suiteName: Self.badgeAppGroup)
+        shared?.set(0, forKey: Self.badgeCacheKey)
+        shared?.set(0, forKey: Self.previousBadgeCacheKey)
+    }
+
     @MainActor
     func initialize(options: [UIApplication.LaunchOptionsKey: Any]?) {
         OneSignal.Debug.setLogLevel(.LL_VERBOSE)
