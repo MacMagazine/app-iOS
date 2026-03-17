@@ -39,17 +39,19 @@ public class FeedViewModel {
 
     public func getFeed(page: Int = 0) async throws {
         guard status != .loading else { return }
+        status = .loading
         do {
-            status = .loading
-            async let highlights = fetch(category: .highlights, page: page)
-            async let appletv = fetch(category: .appletv, page: page)
-            async let reviews = fetch(category: .reviews, page: page)
-            async let tutoriais = fetch(category: .tutorials, page: page)
-            async let rumors = fetch(category: .rumors, page: page)
-            let feed = try await [highlights, appletv, reviews, tutoriais, rumors]
-            storage.save(feed: Array(feed.joined()).toFeedDB)
-            let posts = try await fetch(category: .news, page: page)
-            storage.save(feed: posts.toFeedDB)
+            try await Task {
+                async let highlights = self.fetch(category: .highlights, page: page)
+                async let appletv = self.fetch(category: .appletv, page: page)
+                async let reviews = self.fetch(category: .reviews, page: page)
+                async let tutoriais = self.fetch(category: .tutorials, page: page)
+                async let rumors = self.fetch(category: .rumors, page: page)
+                let feed = try await [highlights, appletv, reviews, tutoriais, rumors]
+                self.storage.save(feed: Array(feed.joined()).toFeedDB)
+                let posts = try await self.fetch(category: .news, page: page)
+                self.storage.save(feed: posts.toFeedDB)
+            }.value
             status = .done
         } catch {
             status = .error(reason: (error as? NetworkAPIError)?.description ?? error.localizedDescription)
