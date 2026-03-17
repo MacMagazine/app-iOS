@@ -15,6 +15,7 @@ struct MainView: View {
     @Environment(\.iPad) private var iPad
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(MainViewModel.self) var viewModel
+    @Environment(\.scenePhase) private var scenePhase
 
     @State var splitViewVisibility: NavigationSplitViewVisibility = .all
 
@@ -38,9 +39,16 @@ struct MainView: View {
                 }
             }
 
+            .onChange(of: scenePhase) {
+                if scenePhase == .active {
+                    viewModel.pushNotification.resetBadge()
+                }
+            }
+
             .onAppear {
                 currentlayout = shouldUseSidebar ? .sidebar : .tabbar
                 viewModel.settingsViewModel.updateTabs(currentTab: $bindableViewModel.tab)
+                viewModel.pushNotification.resetBadge()
 
                 if currentlayout == .sidebar {
                     switch viewModel.tab {
