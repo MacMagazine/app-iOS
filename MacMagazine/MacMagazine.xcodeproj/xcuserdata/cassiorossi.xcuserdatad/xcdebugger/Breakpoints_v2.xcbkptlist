@@ -3,4 +3,80 @@
    uuid = "FF6260C8-B62D-4C21-B498-49EC07F79243"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "695EA0B7-AE60-47CA-B027-662A8F7FE1C3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Features/NewsLibrary/Sources/NewsLibrary/Views/NewsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "695EA0B7-AE60-47CA-B027-662A8F7FE1C3 - a2870729bf91f03a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; Swift.Optional&lt;()&gt; in closure #2 (Swift.Bool, Swift.Bool) -&gt; () in NewsLibrary.NewsView.body.getter : some"
+                  moduleName = "MacMagazine.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cassiorossi/Desktop/Apps/0.%20iOS_Apps/MacMagazine/MacMagazine/Features/NewsLibrary/Sources/NewsLibrary/Views/NewsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95">
+               </Location>
+               <Location
+                  uuid = "695EA0B7-AE60-47CA-B027-662A8F7FE1C3 - 7fa57d867c9173d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; Swift.Optional&lt;()&gt; in closure #2 (Swift.Bool, Swift.Bool) -&gt; () in NewsLibrary.NewsView.body.getter : some"
+                  moduleName = "MacMagazine.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cassiorossi/Desktop/Apps/0.%20iOS_Apps/MacMagazine/MacMagazine/Features/NewsLibrary/Sources/NewsLibrary/Views/NewsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95">
+               </Location>
+               <Location
+                  uuid = "695EA0B7-AE60-47CA-B027-662A8F7FE1C3 - 1d46c20047f0b019"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; Swift.Optional&lt;()&gt; in closure #2 (Swift.Bool, Swift.Bool) -&gt; () in NewsLibrary.NewsView.body.getter : some"
+                  moduleName = "MacMagazine.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cassiorossi/Desktop/Apps/0.%20iOS_Apps/MacMagazine/MacMagazine/Features/NewsLibrary/Sources/NewsLibrary/Views/NewsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96">
+               </Location>
+               <Location
+                  uuid = "695EA0B7-AE60-47CA-B027-662A8F7FE1C3 - ba6520ec3b23d037"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 () async -&gt; Swift.Optional&lt;()&gt; in closure #2 (Swift.Bool, Swift.Bool) -&gt; () in NewsLibrary.NewsView.body.getter : some"
+                  moduleName = "MacMagazine.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cassiorossi/Desktop/Apps/0.%20iOS_Apps/MacMagazine/MacMagazine/Features/NewsLibrary/Sources/NewsLibrary/Views/NewsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

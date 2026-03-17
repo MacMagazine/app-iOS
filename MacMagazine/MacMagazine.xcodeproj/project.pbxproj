@@ -25,6 +25,7 @@
 		9BA065092F65704700E4F88C /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA065082F65704700E4F88C /* OneSignalExtension */; };
 		9BA828AC2EEC7AAB00F26FCB /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BA828B82EEC7AE500F26FCB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA828B72EEC7AE500F26FCB /* FeedLibrary */; };
+		9BB098972F69897300B3EA03 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 9BB098962F69897300B3EA03 /* OneSignalFramework */; };
 		9BC1BCAC2EF965A400C19D1D /* WatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 88C8B2E62EF476E100044DE9 /* WatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */; };
 		9BDD424F2EE9E82F00A9BD85 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD424E2EE9E82F00A9BD85 /* WidgetKit.framework */; };
@@ -230,6 +231,7 @@
 				9B910BEB2EE09D1B00E96B4D /* FeedLibrary in Frameworks */,
 				9B817DA22ED0E5F7005E58E5 /* VideosLibrary in Frameworks */,
 				9B024FDC2EC2719700D66056 /* SettingsLibrary in Frameworks */,
+				9BB098972F69897300B3EA03 /* OneSignalFramework in Frameworks */,
 				9BCD94C62E9971C0007C44B6 /* MacMagazineLibrary in Frameworks */,
 				9B740C772EFC36EE0058B514 /* NewsLibrary in Frameworks */,
 				9BA00001300000010000A001 /* SearchLibrary in Frameworks */,
@@ -380,6 +382,7 @@
 				9B0283C32EF61A08002611AB /* OnboardingLibrary */,
 				9B740C762EFC36EE0058B514 /* NewsLibrary */,
 				9BA00002300000020000A002 /* SearchLibrary */,
+				9BB098962F69897300B3EA03 /* OneSignalFramework */,
 			);
 			productName = MacMagazine;
 			productReference = 9B9E9DC42E986F8400255820 /* MacMagazine.app */;
@@ -1249,6 +1252,11 @@
 		9BA828B72EEC7AE500F26FCB /* FeedLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FeedLibrary;
+		};
+		9BB098962F69897300B3EA03 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BA065072F65704700E4F88C /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalFramework;
 		};
 		9BCD94C52E9971C0007C44B6 /* MacMagazineLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -46,17 +46,6 @@ private extension PostsVisibilityView {
     @ViewBuilder
     var cleanCacheView: some View {
         Button(action: {
-            UserDefaults.standard.removeObject(forKey: "hasCompletedOnboarding")
-            UserDefaults.standard.removeObject(forKey: "hasSeenOnboardingFeatures")
-            analytics.track(.buttonTap(
-                buttonId: AnalyticsConstants.ButtonID.cleanOnboarding.id,
-                screen: AnalyticsConstants.Screen.settingsPosts.name
-            ))
-        },
-               label: {
-            Text("Rever Onboarding")
-        })
-        Button(action: {
             viewModel.flush(cache: .keepFavoritesAndStatus)
             analytics.track(.buttonTap(
                 buttonId: AnalyticsConstants.ButtonID.cleanPosts.id,
@@ -64,7 +53,7 @@ private extension PostsVisibilityView {
             ))
         },
                label: {
-            Text("Manter favoritos e status de leitura")
+            Text("Manter favoritos")
         })
         Button("Limpar tudo", role: .destructive) {
             viewModel.flush(cache: .cleanAll)

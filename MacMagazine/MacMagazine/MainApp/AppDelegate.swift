@@ -4,6 +4,7 @@ import MacMagazineLibrary
 import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    var pushNotification: PushNotification?
     private var logger: LoggerProtocol = Logger(category: "MacMagazineV5")
 
     func application(_ application: UIApplication,
@@ -55,6 +56,7 @@ extension AppDelegate {
             completionHandler(.noData)
             return
         }
+        pushNotification?.shouldReloadContent = true
         completionHandler(.newData)
     }
 }

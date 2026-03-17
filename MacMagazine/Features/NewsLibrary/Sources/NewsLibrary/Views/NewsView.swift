@@ -18,6 +18,7 @@ public struct NewsView<Filter: View>: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
 
+    @Environment(PushNotification.self) private var pushNotification
     @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
 
@@ -84,6 +85,14 @@ public struct NewsView<Filter: View>: View {
                         withAnimation {
                             scrollPosition.scrollTo(edge: .top)
                         }
+                    }
+                }
+            }
+            .onChange(of: pushNotification.shouldReloadContent) { _, value in
+                if value {
+                    pushNotification.shouldReloadContent = false
+                    Task {
+                        try? await viewModel.getNews(status: .loading)
                     }
                 }
             }

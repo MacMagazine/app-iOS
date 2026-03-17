@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let pushNotification = PushNotification()
         pushNotification.initialize(options: PushNotificationDefinition.options)
+        (UIApplication.shared.delegate as? AppDelegate)?.pushNotification = pushNotification
 
         let viewModel = MainViewModel(pushNotification: pushNotification)
 

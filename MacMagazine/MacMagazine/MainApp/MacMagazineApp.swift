@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import LoggerLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
+import OneSignalFramework
 import PodcastLibrary
 import SearchLibrary
 import SettingsLibrary
@@ -16,7 +17,7 @@ struct MacMagazineApp: App {
 
     var body: some Scene {
         WindowGroup {
-            SceneView()
+            SceneView(appDelegate: appDelegate)
         }
     }
 }
@@ -27,12 +28,16 @@ struct SceneView: View {
     @State var shortcutManager = ShortcutManager.shared
     @Bindable var viewModel: MainViewModel
 
-    init(viewModel: MainViewModel? = nil) {
+    init(
+        appDelegate: AppDelegate? = nil,
+        viewModel: MainViewModel? = nil
+    ) {
         if let viewModel {
             self.viewModel = viewModel
         } else {
             let pushNotification = PushNotification()
             pushNotification.initialize(options: PushNotificationDefinition.options)
+            appDelegate?.pushNotification = pushNotification
 
             self.viewModel = MainViewModel(pushNotification: pushNotification)
         }
@@ -92,9 +97,10 @@ struct SceneView: View {
                     viewModel.tab = value
                 }
             }
-            .onChange(of: scenePhase) { _, phase in
-                if phase == .active {
+            .onChange(of: scenePhase) {
+                if scenePhase == .active {
                     UNUserNotificationCenter.current().setBadgeCount(0)
+                    OneSignal.Notifications.setBadgeCount(0)
                 }
             }
             .task {
@@ -125,6 +131,7 @@ private extension SceneView {
         MainView()
             .modelContainer(viewModel.storage.sharedModelContainer)
             .environment(viewModel)
+            .environment(viewModel.pushNotification)
             .environment(viewModel.settingsViewModel)
             .environment(viewModel.searchViewModel)
             .environment(podcastPlayerManager)

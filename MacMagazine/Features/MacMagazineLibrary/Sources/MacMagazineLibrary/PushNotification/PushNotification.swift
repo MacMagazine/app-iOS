@@ -10,10 +10,14 @@ public enum PushPermissionStatus: Equatable {
     case denied
 }
 
+@MainActor
 @Observable
-public class PushNotification: NSObject {
+public class PushNotification: NSObject, @unchecked Sendable {
     public var newContentAvailable: String?
+    public var shouldReloadContent = false
     private let logger: LoggerProtocol
+
+    public static weak var shared: PushNotification?
 
     public override init() {
         self.logger = Logger(category: "MacMagazineV5")
@@ -129,23 +133,30 @@ public extension PushNotification {
 }
 
 extension PushNotification: OSNotificationLifecycleListener {
-    public func onWillDisplay(event: OSNotificationWillDisplayEvent) {
+    nonisolated public func onWillDisplay(event: OSNotificationWillDisplayEvent) {
         event.preventDefault()
         event.notification.display()
-        logger.debug(event.notification.additionalData?.debugString ?? "No additionalData")
+        let debugInfo = event.notification.additionalData?.debugString ?? "No additionalData"
+        Task { @MainActor in
+            self.logger.debug(debugInfo)
+            self.shouldReloadContent = true
+        }
     }
 }
 
 extension PushNotification: OSNotificationClickListener {
-    public func onClick(event: OSNotificationClickEvent) {
+    nonisolated public func onClick(event: OSNotificationClickEvent) {
         let notification: OSNotification = event.notification
         guard let additionalData = notification.additionalData,
               let url = additionalData["url"] as? String,
                 !url.isEmpty else {
             return
         }
-        logger.debug(url)
-        newContentAvailable = url
+        Task { @MainActor in
+            self.logger.debug(url)
+            self.newContentAvailable = url
+            self.shouldReloadContent = true
+        }
     }
 }
 #endif
