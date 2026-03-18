@@ -4,13 +4,13 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    let pushNotification = PushNotification()
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let pushNotification = PushNotification()
         pushNotification.initialize(options: PushNotificationDefinition.options)
         (UIApplication.shared.delegate as? AppDelegate)?.pushNotification = pushNotification
 
@@ -30,5 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                      completionHandler: @escaping (Bool) -> Void) {
         ShortcutManager.shared.process(shortcut: shortcutItem)
         completionHandler(true)
+    }
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        pushNotification.resetBadge()
     }
 }

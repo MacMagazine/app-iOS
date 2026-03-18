@@ -24,6 +24,7 @@ struct SceneView: View {
     @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var shortcutManager = ShortcutManager.shared
     @Bindable var viewModel: MainViewModel
+    let pushNotification = PushNotification()
 
     init(
         appDelegate: AppDelegate? = nil,
@@ -32,7 +33,6 @@ struct SceneView: View {
         if let viewModel {
             self.viewModel = viewModel
         } else {
-            let pushNotification = PushNotification()
             pushNotification.initialize(options: PushNotificationDefinition.options)
             appDelegate?.pushNotification = pushNotification
 

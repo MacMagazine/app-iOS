@@ -13,6 +13,10 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         PushNotificationDefinition.options = launchOptions
         return true
     }
+
+    private func applicationDidBecomeActive(_ notification: Notification) {
+        pushNotification?.resetBadge()
+    }
 }
 
 // MARK: - Analytics -

@@ -46,12 +46,6 @@ private extension PostsVisibilityView {
     @ViewBuilder
     var cleanCacheView: some View {
         Button(action: {
-            PushNotification().resetBadge()
-        },
-               label: {
-            Text("Limpar badge")
-        })
-        Button(action: {
             viewModel.flush(cache: .keepFavoritesAndStatus)
             analytics.track(.buttonTap(
                 buttonId: AnalyticsConstants.ButtonID.cleanPosts.id,
