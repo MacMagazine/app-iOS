@@ -5,6 +5,12 @@ import UIComponentsLibrary
 import UtilityLibrary
 
 struct LeadingImageCard: View {
+    private enum CardMetrics {
+        static let padding: CGFloat = 10
+        static let innerRadius: CGFloat = 8
+        static let outerRadius: CGFloat = innerRadius + padding
+    }
+
     @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.dynamicTypeSize) private var typeSize
     @Namespace var namespace
@@ -22,7 +28,7 @@ struct LeadingImageCard: View {
     var body: some View {
         content
             .background(.background)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: CardMetrics.outerRadius, style: .continuous))
             .contentWidth { value in
                 cardWidth = value
             }
@@ -38,7 +44,7 @@ private extension LeadingImageCard {
             thumbnail
             metadataContent
         }
-        .padding(10)
+        .padding(CardMetrics.padding)
     }
 }
 
@@ -50,7 +56,7 @@ private extension LeadingImageCard {
         if let artworkUrl = URL(string: data.artworkUrl) {
             CachedAsyncImage(image: artworkUrl, contentMode: .fill)
                 .frame(width: 100, height: 100)
-                .cornerRadius(12)
+                .clipShape(RoundedRectangle(cornerRadius: CardMetrics.innerRadius, style: .continuous))
         }
     }
 }

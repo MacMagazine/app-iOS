@@ -25,7 +25,7 @@ public struct GlassCardView: View {
             content
             buttons
         }
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .contentWidth { value in
             cardWidth = value
         }
