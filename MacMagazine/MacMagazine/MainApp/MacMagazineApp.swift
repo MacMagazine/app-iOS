@@ -23,8 +23,8 @@ struct MacMagazineApp: App {
 struct SceneView: View {
     @State private var podcastPlayerManager = PodcastPlayerManager()
     @State var shortcutManager = ShortcutManager.shared
-    @Bindable var viewModel: MainViewModel
-    let pushNotification = PushNotification()
+    @State var viewModel: MainViewModel
+    @State var pushNotification: PushNotification
 
     init(
         appDelegate: AppDelegate? = nil,
@@ -32,10 +32,13 @@ struct SceneView: View {
     ) {
         if let viewModel {
             self.viewModel = viewModel
+            self.pushNotification = viewModel.pushNotification
         } else {
+            let pushNotification = PushNotification()
             pushNotification.initialize(options: PushNotificationDefinition.options)
             appDelegate?.pushNotification = pushNotification
 
+            self.pushNotification = pushNotification
             self.viewModel = MainViewModel(pushNotification: pushNotification)
         }
     }
@@ -70,15 +73,14 @@ struct SceneView: View {
                         .interactiveDismissDisabled(true)
                 }
             )
-            .onChange(of: viewModel.pushNotification.newContentAvailable) { _, url in
-                if let url {
-                    viewModel.deepLinkPostURL = url
-                    viewModel.pushNotification.newContentAvailable = nil
-                    viewModel.analytics.track(.buttonTap(
-                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("push").id,
-                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
-                    ))
-                }
+            .onChange(of: pushNotification.newContentAvailable) {
+                guard let url = pushNotification.newContentAvailable else { return }
+                pushNotification.newContentAvailable = nil
+                viewModel.deepLinkPostURL = url
+                viewModel.analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("push").id,
+                    screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                ))
             }
             .onChange(of: shortcutManager.url) { _, value in
                 if let value {
@@ -95,9 +97,12 @@ struct SceneView: View {
                 }
             }
             .task {
-                viewModel.logger?.debug(viewModel.pushNotification.newContentAvailable ?? "No newContentAvailable")
-                if let url = viewModel.pushNotification.newContentAvailable {
-                    viewModel.pushNotification.newContentAvailable = nil
+                if let newContentAvailable = pushNotification.newContentAvailable {
+                    viewModel.logger?.debug("==> SceneView task newContentAvailable: \(newContentAvailable)")
+                }
+
+                if let url = pushNotification.newContentAvailable {
+                    pushNotification.newContentAvailable = nil
                     viewModel.deepLinkPostURL = url
                     viewModel.analytics.track(.buttonTap(
                         buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("push").id,

@@ -1,4 +1,5 @@
 import Foundation
+import MacMagazineLibrary
 import StorageLibrary
 import UserNotifications
 
@@ -7,11 +8,10 @@ protocol PushNotificationProtocol {
     func setLocalNotification(for event: MMLive)
 }
 
-final class PushNotification: NSObject, PushNotificationProtocol {
+extension PushNotification: PushNotificationProtocol {
     @MainActor
     func setLocalNotification(for event: MMLive) {
         let center = UNUserNotificationCenter.current()
-        center.delegate = self
 
         Task {
             let settings = await center.notificationSettings()
@@ -65,19 +65,5 @@ private extension PushNotification {
             // add our notification request
             UNUserNotificationCenter.current().add(endRequest)
         }
-    }
-}
-
-extension PushNotification: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.banner, .sound])
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
     }
 }

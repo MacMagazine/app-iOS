@@ -1,4 +1,5 @@
 import Foundation
+import MacMagazineLibrary
 import NetworkLibrary
 import StorageLibrary
 

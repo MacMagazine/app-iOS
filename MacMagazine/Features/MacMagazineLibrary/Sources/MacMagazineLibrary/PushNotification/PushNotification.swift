@@ -17,8 +17,6 @@ public class PushNotification: NSObject, @unchecked Sendable {
     public var shouldReloadContent = false
     private let logger: LoggerProtocol
 
-    public static weak var shared: PushNotification?
-
     public override init() {
         self.logger = Logger(category: "MacMagazineV5")
     }
@@ -123,6 +121,7 @@ public extension PushNotification {
         OneSignal.initialize(Self.oneSignalKey, withLaunchOptions: options)
         OneSignal.Notifications.addForegroundLifecycleListener(self)
         OneSignal.Notifications.addClickListener(self)
+        UNUserNotificationCenter.current().delegate = self
     }
 
     @MainActor
@@ -141,9 +140,9 @@ extension PushNotification: OSNotificationLifecycleListener {
     nonisolated public func onWillDisplay(event: OSNotificationWillDisplayEvent) {
         event.preventDefault()
         event.notification.display()
-        let debugInfo = event.notification.additionalData?.debugString ?? "No additionalData"
+        let debugInfo = String(describing: event.notification.additionalData?.debugString)
         Task { @MainActor in
-            self.logger.debug(debugInfo)
+            self.logger.debug("==> \(debugInfo)")
             self.shouldReloadContent = true
         }
     }
@@ -151,6 +150,11 @@ extension PushNotification: OSNotificationLifecycleListener {
 
 extension PushNotification: OSNotificationClickListener {
     nonisolated public func onClick(event: OSNotificationClickEvent) {
+        let debugInfo = String(describing: event.notification.additionalData)
+        Task { @MainActor in
+            self.logger.debug("==> \(debugInfo)")
+        }
+
         let notification: OSNotification = event.notification
         guard let additionalData = notification.additionalData,
               let url = additionalData["url"] as? String,
@@ -162,6 +166,32 @@ extension PushNotification: OSNotificationClickListener {
             self.newContentAvailable = url
             self.shouldReloadContent = true
         }
+    }
+}
+
+extension PushNotification: @MainActor UNUserNotificationCenterDelegate {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       willPresent notification: UNNotification,
+                                       withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound])
+    }
+
+    public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       didReceive response: UNNotificationResponse,
+                                       withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        logger.debug("==> \(userInfo)")
+        guard let additionalData = userInfo["additionalData"] as? [String: Any],
+              let url = additionalData["url"] as? String, !url.isEmpty else {
+            completionHandler()
+            return
+        }
+
+        self.logger.debug(url)
+        self.newContentAvailable = url
+        self.shouldReloadContent = true
+
+        completionHandler()
     }
 }
 #endif
