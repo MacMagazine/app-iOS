@@ -65,7 +65,8 @@ extension AppDelegate {
         pushNotification?.shouldReloadContent = true
 
         guard let custom = userInfo["custom"] as? [String: Any],
-              let url = custom["url"] as? String,
+              let additionalData = custom["a"] as? [String: Any],
+              let url = additionalData["url"] as? String,
               !url.isEmpty else {
             completionHandler(.newData)
             return
