@@ -10,7 +10,6 @@ struct MacMagazineWidget: Widget {
 #if os(iOS)
         return [.accessoryRectangular,
                 .accessoryInline,
-                .accessoryCircular,
                 .systemSmall,
                 .systemMedium,
                 .systemLarge]
@@ -62,13 +61,6 @@ struct MacMagazineWidget: Widget {
 }
 
 #Preview("Inline", as: .accessoryInline) {
-    MacMagazineWidget()
-} timeline: {
-    WidgetEntry(date: Date(),
-                     posts: [.placeholder])
-}
-
-#Preview("Circular", as: .accessoryCircular) {
     MacMagazineWidget()
 } timeline: {
     WidgetEntry(date: Date(),

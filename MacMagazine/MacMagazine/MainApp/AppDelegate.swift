@@ -11,7 +11,21 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureFirebaseIfAvailable()
         PushNotificationDefinition.options = launchOptions
+
+        if let launchOptions {
+            logger.debug(launchOptions)
+        }
+
         return true
+    }
+
+    func application(_ application: UIApplication,
+                     configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let config = UISceneConfiguration(name: nil,
+                                          sessionRole: connectingSceneSession.role)
+        config.delegateClass = SceneDelegate.self
+        return config
     }
 
     private func applicationDidBecomeActive(_ notification: Notification) {
@@ -63,17 +77,6 @@ extension AppDelegate {
         }
 
         pushNotification?.shouldReloadContent = true
-
-        guard let custom = userInfo["custom"] as? [String: Any],
-              let additionalData = custom["a"] as? [String: Any],
-              let url = additionalData["url"] as? String,
-              !url.isEmpty else {
-            completionHandler(.newData)
-            return
-        }
-
-        logger.debug(url)
-        pushNotification?.newContentAvailable = url
 
         completionHandler(.newData)
     }

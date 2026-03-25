@@ -15,7 +15,7 @@ struct MacMagazineApp: App {
 
     var body: some Scene {
         WindowGroup {
-            SceneView(appDelegate: appDelegate)
+            EmptyView()
         }
     }
 }
@@ -98,7 +98,7 @@ struct SceneView: View {
             }
             .task {
                 if let newContentAvailable = pushNotification.newContentAvailable {
-                    viewModel.logger?.debug("==> SceneView task newContentAvailable: \(newContentAvailable)")
+                    viewModel.logger?.debug("SceneView task newContentAvailable: \(newContentAvailable)")
                 }
 
                 if let url = pushNotification.newContentAvailable {

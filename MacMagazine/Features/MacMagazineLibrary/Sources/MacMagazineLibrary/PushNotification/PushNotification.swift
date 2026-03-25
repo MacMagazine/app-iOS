@@ -142,7 +142,7 @@ extension PushNotification: OSNotificationLifecycleListener {
         event.notification.display()
         let debugInfo = String(describing: event.notification.additionalData?.debugString)
         Task { @MainActor in
-            self.logger.debug("==> \(debugInfo)")
+            self.logger.debug(debugInfo)
             self.shouldReloadContent = true
         }
     }
@@ -152,7 +152,7 @@ extension PushNotification: OSNotificationClickListener {
     nonisolated public func onClick(event: OSNotificationClickEvent) {
         let debugInfo = String(describing: event.notification.additionalData)
         Task { @MainActor in
-            self.logger.debug("==> \(debugInfo)")
+            self.logger.debug(debugInfo)
         }
 
         let notification: OSNotification = event.notification
@@ -180,16 +180,16 @@ extension PushNotification: @MainActor UNUserNotificationCenterDelegate {
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        logger.debug("==> \(userInfo)")
+        logger.debug(userInfo)
         guard let additionalData = userInfo["additionalData"] as? [String: Any],
               let url = additionalData["url"] as? String, !url.isEmpty else {
             completionHandler()
             return
         }
 
-        self.logger.debug(url)
-        self.newContentAvailable = url
-        self.shouldReloadContent = true
+        logger.debug(url)
+        newContentAvailable = url
+        shouldReloadContent = true
 
         completionHandler()
     }

@@ -186,13 +186,12 @@ extension NewsView {
 
 extension NewsView {
     private func handleTap(_ post: FeedDB) {
-        viewModel.selectedNews = post
-        readingNews.toggle()
-
         analytics.track(.buttonTap(
             buttonId: AnalyticsConstants.ButtonID.newsStarted(postId: Int(post.postId) ?? 0).id,
             screen: AnalyticsConstants.Screen.news.name)
         )
+        viewModel.selectedNews = post
+        readingNews = true
     }
 }
 
@@ -216,7 +215,7 @@ extension NewsView {
                     shareView
                 }
             }
-            .onAppear {
+            .task {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()
                 try? modelContext.save()

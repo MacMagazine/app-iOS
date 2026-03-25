@@ -170,7 +170,7 @@ extension SubscriptionView {
             viewModel.isPatrao = false
             analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.logoffPatrao.id, screen: AnalyticsConstants.Screen.settings.name))
         }, label: {
-            Text("Logoff de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
+            Text("Logout de patrão").foregroundStyle(theme.main.tint.color ?? .blue)
         })
     }
 }
