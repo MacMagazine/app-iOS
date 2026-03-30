@@ -211,7 +211,7 @@ extension NewsView {
                     favoriteView
                 }
                 ToolbarSpacer(.fixed)
-                ToolbarItem(placement: .automatic) {
+                ToolbarItem(placement: .topBarTrailing) {
                     shareView
                 }
             }
