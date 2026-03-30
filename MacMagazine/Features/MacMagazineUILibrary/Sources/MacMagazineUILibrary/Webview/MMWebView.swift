@@ -30,7 +30,7 @@ public struct MMWebView: View {
     public var body: some View {
         ManagedWebView(
             style: .init(
-                ignoredSafeAreaEdges: [.top, .bottom],
+                ignoredSafeAreaEdges: [.bottom],
                 backForwardGesturesDisabled: true
             ),
             pageProvider: { await makePage() },
@@ -134,8 +134,7 @@ private extension MMWebView {
         let configuration = WebPage.Configuration()
         let contentController = configuration.userContentController
 
-        contentController.addUserScript(MMWebViewUserScripts.topPadding)
-        contentController.addUserScript(MMWebViewUserScripts.tapToZoom)
+        contentController.addUserScript(MMWebViewUserScripts.hideSiteHeader)
         contentController.addUserScript(MMWebViewUserScripts.disableGallery)
         contentController.addUserScript(MMWebViewUserScripts.disableNewGallery)
         contentController.addUserScript(MMWebViewUserScripts.removeBackToBlog)
