@@ -1,4 +1,5 @@
 import FeedLibrary
+import SwiftData
 import SwiftUI
 
 struct FeedDetailView: View {

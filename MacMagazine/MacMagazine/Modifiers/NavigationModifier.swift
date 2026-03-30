@@ -1,3 +1,4 @@
+import MacMagazineLibrary
 import SwiftUI
 
 extension View {
