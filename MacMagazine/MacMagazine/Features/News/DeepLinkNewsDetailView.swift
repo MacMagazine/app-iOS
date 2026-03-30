@@ -36,8 +36,7 @@ struct DeepLinkNewsDetailView: View {
                     ToolbarItem(placement: .automatic) {
                         favoriteView
                     }
-                    ToolbarSpacer(.fixed)
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem(placement: .automatic) {
                         shareView
                     }
                 }
