@@ -200,7 +200,7 @@ extension NewsView {
 extension NewsView {
     @ViewBuilder
     var newsDetailView: some View {
-        MMWebView(url: viewModel.selectedNews?.link)
+        MMWebView(url: viewModel.selectedNews?.link, dismissAction: { readingNews = false })
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: { readingNews = false },

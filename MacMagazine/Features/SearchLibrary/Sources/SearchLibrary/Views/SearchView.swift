@@ -264,7 +264,7 @@ private extension SearchView {
     @ViewBuilder
     var details: some View {
         if let selectedLink {
-            MMWebView(url: selectedLink)
+            MMWebView(url: selectedLink, dismissAction: { showingWebView = false })
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
                         shareView

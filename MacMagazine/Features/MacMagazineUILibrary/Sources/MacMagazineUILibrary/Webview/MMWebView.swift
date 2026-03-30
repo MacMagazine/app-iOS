@@ -16,13 +16,16 @@ public struct MMWebView: View {
 
     private let url: String?
     private let cacheKey: String?
+    private let dismissAction: (() -> Void)?
 
     public init(
         url: String?,
-        cacheKey: String? = nil
+        cacheKey: String? = nil,
+        dismissAction: (() -> Void)? = nil
     ) {
         self.url = url
         self.cacheKey = cacheKey
+        self.dismissAction = dismissAction
     }
 
     public var body: some View {
@@ -40,7 +43,17 @@ public struct MMWebView: View {
             reloadTrigger: reloadID
         )
         .navigationDestination(item: $internalLinkURL) { url in
-            MMWebView(url: url.absoluteString)
+            MMWebView(url: url.absoluteString, dismissAction: dismissAction)
+                .toolbar {
+                    if let action = dismissAction {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: action) {
+                                Image(systemName: "xmark")
+                            }
+                            .tint(.primary)
+                        }
+                    }
+                }
         }
         .sheet(isPresented: Binding(get: { !commentsURL.isEmpty },
                                     set: { _ in commentsURL = "" })) {
