@@ -3,11 +3,11 @@ import SwiftUI
 import WebKit
 
 @MainActor
-struct MMNavigationDecider: WebPage.NavigationDeciding {
+final class MMNavigationDecider: WebPage.NavigationDeciding {
     var onOpenComments: ((String) -> Void)?
     var onOpenInternalLink: ((URL) -> Void)?
 
-    mutating func decidePolicy(
+    func decidePolicy(
         for action: WebPage.NavigationAction,
         preferences: inout WebPage.NavigationPreferences
     ) async -> WKNavigationActionPolicy {

@@ -39,14 +39,6 @@ public struct MMWebView: View {
             page: $page,
             reloadTrigger: reloadID
         )
-        .onAppear {
-            navigationDecider.onOpenComments = { url in
-                commentsURL = url
-            }
-            navigationDecider.onOpenInternalLink = { url in
-                internalLinkURL = url
-            }
-        }
         .navigationDestination(item: $internalLinkURL) { url in
             MMWebView(url: url.absoluteString)
         }
@@ -87,6 +79,9 @@ private extension MMWebView {
 
     func makePage() async -> WebPage? {
         guard let url, URL(string: url) != nil else { return nil }
+
+        navigationDecider.onOpenComments = { [self] slug in commentsURL = slug }
+        navigationDecider.onOpenInternalLink = { [self] url in internalLinkURL = url }
 
         if let cacheKey, WebPageCache.shared.hasPage(for: cacheKey) {
             return WebPageCache.shared.page(
