@@ -87,7 +87,6 @@ private extension LeadingImageCard {
             Spacer(minLength: 4)
 
             MenuButton(data: data)
-                .highPriorityGesture(TapGesture())
         }
     }
 

@@ -20,8 +20,8 @@ public struct ShareButton: View {
     public var body: some View {
         UtilityLibrary.ShareButton(title: title, url: url)
             .font(.system(size: 15))
-            .onTapGesture {
+            .simultaneousGesture(TapGesture().onEnded {
                 action?()
-            }
+            })
     }
 }
