@@ -1,5 +1,7 @@
 import SwiftUI
-import UtilityLibrary
+#if canImport(UIKit)
+import UIKit
+#endif
 
 public struct ShareButton: View {
     let title: String
@@ -18,10 +20,28 @@ public struct ShareButton: View {
     }
 
     public var body: some View {
-        UtilityLibrary.ShareButton(title: title, url: url)
-            .font(.system(size: 15))
-            .simultaneousGesture(TapGesture().onEnded {
-                action?()
-            })
+        Button {
+            action?()
+            presentShareSheet()
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+        }
+        .accessibilityLabel("Compartilhar")
+    }
+
+    private func presentShareSheet() {
+#if canImport(UIKit)
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        guard let scene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }),
+              let rootVC = scene.keyWindow?.rootViewController else { return }
+        var topVC = rootVC
+        while let presented = topVC.presentedViewController {
+            topVC = presented
+        }
+        activityVC.popoverPresentationController?.sourceView = topVC.view
+        topVC.present(activityVC, animated: true)
+#endif
     }
 }
