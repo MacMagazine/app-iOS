@@ -1,4 +1,5 @@
 import SwiftUI
+import UtilityLibrary
 
 public struct ShareButton: View {
     let title: String
@@ -18,14 +19,11 @@ public struct ShareButton: View {
 
     public var body: some View {
         if let url {
-            ShareLink(item: url, subject: Text(title)) {
-                Image(systemName: "square.and.arrow.up")
-            }
-            .font(.system(size: 15))
-            .accessibilityLabel("Compartilhar")
-            .simultaneousGesture(TapGesture().onEnded {
-                action?()
-            })
+            UtilityLibrary.ShareButton(title: title, url: url)
+                .font(.system(size: 15))
+                .simultaneousGesture(TapGesture().onEnded {
+                    action?()
+                })
         } else {
             Image(systemName: "square.and.arrow.up")
                 .font(.system(size: 15))
