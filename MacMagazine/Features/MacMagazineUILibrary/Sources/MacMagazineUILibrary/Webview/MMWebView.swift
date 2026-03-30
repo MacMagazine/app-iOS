@@ -11,7 +11,6 @@ public struct MMWebView: View {
     @State private var internalLinkURL: URL?
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
-    @State private var imageTappedHandler = ImageTappedHandler()
     @State private var reloadID = UUID()
 
     private let url: String?
@@ -140,8 +139,6 @@ private extension MMWebView {
         contentController.addUserScript(MMWebViewUserScripts.disableGallery)
         contentController.addUserScript(MMWebViewUserScripts.disableNewGallery)
         contentController.addUserScript(MMWebViewUserScripts.removeBackToBlog)
-
-        contentController.add(imageTappedHandler, name: "imageTappedHandler")
 
         return configuration
     }

@@ -22,22 +22,6 @@ public enum MMWebViewUserScripts {
     }
 
     @MainActor
-    static var tapToZoom: WKUserScript {
-        WKUserScript(
-            source: """
-            var images = document.querySelectorAll('[data-full-url]');
-            for(var i = 0; i < images.length; i++) {
-                images[i].addEventListener("click", function() {
-                    window.webkit.messageHandlers.imageTappedHandler.postMessage(this.dataset.fullUrl);
-                }, false);
-            }
-            """,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: true
-        )
-    }
-
-    @MainActor
     static var disableGallery: WKUserScript {
         WKUserScript(
             source: """
