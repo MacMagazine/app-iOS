@@ -23,6 +23,14 @@ public struct ShareButton: View {
             }
             .font(.system(size: 15))
             .accessibilityLabel("Compartilhar")
+            .simultaneousGesture(TapGesture().onEnded {
+                action?()
+            })
+        } else {
+            Image(systemName: "square.and.arrow.up")
+                .font(.system(size: 15))
+                .foregroundStyle(.tertiary)
+                .accessibilityLabel("Compartilhar")
         }
     }
 }
