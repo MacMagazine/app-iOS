@@ -25,10 +25,10 @@ public struct ShareButton: View {
                     action?()
                 })
         } else {
-            Image(systemName: "square.and.arrow.up")
+            Image(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")
                 .font(.system(size: 15))
                 .foregroundStyle(.tertiary)
-                .accessibilityLabel("Compartilhar")
+                .disabled(true)
         }
     }
 }
