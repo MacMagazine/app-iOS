@@ -32,6 +32,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             logger.error("pushNotification not init")
         }
+
+        if let userInfo = PushNotificationDefinition.userInfo {
+            logger.debug(userInfo)
+            pushNotification.shouldReloadContent = true
+        }
     }
 
     func windowScene(_ windowScene: UIWindowScene,

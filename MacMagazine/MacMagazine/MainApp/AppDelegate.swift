@@ -27,7 +27,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         let config = UISceneConfiguration(name: nil,
                                           sessionRole: connectingSceneSession.role)
         config.delegateClass = SceneDelegate.self
-        logger.debug((config.delegateClass as? SceneDelegate)?.pushNotification)
         return config
     }
 
@@ -79,13 +78,8 @@ extension AppDelegate {
             return
         }
 
+        PushNotificationDefinition.userInfo = userInfo
         pushNotification?.shouldReloadContent = true
-
-        if let pushNotification {
-            logger.debug(pushNotification.shouldReloadContent)
-        } else {
-            logger.error("pushNotification not init")
-        }
 
         completionHandler(.newData)
     }
