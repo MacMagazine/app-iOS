@@ -1,3 +1,4 @@
+import LoggerLibrary
 import MacMagazineLibrary
 import SwiftUI
 import UIKit
@@ -5,6 +6,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let pushNotification = PushNotification()
+    private var logger: LoggerProtocol = Logger(category: "MacMagazineV5")
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -22,6 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let shortcutItem = connectionOptions.shortcutItem {
             ShortcutManager.shared.pendingShortcut = shortcutItem
+        }
+
+        if let pushNotification = (UIApplication.shared.delegate as? AppDelegate)?.pushNotification {
+            logger.debug(pushNotification.shouldReloadContent)
+        } else {
+            logger.error("pushNotification not init")
         }
     }
 

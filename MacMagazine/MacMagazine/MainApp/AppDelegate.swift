@@ -78,6 +78,12 @@ extension AppDelegate {
 
         pushNotification?.shouldReloadContent = true
 
+        if let pushNotification {
+            logger.debug(pushNotification.shouldReloadContent)
+        } else {
+            logger.error("pushNotification not init")
+        }
+
         completionHandler(.newData)
     }
 }
