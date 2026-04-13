@@ -31,6 +31,8 @@ struct SceneView: View {
         viewModel: MainViewModel? = nil
     ) {
         if let viewModel {
+            viewModel.logger?.debug("")
+
             self.viewModel = viewModel
             self.pushNotification = viewModel.pushNotification
         } else {
@@ -40,6 +42,7 @@ struct SceneView: View {
 
             self.pushNotification = pushNotification
             self.viewModel = MainViewModel(pushNotification: pushNotification)
+            self.viewModel.logger?.debug("")
         }
     }
 

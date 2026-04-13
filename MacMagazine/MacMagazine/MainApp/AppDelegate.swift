@@ -9,6 +9,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        logger.debug("")
         configureFirebaseIfAvailable()
         PushNotificationDefinition.options = launchOptions
 
@@ -22,9 +23,11 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,
                      options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        logger.debug("")
         let config = UISceneConfiguration(name: nil,
                                           sessionRole: connectingSceneSession.role)
         config.delegateClass = SceneDelegate.self
+        logger.debug((config.delegateClass as? SceneDelegate)?.pushNotification)
         return config
     }
 

@@ -11,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
+        logger.debug("")
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         pushNotification.initialize(options: PushNotificationDefinition.options)
