@@ -1,5 +1,6 @@
 import AnalyticsLibrary
 import FeedLibrary
+import LoggerLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
 import StorageLibrary
@@ -35,6 +36,7 @@ public struct NewsView<Filter: View>: View {
     @Query private var allNews: [FeedDB]
 
     private let filters: Filter
+    private let logger = Logger(category: "MacMagazineV5")
 
     // MARK: - Initialization
 
@@ -88,7 +90,18 @@ public struct NewsView<Filter: View>: View {
                     }
                 }
             }
+            .onReceive(
+                NotificationCenter.default.publisher(for: Notification.Name("didReceivePushNotification"))
+            ) { notification in
+                logger.debug(notification)
+
+                Task {
+                    try? await viewModel.getNews(status: .loading)
+                }
+            }
             .onChange(of: pushNotification.shouldReloadContent) { _, value in
+                logger.debug(value)
+
                 if value {
                     pushNotification.shouldReloadContent = false
                     Task {

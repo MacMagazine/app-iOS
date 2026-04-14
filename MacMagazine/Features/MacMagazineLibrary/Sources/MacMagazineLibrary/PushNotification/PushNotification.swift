@@ -107,7 +107,6 @@ import UIKit
 @MainActor
 public enum PushNotificationDefinition {
     public static var options: [UIApplication.LaunchOptionsKey: Any]?
-    public static var userInfo: [AnyHashable: Any]?
 }
 
 public extension PushNotification {

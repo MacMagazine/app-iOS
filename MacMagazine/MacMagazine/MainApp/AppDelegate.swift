@@ -9,7 +9,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        logger.debug("")
         configureFirebaseIfAvailable()
         PushNotificationDefinition.options = launchOptions
 
@@ -23,7 +22,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,
                      options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        logger.debug("")
         let config = UISceneConfiguration(name: nil,
                                           sessionRole: connectingSceneSession.role)
         config.delegateClass = SceneDelegate.self
@@ -70,7 +68,6 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        logger.debug(userInfo)
         guard let aps = userInfo["aps"] as? [String: Any],
               let contentAvailable = aps["content-available"] as? Int,
               contentAvailable == 1 else {
@@ -78,8 +75,9 @@ extension AppDelegate {
             return
         }
 
-        PushNotificationDefinition.userInfo = userInfo
-        pushNotification?.shouldReloadContent = true
+        logger.debug(userInfo)
+        NotificationCenter.default.post(name: Notification.Name("didReceivePushNotification"),
+                                        object: userInfo)
 
         completionHandler(.newData)
     }

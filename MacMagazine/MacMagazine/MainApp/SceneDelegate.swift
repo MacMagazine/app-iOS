@@ -6,12 +6,10 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     let pushNotification = PushNotification()
-    private var logger: LoggerProtocol = Logger(category: "MacMagazineV5")
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
-        logger.debug("")
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         pushNotification.initialize(options: PushNotificationDefinition.options)
@@ -25,17 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let shortcutItem = connectionOptions.shortcutItem {
             ShortcutManager.shared.pendingShortcut = shortcutItem
-        }
-
-        if let pushNotification = (UIApplication.shared.delegate as? AppDelegate)?.pushNotification {
-            logger.debug(pushNotification.shouldReloadContent)
-        } else {
-            logger.error("pushNotification not init")
-        }
-
-        if let userInfo = PushNotificationDefinition.userInfo {
-            logger.debug(userInfo)
-            pushNotification.shouldReloadContent = true
         }
     }
 
