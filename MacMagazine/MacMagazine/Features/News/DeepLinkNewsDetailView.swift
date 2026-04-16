@@ -71,15 +71,7 @@ struct DeepLinkNewsDetailView: View {
     private var shareView: some View {
         ShareButton(
             title: post?.title ?? "",
-            url: url,
-            action: {
-                analytics.track(
-                    .buttonTap(
-                        buttonId: AnalyticsConstants.ButtonID.share.id,
-                        screen: AnalyticsConstants.Screen.news.name
-                    )
-                )
-            }
+            url: url
         )
     }
 }

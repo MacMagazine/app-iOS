@@ -184,13 +184,7 @@ private extension FullPlayerView {
 
             let shareButton = ShareButton(
                 title: podcast.title,
-                url: podcast.urlToShare,
-                action: {
-                    analytics.track(.buttonTap(
-                        buttonId: AnalyticsConstants.ButtonID.share.id,
-                        screen: AnalyticsConstants.Screen.podcastFullPlayer.name
-                    ))
-                }
+                url: podcast.urlToShare
             )
             .accessibilitySortPriority(PlayerAccessibilityPriority.shareButton)
 

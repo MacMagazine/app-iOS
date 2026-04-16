@@ -45,10 +45,7 @@ private extension GlassCardView {
 
         let shareButton = ShareButton(
             title: data.title,
-            url: data.urlToShare,
-            action: {
-                analytics.track(.buttonTap(buttonId: AnalyticsConstants.ButtonID.share.id, screen: data.type.screenName))
-            }
+            url: data.urlToShare
         )
 
         FavoriteShareGlassContainer(

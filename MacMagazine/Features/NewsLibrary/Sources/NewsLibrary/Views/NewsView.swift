@@ -254,15 +254,7 @@ extension NewsView {
            let url = viewModel.selectedNews?.link {
             ShareButton(
                 title: title,
-                url: url,
-                action: {
-                    analytics.track(
-                        .buttonTap(
-                            buttonId: AnalyticsConstants.ButtonID.share.id,
-                            screen: AnalyticsConstants.Screen.news.name
-                        )
-                    )
-                }
+                url: url
             )
         }
     }
