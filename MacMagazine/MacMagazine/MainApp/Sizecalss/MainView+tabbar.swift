@@ -25,7 +25,7 @@ extension MainView {
                         SearchView(api: viewModel.videosViewModel.youtube)
                     } else {
                         NavigationStack {
-                            AnyView(contentView(for: tab))
+                            contentView(for: tab)
                         }
                     }
                 }

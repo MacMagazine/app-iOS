@@ -22,7 +22,7 @@ public struct SettingsView: View {
                                         set: { _ in presentingContent = .none })) {
                 ContentSheet(
                     url: presentingContent.url,
-                    title: presentingContent.title,
+                    title: "",
                     onDismiss: { presentingContent = .none },
                     analytics: analytics
                 )

@@ -30,7 +30,7 @@ public struct MMWebView: View {
     public var body: some View {
         ManagedWebView(
             style: .init(
-                ignoredSafeAreaEdges: [.top, .bottom],
+                ignoredSafeAreaEdges: [.bottom],
                 backForwardGesturesDisabled: true
             ),
             pageProvider: { await makePage() },

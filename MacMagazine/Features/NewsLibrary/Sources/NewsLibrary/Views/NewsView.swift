@@ -215,9 +215,10 @@ extension NewsView {
         MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(action: { readingNews = false },
+                    Button(role: .close,
+                           action: { readingNews = false },
                            label: { Image(systemName: "chevron.backward") })
-                    .tint(.red)
+                    .tint(.primary)
                 }
                 ToolbarItem(placement: .automatic) {
                     favoriteView
@@ -226,7 +227,7 @@ extension NewsView {
                     shareView
                 }
             }
-            // .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
             .task {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()

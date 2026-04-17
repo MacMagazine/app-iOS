@@ -84,7 +84,9 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "C0E9B10B",
-          "introductoryOffer" : null,
+          "introductoryOffers" : [
+
+          ],
           "localizations" : [
             {
               "description" : "Assinatura anual",
@@ -92,9 +94,9 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "MMASSINATURAANUAL_BETA",
+          "productID" : "MMASSINATURAANUAL",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "MMASSINATURAANUAL_BETA",
+          "referenceName" : "MMASSINATURAANUAL",
           "subscriptionGroupID" : "A4781EC9",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
@@ -112,7 +114,9 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "CB959EF5",
-          "introductoryOffer" : null,
+          "introductoryOffers" : [
+
+          ],
           "localizations" : [
             {
               "description" : "Assinatura mensal",
@@ -120,9 +124,9 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "MMASSINATURAMENSAL_BETA",
+          "productID" : "MMASSINATURAMENSAL",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "MMASSINATURAMENSAL_BETA",
+          "referenceName" : "MMASSINATURAMENSAL",
           "subscriptionGroupID" : "A4781EC9",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
@@ -133,7 +137,7 @@
     }
   ],
   "version" : {
-    "major" : 4,
+    "major" : 5,
     "minor" : 0
   }
 }
