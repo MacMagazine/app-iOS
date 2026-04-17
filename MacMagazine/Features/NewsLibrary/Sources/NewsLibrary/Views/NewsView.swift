@@ -217,7 +217,7 @@ extension NewsView {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: { readingNews = false },
                            label: { Image(systemName: "chevron.backward") })
-                    .tint(.primary)
+                    .tint(.red)
                 }
                 ToolbarItem(placement: .automatic) {
                     favoriteView
@@ -226,7 +226,7 @@ extension NewsView {
                     shareView
                 }
             }
-            .navigationBarBackButtonHidden(true)
+            // .navigationBarBackButtonHidden(true)
             .task {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()
