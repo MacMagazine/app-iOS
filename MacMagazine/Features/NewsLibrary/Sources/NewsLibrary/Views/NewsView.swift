@@ -117,7 +117,6 @@ public struct NewsView<Filter: View>: View {
             }
             .navigationDestination(isPresented: $readingNews) {
                 newsDetailView
-                    .navigationBarBackButtonHidden(true)
             }
     }
 }
@@ -213,7 +212,7 @@ extension NewsView {
 extension NewsView {
     @ViewBuilder
     var newsDetailView: some View {
-        MMWebView(url: viewModel.selectedNews?.link, dismissAction: { readingNews = false })
+        MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: { readingNews = false },
@@ -227,6 +226,7 @@ extension NewsView {
                     shareView
                 }
             }
+            .navigationBarBackButtonHidden(true)
             .task {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()

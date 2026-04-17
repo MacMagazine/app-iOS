@@ -44,9 +44,9 @@ public struct MMWebView: View {
         .navigationDestination(item: $internalLinkURL) { url in
             MMWebView(url: url.absoluteString, dismissAction: dismissAction)
                 .toolbar {
-                    if let action = dismissAction {
+                    if let dismissAction {
                         ToolbarItem(placement: .topBarTrailing) {
-                            Button(action: action) {
+                            Button(action: dismissAction) {
                                 Image(systemName: "xmark")
                             }
                             .tint(.primary)
