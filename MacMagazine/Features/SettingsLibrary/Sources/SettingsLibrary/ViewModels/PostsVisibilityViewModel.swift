@@ -33,7 +33,9 @@ private extension PostsVisibilityViewModel {
     @MainActor
     func cleanAll() {
         models.forEach {
-            try? storage?.sharedModelContainer.mainContext.delete(model: $0.self)
+            if ($0 as? SettingsDB.Type) == nil {
+                try? storage?.sharedModelContainer.mainContext.delete(model: $0.self)
+            }
         }
     }
 

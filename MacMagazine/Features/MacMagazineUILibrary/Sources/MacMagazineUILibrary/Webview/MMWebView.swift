@@ -95,14 +95,6 @@ private extension MMWebView {
         navigationDecider.onOpenComments = { [self] slug in commentsURL = slug }
         navigationDecider.onOpenInternalLink = { [self] url in internalLinkURL = url }
 
-        if let cacheKey, WebPageCache.shared.hasPage(for: cacheKey) {
-            return WebPageCache.shared.page(
-                for: cacheKey,
-                configurationProvider: { makeConfiguration() },
-                navigationDecider: navigationDecider
-            )
-        }
-
         let configuration = makeConfiguration()
         let page: WebPage
 
