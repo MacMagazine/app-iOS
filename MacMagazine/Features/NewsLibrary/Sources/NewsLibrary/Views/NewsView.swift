@@ -182,9 +182,6 @@ extension NewsView {
                 labels: [.title, .date, .author],
                 buttons: [.favorite, .share]
             )
-            .contextMenu {
-                MenuContent(data: data)
-            }
             .onAppear {
                 if !favorite && search.isEmpty {
                     viewModel.loadMoreIfNeeded(index: index)

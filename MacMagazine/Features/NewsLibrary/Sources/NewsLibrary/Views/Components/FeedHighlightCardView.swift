@@ -30,9 +30,6 @@ public struct FeedHighlightCardView: View {
         )
         GlassCardView(data: data)
         .compositingGroup()
-        .contextMenu {
-            MenuContent(data: data)
-        }
     }
 
     // MARK: - Init
