@@ -10,7 +10,7 @@ enum CardLabel {
 }
 
 private extension Array where Element == CardLabel {
-    func makeText(_ title: String = "Podcast", using data: CardContent) -> String {
+    func makeText(_ title: String, using data: CardContent) -> String {
         var text = [String]()
         self.forEach {
             switch $0 {
@@ -68,7 +68,7 @@ private struct CardAccessibilityModifier: ViewModifier {
         content
             .accessibilityElement(children: .ignore)
             .accessibilityChildren {
-                Text(labels.makeText(using: data))
+                Text(labels.makeText("", using: data))
                     .accessibilityAddTraits(.isButton)
                     .accessibilityHint("Duplo toque para abrir a notícia.")
                 buttons.makeButtons(using: data)
