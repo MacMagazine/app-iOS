@@ -19,7 +19,7 @@ private extension Array where Element == CardLabel {
             case .duration: text.append("com duração de \(data.type.duration.accessibilityTime)")
             }
         }
-        return "Podcast " + text.joined(separator: ", ") + "."
+        return text.joined(separator: ", ") + "."
     }
 }
 

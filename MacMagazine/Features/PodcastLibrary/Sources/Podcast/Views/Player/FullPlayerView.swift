@@ -22,18 +22,18 @@ enum PodcastBackgroundGradientStyle {
 // MARK: - Accessibility Sort Priority -
 
 enum PlayerAccessibilityPriority {
-    static let favoriteButton: Double = 12
-    static let shareButton: Double = 11
-    static let podcastTitle: Double = 10
-    static let previousChapter: Double = 9
+    static let podcastTitle: Double = 12
+    static let playPauseButton: Double = 11
+    static let skipBackwardButton: Double = 10
+    static let skipForwardButton: Double = 9
     static let progressSlider: Double = 8
-    static let nextChapter: Double = 7
-    static let volumeSlider: Double = 6
+    static let previousChapter: Double = 7
+    static let nextChapter: Double = 6
     static let speedButton: Double = 5
-    static let skipBackwardButton: Double = 4
-    static let playPauseButton: Double = 3
-    static let skipForwardButton: Double = 2
-    static let chaptersButton: Double = 1
+    static let volumeSlider: Double = 4
+    static let chaptersButton: Double = 3
+    static let favoriteButton: Double = 2
+    static let shareButton: Double = 1
 }
 
 // MARK: - PodcastPlayerView -
@@ -230,6 +230,8 @@ private extension FullPlayerView {
         Ticker(text: title, speed: 30)
             .bold()
             .frame(height: 40)
+            .accessibilityLabel(title)
+            .accessibilityAddTraits(.isHeader)
             .accessibilitySortPriority(PlayerAccessibilityPriority.podcastTitle)
     }
 
@@ -247,6 +249,7 @@ private extension FullPlayerView {
             HStack(spacing: 40) {
                 skipButton(
                     systemName: "gobackward.15",
+                    label: "Voltar 15 segundos",
                     action: {
                         playerManager.skip(by: -15)
                         analytics.track(.buttonTap(
@@ -262,6 +265,7 @@ private extension FullPlayerView {
 
                 skipButton(
                     systemName: "goforward.15",
+                    label: "Avançar 15 segundos",
                     action: {
                         playerManager.skip(by: 15)
                         analytics.track(.buttonTap(
@@ -311,6 +315,7 @@ private extension FullPlayerView {
                     Image(systemName: "backward.end")
                 })
                 .font(.system(size: 20))
+                .accessibilityLabel("Capítulo anterior")
                 .accessibilitySortPriority(PlayerAccessibilityPriority.previousChapter)
 
                 Slider(
@@ -333,6 +338,8 @@ private extension FullPlayerView {
                 )
                 .sliderThumbVisibility(.hidden)
                 .tint(.primary)
+                .accessibilityLabel("Posição da reprodução")
+                .accessibilityValue("\(formatTime(displayTime)) de \(formatTime(safeDuration))")
                 .accessibilitySortPriority(PlayerAccessibilityPriority.progressSlider)
 
                 Button(action: {
@@ -346,6 +353,7 @@ private extension FullPlayerView {
                     Image(systemName: "forward.end")
                 })
                 .font(.system(size: 20))
+                .accessibilityLabel("Próximo capítulo")
                 .accessibilitySortPriority(PlayerAccessibilityPriority.nextChapter)
             }
 
@@ -371,9 +379,10 @@ private extension FullPlayerView {
                 .accessibilityHidden(true)
 
             SystemVolumeView()
-            .tint(.primary)
-            .frame(height: 18)
-            .accessibilitySortPriority(PlayerAccessibilityPriority.volumeSlider)
+                .tint(.primary)
+                .frame(height: 18)
+                .accessibilityLabel("Volume")
+                .accessibilitySortPriority(PlayerAccessibilityPriority.volumeSlider)
 
             Image(systemName: "speaker.wave.3")
                 .foregroundColor(.secondary)
@@ -395,14 +404,16 @@ private extension FullPlayerView {
             Image(systemName: playerManager.isPlaying ? "pause.fill" : "play.fill")
         }
         .font(.system(size: 52))
+        .accessibilityLabel(playerManager.isPlaying ? "Pausar" : "Reproduzir")
     }
 
     @ViewBuilder
-    func skipButton(systemName: String, action: @escaping () -> Void) -> some View {
+    func skipButton(systemName: String, label: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
         }
         .font(.system(size: 28))
+        .accessibilityLabel(label)
     }
 }
 
@@ -461,15 +472,15 @@ private extension FullPlayerView {
                 )
         }
         .accessibilityLabel("Velocidade de reprodução")
-        .accessibilityValue("\(currentSpeed)")
+        .accessibilityValue(accessibleSpeedValue(currentSpeed))
         .accessibilityAddTraits(.allowsDirectInteraction)
         .accessibilityAdjustableAction { direction in
             let currentSpeed = Double(playerManager.playbackRate)
             switch direction {
             case .increment:
-                playerManager.setPlaybackRate(Float(currentSpeed + 0.5))
+                playerManager.setPlaybackRate(Float(min(currentSpeed + 0.25, 3.0)))
             case .decrement:
-                playerManager.setPlaybackRate(Float(currentSpeed - 0.5))
+                playerManager.setPlaybackRate(Float(max(currentSpeed - 0.25, 0.5)))
             @unknown default:
                 break
             }
@@ -609,6 +620,18 @@ private extension FullPlayerView {
         } else {
             return String(format: "%d:%02d", minutes, seconds)
         }
+    }
+
+    func accessibleSpeedValue(_ speed: Double) -> String {
+        if abs(speed - 1.0) < 0.001 {
+            return "normal"
+        }
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "pt-BR")
+        formatter.minimumFractionDigits = speed.truncatingRemainder(dividingBy: 1) == 0.0 ? 0 : 1
+        formatter.maximumFractionDigits = 2
+        let base = formatter.string(from: NSNumber(value: speed)) ?? String(speed)
+        return "\(base) vezes"
     }
 
     func formattedSpeedForButton(_ value: Double, isSelected: Bool) -> String {
