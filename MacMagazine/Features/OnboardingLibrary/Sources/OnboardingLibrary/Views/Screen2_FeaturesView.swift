@@ -59,7 +59,6 @@ struct FeaturesView: View {
         }
         .containerRelativeFrame([.horizontal, .vertical])
         .overlay(alignment: .topTrailing) {
-            // Skip button - acts like a toolbar
             OnboardingSkipButton(
                 label: "Pular novidades",
                 hint: "Vá direto para a tela de permissões"
@@ -72,7 +71,6 @@ struct FeaturesView: View {
             .animation(.easeInOut(duration: 0.25), value: isLastPage)
             .allowsHitTesting(!isLastPage)
         }
-        //        .background(OnboardingBackground())
         .onAppear { animateIn = true }
         .onDisappear { animateIn = false }
         .trackScreen(AnalyticsConstants.Screen.onboardingFeatures.name, analytics: coordinator.analytics)
@@ -111,7 +109,6 @@ struct FeaturesView: View {
 
     private var landscapeLayout: some View {
         HStack(spacing: 20) {
-            // Left side - Logo and title
             VStack(spacing: 8) {
                 logoView
                 Text("Novidades no app")
@@ -122,7 +119,6 @@ struct FeaturesView: View {
             }
             .frame(width: 120)
 
-            // Right side - Cards and footer
             VStack(spacing: 0) {
                 Spacer()
 
@@ -131,7 +127,6 @@ struct FeaturesView: View {
 
                 Spacer()
 
-                // Footer at bottom: dots centered, or dots left + button right
                 HStack {
                     if isLastPage {
                         pageIndicator
@@ -186,7 +181,7 @@ struct FeaturesView: View {
         if isIPad {
             return 260
         }
-        return 300
+        return 320
     }
 
     private func pageView(cards: [OnBoardingFeature]) -> some View {
