@@ -207,6 +207,7 @@ private extension FullPlayerView {
             location: .player,
             fallback: { EmptyView() })
         .cornerRadius(24)
+        .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: 540, maxHeight: 540)
         .scaleEffect(playerManager.isPlaying ? 0.95 : 0.85)
         .shadow(
@@ -215,10 +216,9 @@ private extension FullPlayerView {
             x: 0,
             y: 16
         )
-        .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal)
         .accessibilityHidden(true)
-        .id(playerManager.currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
+        .id(playerManager.currentChapter?.id ?? UUID())
         .transition(.opacity)
         .animation(
             .easeInOut(duration: 0.35),
