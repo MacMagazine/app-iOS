@@ -9,10 +9,8 @@ struct PostsVisibilityView: View {
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = PostsVisibilityViewModel()
     @State private var isPresenting = false
-    @State private var showReadConfirmation = false
 
     var body: some View {
-        markAllAsRead
         cleanPosts
         .task {
             viewModel.set(
@@ -24,27 +22,6 @@ struct PostsVisibilityView: View {
 }
 
 private extension PostsVisibilityView {
-    var markAllAsRead: some View {
-        Section {
-            Button(action: {
-                viewModel.markAllAsRead()
-                showReadConfirmation = true
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.cleanPostsOptions.id,
-                    screen: AnalyticsConstants.Screen.settingsPosts.name
-                ))
-            },
-                   label: {
-                Text("Marcar todos como lidos")
-                    .foregroundStyle(theme.main.tint.color ?? .blue)
-            })
-        }
-        .alert("Todos os posts marcados como lido",
-               isPresented: $showReadConfirmation) {
-            Button("OK", role: .cancel) {}
-        }
-    }
-
     var cleanPosts: some View {
         Section {
             Button(action: {

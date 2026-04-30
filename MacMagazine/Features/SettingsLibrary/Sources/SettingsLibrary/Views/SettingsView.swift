@@ -69,6 +69,7 @@ private extension SettingsView {
         NavigationLink {
             List {
                 AppearanceView()
+                ReadingPreferencesView()
                 IconsView()
                 CustomTabView()
                 CustomSocialView()

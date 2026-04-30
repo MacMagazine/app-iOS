@@ -132,6 +132,7 @@ private extension SceneView {
             .environment(viewModel.searchViewModel)
             .environment(podcastPlayerManager)
             .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
+            .environment(\.highlightPostRead, viewModel.settingsViewModel.highlightPostRead)
             .environment(viewModel.sessionState)
             .environmentObject(viewModel.analytics)
             .preferredColorScheme(viewModel.settingsViewModel.colorSchema)

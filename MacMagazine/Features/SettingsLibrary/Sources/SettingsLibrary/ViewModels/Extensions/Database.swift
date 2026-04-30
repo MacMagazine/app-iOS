@@ -51,6 +51,17 @@ extension Database {
     }
 
     @MainActor
+    func update(postRead: Bool) {
+        if let item = settings {
+            item.postRead = postRead
+            item.modifiedAt = Date()
+        } else {
+            context.insert(SettingsDB(postRead: postRead))
+        }
+        try? context.save()
+    }
+
+    @MainActor
     func update(isPatrao: Bool) {
         let date = Calendar.current.date(byAdding: .day, value: isPatrao ? +30 : -1, to: Date()) ?? Date()
         if let item = settings {
