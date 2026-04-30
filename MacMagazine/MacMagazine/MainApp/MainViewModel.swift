@@ -64,6 +64,7 @@ class MainViewModel {
 
         self.storage = Database(
             models: models,
+            cloudKitDatabase: .private("iCloud.com.brit.macmagazine.cloudkit"),
             inMemory: inMemory
         )
 
