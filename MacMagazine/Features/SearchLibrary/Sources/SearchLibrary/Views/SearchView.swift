@@ -6,6 +6,7 @@ import PodcastLibrary
 import StorageLibrary
 import SwiftUI
 import UIComponentsLibrary
+import UIKit
 import YouTubeLibrary
 
 public struct SearchView: View {
@@ -50,6 +51,7 @@ public struct SearchView: View {
                 }
                 .onChange(of: viewModel.status) { _, newStatus in
                     trackSearchCompletion(newStatus)
+                    announceSearchStatus(newStatus)
                 }
                 .navigationDestination(isPresented: $showingWebView) {
                     details
@@ -247,6 +249,25 @@ private extension SearchView {
         case .idle, .searching, .error:
             break
         }
+    }
+
+    func announceSearchStatus(_ status: SearchStatus) {
+        let message: String
+        switch status {
+        case .searching:
+            message = "Buscando..."
+        case .done:
+            if viewModel.results.isEmpty {
+                message = "Nenhum resultado encontrado"
+            } else {
+                message = "\(viewModel.results.count) resultados encontrados"
+            }
+        case .error:
+            message = "Erro na busca"
+        case .idle, .localResults:
+            return
+        }
+        UIAccessibility.post(notification: .announcement, argument: message)
     }
 }
 

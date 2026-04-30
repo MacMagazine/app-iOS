@@ -16,10 +16,18 @@ struct WidgetElementView: View {
     @ViewBuilder
     var body: some View {
         switch widgetFamily {
-        case .systemSmall: smallWidget.widgetURL(post.url)
-        case .accessoryInline: accessoryInlineWidget
-        case .accessoryRectangular: accessoryRectangularWidget
-        default: Link(destination: post.url) { content }
+        case .systemSmall:
+            smallWidget
+                .widgetAccessibility(url: post.url, lastPostTitle: post.title)
+        case .accessoryInline:
+            accessoryInlineWidget
+                .widgetAccessibility(url: post.url, lastPostTitle: post.title)
+        case .accessoryRectangular:
+            accessoryRectangularWidget
+                .widgetAccessibility(url: post.url, lastPostTitle: post.title)
+        default:
+            Link(destination: post.url) { content }
+                .widgetAccessibility(url: nil, lastPostTitle: post.title)
         }
     }
 }

@@ -57,6 +57,7 @@ private extension LeadingImageCard {
             CachedAsyncImage(image: artworkUrl, contentMode: .fill)
                 .frame(width: 100, height: 100)
                 .clipShape(RoundedRectangle(cornerRadius: CardMetrics.innerRadius, style: .continuous))
+                .accessibilityHidden(true)
         }
     }
 }

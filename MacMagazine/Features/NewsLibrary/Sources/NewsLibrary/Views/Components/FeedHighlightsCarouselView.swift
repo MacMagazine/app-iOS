@@ -92,6 +92,8 @@ public struct FeedHighlightsCarouselView: View {
                                 spacing: Layout.spacing
                             )
                     }
+                    .accessibilityLabel(post.title)
+                    .accessibilityHint("Duplo toque para abrir a notícia.")
                     .scrollTransition(.interactive) { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1.0 : 0.95)

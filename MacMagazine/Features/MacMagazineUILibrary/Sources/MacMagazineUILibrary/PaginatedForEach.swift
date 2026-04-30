@@ -42,6 +42,7 @@ public struct PaginatedForEach<Element: Identifiable, Content: View>: View {
         }
         if hasMore {
             ProgressView()
+                .accessibilityLabel("Carregando mais conteúdo")
                 .frame(maxWidth: .infinity)
                 .padding()
         }

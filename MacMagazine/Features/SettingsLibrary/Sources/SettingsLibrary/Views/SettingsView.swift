@@ -126,6 +126,7 @@ private struct ContentSheet: View {
                     Button(action: onDismiss,
                            label: { Image(systemName: "xmark") })
                     .tint(.primary)
+                    .accessibilityLabel("Fechar")
                 }
             }
             .onChange(of: colorScheme) {
@@ -177,6 +178,7 @@ private struct PatronLoginSheet: View {
                     Button(action: onDismiss,
                            label: { Image(systemName: "xmark") })
                     .tint(.primary)
+                    .accessibilityLabel("Fechar")
                 }
             }
         }

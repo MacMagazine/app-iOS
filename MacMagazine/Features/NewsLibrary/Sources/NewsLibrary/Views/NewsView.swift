@@ -216,6 +216,7 @@ extension NewsView {
                            action: { readingNews = false },
                            label: { Image(systemName: "chevron.backward") })
                     .tint(.primary)
+                    .accessibilityLabel("Voltar")
                 }
                 ToolbarItem(placement: .automatic) {
                     favoriteView

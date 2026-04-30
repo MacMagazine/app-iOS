@@ -26,6 +26,7 @@ public struct MenuView<T: Hashable>: View where T: RawRepresentable, T.RawValue:
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
                     .glassEffect(effect(selected: selected == option), in: .capsule)
+                    .accessibilityAddTraits(selected == option ? .isSelected : [])
                 }
             }
         }

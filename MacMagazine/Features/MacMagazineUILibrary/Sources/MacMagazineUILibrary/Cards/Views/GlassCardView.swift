@@ -108,11 +108,13 @@ private extension GlassCardView {
                     .cornerRadius(12)
             }
             .aspectRatio(ratio, contentMode: .fit)
+            .accessibilityHidden(true)
         } else {
             GeometryReader { geo in
                 CachedAsyncImage(image: imageUrl, contentMode: .fill)
                     .frame(width: geo.size.width, height: geo.size.height)
             }
+            .accessibilityHidden(true)
         }
     }
 }

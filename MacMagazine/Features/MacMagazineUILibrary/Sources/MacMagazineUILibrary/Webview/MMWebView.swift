@@ -50,6 +50,7 @@ public struct MMWebView: View {
                                 Image(systemName: "xmark")
                             }
                             .tint(.primary)
+                            .accessibilityLabel("Fechar")
                         }
                     }
                 }

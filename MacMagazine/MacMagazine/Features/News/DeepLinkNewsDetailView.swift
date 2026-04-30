@@ -32,6 +32,7 @@ struct DeepLinkNewsDetailView: View {
                         Button(action: onDismiss,
                                label: { Image(systemName: "xmark") })
                         .tint(.primary)
+                        .accessibilityLabel("Fechar")
                     }
                     ToolbarItem(placement: .automatic) {
                         favoriteView

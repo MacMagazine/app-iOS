@@ -44,6 +44,16 @@ struct MiniPlayerView: View {
             .gesture(tapToOpen)
             .gesture(tapToDismiss)
             .matchedTransitionSource(id: "MINIPLAYER", in: animation)
+            .accessibilityAction(named: "Abrir player completo") {
+                playerManager.isFullscreen.toggle()
+            }
+            .accessibilityAction(named: "Fechar mini player") {
+                if playerManager.isPlaying {
+                    playerManager.pause()
+                    currentPodcast.save(current: playerManager.currentTime, using: modelContext)
+                }
+                playerManager.currentPodcast = nil
+            }
     }
 
     private var tapToOpen: some Gesture {
@@ -83,6 +93,7 @@ private extension MiniPlayerView {
                 Ticker(text: currentPodcast.title, speed: 30)
                     .frame(height: 30)
                     .id(currentPodcast.id)
+                    .accessibilityLabel(currentPodcast.title)
 
                 HStack(spacing: 20) {
                     Button {
@@ -96,6 +107,7 @@ private extension MiniPlayerView {
                             .font(.system(size: 20))
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Voltar 15 segundos")
 
                     Button {
                         playerManager.togglePlayPause()
@@ -109,6 +121,7 @@ private extension MiniPlayerView {
                             .font(.system(size: 24))
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(playerManager.isPlaying ? "Pausar" : "Reproduzir")
 
                     Button {
                         playerManager.skip(by: 15)
@@ -121,6 +134,7 @@ private extension MiniPlayerView {
                             .font(.system(size: 20))
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Avançar 15 segundos")
                 }
             }
             .foregroundStyle(controlsColor)

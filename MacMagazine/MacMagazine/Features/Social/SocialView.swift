@@ -54,7 +54,7 @@ private extension SocialView {
     var optionsView: some View {
         @Bindable var bindableViewModel = viewModel
 
-        Picker("", selection: $bindableViewModel.social) {
+        Picker("Seção social", selection: $bindableViewModel.social) {
             ForEach(viewModel.settingsViewModel.social, id: \.self) { option in
                 Text(option.rawValue).tag(option)
             }
