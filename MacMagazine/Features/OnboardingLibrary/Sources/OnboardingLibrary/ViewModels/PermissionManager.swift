@@ -23,6 +23,11 @@ public final class PermissionManager {
 
     /// Check current push notification permission status from system
     func checkPushPermissionStatus() async {
+        if ProcessInfo.processInfo.isiOSAppOnMac {
+            currentPushStatus = .authorized
+            return
+        }
+
         let status = await PushNotification.authorizationStatus
         currentPushStatus = status
     }
