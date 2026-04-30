@@ -14,6 +14,7 @@ struct WebViewStatusOverlay: View {
         switch status {
         case .loading:
             ProgressView()
+                .accessibilityLabel("Carregando conteúdo")
         case let .error(error):
             ContentUnavailableView(
                 "Estamos com um problema",

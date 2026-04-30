@@ -514,7 +514,6 @@ private extension FullPlayerView {
                 .accessibilityHidden(true)
             }
             .padding(.horizontal, 20)
-            .dynamicTypeSize(.medium)
         }
     }
 

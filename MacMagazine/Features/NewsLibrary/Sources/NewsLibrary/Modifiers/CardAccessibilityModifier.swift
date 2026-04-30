@@ -3,7 +3,7 @@ import MacMagazineUILibrary
 import SwiftUI
 import UtilityLibrary
 
-enum CardLabel {
+public enum CardLabel {
     case title
     case date
     case author
@@ -26,7 +26,7 @@ private extension Array where Element == CardLabel {
     }
 }
 
-enum CardButton {
+public enum CardButton {
     case share
     case favorite
 }
@@ -45,7 +45,7 @@ private extension Array where Element == CardButton {
     }
 }
 
-extension View {
+public extension View {
     func cardAccessibility(
         data: CardContent,
         labels: [CardLabel]?,

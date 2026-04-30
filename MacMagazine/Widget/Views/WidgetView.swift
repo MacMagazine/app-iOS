@@ -40,6 +40,10 @@ struct WidgetView: View {
                 id: \.self) { index in
             WidgetElementView(post: content[index])
         }.header(title: "Últimas notícias", spacing: widgetFamily.spacing)
+        .widgetRectangularAccessibility(
+            url: content.first?.url,
+            accessibilityValue: content.prefix(quantity).map(\.title).joined(separator: "; ")
+        )
         .trackScreen(AnalyticsConstants.Screen.widget(widgetFamily.description).name, analytics: analytics)
     }
 }

@@ -12,9 +12,11 @@ struct RecentSearchesView: View {
                 HStack {
                     Text("Recentes")
                         .font(.headline)
+                        .accessibilityAddTraits(.isHeader)
                     Spacer()
                     Button("Limpar") { onClear() }
                         .font(.subheadline)
+                        .accessibilityLabel("Limpar buscas recentes")
                 }
                 .padding(.horizontal)
 

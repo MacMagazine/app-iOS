@@ -99,7 +99,6 @@ struct SpeedWheelPicker<LeftIcon: View, RightIcon: View>: View {
                 .buttonStyle(.plain)
         }
         .frame(width: width, height: 40)
-        .dynamicTypeSize(.medium)
     }
 
     // MARK: - SCROLL BINDING

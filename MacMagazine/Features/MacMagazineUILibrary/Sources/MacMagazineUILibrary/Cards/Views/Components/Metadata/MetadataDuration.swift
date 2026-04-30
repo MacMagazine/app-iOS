@@ -1,4 +1,5 @@
 import SwiftUI
+import UtilityLibrary
 
 public struct MetadataDuration: View {
     let text: String
@@ -15,5 +16,6 @@ public struct MetadataDuration: View {
             .foregroundColor(.white)
             .lineLimit(1)
             .glassEffect(.clear, in: .rect(cornerRadius: 6))
+            .accessibilityLabel(text.accessibilityTime)
     }
 }

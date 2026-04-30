@@ -32,6 +32,7 @@ struct DisqusSheet: View {
                     Button(action: { onDismiss() },
                            label: { Image(systemName: "xmark") })
                     .tint(.primary)
+                    .accessibilityLabel("Fechar")
                 }
             }
         }
@@ -70,6 +71,7 @@ struct DisqusSheet: View {
                             Button(action: { self.loginURL = nil },
                                    label: { Image(systemName: "xmark") })
                             .tint(.primary)
+                            .accessibilityLabel("Fechar")
                         }
                     }
                 }
