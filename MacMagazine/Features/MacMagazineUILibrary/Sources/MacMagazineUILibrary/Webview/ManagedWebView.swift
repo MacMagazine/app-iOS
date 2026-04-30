@@ -94,7 +94,8 @@ private extension ManagedWebView {
     @ViewBuilder
     var webview: some View {
         if let page, isActive {
-            Color.clear.opacity(0)
+            Color.clear
+                .allowsHitTesting(false)
                 .safeAreaInset(edge: .trailing, spacing: shouldUseSidebar ? nil : 0) {
                     WebView(page)
                         .webViewBackForwardNavigationGestures(
