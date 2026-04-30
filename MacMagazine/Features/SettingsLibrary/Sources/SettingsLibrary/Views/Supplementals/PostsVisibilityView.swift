@@ -11,6 +11,7 @@ struct PostsVisibilityView: View {
     @State private var isPresenting = false
 
     var body: some View {
+        markAllAsRead
         cleanPosts
         .task {
             viewModel.set(
@@ -22,6 +23,22 @@ struct PostsVisibilityView: View {
 }
 
 private extension PostsVisibilityView {
+    var markAllAsRead: some View {
+        Section {
+            Button(action: {
+                viewModel.markAllAsRead()
+                analytics.track(.buttonTap(
+                    buttonId: AnalyticsConstants.ButtonID.cleanPostsOptions.id,
+                    screen: AnalyticsConstants.Screen.settingsPosts.name
+                ))
+            },
+                   label: {
+                Text("Marcar todos como lidos")
+                    .foregroundStyle(theme.main.tint.color ?? .blue)
+            })
+        }
+    }
+
     var cleanPosts: some View {
         Section {
             Button(action: {

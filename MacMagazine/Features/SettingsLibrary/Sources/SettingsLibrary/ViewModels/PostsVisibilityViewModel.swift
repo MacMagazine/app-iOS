@@ -27,6 +27,14 @@ extension PostsVisibilityViewModel {
         case .keepFavoritesAndStatus: keepFavoritesAndStatus()
         }
     }
+
+    @MainActor
+    func markAllAsRead() {
+        let context = storage?.sharedModelContainer.mainContext
+        models.forEach {
+            ($0 as? any ModelReadable.Type)?.markAllAsRead(using: context)
+        }
+    }
 }
 
 private extension PostsVisibilityViewModel {
