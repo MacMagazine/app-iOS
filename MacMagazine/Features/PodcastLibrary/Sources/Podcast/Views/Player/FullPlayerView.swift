@@ -22,18 +22,18 @@ enum PodcastBackgroundGradientStyle {
 // MARK: - Accessibility Sort Priority -
 
 enum PlayerAccessibilityPriority {
-    static let podcastTitle: Double = 12
-    static let playPauseButton: Double = 11
-    static let skipBackwardButton: Double = 10
-    static let skipForwardButton: Double = 9
+    static let favoriteButton: Double = 12
+    static let shareButton: Double = 11
+    static let podcastTitle: Double = 10
+    static let previousChapter: Double = 9
     static let progressSlider: Double = 8
-    static let previousChapter: Double = 7
-    static let nextChapter: Double = 6
-    static let speedButton: Double = 5
-    static let volumeSlider: Double = 4
-    static let chaptersButton: Double = 3
-    static let favoriteButton: Double = 2
-    static let shareButton: Double = 1
+    static let nextChapter: Double = 7
+    static let speedButton: Double = 6
+    static let skipBackwardButton: Double = 5
+    static let playPauseButton: Double = 4
+    static let skipForwardButton: Double = 3
+    static let chaptersButton: Double = 2
+    static let volumeSlider: Double = 1
 }
 
 // MARK: - PodcastPlayerView -
