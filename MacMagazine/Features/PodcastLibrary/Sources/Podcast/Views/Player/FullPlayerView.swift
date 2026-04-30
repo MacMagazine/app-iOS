@@ -142,7 +142,7 @@ struct FullPlayerView: View {
 
             } else {
                 // Layout A - Vertical (iPhone portrait medium + iPad centered)
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     HStack(spacing: 0) {
                         Spacer()
                         actions
@@ -150,18 +150,19 @@ struct FullPlayerView: View {
                     .padding(.top, 5)
 
                     artworkView
+                        .layoutPriority(-1)
                     podcastTitle(podcast.title)
 
-                    Spacer()
+                    Spacer(minLength: 8)
 
                     progressSlider
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 16)
                     playbackControls
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 16)
                     volumeSlider
+                        .padding(.bottom, 16)
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 40)
             }
         }
     }
