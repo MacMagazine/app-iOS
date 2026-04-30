@@ -1,0 +1,63 @@
+name: Feature Request
+description: Sugerir uma nova funcionalidade
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado pela sugestão! Descreva a funcionalidade que gostaria de ver no app.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Qual problema isso resolve?
+      description: Descreva a frustração ou limitação que você enfrenta hoje
+      placeholder: "Eu fico frustrado quando..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solução desejada
+      description: Como você imagina que deveria funcionar?
+      placeholder: "Gostaria que o app..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Você já tentou resolver de outra forma?
+      placeholder: "Tentei usar... mas não funcionou porque..."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área do app
+      description: Em qual parte do app a funcionalidade se encaixa?
+      options:
+        - Notícias
+        - Podcasts
+        - Vídeos
+        - Busca
+        - Ajustes
+        - Widget
+        - Apple Watch
+        - Push Notifications
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Mockups ou referências
+      description: Tem alguma imagem, mockup ou app de referência?
+      placeholder: "Arraste imagens aqui ou cole links de referência"
+    validations:
+      required: false

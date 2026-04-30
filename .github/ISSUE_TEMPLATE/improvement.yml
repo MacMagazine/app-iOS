@@ -1,0 +1,55 @@
+name: Melhoria
+description: Sugerir uma melhoria em funcionalidade existente
+title: "[Melhoria]: "
+labels: ["improvement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Descreva o que gostaria de melhorar no app.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área do app
+      description: Qual parte do app precisa de melhoria?
+      options:
+        - Notícias
+        - Podcasts
+        - Vídeos
+        - Busca
+        - Ajustes / Aparência
+        - Widget
+        - Apple Watch
+        - Performance
+        - Acessibilidade
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Como funciona hoje
+      description: Descreva o comportamento atual
+      placeholder: "Hoje quando eu faço X, acontece Y..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired
+    attributes:
+      label: Como deveria funcionar
+      description: Descreva o comportamento desejado
+      placeholder: "Gostaria que ao fazer X, acontecesse Z..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots ou referências
+      description: Imagens mostrando o estado atual ou o resultado desejado
+      placeholder: "Arraste imagens aqui"
+    validations:
+      required: false
