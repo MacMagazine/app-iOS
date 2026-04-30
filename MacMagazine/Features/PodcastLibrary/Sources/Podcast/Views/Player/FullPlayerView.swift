@@ -142,7 +142,7 @@ struct FullPlayerView: View {
 
             } else {
                 // Layout A - Vertical (iPhone portrait medium + iPad centered)
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     HStack(spacing: 0) {
                         Spacer()
                         actions
@@ -150,18 +150,19 @@ struct FullPlayerView: View {
                     .padding(.top, 5)
 
                     artworkView
+                        .layoutPriority(-1)
                     podcastTitle(podcast.title)
 
-                    Spacer()
+                    Spacer(minLength: 8)
 
                     progressSlider
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 16)
                     playbackControls
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 16)
                     volumeSlider
+                        .padding(.bottom, 16)
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 40)
             }
         }
     }
@@ -206,6 +207,7 @@ private extension FullPlayerView {
             location: .player,
             fallback: { EmptyView() })
         .cornerRadius(24)
+        .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: 540, maxHeight: 540)
         .scaleEffect(playerManager.isPlaying ? 0.95 : 0.85)
         .shadow(
@@ -214,10 +216,9 @@ private extension FullPlayerView {
             x: 0,
             y: 16
         )
-        .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal)
         .accessibilityHidden(true)
-        .id(playerManager.currentChapter?.id ?? UUID()) // Triggers animation when chapter changes
+        .id(playerManager.currentChapter?.id ?? UUID())
         .transition(.opacity)
         .animation(
             .easeInOut(duration: 0.35),
