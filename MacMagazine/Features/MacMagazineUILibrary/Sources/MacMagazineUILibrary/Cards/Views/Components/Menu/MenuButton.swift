@@ -25,6 +25,12 @@ public struct MenuContent: View {
     }
 
     public var body: some View {
+        if let readAction = data.readAction {
+            Button(readText, systemImage: readImage) {
+                readAction()
+            }
+        }
+
         Button("Favorito", systemImage: favoriteImage) {
             data.favoriteAction()
         }
@@ -40,5 +46,13 @@ public struct MenuContent: View {
 private extension MenuContent {
     var favoriteImage: String {
         data.favorite ? "star.fill" : "star"
+    }
+
+    var readText: String {
+        data.read ? "Marcar como não lido" : "Marcar como lido"
+    }
+
+    var readImage: String {
+        data.read ? "circle" : "circle.fill"
     }
 }

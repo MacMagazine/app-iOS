@@ -3,6 +3,7 @@ import SwiftUI
 
 public struct NewsCard: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.highlightPostRead) private var highlightPostRead
 
     let data: CardContent
     let onSelect: () -> Void
@@ -18,6 +19,7 @@ public struct NewsCard: View {
     public var body: some View {
         Button(action: { onSelect() },
                label: { content })
+        .opacity(data.read && highlightPostRead ? 0.6 : 1)
     }
 }
 

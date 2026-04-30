@@ -321,7 +321,67 @@ struct FeedDBTests {
         #expect(remaining.isEmpty)
     }
 
-    // MARK: - Integration Tests
+    // MARK: - ModelReadable Tests
+
+    @Test("markAllAsRead should mark all unread posts as read")
+    func markAllAsReadMarksUnreadPosts() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        storage.context.insert(FeedDB(postId: "1", title: "Unread 1"))
+        storage.context.insert(FeedDB(postId: "2", title: "Unread 2"))
+        storage.context.insert(FeedDB(postId: "3", title: "Unread 3"))
+        try? storage.context.save()
+
+        FeedDB.markAllAsRead(using: storage.context)
+
+        let posts = storage.fetch(FeedDB.self)
+        #expect(posts.count == 3)
+        #expect(posts.allSatisfy { $0.read == true })
+    }
+
+    @Test("markAllAsRead should not affect already-read posts")
+    func markAllAsReadPreservesAlreadyRead() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let originalDate = Date(timeIntervalSince1970: 1000)
+        let alreadyRead = FeedDB(postId: "1", title: "Already Read", modifiedAt: originalDate)
+        alreadyRead.read = true
+        storage.context.insert(alreadyRead)
+        storage.context.insert(FeedDB(postId: "2", title: "Unread"))
+        try? storage.context.save()
+
+        FeedDB.markAllAsRead(using: storage.context)
+
+        let posts = storage.fetch(FeedDB.self)
+        #expect(posts.allSatisfy { $0.read == true })
+        let readPost = posts.first { $0.postId == "1" }
+        #expect(readPost?.modifiedAt == originalDate)
+    }
+
+    @Test("markAllAsRead should handle empty database")
+    func markAllAsReadHandlesEmptyDatabase() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        FeedDB.markAllAsRead(using: storage.context)
+        #expect(storage.fetch(FeedDB.self).isEmpty)
+    }
+
+    @Test("markAllAsRead with nil context does not crash")
+    func markAllAsReadNilContext() {
+        FeedDB.markAllAsRead(using: nil)
+    }
+
+    @Test("markAllAsRead should update modifiedAt on newly-read posts")
+    func markAllAsReadUpdatesModifiedAt() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let oldDate = Date(timeIntervalSince1970: 1000)
+        let post = FeedDB(postId: "1", title: "Old Post", modifiedAt: oldDate)
+        storage.context.insert(post)
+        try? storage.context.save()
+
+        FeedDB.markAllAsRead(using: storage.context)
+
+        let fetched = storage.fetch(FeedDB.self).first
+        #expect(fetched?.read == true)
+        #expect(fetched?.modifiedAt != oldDate)
+    }
 
     // MARK: - ModelDuplicable Tests
 

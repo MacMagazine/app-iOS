@@ -16,6 +16,7 @@ public struct FeedHighlightCardView: View {
     let post: FeedDB
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.highlightPostRead) private var highlightPostRead
     @EnvironmentObject private var analytics: AnalyticsManager
 
     // MARK: - Body
@@ -29,7 +30,8 @@ public struct FeedHighlightCardView: View {
             aspectRatio: nil
         )
         GlassCardView(data: data)
-        .compositingGroup()
+            .opacity(post.read && highlightPostRead ? 0.6 : 1)
+            .compositingGroup()
     }
 
     // MARK: - Init

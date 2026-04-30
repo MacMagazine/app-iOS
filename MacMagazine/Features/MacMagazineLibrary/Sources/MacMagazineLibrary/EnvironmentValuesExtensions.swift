@@ -24,4 +24,7 @@ public extension EnvironmentValues {
 
     @MainActor @Entry
     var removeAds: Bool = false
+
+    @MainActor @Entry
+    var highlightPostRead: Bool = true
 }

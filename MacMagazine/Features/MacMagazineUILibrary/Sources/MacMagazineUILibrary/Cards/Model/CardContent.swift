@@ -71,7 +71,9 @@ public struct CardContent {
     public let artworkUrl: String
     public let urlToShare: String
     public let favorite: Bool
+    public let read: Bool
     public let favoriteAction: () -> Void
+    public let readAction: (() -> Void)?
 
     /// The aspect ratio for the card thumbnail.
     /// When `nil`, the thumbnail fills its parent frame (useful for externally-sized cards like carousels).
@@ -86,8 +88,10 @@ public struct CardContent {
         artworkUrl: String,
         urlToShare: String,
         favorite: Bool,
+        read: Bool = false,
         aspectRatio: CGFloat? = 16 / 9,
-        favoriteAction: @escaping () -> Void
+        favoriteAction: @escaping () -> Void,
+        readAction: (() -> Void)? = nil
     ) {
         self.type = type
         self.title = title
@@ -97,7 +101,9 @@ public struct CardContent {
         self.urlToShare = urlToShare
         self.artworkUrl = artworkUrl
         self.favorite = favorite
+        self.read = read
         self.aspectRatio = aspectRatio
         self.favoriteAction = favoriteAction
+        self.readAction = readAction
     }
 }

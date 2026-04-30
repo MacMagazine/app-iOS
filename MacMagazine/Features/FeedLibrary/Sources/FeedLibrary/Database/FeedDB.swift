@@ -77,6 +77,19 @@ extension FeedDB: ModelFavoritable {
     }
 }
 
+extension FeedDB: ModelReadable {
+    public static func markAllAsRead(using context: ModelContext?) {
+        let descriptor = FetchDescriptor<FeedDB>(predicate: #Predicate<FeedDB> { !$0.read })
+        guard let context,
+              let data = try? context.fetch(descriptor) else { return }
+        for post in data {
+            post.read = true
+            post.modifiedAt = Date()
+        }
+        try? context.save()
+    }
+}
+
 extension FeedDB: ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
         let descriptor = FetchDescriptor<FeedDB>(sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)])

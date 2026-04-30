@@ -25,6 +25,7 @@ public extension FeedDB {
             artworkUrl: self.artworkURL,
             urlToShare: self.link,
             favorite: self.favorite,
+            read: self.read,
             aspectRatio: aspectRatio,
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
@@ -35,6 +36,12 @@ public extension FeedDB {
                     buttonId: AnalyticsConstants.ButtonID.newsFavorite.id,
                     screen: screen ?? type.screenName
                 ))
+            },
+            readAction: { [weak self] in
+                guard let self, let context else { return }
+                self.read.toggle()
+                self.modifiedAt = Date()
+                try? context.save()
             }
         )
     }
