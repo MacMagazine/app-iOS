@@ -1,0 +1,104 @@
+name: Bug Report
+description: Reportar um bug no app
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar! Preencha todos os campos obrigatórios para que possamos reproduzir e corrigir o problema.
+
+  - type: input
+    id: app-version
+    attributes:
+      label: Versão do app
+      description: Vá em Ajustes > Sobre para ver a versão
+      placeholder: "ex: 5.2.0 (build 142)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Dispositivo
+      description: Em qual dispositivo o bug acontece?
+      options:
+        - iPhone (tela pequena — SE, Mini)
+        - iPhone (tela normal — 16, 16 Pro)
+        - iPhone (tela grande — 16 Plus, 16 Pro Max)
+        - iPad
+        - Mac (Designed for iPad)
+        - Apple Watch
+    validations:
+      required: true
+
+  - type: input
+    id: ios-version
+    attributes:
+      label: Versão do iOS/iPadOS/watchOS
+      description: Vá em Ajustes > Geral > Sobre
+      placeholder: "ex: iOS 26.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do bug
+      description: O que aconteceu de errado?
+      placeholder: "Descreva o que você viu acontecer"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+      description: O que deveria ter acontecido?
+      placeholder: "Descreva o que você esperava que acontecesse"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      description: Como chegamos no bug? Seja específico.
+      placeholder: |
+        1. Abra o app
+        2. Vá em...
+        3. Toque em...
+        4. Observe que...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequência
+      description: Com que frequência o bug acontece?
+      options:
+        - Sempre (100%)
+        - Frequentemente (>50%)
+        - Às vezes (<50%)
+        - Raramente (aconteceu 1-2 vezes)
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots ou vídeos
+      description: Anexe imagens ou gravações de tela que mostrem o problema
+      placeholder: "Arraste imagens/vídeos aqui"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto adicional
+      description: Algo mais que possa ajudar? (ex. estava offline, acabou de atualizar, tema escuro, etc.)
+      placeholder: "Informações extras..."
+    validations:
+      required: false
