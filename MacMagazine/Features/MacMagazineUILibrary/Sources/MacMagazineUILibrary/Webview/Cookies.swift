@@ -5,6 +5,7 @@ public struct Cookies {
 
     static let disqus = "disqus.com"
     static let mmDomain = "macmagazine.com.br"
+    private static let cookieExpiration: TimeInterval = 86_400
 
     private static let disqusCookiesKey = "disqus_saved_cookies"
 
@@ -52,7 +53,7 @@ public struct Cookies {
             .name: "_color_schema",
             .value: value,
             .secure: "true",
-            .expires: NSDate(timeIntervalSinceNow: 60)
+            .expires: NSDate(timeIntervalSinceNow: cookieExpiration)
         ])
     }
 
@@ -63,7 +64,7 @@ public struct Cookies {
             .name: "darkmode",
             .value: value,
             .secure: "true",
-            .expires: NSDate(timeIntervalSinceNow: 60)
+            .expires: NSDate(timeIntervalSinceNow: cookieExpiration)
         ])
     }
 
@@ -74,7 +75,7 @@ public struct Cookies {
             .name: "fonte",
             .value: value,
             .secure: "true",
-            .expires: NSDate(timeIntervalSinceNow: 60)
+            .expires: NSDate(timeIntervalSinceNow: cookieExpiration)
         ])
     }
 
@@ -85,7 +86,7 @@ public struct Cookies {
             .name: "version",
             .value: value,
             .secure: "true",
-            .expires: NSDate(timeIntervalSinceNow: 60)
+            .expires: NSDate(timeIntervalSinceNow: cookieExpiration)
         ])
     }
 
@@ -96,7 +97,7 @@ public struct Cookies {
             .name: "patr",
             .value: value,
             .secure: "true",
-            .expires: NSDate(timeIntervalSinceNow: 60)
+            .expires: NSDate(timeIntervalSinceNow: cookieExpiration)
         ])
     }
 }
