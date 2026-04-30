@@ -44,16 +44,6 @@ struct MiniPlayerView: View {
             .gesture(tapToOpen)
             .gesture(tapToDismiss)
             .matchedTransitionSource(id: "MINIPLAYER", in: animation)
-            .accessibilityAction(named: "Abrir player completo") {
-                playerManager.isFullscreen.toggle()
-            }
-            .accessibilityAction(named: "Fechar mini player") {
-                if playerManager.isPlaying {
-                    playerManager.pause()
-                    currentPodcast.save(current: playerManager.currentTime, using: modelContext)
-                }
-                playerManager.currentPodcast = nil
-            }
     }
 
     private var tapToOpen: some Gesture {
@@ -70,16 +60,20 @@ struct MiniPlayerView: View {
     private var tapToDismiss: some Gesture {
         TapGesture(count: 2)
             .onEnded { _ in
-                if playerManager.isPlaying {
-                    playerManager.pause()
-                    currentPodcast.save(current: playerManager.currentTime, using: modelContext)
-                }
-                playerManager.currentPodcast = nil
-                analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.podcastCloseMiniPlayer.id,
-                    screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
-                ))
+                closeMiniPlayer()
             }
+    }
+
+    private func closeMiniPlayer() {
+        if playerManager.isPlaying {
+            playerManager.pause()
+            currentPodcast.save(current: playerManager.currentTime, using: modelContext)
+        }
+        playerManager.currentPodcast = nil
+        analytics.track(.buttonTap(
+            buttonId: AnalyticsConstants.ButtonID.podcastCloseMiniPlayer.id,
+            screen: AnalyticsConstants.Screen.podcastMiniPlayer.name
+        ))
     }
 }
 
@@ -108,6 +102,7 @@ private extension MiniPlayerView {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Voltar 15 segundos")
+                    .accessibilityAction(named: "Fechar mini player") { closeMiniPlayer() }
 
                     Button {
                         playerManager.togglePlayPause()
@@ -122,6 +117,7 @@ private extension MiniPlayerView {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(playerManager.isPlaying ? "Pausar" : "Reproduzir")
+                    .accessibilityAction(named: "Fechar mini player") { closeMiniPlayer() }
 
                     Button {
                         playerManager.skip(by: 15)
@@ -135,6 +131,7 @@ private extension MiniPlayerView {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Avançar 15 segundos")
+                    .accessibilityAction(named: "Fechar mini player") { closeMiniPlayer() }
                 }
             }
             .foregroundStyle(controlsColor)
