@@ -29,7 +29,8 @@ public struct FeedHighlightCardView: View {
             aspectRatio: nil
         )
         GlassCardView(data: data)
-        .compositingGroup()
+            .opacity(post.read ? 0.6 : 1)
+            .compositingGroup()
     }
 
     // MARK: - Init

@@ -18,6 +18,7 @@ public struct NewsCard: View {
     public var body: some View {
         Button(action: { onSelect() },
                label: { content })
+        .opacity(data.read ? 0.6 : 1)
     }
 }
 
