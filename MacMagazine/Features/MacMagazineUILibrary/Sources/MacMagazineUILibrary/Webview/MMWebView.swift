@@ -86,14 +86,13 @@ private extension MMWebView {
     func makeLoadAction() -> (@MainActor (WebPage) async throws -> Void)? {
         guard let cacheKey else { return urlLoadAction() }
         if WebPageCache.shared.hasPage(for: cacheKey) {
-            // Reload the cached page so it re-reads freshly applied cookies
             return { page in
-                Logger.webView.debug("[Cache] Hit for key '\(cacheKey)' — reloading to apply updated cookies")
+                Logger.webView.debug("[Cache] Hit '\(cacheKey)' — reloading")
                 page.reload()
                 try? await Task.sleep(for: .milliseconds(100))
             }
         }
-        Logger.webView.debug("[Cache] Miss for key '\(cacheKey)' — loading URL")
+        Logger.webView.debug("[Cache] Miss '\(cacheKey)'")
         return urlLoadAction()
     }
 
@@ -132,16 +131,14 @@ private extension MMWebView {
         }
 
         page.customUserAgent = Utils.userAgent
-
-        // Always apply cookies to the shared default store so every page
-        // (cached or fresh) reads the current state on next load/reload.
         await applyCookies(using: colorScheme)
 
         return page
     }
 
     func makeConfiguration() -> WebPage.Configuration {
-        let configuration = WebPage.Configuration()
+        var configuration = WebPage.Configuration()
+        configuration.websiteDataStore = .default()
         let contentController = configuration.userContentController
 
         contentController.addUserScript(MMWebViewUserScripts.hideSiteHeader)
