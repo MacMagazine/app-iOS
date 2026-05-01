@@ -66,6 +66,9 @@ public struct ManagedWebView: View {
         .task(id: reloadTrigger) {
             let activePage: WebPage?
             if let existing = page {
+                // Always call pageProvider so it can refresh cookies on the
+                // existing page's store before the load/reload runs.
+                _ = await pageProvider()
                 activePage = existing
             } else {
                 activePage = await pageProvider()
