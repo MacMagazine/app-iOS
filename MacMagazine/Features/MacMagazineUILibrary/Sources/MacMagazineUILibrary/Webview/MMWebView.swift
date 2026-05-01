@@ -1,12 +1,7 @@
 import Foundation
 import MacMagazineLibrary
-import os
 import SwiftUI
 @preconcurrency import WebKit
-
-private extension Logger {
-    static let webView = Logger(subsystem: "com.macmagazine", category: "WebView")
-}
 
 public struct MMWebView: View {
     @Environment(\.removeAds) private var removeAds
@@ -41,7 +36,7 @@ public struct MMWebView: View {
             pageProvider: { await makePage() },
             loadAction: makeLoadAction(),
             onColorSchemeChange: { _, newScheme in
-                await applyCookies(using: newScheme)
+                await updateCookies(for: newScheme)
             },
             page: $page,
             reloadTrigger: reloadID
@@ -69,14 +64,6 @@ public struct MMWebView: View {
         .onChange(of: colorScheme) {
             page?.reload()
         }
-        .onChange(of: removeAds) { _, newValue in
-            guard let page else { return }
-            Logger.webView.debug("[Cookie] removeAds changed to \(newValue) — refreshing cookies and reloading")
-            Task {
-                await applyCookies(using: colorScheme)
-                page.reload()
-            }
-        }
     }
 }
 
@@ -86,13 +73,8 @@ private extension MMWebView {
     func makeLoadAction() -> (@MainActor (WebPage) async throws -> Void)? {
         guard let cacheKey else { return urlLoadAction() }
         if WebPageCache.shared.hasPage(for: cacheKey) {
-            return { page in
-                Logger.webView.debug("[Cache] Hit '\(cacheKey)' — reloading")
-                page.reload()
-                try? await Task.sleep(for: .milliseconds(100))
-            }
+            return nil
         }
-        Logger.webView.debug("[Cache] Miss '\(cacheKey)'")
         return urlLoadAction()
     }
 
@@ -131,14 +113,18 @@ private extension MMWebView {
         }
 
         page.customUserAgent = Utils.userAgent
-        await applyCookies(using: colorScheme)
+
+        let cookies = makeCookies(using: colorScheme)
+        let cookieStore = configuration.websiteDataStore.httpCookieStore
+        for cookie in cookies {
+            await cookieStore.setCookie(cookie)
+        }
 
         return page
     }
 
     func makeConfiguration() -> WebPage.Configuration {
-        var configuration = WebPage.Configuration()
-        configuration.websiteDataStore = .default()
+        let configuration = WebPage.Configuration()
         let contentController = configuration.userContentController
 
         contentController.addUserScript(MMWebViewUserScripts.hideSiteHeader)
@@ -156,12 +142,11 @@ private extension MMWebView {
         )
     }
 
-    func applyCookies(using colorScheme: ColorScheme) async {
+    func updateCookies(for colorScheme: ColorScheme) async {
         let cookies = makeCookies(using: colorScheme)
         let cookieStore = WKWebsiteDataStore.default().httpCookieStore
         for cookie in cookies {
             await cookieStore.setCookie(cookie)
         }
-        Logger.webView.debug("[Cookie] Applied: \(cookies.map { "\($0.name)=\($0.value)" }.joined(separator: ", "))")
     }
 }

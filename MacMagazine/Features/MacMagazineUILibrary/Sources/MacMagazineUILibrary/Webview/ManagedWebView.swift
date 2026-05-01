@@ -66,7 +66,6 @@ public struct ManagedWebView: View {
         .task(id: reloadTrigger) {
             let activePage: WebPage?
             if let existing = page {
-                _ = await pageProvider()
                 activePage = existing
             } else {
                 activePage = await pageProvider()
