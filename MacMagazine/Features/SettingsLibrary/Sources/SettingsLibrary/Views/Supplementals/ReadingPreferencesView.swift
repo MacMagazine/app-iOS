@@ -31,9 +31,6 @@ struct ReadingPreferencesView: View {
             Text("Leitura")
                 .font(.headline)
                 .foregroundColor(theme.text.terciary.color)
-        } footer: {
-            Text("Marca visualmente os posts que você já leu")
-                .accessibilityHidden(true)
         }
         .alert("Todos os posts marcados como lido",
                isPresented: $showReadConfirmation) {
