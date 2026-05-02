@@ -31,6 +31,7 @@ public struct ManagedWebView: View {
 
     @State private var viewStatus = WebViewStatus.idle
     @State private var isActive = true
+    @State private var webViewReadyToRender = !ProcessInfo.processInfo.isiOSAppOnMac
 
     let style: ManagedWebViewStyle
     let pageProvider: @MainActor () async -> WebPage?
@@ -72,6 +73,16 @@ public struct ManagedWebView: View {
                 self.page = activePage
             }
             guard let activePage else { return }
+
+            if !webViewReadyToRender {
+                // On Mac, delay WebView insertion to escape the animation context
+                // that NavigationSplitView applies during detail content transitions.
+                try? await Task.sleep(for: .milliseconds(100))
+                webViewReadyToRender = true
+                // Yield to allow SwiftUI to render the WebView before loading content.
+                try? await Task.sleep(for: .milliseconds(50))
+            }
+
             await performLoad(on: activePage)
         }
         .onChange(of: scenePhase) { _, newPhase in
@@ -93,7 +104,7 @@ public struct ManagedWebView: View {
 private extension ManagedWebView {
     @ViewBuilder
     var webview: some View {
-        if let page, isActive {
+        if let page, isActive, webViewReadyToRender {
             Color.clear
                 .allowsHitTesting(false)
                 .safeAreaInset(edge: .trailing, spacing: shouldUseSidebar ? nil : 0) {
@@ -104,7 +115,6 @@ private extension ManagedWebView {
                         .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
                         .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
                         .opacity(viewStatus == .done ? 1 : 0)
-                        .transition(.opacity)
                 }
         }
     }
