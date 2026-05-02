@@ -39,18 +39,17 @@ final class SubscriptionViewModel {
 
     func setupListeners() {
         observationTask = Task { @MainActor [weak self] in
-            guard let self else { return }
             while !Task.isCancelled {
-                let currentStatus = withObservationTracking {
-                    self.inAppLibrary.status
-                } onChange: {
-                    // This closure is called when status changes
+                guard let self else { return }
+                await withCheckedContinuation { continuation in
+                    withObservationTracking {
+                        _ = self.inAppLibrary.status
+                    } onChange: {
+                        continuation.resume()
+                    }
                 }
-
-                self.process(purchased: currentStatus)
-
-                // Small delay to prevent tight loop
-                try? await Task.sleep(for: .milliseconds(100))
+                guard !Task.isCancelled else { return }
+                await self.process(purchased: self.inAppLibrary.status)
             }
         }
     }
@@ -112,19 +111,16 @@ extension SubscriptionViewModel {
 }
 
 private extension SubscriptionViewModel {
-    func process(purchased: InAppStatus) {
+    func process(purchased: InAppStatus) async {
         switch purchased {
         case let .purchased(identifier):
             if let transaction = status.product(using: identifier) {
-                Task {
-                    analytics?.track(
-                        .purchaseCompleted(productId: identifier,
-                                           revenue: transaction.price)
-                    )
-
-                    await change(expirationDate: transaction.expirationDate)
-                    isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
-                }
+                analytics?.track(
+                    .purchaseCompleted(productId: identifier,
+                                       revenue: transaction.price)
+                )
+                await change(expirationDate: transaction.expirationDate)
+                isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
             }
 
         case .cancelled:

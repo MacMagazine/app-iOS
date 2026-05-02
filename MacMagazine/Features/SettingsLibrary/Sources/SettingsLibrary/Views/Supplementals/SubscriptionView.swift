@@ -54,6 +54,11 @@ struct SubscriptionView: View {
                 viewModel.isPatrao = value
             }
         }
+        .onChange(of: viewModel.isValidSubscription) { _, value in
+            if value {
+                settingsViewModel.removeAds = settingsViewModel.storage.settings?.subscription.removeAds ?? false
+            }
+        }
     }
 }
 
