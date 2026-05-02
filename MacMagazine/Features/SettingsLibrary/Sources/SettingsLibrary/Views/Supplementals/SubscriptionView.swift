@@ -55,8 +55,11 @@ struct SubscriptionView: View {
             }
         }
         .onChange(of: viewModel.isValidSubscription) { _, value in
+            print("[SubscriptionView] isValidSubscription changed to: \(value)")
+            print("[SubscriptionView] settingsViewModel.removeAds before: \(settingsViewModel.removeAds)")
             if value {
                 settingsViewModel.removeAds = settingsViewModel.storage.settings?.subscription.removeAds ?? false
+                print("[SubscriptionView] settingsViewModel.removeAds after: \(settingsViewModel.removeAds)")
             }
         }
     }

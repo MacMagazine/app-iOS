@@ -2,8 +2,11 @@ import AnalyticsLibrary
 import Foundation
 import InAppLibrary
 import MacMagazineLibrary
+import os
 import StorageLibrary
 import UIKit
+
+private let logger = Logger(subsystem: "com.macmagazine", category: "Subscription")
 
 @MainActor
 @Observable
@@ -112,15 +115,25 @@ extension SubscriptionViewModel {
 
 private extension SubscriptionViewModel {
     func process(purchased: InAppStatus) async {
+        logger.debug("[process] InApp status: \(String(describing: purchased))")
+
         switch purchased {
         case let .purchased(identifier):
+            logger.debug("[process] .purchased identifier: \(identifier)")
+            logger.debug("[process] ViewModel status: \(String(describing: self.status))")
+
             if let transaction = status.product(using: identifier) {
+                logger.debug("[process] Found product, expirationDate: \(transaction.expirationDate)")
                 analytics?.track(
                     .purchaseCompleted(productId: identifier,
                                        revenue: transaction.price)
                 )
                 await change(expirationDate: transaction.expirationDate)
                 isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
+                logger.debug("[process] isValidSubscription: \(self.isValidSubscription)")
+                logger.debug("[process] storage removeAds: \(self.storage?.settings?.subscription.removeAds ?? false)")
+            } else {
+                logger.error("[process] FAILED: status.product(using: \(identifier)) returned nil")
             }
 
         case .cancelled:
