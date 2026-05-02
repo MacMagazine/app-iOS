@@ -12,7 +12,6 @@ public struct MMWebView: View {
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
     @State private var reloadID = UUID()
-    @State private var showDebugAlert = false
 
     private let url: String?
     private let cacheKey: String?
@@ -64,14 +63,6 @@ public struct MMWebView: View {
         }
         .onChange(of: colorScheme) {
             page?.reload()
-        }
-        .onAppear {
-            showDebugAlert = true
-        }
-        .alert("Debug: removeAds", isPresented: $showDebugAlert) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("removeAds = \(removeAds)")
         }
     }
 }
