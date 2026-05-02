@@ -64,6 +64,13 @@ public struct MMWebView: View {
         .onChange(of: colorScheme) {
             page?.reload()
         }
+        .onChange(of: removeAds) {
+            if let cacheKey {
+                WebPageCache.shared.removePage(for: cacheKey)
+            }
+            page = nil
+            reloadID = UUID()
+        }
     }
 }
 
@@ -149,4 +156,5 @@ private extension MMWebView {
             await cookieStore.setCookie(cookie)
         }
     }
+
 }
