@@ -98,13 +98,13 @@ private extension ManagedWebView {
                 .allowsHitTesting(false)
                 .safeAreaInset(edge: .trailing, spacing: shouldUseSidebar ? nil : 0) {
                     WebView(page)
+                        .transaction { $0.disablesAnimations = true }
                         .webViewBackForwardNavigationGestures(
                             style.backForwardGesturesDisabled ? .disabled : .enabled
                         )
                         .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
                         .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
                         .opacity(viewStatus == .done ? 1 : 0)
-                        .transition(.opacity)
                 }
         }
     }
