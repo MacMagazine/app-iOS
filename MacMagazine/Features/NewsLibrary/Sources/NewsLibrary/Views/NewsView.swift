@@ -214,7 +214,11 @@ extension NewsView {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(role: .close,
                            action: { readingNews = false },
-                           label: { Image(systemName: "chevron.backward") })
+                           label: {
+                        Image(systemName: "chevron.backward")
+                            .padding(10)
+                            .contentShape(Circle())
+                    })
                     .tint(.primary)
                     .accessibilityLabel("Voltar")
                 }
