@@ -1,6 +1,7 @@
 import FirebaseCore
 import LoggerLibrary
 import MacMagazineLibrary
+import OneSignalFramework
 import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
@@ -57,6 +58,7 @@ private extension AppDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        OneSignal.Notifications.didRegisterForRemoteNotifications(deviceToken: deviceToken)
         logger.debug(deviceToken)
     }
 
