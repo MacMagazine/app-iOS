@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        // pushNotification.initialize(options: PushNotificationDefinition.options)
+        pushNotification.initialize(options: PushNotificationDefinition.options)
         (UIApplication.shared.delegate as? AppDelegate)?.pushNotification = pushNotification
 
         let viewModel = MainViewModel(pushNotification: pushNotification)
