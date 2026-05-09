@@ -70,7 +70,6 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if userInfo["ck"] != nil { return }
         guard let aps = userInfo["aps"] as? [String: Any],
               let contentAvailable = aps["content-available"] as? Int,
               contentAvailable == 1 else {
@@ -78,10 +77,11 @@ extension AppDelegate {
             return
         }
 
-        logger.debug(userInfo)
-        NotificationCenter.default.post(name: Notification.Name("didReceivePushNotification"),
-                                        object: userInfo)
-
+        if userInfo["ck"] == nil {
+            logger.debug(userInfo)
+            NotificationCenter.default.post(name: Notification.Name("didReceivePushNotification"),
+                                            object: userInfo)
+        }
         completionHandler(.newData)
     }
 }
