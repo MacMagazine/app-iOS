@@ -58,7 +58,6 @@ private extension AppDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        OneSignal.Notifications.didRegisterForRemoteNotifications(deviceToken: deviceToken)
         logger.debug(deviceToken)
     }
 
@@ -77,11 +76,8 @@ extension AppDelegate {
             return
         }
 
-        if userInfo["ck"] == nil {
-            logger.debug(userInfo)
-            NotificationCenter.default.post(name: Notification.Name("didReceivePushNotification"),
-                                            object: userInfo)
-        }
-        completionHandler(.newData)
+        logger.debug(userInfo)
+        NotificationCenter.default.post(name: Notification.Name("didReceivePushNotification"),
+                                        object: userInfo)
     }
 }
