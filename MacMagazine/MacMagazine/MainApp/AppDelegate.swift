@@ -79,5 +79,6 @@ extension AppDelegate {
         logger.debug(userInfo)
         NotificationCenter.default.post(name: Notification.Name("didReceivePushNotification"),
                                         object: userInfo)
+        completionHandler(.newData)
     }
 }
