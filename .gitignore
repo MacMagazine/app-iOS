@@ -98,3 +98,6 @@ GoogleService-Info.plist
 .env
 .env.*
 
+.agents
+.codex
+AGENTS.md
