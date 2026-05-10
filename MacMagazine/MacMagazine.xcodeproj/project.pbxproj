@@ -133,6 +133,7 @@
 		9B9E9DD12E986F8500255820 /* Exceptions for "MacMagazine" folder in "MacMagazine" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Resources/ExampleStore.storekit,
 				Resources/Info.plist,
 			);
 			target = 9B9E9DC32E986F8400255820 /* MacMagazine */;
@@ -755,7 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = mm_icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazine.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MacMagazine/Resources/MacMagazineRelease.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5.0.1.0;
