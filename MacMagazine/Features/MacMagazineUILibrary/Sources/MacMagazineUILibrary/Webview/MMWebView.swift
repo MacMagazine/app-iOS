@@ -11,6 +11,8 @@ public struct MMWebView: View {
     @State private var internalLinkURL: URL?
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
+    @State private var galleryStateHandler = GalleryStateMessageHandler()
+    @State private var isGalleryOpen = false
     @State private var reloadID = UUID()
 
     private let url: String?
@@ -41,6 +43,7 @@ public struct MMWebView: View {
             page: $page,
             reloadTrigger: reloadID
         )
+        .interactivePopGesture(enabled: !isGalleryOpen)
         .navigationDestination(item: $internalLinkURL) { url in
             MMWebView(url: url.absoluteString, dismissAction: dismissAction)
                 .toolbar {
@@ -102,6 +105,7 @@ private extension MMWebView {
 
         navigationDecider.onOpenComments = { [self] slug in commentsURL = slug }
         navigationDecider.onOpenInternalLink = { [self] url in internalLinkURL = url }
+        galleryStateHandler.onGalleryStateChange = { [self] isOpen in isGalleryOpen = isOpen }
 
         let configuration = makeConfiguration()
         let page: WebPage
@@ -138,6 +142,8 @@ private extension MMWebView {
         contentController.addUserScript(MMWebViewUserScripts.disableGallery)
         contentController.addUserScript(MMWebViewUserScripts.disableNewGallery)
         contentController.addUserScript(MMWebViewUserScripts.removeBackToBlog)
+        contentController.addUserScript(MMWebViewUserScripts.galleryStateObserver)
+        contentController.add(galleryStateHandler, name: GalleryStateMessageHandler.handlerName)
 
         return configuration
     }
