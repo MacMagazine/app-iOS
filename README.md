@@ -63,6 +63,58 @@ Quer contribuir? Consulte o **[Guia de Contribuição](Support/CONTRIBUTING.md)*
 - Como criar Pull Requests
 - Validações automáticas (GitHub Actions)
 
+## Desenvolvimento com IA (Claude Code)
+
+O projeto é configurado para desenvolvimento assistido por IA usando o [Claude Code](https://code.claude.com/docs/), com guardrails que garantem que o código gerado siga os padrões do projeto.
+
+### Como funciona
+
+O arquivo [CLAUDE.md](CLAUDE.md) é a "constituição" do projeto — carregado em toda sessão, define as regras de ouro, comandos de build e o contrato anti-alucinação. O detalhamento fica em `.claude/`:
+
+```
+CLAUDE.md             ← regras principais (carregado em toda sessão)
+.claude/
+  rules/              ← convenções detalhadas, lidas sob demanda
+                        (arquitetura, cards/WebView/tema, SwiftData/busca,
+                         estilo Swift, concorrência, testes, git)
+  skills/             ← workflows reutilizáveis (/ios-start, /ios-implement,
+                        /ios-fix, /ios-dod, /ios-design-guidelines,
+                        /ios-sanity-check)
+  agents/             ← subagentes especializados (ios-principal-engineer,
+                        swift-code-reviewer, architecture-guardian, test-runner)
+  hooks/              ← guardrails determinísticos (bloqueiam comandos
+                        perigosos e rodam SwiftLint a cada arquivo editado)
+  settings.json       ← permissões compartilhadas + ativação dos hooks
+```
+
+### Como usar
+
+```bash
+# Na raiz do repositório — o CLAUDE.md carrega automaticamente
+claude
+
+# Fluxo típico de uma feature
+> /ios-start          # checklist antes de escrever código
+> /ios-implement      # implementação seguindo os padrões do projeto
+> /ios-dod            # Definition of Done: build + testes + lint reais
+
+# Correção de bug
+> /ios-fix            # análise de causa raiz antes de qualquer correção
+
+# Revisão e auditoria
+> use o agente swift-code-reviewer       # revisão rigorosa do diff
+> use o agente architecture-guardian     # verifica fronteiras entre módulos
+> /ios-sanity-check                      # auditoria de saúde do código
+```
+
+### Guardrails
+
+- **Permissões** (`.claude/settings.json`): toolchain pré-aprovado (xcodebuild, swiftlint, git, gh); leitura de segredos (`GoogleService-Info.plist`, `*.xcconfig`, certificados) e comandos destrutivos negados.
+- **Hooks**: `rm -rf`, `sudo`, force-push e `git reset --hard` são bloqueados; todo arquivo Swift editado passa por `swiftlint --strict` na hora; `try!`, `as!` e `@unchecked Sendable` são rejeitados automaticamente.
+- **Qualidade**: nada é considerado "pronto" sem build, testes e lint passando com saída real — nunca resultados presumidos.
+
+Preferências pessoais (modelo, permissões extras da sua máquina) vão em `.claude/settings.local.json`, que não é versionado.
+
 ## Bug Reporting e Feature Requests
 
 Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para:
@@ -75,6 +127,8 @@ Use as [Issues](https://github.com/MacMagazine/app-iOS/issues) para:
 |-----------|-----------|
 | [CONTRIBUTING.md](Support/CONTRIBUTING.md) | Guia completo de contribuição |
 | [FIREBASE.md](Support/FIREBASE.md) | Configuração do Firebase |
+| [CLAUDE.md](CLAUDE.md) | Regras para desenvolvimento assistido por IA (Claude Code) |
+| [.claude/skills/README.md](.claude/skills/README.md) | Referência rápida de skills e agentes |
 
 ---
 
