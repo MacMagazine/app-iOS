@@ -65,12 +65,14 @@ public struct MMWebView: View {
             }
         }
         .onChange(of: colorScheme) {
+            isGalleryOpen = false
             page?.reload()
         }
         .onChange(of: removeAds) {
             if let cacheKey {
                 WebPageCache.shared.removePage(for: cacheKey)
             }
+            isGalleryOpen = false
             page = nil
             reloadID = UUID()
         }
@@ -114,8 +116,11 @@ private extension MMWebView {
             page = WebPageCache.shared.page(
                 for: cacheKey,
                 configurationProvider: { configuration },
-                navigationDecider: navigationDecider
+                navigationDecider: navigationDecider,
+                galleryStateHandler: galleryStateHandler
             )
+            WebPageCache.shared.galleryHandler(for: cacheKey)?
+                .onGalleryStateChange = { [self] isOpen in isGalleryOpen = isOpen }
         } else {
             page = WebPage(
                 configuration: configuration,

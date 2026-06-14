@@ -39,6 +39,14 @@ private final class BridgeViewController: UIViewController, UIGestureRecognizerD
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        restoreDelegate()
+    }
+
+    isolated deinit {
+        restoreDelegate()
+    }
+
+    private func restoreDelegate() {
         if let popGesture, popGesture.delegate === self {
             popGesture.delegate = originalDelegate
         }

@@ -56,7 +56,7 @@ public enum MMWebViewUserScripts {
             (function() {
                 if (window.__mmGalleryObserver) { return; }
                 var selectors = '.pswp--open, .fancybox-container, #fancybox-overlay, .mfp-wrap';
-                var lastState = false;
+                var lastState = null;
                 function check() {
                     var open = !!document.querySelector(selectors);
                     if (open !== lastState) {
@@ -72,6 +72,7 @@ public enum MMWebViewUserScripts {
                     attributeFilter: ['class', 'style']
                 });
                 window.__mmGalleryObserver = observer;
+                check();
             })();
             """,
             injectionTime: .atDocumentEnd,
