@@ -5,6 +5,7 @@ final class WebPageCache {
     static let shared = WebPageCache()
 
     private var cache: [String: WebPage] = [:]
+    private var galleryHandlers: [String: GalleryStateMessageHandler] = [:]
 
     private init() {}
 
@@ -20,7 +21,8 @@ final class WebPageCache {
     func page(
         for key: String,
         configurationProvider: () -> WebPage.Configuration,
-        navigationDecider: some WebPage.NavigationDeciding
+        navigationDecider: some WebPage.NavigationDeciding,
+        galleryStateHandler: GalleryStateMessageHandler
     ) -> WebPage {
         if let existing = cache[key] {
             return existing
@@ -30,7 +32,12 @@ final class WebPageCache {
             navigationDecider: navigationDecider
         )
         cache[key] = page
+        galleryHandlers[key] = galleryStateHandler
         return page
+    }
+
+    func galleryHandler(for key: String) -> GalleryStateMessageHandler? {
+        galleryHandlers[key]
     }
 
     func hasPage(for key: String) -> Bool {
@@ -39,5 +46,6 @@ final class WebPageCache {
 
     func removePage(for key: String) {
         cache.removeValue(forKey: key)
+        galleryHandlers.removeValue(forKey: key)
     }
 }

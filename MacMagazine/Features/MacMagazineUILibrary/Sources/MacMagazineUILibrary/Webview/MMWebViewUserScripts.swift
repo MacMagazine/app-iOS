@@ -50,6 +50,37 @@ public enum MMWebViewUserScripts {
     }
 
     @MainActor
+    static var galleryStateObserver: WKUserScript {
+        WKUserScript(
+            source: """
+            (function() {
+                if (window.__mmGalleryObserver) { return; }
+                var selectors = '.pswp--open, .fancybox-container, #fancybox-overlay, .mfp-wrap';
+                var lastState = null;
+                function check() {
+                    var open = !!document.querySelector(selectors);
+                    if (open !== lastState) {
+                        lastState = open;
+                        window.webkit.messageHandlers.mmGalleryState.postMessage(open);
+                    }
+                }
+                var observer = new MutationObserver(check);
+                observer.observe(document.documentElement, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true,
+                    attributeFilter: ['class', 'style']
+                });
+                window.__mmGalleryObserver = observer;
+                check();
+            })();
+            """,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        )
+    }
+
+    @MainActor
     public static var hideSiteHeader: WKUserScript {
         WKUserScript(
             source: """
