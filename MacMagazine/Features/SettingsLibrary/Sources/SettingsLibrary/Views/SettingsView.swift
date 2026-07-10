@@ -46,13 +46,13 @@ private extension SettingsView {
         ZStack {
             (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
             List {
-                appearance
                 SubscriptionView(
                     isPatrao: $isPatrao,
                     isPresentingLoginPatrao: $isPresentingLoginPatrao,
                     urlToOpen: $urlToOpen
                 )
-                PushOptionsView()
+                appearance
+                posts
                 AboutView(presentingContent: $presentingContent)
             }
             .navigationTitle(AppTabs.settings.rawValue)
@@ -65,11 +65,30 @@ private extension SettingsView {
         )
     }
 
+    var posts: some View {
+        NavigationLink {
+            List {
+                ReadingPreferencesView()
+                PushOptionsView()
+            }
+            .navigationTitle("Posts")
+            .navigationBarTitleDisplayMode(.inline)
+            .environment(\.editMode, $editMode)
+            .trackScreen(
+                "Ajustes > Posts",
+                previous: nil,
+                analytics: analytics
+            )
+
+        } label: {
+            Label("Posts", systemImage: "newspaper")
+        }
+    }
+
     var appearance: some View {
         NavigationLink {
             List {
                 AppearanceView()
-                ReadingPreferencesView()
                 IconsView()
                 CustomTabView()
                 CustomSocialView()
