@@ -133,12 +133,14 @@ private extension GlassCardView {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    @ViewBuilder
     var titleRow: some View {
+        let style = data.type.categories.mostRelevant.style
         Text(data.title)
-            .font(density.titleFont(style: data.type.style))
-            .fontWeight(data.type.style == .highlight ? .bold : .regular)
+            .font(density.titleFont(style: style))
+            .fontWeight(style == .highlight ? .bold : .regular)
             .multilineTextAlignment(.leading)
-            .lineLimit(density.titleLineLimit(style: data.type.style))
+            .lineLimit(density.titleLineLimit(style: style))
             .foregroundStyle(.white)
     }
 
