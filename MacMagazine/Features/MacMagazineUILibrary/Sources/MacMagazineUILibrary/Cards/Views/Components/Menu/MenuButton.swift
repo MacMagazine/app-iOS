@@ -18,6 +18,8 @@ public struct MenuButton: View {
 }
 
 public struct MenuContent: View {
+    @Environment(\.highlightPostRead) private var highlightPostRead
+
     private let data: CardContent
 
     public init(data: CardContent) {
@@ -25,7 +27,8 @@ public struct MenuContent: View {
     }
 
     public var body: some View {
-        if let readAction = data.readAction {
+        if highlightPostRead,
+            let readAction = data.readAction {
             Button(readText, systemImage: readImage) {
                 readAction()
             }
