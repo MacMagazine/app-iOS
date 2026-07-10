@@ -28,6 +28,12 @@ printf '%s' "$CMD" | grep -Eq '(^|[^a-zA-Z])sudo([[:space:]]|$)' && block "sudo 
 printf '%s' "$CMD" | grep -Eq 'curl[[:space:]].*\|[[:space:]]*(sh|bash|zsh)' && block "curl | shell (no remote-script execution)"
 printf '%s' "$CMD" | grep -Eq '>[[:space:]]*/dev/sd|mkfs|dd[[:space:]]+if=' && block "raw disk operation"
 
+# The session always starts in the project root and stays there. A `cd` chained with
+# other commands is never needed and triggers permission prompts — block it.
+CD_MSG="never chain a 'cd' with other commands. The shell always runs in the project root — re-run this command using ABSOLUTE PATHS with no 'cd' prefix (e.g. xcodebuild -project \"/Users/cassiorossi/Desktop/Apps/0. iOS_Apps/MacMagazine/MacMagazine/MacMagazine.xcodeproj\" ...)."
+printf '%s' "$CMD" | grep -Eq '(^|[^a-zA-Z._/-])cd[[:space:]]+[^&;|]*(&&|;|\|\||\|)' && block "$CD_MSG"
+printf '%s' "$CMD" | grep -Eq '(&&|;|\|\||\|)[[:space:]]*cd([[:space:]]|$)' && block "$CD_MSG"
+
 printf '%s' "$CMD" | grep -Eq '\.xcodeproj|\.xcworkspace' && \
   echo "⚠️  Note: don't hand-edit .xcodeproj/.xcworkspace internals via shell — use Xcode or the SPM manifest." >&2
 
