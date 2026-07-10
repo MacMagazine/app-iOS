@@ -41,6 +41,7 @@ public struct SearchView: View {
                     (theme.main.background.color ?? Color.secondary).ignoresSafeArea()
                 }
                 .navigationTitle("Busca")
+                .navigationBarTitleDisplayMode(.large)
                 .trackScreen(
                     AnalyticsConstants.Screen.search.name,
                     previous: nil,
