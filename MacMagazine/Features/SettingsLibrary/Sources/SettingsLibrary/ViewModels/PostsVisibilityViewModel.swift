@@ -2,6 +2,7 @@ import Foundation
 import MacMagazineLibrary
 import StorageLibrary
 import SwiftData
+import UIComponentsLibrary
 
 @Observable
 final class PostsVisibilityViewModel {
@@ -22,6 +23,8 @@ extension PostsVisibilityViewModel {
 extension PostsVisibilityViewModel {
     @MainActor
     func flush(cache: Cache) {
+        Task { await CachedAsyncImage.clearCache() }
+
         switch cache {
         case .cleanAll: cleanAll()
         case .keepFavoritesAndStatus: keepFavoritesAndStatus()

@@ -59,8 +59,6 @@ private extension AboutView {
                 .foregroundStyle(theme.main.tint.color ?? .blue)
         })
 
-        PostsVisibilityView()
-
         Button(action: {
             presentingContent = .terms
             analytics.track(.buttonTap(

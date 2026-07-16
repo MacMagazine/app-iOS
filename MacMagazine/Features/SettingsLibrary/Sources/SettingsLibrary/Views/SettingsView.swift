@@ -68,8 +68,9 @@ private extension SettingsView {
     var posts: some View {
         NavigationLink {
             List {
-                ReadingPreferencesView()
                 PushOptionsView()
+                ReadingPreferencesView()
+                PostsVisibilityView()
             }
             .navigationTitle("Posts")
             .navigationBarTitleDisplayMode(.inline)
