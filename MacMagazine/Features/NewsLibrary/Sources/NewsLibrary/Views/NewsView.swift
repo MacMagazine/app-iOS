@@ -211,9 +211,11 @@ extension NewsView {
     var newsDetailView: some View {
         MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) { favoriteView }
+                ToolbarItem(placement: .topBarTrailing) { favoriteView }
+                    .sharedBackgroundVisibility(.hidden)
                 ToolbarSpacer(.fixed, placement: .topBarTrailing)
-                ToolbarItemGroup(placement: .topBarTrailing) { shareView }
+                ToolbarItem(placement: .topBarTrailing) { shareView }
+                    .sharedBackgroundVisibility(.hidden)
             }
             .task {
                 viewModel.selectedNews?.read = true
@@ -233,6 +235,7 @@ extension NewsView {
                 favorite: data.favorite,
                 action: data.favoriteAction
             )
+            .minimumTouchTarget()
         }
     }
 
@@ -244,6 +247,7 @@ extension NewsView {
                 title: title,
                 url: url
             )
+            .minimumTouchTarget()
         }
     }
 }

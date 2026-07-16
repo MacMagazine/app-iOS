@@ -34,6 +34,7 @@ private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }
+                    .sharedBackgroundVisibility(.hidden)
                 }
 
         case .normal:
@@ -44,9 +45,11 @@ private struct ToolbarModifier<Menu: View, Options: View>: ViewModifier {
                     ToolbarItem(placement: .navigation) {
                         options
                     }
+                    .sharedBackgroundVisibility(.hidden)
                     ToolbarItem(placement: .primaryAction) {
                         menu
                     }
+                    .sharedBackgroundVisibility(.hidden)
                 }
         }
     }

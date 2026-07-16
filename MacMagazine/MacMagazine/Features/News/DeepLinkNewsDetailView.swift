@@ -37,9 +37,11 @@ struct DeepLinkNewsDetailView: View {
                     ToolbarItem(placement: .automatic) {
                         favoriteView
                     }
+                    .sharedBackgroundVisibility(.hidden)
                     ToolbarItem(placement: .automatic) {
                         shareView
                     }
+                    .sharedBackgroundVisibility(.hidden)
                 }
                 .onAppear {
                     post?.read = true
@@ -65,6 +67,7 @@ struct DeepLinkNewsDetailView: View {
                     ))
                 }
             )
+            .minimumTouchTarget()
         }
     }
 
@@ -74,5 +77,6 @@ struct DeepLinkNewsDetailView: View {
             title: post?.title ?? "",
             url: url
         )
+        .minimumTouchTarget()
     }
 }
