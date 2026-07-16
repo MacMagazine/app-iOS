@@ -7,8 +7,8 @@ import YouTubeLibrary
 
 @MainActor
 public struct AdaptiveVideoCard: VideoCard {
-    public var accessibilityLabels: [CardLabel]?
-    public var accessibilityButtons: [CardButton]?
+    public var accessibilityLabels: [YouTubeLibrary.CardLabel]?
+    public var accessibilityButtons: [YouTubeLibrary.CardButton]?
 
     var context: ModelContext?
     var analytics: AnalyticsManager?

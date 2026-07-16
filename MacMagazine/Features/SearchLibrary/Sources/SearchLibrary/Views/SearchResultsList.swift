@@ -62,8 +62,7 @@ private extension SearchResultsList {
             }
             .cardAccessibility(
                 data: cardContent,
-                labels: [NewsLibrary.CardLabel.title, NewsLibrary.CardLabel.date],
-                buttons: [NewsLibrary.CardButton.favorite, NewsLibrary.CardButton.share]
+                hint: "Duplo toque para abrir a notícia."
             )
         }
     }

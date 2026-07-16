@@ -32,6 +32,11 @@ public struct FeedHighlightCardView: View {
         GlassCardView(data: data)
             .opacity(post.read && highlightPostRead ? 0.6 : 1)
             .compositingGroup()
+            .cardAccessibility(
+                data: data,
+                buttons: (highlightPostRead ? [.read] : []) + [.favorite, .share],
+                hint: "Duplo toque para abrir a notícia."
+            )
     }
 
     // MARK: - Init

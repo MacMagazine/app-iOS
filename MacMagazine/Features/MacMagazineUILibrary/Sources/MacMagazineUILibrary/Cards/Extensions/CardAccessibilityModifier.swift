@@ -1,29 +1,35 @@
-import FeedLibrary
-import MacMagazineUILibrary
 import SwiftUI
 import UtilityLibrary
 
-enum CardLabel {
+public enum CardLabel {
     case title
     case date
+    case dateWithTime
+    case author
     case duration
 }
 
 private extension Array where Element == CardLabel {
-    func makeText(using data: CardContent) -> String {
+    func makeText(_ title: String, using data: CardContent) -> String {
         var text = [String]()
         self.forEach {
             switch $0 {
             case .title: text.append(data.title)
-            case .date: text.append("publicado em \(data.pubDate.toTimeAgoDisplay(showTime: false))")
+            case .dateWithTime: text.append("publicado \(data.pubDate.toTimeAgoDisplay(showTime: true))")
+            case .date: text.append("publicado \(data.pubDate.toTimeAgoDisplay(showTime: false))")
+            case .author:
+                if let author = data.author {
+                    text.append("por \(author)")
+                }
             case .duration: text.append("com duração de \(data.type.duration.accessibilityTime)")
             }
         }
-        return text.joined(separator: ", ") + "."
+        return title + text.joined(separator: ", ") + "."
     }
 }
 
-enum CardButton {
+public enum CardButton {
+    case read
     case share
     case favorite
 }
@@ -33,6 +39,8 @@ private extension Array where Element == CardButton {
     func makeButtons(using data: CardContent) -> some View {
         ForEach(self.indices, id: \.self) { index in
             switch self[index] {
+            case .read:
+                ReadButton(name: data.title, read: data.read, action: data.readAction)
             case .favorite:
                 FavoriteButton(name: data.title, favorite: data.favorite, action: data.favoriteAction)
             case .share:
@@ -42,16 +50,18 @@ private extension Array where Element == CardButton {
     }
 }
 
-extension View {
+public extension View {
     func cardAccessibility(
         data: CardContent,
-        labels: [CardLabel]?,
-        buttons: [CardButton]?
+        labels: [CardLabel] = [.title, .dateWithTime],
+        buttons: [CardButton] = [.favorite, .share],
+        hint: String
     ) -> some View {
         modifier(CardAccessibilityModifier(
             data: data,
-            labels: labels ?? [.title, .date, .duration],
-            buttons: buttons ?? [.favorite, .share])
+            labels: labels,
+            buttons: buttons,
+            hint: hint)
         )
     }
 }
@@ -60,14 +70,15 @@ private struct CardAccessibilityModifier: ViewModifier {
     let data: CardContent
     let labels: [CardLabel]
     let buttons: [CardButton]
+    let hint: String
 
     func body(content: Content) -> some View {
         content
             .accessibilityElement(children: .ignore)
-            .accessibilityChildren {
-                Text(labels.makeText(using: data))
-                    .accessibilityAddTraits(.isButton)
-                    .accessibilityHint("Duplo toque para reproduzir o podcast.")
+            .accessibilityLabel(Text(labels.makeText("", using: data)))
+            .accessibilityHint(hint)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityActions {
                 buttons.makeButtons(using: data)
             }
     }

@@ -24,35 +24,11 @@ public struct GlassCardView: View {
         ZStack(alignment: .topTrailing) {
             content
             MenuButton(data: data).padding([.top, .trailing], 10)
-            // buttons
         }
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .contentWidth { value in
             cardWidth = value
         }
-    }
-}
-
-// MARK: - Buttons -
-
-private extension GlassCardView {
-    @ViewBuilder
-    var buttons: some View {
-        let favoriteButton = FavoriteButton(
-            name: data.type.accessibilityName,
-            favorite: data.favorite,
-            action: data.favoriteAction
-        )
-
-        let shareButton = ShareButton(
-            title: data.title,
-            url: data.urlToShare
-        )
-
-        FavoriteShareGlassContainer(
-            favoriteView: favoriteButton,
-            shareView: shareButton
-        )
     }
 }
 
@@ -63,13 +39,11 @@ private extension GlassCardView {
     var content: some View {
         if let artworkUrl = URL(string: data.artworkUrl) {
             ZStack(alignment: .bottom) {
-                thumbnail(artworkUrl)
-                metadataContent
-                    .background(gradientOverlay)
+                thumbnail(artworkUrl).accessibilityHidden(true)
+                metadataContent.background(gradientOverlay)
             }
         } else {
-            metadataContent
-                .background(fallbackBackground)
+            metadataContent.background(fallbackBackground)
         }
     }
 
@@ -109,13 +83,11 @@ private extension GlassCardView {
                     .cornerRadius(12)
             }
             .aspectRatio(ratio, contentMode: .fit)
-            .accessibilityHidden(true)
         } else {
             GeometryReader { geo in
                 CachedAsyncImage(image: imageUrl, contentMode: .fill)
                     .frame(width: geo.size.width, height: geo.size.height)
             }
-            .accessibilityHidden(true)
         }
     }
 }

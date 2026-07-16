@@ -76,7 +76,6 @@ public struct CollectionViewWithHeader<Header: View, Content: View>: View {
                         header()
                     }
 
-                    // Grid content
                     LazyVGrid(
                         columns: Array(repeating: grid, count: usesDensity ? density.columns : 1),
                         spacing: 20

@@ -20,7 +20,8 @@ public struct AdaptivePodcastCardView: View {
             .cardAccessibility(
                 data: podcast,
                 labels: [.title, .date, .duration],
-                buttons: [.favorite, .share]
+                buttons: [.favorite, .share],
+                hint: "Duplo toque para reproduzir o podcast."
             )
     }
 

@@ -18,6 +18,7 @@ public struct NewsView<Filter: View>: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.highlightPostRead) private var highlightPostRead
 
     @Environment(PushNotification.self) private var pushNotification
     @Environment(SessionState.self) private var sessionState
@@ -179,8 +180,8 @@ extension NewsView {
             }
             .cardAccessibility(
                 data: data,
-                labels: [.title, .date, .author],
-                buttons: [.favorite, .share]
+                buttons: (highlightPostRead ? [.read] : []) + [.favorite, .share],
+                hint: "Duplo toque para abrir a notícia."
             )
             .onAppear {
                 if !favorite && search.isEmpty {
