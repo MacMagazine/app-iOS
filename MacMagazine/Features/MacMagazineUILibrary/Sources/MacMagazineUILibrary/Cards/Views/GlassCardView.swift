@@ -23,7 +23,8 @@ public struct GlassCardView: View {
     public var body: some View {
         ZStack(alignment: .topTrailing) {
             content
-            buttons
+            MenuButton(data: data).padding([.top, .trailing], 10)
+            // buttons
         }
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .contentWidth { value in
