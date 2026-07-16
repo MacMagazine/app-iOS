@@ -211,25 +211,10 @@ extension NewsView {
     var newsDetailView: some View {
         MMWebView(url: viewModel.selectedNews?.link)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(role: .close,
-                           action: { readingNews = false },
-                           label: {
-                        Image(systemName: "chevron.backward")
-                            .padding(10)
-                            .contentShape(Circle())
-                    })
-                    .tint(.primary)
-                    .accessibilityLabel("Voltar")
-                }
-                ToolbarItem(placement: .automatic) {
-                    favoriteView
-                }
-                ToolbarItem(placement: .automatic) {
-                    shareView
-                }
+                ToolbarItemGroup(placement: .topBarTrailing) { favoriteView }
+                ToolbarSpacer(.fixed, placement: .topBarTrailing)
+                ToolbarItemGroup(placement: .topBarTrailing) { shareView }
             }
-            .navigationBarBackButtonHidden(true)
             .task {
                 viewModel.selectedNews?.read = true
                 viewModel.selectedNews?.modifiedAt = Date()

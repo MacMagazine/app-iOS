@@ -16,8 +16,6 @@ public struct ShareButton: View {
 
     public var body: some View {
         UtilityLibrary.ShareButton(title: title, url: url)
-            .padding(10)
-            .contentShape(Circle())
             .font(.system(size: 15))
     }
 }

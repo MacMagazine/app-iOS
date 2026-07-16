@@ -30,8 +30,6 @@ public struct FavoriteButton: View {
 
         }, label: {
             Image(systemName: "star\(favorite ? ".fill" : "")")
-                .padding(10)
-                .contentShape(Circle())
         })
         .accessibilityLabel("Favoritar o \(name).")
         .accessibilityValue(favorite ? "Favoritado." : "Não favoritado.")
