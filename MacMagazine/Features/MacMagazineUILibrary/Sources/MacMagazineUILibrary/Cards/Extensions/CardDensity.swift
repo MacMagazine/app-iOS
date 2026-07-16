@@ -17,14 +17,14 @@ public extension CardDensity {
         }
     }
 
-    func titleFont(style: CardStyle?) -> Font {
+    func titleFont(style: CardStyle?, isHeader: Bool = false) -> Font {
         guard let style,
               style == .highlight else {
             return titleFont
         }
         return switch self {
-        case .compact: .title3
-        case .regular, .spacious: .title2
+        case .compact: isHeader ? .title3 : .headline
+        case .regular, .spacious: isHeader ? .title2 : .title3
         }
     }
 

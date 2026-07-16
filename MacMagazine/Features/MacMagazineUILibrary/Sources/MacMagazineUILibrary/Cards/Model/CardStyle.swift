@@ -2,6 +2,7 @@ import Foundation
 import MacMagazineLibrary
 
 public enum CardStyle {
+    case header
     case leadingImage
     case highlight
     case glass

@@ -137,7 +137,7 @@ private extension GlassCardView {
     var titleRow: some View {
         let style = data.type.categories.mostRelevant.style
         Text(data.title)
-            .font(density.titleFont(style: style))
+            .font(density.titleFont(style: style, isHeader: data.type.style == .header))
             .fontWeight(style == .highlight ? .bold : .regular)
             .multilineTextAlignment(.leading)
             .lineLimit(density.titleLineLimit(style: style))

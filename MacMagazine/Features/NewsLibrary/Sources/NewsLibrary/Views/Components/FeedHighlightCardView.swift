@@ -26,7 +26,7 @@ public struct FeedHighlightCardView: View {
             using: modelContext,
             analytics: analytics,
             screen: AnalyticsConstants.Screen.news.name,
-            style: .highlight,
+            style: .header,
             aspectRatio: nil
         )
         GlassCardView(data: data)
