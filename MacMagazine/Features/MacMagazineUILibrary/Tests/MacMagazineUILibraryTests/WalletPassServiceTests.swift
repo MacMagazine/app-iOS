@@ -3,7 +3,6 @@ import Foundation
 import NetworkLibrary
 import Testing
 
-// swiftlint:disable force_unwrapping
 @Suite("WalletPassService Tests")
 @MainActor
 struct WalletPassServiceTests {
@@ -45,4 +44,3 @@ private struct FailingNetworkStub: Network, Sendable {
     func post(url: URL, headers: [String: String]?, body: Data) async throws -> Data { throw NetworkAPIError.network }
     func ping(url: URL) async throws { throw NetworkAPIError.network }
 }
-// swiftlint:enable force_unwrapping

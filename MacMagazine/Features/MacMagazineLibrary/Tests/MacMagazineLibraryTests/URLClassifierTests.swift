@@ -2,7 +2,6 @@ import Foundation
 @testable import MacMagazineLibrary
 import Testing
 
-// swiftlint:disable force_unwrapping
 @Suite("URLClassifier Tests")
 struct URLClassifierTests {
 
@@ -72,4 +71,3 @@ struct URLClassifierTests {
         #expect(URLClassifier.classify(url) == .walletPass)
     }
 }
-// swiftlint:enable force_unwrapping
