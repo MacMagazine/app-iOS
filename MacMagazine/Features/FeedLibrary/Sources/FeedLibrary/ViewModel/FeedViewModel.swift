@@ -47,10 +47,17 @@ public class FeedViewModel {
                 async let reviews = self.fetch(category: .reviews, page: page)
                 async let tutoriais = self.fetch(category: .tutorials, page: page)
                 async let rumors = self.fetch(category: .rumors, page: page)
-                let feed = try await [highlights, appletv, reviews, tutoriais, rumors]
-                self.storage.save(feed: Array(feed.joined()).toFeedDB)
-                let posts = try await self.fetch(category: .news, page: page)
-                self.storage.save(feed: posts.toFeedDB)
+                async let news = self.fetch(category: .news, page: page)
+
+                let groups: [(category: NewsCategory, posts: [FeedDB])] = [
+                    (.highlights, try await highlights.toFeedDB),
+                    (.appletv, try await appletv.toFeedDB),
+                    (.reviews, try await reviews.toFeedDB),
+                    (.tutorials, try await tutoriais.toFeedDB),
+                    (.rumors, try await rumors.toFeedDB),
+                    (.news, try await news.toFeedDB)
+                ]
+                self.storage.save(feed: groups)
             }.value
             status = .done
         } catch {

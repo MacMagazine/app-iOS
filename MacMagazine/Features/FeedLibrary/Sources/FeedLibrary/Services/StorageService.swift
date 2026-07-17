@@ -21,6 +21,24 @@ extension Database {
         save(feed: feed, in: sharedModelContainer.mainContext)
     }
 
+    /// Saves category-specific fetch results and reconciles stale category membership.
+    ///
+    /// Each group's synthetic category key (`NewsCategory.filterKey`) is added to matching posts
+    /// as usual, then removed from any locally stored post whose `pubDate` falls inside the
+    /// group's fetched date range but which the fetch no longer returned - covering the case
+    /// where the server removed a post from that category (e.g. a de-highlighted post).
+    @MainActor
+    func save(feed groups: [(category: NewsCategory, posts: [FeedDB])]) {
+        let ctx = sharedModelContainer.mainContext
+        for group in groups {
+            group.posts.forEach {
+                _ = save(feed: $0, in: ctx)
+            }
+            reconcile(category: group.category, fetched: group.posts, in: ctx)
+        }
+        FeedDB.deduplicate(using: ctx)
+    }
+
     @MainActor
     private func save(feed: FeedDB, in ctx: ModelContext) -> FeedDB {
         let postId = feed.postId
@@ -43,6 +61,37 @@ extension Database {
 
         try? ctx.save()
         return feed
+    }
+
+    /// Categories whose membership is reconciled (added and removed) on each fetch.
+    ///
+    /// `.news` is excluded: it represents the unfiltered feed, so removal has no meaning there
+    /// and its date window is the widest, making false-positive removals most likely.
+    private static let reconcilableCategories: Set<NewsCategory> = [
+        .highlights, .appletv, .reviews, .tutorials, .rumors
+    ]
+
+    @MainActor
+    private func reconcile(category: NewsCategory, fetched: [FeedDB], in ctx: ModelContext) {
+        guard Self.reconcilableCategories.contains(category),
+              let windowStart = fetched.map(\.pubDate).min(),
+              let windowEnd = fetched.map(\.pubDate).max() else { return }
+
+        let key = category.filterKey
+        let fetchedIds = Set(fetched.map(\.postId))
+        let descriptor = FetchDescriptor<FeedDB>(
+            predicate: #Predicate { $0.pubDate >= windowStart && $0.pubDate <= windowEnd }
+        )
+
+        guard let candidates = try? ctx.fetch(descriptor) else { return }
+        let stale = candidates.filter { $0.categories.contains(key) && !fetchedIds.contains($0.postId) }
+        guard !stale.isEmpty else { return }
+
+        for post in stale {
+            post.categories.removeAll { $0 == key }
+            post.modifiedAt = Date()
+        }
+        try? ctx.save()
     }
 }
 
