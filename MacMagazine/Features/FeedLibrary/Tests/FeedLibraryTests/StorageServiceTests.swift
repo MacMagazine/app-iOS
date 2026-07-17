@@ -1,5 +1,6 @@
 @testable import FeedLibrary
 import Foundation
+import MacMagazineLibrary
 import StorageLibrary
 import Testing
 
@@ -377,6 +378,126 @@ struct StorageServiceTests {
         #expect(cats.contains("Tech"))
         #expect(cats.contains("News"))
         #expect(cats.contains("Reviews"))
+    }
+
+    // MARK: - Category Reconciliation Tests
+
+    @Test("grouped save inserts a post carrying its fetched category key")
+    func groupedSaveAddsCategoryKey() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let post = FeedDB(postId: "1", title: "Rumor", pubDate: Date(), categories: [NewsCategory.rumors.filterKey])
+
+        storage.save(feed: [(category: NewsCategory.rumors, posts: [post])])
+
+        let fetched = storage.fetch(FeedDB.self).first
+        #expect(fetched?.categories.contains(NewsCategory.rumors.filterKey) == true)
+    }
+
+    @Test("grouped save removes a stale category key for a post that dropped out of its date window")
+    func groupedSaveRemovesStaleCategoryKey() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let earlier = Date(timeIntervalSince1970: 900_000)
+        let dehighlightedDate = Date(timeIntervalSince1970: 1_000_000)
+        let later = Date(timeIntervalSince1970: 1_100_000)
+
+        let dehighlighted = FeedDB(
+            postId: "1",
+            title: "No Longer Highlighted",
+            pubDate: dehighlightedDate,
+            categories: [NewsCategory.highlights.filterKey]
+        )
+        storage.save(feed: dehighlighted)
+
+        let before = FeedDB(postId: "2", title: "Before", pubDate: earlier, categories: [NewsCategory.highlights.filterKey])
+        let after = FeedDB(postId: "3", title: "After", pubDate: later, categories: [NewsCategory.highlights.filterKey])
+
+        storage.save(feed: [(category: NewsCategory.highlights, posts: [before, after])])
+
+        let predicate = #Predicate<FeedDB> { $0.postId == "1" }
+        let fetched = storage.fetch(FeedDB.self, predicate: predicate).first
+        #expect(fetched?.categories.contains(NewsCategory.highlights.filterKey) == false)
+    }
+
+    @Test("grouped save never touches a sibling category's key while reconciling")
+    func groupedSavePreservesSiblingCategoryKey() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let date = Date(timeIntervalSince1970: 1_000_000)
+
+        let multiCategory = FeedDB(
+            postId: "1",
+            title: "Review And Rumor",
+            pubDate: date,
+            categories: [NewsCategory.reviews.filterKey, NewsCategory.rumors.filterKey]
+        )
+        storage.save(feed: multiCategory)
+
+        let otherReview = FeedDB(postId: "2", title: "Other Review", pubDate: date, categories: [NewsCategory.reviews.filterKey])
+        storage.save(feed: [(category: NewsCategory.reviews, posts: [otherReview])])
+
+        let predicate = #Predicate<FeedDB> { $0.postId == "1" }
+        let fetched = storage.fetch(FeedDB.self, predicate: predicate).first
+        #expect(fetched?.categories.contains(NewsCategory.reviews.filterKey) == false)
+        #expect(fetched?.categories.contains(NewsCategory.rumors.filterKey) == true)
+    }
+
+    @Test("grouped save skips reconciliation when the fetched category result is empty")
+    func groupedSaveSkipsReconciliationForEmptyResult() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let highlighted = FeedDB(
+            postId: "1",
+            title: "Highlight",
+            pubDate: Date(),
+            categories: [NewsCategory.highlights.filterKey]
+        )
+        storage.save(feed: highlighted)
+
+        storage.save(feed: [(category: NewsCategory.highlights, posts: [])])
+
+        let fetched = storage.fetch(FeedDB.self).first
+        #expect(fetched?.categories.contains(NewsCategory.highlights.filterKey) == true)
+    }
+
+    @Test("grouped save leaves a category key untouched when the post falls outside the fetched date window")
+    func groupedSavePreservesKeyOutsideDateWindow() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let farInThePast = Date(timeIntervalSince1970: 0)
+        let recent = Date(timeIntervalSince1970: 2_000_000)
+
+        let oldHighlight = FeedDB(
+            postId: "1",
+            title: "Old Highlight",
+            pubDate: farInThePast,
+            categories: [NewsCategory.highlights.filterKey]
+        )
+        storage.save(feed: oldHighlight)
+
+        let recentHighlight = FeedDB(postId: "2", title: "Recent Highlight", pubDate: recent, categories: [NewsCategory.highlights.filterKey])
+        storage.save(feed: [(category: NewsCategory.highlights, posts: [recentHighlight])])
+
+        let predicate = #Predicate<FeedDB> { $0.postId == "1" }
+        let fetched = storage.fetch(FeedDB.self, predicate: predicate).first
+        #expect(fetched?.categories.contains(NewsCategory.highlights.filterKey) == true)
+    }
+
+    @Test("grouped save does not reconcile the news category")
+    func groupedSaveDoesNotReconcileNewsCategory() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let date = Date(timeIntervalSince1970: 1_000_000)
+
+        let post = FeedDB(
+            postId: "1",
+            title: "Old News Marker",
+            pubDate: date,
+            categories: [NewsCategory.news.filterKey]
+        )
+        storage.save(feed: post)
+
+        let otherPost = FeedDB(postId: "2", title: "Other Post", pubDate: date, categories: [NewsCategory.news.filterKey])
+        storage.save(feed: [(category: NewsCategory.news, posts: [otherPost])])
+
+        let predicate = #Predicate<FeedDB> { $0.postId == "1" }
+        let fetched = storage.fetch(FeedDB.self, predicate: predicate).first
+        #expect(fetched?.categories.contains(NewsCategory.news.filterKey) == true)
     }
 
     @Test("save should preserve favorite status on update for podcast")
