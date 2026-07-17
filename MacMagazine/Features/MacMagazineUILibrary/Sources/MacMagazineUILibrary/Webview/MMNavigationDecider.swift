@@ -6,6 +6,7 @@ import WebKit
 final class MMNavigationDecider: WebPage.NavigationDeciding {
     var onOpenComments: ((String) -> Void)?
     var onOpenInternalLink: ((URL) -> Void)?
+    var onOpenWalletPass: ((URL) -> Void)?
 
     func decidePolicy(
         for action: WebPage.NavigationAction,
@@ -20,6 +21,8 @@ final class MMNavigationDecider: WebPage.NavigationDeciding {
             switch URLClassifier.classify(url) {
             case let .comments(slug):
                 onOpenComments?(slug)
+            case .walletPass:
+                onOpenWalletPass?(url)
             case .macmagazinePost:
                 if let handler = onOpenInternalLink {
                     handler(url)
