@@ -2,7 +2,6 @@ import Foundation
 @testable import MacMagazineLibrary
 import Testing
 
-// swiftlint:disable force_unwrapping
 @Suite("URLClassifier Tests")
 struct URLClassifierTests {
 
@@ -59,5 +58,16 @@ struct URLClassifierTests {
         let url = URL(string: "https://www.google.com")!
         #expect(URLClassifier.classify(url) == .external)
     }
+
+    @Test("pkpass URL returns .walletPass")
+    func walletPass() {
+        let url = URL(string: "https://macmagazine.com.br/wp-content/uploads/2026/06/wwdc26.pkpass")!
+        #expect(URLClassifier.classify(url) == .walletPass)
+    }
+
+    @Test("pkpass URL is classified before the macmagazine host check")
+    func walletPassTakesPrecedenceOverHost() {
+        let url = URL(string: "https://macmagazine.com.br/passes/keynote.PKPASS")!
+        #expect(URLClassifier.classify(url) == .walletPass)
+    }
 }
-// swiftlint:enable force_unwrapping

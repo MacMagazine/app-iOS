@@ -2,6 +2,7 @@ import Foundation
 
 public enum URLClassification: Equatable, Sendable {
     case comments(String)
+    case walletPass
     case macmagazinePost
     case appStore
     case youTube
@@ -24,6 +25,11 @@ public enum URLClassifier {
             let slug = url.absoluteString
                 .replacingOccurrences(of: "#disqus_thread", with: "")
             return .comments(slug)
+        }
+
+        // Apple Wallet pass (e.g. event tickets), regardless of host
+        if url.pathExtension.lowercased() == "pkpass" {
+            return .walletPass
         }
 
         let host = url.host?.lowercased() ?? ""

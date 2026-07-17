@@ -9,6 +9,7 @@ public struct MMWebView: View {
 
     @State private var commentsURL = ""
     @State private var internalLinkURL: URL?
+    @State private var walletPassURL: URL?
     @State private var page: WebPage?
     @State private var navigationDecider = MMNavigationDecider()
     @State private var galleryStateHandler = GalleryStateMessageHandler()
@@ -64,6 +65,14 @@ public struct MMWebView: View {
                 commentsURL = ""
             }
         }
+        .sheet(isPresented: Binding(get: { walletPassURL != nil },
+                                    set: { _ in walletPassURL = nil })) {
+            if let walletPassURL {
+                WalletPassSheet(url: walletPassURL) {
+                    self.walletPassURL = nil
+                }
+            }
+        }
         .onChange(of: colorScheme) {
             isGalleryOpen = false
             page?.reload()
@@ -107,6 +116,7 @@ private extension MMWebView {
 
         navigationDecider.onOpenComments = { [self] slug in commentsURL = slug }
         navigationDecider.onOpenInternalLink = { [self] url in internalLinkURL = url }
+        navigationDecider.onOpenWalletPass = { [self] url in walletPassURL = url }
         galleryStateHandler.onGalleryStateChange = { [self] isOpen in isGalleryOpen = isOpen }
 
         let configuration = makeConfiguration()

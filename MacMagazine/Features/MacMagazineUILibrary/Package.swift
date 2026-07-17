@@ -16,7 +16,8 @@ let package = Package(
     targets: [
         .target(name: "MacMagazineUILibrary",
                 dependencies: ["MacMagazineLibrary",
-                    .product(name: "UIComponents", package: "Libraries")
+                    .product(name: "UIComponents", package: "Libraries"),
+                    .product(name: "Network", package: "Libraries")
                 ]),
         .testTarget(name: "MacMagazineUILibraryTests",
                     dependencies: ["MacMagazineUILibrary"])
