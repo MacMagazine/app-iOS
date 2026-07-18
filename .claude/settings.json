@@ -29,7 +29,6 @@
       "Bash(gh api:*)"
     ],
     "ask": [
-      "Write(./**/*.xcodeproj/**)",
       "Edit(./**/*.xcodeproj/**)"
     ],
     "deny": [
