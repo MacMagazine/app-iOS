@@ -1,6 +1,6 @@
 import Foundation
 
-enum PushPreferences: String {
+enum PushPreferences: String, Codable {
 	case featured = "featured_posts"
 	case all = "all_posts"
 
