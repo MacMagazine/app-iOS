@@ -1,18 +1,13 @@
-# Graph Report - MacMagazine  (2026-07-18)
+# Graph Report - .  (2026-07-11)
 
 ## Corpus Check
-- 332 files · ~362,975 words
+- 376 files · ~361,182 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2808 nodes · 5245 edges · 192 communities (164 shown, 28 thin omitted)
-- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 624 edges (avg confidence: 0.8)
+- 2457 nodes · 4835 edges · 160 communities (134 shown, 26 thin omitted)
+- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 607 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `87638307`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Settings & Subscriptions
@@ -175,49 +170,17 @@
 - Community 157
 - Community 158
 - Community 159
-- App do MacMagazine para iOS
-- Firebase Configuration
-- iOS Design Guidelines for MacMagazine
-- MMWebView
-- Guia de Contribuição
-- YOUR PRIME DIRECTIVES
-- NewsCategory
-- Anti-hallucination & pattern-fidelity contract
-- Skills Quick Reference
-- Criando um Pull Request
-- Git workflow
-- Swift Style — naming, optionals, lint, comments
-- Critical Requirements (Zero Tolerance)
-- PULL_REQUEST_TEMPLATE.md
-- WalletPassService
-- Testing — Swift Testing
-- Configuração do ambiente
-- Concurrency — Swift 6.2, structured only
-- MinimumTouchTarget
-- View
-- Validações automáticas
-- Fluxo de trabalho
-- swift-code-reviewer.md
-- .makeHTML
-- Options
-- Options
-- Options
-- Padrões de código
-- Troubleshooting
-- architecture-guardian.md
-- test-runner.md
-- ThemeColor.swift
 
 ## God Nodes (most connected - your core abstractions)
-1. `SwiftUI` - 118 edges
-2. `Foundation` - 112 edges
-3. `MacMagazineLibrary` - 94 edges
-4. `Database` - 79 edges
+1. `SwiftUI` - 114 edges
+2. `Foundation` - 108 edges
+3. `MacMagazineLibrary` - 93 edges
+4. `Database` - 70 edges
 5. `ButtonID` - 65 edges
-6. `FeedLibrary` - 55 edges
-7. `FeedDB` - 51 edges
-8. `StorageLibrary` - 49 edges
-9. `PodcastPlayerManager` - 46 edges
+6. `FeedLibrary` - 57 edges
+7. `StorageLibrary` - 49 edges
+8. `PodcastPlayerManager` - 46 edges
+9. `FeedDB` - 45 edges
 10. `AnalyticsLibrary` - 45 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -235,11 +198,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (192 total, 28 thin omitted)
+## Communities (160 total, 26 thin omitted)
 
 ### Community 0 - "Settings & Subscriptions"
-Cohesion: 0.08
-Nodes (12): SettingsDB, Bool, ModelContext, String, UUID, Database, SettingsViewModel, Database (+4 more)
+Cohesion: 0.05
+Nodes (16): SettingsDB, Bool, ModelContext, String, UUID, Subscription, Bool, Database (+8 more)
 
 ### Community 1 - "Live Content & Notifications"
 Cohesion: 0.05
@@ -258,12 +221,12 @@ Cohesion: 0.06
 Nodes (22): DateFormatter, APIXMLParser, Bool, CheckedContinuation, Error, Int, String, DateParser (+14 more)
 
 ### Community 5 - "WebView HTML & Disqus"
-Cohesion: 0.12
-Nodes (14): Int, Bool, Utils, HTTPCookie, ColorScheme, dark, light, system (+6 more)
+Cohesion: 0.05
+Nodes (31): Int, Bool, Utils, DisqusHTMLBuilder, String, GalleryStateMessageHandler, Bool, Void (+23 more)
 
 ### Community 6 - ".claude Config & Hooks"
 Cohesion: 0.04
-Nodes (47): hooks, PostToolUse, PreToolUse, Stop, permissions, allow, ask, deny (+39 more)
+Nodes (48): hooks, PostToolUse, PreToolUse, Stop, permissions, allow, ask, deny (+40 more)
 
 ### Community 7 - "News Feature"
 Cohesion: 0.09
@@ -274,8 +237,8 @@ Cohesion: 0.10
 Nodes (17): FeedViewModel, Bool, CheckedContinuation, Data, Database, Error, FeedDB, Int (+9 more)
 
 ### Community 9 - "FeedLibrary Imports"
-Cohesion: 0.07
-Nodes (13): AVFoundation, FeedLibrary, Foundation, String, NewsTests, URLs, MMLiveLibrary, NetworkLibrary (+5 more)
+Cohesion: 0.10
+Nodes (9): AVFoundation, Combine, FeedLibrary, Foundation, String, Array, Self, URLs (+1 more)
 
 ### Community 10 - "WebView Cookies"
 Cohesion: 0.08
@@ -294,8 +257,8 @@ Cohesion: 0.09
 Nodes (5): FeedDB, Bool, ModelContext, String, FeedDBTests
 
 ### Community 14 - "API Endpoints"
-Cohesion: 0.16
-Nodes (15): Array, CardAccessibilityModifier, CardButton, favorite, read, share, CardLabel, author (+7 more)
+Cohesion: 0.09
+Nodes (8): APIDefinitions, Endpoint, Self, MMLiveLibrary, NetworkLibrary, StorageLibrary, SwiftData, WatchKit
 
 ### Community 15 - "Podcast Full Player UI"
 Cohesion: 0.09
@@ -318,31 +281,39 @@ Cohesion: 0.15
 Nodes (5): Color, createChapter(), PodcastChapterTests, Double, String
 
 ### Community 20 - "Search System"
-Cohesion: 0.11
-Nodes (18): RecentSearchDB, String, LocalSearchServiceProtocol, RemoteFeedSearchService, RemoteSearchServiceProtocol, Database, SearchResultMergerProtocol, SearchViewModel (+10 more)
+Cohesion: 0.12
+Nodes (15): RecentSearchDB, String, LocalSearchServiceProtocol, RemoteSearchServiceProtocol, SearchViewModel, Bool, Database, Duration (+7 more)
 
 ### Community 21 - "Podcast Player Manager"
-Cohesion: 0.11
-Nodes (8): AVPlayer, AVPlayerItem, CMTime, SessionState, Bool, Double, PodcastDB, TimeInterval
+Cohesion: 0.17
+Nodes (8): AVPlayer, AVPlayerItem, Float, PodcastPlayerManager, Any, Double, PodcastDB, TimeInterval
+
+### Community 22 - "Community 22"
+Cohesion: 0.17
+Nodes (4): OnboardingCoordinator, Bool, Void, OnboardingCoordinatorTests
 
 ### Community 23 - "Community 23"
-Cohesion: 0.11
-Nodes (18): CaseIterable, News, all, appletv, highlights, news, reviews, rumors (+10 more)
+Cohesion: 0.09
+Nodes (20): CaseIterable, NewsCategory, all, appletv, highlights, news, podcast, reviews (+12 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.09
-Nodes (12): AppTrackingTransparency, Combine, FirebaseCore, InAppLibrary, LoggerLibrary, Array, Self, Observation (+4 more)
+Cohesion: 0.10
+Nodes (10): AppTrackingTransparency, FirebaseCore, InAppLibrary, LoggerLibrary, Observation, OneSignalExtension, OneSignalFramework, os (+2 more)
 
 ### Community 26 - "Community 26"
 Cohesion: 0.13
-Nodes (8): Float, PodcastPlayerManager, Any, createChapter(), createTestChapters(), PodcastPlayerManagerTests, Double, String
+Nodes (5): createChapter(), createTestChapters(), PodcastPlayerManagerTests, Double, String
 
 ### Community 27 - "Community 27"
 Cohesion: 0.10
 Nodes (16): SearchStatus, done, error, idle, localResults, searching, SearchView, AnalyticsManager (+8 more)
 
+### Community 28 - "Community 28"
+Cohesion: 0.10
+Nodes (16): areEqual(), Equatable, Bool, AreEqualTests, Options, home, search, String (+8 more)
+
 ### Community 29 - "Community 29"
-Cohesion: 0.19
+Cohesion: 0.17
 Nodes (4): QueryProcessor, String, QueryProcessorTests, NaturalLanguage
 
 ### Community 30 - "Community 30"
@@ -354,40 +325,36 @@ Cohesion: 0.16
 Nodes (8): APIStatus, Database, ModelContext, NetworkMockData, Options, YouTubeAPI, VideosViewModel, VideosViewModelTests
 
 ### Community 32 - "Community 32"
-Cohesion: 0.20
-Nodes (10): PodcastChapter, Data, Double, String, ChaptersView, AnalyticsManager, Binding, Bool (+2 more)
-
-### Community 33 - "Community 33"
-Cohesion: 0.14
-Nodes (3): Database, Set, StorageServiceTests
+Cohesion: 0.18
+Nodes (11): CMTime, PodcastChapter, Data, Double, String, ChaptersView, AnalyticsManager, Binding (+3 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.09
-Nodes (20): BridgeViewController, InteractivePopGestureBridge, Bool, Context, View, AddPassesView, Coordinator, Context (+12 more)
+Cohesion: 0.14
+Nodes (13): BridgeViewController, InteractivePopGestureBridge, Bool, Context, View, ImageLocation, background, chapter (+5 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.15
-Nodes (9): AnalyticsManager, PushNotification, PermissionManager, AnalyticsManager, Bool, PushNotification, String, OnboardingSheetPreviewHost (+1 more)
+Cohesion: 0.14
+Nodes (11): AnalyticsManager, PushNotification, PermissionManager, AnalyticsManager, Bool, PushNotification, String, OnboardingSheetPreviewHost (+3 more)
 
 ### Community 36 - "Community 36"
-Cohesion: 0.12
-Nodes (9): OnboardingScreenTests, News, NewsCategory, NewsLibrary, OnboardingLibrary, PodcastLibrary, SettingsLibrary, VideosLibrary (+1 more)
+Cohesion: 0.17
+Nodes (10): OnboardingScreenTests, News, NewsCategory, NewsLibrary, OnboardingLibrary, PodcastLibrary, SearchLibrary, SettingsLibrary (+2 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.24
 Nodes (5): RemoteFeedSearchServiceTests, FeedDB, PodcastDB, SearchResult, String
 
 ### Community 38 - "Community 38"
-Cohesion: 0.26
-Nodes (8): areEqual(), Equatable, Bool, Text, MainView, CaseIterable, String, View
+Cohesion: 0.20
+Nodes (10): Text, SettingsView, NewsView, SocialView, MainView, CaseIterable, String, View (+2 more)
 
 ### Community 39 - "Community 39"
 Cohesion: 0.18
 Nodes (12): Context, Sendable, WidgetData, WidgetEntry, WatchWidgetProvider, MacMagazineTimelineProvider, Context, Void (+4 more)
 
 ### Community 40 - "Community 40"
-Cohesion: 0.23
-Nodes (7): SearchResultMerger, SearchResult, String, SearchResultMergerTests, Bool, SearchResult, String
+Cohesion: 0.20
+Nodes (8): SearchResultMerger, SearchResultMergerProtocol, SearchResult, String, SearchResultMergerTests, Bool, SearchResult, String
 
 ### Community 41 - "Community 41"
 Cohesion: 0.11
@@ -395,27 +362,27 @@ Nodes (16): AppDelegate, Any, AnyHashable, Bool, Data, Error, LoggerProtocol, Pu
 
 ### Community 42 - "Community 42"
 Cohesion: 0.12
-Nodes (13): LinearGradient, CardDensity, Bool, CGFloat, Font, Int, GlassCardView, AnalyticsManager (+5 more)
+Nodes (12): LinearGradient, CardDensity, CGFloat, Font, Int, GlassCardView, AnalyticsManager, CGFloat (+4 more)
 
 ### Community 43 - "Community 43"
-Cohesion: 0.05
-Nodes (26): ActivityAttributes, ActivityKit, Codable, Hashable, Data, String, WidgetData, WidgetDataTests (+18 more)
+Cohesion: 0.19
+Nodes (4): Data, String, WidgetData, WidgetDataTests
 
 ### Community 44 - "Community 44"
-Cohesion: 0.06
-Nodes (31): AnalyticsConstants, AppTabs, live, news, search, settings, social, Social (+23 more)
+Cohesion: 0.14
+Nodes (13): Social, instagram, podcast, videos, SocialTests, CustomizationDB, Bool, ModelContext (+5 more)
 
 ### Community 45 - "Community 45"
-Cohesion: 0.18
-Nodes (8): EnvironmentValues, ThemeColor, OnboardingContainerView, Bool, Bool, Namespace, WelcomeView, Themeable
+Cohesion: 0.12
+Nodes (13): EnvironmentValues, String, Color, ThemeColor, OnboardingContainerView, Bool, Bool, Namespace (+5 more)
 
 ### Community 46 - "Community 46"
-Cohesion: 0.12
-Nodes (16): Card views, Data Layer — SwiftData, search, podcast, multi-platform, Data sources, External dependencies, Key types, Mini player, Multi-platform, NLP pipeline (Apple NaturalLanguage framework) (+8 more)
+Cohesion: 0.16
+Nodes (13): Array, CardAccessibilityModifier, CardButton, favorite, share, CardLabel, author, date (+5 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.17
-Nodes (9): GalleryStateMessageHandler, Bool, Void, WKScriptMessage, WKUserContentController, Bool, String, WebPage (+1 more)
+Cohesion: 0.16
+Nodes (13): Array, CardAccessibilityModifier, CardButton, favorite, share, CardLabel, date, duration (+5 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.12
@@ -430,23 +397,23 @@ Cohesion: 0.19
 Nodes (6): CardContentType, news, podcast, video, NewsCategory, CardContentTypeTests
 
 ### Community 51 - "Community 51"
-Cohesion: 0.15
-Nodes (7): Bool, ScenePhase, UUID, WebViewLoadPolicy, Bool, ScenePhase, WebViewLoadPolicyTests
+Cohesion: 0.14
+Nodes (15): ActivityAttributes, ActivityKit, Codable, News, all, appletv, highlights, news (+7 more)
 
 ### Community 52 - "Community 52"
 Cohesion: 0.13
 Nodes (11): PushNotification, PushPermissionStatus, authorized, denied, notDetermined, LoggerProtocol, String, OSNotificationClickEvent (+3 more)
 
 ### Community 53 - "Community 53"
-Cohesion: 0.10
-Nodes (9): WidgetAccessibility, Widget, WatchWidgetBundle, MacMagazineWidgetBundle, Widget, OneSignalExtension, UserNotifications, WidgetBundle (+1 more)
+Cohesion: 0.14
+Nodes (7): WidgetAccessibility, Widget, WatchWidgetBundle, MacMagazineWidgetBundle, Widget, WidgetBundle, WidgetKit
 
 ### Community 55 - "Community 55"
-Cohesion: 0.15
-Nodes (12): CustomizationViewModel, Database, News, CustomSocialView, AnalyticsManager, IndexSet, Int, CustomTabView (+4 more)
+Cohesion: 0.17
+Nodes (11): CustomizationViewModel, Database, News, CustomSocialView, AnalyticsManager, IndexSet, Int, CustomTabView (+3 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.22
+Cohesion: 0.20
 Nodes (10): SceneView, PushNotification, MainViewModel, Bool, Database, LoggerProtocol, News, PersistentModel (+2 more)
 
 ### Community 57 - "Community 57"
@@ -454,8 +421,8 @@ Cohesion: 0.14
 Nodes (10): Any, AnyHashable, Data, FeedMainViewModel, String, UNNotificationResponse, UNUserNotificationCenter, WatchNotificationsDelegate (+2 more)
 
 ### Community 58 - "Community 58"
-Cohesion: 0.50
-Nodes (3): NetworkService, Data, Network
+Cohesion: 0.16
+Nodes (11): NetworkService, Data, Network, ContentType, news, podcast, video, SortPreference (+3 more)
 
 ### Community 59 - "Community 59"
 Cohesion: 0.21
@@ -466,15 +433,15 @@ Cohesion: 0.24
 Nodes (7): FeedMainViewModel, Bool, CGPoint, FeedDB, Int, ModelContext, String
 
 ### Community 61 - "Community 61"
-Cohesion: 0.67
-Nodes (3): BackgroundView, Bool, Color
+Cohesion: 0.19
+Nodes (10): CGSize, BackgroundView, Bool, Color, PodcastImageView, Content, Data, FeedRowView (+2 more)
 
 ### Community 62 - "Community 62"
-Cohesion: 0.25
+Cohesion: 0.27
 Nodes (10): Edge, ManagedWebView, ManagedWebViewStyle, async, Binding, Bool, MainActor, UUID (+2 more)
 
 ### Community 63 - "Community 63"
-Cohesion: 0.21
+Cohesion: 0.19
 Nodes (8): DisqusDataStore, DisqusLoginWebView, DisqusSheet, MainActor, String, Void, WebPage, WKWebsiteDataStore
 
 ### Community 64 - "Community 64"
@@ -482,24 +449,24 @@ Cohesion: 0.21
 Nodes (8): Cache, cleanAll, keepFavoritesAndStatus, PostsVisibilityViewModel, Database, PersistentModel, PostsVisibilityView, AnalyticsManager
 
 ### Community 65 - "Community 65"
-Cohesion: 0.19
-Nodes (10): FailingNetworkStub, StubNetwork, Data, String, FeedDB, String, String, URL (+2 more)
+Cohesion: 0.21
+Nodes (8): FeedDB, String, AccessibilityChildBehavior, String, View, String, URL, WidgetData
 
 ### Community 66 - "Community 66"
-Cohesion: 0.33
-Nodes (8): AdaptiveBody, AdaptiveVideoCard, MMVideoDBPreview, AnalyticsManager, ModelContext, VideoDB, View, VideoCard
+Cohesion: 0.26
+Nodes (10): CardButton, CardLabel, AdaptiveBody, AdaptiveVideoCard, MMVideoDBPreview, AnalyticsManager, ModelContext, VideoDB (+2 more)
 
 ### Community 67 - "Community 67"
-Cohesion: 0.19
+Cohesion: 0.21
 Nodes (9): Identifiable, OnBoardingFeature, String, FeaturesView, Bool, CGFloat, GridItem, Int (+1 more)
 
 ### Community 68 - "Community 68"
-Cohesion: 0.17
-Nodes (11): CardStyle, glass, header, highlight, leadingImage, NewsCategory, FeedDB, AnalyticsManager (+3 more)
+Cohesion: 0.18
+Nodes (10): CardStyle, glass, highlight, leadingImage, NewsCategory, FeedDB, AnalyticsManager, CGFloat (+2 more)
 
 ### Community 69 - "Community 69"
-Cohesion: 0.20
-Nodes (12): PodcastImageView, Content, Data, SearchResultsList, AnalyticsManager, FeedDB, PodcastDB, SearchResult (+4 more)
+Cohesion: 0.27
+Nodes (8): SearchResultsList, AnalyticsManager, FeedDB, PodcastDB, SearchResult, String, VideoDB, Void
 
 ### Community 70 - "Community 70"
 Cohesion: 0.20
@@ -522,36 +489,36 @@ Cohesion: 0.33
 Nodes (10): Header, CollectionViewWithHeader, APIStatus, Binding, Bool, Content, Int, ScrollPosition (+2 more)
 
 ### Community 77 - "Community 77"
-Cohesion: 0.12
-Nodes (15): 10. WebView System Integrity, 1. Obvious Comments, 2. Force Unwraps in Production Code, 3. @Observable Usage, 4. Card System Compliance, 5. Hardcoded Colors, 6. SwiftLint Compliance, 7. DRY Violations (+7 more)
+Cohesion: 0.18
+Nodes (8): AppTabs, live, news, search, settings, social, AppTabsTests, Bool
 
 ### Community 78 - "Community 78"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (4): String, MMWebViewUserScripts, WebKit, WKUserScript
 
 ### Community 80 - "Community 80"
-Cohesion: 0.19
-Nodes (15): ContentType, news, podcast, video, QueryIntent, SortPreference, recent, relevance (+7 more)
+Cohesion: 0.40
+Nodes (7): QueryIntent, NewsCategory, Set, String, LocalSearchService, ModelContext, SearchResult
 
 ### Community 81 - "Community 81"
-Cohesion: 0.27
-Nodes (9): NewsView, Content, Options, ToolbarModifier, ToolbarType, compact, normal, View (+1 more)
+Cohesion: 0.31
+Nodes (8): Content, Options, ToolbarModifier, ToolbarType, compact, normal, View, Menu
 
 ### Community 82 - "Community 82"
-Cohesion: 0.20
-Nodes (9): ShortcutActions, none, openLastSeenPost, openMostRecentPost, openSearchPost, ShortcutManager, ModelContext, String (+1 more)
+Cohesion: 0.22
+Nodes (8): ShortcutManager, ModelContext, String, UIApplicationShortcutItem, Bool, UIApplicationShortcutItem, Void, UIWindowScene
 
 ### Community 83 - "Community 83"
-Cohesion: 0.12
-Nodes (15): 1. Understand Requirements, 2. Search for Existing Code (Avoid Duplication), 3. Study Existing Implementations (CRITICAL), 4. Design Architecture, 5. Set Up Feature Branch, 6. Build System Reference, Architecture Patterns, Before Writing Code (+7 more)
+Cohesion: 0.18
+Nodes (11): String, WidgetConfiguration, WatchWidget, MacMagazineWidget, String, WidgetConfiguration, MacMagazineWidgetLiveActivity, WidgetConfiguration (+3 more)
 
 ### Community 84 - "Community 84"
 Cohesion: 0.33
 Nodes (6): HeaderWidgetModifier, OverlayHeaderWidgetModifier, CGFloat, Content, String, View
 
 ### Community 85 - "Community 85"
-Cohesion: 0.18
-Nodes (10): String, URLClassification, appStore, comments, external, instagram, macmagazinePost, walletPass (+2 more)
+Cohesion: 0.20
+Nodes (9): String, URLClassification, appStore, comments, external, instagram, macmagazinePost, youTube (+1 more)
 
 ### Community 88 - "Community 88"
 Cohesion: 0.27
@@ -562,15 +529,15 @@ Cohesion: 0.33
 Nodes (5): PortugueseLexicon, Bool, NewsCategory, Set, String
 
 ### Community 90 - "Community 90"
-Cohesion: 0.14
-Nodes (13): Adding a new module, Architecture — modular SPM, MVVM, environment injection, Build targets, Custom environment values, Deep linking, Dependency rules (enforced by review + the architecture-guardian agent), Environment injection (MacMagazineApp), Modular SPM structure (+5 more)
+Cohesion: 0.20
+Nodes (9): CGFloat, Image, WidgetData, WidgetElementView, AnalyticsManager, Int, WidgetData, WidgetEntry (+1 more)
 
 ### Community 91 - "Community 91"
 Cohesion: 0.28
 Nodes (6): AVKit, Context, SystemVolumeView, MediaPlayer, MPVolumeView, UIViewRepresentable
 
 ### Community 92 - "Community 92"
-Cohesion: 0.29
+Cohesion: 0.25
 Nodes (6): Gesture, MiniPlayerView, AnalyticsManager, Color, PodcastDB, String
 
 ### Community 93 - "Community 93"
@@ -582,8 +549,8 @@ Cohesion: 0.33
 Nodes (7): PermissionCard, PermissionCardStatus, denied, granted, notDetermined, String, Void
 
 ### Community 95 - "Community 95"
-Cohesion: 0.23
-Nodes (6): CGSize, CGFloat, UIColor, UIImage, FeedRowView, FeedDB
+Cohesion: 0.39
+Nodes (3): CGFloat, UIColor, UIImage
 
 ### Community 96 - "Community 96"
 Cohesion: 0.31
@@ -602,7 +569,7 @@ Cohesion: 0.36
 Nodes (5): PaginatedForEach, Bool, Content, Element, Int
 
 ### Community 100 - "Community 100"
-Cohesion: 0.29
+Cohesion: 0.25
 Nodes (6): DisqusNewWindowHandler, MainActor, Void, WKScriptMessage, WKUserContentController, WKScriptMessageHandler
 
 ### Community 101 - "Community 101"
@@ -618,8 +585,8 @@ Cohesion: 0.32
 Nodes (4): PodcastMiniPlayerModifier, Content, View, ViewModifier
 
 ### Community 104 - "Community 104"
-Cohesion: 0.50
-Nodes (3): Int, SearchResult, String
+Cohesion: 0.32
+Nodes (5): RemoteFeedSearchService, Database, Int, SearchResult, String
 
 ### Community 105 - "Community 105"
 Cohesion: 0.36
@@ -630,20 +597,20 @@ Cohesion: 0.32
 Nodes (7): AnalyticsManager, Binding, Bool, Database, ScrollPosition, String, VideosView
 
 ### Community 107 - "Community 107"
-Cohesion: 0.18
-Nodes (10): SceneDelegate, Bool, UIApplicationShortcutItem, UIScene, UISceneSession, Void, UIResponder, UIWindow (+2 more)
+Cohesion: 0.32
+Nodes (6): SceneDelegate, UIScene, UISceneSession, UIResponder, UIWindow, UIWindowSceneDelegate
 
 ### Community 108 - "Community 108"
 Cohesion: 0.33
 Nodes (5): Glass, MenuView, Binding, Bool, T
 
 ### Community 109 - "Community 109"
-Cohesion: 0.15
-Nodes (9): CustomHost, APIDefinitions, Endpoint, Int, Self, String, APIDefinitions, Endpoint (+1 more)
+Cohesion: 0.29
+Nodes (5): APIDefinitions, Endpoint, Int, Self, String
 
 ### Community 110 - "Community 110"
-Cohesion: 0.33
-Nodes (5): GenericEvent, newsOrder, socialOrder, tabOrder, String
+Cohesion: 0.29
+Nodes (6): AnalyticsConstants, GenericEvent, newsOrder, socialOrder, tabOrder, String
 
 ### Community 111 - "Community 111"
 Cohesion: 0.33
@@ -658,8 +625,8 @@ Cohesion: 0.38
 Nodes (5): PodcastDB, AnalyticsManager, Double, ModelContext, String
 
 ### Community 114 - "Community 114"
-Cohesion: 0.21
-Nodes (10): ContentSheet, PatronLoginSheet, SettingsView, AnalyticsManager, String, Void, WebPage, SocialView (+2 more)
+Cohesion: 0.43
+Nodes (6): ContentSheet, PatronLoginSheet, AnalyticsManager, String, Void, WebPage
 
 ### Community 115 - "Community 115"
 Cohesion: 0.38
@@ -686,8 +653,8 @@ Cohesion: 0.60
 Nodes (5): AnyObject, ModelDuplicable, ModelFavoritable, ModelReadable, PersistentModel
 
 ### Community 121 - "Community 121"
-Cohesion: 0.14
-Nodes (13): OnboardingCoordinator, OnboardingScreen, features, permissions, welcome, Bool, String, Void (+5 more)
+Cohesion: 0.33
+Nodes (6): Hashable, OnboardingScreen, features, permissions, welcome, String
 
 ### Community 122 - "Community 122"
 Cohesion: 0.53
@@ -706,8 +673,8 @@ Cohesion: 0.40
 Nodes (3): OnboardingLogoView, CGFloat, CGFloat
 
 ### Community 126 - "Community 126"
-Cohesion: 0.14
-Nodes (13): Common MacMagazine Bug Patterns, Enforcement, FAIL Conditions, iOS Bug Fix & Refactoring, Remote search missing podcasts/videos, Search results showing wrong card type, Step 1: Investigation (MANDATORY), Step 2: Fix Implementation (+5 more)
+Cohesion: 0.33
+Nodes (5): ShortcutActions, none, openLastSeenPost, openMostRecentPost, openSearchPost
 
 ### Community 127 - "Community 127"
 Cohesion: 0.40
@@ -722,8 +689,8 @@ Cohesion: 0.40
 Nodes (5): Status, done, error, idle, loading
 
 ### Community 130 - "Community 130"
-Cohesion: 0.20
-Nodes (11): View, FavoriteButton, Bool, String, Void, ReadButton, Bool, String (+3 more)
+Cohesion: 0.70
+Nodes (4): FavoriteButton, Bool, String, Void
 
 ### Community 131 - "Community 131"
 Cohesion: 0.50
@@ -754,12 +721,8 @@ Cohesion: 0.40
 Nodes (3): String, WidgetEntry, WatchWidgetEntryView
 
 ### Community 138 - "Community 138"
-Cohesion: 0.53
-Nodes (4): FeedDB, ModelContext, NewsCategory, PodcastDB
-
-### Community 139 - "Community 139"
-Cohesion: 0.15
-Nodes (13): Agents (`.claude/agents/`), Anti-hallucination contract (the most important section), Build Commands, CLAUDE.md — MacMagazine, Conventions, Definition of Done (all must hold before you say "done"), graphify, Guardrails (deterministic — see `.claude/settings.json` + `.claude/hooks/`) (+5 more)
+Cohesion: 0.50
+Nodes (3): FeedDB, ModelContext, PodcastDB
 
 ### Community 141 - "Community 141"
 Cohesion: 0.67
@@ -773,145 +736,25 @@ Nodes (3): OnboardingSkipButton, String, Void
 Cohesion: 0.83
 Nodes (3): FeedDetailView, FeedDB, FeedMainViewModel
 
-### Community 147 - "Community 147"
-Cohesion: 0.15
-Nodes (12): Accessibility, Card system (MacMagazineUILibrary), CardContent — universal data model, CardContentType — content variants, CardStyle — layout variants, Category-to-style mapping (NewsCategory.style), NewsCard — smart dispatcher, Theme system (+4 more)
-
-### Community 150 - "Community 150"
-Cohesion: 0.15
-Nodes (12): Enforcement Rules, FAIL Conditions — Start Over If You:, iOS Feature Implementation, Phase 1: Pre-Flight (NO CODE YET), Phase 2: Planning, Phase 3: Implementation (Step by Step), Phase 4: Definition of Done, SUCCESS Conditions (+4 more)
-
-### Community 160 - "App do MacMagazine para iOS"
-Cohesion: 0.15
-Nodes (13): App do MacMagazine para iOS, Bug Reporting e Feature Requests, Começando, Como funciona, Como usar, Configuração rápida, Contribuindo, Desenvolvimento com IA (Claude Code) (+5 more)
-
-### Community 161 - "Firebase Configuration"
-Cohesion: 0.17
-Nodes (8): CI/CD Setup (Bitrise), Firebase Configuration, How It Works, Option 1: Using Environment Variables (Recommended), Option 2: Using Secure File Storage, Overview, Security Notes, Setup for Local Development
-
-### Community 162 - "iOS Design Guidelines for MacMagazine"
-Cohesion: 0.17
-Nodes (11): Accessibility, Card System, CardStyle Reference, Dark Mode, iOS Design Guidelines for MacMagazine, Standard Background Pattern, Theme System, Theme Tokens (+3 more)
-
-### Community 163 - "MMWebView"
-Cohesion: 0.29
-Nodes (6): MMWebView, async, MainActor, String, Void, WebPage
-
-### Community 164 - "Guia de Contribuição"
-Cohesion: 0.17
-Nodes (12): 1. Aguarde revisão, 2. Responda aos comentários, 3. Atualize seu PR, 4. Aprovação e merge, Dúvidas?, Executando testes, Guia de Contribuição, Processo de revisão (+4 more)
-
-### Community 165 - "YOUR PRIME DIRECTIVES"
-Cohesion: 0.18
-Nodes (10): DIRECTIVE 1: READ BEFORE YOU WRITE — NO EXCEPTIONS, DIRECTIVE 2: FOLLOW CLAUDE.md AND `.claude/rules/` AS ABSOLUTE LAW, DIRECTIVE 3: ARCHITECTURE COMPLIANCE, DIRECTIVE 4: SOLID, DRY, AND CLEAN CODE, DIRECTIVE 5: SELF-VERIFICATION CHECKLIST, DIRECTIVE 6: WHEN IN DOUBT, READ MORE CODE, DIRECTIVE 7: PROACTIVE EXCELLENCE, HARD-LEARNED LESSONS (+2 more)
-
-### Community 166 - "NewsCategory"
-Cohesion: 0.18
-Nodes (10): NewsCategory, all, appletv, highlights, news, podcast, reviews, rumors (+2 more)
-
-### Community 167 - "Anti-hallucination & pattern-fidelity contract"
-Cohesion: 0.22
-Nodes (8): 1. Never invent APIs or symbols, 2. Mirror the project's patterns — don't freelance, 3. Cite where you act, 4. Never fabricate results, 5. Prefer "I don't know" over a plausible guess, 6. Stay in scope, 7. Self-check before declaring done, Anti-hallucination & pattern-fidelity contract
-
-### Community 168 - "Skills Quick Reference"
-Cohesion: 0.22
-Nodes (8): Built-in Skills (Claude Code), Decision Tree, Project Agents (`.claude/agents/`), Project Skills (this folder), Reference, Skill Integration, Skills Quick Reference, Workflow
-
-### Community 169 - "Criando um Pull Request"
-Cohesion: 0.22
-Nodes (9): 1. Push da sua branch, 2. Abra o Pull Request, 3. Título do PR (IMPORTANTE), 4. Preencha o template, 5. Verifique a base branch, Criando um Pull Request, Exemplos de títulos válidos, Regra especial para `fix` (+1 more)
-
-### Community 170 - "Git workflow"
-Cohesion: 0.25
-Nodes (7): Auto-commit and push (project policy), Blocked regardless (PreToolUse hook + settings.json deny), Branches, Commits / PR titles, Git workflow, Never commit, The gate (before every commit)
-
-### Community 171 - "Swift Style — naming, optionals, lint, comments"
-Cohesion: 0.25
-Nodes (7): API design, Comments — zero tolerance for obvious comments, Files & layout, Naming, Optionals & errors, Swift Style — naming, optionals, lint, comments, SwiftLint configuration highlights
-
-### Community 172 - "Critical Requirements (Zero Tolerance)"
-Cohesion: 0.25
-Nodes (7): Build & Tests, Card System Compliance, Code Quality (SOLID + DRY), Critical Requirements (Zero Tolerance), Git Workflow, iOS Definition of Done Checklist, Self-Review Questions
-
-### Community 173 - "PULL_REQUEST_TEMPLATE.md"
-Cohesion: 0.25
-Nodes (7): Additional Notes, Checklist, Description, Related Issue, Screenshots/Videos, Testing, Type of Change
-
-### Community 174 - "WalletPassService"
-Cohesion: 0.36
-Nodes (5): Network, Sendable, WalletPassService, WalletPassServiceTests, PKPass
-
-### Community 175 - "Testing — Swift Testing"
-Cohesion: 0.29
-Nodes (6): Definition of tested, Pattern, Rules, Testing — Swift Testing, What to test, Where tests live
-
-### Community 176 - "Configuração do ambiente"
-Cohesion: 0.29
-Nodes (7): 1. Clone o repositório, 2. Configure o Firebase, 3. Abra o projeto no Xcode, 4. Resolva as dependências, 5. Selecione o scheme e dispositivo, 6. Build inicial, Configuração do ambiente
-
-### Community 177 - "Concurrency — Swift 6.2, structured only"
-Cohesion: 0.33
-Nodes (5): Banned (the PostToolUse hook blocks these), Concurrency — Swift 6.2, structured only, Example shape, Legacy (migrate when touching, never write new), Required patterns
-
-### Community 178 - "MinimumTouchTarget"
-Cohesion: 0.47
-Nodes (3): MinimumTouchTarget, Content, View
-
-### Community 179 - "View"
-Cohesion: 0.40
-Nodes (3): AccessibilityChildBehavior, String, View
-
-### Community 180 - "Validações automáticas"
-Cohesion: 0.33
-Nodes (6): 1. Branch atualizada, 2. Título do PR, 3. SwiftLint, 4. Testes, Status das validações, Validações automáticas
-
-### Community 181 - "Fluxo de trabalho"
-Cohesion: 0.40
-Nodes (5): 1. Mantenha seu fork atualizado, 2. Crie uma branch, 3. Desenvolva, 4. Teste localmente, Fluxo de trabalho
-
-### Community 182 - "swift-code-reviewer.md"
-Cohesion: 0.50
-Nodes (3): Output, Read first, Review for
-
-### Community 184 - "Options"
-Cohesion: 0.50
-Nodes (4): Options, home, search, String
-
-### Community 185 - "Options"
-Cohesion: 0.50
-Nodes (4): Options, home, search, String
-
-### Community 186 - "Options"
-Cohesion: 0.50
-Nodes (4): Options, home, search, String
-
-### Community 187 - "Padrões de código"
-Cohesion: 0.50
-Nodes (4): Arquitetura, Code Style, Padrões de código, SwiftLint
-
-### Community 188 - "Troubleshooting"
-Cohesion: 0.50
-Nodes (4): App won't build locally, Firebase disabled locally, Firebase not working on Bitrise, Troubleshooting
-
 ## Knowledge Gaps
-- **472 isolated node(s):** `post-tool-use.sh script`, `stop.sh script`, `$schema`, `Read`, `Grep` (+467 more)
+- **265 isolated node(s):** `post-tool-use.sh script`, `stop.sh script`, `$schema`, `Read`, `Grep` (+260 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **26 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Foundation` connect `FeedLibrary Imports` to `Live Content & Notifications`, `Analytics Library`, `XML Feed Parsing`, `Community 145`, `Card Content & Menus`, `Community 148`, `Search System`, `Community 24`, `Community 152`, `Community 29`, `Community 36`, `Community 38`, `NewsCategory`, `Community 43`, `Community 53`, `Community 59`, `ThemeColor.swift`, `Community 64`, `Community 65`, `Community 68`, `Community 70`, `Community 73`, `Community 78`, `Community 82`, `Community 85`, `Community 109`, `Community 110`, `Community 120`?**
-  _High betweenness centrality (0.187) - this node is a cross-community bridge._
-- **Why does `SwiftUI` connect `Analytics Library` to `Community 128`, `Live Content & Notifications`, `Settings & Subscriptions`, `Community 132`, `WebView HTML & Disqus`, `FeedLibrary Imports`, `Community 140`, `API Endpoints`, `Card Content & Menus`, `Community 146`, `Search System`, `Community 149`, `Community 24`, `Community 36`, `Community 43`, `Community 49`, `MinimumTouchTarget`, `Community 53`, `.makeHTML`, `ThemeColor.swift`, `Community 67`, `Community 71`, `Community 78`, `Community 81`, `Community 91`, `Community 94`, `Community 99`, `Community 101`, `Community 102`, `Community 105`, `Community 112`, `Community 117`, `Community 118`, `Community 119`, `Community 124`, `Community 125`?**
-  _High betweenness centrality (0.128) - this node is a cross-community bridge._
-- **Why does `MacMagazineLibrary` connect `Analytics Library` to `Community 89`, `Community 68`, `Community 36`, `FeedLibrary Imports`, `Community 78`, `Community 145`, `Community 148`, `Community 53`, `Community 152`, `Community 24`?**
-  _High betweenness centrality (0.089) - this node is a cross-community bridge._
-- **Are the 74 inferred relationships involving `Database` (e.g. with `.deduplicateHandlesMultipleGroups()` and `.deduplicateKeepsMostRecentlyModified()`) actually correct?**
-  _`Database` has 74 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `Foundation` connect `FeedLibrary Imports` to `Settings & Subscriptions`, `Live Content & Notifications`, `Analytics Library`, `XML Feed Parsing`, `WebView HTML & Disqus`, `Community 139`, `API Endpoints`, `Community 145`, `Card Content & Menus`, `Search ViewModel Tests`, `Community 148`, `Search System`, `Community 23`, `Community 24`, `Community 152`, `Community 28`, `Community 29`, `Community 36`, `Community 40`, `Community 43`, `Community 45`, `Community 53`, `Community 58`, `Community 59`, `Community 63`, `Community 64`, `Community 65`, `Community 68`, `Community 70`, `Community 73`, `Community 78`, `Community 85`, `Community 100`, `Community 109`, `Community 110`, `Community 120`, `Community 126`?**
+  _High betweenness centrality (0.278) - this node is a cross-community bridge._
+- **Why does `SwiftUI` connect `Analytics Library` to `Community 128`, `Live Content & Notifications`, `Settings & Subscriptions`, `Community 132`, `WebView HTML & Disqus`, `FeedLibrary Imports`, `Community 140`, `API Endpoints`, `Card Content & Menus`, `Community 146`, `Search System`, `Community 149`, `Community 24`, `Community 36`, `Community 45`, `Community 46`, `Community 47`, `Community 49`, `Community 51`, `Community 53`, `Community 67`, `Community 71`, `Community 78`, `Community 81`, `Community 84`, `Community 91`, `Community 94`, `Community 99`, `Community 101`, `Community 102`, `Community 105`, `Community 112`, `Community 117`, `Community 118`, `Community 119`, `Community 124`, `Community 125`?**
+  _High betweenness centrality (0.157) - this node is a cross-community bridge._
+- **Why does `MacMagazineLibrary` connect `Analytics Library` to `Community 68`, `Community 36`, `FeedLibrary Imports`, `API Endpoints`, `Community 78`, `Community 145`, `Community 148`, `Community 53`, `Community 24`, `Community 89`, `Community 58`, `Community 152`?**
+  _High betweenness centrality (0.120) - this node is a cross-community bridge._
+- **Are the 68 inferred relationships involving `Database` (e.g. with `.deduplicateHandlesMultipleGroups()` and `.deduplicateKeepsMostRecentlyModified()`) actually correct?**
+  _`Database` has 68 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `post-tool-use.sh script`, `stop.sh script`, `$schema` to the rest of the system?**
-  _472 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _265 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Settings & Subscriptions` be split into smaller, more focused modules?**
-  _Cohesion score 0.07644110275689223 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.050617283950617285 - nodes in this community are weakly interconnected._
 - **Should `Live Content & Notifications` be split into smaller, more focused modules?**
   _Cohesion score 0.05411392405063291 - nodes in this community are weakly interconnected._
