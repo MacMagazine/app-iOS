@@ -6,6 +6,7 @@ import SwiftUI
 public struct MMWebView: View {
     @Environment(\.removeAds) private var removeAds
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
 
     @State private var commentsURL = ""
     @State private var internalLinkURL: URL?
@@ -15,6 +16,7 @@ public struct MMWebView: View {
     @State private var galleryStateHandler = GalleryStateMessageHandler()
     @State private var isGalleryOpen = false
     @State private var reloadID = UUID()
+    @State private var appliedColorScheme: ColorScheme?
 
     private let url: String?
     private let cacheKey: String?
@@ -73,9 +75,16 @@ public struct MMWebView: View {
                 }
             }
         }
-        .onChange(of: colorScheme) {
-            isGalleryOpen = false
-            page?.reload()
+        .onChange(of: colorScheme) { _, newScheme in
+            guard WebViewLoadPolicy.shouldHandleColorSchemeChange(scenePhase: scenePhase) else { return }
+            applyColorScheme(newScheme)
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active,
+               WebViewLoadPolicy.needsColorSchemeReconciliation(current: colorScheme,
+                                                                applied: appliedColorScheme) {
+                applyColorScheme(colorScheme)
+            }
         }
         .onChange(of: removeAds) {
             if let cacheKey {
@@ -91,6 +100,12 @@ public struct MMWebView: View {
 // MARK: - Setup
 
 private extension MMWebView {
+    func applyColorScheme(_ scheme: ColorScheme) {
+        appliedColorScheme = scheme
+        isGalleryOpen = false
+        page?.reload()
+    }
+
     func makeLoadAction() -> (@MainActor (WebPage) async throws -> Void)? {
         guard let cacheKey else { return urlLoadAction() }
         if WebPageCache.shared.hasPage(for: cacheKey) {
@@ -146,6 +161,7 @@ private extension MMWebView {
             await cookieStore.setCookie(cookie)
         }
 
+        appliedColorScheme = colorScheme
         return page
     }
 

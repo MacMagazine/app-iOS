@@ -32,6 +32,8 @@ public struct ManagedWebView: View {
     @State private var viewStatus = WebViewStatus.idle
     @State private var isActive = true
     @State private var webViewReadyToRender = !ProcessInfo.processInfo.isiOSAppOnMac
+    @State private var completedLoadTrigger: UUID?
+    @State private var appliedColorScheme: ColorScheme?
 
     let style: ManagedWebViewStyle
     let pageProvider: @MainActor () async -> WebPage?
@@ -83,18 +85,25 @@ public struct ManagedWebView: View {
                 try? await Task.sleep(for: .milliseconds(50))
             }
 
+            guard WebViewLoadPolicy.shouldLoad(trigger: reloadTrigger,
+                                               completedTrigger: completedLoadTrigger) else {
+                viewStatus = .done
+                return
+            }
+
             await performLoad(on: activePage)
         }
         .onChange(of: scenePhase) { _, newPhase in
             isActive = newPhase == .active
+            if newPhase == .active,
+               WebViewLoadPolicy.needsColorSchemeReconciliation(current: colorScheme,
+                                                                applied: appliedColorScheme) {
+                handleColorSchemeChange(colorScheme)
+            }
         }
         .onChange(of: colorScheme) { _, newScheme in
-            guard let onColorSchemeChange, let page else { return }
-            Task {
-                viewStatus = .loading
-                await onColorSchemeChange(page, newScheme)
-                await performLoad(on: page)
-            }
+            guard WebViewLoadPolicy.shouldHandleColorSchemeChange(scenePhase: scenePhase) else { return }
+            handleColorSchemeChange(newScheme)
         }
     }
 }
@@ -119,9 +128,21 @@ private extension ManagedWebView {
         }
     }
 
+    func handleColorSchemeChange(_ scheme: ColorScheme) {
+        guard let onColorSchemeChange, let page else { return }
+        appliedColorScheme = scheme
+        Task {
+            viewStatus = .loading
+            await onColorSchemeChange(page, scheme)
+            await performLoad(on: page)
+        }
+    }
+
     func performLoad(on page: WebPage) async {
         guard let loadAction else {
             viewStatus = .done
+            completedLoadTrigger = reloadTrigger
+            appliedColorScheme = colorScheme
             return
         }
 
@@ -129,6 +150,8 @@ private extension ManagedWebView {
         do {
             try await loadAction(page)
             viewStatus = .done
+            completedLoadTrigger = reloadTrigger
+            appliedColorScheme = colorScheme
             if let postLoadAction {
                 await postLoadAction(page)
             }
@@ -137,7 +160,7 @@ private extension ManagedWebView {
         } catch let error as WebPage.NavigationError {
             switch error {
             case .webContentProcessTerminated:
-                break
+                completedLoadTrigger = nil
             default:
                 if !Task.isCancelled {
                     viewStatus = .error(error.localizedDescription)
