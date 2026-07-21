@@ -40,7 +40,7 @@ private extension Array where Element == CardButton {
         ForEach(self.indices, id: \.self) { index in
             switch self[index] {
             case .read:
-                ReadButton(name: data.title, read: data.read, action: data.readAction)
+                ReadButton(read: data.read, action: data.readAction)
             case .favorite:
                 FavoriteButton(name: data.title, favorite: data.favorite, action: data.favoriteAction)
             case .share:

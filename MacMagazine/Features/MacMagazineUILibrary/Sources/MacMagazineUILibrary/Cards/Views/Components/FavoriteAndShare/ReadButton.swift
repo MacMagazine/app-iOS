@@ -4,16 +4,13 @@ import UIKit
 #endif
 
 public struct ReadButton: View {
-    let name: String
     let read: Bool
     let action: (() -> Void)?
 
     public init(
-        name: String,
         read: Bool,
         action: (() -> Void)?
     ) {
-        self.name = name
         self.read = read
         self.action = action
     }
@@ -31,7 +28,7 @@ public struct ReadButton: View {
         }, label: {
             Image(systemName: "circle\(read ? ".fill" : "")")
         })
-        .accessibilityLabel("Marcar \(name).", isEnabled: action != nil)
+        .accessibilityLabel(read ? "Marcar como não lido" : "Marcar como lido")
         .accessibilityValue(read ? "Lido." : "Não lido.")
     }
 }
