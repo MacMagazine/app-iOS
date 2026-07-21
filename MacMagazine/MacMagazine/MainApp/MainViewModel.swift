@@ -88,10 +88,10 @@ class MainViewModel {
 // MARK: - Deep Link
 
 extension MainViewModel {
-    func openDeepLink(_ url: URL) {
+    func openDeepLink(_ url: URL, source: String = "widget") {
         deepLinkPostURL = url.absoluteString
         analytics.track(.buttonTap(
-            buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("widget").id,
+            buttonId: AnalyticsConstants.ButtonID.deepLinkOpened(source).id,
             screen: AnalyticsConstants.Screen.deepLinkDetail.name
         ))
     }
