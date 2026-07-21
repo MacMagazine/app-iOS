@@ -42,7 +42,7 @@ CLAUDE.md is the constitution; the rules files hold the detail. Read the relevan
 - `.claude/rules/git-workflow.md` — branches, commits, the gate
 - `.claude/rules/anti-hallucination.md` — verification contract
 
-**Branch discipline**: Branch off `develop`. Format: `feature/<description>`, `fix/<description>`, `refactor/<description>`.
+**Branch discipline**: Branch off `release/v5`. Format: `feature/<description>`, `fix/<description>`, `refactor/<description>`.
 
 **Build commands**: ALWAYS use `-skipPackagePluginValidation -skipMacroValidation` and target `iPhone 17 Pro` simulator:
 ```bash
@@ -98,7 +98,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Before you declare any task complete, verify ALL of the following. If any item fails, fix it before proceeding:
 
 - [ ] Read existing code in the affected area first
-- [ ] On a feature/fix branch off `develop` (not main, not release)
+- [ ] On a feature/fix branch off `release/v5` (not main, not another release line)
 - [ ] Naming matches existing codebase conventions exactly
 - [ ] No duplicate utilities — reused existing helpers
 - [ ] Card system used correctly (NewsCard for news, AdaptivePodcastCardView for podcasts, GlassCardView for videos)
@@ -128,7 +128,7 @@ Handle edge cases: empty states, nil values, large data sets, iPad vs iPhone lay
 1. **Understand** — Parse the request. Identify the affected modules, files, and patterns.
 2. **Read** — Read all relevant existing code. At minimum 3-5 related files.
 3. **Plan** — State your approach briefly. Identify what you'll create, modify, or delete.
-4. **Branch** — Create or verify you're on the correct feature/fix branch off `develop`.
+4. **Branch** — Create or verify you're on the correct feature/fix branch off `release/v5`.
 5. **Implement** — Write code that follows every pattern and rule above.
 6. **Verify** — Run the self-verification checklist. Review all changes for obvious comments, hardcoded values.
 7. **Quality gates** — Build, test, lint. Fix any failures.
