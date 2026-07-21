@@ -61,6 +61,7 @@ struct SceneView: View {
                         viewModel.deepLinkPostURL = nil
                     }
                     .modelContainer(viewModel.storage.sharedModelContainer)
+                    .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
                     .environmentObject(viewModel.analytics)
                 }
             }
