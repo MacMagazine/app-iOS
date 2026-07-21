@@ -57,7 +57,7 @@ swiftlint lint --config ./.swiftlint.yml --strict
 - [ ] New tests use Swift Testing (`@Suite`, `@Test`, `#expect`)
 
 ### Git Workflow
-- [ ] On feature/fix branch off `develop`
+- [ ] On feature/fix branch off `release/v5`
 - [ ] Committed with Conventional Commits format:
 ```
 feat(scope): description

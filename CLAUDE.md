@@ -144,7 +144,7 @@ Run `/ios-dod` for the full checklist.
 
 ## Conventions
 
-- **Branches:** `feature/…`, `fix/…`, `hotfix/…`, `docs/…`, `refactor/…` — off `develop`;
+- **Branches:** `feature/…`, `fix/…`, `hotfix/…`, `docs/…`, `refactor/…` — off `release/v5`;
   releases land on `release/v5`.
 - **Commits/PR titles** (CI-enforced): `feat(scope): description` · `fix(#123): description`
   (bug fixes MUST include the issue number). Types: feat, fix, docs, style, refactor, perf,

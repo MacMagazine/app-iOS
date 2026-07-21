@@ -45,8 +45,8 @@ Before implementing new functionality, ALWAYS read and understand how similar fe
 
 ### 5. Set Up Feature Branch
 ```bash
-git checkout develop
-git pull origin develop
+git checkout release/v5
+git pull origin release/v5
 git checkout -b feature/short-description
 git branch --show-current
 ```
@@ -147,7 +147,7 @@ Stop and rethink if:
 
 ## Ready to Start?
 
-- [ ] Feature branch created off `develop`
+- [ ] Feature branch created off `release/v5`
 - [ ] Existing code reviewed (no duplication)
 - [ ] Architecture designed
 - [ ] Card system understood for this content type

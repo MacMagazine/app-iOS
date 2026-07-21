@@ -3,7 +3,7 @@
 ## Branches
 
 - `feature/<description>`, `fix/<description>`, `hotfix/<description>`, `docs/<description>`, `refactor/<description>`
-- Branch off `develop`; releases land on `release/v5`. Never commit directly to a release branch.
+- Branch off `release/v5`; releases land on `release/v5`.
 - One logical change per branch; keep diffs reviewable.
 
 ## Commits / PR titles
