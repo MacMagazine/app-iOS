@@ -16,7 +16,10 @@ public struct ReadButton: View {
     }
 
     public var body: some View {
-        Button(action: {
+        Button(
+            read ? "Marcar como não lido" : "Marcar como lido",
+            systemImage: "circle\(read ? ".fill" : "")"
+        ) {
             action?()
 #if canImport(UIKit)
             UIAccessibility.post(
@@ -24,11 +27,7 @@ public struct ReadButton: View {
                 argument: read ? "Marcar como não lido" : "Marcar como lido"
             )
 #endif
-
-        }, label: {
-            Image(systemName: "circle\(read ? ".fill" : "")")
-        })
-        .accessibilityLabel(read ? "Marcar como não lido" : "Marcar como lido")
+        }
         .accessibilityValue(read ? "Lido." : "Não lido.")
     }
 }
