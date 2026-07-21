@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["A5VW9QUF9L.com.brit.macmagazine"],
+        "components": [
+          {
+            "/": "/post/*",
+            "comment": "Only post URLs open the app; everything else stays in the browser."
+          }
+        ]
+      }
+    ]
+  }
+}
