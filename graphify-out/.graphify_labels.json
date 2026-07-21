@@ -183,12 +183,20 @@
   "181": "Fluxo de trabalho",
   "182": "swift-code-reviewer.md",
   "183": ".makeHTML",
-  "184": "Options",
-  "185": "Options",
+  "184": "PodcastPlayerManager.swift",
+  "185": ".completeOnboarding",
   "186": "Options",
   "187": "Padrões de código",
   "188": "Troubleshooting",
   "189": "architecture-guardian.md",
   "190": "test-runner.md",
-  "191": "ThemeColor.swift"
+  "191": "ThemeColor.swift",
+  "192": "NewsCategory",
+  "193": "AppearanceViewModel",
+  "194": "MMNavigationDecider",
+  "195": "Associated Domains (Universal Links)",
+  "196": "AppDefinitionsTests.swift",
+  "197": "Options",
+  "198": "NewsCategoryExtensions.swift",
+  "199": "ArrayExtensions.swift"
 }
