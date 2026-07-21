@@ -101,3 +101,7 @@ GoogleService-Info.plist
 .agents
 .codex
 AGENTS.md
+
+# Graphify transient cache and dated snapshots (regenerated every run)
+graphify-out/cache/ast/
+graphify-out/20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
