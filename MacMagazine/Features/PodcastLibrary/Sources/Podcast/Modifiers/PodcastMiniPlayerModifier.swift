@@ -1,3 +1,4 @@
+import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import SwiftUI
@@ -13,6 +14,7 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
     @Environment(PodcastPlayerManager.self) private var manager
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject private var analytics: AnalyticsManager
     @Namespace private var animation
 
     public init() {}
@@ -32,7 +34,7 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                         .padding(.horizontal, 20)
                         .glassEffect(.regular)
                     }
-                    .fullPlayerSheet(manager: manager)
+                    .fullPlayerSheet(manager: manager, analytics: analytics)
             } else {
                 content
                     .tabBarMinimizeBehavior(.onScrollDown)
@@ -45,17 +47,17 @@ private struct PodcastMiniPlayerModifier: ViewModifier {
                         .matchedTransitionSource(id: "MINIPLAYER", in: animation)
                         .padding(.horizontal, 8)
                     }
-                    .fullPlayerSheet(manager: manager)
+                    .fullPlayerSheet(manager: manager, analytics: analytics)
             }
         } else {
             content
-                .fullPlayerSheet(manager: manager)
+                .fullPlayerSheet(manager: manager, analytics: analytics)
         }
     }
 }
 
 private extension View {
-    func fullPlayerSheet(manager: PodcastPlayerManager) -> some View {
+    func fullPlayerSheet(manager: PodcastPlayerManager, analytics: AnalyticsManager) -> some View {
         self.sheet(
             isPresented: Binding(
                 get: { manager.isFullscreen },
@@ -67,6 +69,7 @@ private extension View {
                 backgroundGradientStyle: .fourTone
             )
             .presentationDragIndicator(.visible)
+            .environmentObject(analytics)
         }
     }
 }

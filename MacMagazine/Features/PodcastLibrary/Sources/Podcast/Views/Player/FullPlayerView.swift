@@ -78,6 +78,7 @@ struct FullPlayerView: View {
                     isShowingChapterDialog: $isShowingChapterDialog
                 )
                 .presentationDragIndicator(.visible)
+                .environmentObject(analytics)
             }
     }
 
