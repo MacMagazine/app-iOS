@@ -183,6 +183,12 @@ extension NewsView {
                 buttons: (highlightPostRead ? [.read] : []) + [.favorite, .share],
                 hint: "Duplo toque para abrir a notícia."
             )
+            .peekAndPop(
+                item: item,
+                open: handleTap,
+                favorite: data.favoriteAction,
+                read: highlightPostRead ? data.readAction : nil
+            )
             .onAppear {
                 if !favorite && search.isEmpty {
                     viewModel.loadMoreIfNeeded(index: index)

@@ -85,7 +85,7 @@ public struct FeedHighlightsCarouselView: View {
                     Button {
                         onTap(post)
                     } label: {
-                        FeedHighlightCardView(post: post)
+                        FeedHighlightCardView(post: post, onTap: onTap)
                             .containerRelativeFrame(
                                 .horizontal,
                                 count: visibleCardCount,

@@ -9,11 +9,12 @@ import SwiftUI
 
 /// Card view for featured/highlighted posts in the carousel.
 /// Delegates rendering to the shared GlassCardView.
-public struct FeedHighlightCardView: View {
+struct FeedHighlightCardView: View {
 
     // MARK: - Properties
 
     let post: FeedDB
+    let onTap: ((FeedDB) -> Void)?
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.highlightPostRead) private var highlightPostRead
@@ -21,7 +22,7 @@ public struct FeedHighlightCardView: View {
 
     // MARK: - Body
 
-    public var body: some View {
+    var body: some View {
         let data = post.toCardContent(
             using: modelContext,
             analytics: analytics,
@@ -37,12 +38,22 @@ public struct FeedHighlightCardView: View {
                 buttons: (highlightPostRead ? [.read] : []) + [.favorite, .share],
                 hint: "Duplo toque para abrir a notícia."
             )
+            .peekAndPop(
+                item: post,
+                open: onTap,
+                favorite: data.favoriteAction,
+                read: highlightPostRead ? data.readAction : nil
+            )
     }
 
     // MARK: - Init
 
-    public init(post: FeedDB) {
+    public init(
+        post: FeedDB,
+        onTap: ((FeedDB) -> Void)? = nil
+    ) {
         self.post = post
+        self.onTap = onTap
     }
 }
 
