@@ -66,6 +66,7 @@ public struct CardContent {
     public let type: CardContentType
     public let analytics: AnalyticsManager?
     public let title: String
+    public let titleLines: Int
     public let pubDate: Date
     public let author: String?
     public let artworkUrl: String
@@ -83,6 +84,7 @@ public struct CardContent {
         type: CardContentType,
         analytics: AnalyticsManager? = nil,
         title: String,
+        titleLines: Int = 3,
         pubDate: Date,
         author: String? = nil,
         artworkUrl: String,
@@ -95,6 +97,7 @@ public struct CardContent {
     ) {
         self.type = type
         self.title = title
+        self.titleLines = titleLines
         self.analytics = analytics
         self.pubDate = pubDate
         self.author = author

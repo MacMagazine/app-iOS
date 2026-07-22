@@ -24,7 +24,7 @@ public struct ReadButton: View {
 #if canImport(UIKit)
             UIAccessibility.post(
                 notification: .announcement,
-                argument: read ? "Marcar como não lido" : "Marcar como lido"
+                argument: read ? "Não lido." : "Lido."
             )
 #endif
         }

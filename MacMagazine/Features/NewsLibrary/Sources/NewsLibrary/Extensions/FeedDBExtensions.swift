@@ -11,7 +11,8 @@ public extension FeedDB {
         analytics: AnalyticsManager?,
         screen: String?,
         style: CardStyle?,
-        aspectRatio: CGFloat? = 16 / 9
+        aspectRatio: CGFloat? = 16 / 9,
+        titleLines: Int = 3
     ) -> CardContent {
         let type = CardContentType.news(
             categories: self.categories.toNewsCategory,
@@ -20,6 +21,7 @@ public extension FeedDB {
             type: type,
             analytics: analytics,
             title: self.title,
+            titleLines: titleLines,
             pubDate: self.pubDate,
             author: self.author,
             artworkUrl: self.artworkURL,

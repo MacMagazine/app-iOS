@@ -3,6 +3,7 @@ import FeedLibrary
 import LoggerLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
@@ -14,13 +15,13 @@ public struct NewsView<Filter: View>: View {
 
     // MARK: - Environment
 
-    @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.highlightPostRead) private var highlightPostRead
 
     @Environment(PushNotification.self) private var pushNotification
+    @Environment(SettingsViewModel.self) private var settingsViewModel
     @Environment(SessionState.self) private var sessionState
     @EnvironmentObject private var analytics: AnalyticsManager
 
@@ -169,17 +170,21 @@ extension NewsView {
     @ViewBuilder
     private var newsCards: some View {
         PaginatedForEach(news) { index, item in
-            let data = item.toCardContent(using: modelContext,
-                                          analytics: analytics,
-                                          screen: nil,
-                                          style: category.style,
-                                          aspectRatio: aspectRatio)
+            let data = item.toCardContent(
+                using: modelContext,
+                analytics: analytics,
+                screen: nil,
+                style: category.style,
+                aspectRatio: aspectRatio,
+                titleLines: settingsViewModel.titleLines
+            )
 
             NewsCard(data: data) {
                 handleTap(item)
             }
             .cardAccessibility(
                 data: data,
+                labels: [.title, .dateWithTime, .author] + (highlightPostRead ? [.read] : []) + [.favorite],
                 buttons: (highlightPostRead ? [.read] : []) + [.favorite, .share],
                 hint: "Duplo toque para abrir a notícia."
             )
@@ -238,7 +243,6 @@ extension NewsView {
                                                             screen: nil,
                                                             style: category.style) {
             FavoriteButton(
-                name: data.title,
                 favorite: data.favorite,
                 action: data.favoriteAction
             )

@@ -178,7 +178,6 @@ private extension FullPlayerView {
             screen: "Podcast Full-player"
         ) {
             let favoriteButton = FavoriteButton(
-                name: podcast.title,
                 favorite: podcast.favorite,
                 action: podcast.favoriteAction
             )

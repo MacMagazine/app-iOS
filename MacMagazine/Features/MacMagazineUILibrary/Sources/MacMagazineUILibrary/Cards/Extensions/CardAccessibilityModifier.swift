@@ -7,6 +7,8 @@ public enum CardLabel {
     case dateWithTime
     case author
     case duration
+    case read
+    case favorite
 }
 
 private extension Array where Element == CardLabel {
@@ -22,6 +24,14 @@ private extension Array where Element == CardLabel {
                     text.append("por \(author)")
                 }
             case .duration: text.append("com duração de \(data.type.duration.accessibilityTime)")
+            case .read:
+                if data.read {
+                    text.append("lido")
+                }
+            case .favorite:
+                if data.favorite {
+                    text.append("favorito")
+                }
             }
         }
         return title + text.joined(separator: ", ") + "."
@@ -42,7 +52,7 @@ private extension Array where Element == CardButton {
             case .read:
                 ReadButton(read: data.read, action: data.readAction)
             case .favorite:
-                FavoriteButton(name: data.title, favorite: data.favorite, action: data.favoriteAction)
+                FavoriteButton(favorite: data.favorite, action: data.favoriteAction)
             case .share:
                 ShareButton(title: data.title, url: data.urlToShare)
             }

@@ -133,4 +133,15 @@ extension Database {
         }
         try? context.save()
     }
+
+    @MainActor
+    func update(lines: Int) {
+        if let item = customization {
+            item.lines = lines
+            item.modifiedAt = Date()
+        } else {
+            context.insert(CustomizationDB(lines: lines))
+        }
+        try? context.save()
+    }
 }

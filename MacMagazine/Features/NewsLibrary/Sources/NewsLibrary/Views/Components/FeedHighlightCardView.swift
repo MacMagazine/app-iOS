@@ -35,6 +35,7 @@ struct FeedHighlightCardView: View {
             .compositingGroup()
             .cardAccessibility(
                 data: data,
+                labels: [.title, .dateWithTime, .author] + (highlightPostRead ? [.read] : []) + [.favorite],
                 buttons: (highlightPostRead ? [.read] : []) + [.favorite, .share],
                 hint: "Duplo toque para abrir a notícia."
             )

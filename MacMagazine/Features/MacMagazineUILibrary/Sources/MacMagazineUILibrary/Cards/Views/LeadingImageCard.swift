@@ -82,7 +82,7 @@ private extension LeadingImageCard {
             Text(data.title)
                 .font(density.titleFont)
                 .multilineTextAlignment(.leading)
-                .lineLimit(3, reservesSpace: true)
+                .lineLimit(data.titleLines, reservesSpace: true)
                 .foregroundStyle(.primary)
 
             Spacer(minLength: 4)

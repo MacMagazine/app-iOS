@@ -78,7 +78,6 @@ public struct PodcastCardView: View {
     var buttons: some View {
         HStack(spacing: 20) {
             FavoriteButton(
-                name: podcast.title,
                 favorite: podcast.favorite,
                 action: podcast.favoriteAction
             )

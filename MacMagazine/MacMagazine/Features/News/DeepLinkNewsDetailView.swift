@@ -55,7 +55,6 @@ struct DeepLinkNewsDetailView: View {
     private var favoriteView: some View {
         if let post {
             FavoriteButton(
-                name: post.title,
                 favorite: post.favorite,
                 action: {
                     post.favorite.toggle()
