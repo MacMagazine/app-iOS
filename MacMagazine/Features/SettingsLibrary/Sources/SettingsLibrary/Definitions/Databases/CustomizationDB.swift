@@ -9,6 +9,8 @@ public final class CustomizationDB: Equatable {
     var news: [News] = News.allCases
     var social: [Social] = Social.allCases
     var lines: Int = 3
+    var rememberFilter: Bool = false
+    var filter: News? = nil
     var modifiedAt: Date = Date()
 
     init(
@@ -17,6 +19,8 @@ public final class CustomizationDB: Equatable {
         social: [Social] = Social.allCases,
         news: [News] = News.allCases,
         lines: Int = 3,
+        rememberFilter: Bool = false,
+        filter: News? = nil,
         modifiedAt: Date = Date()
     ) {
         self.id = id
@@ -24,6 +28,8 @@ public final class CustomizationDB: Equatable {
         self.social = social
         self.news = news
         self.lines = lines
+        self.rememberFilter = rememberFilter
+        self.filter = filter
         self.modifiedAt = modifiedAt
     }
 }

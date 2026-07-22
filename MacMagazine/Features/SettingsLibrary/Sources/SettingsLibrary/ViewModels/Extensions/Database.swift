@@ -135,12 +135,32 @@ extension Database {
     }
 
     @MainActor
+    func update(filter: News?) {
+        if let item = customization {
+            item.filter = item.rememberFilter ? filter : nil
+            item.modifiedAt = Date()
+        }
+        try? context.save()
+    }
+
+    @MainActor
     func update(lines: Int) {
         if let item = customization {
             item.lines = lines
             item.modifiedAt = Date()
         } else {
             context.insert(CustomizationDB(lines: lines))
+        }
+        try? context.save()
+    }
+
+    @MainActor
+    func update(rememberFilter: Bool) {
+        if let item = customization {
+            item.rememberFilter = rememberFilter
+            item.modifiedAt = Date()
+        } else {
+            context.insert(CustomizationDB(rememberFilter: rememberFilter))
         }
         try? context.save()
     }

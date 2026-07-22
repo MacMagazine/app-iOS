@@ -8,6 +8,7 @@ import SwiftUI
 import UIComponentsLibrary
 
 struct NewsView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(MainViewModel.self) private var viewModel
@@ -34,6 +35,7 @@ struct NewsView: View {
                 buttonId: AnalyticsConstants.ButtonID.categoryFilterChanged(newValue.rawValue).id,
                 screen: AnalyticsConstants.Screen.news.name
             ))
+            Task { await viewModel.settingsViewModel.change(newValue) }
         }
         .trackScreen(
             AnalyticsConstants.Screen.news.name,
@@ -54,10 +56,13 @@ private extension NewsView {
                 scrollPosition.scrollTo(edge: .top)
             }
         }, label: {
-            Image(systemName: "rectangle.grid.2x2\(showCategoryFilter ? ".fill" : "")")
+            Image(systemName: viewModel.news.icon)
         })
         .accessibilityLabel(showCategoryFilter ? "Ocultar filtro por categorias" : "Mostrar filtro por categorias")
-        .minimumTouchTarget()
+        .minimumTouchTarget(
+            selected: showCategoryFilter,
+            selectedColor: colorScheme == .dark ? .white : .gray
+        )
     }
 
     var favoriteButton: some View {

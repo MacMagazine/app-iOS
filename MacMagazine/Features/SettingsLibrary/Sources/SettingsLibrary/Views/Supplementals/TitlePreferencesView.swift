@@ -2,7 +2,7 @@ import AnalyticsLibrary
 import MacMagazineLibrary
 import SwiftUI
 
-struct CustomCardsView: View {
+struct TitlePreferencesView: View {
     @EnvironmentObject private var analytics: AnalyticsManager
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var viewModel

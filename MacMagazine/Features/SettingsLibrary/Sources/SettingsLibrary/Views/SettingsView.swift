@@ -70,7 +70,8 @@ private extension SettingsView {
             List {
                 PushOptionsView()
                 ReadingPreferencesView()
-                CustomCardsView()
+                TitlePreferencesView()
+                FilterPreferencesView()
                 PostsVisibilityView()
             }
             .navigationTitle("Posts")

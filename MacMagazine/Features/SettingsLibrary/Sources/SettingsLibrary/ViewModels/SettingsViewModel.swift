@@ -14,6 +14,8 @@ final public class SettingsViewModel {
     public var removeAds = false
     public var highlightPostRead = false
     public var titleLines = 3
+    public var rememberFilter = false
+    public var filter: News?
 
     private var storedTabs: [AppTabs] = AppTabs.allCases
 
@@ -43,6 +45,8 @@ final public class SettingsViewModel {
         self.removeAds = self.storage.settings?.subscription.removeAds ?? false
         self.highlightPostRead = self.storage.settings?.postRead ?? true
         self.titleLines = self.storage.customization?.lines ?? 3
+        self.rememberFilter = self.storage.customization?.rememberFilter ?? false
+        self.filter = self.storage.customization?.filter
 
         updateSchema()
 
@@ -59,6 +63,8 @@ final public class SettingsViewModel {
                 self?.removeAds = self?.storage.settings?.subscription.removeAds ?? false
                 self?.highlightPostRead = self?.storage.settings?.postRead ?? true
                 self?.titleLines = self?.storage.customization?.lines ?? 3
+                self?.rememberFilter = self?.storage.customization?.rememberFilter ?? false
+                self?.filter = self?.storage.customization?.filter
             }
         }
     }
@@ -72,6 +78,11 @@ final public class SettingsViewModel {
                 binding.wrappedValue = tabs.first ?? .news
             }
         }
+    }
+
+    @MainActor
+    public func change(_ filter: News) async {
+        storage.update(filter: filter)
     }
 }
 
@@ -91,5 +102,13 @@ extension SettingsViewModel {
     @MainActor
     func change(_ titleLines: Int) async {
         storage.update(lines: titleLines)
+    }
+
+    @MainActor
+    func change(_ rememberFilter: Bool) async {
+        storage.update(rememberFilter: rememberFilter)
+        if !rememberFilter {
+            storage.update(filter: nil)
+        }
     }
 }

@@ -78,7 +78,7 @@ class MainViewModel {
         self.tab = settingsViewModel.tabs.first ?? .news
         self.scrollToTopTrigger = settingsViewModel.tabs.first
         self.social = settingsViewModel.social.first ?? .videos
-        self.news = settingsViewModel.news.first ?? .all
+        self.news = settingsViewModel.filter ?? settingsViewModel.news.first ?? .all
 
         // Observe storage status changes
         observeStorageStatus()
