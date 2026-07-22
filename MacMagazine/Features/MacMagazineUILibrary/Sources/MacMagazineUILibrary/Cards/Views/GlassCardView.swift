@@ -113,7 +113,9 @@ private extension GlassCardView {
             .font(density.titleFont(style: style, isHeader: data.type.style == .header))
             .fontWeight(style == .highlight ? .bold : .regular)
             .multilineTextAlignment(.leading)
-            .lineLimit(density.titleLineLimit(style: style))
+            .if(data.titleLines > 0) { view in
+                view.lineLimit(density.titleLineLimit(style: style))
+            }
             .foregroundStyle(.white)
     }
 

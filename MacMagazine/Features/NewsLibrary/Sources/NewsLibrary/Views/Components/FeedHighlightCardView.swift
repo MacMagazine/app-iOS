@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import SettingsLibrary
 import SwiftData
 import SwiftUI
 
@@ -18,6 +19,7 @@ struct FeedHighlightCardView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.highlightPostRead) private var highlightPostRead
+    @Environment(SettingsViewModel.self) private var settingsViewModel
     @EnvironmentObject private var analytics: AnalyticsManager
 
     // MARK: - Body
@@ -28,7 +30,8 @@ struct FeedHighlightCardView: View {
             analytics: analytics,
             screen: AnalyticsConstants.Screen.news.name,
             style: .header,
-            aspectRatio: nil
+            aspectRatio: nil,
+            titleLines: settingsViewModel.titleLines
         )
         GlassCardView(data: data)
             .opacity(post.read && highlightPostRead ? 0.6 : 1)

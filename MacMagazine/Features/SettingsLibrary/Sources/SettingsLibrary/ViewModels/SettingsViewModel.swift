@@ -87,4 +87,9 @@ extension SettingsViewModel {
         case .system: nil
         }
     }
+
+    @MainActor
+    func change(_ titleLines: Int) async {
+        storage.update(lines: titleLines)
+    }
 }
