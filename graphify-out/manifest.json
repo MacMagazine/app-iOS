@@ -885,9 +885,9 @@
     "semantic_hash": ""
   },
   "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift": {
-    "mtime": 1783719971.1998243,
-    "ast_hash": "77e0cb5b3c8628104d9a5280f1eb5051",
-    "semantic_hash": "77e0cb5b3c8628104d9a5280f1eb5051"
+    "mtime": 1784844796.798284,
+    "ast_hash": "619d21bcfad936d3bfacd7306b5b26ea",
+    "semantic_hash": ""
   },
   "MacMagazine/Features/SearchLibrary/Tests/SearchLibraryTests/QueryProcessorTests.swift": {
     "mtime": 1772824345.403498,
@@ -1875,7 +1875,7 @@
     "semantic_hash": ""
   },
   "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Cards/Extensions/MinimumTouchTarget.swift": {
-    "mtime": 1784842319.3755887,
+    "mtime": 1784844058.7430184,
     "ast_hash": "68617534f14cf62b5c8794904e42f813",
     "semantic_hash": ""
   },

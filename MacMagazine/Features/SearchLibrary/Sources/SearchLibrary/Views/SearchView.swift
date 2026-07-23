@@ -61,13 +61,13 @@ public struct SearchView: View {
                     api.selectedVideo = value
                 }
                 .player(api: api, action: $action)
-        }
-        .if(!isIPad) { view in
-            view.searchable(
-                text: $viewModel.searchText,
-                prompt: "Buscar notícias, podcasts e vídeos"
-            )
-            .searchPresentationToolbarBehavior(.avoidHidingContent)
+                .if(!isIPad) { view in
+                    view.searchable(
+                        text: $viewModel.searchText,
+                        prompt: "Buscar notícias, podcasts e vídeos"
+                    )
+                    .searchPresentationToolbarBehavior(.avoidHidingContent)
+                }
         }
     }
 }

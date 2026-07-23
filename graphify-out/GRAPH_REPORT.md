@@ -1,16 +1,16 @@
 # Graph Report - MacMagazine  (2026-07-23)
 
 ## Corpus Check
-- 337 files · ~364,352 words
+- 337 files · ~364,353 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2859 nodes · 5349 edges · 206 communities (177 shown, 29 thin omitted)
+- 2859 nodes · 5349 edges · 205 communities (176 shown, 29 thin omitted)
 - Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 635 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9b3f28cd`
+- Built from commit: `010df5c6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -248,7 +248,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (206 total, 29 thin omitted)
+## Communities (205 total, 29 thin omitted)
 
 ### Community 0 - "Settings & Subscriptions"
 Cohesion: 0.14
@@ -383,8 +383,8 @@ Cohesion: 0.22
 Nodes (8): BridgeViewController, InteractivePopGestureBridge, Bool, Context, UIGestureRecognizer, UIGestureRecognizerDelegate, UIViewController, UIViewControllerRepresentable
 
 ### Community 35 - "Community 35"
-Cohesion: 0.17
-Nodes (9): PermissionManager, AnalyticsManager, Bool, PushNotification, String, OnboardingSheetPreviewHost, WelcomeSheetPreviewHost, FeaturesViewSheetPreviewHost (+1 more)
+Cohesion: 0.14
+Nodes (11): AnalyticsManager, PushNotification, PermissionManager, AnalyticsManager, Bool, PushNotification, String, OnboardingSheetPreviewHost (+3 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.12
@@ -423,8 +423,8 @@ Cohesion: 0.17
 Nodes (10): AppTabs, live, news, search, settings, social, AppTabsTests, SocialView (+2 more)
 
 ### Community 45 - "Community 45"
-Cohesion: 0.14
-Nodes (13): OnboardingCoordinator, AnalyticsManager, Bool, PushNotification, Void, OnboardingContainerView, Bool, Bool (+5 more)
+Cohesion: 0.19
+Nodes (8): OnboardingCoordinator, Bool, Void, OnboardingContainerView, Bool, Bool, Namespace, WelcomeView
 
 ### Community 46 - "Community 46"
 Cohesion: 0.12
@@ -591,8 +591,8 @@ Cohesion: 0.31
 Nodes (6): NetworkService, Data, Int, Network, NewsCategory, String
 
 ### Community 94 - "Community 94"
-Cohesion: 0.33
-Nodes (7): PermissionCard, PermissionCardStatus, denied, granted, notDetermined, String, Void
+Cohesion: 0.19
+Nodes (10): PermissionCard, PermissionCardStatus, denied, granted, notDetermined, String, Void, PermissionsView (+2 more)
 
 ### Community 95 - "Community 95"
 Cohesion: 0.33

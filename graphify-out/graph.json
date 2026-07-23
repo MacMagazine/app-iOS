@@ -12242,7 +12242,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_swift_analyticsmanager",
-      "community": 45,
+      "community": 35,
       "norm_label": "analyticsmanager"
     },
     {
@@ -12252,7 +12252,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_init",
-      "community": 45,
+      "community": 35,
       "norm_label": ".init()"
     },
     {
@@ -12262,7 +12262,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_navigate",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigate()"
     },
     {
@@ -12272,7 +12272,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_skiptopermissions",
-      "community": 22,
+      "community": 45,
       "norm_label": ".skiptopermissions()"
     },
     {
@@ -12282,7 +12282,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_completeonboarding",
-      "community": 185,
+      "community": 22,
       "norm_label": ".completeonboarding()"
     },
     {
@@ -12292,7 +12292,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_markfeaturesasseen",
-      "community": 22,
+      "community": 45,
       "norm_label": ".markfeaturesasseen()"
     },
     {
@@ -12312,7 +12312,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_createifneeded",
-      "community": 45,
+      "community": 35,
       "norm_label": ".createifneeded()"
     },
     {
@@ -12322,7 +12322,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_swift_pushnotification",
-      "community": 45,
+      "community": 35,
       "norm_label": "pushnotification"
     },
     {
@@ -12332,7 +12332,7 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_resetonboarding",
-      "community": 185,
+      "community": 22,
       "norm_label": ".resetonboarding()"
     },
     {
@@ -13193,7 +13193,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen3_permissionsview_permissionsview",
-      "community": 45,
+      "community": 94,
       "norm_label": "permissionsview"
     },
     {
@@ -13203,7 +13203,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen3_permissionsview_swift_namespace",
-      "community": 45,
+      "community": 94,
       "norm_label": "namespace"
     },
     {
@@ -13213,7 +13213,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen3_permissionsview_swift_bool",
-      "community": 45,
+      "community": 94,
       "norm_label": "bool"
     },
     {
@@ -13223,7 +13223,7 @@
       "source_location": "L219",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen3_permissionsview_permissionsview_requestpushpermission",
-      "community": 45,
+      "community": 94,
       "norm_label": ".requestpushpermission()"
     },
     {
@@ -13233,7 +13233,7 @@
       "source_location": "L224",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen3_permissionsview_permissionsview_requestattpermission",
-      "community": 45,
+      "community": 94,
       "norm_label": ".requestattpermission()"
     },
     {
@@ -13284,7 +13284,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_init",
-      "community": 185,
+      "community": 22,
       "norm_label": ".init()"
     },
     {
@@ -13334,7 +13334,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_navigatetopermissions",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigatetopermissions()"
     },
     {
@@ -13344,7 +13344,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_navigatebacktowelcome",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigatebacktowelcome()"
     },
     {
@@ -13374,7 +13374,7 @@
       "source_location": "L107",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_completionhandlercalled",
-      "community": 185,
+      "community": 22,
       "norm_label": ".completionhandlercalled()"
     },
     {
@@ -13384,7 +13384,7 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_completionwithnilhandler",
-      "community": 185,
+      "community": 22,
       "norm_label": ".completionwithnilhandler()"
     },
     {
@@ -13394,7 +13394,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_marksonboardingascompleted",
-      "community": 185,
+      "community": 22,
       "norm_label": ".marksonboardingascompleted()"
     },
     {
@@ -13404,7 +13404,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_resetonboardingstate",
-      "community": 185,
+      "community": 22,
       "norm_label": ".resetonboardingstate()"
     },
     {
@@ -13414,7 +13414,7 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_typicalnavigationflow",
-      "community": 22,
+      "community": 45,
       "norm_label": ".typicalnavigationflow()"
     },
     {
@@ -17749,7 +17749,7 @@
       "label": ".errorContent()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L185",
+      "source_location": "L186",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
       "community": 27,
@@ -17769,7 +17769,7 @@
       "label": ".handleNewsSelection()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L209",
+      "source_location": "L210",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlenewsselection",
       "community": 27,
@@ -17789,7 +17789,7 @@
       "label": ".handlePodcastSelection()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L220",
+      "source_location": "L221",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlepodcastselection",
       "community": 27,
@@ -17809,7 +17809,7 @@
       "label": ".handleLinkSelection()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L230",
+      "source_location": "L231",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
       "community": 27,
@@ -17819,7 +17819,7 @@
       "label": ".trackSearchCompletion()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L243",
+      "source_location": "L244",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_tracksearchcompletion",
       "community": 27,
@@ -17829,7 +17829,7 @@
       "label": ".announceSearchStatus()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L255",
+      "source_location": "L256",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_announcesearchstatus",
       "community": 27,
@@ -42401,7 +42401,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L232",
+      "source_location": "L233",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
       "target": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_analyticsconstants_analyticsconstants"
@@ -49945,7 +49945,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L201",
+      "source_location": "L202",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -51706,7 +51706,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L298",
+      "source_location": "L299",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -51717,7 +51717,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L185",
+      "source_location": "L186",
       "weight": 1.0,
       "context": "return_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
@@ -69920,7 +69920,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L255",
+      "source_location": "L256",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_announcesearchstatus",
@@ -69931,7 +69931,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L243",
+      "source_location": "L244",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_tracksearchcompletion",
@@ -70532,7 +70532,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L285",
+      "source_location": "L286",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -70542,7 +70542,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L255",
+      "source_location": "L256",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_announcesearchstatus",
@@ -70552,7 +70552,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L185",
+      "source_location": "L186",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
@@ -70562,7 +70562,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L230",
+      "source_location": "L231",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
@@ -70572,7 +70572,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L209",
+      "source_location": "L210",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlenewsselection",
@@ -70582,7 +70582,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L220",
+      "source_location": "L221",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlepodcastselection",
@@ -70602,7 +70602,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L243",
+      "source_location": "L244",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_tracksearchcompletion",
@@ -70623,7 +70623,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L278",
+      "source_location": "L279",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -70634,7 +70634,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L197",
+      "source_location": "L198",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -70722,7 +70722,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L185",
+      "source_location": "L186",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
@@ -70733,7 +70733,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L230",
+      "source_location": "L231",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
@@ -70757,7 +70757,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L189",
+      "source_location": "L190",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
       "target": "macmagazine_features_settingslibrary_sources_settingslibrary_views_extensions_plainbuttontextstyle_text"
@@ -70766,7 +70766,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L209",
+      "source_location": "L210",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlenewsselection",
@@ -70777,7 +70777,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L220",
+      "source_location": "L221",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlepodcastselection",
@@ -85638,5 +85638,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9b3f28cd76d3b5d88008835ef370a64842b68cb2"
+  "built_at_commit": "010df5c630b7419e888e5cf0a7a3174fe35bdd83"
 }
