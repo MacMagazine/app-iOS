@@ -16,7 +16,7 @@ struct ReadingPreferencesView: View {
         Section {
             Toggle("Lembrar último filtro usado", isOn: $rememberFilter)
                 .tint(theme.button.primary.color)
-            Toggle("Mostrar título completo", isOn: $allLines)
+            Toggle("Mostrar títulos completos", isOn: $allLines)
                 .tint(theme.button.primary.color)
             Toggle("Identificar posts já lidos", isOn: $viewModel.postRead)
                 .tint(theme.button.primary.color)

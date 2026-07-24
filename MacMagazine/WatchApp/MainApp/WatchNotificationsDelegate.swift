@@ -17,8 +17,8 @@ final class WatchNotificationsDelegate: NSObject, WKApplicationDelegate {
             let notificationCenter = UNUserNotificationCenter.current()
             notificationCenter.delegate = self
 
-            let success = try await notificationCenter.requestAuthorization(options: [.badge, .sound, .alert])
-            guard success else { return }
+            let success = try? await notificationCenter.requestAuthorization(options: [.badge, .sound, .alert])
+            guard success ?? false else { return }
 
             await MainActor.run {
                 WKApplication.shared().registerForRemoteNotifications()

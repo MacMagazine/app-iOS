@@ -49,7 +49,7 @@ class PodcastViewModel {
             lastIndex = index
             let page = Int(index / threshold) + 1
             Task {
-                try await getPodcasts(status: nil, page: page)
+                try? await getPodcasts(status: nil, page: page)
             }
         }
     }

@@ -1,6 +1,7 @@
 import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
+import SwiftData
 import SwiftUI
 import UIComponentsLibrary
 

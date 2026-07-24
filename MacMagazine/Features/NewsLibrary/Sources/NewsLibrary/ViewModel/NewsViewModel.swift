@@ -50,7 +50,7 @@ class NewsViewModel {
             lastIndex = index
             let page = Int(index / threshold) + 1
             Task {
-                try await getNews(status: nil, page: page)
+                try? await getNews(status: nil, page: page)
             }
         }
     }

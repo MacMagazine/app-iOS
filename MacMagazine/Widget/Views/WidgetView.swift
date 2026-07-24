@@ -25,7 +25,9 @@ struct WidgetView: View {
                     WidgetElementView(post: content[0])
                         .trackScreen(AnalyticsConstants.Screen.widget(widgetFamily.description).name, analytics: analytics)
 
-                case .systemExtraLarge, .accessoryCircular:
+                case .systemExtraLarge,
+                        .accessoryCircular,
+                        .systemExtraLargePortrait:
                     Text("Tamanho incompatível.")
 
                 @unknown default:

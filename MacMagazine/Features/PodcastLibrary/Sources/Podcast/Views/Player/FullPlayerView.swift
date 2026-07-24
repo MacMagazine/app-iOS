@@ -2,6 +2,7 @@ import AnalyticsLibrary
 import FeedLibrary
 import MacMagazineLibrary
 import MacMagazineUILibrary
+import SwiftData
 import SwiftUI
 import UIComponentsLibrary
 
@@ -178,6 +179,7 @@ private extension FullPlayerView {
             screen: "Podcast Full-player"
         ) {
             let favoriteButton = FavoriteButton(
+                name: podcast.title,
                 favorite: podcast.favorite,
                 action: podcast.favoriteAction
             )
