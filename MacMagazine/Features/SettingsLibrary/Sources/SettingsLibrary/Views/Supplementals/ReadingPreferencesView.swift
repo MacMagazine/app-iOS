@@ -9,9 +9,15 @@ struct ReadingPreferencesView: View {
     @Environment(SettingsViewModel.self) private var settingsViewModel
     @State private var viewModel = ReadingPreferencesViewModel()
     @State private var showReadConfirmation = false
+    @State private var allLines = false
+    @State private var rememberFilter = false
 
     var body: some View {
         Section {
+            Toggle("Lembrar último filtro usado", isOn: $rememberFilter)
+                .tint(theme.button.primary.color)
+            Toggle("Mostrar título completo", isOn: $allLines)
+                .tint(theme.button.primary.color)
             Toggle("Identificar posts já lidos", isOn: $viewModel.postRead)
                 .tint(theme.button.primary.color)
 
@@ -41,13 +47,29 @@ struct ReadingPreferencesView: View {
                 storage: settingsViewModel.storage,
                 models: settingsViewModel.models
             )
+            allLines = settingsViewModel.titleLines == 0
+            rememberFilter = settingsViewModel.rememberFilter
         }
         .onChange(of: viewModel.postRead) { _, value in
             analytics.track(.buttonTap(
-                buttonId: AnalyticsConstants.ButtonID.theme("\(value)").id,
-                screen: AnalyticsConstants.Screen.settingsAppearance.name
+                buttonId: AnalyticsConstants.ButtonID.postRead("\(value)").id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
             ))
             Task { await viewModel.change(postRead: value) }
+        }
+        .onChange(of: allLines) { _, value in
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.allLines("\(value)").id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+            Task { await settingsViewModel.change(value ? 0 : 3) }
+        }
+        .onChange(of: rememberFilter) { _, value in
+            analytics.track(.buttonTap(
+                buttonId: AnalyticsConstants.ButtonID.rememberFilter("\(value)").id,
+                screen: AnalyticsConstants.Screen.settingsPosts.name
+            ))
+            Task { await settingsViewModel.change(value) }
         }
     }
 }

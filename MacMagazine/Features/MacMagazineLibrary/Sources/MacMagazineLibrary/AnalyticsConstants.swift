@@ -170,6 +170,9 @@ public enum AnalyticsConstants {
         case cleanPosts
         case cleanAllPosts
         case cleanOnboarding
+        case postRead(String)
+        case allLines(String)
+        case rememberFilter(String)
 
         // MARK: Settings - Push Notifications
         case pushNotifications(String)
@@ -268,6 +271,9 @@ public enum AnalyticsConstants {
             case .cleanPosts: "clean_posts"
             case .cleanAllPosts: "clean_all_posts"
             case .cleanOnboarding: "clean_onboarding"
+            case let .postRead(value): "show_post_read_status \(value)"
+            case let .allLines(value): "show_all_title_lines \(value)"
+            case let .rememberFilter(value): "remember_lastused_filter \(value)"
 
             // Settings - Push Notifications
             case let .pushNotifications(value): "push_notifications \(value)"
