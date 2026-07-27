@@ -174,6 +174,70 @@ struct XMLParserTests {
         }
     }
 
+    @Test("Image enclosure from search feed is not treated as a podcast URL")
+    func parseSearchXMLImageEnclosureIsNotPodcastURL() async throws {
+        // Given
+        let xml = """
+        <?xml version="1.0"?>
+        <rss><channel><item>
+            <post-id>123</post-id>
+            <title>News item</title>
+            <link>https://macmagazine.com.br/post</link>
+            <enclosure url="https://macmagazine.com.br/image.jpg" length="12345" type="image/jpeg" />
+        </item></channel></rss>
+        """
+        let data = Data(xml.utf8)
+
+        // When
+        let posts = try await withCheckedThrowingContinuation { continuation in
+            let parser = XMLParser(data: data)
+            let apiParser = APIXMLParser(
+                numberOfPosts: -1,
+                category: "",
+                parseFullContent: false,
+                continuation: continuation
+            )
+            parser.delegate = apiParser
+            parser.parse()
+        } as [XMLPost]
+
+        // Then
+        let post = try #require(posts.first)
+        #expect(post.podcastURL.isEmpty, "Image enclosure must not populate podcastURL")
+    }
+
+    @Test("Audio enclosure from search feed is treated as a podcast URL")
+    func parseSearchXMLAudioEnclosureIsPodcastURL() async throws {
+        // Given
+        let xml = """
+        <?xml version="1.0"?>
+        <rss><channel><item>
+            <post-id>456</post-id>
+            <title>Podcast item</title>
+            <link>https://macmagazine.com.br/podcast</link>
+            <enclosure url="https://feeds.soundcloud.com/stream/episode.mp3" length="67890" type="audio/mpeg" />
+        </item></channel></rss>
+        """
+        let data = Data(xml.utf8)
+
+        // When
+        let posts = try await withCheckedThrowingContinuation { continuation in
+            let parser = XMLParser(data: data)
+            let apiParser = APIXMLParser(
+                numberOfPosts: -1,
+                category: "",
+                parseFullContent: false,
+                continuation: continuation
+            )
+            parser.delegate = apiParser
+            parser.parse()
+        } as [XMLPost]
+
+        // Then
+        let post = try #require(posts.first)
+        #expect(post.podcastURL == "https://feeds.soundcloud.com/stream/episode.mp3")
+    }
+
     // MARK: - Error Handling Tests
 
     @Test("Parse invalid XML throws error")
