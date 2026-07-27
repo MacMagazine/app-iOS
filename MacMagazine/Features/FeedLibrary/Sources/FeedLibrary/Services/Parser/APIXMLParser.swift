@@ -84,7 +84,8 @@ class APIXMLParser: NSObject, XMLParserDelegate {
 				}
 				currentPost.artworkURL = url
 			case "enclosure":
-				guard let url = attributes?["url"] else {
+				guard let url = attributes?["url"],
+					  attributes?["type"]?.hasPrefix("audio/") == true else {
 					return
 				}
 				currentPost.podcastURL = url
