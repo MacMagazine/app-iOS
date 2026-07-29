@@ -507,6 +507,27 @@ struct PodcastDBTests {
         #expect(remaining.first?.current == 100)
     }
 
+    @Test("deduplicate breaks an exact progressModifiedAt tie by preferring the larger value, regardless of insertion order")
+    func deduplicateBreaksProgressTieDeterministically() {
+        let insertionOrders: [(first: Double, second: Double)] = [(900, 100), (100, 900)]
+
+        for order in insertionOrders {
+            let storage = Database(models: [PodcastDB.self], inMemory: true)
+            let first = PodcastDB(postId: "dup-1", current: order.first, modifiedAt: Date(timeIntervalSince1970: 1000))
+            let second = PodcastDB(postId: "dup-1", current: order.second, modifiedAt: Date(timeIntervalSince1970: 1000))
+
+            storage.context.insert(first)
+            storage.context.insert(second)
+            try? storage.context.save()
+
+            PodcastDB.deduplicate(using: storage.context)
+
+            let remaining = storage.fetch(PodcastDB.self)
+            #expect(remaining.count == 1)
+            #expect(remaining.first?.current == 900)
+        }
+    }
+
     @Test("deduplicate merges favorite and progress independently by their own timestamps")
     func deduplicateMergesFavoriteAndProgressIndependently() {
         let storage = Database(models: [PodcastDB.self], inMemory: true)

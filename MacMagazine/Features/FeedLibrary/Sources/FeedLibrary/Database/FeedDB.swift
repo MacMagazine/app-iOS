@@ -34,7 +34,7 @@ public final class FeedDB {
         fullContent: String = "",
         favorite: Bool = false,
         favoriteModifiedAt: Date = Date.distantPast,
-        ead: Bool = false,
+        read: Bool = false,
         readModifiedAt: Date = Date.distantPast,
         modifiedAt: Date = Date()
     ) {
@@ -82,6 +82,8 @@ extension FeedDB: ModelFavoritable {
         try? context.save()
     }
 
+    /// Flips `favorite` and stamps `favoriteModifiedAt`, so `deduplicate()` can tell this
+    /// explicit action apart from a blank sync-created duplicate.
     public func toggleFavorite() {
         favorite.toggle()
         favoriteModifiedAt = Date()
@@ -100,12 +102,16 @@ extension FeedDB: ModelReadable {
         try? context.save()
     }
 
+    /// Flips `read` and stamps `readModifiedAt`, so `deduplicate()` can tell this explicit
+    /// action apart from a blank sync-created duplicate.
     public func toggleRead() {
         read.toggle()
         readModifiedAt = Date()
         modifiedAt = Date()
     }
 
+    /// Sets `read` to `true` and stamps `readModifiedAt`, so `deduplicate()` can tell this
+    /// explicit action apart from a blank sync-created duplicate.
     public func markAsRead() {
         read = true
         readModifiedAt = Date()
@@ -121,22 +127,22 @@ extension FeedDB: ModelDuplicable {
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
 
-        for group in Dictionary(grouping: data, by: \.postId).values where group.count > 1 {
-            guard let survivor = group.max(by: { $0.modifiedAt < $1.modifiedAt }) else { continue }
-
-            if let latestFavorite = FeedDB.latest(in: group, value: { $0.favorite }, modifiedAt: { $0.favoriteModifiedAt }) {
+        FeedDB.resolveDuplicates(in: data, postId: \.postId, modifiedAt: \.modifiedAt) { survivor, group in
+            if let latestFavorite = FeedDB.latest(
+                in: group, value: { $0.favorite }, modifiedAt: { $0.favoriteModifiedAt },
+                preferOnTie: { candidate, _ in candidate }
+            ) {
                 survivor.favorite = latestFavorite.value
                 survivor.favoriteModifiedAt = latestFavorite.modifiedAt
             }
-            if let latestRead = FeedDB.latest(in: group, value: { $0.read }, modifiedAt: { $0.readModifiedAt }) {
+            if let latestRead = FeedDB.latest(
+                in: group, value: { $0.read }, modifiedAt: { $0.readModifiedAt },
+                preferOnTie: { candidate, _ in candidate }
+            ) {
                 survivor.read = latestRead.value
                 survivor.readModifiedAt = latestRead.modifiedAt
             }
-
-            for record in group where record !== survivor {
-                context.delete(record)
-            }
-        }
+        } delete: { context.delete($0) }
 
         try? context.save()
     }

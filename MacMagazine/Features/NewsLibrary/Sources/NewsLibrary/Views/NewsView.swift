@@ -230,8 +230,7 @@ extension NewsView {
                     .sharedBackgroundVisibility(.hidden)
             }
             .task {
-                viewModel.selectedNews?.read = true
-                viewModel.selectedNews?.modifiedAt = Date()
+                viewModel.selectedNews?.markAsRead()
                 try? modelContext.save()
             }
     }

@@ -64,6 +64,12 @@ struct FeedDBTests {
         #expect(feed.favorite == favorite)
     }
 
+    @Test("FeedDB initializer's read parameter actually sets the read property")
+    func initializationSetsReadFromParameter() {
+        let feed = FeedDB(postId: "1", read: true)
+        #expect(feed.read == true)
+    }
+
     @Test("FeedDB should initialize with default values")
     func initializationWithDefaults() {
         // When
@@ -568,6 +574,27 @@ struct FeedDBTests {
         #expect(remaining.count == 1)
         #expect(remaining.first?.favorite == testCase.expectedFavorite)
         #expect(remaining.first?.read == testCase.expectedRead)
+    }
+
+    @Test("deduplicate breaks an exact favoriteModifiedAt tie by preferring true, regardless of insertion order")
+    func deduplicateBreaksFavoriteTieDeterministically() {
+        let insertionOrders: [(first: Bool, second: Bool)] = [(true, false), (false, true)]
+
+        for order in insertionOrders {
+            let storage = Database(models: [FeedDB.self], inMemory: true)
+            let first = FeedDB(postId: "dup-1", favorite: order.first, modifiedAt: Date(timeIntervalSince1970: 1000))
+            let second = FeedDB(postId: "dup-1", favorite: order.second, modifiedAt: Date(timeIntervalSince1970: 1000))
+
+            storage.context.insert(first)
+            storage.context.insert(second)
+            try? storage.context.save()
+
+            FeedDB.deduplicate(using: storage.context)
+
+            let remaining = storage.fetch(FeedDB.self)
+            #expect(remaining.count == 1)
+            #expect(remaining.first?.favorite == true)
+        }
     }
 
     @Test("deduplicate is safe on empty database")

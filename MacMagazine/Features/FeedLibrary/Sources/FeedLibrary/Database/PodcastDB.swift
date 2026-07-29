@@ -67,6 +67,8 @@ extension PodcastDB: ModelFavoritable {
         try? context.save()
     }
 
+    /// Flips `favorite` and stamps `favoriteModifiedAt`, so `deduplicate()` can tell this
+    /// explicit action apart from a blank sync-created duplicate.
     public func toggleFavorite() {
         favorite.toggle()
         favoriteModifiedAt = Date()
@@ -75,6 +77,8 @@ extension PodcastDB: ModelFavoritable {
 }
 
 extension PodcastDB {
+    /// Sets `current` and stamps `progressModifiedAt`, so `deduplicate()` can tell this
+    /// explicit action apart from a blank sync-created duplicate.
     public func updateProgress(_ current: Double) {
         self.current = current
         progressModifiedAt = Date()
@@ -90,22 +94,22 @@ extension PodcastDB: ModelDuplicable {
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
 
-        for group in Dictionary(grouping: data, by: \.postId).values where group.count > 1 {
-            guard let survivor = group.max(by: { $0.modifiedAt < $1.modifiedAt }) else { continue }
-
-            if let latestFavorite = PodcastDB.latest(in: group, value: { $0.favorite }, modifiedAt: { $0.favoriteModifiedAt }) {
+        PodcastDB.resolveDuplicates(in: data, postId: \.postId, modifiedAt: \.modifiedAt) { survivor, group in
+            if let latestFavorite = PodcastDB.latest(
+                in: group, value: { $0.favorite }, modifiedAt: { $0.favoriteModifiedAt },
+                preferOnTie: { candidate, _ in candidate }
+            ) {
                 survivor.favorite = latestFavorite.value
                 survivor.favoriteModifiedAt = latestFavorite.modifiedAt
             }
-            if let latestProgress = PodcastDB.latest(in: group, value: { $0.current }, modifiedAt: { $0.progressModifiedAt }) {
+            if let latestProgress = PodcastDB.latest(
+                in: group, value: { $0.current }, modifiedAt: { $0.progressModifiedAt },
+                preferOnTie: { candidate, current in candidate > current }
+            ) {
                 survivor.current = latestProgress.value
                 survivor.progressModifiedAt = latestProgress.modifiedAt
             }
-
-            for record in group where record !== survivor {
-                context.delete(record)
-            }
-        }
+        } delete: { context.delete($0) }
 
         try? context.save()
     }
