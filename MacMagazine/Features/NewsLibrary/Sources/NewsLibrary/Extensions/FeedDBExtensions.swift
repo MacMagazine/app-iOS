@@ -31,8 +31,7 @@ public extension FeedDB {
             aspectRatio: aspectRatio,
             favoriteAction: { [weak self] in
                 guard let self, let context else { return }
-                self.favorite.toggle()
-                self.modifiedAt = Date()
+                self.toggleFavorite()
                 try? context.save()
                 analytics?.track(.buttonTap(
                     buttonId: AnalyticsConstants.ButtonID.newsFavorite.id,
@@ -41,8 +40,7 @@ public extension FeedDB {
             },
             readAction: { [weak self] in
                 guard let self, let context else { return }
-                self.read.toggle()
-                self.modifiedAt = Date()
+                self.toggleRead()
                 try? context.save()
             }
         )

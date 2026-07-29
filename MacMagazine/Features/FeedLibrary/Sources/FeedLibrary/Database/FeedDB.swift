@@ -16,7 +16,9 @@ public final class FeedDB {
     public var excerpt: String = ""
     public var fullContent: String = ""
     public var favorite: Bool = false
+    public var favoriteModifiedAt: Date = Date.distantPast
     public var read: Bool = false
+    public var readModifiedAt: Date = Date.distantPast
     public var modifiedAt: Date = Date()
 
     public init(
@@ -31,7 +33,9 @@ public final class FeedDB {
         excerpt: String = "",
         fullContent: String = "",
         favorite: Bool = false,
+        favoriteModifiedAt: Date = Date.distantPast,
         ead: Bool = false,
+        readModifiedAt: Date = Date.distantPast,
         modifiedAt: Date = Date()
     ) {
         self.postId = postId
@@ -45,7 +49,9 @@ public final class FeedDB {
         self.excerpt = excerpt
         self.fullContent = fullContent
         self.favorite = favorite
+        self.favoriteModifiedAt = favoriteModifiedAt
         self.read = read
+        self.readModifiedAt = readModifiedAt
         self.modifiedAt = modifiedAt
     }
 }
@@ -75,6 +81,12 @@ extension FeedDB: ModelFavoritable {
         data.forEach { context.delete($0) }
         try? context.save()
     }
+
+    public func toggleFavorite() {
+        favorite.toggle()
+        favoriteModifiedAt = Date()
+        modifiedAt = Date()
+    }
 }
 
 extension FeedDB: ModelReadable {
@@ -83,10 +95,21 @@ extension FeedDB: ModelReadable {
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
         for post in data {
-            post.read = true
-            post.modifiedAt = Date()
+            post.markAsRead()
         }
         try? context.save()
+    }
+
+    public func toggleRead() {
+        read.toggle()
+        readModifiedAt = Date()
+        modifiedAt = Date()
+    }
+
+    public func markAsRead() {
+        read = true
+        readModifiedAt = Date()
+        modifiedAt = Date()
     }
 }
 
@@ -99,9 +122,16 @@ extension FeedDB: ModelDuplicable {
               let data = try? context.fetch(descriptor) else { return }
 
         for group in Dictionary(grouping: data, by: \.postId).values where group.count > 1 {
-            guard let survivor = group.max(by: FeedDB.isLessAuthoritative) else { continue }
-            survivor.favorite = group.contains { $0.favorite }
-            survivor.read = group.contains { $0.read }
+            guard let survivor = group.max(by: { $0.modifiedAt < $1.modifiedAt }) else { continue }
+
+            if let latestFavorite = FeedDB.latest(in: group, value: { $0.favorite }, modifiedAt: { $0.favoriteModifiedAt }) {
+                survivor.favorite = latestFavorite.value
+                survivor.favoriteModifiedAt = latestFavorite.modifiedAt
+            }
+            if let latestRead = FeedDB.latest(in: group, value: { $0.read }, modifiedAt: { $0.readModifiedAt }) {
+                survivor.read = latestRead.value
+                survivor.readModifiedAt = latestRead.modifiedAt
+            }
 
             for record in group where record !== survivor {
                 context.delete(record)

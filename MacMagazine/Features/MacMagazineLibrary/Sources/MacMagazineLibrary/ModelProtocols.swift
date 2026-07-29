@@ -13,14 +13,15 @@ public protocol ModelDuplicable: AnyObject, PersistentModel {
     static func deduplicate(using context: ModelContext?)
 }
 
-public protocol ModelPrioritizable {
-    var favorite: Bool { get }
-    var modifiedAt: Date { get }
-}
+public protocol ModelPrioritizable {}
 
 public extension ModelPrioritizable {
-    static func isLessAuthoritative(_ lhs: Self, _ rhs: Self) -> Bool {
-        guard lhs.favorite == rhs.favorite else { return rhs.favorite }
-        return lhs.modifiedAt < rhs.modifiedAt
+    static func latest<Value>(
+        in group: [Self],
+        value: (Self) -> Value,
+        modifiedAt: (Self) -> Date
+    ) -> (value: Value, modifiedAt: Date)? {
+        guard let winner = group.max(by: { modifiedAt($0) < modifiedAt($1) }) else { return nil }
+        return (value(winner), modifiedAt(winner))
     }
 }
