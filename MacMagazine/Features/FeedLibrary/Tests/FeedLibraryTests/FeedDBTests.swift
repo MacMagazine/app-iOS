@@ -4,6 +4,15 @@ import StorageLibrary
 import SwiftData
 import Testing
 
+private struct FavoriteReadCase: Sendable {
+    let olderFavorite: Bool
+    let olderRead: Bool
+    let newerFavorite: Bool
+    let newerRead: Bool
+    let expectedFavorite: Bool
+    let expectedRead: Bool
+}
+
 @Suite("FeedDB Tests")
 @MainActor
 struct FeedDBTests {
@@ -454,23 +463,33 @@ struct FeedDBTests {
         #expect(remaining.first?.favorite == true)
     }
 
-    @Test("deduplicate merges favorite and read state onto the surviving record")
-    func deduplicateMergesFavoriteAndReadState() {
+    @Test(
+        "deduplicate OR-merges favorite and read across every combination",
+        arguments: [
+            FavoriteReadCase(olderFavorite: true, olderRead: false, newerFavorite: false, newerRead: false, expectedFavorite: true, expectedRead: false),
+            FavoriteReadCase(olderFavorite: false, olderRead: true, newerFavorite: false, newerRead: false, expectedFavorite: false, expectedRead: true),
+            FavoriteReadCase(olderFavorite: true, olderRead: true, newerFavorite: false, newerRead: false, expectedFavorite: true, expectedRead: true),
+            FavoriteReadCase(olderFavorite: true, olderRead: true, newerFavorite: true, newerRead: false, expectedFavorite: true, expectedRead: true),
+            FavoriteReadCase(olderFavorite: false, olderRead: false, newerFavorite: false, newerRead: false, expectedFavorite: false, expectedRead: false)
+        ]
+    )
+    fileprivate func deduplicateMergesFavoriteAndReadState(_ testCase: FavoriteReadCase) {
         let storage = Database(models: [FeedDB.self], inMemory: true)
-        let favoritedButUnread = FeedDB(postId: "dup-1", favorite: true, modifiedAt: Date(timeIntervalSince1970: 1000))
-        let readButNotFavorited = FeedDB(postId: "dup-1", favorite: false, modifiedAt: Date(timeIntervalSince1970: 2000))
-        readButNotFavorited.read = true
+        let older = FeedDB(postId: "dup-1", favorite: testCase.olderFavorite, modifiedAt: Date(timeIntervalSince1970: 1000))
+        older.read = testCase.olderRead
+        let newer = FeedDB(postId: "dup-1", favorite: testCase.newerFavorite, modifiedAt: Date(timeIntervalSince1970: 2000))
+        newer.read = testCase.newerRead
 
-        storage.context.insert(favoritedButUnread)
-        storage.context.insert(readButNotFavorited)
+        storage.context.insert(older)
+        storage.context.insert(newer)
         try? storage.context.save()
 
         FeedDB.deduplicate(using: storage.context)
 
         let remaining = storage.fetch(FeedDB.self)
         #expect(remaining.count == 1)
-        #expect(remaining.first?.favorite == true)
-        #expect(remaining.first?.read == true)
+        #expect(remaining.first?.favorite == testCase.expectedFavorite)
+        #expect(remaining.first?.read == testCase.expectedRead)
     }
 
     @Test("deduplicate is safe on empty database")

@@ -446,6 +446,42 @@ struct PodcastDBTests {
         #expect(remaining.first?.current == 900)
     }
 
+    @Test("deduplicate keeps furthest progress even when it belongs to the non-favorited duplicate")
+    func deduplicateMergesProgressAcrossFavoriteWinner() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let favoritedButNotListened = PodcastDB(postId: "dup-1", favorite: true, current: 0, modifiedAt: Date(timeIntervalSince1970: 1000))
+        let listenedButNotFavorited = PodcastDB(postId: "dup-1", favorite: false, current: 900, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(favoritedButNotListened)
+        storage.context.insert(listenedButNotFavorited)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.favorite == true)
+        #expect(remaining.first?.current == 900)
+    }
+
+    @Test("deduplicate keeps the furthest progress when both duplicates are favorited")
+    func deduplicateMergesProgressWhenBothFavorited() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let olderFavorited = PodcastDB(postId: "dup-1", favorite: true, current: 900, modifiedAt: Date(timeIntervalSince1970: 1000))
+        let newerFavorited = PodcastDB(postId: "dup-1", favorite: true, current: 0, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(olderFavorited)
+        storage.context.insert(newerFavorited)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.favorite == true)
+        #expect(remaining.first?.current == 900)
+    }
+
     @Test("deduplicate is safe on empty database")
     func deduplicateSafeOnEmpty() {
         let storage = Database(models: [PodcastDB.self], inMemory: true)
