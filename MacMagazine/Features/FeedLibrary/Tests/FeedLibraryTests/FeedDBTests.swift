@@ -436,6 +436,43 @@ struct FeedDBTests {
         #expect(remaining.contains { $0.title == "Y-new" })
     }
 
+    @Test("deduplicate keeps the favorited copy even when it is not the most recently modified")
+    func deduplicateKeepsFavoriteOverRecency() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let favorited = FeedDB(postId: "dup-1", title: "Favorited", favorite: true, modifiedAt: Date(timeIntervalSince1970: 1000))
+        let freshSync = FeedDB(postId: "dup-1", title: "Fresh Sync", favorite: false, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(favorited)
+        storage.context.insert(freshSync)
+        try? storage.context.save()
+
+        FeedDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(FeedDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.title == "Favorited")
+        #expect(remaining.first?.favorite == true)
+    }
+
+    @Test("deduplicate merges favorite and read state onto the surviving record")
+    func deduplicateMergesFavoriteAndReadState() {
+        let storage = Database(models: [FeedDB.self], inMemory: true)
+        let favoritedButUnread = FeedDB(postId: "dup-1", favorite: true, modifiedAt: Date(timeIntervalSince1970: 1000))
+        let readButNotFavorited = FeedDB(postId: "dup-1", favorite: false, modifiedAt: Date(timeIntervalSince1970: 2000))
+        readButNotFavorited.read = true
+
+        storage.context.insert(favoritedButUnread)
+        storage.context.insert(readButNotFavorited)
+        try? storage.context.save()
+
+        FeedDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(FeedDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.favorite == true)
+        #expect(remaining.first?.read == true)
+    }
+
     @Test("deduplicate is safe on empty database")
     func deduplicateSafeOnEmpty() {
         let storage = Database(models: [FeedDB.self], inMemory: true)

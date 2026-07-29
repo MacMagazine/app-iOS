@@ -62,17 +62,23 @@ extension PodcastDB: ModelFavoritable {
     }
 }
 
+extension PodcastDB: ModelPrioritizable {}
+
 extension PodcastDB: ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
         let descriptor = FetchDescriptor<PodcastDB>()
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
 
-        let recordsToDelete = Dictionary(grouping: data, by: \.pubDate)
-            .values
-            .flatMap { $0.sorted { $0.modifiedAt > $1.modifiedAt }.dropFirst() }
+        for group in Dictionary(grouping: data, by: \.postId).values where group.count > 1 {
+            guard let survivor = group.max(by: PodcastDB.isLessAuthoritative) else { continue }
+            survivor.favorite = group.contains { $0.favorite }
 
-        recordsToDelete.forEach { context.delete($0) }
+            for record in group where record !== survivor {
+                context.delete(record)
+            }
+        }
+
         try? context.save()
     }
 }

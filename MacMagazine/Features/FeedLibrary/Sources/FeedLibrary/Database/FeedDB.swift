@@ -90,17 +90,24 @@ extension FeedDB: ModelReadable {
     }
 }
 
+extension FeedDB: ModelPrioritizable {}
+
 extension FeedDB: ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
         let descriptor = FetchDescriptor<FeedDB>(sortBy: [SortDescriptor(\FeedDB.pubDate, order: .reverse)])
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
 
-        let recordsToDelete = Dictionary(grouping: data, by: \.postId)
-            .values
-            .flatMap { $0.sorted { $0.modifiedAt > $1.modifiedAt }.dropFirst() }
+        for group in Dictionary(grouping: data, by: \.postId).values where group.count > 1 {
+            guard let survivor = group.max(by: FeedDB.isLessAuthoritative) else { continue }
+            survivor.favorite = group.contains { $0.favorite }
+            survivor.read = group.contains { $0.read }
 
-        recordsToDelete.forEach { context.delete($0) }
+            for record in group where record !== survivor {
+                context.delete(record)
+            }
+        }
+
         try? context.save()
     }
 }
