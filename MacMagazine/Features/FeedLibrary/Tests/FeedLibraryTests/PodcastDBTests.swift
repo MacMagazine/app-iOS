@@ -429,6 +429,23 @@ struct PodcastDBTests {
         #expect(remaining.first?.favorite == true)
     }
 
+    @Test("deduplicate keeps the furthest playback progress across duplicates")
+    func deduplicateKeepsFurthestPlaybackProgress() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let listenedFurther = PodcastDB(postId: "dup-1", current: 900, modifiedAt: Date(timeIntervalSince1970: 1000))
+        let freshSync = PodcastDB(postId: "dup-1", current: 0, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(listenedFurther)
+        storage.context.insert(freshSync)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.current == 900)
+    }
+
     @Test("deduplicate is safe on empty database")
     func deduplicateSafeOnEmpty() {
         let storage = Database(models: [PodcastDB.self], inMemory: true)

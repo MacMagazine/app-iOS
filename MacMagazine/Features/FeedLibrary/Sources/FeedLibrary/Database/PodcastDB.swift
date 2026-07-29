@@ -73,6 +73,7 @@ extension PodcastDB: ModelDuplicable {
         for group in Dictionary(grouping: data, by: \.postId).values where group.count > 1 {
             guard let survivor = group.max(by: PodcastDB.isLessAuthoritative) else { continue }
             survivor.favorite = group.contains { $0.favorite }
+            survivor.current = group.map(\.current).max() ?? survivor.current
 
             for record in group where record !== survivor {
                 context.delete(record)
