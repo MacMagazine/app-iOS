@@ -16,7 +16,9 @@ public final class FeedDB {
     public var excerpt: String = ""
     public var fullContent: String = ""
     public var favorite: Bool = false
+    public var favoriteModifiedAt: Date = Date.distantPast
     public var read: Bool = false
+    public var readModifiedAt: Date = Date.distantPast
     public var modifiedAt: Date = Date()
 
     public init(
@@ -31,7 +33,9 @@ public final class FeedDB {
         excerpt: String = "",
         fullContent: String = "",
         favorite: Bool = false,
-        ead: Bool = false,
+        favoriteModifiedAt: Date = Date.distantPast,
+        read: Bool = false,
+        readModifiedAt: Date = Date.distantPast,
         modifiedAt: Date = Date()
     ) {
         self.postId = postId
@@ -45,7 +49,9 @@ public final class FeedDB {
         self.excerpt = excerpt
         self.fullContent = fullContent
         self.favorite = favorite
+        self.favoriteModifiedAt = favoriteModifiedAt
         self.read = read
+        self.readModifiedAt = readModifiedAt
         self.modifiedAt = modifiedAt
     }
 }
@@ -75,6 +81,14 @@ extension FeedDB: ModelFavoritable {
         data.forEach { context.delete($0) }
         try? context.save()
     }
+
+    /// Flips `favorite` and stamps `favoriteModifiedAt`, so `deduplicate()` can tell this
+    /// explicit action apart from a blank sync-created duplicate.
+    public func toggleFavorite() {
+        favorite.toggle()
+        favoriteModifiedAt = Date()
+        modifiedAt = Date()
+    }
 }
 
 extension FeedDB: ModelReadable {
@@ -83,12 +97,29 @@ extension FeedDB: ModelReadable {
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
         for post in data {
-            post.read = true
-            post.modifiedAt = Date()
+            post.markAsRead()
         }
         try? context.save()
     }
+
+    /// Flips `read` and stamps `readModifiedAt`, so `deduplicate()` can tell this explicit
+    /// action apart from a blank sync-created duplicate.
+    public func toggleRead() {
+        read.toggle()
+        readModifiedAt = Date()
+        modifiedAt = Date()
+    }
+
+    /// Sets `read` to `true` and stamps `readModifiedAt`, so `deduplicate()` can tell this
+    /// explicit action apart from a blank sync-created duplicate.
+    public func markAsRead() {
+        read = true
+        readModifiedAt = Date()
+        modifiedAt = Date()
+    }
 }
+
+extension FeedDB: ModelPrioritizable {}
 
 extension FeedDB: ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
@@ -96,11 +127,23 @@ extension FeedDB: ModelDuplicable {
         guard let context,
               let data = try? context.fetch(descriptor) else { return }
 
-        let recordsToDelete = Dictionary(grouping: data, by: \.postId)
-            .values
-            .flatMap { $0.sorted { $0.modifiedAt > $1.modifiedAt }.dropFirst() }
+        FeedDB.resolveDuplicates(in: data, postId: \.postId, modifiedAt: \.modifiedAt) { survivor, group in
+            if let latestFavorite = FeedDB.latest(
+                in: group, value: { $0.favorite }, modifiedAt: { $0.favoriteModifiedAt },
+                preferOnTie: { candidate, _ in candidate }
+            ) {
+                survivor.favorite = latestFavorite.value
+                survivor.favoriteModifiedAt = latestFavorite.modifiedAt
+            }
+            if let latestRead = FeedDB.latest(
+                in: group, value: { $0.read }, modifiedAt: { $0.readModifiedAt },
+                preferOnTie: { candidate, _ in candidate }
+            ) {
+                survivor.read = latestRead.value
+                survivor.readModifiedAt = latestRead.modifiedAt
+            }
+        } delete: { context.delete($0) }
 
-        recordsToDelete.forEach { context.delete($0) }
         try? context.save()
     }
 }

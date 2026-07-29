@@ -44,8 +44,7 @@ struct DeepLinkNewsDetailView: View {
                     .sharedBackgroundVisibility(.hidden)
                 }
                 .onAppear {
-                    post?.read = true
-                    post?.modifiedAt = Date()
+                    post?.markAsRead()
                     try? modelContext.save()
                 }
         }
@@ -57,8 +56,7 @@ struct DeepLinkNewsDetailView: View {
             FavoriteButton(
                 favorite: post.favorite,
                 action: {
-                    post.favorite.toggle()
-                    post.modifiedAt = Date()
+                    post.toggleFavorite()
                     try? modelContext.save()
                     analytics.track(.buttonTap(
                         buttonId: AnalyticsConstants.ButtonID.newsFavorite.id,

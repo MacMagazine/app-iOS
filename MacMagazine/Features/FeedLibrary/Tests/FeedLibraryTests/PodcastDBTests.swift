@@ -360,14 +360,40 @@ struct PodcastDBTests {
         #expect(remaining.isEmpty)
     }
 
+    @Test("toggleFavorite flips favorite and stamps favoriteModifiedAt without touching progress")
+    func toggleFavoriteStampsFavoriteModifiedAt() {
+        let podcast = PodcastDB(postId: "1", current: 900)
+        let progressModifiedAtBefore = podcast.progressModifiedAt
+
+        podcast.toggleFavorite()
+
+        #expect(podcast.favorite == true)
+        #expect(podcast.favoriteModifiedAt != Date.distantPast)
+        #expect(podcast.progressModifiedAt == progressModifiedAtBefore)
+
+        podcast.toggleFavorite()
+        #expect(podcast.favorite == false)
+    }
+
+    @Test("updateProgress sets current and stamps progressModifiedAt without touching favorite")
+    func updateProgressStampsProgressModifiedAt() {
+        let podcast = PodcastDB(postId: "1", favorite: true)
+        let favoriteModifiedAtBefore = podcast.favoriteModifiedAt
+
+        podcast.updateProgress(450)
+
+        #expect(podcast.current == 450)
+        #expect(podcast.progressModifiedAt != Date.distantPast)
+        #expect(podcast.favoriteModifiedAt == favoriteModifiedAtBefore)
+    }
+
     // MARK: - ModelDuplicable Tests
 
-    @Test("deduplicate removes duplicates grouped by pubDate keeping most recently modified")
+    @Test("deduplicate removes duplicate postIds keeping most recently modified")
     func deduplicateKeepsMostRecentlyModified() {
         let storage = Database(models: [PodcastDB.self], inMemory: true)
-        let sharedPubDate = Date(timeIntervalSince1970: 5000)
-        let older = PodcastDB(postId: "p1", pubDate: sharedPubDate, modifiedAt: Date(timeIntervalSince1970: 1000))
-        let newer = PodcastDB(postId: "p2", pubDate: sharedPubDate, modifiedAt: Date(timeIntervalSince1970: 2000))
+        let older = PodcastDB(postId: "dup-1", title: "Older", modifiedAt: Date(timeIntervalSince1970: 1000))
+        let newer = PodcastDB(postId: "dup-1", title: "Newer", modifiedAt: Date(timeIntervalSince1970: 2000))
 
         storage.context.insert(older)
         storage.context.insert(newer)
@@ -377,15 +403,16 @@ struct PodcastDBTests {
 
         let remaining = storage.fetch(PodcastDB.self)
         #expect(remaining.count == 1)
-        #expect(remaining.first?.postId == "p2")
+        #expect(remaining.first?.title == "Newer")
     }
 
-    @Test("deduplicate preserves podcasts with distinct pubDates")
-    func deduplicatePreservesDistinctPubDates() {
+    @Test("deduplicate preserves podcasts with distinct postIds sharing the same pubDate")
+    func deduplicatePreservesDistinctPostIds() {
         let storage = Database(models: [PodcastDB.self], inMemory: true)
-        storage.context.insert(PodcastDB(postId: "1", pubDate: Date(timeIntervalSince1970: 1000)))
-        storage.context.insert(PodcastDB(postId: "2", pubDate: Date(timeIntervalSince1970: 2000)))
-        storage.context.insert(PodcastDB(postId: "3", pubDate: Date(timeIntervalSince1970: 3000)))
+        let sharedPubDate = Date(timeIntervalSince1970: 5000)
+        storage.context.insert(PodcastDB(postId: "1", pubDate: sharedPubDate))
+        storage.context.insert(PodcastDB(postId: "2", pubDate: sharedPubDate))
+        storage.context.insert(PodcastDB(postId: "3", pubDate: sharedPubDate))
         try? storage.context.save()
 
         PodcastDB.deduplicate(using: storage.context)
@@ -394,15 +421,14 @@ struct PodcastDBTests {
         #expect(remaining.count == 3)
     }
 
-    @Test("deduplicate handles triple duplicates for same pubDate")
+    @Test("deduplicate handles triple duplicates for same postId")
     func deduplicateHandlesTripleDuplicates() {
         let storage = Database(models: [PodcastDB.self], inMemory: true)
-        let sharedDate = Date(timeIntervalSince1970: 9000)
         let now = Date()
 
-        storage.context.insert(PodcastDB(postId: "a", pubDate: sharedDate, modifiedAt: now.addingTimeInterval(-200)))
-        storage.context.insert(PodcastDB(postId: "b", pubDate: sharedDate, modifiedAt: now.addingTimeInterval(-100)))
-        storage.context.insert(PodcastDB(postId: "c", title: "Winner", pubDate: sharedDate, modifiedAt: now))
+        storage.context.insert(PodcastDB(postId: "dup-1", modifiedAt: now.addingTimeInterval(-200)))
+        storage.context.insert(PodcastDB(postId: "dup-1", modifiedAt: now.addingTimeInterval(-100)))
+        storage.context.insert(PodcastDB(postId: "dup-1", title: "Winner", modifiedAt: now))
         try? storage.context.save()
 
         PodcastDB.deduplicate(using: storage.context)
@@ -410,6 +436,120 @@ struct PodcastDBTests {
         let remaining = storage.fetch(PodcastDB.self)
         #expect(remaining.count == 1)
         #expect(remaining.first?.title == "Winner")
+    }
+
+    @Test("deduplicate keeps the most recently modified content even when a different duplicate wins the favorite merge")
+    func deduplicateDecouplesContentSurvivorFromFavoriteMerge() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let originallyFavorited = PodcastDB(postId: "dup-1", title: "Original", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 5000), modifiedAt: Date(timeIntervalSince1970: 1000))
+        let freshSync = PodcastDB(postId: "dup-1", title: "Fresh Sync", favorite: false, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(originallyFavorited)
+        storage.context.insert(freshSync)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.title == "Fresh Sync")
+        #expect(remaining.first?.favorite == true)
+    }
+
+    @Test("deduplicate respects an explicit cross-device unfavorite over an older favorite")
+    func deduplicateRespectsExplicitUnfavorite() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let favoritedOnDeviceA = PodcastDB(postId: "dup-1", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 1000), modifiedAt: Date(timeIntervalSince1970: 1000))
+        let unfavoritedOnDeviceB = PodcastDB(postId: "dup-1", favorite: false, favoriteModifiedAt: Date(timeIntervalSince1970: 2000), modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(favoritedOnDeviceA)
+        storage.context.insert(unfavoritedOnDeviceB)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.favorite == false)
+    }
+
+    @Test("deduplicate never lets a blank sync duplicate override real playback progress")
+    func deduplicatePreservesProgressAgainstBlankDuplicate() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let listenedTo = PodcastDB(postId: "dup-1", current: 900, progressModifiedAt: Date(timeIntervalSince1970: 1000), modifiedAt: Date(timeIntervalSince1970: 1000))
+        let freshSync = PodcastDB(postId: "dup-1", current: 0, modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(listenedTo)
+        storage.context.insert(freshSync)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.current == 900)
+    }
+
+    @Test("deduplicate honors a deliberate rewind even though it lowers the playback position")
+    func deduplicateHonorsDeliberateRewind() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let listenedFurtherButStale = PodcastDB(postId: "dup-1", current: 900, progressModifiedAt: Date(timeIntervalSince1970: 1000), modifiedAt: Date(timeIntervalSince1970: 1000))
+        let rewoundOnAnotherDevice = PodcastDB(postId: "dup-1", current: 100, progressModifiedAt: Date(timeIntervalSince1970: 2000), modifiedAt: Date(timeIntervalSince1970: 2000))
+
+        storage.context.insert(listenedFurtherButStale)
+        storage.context.insert(rewoundOnAnotherDevice)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.current == 100)
+    }
+
+    @Test("deduplicate breaks an exact progressModifiedAt tie by preferring the larger value, regardless of insertion order")
+    func deduplicateBreaksProgressTieDeterministically() {
+        let insertionOrders: [(first: Double, second: Double)] = [(900, 100), (100, 900)]
+
+        for order in insertionOrders {
+            let storage = Database(models: [PodcastDB.self], inMemory: true)
+            let first = PodcastDB(postId: "dup-1", current: order.first, modifiedAt: Date(timeIntervalSince1970: 1000))
+            let second = PodcastDB(postId: "dup-1", current: order.second, modifiedAt: Date(timeIntervalSince1970: 1000))
+
+            storage.context.insert(first)
+            storage.context.insert(second)
+            try? storage.context.save()
+
+            PodcastDB.deduplicate(using: storage.context)
+
+            let remaining = storage.fetch(PodcastDB.self)
+            #expect(remaining.count == 1)
+            #expect(remaining.first?.current == 900)
+        }
+    }
+
+    @Test("deduplicate merges favorite and progress independently by their own timestamps")
+    func deduplicateMergesFavoriteAndProgressIndependently() {
+        let storage = Database(models: [PodcastDB.self], inMemory: true)
+        let favoritedButNotListened = PodcastDB(
+            postId: "dup-1", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 2000),
+            current: 0, modifiedAt: Date(timeIntervalSince1970: 1000)
+        )
+        let listenedButNotFavorited = PodcastDB(
+            postId: "dup-1", favorite: false, favoriteModifiedAt: Date(timeIntervalSince1970: 1000),
+            current: 900, progressModifiedAt: Date(timeIntervalSince1970: 2000), modifiedAt: Date(timeIntervalSince1970: 2000)
+        )
+
+        storage.context.insert(favoritedButNotListened)
+        storage.context.insert(listenedButNotFavorited)
+        try? storage.context.save()
+
+        PodcastDB.deduplicate(using: storage.context)
+
+        let remaining = storage.fetch(PodcastDB.self)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.favorite == true)
+        #expect(remaining.first?.current == 900)
     }
 
     @Test("deduplicate is safe on empty database")
