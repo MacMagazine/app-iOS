@@ -82,13 +82,13 @@ struct PodcastDBSafeguardTests {
     // MARK: - snapshot Tests
 
     @Test("snapshot should copy every row into the destination store")
-    func snapshotCopiesEveryRow() {
+    func snapshotCopiesEveryRow() throws {
         let stores = makeStores()
         stores.main.context.insert(PodcastDB(postId: "1", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(PodcastDB(postId: "2", current: 33, progressModifiedAt: Date(timeIntervalSince1970: 2000)))
         try? stores.main.context.save()
 
-        PodcastDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try PodcastDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
 
         let saved = stores.snapshot.fetch(PodcastDB.self)
         #expect(saved.count == 2)
@@ -97,19 +97,19 @@ struct PodcastDBSafeguardTests {
     }
 
     @Test("snapshot should handle an empty source store")
-    func snapshotHandlesEmptySource() {
+    func snapshotHandlesEmptySource() throws {
         let stores = makeStores()
 
-        PodcastDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try PodcastDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
 
         #expect(stores.snapshot.fetch(PodcastDB.self).isEmpty)
     }
 
     @Test("snapshot with nil contexts does not crash")
-    func snapshotNilContexts() {
+    func snapshotNilContexts() throws {
         let stores = makeStores()
-        PodcastDB.snapshot(from: nil, into: stores.snapshot.context)
-        PodcastDB.snapshot(from: stores.main.context, into: nil)
+        try PodcastDB.snapshot(from: nil, into: stores.snapshot.context)
+        try PodcastDB.snapshot(from: stores.main.context, into: nil)
         #expect(stores.snapshot.fetch(PodcastDB.self).isEmpty)
     }
 
@@ -132,14 +132,14 @@ struct PodcastDBSafeguardTests {
                                 expectedCurrent: 120)
         ]
     )
-    fileprivate func restoreMergesProgressByAuthorityTimestamp(_ testCase: ProgressRestoreCase) {
+    fileprivate func restoreMergesProgressByAuthorityTimestamp(_ testCase: ProgressRestoreCase) throws {
         let stores = makeStores()
         stores.main.context.insert(PodcastDB(postId: "1", current: testCase.mainCurrent, progressModifiedAt: testCase.mainProgressModifiedAt))
         stores.snapshot.context.insert(PodcastDB(postId: "1", current: testCase.snapshotCurrent, progressModifiedAt: testCase.snapshotProgressModifiedAt))
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(PodcastDB.self)
         #expect(restored.count == 1)
@@ -147,7 +147,7 @@ struct PodcastDBSafeguardTests {
     }
 
     @Test("restore merges favorite and progress independently by their own timestamps")
-    func restoreMergesFavoriteAndProgressIndependently() {
+    func restoreMergesFavoriteAndProgressIndependently() throws {
         let stores = makeStores()
         stores.main.context.insert(PodcastDB(postId: "1",
                                              favorite: false,
@@ -162,7 +162,7 @@ struct PodcastDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(PodcastDB.self).first
         #expect(restored?.favorite == true)
@@ -170,7 +170,7 @@ struct PodcastDBSafeguardTests {
     }
 
     @Test("restore preserves the snapshot's own timestamps instead of stamping now")
-    func restorePreservesSnapshotTimestamps() {
+    func restorePreservesSnapshotTimestamps() throws {
         let stores = makeStores()
         let progressModifiedAt = Date(timeIntervalSince1970: 2000)
         stores.main.context.insert(PodcastDB(postId: "1", current: 0, progressModifiedAt: Date(timeIntervalSince1970: 1000)))
@@ -178,7 +178,7 @@ struct PodcastDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         #expect(stores.main.fetch(PodcastDB.self).first?.progressModifiedAt == progressModifiedAt)
     }
@@ -186,7 +186,7 @@ struct PodcastDBSafeguardTests {
     // MARK: - restore Re-insertion Tests
 
     @Test("restore re-inserts a snapshot row whose postId is gone from the main store")
-    func restoreReinsertsMissingRow() {
+    func restoreReinsertsMissingRow() throws {
         let stores = makeStores()
         stores.snapshot.context.insert(PodcastDB(postId: "old",
                                                  title: "Old Episode",
@@ -197,7 +197,7 @@ struct PodcastDBSafeguardTests {
                                                  progressModifiedAt: Date(timeIntervalSince1970: 1000)))
         try? stores.snapshot.context.save()
 
-        PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(PodcastDB.self)
         #expect(restored.count == 1)
@@ -208,7 +208,7 @@ struct PodcastDBSafeguardTests {
     }
 
     @Test("restore applies the snapshot to every duplicate row sharing the postId")
-    func restoreAppliesToEveryDuplicateRow() {
+    func restoreAppliesToEveryDuplicateRow() throws {
         let stores = makeStores()
         stores.main.context.insert(PodcastDB(postId: "1", title: "Copy A", modifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(PodcastDB(postId: "1", title: "Copy B", modifiedAt: Date(timeIntervalSince1970: 2000)))
@@ -216,7 +216,7 @@ struct PodcastDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(PodcastDB.self)
         #expect(restored.count == 2)
@@ -224,19 +224,19 @@ struct PodcastDBSafeguardTests {
     }
 
     @Test("restore should handle an empty snapshot store")
-    func restoreHandlesEmptySnapshot() {
+    func restoreHandlesEmptySnapshot() throws {
         let stores = makeStores()
 
-        PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         #expect(stores.main.fetch(PodcastDB.self).isEmpty)
     }
 
     @Test("restore with nil contexts does not crash")
-    func restoreNilContexts() {
+    func restoreNilContexts() throws {
         let stores = makeStores()
-        PodcastDB.restore(from: nil, into: stores.main.context)
-        PodcastDB.restore(from: stores.snapshot.context, into: nil)
+        try PodcastDB.restore(from: nil, into: stores.main.context)
+        try PodcastDB.restore(from: stores.snapshot.context, into: nil)
         #expect(stores.main.fetch(PodcastDB.self).isEmpty)
     }
 }

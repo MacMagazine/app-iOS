@@ -86,6 +86,13 @@
         "identifier" : "SearchLibraryTests",
         "name" : "SearchLibraryTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features\/SafeguardLibrary",
+        "identifier" : "SafeguardLibraryTests",
+        "name" : "SafeguardLibraryTests"
+      }
     }
   ],
   "version" : 1

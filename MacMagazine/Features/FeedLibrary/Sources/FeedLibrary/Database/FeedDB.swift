@@ -138,19 +138,17 @@ extension FeedDB: ModelSafeguardable {
                modifiedAt: modifiedAt)
     }
 
-    public static func snapshot(from source: ModelContext?, into destination: ModelContext?) {
-        guard let source,
-              let destination,
-              let data = try? source.fetch(FetchDescriptor<FeedDB>()) else { return }
+    public static func snapshot(from source: ModelContext?, into destination: ModelContext?) throws {
+        guard let source, let destination else { return }
+        let data = try source.fetch(FetchDescriptor<FeedDB>())
         data.forEach { destination.insert($0.copied()) }
-        try? destination.save()
+        try destination.save()
     }
 
-    public static func restore(from snapshot: ModelContext?, into main: ModelContext?) {
-        guard let snapshot,
-              let main,
-              let saved = try? snapshot.fetch(FetchDescriptor<FeedDB>()),
-              let existing = try? main.fetch(FetchDescriptor<FeedDB>()) else { return }
+    public static func restore(from snapshot: ModelContext?, into main: ModelContext?) throws {
+        guard let snapshot, let main else { return }
+        let saved = try snapshot.fetch(FetchDescriptor<FeedDB>())
+        let existing = try main.fetch(FetchDescriptor<FeedDB>())
 
         let existingByPostId = Dictionary(grouping: existing, by: \.postId)
         for record in saved {
@@ -161,7 +159,7 @@ extension FeedDB: ModelSafeguardable {
             rows.forEach { $0.merge(from: record) }
         }
 
-        try? main.save()
+        try main.save()
     }
 
     /// Applies the snapshot's `favorite`/`read` only when its own authority timestamp is strictly

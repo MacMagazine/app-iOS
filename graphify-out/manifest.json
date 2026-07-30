@@ -25,13 +25,13 @@
     "semantic_hash": "b3250fcc6f96d8583dabca29a5e23ee0"
   },
   "MacMagazine/Features/FeedLibrary/Sources/FeedLibrary/Database/FeedDB.swift": {
-    "mtime": 1785434100.9532864,
-    "ast_hash": "318d4c5b12ed12dbd68afef2f3a55e02",
+    "mtime": 1785436731.0331864,
+    "ast_hash": "ea2c5a565298373146ed087171e92675",
     "semantic_hash": ""
   },
   "MacMagazine/Features/FeedLibrary/Sources/FeedLibrary/Database/PodcastDB.swift": {
-    "mtime": 1785434100.9536858,
-    "ast_hash": "b718bf43691733074649131b4e7f1f26",
+    "mtime": 1785436741.6328812,
+    "ast_hash": "113b7181800f19dea77e0f0c29508c4b",
     "semantic_hash": ""
   },
   "MacMagazine/Features/FeedLibrary/Sources/FeedLibrary/Extensions/StringExtensions.swift": {
@@ -220,8 +220,8 @@
     "semantic_hash": "4cc41be2407655785b2b84ee61e7c6d9"
   },
   "MacMagazine/Features/MacMagazineLibrary/Sources/MacMagazineLibrary/ModelProtocols.swift": {
-    "mtime": 1785434028.2331975,
-    "ast_hash": "61f819d690d226a610ea57d1c5908b2a",
+    "mtime": 1785436720.0390139,
+    "ast_hash": "1018776df7632887bcf8d3f0705dca59",
     "semantic_hash": ""
   },
   "MacMagazine/Features/MacMagazineLibrary/Sources/MacMagazineLibrary/NewsCategory.swift": {
@@ -1115,8 +1115,8 @@
     "semantic_hash": ""
   },
   "MacMagazine/Features/VideosLibrary/Sources/Videos/Model/VideoDBExtensions.swift": {
-    "mtime": 1785434100.956685,
-    "ast_hash": "7efbf6417fdc4bcdc9cd8ede08fc161a",
+    "mtime": 1785436749.463781,
+    "ast_hash": "e7ab7f52ffaa7deded647d0cefb2f3d9",
     "semantic_hash": ""
   },
   "MacMagazine/Features/VideosLibrary/Sources/Videos/VideosView.swift": {
@@ -1495,7 +1495,7 @@
     "semantic_hash": "a3a30aeec0f7c7c5a7a17939bd8a4ac7"
   },
   "Support/Scripts/updateBuildVersion.sh": {
-    "mtime": 1785399444.8110797,
+    "mtime": 1785435613.5337253,
     "ast_hash": "aa1881642e51184480343f10afac0996",
     "semantic_hash": ""
   },
@@ -1505,8 +1505,8 @@
     "semantic_hash": "4143f8e895db1ad0e5bd6b7cd9629c4f"
   },
   ".claude/agents/ios-principal-engineer.md": {
-    "mtime": 1784669524.5125232,
-    "ast_hash": "da1d88f6922d5e430523a84287a97c6e",
+    "mtime": 1785436457.918634,
+    "ast_hash": "e3f845c5a93dba852f9a514b319e4ab0",
     "semantic_hash": ""
   },
   ".claude/agents/swift-code-reviewer.md": {
@@ -1515,9 +1515,9 @@
     "semantic_hash": "8b2a1d12ad695592601ddf99f63d701c"
   },
   ".claude/agents/test-runner.md": {
-    "mtime": 1781684529.3957071,
-    "ast_hash": "b2760d6fdefc414d3309450aa5c3fec0",
-    "semantic_hash": "b2760d6fdefc414d3309450aa5c3fec0"
+    "mtime": 1785436408.2660606,
+    "ast_hash": "9324aeb6b971f4b4105a72c0020ca6dc",
+    "semantic_hash": ""
   },
   ".claude/rules/anti-hallucination.md": {
     "mtime": 1781684529.3972466,
@@ -1570,8 +1570,8 @@
     "semantic_hash": "8b0705ea993fc4e2d02fcaa8634076eb"
   },
   ".claude/skills/ios-dod/SKILL.md": {
-    "mtime": 1784669524.5143726,
-    "ast_hash": "c55b8623edce972d77f3a36971959001",
+    "mtime": 1785436459.6914032,
+    "ast_hash": "a96ff73626fdad6410a9184dfe5fba00",
     "semantic_hash": ""
   },
   ".claude/skills/ios-fix/SKILL.md": {
@@ -1590,8 +1590,8 @@
     "semantic_hash": "c4840b3949fbb1991a8fb1b8c0e8514c"
   },
   ".claude/skills/ios-start/SKILL.md": {
-    "mtime": 1784669524.5150983,
-    "ast_hash": "20ddea9c288e3b6dadc33656bca3ba6e",
+    "mtime": 1785436458.8204896,
+    "ast_hash": "a0a795ffdfb6952f7fd466db1418e347",
     "semantic_hash": ""
   },
   ".github/ISSUE_TEMPLATE/bug_report.yml": {
@@ -1635,8 +1635,8 @@
     "semantic_hash": "c8fc8637a01d60df8bcf231b5a0225b7"
   },
   "CLAUDE.md": {
-    "mtime": 1784669524.5159585,
-    "ast_hash": "bc3965f935c6c8b3f7224aa733e85333",
+    "mtime": 1785436375.9215229,
+    "ast_hash": "032f47e9d0ac60f4e683913fc07cd773",
     "semantic_hash": ""
   },
   "README.md": {
@@ -1925,23 +1925,53 @@
     "semantic_hash": ""
   },
   "MacMagazine/Features/FeedLibrary/Tests/FeedLibraryTests/FeedDBSafeguardTests.swift": {
-    "mtime": 1785434158.2500167,
-    "ast_hash": "c05775b6679d0b3c0e306e23420475e0",
+    "mtime": 1785436785.2442293,
+    "ast_hash": "60bc585199254f3fb2cee811810d953a",
     "semantic_hash": ""
   },
   "MacMagazine/Features/FeedLibrary/Tests/FeedLibraryTests/PodcastDBSafeguardTests.swift": {
-    "mtime": 1785434197.2786388,
-    "ast_hash": "b1174800eb9c4ca5bcddf7d5be6f9bed",
+    "mtime": 1785436785.2446296,
+    "ast_hash": "0eadf6200616f0623f1d8b6877761ed4",
     "semantic_hash": ""
   },
   "MacMagazine/Features/VideosLibrary/Tests/VideosLibraryTests/VideoDBSafeguardTests.swift": {
-    "mtime": 1785434238.85336,
-    "ast_hash": "7202bfd9531929188688e13c28fb055c",
+    "mtime": 1785436785.2445147,
+    "ast_hash": "ac9d1dfd9255f9b96b11de9b3e2c13a9",
     "semantic_hash": ""
   },
   "DATA_SAFEGUARD_PLAN.md": {
-    "mtime": 1785433757.1789708,
-    "ast_hash": "06333e025ada11b1a373bf757b24d51a",
+    "mtime": 1785436471.692896,
+    "ast_hash": "80b8a32d74c2f7022d63637615a24543",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Package.swift": {
+    "mtime": 1785436870.2667708,
+    "ast_hash": "b9debdc80edc05623d0e956e91a3d598",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Sources/SafeguardLibrary/Services/SafeguardClock.swift": {
+    "mtime": 1785436916.2369046,
+    "ast_hash": "21cdbf7f12ae99d2cd0f266c63c01594",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Sources/SafeguardLibrary/Services/SafeguardStatusSource.swift": {
+    "mtime": 1785437148.4935613,
+    "ast_hash": "923f6b7f60efb2eec080f596dd4c4714",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Sources/SafeguardLibrary/ViewModels/SafeguardCoordinator.swift": {
+    "mtime": 1785437155.4748971,
+    "ast_hash": "d6686df625d2616114a41c49897fc8f7",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Tests/SafeguardLibraryTests/SafeguardCoordinatorTests.swift": {
+    "mtime": 1785437174.0618808,
+    "ast_hash": "af8ef826654b47ab098690041ffa2c22",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Tests/SafeguardLibraryTests/SafeguardTestDoubles.swift": {
+    "mtime": 1785437164.580257,
+    "ast_hash": "7eb806d0b704cafef739d25259e55c40",
     "semantic_hash": ""
   }
 }

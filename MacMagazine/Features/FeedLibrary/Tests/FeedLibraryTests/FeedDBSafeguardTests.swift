@@ -85,14 +85,14 @@ struct FeedDBSafeguardTests {
     // MARK: - snapshot Tests
 
     @Test("snapshot should copy every row into the destination store")
-    func snapshotCopiesEveryRow() {
+    func snapshotCopiesEveryRow() throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "1", title: "First", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(FeedDB(postId: "2", title: "Second"))
         stores.main.context.insert(FeedDB(postId: "3", title: "Third", read: true, readModifiedAt: Date(timeIntervalSince1970: 2000)))
         try? stores.main.context.save()
 
-        FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
 
         let saved = stores.snapshot.fetch(FeedDB.self)
         #expect(saved.count == 3)
@@ -101,15 +101,15 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("snapshot round-trip should survive the main store being emptied")
-    func snapshotRoundTripSurvivesEmptiedMainStore() {
+    func snapshotRoundTripSurvivesEmptiedMainStore() throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "1", title: "Favorited", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 1000)))
         try? stores.main.context.save()
 
-        FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
         stores.main.fetch(FeedDB.self).forEach { stores.main.context.delete($0) }
         try? stores.main.context.save()
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(FeedDB.self)
         #expect(restored.count == 1)
@@ -118,13 +118,13 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("snapshot rows should be independent of later main-store edits")
-    func snapshotRowsAreIndependentOfMainStore() {
+    func snapshotRowsAreIndependentOfMainStore() throws {
         let stores = makeStores()
         let post = FeedDB(postId: "1", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 1000))
         stores.main.context.insert(post)
         try? stores.main.context.save()
 
-        FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
         post.favorite = false
         try? stores.main.context.save()
 
@@ -132,19 +132,19 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("snapshot should handle an empty source store")
-    func snapshotHandlesEmptySource() {
+    func snapshotHandlesEmptySource() throws {
         let stores = makeStores()
 
-        FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try FeedDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
 
         #expect(stores.snapshot.fetch(FeedDB.self).isEmpty)
     }
 
     @Test("snapshot with nil contexts does not crash")
-    func snapshotNilContexts() {
+    func snapshotNilContexts() throws {
         let stores = makeStores()
-        FeedDB.snapshot(from: nil, into: stores.snapshot.context)
-        FeedDB.snapshot(from: stores.main.context, into: nil)
+        try FeedDB.snapshot(from: nil, into: stores.snapshot.context)
+        try FeedDB.snapshot(from: stores.main.context, into: nil)
         #expect(stores.snapshot.fetch(FeedDB.self).isEmpty)
     }
 
@@ -180,7 +180,7 @@ struct FeedDBSafeguardTests {
             )
         ]
     )
-    fileprivate func restoreMergesByAuthorityTimestamp(_ testCase: RestoreCase) {
+    fileprivate func restoreMergesByAuthorityTimestamp(_ testCase: RestoreCase) throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "1",
                                           favorite: testCase.mainFavorite,
@@ -195,7 +195,7 @@ struct FeedDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(FeedDB.self)
         #expect(restored.count == 1)
@@ -204,7 +204,7 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("restore preserves the snapshot's own timestamps instead of stamping now")
-    func restorePreservesSnapshotTimestamps() {
+    func restorePreservesSnapshotTimestamps() throws {
         let stores = makeStores()
         let snapshotFavoriteModifiedAt = Date(timeIntervalSince1970: 2000)
         stores.main.context.insert(FeedDB(postId: "1", favorite: false, favoriteModifiedAt: Date(timeIntervalSince1970: 1000)))
@@ -212,20 +212,20 @@ struct FeedDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         #expect(stores.main.fetch(FeedDB.self).first?.favoriteModifiedAt == snapshotFavoriteModifiedAt)
     }
 
     @Test("a restored value loses to a newer value arriving afterwards")
-    func restoredValueLosesToNewerRemoteValue() {
+    func restoredValueLosesToNewerRemoteValue() throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "1", favorite: false, favoriteModifiedAt: Date(timeIntervalSince1970: 1000), modifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.snapshot.context.insert(FeedDB(postId: "1", favorite: true, favoriteModifiedAt: Date(timeIntervalSince1970: 2000)))
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
         let remoteUnfavorite = FeedDB(postId: "1", favorite: false, favoriteModifiedAt: Date(timeIntervalSince1970: 3000), modifiedAt: Date(timeIntervalSince1970: 3000))
         stores.main.context.insert(remoteUnfavorite)
         try? stores.main.context.save()
@@ -239,7 +239,7 @@ struct FeedDBSafeguardTests {
     // MARK: - restore Re-insertion Tests
 
     @Test("restore re-inserts a snapshot row whose postId is gone from the main store")
-    func restoreReinsertsMissingRow() {
+    func restoreReinsertsMissingRow() throws {
         let stores = makeStores()
         let favoriteModifiedAt = Date(timeIntervalSince1970: 1000)
         stores.main.context.insert(FeedDB(postId: "kept", title: "Kept"))
@@ -252,7 +252,7 @@ struct FeedDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(FeedDB.self)
         #expect(restored.count == 2)
@@ -264,7 +264,7 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("restore applies the snapshot to every duplicate row sharing the postId")
-    func restoreAppliesToEveryDuplicateRow() {
+    func restoreAppliesToEveryDuplicateRow() throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "1", title: "Copy A", modifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(FeedDB(postId: "1", title: "Copy B", modifiedAt: Date(timeIntervalSince1970: 2000)))
@@ -272,7 +272,7 @@ struct FeedDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(FeedDB.self)
         #expect(restored.count == 2)
@@ -280,7 +280,7 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("restore followed by deduplicate keeps a single favorited survivor")
-    func restoreThenDeduplicateKeepsFavoritedSurvivor() {
+    func restoreThenDeduplicateKeepsFavoritedSurvivor() throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "1", title: "Copy A", modifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(FeedDB(postId: "1", title: "Copy B", modifiedAt: Date(timeIntervalSince1970: 2000)))
@@ -288,7 +288,7 @@ struct FeedDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
         FeedDB.deduplicate(using: stores.main.context)
 
         let remaining = stores.main.fetch(FeedDB.self)
@@ -298,12 +298,12 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("restore leaves untouched rows the snapshot does not know about")
-    func restoreLeavesUnknownRowsUntouched() {
+    func restoreLeavesUnknownRowsUntouched() throws {
         let stores = makeStores()
         stores.main.context.insert(FeedDB(postId: "fresh", title: "Fetched After Update", read: true, readModifiedAt: Date(timeIntervalSince1970: 5000)))
         try? stores.main.context.save()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(FeedDB.self)
         #expect(restored.count == 1)
@@ -311,19 +311,19 @@ struct FeedDBSafeguardTests {
     }
 
     @Test("restore should handle an empty snapshot store")
-    func restoreHandlesEmptySnapshot() {
+    func restoreHandlesEmptySnapshot() throws {
         let stores = makeStores()
 
-        FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         #expect(stores.main.fetch(FeedDB.self).isEmpty)
     }
 
     @Test("restore with nil contexts does not crash")
-    func restoreNilContexts() {
+    func restoreNilContexts() throws {
         let stores = makeStores()
-        FeedDB.restore(from: nil, into: stores.main.context)
-        FeedDB.restore(from: stores.snapshot.context, into: nil)
+        try FeedDB.restore(from: nil, into: stores.main.context)
+        try FeedDB.restore(from: stores.snapshot.context, into: nil)
         #expect(stores.main.fetch(FeedDB.self).isEmpty)
     }
 }

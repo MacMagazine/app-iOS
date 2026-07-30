@@ -18,11 +18,17 @@ public protocol ModelSafeguardable: AnyObject, PersistentModel {
     func copied() -> Self
 
     /// Copies every row from `source` into `destination` (the in-memory snapshot).
-    static func snapshot(from source: ModelContext?, into destination: ModelContext?)
+    ///
+    /// - Throws: whatever `ModelContext` raises while fetching or saving. A safeguard run that
+    /// cannot read the main store or write the snapshot has no copy of the user's state, so the
+    /// failure must reach the caller instead of leaving an empty snapshot behind.
+    static func snapshot(from source: ModelContext?, into destination: ModelContext?) throws
 
     /// Re-applies snapshot rows onto `main`: re-inserts records whose key is no longer present
     /// wholesale, and merges user state onto every existing row sharing that key.
-    static func restore(from snapshot: ModelContext?, into main: ModelContext?)
+    ///
+    /// - Throws: whatever `ModelContext` raises while fetching or saving.
+    static func restore(from snapshot: ModelContext?, into main: ModelContext?) throws
 }
 
 public protocol ModelPrioritizable: AnyObject {}

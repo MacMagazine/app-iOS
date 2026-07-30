@@ -71,13 +71,13 @@ struct VideoDBSafeguardTests {
     // MARK: - snapshot Tests
 
     @Test("snapshot should copy every row into the destination store")
-    func snapshotCopiesEveryRow() {
+    func snapshotCopiesEveryRow() throws {
         let stores = makeStores()
         stores.main.context.insert(makeVideo(videoId: "1", favorite: true))
         stores.main.context.insert(makeVideo(videoId: "2", current: 30))
         try? stores.main.context.save()
 
-        VideoDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try VideoDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
 
         let saved = stores.snapshot.fetch(VideoDB.self)
         #expect(saved.count == 2)
@@ -86,19 +86,19 @@ struct VideoDBSafeguardTests {
     }
 
     @Test("snapshot should handle an empty source store")
-    func snapshotHandlesEmptySource() {
+    func snapshotHandlesEmptySource() throws {
         let stores = makeStores()
 
-        VideoDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
+        try VideoDB.snapshot(from: stores.main.context, into: stores.snapshot.context)
 
         #expect(stores.snapshot.fetch(VideoDB.self).isEmpty)
     }
 
     @Test("snapshot with nil contexts does not crash")
-    func snapshotNilContexts() {
+    func snapshotNilContexts() throws {
         let stores = makeStores()
-        VideoDB.snapshot(from: nil, into: stores.snapshot.context)
-        VideoDB.snapshot(from: stores.main.context, into: nil)
+        try VideoDB.snapshot(from: nil, into: stores.snapshot.context)
+        try VideoDB.snapshot(from: stores.main.context, into: nil)
         #expect(stores.snapshot.fetch(VideoDB.self).isEmpty)
     }
 
@@ -113,14 +113,14 @@ struct VideoDBSafeguardTests {
             FavoriteRestoreCase(snapshotFavorite: false, mainFavorite: false, expectedFavorite: false)
         ]
     )
-    fileprivate func restoreOrMergesFavorite(_ testCase: FavoriteRestoreCase) {
+    fileprivate func restoreOrMergesFavorite(_ testCase: FavoriteRestoreCase) throws {
         let stores = makeStores()
         stores.main.context.insert(makeVideo(videoId: "1", favorite: testCase.mainFavorite))
         stores.snapshot.context.insert(makeVideo(videoId: "1", favorite: testCase.snapshotFavorite))
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(VideoDB.self)
         #expect(restored.count == 1)
@@ -128,14 +128,14 @@ struct VideoDBSafeguardTests {
     }
 
     @Test("restore keeps the larger playback position", arguments: [(120.0, 30.0), (30.0, 120.0)])
-    func restoreKeepsLargerPlaybackPosition(snapshotCurrent: Double, mainCurrent: Double) {
+    func restoreKeepsLargerPlaybackPosition(snapshotCurrent: Double, mainCurrent: Double) throws {
         let stores = makeStores()
         stores.main.context.insert(makeVideo(videoId: "1", current: mainCurrent))
         stores.snapshot.context.insert(makeVideo(videoId: "1", current: snapshotCurrent))
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         #expect(stores.main.fetch(VideoDB.self).first?.current == 120)
     }
@@ -143,12 +143,12 @@ struct VideoDBSafeguardTests {
     // MARK: - restore Re-insertion Tests
 
     @Test("restore re-inserts a snapshot row whose videoId is gone from the main store")
-    func restoreReinsertsMissingRow() {
+    func restoreReinsertsMissingRow() throws {
         let stores = makeStores()
         stores.snapshot.context.insert(makeVideo(videoId: "old", title: "Old Video", favorite: true, current: 55))
         try? stores.snapshot.context.save()
 
-        VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(VideoDB.self)
         #expect(restored.count == 1)
@@ -158,7 +158,7 @@ struct VideoDBSafeguardTests {
     }
 
     @Test("restore applies the snapshot to every duplicate row sharing the videoId")
-    func restoreAppliesToEveryDuplicateRow() {
+    func restoreAppliesToEveryDuplicateRow() throws {
         let stores = makeStores()
         stores.main.context.insert(makeVideo(videoId: "1", title: "Copy A", modifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(makeVideo(videoId: "1", title: "Copy B", modifiedAt: Date(timeIntervalSince1970: 2000)))
@@ -166,7 +166,7 @@ struct VideoDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         let restored = stores.main.fetch(VideoDB.self)
         #expect(restored.count == 2)
@@ -174,7 +174,7 @@ struct VideoDBSafeguardTests {
     }
 
     @Test("restore followed by deduplicate keeps a single favorited survivor")
-    func restoreThenDeduplicateKeepsFavoritedSurvivor() {
+    func restoreThenDeduplicateKeepsFavoritedSurvivor() throws {
         let stores = makeStores()
         stores.main.context.insert(makeVideo(videoId: "1", title: "Copy A", modifiedAt: Date(timeIntervalSince1970: 1000)))
         stores.main.context.insert(makeVideo(videoId: "1", title: "Copy B", modifiedAt: Date(timeIntervalSince1970: 2000)))
@@ -182,7 +182,7 @@ struct VideoDBSafeguardTests {
         try? stores.main.context.save()
         try? stores.snapshot.context.save()
 
-        VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
         VideoDB.deduplicate(using: stores.main.context)
 
         let remaining = stores.main.fetch(VideoDB.self)
@@ -192,19 +192,19 @@ struct VideoDBSafeguardTests {
     }
 
     @Test("restore should handle an empty snapshot store")
-    func restoreHandlesEmptySnapshot() {
+    func restoreHandlesEmptySnapshot() throws {
         let stores = makeStores()
 
-        VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: stores.main.context)
 
         #expect(stores.main.fetch(VideoDB.self).isEmpty)
     }
 
     @Test("restore with nil contexts does not crash")
-    func restoreNilContexts() {
+    func restoreNilContexts() throws {
         let stores = makeStores()
-        VideoDB.restore(from: nil, into: stores.main.context)
-        VideoDB.restore(from: stores.snapshot.context, into: nil)
+        try VideoDB.restore(from: nil, into: stores.main.context)
+        try VideoDB.restore(from: stores.snapshot.context, into: nil)
         #expect(stores.main.fetch(VideoDB.self).isEmpty)
     }
 }
