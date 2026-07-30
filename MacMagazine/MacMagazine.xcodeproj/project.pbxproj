@@ -15,7 +15,6 @@
 		9B1A43032EE0C14E00E56784 /* PodcastLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1A43022EE0C14E00E56784 /* PodcastLibrary */; };
 		9B4F666F2EE9F223008ACACB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B4F666E2EE9F223008ACACB /* FeedLibrary */; };
 		9B5143C52EF4CE9800ED4F39 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5143C42EF4CE9800ED4F39 /* MacMagazineLibrary */; };
-		9BA10001310000010000B001 /* SafeguardLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA10002310000020000B002 /* SafeguardLibrary */; };
 		9B543D342EE8A116001730C4 /* MacMagazineUILibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B543D332EE8A116001730C4 /* MacMagazineUILibrary */; };
 		9B740C742EFC2AC80058B514 /* MacMagazineLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B740C732EFC2AC80058B514 /* MacMagazineLibrary */; };
 		9B740C772EFC36EE0058B514 /* NewsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9B740C762EFC36EE0058B514 /* NewsLibrary */; };
@@ -24,6 +23,7 @@
 		9BA00001300000010000A001 /* SearchLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA00002300000020000A002 /* SearchLibrary */; };
 		9BA064FE2F65689400E4F88C /* MacMagazineNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9BA064F72F65689400E4F88C /* MacMagazineNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BA065092F65704700E4F88C /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA065082F65704700E4F88C /* OneSignalExtension */; };
+		9BA10001310000010000B001 /* SafeguardLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA10002310000020000B002 /* SafeguardLibrary */; };
 		9BA828AC2EEC7AAB00F26FCB /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BA828B82EEC7AE500F26FCB /* FeedLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 9BA828B72EEC7AE500F26FCB /* FeedLibrary */; };
 		9BB098972F69897300B3EA03 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 9BB098962F69897300B3EA03 /* OneSignalFramework */; };
@@ -114,8 +114,8 @@
 		9B910BE92EE0994600E96B4D /* FeedLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeedLibrary; sourceTree = "<group>"; };
 		9B9E9DC42E986F8400255820 /* MacMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA00003300000030000A003 /* SearchLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SearchLibrary; sourceTree = "<group>"; };
-		9BA10003310000030000B003 /* SafeguardLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SafeguardLibrary; sourceTree = "<group>"; };
 		9BA064F72F65689400E4F88C /* MacMagazineNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacMagazineNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA10003310000030000B003 /* SafeguardLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SafeguardLibrary; sourceTree = "<group>"; };
 		9BA8288C2EEC7AAA00F26FCB /* WatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB3888E2EE0B2E4007AC71C /* MacMagazine.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MacMagazine.xctestplan; sourceTree = "<group>"; };
 		9BCD94C42E997032007C44B6 /* MacMagazineLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MacMagazineLibrary; sourceTree = "<group>"; };
@@ -1252,14 +1252,14 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SearchLibrary;
 		};
-		9BA10002310000020000B002 /* SafeguardLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SafeguardLibrary;
-		};
 		9BA065082F65704700E4F88C /* OneSignalExtension */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9BA065072F65704700E4F88C /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
 			productName = OneSignalExtension;
+		};
+		9BA10002310000020000B002 /* SafeguardLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SafeguardLibrary;
 		};
 		9BA828B72EEC7AE500F26FCB /* FeedLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

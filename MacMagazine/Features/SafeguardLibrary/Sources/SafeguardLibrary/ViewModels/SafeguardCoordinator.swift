@@ -31,6 +31,10 @@ public final class SafeguardCoordinator: @MainActor Identifiable {
     private let fetch: @MainActor () async -> Void
     private let deduplicate: @MainActor () -> Void
 
+    /// Frozen at creation on purpose: the fetch phase fills an empty store, so asking again mid-run
+    /// would flip a silent flow into a visible one halfway through.
+    private let hasStateToProtect: Bool
+
     // Wait windows
     static let quiesceWindow: TimeInterval = 5
     static let hardTimeout: TimeInterval = 30
@@ -56,6 +60,35 @@ public final class SafeguardCoordinator: @MainActor Identifiable {
         self.version = version
         self.fetch = fetch
         self.deduplicate = deduplicate
+        self.hasStateToProtect = defaults.string(forKey: Self.lastSafeguardedVersionKey) != nil
+            || !Self.isStoreEmpty(models: models, mainContext: mainContext)
+    }
+
+    // MARK: - Presentation Gate
+
+    /// Whether the flow deserves a screen of its own. A true fresh install - an empty store that
+    /// no earlier version ever safeguarded - has nothing to narrate, so it runs behind a bare
+    /// placeholder instead of stacking a screen in front of onboarding. A failure always surfaces
+    /// even then: its actions are the user's only way out.
+    public var shouldPresentUI: Bool {
+        phase.isFailed || hasStateToProtect
+    }
+
+    var isStoreEmpty: Bool {
+        Self.isStoreEmpty(models: models, mainContext: mainContext)
+    }
+
+    /// A failed count reads as *not* empty on purpose: an unreadable store is the case that most
+    /// needs the flow visible, never the one to skip silently.
+    private static func isStoreEmpty(models: [any PersistentModel.Type], mainContext: ModelContext?) -> Bool {
+        guard let mainContext else { return true }
+        return models
+            .compactMap { $0 as? any ModelSafeguardable.Type }
+            .allSatisfy { count($0, in: mainContext) == 0 }
+    }
+
+    private static func count<T: PersistentModel>(_ type: T.Type, in context: ModelContext) -> Int? {
+        try? context.fetchCount(FetchDescriptor<T>())
     }
 
     // MARK: - Flow
@@ -83,6 +116,14 @@ public final class SafeguardCoordinator: @MainActor Identifiable {
         } catch {
             phase = .failed(error.localizedDescription)
         }
+    }
+
+    /// Discards the snapshot a failed run left behind and repeats the flow from scratch - the only
+    /// way back when ``takeSnapshot()`` itself threw partway and the working copy is incomplete,
+    /// which ``retry()`` alone cannot repair because it never re-snapshots.
+    public func restart() async {
+        snapshot = nil
+        await run()
     }
 
     private func takeSnapshot() throws {
@@ -187,4 +228,9 @@ public enum SafeguardPhase: Hashable, Sendable {
     case restoring
     case done
     case failed(String)
+
+    public var isFailed: Bool {
+        if case .failed = self { return true }
+        return false
+    }
 }

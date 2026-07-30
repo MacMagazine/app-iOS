@@ -3,12 +3,14 @@ import FeedLibrary
 import LoggerLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
+import SafeguardLibrary
 import SearchLibrary
 import SettingsLibrary
 import StorageLibrary
 import SwiftData
 import SwiftUI
 import VideosLibrary
+import WidgetKit
 import YouTubeLibrary
 
 @MainActor
@@ -30,7 +32,11 @@ class MainViewModel {
     var news: News
     var scrollToTopTrigger: AppTabs?
     var onboardingCoordinator: OnboardingCoordinator?
+    private(set) var safeguardCoordinator: SafeguardCoordinator?
     var deepLinkPostURL: String?
+
+    @ObservationIgnored
+    private var hasInitializedOnboarding = false
 
     let analytics = AnalyticsManager()
     let pushNotification: PushNotification
@@ -44,6 +50,9 @@ class MainViewModel {
     var searchViewModel: SearchViewModel { _searchViewModel }
 
     let models: [any PersistentModel.Type]
+    let safeguardModels: [any PersistentModel.Type]
+
+    private let isCloudSyncEnabled: Bool
 
     init(
         pushNotification: PushNotification,
@@ -61,6 +70,14 @@ class MainViewModel {
             CustomizationDB.self,
             RecentSearchDB.self
         ]
+
+        self.safeguardModels = [
+            FeedDB.self,
+            PodcastDB.self,
+            VideoDB.self
+        ]
+
+        self.isCloudSyncEnabled = !inMemory
 
         self.storage = Database(
             models: models,
@@ -82,6 +99,8 @@ class MainViewModel {
 
         // Observe storage status changes
         observeStorageStatus()
+
+        makeSafeguardCoordinator()
     }
 }
 
@@ -102,7 +121,13 @@ extension MainViewModel {
 extension MainViewModel {
     var showOnboarding: Bool { onboardingCoordinator != nil }
 
+    /// Held back while the safeguard flow owns the screen - that flow's `onComplete` calls this
+    /// instead, so the two can never be presented at once. The one-shot flag is set before the
+    /// first `await` so the two entry points cannot both get through.
     func initializeOnboarding() async {
+        guard safeguardCoordinator == nil, !hasInitializedOnboarding else { return }
+        hasInitializedOnboarding = true
+
         guard let coordinator = await OnboardingCoordinator.createIfNeeded(
             analytics: analytics,
             pushNotification: pushNotification
@@ -116,6 +141,37 @@ extension MainViewModel {
         }
 
         onboardingCoordinator = coordinator
+    }
+}
+
+// MARK: - Safeguard
+
+extension MainViewModel {
+    /// Decided synchronously during `init`, never from a `.task`: every feature view inside
+    /// `MainView` fetches on appear, so the gate has to be resolved before the first render can
+    /// compose any of them. The flow itself still runs asynchronously, from `SafeguardView`.
+    private func makeSafeguardCoordinator() {
+        guard let coordinator = SafeguardCoordinator.createIfNeeded(
+            models: safeguardModels,
+            mainContext: storage.sharedModelContainer.mainContext,
+            statusSource: StorageStatusSource(storage: storage, isSyncEnabled: isCloudSyncEnabled),
+            fetch: { [weak self] in await self?.refreshContent() },
+            deduplicate: { [weak self] in self?.deduplicate() }
+        ) else { return }
+
+        coordinator.onComplete = { [weak self] in
+            WidgetCenter.shared.reloadAllTimelines()
+            self?.safeguardCoordinator = nil
+            Task { await self?.initializeOnboarding() }
+        }
+
+        safeguardCoordinator = coordinator
+    }
+
+    private func refreshContent() async {
+        let feedService = FeedViewModel(storage: storage)
+        try? await feedService.getFeed()
+        try? await feedService.getPodcast()
     }
 }
 

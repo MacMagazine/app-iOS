@@ -3,6 +3,7 @@ import LoggerLibrary
 import MacMagazineLibrary
 import OnboardingLibrary
 import PodcastLibrary
+import SafeguardLibrary
 import SearchLibrary
 import SettingsLibrary
 import StorageLibrary
@@ -45,12 +46,53 @@ struct SceneView: View {
 
     var body: some View {
         content
-            .onOpenURL { url in
-                viewModel.deepLinkPostURL = url.absoluteString
+            .task {
+                shortcutManager.context = viewModel.storage.sharedModelContainer.mainContext
+                podcastPlayerManager.observeSessionState(viewModel.sessionState)
+                viewModel.analytics.track(.app(.open))
                 viewModel.analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("widget").id,
-                    screen: AnalyticsConstants.Screen.deepLinkDetail.name
+                    buttonId: AnalyticsConstants.ButtonID.appLaunched.id,
+                    screen: AnalyticsConstants.Screen.news.name
                 ))
+                await viewModel.initializeOnboarding()
+            }
+            .environment(\.theme, viewModel.theme)
+    }
+}
+
+private extension SceneView {
+    /// A switch, never an overlay: a modal would leave `MainView` mounted and its feature views
+    /// would keep fetching into the shared store behind the safeguard flow.
+    var content: some View {
+        Group {
+            if let coordinator = viewModel.safeguardCoordinator {
+                SafeguardView(coordinator: coordinator)
+            } else {
+                mainView
+            }
+        }
+        .modelContainer(viewModel.storage.sharedModelContainer)
+        .environment(viewModel)
+        .environment(viewModel.pushNotification)
+        .environment(viewModel.settingsViewModel)
+        .environment(viewModel.searchViewModel)
+        .environment(podcastPlayerManager)
+        .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
+        .environment(\.highlightPostRead, viewModel.settingsViewModel.highlightPostRead)
+        .environment(viewModel.sessionState)
+        .environmentObject(viewModel.analytics)
+        .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
+    }
+
+    /// Every presentation that can write to the shared store lives on this branch, never on the
+    /// shared wrapper: while `SafeguardView` owns the screen these modifiers must be absent from
+    /// the tree, or a deep link could present over the flow and mutate rows before its snapshot
+    /// step runs. `initial: true` is what makes the deferral lossless - an event delivered by
+    /// `SceneDelegate` while this branch was unmounted is read once here, on mount.
+    var mainView: some View {
+        MainView()
+            .onOpenURL { url in
+                viewModel.openDeepLink(url)
             }
             .fullScreenCover(isPresented: Binding(
                 get: { viewModel.deepLinkPostURL != nil },
@@ -74,8 +116,9 @@ struct SceneView: View {
                         .interactiveDismissDisabled(true)
                 }
             )
-            .onChange(of: pushNotification.newContentAvailable) {
+            .onChange(of: pushNotification.newContentAvailable, initial: true) {
                 guard let url = pushNotification.newContentAvailable else { return }
+                viewModel.logger?.debug("SceneView newContentAvailable: \(url)")
                 pushNotification.newContentAvailable = nil
                 viewModel.deepLinkPostURL = url
                 viewModel.analytics.track(.buttonTap(
@@ -83,7 +126,7 @@ struct SceneView: View {
                     screen: AnalyticsConstants.Screen.deepLinkDetail.name
                 ))
             }
-            .onChange(of: shortcutManager.url) { _, value in
+            .onChange(of: shortcutManager.url, initial: true) { _, value in
                 if let value {
                     viewModel.deepLinkPostURL = value
                     viewModel.analytics.track(.buttonTap(
@@ -92,50 +135,10 @@ struct SceneView: View {
                     ))
                 }
             }
-            .onChange(of: shortcutManager.tab) { _, value in
+            .onChange(of: shortcutManager.tab, initial: true) { _, value in
                 if let value {
                     viewModel.tab = value
                 }
             }
-            .task {
-                if let newContentAvailable = pushNotification.newContentAvailable {
-                    viewModel.logger?.debug("SceneView task newContentAvailable: \(newContentAvailable)")
-                }
-
-                if let url = pushNotification.newContentAvailable {
-                    pushNotification.newContentAvailable = nil
-                    viewModel.deepLinkPostURL = url
-                    viewModel.analytics.track(.buttonTap(
-                        buttonId: AnalyticsConstants.ButtonID.deepLinkOpened("push").id,
-                        screen: AnalyticsConstants.Screen.deepLinkDetail.name
-                    ))
-                }
-                shortcutManager.context = viewModel.storage.sharedModelContainer.mainContext
-                podcastPlayerManager.observeSessionState(viewModel.sessionState)
-                viewModel.analytics.track(.app(.open))
-                viewModel.analytics.track(.buttonTap(
-                    buttonId: AnalyticsConstants.ButtonID.appLaunched.id,
-                    screen: AnalyticsConstants.Screen.news.name
-                ))
-                await viewModel.initializeOnboarding()
-            }
-            .environment(\.theme, viewModel.theme)
-    }
-}
-
-private extension SceneView {
-    var content: some View {
-        MainView()
-            .modelContainer(viewModel.storage.sharedModelContainer)
-            .environment(viewModel)
-            .environment(viewModel.pushNotification)
-            .environment(viewModel.settingsViewModel)
-            .environment(viewModel.searchViewModel)
-            .environment(podcastPlayerManager)
-            .environment(\.removeAds, viewModel.settingsViewModel.removeAds)
-            .environment(\.highlightPostRead, viewModel.settingsViewModel.highlightPostRead)
-            .environment(viewModel.sessionState)
-            .environmentObject(viewModel.analytics)
-            .preferredColorScheme(viewModel.settingsViewModel.colorSchema)
     }
 }

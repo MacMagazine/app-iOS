@@ -211,8 +211,21 @@
   "209": ".setup",
   "210": ".userNotificationCenter",
   "211": ".init",
+  "212": "OnboardingCoordinatorTests.swift",
   "213": "SessionState",
+  "214": ".runWalksEveryPhaseInOrder",
+  "215": "AreEqualTests",
   "216": "DynamicTypeSize.swift",
   "217": "String",
-  "219": ".updateTabs"
+  "218": "MetadataDuration",
+  "219": "FavoriteButton",
+  "220": "NotificationService",
+  "221": ".init",
+  "222": "OnboardingCTAButton",
+  "223": ".init",
+  "224": ".change",
+  "225": "CMTime",
+  "226": ".init",
+  "227": "Bool",
+  "228": "BackgroundView"
 }

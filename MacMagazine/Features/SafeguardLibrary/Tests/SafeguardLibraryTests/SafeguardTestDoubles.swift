@@ -126,6 +126,17 @@ extension RecordingModel: ModelSafeguardable {
     }
 }
 
+/// Stands in for the registered models the safeguard does not cover - `SettingsDB`,
+/// `CustomizationDB`, `RecentSearchDB` - whose rows must not make the store look non-empty.
+@Model
+final class UnsafeguardedModel {
+    var key: String = ""
+
+    init(key: String = "") {
+        self.key = key
+    }
+}
+
 @Model
 final class FailingSnapshotModel {
     var key: String = ""

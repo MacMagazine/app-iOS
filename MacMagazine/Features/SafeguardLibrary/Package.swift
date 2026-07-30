@@ -18,6 +18,7 @@ let package = Package(
                 dependencies: [
                     "MacMagazineLibrary",
                     .product(name: "Storage", package: "Libraries"),
+                    .product(name: "UIComponents", package: "Libraries"),
                     .product(name: "Utilities", package: "Libraries")
                 ]),
         .testTarget(name: "SafeguardLibraryTests",

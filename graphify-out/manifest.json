@@ -1170,8 +1170,8 @@
     "semantic_hash": "8023f9dae2dfb30163395983e58ce88d"
   },
   "MacMagazine/MacMagazine/MainApp/MacMagazineApp.swift": {
-    "mtime": 1784669524.516605,
-    "ast_hash": "41d8bfa4a23610a9ba8e1db046e3e335",
+    "mtime": 1785441791.9354944,
+    "ast_hash": "c8ac83aff559876d9c548f51daf7f981",
     "semantic_hash": ""
   },
   "MacMagazine/MacMagazine/MainApp/MainView.swift": {
@@ -1180,8 +1180,8 @@
     "semantic_hash": "08de58f9a0e1b3dbca1c21124b26a85c"
   },
   "MacMagazine/MacMagazine/MainApp/MainViewModel.swift": {
-    "mtime": 1784757284.1594865,
-    "ast_hash": "8a1a48aec8fad205f041a5517560ca2e",
+    "mtime": 1785440942.4274871,
+    "ast_hash": "41ee5d076169db39e48526055c6e67f5",
     "semantic_hash": ""
   },
   "MacMagazine/MacMagazine/MainApp/NavigationState.swift": {
@@ -1940,13 +1940,13 @@
     "semantic_hash": ""
   },
   "DATA_SAFEGUARD_PLAN.md": {
-    "mtime": 1785436471.692896,
-    "ast_hash": "80b8a32d74c2f7022d63637615a24543",
+    "mtime": 1785441630.1680853,
+    "ast_hash": "3087a9d229449b0db2bf65e40269845e",
     "semantic_hash": ""
   },
   "MacMagazine/Features/SafeguardLibrary/Package.swift": {
-    "mtime": 1785436870.2667708,
-    "ast_hash": "b9debdc80edc05623d0e956e91a3d598",
+    "mtime": 1785439880.7921872,
+    "ast_hash": "1bc094cd0a3d734389df50203361281d",
     "semantic_hash": ""
   },
   "MacMagazine/Features/SafeguardLibrary/Sources/SafeguardLibrary/Services/SafeguardClock.swift": {
@@ -1960,18 +1960,23 @@
     "semantic_hash": ""
   },
   "MacMagazine/Features/SafeguardLibrary/Sources/SafeguardLibrary/ViewModels/SafeguardCoordinator.swift": {
-    "mtime": 1785437155.4748971,
-    "ast_hash": "d6686df625d2616114a41c49897fc8f7",
+    "mtime": 1785440903.0596895,
+    "ast_hash": "683c2731c8a2498342eb91f384a4fff4",
     "semantic_hash": ""
   },
   "MacMagazine/Features/SafeguardLibrary/Tests/SafeguardLibraryTests/SafeguardCoordinatorTests.swift": {
-    "mtime": 1785437174.0618808,
-    "ast_hash": "af8ef826654b47ab098690041ffa2c22",
+    "mtime": 1785440979.7794805,
+    "ast_hash": "e7d9a83516cb1b308032a9a0aa31d29a",
     "semantic_hash": ""
   },
   "MacMagazine/Features/SafeguardLibrary/Tests/SafeguardLibraryTests/SafeguardTestDoubles.swift": {
-    "mtime": 1785437164.580257,
-    "ast_hash": "7eb806d0b704cafef739d25259e55c40",
+    "mtime": 1785440005.5825174,
+    "ast_hash": "85376212a4b571868837e49724d2eb93",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/SafeguardLibrary/Sources/SafeguardLibrary/Views/SafeguardView.swift": {
+    "mtime": 1785440920.6954238,
+    "ast_hash": "15fd1abfd7bf10c409a75a80df7eaef8",
     "semantic_hash": ""
   }
 }

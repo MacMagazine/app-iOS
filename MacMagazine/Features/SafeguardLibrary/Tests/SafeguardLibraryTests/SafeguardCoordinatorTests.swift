@@ -321,4 +321,163 @@ struct SafeguardCoordinatorTests {
         #expect(safeguard.snapshot != nil)
         #expect(defaults.string(forKey: Self.versionKey) == nil)
     }
+
+    // MARK: - Restart Tests
+
+    @Test("restart discards the partial snapshot and re-runs the whole flow")
+    func restartDiscardsPartialSnapshot() async throws {
+        let clock = FakeClock()
+        let defaults = try makeDefaults()
+
+        let safeguard = try #require(makeCoordinator(models: [FailingSnapshotModel.self, RecordingModel.self],
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: defaults))
+        await safeguard.run()
+        let partialSnapshot = try #require(safeguard.snapshot)
+
+        await safeguard.restart()
+
+        #expect(safeguard.phase == .failed(SafeguardTestError().localizedDescription))
+        #expect(safeguard.snapshot !== partialSnapshot)
+    }
+
+    @Test("restart re-snapshots the main store instead of reusing the failed working copy")
+    func restartReSnapshotsFromMainStore() async throws {
+        let clock = FakeClock()
+        let main = Database(models: [RecordingModel.self], inMemory: true)
+        main.context.insert(RecordingModel(key: "1"))
+        try main.context.save()
+
+        let safeguard = try #require(makeCoordinator(models: [RecordingModel.self],
+                                                     mainContext: main.context,
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: try makeDefaults()))
+        await safeguard.run()
+
+        main.context.insert(RecordingModel(key: "2"))
+        try main.context.save()
+
+        await safeguard.restart()
+
+        #expect(safeguard.phase == .done)
+        #expect(Set(main.fetch(RecordingModel.self).map(\.key)) == ["1", "2"])
+    }
+
+    // MARK: - Fresh Install Detection Tests
+
+    @Test("a store with no safeguardable rows and no earlier run stays silent")
+    func freshInstallRunsSilently() throws {
+        let clock = FakeClock()
+        let main = Database(models: [RecordingModel.self], inMemory: true)
+
+        let safeguard = try #require(makeCoordinator(mainContext: main.context,
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: try makeDefaults()))
+
+        #expect(safeguard.isStoreEmpty)
+        #expect(!safeguard.shouldPresentUI)
+    }
+
+    @Test("a store holding rows presents the view")
+    func populatedStorePresentsUI() throws {
+        let clock = FakeClock()
+        let main = Database(models: [RecordingModel.self], inMemory: true)
+        main.context.insert(RecordingModel(key: "1"))
+        try main.context.save()
+
+        let safeguard = try #require(makeCoordinator(mainContext: main.context,
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: try makeDefaults()))
+
+        #expect(!safeguard.isStoreEmpty)
+        #expect(safeguard.shouldPresentUI)
+    }
+
+    @Test("an empty store presents the view when an earlier version was already safeguarded")
+    func emptyStorePresentsUIAfterEarlierRun() throws {
+        let clock = FakeClock()
+        let defaults = try makeDefaults()
+        defaults.set("5.0.1 (100)", forKey: Self.versionKey)
+        let main = Database(models: [RecordingModel.self], inMemory: true)
+
+        let safeguard = try #require(makeCoordinator(mainContext: main.context,
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: defaults))
+
+        #expect(safeguard.isStoreEmpty)
+        #expect(safeguard.shouldPresentUI)
+    }
+
+    @Test("a nil main context has nothing to protect and stays silent")
+    func nilContextRunsSilently() throws {
+        let clock = FakeClock()
+
+        let safeguard = try #require(makeCoordinator(statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: try makeDefaults()))
+
+        #expect(safeguard.isStoreEmpty)
+        #expect(!safeguard.shouldPresentUI)
+    }
+
+    @Test("models that cannot be safeguarded are ignored when judging emptiness")
+    func emptinessIgnoresNonSafeguardableModels() throws {
+        let clock = FakeClock()
+        let main = Database(models: [RecordingModel.self, UnsafeguardedModel.self], inMemory: true)
+        main.context.insert(UnsafeguardedModel(key: "1"))
+        try main.context.save()
+
+        let safeguard = try #require(makeCoordinator(models: [RecordingModel.self, UnsafeguardedModel.self],
+                                                     mainContext: main.context,
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: try makeDefaults()))
+
+        #expect(safeguard.isStoreEmpty)
+    }
+
+    @Test("the presentation decision survives a fetch that fills the empty store")
+    func presentationDecisionIsFrozenAtCreation() async throws {
+        let clock = FakeClock()
+        let main = Database(models: [RecordingModel.self], inMemory: true)
+
+        let safeguard = try #require(makeCoordinator(
+            mainContext: main.context,
+            statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+            clock: clock,
+            defaults: try makeDefaults(),
+            fetch: {
+                main.context.insert(RecordingModel(key: "1"))
+                try? main.context.save()
+            }
+        ))
+        #expect(!safeguard.shouldPresentUI)
+
+        await safeguard.run()
+
+        #expect(safeguard.phase == .done)
+        #expect(!safeguard.isStoreEmpty)
+        #expect(!safeguard.shouldPresentUI)
+    }
+
+    @Test("a silent run that fails surfaces the view so its actions are reachable")
+    func silentFailureSurfacesUI() async throws {
+        let clock = FakeClock()
+
+        let safeguard = try #require(makeCoordinator(models: [FailingSnapshotModel.self],
+                                                     statusSource: FakeStatusSource(isSyncEnabled: false, clock: clock),
+                                                     clock: clock,
+                                                     defaults: try makeDefaults()))
+        #expect(!safeguard.shouldPresentUI)
+
+        await safeguard.run()
+
+        #expect(safeguard.phase.isFailed)
+        #expect(safeguard.shouldPresentUI)
+    }
 }
