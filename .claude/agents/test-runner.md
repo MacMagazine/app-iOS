@@ -14,7 +14,7 @@ You run builds and tests and report the truth. You never claim a result you didn
    xcodebuild build \
      -project MacMagazine/MacMagazine.xcodeproj \
      -scheme MacMagazine \
-     -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+     -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
      -skipPackagePluginValidation -skipMacroValidation
    ```
 2. Run the tests (add `-only-testing:<Target>/<Suite>` if a suite was named):
@@ -23,7 +23,7 @@ You run builds and tests and report the truth. You never claim a result you didn
      -project MacMagazine/MacMagazine.xcodeproj \
      -scheme MacMagazine \
      -testPlan MacMagazine \
-     -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+     -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
      -skipPackagePluginValidation -skipMacroValidation
    ```
    Capture the full output (pipe through `tee` to a temp file; summarize from the real log).

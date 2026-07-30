@@ -184,6 +184,7 @@
   "182": "swift-code-reviewer.md",
   "183": ".makeHTML",
   "184": "PodcastPlayerManager.swift",
+  "185": ".parse",
   "186": "Options",
   "187": "Padrões de código",
   "188": "Troubleshooting",
@@ -203,5 +204,19 @@
   "202": ".change",
   "203": "WidgetView",
   "204": "CMTime",
-  "205": "EnvironmentValuesExtensions.swift"
+  "205": "EnvironmentValuesExtensions.swift",
+  "206": ".restore",
+  "207": "Ticker",
+  "208": "NotificationService",
+  "209": ".setup",
+  "210": ".userNotificationCenter",
+  "211": ".init",
+  "212": "LeadingImageCard",
+  "213": "SessionState",
+  "214": "AreEqualTests",
+  "215": "GlassPodcastCardView",
+  "216": "DynamicTypeSize.swift",
+  "217": "String",
+  "218": "URLs.swift",
+  "219": ".updateTabs"
 }

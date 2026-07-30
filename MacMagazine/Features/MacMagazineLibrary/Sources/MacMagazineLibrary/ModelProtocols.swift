@@ -13,6 +13,18 @@ public protocol ModelDuplicable: AnyObject, PersistentModel {
     static func deduplicate(using context: ModelContext?)
 }
 
+public protocol ModelSafeguardable: AnyObject, PersistentModel {
+    /// Detached deep copy, safe to insert into another container.
+    func copied() -> Self
+
+    /// Copies every row from `source` into `destination` (the in-memory snapshot).
+    static func snapshot(from source: ModelContext?, into destination: ModelContext?)
+
+    /// Re-applies snapshot rows onto `main`: re-inserts records whose key is no longer present
+    /// wholesale, and merges user state onto every existing row sharing that key.
+    static func restore(from snapshot: ModelContext?, into main: ModelContext?)
+}
+
 public protocol ModelPrioritizable: AnyObject {}
 
 public extension ModelPrioritizable {

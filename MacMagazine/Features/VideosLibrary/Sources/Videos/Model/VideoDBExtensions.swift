@@ -51,6 +51,55 @@ extension VideoDB: @retroactive ModelFavoritable {
     }
 }
 
+extension VideoDB: @retroactive ModelSafeguardable {
+    public func copied() -> VideoDB {
+        VideoDB(artworkURL: artworkURL,
+                current: current,
+                duration: duration,
+                favorite: favorite,
+                likes: likes,
+                pubDate: pubDate,
+                title: title,
+                videoId: videoId,
+                views: views,
+                modifiedAt: modifiedAt)
+    }
+
+    public static func snapshot(from source: ModelContext?, into destination: ModelContext?) {
+        guard let source,
+              let destination,
+              let data = try? source.fetch(FetchDescriptor<VideoDB>()) else { return }
+        data.forEach { destination.insert($0.copied()) }
+        try? destination.save()
+    }
+
+    public static func restore(from snapshot: ModelContext?, into main: ModelContext?) {
+        guard let snapshot,
+              let main,
+              let saved = try? snapshot.fetch(FetchDescriptor<VideoDB>()),
+              let existing = try? main.fetch(FetchDescriptor<VideoDB>()) else { return }
+
+        let existingByVideoId = Dictionary(grouping: existing, by: \.videoId)
+        for record in saved {
+            guard let rows = existingByVideoId[record.videoId] else {
+                main.insert(record.copied())
+                continue
+            }
+            rows.forEach { $0.merge(from: record) }
+        }
+
+        try? main.save()
+    }
+
+    /// `VideoDB` is an external model with no per-field authority timestamps, so the merge cannot
+    /// tell an explicit un-favorite apart from a blank sync-created row. It therefore only ever
+    /// adds state: favorite is OR-ed and the furthest playback position wins.
+    private func merge(from record: VideoDB) {
+        favorite = favorite || record.favorite
+        current = max(current, record.current)
+    }
+}
+
 extension VideoDB: @retroactive ModelDuplicable {
     public static func deduplicate(using context: ModelContext?) {
         let descriptor = FetchDescriptor<VideoDB>()

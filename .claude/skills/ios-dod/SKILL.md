@@ -38,7 +38,7 @@ review pass use the `swift-code-reviewer` and `architecture-guardian` agents.
 xcodebuild build \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation -skipMacroValidation
 ```
 - [ ] All tests pass:
@@ -47,7 +47,7 @@ xcodebuild test \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
   -testPlan MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation -skipMacroValidation
 ```
 - [ ] SwiftLint clean (zero violations):

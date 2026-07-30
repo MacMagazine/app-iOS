@@ -119,6 +119,67 @@ extension FeedDB: ModelReadable {
     }
 }
 
+extension FeedDB: ModelSafeguardable {
+    public func copied() -> FeedDB {
+        FeedDB(postId: postId,
+               title: title,
+               subtitle: subtitle,
+               pubDate: pubDate,
+               author: author,
+               artworkURL: artworkURL,
+               link: link,
+               categories: categories,
+               excerpt: excerpt,
+               fullContent: fullContent,
+               favorite: favorite,
+               favoriteModifiedAt: favoriteModifiedAt,
+               read: read,
+               readModifiedAt: readModifiedAt,
+               modifiedAt: modifiedAt)
+    }
+
+    public static func snapshot(from source: ModelContext?, into destination: ModelContext?) {
+        guard let source,
+              let destination,
+              let data = try? source.fetch(FetchDescriptor<FeedDB>()) else { return }
+        data.forEach { destination.insert($0.copied()) }
+        try? destination.save()
+    }
+
+    public static func restore(from snapshot: ModelContext?, into main: ModelContext?) {
+        guard let snapshot,
+              let main,
+              let saved = try? snapshot.fetch(FetchDescriptor<FeedDB>()),
+              let existing = try? main.fetch(FetchDescriptor<FeedDB>()) else { return }
+
+        let existingByPostId = Dictionary(grouping: existing, by: \.postId)
+        for record in saved {
+            guard let rows = existingByPostId[record.postId] else {
+                main.insert(record.copied())
+                continue
+            }
+            rows.forEach { $0.merge(from: record) }
+        }
+
+        try? main.save()
+    }
+
+    /// Applies the snapshot's `favorite`/`read` only when its own authority timestamp is strictly
+    /// newer, and carries that original timestamp over instead of stamping `Date()`: a restore is
+    /// not a user action, so stamping now would let restored state outrank a genuinely newer value
+    /// that iCloud delivers afterwards. Same authority rule `deduplicate()` applies.
+    private func merge(from record: FeedDB) {
+        if record.favoriteModifiedAt > favoriteModifiedAt {
+            favorite = record.favorite
+            favoriteModifiedAt = record.favoriteModifiedAt
+        }
+        if record.readModifiedAt > readModifiedAt {
+            read = record.read
+            readModifiedAt = record.readModifiedAt
+        }
+    }
+}
+
 extension FeedDB: ModelPrioritizable {}
 
 extension FeedDB: ModelDuplicable {

@@ -16,14 +16,17 @@ architecture via local Swift packages under `MacMagazine/Features/`.
 ## Build Commands
 
 **CRITICAL**: Always use `-skipPackagePluginValidation -skipMacroValidation` and target the
-**iPhone 17 Pro simulator**.
+**iPhone 17 Pro simulator, OS=26.5** — pin the OS explicitly. Without it, `OS:latest` resolves
+against the newest *installed* runtime, and if a newer runtime exists without an iPhone 17 Pro
+simulator on it, the plain name-only destination fails to resolve even though a matching
+simulator exists on 26.5.
 
 ```bash
 # Build
 xcodebuild build \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation \
   -skipMacroValidation
 
@@ -32,7 +35,7 @@ xcodebuild test \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
   -testPlan MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation \
   -skipMacroValidation
 

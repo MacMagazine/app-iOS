@@ -44,12 +44,12 @@ CLAUDE.md is the constitution; the rules files hold the detail. Read the relevan
 
 **Branch discipline**: Branch off `release/v5`. Format: `feature/<description>`, `fix/<description>`, `refactor/<description>`.
 
-**Build commands**: ALWAYS use `-skipPackagePluginValidation -skipMacroValidation` and target `iPhone 17 Pro` simulator:
+**Build commands**: ALWAYS use `-skipPackagePluginValidation -skipMacroValidation` and target `iPhone 17 Pro` simulator, OS pinned to 26.5:
 ```bash
 xcodebuild build \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation -skipMacroValidation
 ```
 

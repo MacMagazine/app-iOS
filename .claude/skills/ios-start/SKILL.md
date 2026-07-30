@@ -58,7 +58,7 @@ git branch --show-current
 xcodebuild build \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation -skipMacroValidation
 
 # Test
@@ -66,7 +66,7 @@ xcodebuild test \
   -project MacMagazine/MacMagazine.xcodeproj \
   -scheme MacMagazine \
   -testPlan MacMagazine \
-  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5" \
   -skipPackagePluginValidation -skipMacroValidation
 
 # Lint
