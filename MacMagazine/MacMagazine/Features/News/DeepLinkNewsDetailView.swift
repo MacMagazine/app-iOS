@@ -47,6 +47,11 @@ struct DeepLinkNewsDetailView: View {
                     post?.markAsRead()
                     try? modelContext.save()
                 }
+                .onChange(of: post) { _, newValue in
+                    guard let newValue, !newValue.read else { return }
+                    newValue.markAsRead()
+                    try? modelContext.save()
+                }
         }
     }
 
