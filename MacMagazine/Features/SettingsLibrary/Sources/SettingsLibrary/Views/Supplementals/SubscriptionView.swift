@@ -106,7 +106,7 @@ extension SubscriptionView {
 
     @ViewBuilder
     private var subscriptionOptions: some View {
-        // restore
+        restore
         manageSubscription
     }
 
