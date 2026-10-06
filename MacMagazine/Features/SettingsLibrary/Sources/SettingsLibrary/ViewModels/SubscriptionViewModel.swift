@@ -10,7 +10,7 @@ private let logger = Logger(subsystem: "com.macmagazine", category: "Subscriptio
 
 @MainActor
 @Observable
-final class SubscriptionViewModel {
+public final class SubscriptionViewModel {
     enum Status {
         case idle
         case loading
@@ -32,10 +32,10 @@ final class SubscriptionViewModel {
     var storage: Database?
     var analytics: AnalyticsManager?
 
-    let inAppLibrary: InAppManager
+    let inAppLibrary: any InAppManaging
     private var observationTask: Task<Void, Never>?
 
-    init(inAppLibrary: InAppManager = InAppManager()) {
+    public init(inAppLibrary: any InAppManaging = InAppManager()) {
         self.inAppLibrary = inAppLibrary
         setupListeners()
     }
@@ -62,10 +62,6 @@ extension SubscriptionViewModel {
     func get() async {
         isValidSubscription = storage?.settings?.subscription.isValidSubscription ?? false
         isPatrao = storage?.settings?.subscription.isPatrao ?? false
-
-        if !isValidSubscription {
-            await change(isPatrao: false)
-        }
     }
 
     func change(isPatrao: Bool) async {
@@ -96,6 +92,11 @@ extension SubscriptionViewModel {
         }
     }
 
+    func refreshEntitlements() async {
+        try? await getPurchasableProducts()
+        await inAppLibrary.restore()
+    }
+
     func purchase(
         using identifier: String,
         analytics: AnalyticsManager
@@ -113,7 +114,7 @@ extension SubscriptionViewModel {
     }
 }
 
-private extension SubscriptionViewModel {
+extension SubscriptionViewModel {
     func process(purchased: InAppStatus) async {
         logger.debug("[process] InApp status: \(String(describing: purchased))")
 
@@ -121,6 +122,10 @@ private extension SubscriptionViewModel {
         case let .purchased(identifier):
             logger.debug("[process] .purchased identifier: \(identifier)")
             logger.debug("[process] ViewModel status: \(String(describing: self.status))")
+
+            if status.product(using: identifier) == nil {
+                try? await getPurchasableProducts()
+            }
 
             if let transaction = status.product(using: identifier) {
                 logger.debug("[process] Found product, expirationDate: \(transaction.expirationDate)")

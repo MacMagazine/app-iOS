@@ -77,7 +77,7 @@ extension Database {
     @MainActor
     func update(expirationDate: Date) {
         if let item = settings {
-            item.subscription = Subscription(isPatrao: false, expirationDate: expirationDate)
+            item.subscription = Subscription(isPatrao: item.subscription.isPatrao, expirationDate: expirationDate)
             item.modifiedAt = Date()
         } else {
             let subscription = Subscription(isPatrao: false, expirationDate: expirationDate)

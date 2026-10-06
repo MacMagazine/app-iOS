@@ -294,6 +294,23 @@ struct DatabaseExtensionsTests {
         #expect(settings?.subscription.isPatrao == false, "Should set isPatrao to false")
     }
 
+    @Test("Should preserve isPatrao when updating expiration date on an existing record")
+    func updateExpirationDatePreservesIsPatrao() {
+        // Given
+        let database = Database(models: [SettingsDB.self], inMemory: true)
+        database.update(isPatrao: true)
+        let futureDate = Date().addingTimeInterval(86400 * 30)
+
+        // When
+        database.update(expirationDate: futureDate)
+
+        // Then
+        let settings = database.settings
+        #expect(settings?.subscription.isPatrao == true, "A paying patrão must not lose patrão status on purchase")
+        #expect(settings?.subscription.expirationDate.timeIntervalSince1970 ==
+                futureDate.timeIntervalSince1970)
+    }
+
     @Test("Should update social array correctly")
     func updateSocial() {
         // Given
