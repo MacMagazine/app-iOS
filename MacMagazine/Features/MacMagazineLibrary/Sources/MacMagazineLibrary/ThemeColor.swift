@@ -22,6 +22,8 @@ public struct ThemeColor: Themeable {
 									terciary: "MMGray6Gray3",
 									destructive: "TabascoDracula")
 
+    public let web = SecondaryColor(background: "MMWeb")
+
     public init() {}
 }
 

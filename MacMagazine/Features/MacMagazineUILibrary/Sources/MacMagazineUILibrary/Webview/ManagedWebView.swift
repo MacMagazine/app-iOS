@@ -1,4 +1,5 @@
 import Combine
+import MacMagazineLibrary
 import SwiftUI
 @preconcurrency import WebKit
 
@@ -184,6 +185,7 @@ extension View {
 }
 
 private struct SafeAreaInsetModifier: ViewModifier {
+    @Environment(\.theme) private var theme: ThemeColor
     @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @Environment(\.iPad) private var iPad
 
@@ -214,7 +216,8 @@ private struct SafeAreaInsetModifier: ViewModifier {
 
 private extension SafeAreaInsetModifier {
     var background: some View {
-        Color.clear
+        (theme.web.background.color ?? Color.secondary)
+            .ignoresSafeArea()
             .allowsHitTesting(false)
     }
 
