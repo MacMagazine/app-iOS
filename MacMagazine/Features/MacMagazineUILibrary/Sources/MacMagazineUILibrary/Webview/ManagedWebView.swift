@@ -1,3 +1,4 @@
+import Combine
 import SwiftUI
 @preconcurrency import WebKit
 
@@ -27,7 +28,6 @@ public struct ManagedWebViewStyle {
 public struct ManagedWebView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
-    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
 
     @State private var viewStatus = WebViewStatus.idle
     @State private var isActive = true
@@ -114,18 +114,19 @@ private extension ManagedWebView {
     @ViewBuilder
     var webview: some View {
         if let page, isActive, webViewReadyToRender {
-            Color.clear
-                .allowsHitTesting(false)
-                .safeAreaInset(edge: .trailing, spacing: shouldUseSidebar ? nil : 0) {
-                    WebView(page)
-                        .webViewBackForwardNavigationGestures(
-                            style.backForwardGesturesDisabled ? .disabled : .enabled
-                        )
-                        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
-                        .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
-                        .opacity(viewStatus == .done ? 1 : 0)
-                }
+            content(for: page)
+                .safeAreaInset()
         }
+    }
+
+    func content(for page: WebPage) -> some View {
+        WebView(page)
+            .webViewBackForwardNavigationGestures(
+                style.backForwardGesturesDisabled ? .disabled : .enabled
+            )
+            .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
+            .ignoresSafeArea(.container, edges: style.ignoredSafeAreaEdges)
+            .opacity(viewStatus == .done ? 1 : 0)
     }
 
     func handleColorSchemeChange(_ scheme: ColorScheme) {
@@ -170,6 +171,57 @@ private extension ManagedWebView {
             if !Task.isCancelled {
                 viewStatus = .error(error.localizedDescription)
             }
+        }
+    }
+}
+
+// MARK: - SafeInset -
+
+extension View {
+    func safeAreaInset() -> some View {
+        modifier(SafeAreaInsetModifier())
+    }
+}
+
+private struct SafeAreaInsetModifier: ViewModifier {
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
+    @Environment(\.iPad) private var iPad
+
+    @State private var orientation = UIDevice.current.orientation
+
+    private let orientationChangedNotification = NotificationCenter.default
+        .publisher(for: UIDevice.orientationDidChangeNotification)
+        .makeConnectable()
+        .autoconnect()
+
+    func body(content: Content) -> some View {
+        if iPad {
+            background
+                .safeAreaInset(edge: .trailing, spacing: shouldUseSidebar ? nil : 0.0) {
+                    content
+                }
+        } else {
+            background
+                .safeAreaInset(edge: edge, spacing: nil) {
+                    content
+                }
+                .onReceive(orientationChangedNotification) { _ in
+                    orientation = UIDevice.current.orientation
+                }
+        }
+    }
+}
+
+private extension SafeAreaInsetModifier {
+    var background: some View {
+        Color.clear
+            .allowsHitTesting(false)
+    }
+
+    var edge: HorizontalEdge {
+        switch orientation {
+        case .landscapeLeft: .trailing
+        default: .leading
         }
     }
 }
