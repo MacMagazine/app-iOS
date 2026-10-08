@@ -30,15 +30,19 @@ final public class SettingsViewModel {
     let models: [any PersistentModel.Type]
 
     let mmLive: MMLiveViewModel
+    let subscriptionViewModel: SubscriptionViewModel
 
     public init(
         storage: Database,
         models: [any PersistentModel.Type],
-        mmLive: MMLiveViewModel = MMLiveViewModel()
+        mmLive: MMLiveViewModel = MMLiveViewModel(),
+        subscriptionViewModel: SubscriptionViewModel = SubscriptionViewModel()
     ) {
         self.storage = storage
         self.models = models
         self.mmLive = mmLive
+        self.subscriptionViewModel = subscriptionViewModel
+        self.subscriptionViewModel.storage = storage
         self.storedTabs = self.storage.customization?.tabs ?? AppTabs.allCases
         self.social = self.storage.customization?.social ?? Social.allCases
         self.news = self.storage.customization?.news ?? News.allCases
@@ -66,6 +70,10 @@ final public class SettingsViewModel {
                 self?.rememberFilter = self?.storage.customization?.rememberFilter ?? false
                 self?.filter = self?.storage.customization?.filter
             }
+        }
+
+        Task { [weak self] in
+            await self?.refreshSubscriptionEntitlement()
         }
     }
 
@@ -110,5 +118,13 @@ extension SettingsViewModel {
         if !rememberFilter {
             storage.update(filter: nil)
         }
+    }
+}
+
+extension SettingsViewModel {
+    @MainActor
+    func refreshSubscriptionEntitlement() async {
+        await subscriptionViewModel.get()
+        await subscriptionViewModel.refreshEntitlements()
     }
 }

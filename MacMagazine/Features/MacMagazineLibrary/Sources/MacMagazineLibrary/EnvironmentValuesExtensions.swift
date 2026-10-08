@@ -6,7 +6,7 @@ public extension EnvironmentValues {
 #if os(watchOS)
         false
 #else
-        horizontalSizeClass == .regular && UIDevice.current.userInterfaceIdiom == .pad
+        horizontalSizeClass == .regular && iPad
 #endif
     }
 

@@ -27,22 +27,16 @@ struct DeepLinkNewsDetailView: View {
                     previous: nil,
                     analytics: analytics
                 )
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
+                .toolbar(
+                    close:
                         Button(action: onDismiss,
                                label: { Image(systemName: "xmark") })
                         .tint(.primary)
                         .accessibilityLabel("Fechar")
-                    }
-                    ToolbarItem(placement: .automatic) {
-                        favoriteView
-                    }
-                    .sharedBackgroundVisibility(.hidden)
-                    ToolbarItem(placement: .automatic) {
-                        shareView
-                    }
-                    .sharedBackgroundVisibility(.hidden)
-                }
+                    ,
+                    favourite: favoriteView,
+                    share: shareView
+                )
                 .onAppear {
                     post?.markAsRead()
                     try? modelContext.save()

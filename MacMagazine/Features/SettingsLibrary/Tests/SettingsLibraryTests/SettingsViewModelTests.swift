@@ -287,4 +287,42 @@ struct SettingsViewModelTests {
         #expect(tabsWithLive.contains(.live))
         #expect(!tabsWithoutLive.contains(.live))
     }
+
+    // MARK: - Subscription Entitlement Tests
+
+    @Test("Should wire the injected SubscriptionViewModel to the shared storage")
+    func subscriptionViewModelSharesStorage() {
+        let storage = Database(
+            models: [SettingsDB.self, CustomizationDB.self],
+            inMemory: true
+        )
+        let subscriptionViewModel = SubscriptionViewModel(inAppLibrary: FakeInAppManager())
+        let sut = SettingsViewModel(
+            storage: storage,
+            models: [SettingsDB.self, CustomizationDB.self],
+            subscriptionViewModel: subscriptionViewModel
+        )
+
+        #expect(sut.subscriptionViewModel.storage != nil)
+    }
+
+    @Test("refreshSubscriptionEntitlement() restores entitlements without visiting the Settings screen")
+    func refreshSubscriptionEntitlementRestoresEntitlements() async {
+        let storage = Database(
+            models: [SettingsDB.self, CustomizationDB.self],
+            inMemory: true
+        )
+        let fake = FakeInAppManager()
+        let subscriptionViewModel = SubscriptionViewModel(inAppLibrary: fake)
+        let sut = SettingsViewModel(
+            storage: storage,
+            models: [SettingsDB.self, CustomizationDB.self],
+            subscriptionViewModel: subscriptionViewModel
+        )
+
+        await sut.refreshSubscriptionEntitlement()
+
+        #expect(fake.getProductsCallCount == 1)
+        #expect(fake.restoreCallCount == 1)
+    }
 }

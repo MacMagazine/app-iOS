@@ -222,13 +222,7 @@ extension NewsView {
     @ViewBuilder
     var newsDetailView: some View {
         MMWebView(url: viewModel.selectedNews?.link)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) { favoriteView }
-                    .sharedBackgroundVisibility(.hidden)
-                ToolbarSpacer(.fixed, placement: .topBarTrailing)
-                ToolbarItem(placement: .topBarTrailing) { shareView }
-                    .sharedBackgroundVisibility(.hidden)
-            }
+            .toolbar(favourite: favoriteView, share: shareView)
             .task {
                 viewModel.selectedNews?.markAsRead()
                 try? modelContext.save()

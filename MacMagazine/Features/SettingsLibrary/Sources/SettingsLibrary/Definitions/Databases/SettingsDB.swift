@@ -40,16 +40,24 @@ extension SettingsDB {
 }
 
 extension SettingsDB: ModelDuplicable {
+    /// `.unique`/`#Unique` isn't supported with CloudKit, so every device can create its own
+    /// row - merge the subscription across duplicates instead of letting the most recently
+    /// modified one win outright.
     public static func deduplicate(using context: ModelContext?) {
         let descriptor = FetchDescriptor<SettingsDB>()
         guard let context,
-              let data = try? context.fetch(descriptor) else { return }
+              let data = try? context.fetch(descriptor),
+              data.count > 1 else { return }
 
-        let recordsToDelete = data
-            .sorted { $0.modifiedAt > $1.modifiedAt }
-            .dropFirst()
+        let sorted = data.sorted { $0.modifiedAt > $1.modifiedAt }
+        guard let survivor = sorted.first else { return }
 
-        recordsToDelete.forEach { context.delete($0) }
+        survivor.subscription = Subscription(
+            isPatrao: data.contains { $0.subscription.isPatrao },
+            expirationDate: data.map { $0.subscription.expirationDate }.max() ?? survivor.subscription.expirationDate
+        )
+
+        sorted.dropFirst().forEach { context.delete($0) }
         try? context.save()
     }
 }

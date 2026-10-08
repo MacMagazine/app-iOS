@@ -10,13 +10,14 @@ struct SubscriptionView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(SettingsViewModel.self) private var settingsViewModel
-    @State var viewModel = SubscriptionViewModel()
 
     @State private var selectedProduct: String?
 
     @Binding var isPatrao: Bool
     @Binding var isPresentingLoginPatrao: Bool
     @Binding var urlToOpen: URL?
+
+    private var viewModel: SubscriptionViewModel { settingsViewModel.subscriptionViewModel }
 
     var body: some View {
         Section {
@@ -35,11 +36,9 @@ struct SubscriptionView: View {
         }
 
         .task {
-            viewModel.storage = settingsViewModel.storage
             await viewModel.get()
             if !viewModel.isPatrao {
-                try? await viewModel.getPurchasableProducts()
-                viewModel.restore()
+                await viewModel.refreshEntitlements()
             }
         }
 
@@ -55,11 +54,8 @@ struct SubscriptionView: View {
             }
         }
         .onChange(of: viewModel.isValidSubscription) { _, value in
-            print("[SubscriptionView] isValidSubscription changed to: \(value)")
-            print("[SubscriptionView] settingsViewModel.removeAds before: \(settingsViewModel.removeAds)")
             if value {
                 settingsViewModel.removeAds = settingsViewModel.storage.settings?.subscription.removeAds ?? false
-                print("[SubscriptionView] settingsViewModel.removeAds after: \(settingsViewModel.removeAds)")
             }
         }
     }
@@ -110,7 +106,7 @@ extension SubscriptionView {
 
     @ViewBuilder
     private var subscriptionOptions: some View {
-        // restore
+        restore
         manageSubscription
     }
 

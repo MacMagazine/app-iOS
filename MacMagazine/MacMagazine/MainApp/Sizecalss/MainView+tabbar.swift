@@ -31,6 +31,7 @@ extension MainView {
                 }
             }
         }
+        .tabViewSearchActivation(.searchTabSelection)
         .podcastMiniPlayer()
         .onChange(of: viewModel.tab) { _, newTab in
             viewModel.analytics.track(.buttonTap(

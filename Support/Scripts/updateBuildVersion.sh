@@ -2,19 +2,21 @@
 
 # updateBuildVersion.sh
 # Increments the app version (MARKETING_VERSION) before archiving for App Store submission.
+# CURRENT_PROJECT_VERSION mirrors MARKETING_VERSION as major.minor.patch.build.
+#
 # Usage:
-#   ./updateBuildVersion.sh [patch|minor|major] [--build]
+#   ./updateBuildVersion.sh [patch|minor|major] [--build [<build_number>]]
 #
 # Arguments:
-#   patch (default) - Increments 5.1.1 -> 5.1.2
-#   minor          - Increments 5.1.1 -> 5.2.0
-#   major          - Increments 5.1.1 -> 6.0.0
-#   --build        - Also increment the build number (4th component of CURRENT_PROJECT_VERSION)
+#   patch|minor|major - Bumps MARKETING_VERSION (omit to leave it untouched)
+#   --build           - Increments the build number (4th component of CURRENT_PROJECT_VERSION)
+#   --build <number>  - Sets the build number explicitly, e.g. Bitrise's $BITRISE_BUILD_NUMBER
 #
 # Example:
-#   ./updateBuildVersion.sh              # 5.1.1 -> 5.1.2
-#   ./updateBuildVersion.sh minor        # 5.1.1 -> 5.2.0
-#   ./updateBuildVersion.sh patch --build # 5.1.1 -> 5.1.2 and build 5.1.1.0 -> 5.1.2.1
+#   ./updateBuildVersion.sh patch          # 5.1.1 -> 5.1.2
+#   ./updateBuildVersion.sh minor          # 5.1.1 -> 5.2.0
+#   ./updateBuildVersion.sh patch --build  # 5.1.1 -> 5.1.2 and build 5.1.1.0 -> 5.1.2.1
+#   ./updateBuildVersion.sh --build 677    # keeps 5.1.1, build 5.1.1.0 -> 5.1.1.677 (CI)
 
 set -e  # Exit on error
 
@@ -24,25 +26,41 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Configuration
 for file in ./MacMagazine/*.xcodeproj; do
     project_name="$(basename "${file}" .xcodeproj)"
 done
 PROJECT_FILE="MacMagazine/${project_name}.xcodeproj/project.pbxproj"
-INCREMENT_TYPE="${1:-patch}"
+INCREMENT_TYPE=""
 INCREMENT_BUILD=false
+EXPLICIT_BUILD=""
 
-# Check for --build flag
-for arg in "$@"; do
-    if [ "$arg" = "--build" ]; then
-        INCREMENT_BUILD=true
-    fi
+# ---- READ PARAMS ----
+while [ $# -gt 0 ]; do
+    case "$1" in
+        patch|minor|major) INCREMENT_TYPE="$1";;
+        --build)
+            if [[ "$2" =~ ^[0-9]+$ ]]; then
+                EXPLICIT_BUILD="$2"
+                shift
+            else
+                INCREMENT_BUILD=true
+            fi
+            ;;
+    esac
+    shift
 done
 
 # Validate increment type
-if [[ ! "$INCREMENT_TYPE" =~ ^(patch|minor|major)$ ]]; then
+if [ -n "$INCREMENT_TYPE" ] && [[ ! "$INCREMENT_TYPE" =~ ^(patch|minor|major)$ ]]; then
     echo -e "${RED}Error: Invalid increment type '$INCREMENT_TYPE'${NC}"
-    echo "Usage: $0 [patch|minor|major] [--build]"
+    echo "Usage: $0 [patch|minor|major] [--build [<build_number>]]"
+    exit 1
+fi
+
+# Require at least one action
+if [ -z "$INCREMENT_TYPE" ] && [ "$INCREMENT_BUILD" = false ] && [ -z "$EXPLICIT_BUILD" ]; then
+    echo -e "${RED}Error: Nothing to do — pass patch|minor|major and/or --build [<build_number>]${NC}"
+    echo "Usage: $0 [patch|minor|major] [--build [<build_number>]]"
     exit 1
 fi
 
@@ -98,19 +116,21 @@ BACKUP_FILE="${PROJECT_FILE}.backup"
 cp "$PROJECT_FILE" "$BACKUP_FILE"
 echo -e "${YELLOW}Created backup: ${BACKUP_FILE}${NC}"
 
-# Update all MARKETING_VERSION occurrences
-# Use sed with a temporary file for compatibility
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS
-    sed -i '' "s/MARKETING_VERSION = ${CURRENT_VERSION};/MARKETING_VERSION = ${NEW_VERSION};/g" "$PROJECT_FILE"
-else
-    # Linux
-    sed -i "s/MARKETING_VERSION = ${CURRENT_VERSION};/MARKETING_VERSION = ${NEW_VERSION};/g" "$PROJECT_FILE"
-fi
+if [ -n "$INCREMENT_TYPE" ]; then
+    # Update all MARKETING_VERSION occurrences
+    # Use sed with a temporary file for compatibility
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        sed -i '' "s/MARKETING_VERSION = ${CURRENT_VERSION};/MARKETING_VERSION = ${NEW_VERSION};/g" "$PROJECT_FILE"
+    else
+        # Linux
+        sed -i "s/MARKETING_VERSION = ${CURRENT_VERSION};/MARKETING_VERSION = ${NEW_VERSION};/g" "$PROJECT_FILE"
+    fi
 
-# Count how many replacements were made
-REPLACEMENT_COUNT=$(grep -c "MARKETING_VERSION = ${NEW_VERSION};" "$PROJECT_FILE" || true)
-echo -e "${GREEN}✓ Updated MARKETING_VERSION in ${REPLACEMENT_COUNT} locations${NC}"
+    # Count how many replacements were made
+    REPLACEMENT_COUNT=$(grep -c "MARKETING_VERSION = ${NEW_VERSION};" "$PROJECT_FILE" || true)
+    echo -e "${GREEN}✓ Updated MARKETING_VERSION in ${REPLACEMENT_COUNT} locations${NC}"
+fi
 
 # CURRENT_PROJECT_VERSION mirrors MARKETING_VERSION as major.minor.patch.build
 CURRENT_BUNDLE_VERSION=$(grep -m 1 "CURRENT_PROJECT_VERSION = " "$PROJECT_FILE" | sed 's/.*CURRENT_PROJECT_VERSION = \(.*\);/\1/' | tr -d ' ')
@@ -119,7 +139,11 @@ if [ -n "$CURRENT_BUNDLE_VERSION" ]; then
     IFS='.' read -r -a BUNDLE_PARTS <<< "$CURRENT_BUNDLE_VERSION"
     BUILD="${BUNDLE_PARTS[3]:-0}"
 
-    if [ "$INCREMENT_BUILD" = true ]; then
+    if [ -n "$EXPLICIT_BUILD" ]; then
+        echo ""
+        echo -e "${YELLOW}Setting build number...${NC}"
+        BUILD="$EXPLICIT_BUILD"
+    elif [ "$INCREMENT_BUILD" = true ]; then
         echo ""
         echo -e "${YELLOW}Incrementing build number...${NC}"
         BUILD=$((BUILD + 1))
