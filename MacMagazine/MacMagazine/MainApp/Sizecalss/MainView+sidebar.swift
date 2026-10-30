@@ -54,29 +54,29 @@ extension MainView {
         .navigationTitle("MacMagazine")
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                HStack {
-                    if viewModel.settingsViewModel.isLive {
-                        Button(action: { process(AppTabs.live) },
-                               label: {
-                            HStack {
-                                Image(systemName: AppTabs.live.icon)
-                                Text(AppTabs.live.rawValue)
-                            }
-                        })
-                    }
-
-                    Button(action: { process(AppTabs.settings) },
+            if viewModel.settingsViewModel.isLive {
+                ToolbarItem(placement: .bottomBar) {
+                    Button(action: { process(AppTabs.live) },
                            label: {
                         HStack {
-                            Image(systemName: AppTabs.settings.icon)
-                            Text(AppTabs.settings.rawValue)
+                            Image(systemName: AppTabs.live.icon)
+                            Text(AppTabs.live.rawValue)
                         }
                     })
-
-                    Spacer()
                 }
             }
+
+            ToolbarItem(placement: .bottomBar) {
+                Button(action: { process(AppTabs.settings) },
+                       label: {
+                    HStack {
+                        Image(systemName: AppTabs.settings.icon)
+                        Text(AppTabs.settings.rawValue)
+                    }
+                })
+            }
+
+            ToolbarSpacer(.flexible, placement: .bottomBar)
         }
     }
 }
