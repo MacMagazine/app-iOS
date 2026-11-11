@@ -13,8 +13,7 @@ public struct SearchView: View {
     @Environment(\.theme) private var theme: ThemeColor
     @Environment(PodcastPlayerManager.self) private var podcastPlayerManager
     @Environment(SearchViewModel.self) private var viewModel
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.shouldUseSidebar) private var shouldUseSidebar
     @EnvironmentObject private var analytics: AnalyticsManager
 
     @State private var cardWidth = CGFloat.zero
@@ -61,7 +60,7 @@ public struct SearchView: View {
                     api.selectedVideo = value
                 }
                 .player(api: api, action: $action)
-                .if(!isIPad) { view in
+                .if(!shouldUseSidebar) { view in
                     view.searchable(
                         text: $viewModel.searchText,
                         prompt: "Buscar notícias, podcasts e vídeos"
@@ -270,14 +269,6 @@ private extension SearchView {
             return
         }
         UIAccessibility.post(notification: .announcement, argument: message)
-    }
-}
-
-// MARK: - Layout
-
-private extension SearchView {
-    var isIPad: Bool {
-        horizontalSizeClass == .regular && verticalSizeClass == .regular
     }
 }
 
