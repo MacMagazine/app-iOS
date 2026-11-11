@@ -42,7 +42,7 @@ private extension WidgetElementView {
             VStack {
                 Image("logo_white")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .frame(width: 24, height: 24)
                 Spacer(minLength: 0)
             }

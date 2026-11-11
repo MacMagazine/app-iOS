@@ -36,7 +36,7 @@ private extension PodcastImageView {
         case .chapter:
             Image(uiImage: uiImage)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .scaledToFill()
 
         case .background:
             Image(uiImage: uiImage)
@@ -54,7 +54,7 @@ private extension PodcastImageView {
 
         case .chapter:
             CachedAsyncImage(image: artworkURL, contentMode: .fill)
-                .aspectRatio(contentMode: .fill)
+                .scaledToFill()
 
         case .background:
             CachedAsyncImage(image: artworkURL, contentMode: .fill)
