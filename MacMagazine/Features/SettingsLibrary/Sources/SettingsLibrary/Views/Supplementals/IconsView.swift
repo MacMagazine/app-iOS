@@ -63,7 +63,7 @@ private extension IconsView {
                     VStack(spacing: 8) {
                         Image(type.rawValue, bundle: .module)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .scaledToFit()
                             .frame(width: 80, height: 80)
                             .cornerRadius(16)
                             .overlay(
