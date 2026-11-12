@@ -111,14 +111,14 @@ private extension DisqusSheet {
     }
 
     func loadContent() async {
-        guard let page else { return }
+        guard let page, let pageURL = DisqusHTMLBuilder.pageURL else { return }
         let html = DisqusHTMLBuilder.makeHTML(
             commentsURL: commentsURL,
             colorScheme: colorScheme
         )
         viewStatus = .loading
         do {
-            for try await event in page.load(html: html) {
+            for try await event in page.load(html: html, baseURL: pageURL) {
                 if case .finished = event {
                     viewStatus = .done
                     return

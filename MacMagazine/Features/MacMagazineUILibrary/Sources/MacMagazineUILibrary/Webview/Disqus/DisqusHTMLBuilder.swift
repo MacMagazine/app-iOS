@@ -1,6 +1,13 @@
 import SwiftUI
 
 enum DisqusHTMLBuilder {
+    static let shortname = "macmagazinecombr"
+
+    /// Origin the comments HTML is loaded under. Without it the page is
+    /// `about:blank`, which makes the disqus.com iframe third-party, and WebKit
+    /// then blocks the session cookies written by the login sheet.
+    static let pageURL = URL(string: "https://\(shortname).disqus.com/")
+
     static func makeHTML(commentsURL: String, colorScheme: ColorScheme) -> String {
         let backgroundColor = colorScheme == .dark ? "black" : "none"
         let linkColor = colorScheme == .dark ? "white" : "#0096D3"
@@ -24,7 +31,7 @@ enum DisqusHTMLBuilder {
             <div id="disqus_thread"></div>
             <script>
                 var disqus_identifier = '\(commentsURL)';
-                var disqus_shortname = 'macmagazinecombr';
+                var disqus_shortname = '\(shortname)';
                 (function() {
                     var dsq = document.createElement('script');
                     dsq.type = 'text/javascript';
