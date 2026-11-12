@@ -609,7 +609,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_sources_feedlibrary_database_feeddb",
-      "community": 53,
+      "community": 28,
       "norm_label": "feeddb.swift"
     },
     {
@@ -620,7 +620,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "foundation",
-      "community": 9,
+      "community": 28,
       "norm_label": "foundation"
     },
     {
@@ -903,7 +903,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_sources_feedlibrary_extensions_stringextensions",
-      "community": 9,
+      "community": 28,
       "norm_label": "stringextensions.swift"
     },
     {
@@ -913,7 +913,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_sources_feedlibrary_extensions_stringextensions_string",
-      "community": 9,
+      "community": 28,
       "norm_label": "string"
     },
     {
@@ -973,7 +973,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "codable",
-      "community": 70,
+      "community": 23,
       "norm_label": "codable"
     },
     {
@@ -1034,7 +1034,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "networklibrary",
-      "community": 9,
+      "community": 28,
       "norm_label": "networklibrary"
     },
     {
@@ -1104,7 +1104,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_sources_feedlibrary_services_networkservice",
-      "community": 9,
+      "community": 28,
       "norm_label": "networkservice.swift"
     },
     {
@@ -1585,7 +1585,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_sources_feedlibrary_viewmodel_feedviewmodel",
-      "community": 9,
+      "community": 28,
       "norm_label": "feedviewmodel.swift"
     },
     {
@@ -1885,7 +1885,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_categorytests",
-      "community": 9,
+      "community": 53,
       "norm_label": "categorytests.swift"
     },
     {
@@ -1896,7 +1896,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "feedlibrary",
-      "community": 9,
+      "community": 53,
       "norm_label": "feedlibrary"
     },
     {
@@ -2067,7 +2067,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_dateparsertests",
-      "community": 9,
+      "community": 53,
       "norm_label": "dateparsertests.swift"
     },
     {
@@ -2237,7 +2237,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_feeddbtests",
-      "community": 9,
+      "community": 28,
       "norm_label": "feeddbtests.swift"
     },
     {
@@ -2637,7 +2637,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_feedendpointtests",
-      "community": 9,
+      "community": 28,
       "norm_label": "feedendpointtests.swift"
     },
     {
@@ -2877,7 +2877,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_feedviewmodeltests",
-      "community": 9,
+      "community": 28,
       "norm_label": "feedviewmodeltests.swift"
     },
     {
@@ -3087,7 +3087,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_podcastdbtests",
-      "community": 9,
+      "community": 28,
       "norm_label": "podcastdbtests.swift"
     },
     {
@@ -3447,7 +3447,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_storageservicetests",
-      "community": 9,
+      "community": 28,
       "norm_label": "storageservicetests.swift"
     },
     {
@@ -3707,7 +3707,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_stringextensionstests",
-      "community": 9,
+      "community": 53,
       "norm_label": "stringextensionstests.swift"
     },
     {
@@ -3827,7 +3827,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_widgetdatatests",
-      "community": 9,
+      "community": 53,
       "norm_label": "widgetdatatests.swift"
     },
     {
@@ -3967,7 +3967,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_xmlparsertests",
-      "community": 9,
+      "community": 53,
       "norm_label": "xmlparsertests.swift"
     },
     {
@@ -4087,7 +4087,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_feedlibrary_tests_feedlibrarytests_xmlposttests",
-      "community": 9,
+      "community": 53,
       "norm_label": "xmlposttests.swift"
     },
     {
@@ -4207,7 +4207,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_models_mmlive",
-      "community": 61,
+      "community": 1,
       "norm_label": "mmlive.swift"
     },
     {
@@ -4217,7 +4217,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_models_mmlive_mmlive",
-      "community": 61,
+      "community": 1,
       "norm_label": "mmlive"
     },
     {
@@ -4277,7 +4277,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_networkservice",
-      "community": 9,
+      "community": 28,
       "norm_label": "networkservice.swift"
     },
     {
@@ -4337,7 +4337,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_pushnotification",
-      "community": 24,
+      "community": 28,
       "norm_label": "pushnotification.swift"
     },
     {
@@ -4368,7 +4368,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_pushnotification_pushnotification",
-      "community": 61,
+      "community": 1,
       "norm_label": "pushnotification"
     },
     {
@@ -4378,7 +4378,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_pushnotification_pushnotification_setlocalnotification",
-      "community": 61,
+      "community": 1,
       "norm_label": ".setlocalnotification()"
     },
     {
@@ -4388,7 +4388,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_pushnotification_pushnotification_process",
-      "community": 61,
+      "community": 1,
       "norm_label": ".process()"
     },
     {
@@ -4398,7 +4398,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_pushnotification_pushnotification_startinterval",
-      "community": 61,
+      "community": 1,
       "norm_label": ".startinterval()"
     },
     {
@@ -4408,7 +4408,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_pushnotification_pushnotification_endinterval",
-      "community": 61,
+      "community": 1,
       "norm_label": ".endinterval()"
     },
     {
@@ -4428,7 +4428,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_storageservice_storage",
-      "community": 61,
+      "community": 1,
       "norm_label": "storage"
     },
     {
@@ -4438,7 +4438,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_storageservice_storage_save",
-      "community": 61,
+      "community": 1,
       "norm_label": ".save()"
     },
     {
@@ -4448,7 +4448,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_services_storageservice_storage_get",
-      "community": 61,
+      "community": 1,
       "norm_label": ".get()"
     },
     {
@@ -4458,7 +4458,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_viewmodel_mmliveviewmodel",
-      "community": 9,
+      "community": 28,
       "norm_label": "mmliveviewmodel.swift"
     },
     {
@@ -4478,7 +4478,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_viewmodel_mmliveviewmodel_swift_networkservice",
-      "community": 61,
+      "community": 1,
       "norm_label": "networkservice"
     },
     {
@@ -4498,7 +4498,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_viewmodel_mmliveviewmodel_mmliveviewmodel_init",
-      "community": 61,
+      "community": 1,
       "norm_label": ".init()"
     },
     {
@@ -4508,7 +4508,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_sources_mmlivelibrary_viewmodel_mmliveviewmodel_swift_network",
-      "community": 61,
+      "community": 1,
       "norm_label": "network"
     },
     {
@@ -4558,7 +4558,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_tests_mmlivelibrarytests_mmliveviewmodeltests",
-      "community": 9,
+      "community": 28,
       "norm_label": "mmliveviewmodeltests.swift"
     },
     {
@@ -4709,7 +4709,7 @@
       "source_location": "L309",
       "_origin": "ast",
       "id": "macmagazine_features_mmlivelibrary_tests_mmlivelibrarytests_mmliveviewmodeltests_mockpushnotification_setlocalnotification",
-      "community": 61,
+      "community": 1,
       "norm_label": ".setlocalnotification()"
     },
     {
@@ -5700,7 +5700,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_appdefinitions_apptabs",
-      "community": 44,
+      "community": 70,
       "norm_label": "apptabs"
     },
     {
@@ -5720,7 +5720,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "caseiterable",
-      "community": 23,
+      "community": 44,
       "norm_label": "caseiterable"
     },
     {
@@ -5730,7 +5730,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_appdefinitions_apptabs_live",
-      "community": 44,
+      "community": 70,
       "norm_label": "live"
     },
     {
@@ -5740,7 +5740,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_appdefinitions_apptabs_news",
-      "community": 44,
+      "community": 70,
       "norm_label": "news"
     },
     {
@@ -5750,7 +5750,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_appdefinitions_apptabs_social",
-      "community": 44,
+      "community": 70,
       "norm_label": "social"
     },
     {
@@ -5760,7 +5760,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_appdefinitions_apptabs_settings",
-      "community": 44,
+      "community": 70,
       "norm_label": "settings"
     },
     {
@@ -5770,7 +5770,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_appdefinitions_apptabs_search",
-      "community": 44,
+      "community": 70,
       "norm_label": "search"
     },
     {
@@ -5960,7 +5960,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_dateextensions_date_totimeagodisplay",
-      "community": 208,
+      "community": 1,
       "norm_label": ".totimeagodisplay()"
     },
     {
@@ -5970,7 +5970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_dateextensions_swift_bool",
-      "community": 208,
+      "community": 1,
       "norm_label": "bool"
     },
     {
@@ -5980,7 +5980,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_dateextensions_swift_string",
-      "community": 208,
+      "community": 1,
       "norm_label": "string"
     },
     {
@@ -6031,7 +6031,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols",
-      "community": 120,
+      "community": 28,
       "norm_label": "modelprotocols.swift"
     },
     {
@@ -6041,7 +6041,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_modelfavoritable",
-      "community": 120,
+      "community": 115,
       "norm_label": "modelfavoritable"
     },
     {
@@ -6051,7 +6051,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "anyobject",
-      "community": 120,
+      "community": 115,
       "norm_label": "anyobject"
     },
     {
@@ -6061,7 +6061,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "persistentmodel",
-      "community": 120,
+      "community": 115,
       "norm_label": "persistentmodel"
     },
     {
@@ -6071,7 +6071,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_modelreadable",
-      "community": 120,
+      "community": 115,
       "norm_label": "modelreadable"
     },
     {
@@ -6081,7 +6081,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_modelduplicable",
-      "community": 120,
+      "community": 115,
       "norm_label": "modelduplicable"
     },
     {
@@ -6091,7 +6091,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_modelprioritizable",
-      "community": 120,
+      "community": 1,
       "norm_label": "modelprioritizable"
     },
     {
@@ -6101,7 +6101,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_modelprioritizable_latest",
-      "community": 192,
+      "community": 1,
       "norm_label": ".latest()"
     },
     {
@@ -6111,7 +6111,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_swift_self",
-      "community": 192,
+      "community": 1,
       "norm_label": "self"
     },
     {
@@ -6121,7 +6121,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "value",
-      "community": 192,
+      "community": 1,
       "norm_label": "value"
     },
     {
@@ -6131,7 +6131,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_swift_bool",
-      "community": 192,
+      "community": 1,
       "norm_label": "bool"
     },
     {
@@ -6141,7 +6141,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_modelprioritizable_resolveduplicates",
-      "community": 192,
+      "community": 1,
       "norm_label": ".resolveduplicates()"
     },
     {
@@ -6151,7 +6151,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_swift_string",
-      "community": 192,
+      "community": 1,
       "norm_label": "string"
     },
     {
@@ -6161,7 +6161,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_modelprotocols_swift_void",
-      "community": 192,
+      "community": 1,
       "norm_label": "void"
     },
     {
@@ -6171,7 +6171,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory",
-      "community": 23,
+      "community": 120,
       "norm_label": "newscategory.swift"
     },
     {
@@ -6181,7 +6181,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory",
-      "community": 23,
+      "community": 120,
       "norm_label": "newscategory"
     },
     {
@@ -6191,7 +6191,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_all",
-      "community": 23,
+      "community": 120,
       "norm_label": "all"
     },
     {
@@ -6201,7 +6201,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_news",
-      "community": 23,
+      "community": 120,
       "norm_label": "news"
     },
     {
@@ -6211,7 +6211,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_highlights",
-      "community": 23,
+      "community": 120,
       "norm_label": "highlights"
     },
     {
@@ -6221,7 +6221,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_appletv",
-      "community": 23,
+      "community": 120,
       "norm_label": "appletv"
     },
     {
@@ -6231,7 +6231,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_reviews",
-      "community": 23,
+      "community": 120,
       "norm_label": "reviews"
     },
     {
@@ -6241,7 +6241,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_rumors",
-      "community": 23,
+      "community": 120,
       "norm_label": "rumors"
     },
     {
@@ -6251,7 +6251,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_tutorials",
-      "community": 23,
+      "community": 120,
       "norm_label": "tutorials"
     },
     {
@@ -6261,7 +6261,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_youtube",
-      "community": 23,
+      "community": 120,
       "norm_label": "youtube"
     },
     {
@@ -6271,7 +6271,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_newscategory_newscategory_podcast",
-      "community": 23,
+      "community": 120,
       "norm_label": "podcast"
     },
     {
@@ -6314,7 +6314,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "utilitylibrary",
-      "community": 2,
+      "community": 53,
       "norm_label": "utilitylibrary"
     },
     {
@@ -6786,7 +6786,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_themecolor",
-      "community": 2,
+      "community": 211,
       "norm_label": "themecolor.swift"
     },
     {
@@ -6807,7 +6807,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_themecolor_themecolor",
-      "community": 45,
+      "community": 122,
       "norm_label": "themecolor"
     },
     {
@@ -6817,7 +6817,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "themeable",
-      "community": 45,
+      "community": 122,
       "norm_label": "themeable"
     },
     {
@@ -6827,7 +6827,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_themecolor_themecolor_init",
-      "community": 45,
+      "community": 122,
       "norm_label": ".init()"
     },
     {
@@ -6857,7 +6857,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_themecolor_environmentvalues",
-      "community": 45,
+      "community": 122,
       "norm_label": "environmentvalues"
     },
     {
@@ -7037,7 +7037,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_apptabstests",
-      "community": 44,
+      "community": 70,
       "norm_label": "apptabstests"
     },
     {
@@ -7047,7 +7047,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_apptabstests_codableroundtrip",
-      "community": 44,
+      "community": 70,
       "norm_label": ".codableroundtrip()"
     },
     {
@@ -7057,7 +7057,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_apptabstests_usableasdictionarykeys",
-      "community": 44,
+      "community": 70,
       "norm_label": ".usableasdictionarykeys()"
     },
     {
@@ -7127,7 +7127,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_areequaltests",
-      "community": 38,
+      "community": 151,
       "norm_label": "areequaltests"
     },
     {
@@ -7137,7 +7137,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_areequaltests_samevalues",
-      "community": 38,
+      "community": 151,
       "norm_label": ".samevalues()"
     },
     {
@@ -7147,7 +7147,7 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_areequaltests_differentvaluessametype",
-      "community": 38,
+      "community": 151,
       "norm_label": ".differentvaluessametype()"
     },
     {
@@ -7157,7 +7157,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazinelibrary_tests_macmagazinelibrarytests_appdefinitionstests_areequaltests_differenttypes",
-      "community": 38,
+      "community": 151,
       "norm_label": ".differenttypes()"
     },
     {
@@ -7297,7 +7297,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_extensions_arrayextensions",
-      "community": 198,
+      "community": 193,
       "norm_label": "arrayextensions.swift"
     },
     {
@@ -7307,7 +7307,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_extensions_arrayextensions_array",
-      "community": 198,
+      "community": 193,
       "norm_label": "array"
     },
     {
@@ -7317,7 +7317,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_extensions_arrayextensions_swift_newscategory",
-      "community": 198,
+      "community": 193,
       "norm_label": "newscategory"
     },
     {
@@ -7367,7 +7367,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "viewmodifier",
-      "community": 103,
+      "community": 112,
       "norm_label": "viewmodifier"
     },
     {
@@ -7957,7 +7957,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_model_cardcontent",
-      "community": 9,
+      "community": 2,
       "norm_label": "cardcontent.swift"
     },
     {
@@ -8187,7 +8187,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "view",
-      "community": 69,
+      "community": 72,
       "norm_label": "view"
     },
     {
@@ -8357,7 +8357,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_components_favoriteandshare_sharebutton",
-      "community": 2,
+      "community": 53,
       "norm_label": "sharebutton.swift"
     },
     {
@@ -8497,7 +8497,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_components_metadata_metadataduration",
-      "community": 2,
+      "community": 53,
       "norm_label": "metadataduration.swift"
     },
     {
@@ -8507,7 +8507,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_components_metadata_metadataduration_metadataduration",
-      "community": 151,
+      "community": 136,
       "norm_label": "metadataduration"
     },
     {
@@ -8517,7 +8517,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_components_metadata_metadataduration_swift_string",
-      "community": 151,
+      "community": 136,
       "norm_label": "string"
     },
     {
@@ -8527,7 +8527,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_components_metadata_metadataduration_metadataduration_init",
-      "community": 151,
+      "community": 136,
       "norm_label": ".init()"
     },
     {
@@ -8617,7 +8617,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_leadingimagecard_leadingimagecard",
-      "community": 42,
+      "community": 149,
       "norm_label": "leadingimagecard"
     },
     {
@@ -8627,7 +8627,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_leadingimagecard_cardmetrics",
-      "community": 42,
+      "community": 149,
       "norm_label": "cardmetrics"
     },
     {
@@ -8637,7 +8637,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_leadingimagecard_swift_cgfloat",
-      "community": 42,
+      "community": 149,
       "norm_label": "cgfloat"
     },
     {
@@ -8647,7 +8647,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_leadingimagecard_swift_analyticsmanager",
-      "community": 42,
+      "community": 149,
       "norm_label": "analyticsmanager"
     },
     {
@@ -8657,7 +8657,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_cards_views_leadingimagecard_leadingimagecard_init",
-      "community": 42,
+      "community": 149,
       "norm_label": ".init()"
     },
     {
@@ -9105,7 +9105,7 @@
       "label": ".makeHTML()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusHTMLBuilder.swift",
-      "source_location": "L4",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml",
       "community": 183,
@@ -9568,7 +9568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_mmnavigationdecider",
-      "community": 78,
+      "community": 2,
       "norm_label": "mmnavigationdecider.swift"
     },
     {
@@ -10069,7 +10069,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_walletpass_walletpassservice",
-      "community": 9,
+      "community": 24,
       "norm_label": "walletpassservice.swift"
     },
     {
@@ -10390,7 +10390,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_webviewloadpolicy",
-      "community": 9,
+      "community": 28,
       "norm_label": "webviewloadpolicy.swift"
     },
     {
@@ -10901,7 +10901,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_cookiestests",
-      "community": 9,
+      "community": 2,
       "norm_label": "cookiestests.swift"
     },
     {
@@ -11195,13 +11195,73 @@
       "norm_label": ".allcookieshaveexpiration()"
     },
     {
+      "label": "DisqusHTMLBuilderTests.swift",
+      "file_type": "code",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests",
+      "community": 2,
+      "norm_label": "disqushtmlbuildertests.swift"
+    },
+    {
+      "label": "DisqusHTMLBuilderTests",
+      "file_type": "code",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests",
+      "community": 183,
+      "norm_label": "disqushtmlbuildertests"
+    },
+    {
+      "label": ".pageURLIsSameSiteAsDisqus()",
+      "file_type": "code",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_pageurlissamesiteasdisqus",
+      "community": 183,
+      "norm_label": ".pageurlissamesiteasdisqus()"
+    },
+    {
+      "label": ".pageURLIsNotAboutBlank()",
+      "file_type": "code",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_pageurlisnotaboutblank",
+      "community": 183,
+      "norm_label": ".pageurlisnotaboutblank()"
+    },
+    {
+      "label": ".embedScriptMatchesForum()",
+      "file_type": "code",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_embedscriptmatchesforum",
+      "community": 183,
+      "norm_label": ".embedscriptmatchesforum()"
+    },
+    {
+      "label": ".emptyCommentsURL()",
+      "file_type": "code",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_emptycommentsurl",
+      "community": 183,
+      "norm_label": ".emptycommentsurl()"
+    },
+    {
       "label": "WalletPassServiceTests.swift",
       "file_type": "code",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/WalletPassServiceTests.swift",
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_walletpassservicetests",
-      "community": 9,
+      "community": 28,
       "norm_label": "walletpassservicetests.swift"
     },
     {
@@ -11361,7 +11421,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_webviewloadpolicytests",
-      "community": 9,
+      "community": 2,
       "norm_label": "webviewloadpolicytests.swift"
     },
     {
@@ -11591,7 +11651,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_newslibrary_sources_newslibrary_viewmodel_newsviewmodel",
-      "community": 9,
+      "community": 28,
       "norm_label": "newsviewmodel.swift"
     },
     {
@@ -11861,7 +11921,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_newslibrary_sources_newslibrary_views_components_feedhighlightcardview",
-      "community": 36,
+      "community": 2,
       "norm_label": "feedhighlightcardview.swift"
     },
     {
@@ -11872,7 +11932,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "settingslibrary",
-      "community": 36,
+      "community": 9,
       "norm_label": "settingslibrary"
     },
     {
@@ -11932,7 +11992,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_newslibrary_sources_newslibrary_views_components_feedhighlightscarouselview",
-      "community": 9,
+      "community": 2,
       "norm_label": "feedhighlightscarouselview.swift"
     },
     {
@@ -12042,7 +12102,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_newslibrary_sources_newslibrary_views_mock_previewdata",
-      "community": 9,
+      "community": 53,
       "norm_label": "previewdata.swift"
     },
     {
@@ -12192,7 +12252,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_newslibrary_sources_newslibrary_views_newsview",
-      "community": 2,
+      "community": 24,
       "norm_label": "newsview.swift"
     },
     {
@@ -12272,7 +12332,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "filter",
-      "community": 7,
+      "community": 31,
       "norm_label": "filter"
     },
     {
@@ -12763,7 +12823,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator",
-      "community": 24,
+      "community": 2,
       "norm_label": "onboardingcoordinator.swift"
     },
     {
@@ -12773,7 +12833,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator",
-      "community": 22,
+      "community": 45,
       "norm_label": "onboardingcoordinator"
     },
     {
@@ -12793,7 +12853,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_swift_void",
-      "community": 22,
+      "community": 45,
       "norm_label": "void"
     },
     {
@@ -12823,7 +12883,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_navigate",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigate()"
     },
     {
@@ -12833,7 +12893,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_skiptopermissions",
-      "community": 22,
+      "community": 45,
       "norm_label": ".skiptopermissions()"
     },
     {
@@ -12853,7 +12913,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_onboardingcoordinator_markfeaturesasseen",
-      "community": 22,
+      "community": 45,
       "norm_label": ".markfeaturesasseen()"
     },
     {
@@ -12863,7 +12923,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_viewmodels_onboardingcoordinator_swift_bool",
-      "community": 22,
+      "community": 45,
       "norm_label": "bool"
     },
     {
@@ -13624,7 +13684,7 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen1_welcomeview_welcomesheetpreviewhost",
-      "community": 22,
+      "community": 35,
       "norm_label": "welcomesheetpreviewhost"
     },
     {
@@ -13734,7 +13794,7 @@
       "source_location": "L302",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_sources_onboardinglibrary_views_screen2_featuresview_featuresviewsheetpreviewhost",
-      "community": 22,
+      "community": 35,
       "norm_label": "featuresviewsheetpreviewhost"
     },
     {
@@ -13814,7 +13874,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests",
-      "community": 36,
+      "community": 9,
       "norm_label": "onboardingcoordinatortests.swift"
     },
     {
@@ -13825,7 +13885,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "onboardinglibrary",
-      "community": 36,
+      "community": 9,
       "norm_label": "onboardinglibrary"
     },
     {
@@ -13855,7 +13915,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_initialscreeniswelcome",
-      "community": 35,
+      "community": 22,
       "norm_label": ".initialscreeniswelcome()"
     },
     {
@@ -13875,7 +13935,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_initialcompletionisnil",
-      "community": 35,
+      "community": 22,
       "norm_label": ".initialcompletionisnil()"
     },
     {
@@ -13885,7 +13945,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_navigatetofeatures",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigatetofeatures()"
     },
     {
@@ -13895,7 +13955,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_navigatetopermissions",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigatetopermissions()"
     },
     {
@@ -13905,7 +13965,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_navigatebacktowelcome",
-      "community": 22,
+      "community": 45,
       "norm_label": ".navigatebacktowelcome()"
     },
     {
@@ -13975,7 +14035,7 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingcoordinatortests_typicalnavigationflow",
-      "community": 22,
+      "community": 45,
       "norm_label": ".typicalnavigationflow()"
     },
     {
@@ -13995,7 +14055,7 @@
       "source_location": "L192",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingscreentests",
-      "community": 36,
+      "community": 9,
       "norm_label": "onboardingscreentests"
     },
     {
@@ -14005,7 +14065,7 @@
       "source_location": "L195",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingscreentests_screensarehashable",
-      "community": 36,
+      "community": 9,
       "norm_label": ".screensarehashable()"
     },
     {
@@ -14015,7 +14075,7 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "macmagazine_features_onboardinglibrary_tests_onboardinglibrarytests_onboardingcoordinatortests_onboardingscreentests_screenshaveanalyticsnames",
-      "community": 36,
+      "community": 9,
       "norm_label": ".screenshaveanalyticsnames()"
     },
     {
@@ -14246,7 +14306,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "cmtime",
-      "community": 204,
+      "community": 21,
       "norm_label": "cmtime"
     },
     {
@@ -14327,7 +14387,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_manager_podcastplayermanager_podcastplayermanager",
-      "community": 21,
+      "community": 26,
       "norm_label": "podcastplayermanager"
     },
     {
@@ -14357,7 +14417,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "float",
-      "community": 21,
+      "community": 26,
       "norm_label": "float"
     },
     {
@@ -14377,7 +14437,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_manager_podcastplayermanager_swift_any",
-      "community": 21,
+      "community": 26,
       "norm_label": "any"
     },
     {
@@ -14387,7 +14447,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_manager_podcastplayermanager_podcastplayermanager_init",
-      "community": 21,
+      "community": 26,
       "norm_label": ".init()"
     },
     {
@@ -14477,7 +14537,7 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_manager_podcastplayermanager_podcastplayermanager_setplaybackrate",
-      "community": 21,
+      "community": 26,
       "norm_label": ".setplaybackrate()"
     },
     {
@@ -14527,7 +14587,7 @@
       "source_location": "L214",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_manager_podcastplayermanager_podcastplayermanager_setuptimeobserver",
-      "community": 204,
+      "community": 21,
       "norm_label": ".setuptimeobserver()"
     },
     {
@@ -14778,7 +14838,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_viewmodel_podcastviewmodel",
-      "community": 9,
+      "community": 28,
       "norm_label": "podcastviewmodel.swift"
     },
     {
@@ -15188,7 +15248,7 @@
       "source_location": "L192",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_chaptersview_chaptersview_updatebackgroundgradient",
-      "community": 15,
+      "community": 36,
       "norm_label": ".updatebackgroundgradient()"
     },
     {
@@ -15198,7 +15258,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_chaptersview_swift_data",
-      "community": 15,
+      "community": 36,
       "norm_label": "data"
     },
     {
@@ -15228,7 +15288,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_fullplayerview_podcastbackgroundgradientstyle",
-      "community": 15,
+      "community": 36,
       "norm_label": "podcastbackgroundgradientstyle"
     },
     {
@@ -15238,7 +15298,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_fullplayerview_podcastbackgroundgradientstyle_twotone",
-      "community": 15,
+      "community": 36,
       "norm_label": "twotone"
     },
     {
@@ -15248,7 +15308,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_fullplayerview_podcastbackgroundgradientstyle_threetone",
-      "community": 15,
+      "community": 36,
       "norm_label": "threetone"
     },
     {
@@ -15258,7 +15318,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_fullplayerview_podcastbackgroundgradientstyle_fourtone",
-      "community": 15,
+      "community": 36,
       "norm_label": "fourtone"
     },
     {
@@ -15328,7 +15388,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_fullplayerview_fullplayerview_init",
-      "community": 15,
+      "community": 36,
       "norm_label": ".init()"
     },
     {
@@ -15478,7 +15538,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundview_backgroundview",
-      "community": 32,
+      "community": 72,
       "norm_label": "backgroundview"
     },
     {
@@ -15488,7 +15548,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundview_swift_color",
-      "community": 32,
+      "community": 72,
       "norm_label": "color"
     },
     {
@@ -15498,7 +15558,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundview_swift_bool",
-      "community": 32,
+      "community": 72,
       "norm_label": "bool"
     },
     {
@@ -15518,7 +15578,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_backgroundgradientstatus",
-      "community": 15,
+      "community": 36,
       "norm_label": "backgroundgradientstatus"
     },
     {
@@ -15528,7 +15588,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_swift_color",
-      "community": 15,
+      "community": 36,
       "norm_label": "color"
     },
     {
@@ -15538,7 +15598,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_swift_bool",
-      "community": 15,
+      "community": 36,
       "norm_label": "bool"
     },
     {
@@ -15548,7 +15608,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_backgroundviewmodel",
-      "community": 15,
+      "community": 36,
       "norm_label": "backgroundviewmodel"
     },
     {
@@ -15558,7 +15618,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_backgroundviewmodel_backgroundgradient",
-      "community": 15,
+      "community": 36,
       "norm_label": ".backgroundgradient()"
     },
     {
@@ -15568,7 +15628,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_swift_data",
-      "community": 15,
+      "community": 36,
       "norm_label": "data"
     },
     {
@@ -15578,7 +15638,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_swift_string",
-      "community": 15,
+      "community": 36,
       "norm_label": "string"
     },
     {
@@ -15588,7 +15648,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_swift_binding",
-      "community": 15,
+      "community": 36,
       "norm_label": "binding"
     },
     {
@@ -15598,7 +15658,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_backgroundviewmodel_updatebackgroundgradient",
-      "community": 15,
+      "community": 36,
       "norm_label": ".updatebackgroundgradient()"
     },
     {
@@ -15608,7 +15668,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_background_backgroundviewmodel_backgroundviewmodel_processartworkcolors",
-      "community": 15,
+      "community": 36,
       "norm_label": ".processartworkcolors()"
     },
     {
@@ -15628,7 +15688,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_podcastimageview_podcastimageview",
-      "community": 69,
+      "community": 72,
       "norm_label": "podcastimageview"
     },
     {
@@ -15678,7 +15738,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_podcastimageview_swift_data",
-      "community": 69,
+      "community": 72,
       "norm_label": "data"
     },
     {
@@ -15688,7 +15748,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_podcastimageview_swift_content",
-      "community": 69,
+      "community": 72,
       "norm_label": "content"
     },
     {
@@ -15698,7 +15758,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_podcastimageview_podcastimageview_dataimage",
-      "community": 69,
+      "community": 72,
       "norm_label": ".dataimage()"
     },
     {
@@ -15708,7 +15768,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_podcastimageview_podcastimageview_coverimage",
-      "community": 69,
+      "community": 72,
       "norm_label": ".coverimage()"
     },
     {
@@ -15888,7 +15948,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker",
-      "community": 199,
+      "community": 1,
       "norm_label": "ticker.swift"
     },
     {
@@ -15898,7 +15958,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker_ticker",
-      "community": 199,
+      "community": 1,
       "norm_label": "ticker"
     },
     {
@@ -15908,7 +15968,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker_swift_string",
-      "community": 199,
+      "community": 1,
       "norm_label": "string"
     },
     {
@@ -15918,7 +15978,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker_swift_double",
-      "community": 199,
+      "community": 1,
       "norm_label": "double"
     },
     {
@@ -15928,7 +15988,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker_swift_cgfloat",
-      "community": 199,
+      "community": 1,
       "norm_label": "cgfloat"
     },
     {
@@ -15938,7 +15998,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker_ticker_update",
-      "community": 199,
+      "community": 1,
       "norm_label": ".update()"
     },
     {
@@ -15948,7 +16008,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_helpers_ticker_ticker_calculateoffset",
-      "community": 199,
+      "community": 1,
       "norm_label": ".calculateoffset()"
     },
     {
@@ -15968,7 +16028,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_miniplayerview",
-      "community": 122,
+      "community": 103,
       "norm_label": "miniplayerview"
     },
     {
@@ -15978,7 +16038,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_swift_analyticsmanager",
-      "community": 122,
+      "community": 103,
       "norm_label": "analyticsmanager"
     },
     {
@@ -15988,7 +16048,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_swift_podcastdb",
-      "community": 122,
+      "community": 103,
       "norm_label": "podcastdb"
     },
     {
@@ -15998,7 +16058,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_swift_color",
-      "community": 122,
+      "community": 103,
       "norm_label": "color"
     },
     {
@@ -16008,7 +16068,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_miniplayerview_init",
-      "community": 122,
+      "community": 103,
       "norm_label": ".init()"
     },
     {
@@ -16018,7 +16078,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "gesture",
-      "community": 122,
+      "community": 103,
       "norm_label": "gesture"
     },
     {
@@ -16038,7 +16098,7 @@
       "source_location": "L144",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_miniplayerview_artwork",
-      "community": 122,
+      "community": 103,
       "norm_label": ".artwork()"
     },
     {
@@ -16048,7 +16108,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_sources_podcast_views_player_miniplayerview_swift_string",
-      "community": 122,
+      "community": 103,
       "norm_label": "string"
     },
     {
@@ -16169,7 +16229,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "podcastlibrary",
-      "community": 2,
+      "community": 9,
       "norm_label": "podcastlibrary"
     },
     {
@@ -16389,7 +16449,7 @@
       "source_location": "L291",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_tests_podcasttests_podcastchaptertests_podcastchaptertests_formatfractionalseconds",
-      "community": 204,
+      "community": 21,
       "norm_label": ".formatfractionalseconds()"
     },
     {
@@ -16519,7 +16579,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_tests_podcasttests_podcastplayermanagertests_podcastplayermanagertests_currentchapternochapters",
-      "community": 21,
+      "community": 26,
       "norm_label": ".currentchapternochapters()"
     },
     {
@@ -16579,7 +16639,7 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "macmagazine_features_podcastlibrary_tests_podcasttests_podcastplayermanagertests_podcastplayermanagertests_navigatewithnochapters",
-      "community": 21,
+      "community": 26,
       "norm_label": ".navigatewithnochapters()"
     },
     {
@@ -16970,7 +17030,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "youtubelibrary",
-      "community": 2,
+      "community": 28,
       "norm_label": "youtubelibrary"
     },
     {
@@ -17250,7 +17310,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_nlp_queryintent",
-      "community": 9,
+      "community": 80,
       "norm_label": "queryintent.swift"
     },
     {
@@ -17631,7 +17691,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_services_remotefeedsearchservice_remotesearchserviceprotocol",
-      "community": 20,
+      "community": 18,
       "norm_label": "remotesearchserviceprotocol"
     },
     {
@@ -17721,7 +17781,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_services_searchresultmerger",
-      "community": 40,
+      "community": 20,
       "norm_label": "searchresultmerger.swift"
     },
     {
@@ -17731,7 +17791,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_services_searchresultmerger_searchresultmergerprotocol",
-      "community": 40,
+      "community": 20,
       "norm_label": "searchresultmergerprotocol"
     },
     {
@@ -18081,7 +18141,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchresultslist",
-      "community": 2,
+      "community": 9,
       "norm_label": "searchresultslist.swift"
     },
     {
@@ -18092,7 +18152,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "videoslibrary",
-      "community": 2,
+      "community": 9,
       "norm_label": "videoslibrary"
     },
     {
@@ -18222,7 +18282,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview",
-      "community": 2,
+      "community": 9,
       "norm_label": "searchview.swift"
     },
     {
@@ -18289,7 +18349,7 @@
       "label": ".init()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L29",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_init",
       "community": 27,
@@ -18299,7 +18359,7 @@
       "label": ".errorContent()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L186",
+      "source_location": "L185",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
       "community": 27,
@@ -18319,7 +18379,7 @@
       "label": ".handleNewsSelection()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L210",
+      "source_location": "L209",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlenewsselection",
       "community": 27,
@@ -18339,7 +18399,7 @@
       "label": ".handlePodcastSelection()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L221",
+      "source_location": "L220",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlepodcastselection",
       "community": 27,
@@ -18359,7 +18419,7 @@
       "label": ".handleLinkSelection()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L231",
+      "source_location": "L230",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
       "community": 27,
@@ -18369,7 +18429,7 @@
       "label": ".trackSearchCompletion()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L244",
+      "source_location": "L243",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_tracksearchcompletion",
       "community": 27,
@@ -18379,21 +18439,11 @@
       "label": ".announceSearchStatus()",
       "file_type": "code",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L256",
+      "source_location": "L255",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_announcesearchstatus",
       "community": 27,
       "norm_label": ".announcesearchstatus()"
-    },
-    {
-      "label": "Bool",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_swift_bool",
-      "community": 27,
-      "norm_label": "bool"
     },
     {
       "label": "QueryProcessorTests.swift",
@@ -18953,7 +19003,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_searchlibrary_tests_searchlibrarytests_searchviewmodeltests",
-      "community": 9,
+      "community": 28,
       "norm_label": "searchviewmodeltests.swift"
     },
     {
@@ -19624,7 +19674,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "inapplibrary",
-      "community": 28,
+      "community": 24,
       "norm_label": "inapplibrary"
     },
     {
@@ -19654,7 +19704,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_pushpreferences",
-      "community": 70,
+      "community": 23,
       "norm_label": "pushpreferences.swift"
     },
     {
@@ -19664,7 +19714,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_pushpreferences_pushpreferences",
-      "community": 70,
+      "community": 23,
       "norm_label": "pushpreferences"
     },
     {
@@ -19674,7 +19724,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_pushpreferences_pushpreferences_featured",
-      "community": 70,
+      "community": 23,
       "norm_label": "featured"
     },
     {
@@ -19684,7 +19734,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_pushpreferences_pushpreferences_all",
-      "community": 70,
+      "community": 23,
       "norm_label": "all"
     },
     {
@@ -19694,7 +19744,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_pushpreferences_pushpreferences_accessibilitytext",
-      "community": 70,
+      "community": 23,
       "norm_label": ".accessibilitytext()"
     },
     {
@@ -19704,7 +19754,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_pushpreferences_swift_bool",
-      "community": 70,
+      "community": 23,
       "norm_label": "bool"
     },
     {
@@ -19744,7 +19794,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_urls",
-      "community": 9,
+      "community": 28,
       "norm_label": "urls.swift"
     },
     {
@@ -19754,7 +19804,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_urls_urls",
-      "community": 9,
+      "community": 28,
       "norm_label": "urls"
     },
     {
@@ -20265,7 +20315,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_pushoptionsviewmodel_pushoptionsviewmodel",
-      "community": 70,
+      "community": 23,
       "norm_label": "pushoptionsviewmodel"
     },
     {
@@ -20275,7 +20325,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_pushoptionsviewmodel_swift_database",
-      "community": 70,
+      "community": 23,
       "norm_label": "database"
     },
     {
@@ -20285,7 +20335,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_pushoptionsviewmodel_pushoptionsviewmodel_get",
-      "community": 70,
+      "community": 23,
       "norm_label": ".get()"
     },
     {
@@ -20295,7 +20345,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_pushoptionsviewmodel_pushoptionsviewmodel_change",
-      "community": 70,
+      "community": 23,
       "norm_label": ".change()"
     },
     {
@@ -20445,7 +20495,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_settingsviewmodel_settingsviewmodel_updatetabs",
-      "community": 0,
+      "community": 70,
       "norm_label": ".updatetabs()"
     },
     {
@@ -20455,7 +20505,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_settingsviewmodel_swift_binding",
-      "community": 0,
+      "community": 70,
       "norm_label": "binding"
     },
     {
@@ -20505,7 +20555,7 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_settingsviewmodel_settingsviewmodel_refreshsubscriptionentitlement",
-      "community": 12,
+      "community": 0,
       "norm_label": ".refreshsubscriptionentitlement()"
     },
     {
@@ -20515,7 +20565,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel",
-      "community": 28,
+      "community": 24,
       "norm_label": "subscriptionviewmodel.swift"
     },
     {
@@ -20526,7 +20576,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "os",
-      "community": 28,
+      "community": 24,
       "norm_label": "os"
     },
     {
@@ -20546,7 +20596,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_status",
-      "community": 149,
+      "community": 12,
       "norm_label": "status"
     },
     {
@@ -20556,7 +20606,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_status_idle",
-      "community": 149,
+      "community": 12,
       "norm_label": "idle"
     },
     {
@@ -20566,7 +20616,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_status_loading",
-      "community": 149,
+      "community": 12,
       "norm_label": "loading"
     },
     {
@@ -20576,7 +20626,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_status_purchasable",
-      "community": 149,
+      "community": 12,
       "norm_label": "purchasable"
     },
     {
@@ -20586,7 +20636,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_swift_inappproduct",
-      "community": 149,
+      "community": 12,
       "norm_label": "inappproduct"
     },
     {
@@ -20596,7 +20646,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_status_error",
-      "community": 149,
+      "community": 12,
       "norm_label": "error"
     },
     {
@@ -20606,7 +20656,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_swift_string",
-      "community": 149,
+      "community": 12,
       "norm_label": "string"
     },
     {
@@ -20616,7 +20666,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_status_product",
-      "community": 149,
+      "community": 12,
       "norm_label": ".product()"
     },
     {
@@ -20636,7 +20686,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_swift_analyticsmanager",
-      "community": 149,
+      "community": 12,
       "norm_label": "analyticsmanager"
     },
     {
@@ -20696,7 +20746,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_subscriptionviewmodel_get",
-      "community": 12,
+      "community": 61,
       "norm_label": ".get()"
     },
     {
@@ -20756,7 +20806,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_viewmodels_subscriptionviewmodel_subscriptionviewmodel_purchase",
-      "community": 149,
+      "community": 12,
       "norm_label": ".purchase()"
     },
     {
@@ -20967,7 +21017,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_extensions_plainbuttontextstyle_text",
-      "community": 38,
+      "community": 105,
       "norm_label": "text"
     },
     {
@@ -20997,7 +21047,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_settingsview_settingsview",
-      "community": 203,
+      "community": 114,
       "norm_label": "settingsview"
     },
     {
@@ -21017,7 +21067,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_settingsview_settingsview_init",
-      "community": 203,
+      "community": 114,
       "norm_label": ".init()"
     },
     {
@@ -21127,7 +21177,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_appearanceview_appearanceview",
-      "community": 5,
+      "community": 122,
       "norm_label": "appearanceview"
     },
     {
@@ -21137,7 +21187,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_appearanceview_swift_analyticsmanager",
-      "community": 5,
+      "community": 122,
       "norm_label": "analyticsmanager"
     },
     {
@@ -21297,7 +21347,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_iconsview_iconsview",
-      "community": 23,
+      "community": 122,
       "norm_label": "iconsview"
     },
     {
@@ -21307,7 +21357,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_iconsview_swift_analyticsmanager",
-      "community": 23,
+      "community": 122,
       "norm_label": "analyticsmanager"
     },
     {
@@ -21357,7 +21407,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_pushoptionsview_pushoptionsview",
-      "community": 70,
+      "community": 23,
       "norm_label": "pushoptionsview"
     },
     {
@@ -21367,7 +21417,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_pushoptionsview_swift_analyticsmanager",
-      "community": 70,
+      "community": 23,
       "norm_label": "analyticsmanager"
     },
     {
@@ -21417,7 +21467,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_subscriptionview_subscriptionview",
-      "community": 193,
+      "community": 12,
       "norm_label": "subscriptionview"
     },
     {
@@ -21427,7 +21477,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_subscriptionview_swift_analyticsmanager",
-      "community": 193,
+      "community": 12,
       "norm_label": "analyticsmanager"
     },
     {
@@ -21437,7 +21487,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_subscriptionview_swift_string",
-      "community": 193,
+      "community": 12,
       "norm_label": "string"
     },
     {
@@ -21447,7 +21497,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_subscriptionview_swift_bool",
-      "community": 193,
+      "community": 12,
       "norm_label": "bool"
     },
     {
@@ -21457,7 +21507,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_sources_settingslibrary_views_supplementals_subscriptionview_subscriptionview_subscriptions",
-      "community": 193,
+      "community": 12,
       "norm_label": ".subscriptions()"
     },
     {
@@ -21467,7 +21517,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_databaseextensionstests",
-      "community": 36,
+      "community": 9,
       "norm_label": "databaseextensionstests.swift"
     },
     {
@@ -21527,7 +21577,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_databaseextensionstests_databaseextensionstests_customizationreturnfirstwhensingle",
-      "community": 82,
+      "community": 44,
       "norm_label": ".customizationreturnfirstwhensingle()"
     },
     {
@@ -21537,7 +21587,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_databaseextensionstests_databaseextensionstests_customizationdeleteduplicates",
-      "community": 82,
+      "community": 44,
       "norm_label": ".customizationdeleteduplicates()"
     },
     {
@@ -21707,7 +21757,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_postsvisibilityviewmodeltests",
-      "community": 36,
+      "community": 9,
       "norm_label": "postsvisibilityviewmodeltests.swift"
     },
     {
@@ -21757,7 +21807,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_settingsdbtests",
-      "community": 36,
+      "community": 9,
       "norm_label": "settingsdbtests.swift"
     },
     {
@@ -21817,7 +21867,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_settingsviewmodeltests",
-      "community": 36,
+      "community": 9,
       "norm_label": "settingsviewmodeltests.swift"
     },
     {
@@ -22047,7 +22097,7 @@
       "source_location": "L309",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_settingsviewmodeltests_settingsviewmodeltests_refreshsubscriptionentitlementrestoresentitlements",
-      "community": 12,
+      "community": 0,
       "norm_label": ".refreshsubscriptionentitlementrestoresentitlements()"
     },
     {
@@ -22057,7 +22107,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptiontests",
-      "community": 36,
+      "community": 9,
       "norm_label": "subscriptiontests.swift"
     },
     {
@@ -22257,7 +22307,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests",
-      "community": 28,
+      "community": 9,
       "norm_label": "subscriptionviewmodeltests.swift"
     },
     {
@@ -22267,7 +22317,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_fakeinappmanager",
-      "community": 12,
+      "community": 61,
       "norm_label": "fakeinappmanager"
     },
     {
@@ -22277,7 +22327,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_swift_inappstatus",
-      "community": 12,
+      "community": 61,
       "norm_label": "inappstatus"
     },
     {
@@ -22287,7 +22337,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_swift_inappproduct",
-      "community": 12,
+      "community": 61,
       "norm_label": "inappproduct"
     },
     {
@@ -22297,7 +22347,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_fakeinappmanager_getproducts",
-      "community": 12,
+      "community": 61,
       "norm_label": ".getproducts()"
     },
     {
@@ -22307,7 +22357,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_swift_string",
-      "community": 12,
+      "community": 61,
       "norm_label": "string"
     },
     {
@@ -22317,7 +22367,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_fakeinappmanager_purchase",
-      "community": 12,
+      "community": 61,
       "norm_label": ".purchase()"
     },
     {
@@ -22327,7 +22377,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_fakeinappmanager_restore",
-      "community": 12,
+      "community": 61,
       "norm_label": ".restore()"
     },
     {
@@ -22337,7 +22387,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests",
-      "community": 12,
+      "community": 61,
       "norm_label": "subscriptionviewmodeltests"
     },
     {
@@ -22347,7 +22397,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests_makeproduct",
-      "community": 12,
+      "community": 61,
       "norm_label": ".makeproduct()"
     },
     {
@@ -22357,7 +22407,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests_getdoesnotpersistwhennotsubscribed",
-      "community": 12,
+      "community": 61,
       "norm_label": ".getdoesnotpersistwhennotsubscribed()"
     },
     {
@@ -22367,7 +22417,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests_getdoesnotoverwritevalidsubscription",
-      "community": 12,
+      "community": 61,
       "norm_label": ".getdoesnotoverwritevalidsubscription()"
     },
     {
@@ -22377,7 +22427,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests_processfetchescatalogwhenmissing",
-      "community": 12,
+      "community": 61,
       "norm_label": ".processfetchescatalogwhenmissing()"
     },
     {
@@ -22387,7 +22437,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests_processskipscatalogfetchwhenalreadyloaded",
-      "community": 12,
+      "community": 61,
       "norm_label": ".processskipscatalogfetchwhenalreadyloaded()"
     },
     {
@@ -22397,7 +22447,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "macmagazine_features_settingslibrary_tests_settingslibrarytests_subscriptionviewmodeltests_subscriptionviewmodeltests_refreshentitlementsfetchesandrestores",
-      "community": 12,
+      "community": 61,
       "norm_label": ".refreshentitlementsfetchesandrestores()"
     },
     {
@@ -22527,7 +22577,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_videoslibrary_sources_videos_model_videodbextensions",
-      "community": 2,
+      "community": 28,
       "norm_label": "videodbextensions.swift"
     },
     {
@@ -22697,7 +22747,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_videoslibrary_sources_videos_videosviewmodel",
-      "community": 9,
+      "community": 28,
       "norm_label": "videosviewmodel.swift"
     },
     {
@@ -22827,7 +22877,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_features_videoslibrary_tests_videoslibrarytests_videosviewmodeltests",
-      "community": 2,
+      "community": 28,
       "norm_label": "videosviewmodeltests.swift"
     },
     {
@@ -23217,7 +23267,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_features_shortcuts_shortcutmanager",
-      "community": 28,
+      "community": 53,
       "norm_label": "shortcutmanager.swift"
     },
     {
@@ -23297,7 +23347,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_features_social_socialview_socialview",
-      "community": 203,
+      "community": 114,
       "norm_label": "socialview"
     },
     {
@@ -23518,7 +23568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_macmagazineapp",
-      "community": 36,
+      "community": 9,
       "norm_label": "macmagazineapp.swift"
     },
     {
@@ -23648,7 +23698,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_mainviewmodel",
-      "community": 36,
+      "community": 9,
       "norm_label": "mainviewmodel.swift"
     },
     {
@@ -23788,7 +23838,7 @@
       "source_location": "L150",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_mainviewmodel_news",
-      "community": 36,
+      "community": 9,
       "norm_label": "news"
     },
     {
@@ -23798,7 +23848,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_mainviewmodel_swift_newscategory",
-      "community": 36,
+      "community": 9,
       "norm_label": "newscategory"
     },
     {
@@ -23808,7 +23858,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_navigationstate",
-      "community": 36,
+      "community": 2,
       "norm_label": "navigationstate.swift"
     },
     {
@@ -23818,7 +23868,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_navigationstate_navigationstate",
-      "community": 97,
+      "community": 192,
       "norm_label": "navigationstate"
     },
     {
@@ -23828,7 +23878,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_navigationstate_swift_caseiterable",
-      "community": 97,
+      "community": 192,
       "norm_label": "caseiterable"
     },
     {
@@ -23838,7 +23888,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_navigationstate_navigationstate_navigate",
-      "community": 97,
+      "community": 192,
       "norm_label": ".navigate()"
     },
     {
@@ -23848,7 +23898,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "userinterfacesizeclass",
-      "community": 97,
+      "community": 192,
       "norm_label": "userinterfacesizeclass"
     },
     {
@@ -24048,7 +24098,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_sizecalss_mainview_sidebar",
-      "community": 2,
+      "community": 9,
       "norm_label": "mainview+sidebar.swift"
     },
     {
@@ -24188,7 +24238,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_sizecalss_mainview_tabbar",
-      "community": 2,
+      "community": 9,
       "norm_label": "mainview+tabbar.swift"
     },
     {
@@ -24198,7 +24248,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_sizecalss_mainview_tabbar_mainview",
-      "community": 203,
+      "community": 114,
       "norm_label": "mainview"
     },
     {
@@ -24208,7 +24258,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_sizecalss_mainview_tabbar_swift_view",
-      "community": 203,
+      "community": 114,
       "norm_label": "view"
     },
     {
@@ -24218,7 +24268,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "macmagazine_macmagazine_mainapp_sizecalss_mainview_tabbar_mainview_contentview",
-      "community": 203,
+      "community": 114,
       "norm_label": ".contentview()"
     },
     {
@@ -24308,7 +24358,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_macmagazinenotificationserviceextension_notificationservice",
-      "community": 53,
+      "community": 24,
       "norm_label": "notificationservice.swift"
     },
     {
@@ -24319,7 +24369,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "onesignalextension",
-      "community": 53,
+      "community": 24,
       "norm_label": "onesignalextension"
     },
     {
@@ -24329,7 +24379,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_macmagazinenotificationserviceextension_notificationservice_notificationservice",
-      "community": 200,
+      "community": 1,
       "norm_label": "notificationservice"
     },
     {
@@ -24339,7 +24389,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "unnotificationserviceextension",
-      "community": 200,
+      "community": 1,
       "norm_label": "unnotificationserviceextension"
     },
     {
@@ -24349,7 +24399,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "unnotificationcontent",
-      "community": 200,
+      "community": 1,
       "norm_label": "unnotificationcontent"
     },
     {
@@ -24359,7 +24409,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_macmagazinenotificationserviceextension_notificationservice_swift_void",
-      "community": 200,
+      "community": 1,
       "norm_label": "void"
     },
     {
@@ -24369,7 +24419,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "unnotificationrequest",
-      "community": 200,
+      "community": 1,
       "norm_label": "unnotificationrequest"
     },
     {
@@ -24379,7 +24429,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "unmutablenotificationcontent",
-      "community": 61,
+      "community": 1,
       "norm_label": "unmutablenotificationcontent"
     },
     {
@@ -24389,7 +24439,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_macmagazinenotificationserviceextension_notificationservice_notificationservice_didreceive",
-      "community": 200,
+      "community": 1,
       "norm_label": ".didreceive()"
     },
     {
@@ -24399,7 +24449,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "macmagazine_macmagazinenotificationserviceextension_notificationservice_notificationservice_serviceextensiontimewillexpire",
-      "community": 200,
+      "community": 1,
       "norm_label": ".serviceextensiontimewillexpire()"
     },
     {
@@ -24409,7 +24459,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_watchapp_extension_feeddb",
-      "community": 2,
+      "community": 53,
       "norm_label": "feeddb.swift"
     },
     {
@@ -25000,7 +25050,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_watchapp_views_feeddetailview",
-      "community": 28,
+      "community": 53,
       "norm_label": "feeddetailview.swift"
     },
     {
@@ -25240,7 +25290,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_watchapp_views_row_feedrowview",
-      "community": 2,
+      "community": 53,
       "norm_label": "feedrowview.swift"
     },
     {
@@ -25250,7 +25300,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "macmagazine_watchapp_views_row_feedrowview_feedrowview",
-      "community": 148,
+      "community": 72,
       "norm_label": "feedrowview"
     },
     {
@@ -25260,7 +25310,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_watchapp_views_row_feedrowview_swift_feeddb",
-      "community": 148,
+      "community": 72,
       "norm_label": "feeddb"
     },
     {
@@ -25270,7 +25320,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "macmagazine_watchapp_views_row_feedrowview_feedrowview_background",
-      "community": 148,
+      "community": 72,
       "norm_label": ".background()"
     },
     {
@@ -25280,7 +25330,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "cgsize",
-      "community": 148,
+      "community": 72,
       "norm_label": "cgsize"
     },
     {
@@ -25380,7 +25430,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_model_widgetentry_widgetentry",
-      "community": 207,
+      "community": 1,
       "norm_label": "widgetentry"
     },
     {
@@ -25390,7 +25440,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "timelineentry",
-      "community": 207,
+      "community": 1,
       "norm_label": "timelineentry"
     },
     {
@@ -25400,7 +25450,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_model_widgetentry_swift_widgetdata",
-      "community": 207,
+      "community": 1,
       "norm_label": "widgetdata"
     },
     {
@@ -25410,7 +25460,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_model_widgetentry_widgetdata",
-      "community": 210,
+      "community": 1,
       "norm_label": "widgetdata"
     },
     {
@@ -25420,7 +25470,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_model_widgetentry_widgetdata_init",
-      "community": 210,
+      "community": 1,
       "norm_label": ".init()"
     },
     {
@@ -25430,7 +25480,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_model_widgetentry_swift_string",
-      "community": 210,
+      "community": 1,
       "norm_label": "string"
     },
     {
@@ -25440,7 +25490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_views_watchwidgetentryview",
-      "community": 2,
+      "community": 53,
       "norm_label": "watchwidgetentryview.swift"
     },
     {
@@ -25680,7 +25730,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_widget_watchwidgetprovider_watchwidgetprovider_getwidgetcontent",
-      "community": 39,
+      "community": 8,
       "norm_label": ".getwidgetcontent()"
     },
     {
@@ -25690,7 +25740,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_watchwidget_widget_watchwidgetprovider_swift_widgetdata",
-      "community": 39,
+      "community": 8,
       "norm_label": "widgetdata"
     },
     {
@@ -25700,7 +25750,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_widget_extensions_widgetaccessibility_view",
-      "community": 118,
+      "community": 53,
       "norm_label": "widgetaccessibility+view.swift"
     },
     {
@@ -25710,7 +25760,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "macmagazine_widget_extensions_widgetaccessibility_view_widgetaccessibility",
-      "community": 118,
+      "community": 53,
       "norm_label": "widgetaccessibility"
     },
     {
@@ -26101,7 +26151,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "macmagazine_widget_timeline_widgetentry_widgetentry",
-      "community": 207,
+      "community": 1,
       "norm_label": "widgetentry"
     },
     {
@@ -26111,7 +26161,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macmagazine_widget_timeline_widgetentry_swift_widgetdata",
-      "community": 207,
+      "community": 1,
       "norm_label": "widgetdata"
     },
     {
@@ -26121,7 +26171,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_widget_views_modifiers_headerwidgetmodifier",
-      "community": 53,
+      "community": 84,
       "norm_label": "headerwidgetmodifier.swift"
     },
     {
@@ -26301,7 +26351,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macmagazine_widget_views_widgetelementview",
-      "community": 2,
+      "community": 53,
       "norm_label": "widgetelementview.swift"
     },
     {
@@ -30702,6 +30752,17 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_cookiestests",
+      "target": "foundation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests",
       "target": "foundation",
       "confidence_score": 1.0
     },
@@ -39976,6 +40037,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests",
+      "target": "testing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/WalletPassServiceTests.swift",
       "source_location": "L4",
       "weight": 1.0,
@@ -43914,7 +43986,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L233",
+      "source_location": "L232",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
       "target": "macmagazine_features_macmagazinelibrary_sources_macmagazinelibrary_analyticsconstants_analyticsconstants"
@@ -46952,6 +47024,17 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_webviewstatus",
+      "target": "swiftui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests",
       "target": "swiftui",
       "confidence_score": 1.0
     },
@@ -51613,7 +51696,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L202",
+      "source_location": "L201",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -53567,7 +53650,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L299",
+      "source_location": "L290",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -53578,7 +53661,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L186",
+      "source_location": "L185",
       "weight": 1.0,
       "context": "return_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
@@ -55462,7 +55545,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusHTMLBuilder.swift",
-      "source_location": "L4",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder",
       "target": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml",
@@ -55472,7 +55555,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusHTMLBuilder.swift",
-      "source_location": "L4",
+      "source_location": "L11",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml",
@@ -55483,7 +55566,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusHTMLBuilder.swift",
-      "source_location": "L4",
+      "source_location": "L11",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml",
@@ -55499,6 +55582,28 @@
       "source_location": "L115",
       "weight": 1.0,
       "source": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disquswebview_disqussheet_loadcontent",
+      "target": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_embedscriptmatchesforum",
+      "target": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_emptycommentsurl",
       "target": "macmagazine_features_macmagazineuilibrary_sources_macmagazineuilibrary_webview_disqus_disqushtmlbuilder_disqushtmlbuilder_makehtml"
     },
     {
@@ -58010,6 +58115,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests",
+      "target": "macmagazineuilibrary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/WalletPassServiceTests.swift",
       "source_location": "L2",
       "weight": 1.0,
@@ -58825,6 +58941,67 @@
       "weight": 1.0,
       "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_cookiestests_cookiestests",
       "target": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_cookiestests_cookiestests_makecookiesremoveads",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests",
+      "target": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests",
+      "target": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_embedscriptmatchesforum",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests",
+      "target": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_emptycommentsurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests",
+      "target": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_pageurlisnotaboutblank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests",
+      "target": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_pageurlissamesiteasdisqus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift",
+      "source_location": "L32",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "macmagazine_features_macmagazineuilibrary_tests_macmagazineuilibrarytests_disqushtmlbuildertests_disqushtmlbuildertests_embedscriptmatchesforum",
+      "target": "macmagazine_features_settingslibrary_sources_settingslibrary_definitions_colorscheme_colorscheme",
       "confidence_score": 1.0
     },
     {
@@ -71975,7 +72152,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L256",
+      "source_location": "L255",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_announcesearchstatus",
@@ -71986,7 +72163,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L244",
+      "source_location": "L243",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_tracksearchcompletion",
@@ -72587,7 +72764,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L286",
+      "source_location": "L277",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72597,7 +72774,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L256",
+      "source_location": "L255",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_announcesearchstatus",
@@ -72607,7 +72784,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L186",
+      "source_location": "L185",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
@@ -72617,7 +72794,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L231",
+      "source_location": "L230",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
@@ -72627,7 +72804,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L210",
+      "source_location": "L209",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlenewsselection",
@@ -72637,7 +72814,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L221",
+      "source_location": "L220",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlepodcastselection",
@@ -72647,7 +72824,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L29",
+      "source_location": "L28",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_init",
@@ -72657,7 +72834,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L244",
+      "source_location": "L243",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
       "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_tracksearchcompletion",
@@ -72667,7 +72844,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L18",
+      "source_location": "L17",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72678,18 +72855,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L279",
-      "weight": 1.0,
-      "context": "field",
-      "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
-      "target": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_swift_bool",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L198",
+      "source_location": "L197",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72700,7 +72866,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72711,7 +72877,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L25",
+      "source_location": "L24",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72722,7 +72888,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L27",
+      "source_location": "L26",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72733,7 +72899,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0,
       "context": "field",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview",
@@ -72777,7 +72943,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L186",
+      "source_location": "L185",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
@@ -72788,7 +72954,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L231",
+      "source_location": "L230",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlelinkselection",
@@ -72799,7 +72965,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L29",
+      "source_location": "L28",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_init",
@@ -72812,7 +72978,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L190",
+      "source_location": "L189",
       "weight": 1.0,
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_errorcontent",
       "target": "macmagazine_features_settingslibrary_sources_settingslibrary_views_extensions_plainbuttontextstyle_text"
@@ -72821,7 +72987,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L210",
+      "source_location": "L209",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlenewsselection",
@@ -72832,7 +72998,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift",
-      "source_location": "L221",
+      "source_location": "L220",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "macmagazine_features_searchlibrary_sources_searchlibrary_views_searchview_searchview_handlepodcastselection",
@@ -88594,5 +88760,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8544bc27b0e3620d0e16801b17c8261ca8377359"
+  "built_at_commit": "ac044640747dcd1a2e394263e72f40131fcdaee0"
 }
