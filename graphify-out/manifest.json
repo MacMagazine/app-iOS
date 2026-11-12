@@ -455,9 +455,9 @@
     "semantic_hash": "c9fed7c45cebe056958acedf47a6cd50"
   },
   "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusHTMLBuilder.swift": {
-    "mtime": 1772824345.3916125,
-    "ast_hash": "deb61e969643a98df70d674ead369585",
-    "semantic_hash": "deb61e969643a98df70d674ead369585"
+    "mtime": 1794509990.6248052,
+    "ast_hash": "c65732fd4aa791374bb2f1a056674cb5",
+    "semantic_hash": ""
   },
   "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusNewWindowHandler.swift": {
     "mtime": 1772824345.3919508,
@@ -465,9 +465,9 @@
     "semantic_hash": "0b68740b5a2aceeb04bb5f345d74fecd"
   },
   "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/Disqus/DisqusWebView.swift": {
-    "mtime": 1778008694.1266875,
-    "ast_hash": "3de9030bb95966d960ce0c9e6e1c108e",
-    "semantic_hash": "3de9030bb95966d960ce0c9e6e1c108e"
+    "mtime": 1794509993.1382506,
+    "ast_hash": "1ebad9fcaad084d020680e30ff207676",
+    "semantic_hash": ""
   },
   "MacMagazine/Features/MacMagazineUILibrary/Sources/MacMagazineUILibrary/Webview/GalleryStateMessageHandler.swift": {
     "mtime": 1781684811.2717514,
@@ -775,9 +775,9 @@
     "semantic_hash": "67d45ba8dd465d26a3fb98d657465011"
   },
   "MacMagazine/Features/PodcastLibrary/Sources/Podcast/Views/Player/Helpers/PodcastImageView.swift": {
-    "mtime": 1765735902.047535,
-    "ast_hash": "510f751e01827ad109529d1d4385101a",
-    "semantic_hash": "510f751e01827ad109529d1d4385101a"
+    "mtime": 1794424185.0884724,
+    "ast_hash": "3213bf946b032cb4e379e18c35578e71",
+    "semantic_hash": ""
   },
   "MacMagazine/Features/PodcastLibrary/Sources/Podcast/Views/Player/Helpers/ScrollStylePicker.swift": {
     "mtime": 1778008694.1346414,
@@ -885,8 +885,8 @@
     "semantic_hash": ""
   },
   "MacMagazine/Features/SearchLibrary/Sources/SearchLibrary/Views/SearchView.swift": {
-    "mtime": 1791407253.0337641,
-    "ast_hash": "dce2038cfa1c524f71062b7fdd2cc337",
+    "mtime": 1794424185.0888386,
+    "ast_hash": "66f24013f19f1305952186b7b4e0c7e0",
     "semantic_hash": ""
   },
   "MacMagazine/Features/SearchLibrary/Tests/SearchLibraryTests/QueryProcessorTests.swift": {
@@ -1065,9 +1065,9 @@
     "semantic_hash": "e737a5f73baf8c2bfc227011fdee0b7a"
   },
   "MacMagazine/Features/SettingsLibrary/Sources/SettingsLibrary/Views/Supplementals/IconsView.swift": {
-    "mtime": 1766101747.4883657,
-    "ast_hash": "eb920f6d42c1bc05e719c8886d054068",
-    "semantic_hash": "eb920f6d42c1bc05e719c8886d054068"
+    "mtime": 1794424185.0891504,
+    "ast_hash": "8f25d931b4e4dc9586a0eb18eae9ba9d",
+    "semantic_hash": ""
   },
   "MacMagazine/Features/SettingsLibrary/Sources/SettingsLibrary/Views/Supplementals/PostsVisibilityView.swift": {
     "mtime": 1773870995.261651,
@@ -1195,7 +1195,7 @@
     "semantic_hash": ""
   },
   "MacMagazine/MacMagazine/MainApp/Sizecalss/MainView+sidebar.swift": {
-    "mtime": 1793362351.0772471,
+    "mtime": 1793377446.247463,
     "ast_hash": "f726736da4308dbe1b6a58d7d9ddea9a",
     "semantic_hash": ""
   },
@@ -1465,9 +1465,9 @@
     "semantic_hash": "e7176ebc14bdc78c601023f587fa546a"
   },
   "MacMagazine/Widget/Views/WidgetElementView.swift": {
-    "mtime": 1778008694.1452987,
-    "ast_hash": "9a1669452f5fb049a2503bf23fdf77fc",
-    "semantic_hash": "9a1669452f5fb049a2503bf23fdf77fc"
+    "mtime": 1794424185.089466,
+    "ast_hash": "666b03297a7369bbbe6f56c1cd7fa293",
+    "semantic_hash": ""
   },
   "MacMagazine/Widget/Views/WidgetView.swift": {
     "mtime": 1784905161.6678677,
@@ -1625,9 +1625,9 @@
     "semantic_hash": "d5725d9349c294ad66310c73da419531"
   },
   ".github/workflows/pr-validation.yml": {
-    "mtime": 1766772439.6372857,
-    "ast_hash": "e488e7b04e2fd0c32f62c77a71785b32",
-    "semantic_hash": "e488e7b04e2fd0c32f62c77a71785b32"
+    "mtime": 1794424185.0880888,
+    "ast_hash": "cd4ab4f069fb83841a7933bf4cfc2319",
+    "semantic_hash": ""
   },
   ".swiftlint.yml": {
     "mtime": 1772824345.3770432,
@@ -1947,6 +1947,11 @@
   "MacMagazine/Features/SettingsLibrary/Tests/SettingsLibraryTests/SubscriptionViewModelTests.swift": {
     "mtime": 1791484339.9706852,
     "ast_hash": "bc140ea66a015dedde792e4666dd8f52",
+    "semantic_hash": ""
+  },
+  "MacMagazine/Features/MacMagazineUILibrary/Tests/MacMagazineUILibraryTests/DisqusHTMLBuilderTests.swift": {
+    "mtime": 1794509984.5062928,
+    "ast_hash": "cd3b564b17f1e9b1aabc42306954bd66",
     "semantic_hash": ""
   }
 }
