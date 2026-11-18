@@ -88,7 +88,7 @@ Global audio playback state injected via `@Environment`. Available everywhere. M
 ## Multi-platform
 
 - **watchOS (`WatchApp/`)** — Minimal feed reader: `FeedMainViewModel` fetches news via `FeedLibrary`, simple list with detail views.
-- **iOS Widget (`Widget/`)** — Timeline provider fetches latest posts, renders with `WidgetView`. Live Activities via `MacMagazineWidgetLiveActivity`.
+- **iOS Widget (`Widget/`)** — Timeline provider fetches latest posts (15 s deadline), downloads only the thumbnails the family shows in parallel (10 s timeout each) and downscales them with `WidgetImageDownscaler`, renders with `WidgetView`. Refreshes every 30 min (15 min after a failed or empty fetch, via `WidgetRefreshSchedule`) and falls back to the last good posts cached per family (`WidgetPostsCache`, Caches directory). Live Activities via `MacMagazineWidgetLiveActivity`.
 - **watchOS Widget (`WatchWidget/`)** — Separate widget extension.
 - **Widget data model** — `WidgetData` (postId, title, thumbnail, pubDate, link).
 - macOS and visionOS via `#if os()` where needed. Primary targets: iOS and watchOS.
