@@ -79,9 +79,11 @@ CLAUDE.md             ← regras principais (carregado em toda sessão)
                          estilo Swift, concorrência, testes, git)
   skills/             ← workflows reutilizáveis (/ios-start, /ios-implement,
                         /ios-fix, /ios-dod, /ios-design-guidelines,
-                        /ios-sanity-check)
+                        /ios-sanity-check, /factory)
   agents/             ← subagentes especializados (ios-principal-engineer,
-                        swift-code-reviewer, architecture-guardian, test-runner)
+                        swift-code-reviewer, architecture-guardian, test-runner
+                        + agentes da factory: intake, spec-writer, builder,
+                          reviewer-*, approver)
   hooks/              ← guardrails determinísticos (bloqueiam comandos
                         perigosos e rodam SwiftLint a cada arquivo editado)
   settings.json       ← permissões compartilhadas + ativação dos hooks
@@ -114,6 +116,90 @@ claude
 - **Qualidade**: nada é considerado "pronto" sem build, testes e lint passando com saída real — nunca resultados presumidos.
 
 Preferências pessoais (modelo, permissões extras da sua máquina) vão em `.claude/settings.local.json`, que não é versionado.
+
+## Software Factory
+
+A **factory** transforma issues do GitHub em Pull Requests de forma autônoma, usando agentes do Claude Code. Cada issue com o label `factory` passa por um pipeline com portões de qualidade, e **um PR é criado por issue**.
+
+### Pipeline
+
+```
+intake      → decide ACCEPT, NEEDS-INFO ou REJECT (comenta na issue)
+route       → escolhe revisores e modelos conforme risco/superfícies da issue
+spec-writer → escreve spec.md com critérios de aceite testáveis
+builder     → implementa na branch factory/<job-id> e abre o PR em rascunho
+gate        → factory/checks.sh (SwiftLint --strict + xcodebuild test)
+reviewers   → code, ux, ui, security (conforme o roteamento), em paralelo
+approver    → APPROVE (merge automático) ou ESCALATE (vai para um humano)
+```
+
+Se o gate ou algum revisor reprovar, o builder recebe o feedback e faz uma nova rodada (máximo de `max_rounds`, hoje 3). Esgotadas as rodadas, o job vai para `needs-human`.
+
+### Pré-requisitos
+
+- [Claude Code](https://code.claude.com/docs/) e [GitHub CLI](https://cli.github.com/) (`gh`) instalados e autenticados
+- Setup do Firebase concluído (veja [Configuração rápida](#configuração-rápida)); o `checks.sh` copia o template do `GoogleService-Info.plist` se ele não existir
+- Labels `factory`, `factory:needs-info` e `factory:needs-human` criados no repositório
+
+### Como usar
+
+1. Abra uma issue descrevendo a mudança e aplique o label `factory`. O label é a fronteira de confiança: só quem tem permissão de triagem/escrita consegue aplicá-lo.
+2. Na raiz do repositório, abra o Claude Code e execute:
+
+```bash
+claude
+
+> /factory run          # processa todas as issues com o label `factory`
+> /factory run 123      # processa somente a issue #123
+> /factory              # conversar com a factory: status, custo, feedback, nova feature
+```
+
+A sessão que roda `/factory` vira o **orquestrador único**: ela dispara os agentes de cada job, mas nunca escreve código nem edita o estado diretamente. Se a sessão cair, basta rodar `/factory run` de novo: o estado fica em arquivos e os jobs são retomados de onde pararam.
+
+### Quando a factory pede ajuda
+
+| Estado | Significado | O que fazer |
+|--------|-------------|-------------|
+| `needs-info` | O intake precisa de mais informações | Responda na issue (ou via `/factory`) e rode `/factory run` |
+| `needs-human` | O approver escalou, ou as rodadas acabaram | Revise o PR e faça o merge, ou dê feedback com `/factory` |
+| `rejected` | O intake recusou a issue | Veja o comentário na issue |
+
+Exemplos:
+
+```bash
+> /factory o que o reviewer de segurança disse sobre o job 003?
+> /factory feedback no job 003: use o card existente em vez de criar um novo
+> /factory rejeite o job 004: não vamos mais fazer isso
+```
+
+Um PR pode ser mergeado manualmente a qualquer momento; a factory detecta o merge e encerra o job.
+
+### Configuração e arquivos
+
+| Caminho | Descrição |
+|---------|-----------|
+| `factory/config.json` | Concorrência, número de rodadas, branch base (`release/v5`), labels, roteamento de revisores/modelos |
+| `factory/checks.sh` | Checagens executadas pelo gate (SwiftLint estrito + testes) |
+| `factory/bin/` | Scripts (`job`, `gate`, `route`): únicos que alteram o estado dos jobs |
+| `factory/jobs/` | Estado em tempo de execução de cada job (ignorado pelo git) |
+| `.worktrees/<job-id>/` | Checkout isolado de cada job (ignorado pelo git) |
+
+Cada job vive em `factory/jobs/<job-id>/` com `issue.md`, `intake.md`, `spec.md`, `build.md`, os resultados de cada rodada (`round-N/`) e `decision.md`.
+
+### Dashboard
+
+Acompanhe os jobs em tempo real:
+
+```bash
+python3 -m http.server --directory factory
+# abra http://localhost:8000/dashboard.html
+```
+
+### Garantias
+
+- Somente issues com o label `factory` são executadas; o texto da issue chega aos agentes apenas como dado citado.
+- Agentes só fazem push na branch `factory/<job-id>`; o merge acontece apenas via `factory/bin/job merge` (`gh pr merge`), e a factory nunca faz deploy.
+- `factory/checks.sh` e `factory/config.json` são caminhos protegidos.
 
 ## Bug Reporting e Feature Requests
 
