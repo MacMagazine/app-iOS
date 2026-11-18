@@ -32,6 +32,7 @@ public struct NewsView<Filter: View>: View {
     @Binding private var favorite: Bool
     @Binding private var category: NewsCategory
     @Binding var scrollPosition: ScrollPosition
+    @State private var highlightsScrollPosition = ScrollPosition()
     @State private var search: String = ""
     @State private var readingNews = false
 
@@ -90,6 +91,9 @@ public struct NewsView<Filter: View>: View {
                             scrollPosition.scrollTo(edge: .top)
                         }
                     }
+                    withAnimation {
+                        highlightsScrollPosition.scrollTo(edge: .leading)
+                    }
                 }
             }
             .onReceive(
@@ -147,7 +151,7 @@ extension NewsView {
                 if shouldShowHighlights {
                     FeedHighlightsCarouselView(
                         highlights: highlights,
-                        scrollPosition: $scrollPosition,
+                        scrollPosition: $highlightsScrollPosition,
                         onTap: { post in
                             analytics.track(.buttonTap(
                                 buttonId: AnalyticsConstants.ButtonID.highlightCardTapped(post.postId).id,
