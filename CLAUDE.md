@@ -161,3 +161,20 @@ Rules:
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+
+## Software factory
+
+`/factory run` builds every open GitHub issue labeled `factory` through
+intake → spec → build → gate → review → approve, one PR per issue. State is in
+`factory/jobs/` (gitignored); `factory/bin/job` is its only writer. Checks:
+`factory/checks.sh` (SwiftLint strict + `xcodebuild test`, same as the gate above).
+Dashboard: run `python3 -m http.server` inside `factory/`, then open
+http://localhost:8000/dashboard.html.
+
+Fresh checkout setup: none beyond `Support/Scripts/setup-firebase.sh`, which
+`factory/checks.sh` runs for you (copies the template `GoogleService-Info.plist`).
+There is no dev server; UI changes are verified by build, tests and code reading.
+
+Each job works in its own git worktree, a full checkout of the repo at
+`.worktrees/<job-id>` (gitignored). A tool run from the repo root that doesn't
+read `.gitignore` sees those copies too; exclude `.worktrees/` in its config.
