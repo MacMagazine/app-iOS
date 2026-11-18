@@ -171,8 +171,9 @@ intake → spec → build → gate → review → approve, one PR per issue. Sta
 Dashboard: run `python3 -m http.server` inside `factory/`, then open
 http://localhost:8000/dashboard.html.
 
-Fresh checkout setup: none beyond `Support/Scripts/setup-firebase.sh`, which
-`factory/checks.sh` runs for you (copies the template `GoogleService-Info.plist`).
+Fresh checkout setup: none. `factory/checks.sh` copies the template
+`GoogleService-Info.plist` into place when it is missing (the same file
+`Support/Scripts/setup-firebase.sh` installs).
 There is no dev server; UI changes are verified by build, tests and code reading.
 
 Each job works in its own git worktree, a full checkout of the repo at
